@@ -1,0 +1,17 @@
+{
+  "name": "@talim/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "tailwind.config.ts",
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "exports": {
+    ".": "./tailwind.config.ts",
+    "./tailwind.config": "./tailwind.config.ts"
+  }
+}
