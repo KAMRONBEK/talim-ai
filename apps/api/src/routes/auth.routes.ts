@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { asyncHandler } from '../lib/asyncHandler.js';
+import { authMiddleware } from '../middleware/auth.middleware.js';
+import * as authController from '../controllers/auth.controller.js';
+
+export const authRoutes = Router();
+
+authRoutes.post('/register', asyncHandler(authController.register));
+authRoutes.post('/login', asyncHandler(authController.login));
+authRoutes.get('/me', authMiddleware, asyncHandler(authController.me));
