@@ -1,0 +1,5 @@
+# Doppler project setup — run `doppler setup` from repo root after login.
+# Docs: https://docs.doppler.com/docs/repo-config-file
+setup:
+  - project: talim-ai
+    config: dev
