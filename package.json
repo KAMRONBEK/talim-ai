@@ -1,0 +1,28 @@
+{
+  "name": "talim-ai",
+  "private": true,
+  "scripts": {
+    "build": "doppler run -- turbo run build",
+    "dev": "doppler run -- turbo run dev",
+    "dev:infra": "docker compose up -d db redis",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "db:generate": "doppler run -- pnpm --filter @talim/api exec prisma generate",
+    "db:migrate": "doppler run -- pnpm --filter @talim/api exec prisma migrate dev",
+    "db:push": "doppler run -- pnpm --filter @talim/api exec prisma db push",
+    "docker:up": "bash scripts/doppler-docker.sh up -d --build",
+    "docker:down": "docker compose down",
+    "doppler:setup": "doppler setup --no-interactive",
+    "doppler:upload": "doppler secrets upload env.template --project talim-ai --config dev"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

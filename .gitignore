@@ -1,0 +1,14 @@
+.cursor
+node_modules
+.turbo
+dist
+.next
+.env
+.env.*
+!.env.example
+doppler.json
+*.log
+uploads
+.DS_Store
+coverage
+*.tsbuildinfo
