@@ -5,6 +5,7 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { quizQueue } from '../services/queue.service.js';
 import { getParam } from '../lib/params.js';
+import { isSelectedAnswerCorrect } from '../lib/quiz-answer.js';
 
 const submitSchema = z.object({
   answers: z.record(z.string(), z.string()),
@@ -77,7 +78,8 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
 
   let correct = 0;
   for (const question of quiz.questions) {
-    if (body.answers[question.id] === question.correctAnswer) {
+    const options = Array.isArray(question.options) ? (question.options as string[]) : [];
+    if (isSelectedAnswerCorrect(options, body.answers[question.id], question.correctAnswer)) {
       correct++;
     }
   }

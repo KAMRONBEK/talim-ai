@@ -10,7 +10,10 @@ export function useQuiz(id: string, pollInterval?: number) {
       return data.quiz;
     },
     enabled: !!id,
-    refetchInterval: pollInterval,
+    refetchInterval: (query) => {
+      const quiz = query.state.data as Quiz | undefined;
+      return quiz?.questions?.length ? false : pollInterval;
+    },
   });
 }
 

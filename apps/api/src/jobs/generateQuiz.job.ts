@@ -2,6 +2,7 @@ import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
+import { resolveCorrectAnswer } from '../lib/quiz-answer.js';
 
 interface GeneratedQuestion {
   question: string;
@@ -47,7 +48,7 @@ export function registerGenerateQuizJob(): void {
           quizId,
           question: q.question,
           options: q.options,
-          correctAnswer: q.correctAnswer,
+          correctAnswer: resolveCorrectAnswer(q.options, q.correctAnswer),
           explanation: q.explanation,
         },
       });
