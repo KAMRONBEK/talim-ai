@@ -78,7 +78,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   const messages = [
     {
       role: 'system' as const,
-      content: `You are Talim.ai, an AI tutor. Answer based on the provided content context. If the answer is not in the context, say so honestly.\n\nContext:\n${context}`,
+      content: `You are Talim AI, an AI tutor. Answer based on the provided content context. If the answer is not in the context, say so honestly.\n\nContext:\n${context}`,
     },
     ...history.map((m) => ({
       role: (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',

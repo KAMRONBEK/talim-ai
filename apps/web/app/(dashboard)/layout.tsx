@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <header className="border-b">
           <div className="container mx-auto flex h-16 items-center justify-between px-4">
             <Link href="/" className="text-xl font-bold text-primary">
-              Talim.ai
+              Talim AI
             </Link>
             <nav className="flex items-center gap-4">
               <Link href="/content" className="text-sm hover:text-primary">

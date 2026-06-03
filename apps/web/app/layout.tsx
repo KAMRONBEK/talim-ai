@@ -6,7 +6,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Talim.ai — Learn Anything with AI',
+  title: 'Talim AI — Learn Anything with AI',
   description: 'AI-powered tutoring platform for PDFs, YouTube videos, and slides',
 };
 
