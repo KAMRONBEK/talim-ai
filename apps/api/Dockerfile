@@ -23,6 +23,7 @@ FROM node:20-alpine AS runner
 RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 WORKDIR /app
 ENV NODE_ENV=production
+ENV NODE_PATH=/app/node_modules:/app/apps/api/node_modules
 RUN apk add --no-cache openssl
 COPY --from=builder /app/apps/api/dist ./dist
 COPY --from=builder /app/apps/api/package.json ./package.json
@@ -33,4 +34,4 @@ COPY --from=builder /app/package.json ./root-package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN mkdir -p /uploads
 EXPOSE 4000
-CMD ["sh", "-c", "npx prisma migrate deploy --schema=src/prisma/schema.prisma && node dist/index.js"]
+CMD ["sh", "-c", "./apps/api/node_modules/.bin/prisma migrate deploy --schema=src/prisma/schema.prisma && node dist/index.js"]

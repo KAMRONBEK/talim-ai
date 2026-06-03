@@ -6,8 +6,8 @@ const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
   REDIS_URL: z.string().min(1),
   JWT_SECRET: z.string().min(32),
-  DEEPSEEK_API_KEY: z.string().min(1),
-  OPENAI_API_KEY: z.string().min(1),
+  DEEPSEEK_API_KEY: z.string().default(''),
+  OPENAI_API_KEY: z.string().default(''),
   UPLOAD_DIR: z.string().default('/uploads'),
   CORS_ORIGIN: z.string().default('http://localhost:3000'),
 });

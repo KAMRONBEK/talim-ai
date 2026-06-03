@@ -40,8 +40,9 @@ services:
     environment:
       NODE_ENV: production
       PORT: ${PORT:-4000}
-      DATABASE_URL: ${DATABASE_URL:-postgresql://talim:talim@db:5432/talim}
-      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+      # Use Docker service hostnames (Doppler dev uses localhost for pnpm dev, not containers)
+      DATABASE_URL: postgresql://talim:talim@db:5432/talim
+      REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET}
       DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
