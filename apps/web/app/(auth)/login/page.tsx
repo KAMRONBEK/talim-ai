@@ -1,20 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@talim/ui';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
 
 export default function LoginPage() {
-  const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
+  const token = useAuthStore((s) => s.token);
+  const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && token) {
+      window.location.assign('/');
+    }
+  }, [mounted, token]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +33,7 @@ export default function LoginPage() {
     try {
       const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
       setAuth(data.user, data.token);
-      router.push('/');
+      window.location.assign('/');
     } catch {
       setError('Invalid email or password');
     } finally {
@@ -31,11 +41,19 @@ export default function LoginPage() {
     }
   };
 
+  if (!mounted || token) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Sign in to Talim.ai</CardTitle>
+          <CardTitle>Sign in to Talim AI</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

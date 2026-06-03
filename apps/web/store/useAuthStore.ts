@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import type { User } from '@talim/types';
 
 interface AuthState {
@@ -17,6 +17,9 @@ export const useAuthStore = create<AuthState>()(
       setAuth: (user, token) => set({ user, token }),
       logout: () => set({ user: null, token: null }),
     }),
-    { name: 'talim-auth' },
+    {
+      name: 'talim-auth',
+      storage: createJSONStorage(() => localStorage),
+    },
   ),
 );
