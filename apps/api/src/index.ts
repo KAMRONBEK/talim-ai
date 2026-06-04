@@ -25,7 +25,7 @@ async function bootstrap(): Promise<void> {
   app.use(errorMiddleware);
 
   app.listen(env.PORT, () => {
-    console.log(`API server running on port ${env.PORT}`);
+    console.log(`API ready on port ${env.PORT} (${env.NODE_ENV})`);
   });
 }
 

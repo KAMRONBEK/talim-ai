@@ -73,5 +73,6 @@ jobs:
 
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
             doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} up -d --build
-            doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} exec -T api npx prisma migrate deploy || true
+            doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} exec -T api \
+              ./apps/api/node_modules/.bin/prisma migrate deploy --schema=src/prisma/schema.prisma || true
             docker image prune -f
