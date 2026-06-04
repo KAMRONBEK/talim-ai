@@ -7,6 +7,7 @@ import { useSections, useSection } from '@/hooks/useSections';
 import { useGenerateSummary } from '@/hooks/useQuiz';
 import { ChatWindow } from '@/components/chat/ChatWindow';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
+import { formatSummaryForDisplay } from '@/lib/format-summary';
 
 function ChatPageInner({ id }: { id: string }) {
   const { data: content } = useContent(id);
@@ -112,7 +113,9 @@ function ChatPageInner({ id }: { id: string }) {
               {generateSummary.isPending ? (
                 <p className="text-muted-foreground">Xulosa yaratilmoqda...</p>
               ) : (
-                <p className="whitespace-pre-wrap">{summary ?? 'Xulosa mavjud emas.'}</p>
+                <p className="whitespace-pre-wrap leading-relaxed">
+                  {summary ? formatSummaryForDisplay(summary) : 'Xulosa mavjud emas.'}
+                </p>
               )}
             </div>
           ) : content.type === 'PDF' && pdfUrl ? (

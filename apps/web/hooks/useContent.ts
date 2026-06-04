@@ -20,6 +20,25 @@ export function useContent(id: string) {
       return data.content;
     },
     enabled: !!id,
+    refetchInterval: (query) => {
+      const status = query.state.data?.status;
+      if (status === 'PENDING' || status === 'PROCESSING') return 3000;
+      return false;
+    },
+  });
+}
+
+export function useRetryContent() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data } = await api.post<{ content: Content }>(`/content/${id}/retry`);
+      return data.content;
+    },
+    onSuccess: (_data, id) => {
+      queryClient.invalidateQueries({ queryKey: ['contents'] });
+      queryClient.invalidateQueries({ queryKey: ['content', id] });
+    },
   });
 }
 
