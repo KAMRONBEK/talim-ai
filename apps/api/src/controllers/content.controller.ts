@@ -97,6 +97,30 @@ export async function createYoutubeContent(req: AuthenticatedRequest, res: Respo
   res.status(201).json({ content: formatContent(content) });
 }
 
+export async function retryContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const content = await prisma.content.findFirst({
+    where: { id: getParam(req, 'id'), userId: req.user.userId },
+  });
+  if (!content) throw new AppError(404, 'Content not found');
+  if (content.status !== 'FAILED') {
+    throw new AppError(400, 'Only failed content can be retried');
+  }
+  if (content.type === 'YOUTUBE') {
+    if (!content.url) throw new AppError(400, 'YouTube URL missing');
+  } else if (!content.storagePath) {
+    throw new AppError(400, 'File no longer available — please upload again');
+  }
+
+  const updated = await prisma.content.update({
+    where: { id: content.id },
+    data: { status: 'PENDING' },
+  });
+
+  await contentQueue.add({ contentId: content.id });
+  res.json({ content: formatContent(updated) });
+}
+
 export async function deleteContent(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const content = await prisma.content.findFirst({

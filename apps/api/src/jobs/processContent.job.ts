@@ -29,7 +29,7 @@ export function registerProcessContentJob(): void {
       } else if (content.storagePath) {
         const buffer = await storageService.get(content.storagePath);
         if (content.type === 'PDF' || content.type === 'SLIDE') {
-          text = await extractPdfText(buffer);
+          text = await extractPdfText(buffer, content.title);
         } else {
           throw new Error(`Unsupported content type: ${content.type}`);
         }

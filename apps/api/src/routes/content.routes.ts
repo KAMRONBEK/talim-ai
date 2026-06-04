@@ -19,4 +19,5 @@ contentRoutes.get('/:id/podcast/episodes/:episodeId/audio', asyncHandler(podcast
 contentRoutes.get('/:id', asyncHandler(contentController.getContent));
 contentRoutes.post('/upload', upload.single('file'), asyncHandler(contentController.uploadContent));
 contentRoutes.post('/youtube', asyncHandler(contentController.createYoutubeContent));
+contentRoutes.post('/:id/retry', asyncHandler(contentController.retryContent));
 contentRoutes.delete('/:id', asyncHandler(contentController.deleteContent));
