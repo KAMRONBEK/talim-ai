@@ -34,8 +34,11 @@ export default function LoginPage() {
       const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
       setAuth(data.user, data.token);
       router.replace('/dashboard');
-    } catch {
-      setError('Invalid email or password');
+    } catch (err: unknown) {
+      const status = (err as { response?: { status?: number } })?.response?.status;
+      setError(
+        status === 401 ? 'Invalid email or password' : 'Could not reach the server. Please try again.',
+      );
     } finally {
       setLoading(false);
     }
