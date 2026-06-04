@@ -16,7 +16,7 @@ COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY apps/web ./apps/web
 COPY packages/types ./packages/types
 COPY packages/ui ./packages/ui
-ARG NEXT_PUBLIC_API_URL=http://localhost/api
+ARG NEXT_PUBLIC_API_URL=http://localhost:4000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 WORKDIR /app/apps/web
 RUN pnpm build
