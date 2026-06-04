@@ -1,4 +1,5 @@
 import type { Response } from 'express';
+import path from 'path';
 import { ContentType } from '@prisma/client';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
@@ -109,4 +110,25 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
 
   await prisma.content.delete({ where: { id: content.id } });
   res.status(204).send();
+}
+
+export async function getContentFile(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const content = await prisma.content.findFirst({
+    where: { id: getParam(req, 'id'), userId: req.user.userId },
+  });
+  if (!content?.storagePath) throw new AppError(404, 'File not available');
+
+  const buffer = await storageService.get(content.storagePath);
+  const ext = path.extname(content.storagePath).toLowerCase();
+  const contentType =
+    ext === '.pdf'
+      ? 'application/pdf'
+      : ext === '.ppt' || ext === '.pptx'
+        ? 'application/vnd.ms-powerpoint'
+        : 'application/octet-stream';
+
+  res.setHeader('Content-Type', contentType);
+  res.setHeader('Content-Disposition', `inline; filename="${path.basename(content.storagePath)}"`);
+  res.send(buffer);
 }

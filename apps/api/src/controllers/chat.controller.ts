@@ -11,6 +11,7 @@ const streamSchema = z.object({
   contentId: z.string().min(1),
   message: z.string().min(1),
   sessionId: z.string().optional(),
+  selectedExcerpt: z.string().max(4000).optional(),
 });
 
 export async function getOrCreateSession(
@@ -74,11 +75,14 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
 
   const chunks = await searchSimilarChunks(body.contentId, body.message);
   const context = buildRagContext(chunks);
+  const excerptBlock = body.selectedExcerpt
+    ? `\n\nUser selected this excerpt from the material:\n"""${body.selectedExcerpt}"""`
+    : '';
 
   const messages = [
     {
       role: 'system' as const,
-      content: `You are Talim AI, an AI tutor. Answer based on the provided content context. If the answer is not in the context, say so honestly.\n\nContext:\n${context}`,
+      content: `You are Talim AI, an AI tutor. Answer based on the provided content context. If the answer is not in the context, say so honestly.\n\nContext:\n${context}${excerptBlock}`,
     },
     ...history.map((m) => ({
       role: (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',

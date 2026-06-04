@@ -5,6 +5,7 @@ import { storageService } from '../services/storage.service.js';
 import { extractPdfText } from '../services/pdf.service.js';
 import { extractYoutubeTranscript } from '../services/youtube.service.js';
 import { chunkText, storeChunksWithEmbeddings } from '../services/rag.service.js';
+import { generateContentSections } from '../services/section.service.js';
 
 export function registerProcessContentJob(): void {
   contentQueue.process(async (job) => {
@@ -38,6 +39,7 @@ export function registerProcessContentJob(): void {
 
       const chunks = await chunkText(text);
       await storeChunksWithEmbeddings(contentId, chunks);
+      await generateContentSections(contentId, chunks.length);
 
       await prisma.content.update({
         where: { id: contentId },

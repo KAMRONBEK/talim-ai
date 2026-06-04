@@ -27,6 +27,13 @@ enum MessageRole {
   ASSISTANT
 }
 
+enum PodcastStatus {
+  PENDING
+  GENERATING
+  READY
+  FAILED
+}
+
 model User {
   id           String        @id @default(cuid())
   email        String        @unique
@@ -53,12 +60,55 @@ model Content {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  chunks      Chunk[]
+  chunks       Chunk[]
   chatSessions ChatSession[]
-  quizzes     Quiz[]
+  quizzes      Quiz[]
+  sections     ContentSection[]
+  podcast      Podcast?
 
   @@index([userId])
   @@index([status])
+}
+
+model ContentSection {
+  id          String  @id @default(cuid())
+  contentId   String
+  title       String
+  order       Int
+  startChunk  Int
+  endChunk    Int
+  readMinutes Int?
+  content     Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@index([contentId])
+  @@index([contentId, order])
+}
+
+model Podcast {
+  id        String           @id @default(cuid())
+  contentId String           @unique
+  status    PodcastStatus    @default(PENDING)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  content   Content          @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  episodes  PodcastEpisode[]
+
+  @@index([contentId])
+}
+
+model PodcastEpisode {
+  id          String   @id @default(cuid())
+  podcastId   String
+  title       String
+  order       Int
+  script      String
+  audioPath   String?
+  durationSec Int?
+  sectionId   String?
+  podcast     Podcast  @relation(fields: [podcastId], references: [id], onDelete: Cascade)
+
+  @@index([podcastId])
+  @@index([podcastId, order])
 }
 
 model Chunk {
