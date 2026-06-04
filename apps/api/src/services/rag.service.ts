@@ -65,3 +65,16 @@ export async function searchSimilarChunks(
 export function buildRagContext(chunks: { text: string }[]): string {
   return chunks.map((c, i) => `[${i + 1}] ${c.text}`).join('\n\n');
 }
+
+/** Chunks in document order — better for summaries than semantic search alone. */
+export async function getOrderedChunks(
+  contentId: string,
+  limit: number = 40,
+): Promise<{ text: string; chunkIndex: number }[]> {
+  return prisma.chunk.findMany({
+    where: { contentId },
+    orderBy: { chunkIndex: 'asc' },
+    take: limit,
+    select: { text: true, chunkIndex: true },
+  });
+}
