@@ -1,18 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@talim/ui';
 import { useUploadContent, useCreateYoutubeContent } from '@/hooks/useContent';
 
-interface UploadCardProps {
+interface UploadCallbacks {
   onSuccess?: () => void;
-  compact?: boolean;
 }
 
-export function UploadCard({ onSuccess, compact }: UploadCardProps) {
-  const [youtubeUrl, setYoutubeUrl] = useState('');
+export function FileUploadField({ onSuccess }: UploadCallbacks) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const uploadMutation = useUploadContent();
-  const youtubeMutation = useCreateYoutubeContent();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -22,6 +20,33 @@ export function UploadCard({ onSuccess, compact }: UploadCardProps) {
     onSuccess?.();
   };
 
+  return (
+    <div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept=".pdf,.ppt,.pptx"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+      <label className="mb-2 block text-sm font-medium">PDF yoki slaydlar</label>
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full"
+        disabled={uploadMutation.isPending}
+        onClick={() => inputRef.current?.click()}
+      >
+        {uploadMutation.isPending ? 'Yuklanmoqda...' : 'Fayl tanlash'}
+      </Button>
+    </div>
+  );
+}
+
+export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
+  const [youtubeUrl, setYoutubeUrl] = useState('');
+  const youtubeMutation = useCreateYoutubeContent();
+
   const handleYoutubeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!youtubeUrl.trim()) return;
@@ -30,28 +55,33 @@ export function UploadCard({ onSuccess, compact }: UploadCardProps) {
     onSuccess?.();
   };
 
+  return (
+    <form onSubmit={handleYoutubeSubmit} className="space-y-2">
+      <label className="block text-sm font-medium">YouTube havolasi</label>
+      <div className="flex gap-2">
+        <Input
+          value={youtubeUrl}
+          onChange={(e) => setYoutubeUrl(e.target.value)}
+          placeholder="https://youtube.com/watch?v=..."
+        />
+        <Button type="submit" disabled={youtubeMutation.isPending}>
+          {youtubeMutation.isPending ? '...' : "Qo'shish"}
+        </Button>
+      </div>
+    </form>
+  );
+}
+
+interface UploadCardProps {
+  onSuccess?: () => void;
+  compact?: boolean;
+}
+
+export function UploadCard({ onSuccess, compact }: UploadCardProps) {
   const inner = (
     <>
-        <div>
-          <label className="mb-2 block text-sm font-medium">PDF or Slides</label>
-          <Input type="file" accept=".pdf,.ppt,.pptx" onChange={handleFileChange} />
-          {uploadMutation.isPending && (
-            <p className="mt-1 text-sm text-muted-foreground">Uploading...</p>
-          )}
-        </div>
-        <form onSubmit={handleYoutubeSubmit} className="space-y-2">
-          <label className="block text-sm font-medium">YouTube URL</label>
-          <div className="flex gap-2">
-            <Input
-              value={youtubeUrl}
-              onChange={(e) => setYoutubeUrl(e.target.value)}
-              placeholder="https://youtube.com/watch?v=..."
-            />
-            <Button type="submit" disabled={youtubeMutation.isPending}>
-              Add
-            </Button>
-          </div>
-        </form>
+      <FileUploadField onSuccess={onSuccess} />
+      <YoutubeLinkForm onSuccess={onSuccess} />
     </>
   );
 
@@ -62,7 +92,7 @@ export function UploadCard({ onSuccess, compact }: UploadCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Upload Content</CardTitle>
+        <CardTitle>Material yuklash</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">{inner}</CardContent>
     </Card>

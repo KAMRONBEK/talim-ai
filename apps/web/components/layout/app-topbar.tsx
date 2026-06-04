@@ -2,20 +2,14 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import {
   Button,
   Avatar,
   AvatarFallback,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
   Input,
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { UploadCard } from '@/components/content/UploadCard';
+import { UploadSheet } from '@/components/content/upload-sheet';
 
 interface AppTopbarProps {
   showSearch?: boolean;
@@ -26,7 +20,6 @@ interface AppTopbarProps {
 export function AppTopbar({ showSearch = true, searchQuery = '', onSearchChange }: AppTopbarProps) {
   const router = useRouter();
   const { user, logout } = useAuthStore();
-  const [uploadOpen, setUploadOpen] = useState(false);
 
   const initials = user?.name
     ? user.name
@@ -57,19 +50,9 @@ export function AppTopbar({ showSearch = true, searchQuery = '', onSearchChange 
           )}
         </div>
         <div className="flex items-center gap-2">
-          <Sheet open={uploadOpen} onOpenChange={setUploadOpen}>
-            <SheetTrigger>
-              <Button size="sm">+ Yuklash</Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Material yuklash</SheetTitle>
-              </SheetHeader>
-              <div className="p-6 pt-0">
-                <UploadCard compact onSuccess={() => setUploadOpen(false)} />
-              </div>
-            </SheetContent>
-          </Sheet>
+          <UploadSheet
+            trigger={<Button size="sm">+ Yuklash</Button>}
+          />
           <Link
             href="/dashboard"
             className="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent"

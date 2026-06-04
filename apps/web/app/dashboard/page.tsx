@@ -1,39 +1,58 @@
 'use client';
 
 import { useMemo } from 'react';
-import { ContentList } from '@/components/content/ContentList';
-import { UploadCard } from '@/components/content/UploadCard';
+import { useAuthStore } from '@/store/useAuthStore';
 import { useContents } from '@/hooks/useContent';
 import { useDashboardSearch } from '@/contexts/dashboard-search';
+import { QuickActionCards } from '@/components/dashboard/quick-action-cards';
+import { DashboardSearchBar } from '@/components/dashboard/dashboard-search-bar';
+import { RecentContentGrid } from '@/components/dashboard/recent-content-grid';
+
+function getFirstName(name: string | null | undefined, email: string | undefined): string {
+  if (name?.trim()) return name.trim().split(/\s+/)[0] ?? name;
+  if (email) return email.split('@')[0] ?? 'siz';
+  return 'siz';
+}
 
 export default function DashboardPage() {
+  const user = useAuthStore((s) => s.user);
   const { data: contents, isLoading } = useContents();
   const { search } = useDashboardSearch();
 
   const filtered = useMemo(() => {
     if (!contents) return [];
-    const q = search.toLowerCase();
+    const q = search.toLowerCase().trim();
     if (!q) return contents;
     return contents.filter((c) => c.title.toLowerCase().includes(q));
   }, [contents, search]);
 
+  const firstName = getFirstName(user?.name, user?.email);
+
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Kutubxonangiz</h1>
-        <p className="mt-1 text-muted-foreground">
-          Materiallarni yuklang va AI xulosalar, testlar va podkastlar bilan o&apos;rganing.
-        </p>
+    <div className="mx-auto flex max-w-4xl flex-col items-center gap-10">
+      <div className="w-full text-center">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          O&apos;rganishga tayyormisiz, {firstName}?
+        </h1>
       </div>
-      <UploadCard />
-      <div>
-        <h2 className="mb-4 text-xl font-semibold">So&apos;nggi materiallar</h2>
+
+      <QuickActionCards />
+
+      <DashboardSearchBar />
+
+      <section id="dashboard-recents" className="w-full">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold">So&apos;nggilar</h2>
+          {!isLoading && filtered.length > 0 && (
+            <span className="text-sm text-muted-foreground">{filtered.length} ta</span>
+          )}
+        </div>
         {isLoading ? (
-          <p className="text-muted-foreground">Yuklanmoqda...</p>
+          <p className="text-center text-muted-foreground">Yuklanmoqda...</p>
         ) : (
-          <ContentList contents={filtered} />
+          <RecentContentGrid contents={filtered} />
         )}
-      </div>
+      </section>
     </div>
   );
 }

@@ -24,6 +24,7 @@
     --ring: 168 55% 40%;
     --radius: 0.625rem;
     --topbar-height: 3.5rem;
+    --sidebar-width: 16rem;
   }
 
   .dark {
@@ -86,5 +87,9 @@
 
   .avatar-gradient {
     @apply bg-gradient-to-br from-primary to-accent-secondary text-primary-foreground;
+  }
+
+  .dashboard-card {
+    @apply shadow-sm;
   }
 }
