@@ -55,7 +55,8 @@ jobs:
 
             systemctl stop caddy 2>/dev/null || true
             systemctl disable caddy 2>/dev/null || true
-            pkill -f '/opt/jarviddin' 2>/dev/null || true
+            # Do not use pkill -f '/opt/jarviddin' — it matches this script's argv and kills the SSH session
+            fuser -k 3000/tcp 2>/dev/null || true
 
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
             doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} up -d --build
