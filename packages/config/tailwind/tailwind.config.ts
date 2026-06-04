@@ -36,6 +36,7 @@ const preset = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        'accent-secondary': 'hsl(var(--accent-secondary))',
       },
       borderRadius: {
         lg: 'var(--radius)',
