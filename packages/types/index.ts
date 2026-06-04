@@ -1,6 +1,7 @@
 export type ContentType = 'PDF' | 'YOUTUBE' | 'SLIDE';
 export type ContentStatus = 'PENDING' | 'PROCESSING' | 'READY' | 'FAILED';
 export type MessageRole = 'USER' | 'ASSISTANT';
+export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 
 export interface User {
   id: string;
@@ -23,6 +24,33 @@ export interface Content {
   storagePath: string | null;
   status: ContentStatus;
   createdAt: string;
+}
+
+export interface ContentSection {
+  id: string;
+  contentId: string;
+  title: string;
+  order: number;
+  startChunk: number;
+  endChunk: number;
+  readMinutes: number | null;
+}
+
+export interface PodcastEpisode {
+  id: string;
+  podcastId: string;
+  title: string;
+  order: number;
+  hasAudio: boolean;
+  durationSec: number | null;
+  sectionId: string | null;
+}
+
+export interface Podcast {
+  id: string;
+  contentId: string;
+  status: PodcastStatus;
+  episodes: PodcastEpisode[];
 }
 
 export interface ChatSession {
