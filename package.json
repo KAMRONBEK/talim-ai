@@ -13,6 +13,7 @@
     "db:push": "doppler run -- pnpm --filter @talim/api exec prisma db push",
     "docker:up": "bash scripts/doppler-docker.sh up -d --build",
     "docker:down": "docker compose down",
+    "docker:re": "bash scripts/doppler-docker.sh restart",
     "doppler:setup": "doppler setup --no-interactive",
     "doppler:upload": "doppler secrets upload env.template --project talim-ai --config dev"
   },
