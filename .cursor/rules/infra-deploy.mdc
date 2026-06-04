@@ -1,0 +1,14 @@
+---
+description: Apply when changing Docker Compose, nginx, GitHub Actions deploy workflow, VPS/SSH scripts, Doppler env templates, or deploying talim-ai to the VPS
+alwaysApply: false
+---
+
+# Infra And Deploy
+
+- Production: `docker-compose.yml` + `docker-compose.prod.yml` — only nginx exposes 80/443.
+- CI deploy path: `/root/talim-ai` as `root`; secrets `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, `DOPPLER_TOKEN`.
+- Doppler `prd` on server/CI; Doppler `dev` for local and MCP.
+- `env.template`: document secret names only — no real values.
+- Rebuild web after changing `NEXT_PUBLIC_API_URL` or `CORS_ORIGIN` in Doppler `prd`.
+- Never use `pkill -f` with strings that appear in the deploy script itself.
+- Verify: `docker compose ... ps` and `/api/health`.

@@ -1,0 +1,14 @@
+---
+description: Apply when doing browser QA, Playwright MCP smoke tests, talim-vps server checks, or verifying UI after feature or deploy work
+alwaysApply: false
+---
+
+# MCP And QA
+
+- MCP config in `.cursor/mcp.json` — no credentials in repo.
+- `talim-vps`: server/docker ops; SSH password from Doppler `dev`.
+- `playwright`: browser QA — navigate, snapshot, click/type, console errors.
+- Local UI: `http://localhost:3000` after `pnpm dev`.
+- Production: `http://talim-ai.uz` and `/api/health`.
+- After UI changes: short Playwright MCP pass before commit/deploy.
+- Important flows → convert to repeatable Playwright tests later.

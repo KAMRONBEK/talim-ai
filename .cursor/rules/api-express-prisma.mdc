@@ -1,0 +1,15 @@
+---
+description: Apply when editing Express routes, controllers, services, jobs, env config, or Prisma schema/migrations in apps/api
+globs: apps/api/**/*.ts, apps/api/**/schema.prisma, apps/api/**/migrations/**, packages/types/**/*.ts
+alwaysApply: false
+---
+
+# API Patterns
+
+- Thin routes → middleware → controllers → services for business logic.
+- Async handlers: `asyncHandler`. Expected errors: `AppError` from `error.middleware.ts`.
+- New env vars: add to `apps/api/src/config/env.ts` and document in `env.template`.
+- Prisma: shared client from `apps/api/src/lib/prisma.ts` only.
+- Schema changes: Prisma migrations + `pnpm db:generate`.
+- Keep `GET /health` → `{ status: 'ok' }` (deploy smoke checks depend on it).
+- Never leak provider errors or secrets in responses.

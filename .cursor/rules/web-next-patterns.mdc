@@ -1,0 +1,15 @@
+---
+description: Apply when editing Next.js pages, components, hooks, stores, or shared UI in apps/web or packages/ui
+globs: apps/web/**/*.{ts,tsx}, packages/ui/**/*.{ts,tsx}, packages/types/**/*.ts
+alwaysApply: false
+---
+
+# Web App Patterns
+
+- Reuse `apps/web/components` and `packages/ui` primitives before new UI.
+- API calls go through `apps/web/lib/api.ts` (auth header + 401 logout).
+- State: existing Zustand stores and hooks in `store/*`, `hooks/*`.
+- URLs: `NEXT_PUBLIC_API_URL` only — no hardcoded production domains.
+- Layout: routes in `app/**`, UI in `components/**`, helpers in `lib/**`.
+- Keep diffs focused; avoid unrelated page refactors.
+- After user-flow changes → Playwright MCP smoke test on affected path.

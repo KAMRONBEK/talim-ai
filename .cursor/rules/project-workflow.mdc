@@ -1,0 +1,32 @@
+---
+description: Core talim-ai monorepo workflow, secrets, and rule routing
+alwaysApply: true
+---
+
+# talim-ai Workflow
+
+Monorepo: `apps/web`, `apps/api`, `packages/types`, `packages/ui`.
+
+- Prefer existing local patterns over new abstractions.
+- Use `pnpm` scripts only; no npm/yarn.
+- Secrets in Doppler only — never commit `.env`, tokens, or VPS passwords.
+- Local: Doppler `dev`. Server/CI: Doppler `prd`.
+- Browser config: `NEXT_PUBLIC_*` only.
+
+## Rule routing
+
+Apply the matching project rule for the task (Cursor loads them via globs or description):
+
+| When you are… | Rule |
+|---------------|------|
+| Editing web UI, pages, hooks, stores, `packages/ui` | `web-next-patterns` |
+| Editing API routes, services, jobs, Prisma schema | `api-express-prisma` |
+| Editing Docker, nginx, deploy workflow, VPS scripts, env template | `infra-deploy` |
+| Browser QA, Playwright MCP, talim-vps ops, post-UI verification | `mcp-qa` |
+
+If scope is unclear, read the relevant rule before editing. Use `@rule-name` to force a rule.
+
+## After changes
+
+- UI work → Playwright MCP or `docs/QA.md` smoke test on `http://localhost:3000`
+- Deploy/infra → verify `/api/health` locally or at `http://talim-ai.uz/api/health`
