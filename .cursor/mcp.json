@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "talim-vps": {
+      "command": "bash",
+      "args": ["scripts/cursor-talim-vps-mcp.sh"]
+    }
+  }
+}
