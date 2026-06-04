@@ -3,10 +3,12 @@ name: Deploy to VPS
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: Deploy via SSH with Doppler
         uses: appleboy/ssh-action@v1.2.0
@@ -16,17 +18,20 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          command_timeout: 40m
           envs: DOPPLER_TOKEN
           script: |
             set -euo pipefail
 
             COMPOSE_FILES="-f docker-compose.yml -f docker-compose.prod.yml"
-            REPO_DIR="$HOME/talim-ai"
+            REPO_DIR="${HOME}/talim-ai"
             REPO_URL="https://github.com/KAMRONBEK/talim-ai.git"
 
             if ! command -v docker >/dev/null 2>&1; then
+              export DEBIAN_FRONTEND=noninteractive
               apt-get update
-              apt-get install -y ca-certificates curl
+              apt-get install -y ca-certificates curl git
               install -m 0755 -d /etc/apt/keyrings
               curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
               chmod a+r /etc/apt/keyrings/docker.asc
@@ -37,7 +42,7 @@ jobs:
             fi
 
             if ! command -v doppler >/dev/null 2>&1; then
-              curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
+              curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh -s -- --install-path /usr/local/bin
             fi
 
             if [ ! -d "${REPO_DIR}/.git" ]; then
@@ -45,9 +50,9 @@ jobs:
             fi
 
             cd "${REPO_DIR}"
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
-            # Free ports 80/443/3000 from legacy jarviddin/Caddy if still running
             systemctl stop caddy 2>/dev/null || true
             systemctl disable caddy 2>/dev/null || true
             pkill -f '/opt/jarviddin' 2>/dev/null || true

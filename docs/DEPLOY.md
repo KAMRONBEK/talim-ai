@@ -38,10 +38,22 @@ Set in Doppler dashboard or CLI (do **not** put real values in git):
 
 Do **not** set `DATABASE_URL` / `REDIS_URL` to `localhost` in `prd` — Compose uses internal Docker hostnames (`db`, `redis`).
 
-Create a **service token** for `talim-ai` / `prd` and add to GitHub:
+Create a **service token** for `talim-ai` / `prd` and add these GitHub repository secrets (all required):
 
-- `DOPPLER_TOKEN`
-- `VPS_HOST`, `VPS_USER` (e.g. `root`), `VPS_SSH_KEY`
+| Secret | Example |
+|--------|---------|
+| `DOPPLER_TOKEN` | `dp.st.prd....` service token |
+| `VPS_HOST` | `185.217.131.248` |
+| `VPS_USER` | `root` |
+| `VPS_SSH_KEY` | Private key whose public half is in `~/.ssh/authorized_keys` on the VPS |
+
+Generate a deploy-only key (do not commit the private key):
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/talim_ai_deploy -N "" -C "github-actions-talim-ai-deploy"
+cat ~/.ssh/talim_ai_deploy.pub   # add this line to VPS authorized_keys
+gh secret set VPS_SSH_KEY < ~/.ssh/talim_ai_deploy
+```
 
 ## Manual deploy
 
