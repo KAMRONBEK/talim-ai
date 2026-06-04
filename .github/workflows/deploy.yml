@@ -18,15 +18,41 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           envs: DOPPLER_TOKEN
           script: |
-            set -e
-            cd ~/talim-ai
-            git pull origin main
+            set -euo pipefail
 
-            if ! command -v doppler >/dev/null 2>&1; then
-              curl -Ls https://cli.doppler.com/install.sh | sh
+            COMPOSE_FILES="-f docker-compose.yml -f docker-compose.prod.yml"
+            REPO_DIR="$HOME/talim-ai"
+            REPO_URL="https://github.com/KAMRONBEK/talim-ai.git"
+
+            if ! command -v docker >/dev/null 2>&1; then
+              apt-get update
+              apt-get install -y ca-certificates curl
+              install -m 0755 -d /etc/apt/keyrings
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+              chmod a+r /etc/apt/keyrings/docker.asc
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${VERSION_CODENAME}") stable" > /etc/apt/sources.list.d/docker.list
+              apt-get update
+              apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+              systemctl enable --now docker
             fi
 
+            if ! command -v doppler >/dev/null 2>&1; then
+              curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
+            fi
+
+            if [ ! -d "${REPO_DIR}/.git" ]; then
+              git clone "${REPO_URL}" "${REPO_DIR}"
+            fi
+
+            cd "${REPO_DIR}"
+            git pull origin main
+
+            # Free ports 80/443/3000 from legacy jarviddin/Caddy if still running
+            systemctl stop caddy 2>/dev/null || true
+            systemctl disable caddy 2>/dev/null || true
+            pkill -f '/opt/jarviddin' 2>/dev/null || true
+
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
-            doppler run --project talim-ai --config prd -- docker compose up -d --build
-            doppler run --project talim-ai --config prd -- docker compose exec -T api npx prisma migrate deploy || true
+            doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} up -d --build
+            doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} exec -T api npx prisma migrate deploy || true
             docker image prune -f
