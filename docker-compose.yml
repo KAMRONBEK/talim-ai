@@ -1,3 +1,7 @@
+# Start with Doppler so secrets (JWT_SECRET, API keys) are injected into Compose:
+#   pnpm docker:up
+# Plain `docker compose up` does NOT read Doppler — only a local .env or the dev fallback below.
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -43,7 +47,8 @@ services:
       # Use Docker service hostnames (Doppler dev uses localhost for pnpm dev, not containers)
       DATABASE_URL: postgresql://talim:talim@db:5432/talim
       REDIS_URL: redis://redis:6379
-      JWT_SECRET: ${JWT_SECRET}
+      # Min 32 chars (API zod validation). Override via .env or Doppler (pnpm docker:up).
+      JWT_SECRET: ${JWT_SECRET:-talim-ai-local-dev-jwt-secret-change-in-production}
       DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       UPLOAD_DIR: ${UPLOAD_DIR:-/uploads}
