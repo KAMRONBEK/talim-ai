@@ -58,6 +58,19 @@ jobs:
             # Do not use pkill -f '/opt/jarviddin' — it matches this script's argv and kills the SSH session
             fuser -k 3000/tcp 2>/dev/null || true
 
+            export DOCKER_BUILDKIT=1
+            export COMPOSE_DOCKER_CLI_BUILD=1
+
+            # Prune BuildKit cache once per week; keep ~5GB to avoid filling the 40GB disk
+            PRUNE_STAMP="${HOME}/.talim-docker-builder-prune-at"
+            PRUNE_AGE_SEC=$((7 * 24 * 60 * 60))
+            LAST_PRUNE=$([ -f "${PRUNE_STAMP}" ] && stat -c %Y "${PRUNE_STAMP}" || echo 0)
+            NOW=$(date +%s)
+            if [ $((NOW - LAST_PRUNE)) -ge "${PRUNE_AGE_SEC}" ]; then
+              docker builder prune -f --max-used-space 5gb
+              touch "${PRUNE_STAMP}"
+            fi
+
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
             doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} up -d --build
             doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} exec -T api npx prisma migrate deploy || true
