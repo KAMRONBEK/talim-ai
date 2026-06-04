@@ -4,7 +4,12 @@ import { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@talim/ui';
 import { useUploadContent, useCreateYoutubeContent } from '@/hooks/useContent';
 
-export function UploadCard() {
+interface UploadCardProps {
+  onSuccess?: () => void;
+  compact?: boolean;
+}
+
+export function UploadCard({ onSuccess, compact }: UploadCardProps) {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const uploadMutation = useUploadContent();
   const youtubeMutation = useCreateYoutubeContent();
@@ -14,6 +19,7 @@ export function UploadCard() {
     if (!file) return;
     await uploadMutation.mutateAsync(file);
     e.target.value = '';
+    onSuccess?.();
   };
 
   const handleYoutubeSubmit = async (e: React.FormEvent) => {
@@ -21,14 +27,11 @@ export function UploadCard() {
     if (!youtubeUrl.trim()) return;
     await youtubeMutation.mutateAsync({ url: youtubeUrl.trim() });
     setYoutubeUrl('');
+    onSuccess?.();
   };
 
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Upload Content</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+  const inner = (
+    <>
         <div>
           <label className="mb-2 block text-sm font-medium">PDF or Slides</label>
           <Input type="file" accept=".pdf,.ppt,.pptx" onChange={handleFileChange} />
@@ -49,7 +52,19 @@ export function UploadCard() {
             </Button>
           </div>
         </form>
-      </CardContent>
+    </>
+  );
+
+  if (compact) {
+    return <div className="space-y-4">{inner}</div>;
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Upload Content</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">{inner}</CardContent>
     </Card>
   );
 }

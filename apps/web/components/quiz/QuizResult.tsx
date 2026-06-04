@@ -10,14 +10,14 @@ interface QuizResultProps {
 
 export function QuizResult({ score, correct, total }: QuizResultProps) {
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader>
-        <CardTitle>Quiz Results</CardTitle>
+        <CardTitle>Test natijalari</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-3xl font-bold text-primary">{score.toFixed(0)}%</p>
         <p className="mt-2 text-muted-foreground">
-          You got {correct} out of {total} questions correct.
+          {total} ta savoldan {correct} tasi to&apos;g&apos;ri.
         </p>
       </CardContent>
     </Card>

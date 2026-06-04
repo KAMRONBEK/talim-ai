@@ -8,6 +8,7 @@ export interface LocalChatMessage {
   role: MessageRole;
   text: string;
   streaming?: boolean;
+  excerpt?: string;
 }
 
 interface ChatState {
@@ -18,7 +19,7 @@ interface ChatState {
   setMessages: (messages: LocalChatMessage[]) => void;
   addMessage: (message: LocalChatMessage) => void;
   updateStreamingMessage: (id: string, text: string) => void;
-  streamMessage: (contentId: string, message: string) => Promise<void>;
+  streamMessage: (contentId: string, message: string, selectedExcerpt?: string) => Promise<void>;
   reset: () => void;
 }
 
@@ -34,7 +35,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       messages: state.messages.map((m) => (m.id === id ? { ...m, text, streaming: true } : m)),
     })),
   reset: () => set({ sessionId: null, messages: [], isStreaming: false }),
-  streamMessage: async (contentId, message) => {
+  streamMessage: async (contentId, message, selectedExcerpt) => {
     const token = useAuthStore.getState().token;
     if (!token) throw new Error('Not authenticated');
 
@@ -45,7 +46,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       isStreaming: true,
       messages: [
         ...state.messages,
-        { id: userMsgId, role: 'USER', text: message },
+        { id: userMsgId, role: 'USER', text: message, excerpt: selectedExcerpt },
         { id: assistantMsgId, role: 'ASSISTANT', text: '', streaming: true },
       ],
     }));
@@ -60,6 +61,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         contentId,
         message,
         sessionId: get().sessionId ?? undefined,
+        selectedExcerpt,
       }),
     });
 
