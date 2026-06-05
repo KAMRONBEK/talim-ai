@@ -2,6 +2,7 @@ export type ContentType = 'PDF' | 'YOUTUBE' | 'SLIDE';
 export type ContentStatus = 'PENDING' | 'PROCESSING' | 'READY' | 'FAILED';
 export type MessageRole = 'USER' | 'ASSISTANT';
 export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
+export type QuizKind = 'FULL' | 'QUICK';
 
 export interface User {
   id: string;
@@ -53,6 +54,12 @@ export interface Podcast {
   episodes: PodcastEpisode[];
 }
 
+export interface PodcastEpisodeProgress {
+  episodeId: string;
+  listenedSec: number;
+  completed: boolean;
+}
+
 export interface ChatSession {
   id: string;
   userId: string;
@@ -81,6 +88,8 @@ export interface Quiz {
   id: string;
   contentId: string;
   userId: string;
+  sectionId: string | null;
+  kind: QuizKind;
   createdAt: string;
   questions?: QuizQuestion[];
 }
@@ -94,7 +103,52 @@ export interface QuizAttempt {
   createdAt: string;
 }
 
+export interface QuizWithLatestAttempt extends Quiz {
+  latestAttempt: QuizAttempt | null;
+  questionCount: number;
+}
+
+export interface ContentProgress {
+  contentId: string;
+  lastSectionId: string | null;
+  overallCoverage: number;
+  lastActivityAt: string;
+}
+
+export interface SectionProgress {
+  sectionId: string;
+  contentId: string;
+  coverageScore: number;
+  quizBestScore: number | null;
+  quickCheckAccuracy: number | null;
+  viewedAt: string | null;
+  aiFeedback: string | null;
+}
+
+export interface ContentProgressResponse {
+  contentProgress: ContentProgress | null;
+  sections: Record<string, SectionProgress>;
+}
+
+export interface ContentSummary {
+  id: string;
+  contentId: string;
+  sectionId: string | null;
+  scopeKey: string;
+  summary: string;
+  createdAt: string;
+}
+
+export interface LearningHistory {
+  quizzes: QuizWithLatestAttempt[];
+  summaries: ContentSummary[];
+  podcastStatus: PodcastStatus | null;
+  streakDays: number;
+}
+
 export interface ApiError {
   message: string;
   errors?: Record<string, string[]>;
 }
+
+export { isSelectedAnswerCorrect, resolveCorrectAnswer } from './quiz-answer';

@@ -18,6 +18,8 @@ COPY --from=deps /app/packages ./packages
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY apps/api ./apps/api
 COPY packages/types ./packages/types
+WORKDIR /app/packages/types
+RUN pnpm build
 WORKDIR /app/apps/api
 RUN pnpm exec prisma generate
 RUN pnpm build
@@ -33,6 +35,7 @@ COPY --from=builder /app/apps/api/package.json ./package.json
 COPY --from=builder /app/apps/api/src/prisma ./src/prisma
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/apps/api/node_modules ./apps/api/node_modules
+COPY --from=builder /app/packages/types ./packages/types
 COPY --from=builder /app/package.json ./root-package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN mkdir -p /uploads
