@@ -5,7 +5,7 @@ import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.s
 
 const CHUNK_SIZE = 512;
 const CHUNK_OVERLAP = 50;
-const TOP_K = 5;
+const TOP_K = 7;
 
 export async function chunkText(text: string): Promise<string[]> {
   const splitter = new RecursiveCharacterTextSplitter({
@@ -63,7 +63,7 @@ export async function searchSimilarChunks(
 }
 
 export function buildRagContext(chunks: { text: string }[]): string {
-  return chunks.map((c, i) => `[${i + 1}] ${c.text}`).join('\n\n');
+  return chunks.map((c, i) => `--- Parcha ${i + 1} ---\n${c.text}`).join('\n\n');
 }
 
 /** Chunks in document order — better for summaries than semantic search alone. */

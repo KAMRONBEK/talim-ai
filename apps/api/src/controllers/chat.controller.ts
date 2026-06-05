@@ -4,7 +4,8 @@ import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
-import { streamChatCompletion } from '../services/ai.service.js';
+import { streamTutorCompletion } from '../services/ai.service.js';
+import { buildTutorSystemMessage } from '../lib/tutor-prompt.js';
 import { getParam } from '../lib/params.js';
 
 const streamSchema = z.object({
@@ -75,14 +76,11 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
 
   const chunks = await searchSimilarChunks(body.contentId, body.message);
   const context = buildRagContext(chunks);
-  const excerptBlock = body.selectedExcerpt
-    ? `\n\nUser selected this excerpt from the material:\n"""${body.selectedExcerpt}"""`
-    : '';
 
   const messages = [
     {
       role: 'system' as const,
-      content: `You are Talim AI, an AI tutor. Answer based on the provided content context. If the answer is not in the context, say so honestly.\n\nContext:\n${context}${excerptBlock}`,
+      content: buildTutorSystemMessage(context, body.selectedExcerpt),
     },
     ...history.map((m) => ({
       role: (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',
@@ -98,7 +96,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   let fullResponse = '';
 
   try {
-    for await (const text of streamChatCompletion(messages)) {
+    for await (const text of streamTutorCompletion(messages)) {
       fullResponse += text;
       res.write(`data: ${JSON.stringify({ text })}\n\n`);
     }

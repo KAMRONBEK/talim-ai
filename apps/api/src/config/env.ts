@@ -8,6 +8,8 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(32),
   DEEPSEEK_API_KEY: z.string().default(''),
   OPENAI_API_KEY: z.string().default(''),
+  TUTOR_MODEL: z.string().default('gpt-4o'),
+  TUTOR_TEMPERATURE: z.coerce.number().min(0).max(2).default(0.7),
   UPLOAD_DIR: z.string().default('/uploads'),
   CORS_ORIGIN: z.string().default('http://localhost:3000'),
 });

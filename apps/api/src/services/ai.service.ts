@@ -6,6 +6,10 @@ const deepseek = new OpenAI({
   baseURL: 'https://api.deepseek.com',
 });
 
+const openai = new OpenAI({
+  apiKey: env.OPENAI_API_KEY,
+});
+
 export interface ChatMessageInput {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -24,6 +28,20 @@ export async function* streamChatCompletion(messages: ChatMessageInput[]): Async
   const stream = await deepseek.chat.completions.create({
     model: 'deepseek-chat',
     messages,
+    stream: true,
+  });
+
+  for await (const chunk of stream) {
+    const text = chunk.choices[0]?.delta?.content ?? '';
+    if (text) yield text;
+  }
+}
+
+export async function* streamTutorCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
+  const stream = await openai.chat.completions.create({
+    model: env.TUTOR_MODEL,
+    messages,
+    temperature: env.TUTOR_TEMPERATURE,
     stream: true,
   });
 

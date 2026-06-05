@@ -4,6 +4,7 @@ import { buildRagContext } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
 import { synthesizeSpeech } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
+import { PODCAST_SYSTEM_PROMPT, buildPodcastUserPrompt } from '../lib/podcast-prompt.js';
 
 export function registerGeneratePodcastJob(): void {
   podcastQueue.process(async (job) => {
@@ -58,14 +59,10 @@ export function registerGeneratePodcastJob(): void {
           : '';
 
       const script = await generateChatCompletion([
-        {
-          role: 'system',
-          content:
-            'Write a clear, engaging podcast script (3-4 minutes when spoken) for a student learning this material. No stage directions, just spoken narration.',
-        },
+        { role: 'system', content: PODCAST_SYSTEM_PROMPT },
         {
           role: 'user',
-          content: `Topic: ${sec.title}\n\nMaterial:\n${context || content.title}\n\nWrite the script.`,
+          content: buildPodcastUserPrompt(sec.title, context || content.title),
         },
       ]);
 

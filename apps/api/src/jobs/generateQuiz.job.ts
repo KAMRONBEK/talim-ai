@@ -3,6 +3,7 @@ import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
 import { resolveCorrectAnswer } from '../lib/quiz-answer.js';
+import { QUIZ_SYSTEM_PROMPT, buildQuizUserPrompt } from '../lib/quiz-prompt.js';
 
 interface GeneratedQuestion {
   question: string;
@@ -24,15 +25,8 @@ export function registerGenerateQuizJob(): void {
     const context = buildRagContext(chunks);
 
     const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>([
-      {
-        role: 'system',
-        content:
-          'You are an expert tutor. Generate a quiz with exactly 5 multiple-choice questions based on the provided content. Return valid JSON only.',
-      },
-      {
-        role: 'user',
-        content: `Content title: ${content.title}\n\nContext:\n${context}\n\nReturn JSON: { "questions": [{ "question": "...", "options": ["A","B","C","D"], "correctAnswer": "A", "explanation": "..." }] }`,
-      },
+      { role: 'system', content: QUIZ_SYSTEM_PROMPT },
+      { role: 'user', content: buildQuizUserPrompt(content.title, context) },
     ]);
 
     const questions = result.questions ?? [];

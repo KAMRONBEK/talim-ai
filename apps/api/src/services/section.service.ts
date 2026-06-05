@@ -1,5 +1,6 @@
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from './ai.service.js';
+import { SECTION_SYSTEM_PROMPT, buildSectionUserPrompt } from '../lib/section-prompt.js';
 
 interface GeneratedSection {
   title: string;
@@ -17,7 +18,7 @@ export async function generateContentSections(contentId: string, chunkCount: num
     await prisma.contentSection.create({
       data: {
         contentId,
-        title: 'Full content',
+        title: "To'liq material",
         order: 0,
         startChunk: 0,
         endChunk: chunkCount - 1,
@@ -40,15 +41,8 @@ export async function generateContentSections(contentId: string, chunkCount: num
 
   try {
     const result = await generateJsonCompletion<{ sections: GeneratedSection[] }>([
-      {
-        role: 'system',
-        content:
-          'You divide learning material into logical sections. Return valid JSON only. Chunk indices are 0-based and inclusive.',
-      },
-      {
-        role: 'user',
-        content: `Total chunks: ${chunkCount} (indices 0 to ${chunkCount - 1}).\n\nChunk previews:\n${preview}\n\nReturn JSON: { "sections": [{ "title": "...", "startChunk": 0, "endChunk": 4, "readMinutes": 8 }] }\nCreate 5-10 sections covering all chunks without gaps or overlaps.`,
-      },
+      { role: 'system', content: SECTION_SYSTEM_PROMPT },
+      { role: 'user', content: buildSectionUserPrompt(chunkCount, preview) },
     ]);
 
     const sections = (result.sections ?? []).slice(0, 12);
@@ -78,7 +72,7 @@ export async function generateContentSections(contentId: string, chunkCount: num
       await prisma.contentSection.create({
         data: {
           contentId,
-          title: `Section ${order + 1}`,
+          title: `Bo'lim ${order + 1}`,
           order,
           startChunk: start,
           endChunk: end,
