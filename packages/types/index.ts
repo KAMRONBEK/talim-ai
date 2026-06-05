@@ -1,4 +1,15 @@
+import type { AppLocale } from './locale';
+
+export {
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  isAppLocale,
+  parseAppLocale,
+  type AppLocale,
+} from './locale';
+
 export type ContentType = 'PDF' | 'YOUTUBE' | 'SLIDE';
+export type GeneratedMediaStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 export type ContentStatus = 'PENDING' | 'PROCESSING' | 'READY' | 'FAILED';
 export type MessageRole = 'USER' | 'ASSISTANT';
 export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
@@ -8,6 +19,7 @@ export interface User {
   id: string;
   email: string;
   name: string | null;
+  preferredLocale: AppLocale;
   createdAt: string;
 }
 
@@ -50,6 +62,7 @@ export interface PodcastEpisode {
 export interface Podcast {
   id: string;
   contentId: string;
+  locale: AppLocale;
   status: PodcastStatus;
   episodes: PodcastEpisode[];
 }
@@ -90,6 +103,7 @@ export interface Quiz {
   userId: string;
   sectionId: string | null;
   kind: QuizKind;
+  locale: AppLocale;
   createdAt: string;
   questions?: QuizQuestion[];
 }
@@ -135,7 +149,21 @@ export interface ContentSummary {
   contentId: string;
   sectionId: string | null;
   scopeKey: string;
+  locale: AppLocale;
   summary: string;
+  createdAt: string;
+}
+
+export interface ContentVideo {
+  id: string;
+  contentId: string;
+  locale: AppLocale;
+  sectionId: string | null;
+  scopeKey: string;
+  status: GeneratedMediaStatus;
+  script: string | null;
+  storagePath: string | null;
+  durationSec: number | null;
   createdAt: string;
 }
 
@@ -152,3 +180,12 @@ export interface ApiError {
 }
 
 export { isSelectedAnswerCorrect, resolveCorrectAnswer } from './quiz-answer';
+
+export {
+  GRAPH_FENCE_LANG,
+  serializeGraphBlock,
+  parseGraphBlock,
+  type DesmosExpression,
+  type DesmosViewport,
+  type DesmosGraphPayload,
+} from './tutor-graph';
