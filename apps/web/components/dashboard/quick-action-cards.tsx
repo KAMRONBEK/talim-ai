@@ -3,38 +3,38 @@
 import { useState } from 'react';
 import { FileUp, Link2 } from 'lucide-react';
 import {
+  cn,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
 } from '@talim/ui';
-import { FileUploadField, YoutubeLinkForm } from '@/components/content/UploadCard';
-import { cn } from '@talim/ui';
+import { YoutubeLinkForm } from '@/components/content/UploadCard';
+import { useFileUpload } from '@/hooks/useFileUpload';
 
 export function QuickActionCards() {
   const [linkOpen, setLinkOpen] = useState(false);
-  const [uploadOpen, setUploadOpen] = useState(false);
+  const { fileInput, openFilePicker, isPending, error } = useFileUpload();
 
   return (
     <>
+      {fileInput}
       <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
         <button
           type="button"
-          onClick={() => setUploadOpen(true)}
+          disabled={isPending}
+          onClick={openFilePicker}
           className={cn(
             'dashboard-card group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
             'hover:border-primary/30 hover:shadow-md',
+            isPending && 'pointer-events-none opacity-60',
           )}
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <FileUp className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">Yuklash</p>
+            <p className="font-semibold">{isPending ? 'Yuklanmoqda...' : 'Yuklash'}</p>
             <p className="mt-0.5 text-sm text-muted-foreground">Fayl, audio, video</p>
           </div>
         </button>
@@ -57,16 +57,9 @@ export function QuickActionCards() {
         </button>
       </div>
 
-      <Sheet open={uploadOpen} onOpenChange={setUploadOpen}>
-        <SheetContent>
-          <SheetHeader>
-            <SheetTitle>Material yuklash</SheetTitle>
-          </SheetHeader>
-          <div className="p-6 pt-0">
-            <FileUploadField onSuccess={() => setUploadOpen(false)} />
-          </div>
-        </SheetContent>
-      </Sheet>
+      {error && (
+        <p className="mx-auto w-full max-w-2xl text-center text-sm text-destructive">{error}</p>
+      )}
 
       <Dialog open={linkOpen} onOpenChange={setLinkOpen}>
         <DialogContent>

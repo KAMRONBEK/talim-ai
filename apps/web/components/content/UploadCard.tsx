@@ -1,56 +1,32 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
-import { useUploadContent, useCreateYoutubeContent } from '@/hooks/useContent';
+import { useCreateYoutubeContent } from '@/hooks/useContent';
+import { useFileUpload } from '@/hooks/useFileUpload';
 
 interface UploadCallbacks {
   onSuccess?: () => void;
 }
 
 export function FileUploadField({ onSuccess }: UploadCallbacks) {
-  const inputId = useId();
-  const uploadMutation = useUploadContent();
-  const [error, setError] = useState<string | null>(null);
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
-
-    setError(null);
-    try {
-      await uploadMutation.mutateAsync(file);
-      onSuccess?.();
-    } catch {
-      setError("Yuklash amalga oshmadi. Qayta urinib ko'ring.");
-    }
-  };
-
-  const isPending = uploadMutation.isPending;
+  const { fileInput, openFilePicker, isPending, error } = useFileUpload({ onSuccess });
 
   return (
     <div>
-      <input
-        id={inputId}
-        type="file"
-        accept=".pdf,.ppt,.pptx"
-        className="sr-only"
-        disabled={isPending}
-        onChange={handleFileChange}
-      />
+      {fileInput}
       <p className="mb-2 text-sm font-medium">PDF yoki slaydlar</p>
-      <label
-        htmlFor={isPending ? undefined : inputId}
-        aria-disabled={isPending}
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={openFilePicker}
         className={cn(
           buttonVariants({ variant: 'outline' }),
-          'flex h-10 w-full cursor-pointer touch-manipulation select-none items-center justify-center',
-          isPending && 'pointer-events-none opacity-50',
+          'flex h-10 w-full touch-manipulation select-none items-center justify-center',
         )}
       >
         {isPending ? 'Yuklanmoqda...' : 'Fayl tanlash'}
-      </label>
+      </button>
       {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
     </div>
   );

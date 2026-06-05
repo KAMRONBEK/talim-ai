@@ -2,19 +2,14 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import {
   Avatar,
   AvatarFallback,
   Button,
   Input,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { UploadCard } from '@/components/content/UploadCard';
+import { useFileUpload } from '@/hooks/useFileUpload';
 
 interface LearningTopbarProps {
   contentId: string;
@@ -24,7 +19,7 @@ interface LearningTopbarProps {
 export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
   const router = useRouter();
   const { user, logout } = useAuthStore();
-  const [uploadOpen, setUploadOpen] = useState(false);
+  const { fileInput, openFilePicker, isPending } = useFileUpload();
 
   const initials = user?.name
     ? user.name
@@ -37,6 +32,7 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b bg-card px-4 md:px-5">
+      {fileInput}
       <div className="flex min-w-0 items-center gap-3 md:gap-4">
         <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-semibold">
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs text-primary-foreground">
@@ -66,20 +62,11 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
           variant="outline"
           type="button"
           className="hidden touch-manipulation sm:inline-flex"
-          onClick={() => setUploadOpen(true)}
+          disabled={isPending}
+          onClick={openFilePicker}
         >
-          + Yuklash
+          {isPending ? 'Yuklanmoqda...' : '+ Yuklash'}
         </Button>
-        <Sheet open={uploadOpen} onOpenChange={setUploadOpen}>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Material yuklash</SheetTitle>
-            </SheetHeader>
-            <div className="p-6 pt-0">
-              <UploadCard compact onSuccess={() => setUploadOpen(false)} />
-            </div>
-          </SheetContent>
-        </Sheet>
         <Link
           href={`/content/${contentId}/chat`}
           className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent"
