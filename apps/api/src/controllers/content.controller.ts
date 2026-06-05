@@ -6,7 +6,7 @@ import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
-import { contentQueue } from '../services/queue.service.js';
+import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 
@@ -127,6 +127,20 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
     where: { id: getParam(req, 'id'), userId: req.user.userId },
   });
   if (!content) throw new AppError(404, 'Content not found');
+
+  await cancelContentJobs(content.id);
+
+  const podcast = await prisma.podcast.findUnique({
+    where: { contentId: content.id },
+    include: { episodes: true },
+  });
+  if (podcast) {
+    await Promise.all(
+      podcast.episodes
+        .filter((episode) => episode.audioPath)
+        .map((episode) => storageService.delete(episode.audioPath!)),
+    );
+  }
 
   if (content.storagePath) {
     await storageService.delete(content.storagePath);

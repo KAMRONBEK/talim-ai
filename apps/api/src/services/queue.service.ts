@@ -19,3 +19,19 @@ export interface GeneratePodcastJobData {
   contentId: string;
   podcastId: string;
 }
+
+type ContentScopedJobData = { contentId?: string };
+
+const CONTENT_QUEUES = [contentQueue, quizQueue, podcastQueue] as const;
+
+export async function cancelContentJobs(contentId: string): Promise<void> {
+  const states: Bull.JobStatus[] = ['waiting', 'active', 'delayed'];
+  for (const queue of CONTENT_QUEUES) {
+    const jobs = await queue.getJobs(states);
+    await Promise.all(
+      jobs
+        .filter((job) => (job.data as ContentScopedJobData).contentId === contentId)
+        .map((job) => job.remove()),
+    );
+  }
+}
