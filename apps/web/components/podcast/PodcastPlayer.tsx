@@ -10,23 +10,44 @@ function formatTime(sec: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
+function isNearEnd(current: number, duration: number): boolean {
+  return duration > 0 && current >= duration - 2;
+}
+
 interface PodcastPlayerProps {
   audioUrl: string;
   playbackRate: number;
   onPlaybackRateChange: (rate: number) => void;
+  initialPositionSec?: number;
+  onProgress?: (listenedSec: number, completed: boolean) => void;
 }
 
-export function PodcastPlayer({ audioUrl, playbackRate, onPlaybackRateChange }: PodcastPlayerProps) {
+export function PodcastPlayer({
+  audioUrl,
+  playbackRate,
+  onPlaybackRateChange,
+  initialPositionSec = 0,
+  onProgress,
+}: PodcastPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
+  const restoredRef = useRef(false);
+
+  const reportProgress = (time: number, dur: number) => {
+    onProgress?.(Math.floor(time), isNearEnd(time, dur));
+  };
 
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
     el.playbackRate = playbackRate;
   }, [playbackRate, audioUrl]);
+
+  useEffect(() => {
+    restoredRef.current = false;
+  }, [audioUrl]);
 
   const togglePlay = () => {
     const el = audioRef.current;
@@ -53,15 +74,28 @@ export function PodcastPlayer({ audioUrl, playbackRate, onPlaybackRateChange }: 
         key={audioUrl}
         src={audioUrl}
         className="hidden"
-        onTimeUpdate={() => setCurrent(audioRef.current?.currentTime ?? 0)}
+        onTimeUpdate={() => {
+          const t = audioRef.current?.currentTime ?? 0;
+          const d = audioRef.current?.duration ?? 0;
+          setCurrent(t);
+          reportProgress(t, d);
+        }}
         onLoadedMetadata={() => {
           const el = audioRef.current;
           if (el) {
             setDuration(el.duration);
             el.playbackRate = playbackRate;
+            if (!restoredRef.current && initialPositionSec > 0) {
+              el.currentTime = initialPositionSec;
+              setCurrent(initialPositionSec);
+              restoredRef.current = true;
+            }
           }
         }}
-        onEnded={() => setPlaying(false)}
+        onEnded={() => {
+          setPlaying(false);
+          reportProgress(duration, duration);
+        }}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
@@ -79,6 +113,7 @@ export function PodcastPlayer({ audioUrl, playbackRate, onPlaybackRateChange }: 
           const t = Number(e.target.value);
           if (audioRef.current) audioRef.current.currentTime = t;
           setCurrent(t);
+          reportProgress(t, duration);
         }}
       />
       <div className="flex items-center justify-center gap-4">

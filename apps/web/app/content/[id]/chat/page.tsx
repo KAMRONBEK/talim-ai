@@ -7,7 +7,7 @@ import { useSections, useSection } from '@/hooks/useSections';
 import { useGenerateSummary } from '@/hooks/useQuiz';
 import { ChatWindow } from '@/components/chat/ChatWindow';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
-import { formatSummaryForDisplay } from '@/lib/format-summary';
+import { SummaryText } from '@/components/learning/summary-text';
 
 function ChatPageInner({ id }: { id: string }) {
   const { data: content } = useContent(id);
@@ -66,7 +66,7 @@ function ChatPageInner({ id }: { id: string }) {
 
   const loadSummary = async () => {
     if (summary) return;
-    const text = await generateSummary.mutateAsync(id);
+    const text = await generateSummary.mutateAsync({ contentId: id });
     setSummary(text);
   };
 
@@ -112,10 +112,10 @@ function ChatPageInner({ id }: { id: string }) {
             <div className="p-6 text-sm leading-relaxed">
               {generateSummary.isPending ? (
                 <p className="text-muted-foreground">Xulosa yaratilmoqda...</p>
+              ) : summary ? (
+                <SummaryText text={summary} />
               ) : (
-                <p className="whitespace-pre-wrap leading-relaxed">
-                  {summary ? formatSummaryForDisplay(summary) : 'Xulosa mavjud emas.'}
-                </p>
+                <p className="text-sm leading-relaxed">Xulosa mavjud emas.</p>
               )}
             </div>
           ) : content.type === 'PDF' && pdfUrl ? (

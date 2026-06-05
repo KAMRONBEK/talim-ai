@@ -1,6 +1,6 @@
 'use client';
 
-import { use, Suspense } from 'react';
+import { use, Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
@@ -13,11 +13,16 @@ import {
 } from '@talim/ui';
 import { useContent, useRetryContent } from '@/hooks/useContent';
 import { useSections, useSection } from '@/hooks/useSections';
-import { useCreateQuiz, useGenerateSummary } from '@/hooks/useQuiz';
+import {
+  useCreateQuiz,
+  useGenerateSummary,
+  useSavedSummary,
+} from '@/hooks/useQuiz';
+import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
 import { ContentRightPanel } from '@/components/layout/content-right-panel';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
 import { useState } from 'react';
-import { formatSummaryForDisplay } from '@/lib/format-summary';
+import { SummaryText } from '@/components/learning/summary-text';
 
 function ContentDetailInner({ id }: { id: string }) {
   const router = useRouter();
@@ -25,23 +30,58 @@ function ContentDetailInner({ id }: { id: string }) {
   const sectionId = searchParams.get('section') ?? undefined;
   const { data: content } = useContent(id);
   const { data: sections = [] } = useSections(id);
-  const activeSectionId = sectionId ?? sections[0]?.id;
+  const { data: progressData } = useContentProgress(id);
+  const sectionIds = new Set(sections.map((s) => s.id));
+  const storedLastSectionId = progressData?.contentProgress?.lastSectionId;
+  const validLastSectionId =
+    storedLastSectionId && sectionIds.has(storedLastSectionId)
+      ? storedLastSectionId
+      : undefined;
+  const activeSectionId = sectionId ?? validLastSectionId ?? sections[0]?.id;
   const activeIndex = sections.findIndex((s) => s.id === activeSectionId);
   const { data: sectionData, isLoading: sectionLoading } = useSection(id, activeSectionId);
+  const { data: history } = useLearningHistory(id);
   const createQuiz = useCreateQuiz();
   const generateSummary = useGenerateSummary();
+  const { data: savedSummary } = useSavedSummary(id, activeSectionId);
   const retryContent = useRetryContent();
   const [summary, setSummary] = useState<string | null>(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-  const handleCreateQuiz = async () => {
-    const quiz = await createQuiz.mutateAsync(id);
+  useEffect(() => {
+    if (savedSummary) setSummary(savedSummary);
+  }, [savedSummary]);
+
+  const sectionProgress = activeSectionId
+    ? progressData?.sections[activeSectionId]
+    : undefined;
+
+  const handleCreateQuiz = async (kind: 'FULL' | 'QUICK') => {
+    if (!activeSectionId) return;
+    const quiz = await createQuiz.mutateAsync({
+      contentId: id,
+      sectionId: activeSectionId,
+      kind,
+    });
     router.push(`/quiz/${quiz.id}`);
   };
 
   const handleSummary = async () => {
-    const text = await generateSummary.mutateAsync(id);
+    if (savedSummary) {
+      setSummary(savedSummary);
+      setSummaryOpen(true);
+      return;
+    }
+    const text = await generateSummary.mutateAsync({
+      contentId: id,
+      sectionId: activeSectionId,
+    });
+    setSummary(text);
+    setSummaryOpen(true);
+  };
+
+  const handleOpenSummary = (text: string) => {
     setSummary(text);
     setSummaryOpen(true);
   };
@@ -141,7 +181,16 @@ function ContentDetailInner({ id }: { id: string }) {
             {sectionData?.section.readMinutes != null && (
               <span>{sectionData.section.readMinutes} daqiqa o&apos;qish</span>
             )}
+            {sectionProgress != null && sectionProgress.coverageScore > 0 && (
+              <Badge variant="outline">
+                {Math.round(sectionProgress.coverageScore)}% o&apos;zlashtirildi
+              </Badge>
+            )}
           </div>
+
+          {sectionProgress?.aiFeedback && (
+            <p className="mt-3 text-sm text-muted-foreground">{sectionProgress.aiFeedback}</p>
+          )}
 
           <div className="mt-8 max-w-3xl">
             {sectionLoading ? (
@@ -155,16 +204,24 @@ function ContentDetailInner({ id }: { id: string }) {
             {summary && (
               <div className="od-info-box mt-8">
                 <div className="od-info-box-title">💡 Asosiy tushuncha</div>
-                <p className="whitespace-pre-wrap leading-relaxed">
-                  {formatSummaryForDisplay(summary)}
-                </p>
+                <SummaryText text={summary} />
               </div>
             )}
           </div>
 
           <div className="mt-10 flex flex-wrap gap-2.5 border-t pt-8">
-            <Button onClick={handleCreateQuiz} disabled={createQuiz.isPending}>
+            <Button
+              onClick={() => handleCreateQuiz('FULL')}
+              disabled={createQuiz.isPending || !activeSectionId}
+            >
               ❓ {createQuiz.isPending ? 'Yaratilmoqda...' : 'Test ishlang'}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => handleCreateQuiz('QUICK')}
+              disabled={createQuiz.isPending || !activeSectionId}
+            >
+              ⚡ {createQuiz.isPending ? 'Yaratilmoqda...' : 'Tez savol'}
             </Button>
             <Button
               variant="outline"
@@ -174,9 +231,6 @@ function ContentDetailInner({ id }: { id: string }) {
             </Button>
             <Button variant="outline" onClick={() => router.push(`/content/${id}/chat`)}>
               💬 AI o&apos;qituvchidan so&apos;rang
-            </Button>
-            <Button variant="outline" disabled title="Tez orada">
-              🔖 Saqlash
             </Button>
             <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
               O&apos;chirish
@@ -188,9 +242,17 @@ function ContentDetailInner({ id }: { id: string }) {
       <ContentRightPanel
         contentId={id}
         onSummary={handleSummary}
-        onQuiz={handleCreateQuiz}
+        onQuiz={() => handleCreateQuiz('FULL')}
+        onQuickCheck={() => handleCreateQuiz('QUICK')}
         summaryPending={generateSummary.isPending}
         quizPending={createQuiz.isPending}
+        quickCheckPending={createQuiz.isPending}
+        overallCoverage={progressData?.contentProgress?.overallCoverage ?? 0}
+        sectionCoverage={sectionProgress?.coverageScore ?? 0}
+        streakDays={history?.streakDays ?? 0}
+        quizCount={history?.quizzes.length ?? 0}
+        history={history}
+        onOpenSummary={handleOpenSummary}
       />
 
       <Dialog open={summaryOpen} onOpenChange={setSummaryOpen}>
@@ -198,9 +260,7 @@ function ContentDetailInner({ id }: { id: string }) {
           <DialogHeader>
             <DialogTitle>Xulosa</DialogTitle>
           </DialogHeader>
-          <p className="whitespace-pre-wrap text-sm leading-relaxed">
-            {formatSummaryForDisplay(summary ?? '')}
-          </p>
+          <SummaryText text={summary ?? ''} />
         </DialogContent>
       </Dialog>
 
