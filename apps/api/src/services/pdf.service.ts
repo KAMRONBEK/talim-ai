@@ -32,7 +32,7 @@ async function extractWithOpenAI(buffer: Buffer, filename: string): Promise<stri
             { type: 'file', file: { file_id: upload.id } },
             {
               type: 'text',
-              text: 'Extract all readable text from this document. Return plain text only. Preserve the original language (including Uzbek if present).',
+              text: 'Extract all readable text from this document. Return plain text only with no introduction, commentary, or meta phrases (do not write "Here is the extracted text" or similar). Start directly with the document content. Preserve the original language (including Uzbek if present).',
             },
           ],
         },
