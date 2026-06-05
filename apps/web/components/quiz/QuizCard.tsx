@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 import { Button, Card, CardContent } from '@talim/ui';
-import type { Quiz, QuizQuestion } from '@talim/types';
+import {
+  isSelectedAnswerCorrect,
+  resolveCorrectAnswer,
+  type Quiz,
+  type QuizQuestion,
+} from '@talim/types';
 
 interface QuizCardProps {
   quiz: Quiz;
@@ -11,6 +16,50 @@ interface QuizCardProps {
 }
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+function getOptionStyles(
+  answered: boolean,
+  selected: boolean,
+  isCorrectOption: boolean,
+  isCorrect: boolean,
+): { label: string; letter: string } {
+  if (!answered) {
+    return {
+      label: selected
+        ? 'border-primary bg-accent/50'
+        : 'border-border hover:border-muted-foreground/30 hover:bg-muted/50',
+      letter: selected
+        ? 'border-primary bg-primary text-primary-foreground'
+        : 'border-border bg-card',
+    };
+  }
+
+  if (selected && isCorrect) {
+    return {
+      label: 'border-success bg-success-muted',
+      letter: 'border-success bg-success text-success-foreground',
+    };
+  }
+
+  if (selected && !isCorrect) {
+    return {
+      label: 'border-destructive bg-destructive/10',
+      letter: 'border-destructive bg-destructive text-destructive-foreground',
+    };
+  }
+
+  if (isCorrectOption && !isCorrect) {
+    return {
+      label: 'border-success bg-success-muted/80',
+      letter: 'border-success bg-success text-success-foreground',
+    };
+  }
+
+  return {
+    label: 'border-border bg-muted/20 opacity-60',
+    letter: 'border-border bg-card',
+  };
+}
 
 export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -47,7 +96,10 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
 
   if (!q) return null;
 
-  const answered = !!answers[q.id];
+  const selectedAnswer = answers[q.id];
+  const answered = !!selectedAnswer;
+  const isCorrect = isSelectedAnswerCorrect(q.options, selectedAnswer, q.correctAnswer);
+  const resolvedCorrect = resolveCorrectAnswer(q.options, q.correctAnswer);
 
   return (
     <div>
@@ -70,16 +122,14 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
           <p className="text-lg font-semibold leading-snug">{q.question}</p>
           <div className="space-y-2.5">
             {q.options.map((option, i) => {
-              const selected = answers[q.id] === option;
+              const selected = selectedAnswer === option;
+              const isCorrectOption = option === resolvedCorrect;
+              const styles = getOptionStyles(answered, selected, isCorrectOption, isCorrect);
               const letter = LETTERS[i] ?? String(i + 1);
               return (
                 <label
                   key={option}
-                  className={`flex cursor-pointer items-center gap-3 rounded-[10px] border-2 bg-muted/30 p-4 transition-colors ${
-                    selected
-                      ? 'border-primary bg-accent/50'
-                      : 'border-border hover:border-muted-foreground/30 hover:bg-muted/50'
-                  }`}
+                  className={`flex cursor-pointer items-center gap-3 rounded-[10px] border-2 bg-muted/30 p-4 transition-colors ${styles.label}`}
                 >
                   <input
                     type="radio"
@@ -90,11 +140,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                     className="sr-only"
                   />
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold ${
-                      selected
-                        ? 'border-primary bg-primary text-primary-foreground'
-                        : 'border-border bg-card'
-                    }`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold ${styles.letter}`}
                   >
                     {letter}
                   </span>
@@ -103,9 +149,22 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               );
             })}
           </div>
+          {answered && (
+            <p
+              className={`text-sm font-semibold ${isCorrect ? 'text-success' : 'text-destructive'}`}
+            >
+              {isCorrect ? "To'g'ri!" : "Noto'g'ri"}
+            </p>
+          )}
           {answered && q.explanation && (
-            <div className="od-quiz-explanation">
-              <div className="od-quiz-explanation-title">✓ Tushuntirish</div>
+            <div className={isCorrect ? 'od-quiz-explanation' : 'od-quiz-explanation-wrong'}>
+              <div
+                className={
+                  isCorrect ? 'od-quiz-explanation-title' : 'od-quiz-explanation-wrong-title'
+                }
+              >
+                {isCorrect ? '✓ Tushuntirish' : '✗ Tushuntirish'}
+              </div>
               <p>{q.explanation}</p>
             </div>
           )}

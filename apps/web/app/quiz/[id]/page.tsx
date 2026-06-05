@@ -1,10 +1,10 @@
 'use client';
 
-import { use } from 'react';
+import { use, useState } from 'react';
 import Link from 'next/link';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { QuizResult } from '@/components/quiz/QuizResult';
-import { useQuiz, useSubmitQuiz } from '@/hooks/useQuiz';
+import { useQuiz, useSubmitQuiz, useLatestQuizAttempt } from '@/hooks/useQuiz';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
 import { AuthGuard } from '@/components/auth-guard';
 import { useContent } from '@/hooks/useContent';
@@ -12,15 +12,19 @@ import { useContent } from '@/hooks/useContent';
 export default function QuizPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data: quiz, isLoading } = useQuiz(id, 3000);
+  const { data: latestAttemptData, isLoading: attemptLoading } = useLatestQuizAttempt(id);
   const submitQuiz = useSubmitQuiz();
+  const [retaking, setRetaking] = useState(false);
+  const [retakeKey, setRetakeKey] = useState(0);
   const contentId = quiz?.contentId ?? '';
   const { data: content } = useContent(contentId);
 
   const handleSubmit = async (answers: Record<string, string>) => {
-    await submitQuiz.mutateAsync({ quizId: id, answers });
+    await submitQuiz.mutateAsync({ quizId: id, answers, contentId });
+    setRetaking(false);
   };
 
-  if (isLoading) {
+  if (isLoading || attemptLoading) {
     return (
       <AuthGuard>
         <p className="p-8 text-muted-foreground">Test yuklanmoqda...</p>
@@ -38,6 +42,10 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
 
   const questionCount = quiz.questions?.length ?? 0;
   const title = content?.title ?? 'Test';
+  const quizLabel = quiz.kind === 'QUICK' ? 'Tez savol' : 'Mashq testi';
+
+  const resultData = submitQuiz.data ?? latestAttemptData;
+  const showResult = !retaking && resultData?.attempt != null;
 
   return (
     <AuthGuard>
@@ -50,17 +58,27 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
           >
             ← Kontentga qaytish
           </Link>
+          <p className="mb-1 text-sm font-medium">{quizLabel}</p>
           <p className="mb-4 text-sm text-muted-foreground">
             {questionCount > 0 ? `${questionCount} ta savol` : 'Savollar yaratilmoqda...'}
           </p>
-          {submitQuiz.data ? (
+          {showResult && resultData.attempt ? (
             <QuizResult
-              score={submitQuiz.data.attempt.score}
-              correct={submitQuiz.data.correct}
-              total={submitQuiz.data.total}
+              score={resultData.attempt.score}
+              correct={resultData.correct ?? 0}
+              total={resultData.total ?? questionCount}
+              onRetry={() => {
+                setRetaking(true);
+                setRetakeKey((k) => k + 1);
+              }}
             />
           ) : (
-            <QuizCard quiz={quiz} onSubmit={handleSubmit} isSubmitting={submitQuiz.isPending} />
+            <QuizCard
+              key={`${id}-${retakeKey}`}
+              quiz={quiz}
+              onSubmit={handleSubmit}
+              isSubmitting={submitQuiz.isPending}
+            />
           )}
         </main>
       </div>

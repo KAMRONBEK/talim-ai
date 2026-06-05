@@ -1,14 +1,15 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@talim/ui';
+import { Button, Card, CardContent, CardHeader, CardTitle } from '@talim/ui';
 
 interface QuizResultProps {
   score: number;
   correct: number;
   total: number;
+  onRetry?: () => void;
 }
 
-export function QuizResult({ score, correct, total }: QuizResultProps) {
+export function QuizResult({ score, correct, total, onRetry }: QuizResultProps) {
   return (
     <Card className="rounded-2xl">
       <CardHeader>
@@ -19,6 +20,11 @@ export function QuizResult({ score, correct, total }: QuizResultProps) {
         <p className="mt-2 text-muted-foreground">
           {total} ta savoldan {correct} tasi to&apos;g&apos;ri.
         </p>
+        {onRetry && (
+          <Button type="button" variant="outline" className="mt-4" onClick={onRetry}>
+            Qayta ishlash
+          </Button>
+        )}
       </CardContent>
     </Card>
   );
