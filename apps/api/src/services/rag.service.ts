@@ -1,6 +1,8 @@
 import { randomUUID } from 'crypto';
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
+import type { AppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
+import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
 
 const CHUNK_SIZE = 512;
@@ -38,6 +40,24 @@ export async function storeChunksWithEmbeddings(contentId: string, chunks: strin
   }
 }
 
+export function mergeSimilarChunks(
+  primary: { text: string; chunkIndex: number }[],
+  secondary: { text: string; chunkIndex: number }[],
+  limit: number = TOP_K,
+): { text: string; chunkIndex: number }[] {
+  const seen = new Set<number>();
+  const merged: { text: string; chunkIndex: number }[] = [];
+
+  for (const chunk of [...primary, ...secondary]) {
+    if (seen.has(chunk.chunkIndex)) continue;
+    seen.add(chunk.chunkIndex);
+    merged.push(chunk);
+    if (merged.length >= limit) break;
+  }
+
+  return merged;
+}
+
 export async function searchSimilarChunks(
   contentId: string,
   query: string,
@@ -62,8 +82,9 @@ export async function searchSimilarChunks(
   return results;
 }
 
-export function buildRagContext(chunks: { text: string }[]): string {
-  return chunks.map((c, i) => `--- Parcha ${i + 1} ---\n${c.text}`).join('\n\n');
+export function buildRagContext(chunks: { text: string }[], locale: AppLocale = 'uz'): string {
+  const label = getRagChunkLabel(locale);
+  return chunks.map((c, i) => `--- ${label} ${i + 1} ---\n${c.text}`).join('\n\n');
 }
 
 /** Chunks in document order — better for summaries than semantic search alone. */

@@ -1,10 +1,11 @@
 import type { QuizKind } from '@prisma/client';
+import { parseAppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
 import { resolveCorrectAnswer } from '@talim/types';
-import { QUIZ_SYSTEM_PROMPT, buildQuizUserPrompt } from '../lib/quiz-prompt.js';
+import { getQuizSystemPrompt, buildQuizUserPrompt } from '../lib/locale-prompts.js';
 
 interface GeneratedQuestion {
   question: string;
@@ -33,12 +34,15 @@ async function getSectionContext(contentId: string, sectionId: string): Promise<
 
 export function registerGenerateQuizJob(): void {
   quizQueue.process(async (job) => {
-    const { contentId, quizId, sectionId, kind } = job.data as GenerateQuizJobData;
+    const { contentId, quizId, sectionId, kind, locale: jobLocale } = job.data as GenerateQuizJobData;
 
     const content = await prisma.content.findUnique({ where: { id: contentId } });
     if (!content) {
       throw new Error(`Content ${contentId} not found`);
     }
+
+    const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
+    const locale = parseAppLocale(jobLocale ?? quiz?.locale);
 
     const quizKind: QuizKind = kind ?? 'FULL';
     let context: string;
@@ -51,8 +55,8 @@ export function registerGenerateQuizJob(): void {
     }
 
     const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>([
-      { role: 'system', content: QUIZ_SYSTEM_PROMPT },
-      { role: 'user', content: buildQuizUserPrompt(content.title, context, quizKind) },
+      { role: 'system', content: getQuizSystemPrompt(locale) },
+      { role: 'user', content: buildQuizUserPrompt(locale, content.title, context, quizKind) },
     ]);
 
     const questions = result.questions ?? [];

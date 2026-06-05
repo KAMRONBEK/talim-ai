@@ -1,14 +1,23 @@
+import { parseAppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import { buildRagContext } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
 import { synthesizeSpeech } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
-import { PODCAST_SYSTEM_PROMPT, buildPodcastUserPrompt } from '../lib/podcast-prompt.js';
+import {
+  getPodcastSystemPrompt,
+  buildPodcastUserPrompt,
+} from '../lib/locale-prompts.js';
 
 export function registerGeneratePodcastJob(): void {
   podcastQueue.process(async (job) => {
-    const { contentId, podcastId } = job.data as GeneratePodcastJobData;
+    const { contentId, podcastId, locale: jobLocale } = job.data as GeneratePodcastJobData;
+
+    const podcast = await prisma.podcast.findUnique({ where: { id: podcastId } });
+    if (!podcast) throw new Error(`Podcast ${podcastId} not found`);
+
+    const locale = parseAppLocale(jobLocale ?? podcast.locale);
 
     const content = await prisma.content.findUnique({
       where: { id: contentId },
@@ -16,6 +25,14 @@ export function registerGeneratePodcastJob(): void {
     });
     if (!content) throw new Error(`Content ${contentId} not found`);
 
+    const existingEpisodes = await prisma.podcastEpisode.findMany({
+      where: { podcastId },
+    });
+    await Promise.all(
+      existingEpisodes
+        .filter((e) => e.audioPath)
+        .map((e) => storageService.delete(e.audioPath!)),
+    );
     await prisma.podcastEpisode.deleteMany({ where: { podcastId } });
 
     let sections = content.sections;
@@ -59,10 +76,10 @@ export function registerGeneratePodcastJob(): void {
           : '';
 
       const script = await generateChatCompletion([
-        { role: 'system', content: PODCAST_SYSTEM_PROMPT },
+        { role: 'system', content: getPodcastSystemPrompt(locale) },
         {
           role: 'user',
-          content: buildPodcastUserPrompt(sec.title, context || content.title),
+          content: buildPodcastUserPrompt(locale, sec.title, context || content.title),
         },
       ]);
 
@@ -77,8 +94,8 @@ export function registerGeneratePodcastJob(): void {
       });
 
       try {
-        const audio = await synthesizeSpeech(script);
-        const audioPath = await storageService.save(audio, `${episode.id}.mp3`);
+        const audio = await synthesizeSpeech(script, locale);
+        const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
         const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({
           where: { id: episode.id },

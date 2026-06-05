@@ -6,6 +6,7 @@ import { prisma } from '../lib/prisma.js';
 import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
+import { parseAppLocale } from '@talim/types';
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -18,15 +19,27 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
+const updateMeSchema = z.object({
+  preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
+  name: z.string().min(1).optional(),
+});
+
 function signToken(userId: string, email: string): string {
   return jwt.sign({ userId, email }, env.JWT_SECRET, { expiresIn: '7d' });
 }
 
-function formatUser(user: { id: string; email: string; name: string | null; createdAt: Date }) {
+function formatUser(user: {
+  id: string;
+  email: string;
+  name: string | null;
+  preferredLocale: string;
+  createdAt: Date;
+}) {
   return {
     id: user.id,
     email: user.email,
     name: user.name,
+    preferredLocale: parseAppLocale(user.preferredLocale),
     createdAt: user.createdAt.toISOString(),
   };
 }
@@ -75,5 +88,20 @@ export async function me(req: AuthenticatedRequest, res: Response): Promise<void
   if (!user) {
     throw new AppError(404, 'User not found');
   }
+  res.json({ user: formatUser(user) });
+}
+
+export async function updateMe(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const body = updateMeSchema.parse(req.body ?? {});
+
+  const user = await prisma.user.update({
+    where: { id: req.user.userId },
+    data: {
+      ...(body.preferredLocale !== undefined ? { preferredLocale: body.preferredLocale } : {}),
+      ...(body.name !== undefined ? { name: body.name } : {}),
+    },
+  });
+
   res.json({ user: formatUser(user) });
 }

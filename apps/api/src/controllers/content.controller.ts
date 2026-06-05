@@ -9,10 +9,16 @@ import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
+import { extractRegionTextFromImage } from '../services/pdf.service.js';
 
 const youtubeSchema = z.object({
   url: z.string().url(),
   title: z.string().min(1).optional(),
+});
+
+const ocrRegionSchema = z.object({
+  page: z.number().int().min(1),
+  image: z.string().min(1),
 });
 
 function formatContent(content: {
@@ -130,11 +136,11 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
 
   await cancelContentJobs(content.id);
 
-  const podcast = await prisma.podcast.findUnique({
+  const podcasts = await prisma.podcast.findMany({
     where: { contentId: content.id },
     include: { episodes: true },
   });
-  if (podcast) {
+  for (const podcast of podcasts) {
     await Promise.all(
       podcast.episodes
         .filter((episode) => episode.audioPath)
@@ -142,12 +148,38 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
     );
   }
 
+  const videos = await prisma.contentVideo.findMany({
+    where: { contentId: content.id },
+  });
+  await Promise.all(
+    videos
+      .filter((v) => v.storagePath)
+      .map((v) => storageService.delete(v.storagePath!)),
+  );
+
   if (content.storagePath) {
     await storageService.delete(content.storagePath);
   }
 
   await prisma.content.delete({ where: { id: content.id } });
   res.status(204).send();
+}
+
+export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const body = ocrRegionSchema.parse(req.body);
+
+  const content = await prisma.content.findFirst({
+    where: { id: getParam(req, 'id'), userId: req.user.userId, type: 'PDF' },
+  });
+  if (!content) throw new AppError(404, 'PDF content not found');
+
+  const base64 = body.image.replace(/^data:image\/\w+;base64,/, '');
+  const imageBuffer = Buffer.from(base64, 'base64');
+  if (imageBuffer.length === 0) throw new AppError(400, 'Invalid image data');
+
+  const text = await extractRegionTextFromImage(imageBuffer);
+  res.json({ text, page: body.page });
 }
 
 export async function getContentFile(req: AuthenticatedRequest, res: Response): Promise<void> {

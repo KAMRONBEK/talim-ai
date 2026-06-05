@@ -6,16 +6,19 @@ import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getOrderedChunks, buildRagContext } from '../services/rag.service.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import {
+  getSummarySystemPrompt,
   buildSummaryUserPrompt,
   sanitizeSummaryOutput,
-  SUMMARY_SYSTEM_PROMPT,
-} from '../lib/summary-prompt.js';
+} from '../lib/locale-prompts.js';
 import { getParam } from '../lib/params.js';
+import { resolveLocale } from '../lib/locale.js';
 import { getSectionBody } from '../services/section.service.js';
 import { recordLearningActivity } from '../services/learningProgress.service.js';
+import type { AppLocale } from '@talim/types';
 
 const summaryBodySchema = z.object({
   sectionId: z.string().optional(),
+  locale: z.enum(['uz', 'en', 'ru']).optional(),
 });
 
 function scopeKey(sectionId?: string): string {
@@ -33,6 +36,7 @@ async function assertContentReady(userId: string, contentId: string) {
 async function generateSummaryText(
   contentId: string,
   title: string,
+  locale: AppLocale,
   sectionId?: string,
 ): Promise<string> {
   let context: string;
@@ -50,11 +54,11 @@ async function generateSummaryText(
   }
 
   const raw = await generateChatCompletion([
-    { role: 'system', content: SUMMARY_SYSTEM_PROMPT },
-    { role: 'user', content: buildSummaryUserPrompt(title, context) },
+    { role: 'system', content: getSummarySystemPrompt(locale) },
+    { role: 'user', content: buildSummaryUserPrompt(locale, title, context) },
   ]);
 
-  return sanitizeSummaryOutput(raw);
+  return sanitizeSummaryOutput(locale, raw);
 }
 
 function formatSummary(row: {
@@ -62,6 +66,7 @@ function formatSummary(row: {
   contentId: string;
   sectionId: string | null;
   scopeKey: string;
+  locale: string;
   summary: string;
   createdAt: Date;
 }) {
@@ -70,6 +75,7 @@ function formatSummary(row: {
     contentId: row.contentId,
     sectionId: row.sectionId,
     scopeKey: row.scopeKey,
+    locale: row.locale,
     summary: row.summary,
     createdAt: row.createdAt.toISOString(),
   };
@@ -79,14 +85,16 @@ export async function getSummary(req: AuthenticatedRequest, res: Response): Prom
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'contentId');
   const sectionId = typeof req.query.sectionId === 'string' ? req.query.sectionId : undefined;
+  const locale = resolveLocale(req);
   await assertContentReady(req.user.userId, contentId);
 
   const saved = await prisma.contentSummary.findUnique({
     where: {
-      userId_contentId_scopeKey: {
+      userId_contentId_scopeKey_locale: {
         userId: req.user.userId,
         contentId,
         scopeKey: scopeKey(sectionId),
+        locale,
       },
     },
   });
@@ -102,15 +110,17 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'contentId');
   const body = summaryBodySchema.parse(req.body ?? {});
+  const locale = body.locale ?? resolveLocale(req);
   const content = await assertContentReady(req.user.userId, contentId);
   const key = scopeKey(body.sectionId);
 
   const existing = await prisma.contentSummary.findUnique({
     where: {
-      userId_contentId_scopeKey: {
+      userId_contentId_scopeKey_locale: {
         userId: req.user.userId,
         contentId,
         scopeKey: key,
+        locale,
       },
     },
   });
@@ -120,14 +130,15 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
     return;
   }
 
-  const summaryText = await generateSummaryText(contentId, content.title, body.sectionId);
+  const summaryText = await generateSummaryText(contentId, content.title, locale, body.sectionId);
 
   const saved = await prisma.contentSummary.upsert({
     where: {
-      userId_contentId_scopeKey: {
+      userId_contentId_scopeKey_locale: {
         userId: req.user.userId,
         contentId,
         scopeKey: key,
+        locale,
       },
     },
     create: {
@@ -135,6 +146,7 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
       contentId,
       scopeKey: key,
       sectionId: body.sectionId ?? null,
+      locale,
       summary: summaryText,
     },
     update: {

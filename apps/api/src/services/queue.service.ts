@@ -15,11 +15,13 @@ export interface GenerateQuizJobData {
   quizId: string;
   sectionId?: string;
   kind?: 'FULL' | 'QUICK';
+  locale?: string;
 }
 
 export interface GeneratePodcastJobData {
   contentId: string;
   podcastId: string;
+  locale?: string;
 }
 
 type ContentScopedJobData = { contentId?: string };

@@ -1,23 +1,32 @@
 import type { Response } from 'express';
+import type { AppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getParam } from '../lib/params.js';
-import { getSectionBody } from '../services/section.service.js';
+import { resolveLocale } from '../lib/locale.js';
+import {
+  ensureSectionTitlesForLocale,
+  getSectionBody,
+  resolveSectionTitle,
+} from '../services/section.service.js';
 
-function formatSection(section: {
-  id: string;
-  contentId: string;
-  title: string;
-  order: number;
-  startChunk: number;
-  endChunk: number;
-  readMinutes: number | null;
-}) {
+function formatSection(
+  section: {
+    id: string;
+    contentId: string;
+    title: string;
+    order: number;
+    startChunk: number;
+    endChunk: number;
+    readMinutes: number | null;
+  },
+  title: string,
+) {
   return {
     id: section.id,
     contentId: section.contentId,
-    title: section.title,
+    title,
     order: section.order,
     startChunk: section.startChunk,
     endChunk: section.endChunk,
@@ -36,6 +45,7 @@ async function assertContentAccess(userId: string, contentId: string) {
 export async function listSections(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
+  const locale = resolveLocale(req) as AppLocale;
   await assertContentAccess(req.user.userId, contentId);
 
   const sections = await prisma.contentSection.findMany({
@@ -43,13 +53,23 @@ export async function listSections(req: AuthenticatedRequest, res: Response): Pr
     orderBy: { order: 'asc' },
   });
 
-  res.json({ sections: sections.map(formatSection) });
+  await ensureSectionTitlesForLocale(contentId, locale);
+
+  const localized = await Promise.all(
+    sections.map(async (section) => {
+      const title = await resolveSectionTitle(section, locale);
+      return formatSection(section, title);
+    }),
+  );
+
+  res.json({ sections: localized });
 }
 
 export async function getSection(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const sectionId = getParam(req, 'sectionId');
+  const locale = resolveLocale(req) as AppLocale;
   await assertContentAccess(req.user.userId, contentId);
 
   const section = await prisma.contentSection.findFirst({
@@ -57,6 +77,8 @@ export async function getSection(req: AuthenticatedRequest, res: Response): Prom
   });
   if (!section) throw new AppError(404, 'Section not found');
 
+  await ensureSectionTitlesForLocale(contentId, locale);
+  const title = await resolveSectionTitle(section, locale);
   const body = await getSectionBody(contentId, sectionId);
-  res.json({ section: formatSection(section), body });
+  res.json({ section: formatSection(section, title), body });
 }

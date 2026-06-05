@@ -8,3 +8,4 @@ export const authRoutes = Router();
 authRoutes.post('/register', asyncHandler(authController.register));
 authRoutes.post('/login', asyncHandler(authController.login));
 authRoutes.get('/me', authMiddleware, asyncHandler(authController.me));
+authRoutes.patch('/me', authMiddleware, asyncHandler(authController.updateMe));

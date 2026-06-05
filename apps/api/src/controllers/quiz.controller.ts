@@ -5,12 +5,14 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { quizQueue } from '../services/queue.service.js';
 import { getParam } from '../lib/params.js';
+import { resolveLocale } from '../lib/locale.js';
 import { isSelectedAnswerCorrect } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
 
 const createQuizSchema = z.object({
   sectionId: z.string().min(1),
   kind: z.enum(['FULL', 'QUICK']).default('FULL'),
+  locale: z.enum(['uz', 'en', 'ru']).optional(),
 });
 
 const submitSchema = z.object({
@@ -23,6 +25,7 @@ function formatQuiz(quiz: {
   userId: string;
   sectionId: string | null;
   kind: 'FULL' | 'QUICK';
+  locale: string;
   createdAt: Date;
   questions?: {
     id: string;
@@ -39,6 +42,7 @@ function formatQuiz(quiz: {
     userId: quiz.userId,
     sectionId: quiz.sectionId,
     kind: quiz.kind,
+    locale: quiz.locale,
     createdAt: quiz.createdAt.toISOString(),
     questions: quiz.questions?.map((q) => ({
       id: q.id,
@@ -73,6 +77,7 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'contentId');
   const body = createQuizSchema.parse(req.body ?? {});
+  const locale = body.locale ?? resolveLocale(req);
 
   const content = await prisma.content.findFirst({
     where: { id: contentId, userId: req.user.userId, status: 'READY' },
@@ -84,14 +89,34 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
   });
   if (!section) throw new AppError(404, 'Section not found');
 
-  const quiz = await prisma.quiz.create({
-    data: {
+  const existing = await prisma.quiz.findFirst({
+    where: {
       contentId,
       userId: req.user.userId,
       sectionId: body.sectionId,
       kind: body.kind,
+      locale,
     },
+    include: { questions: true },
+    orderBy: { createdAt: 'desc' },
   });
+
+  if (existing && existing.questions.length > 0) {
+    res.json({ quiz: formatQuiz(existing), cached: true });
+    return;
+  }
+
+  const quiz =
+    existing ??
+    (await prisma.quiz.create({
+      data: {
+        contentId,
+        userId: req.user.userId,
+        sectionId: body.sectionId,
+        kind: body.kind,
+        locale,
+      },
+    }));
 
   await quizQueue.add({
     contentId,
@@ -99,16 +124,19 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
     quizId: quiz.id,
     sectionId: body.sectionId,
     kind: body.kind,
+    locale,
   });
 
   res.status(202).json({
     quiz: formatQuiz({ ...quiz, questions: [] }),
+    cached: false,
   });
 }
 
 export async function listQuizzesByContent(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'contentId');
+  const locale = resolveLocale(req);
 
   const content = await prisma.content.findFirst({
     where: { id: contentId, userId: req.user.userId },
@@ -116,7 +144,7 @@ export async function listQuizzesByContent(req: AuthenticatedRequest, res: Respo
   if (!content) throw new AppError(404, 'Content not found');
 
   const quizzes = await prisma.quiz.findMany({
-    where: { contentId, userId: req.user.userId },
+    where: { contentId, userId: req.user.userId, locale },
     include: {
       questions: { select: { id: true } },
       attempts: {
@@ -135,6 +163,7 @@ export async function listQuizzesByContent(req: AuthenticatedRequest, res: Respo
       userId: q.userId,
       sectionId: q.sectionId,
       kind: q.kind,
+      locale: q.locale,
       createdAt: q.createdAt.toISOString(),
       questionCount: q.questions.length,
       latestAttempt: q.attempts[0] ? formatAttempt(q.attempts[0]) : null,

@@ -8,6 +8,7 @@ import {
   markSectionViewed,
   computeStreakDays,
 } from '../services/learningProgress.service.js';
+import { resolveLocale } from '../lib/locale.js';
 
 const patchProgressSchema = z.object({
   sectionId: z.string().min(1),
@@ -108,12 +109,13 @@ export async function patchContentProgress(req: AuthenticatedRequest, res: Respo
 export async function getLearningHistory(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
+  const locale = resolveLocale(req);
   await assertContentAccess(req.user.userId, contentId);
   const userId = req.user.userId;
 
   const [quizzes, summaries, podcast, streakDays] = await Promise.all([
     prisma.quiz.findMany({
-      where: { contentId, userId },
+      where: { contentId, userId, locale },
       include: {
         questions: { select: { id: true } },
         attempts: {
@@ -125,10 +127,10 @@ export async function getLearningHistory(req: AuthenticatedRequest, res: Respons
       orderBy: { createdAt: 'desc' },
     }),
     prisma.contentSummary.findMany({
-      where: { contentId, userId },
+      where: { contentId, userId, locale },
       orderBy: { updatedAt: 'desc' },
     }),
-    prisma.podcast.findUnique({ where: { contentId } }),
+    prisma.podcast.findUnique({ where: { contentId_locale: { contentId, locale } } }),
     computeStreakDays(userId),
   ]);
 
@@ -139,6 +141,7 @@ export async function getLearningHistory(req: AuthenticatedRequest, res: Respons
       userId: q.userId,
       sectionId: q.sectionId,
       kind: q.kind,
+      locale: q.locale,
       createdAt: q.createdAt.toISOString(),
       questionCount: q.questions.length,
       latestAttempt: q.attempts[0]
@@ -157,6 +160,7 @@ export async function getLearningHistory(req: AuthenticatedRequest, res: Respons
       contentId: s.contentId,
       sectionId: s.sectionId,
       scopeKey: s.scopeKey,
+      locale: s.locale,
       summary: s.summary,
       createdAt: s.createdAt.toISOString(),
     })),
@@ -210,10 +214,11 @@ export async function patchEpisodeProgress(req: AuthenticatedRequest, res: Respo
 export async function getEpisodeProgress(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
+  const locale = resolveLocale(req);
   await assertContentAccess(req.user.userId, contentId);
 
   const podcast = await prisma.podcast.findUnique({
-    where: { contentId },
+    where: { contentId_locale: { contentId, locale } },
     include: { episodes: { select: { id: true } } },
   });
 

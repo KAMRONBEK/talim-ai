@@ -55,3 +55,36 @@ export async function extractPdfText(buffer: Buffer, filename = 'document.pdf'):
 
   return extractWithOpenAI(buffer, filename);
 }
+
+/** OCR a cropped page region (image/png or jpeg) from a scanned PDF viewer selection. */
+export async function extractRegionTextFromImage(imageBuffer: Buffer): Promise<string> {
+  if (!openai) {
+    throw new Error('OPENAI_API_KEY is required for scanned PDF region OCR');
+  }
+
+  const base64 = imageBuffer.toString('base64');
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'image_url',
+            image_url: { url: `data:image/png;base64,${base64}` },
+          },
+          {
+            type: 'text',
+            text: 'Extract all readable text visible in this image. Return plain text only with no introduction or commentary. Preserve the original language.',
+          },
+        ],
+      },
+    ],
+  });
+
+  const text = response.choices[0]?.message?.content?.trim();
+  if (!text) {
+    throw new Error('No text could be extracted from the selected region');
+  }
+  return text;
+}

@@ -1,34 +1,49 @@
 import type { Response } from 'express';
+import type { AppLocale } from '@talim/types';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
-import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
-import { streamTutorCompletion } from '../services/ai.service.js';
-import { buildTutorSystemMessage } from '../lib/tutor-prompt.js';
+import {
+  searchSimilarChunks,
+  mergeSimilarChunks,
+  buildRagContext,
+} from '../services/rag.service.js';
+import { streamTutorWithTools } from '../services/ai.service.js';
+import { serializeGraphBlock } from '../lib/tutor-graph.js';
+import { buildTutorSystemMessage } from '../lib/locale-prompts.js';
 import { getParam } from '../lib/params.js';
+import { resolveLocale } from '../lib/locale.js';
 
 const streamSchema = z.object({
   contentId: z.string().min(1),
   message: z.string().min(1),
   sessionId: z.string().optional(),
   selectedExcerpt: z.string().max(4000).optional(),
+  selectedImage: z.string().max(2_000_000).optional(),
+  locale: z.enum(['uz', 'en', 'ru']).optional(),
 });
 
 export async function getOrCreateSession(
   userId: string,
   contentId: string,
+  locale: AppLocale,
   sessionId?: string,
 ): Promise<string> {
   if (sessionId) {
     const existing = await prisma.chatSession.findFirst({
-      where: { id: sessionId, userId, contentId },
+      where: { id: sessionId, userId, contentId, locale },
     });
     if (existing) return existing.id;
   }
 
+  const existingForLocale = await prisma.chatSession.findFirst({
+    where: { userId, contentId, locale },
+  });
+  if (existingForLocale) return existingForLocale.id;
+
   const session = await prisma.chatSession.create({
-    data: { userId, contentId },
+    data: { userId, contentId, locale },
   });
   return session.id;
 }
@@ -62,7 +77,14 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   });
   if (!content) throw new AppError(404, 'Content not found or not ready');
 
-  const sessionId = await getOrCreateSession(req.user.userId, body.contentId, body.sessionId);
+  const locale = (body.locale ?? resolveLocale(req)) as AppLocale;
+
+  const sessionId = await getOrCreateSession(
+    req.user.userId,
+    body.contentId,
+    locale,
+    body.sessionId,
+  );
 
   await prisma.chatMessage.create({
     data: { sessionId, role: 'USER', text: body.message },
@@ -74,18 +96,41 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     take: 20,
   });
 
-  const chunks = await searchSimilarChunks(body.contentId, body.message);
-  const context = buildRagContext(chunks);
+  const messageChunks = await searchSimilarChunks(body.contentId, body.message);
+  const excerptChunks =
+    !body.selectedImage && body.selectedExcerpt?.trim()
+      ? await searchSimilarChunks(body.contentId, body.selectedExcerpt)
+      : [];
+  const chunks = excerptChunks.length
+    ? mergeSimilarChunks(excerptChunks, messageChunks)
+    : messageChunks;
+  const context = buildRagContext(chunks, locale);
 
   const messages = [
     {
       role: 'system' as const,
-      content: buildTutorSystemMessage(context, body.selectedExcerpt),
+      content: buildTutorSystemMessage(
+        locale,
+        context,
+        body.selectedExcerpt,
+        Boolean(body.selectedImage),
+      ),
     },
-    ...history.map((m) => ({
-      role: (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',
-      content: m.text,
-    })),
+    ...history.map((m, index) => {
+      const role = (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant';
+      const isLatestUser =
+        m.role === 'USER' && index === history.length - 1 && Boolean(body.selectedImage);
+      if (isLatestUser && body.selectedImage) {
+        return {
+          role,
+          content: [
+            { type: 'image_url' as const, image_url: { url: body.selectedImage } },
+            { type: 'text' as const, text: m.text },
+          ],
+        };
+      }
+      return { role, content: m.text };
+    }),
   ];
 
   res.setHeader('Content-Type', 'text/event-stream');
@@ -96,9 +141,15 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   let fullResponse = '';
 
   try {
-    for await (const text of streamTutorCompletion(messages)) {
-      fullResponse += text;
-      res.write(`data: ${JSON.stringify({ text })}\n\n`);
+    for await (const event of streamTutorWithTools(messages)) {
+      if (event.type === 'text') {
+        fullResponse += event.text;
+        res.write(`data: ${JSON.stringify({ text: event.text })}\n\n`);
+      } else if (event.type === 'graph') {
+        const block = serializeGraphBlock(event.graph);
+        fullResponse += block;
+        res.write(`data: ${JSON.stringify({ graph: event.graph })}\n\n`);
+      }
     }
 
     await prisma.chatMessage.create({

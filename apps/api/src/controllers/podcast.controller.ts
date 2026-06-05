@@ -1,10 +1,16 @@
 import type { Response } from 'express';
+import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getParam } from '../lib/params.js';
+import { resolveLocale } from '../lib/locale.js';
 import { podcastQueue } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
+
+const createPodcastSchema = z.object({
+  locale: z.enum(['uz', 'en', 'ru']).optional(),
+});
 
 function formatEpisode(episode: {
   id: string;
@@ -37,10 +43,11 @@ async function assertContentReady(userId: string, contentId: string) {
 export async function getPodcast(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
+  const locale = resolveLocale(req);
   await assertContentReady(req.user.userId, contentId);
 
   const podcast = await prisma.podcast.findUnique({
-    where: { contentId },
+    where: { contentId_locale: { contentId, locale } },
     include: { episodes: { orderBy: { order: 'asc' } } },
   });
 
@@ -53,6 +60,7 @@ export async function getPodcast(req: AuthenticatedRequest, res: Response): Prom
     podcast: {
       id: podcast.id,
       contentId: podcast.contentId,
+      locale: podcast.locale,
       status: podcast.status,
       episodes: podcast.episodes.map(formatEpisode),
     },
@@ -62,9 +70,14 @@ export async function getPodcast(req: AuthenticatedRequest, res: Response): Prom
 export async function createPodcast(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
+  const body = createPodcastSchema.parse(req.body ?? {});
+  const locale = body.locale ?? resolveLocale(req);
   await assertContentReady(req.user.userId, contentId);
 
-  const existing = await prisma.podcast.findUnique({ where: { contentId } });
+  const existing = await prisma.podcast.findUnique({
+    where: { contentId_locale: { contentId, locale } },
+  });
+
   if (existing?.status === 'GENERATING') {
     throw new AppError(409, 'Podcast generation already in progress');
   }
@@ -73,6 +86,7 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
       podcast: {
         id: existing.id,
         contentId: existing.contentId,
+        locale: existing.locale,
         status: existing.status,
       },
     });
@@ -82,10 +96,18 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
   const podcast =
     existing ??
     (await prisma.podcast.create({
-      data: { contentId, status: 'PENDING' },
+      data: { contentId, locale, status: 'PENDING' },
     }));
 
   if (existing && existing.status === 'FAILED') {
+    const episodes = await prisma.podcastEpisode.findMany({
+      where: { podcastId: existing.id },
+    });
+    await Promise.all(
+      episodes
+        .filter((e) => e.audioPath)
+        .map((e) => storageService.delete(e.audioPath!)),
+    );
     await prisma.podcastEpisode.deleteMany({ where: { podcastId: existing.id } });
     await prisma.podcast.update({
       where: { id: existing.id },
@@ -93,14 +115,14 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
     });
   }
 
-  await podcastQueue.add({ contentId, podcastId: podcast.id });
+  await podcastQueue.add({ contentId, podcastId: podcast.id, locale });
   await prisma.podcast.update({
     where: { id: podcast.id },
     data: { status: 'GENERATING' },
   });
 
   res.status(202).json({
-    podcast: { id: podcast.id, contentId, status: 'GENERATING' },
+    podcast: { id: podcast.id, contentId, locale, status: 'GENERATING' },
   });
 }
 

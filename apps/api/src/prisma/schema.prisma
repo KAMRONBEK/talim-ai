@@ -39,11 +39,19 @@ enum QuizKind {
   QUICK
 }
 
+enum GeneratedMediaStatus {
+  PENDING
+  GENERATING
+  READY
+  FAILED
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
   passwordHash            String
   name                    String?
+  preferredLocale         String                   @default("uz")
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
   contents                Content[]
@@ -74,7 +82,8 @@ model Content {
   chatSessions     ChatSession[]
   quizzes          Quiz[]
   sections         ContentSection[]
-  podcast          Podcast?
+  podcasts         Podcast[]
+  contentVideos    ContentVideo[]
   contentProgress  ContentProgress[]
   contentSummaries ContentSummary[]
 
@@ -83,30 +92,44 @@ model Content {
 }
 
 model ContentSection {
-  id              String            @id @default(cuid())
+  id              String                 @id @default(cuid())
   contentId       String
   title           String
   order           Int
   startChunk      Int
   endChunk        Int
   readMinutes     Int?
-  content         Content           @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  content         Content                @relation(fields: [contentId], references: [id], onDelete: Cascade)
   quizzes         Quiz[]
   sectionProgress SectionProgress[]
+  localizedTitles ContentSectionTitle[]
 
   @@index([contentId])
   @@index([contentId, order])
 }
 
+model ContentSectionTitle {
+  id        String         @id @default(cuid())
+  sectionId String
+  locale    String
+  title     String
+  section   ContentSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@unique([sectionId, locale])
+  @@index([sectionId])
+}
+
 model Podcast {
   id        String           @id @default(cuid())
-  contentId String           @unique
+  contentId String
+  locale    String           @default("uz")
   status    PodcastStatus    @default(PENDING)
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
   content   Content          @relation(fields: [contentId], references: [id], onDelete: Cascade)
   episodes  PodcastEpisode[]
 
+  @@unique([contentId, locale])
   @@index([contentId])
 }
 
@@ -156,11 +179,13 @@ model ChatSession {
   id        String        @id @default(cuid())
   userId    String
   contentId String
+  locale    String        @default("uz")
   createdAt DateTime      @default(now())
   user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   content   Content       @relation(fields: [contentId], references: [id], onDelete: Cascade)
   messages  ChatMessage[]
 
+  @@unique([userId, contentId, locale])
   @@index([userId])
   @@index([contentId])
 }
@@ -182,6 +207,7 @@ model Quiz {
   userId    String
   sectionId String?
   kind      QuizKind       @default(FULL)
+  locale    String         @default("uz")
   createdAt DateTime       @default(now())
   content   Content        @relation(fields: [contentId], references: [id], onDelete: Cascade)
   user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -191,7 +217,7 @@ model Quiz {
 
   @@index([contentId])
   @@index([userId])
-  @@index([contentId, userId, sectionId, kind])
+  @@index([contentId, userId, sectionId, kind, locale])
 }
 
 model QuizQuestion {
@@ -261,14 +287,33 @@ model ContentSummary {
   contentId String
   scopeKey  String
   sectionId String?
+  locale    String   @default("uz")
   summary   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   content   Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, contentId, scopeKey])
+  @@unique([userId, contentId, scopeKey, locale])
   @@index([userId])
+  @@index([contentId])
+}
+
+model ContentVideo {
+  id          String               @id @default(cuid())
+  contentId   String
+  locale      String               @default("uz")
+  scopeKey    String
+  sectionId   String?
+  status      GeneratedMediaStatus @default(PENDING)
+  script      String?
+  storagePath String?
+  durationSec Int?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  content     Content              @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, locale, scopeKey])
   @@index([contentId])
 }
 

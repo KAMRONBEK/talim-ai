@@ -6,6 +6,7 @@ import * as contentController from '../controllers/content.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as progressController from '../controllers/progress.controller.js';
+import * as videoController from '../controllers/video.controller.js';
 
 export const contentRoutes = Router();
 
@@ -18,8 +19,11 @@ contentRoutes.get('/:id/podcast/progress', asyncHandler(progressController.getEp
 contentRoutes.get('/:id/sections', asyncHandler(sectionController.listSections));
 contentRoutes.get('/:id/sections/:sectionId', asyncHandler(sectionController.getSection));
 contentRoutes.get('/:id/file', asyncHandler(contentController.getContentFile));
+contentRoutes.post('/:id/ocr-region', asyncHandler(contentController.ocrPdfRegion));
 contentRoutes.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 contentRoutes.post('/:id/podcast', asyncHandler(podcastController.createPodcast));
+contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
+contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
 contentRoutes.patch(
   '/:id/podcast/episodes/:episodeId/progress',
   asyncHandler(progressController.patchEpisodeProgress),
