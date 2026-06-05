@@ -15,6 +15,7 @@ import { useContent, useRetryContent } from '@/hooks/useContent';
 import { useSections, useSection } from '@/hooks/useSections';
 import { useCreateQuiz, useGenerateSummary } from '@/hooks/useQuiz';
 import { ContentRightPanel } from '@/components/layout/content-right-panel';
+import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
 import { useState } from 'react';
 import { formatSummaryForDisplay } from '@/lib/format-summary';
 
@@ -32,6 +33,7 @@ function ContentDetailInner({ id }: { id: string }) {
   const retryContent = useRetryContent();
   const [summary, setSummary] = useState<string | null>(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
   const handleCreateQuiz = async () => {
     const quiz = await createQuiz.mutateAsync(id);
@@ -50,41 +52,65 @@ function ContentDetailInner({ id }: { id: string }) {
 
   if (content.status === 'FAILED') {
     return (
-      <div className="flex flex-1 items-center justify-center p-8">
-        <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-          <h2 className="text-lg font-semibold">Material qayta ishlanmadi</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            PDF dan matn ajratib bo&apos;lmadi. Skanerlangan yoki faqat rasmlardan iborat PDF
-            bo&apos;lishi mumkin — OCR orqali qayta urinib ko&apos;ring.
-          </p>
-          <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
-            <Button
-              disabled={retryContent.isPending}
-              onClick={() => retryContent.mutate(id)}
-            >
-              {retryContent.isPending ? 'Ishlanmoqda...' : 'Qayta ishlash'}
-            </Button>
-            <Link href="/dashboard">
-              <Button variant="outline" type="button">
-                Kutubxonaga qaytish
+      <>
+        <div className="flex flex-1 items-center justify-center p-8">
+          <div className="max-w-md rounded-xl border bg-card p-8 text-center">
+            <h2 className="text-lg font-semibold">Material qayta ishlanmadi</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              PDF dan matn ajratib bo&apos;lmadi. Skanerlangan yoki faqat rasmlardan iborat PDF
+              bo&apos;lishi mumkin — OCR orqali qayta urinib ko&apos;ring.
+            </p>
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
+              <Button
+                disabled={retryContent.isPending}
+                onClick={() => retryContent.mutate(id)}
+              >
+                {retryContent.isPending ? 'Ishlanmoqda...' : 'Qayta ishlash'}
               </Button>
-            </Link>
+              <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+                O&apos;chirish
+              </Button>
+              <Link href="/dashboard">
+                <Button variant="outline" type="button">
+                  Kutubxonaga qaytish
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+        <DeleteContentDialog
+          open={deleteOpen}
+          onOpenChange={setDeleteOpen}
+          content={{ id: content.id, title: content.title }}
+          onDeleted={() => router.push('/dashboard')}
+        />
+      </>
     );
   }
 
   if (content.status !== 'READY') {
     return (
-      <div className="flex flex-1 items-center justify-center p-8">
-        <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-          <h2 className="text-lg font-semibold">Material qayta ishlanmoqda</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Holat: {content.status}. Tayyor bo&apos;lganda sahifani avtomatik yangilanadi.
-          </p>
+      <>
+        <div className="flex flex-1 items-center justify-center p-8">
+          <div className="max-w-md rounded-xl border bg-card p-8 text-center">
+            <h2 className="text-lg font-semibold">Material qayta ishlanmoqda</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Holat: {content.status}. Tayyor bo&apos;lganda sahifani avtomatik yangilanadi.
+            </p>
+            <div className="mt-6">
+              <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+                O&apos;chirish
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
+        <DeleteContentDialog
+          open={deleteOpen}
+          onOpenChange={setDeleteOpen}
+          content={{ id: content.id, title: content.title }}
+          onDeleted={() => router.push('/dashboard')}
+        />
+      </>
     );
   }
 
@@ -152,6 +178,9 @@ function ContentDetailInner({ id }: { id: string }) {
             <Button variant="outline" disabled title="Tez orada">
               🔖 Saqlash
             </Button>
+            <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+              O&apos;chirish
+            </Button>
           </div>
         </div>
       </div>
@@ -174,6 +203,13 @@ function ContentDetailInner({ id }: { id: string }) {
           </p>
         </DialogContent>
       </Dialog>
+
+      <DeleteContentDialog
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        content={{ id: content.id, title: content.title }}
+        onDeleted={() => router.push('/dashboard')}
+      />
     </div>
   );
 }

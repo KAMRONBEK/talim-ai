@@ -68,12 +68,16 @@ export function useCreateYoutubeContent() {
   });
 }
 
-export function useDeleteContent() {
+export function useDeleteContent(options?: { onDeleted?: (id: string) => void }) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
       await api.delete(`/content/${id}`);
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['contents'] }),
+    onSuccess: (_data, id) => {
+      queryClient.invalidateQueries({ queryKey: ['contents'] });
+      queryClient.removeQueries({ queryKey: ['content', id] });
+      options?.onDeleted?.(id);
+    },
   });
 }
