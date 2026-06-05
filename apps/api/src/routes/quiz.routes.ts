@@ -6,6 +6,9 @@ import * as quizController from '../controllers/quiz.controller.js';
 export const quizRoutes = Router();
 
 quizRoutes.use(authMiddleware);
+quizRoutes.get('/content/:contentId', asyncHandler(quizController.listQuizzesByContent));
 quizRoutes.post('/content/:contentId', asyncHandler(quizController.createQuiz));
+quizRoutes.get('/:id/attempts/latest', asyncHandler(quizController.getLatestAttempt));
+quizRoutes.get('/:id/attempts', asyncHandler(quizController.listAttempts));
 quizRoutes.get('/:id', asyncHandler(quizController.getQuiz));
 quizRoutes.post('/:id/submit', asyncHandler(quizController.submitQuiz));

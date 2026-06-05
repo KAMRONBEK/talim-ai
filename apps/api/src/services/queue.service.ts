@@ -13,6 +13,8 @@ export interface GenerateQuizJobData {
   contentId: string;
   userId: string;
   quizId: string;
+  sectionId?: string;
+  kind?: 'FULL' | 'QUICK';
 }
 
 export interface GeneratePodcastJobData {
