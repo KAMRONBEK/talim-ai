@@ -39,6 +39,7 @@ API health (browser or curl): `http://localhost:4000/api/health` or `http://tali
 - Use **headed** mode (default) to watch the agent; add `--headless` to MCP args for CI-style runs.
 - For logged-in flows, provide test credentials in chat (store real secrets in Doppler `dev`, not in git).
 - **`talim-vps`** MCP is for server/docker ops; **`playwright`** is for UI QA — use both when needed.
+- **Cleanup after QA:** delete repo-root `*.png` screenshots and `.playwright-mcp/` snapshots before committing. They are gitignored and must not be left in the workspace (see `.cursor/rules/mcp-qa.mdc`).
 
 ## Optional: headless MCP args
 

@@ -16,3 +16,5 @@ uploads
 coverage
 *.tsbuildinfo
 .playwright-mcp/
+# Ephemeral QA screenshots (repo root — delete after MCP/browser testing)
+/*.png

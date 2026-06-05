@@ -12,3 +12,16 @@ alwaysApply: false
 - Production: `http://talim-ai.uz` and `/api/health`.
 - After UI changes: short Playwright MCP pass before commit/deploy.
 - Important flows → convert to repeatable Playwright tests later.
+
+## Screenshot and artifact cleanup (required)
+
+QA screenshots and MCP dumps are **ephemeral** — never commit them.
+
+After every browser/Playwright MCP test pass (success or failure):
+
+1. Delete repo-root screenshots (e.g. `login-page.png`, `localhost-*.png`, `admin-*.png`).
+2. Delete `.playwright-mcp/` snapshots if created during the session.
+3. Do not save new captures under `apps/`, `packages/`, or `docs/` unless the user explicitly asks for a permanent asset.
+4. Before `git add` / commit, run `git status` and confirm no `.png` or `.playwright-mcp/` files are staged.
+
+Prefer MCP snapshots over saving PNGs. If a screenshot is needed only for the current chat, attach it in-session and delete the file when QA is done.
