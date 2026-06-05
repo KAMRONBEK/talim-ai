@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 import { cn } from '../lib/utils';
 
 interface SheetContextValue {
@@ -43,22 +44,34 @@ function SheetTrigger({ children }: { children: React.ReactElement }) {
 
 function SheetContent({ className, children, side = 'right', ...props }: React.HTMLAttributes<HTMLDivElement> & { side?: 'right' | 'left' }) {
   const ctx = React.useContext(SheetContext);
-  if (!ctx?.open) return null;
+  const [mounted, setMounted] = React.useState(false);
 
-  return (
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!ctx?.open || !mounted) return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-50">
-      <div className="fixed inset-0 bg-black/40" onClick={() => ctx.setOpen(false)} />
+      <div
+        className="fixed inset-0 z-0 bg-black/40"
+        aria-hidden="true"
+        onClick={() => ctx.setOpen(false)}
+      />
       <div
         className={cn(
-          'fixed top-0 flex h-full w-full max-w-md flex-col border bg-card shadow-lg',
+          'fixed top-0 z-10 flex h-full w-full max-w-md flex-col border bg-card shadow-lg',
           side === 'right' ? 'right-0' : 'left-0',
           className,
         )}
+        onMouseDown={(e) => e.stopPropagation()}
         {...props}
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

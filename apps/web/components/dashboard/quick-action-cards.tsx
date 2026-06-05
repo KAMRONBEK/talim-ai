@@ -26,7 +26,7 @@ export function QuickActionCards() {
           type="button"
           onClick={() => setUploadOpen(true)}
           className={cn(
-            'dashboard-card group flex flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
+            'dashboard-card group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
             'hover:border-primary/30 hover:shadow-md',
           )}
         >
@@ -43,7 +43,7 @@ export function QuickActionCards() {
           type="button"
           onClick={() => setLinkOpen(true)}
           className={cn(
-            'dashboard-card group flex flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
+            'dashboard-card group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
             'hover:border-primary/30 hover:shadow-md',
           )}
         >

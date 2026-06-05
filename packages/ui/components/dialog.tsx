@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 import { cn } from '../lib/utils';
 
 interface DialogContextValue {
@@ -43,21 +44,33 @@ function DialogTrigger({ children, asChild }: { children: React.ReactElement; as
 
 function DialogContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const ctx = React.useContext(DialogContext);
-  if (!ctx?.open) return null;
+  const [mounted, setMounted] = React.useState(false);
 
-  return (
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!ctx?.open || !mounted) return null;
+
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="fixed inset-0 bg-black/40" onClick={() => ctx.setOpen(false)} />
+      <div
+        className="fixed inset-0 z-0 bg-black/40"
+        aria-hidden="true"
+        onClick={() => ctx.setOpen(false)}
+      />
       <div
         className={cn(
-          'relative z-50 max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl border bg-card p-6 shadow-lg',
+          'relative z-10 max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl border bg-card p-6 shadow-lg',
           className,
         )}
+        onMouseDown={(e) => e.stopPropagation()}
         {...props}
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

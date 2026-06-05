@@ -12,7 +12,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { UploadCard } from '@/components/content/UploadCard';
@@ -62,12 +61,16 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
         </span>
       </div>
       <div className="flex items-center gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          type="button"
+          className="hidden touch-manipulation sm:inline-flex"
+          onClick={() => setUploadOpen(true)}
+        >
+          + Yuklash
+        </Button>
         <Sheet open={uploadOpen} onOpenChange={setUploadOpen}>
-          <SheetTrigger>
-            <Button size="sm" variant="outline" className="hidden sm:inline-flex">
-              + Yuklash
-            </Button>
-          </SheetTrigger>
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Material yuklash</SheetTitle>

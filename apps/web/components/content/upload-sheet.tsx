@@ -5,20 +5,17 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from '@talim/ui';
 import { UploadCard } from '@/components/content/UploadCard';
 
 interface UploadSheetProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  trigger?: React.ReactNode;
 }
 
-export function UploadSheet({ open, onOpenChange, trigger }: UploadSheetProps) {
-  const sheet = (
+export function UploadSheet({ open, onOpenChange }: UploadSheetProps) {
+  return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      {trigger && <SheetTrigger>{trigger as React.ReactElement}</SheetTrigger>}
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Material yuklash</SheetTitle>
@@ -29,6 +26,4 @@ export function UploadSheet({ open, onOpenChange, trigger }: UploadSheetProps) {
       </SheetContent>
     </Sheet>
   );
-
-  return sheet;
 }

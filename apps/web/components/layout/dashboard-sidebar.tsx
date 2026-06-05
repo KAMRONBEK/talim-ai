@@ -45,15 +45,15 @@ export function DashboardSidebar() {
         </div>
 
         <div className="border-b p-3">
-          <UploadSheet
-            open={uploadOpen}
-            onOpenChange={setUploadOpen}
-            trigger={
-              <Button className="w-full justify-start gap-2" size="sm">
-                + Kontent qo&apos;shish
-              </Button>
-            }
-          />
+          <Button
+            className="w-full touch-manipulation justify-start gap-2"
+            size="sm"
+            type="button"
+            onClick={() => setUploadOpen(true)}
+          >
+            + Kontent qo&apos;shish
+          </Button>
+          <UploadSheet open={uploadOpen} onOpenChange={setUploadOpen} />
         </div>
 
         <div className="flex-1 overflow-y-auto p-3">

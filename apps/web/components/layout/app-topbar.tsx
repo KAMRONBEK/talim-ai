@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import {
   Button,
   Avatar,
@@ -20,6 +21,7 @@ interface AppTopbarProps {
 export function AppTopbar({ showSearch = true, searchQuery = '', onSearchChange }: AppTopbarProps) {
   const router = useRouter();
   const { user, logout } = useAuthStore();
+  const [uploadOpen, setUploadOpen] = useState(false);
 
   const initials = user?.name
     ? user.name
@@ -50,9 +52,10 @@ export function AppTopbar({ showSearch = true, searchQuery = '', onSearchChange 
           )}
         </div>
         <div className="flex items-center gap-2">
-          <UploadSheet
-            trigger={<Button size="sm">+ Yuklash</Button>}
-          />
+          <Button size="sm" type="button" className="touch-manipulation" onClick={() => setUploadOpen(true)}>
+            + Yuklash
+          </Button>
+          <UploadSheet open={uploadOpen} onOpenChange={setUploadOpen} />
           <Link
             href="/dashboard"
             className="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent"

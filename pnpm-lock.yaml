@@ -203,9 +203,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.2.7(react@19.2.7)
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.1
@@ -216,9 +213,15 @@ importers:
       '@types/react':
         specifier: ^19.0.2
         version: 19.2.16
+      '@types/react-dom':
+        specifier: ^19.0.2
+        version: 19.2.3(@types/react@19.2.16)
       react:
         specifier: ^19.0.0
         version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
       typescript:
         specifier: ^5.7.2
         version: 5.9.3

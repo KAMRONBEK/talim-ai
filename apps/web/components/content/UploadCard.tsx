@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input } from '@talim/ui';
+import { useId, useState } from 'react';
+import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
 import { useUploadContent, useCreateYoutubeContent } from '@/hooks/useContent';
 
 interface UploadCallbacks {
@@ -9,50 +9,70 @@ interface UploadCallbacks {
 }
 
 export function FileUploadField({ onSuccess }: UploadCallbacks) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputId = useId();
   const uploadMutation = useUploadContent();
+  const [error, setError] = useState<string | null>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-    await uploadMutation.mutateAsync(file);
     e.target.value = '';
-    onSuccess?.();
+    if (!file) return;
+
+    setError(null);
+    try {
+      await uploadMutation.mutateAsync(file);
+      onSuccess?.();
+    } catch {
+      setError("Yuklash amalga oshmadi. Qayta urinib ko'ring.");
+    }
   };
+
+  const isPending = uploadMutation.isPending;
 
   return (
     <div>
       <input
-        ref={inputRef}
+        id={inputId}
         type="file"
         accept=".pdf,.ppt,.pptx"
-        className="hidden"
+        className="sr-only"
+        disabled={isPending}
         onChange={handleFileChange}
       />
-      <label className="mb-2 block text-sm font-medium">PDF yoki slaydlar</label>
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full"
-        disabled={uploadMutation.isPending}
-        onClick={() => inputRef.current?.click()}
+      <p className="mb-2 text-sm font-medium">PDF yoki slaydlar</p>
+      <label
+        htmlFor={isPending ? undefined : inputId}
+        aria-disabled={isPending}
+        className={cn(
+          buttonVariants({ variant: 'outline' }),
+          'flex h-10 w-full cursor-pointer touch-manipulation select-none items-center justify-center',
+          isPending && 'pointer-events-none opacity-50',
+        )}
       >
-        {uploadMutation.isPending ? 'Yuklanmoqda...' : 'Fayl tanlash'}
-      </Button>
+        {isPending ? 'Yuklanmoqda...' : 'Fayl tanlash'}
+      </label>
+      {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
     </div>
   );
 }
 
 export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
   const [youtubeUrl, setYoutubeUrl] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const youtubeMutation = useCreateYoutubeContent();
 
   const handleYoutubeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!youtubeUrl.trim()) return;
-    await youtubeMutation.mutateAsync({ url: youtubeUrl.trim() });
-    setYoutubeUrl('');
-    onSuccess?.();
+
+    setError(null);
+    try {
+      await youtubeMutation.mutateAsync({ url: youtubeUrl.trim() });
+      setYoutubeUrl('');
+      onSuccess?.();
+    } catch {
+      setError("Havola qo'shilmadi. URL ni tekshirib qayta urinib ko'ring.");
+    }
   };
 
   return (
@@ -63,11 +83,13 @@ export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
           value={youtubeUrl}
           onChange={(e) => setYoutubeUrl(e.target.value)}
           placeholder="https://youtube.com/watch?v=..."
+          disabled={youtubeMutation.isPending}
         />
-        <Button type="submit" disabled={youtubeMutation.isPending}>
+        <Button type="submit" className="touch-manipulation" disabled={youtubeMutation.isPending}>
           {youtubeMutation.isPending ? '...' : "Qo'shish"}
         </Button>
       </div>
+      {error && <p className="text-sm text-destructive">{error}</p>}
     </form>
   );
 }
