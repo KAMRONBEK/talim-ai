@@ -19,6 +19,15 @@
     --accent-foreground: 168 55% 28%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 35%;
+    --success-foreground: 0 0% 100%;
+    --success-muted: 142 76% 94%;
+    --warning: 38 92% 40%;
+    --warning-foreground: 0 0% 100%;
+    --warning-muted: 48 96% 89%;
+    --info: 217 91% 50%;
+    --info-foreground: 0 0% 100%;
+    --info-muted: 214 95% 93%;
     --border: 214 20% 90%;
     --input: 214 20% 90%;
     --ring: 168 55% 40%;
@@ -34,6 +43,7 @@
     --card-foreground: 210 20% 98%;
     --primary: 168 55% 45%;
     --primary-foreground: 222 20% 8%;
+    --accent-secondary: 255 65% 65%;
     --secondary: 217 20% 18%;
     --secondary-foreground: 210 20% 98%;
     --muted: 217 20% 18%;
@@ -42,6 +52,15 @@
     --accent-foreground: 210 20% 98%;
     --destructive: 0 62% 35%;
     --destructive-foreground: 210 20% 98%;
+    --success: 142 60% 45%;
+    --success-foreground: 222 20% 8%;
+    --success-muted: 142 40% 16%;
+    --warning: 38 80% 50%;
+    --warning-foreground: 222 20% 8%;
+    --warning-muted: 38 40% 16%;
+    --info: 217 70% 55%;
+    --info-foreground: 222 20% 8%;
+    --info-muted: 217 40% 16%;
     --border: 217 20% 22%;
     --input: 217 20% 22%;
     --ring: 168 55% 45%;
@@ -78,11 +97,19 @@
   }
 
   .od-quiz-explanation {
-    @apply mt-5 rounded-[10px] border border-emerald-200 bg-emerald-50/80 p-4 text-sm leading-relaxed;
+    @apply mt-5 rounded-[10px] border border-success/30 bg-success-muted p-4 text-sm leading-relaxed;
   }
 
   .od-quiz-explanation-title {
-    @apply mb-1.5 flex items-center gap-1.5 font-semibold text-emerald-700;
+    @apply mb-1.5 flex items-center gap-1.5 font-semibold text-success;
+  }
+
+  .od-quiz-explanation-wrong {
+    @apply mt-5 rounded-[10px] border border-destructive/30 bg-destructive/10 p-4 text-sm leading-relaxed;
+  }
+
+  .od-quiz-explanation-wrong-title {
+    @apply mb-1.5 flex items-center gap-1.5 font-semibold text-destructive;
   }
 
   .avatar-gradient {

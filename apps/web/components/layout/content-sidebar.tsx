@@ -3,13 +3,16 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@talim/ui';
-import type { ContentSection } from '@talim/types';
+import type { ContentSection, SectionProgress } from '@talim/types';
+
+const SECTION_COMPLETE_THRESHOLD = 70;
 
 interface ContentSidebarProps {
   contentId: string;
   contentTitle: string;
   sections: ContentSection[];
   activeSectionId?: string;
+  sectionProgressMap?: Record<string, SectionProgress>;
 }
 
 export function ContentSidebar({
@@ -17,6 +20,7 @@ export function ContentSidebar({
   contentTitle,
   sections,
   activeSectionId,
+  sectionProgressMap = {},
 }: ContentSidebarProps) {
   const pathname = usePathname();
 
@@ -49,24 +53,29 @@ export function ContentSidebar({
           Boblar
         </p>
         <div className="space-y-0.5">
-          {sections.map((section, i) => (
-            <Link
-              key={section.id}
-              href={`/content/${contentId}?section=${section.id}`}
-              className={cn(
-                'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
-                activeSectionId === section.id
-                  ? 'bg-accent font-medium text-accent-foreground'
-                  : 'text-muted-foreground hover:bg-secondary',
-              )}
-            >
-              <span>📄</span>
-              <span className="truncate">{section.title}</span>
-              {i < 2 && (
-                <span className="ml-auto text-xs text-emerald-600">✓</span>
-              )}
-            </Link>
-          ))}
+          {sections.map((section) => {
+            const progress = sectionProgressMap[section.id];
+            const complete =
+              progress != null && progress.coverageScore >= SECTION_COMPLETE_THRESHOLD;
+            return (
+              <Link
+                key={section.id}
+                href={`/content/${contentId}?section=${section.id}`}
+                className={cn(
+                  'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
+                  activeSectionId === section.id
+                    ? 'bg-accent font-medium text-accent-foreground'
+                    : 'text-muted-foreground hover:bg-secondary',
+                )}
+              >
+                <span>📄</span>
+                <span className="truncate">{section.title}</span>
+                {complete && (
+                  <span className="ml-auto text-xs text-success">✓</span>
+                )}
+              </Link>
+            );
+          })}
         </div>
         <p className="mb-2 mt-6 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           Harakatlar

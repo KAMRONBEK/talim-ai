@@ -10,6 +10,7 @@ import {
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useFileUpload } from '@/hooks/useFileUpload';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 interface LearningTopbarProps {
   contentId: string;
@@ -57,6 +58,7 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
         </span>
       </div>
       <div className="flex items-center gap-2">
+        <ThemeToggle compact />
         <Button
           size="sm"
           variant="outline"

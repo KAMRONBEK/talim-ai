@@ -1,10 +1,11 @@
 'use client';
 
-import { use, useEffect, useState, Suspense } from 'react';
+import { use, useEffect, useState, Suspense, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Button } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
 import { usePodcast, useCreatePodcast } from '@/hooks/usePodcast';
+import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
 import { PodcastPlayer } from '@/components/podcast/PodcastPlayer';
 import type { PodcastEpisode } from '@talim/types';
@@ -20,9 +21,66 @@ function PodcastPageInner({ id }: { id: string }) {
   const { data: content } = useContent(id);
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
+  const { data: progressList = [] } = usePodcastProgress(id);
+  const updateProgress = useUpdatePodcastProgress(id);
   const [activeEpisode, setActiveEpisode] = useState<PodcastEpisode | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [playbackRate, setPlaybackRate] = useState(1);
+  const lastSavedRef = useRef(0);
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingProgressRef = useRef<{
+    episodeId: string;
+    listenedSec: number;
+    completed: boolean;
+  } | null>(null);
+  const progressMap = new Map(progressList.map((p) => [p.episodeId, p]));
+  const activeProgress = activeEpisode ? progressMap.get(activeEpisode.id) : undefined;
+
+  const flushProgress = useCallback(() => {
+    const pending = pendingProgressRef.current;
+    if (!pending) return;
+    if (saveTimerRef.current) {
+      clearTimeout(saveTimerRef.current);
+      saveTimerRef.current = null;
+    }
+    lastSavedRef.current = pending.listenedSec;
+    pendingProgressRef.current = null;
+    updateProgress.mutate(pending);
+  }, [updateProgress]);
+
+  const handleProgress = useCallback(
+    (listenedSec: number, completed: boolean) => {
+      if (!activeEpisode) return;
+
+      if (completed) {
+        pendingProgressRef.current = {
+          episodeId: activeEpisode.id,
+          listenedSec,
+          completed: true,
+        };
+        flushProgress();
+        return;
+      }
+
+      if (Math.abs(listenedSec - lastSavedRef.current) < 5) return;
+
+      pendingProgressRef.current = {
+        episodeId: activeEpisode.id,
+        listenedSec,
+        completed: false,
+      };
+
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      saveTimerRef.current = setTimeout(flushProgress, 2000);
+    },
+    [activeEpisode, flushProgress],
+  );
+
+  useEffect(() => {
+    return () => {
+      flushProgress();
+    };
+  }, [flushProgress]);
 
   useEffect(() => {
     if (!activeEpisode?.hasAudio) {
@@ -30,6 +88,9 @@ function PodcastPageInner({ id }: { id: string }) {
       return;
     }
     let revoked: string | null = null;
+    lastSavedRef.current = 0;
+    pendingProgressRef.current = null;
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     fetchAuthenticatedBlob(`/content/${id}/podcast/episodes/${activeEpisode.id}/audio`)
       .then((url) => {
         revoked = url;
@@ -37,9 +98,10 @@ function PodcastPageInner({ id }: { id: string }) {
       })
       .catch(() => setAudioUrl(null));
     return () => {
+      flushProgress();
       if (revoked) URL.revokeObjectURL(revoked);
     };
-  }, [activeEpisode, id]);
+  }, [activeEpisode, id, flushProgress]);
 
   useEffect(() => {
     const ready = podcast?.episodes.filter((e) => e.hasAudio) ?? [];
@@ -86,36 +148,40 @@ function PodcastPageInner({ id }: { id: string }) {
           </p>
         </div>
         <div className="space-y-1 p-3">
-          {episodes.map((ep, i) => (
-            <button
-              key={ep.id}
-              type="button"
-              onClick={() => setActiveEpisode(ep)}
-              className={`flex w-full items-center gap-3 rounded-[10px] p-3 text-left text-sm transition-colors ${
-                activeEpisode?.id === ep.id ? 'bg-accent' : 'hover:bg-muted/60'
-              }`}
-            >
-              <span
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${
-                  activeEpisode?.id === ep.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground'
+          {episodes.map((ep, i) => {
+            const epProgress = progressMap.get(ep.id);
+            return (
+              <button
+                key={ep.id}
+                type="button"
+                onClick={() => setActiveEpisode(ep)}
+                className={`flex w-full items-center gap-3 rounded-[10px] p-3 text-left text-sm transition-colors ${
+                  activeEpisode?.id === ep.id ? 'bg-accent' : 'hover:bg-muted/60'
                 }`}
               >
-                {i + 1}
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-medium">{ep.title}</p>
-                <p className="text-[11px] text-muted-foreground">
-                  {formatDuration(ep.durationSec)}
-                  {!ep.hasAudio && ' · Tayyorlanmoqda'}
-                </p>
-              </div>
-              {ep.hasAudio && (
-                <span className="shrink-0 text-[11px] font-medium text-emerald-600">Tayyor</span>
-              )}
-            </button>
-          ))}
+                <span
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${
+                    activeEpisode?.id === ep.id
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground'
+                  }`}
+                >
+                  {i + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-medium">{ep.title}</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    {formatDuration(ep.durationSec)}
+                    {!ep.hasAudio && ' · Tayyorlanmoqda'}
+                    {epProgress?.completed && ' · Tugallangan'}
+                  </p>
+                </div>
+                {ep.hasAudio && (
+                  <span className="shrink-0 text-[11px] font-medium text-success">Tayyor</span>
+                )}
+              </button>
+            );
+          })}
         </div>
         {generating && (
           <div className="px-3 pb-3">
@@ -128,7 +194,7 @@ function PodcastPageInner({ id }: { id: string }) {
       <div className="flex flex-1 flex-col items-center justify-center gap-8 p-10">
         {activeEpisode ? (
           <>
-            <div className="relative flex h-[280px] w-[280px] items-center justify-center overflow-hidden rounded-[20px] bg-gradient-to-br from-emerald-100 to-blue-100 text-7xl shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
+            <div className="relative flex h-[280px] w-[280px] items-center justify-center overflow-hidden rounded-[20px] bg-gradient-to-br from-success-muted to-info-muted text-7xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-none">
               🎧
             </div>
             <div className="text-center">
@@ -140,6 +206,8 @@ function PodcastPageInner({ id }: { id: string }) {
                 audioUrl={audioUrl}
                 playbackRate={playbackRate}
                 onPlaybackRateChange={setPlaybackRate}
+                initialPositionSec={activeProgress?.listenedSec ?? 0}
+                onProgress={handleProgress}
               />
             ) : (
               <p className="text-sm text-muted-foreground">Ushbu epizod uchun audio hali tayyor emas.</p>

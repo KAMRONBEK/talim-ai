@@ -1,25 +1,44 @@
 'use client';
 
 import Link from 'next/link';
+import type { LearningHistory } from '@talim/types';
+import { LearningHistoryPanel } from '@/components/learning/learning-history-panel';
 
 interface ContentRightPanelProps {
   contentId: string;
   onSummary: () => void;
   onQuiz: () => void;
+  onQuickCheck: () => void;
   summaryPending?: boolean;
   quizPending?: boolean;
+  quickCheckPending?: boolean;
+  overallCoverage?: number;
+  sectionCoverage?: number;
+  streakDays?: number;
+  quizCount?: number;
+  history?: LearningHistory;
+  onOpenSummary: (summary: string) => void;
 }
 
 export function ContentRightPanel({
   contentId,
   onSummary,
   onQuiz,
+  onQuickCheck,
   summaryPending,
   quizPending,
+  quickCheckPending,
+  overallCoverage = 0,
+  sectionCoverage = 0,
+  streakDays = 0,
+  quizCount = 0,
+  history,
+  onOpenSummary,
 }: ContentRightPanelProps) {
   const circumference = 2 * Math.PI * 52;
-  const progress = 0.72;
+  const progress = Math.min(1, Math.max(0, sectionCoverage / 100));
   const offset = circumference * (1 - progress);
+  const displayPercent = Math.round(sectionCoverage);
 
   return (
     <aside className="hidden w-72 shrink-0 flex-col overflow-y-auto border-l bg-card lg:flex">
@@ -40,9 +59,14 @@ export function ContentRightPanel({
               strokeDashoffset={offset}
             />
           </svg>
-          <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold">72%</span>
+          <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
+            {displayPercent}%
+          </span>
         </div>
-        <p className="text-xs text-muted-foreground">Bob tugallandi</p>
+        <p className="text-xs text-muted-foreground">Joriy bob</p>
+        <p className="mt-1 text-[11px] text-muted-foreground">
+          Umumiy: {Math.round(overallCoverage)}%
+        </p>
       </div>
 
       <div className="border-b p-5">
@@ -54,24 +78,24 @@ export function ContentRightPanel({
             disabled={summaryPending}
             className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-sm">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-success-muted text-sm">
               📝
             </span>
             <div>
               <div className="font-medium">Xulosa PDF</div>
-              <div className="text-[11px] text-muted-foreground">3 daqiqa o&apos;qish</div>
+              <div className="text-[11px] text-muted-foreground">Saqlangan xulosa</div>
             </div>
           </button>
           <Link
             href={`/content/${contentId}/podcast`}
             className="flex items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-sm transition-colors hover:bg-muted"
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-sm">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-info-muted text-sm">
               🎧
             </span>
             <div>
               <div className="font-medium">AI Podkast</div>
-              <div className="text-[11px] text-muted-foreground">8 daqiqa tinglash</div>
+              <div className="text-[11px] text-muted-foreground">Tinglash</div>
             </div>
           </Link>
           <button
@@ -80,24 +104,50 @@ export function ContentRightPanel({
             disabled={quizPending}
             className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-sm">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-success-muted text-sm">
               ❓
             </span>
             <div>
               <div className="font-medium">Mashq testi</div>
-              <div className="text-[11px] text-muted-foreground">12 ta savol</div>
+              <div className="text-[11px] text-muted-foreground">
+                {quizCount > 0 ? `${quizCount} ta test` : '5 ta savol'}
+              </div>
+            </div>
+          </button>
+          <button
+            type="button"
+            onClick={onQuickCheck}
+            disabled={quickCheckPending}
+            className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
+          >
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-warning-muted text-sm">
+              ⚡
+            </span>
+            <div>
+              <div className="font-medium">Tez savol</div>
+              <div className="text-[11px] text-muted-foreground">2 ta savol</div>
             </div>
           </button>
         </div>
       </div>
+
+      <LearningHistoryPanel
+        contentId={contentId}
+        history={history}
+        onOpenSummary={onOpenSummary}
+      />
 
       <div className="p-5">
         <h3 className="mb-3 text-sm font-semibold">O&apos;rganish davomiyligi</h3>
         <div className="flex items-center gap-3 rounded-[10px] bg-muted/50 p-3.5">
           <span className="text-3xl">🔥</span>
           <div>
-            <div className="text-lg font-bold">5 kun</div>
-            <div className="text-xs text-muted-foreground">Davom eting!</div>
+            <div className="text-lg font-bold">
+              {streakDays} {streakDays === 1 ? 'kun' : 'kun'}
+            </div>
+            <div className="text-xs text-muted-foreground">
+              {streakDays > 0 ? 'Davom eting!' : 'Bugun boshlang'}
+            </div>
           </div>
         </div>
       </div>

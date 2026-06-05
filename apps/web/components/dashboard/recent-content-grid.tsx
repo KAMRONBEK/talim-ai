@@ -19,9 +19,9 @@ const typeStyles: Record<
   ContentType,
   { gradient: string; icon: typeof FileText }
 > = {
-  PDF: { gradient: 'from-rose-100 to-orange-100', icon: FileText },
-  YOUTUBE: { gradient: 'from-red-100 to-rose-200', icon: Play },
-  SLIDE: { gradient: 'from-violet-100 to-indigo-100', icon: Presentation },
+  PDF: { gradient: 'from-warning-muted to-destructive/10', icon: FileText },
+  YOUTUBE: { gradient: 'from-destructive/15 to-destructive/5', icon: Play },
+  SLIDE: { gradient: 'from-info-muted to-accent', icon: Presentation },
 };
 
 function ContentThumbnail({ content }: { content: Content }) {
@@ -54,7 +54,7 @@ function ContentThumbnail({ content }: { content: Content }) {
         style.gradient,
       )}
     >
-      <Icon className="h-12 w-12 text-foreground/40" />
+      <Icon className="h-12 w-12 text-muted-foreground/60" />
     </div>
   );
 }

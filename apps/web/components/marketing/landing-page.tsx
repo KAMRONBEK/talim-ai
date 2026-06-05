@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const features = [
   {
@@ -8,28 +9,28 @@ const features = [
     title: 'AI xulosalari',
     description:
       'Har qanday materialdan asosiy nuqtalarni ajratib oling. Butun bobni qayta o\'qish shart emas — asosiy tushunchalarni bir necha daqiqada tushuning.',
-    color: 'bg-emerald-50',
+    color: 'bg-success-muted',
   },
   {
     icon: '🎧',
     title: 'Tinglang va o\'rganing',
     description:
       'Kontentingizni AI yaratgan podkastlarga aylantiring. Sayohat, mashq yoki uy ishlari paytida o\'rganing.',
-    color: 'bg-blue-50',
+    color: 'bg-info-muted',
   },
   {
     icon: '📊',
     title: 'Bilimingizni sinang',
     description:
       'Shaxsiy imtihonlar va testlar yarating, batafsil javob tahlillarini oling. Taraqqiyotingizni kuzating.',
-    color: 'bg-amber-50',
+    color: 'bg-warning-muted',
   },
   {
     icon: '💬',
     title: 'AI o\'qituvchi suhbati',
     description:
       'Materialingizning istalgan qismini tanlang va aniq savollar bering. Kontentingizga bevosita havolalar bilan javoblar.',
-    color: 'bg-rose-50',
+    color: 'bg-destructive/10',
   },
 ];
 
@@ -87,6 +88,7 @@ export function LandingPage() {
             </li>
           </ul>
           <div className="flex items-center gap-3">
+            <ThemeToggle compact />
             <Link
               href="/login"
               className="hidden rounded-[10px] border px-5 py-2.5 text-sm font-semibold hover:bg-secondary sm:inline-flex"
@@ -169,7 +171,7 @@ export function LandingPage() {
                 >
                   <span
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm ${
-                      row.purple ? 'bg-blue-50' : 'bg-emerald-50'
+                      row.purple ? 'bg-info-muted' : 'bg-success-muted'
                     }`}
                   >
                     {row.icon}
@@ -304,14 +306,14 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-br from-slate-800 to-slate-900 px-6 py-20 text-white">
+      <section className="bg-gradient-to-br from-slate-800 to-slate-900 px-6 py-20 text-white dark:from-muted dark:to-muted dark:text-foreground">
         <div className="mx-auto grid max-w-6xl gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
-              <h3 className="bg-gradient-to-br from-white to-slate-300 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent">
+              <h3 className="bg-gradient-to-br from-white to-slate-300 bg-clip-text text-5xl font-extrabold tracking-tight text-transparent dark:from-foreground dark:to-muted-foreground">
                 {s.value}
               </h3>
-              <p className="mt-2 text-slate-300">{s.label}</p>
+              <p className="mt-2 text-slate-300 dark:text-muted-foreground">{s.label}</p>
             </div>
           ))}
         </div>

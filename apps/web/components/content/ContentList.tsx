@@ -9,10 +9,10 @@ interface ContentListProps {
 }
 
 const statusColors: Record<string, string> = {
-  PENDING: 'text-yellow-600',
-  PROCESSING: 'text-blue-600',
-  READY: 'text-green-600',
-  FAILED: 'text-red-600',
+  PENDING: 'text-warning',
+  PROCESSING: 'text-info',
+  READY: 'text-success',
+  FAILED: 'text-destructive',
 };
 
 export function ContentList({ contents }: ContentListProps) {

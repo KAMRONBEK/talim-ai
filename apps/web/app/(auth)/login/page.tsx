@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
@@ -53,7 +54,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-background p-4">
+      <div className="absolute right-4 top-4">
+        <ThemeToggle compact />
+      </div>
       <Link href="/" className="mb-8 flex items-center gap-2 text-xl font-bold">
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           T
