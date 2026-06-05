@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@talim/ui';
 import type { Content } from '@talim/types';
 

@@ -1,7 +1,8 @@
 'use client';
 
 import { use, useState } from 'react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { QuizResult } from '@/components/quiz/QuizResult';
 import { useQuiz, useSubmitQuiz, useLatestQuizAttempt } from '@/hooks/useQuiz';
@@ -11,6 +12,8 @@ import { useContent } from '@/hooks/useContent';
 
 export default function QuizPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const t = useTranslations('quiz');
+  const tContent = useTranslations('content');
   const { data: quiz, isLoading } = useQuiz(id, 3000);
   const { data: latestAttemptData, isLoading: attemptLoading } = useLatestQuizAttempt(id);
   const submitQuiz = useSubmitQuiz();
@@ -27,7 +30,7 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
   if (isLoading || attemptLoading) {
     return (
       <AuthGuard>
-        <p className="p-8 text-muted-foreground">Test yuklanmoqda...</p>
+        <p className="p-8 text-muted-foreground">{t('loading')}</p>
       </AuthGuard>
     );
   }
@@ -35,14 +38,14 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
   if (!quiz) {
     return (
       <AuthGuard>
-        <p className="p-8 text-destructive">Test topilmadi</p>
+        <p className="p-8 text-destructive">{t('notFound')}</p>
       </AuthGuard>
     );
   }
 
   const questionCount = quiz.questions?.length ?? 0;
-  const title = content?.title ?? 'Test';
-  const quizLabel = quiz.kind === 'QUICK' ? 'Tez savol' : 'Mashq testi';
+  const title = content?.title ?? t('defaultTitle');
+  const quizLabel = quiz.kind === 'QUICK' ? t('quickLabel') : t('fullLabel');
 
   const resultData = submitQuiz.data ?? latestAttemptData;
   const showResult = !retaking && resultData?.attempt != null;
@@ -56,11 +59,13 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
             href={contentId ? `/content/${contentId}` : '/dashboard'}
             className="mb-6 inline-block text-sm text-primary hover:underline"
           >
-            ← Kontentga qaytish
+            ← {tContent('backToContent')}
           </Link>
           <p className="mb-1 text-sm font-medium">{quizLabel}</p>
           <p className="mb-4 text-sm text-muted-foreground">
-            {questionCount > 0 ? `${questionCount} ta savol` : 'Savollar yaratilmoqda...'}
+            {questionCount > 0
+              ? t('questionCount', { count: questionCount })
+              : t('generatingQuestions')}
           </p>
           {showResult && resultData.attempt ? (
             <QuizResult

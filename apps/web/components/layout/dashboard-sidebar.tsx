@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { Play } from 'lucide-react';
 import {
   Avatar,
@@ -13,6 +13,8 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useContents } from '@/hooks/useContent';
 
 export function DashboardSidebar() {
+  const t = useTranslations('sidebar');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const { data: contents } = useContents();
@@ -28,7 +30,7 @@ export function DashboardSidebar() {
         .toUpperCase()
     : user?.email?.slice(0, 2).toUpperCase() ?? '?';
 
-  const displayName = user?.name ?? user?.email?.split('@')[0] ?? 'Foydalanuvchi';
+  const displayName = user?.name ?? user?.email?.split('@')[0] ?? tCommon('user');
 
   return (
     <aside className="flex w-[var(--sidebar-width)] shrink-0 flex-col border-r bg-card">
@@ -43,10 +45,10 @@ export function DashboardSidebar() {
 
       <div className="flex-1 overflow-y-auto p-3">
         <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          So&apos;nggilar
+          {t('recents')}
         </p>
         {recents.length === 0 ? (
-          <p className="px-2 text-sm text-muted-foreground">Hali material yo&apos;q</p>
+          <p className="px-2 text-sm text-muted-foreground">{t('noMaterials')}</p>
         ) : (
           <ul className="space-y-0.5">
             {recents.map((item) => (
@@ -85,7 +87,7 @@ export function DashboardSidebar() {
             router.push('/login');
           }}
         >
-          Chiqish
+          {tCommon('logout')}
         </Button>
       </div>
     </aside>

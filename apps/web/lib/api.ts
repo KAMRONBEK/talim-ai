@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useAuthStore } from '@/store/useAuthStore';
+import { getApiLocale } from '@/lib/locale-api';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 
@@ -13,6 +14,13 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  const locale = getApiLocale();
+  config.headers['Accept-Language'] = locale;
+  if (config.params && typeof config.params === 'object') {
+    config.params = { ...config.params, locale };
+  } else if (config.method?.toLowerCase() === 'get') {
+    config.params = { ...(config.params as object), locale };
+  }
   return config;
 });
 
@@ -22,7 +30,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       useAuthStore.getState().logout();
       if (typeof window !== 'undefined') {
-        window.location.href = '/login';
+        const locale = getApiLocale();
+        window.location.href = `/${locale}/login`;
       }
     }
     return Promise.reject(error);

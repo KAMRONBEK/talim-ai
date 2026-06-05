@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent } from '@talim/ui';
 import {
   isSelectedAnswerCorrect,
@@ -62,6 +63,7 @@ function getOptionStyles(
 }
 
 export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
+  const t = useTranslations('quiz');
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const questions = quiz.questions ?? [];
@@ -70,7 +72,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
     return (
       <Card>
         <CardContent className="space-y-4 py-12 text-center">
-          <p className="text-muted-foreground">Test savollari yaratilmoqda...</p>
+          <p className="text-muted-foreground">{t('generating')}</p>
           <div className="mx-auto h-1.5 max-w-xs overflow-hidden rounded-full bg-border">
             <div className="h-full w-1/3 animate-pulse rounded-full bg-gradient-to-r from-primary to-accent-secondary" />
           </div>
@@ -116,7 +118,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               {currentIndex + 1}
             </span>
             <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Ko&apos;p tanlov
+              {t('multipleChoice')}
             </span>
           </div>
           <p className="text-lg font-semibold leading-snug">{q.question}</p>
@@ -153,7 +155,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
             <p
               className={`text-sm font-semibold ${isCorrect ? 'text-success' : 'text-destructive'}`}
             >
-              {isCorrect ? "To'g'ri!" : "Noto'g'ri"}
+              {isCorrect ? t('correct') : t('incorrect')}
             </p>
           )}
           {answered && q.explanation && (
@@ -163,25 +165,25 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                   isCorrect ? 'od-quiz-explanation-title' : 'od-quiz-explanation-wrong-title'
                 }
               >
-                {isCorrect ? '✓ Tushuntirish' : '✗ Tushuntirish'}
+                {isCorrect ? t('explanationCorrect') : t('explanationWrong')}
               </div>
               <p>{q.explanation}</p>
             </div>
           )}
           <div className="flex justify-between gap-2 pt-2">
             <Button variant="outline" onClick={goPrev} disabled={currentIndex === 0}>
-              Oldingi
+              {t('prev')}
             </Button>
             {currentIndex < questions.length - 1 ? (
               <Button onClick={goNext} disabled={!answered}>
-                Keyingi
+                {t('next')}
               </Button>
             ) : (
               <Button
                 onClick={() => onSubmit(answers)}
                 disabled={isSubmitting || Object.keys(answers).length < questions.length}
               >
-                {isSubmitting ? 'Yuborilmoqda...' : 'Testni yakunlash'}
+                {isSubmitting ? t('submitting') : t('submit')}
               </Button>
             )}
           </div>

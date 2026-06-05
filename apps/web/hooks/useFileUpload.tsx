@@ -7,9 +7,10 @@ export const FILE_UPLOAD_ACCEPT = '.pdf,.ppt,.pptx';
 
 interface UseFileUploadOptions {
   onSuccess?: () => void;
+  uploadFailedMessage?: string;
 }
 
-export function useFileUpload({ onSuccess }: UseFileUploadOptions = {}) {
+export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadOptions = {}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const uploadMutation = useUploadContent();
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export function useFileUpload({ onSuccess }: UseFileUploadOptions = {}) {
       await uploadMutation.mutateAsync(file);
       onSuccess?.();
     } catch {
-      setError("Yuklash amalga oshmadi. Qayta urinib ko'ring.");
+      setError(uploadFailedMessage ?? 'Upload failed');
     }
   };
 

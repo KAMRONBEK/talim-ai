@@ -1,3 +1,6 @@
+@import '../styles/pdf-text-layer.css';
+@import 'katex/dist/katex.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -119,4 +122,27 @@
   .dashboard-card {
     @apply shadow-sm;
   }
+
+  .tutor-md {
+    @apply leading-relaxed;
+  }
+
+  .tutor-md .katex-display {
+    @apply my-2 overflow-x-auto;
+  }
+
+  .tutor-md blockquote {
+    @apply my-2 border-l-2 border-primary/40 pl-3 italic text-muted-foreground;
+  }
+
+}
+
+/* KaTeX MathML can render visibly in some browsers despite clip-path */
+.tutor-md .katex .katex-mathml {
+  display: none !important;
+}
+
+/* Next.js dev indicator/error bar (shadow DOM host); not present in production */
+nextjs-portal {
+  display: none !important;
 }

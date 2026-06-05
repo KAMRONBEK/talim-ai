@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { splitSummaryParagraphs } from '@/lib/format-summary';
 
 export function SummaryText({
@@ -7,10 +10,11 @@ export function SummaryText({
   text: string;
   className?: string;
 }) {
+  const t = useTranslations('content');
   const paragraphs = splitSummaryParagraphs(text);
 
   if (paragraphs.length === 0) {
-    return <p className={className}>Xulosa mavjud emas.</p>;
+    return <p className={className}>{t('summaryNotAvailable')}</p>;
   }
 
   return (

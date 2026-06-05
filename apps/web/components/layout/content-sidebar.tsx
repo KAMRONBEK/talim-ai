@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
 import type { ContentSection, SectionProgress } from '@talim/types';
 
@@ -22,6 +22,8 @@ export function ContentSidebar({
   activeSectionId,
   sectionProgressMap = {},
 }: ContentSidebarProps) {
+  const t = useTranslations('sidebar');
+  const tContent = useTranslations('content');
   const pathname = usePathname();
 
   const navLink = (href: string, label: string, icon: string) => {
@@ -45,12 +47,12 @@ export function ContentSidebar({
       <div className="border-b p-4">
         <h2 className="truncate font-semibold">{contentTitle}</h2>
         <p className="text-xs text-muted-foreground">
-          {sections.length} bob
+          {t('sectionCount', { count: sections.length })}
         </p>
       </div>
       <div className="flex-1 overflow-y-auto p-3">
         <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Boblar
+          {t('sections')}
         </p>
         <div className="space-y-0.5">
           {sections.map((section) => {
@@ -78,12 +80,12 @@ export function ContentSidebar({
           })}
         </div>
         <p className="mb-2 mt-6 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-          Harakatlar
+          {t('actions')}
         </p>
         <div className="space-y-0.5">
-          {navLink(`/content/${contentId}`, "O'qish", '📖')}
-          {navLink(`/content/${contentId}/chat`, "AI o'qituvchidan so'rang", '💬')}
-          {navLink(`/content/${contentId}/podcast`, 'Podkastni tinglang', '🎧')}
+          {navLink(`/content/${contentId}`, t('read'), '📖')}
+          {navLink(`/content/${contentId}/chat`, tContent('askTutor'), '💬')}
+          {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
         </div>
       </div>
     </aside>

@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { ContentProgressResponse, LearningHistory } from '@talim/types';
+import { useLocale } from 'next-intl';
+import type { AppLocale, ContentProgressResponse, LearningHistory } from '@talim/types';
 import { api } from '@/lib/api';
 
 export function useContentProgress(contentId: string) {
@@ -27,10 +28,14 @@ export function useMarkSectionViewed(contentId: string) {
 }
 
 export function useLearningHistory(contentId: string) {
+  const locale = useLocale() as AppLocale;
+
   return useQuery({
-    queryKey: ['learning-history', contentId],
+    queryKey: ['learning-history', contentId, locale],
     queryFn: async () => {
-      const { data } = await api.get<LearningHistory>(`/content/${contentId}/learning-history`);
+      const { data } = await api.get<LearningHistory>(`/content/${contentId}/learning-history`, {
+        params: { locale },
+      });
       return data;
     },
     enabled: !!contentId,
@@ -38,12 +43,14 @@ export function useLearningHistory(contentId: string) {
 }
 
 export function usePodcastProgress(contentId: string) {
+  const locale = useLocale() as AppLocale;
+
   return useQuery({
-    queryKey: ['podcast-progress', contentId],
+    queryKey: ['podcast-progress', contentId, locale],
     queryFn: async () => {
       const { data } = await api.get<{
         progress: { episodeId: string; listenedSec: number; completed: boolean }[];
-      }>(`/content/${contentId}/podcast/progress`);
+      }>(`/content/${contentId}/podcast/progress`, { params: { locale } });
       return data.progress;
     },
     enabled: !!contentId,

@@ -1,12 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Podcast } from '@talim/types';
+import { useLocale } from 'next-intl';
+import type { AppLocale } from '@talim/types';
 import { api } from '@/lib/api';
 
 export function usePodcast(contentId: string, pollMs?: number) {
+  const locale = useLocale() as AppLocale;
+
   return useQuery({
-    queryKey: ['podcast', contentId],
+    queryKey: ['podcast', contentId, locale],
     queryFn: async () => {
-      const { data } = await api.get<{ podcast: Podcast | null }>(`/content/${contentId}/podcast`);
+      const { data } = await api.get<{ podcast: Podcast | null }>(
+        `/content/${contentId}/podcast`,
+        { params: { locale } },
+      );
       return data.podcast;
     },
     enabled: !!contentId,
@@ -20,15 +27,18 @@ export function usePodcast(contentId: string, pollMs?: number) {
 
 export function useCreatePodcast() {
   const queryClient = useQueryClient();
+  const locale = useLocale() as AppLocale;
+
   return useMutation({
-    mutationFn: async (contentId: string) => {
+    mutationFn: async ({ contentId }: { contentId: string }) => {
       const { data } = await api.post<{ podcast: { id: string; status: string } }>(
         `/content/${contentId}/podcast`,
+        { locale },
       );
       return data.podcast;
     },
-    onSuccess: (_, contentId) => {
-      queryClient.invalidateQueries({ queryKey: ['podcast', contentId] });
+    onSuccess: (_, { contentId }) => {
+      queryClient.invalidateQueries({ queryKey: ['podcast', contentId, locale] });
     },
   });
 }

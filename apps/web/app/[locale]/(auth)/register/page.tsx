@@ -1,19 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
 
-export default function LoginPage() {
+export default function RegisterPage() {
+  const t = useTranslations('auth');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
   const token = useAuthStore((s) => s.token);
   const [mounted, setMounted] = useState(false);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -32,14 +36,15 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
+      const { data } = await api.post<AuthResponse>('/auth/register', {
+        name,
+        email,
+        password,
+      });
       setAuth(data.user, data.token);
       router.replace('/dashboard');
-    } catch (err: unknown) {
-      const status = (err as { response?: { status?: number } })?.response?.status;
-      setError(
-        status === 401 ? 'Invalid email or password' : 'Could not reach the server. Please try again.',
-      );
+    } catch {
+      setError(t('registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -48,14 +53,15 @@ export default function LoginPage() {
   if (!mounted || token) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="text-muted-foreground">{tCommon('loading')}</p>
       </div>
     );
   }
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-background p-4">
-      <div className="absolute right-4 top-4">
+      <div className="absolute right-4 top-4 flex items-center gap-2">
+        <LanguageSwitcher compact />
         <ThemeToggle compact />
       </div>
       <Link href="/" className="mb-8 flex items-center gap-2 text-xl font-bold">
@@ -67,26 +73,30 @@ export default function LoginPage() {
       <Card className="w-full max-w-md border shadow-lg">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold">Welcome back</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Sign in to continue learning</p>
+            <h1 className="text-2xl font-bold">{t('createAccount')}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{t('registerContinue')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="name">{t('name')}</Label>
+              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">{t('email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <Input
                 id="password"
                 type="password"
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -94,13 +104,13 @@ export default function LoginPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? t('registering') : t('register')}
             </Button>
           </form>
           <p className="text-center text-sm text-muted-foreground">
-            No account?{' '}
-            <Link href="/register" className="font-medium text-primary hover:underline">
-              Create one
+            {t('haveAccount')}{' '}
+            <Link href="/login" className="font-medium text-primary hover:underline">
+              {t('signIn')}
             </Link>
           </p>
         </CardContent>

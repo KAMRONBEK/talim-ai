@@ -1,4 +1,4 @@
-const rtf = new Intl.RelativeTimeFormat('uz', { numeric: 'auto' });
+import type { AppLocale } from '@talim/types';
 
 const UNITS: { unit: Intl.RelativeTimeFormatUnit; ms: number }[] = [
   { unit: 'year', ms: 365 * 24 * 60 * 60 * 1000 },
@@ -10,8 +10,14 @@ const UNITS: { unit: Intl.RelativeTimeFormatUnit; ms: number }[] = [
   { unit: 'second', ms: 1000 },
 ];
 
-/** Format a date as Uzbek relative time (e.g. "bir daqiqa oldin"). */
-export function formatRelativeTime(date: string | Date): string {
+const LOCALE_MAP: Record<AppLocale, string> = {
+  uz: 'uz',
+  en: 'en',
+  ru: 'ru',
+};
+
+export function formatRelativeTime(date: string | Date, locale: AppLocale = 'uz'): string {
+  const rtf = new Intl.RelativeTimeFormat(LOCALE_MAP[locale], { numeric: 'auto' });
   const then = typeof date === 'string' ? new Date(date) : date;
   const diffMs = then.getTime() - Date.now();
   const absMs = Math.abs(diffMs);

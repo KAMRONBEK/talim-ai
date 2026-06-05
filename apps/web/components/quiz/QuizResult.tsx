@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@talim/ui';
 
 interface QuizResultProps {
@@ -10,19 +11,19 @@ interface QuizResultProps {
 }
 
 export function QuizResult({ score, correct, total, onRetry }: QuizResultProps) {
+  const t = useTranslations('quiz');
+
   return (
     <Card className="rounded-2xl">
       <CardHeader>
-        <CardTitle>Test natijalari</CardTitle>
+        <CardTitle>{t('resultsTitle')}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-3xl font-bold text-primary">{score.toFixed(0)}%</p>
-        <p className="mt-2 text-muted-foreground">
-          {total} ta savoldan {correct} tasi to&apos;g&apos;ri.
-        </p>
+        <p className="mt-2 text-muted-foreground">{t('scoreLine', { correct, total })}</p>
         {onRetry && (
           <Button type="button" variant="outline" className="mt-4" onClick={onRetry}>
-            Qayta ishlash
+            {t('retry')}
           </Button>
         )}
       </CardContent>

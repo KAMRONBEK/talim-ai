@@ -2,20 +2,30 @@
 
 import { useEffect, useState } from 'react';
 import { Monitor, Moon, Sun } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useTheme } from 'next-themes';
 
-const themes = [
-  { value: 'light', label: "Yorug'", icon: Sun },
-  { value: 'dark', label: "Qorong'u", icon: Moon },
-  { value: 'system', label: 'Tizim', icon: Monitor },
-] as const;
+const themeValues = ['light', 'dark', 'system'] as const;
+type ThemeValue = (typeof themeValues)[number];
 
-type ThemeValue = (typeof themes)[number]['value'];
+const themeIcons = {
+  light: Sun,
+  dark: Moon,
+  system: Monitor,
+} as const;
 
 export function ThemeToggle({ compact = false }: { compact?: boolean }) {
+  const t = useTranslations('theme');
+  const tCommon = useTranslations('common');
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  const themes = themeValues.map((value) => ({
+    value,
+    label: t(value),
+    icon: themeIcons[value],
+  }));
 
   useEffect(() => {
     setMounted(true);
@@ -33,10 +43,9 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
   const active = (theme ?? 'system') as ThemeValue;
 
   if (compact) {
-    const cycle: ThemeValue[] = ['light', 'dark', 'system'];
-    const currentIndex = cycle.indexOf(active);
-    const next = cycle[(currentIndex + 1) % cycle.length] ?? 'system';
-    const Icon = themes.find((t) => t.value === active)?.icon ?? Monitor;
+    const currentIndex = themeValues.indexOf(active);
+    const next = themeValues[(currentIndex + 1) % themeValues.length] ?? 'system';
+    const Icon = themes.find((item) => item.value === active)?.icon ?? Monitor;
 
     return (
       <Button
@@ -44,8 +53,8 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
         variant="outline"
         size="icon"
         className="h-9 w-9 shrink-0"
-        aria-label="Mavzuni almashtirish"
-        title={themes.find((t) => t.value === active)?.label}
+        aria-label={tCommon('themeToggle')}
+        title={themes.find((item) => item.value === active)?.label}
         onClick={() => setTheme(next)}
       >
         <Icon className="h-4 w-4" />
@@ -57,7 +66,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
     <div
       className="inline-flex items-center rounded-lg border bg-background p-0.5"
       role="group"
-      aria-label="Mavzu"
+      aria-label={tCommon('theme')}
     >
       {themes.map(({ value, label, icon: Icon }) => (
         <button

@@ -1,6 +1,8 @@
 import { create } from 'zustand';
-import type { MessageRole } from '@talim/types';
+import type { DesmosGraphPayload, MessageRole } from '@talim/types';
+import { serializeGraphBlock } from '@talim/types';
 import { getApiBaseUrl } from '@/lib/api';
+import { getApiLocale } from '@/lib/locale-api';
 import { useAuthStore } from './useAuthStore';
 
 export interface LocalChatMessage {
@@ -9,6 +11,7 @@ export interface LocalChatMessage {
   text: string;
   streaming?: boolean;
   excerpt?: string;
+  excerptImage?: string;
 }
 
 interface ChatState {
@@ -19,7 +22,12 @@ interface ChatState {
   setMessages: (messages: LocalChatMessage[]) => void;
   addMessage: (message: LocalChatMessage) => void;
   updateStreamingMessage: (id: string, text: string) => void;
-  streamMessage: (contentId: string, message: string, selectedExcerpt?: string) => Promise<void>;
+  streamMessage: (
+    contentId: string,
+    message: string,
+    selectedExcerpt?: string,
+    selectedImage?: string,
+  ) => Promise<void>;
   reset: () => void;
 }
 
@@ -35,7 +43,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       messages: state.messages.map((m) => (m.id === id ? { ...m, text, streaming: true } : m)),
     })),
   reset: () => set({ sessionId: null, messages: [], isStreaming: false }),
-  streamMessage: async (contentId, message, selectedExcerpt) => {
+  streamMessage: async (contentId, message, selectedExcerpt, selectedImage) => {
     const token = useAuthStore.getState().token;
     if (!token) throw new Error('Not authenticated');
 
@@ -46,7 +54,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       isStreaming: true,
       messages: [
         ...state.messages,
-        { id: userMsgId, role: 'USER', text: message, excerpt: selectedExcerpt },
+        { id: userMsgId, role: 'USER', text: message, excerpt: selectedExcerpt, excerptImage: selectedImage },
         { id: assistantMsgId, role: 'ASSISTANT', text: '', streaming: true },
       ],
     }));
@@ -56,12 +64,15 @@ export const useChatStore = create<ChatState>((set, get) => ({
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
+        'Accept-Language': getApiLocale(),
       },
       body: JSON.stringify({
         contentId,
         message,
         sessionId: get().sessionId ?? undefined,
         selectedExcerpt,
+        selectedImage,
+        locale: getApiLocale(),
       }),
     });
 
@@ -89,9 +100,18 @@ export const useChatStore = create<ChatState>((set, get) => ({
         if (data === '[DONE]') continue;
 
         try {
-          const parsed = JSON.parse(data) as { text?: string; sessionId?: string; error?: string };
+          const parsed = JSON.parse(data) as {
+            text?: string;
+            graph?: DesmosGraphPayload;
+            sessionId?: string;
+            error?: string;
+          };
           if (parsed.sessionId) {
             set({ sessionId: parsed.sessionId });
+          }
+          if (parsed.graph) {
+            fullText += serializeGraphBlock(parsed.graph);
+            get().updateStreamingMessage(assistantMsgId, fullText);
           }
           if (parsed.text) {
             fullText += parsed.text;

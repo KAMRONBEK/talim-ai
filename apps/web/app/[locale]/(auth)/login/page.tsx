@@ -1,20 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
 
-export default function RegisterPage() {
+export default function LoginPage() {
+  const t = useTranslations('auth');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
   const token = useAuthStore((s) => s.token);
   const [mounted, setMounted] = useState(false);
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -33,15 +35,12 @@ export default function RegisterPage() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await api.post<AuthResponse>('/auth/register', {
-        name,
-        email,
-        password,
-      });
+      const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
       setAuth(data.user, data.token);
       router.replace('/dashboard');
-    } catch {
-      setError('Registration failed. Email may already be in use.');
+    } catch (err: unknown) {
+      const status = (err as { response?: { status?: number } })?.response?.status;
+      setError(status === 401 ? t('invalidCredentials') : t('serverError'));
     } finally {
       setLoading(false);
     }
@@ -50,14 +49,15 @@ export default function RegisterPage() {
   if (!mounted || token) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="text-muted-foreground">{tCommon('loading')}</p>
       </div>
     );
   }
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-background p-4">
-      <div className="absolute right-4 top-4">
+      <div className="absolute right-4 top-4 flex items-center gap-2">
+        <LanguageSwitcher compact />
         <ThemeToggle compact />
       </div>
       <Link href="/" className="mb-8 flex items-center gap-2 text-xl font-bold">
@@ -69,30 +69,26 @@ export default function RegisterPage() {
       <Card className="w-full max-w-md border shadow-lg">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold">Create your account</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Start learning with Talim AI</p>
+            <h1 className="text-2xl font-bold">{t('welcomeBack')}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{t('signInContinue')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t('email')}</Label>
               <Input
                 id="email"
                 type="email"
+                placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t('password')}</Label>
               <Input
                 id="password"
                 type="password"
-                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -100,13 +96,13 @@ export default function RegisterPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? t('signingIn') : t('signIn')}
             </Button>
           </form>
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link href="/login" className="font-medium text-primary hover:underline">
-              Sign in
+            {t('noAccount')}{' '}
+            <Link href="/register" className="font-medium text-primary hover:underline">
+              {t('createOne')}
             </Link>
           </p>
         </CardContent>

@@ -1,8 +1,9 @@
 'use client';
 
 import { use, Suspense, useEffect } from 'react';
-import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   Button,
   Badge,
@@ -24,7 +25,14 @@ import { DeleteContentDialog } from '@/components/content/delete-content-dialog'
 import { useState } from 'react';
 import { SummaryText } from '@/components/learning/summary-text';
 
+function ContentPageLoading() {
+  const t = useTranslations('common');
+  return <>{t('loading')}</>;
+}
+
 function ContentDetailInner({ id }: { id: string }) {
+  const t = useTranslations('content');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const searchParams = useSearchParams();
   const sectionId = searchParams.get('section') ?? undefined;
@@ -87,7 +95,7 @@ function ContentDetailInner({ id }: { id: string }) {
   };
 
   if (!content) {
-    return <p className="p-8 text-muted-foreground">Yuklanmoqda...</p>;
+    return <p className="p-8 text-muted-foreground">{tCommon('loading')}</p>;
   }
 
   if (content.status === 'FAILED') {
@@ -95,24 +103,21 @@ function ContentDetailInner({ id }: { id: string }) {
       <>
         <div className="flex flex-1 items-center justify-center p-8">
           <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-            <h2 className="text-lg font-semibold">Material qayta ishlanmadi</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              PDF dan matn ajratib bo&apos;lmadi. Skanerlangan yoki faqat rasmlardan iborat PDF
-              bo&apos;lishi mumkin — OCR orqali qayta urinib ko&apos;ring.
-            </p>
+            <h2 className="text-lg font-semibold">{t('failed')}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{t('failedDesc')}</p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
               <Button
                 disabled={retryContent.isPending}
                 onClick={() => retryContent.mutate(id)}
               >
-                {retryContent.isPending ? 'Ishlanmoqda...' : 'Qayta ishlash'}
+                {retryContent.isPending ? t('retrying') : t('retry')}
               </Button>
               <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                O&apos;chirish
+                {tCommon('delete')}
               </Button>
               <Link href="/dashboard">
                 <Button variant="outline" type="button">
-                  Kutubxonaga qaytish
+                  {t('backToLibrary')}
                 </Button>
               </Link>
             </div>
@@ -133,13 +138,13 @@ function ContentDetailInner({ id }: { id: string }) {
       <>
         <div className="flex flex-1 items-center justify-center p-8">
           <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-            <h2 className="text-lg font-semibold">Material qayta ishlanmoqda</h2>
+            <h2 className="text-lg font-semibold">{t('processing')}</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Holat: {content.status}. Tayyor bo&apos;lganda sahifani avtomatik yangilanadi.
+              {t('processingDesc', { status: content.status })}
             </p>
             <div className="mt-6">
               <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                O&apos;chirish
+                {tCommon('delete')}
               </Button>
             </div>
           </div>
@@ -155,7 +160,7 @@ function ContentDetailInner({ id }: { id: string }) {
   }
 
   const sectionTitle = sectionData?.section.title ?? content.title;
-  const chapterLabel = activeIndex >= 0 ? `${activeIndex + 1}-bob` : '';
+  const chapterLabel = activeIndex >= 0 ? t('chapter', { n: activeIndex + 1 }) : '';
 
   return (
     <div className="flex flex-1 overflow-hidden">
@@ -163,7 +168,7 @@ function ContentDetailInner({ id }: { id: string }) {
         <div className="flex-1 overflow-y-auto px-6 py-8 md:px-12">
           <nav className="mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <Link href="/dashboard" className="hover:text-foreground">
-              Bosh sahifa
+              {tCommon('home')}
             </Link>
             <span>/</span>
             <span className="text-foreground">{content.title}</span>
@@ -179,11 +184,11 @@ function ContentDetailInner({ id }: { id: string }) {
           <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             {chapterLabel && <Badge variant="secondary">{chapterLabel}</Badge>}
             {sectionData?.section.readMinutes != null && (
-              <span>{sectionData.section.readMinutes} daqiqa o&apos;qish</span>
+              <span>{t('readMinutes', { n: sectionData.section.readMinutes })}</span>
             )}
             {sectionProgress != null && sectionProgress.coverageScore > 0 && (
               <Badge variant="outline">
-                {Math.round(sectionProgress.coverageScore)}% o&apos;zlashtirildi
+                {t('coverage', { n: Math.round(sectionProgress.coverageScore) })}
               </Badge>
             )}
           </div>
@@ -194,16 +199,16 @@ function ContentDetailInner({ id }: { id: string }) {
 
           <div className="mt-8 max-w-3xl">
             {sectionLoading ? (
-              <p className="text-muted-foreground">Bob yuklanmoqda...</p>
+              <p className="text-muted-foreground">{t('sectionLoading')}</p>
             ) : (
               <article className="prose prose-sm max-w-none whitespace-pre-wrap text-[15px] leading-relaxed text-foreground">
-                {sectionData?.body ?? "Yon paneldan bob tanlang."}
+                {sectionData?.body ?? t('selectSection')}
               </article>
             )}
 
             {summary && (
               <div className="od-info-box mt-8">
-                <div className="od-info-box-title">💡 Asosiy tushuncha</div>
+                <div className="od-info-box-title">💡 {t('keyConcept')}</div>
                 <SummaryText text={summary} />
               </div>
             )}
@@ -214,26 +219,29 @@ function ContentDetailInner({ id }: { id: string }) {
               onClick={() => handleCreateQuiz('FULL')}
               disabled={createQuiz.isPending || !activeSectionId}
             >
-              ❓ {createQuiz.isPending ? 'Yaratilmoqda...' : 'Test ishlang'}
+              ❓ {createQuiz.isPending ? t('creating') : t('quiz')}
             </Button>
             <Button
               variant="outline"
               onClick={() => handleCreateQuiz('QUICK')}
               disabled={createQuiz.isPending || !activeSectionId}
             >
-              ⚡ {createQuiz.isPending ? 'Yaratilmoqda...' : 'Tez savol'}
+              ⚡ {createQuiz.isPending ? t('creating') : t('quickQuiz')}
             </Button>
             <Button
               variant="outline"
               onClick={() => router.push(`/content/${id}/podcast`)}
             >
-              🎧 Tinglang
+              🎧 {t('listen')}
             </Button>
             <Button variant="outline" onClick={() => router.push(`/content/${id}/chat`)}>
-              💬 AI o&apos;qituvchidan so&apos;rang
+              💬 {t('askTutor')}
+            </Button>
+            <Button variant="outline" disabled title={tCommon('videoComingSoon')}>
+              🎬 {tCommon('videoComingSoon')}
             </Button>
             <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-              O&apos;chirish
+              {tCommon('delete')}
             </Button>
           </div>
         </div>
@@ -258,7 +266,7 @@ function ContentDetailInner({ id }: { id: string }) {
       <Dialog open={summaryOpen} onOpenChange={setSummaryOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Xulosa</DialogTitle>
+            <DialogTitle>{t('summaryTitle')}</DialogTitle>
           </DialogHeader>
           <SummaryText text={summary ?? ''} />
         </DialogContent>
@@ -277,7 +285,7 @@ function ContentDetailInner({ id }: { id: string }) {
 export default function ContentDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   return (
-    <Suspense fallback={<p className="p-8">Yuklanmoqda...</p>}>
+    <Suspense fallback={<p className="p-8"><ContentPageLoading /></p>}>
       <ContentDetailInner id={id} />
     </Suspense>
   );

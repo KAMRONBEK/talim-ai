@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import type { LearningHistory } from '@talim/types';
+import { Link } from '@/i18n/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import type { AppLocale, LearningHistory } from '@talim/types';
 import { formatRelativeTime } from '@/lib/format-relative-time';
 
 interface LearningHistoryPanelProps {
@@ -15,6 +16,8 @@ export function LearningHistoryPanel({
   history,
   onOpenSummary,
 }: LearningHistoryPanelProps) {
+  const t = useTranslations('content');
+  const locale = useLocale() as AppLocale;
   if (!history) return null;
 
   const quizzes = history.quizzes.slice(0, 5);
@@ -22,12 +25,12 @@ export function LearningHistoryPanel({
 
   return (
     <div className="border-b p-5">
-      <h3 className="mb-3 text-sm font-semibold">O&apos;rganish tarixi</h3>
+      <h3 className="mb-3 text-sm font-semibold">{t('learningHistory')}</h3>
       <div className="space-y-3">
         {quizzes.length > 0 && (
           <div>
             <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-              Testlar
+              {t('quizzes')}
             </p>
             <ul className="space-y-1">
               {quizzes.map((q) => (
@@ -37,7 +40,7 @@ export function LearningHistoryPanel({
                     className="flex items-center justify-between rounded-lg bg-muted/50 px-2.5 py-2 text-xs transition-colors hover:bg-muted"
                   >
                     <span>
-                      {q.kind === 'QUICK' ? 'Tez savol' : 'Mashq testi'}
+                      {q.kind === 'QUICK' ? t('quickCheckLabel') : t('fullQuizLabel')}
                       {q.latestAttempt != null && (
                         <span className="ml-1 text-muted-foreground">
                           · {Math.round(q.latestAttempt.score)}%
@@ -45,7 +48,7 @@ export function LearningHistoryPanel({
                       )}
                     </span>
                     <span className="text-muted-foreground">
-                      {formatRelativeTime(q.createdAt)}
+                      {formatRelativeTime(q.createdAt, locale)}
                     </span>
                   </Link>
                 </li>
@@ -57,7 +60,7 @@ export function LearningHistoryPanel({
         {summaries.length > 0 && (
           <div>
             <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-              Xulosalar
+              {t('summaries')}
             </p>
             <ul className="space-y-1">
               {summaries.map((s) => (
@@ -67,9 +70,9 @@ export function LearningHistoryPanel({
                     onClick={() => onOpenSummary(s.summary)}
                     className="flex w-full items-center justify-between rounded-lg bg-muted/50 px-2.5 py-2 text-left text-xs transition-colors hover:bg-muted"
                   >
-                    <span>{s.sectionId ? 'Bob xulosasi' : "To'liq xulosa"}</span>
+                    <span>{s.sectionId ? t('sectionSummary') : t('fullSummary')}</span>
                     <span className="text-muted-foreground">
-                      {formatRelativeTime(s.createdAt)}
+                      {formatRelativeTime(s.createdAt, locale)}
                     </span>
                   </button>
                 </li>
@@ -84,14 +87,12 @@ export function LearningHistoryPanel({
             className="flex items-center gap-2 rounded-lg bg-muted/50 px-2.5 py-2 text-xs transition-colors hover:bg-muted"
           >
             <span>🎧</span>
-            <span>Podkast mavjud — tinglash</span>
+            <span>{t('podcastAvailable')}</span>
           </Link>
         )}
 
         {quizzes.length === 0 && summaries.length === 0 && history.podcastStatus !== 'READY' && (
-          <p className="text-xs text-muted-foreground">
-            Hali test yoki xulosa yo&apos;q. Test ishlang yoki xulosa yarating.
-          </p>
+          <p className="text-xs text-muted-foreground">{t('noHistoryYet')}</p>
         )}
       </div>
     </div>

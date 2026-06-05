@@ -1,17 +1,22 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import type { MessageRole } from '@talim/types';
 import { cn } from '@talim/ui';
+import { TutorMessageContent } from './TutorMessageContent';
 
 interface ChatMessageProps {
   role: MessageRole;
   text: string;
   streaming?: boolean;
   excerpt?: string;
+  excerptImage?: string;
 }
 
-export function ChatMessage({ role, text, streaming, excerpt }: ChatMessageProps) {
+export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: ChatMessageProps) {
+  const t = useTranslations('chat');
   const isUser = role === 'USER';
+  const hasExcerpt = Boolean(excerpt || excerptImage);
   return (
     <div className={cn('flex gap-3', isUser ? 'flex-row-reverse' : 'flex-row')}>
       <div
@@ -20,7 +25,7 @@ export function ChatMessage({ role, text, streaming, excerpt }: ChatMessageProps
           isUser ? 'avatar-gradient' : 'bg-muted',
         )}
       >
-        {isUser ? 'Siz' : '🎓'}
+        {isUser ? t('you') : '🎓'}
       </div>
       <div className={cn('max-w-[85%]', isUser && 'text-right')}>
         <div
@@ -29,18 +34,32 @@ export function ChatMessage({ role, text, streaming, excerpt }: ChatMessageProps
             isUser ? 'bg-primary text-primary-foreground' : 'border bg-card',
           )}
         >
-          {excerpt && isUser && (
+          {hasExcerpt && isUser && (
             <div className="od-selected-quote mb-2 rounded-r-lg border-l-primary bg-primary-foreground/10 text-left text-primary-foreground">
               <div className="od-selected-quote-label text-primary-foreground/80">
-                📖 Kitobdan tanlangan
+                📖 {excerptImage ? t('selectedArea') : t('selectedFromBook')}
               </div>
-              {excerpt}
+              {excerptImage && (
+                <img
+                  src={excerptImage}
+                  alt=""
+                  className="mb-2 max-h-40 w-full rounded-md border border-primary-foreground/20 object-contain"
+                />
+              )}
+              {excerpt && <p className="whitespace-pre-wrap">{excerpt}</p>}
             </div>
           )}
-          <p className="whitespace-pre-wrap">{text || (streaming ? '...' : '')}</p>
+          {isUser ? (
+            <p className="whitespace-pre-wrap">{text}</p>
+          ) : (
+            <TutorMessageContent
+              content={text || (streaming ? t('streaming') : '')}
+              streaming={streaming}
+            />
+          )}
         </div>
         <p className="mt-1 text-[11px] text-muted-foreground">
-          {isUser ? 'Siz' : "AI O'qituvchi"} · Hozir
+          {isUser ? t('you') : t('tutor')} · {t('now')}
         </p>
       </div>
     </div>

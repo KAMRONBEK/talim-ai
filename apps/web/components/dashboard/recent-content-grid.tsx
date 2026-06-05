@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { FileText, Presentation, Play, AlertCircle, Trash2 } from 'lucide-react';
 import { Badge, Button } from '@talim/ui';
-import type { Content, ContentType } from '@talim/types';
+import { useLocale, useTranslations } from 'next-intl';
+import type { AppLocale, Content, ContentType } from '@talim/types';
 import { formatRelativeTime } from '@/lib/format-relative-time';
 import { getYoutubeThumbnailUrl } from '@/lib/youtube';
 import { cn } from '@talim/ui';
@@ -60,13 +61,13 @@ function ContentThumbnail({ content }: { content: Content }) {
 }
 
 export function RecentContentGrid({ contents }: RecentContentGridProps) {
+  const t = useTranslations('common');
+  const locale = useLocale() as AppLocale;
   const [deleteTarget, setDeleteTarget] = useState<Content | null>(null);
 
   if (contents.length === 0) {
     return (
-      <p className="text-center text-muted-foreground">
-        Hali material yo&apos;q. Yuqoridagi kartochkalar orqali birinchi materialingizni qo&apos;shing.
-      </p>
+      <p className="text-center text-muted-foreground">{t('noMaterials')}</p>
     );
   }
 
@@ -100,7 +101,7 @@ export function RecentContentGrid({ contents }: RecentContentGridProps) {
                 <p className="truncate text-sm font-medium">{content.title}</p>
                 <div className="mt-0.5 flex items-center gap-2">
                   <p className="text-xs text-muted-foreground">
-                    {formatRelativeTime(content.createdAt)}
+                    {formatRelativeTime(content.createdAt, locale)}
                   </p>
                   {content.status === 'FAILED' && (
                     <Badge

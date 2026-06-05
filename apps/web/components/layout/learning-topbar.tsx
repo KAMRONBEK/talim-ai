@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import {
   Avatar,
   AvatarFallback,
@@ -11,6 +11,7 @@ import {
 import { useAuthStore } from '@/store/useAuthStore';
 import { useFileUpload } from '@/hooks/useFileUpload';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 interface LearningTopbarProps {
   contentId: string;
@@ -18,6 +19,7 @@ interface LearningTopbarProps {
 }
 
 export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
+  const t = useTranslations('common');
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const { fileInput, openFilePicker, isPending } = useFileUpload();
@@ -43,21 +45,22 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
         </Link>
         <Input
           className="hidden h-9 w-48 border bg-background text-sm lg:block xl:w-80"
-          placeholder="Materiallaringizni qidiring..."
+          placeholder={t('searchPlaceholder')}
           disabled
-          aria-label="Qidiruv"
+          aria-label={t('search')}
         />
         <Link
           href="/dashboard"
           className="hidden rounded-lg border px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary sm:inline-flex"
         >
-          ← Orqaga
+          ← {t('back')}
         </Link>
         <span className="hidden truncate text-sm font-medium md:inline max-w-[200px] lg:max-w-xs">
           {title}
         </span>
       </div>
       <div className="flex items-center gap-2">
+        <LanguageSwitcher compact />
         <ThemeToggle compact />
         <Button
           size="sm"
@@ -67,13 +70,13 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
           disabled={isPending}
           onClick={openFilePicker}
         >
-          {isPending ? 'Yuklanmoqda...' : '+ Yuklash'}
+          {isPending ? t('uploading') : `+ ${t('upload')}`}
         </Button>
         <Link
           href={`/content/${contentId}/chat`}
           className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent"
         >
-          💬 AI O&apos;qituvchi
+          💬 {t('aiTutor')}
         </Link>
         <Avatar className="h-8 w-8">
           <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>
@@ -87,7 +90,7 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
             router.push('/login');
           }}
         >
-          Chiqish
+          {t('logout')}
         </Button>
       </div>
     </header>

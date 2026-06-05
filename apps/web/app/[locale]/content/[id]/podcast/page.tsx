@@ -1,7 +1,8 @@
 'use client';
 
 import { use, useEffect, useState, Suspense, useRef, useCallback } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
 import { usePodcast, useCreatePodcast } from '@/hooks/usePodcast';
@@ -18,6 +19,8 @@ function formatDuration(sec: number | null): string {
 }
 
 function PodcastPageInner({ id }: { id: string }) {
+  const t = useTranslations('content');
+  const tCommon = useTranslations('common');
   const { data: content } = useContent(id);
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
@@ -110,25 +113,21 @@ function PodcastPageInner({ id }: { id: string }) {
     }
   }, [podcast, activeEpisode]);
 
-  if (!content) return <p className="p-8">Yuklanmoqda...</p>;
+  if (!content) return <p className="p-8">{tCommon('loading')}</p>;
 
   if (content.status !== 'READY') {
     return (
-      <p className="p-8 text-muted-foreground">
-        Podkast yaratish uchun material tayyor bo&apos;lishi kerak.
-      </p>
+      <p className="p-8 text-muted-foreground">{t('podcastNeedsReady')}</p>
     );
   }
 
   if (!podcast && !isLoading) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <h2 className="text-xl font-semibold">Hali podkast yo&apos;q</h2>
-        <p className="max-w-md text-center text-sm text-muted-foreground">
-          Kontent bo&apos;laklaridan AI ovozli podkast yarating.
-        </p>
-        <Button onClick={() => createPodcast.mutate(id)} disabled={createPodcast.isPending}>
-          {createPodcast.isPending ? 'Boshlanmoqda...' : 'Podkast yaratish'}
+        <h2 className="text-xl font-semibold">{t('noPodcast')}</h2>
+        <p className="max-w-md text-center text-sm text-muted-foreground">{t('noPodcastDesc')}</p>
+        <Button onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
+          {createPodcast.isPending ? t('podcastGenerating') : t('createPodcast')}
         </Button>
       </div>
     );
@@ -143,8 +142,8 @@ function PodcastPageInner({ id }: { id: string }) {
         <div className="border-b p-5">
           <h2 className="text-[15px] font-semibold">{content.title}</h2>
           <p className="text-xs text-muted-foreground">
-            {episodes.length} epizod
-            {generating && ' · Yaratilmoqda...'}
+            {t('episodes', { count: episodes.length })}
+            {generating && ` · ${t('podcastGenerating')}`}
           </p>
         </div>
         <div className="space-y-1 p-3">
@@ -172,12 +171,12 @@ function PodcastPageInner({ id }: { id: string }) {
                   <p className="truncate font-medium">{ep.title}</p>
                   <p className="text-[11px] text-muted-foreground">
                     {formatDuration(ep.durationSec)}
-                    {!ep.hasAudio && ' · Tayyorlanmoqda'}
-                    {epProgress?.completed && ' · Tugallangan'}
+                    {!ep.hasAudio && ` · ${t('episodePreparing')}`}
+                    {epProgress?.completed && ` · ${t('episodeCompleted')}`}
                   </p>
                 </div>
                 {ep.hasAudio && (
-                  <span className="shrink-0 text-[11px] font-medium text-success">Tayyor</span>
+                  <span className="shrink-0 text-[11px] font-medium text-success">{t('episodeReady')}</span>
                 )}
               </button>
             );
@@ -186,7 +185,7 @@ function PodcastPageInner({ id }: { id: string }) {
         {generating && (
           <div className="px-3 pb-3">
             <Button className="w-full" variant="outline" disabled>
-              Epizodlar yaratilmoqda...
+              {t('episodesGenerating')}
             </Button>
           </div>
         )}
@@ -210,14 +209,14 @@ function PodcastPageInner({ id }: { id: string }) {
                 onProgress={handleProgress}
               />
             ) : (
-              <p className="text-sm text-muted-foreground">Ushbu epizod uchun audio hali tayyor emas.</p>
+              <p className="text-sm text-muted-foreground">{t('audioNotReady')}</p>
             )}
           </>
         ) : (
-          <p className="text-muted-foreground">Epizod tanlang</p>
+          <p className="text-muted-foreground">{t('selectEpisode')}</p>
         )}
         <Link href={`/content/${id}`} className="text-sm text-primary hover:underline">
-          ← Kontentga qaytish
+          ← {t('backToContent')}
         </Link>
       </div>
     </div>
@@ -227,7 +226,7 @@ function PodcastPageInner({ id }: { id: string }) {
 export default function PodcastPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   return (
-    <Suspense fallback={<p className="p-8">Yuklanmoqda...</p>}>
+    <Suspense fallback={<p className="p-8">...</p>}>
       <PodcastPageInner id={id} />
     </Suspense>
   );

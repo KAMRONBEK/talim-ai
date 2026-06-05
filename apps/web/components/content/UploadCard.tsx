@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
 import { useCreateYoutubeContent } from '@/hooks/useContent';
 import { useFileUpload } from '@/hooks/useFileUpload';
@@ -10,12 +11,17 @@ interface UploadCallbacks {
 }
 
 export function FileUploadField({ onSuccess }: UploadCallbacks) {
-  const { fileInput, openFilePicker, isPending, error } = useFileUpload({ onSuccess });
+  const t = useTranslations('content');
+  const tCommon = useTranslations('common');
+  const { fileInput, openFilePicker, isPending, error } = useFileUpload({
+    onSuccess,
+    uploadFailedMessage: t('uploadFailed'),
+  });
 
   return (
     <div>
       {fileInput}
-      <p className="mb-2 text-sm font-medium">PDF yoki slaydlar</p>
+      <p className="mb-2 text-sm font-medium">{t('pdfOrSlides')}</p>
       <button
         type="button"
         disabled={isPending}
@@ -25,7 +31,7 @@ export function FileUploadField({ onSuccess }: UploadCallbacks) {
           'flex h-10 w-full touch-manipulation select-none items-center justify-center',
         )}
       >
-        {isPending ? 'Yuklanmoqda...' : 'Fayl tanlash'}
+        {isPending ? tCommon('uploading') : t('selectFile')}
       </button>
       {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
     </div>
@@ -33,6 +39,7 @@ export function FileUploadField({ onSuccess }: UploadCallbacks) {
 }
 
 export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
+  const t = useTranslations('content');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
   const youtubeMutation = useCreateYoutubeContent();
@@ -47,13 +54,13 @@ export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
       setYoutubeUrl('');
       onSuccess?.();
     } catch {
-      setError("Havola qo'shilmadi. URL ni tekshirib qayta urinib ko'ring.");
+      setError(t('linkFailed'));
     }
   };
 
   return (
     <form onSubmit={handleYoutubeSubmit} className="space-y-2">
-      <label className="block text-sm font-medium">YouTube havolasi</label>
+      <label className="block text-sm font-medium">{t('youtubeLink')}</label>
       <div className="flex gap-2">
         <Input
           value={youtubeUrl}
@@ -62,7 +69,7 @@ export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
           disabled={youtubeMutation.isPending}
         />
         <Button type="submit" className="touch-manipulation" disabled={youtubeMutation.isPending}>
-          {youtubeMutation.isPending ? '...' : "Qo'shish"}
+          {youtubeMutation.isPending ? '...' : t('addLink')}
         </Button>
       </div>
       {error && <p className="text-sm text-destructive">{error}</p>}
@@ -76,6 +83,7 @@ interface UploadCardProps {
 }
 
 export function UploadCard({ onSuccess, compact }: UploadCardProps) {
+  const t = useTranslations('content');
   const inner = (
     <>
       <FileUploadField onSuccess={onSuccess} />
@@ -90,7 +98,7 @@ export function UploadCard({ onSuccess, compact }: UploadCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Material yuklash</CardTitle>
+        <CardTitle>{t('uploadMaterial')}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">{inner}</CardContent>
     </Card>

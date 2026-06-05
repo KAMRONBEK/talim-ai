@@ -1,12 +1,15 @@
 'use client';
 
 import { Suspense, use, useEffect, useRef } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from '@/i18n/navigation';
+import { useAutoGenerateOnLocaleChange } from '@/hooks/useLocaleContent';
 import { AuthGuard } from '@/components/auth-guard';
 import { ContentSidebar } from '@/components/layout/content-sidebar';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
 import { useContent } from '@/hooks/useContent';
 import { useSections } from '@/hooks/useSections';
+import { useTranslations } from 'next-intl';
 import { useContentProgress, useMarkSectionViewed } from '@/hooks/useProgress';
 
 function ContentLayoutInner({
@@ -16,6 +19,7 @@ function ContentLayoutInner({
   children: React.ReactNode;
   id: string;
 }) {
+  const t = useTranslations('common');
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -33,6 +37,8 @@ function ContentLayoutInner({
       ? storedLastSectionId
       : undefined;
   const activeId = sectionParam ?? validLastSectionId ?? sections[0]?.id;
+
+  useAutoGenerateOnLocaleChange(id, activeId);
 
   useEffect(() => {
     if (!isReaderPage) return;
@@ -53,7 +59,7 @@ function ContentLayoutInner({
   }, [isReaderPage, activeId, content?.status, sections, markViewed]);
 
   if (!content) {
-    return <p className="p-8 text-muted-foreground">Loading...</p>;
+    return <p className="p-8 text-muted-foreground">{t('loading')}</p>;
   }
 
   return (
@@ -67,10 +73,15 @@ function ContentLayoutInner({
           activeSectionId={activeId}
           sectionProgressMap={progressData?.sections}
         />
-        <div className="flex flex-1 flex-col overflow-hidden">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
       </div>
     </div>
   );
+}
+
+function ContentLayoutSuspenseFallback() {
+  const t = useTranslations('common');
+  return <p className="p-8">{t('loading')}</p>;
 }
 
 export default function ContentLayout({
@@ -84,7 +95,7 @@ export default function ContentLayout({
 
   return (
     <AuthGuard>
-      <Suspense fallback={<p className="p-8">Loading...</p>}>
+      <Suspense fallback={<ContentLayoutSuspenseFallback />}>
         <ContentLayoutInner id={id}>{children}</ContentLayoutInner>
       </Suspense>
     </AuthGuard>

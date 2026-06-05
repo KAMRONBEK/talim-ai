@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { FileUp, Link2 } from 'lucide-react';
 import {
   cn,
@@ -13,6 +14,8 @@ import { YoutubeLinkForm } from '@/components/content/UploadCard';
 import { useFileUpload } from '@/hooks/useFileUpload';
 
 export function QuickActionCards() {
+  const t = useTranslations('dashboard');
+  const tCommon = useTranslations('common');
   const [linkOpen, setLinkOpen] = useState(false);
   const { fileInput, openFilePicker, isPending, error } = useFileUpload();
 
@@ -34,8 +37,10 @@ export function QuickActionCards() {
             <FileUp className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">{isPending ? 'Yuklanmoqda...' : 'Yuklash'}</p>
-            <p className="mt-0.5 text-sm text-muted-foreground">Fayl, audio, video</p>
+            <p className="font-semibold">
+              {isPending ? tCommon('uploading') : t('uploadTitle')}
+            </p>
+            <p className="mt-0.5 text-sm text-muted-foreground">{t('uploadDesc')}</p>
           </div>
         </button>
 
@@ -51,8 +56,8 @@ export function QuickActionCards() {
             <Link2 className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">Havola</p>
-            <p className="mt-0.5 text-sm text-muted-foreground">YouTube, veb-sayt</p>
+            <p className="font-semibold">{t('linkTitle')}</p>
+            <p className="mt-0.5 text-sm text-muted-foreground">{t('linkDesc')}</p>
           </div>
         </button>
       </div>
@@ -64,7 +69,7 @@ export function QuickActionCards() {
       <Dialog open={linkOpen} onOpenChange={setLinkOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Havola orqali qo&apos;shish</DialogTitle>
+            <DialogTitle>{t('addViaLink')}</DialogTitle>
           </DialogHeader>
           <YoutubeLinkForm onSuccess={() => setLinkOpen(false)} />
         </DialogContent>
