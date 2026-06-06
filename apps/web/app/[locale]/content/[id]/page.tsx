@@ -20,7 +20,7 @@ import {
   useSavedSummary,
 } from '@/hooks/useQuiz';
 import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
-import { ContentRightPanel } from '@/components/layout/content-right-panel';
+import { ContentRightPanel, ContentRightPanelSheet } from '@/components/layout/content-right-panel';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
 import { useState } from 'react';
 import { SummaryText } from '@/components/learning/summary-text';
@@ -56,6 +56,7 @@ function ContentDetailInner({ id }: { id: string }) {
   const [summary, setSummary] = useState<string | null>(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [progressOpen, setProgressOpen] = useState(false);
 
   useEffect(() => {
     if (savedSummary) setSummary(savedSummary);
@@ -162,10 +163,26 @@ function ContentDetailInner({ id }: { id: string }) {
   const sectionTitle = sectionData?.section.title ?? content.title;
   const chapterLabel = activeIndex >= 0 ? t('chapter', { n: activeIndex + 1 }) : '';
 
+  const rightPanelProps = {
+    contentId: id,
+    onSummary: handleSummary,
+    onQuiz: () => handleCreateQuiz('FULL'),
+    onQuickCheck: () => handleCreateQuiz('QUICK'),
+    summaryPending: generateSummary.isPending,
+    quizPending: createQuiz.isPending,
+    quickCheckPending: createQuiz.isPending,
+    overallCoverage: progressData?.contentProgress?.overallCoverage ?? 0,
+    sectionCoverage: sectionProgress?.coverageScore ?? 0,
+    streakDays: history?.streakDays ?? 0,
+    quizCount: history?.quizzes.length ?? 0,
+    history,
+    onOpenSummary: handleOpenSummary,
+  };
+
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className="relative flex flex-1 overflow-hidden">
       <div className="flex flex-1 flex-col overflow-hidden">
-        <div className="flex-1 overflow-y-auto px-6 py-8 md:px-12">
+        <div className="flex-1 overflow-y-auto px-4 py-8 md:px-12">
           <nav className="mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <Link href="/dashboard" className="hover:text-foreground">
               {tCommon('home')}
@@ -180,7 +197,7 @@ function ContentDetailInner({ id }: { id: string }) {
             )}
           </nav>
 
-          <h1 className="text-3xl font-bold tracking-tight">{sectionTitle}</h1>
+          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">{sectionTitle}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             {chapterLabel && <Badge variant="secondary">{chapterLabel}</Badge>}
             {sectionData?.section.readMinutes != null && (
@@ -216,6 +233,7 @@ function ContentDetailInner({ id }: { id: string }) {
 
           <div className="mt-10 flex flex-wrap gap-2.5 border-t pt-8">
             <Button
+              className="w-full touch-manipulation sm:w-auto"
               onClick={() => handleCreateQuiz('FULL')}
               disabled={createQuiz.isPending || !activeSectionId}
             >
@@ -223,6 +241,7 @@ function ContentDetailInner({ id }: { id: string }) {
             </Button>
             <Button
               variant="outline"
+              className="w-full touch-manipulation sm:w-auto"
               onClick={() => handleCreateQuiz('QUICK')}
               disabled={createQuiz.isPending || !activeSectionId}
             >
@@ -230,38 +249,54 @@ function ContentDetailInner({ id }: { id: string }) {
             </Button>
             <Button
               variant="outline"
+              className="w-full touch-manipulation sm:w-auto"
               onClick={() => router.push(`/content/${id}/podcast`)}
             >
               🎧 {t('listen')}
             </Button>
-            <Button variant="outline" onClick={() => router.push(`/content/${id}/chat`)}>
+            <Button
+              variant="outline"
+              className="w-full touch-manipulation sm:w-auto"
+              onClick={() => router.push(`/content/${id}/chat`)}
+            >
               💬 {t('askTutor')}
             </Button>
-            <Button variant="outline" disabled title={tCommon('videoComingSoon')}>
+            <Button
+              variant="outline"
+              className="w-full touch-manipulation sm:w-auto"
+              disabled
+              title={tCommon('videoComingSoon')}
+            >
               🎬 {tCommon('videoComingSoon')}
             </Button>
-            <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+            <Button
+              variant="outline"
+              type="button"
+              className="w-full touch-manipulation sm:w-auto"
+              onClick={() => setDeleteOpen(true)}
+            >
               {tCommon('delete')}
             </Button>
           </div>
         </div>
       </div>
 
-      <ContentRightPanel
-        contentId={id}
-        onSummary={handleSummary}
-        onQuiz={() => handleCreateQuiz('FULL')}
-        onQuickCheck={() => handleCreateQuiz('QUICK')}
-        summaryPending={generateSummary.isPending}
-        quizPending={createQuiz.isPending}
-        quickCheckPending={createQuiz.isPending}
-        overallCoverage={progressData?.contentProgress?.overallCoverage ?? 0}
-        sectionCoverage={sectionProgress?.coverageScore ?? 0}
-        streakDays={history?.streakDays ?? 0}
-        quizCount={history?.quizzes.length ?? 0}
-        history={history}
-        onOpenSummary={handleOpenSummary}
+      <ContentRightPanel {...rightPanelProps} />
+      <ContentRightPanelSheet
+        open={progressOpen}
+        onOpenChange={setProgressOpen}
+        {...rightPanelProps}
       />
+      <div className="fixed bottom-4 right-4 z-40 md:hidden">
+        <Button
+          type="button"
+          size="sm"
+          className="touch-manipulation shadow-lg"
+          onClick={() => setProgressOpen(true)}
+        >
+          📊 {t('yourProgress')}
+        </Button>
+      </div>
 
       <Dialog open={summaryOpen} onOpenChange={setSummaryOpen}>
         <DialogContent>

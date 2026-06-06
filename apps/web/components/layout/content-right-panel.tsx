@@ -2,10 +2,11 @@
 
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import type { LearningHistory } from '@talim/types';
 import { LearningHistoryPanel } from '@/components/learning/learning-history-panel';
 
-interface ContentRightPanelProps {
+export interface ContentRightPanelBodyProps {
   contentId: string;
   onSummary: () => void;
   onQuiz: () => void;
@@ -19,9 +20,10 @@ interface ContentRightPanelProps {
   quizCount?: number;
   history?: LearningHistory;
   onOpenSummary: (summary: string) => void;
+  onAction?: () => void;
 }
 
-export function ContentRightPanel({
+export function ContentRightPanelBody({
   contentId,
   onSummary,
   onQuiz,
@@ -35,15 +37,21 @@ export function ContentRightPanel({
   quizCount = 0,
   history,
   onOpenSummary,
-}: ContentRightPanelProps) {
+  onAction,
+}: ContentRightPanelBodyProps) {
   const t = useTranslations('content');
   const circumference = 2 * Math.PI * 52;
   const progress = Math.min(1, Math.max(0, sectionCoverage / 100));
   const offset = circumference * (1 - progress);
   const displayPercent = Math.round(sectionCoverage);
 
+  const wrapAction = (fn: () => void) => () => {
+    fn();
+    onAction?.();
+  };
+
   return (
-    <aside className="hidden w-72 shrink-0 flex-col overflow-y-auto border-l bg-card lg:flex">
+    <>
       <div className="border-b p-5 text-center">
         <h3 className="text-sm font-semibold">{t('yourProgress')}</h3>
         <div className="relative mx-auto my-4 h-[120px] w-[120px]">
@@ -76,7 +84,7 @@ export function ContentRightPanel({
         <div className="space-y-2">
           <button
             type="button"
-            onClick={onSummary}
+            onClick={wrapAction(onSummary)}
             disabled={summaryPending}
             className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
           >
@@ -90,6 +98,7 @@ export function ContentRightPanel({
           </button>
           <Link
             href={`/content/${contentId}/podcast`}
+            onClick={onAction}
             className="flex items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-sm transition-colors hover:bg-muted"
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-info-muted text-sm">
@@ -102,7 +111,7 @@ export function ContentRightPanel({
           </Link>
           <button
             type="button"
-            onClick={onQuiz}
+            onClick={wrapAction(onQuiz)}
             disabled={quizPending}
             className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
           >
@@ -118,7 +127,7 @@ export function ContentRightPanel({
           </button>
           <button
             type="button"
-            onClick={onQuickCheck}
+            onClick={wrapAction(onQuickCheck)}
             disabled={quickCheckPending}
             className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
           >
@@ -136,7 +145,10 @@ export function ContentRightPanel({
       <LearningHistoryPanel
         contentId={contentId}
         history={history}
-        onOpenSummary={onOpenSummary}
+        onOpenSummary={(text) => {
+          onOpenSummary(text);
+          onAction?.();
+        }}
       />
 
       <div className="p-5">
@@ -153,6 +165,40 @@ export function ContentRightPanel({
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+type ContentRightPanelProps = Omit<ContentRightPanelBodyProps, 'onAction'>;
+
+export function ContentRightPanel(props: ContentRightPanelProps) {
+  return (
+    <aside className="hidden w-72 shrink-0 flex-col overflow-y-auto border-l bg-card md:flex">
+      <ContentRightPanelBody {...props} />
     </aside>
+  );
+}
+
+interface ContentRightPanelSheetProps extends ContentRightPanelProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export function ContentRightPanelSheet({
+  open,
+  onOpenChange,
+  ...props
+}: ContentRightPanelSheetProps) {
+  const t = useTranslations('content');
+
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="right" className="flex w-full max-w-sm flex-col overflow-y-auto p-0">
+        <SheetHeader className="border-b p-4">
+          <SheetTitle>{t('yourProgress')}</SheetTitle>
+        </SheetHeader>
+        <ContentRightPanelBody {...props} onAction={() => onOpenChange(false)} />
+      </SheetContent>
+    </Sheet>
   );
 }

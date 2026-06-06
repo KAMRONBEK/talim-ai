@@ -137,9 +137,9 @@ function PodcastPageInner({ id }: { id: string }) {
   const generating = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
 
   return (
-    <div className="flex flex-1 overflow-hidden">
-      <aside className="w-80 shrink-0 overflow-y-auto border-r bg-card">
-        <div className="border-b p-5">
+    <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
+      <aside className="w-full shrink-0 overflow-y-auto border-b bg-card md:w-80 md:border-b-0 md:border-r">
+        <div className="border-b p-4 md:p-5">
           <h2 className="text-[15px] font-semibold">{content.title}</h2>
           <p className="text-xs text-muted-foreground">
             {t('episodes', { count: episodes.length })}
@@ -190,10 +190,10 @@ function PodcastPageInner({ id }: { id: string }) {
           </div>
         )}
       </aside>
-      <div className="flex flex-1 flex-col items-center justify-center gap-8 p-10">
+      <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-6 overflow-y-auto p-4 md:gap-8 md:p-10">
         {activeEpisode ? (
           <>
-            <div className="relative flex h-[280px] w-[280px] items-center justify-center overflow-hidden rounded-[20px] bg-gradient-to-br from-success-muted to-info-muted text-7xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-none">
+            <div className="relative flex h-[200px] w-[200px] items-center justify-center overflow-hidden rounded-[20px] bg-gradient-to-br from-success-muted to-info-muted text-6xl shadow-[0_20px_60px_rgba(0,0,0,0.1)] dark:shadow-none md:h-[280px] md:w-[280px] md:text-7xl">
               🎧
             </div>
             <div className="text-center">

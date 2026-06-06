@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useState, type ReactNode } from 'react';
 import { AuthGuard } from '@/components/auth-guard';
-import { DashboardSidebar } from '@/components/layout/dashboard-sidebar';
+import { DashboardSidebar, DashboardSidebarSheet } from '@/components/layout/dashboard-sidebar';
 import { DashboardHeader } from '@/components/layout/dashboard-header';
+import { useSidebarSheet } from '@/hooks/useSidebarSheet';
 
 const DashboardSearchContext = createContext({
   search: '',
@@ -16,15 +17,17 @@ export function useDashboardSearch() {
 
 export function DashboardShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState('');
+  const { open: sidebarOpen, setOpen: setSidebarOpen } = useSidebarSheet();
 
   return (
     <AuthGuard>
       <DashboardSearchContext.Provider value={{ search, setSearch }}>
-        <div className="flex min-h-screen">
+        <div className="flex min-h-dvh">
           <DashboardSidebar />
+          <DashboardSidebarSheet open={sidebarOpen} onOpenChange={setSidebarOpen} />
           <div className="flex min-w-0 flex-1 flex-col">
-            <DashboardHeader />
-            <main className="flex-1 overflow-y-auto px-6 py-8">{children}</main>
+            <DashboardHeader onMenuClick={() => setSidebarOpen(true)} />
+            <main className="flex-1 overflow-y-auto px-4 py-8 md:px-6">{children}</main>
           </div>
         </div>
       </DashboardSearchContext.Provider>

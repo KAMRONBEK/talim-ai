@@ -5,8 +5,9 @@ import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useAutoGenerateOnLocaleChange } from '@/hooks/useLocaleContent';
 import { AuthGuard } from '@/components/auth-guard';
-import { ContentSidebar } from '@/components/layout/content-sidebar';
+import { ContentSidebar, ContentSidebarSheet } from '@/components/layout/content-sidebar';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
+import { useSidebarSheet } from '@/hooks/useSidebarSheet';
 import { useContent } from '@/hooks/useContent';
 import { useSections } from '@/hooks/useSections';
 import { useTranslations } from 'next-intl';
@@ -30,6 +31,7 @@ function ContentLayoutInner({
   const { data: progressData } = useContentProgress(id);
   const markViewed = useMarkSectionViewed(id);
   const prevActiveRef = useRef<string | undefined>(undefined);
+  const { open: sidebarOpen, setOpen: setSidebarOpen } = useSidebarSheet();
 
   const storedLastSectionId = progressData?.contentProgress?.lastSectionId;
   const validLastSectionId =
@@ -62,17 +64,28 @@ function ContentLayoutInner({
     return <p className="p-8 text-muted-foreground">{t('loading')}</p>;
   }
 
+  const sidebarProps = {
+    contentId: id,
+    contentTitle: content.title,
+    sections,
+    activeSectionId: activeId,
+    sectionProgressMap: progressData?.sections,
+  };
+
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      <LearningTopbar contentId={id} title={content.title} />
+    <div className="flex h-dvh flex-col overflow-hidden">
+      <LearningTopbar
+        contentId={id}
+        title={content.title}
+        onMenuClick={() => setSidebarOpen(true)}
+      />
+      <ContentSidebarSheet
+        open={sidebarOpen}
+        onOpenChange={setSidebarOpen}
+        {...sidebarProps}
+      />
       <div className="flex flex-1 overflow-hidden">
-        <ContentSidebar
-          contentId={id}
-          contentTitle={content.title}
-          sections={sections}
-          activeSectionId={activeId}
-          sectionProgressMap={progressData?.sections}
-        />
+        <ContentSidebar {...sidebarProps} />
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
       </div>
     </div>

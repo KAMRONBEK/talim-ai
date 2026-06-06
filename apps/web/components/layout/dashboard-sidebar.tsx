@@ -8,11 +8,19 @@ import {
   Avatar,
   AvatarFallback,
   Button,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useContents } from '@/hooks/useContent';
 
-export function DashboardSidebar() {
+export interface DashboardSidebarBodyProps {
+  onNavigate?: () => void;
+}
+
+export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
   const t = useTranslations('sidebar');
   const tCommon = useTranslations('common');
   const router = useRouter();
@@ -33,9 +41,13 @@ export function DashboardSidebar() {
   const displayName = user?.name ?? user?.email?.split('@')[0] ?? tCommon('user');
 
   return (
-    <aside className="flex w-[var(--sidebar-width)] shrink-0 flex-col border-r bg-card">
+    <>
       <div className="flex items-center gap-2 border-b px-4 py-4">
-        <Link href="/dashboard" className="flex min-w-0 items-center gap-2 font-bold tracking-tight">
+        <Link
+          href="/dashboard"
+          onClick={onNavigate}
+          className="flex min-w-0 items-center gap-2 font-bold tracking-tight"
+        >
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
             T
           </span>
@@ -55,6 +67,7 @@ export function DashboardSidebar() {
               <li key={item.id}>
                 <Link
                   href={`/content/${item.id}`}
+                  onClick={onNavigate}
                   className="flex items-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 >
                   <Play className="h-3.5 w-3.5 shrink-0 opacity-60" />
@@ -83,6 +96,7 @@ export function DashboardSidebar() {
           size="sm"
           className="mt-1 w-full justify-start text-muted-foreground"
           onClick={() => {
+            onNavigate?.();
             logout();
             router.push('/login');
           }}
@@ -90,6 +104,34 @@ export function DashboardSidebar() {
           {tCommon('logout')}
         </Button>
       </div>
+    </>
+  );
+}
+
+export function DashboardSidebar() {
+  return (
+    <aside className="hidden w-[var(--sidebar-width)] shrink-0 flex-col border-r bg-card md:flex">
+      <DashboardSidebarBody />
     </aside>
+  );
+}
+
+interface DashboardSidebarSheetProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export function DashboardSidebarSheet({ open, onOpenChange }: DashboardSidebarSheetProps) {
+  const t = useTranslations('common');
+
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="left" className="flex w-[min(100%,16rem)] flex-col p-0">
+        <SheetHeader className="sr-only">
+          <SheetTitle>{t('menu')}</SheetTitle>
+        </SheetHeader>
+        <DashboardSidebarBody onNavigate={() => onOpenChange(false)} />
+      </SheetContent>
+    </Sheet>
   );
 }

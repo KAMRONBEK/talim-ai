@@ -2,26 +2,29 @@
 
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { cn } from '@talim/ui';
 import type { ContentSection, SectionProgress } from '@talim/types';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
 
-interface ContentSidebarProps {
+export interface ContentSidebarBodyProps {
   contentId: string;
   contentTitle: string;
   sections: ContentSection[];
   activeSectionId?: string;
   sectionProgressMap?: Record<string, SectionProgress>;
+  onNavigate?: () => void;
 }
 
-export function ContentSidebar({
+export function ContentSidebarBody({
   contentId,
   contentTitle,
   sections,
   activeSectionId,
   sectionProgressMap = {},
-}: ContentSidebarProps) {
+  onNavigate,
+}: ContentSidebarBodyProps) {
   const t = useTranslations('sidebar');
   const tContent = useTranslations('content');
   const pathname = usePathname();
@@ -31,6 +34,7 @@ export function ContentSidebar({
     return (
       <Link
         href={href}
+        onClick={onNavigate}
         className={cn(
           'flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
           active ? 'bg-accent font-medium text-accent-foreground' : 'text-muted-foreground hover:bg-secondary',
@@ -43,7 +47,7 @@ export function ContentSidebar({
   };
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col border-r bg-card">
+    <>
       <div className="border-b p-4">
         <h2 className="truncate font-semibold">{contentTitle}</h2>
         <p className="text-xs text-muted-foreground">
@@ -63,6 +67,7 @@ export function ContentSidebar({
               <Link
                 key={section.id}
                 href={`/content/${contentId}?section=${section.id}`}
+                onClick={onNavigate}
                 className={cn(
                   'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
                   activeSectionId === section.id
@@ -88,6 +93,40 @@ export function ContentSidebar({
           {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
         </div>
       </div>
+    </>
+  );
+}
+
+interface ContentSidebarProps extends ContentSidebarBodyProps {}
+
+export function ContentSidebar(props: ContentSidebarProps) {
+  return (
+    <aside className="hidden w-64 shrink-0 flex-col border-r bg-card md:flex">
+      <ContentSidebarBody {...props} />
     </aside>
+  );
+}
+
+interface ContentSidebarSheetProps extends ContentSidebarBodyProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export function ContentSidebarSheet({
+  open,
+  onOpenChange,
+  ...props
+}: ContentSidebarSheetProps) {
+  const t = useTranslations('common');
+
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange}>
+      <SheetContent side="left" className="flex w-[min(100%,16rem)] flex-col p-0">
+        <SheetHeader className="sr-only">
+          <SheetTitle>{t('menu')}</SheetTitle>
+        </SheetHeader>
+        <ContentSidebarBody {...props} onNavigate={() => onOpenChange(false)} />
+      </SheetContent>
+    </Sheet>
   );
 }

@@ -2,6 +2,7 @@
 
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Menu } from 'lucide-react';
 import {
   Avatar,
   AvatarFallback,
@@ -16,9 +17,10 @@ import { LanguageSwitcher } from '@/components/language-switcher';
 interface LearningTopbarProps {
   contentId: string;
   title: string;
+  onMenuClick?: () => void;
 }
 
-export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
+export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbarProps) {
   const t = useTranslations('common');
   const router = useRouter();
   const { user, logout } = useAuthStore();
@@ -36,7 +38,19 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b bg-card px-4 md:px-5">
       {fileInput}
-      <div className="flex min-w-0 items-center gap-3 md:gap-4">
+      <div className="flex min-w-0 items-center gap-2 md:gap-4">
+        {onMenuClick && (
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="shrink-0 touch-manipulation md:hidden"
+            onClick={onMenuClick}
+            aria-label={t('menu')}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        )}
         <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-semibold">
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs text-primary-foreground">
             T
@@ -55,7 +69,7 @@ export function LearningTopbar({ contentId, title }: LearningTopbarProps) {
         >
           ← {t('back')}
         </Link>
-        <span className="hidden truncate text-sm font-medium md:inline max-w-[200px] lg:max-w-xs">
+        <span className="hidden max-w-[120px] truncate text-sm font-medium sm:inline sm:max-w-[200px] lg:max-w-xs">
           {title}
         </span>
       </div>
