@@ -3,11 +3,12 @@ import path from 'path';
 import { ContentType } from '@prisma/client';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
+import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
-import { extractYoutubeVideoId } from '../services/youtube.service.js';
+import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage } from '../services/pdf.service.js';
 
@@ -40,6 +41,26 @@ function formatContent(content: {
     storagePath: content.storagePath,
     status: content.status,
     createdAt: content.createdAt.toISOString(),
+  };
+}
+
+function formatTranscriptSegment(segment: {
+  id: string;
+  contentId: string;
+  order: number;
+  startMs: number;
+  endMs: number;
+  text: string;
+  source: string;
+}) {
+  return {
+    id: segment.id,
+    contentId: segment.contentId,
+    order: segment.order,
+    startMs: segment.startMs,
+    endMs: segment.endMs,
+    text: segment.text,
+    source: segment.source,
   };
 }
 
@@ -125,6 +146,55 @@ export async function retryContent(req: AuthenticatedRequest, res: Response): Pr
 
   await contentQueue.add({ contentId: content.id });
   res.json({ content: formatContent(updated) });
+}
+
+export async function getContentTranscript(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const contentId = getParam(req, 'id');
+  const content = await prisma.content.findFirst({
+    where: { id: contentId, userId: req.user.userId, type: ContentType.YOUTUBE },
+  });
+  if (!content) throw new AppError(404, 'YouTube content not found');
+
+  let segments = await prisma.contentTranscriptSegment.findMany({
+    where: { contentId },
+    orderBy: { order: 'asc' },
+  });
+
+  if (segments.length === 0 && content.url) {
+    const transcript = await extractYoutubeTranscript(content.url, {
+      title: content.title,
+      locale: env.DEFAULT_CONTENT_LOCALE,
+    });
+    await prisma.$transaction([
+      prisma.contentTranscriptSegment.deleteMany({ where: { contentId } }),
+      prisma.contentTranscriptSegment.createMany({
+        data: transcript.segments.map((segment) => ({
+          contentId,
+          order: segment.order,
+          startMs: segment.startMs,
+          endMs: segment.endMs,
+          text: segment.text,
+          source: segment.source,
+        })),
+      }),
+    ]);
+    segments = await prisma.contentTranscriptSegment.findMany({
+      where: { contentId },
+      orderBy: { order: 'asc' },
+    });
+  }
+
+  const lastSegment = segments.at(-1);
+
+  res.json({
+    transcript: {
+      contentId,
+      source: segments[0]?.source ?? null,
+      durationMs: lastSegment?.endMs ?? null,
+      segments: segments.map(formatTranscriptSegment),
+    },
+  });
 }
 
 export async function deleteContent(req: AuthenticatedRequest, res: Response): Promise<void> {

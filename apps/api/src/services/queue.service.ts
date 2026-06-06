@@ -4,6 +4,7 @@ import { env } from '../config/env.js';
 export const contentQueue = new Bull('process-content', env.REDIS_URL);
 export const quizQueue = new Bull('generate-quiz', env.REDIS_URL);
 export const podcastQueue = new Bull('generate-podcast', env.REDIS_URL);
+export const manimQueue = new Bull('render-manim', env.REDIS_URL);
 
 export interface ProcessContentJobData {
   contentId: string;
@@ -22,6 +23,14 @@ export interface GeneratePodcastJobData {
   contentId: string;
   podcastId: string;
   locale?: string;
+}
+
+export interface RenderManimJobData {
+  jobId: string;
+  script: string;
+  messageId: string;
+  storagePath?: string;
+  status?: 'pending' | 'ready' | 'failed';
 }
 
 type ContentScopedJobData = { contentId?: string };

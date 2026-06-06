@@ -18,6 +18,7 @@ contentRoutes.get('/:id/learning-history', asyncHandler(progressController.getLe
 contentRoutes.get('/:id/podcast/progress', asyncHandler(progressController.getEpisodeProgress));
 contentRoutes.get('/:id/sections', asyncHandler(sectionController.listSections));
 contentRoutes.get('/:id/sections/:sectionId', asyncHandler(sectionController.getSection));
+contentRoutes.get('/:id/transcript', asyncHandler(contentController.getContentTranscript));
 contentRoutes.get('/:id/file', asyncHandler(contentController.getContentFile));
 contentRoutes.post('/:id/ocr-region', asyncHandler(contentController.ocrPdfRegion));
 contentRoutes.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
