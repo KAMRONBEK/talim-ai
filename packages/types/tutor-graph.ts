@@ -5,6 +5,14 @@ export interface DesmosExpression {
   hidden?: boolean;
 }
 
+export interface DesmosSlider {
+  id: string;
+  latex: string;
+  min?: number;
+  max?: number;
+  step?: number;
+}
+
 export interface DesmosViewport {
   xmin: number;
   xmax: number;
@@ -15,6 +23,7 @@ export interface DesmosViewport {
 export interface DesmosGraphPayload {
   expressions: DesmosExpression[];
   viewport?: DesmosViewport;
+  sliders?: DesmosSlider[];
 }
 
 export const GRAPH_FENCE_LANG = 'graph';

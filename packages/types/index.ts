@@ -14,6 +14,7 @@ export type ContentStatus = 'PENDING' | 'PROCESSING' | 'READY' | 'FAILED';
 export type MessageRole = 'USER' | 'ASSISTANT';
 export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 export type QuizKind = 'FULL' | 'QUICK';
+export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 
 export interface User {
   id: string;
@@ -47,6 +48,25 @@ export interface ContentSection {
   startChunk: number;
   endChunk: number;
   readMinutes: number | null;
+}
+
+export interface TranscriptSegment {
+  id: string;
+  contentId: string;
+  order: number;
+  startMs: number;
+  endMs: number;
+  text: string;
+  source: TranscriptSource;
+}
+
+export interface ContentTranscriptResponse {
+  transcript: {
+    contentId: string;
+    source: TranscriptSource | null;
+    durationMs: number | null;
+    segments: TranscriptSegment[];
+  };
 }
 
 export interface PodcastEpisode {
@@ -85,7 +105,14 @@ export interface ChatMessage {
   sessionId: string;
   role: MessageRole;
   text: string;
+  excerpt?: string | null;
+  excerptImage?: string | null;
   createdAt: string;
+}
+
+export interface ChatSessionResponse {
+  sessionId: string | null;
+  messages: ChatMessage[];
 }
 
 export interface QuizQuestion {
@@ -186,6 +213,24 @@ export {
   serializeGraphBlock,
   parseGraphBlock,
   type DesmosExpression,
+  type DesmosSlider,
   type DesmosViewport,
   type DesmosGraphPayload,
 } from './tutor-graph';
+
+export {
+  VISUAL_FENCE_LANG,
+  serializeVisualBlock,
+  parseVisualBlock,
+  parseFenceBlock,
+  serializeDesmosAsVisual,
+  type VisualKind,
+  type VisualBlock,
+  type VisualPayloadMap,
+  type MermaidPayload,
+  type ChartPayload,
+  type ChartSeries,
+  type GeoGebraPayload,
+  type ManimPayload,
+  type HtmlSandboxPayload,
+} from './tutor-visual';
