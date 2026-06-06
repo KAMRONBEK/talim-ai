@@ -9,7 +9,6 @@ import { setApiLocale } from '@/lib/locale-api';
 import { api } from '@/lib/api';
 import { useGenerateSummary } from '@/hooks/useQuiz';
 import { useCreatePodcast } from '@/hooks/usePodcast';
-import { useChatStore } from '@/store/useChatStore';
 
 export function useLocaleSync() {
   const locale = useLocale() as AppLocale;
@@ -27,14 +26,12 @@ export function useAutoGenerateOnLocaleChange(contentId: string, sectionId?: str
   const queryClient = useQueryClient();
   const generateSummary = useGenerateSummary();
   const createPodcast = useCreatePodcast();
-  const resetChat = useChatStore((s) => s.reset);
 
   useEffect(() => {
     if (prevLocale.current === locale) return;
     prevLocale.current = locale;
 
-    resetChat();
-
+    void queryClient.invalidateQueries({ queryKey: ['chat-session', contentId] });
     void queryClient.invalidateQueries({ queryKey: ['summary', contentId] });
     void queryClient.invalidateQueries({ queryKey: ['podcast', contentId] });
     void queryClient.invalidateQueries({ queryKey: ['quiz-history', contentId] });
@@ -64,5 +61,5 @@ export function useAutoGenerateOnLocaleChange(contentId: string, sectionId?: str
         void createPodcast.mutateAsync({ contentId });
       }
     })();
-  }, [locale, contentId, sectionId, queryClient, generateSummary, createPodcast, resetChat]);
+  }, [locale, contentId, sectionId, queryClient, generateSummary, createPodcast]);
 }

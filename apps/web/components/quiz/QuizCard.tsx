@@ -96,12 +96,23 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
     if (currentIndex > 0) setCurrentIndex((i) => i - 1);
   };
 
+  const handleSubmit = () => {
+    const currentAnswers = questions.reduce<Record<string, string>>((acc, question) => {
+      const answer = answers[question.id];
+      if (answer) acc[question.id] = answer;
+      return acc;
+    }, {});
+
+    onSubmit(currentAnswers);
+  };
+
   if (!q) return null;
 
   const selectedAnswer = answers[q.id];
   const answered = !!selectedAnswer;
   const isCorrect = isSelectedAnswerCorrect(q.options, selectedAnswer, q.correctAnswer);
   const resolvedCorrect = resolveCorrectAnswer(q.options, q.correctAnswer);
+  const allQuestionsAnswered = questions.every((question) => Boolean(answers[question.id]));
 
   return (
     <div>
@@ -180,8 +191,8 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               </Button>
             ) : (
               <Button
-                onClick={() => onSubmit(answers)}
-                disabled={isSubmitting || Object.keys(answers).length < questions.length}
+                onClick={handleSubmit}
+                disabled={isSubmitting || !allQuestionsAnswered}
               >
                 {isSubmitting ? t('submitting') : t('submit')}
               </Button>
