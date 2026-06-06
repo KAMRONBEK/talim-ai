@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState, useRef, Suspense, useCallback } from 'react';
+import { use, useEffect, useState, Suspense, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
@@ -10,7 +10,8 @@ import { ChatWindow } from '@/components/chat/ChatWindow';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
 import { SummaryText } from '@/components/learning/summary-text';
 import { PdfViewer } from '@/components/learning/PdfViewerLazy';
-import { SelectionToolbar } from '@/components/learning/SelectionToolbar';
+import { VideoTutorialViewer } from '@/components/learning/VideoTutorialViewer';
+import type { TranscriptExcerptPayload } from '@/components/learning/TranscriptPanel';
 import { ResizableSplit } from '@/components/layout/resizable-split';
 import type { PdfExcerptPayload } from '@/components/learning/PdfViewer';
 
@@ -27,11 +28,10 @@ function ChatPageInner({ id }: { id: string }) {
   const [selectedExcerpt, setSelectedExcerpt] = useState('');
   const [selectedExcerptImage, setSelectedExcerptImage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'content' | 'summary'>('content');
+  const [mobilePanel, setMobilePanel] = useState<'material' | 'chat'>('chat');
   const [summary, setSummary] = useState<string | null>(null);
-  const [floatPos, setFloatPos] = useState<{ top: number; left: number } | null>(null);
   const [inputSeed, setInputSeed] = useState<string | null>(null);
   const [selectionHint, setSelectionHint] = useState<string | null>(null);
-  const bookRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!content || content.type !== 'PDF' || !content.storagePath) return;
@@ -47,74 +47,39 @@ function ChatPageInner({ id }: { id: string }) {
     };
   }, [content, id]);
 
-  const setExcerptFromRect = useCallback((excerpt: string, anchorRect: DOMRect) => {
-    if (!bookRef.current) return;
-    const panelRect = bookRef.current.getBoundingClientRect();
-    setSelectedExcerpt(excerpt);
-    setSelectionHint(null);
-    const left = anchorRect.left - panelRect.left + anchorRect.width / 2 - 90;
-    const belowSelection = anchorRect.top - panelRect.top + anchorRect.height + 8;
-    const aboveSelection = anchorRect.top - panelRect.top - 40;
-    const top =
-      belowSelection + 36 < panelRect.height ? belowSelection : Math.max(8, aboveSelection);
-    setFloatPos({ left, top });
-  }, []);
-
   const handlePdfExcerptSelected = useCallback(
     (payload: PdfExcerptPayload) => {
       const pagePrefix = payload.page ? `[Page ${payload.page}] ` : '';
-      if (payload.mode === 'area' && payload.imageDataUrl) {
-        setSelectedExcerptImage(payload.imageDataUrl);
-        const label = payload.excerpt.trim()
-          ? `${pagePrefix}${payload.excerpt}`
-          : `${pagePrefix}${t('selectedArea')}`;
-        setExcerptFromRect(label, payload.anchorRect);
-        setInputSeed(tChat('areaImagePrompt'));
-        return;
-      }
-      setSelectedExcerptImage(null);
-      const excerpt = `${pagePrefix}${payload.excerpt}`;
-      setExcerptFromRect(excerpt, payload.anchorRect);
-    },
-    [setExcerptFromRect, t, tChat],
-  );
-
-  const handleBookSelection = () => {
-    const sel = window.getSelection();
-    const text = sel?.toString().trim() ?? '';
-    if (text.length < 10 || !bookRef.current || !sel?.rangeCount) {
-      setFloatPos(null);
-      if (text.length < 10) setSelectedExcerpt('');
-      return;
-    }
-    const range = sel.getRangeAt(0);
-    const rangeRect = range.getBoundingClientRect();
-    setExcerptFromRect(text, rangeRect);
-  };
-
-  const handleAskFloat = () => {
-    if (!selectedExcerpt && !selectedExcerptImage) return;
-    if (selectedExcerptImage) {
+      setSelectedExcerptImage(payload.imageDataUrl ?? null);
+      const label = payload.excerpt.trim()
+        ? `${pagePrefix}${payload.excerpt}`
+        : `${pagePrefix}${t('selectedArea')}`;
+      setSelectedExcerpt(label);
+      setSelectionHint(null);
       setInputSeed(tChat('areaImagePrompt'));
-    } else {
-      const snippet =
-        selectedExcerpt.length > 120 ? `${selectedExcerpt.slice(0, 120)}...` : selectedExcerpt;
-      setInputSeed(tChat('excerptPrompt', { snippet }));
-    }
-    setFloatPos(null);
-    window.getSelection()?.removeAllRanges();
-  };
+    },
+    [t, tChat],
+  );
 
   const clearSelection = useCallback(() => {
     setSelectedExcerpt('');
     setSelectedExcerptImage(null);
-    setFloatPos(null);
     setSelectionHint(null);
   }, []);
 
   const handleEmptyPdfSelection = useCallback(() => {
     setSelectionHint(t('pdfNoTextInSelection'));
   }, [t]);
+
+  const handleTranscriptExcerptSelected = useCallback(
+    (payload: TranscriptExcerptPayload & { label: string }) => {
+      setSelectedExcerptImage(null);
+      setSelectedExcerpt(payload.label);
+      setSelectionHint(null);
+      setInputSeed(tChat('excerptPrompt', { snippet: payload.label }));
+    },
+    [tChat],
+  );
 
   const loadSummary = async () => {
     if (summary) return;
@@ -154,11 +119,7 @@ function ChatPageInner({ id }: { id: string }) {
           </button>
         ))}
       </div>
-      <div
-        ref={bookRef}
-        className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-muted/20"
-        onMouseUp={activeTab === 'content' && content.type !== 'PDF' ? handleBookSelection : undefined}
-      >
+      <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-muted/20">
         {activeTab === 'summary' ? (
           <div className="min-h-0 flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
             {generateSummary.isPending ? (
@@ -178,16 +139,18 @@ function ChatPageInner({ id }: { id: string }) {
               onEmptySelection={handleEmptyPdfSelection}
             />
           </div>
-        ) : sectionData?.body ? (
-          <div className="min-h-0 flex-1 select-text overflow-y-auto p-6 text-sm leading-relaxed">
-            {sectionData.body}
-          </div>
         ) : content.type === 'YOUTUBE' && content.url ? (
-          <div className="flex h-full flex-col items-center justify-center gap-2 p-4 text-center text-sm text-muted-foreground">
-            <a href={content.url} target="_blank" rel="noreferrer" className="text-primary underline">
-              {t('openVideo')}
-            </a>
-            <p>{t('selectTextToAsk')}</p>
+          <div className="min-h-0 flex-1">
+            <VideoTutorialViewer
+              contentId={id}
+              url={content.url}
+              onExcerptSelected={handleTranscriptExcerptSelected}
+              onSelectionCleared={clearSelection}
+            />
+          </div>
+        ) : sectionData?.body ? (
+          <div className="min-h-0 flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
+            {sectionData.body}
           </div>
         ) : (
           <p className="p-4 text-sm text-muted-foreground">{t('viewerNotAvailable')}</p>
@@ -197,17 +160,12 @@ function ChatPageInner({ id }: { id: string }) {
             {selectionHint}
           </p>
         )}
-        <SelectionToolbar
-          position={activeTab === 'content' ? floatPos : null}
-          label={tChat('askAboutExcerpt')}
-          onAsk={handleAskFloat}
-        />
       </div>
     </div>
   );
 
   const chatPanel = (
-    <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-4">
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-2 md:p-4">
       <ChatWindow
         contentId={id}
         contentTitle={content.title}
@@ -220,9 +178,40 @@ function ChatPageInner({ id }: { id: string }) {
     </div>
   );
 
+  const mobileTabs = (
+    <div className="flex shrink-0 border-b bg-muted/30 md:hidden">
+      {(['material', 'chat'] as const).map((panel) => (
+        <button
+          key={panel}
+          type="button"
+          className={cn(
+            'flex-1 border-b-2 py-2.5 text-xs font-medium transition-colors',
+            mobilePanel === panel
+              ? 'border-primary bg-card text-primary'
+              : 'border-transparent text-muted-foreground hover:text-foreground',
+          )}
+          onClick={() => setMobilePanel(panel)}
+        >
+          {panel === 'material' ? t('materialTab') : tCommon('aiTutor')}
+        </button>
+      ))}
+    </div>
+  );
+
   return (
-    <div className="flex min-h-0 flex-1 overflow-hidden">
-      <ResizableSplit left={materialPanel} right={chatPanel} defaultLeftPercent={58} />
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+      {mobileTabs}
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden md:hidden">
+        {mobilePanel === 'material' ? materialPanel : chatPanel}
+      </div>
+      <div className="hidden min-h-0 flex-1 overflow-hidden md:flex">
+        <ResizableSplit
+          left={materialPanel}
+          right={chatPanel}
+          defaultLeftPercent={58}
+          storageKey="talim-chat-material-split"
+        />
+      </div>
     </div>
   );
 }

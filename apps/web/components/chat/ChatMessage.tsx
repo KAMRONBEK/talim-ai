@@ -35,18 +35,19 @@ export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: Ch
           )}
         >
           {hasExcerpt && isUser && (
-            <div className="od-selected-quote mb-2 rounded-r-lg border-l-primary bg-primary-foreground/10 text-left text-primary-foreground">
-              <div className="od-selected-quote-label text-primary-foreground/80">
-                📖 {excerptImage ? t('selectedArea') : t('selectedFromBook')}
-              </div>
+            <div className="mb-2 text-left">
               {excerptImage && (
                 <img
                   src={excerptImage}
                   alt=""
-                  className="mb-2 max-h-40 w-full rounded-md border border-primary-foreground/20 object-contain"
+                  className="max-h-24 w-full rounded-md border border-primary-foreground/20 object-contain"
                 />
               )}
-              {excerpt && <p className="whitespace-pre-wrap">{excerpt}</p>}
+              {excerpt && (
+                <p className="mt-1 line-clamp-3 rounded-md bg-primary-foreground/10 px-2 py-1 text-[10px] italic text-primary-foreground/80">
+                  {excerpt}
+                </p>
+              )}
             </div>
           )}
           {isUser ? (

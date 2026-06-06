@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import type { DesmosGraphPayload, MessageRole } from '@talim/types';
-import { serializeGraphBlock } from '@talim/types';
+import type { ChatMessage, DesmosGraphPayload, MessageRole, VisualBlock } from '@talim/types';
+import { serializeGraphBlock, serializeVisualBlock } from '@talim/types';
 import { getApiBaseUrl } from '@/lib/api';
 import { getApiLocale } from '@/lib/locale-api';
 import { useAuthStore } from './useAuthStore';
@@ -28,7 +28,12 @@ interface ChatState {
     selectedExcerpt?: string,
     selectedImage?: string,
   ) => Promise<void>;
+  hydrate: (sessionId: string | null, messages: ChatMessage[]) => void;
   reset: () => void;
+}
+
+function appendVisualToText(fullText: string, block: VisualBlock): string {
+  return fullText + serializeVisualBlock(block);
 }
 
 export const useChatStore = create<ChatState>((set, get) => ({
@@ -43,6 +48,18 @@ export const useChatStore = create<ChatState>((set, get) => ({
       messages: state.messages.map((m) => (m.id === id ? { ...m, text, streaming: true } : m)),
     })),
   reset: () => set({ sessionId: null, messages: [], isStreaming: false }),
+  hydrate: (sessionId, messages) =>
+    set({
+      sessionId,
+      messages: messages.map((m) => ({
+        id: m.id,
+        role: m.role,
+        text: m.text,
+        excerpt: m.excerpt ?? undefined,
+        excerptImage: m.excerptImage ?? undefined,
+      })),
+      isStreaming: false,
+    }),
   streamMessage: async (contentId, message, selectedExcerpt, selectedImage) => {
     const token = useAuthStore.getState().token;
     if (!token) throw new Error('Not authenticated');
@@ -102,6 +119,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         try {
           const parsed = JSON.parse(data) as {
             text?: string;
+            visual?: VisualBlock;
             graph?: DesmosGraphPayload;
             sessionId?: string;
             error?: string;
@@ -109,7 +127,16 @@ export const useChatStore = create<ChatState>((set, get) => ({
           if (parsed.sessionId) {
             set({ sessionId: parsed.sessionId });
           }
-          if (parsed.graph) {
+          if (parsed.error) {
+            fullText += fullText
+              ? `\n\n${parsed.error}`
+              : parsed.error;
+            get().updateStreamingMessage(assistantMsgId, fullText);
+          }
+          if (parsed.visual) {
+            fullText = appendVisualToText(fullText, parsed.visual);
+            get().updateStreamingMessage(assistantMsgId, fullText);
+          } else if (parsed.graph) {
             fullText += serializeGraphBlock(parsed.graph);
             get().updateStreamingMessage(assistantMsgId, fullText);
           }

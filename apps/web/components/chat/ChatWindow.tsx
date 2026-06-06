@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { ChatMessage } from './ChatMessage';
+import { useChatSession } from '@/hooks/useChat';
 import { useChatStore } from '@/store/useChatStore';
 
 interface ChatWindowProps {
@@ -27,14 +28,32 @@ export function ChatWindow({
 }: ChatWindowProps) {
   const locale = useLocale();
   const t = useTranslations('chat');
+  const tCommon = useTranslations('common');
   const quickActions = t.raw('quickActions') as string[];
   const [input, setInput] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
-  const { messages, isStreaming, streamMessage, reset } = useChatStore();
+  const hydratedKeyRef = useRef<string | null>(null);
+  const { data: sessionData, isLoading } = useChatSession(contentId);
+  const { messages, isStreaming, streamMessage, hydrate, reset } = useChatStore();
+
+  const placeholder = useMemo(() => {
+    if (quickActions.length === 0) return t('placeholder');
+    const index = Math.floor(Math.random() * quickActions.length);
+    return quickActions[index] ?? t('placeholder');
+  }, [contentId, locale, quickActions, t]);
 
   useEffect(() => {
+    hydratedKeyRef.current = null;
     reset();
   }, [contentId, locale, reset]);
+
+  useEffect(() => {
+    if (!sessionData || isLoading) return;
+    const key = `${contentId}:${locale}`;
+    if (hydratedKeyRef.current === key) return;
+    hydratedKeyRef.current = key;
+    hydrate(sessionData.sessionId, sessionData.messages);
+  }, [sessionData, isLoading, contentId, locale, hydrate]);
 
   useEffect(() => {
     if (inputSeed) {
@@ -44,7 +63,7 @@ export function ChatWindow({
   }, [inputSeed, onInputSeedConsumed]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,90 +75,70 @@ export function ChatWindow({
     onClearExcerpt?.();
   };
 
-  const askAboutExcerpt = () => {
-    if (!selectedExcerpt && !selectedExcerptImage) return;
-    if (selectedExcerptImage) {
-      setInput(t('areaImagePrompt'));
-      return;
-    }
-    const snippet =
-      selectedExcerpt!.length > 120 ? `${selectedExcerpt!.slice(0, 120)}...` : selectedExcerpt!;
-    setInput(t('excerptPrompt', { snippet }));
-  };
+  const showGreeting = !isLoading && messages.length === 0;
+  const hasExcerptSelection = Boolean(selectedExcerpt || selectedExcerptImage);
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-lg border bg-card">
+    <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-lg border bg-card">
       <div className="border-b px-4 py-3">
         <h2 className="font-semibold">{t('title')}</h2>
         <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
-        {messages.length === 0 && (
+        {isLoading && (
+          <p className="text-sm text-muted-foreground">{tCommon('loading')}</p>
+        )}
+        {showGreeting && (
           <ChatMessage
             role="ASSISTANT"
             text={t('greeting', { title: contentTitle ?? t('defaultTitle') })}
           />
         )}
-        {messages.map((msg) => (
-          <ChatMessage
-            key={msg.id}
-            role={msg.role}
-            text={msg.text}
-            streaming={msg.streaming}
-            excerpt={msg.excerpt}
-            excerptImage={msg.excerptImage}
-          />
-        ))}
+        {!isLoading &&
+          messages.map((msg) => (
+            <ChatMessage
+              key={msg.id}
+              role={msg.role}
+              text={msg.text}
+              streaming={msg.streaming}
+              excerpt={msg.excerpt}
+              excerptImage={msg.excerptImage}
+            />
+          ))}
         <div ref={bottomRef} />
       </div>
 
       <div className="border-t p-4">
-        {(selectedExcerpt || selectedExcerptImage) && (
-          <div className="mb-3">
-            <div className="od-selected-quote rounded-lg">
-              <div className="od-selected-quote-label">
-                📖 {selectedExcerptImage ? t('selectedArea') : t('selectedText')}
-              </div>
+        {hasExcerptSelection && (
+          <div className="mb-2 flex items-start gap-2">
+            <div className="min-w-0 flex-1 rounded-md border border-primary/20 bg-accent/30 p-1.5">
               {selectedExcerptImage && (
                 <img
                   src={selectedExcerptImage}
                   alt=""
-                  className="mb-2 max-h-40 w-full rounded-md border object-contain"
+                  className="max-h-24 w-full rounded object-contain"
                 />
               )}
-              {selectedExcerpt && <p className="line-clamp-3">{selectedExcerpt}</p>}
-            </div>
-            <div className="mt-2 flex gap-2">
-              <Button type="button" size="sm" variant="secondary" onClick={askAboutExcerpt}>
-                {t('askAboutExcerpt')}
-              </Button>
-              {onClearExcerpt && (
-                <Button type="button" size="sm" variant="ghost" onClick={onClearExcerpt}>
-                  {t('clear')}
-                </Button>
+              {selectedExcerpt && (
+                <p className="line-clamp-3 px-1 text-[10px] italic text-muted-foreground">
+                  {selectedExcerpt}
+                </p>
               )}
             </div>
+            {onClearExcerpt && (
+              <Button type="button" size="sm" variant="ghost" onClick={onClearExcerpt} className="shrink-0">
+                {t('clear')}
+              </Button>
+            )}
           </div>
         )}
-        <div className="mb-3 flex flex-wrap gap-2">
-          {quickActions.map((action) => (
-            <button
-              key={action}
-              type="button"
-              className="rounded-full border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-              onClick={() => setInput(action)}
-            >
-              {action}
-            </button>
-          ))}
-        </div>
         <form onSubmit={handleSubmit} className="flex gap-2">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={t('placeholder')}
-            disabled={isStreaming}
+            placeholder={placeholder}
+            disabled={isStreaming || isLoading}
             rows={1}
             className="flex-1 resize-none rounded-lg border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onKeyDown={(e) => {
@@ -149,7 +148,7 @@ export function ChatWindow({
               }
             }}
           />
-          <Button type="submit" disabled={isStreaming || !input.trim()} className="shrink-0">
+          <Button type="submit" disabled={isStreaming || isLoading || !input.trim()} className="shrink-0">
             ↑
           </Button>
         </form>

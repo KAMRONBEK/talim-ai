@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { GRAPH_FENCE_LANG, parseGraphBlock } from '@talim/types';
+import { parseFenceBlock, VISUAL_FENCE_LANG } from '@talim/types';
 import { preprocessLatex } from '@/lib/preprocess-latex';
-import { DesmosGraph } from './DesmosGraph';
+import { VisualBlockRenderer } from './VisualBlockRenderer';
 
 interface TutorMessageContentProps {
   content: string;
@@ -20,16 +20,23 @@ export function TutorMessageContent({ content, streaming }: TutorMessageContentP
     <div className={`tutor-md text-left ${streaming ? 'opacity-90' : ''}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[[rehypeKatex, { output: 'html', throwOnError: false }]]}
+        rehypePlugins={[[rehypeKatex, { output: 'html', throwOnError: false, strict: false }]]}
         components={{
           p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
           ul: ({ children }) => <ul className="mb-2 list-disc pl-5 last:mb-0">{children}</ul>,
           ol: ({ children }) => <ol className="mb-2 list-decimal pl-5 last:mb-0">{children}</ol>,
           li: ({ children }) => <li className="mb-1">{children}</li>,
           strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+          em: ({ children }) => <em className="italic">{children}</em>,
           h1: ({ children }) => <h3 className="mb-2 text-base font-semibold">{children}</h3>,
           h2: ({ children }) => <h3 className="mb-2 text-base font-semibold">{children}</h3>,
           h3: ({ children }) => <h4 className="mb-2 text-sm font-semibold">{children}</h4>,
+          hr: () => <hr className="my-3 border-border" />,
+          blockquote: ({ children }) => (
+            <blockquote className="my-2 border-l-2 border-primary/40 pl-3 italic text-muted-foreground">
+              {children}
+            </blockquote>
+          ),
           a: ({ href, children }) => (
             <a
               href={href}
@@ -55,10 +62,8 @@ export function TutorMessageContent({ content, streaming }: TutorMessageContentP
             const lang = match?.[1];
             const raw = String(children).replace(/\n$/, '');
 
-            if (lang === GRAPH_FENCE_LANG) {
-              const payload = parseGraphBlock(raw);
-              if (payload) return <DesmosGraph payload={payload} />;
-            }
+            const block = parseFenceBlock(lang, raw) ?? parseFenceBlock('graph', raw);
+            if (block) return <VisualBlockRenderer block={block} />;
 
             const isBlock = Boolean(className);
             if (isBlock) {

@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
-import { MousePointer2, Scan } from 'lucide-react';
 import { loadPdfJs, type PdfDocumentProxy, type PdfJsModule, type PdfViewport } from '@/lib/pdfjs-cdn';
 import {
   cropPageCanvasRegion,
@@ -15,9 +14,8 @@ import {
 const MIN_TEXT_LENGTH = 5;
 const MIN_AREA_PX = 12;
 const PAGE_PADDING = 4;
-const SELECTION_DEBOUNCE_MS = 50;
 
-export type PdfSelectionMode = 'text' | 'area';
+export type PdfSelectionMode = 'area';
 
 export interface PdfExcerptPayload {
   excerpt: string;
@@ -67,8 +65,7 @@ async function renderManualTextLayer(
     span.style.fontFamily = 'sans-serif';
     span.style.whiteSpace = 'pre';
     span.style.color = 'transparent';
-    span.style.userSelect = 'text';
-    span.style.cursor = 'text';
+    span.style.userSelect = 'none';
     container.appendChild(span);
   }
   ensureEndOfContent(container);
@@ -116,11 +113,8 @@ export function PdfViewer({
   const pdfjsRef = useRef<PdfJsModule | null>(null);
   const viewportByPageRef = useRef<Map<number, PdfViewport>>(new Map());
   const pagesRenderedRef = useRef(false);
-  const selectionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isTextSelectingRef = useRef(false);
   const [pages, setPages] = useState<PageState[]>([]);
   const [pageWidth, setPageWidth] = useState(600);
-  const [mode, setMode] = useState<PdfSelectionMode>('text');
   const [dragRect, setDragRect] = useState<Rect | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -222,100 +216,6 @@ export function PdfViewer({
     };
   }, [pages, pageWidth]);
 
-  const setTextLayerSelecting = useCallback((pageNumber: number, selecting: boolean) => {
-    const textLayer = pageRefs.current.get(pageNumber)?.querySelector('.textLayer');
-    textLayer?.classList.toggle('selecting', selecting);
-  }, []);
-
-  const clearAllTextLayerSelecting = useCallback(() => {
-    for (const pageEl of pageRefs.current.values()) {
-      pageEl.querySelector('.textLayer')?.classList.remove('selecting');
-    }
-  }, []);
-
-  const selectionIsInViewer = useCallback(() => {
-    const sel = window.getSelection();
-    if (!sel?.rangeCount || !containerRef.current) return false;
-    const node = sel.getRangeAt(0).commonAncestorContainer;
-    const el = node.nodeType === Node.TEXT_NODE ? node.parentElement : (node as Element);
-    return Boolean(el?.closest('.textLayer') && containerRef.current.contains(el));
-  }, []);
-
-  const handleTextSelection = useCallback(() => {
-    if (mode !== 'text') return;
-    const sel = window.getSelection();
-    const text = sel?.toString().trim() ?? '';
-    if (text.length < MIN_TEXT_LENGTH || !sel?.rangeCount) {
-      if (text.length < MIN_TEXT_LENGTH && !isTextSelectingRef.current) onSelectionCleared?.();
-      return;
-    }
-
-    if (!selectionIsInViewer()) {
-      onSelectionCleared?.();
-      return;
-    }
-
-    const range = sel.getRangeAt(0);
-    const rangeRect = range.getBoundingClientRect();
-    if (!rangeRect.width && !rangeRect.height) {
-      onSelectionCleared?.();
-      return;
-    }
-
-    let pageNumber: number | undefined;
-    for (const [num, pageEl] of pageRefs.current) {
-      if (pageEl.contains(range.commonAncestorContainer)) {
-        pageNumber = num;
-        break;
-      }
-    }
-
-    onExcerptSelected({
-      excerpt: text,
-      anchorRect: rangeRect,
-      page: pageNumber,
-      mode: 'text',
-    });
-  }, [mode, onExcerptSelected, onSelectionCleared, selectionIsInViewer]);
-
-  useEffect(() => {
-    if (mode !== 'text') return;
-
-    const onSelectionChange = () => {
-      if (selectionTimerRef.current) clearTimeout(selectionTimerRef.current);
-      selectionTimerRef.current = setTimeout(() => {
-        const sel = window.getSelection();
-        const text = sel?.toString().trim() ?? '';
-        if (text.length < MIN_TEXT_LENGTH) {
-          if (!isTextSelectingRef.current) onSelectionCleared?.();
-          return;
-        }
-        handleTextSelection();
-      }, SELECTION_DEBOUNCE_MS);
-    };
-
-    document.addEventListener('selectionchange', onSelectionChange);
-    return () => {
-      document.removeEventListener('selectionchange', onSelectionChange);
-      if (selectionTimerRef.current) clearTimeout(selectionTimerRef.current);
-    };
-  }, [mode, handleTextSelection, onSelectionCleared]);
-
-  const findPageAtPoint = (clientX: number, clientY: number) => {
-    for (const [num, pageEl] of pageRefs.current) {
-      const rect = pageEl.getBoundingClientRect();
-      if (
-        clientX >= rect.left &&
-        clientX <= rect.right &&
-        clientY >= rect.top &&
-        clientY <= rect.bottom
-      ) {
-        return { pageNumber: num, pageEl };
-      }
-    }
-    return null;
-  };
-
   const finishAreaSelection = useCallback(
     async (dragStart: { x: number; y: number; pageNumber: number }, rect: Rect) => {
       const doc = pdfDocRef.current;
@@ -371,8 +271,8 @@ export function PdfViewer({
     [onEmptySelection, onExcerptSelected, onSelectionCleared],
   );
 
-  const handlePageMouseDown = (pageNumber: number, e: React.MouseEvent<HTMLDivElement>) => {
-    if (mode !== 'area' || !pdfDocRef.current || !viewportByPageRef.current.has(pageNumber)) return;
+  const handlePagePointerDown = (pageNumber: number, e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pdfDocRef.current || !viewportByPageRef.current.has(pageNumber)) return;
     const pageEl = pageRefs.current.get(pageNumber);
     if (!pageEl) return;
     e.preventDefault();
@@ -401,7 +301,7 @@ export function PdfViewer({
   useEffect(() => {
     if (!isDragging) return;
 
-    const onMove = (e: MouseEvent) => {
+    const onMove = (e: PointerEvent) => {
       if (!dragStartRef.current) return;
       const pageEl = pageRefs.current.get(dragStartRef.current.pageNumber);
       if (!pageEl) return;
@@ -433,85 +333,25 @@ export function PdfViewer({
       void finishAreaSelection(start, rect);
     };
 
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+    document.addEventListener('pointercancel', onUp);
     return () => {
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointercancel', onUp);
     };
   }, [isDragging, finishAreaSelection]);
 
-  const handleTextLayerMouseDown = (pageNumber: number) => {
-    if (mode !== 'text') return;
-    isTextSelectingRef.current = true;
-    setTextLayerSelecting(pageNumber, true);
-  };
-
-  const endTextSelecting = useCallback(() => {
-    if (!isTextSelectingRef.current) return;
-    isTextSelectingRef.current = false;
-    clearAllTextLayerSelecting();
-  }, [clearAllTextLayerSelecting]);
-
-  const handleMouseUp = () => {
-    if (mode === 'text') {
-      endTextSelecting();
-      requestAnimationFrame(() => handleTextSelection());
-    }
-  };
-
-  const handleModeChange = (next: PdfSelectionMode) => {
-    setMode(next);
-    isTextSelectingRef.current = false;
-    clearAllTextLayerSelecting();
-    window.getSelection()?.removeAllRanges();
-    setIsDragging(false);
-    dragStartRef.current = null;
-    updateDragRect(null);
-    onSelectionCleared?.();
-  };
-
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 items-center gap-1 border-b bg-muted/40 px-2 py-1.5">
-        <button
-          type="button"
-          className={cn(
-            'flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium',
-            mode === 'text'
-              ? 'bg-primary text-primary-foreground'
-              : 'text-muted-foreground hover:text-foreground',
-          )}
-          onClick={() => handleModeChange('text')}
-        >
-          <MousePointer2 className="h-3.5 w-3.5" />
-          {t('pdfSelectText')}
-        </button>
-        <button
-          type="button"
-          className={cn(
-            'flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium',
-            mode === 'area'
-              ? 'bg-primary text-primary-foreground'
-              : 'text-muted-foreground hover:text-foreground',
-          )}
-          onClick={() => handleModeChange('area')}
-        >
-          <Scan className="h-3.5 w-3.5" />
-          {t('pdfSelectArea')}
-        </button>
-        <span className="ml-auto hidden text-[10px] text-muted-foreground sm:inline">
-          {mode === 'text' ? t('pdfSelectTextHint') : t('pdfSelectAreaHint')}
-        </span>
+      <div className="flex shrink-0 items-center border-b bg-muted/40 px-3 py-1.5">
+        <span className="text-[10px] text-muted-foreground">{t('pdfSelectAreaHint')}</span>
       </div>
 
       <div
         ref={containerRef}
-        className={cn(
-          'relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 py-2',
-          mode === 'area' && 'cursor-crosshair',
-        )}
-        onMouseUp={handleMouseUp}
+        className="relative min-h-0 flex-1 cursor-crosshair overflow-y-auto overscroll-contain px-1 py-2"
       >
         {loading && <p className="p-4 text-sm text-muted-foreground">{t('pdfLoading')}</p>}
         {error && <p className="p-4 text-sm text-destructive">{t('pdfLoadError')}</p>}
@@ -532,20 +372,10 @@ export function PdfViewer({
                   'pdf-page-inner relative h-full w-full overflow-hidden',
                   isDragging && dragStartRef.current?.pageNumber === pageNumber && 'touch-none',
                 )}
-                {...(mode === 'area'
-                  ? { onMouseDown: (e: React.MouseEvent<HTMLDivElement>) => handlePageMouseDown(pageNumber, e) }
-                  : {})}
+                onPointerDown={(e: React.PointerEvent<HTMLDivElement>) => handlePagePointerDown(pageNumber, e)}
               >
                 <canvas className="pointer-events-none absolute inset-0 block h-full w-full" />
-                <div
-                  className={cn(
-                    'textLayer absolute inset-0 z-[1]',
-                    mode === 'text' ? 'select-text' : 'pointer-events-none',
-                  )}
-                  onMouseDown={
-                    mode === 'text' ? () => handleTextLayerMouseDown(pageNumber) : undefined
-                  }
-                />
+                <div className="textLayer pointer-events-none absolute inset-0 z-[1]" />
               </div>
               {isDragging &&
                 dragStartRef.current?.pageNumber === pageNumber &&
