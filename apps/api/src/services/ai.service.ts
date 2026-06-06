@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
-import type { DesmosGraphPayload } from '@talim/types';
+import type { VisualBlock } from '@talim/types';
 import { env } from '../config/env.js';
-import { RENDER_GRAPH_TOOL, validateGraphPayload } from '../lib/tutor-graph.js';
+import type { TutorGraphIntent } from '../lib/tutor-graph-intent.js';
+import { getTutorTools, handleTutorToolCall } from '../lib/tutor-tools.js';
 
 const deepseek = new OpenAI({
   apiKey: env.DEEPSEEK_API_KEY,
@@ -26,9 +27,14 @@ export interface ChatMessageInput {
 
 export type TutorStreamEvent =
   | { type: 'text'; text: string }
-  | { type: 'graph'; graph: DesmosGraphPayload };
+  | { type: 'visual'; block: VisualBlock }
+  | { type: 'manim_enqueue'; jobId: string; script: string };
 
-const MAX_TOOL_ROUNDS = 2;
+const MAX_TOOL_ROUNDS = 3;
+
+interface TutorToolOptions {
+  graphIntent?: TutorGraphIntent;
+}
 
 function toTextOnlyMessages(
   messages: ChatMessageInput[],
@@ -45,21 +51,43 @@ function toTextOnlyMessages(
   }));
 }
 
-export async function generateChatCompletion(messages: ChatMessageInput[]): Promise<string> {
-  const response = await deepseek.chat.completions.create({
-    model: 'deepseek-chat',
+function createDeepSeekChatCompletion(
+  messages: ChatMessageInput[],
+  options?: { temperature?: number },
+) {
+  return deepseek.chat.completions.create({
+    model: env.DEEPSEEK_MODEL,
     messages: toTextOnlyMessages(messages),
-    stream: false,
-  });
+    ...(options?.temperature !== undefined ? { temperature: options.temperature } : {}),
+    extra_body: {
+      thinking: {
+        type: env.DEEPSEEK_THINKING,
+      },
+    },
+  } as any);
+}
+
+function createDeepSeekChatStream(messages: ChatMessageInput[]) {
+  return deepseek.chat.completions.create({
+    model: env.DEEPSEEK_MODEL,
+    messages: toTextOnlyMessages(messages),
+    stream: true,
+    extra_body: {
+      thinking: {
+        type: env.DEEPSEEK_THINKING,
+      },
+    },
+  } as any);
+}
+
+export async function generateChatCompletion(messages: ChatMessageInput[]): Promise<string> {
+  const response = await createDeepSeekChatCompletion(messages);
   return response.choices[0]?.message?.content ?? '';
 }
 
 export async function* streamChatCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
-  const stream = await deepseek.chat.completions.create({
-    model: 'deepseek-chat',
-    messages: toTextOnlyMessages(messages),
-    stream: true,
-  });
+  const stream =
+    (await createDeepSeekChatStream(messages)) as unknown as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
 
   for await (const chunk of stream) {
     const text = chunk.choices[0]?.delta?.content ?? '';
@@ -73,17 +101,49 @@ export async function* streamTutorCompletion(messages: ChatMessageInput[]): Asyn
   }
 }
 
+function buildGraphIntentInstruction(intent?: TutorGraphIntent): string | null {
+  if (!intent?.isExplicit) return null;
+
+  return `The latest student request explicitly asks to draw, plot, or graph something.
+- If you can extract a concrete graphable function, curve, or equation from the latest text or attached image, call render_graph instead of printing raw LaTeX or a code block.
+- If the selected image contains a symbolic formula with unspecified coefficients, unknown constants, or an infinite series that cannot be plotted exactly, say what information is missing. Do not invent an exact graph.
+- When helpful for teaching, you may call render_graph for a clearly labeled illustrative example, but state that it is illustrative rather than the exact selected expression.
+- Keep the explanation brief after the visual.`;
+}
+
+function withTutorToolInstructions(
+  messages: ChatMessageInput[],
+  options?: TutorToolOptions,
+): OpenAI.Chat.Completions.ChatCompletionMessageParam[] {
+  const baseMessages = messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[];
+  const graphInstruction = buildGraphIntentInstruction(options?.graphIntent);
+  if (!graphInstruction) return baseMessages;
+
+  const instruction: OpenAI.Chat.Completions.ChatCompletionSystemMessageParam = {
+    role: 'system',
+    content: graphInstruction,
+  };
+  const firstNonSystemIndex = baseMessages.findIndex((m) => m.role !== 'system');
+  if (firstNonSystemIndex === -1) return [...baseMessages, instruction];
+  return [
+    ...baseMessages.slice(0, firstNonSystemIndex),
+    instruction,
+    ...baseMessages.slice(firstNonSystemIndex),
+  ];
+}
+
 export async function* streamTutorWithTools(
   messages: ChatMessageInput[],
+  options?: TutorToolOptions,
 ): AsyncGenerator<TutorStreamEvent> {
-  let currentMessages = messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[];
+  let currentMessages = withTutorToolInstructions(messages, options);
   let rounds = 0;
 
   while (rounds < MAX_TOOL_ROUNDS) {
     const stream = await openai.chat.completions.create({
       model: env.TUTOR_MODEL,
       messages: currentMessages,
-      tools: [RENDER_GRAPH_TOOL],
+      tools: getTutorTools(),
       temperature: env.TUTOR_TEMPERATURE,
       stream: true,
     });
@@ -139,31 +199,26 @@ export async function* streamTutorWithTools(
     ];
 
     for (const tc of toolCalls) {
-      if (tc.name === 'render_graph') {
-        try {
-          const raw = JSON.parse(tc.arguments) as unknown;
-          const graph = validateGraphPayload(raw);
-          yield { type: 'graph', graph };
-          currentMessages.push({
-            role: 'tool',
-            tool_call_id: tc.id,
-            content: JSON.stringify({
-              success: true,
-              expressionCount: graph.expressions.length,
-            }),
-          });
-        } catch {
-          currentMessages.push({
-            role: 'tool',
-            tool_call_id: tc.id,
-            content: JSON.stringify({ success: false, error: 'Invalid graph payload' }),
-          });
+      const result = handleTutorToolCall(tc.name, tc.arguments);
+      if (result.ok) {
+        yield { type: 'visual', block: result.block };
+        if (result.manimJob) {
+          yield {
+            type: 'manim_enqueue',
+            jobId: result.manimJob.jobId,
+            script: result.manimJob.script,
+          };
         }
+        currentMessages.push({
+          role: 'tool',
+          tool_call_id: tc.id,
+          content: result.toolContent,
+        });
       } else {
         currentMessages.push({
           role: 'tool',
           tool_call_id: tc.id,
-          content: JSON.stringify({ success: false, error: 'Unknown tool' }),
+          content: JSON.stringify({ success: false, error: result.error }),
         });
       }
     }
@@ -172,8 +227,12 @@ export async function* streamTutorWithTools(
   }
 }
 
-export async function generateJsonCompletion<T>(messages: ChatMessageInput[]): Promise<T> {
-  const text = await generateChatCompletion(messages);
+export async function generateJsonCompletion<T>(
+  messages: ChatMessageInput[],
+  options?: { temperature?: number },
+): Promise<T> {
+  const response = await createDeepSeekChatCompletion(messages, options);
+  const text = response.choices[0]?.message?.content ?? '';
   const jsonMatch = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
   if (!jsonMatch) {
     throw new Error('Failed to parse JSON from AI response');

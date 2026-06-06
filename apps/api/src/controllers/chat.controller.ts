@@ -10,10 +10,20 @@ import {
   buildRagContext,
 } from '../services/rag.service.js';
 import { streamTutorWithTools } from '../services/ai.service.js';
-import { serializeGraphBlock } from '../lib/tutor-graph.js';
+import { serializeBlockForMessage } from '../lib/tutor-tools.js';
 import { buildTutorSystemMessage } from '../lib/locale-prompts.js';
+import { detectTutorGraphIntent } from '../lib/tutor-graph-intent.js';
+import {
+  classifyTutorScope,
+  getClarificationResponse,
+  getOutOfScopeResponse,
+  isTutorScopeRefusal,
+} from '../lib/tutor-scope.js';
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
+import { manimQueue } from '../services/queue.service.js';
+import { getManimAssetPath } from '../jobs/renderManim.job.js';
+import { storageService } from '../services/storage.service.js';
 
 const streamSchema = z.object({
   contentId: z.string().min(1),
@@ -48,6 +58,67 @@ export async function getOrCreateSession(
   return session.id;
 }
 
+function mapChatMessage(m: {
+  id: string;
+  sessionId: string;
+  role: string;
+  text: string;
+  excerpt: string | null;
+  excerptImage: string | null;
+  createdAt: Date;
+}) {
+  return {
+    id: m.id,
+    sessionId: m.sessionId,
+    role: m.role,
+    text: m.text,
+    excerpt: m.excerpt,
+    excerptImage: m.excerptImage,
+    createdAt: m.createdAt.toISOString(),
+  };
+}
+
+async function streamStaticAssistantResponse(
+  res: Response,
+  sessionId: string,
+  text: string,
+): Promise<void> {
+  await prisma.chatMessage.create({
+    data: { sessionId, role: 'ASSISTANT', text },
+  });
+
+  res.write(`data: ${JSON.stringify({ text })}\n\n`);
+  res.write(`data: ${JSON.stringify({ sessionId })}\n\n`);
+  res.write('data: [DONE]\n\n');
+  res.end();
+}
+
+export async function getContentChat(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const contentId = getParam(req, 'contentId');
+  const locale = resolveLocale(req) as AppLocale;
+
+  const content = await prisma.content.findFirst({
+    where: { id: contentId, userId: req.user.userId, status: 'READY' },
+  });
+  if (!content) throw new AppError(404, 'Content not found or not ready');
+
+  const session = await prisma.chatSession.findFirst({
+    where: { userId: req.user.userId, contentId, locale },
+    include: { messages: { orderBy: { createdAt: 'asc' } } },
+  });
+
+  if (!session) {
+    res.json({ sessionId: null, messages: [] });
+    return;
+  }
+
+  res.json({
+    sessionId: session.id,
+    messages: session.messages.map(mapChatMessage),
+  });
+}
+
 export async function getMessages(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const sessionId = getParam(req, 'sessionId');
@@ -58,14 +129,23 @@ export async function getMessages(req: AuthenticatedRequest, res: Response): Pro
   if (!session) throw new AppError(404, 'Session not found');
 
   res.json({
-    messages: session.messages.map((m) => ({
-      id: m.id,
-      sessionId: m.sessionId,
-      role: m.role,
-      text: m.text,
-      createdAt: m.createdAt.toISOString(),
-    })),
+    messages: session.messages.map(mapChatMessage),
   });
+}
+
+export async function getManimAsset(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const jobId = getParam(req, 'jobId');
+  const storagePath = await getManimAssetPath(jobId);
+  if (!storagePath) throw new AppError(404, 'Asset not found');
+
+  const buffer = await storageService.get(storagePath);
+  const ext = storagePath.split('.').pop()?.toLowerCase();
+  const contentType =
+    ext === 'mp4' ? 'video/mp4' : ext === 'svg' ? 'image/svg+xml' : 'application/octet-stream';
+  res.setHeader('Content-Type', contentType);
+  res.setHeader('Cache-Control', 'private, max-age=3600');
+  res.send(buffer);
 }
 
 export async function streamChat(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -87,7 +167,13 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   );
 
   await prisma.chatMessage.create({
-    data: { sessionId, role: 'USER', text: body.message },
+    data: {
+      sessionId,
+      role: 'USER',
+      text: body.message,
+      excerpt: body.selectedExcerpt?.trim() || null,
+      excerptImage: body.selectedImage || null,
+    },
   });
 
   const history = await prisma.chatMessage.findMany({
@@ -105,6 +191,38 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     ? mergeSimilarChunks(excerptChunks, messageChunks)
     : messageChunks;
   const context = buildRagContext(chunks, locale);
+  const scopeDecision = await classifyTutorScope({
+    locale,
+    contentTitle: content.title,
+    message: body.message,
+    context,
+    selectedExcerpt: body.selectedExcerpt,
+    hasSelectedImage: Boolean(body.selectedImage),
+  });
+
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders?.();
+
+  if (scopeDecision.route === 'unrelated') {
+    await streamStaticAssistantResponse(res, sessionId, getOutOfScopeResponse(locale));
+    return;
+  }
+
+  if (scopeDecision.route === 'needs_clarification') {
+    await streamStaticAssistantResponse(res, sessionId, getClarificationResponse(locale));
+    return;
+  }
+
+  const filteredHistory = history.filter(
+    (m) => !(m.role === 'ASSISTANT' && isTutorScopeRefusal(locale, m.text)),
+  );
+  const graphIntent = detectTutorGraphIntent({
+    message: body.message,
+    selectedExcerpt: body.selectedExcerpt,
+    hasSelectedImage: Boolean(body.selectedImage),
+  });
 
   const messages = [
     {
@@ -114,12 +232,13 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
         context,
         body.selectedExcerpt,
         Boolean(body.selectedImage),
+        scopeDecision.scopeNote,
       ),
     },
-    ...history.map((m, index) => {
+    ...filteredHistory.map((m, index) => {
       const role = (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant';
       const isLatestUser =
-        m.role === 'USER' && index === history.length - 1 && Boolean(body.selectedImage);
+        m.role === 'USER' && index === filteredHistory.length - 1 && Boolean(body.selectedImage);
       if (isLatestUser && body.selectedImage) {
         return {
           role,
@@ -133,28 +252,37 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     }),
   ];
 
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.flushHeaders?.();
-
   let fullResponse = '';
+  const manimJobs: Array<{ jobId: string; script: string }> = [];
 
   try {
-    for await (const event of streamTutorWithTools(messages)) {
+    for await (const event of streamTutorWithTools(messages, { graphIntent })) {
       if (event.type === 'text') {
         fullResponse += event.text;
         res.write(`data: ${JSON.stringify({ text: event.text })}\n\n`);
-      } else if (event.type === 'graph') {
-        const block = serializeGraphBlock(event.graph);
-        fullResponse += block;
-        res.write(`data: ${JSON.stringify({ graph: event.graph })}\n\n`);
+      } else if (event.type === 'visual') {
+        const blockStr = serializeBlockForMessage(event.block);
+        fullResponse += blockStr;
+        res.write(`data: ${JSON.stringify({ visual: event.block })}\n\n`);
+        if (event.block.kind === 'desmos') {
+          res.write(`data: ${JSON.stringify({ graph: event.block.payload })}\n\n`);
+        }
+      } else if (event.type === 'manim_enqueue') {
+        manimJobs.push({ jobId: event.jobId, script: event.script });
       }
     }
 
-    await prisma.chatMessage.create({
+    const assistantMessage = await prisma.chatMessage.create({
       data: { sessionId, role: 'ASSISTANT', text: fullResponse },
     });
+
+    for (const job of manimJobs) {
+      await manimQueue.add({
+        jobId: job.jobId,
+        script: job.script,
+        messageId: assistantMessage.id,
+      });
+    }
 
     res.write(`data: ${JSON.stringify({ sessionId })}\n\n`);
     res.write('data: [DONE]\n\n');
@@ -162,6 +290,6 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   } catch (error) {
     res.write(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`);
     res.end();
-    throw error;
+    console.error('Chat stream failed:', error);
   }
 }
