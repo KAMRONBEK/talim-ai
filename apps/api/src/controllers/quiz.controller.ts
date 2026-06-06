@@ -6,7 +6,7 @@ import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { quizQueue } from '../services/queue.service.js';
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
-import { isSelectedAnswerCorrect } from '@talim/types';
+import { isSelectedAnswerCorrect, resolveCorrectAnswer } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
 
 const createQuizSchema = z.object({
@@ -71,6 +71,68 @@ function formatAttempt(attempt: {
     answers: attempt.answers as Record<string, string>,
     createdAt: attempt.createdAt.toISOString(),
   };
+}
+
+type QuizQuestionForEvaluation = {
+  id: string;
+  options: unknown;
+  correctAnswer: string;
+};
+
+function normalizeAnswer(value: string): string {
+  return value.trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
+function getSubmittedOptionLabel(value: string): string | null {
+  const match = value.trim().match(/^([A-Z])(?:[\).:\s]|$)/i);
+  return match?.[1]?.toUpperCase() ?? null;
+}
+
+function stripSubmittedOptionLabel(value: string): string {
+  return value.trim().replace(/^[A-Z][\).:\s]+/i, '').trim();
+}
+
+function resolveSubmittedAnswer(options: string[], submittedAnswer: string | undefined): string {
+  if (!submittedAnswer) return '';
+
+  const exactOption = options.find((option) => normalizeAnswer(option) === normalizeAnswer(submittedAnswer));
+  if (exactOption) return exactOption;
+
+  const label = getSubmittedOptionLabel(submittedAnswer);
+  if (label) {
+    const labelIndex = label.charCodeAt(0) - 'A'.charCodeAt(0);
+    if (labelIndex >= 0 && labelIndex < options.length) return options[labelIndex] ?? submittedAnswer;
+  }
+
+  const unlabelledAnswer = stripSubmittedOptionLabel(submittedAnswer);
+  const matchingOption = options.find(
+    (option) => normalizeAnswer(stripSubmittedOptionLabel(option)) === normalizeAnswer(unlabelledAnswer),
+  );
+
+  return matchingOption ?? submittedAnswer;
+}
+
+function evaluateQuizAnswers(
+  questions: QuizQuestionForEvaluation[],
+  submittedAnswers: Record<string, string>,
+) {
+  const answers: Record<string, string> = {};
+  let correct = 0;
+
+  for (const question of questions) {
+    const options = Array.isArray(question.options) ? (question.options as string[]) : [];
+    const resolvedCorrectAnswer = resolveCorrectAnswer(options, question.correctAnswer);
+    const selectedAnswer = resolveSubmittedAnswer(options, submittedAnswers[question.id]);
+    answers[question.id] = selectedAnswer;
+
+    if (isSelectedAnswerCorrect(options, selectedAnswer, resolvedCorrectAnswer)) {
+      correct++;
+    }
+  }
+
+  const total = questions.length;
+  const score = total > 0 ? (correct / total) * 100 : 0;
+  return { answers, correct, total, score };
 }
 
 export async function createQuiz(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -219,19 +281,16 @@ export async function getLatestAttempt(req: AuthenticatedRequest, res: Response)
   }
 
   const questions = await prisma.quizQuestion.findMany({ where: { quizId } });
-  let correct = 0;
-  const answers = attempt.answers as Record<string, string>;
-  for (const question of questions) {
-    const options = Array.isArray(question.options) ? (question.options as string[]) : [];
-    if (isSelectedAnswerCorrect(options, answers[question.id], question.correctAnswer)) {
-      correct++;
-    }
-  }
+  const evaluation = evaluateQuizAnswers(questions, attempt.answers as Record<string, string>);
 
   res.json({
-    attempt: formatAttempt(attempt),
-    correct,
-    total: questions.length,
+    attempt: formatAttempt({
+      ...attempt,
+      score: evaluation.score,
+      answers: evaluation.answers,
+    }),
+    correct: evaluation.correct,
+    total: evaluation.total,
   });
 }
 
@@ -248,30 +307,22 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
     throw new AppError(400, 'Quiz is still being generated');
   }
 
-  let correct = 0;
-  for (const question of quiz.questions) {
-    const options = Array.isArray(question.options) ? (question.options as string[]) : [];
-    if (isSelectedAnswerCorrect(options, body.answers[question.id], question.correctAnswer)) {
-      correct++;
-    }
-  }
-
-  const score = (correct / quiz.questions.length) * 100;
+  const evaluation = evaluateQuizAnswers(quiz.questions, body.answers);
 
   const attempt = await prisma.quizAttempt.create({
     data: {
       quizId: quiz.id,
       userId: req.user.userId,
-      score,
-      answers: body.answers,
+      score: evaluation.score,
+      answers: evaluation.answers,
     },
   });
 
-  await updateProgressAfterQuizSubmit(req.user.userId, quiz, attempt, body.answers);
+  await updateProgressAfterQuizSubmit(req.user.userId, quiz, attempt, evaluation.answers);
 
   res.json({
     attempt: formatAttempt(attempt),
-    correct,
-    total: quiz.questions.length,
+    correct: evaluation.correct,
+    total: evaluation.total,
   });
 }
