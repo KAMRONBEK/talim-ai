@@ -46,6 +46,11 @@ enum GeneratedMediaStatus {
   FAILED
 }
 
+enum TranscriptSource {
+  YOUTUBE_CAPTIONS
+  AI_TRANSCRIPTION
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
@@ -84,6 +89,7 @@ model Content {
   sections         ContentSection[]
   podcasts         Podcast[]
   contentVideos    ContentVideo[]
+  transcriptSegments ContentTranscriptSegment[]
   contentProgress  ContentProgress[]
   contentSummaries ContentSummary[]
 
@@ -175,6 +181,22 @@ model Chunk {
   @@index([chunkIndex])
 }
 
+model ContentTranscriptSegment {
+  id        String           @id @default(cuid())
+  contentId String
+  order     Int
+  startMs   Int
+  endMs     Int
+  text      String           @db.Text
+  source    TranscriptSource
+  createdAt DateTime         @default(now())
+  content   Content          @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, order])
+  @@index([contentId])
+  @@index([contentId, startMs])
+}
+
 model ChatSession {
   id        String        @id @default(cuid())
   userId    String
@@ -191,12 +213,14 @@ model ChatSession {
 }
 
 model ChatMessage {
-  id        String      @id @default(cuid())
-  sessionId String
-  role      MessageRole
-  text      String
-  createdAt DateTime    @default(now())
-  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  id           String      @id @default(cuid())
+  sessionId    String
+  role         MessageRole
+  text         String
+  excerpt      String?     @db.Text
+  excerptImage String?     @db.Text
+  createdAt    DateTime    @default(now())
+  session      ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId])
 }
