@@ -41,8 +41,8 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
   const displayName = user?.name ?? user?.email?.split('@')[0] ?? tCommon('user');
 
   return (
-    <>
-      <div className="flex items-center gap-2 border-b px-4 py-4">
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="flex shrink-0 items-center gap-2 border-b px-4 py-4">
         <Link
           href="/dashboard"
           onClick={onNavigate}
@@ -79,7 +79,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
         )}
       </div>
 
-      <div className="border-t p-3">
+      <div className="shrink-0 border-t p-3">
         <div className="flex items-center gap-2 rounded-lg px-2 py-2">
           <Avatar className="h-9 w-9 shrink-0">
             <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>
@@ -104,13 +104,13 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
           {tCommon('logout')}
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 
 export function DashboardSidebar() {
   return (
-    <aside className="hidden w-[var(--sidebar-width)] shrink-0 flex-col border-r bg-card md:flex">
+    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 flex-col overflow-hidden border-r bg-card md:flex">
       <DashboardSidebarBody />
     </aside>
   );
@@ -126,7 +126,7 @@ export function DashboardSidebarSheet({ open, onOpenChange }: DashboardSidebarSh
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="flex w-[min(100%,16rem)] flex-col p-0">
+      <SheetContent side="left" className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0">
         <SheetHeader className="sr-only">
           <SheetTitle>{t('menu')}</SheetTitle>
         </SheetHeader>

@@ -47,8 +47,8 @@ export function ContentSidebarBody({
   };
 
   return (
-    <>
-      <div className="border-b p-4">
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="shrink-0 border-b p-4">
         <h2 className="truncate font-semibold">{contentTitle}</h2>
         <p className="text-xs text-muted-foreground">
           {t('sectionCount', { count: sections.length })}
@@ -93,7 +93,7 @@ export function ContentSidebarBody({
           {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -101,7 +101,7 @@ interface ContentSidebarProps extends ContentSidebarBodyProps {}
 
 export function ContentSidebar(props: ContentSidebarProps) {
   return (
-    <aside className="hidden w-64 shrink-0 flex-col border-r bg-card md:flex">
+    <aside className="hidden h-full w-64 shrink-0 flex-col overflow-hidden border-r bg-card md:flex">
       <ContentSidebarBody {...props} />
     </aside>
   );
@@ -121,7 +121,7 @@ export function ContentSidebarSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="flex w-[min(100%,16rem)] flex-col p-0">
+      <SheetContent side="left" className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0">
         <SheetHeader className="sr-only">
           <SheetTitle>{t('menu')}</SheetTitle>
         </SheetHeader>

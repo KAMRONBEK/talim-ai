@@ -22,12 +22,12 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   return (
     <AuthGuard>
       <DashboardSearchContext.Provider value={{ search, setSearch }}>
-        <div className="flex min-h-dvh">
+        <div className="flex h-dvh overflow-hidden">
           <DashboardSidebar />
           <DashboardSidebarSheet open={sidebarOpen} onOpenChange={setSidebarOpen} />
-          <div className="flex min-w-0 flex-1 flex-col">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
             <DashboardHeader onMenuClick={() => setSidebarOpen(true)} />
-            <main className="flex-1 overflow-y-auto px-4 py-8 md:px-6">{children}</main>
+            <main className="min-h-0 flex-1 overflow-y-auto px-4 py-8 md:px-6">{children}</main>
           </div>
         </div>
       </DashboardSearchContext.Provider>
