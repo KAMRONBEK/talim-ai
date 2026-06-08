@@ -72,5 +72,10 @@ jobs:
             fi
 
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
-            doppler run --project talim-ai --config prd -- docker compose ${COMPOSE_FILES} up -d --build --wait
+            # Build app tier first; nginx is recreated separately so it does not proxy to
+            # stale container IPs while --wait marks the deploy failed.
+            doppler run --project talim-ai --config prd -- \
+              docker compose ${COMPOSE_FILES} up -d --build --wait db redis api web admin
+            doppler run --project talim-ai --config prd -- \
+              docker compose ${COMPOSE_FILES} up -d --force-recreate --no-deps --wait nginx
             docker image prune -f
