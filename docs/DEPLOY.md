@@ -33,8 +33,8 @@ Set in Doppler dashboard or CLI (do **not** put real values in git):
 | `JWT_SECRET` | 32+ character random string |
 | `DEEPSEEK_API_KEY` | Your API key |
 | `OPENAI_API_KEY` | Optional |
-| `CORS_ORIGIN` | `http://talim-ai.uz` |
-| `NEXT_PUBLIC_API_URL` | `http://talim-ai.uz/api` |
+| `CORS_ORIGIN` | `https://talim-ai.uz,https://admin.talim-ai.uz` |
+| `NEXT_PUBLIC_API_URL` | `https://talim-ai.uz/api` |
 
 Do **not** set `DATABASE_URL` / `REDIS_URL` to `localhost` in `prd` — Compose uses internal Docker hostnames (`db`, `redis`).
 
@@ -65,11 +65,29 @@ doppler run --project talim-ai --config prd -- \
   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
+## First platform admin
+
+Admin accounts are not self-registered. Create the first operator on the VPS (or locally with DB access):
+
+```bash
+doppler run -- pnpm --filter @talim/api create-admin -- \
+  --email you@example.com --password 'your-secure-password' --name 'Operator'
+```
+
+Sign in at `https://admin.talim-ai.uz/login` (or `http://localhost:3001/login` in local dev).
+
+## Admin subdomain (DNS + SSL)
+
+1. Add DNS **A** record: `admin.talim-ai.uz` → VPS IP.
+2. Extend the Let's Encrypt cert to include `admin.talim-ai.uz` (or use a wildcard `*.talim-ai.uz`).
+3. Rebuild and restart after updating Doppler `CORS_ORIGIN` and redeploying.
+
 ## Verify
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose.prod.yml ps
 curl -I http://127.0.0.1/ -H 'Host: talim-ai.uz'
+curl -I http://127.0.0.1/ -H 'Host: admin.talim-ai.uz'
 curl -s http://127.0.0.1/api/health -H 'Host: talim-ai.uz'
 ```
 
