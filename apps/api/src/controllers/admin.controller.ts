@@ -9,6 +9,12 @@ import { getParam } from '../lib/params.js';
 import { parseAppLocale } from '@talim/types';
 import { writeAdminAuditLog } from '../services/admin/audit.service.js';
 import { getUsageForPeriod } from '../services/usage.service.js';
+import {
+  adminUpdateUserSubscription,
+  getSubscriptionForUser,
+  getUsageVsLimits,
+  listSubscriptionsForAdmin,
+} from '../services/subscription.service.js';
 import { contentQueue } from '../services/queue.service.js';
 import { cancelContentJobs } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
@@ -41,6 +47,21 @@ const usageDaysSchema = z.object({
   days: z.coerce.number().int().min(1).max(90).default(30),
 });
 
+const subscriptionListSchema = paginationSchema.extend({
+  status: z.enum(['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING']).optional(),
+  plan: z.string().optional(),
+});
+
+const patchSubscriptionSchema = z
+  .object({
+    planCode: z.enum(['FREE', 'INDIVIDUAL_PRO', 'TENANT_STARTER', 'TENANT_GROWTH']).optional(),
+    status: z.enum(['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING']).optional(),
+    currentPeriodEnd: z.string().datetime().nullable().optional(),
+  })
+  .refine((body) => body.planCode !== undefined || body.status !== undefined || body.currentPeriodEnd !== undefined, {
+    message: 'At least one field required',
+  });
+
 function formatAdminUser(user: {
   id: string;
   email: string;
@@ -50,6 +71,7 @@ function formatAdminUser(user: {
   createdAt: Date;
   _count?: { contents: number };
   contents?: { updatedAt: Date }[];
+  subscription?: { status: string; plan: { code: string } } | null;
 }) {
   const lastActivity = user.contents?.[0]?.updatedAt;
   return {
@@ -61,6 +83,13 @@ function formatAdminUser(user: {
     createdAt: user.createdAt.toISOString(),
     contentCount: user._count?.contents ?? 0,
     lastActivityAt: lastActivity ? lastActivity.toISOString() : null,
+    planCode: user.subscription?.plan.code ?? null,
+    subscriptionStatus: (user.subscription?.status as
+      | 'ACTIVE'
+      | 'PAST_DUE'
+      | 'CANCELED'
+      | 'TRIALING'
+      | undefined) ?? null,
   };
 }
 
@@ -92,6 +121,7 @@ export async function listUsers(req: AuthenticatedRequest, res: Response): Promi
       include: {
         _count: { select: { contents: true } },
         contents: { orderBy: { updatedAt: 'desc' }, take: 1, select: { updatedAt: true } },
+        subscription: { include: { plan: { select: { code: true } } } },
       },
     }),
   ]);
@@ -111,14 +141,27 @@ export async function createUser(req: AuthenticatedRequest, res: Response): Prom
   if (existing) throw new AppError(409, 'Email already registered');
 
   const passwordHash = await bcrypt.hash(body.password, 12);
+  const freePlan = await prisma.plan.findUnique({ where: { code: 'FREE' } });
+  if (!freePlan) throw new AppError(500, 'FREE plan not configured');
+
   const user = await prisma.user.create({
     data: {
       email: body.email,
       passwordHash,
       name: body.name ?? null,
       role: body.role,
+      subscription: {
+        create: {
+          planId: freePlan.id,
+          status: 'ACTIVE',
+          source: 'ADMIN',
+        },
+      },
     },
-    include: { _count: { select: { contents: true } } },
+    include: {
+      _count: { select: { contents: true } },
+      subscription: { include: { plan: { select: { code: true } } } },
+    },
   });
 
   await writeAdminAuditLog({
@@ -146,6 +189,10 @@ export async function getUser(req: AuthenticatedRequest, res: Response): Promise
   const from = new Date();
   from.setDate(from.getDate() - 30);
   const usage = await getUsageForPeriod({ userId: id, from, to: new Date() });
+  const [subscription, usageVsLimits] = await Promise.all([
+    getSubscriptionForUser(id),
+    getUsageVsLimits(id),
+  ]);
 
   res.json({
     user: {
@@ -154,6 +201,8 @@ export async function getUser(req: AuthenticatedRequest, res: Response): Promise
       summaryCount: user._count.contentSummaries,
       usageLast30Days: usage.totalCostUsd,
     },
+    subscription,
+    usageVsLimits,
     contents: await prisma.content.findMany({
       where: { userId: id },
       orderBy: { createdAt: 'desc' },
@@ -437,8 +486,45 @@ export async function deleteGenerated(req: AuthenticatedRequest, res: Response):
   res.status(204).send();
 }
 
-export async function listSubscriptions(_req: AuthenticatedRequest, res: Response): Promise<void> {
-  res.json({ items: [], total: 0 });
+export async function listSubscriptions(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const query = subscriptionListSchema.parse(req.query);
+  const result = await listSubscriptionsForAdmin({
+    page: query.page,
+    pageSize: query.pageSize,
+    search: query.search,
+    status: query.status,
+    plan: query.plan,
+  });
+  res.json(result);
+}
+
+export async function patchUserSubscription(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const id = getParam(req, 'id');
+  const body = patchSubscriptionSchema.parse(req.body ?? {});
+
+  const existing = await prisma.subscription.findUnique({
+    where: { userId: id },
+    include: { plan: true },
+  });
+  if (!existing) throw new AppError(404, 'Subscription not found');
+
+  const subscription = await adminUpdateUserSubscription(id, body);
+
+  await writeAdminAuditLog({
+    adminUserId: req.user.userId,
+    action: 'subscription.update',
+    targetType: 'subscription',
+    targetId: subscription.id,
+    metadata: {
+      fromPlan: existing.plan.code,
+      toPlan: subscription.planCode,
+      fromStatus: existing.status,
+      toStatus: subscription.status,
+    },
+  });
+
+  res.json({ subscription });
 }
 
 export async function usageSummary(req: AuthenticatedRequest, res: Response): Promise<void> {

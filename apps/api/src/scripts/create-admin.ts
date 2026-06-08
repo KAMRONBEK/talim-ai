@@ -34,6 +34,7 @@ async function main(): Promise<void> {
 
   const passwordHash = await bcrypt.hash(password, 12);
   const existing = await prisma.user.findUnique({ where: { email } });
+  const freePlan = await prisma.plan.findUnique({ where: { code: 'FREE' } });
 
   const user = existing
     ? await prisma.user.update({
@@ -46,6 +47,17 @@ async function main(): Promise<void> {
           passwordHash,
           name: name ?? null,
           role: 'ADMIN',
+          ...(freePlan
+            ? {
+                subscription: {
+                  create: {
+                    planId: freePlan.id,
+                    status: 'ACTIVE',
+                    source: 'ADMIN',
+                  },
+                },
+              }
+            : {}),
         },
       });
 

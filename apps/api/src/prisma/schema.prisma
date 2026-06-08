@@ -71,6 +71,23 @@ enum UsageFeature {
   TENANT_ASSISTANT
 }
 
+enum PlanKind {
+  INDIVIDUAL
+  TENANT
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+}
+
+enum SubscriptionSource {
+  ADMIN
+  PAYMENT_PROVIDER
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
@@ -91,6 +108,7 @@ model User {
   learningActivityDays    LearningActivityDay[]
   apiUsageEvents          ApiUsageEvent[]
   adminAuditLogs          AdminAuditLog[]
+  subscription            Subscription?
 
   @@index([email])
   @@index([role])
@@ -405,4 +423,34 @@ model AdminAuditLog {
 
   @@index([adminUserId, createdAt])
   @@index([targetType, targetId])
+}
+
+model Plan {
+  id            String         @id @default(cuid())
+  code          String         @unique
+  name          String
+  kind          PlanKind
+  limits        Json
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id                     String             @id @default(cuid())
+  userId                 String?            @unique
+  tenantId               String?            @unique
+  planId                 String
+  status                 SubscriptionStatus @default(ACTIVE)
+  source                 SubscriptionSource @default(ADMIN)
+  externalSubscriptionId String?            @unique
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  user                   User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan                   Plan               @relation(fields: [planId], references: [id])
+
+  @@index([planId])
+  @@index([status])
 }

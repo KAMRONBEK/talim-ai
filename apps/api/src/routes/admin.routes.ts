@@ -14,6 +14,7 @@ adminRoutes.get('/users/:id', asyncHandler(adminController.getUser));
 adminRoutes.patch('/users/:id', asyncHandler(adminController.patchUser));
 adminRoutes.delete('/users/:id', asyncHandler(adminController.deleteUser));
 adminRoutes.post('/users/:id/reset-password', asyncHandler(adminController.resetUserPassword));
+adminRoutes.patch('/users/:id/subscription', asyncHandler(adminController.patchUserSubscription));
 
 adminRoutes.get('/tenants', asyncHandler(adminController.listTenants));
 adminRoutes.get('/tenants/:id', asyncHandler(adminController.getTenant));

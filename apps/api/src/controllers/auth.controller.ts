@@ -58,12 +58,25 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
   }
 
   const passwordHash = await bcrypt.hash(body.password, 12);
+  const freePlan = await prisma.plan.findUnique({ where: { code: 'FREE' } });
+
   const user = await prisma.user.create({
     data: {
       email: body.email,
       passwordHash,
       name: body.name ?? null,
       role: 'INDIVIDUAL',
+      ...(freePlan
+        ? {
+            subscription: {
+              create: {
+                planId: freePlan.id,
+                status: 'ACTIVE',
+                source: 'ADMIN',
+              },
+            },
+          }
+        : {}),
     },
   });
 
