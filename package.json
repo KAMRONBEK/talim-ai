@@ -4,6 +4,7 @@
   "scripts": {
     "build": "doppler run -- turbo run build",
     "dev": "pnpm --filter @talim/types build && doppler run -- turbo run dev",
+    "dev:admin": "pnpm --filter @talim/types build && doppler run -- pnpm --filter @talim/admin dev",
     "dev:all": "pnpm dev:infra && pnpm db:migrate:deploy && pnpm dev",
     "dev:infra": "docker compose up -d --wait db redis",
     "lint": "turbo run lint",
