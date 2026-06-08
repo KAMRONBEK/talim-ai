@@ -17,6 +17,65 @@ export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
 
+export type PlanKind = 'INDIVIDUAL' | 'TENANT';
+export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
+export type SubscriptionSource = 'ADMIN' | 'PAYMENT_PROVIDER';
+export type PlanCode = 'FREE' | 'INDIVIDUAL_PRO' | 'TENANT_STARTER' | 'TENANT_GROWTH';
+
+export interface PlanLimits {
+  maxUploads?: number | null;
+  maxGenerationsPerMonth?: number | null;
+  maxTutorMessages?: number | null;
+  maxStudents?: number | null;
+  maxContentItems?: number | null;
+}
+
+export interface AdminUserSubscription {
+  id: string;
+  planCode: string;
+  planName: string;
+  planKind: PlanKind;
+  status: SubscriptionStatus;
+  source: SubscriptionSource;
+  externalSubscriptionId: string | null;
+  currentPeriodStart: string | null;
+  currentPeriodEnd: string | null;
+  limits: PlanLimits;
+  effectivePlanCode: string;
+}
+
+export interface AdminSubscriptionListItem extends AdminUserSubscription {
+  userId: string;
+  userEmail: string;
+  userName: string | null;
+}
+
+export interface AdminUsageVsLimits {
+  periodStart: string;
+  periodEnd: string;
+  uploads: { used: number; limit: number | null };
+  generations: { used: number; limit: number | null };
+  tutorMessages: { used: number; limit: number | null };
+  apiCostUsd: number;
+}
+
+export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE';
+
+export interface QuotaExceededResponse {
+  message: string;
+  code: 'QUOTA_EXCEEDED';
+  feature: QuotaFeature;
+  used: number;
+  limit: number;
+  upgradePlanCode: PlanCode | null;
+}
+
+export interface AdminUpdateSubscriptionInput {
+  planCode?: PlanCode;
+  status?: SubscriptionStatus;
+  currentPeriodEnd?: string | null;
+}
+
 export type UsageFeature =
   | 'EMBED'
   | 'TUTOR_CHAT'
@@ -41,6 +100,8 @@ export interface User {
 export interface AdminUserListItem extends User {
   contentCount: number;
   lastActivityAt: string | null;
+  planCode: string | null;
+  subscriptionStatus: SubscriptionStatus | null;
 }
 
 export interface AdminUserDetail extends AdminUserListItem {
@@ -69,6 +130,23 @@ export interface AdminGeneratedItem {
   userEmail: string;
   status?: string;
   createdAt: string;
+}
+
+export interface UsageFeatureStats {
+  count: number;
+  inputTokens: number;
+  outputTokens: number;
+  costUsd: number;
+}
+
+export interface UserUsageSummary {
+  periodStart: string;
+  periodEnd: string;
+  totalInputTokens: number;
+  totalOutputTokens: number;
+  totalCostUsd: number;
+  eventCount: number;
+  byFeature: Partial<Record<UsageFeature, UsageFeatureStats>>;
 }
 
 export interface AdminUsageSummaryRow {
