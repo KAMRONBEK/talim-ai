@@ -21,8 +21,29 @@ async function bootstrap(): Promise<void> {
 
   const app = express();
 
-  const corsOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim()).filter(Boolean);
-  app.use(cors({ origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins, credentials: true }));
+  const corsOrigins = new Set(
+    env.CORS_ORIGIN.split(',')
+      .map((o) => o.trim())
+      .filter(Boolean),
+  );
+  if (env.NODE_ENV !== 'production') {
+    corsOrigins.add('http://localhost:3000');
+    corsOrigins.add('http://localhost:3001');
+  }
+  const allowedOrigins = [...corsOrigins];
+
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+          return;
+        }
+        callback(new Error(`CORS blocked for origin: ${origin}`));
+      },
+      credentials: true,
+    }),
+  );
   app.use(express.json({ limit: '10mb' }));
   app.use(routes);
   app.use(errorMiddleware);
