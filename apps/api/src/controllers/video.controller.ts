@@ -5,6 +5,7 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
+import { assertQuota } from '../services/subscription.service.js';
 
 const videoBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -92,6 +93,8 @@ export async function createVideo(req: AuthenticatedRequest, res: Response): Pro
     res.json({ video: formatVideo(existing), cached: true });
     return;
   }
+
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
 
   const video = await prisma.contentVideo.create({
     data: {

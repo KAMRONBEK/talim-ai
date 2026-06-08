@@ -11,6 +11,7 @@ import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage } from '../services/pdf.service.js';
+import { assertQuota } from '../services/subscription.service.js';
 
 const youtubeSchema = z.object({
   url: z.string().url(),
@@ -139,6 +140,8 @@ export async function retryContent(req: AuthenticatedRequest, res: Response): Pr
     throw new AppError(400, 'File no longer available — please upload again');
   }
 
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
+
   const updated = await prisma.content.update({
     where: { id: content.id },
     data: { status: 'PENDING' },
@@ -165,6 +168,7 @@ export async function getContentTranscript(req: AuthenticatedRequest, res: Respo
     const transcript = await extractYoutubeTranscript(content.url, {
       title: content.title,
       locale: env.DEFAULT_CONTENT_LOCALE,
+      usage: { userId: req.user.userId, metadata: { contentId } },
     });
     await prisma.$transaction([
       prisma.contentTranscriptSegment.deleteMany({ where: { contentId } }),
@@ -248,7 +252,10 @@ export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Pr
   const imageBuffer = Buffer.from(base64, 'base64');
   if (imageBuffer.length === 0) throw new AppError(400, 'Invalid image data');
 
-  const text = await extractRegionTextFromImage(imageBuffer);
+  const text = await extractRegionTextFromImage(imageBuffer, {
+    userId: req.user.userId,
+    metadata: { contentId: content.id },
+  });
   res.json({ text, page: body.page });
 }
 

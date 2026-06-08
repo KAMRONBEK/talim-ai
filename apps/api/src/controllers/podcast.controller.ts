@@ -7,6 +7,7 @@ import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { podcastQueue } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
+import { assertQuota } from '../services/subscription.service.js';
 
 const createPodcastSchema = z.object({
   locale: z.enum(['uz', 'en', 'ru']).optional(),
@@ -92,6 +93,8 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
     });
     return;
   }
+
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
 
   const podcast =
     existing ??

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { authMiddleware } from '../middleware/auth.middleware.js';
 import { upload } from '../middleware/upload.middleware.js';
+import { enforceQuota } from '../middleware/quota.middleware.js';
 import * as contentController from '../controllers/content.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
@@ -31,7 +32,16 @@ contentRoutes.patch(
 );
 contentRoutes.get('/:id/podcast/episodes/:episodeId/audio', asyncHandler(podcastController.streamEpisodeAudio));
 contentRoutes.get('/:id', asyncHandler(contentController.getContent));
-contentRoutes.post('/upload', upload.single('file'), asyncHandler(contentController.uploadContent));
-contentRoutes.post('/youtube', asyncHandler(contentController.createYoutubeContent));
+contentRoutes.post(
+  '/upload',
+  upload.single('file'),
+  enforceQuota('UPLOAD', 'GENERATION'),
+  asyncHandler(contentController.uploadContent),
+);
+contentRoutes.post(
+  '/youtube',
+  enforceQuota('UPLOAD', 'GENERATION'),
+  asyncHandler(contentController.createYoutubeContent),
+);
 contentRoutes.post('/:id/retry', asyncHandler(contentController.retryContent));
 contentRoutes.delete('/:id', asyncHandler(contentController.deleteContent));

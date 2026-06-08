@@ -7,6 +7,7 @@ import { extractPdfText } from '../services/pdf.service.js';
 import { extractYoutubeTranscript } from '../services/youtube.service.js';
 import { chunkText, storeChunksWithEmbeddings } from '../services/rag.service.js';
 import { generateContentSections } from '../services/section.service.js';
+import { assertQuota } from '../services/subscription.service.js';
 
 export function registerProcessContentJob(): void {
   contentQueue.process(async (job) => {
@@ -23,12 +24,14 @@ export function registerProcessContentJob(): void {
     });
 
     try {
+      const usage = { userId: content.userId, metadata: { contentId } };
       let text = '';
 
       if (content.type === 'YOUTUBE' && content.url) {
         const transcript = await extractYoutubeTranscript(content.url, {
           title: content.title,
           locale: env.DEFAULT_CONTENT_LOCALE,
+          usage,
         });
         text = transcript.text;
         await prisma.$transaction([
@@ -47,7 +50,7 @@ export function registerProcessContentJob(): void {
       } else if (content.storagePath) {
         const buffer = await storageService.get(content.storagePath);
         if (content.type === 'PDF' || content.type === 'SLIDE') {
-          text = await extractPdfText(buffer, content.title);
+          text = await extractPdfText(buffer, content.title, usage);
         } else {
           throw new Error(`Unsupported content type: ${content.type}`);
         }
@@ -56,7 +59,16 @@ export function registerProcessContentJob(): void {
       }
 
       const chunks = await chunkText(text);
-      await storeChunksWithEmbeddings(contentId, chunks);
+      await storeChunksWithEmbeddings(contentId, chunks, usage);
+
+      if (chunks.length > 3) {
+        const user = await prisma.user.findUnique({
+          where: { id: content.userId },
+          select: { role: true },
+        });
+        await assertQuota(content.userId, 'GENERATION', { role: user?.role });
+      }
+
       await generateContentSections(contentId, chunks.length);
 
       await prisma.content.update({

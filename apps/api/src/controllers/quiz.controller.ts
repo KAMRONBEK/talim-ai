@@ -8,6 +8,7 @@ import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { isSelectedAnswerCorrect, resolveCorrectAnswer } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
+import { assertQuota } from '../services/subscription.service.js';
 
 const createQuizSchema = z.object({
   sectionId: z.string().min(1),
@@ -167,6 +168,8 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
     res.json({ quiz: formatQuiz(existing), cached: true });
     return;
   }
+
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
 
   const quiz =
     existing ??

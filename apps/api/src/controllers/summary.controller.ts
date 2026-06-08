@@ -15,6 +15,7 @@ import { resolveLocale } from '../lib/locale.js';
 import { getSectionBody } from '../services/section.service.js';
 import { recordLearningActivity } from '../services/learningProgress.service.js';
 import type { AppLocale } from '@talim/types';
+import { assertQuota } from '../services/subscription.service.js';
 
 const summaryBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -137,6 +138,8 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
     res.json({ summary: formatSummary(existing), cached: true });
     return;
   }
+
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
 
   const summaryText = await generateSummaryText(
     req.user.userId,

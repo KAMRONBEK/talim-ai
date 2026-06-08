@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
+import type { PlanCode, QuotaFeature } from '@talim/types';
 import { ZodError } from 'zod';
 
 export class AppError extends Error {
@@ -8,6 +9,26 @@ export class AppError extends Error {
   ) {
     super(message);
     this.name = 'AppError';
+  }
+}
+
+const QUOTA_MESSAGES: Record<QuotaFeature, string> = {
+  UPLOAD: 'Upload limit reached',
+  GENERATION: 'Monthly AI generation limit reached',
+  TUTOR_MESSAGE: 'Monthly tutor message limit reached',
+};
+
+export class QuotaExceededError extends AppError {
+  readonly code = 'QUOTA_EXCEEDED' as const;
+
+  constructor(
+    public feature: QuotaFeature,
+    public used: number,
+    public limit: number,
+    public upgradePlanCode: PlanCode | null,
+  ) {
+    super(402, QUOTA_MESSAGES[feature]);
+    this.name = 'QuotaExceededError';
   }
 }
 
@@ -21,6 +42,18 @@ export function errorMiddleware(
     res.status(400).json({
       message: 'Validation error',
       errors: err.flatten().fieldErrors,
+    });
+    return;
+  }
+
+  if (err instanceof QuotaExceededError) {
+    res.status(402).json({
+      message: err.message,
+      code: err.code,
+      feature: err.feature,
+      used: err.used,
+      limit: err.limit,
+      upgradePlanCode: err.upgradePlanCode,
     });
     return;
   }
