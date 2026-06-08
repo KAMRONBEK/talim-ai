@@ -142,10 +142,18 @@ export async function listSubscriptionsForAdmin(params: {
   search?: string;
   status?: SubscriptionStatus;
   plan?: string;
+  kind?: 'user' | 'tenant' | 'all';
 }) {
-  const where: Prisma.SubscriptionWhereInput = {
-    userId: { not: null },
-  };
+  const kind = params.kind ?? 'all';
+  const where: Prisma.SubscriptionWhereInput = {};
+
+  if (kind === 'user') {
+    where.userId = { not: null };
+  } else if (kind === 'tenant') {
+    where.tenantId = { not: null };
+  } else {
+    where.OR = [{ userId: { not: null } }, { tenantId: { not: null } }];
+  }
 
   if (params.status) where.status = params.status;
   if (params.plan) {
@@ -153,12 +161,15 @@ export async function listSubscriptionsForAdmin(params: {
   }
   if (params.search?.trim()) {
     const q = params.search.trim();
-    where.user = {
-      OR: [
-        { email: { contains: q, mode: 'insensitive' } },
-        { name: { contains: q, mode: 'insensitive' } },
-      ],
-    };
+    where.AND = [
+      ...(Array.isArray(where.AND) ? where.AND : where.AND ? [where.AND] : []),
+      {
+        OR: [
+          { user: { OR: [{ email: { contains: q, mode: 'insensitive' } }, { name: { contains: q, mode: 'insensitive' } }] } },
+          { tenant: { OR: [{ name: { contains: q, mode: 'insensitive' } }, { slug: { contains: q, mode: 'insensitive' } }] } },
+        ],
+      },
+    ];
   }
 
   const skip = (params.page - 1) * params.pageSize;
@@ -172,17 +183,31 @@ export async function listSubscriptionsForAdmin(params: {
       include: {
         plan: true,
         user: { select: { id: true, email: true, name: true } },
+        tenant: { select: { id: true, name: true, slug: true } },
       },
     }),
   ]);
 
   return {
-    items: items.map((sub) => ({
-      ...formatSubscription(sub),
-      userId: sub.user!.id,
-      userEmail: sub.user!.email,
-      userName: sub.user!.name,
-    })),
+    items: items.map((sub) => {
+      const base = formatSubscription(sub);
+      if (sub.tenantId && sub.tenant) {
+        return {
+          ...base,
+          subjectType: 'tenant' as const,
+          tenantId: sub.tenant.id,
+          tenantName: sub.tenant.name,
+          tenantSlug: sub.tenant.slug,
+        };
+      }
+      return {
+        ...base,
+        subjectType: 'user' as const,
+        userId: sub.user!.id,
+        userEmail: sub.user!.email,
+        userName: sub.user!.name,
+      };
+    }),
     total,
     page: params.page,
     pageSize: params.pageSize,
@@ -265,14 +290,215 @@ function resolveUpgradePlanCode(effectivePlanCode: string): PlanCode | null {
   return effectivePlanCode === FREE_PLAN_CODE ? 'INDIVIDUAL_PRO' : null;
 }
 
+function resolveTenantUpgradePlanCode(effectivePlanCode: string): PlanCode | null {
+  if (effectivePlanCode === 'TENANT_STARTER') return 'TENANT_GROWTH';
+  return null;
+}
+
+export async function getSubscriptionForTenant(tenantId: string): Promise<SubscriptionView | null> {
+  const sub = await prisma.subscription.findUnique({
+    where: { tenantId },
+    include: { plan: true },
+  });
+  if (!sub) return null;
+  return formatSubscription(sub);
+}
+
+export async function requireActiveTenantSubscription(tenantId: string): Promise<SubscriptionView> {
+  const sub = await getSubscriptionForTenant(tenantId);
+  if (!sub || sub.status !== 'ACTIVE') {
+    throw new AppError(402, 'Tenant subscription required. Contact admin to activate your organization.');
+  }
+  if (sub.planKind !== 'TENANT') {
+    throw new AppError(402, 'Tenant subscription required. Contact admin to activate your organization.');
+  }
+  return sub;
+}
+
+async function getTenantContentCount(tenantId: string): Promise<number> {
+  return prisma.content.count({ where: { tenantId } });
+}
+
+async function getActiveStudentCount(tenantId: string): Promise<number> {
+  return prisma.tenantMembership.count({
+    where: { tenantId, role: 'LEARNER', active: true },
+  });
+}
+
+async function getTenantGenerationCount(tenantId: string, from: Date, to: Date): Promise<number> {
+  const usage = await getUsageForPeriod({ tenantId, from, to });
+  return GENERATION_FEATURES.reduce(
+    (sum, feature) => sum + (usage.byFeature[feature]?.count ?? 0),
+    0,
+  );
+}
+
+export async function assertTenantQuota(
+  tenantId: string,
+  feature: QuotaFeature | 'STUDENT',
+): Promise<void> {
+  const subscription = await requireActiveTenantSubscription(tenantId);
+  const limits = subscription.limits;
+  const upgradePlanCode = resolveTenantUpgradePlanCode(subscription.effectivePlanCode);
+  const { from, to } = monthToDateRange();
+
+  if (feature === 'STUDENT') {
+    const limit = limits.maxStudents;
+    if (limit == null) return;
+    const used = await getActiveStudentCount(tenantId);
+    if (used >= limit) {
+      throw new QuotaExceededError('UPLOAD', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
+  if (feature === 'UPLOAD') {
+    const limit = limits.maxContentItems;
+    if (limit == null) return;
+    const used = await getTenantContentCount(tenantId);
+    if (used >= limit) {
+      throw new QuotaExceededError('UPLOAD', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
+  if (feature === 'GENERATION') {
+    const limit = limits.maxGenerationsPerMonth;
+    if (limit == null) return;
+    const used = await getTenantGenerationCount(tenantId, from, to);
+    if (used >= limit) {
+      throw new QuotaExceededError('GENERATION', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
+  const limit = limits.maxTutorMessages;
+  if (limit == null) return;
+  const used = await prisma.apiUsageEvent.count({
+    where: {
+      tenantId,
+      feature: 'TUTOR_CHAT',
+      createdAt: { gte: from, lte: to },
+    },
+  });
+  if (used >= limit) {
+    throw new QuotaExceededError('TUTOR_MESSAGE', used, limit, upgradePlanCode);
+  }
+}
+
+export async function getTenantUsageVsLimits(tenantId: string) {
+  const sub = await getSubscriptionForTenant(tenantId);
+  const limits = sub?.limits ?? {};
+  const { from, to } = monthToDateRange();
+
+  const [contentCount, studentCount, generationCount, usage] = await Promise.all([
+    getTenantContentCount(tenantId),
+    getActiveStudentCount(tenantId),
+    getTenantGenerationCount(tenantId, from, to),
+    getUsageForPeriod({ tenantId, from, to }),
+  ]);
+
+  return {
+    subscription: sub,
+    periodStart: from.toISOString(),
+    periodEnd: to.toISOString(),
+    uploads: { used: contentCount, limit: limits.maxContentItems ?? null },
+    generations: { used: generationCount, limit: limits.maxGenerationsPerMonth ?? null },
+    tutorMessages: {
+      used: usage.byFeature.TUTOR_CHAT?.count ?? 0,
+      limit: limits.maxTutorMessages ?? null,
+    },
+    students: { used: studentCount, limit: limits.maxStudents ?? null },
+    contentItems: { used: contentCount, limit: limits.maxContentItems ?? null },
+    apiCostUsd: usage.totalCostUsd,
+  };
+}
+
+export async function adminUpdateTenantSubscription(
+  tenantId: string,
+  input: {
+    planCode?: string;
+    status?: SubscriptionStatus;
+    currentPeriodEnd?: string | null;
+  },
+) {
+  const tenant = await prisma.tenant.findUnique({ where: { id: tenantId } });
+  if (!tenant) throw new AppError(404, 'Tenant not found');
+
+  let existing = await prisma.subscription.findUnique({
+    where: { tenantId },
+    include: { plan: true },
+  });
+
+  if (!existing && input.planCode) {
+    const plan = await prisma.plan.findUnique({ where: { code: input.planCode } });
+    if (!plan) throw new AppError(400, `Unknown plan: ${input.planCode}`);
+    if (plan.kind !== 'TENANT') {
+      throw new AppError(400, `Plan ${input.planCode} is not a tenant plan`);
+    }
+    existing = await prisma.subscription.create({
+      data: {
+        tenantId,
+        planId: plan.id,
+        status: input.status ?? 'ACTIVE',
+        source: 'ADMIN',
+        currentPeriodEnd: input.currentPeriodEnd ? new Date(input.currentPeriodEnd) : null,
+      },
+      include: { plan: true },
+    });
+    return formatSubscription(existing);
+  }
+
+  if (!existing) throw new AppError(404, 'Tenant subscription not found');
+
+  const data: Prisma.SubscriptionUpdateInput = {
+    source: 'ADMIN',
+    externalSubscriptionId: null,
+  };
+
+  if (input.planCode) {
+    const plan = await prisma.plan.findUnique({ where: { code: input.planCode } });
+    if (!plan) throw new AppError(400, `Unknown plan: ${input.planCode}`);
+    if (plan.kind !== 'TENANT') {
+      throw new AppError(400, `Plan ${input.planCode} is not a tenant plan`);
+    }
+    data.plan = { connect: { id: plan.id } };
+  }
+
+  if (input.status) {
+    data.status = input.status;
+  }
+
+  if (input.currentPeriodEnd !== undefined) {
+    data.currentPeriodEnd = input.currentPeriodEnd ? new Date(input.currentPeriodEnd) : null;
+  }
+
+  const updated = await prisma.subscription.update({
+    where: { tenantId },
+    data,
+    include: { plan: true },
+  });
+
+  return formatSubscription(updated);
+}
+
 export async function assertQuota(
   userId: string,
   feature: QuotaFeature,
   options?: { role?: UserRole; tenantId?: string },
 ): Promise<void> {
-  void options?.tenantId;
-
   if (options?.role === 'ADMIN') return;
+
+  if (options?.role === 'TENANT_LEARNER') {
+    if (feature === 'UPLOAD' || feature === 'GENERATION') {
+      throw new AppError(403, 'Learners cannot upload or generate content');
+    }
+  }
+
+  if (options?.role === 'TENANT_OWNER' && options.tenantId) {
+    await assertTenantQuota(options.tenantId, feature);
+    return;
+  }
 
   const subscription = await getSubscriptionForUser(userId);
   const limits = subscription.limits;

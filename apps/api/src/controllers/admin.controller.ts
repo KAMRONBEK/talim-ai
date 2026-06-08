@@ -11,10 +11,16 @@ import { writeAdminAuditLog } from '../services/admin/audit.service.js';
 import { getUsageForPeriod } from '../services/usage.service.js';
 import {
   adminUpdateUserSubscription,
+  adminUpdateTenantSubscription,
+  getSubscriptionForTenant,
   getSubscriptionForUser,
+  getTenantUsageVsLimits,
   getUsageVsLimits,
   listSubscriptionsForAdmin,
 } from '../services/subscription.service.js';
+import { formatTenant } from '../services/tenant.service.js';
+import { applyAdminRoleChange } from '../services/adminUserRole.service.js';
+import { resolveTenantIdForUser } from '../services/contentAccess.service.js';
 import { contentQueue } from '../services/queue.service.js';
 import { cancelContentJobs } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
@@ -33,11 +39,22 @@ const createUserSchema = z.object({
   role: z.enum(['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN']).default('INDIVIDUAL'),
 });
 
-const patchUserSchema = z.object({
-  name: z.string().min(1).optional(),
-  role: z.enum(['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN']).optional(),
-  preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
-});
+const patchUserSchema = z
+  .object({
+    name: z.string().min(1).optional(),
+    role: z.enum(['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN']).optional(),
+    preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
+    tenantId: z.string().min(1).optional(),
+    orgName: z.string().min(1).optional(),
+  })
+  .refine(
+    (body) => {
+      if (body.role === 'TENANT_LEARNER' && !body.tenantId) return false;
+      if (body.role === 'TENANT_OWNER' && !body.tenantId && !body.orgName) return false;
+      return true;
+    },
+    { message: 'tenantId required for learner; orgName or tenantId required for tenant owner' },
+  );
 
 const resetPasswordSchema = z.object({
   password: z.string().min(8),
@@ -50,6 +67,7 @@ const usageDaysSchema = z.object({
 const subscriptionListSchema = paginationSchema.extend({
   status: z.enum(['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING']).optional(),
   plan: z.string().optional(),
+  kind: z.enum(['user', 'tenant', 'all']).optional(),
 });
 
 const patchSubscriptionSchema = z
@@ -189,10 +207,33 @@ export async function getUser(req: AuthenticatedRequest, res: Response): Promise
   const from = new Date();
   from.setDate(from.getDate() - 30);
   const usage = await getUsageForPeriod({ userId: id, from, to: new Date() });
-  const [subscription, usageVsLimits] = await Promise.all([
-    getSubscriptionForUser(id),
-    getUsageVsLimits(id),
-  ]);
+  const tenantId = await resolveTenantIdForUser(id, user.role);
+  const ownedTenant =
+    user.role === 'TENANT_OWNER'
+      ? await prisma.tenant.findFirst({
+          where: { ownerId: id },
+          select: { id: true, name: true, slug: true },
+        })
+      : null;
+  const learnerMembership =
+    user.role === 'TENANT_LEARNER'
+      ? await prisma.tenantMembership.findFirst({
+          where: { userId: id, role: 'LEARNER', active: true },
+          include: { tenant: { select: { id: true, name: true, slug: true } } },
+        })
+      : null;
+
+  let subscription;
+  let usageVsLimits;
+  if (user.role === 'TENANT_OWNER' && tenantId) {
+    usageVsLimits = await getTenantUsageVsLimits(tenantId);
+    subscription = usageVsLimits.subscription ?? (await getSubscriptionForTenant(tenantId));
+  } else {
+    [subscription, usageVsLimits] = await Promise.all([
+      getSubscriptionForUser(id),
+      getUsageVsLimits(id),
+    ]);
+  }
 
   res.json({
     user: {
@@ -200,6 +241,9 @@ export async function getUser(req: AuthenticatedRequest, res: Response): Promise
       quizCount: user._count.quizzes,
       summaryCount: user._count.contentSummaries,
       usageLast30Days: usage.totalCostUsd,
+      tenantId,
+      ownedTenant,
+      learnerTenant: learnerMembership?.tenant ?? null,
     },
     subscription,
     usageVsLimits,
@@ -225,10 +269,25 @@ export async function patchUser(req: AuthenticatedRequest, res: Response): Promi
 
   const existing = await prisma.user.findUnique({ where: { id } });
   if (!existing) throw new AppError(404, 'User not found');
+  if (id === req.user.userId && body.role && body.role !== 'ADMIN') {
+    throw new AppError(400, 'Cannot change your own admin role');
+  }
+
+  const newRole = body.role ?? existing.role;
+  if (body.role && body.role !== existing.role) {
+    await applyAdminRoleChange(id, existing.role, body.role, {
+      tenantId: body.tenantId,
+      orgName: body.orgName,
+    });
+  }
 
   const user = await prisma.user.update({
     where: { id },
-    data: body,
+    data: {
+      ...(body.name !== undefined ? { name: body.name } : {}),
+      ...(body.role !== undefined ? { role: body.role } : {}),
+      ...(body.preferredLocale !== undefined ? { preferredLocale: body.preferredLocale } : {}),
+    },
     include: { _count: { select: { contents: true } } },
   });
 
@@ -238,11 +297,17 @@ export async function patchUser(req: AuthenticatedRequest, res: Response): Promi
       action: 'user.role_change',
       targetType: 'user',
       targetId: id,
-      metadata: { from: existing.role, to: body.role },
+      metadata: {
+        from: existing.role,
+        to: body.role,
+        tenantId: body.tenantId ?? null,
+        orgName: body.orgName ?? null,
+      },
     });
   }
 
-  res.json({ user: formatAdminUser(user) });
+  const tenantId = await resolveTenantIdForUser(user.id, newRole);
+  res.json({ user: { ...formatAdminUser(user), tenantId } });
 }
 
 export async function deleteUser(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -286,16 +351,149 @@ export async function resetUserPassword(req: AuthenticatedRequest, res: Response
   res.json({ ok: true });
 }
 
-export async function listTenants(_req: AuthenticatedRequest, res: Response): Promise<void> {
-  res.json({ items: [], total: 0, page: 1, pageSize: 20 });
+const patchTenantSubscriptionSchema = z
+  .object({
+    planCode: z.enum(['TENANT_STARTER', 'TENANT_GROWTH']).optional(),
+    status: z.enum(['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING']).optional(),
+    currentPeriodEnd: z.string().datetime().nullable().optional(),
+    name: z.string().min(1).optional(),
+  })
+  .refine(
+    (body) =>
+      body.planCode !== undefined ||
+      body.status !== undefined ||
+      body.currentPeriodEnd !== undefined ||
+      body.name !== undefined,
+    { message: 'At least one field required' },
+  );
+
+export async function listTenants(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const query = paginationSchema.parse(req.query);
+  const skip = (query.page - 1) * query.pageSize;
+  const where: Prisma.TenantWhereInput = query.search?.trim()
+    ? {
+        OR: [
+          { name: { contains: query.search.trim(), mode: 'insensitive' } },
+          { slug: { contains: query.search.trim(), mode: 'insensitive' } },
+        ],
+      }
+    : {};
+
+  const [total, tenants] = await Promise.all([
+    prisma.tenant.count({ where }),
+    prisma.tenant.findMany({
+      where,
+      skip,
+      take: query.pageSize,
+      orderBy: { createdAt: 'desc' },
+      include: {
+        owner: { select: { id: true, email: true, name: true } },
+        subscription: { include: { plan: true } },
+        memberships: {
+          where: { role: 'LEARNER', active: true },
+          select: { id: true },
+        },
+        _count: { select: { contents: true } },
+      },
+    }),
+  ]);
+
+  res.json({
+    items: tenants.map((t) => ({
+      ...formatTenant(t),
+      ownerEmail: t.owner.email,
+      ownerName: t.owner.name,
+      studentCount: t.memberships.length,
+      contentCount: t._count.contents,
+      planCode: t.subscription?.plan.code ?? null,
+      subscriptionStatus: t.subscription?.status ?? null,
+    })),
+    total,
+    page: query.page,
+    pageSize: query.pageSize,
+  });
 }
 
 export async function getTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
-  throw new AppError(404, 'Tenant not found');
+  const id = getParam(req, 'id');
+  const tenant = await prisma.tenant.findUnique({
+    where: { id },
+    include: {
+      owner: { select: { id: true, email: true, name: true } },
+      subscription: { include: { plan: true } },
+    },
+  });
+  if (!tenant) throw new AppError(404, 'Tenant not found');
+
+  const [usageVsLimits, memberships, contentCount] = await Promise.all([
+    getTenantUsageVsLimits(id).catch(() => null),
+    prisma.tenantMembership.findMany({
+      where: { tenantId: id },
+      include: { user: { select: { id: true, email: true, name: true, role: true } } },
+      orderBy: [{ role: 'desc' }, { joinedAt: 'desc' }],
+    }),
+    prisma.content.count({ where: { tenantId: id } }),
+  ]);
+  const studentCount = memberships.filter((m) => m.role === 'LEARNER' && m.active).length;
+  const subscription =
+    usageVsLimits?.subscription ??
+    (tenant.subscription ? await getSubscriptionForTenant(id) : null);
+
+  res.json({
+    tenant: {
+      ...formatTenant(tenant),
+      owner: tenant.owner,
+      studentCount,
+      contentCount,
+      members: memberships.map((m) => ({
+        membershipId: m.id,
+        userId: m.user.id,
+        email: m.user.email,
+        name: m.user.name,
+        userRole: m.user.role,
+        memberRole: m.role,
+        active: m.active,
+        joinedAt: m.joinedAt.toISOString(),
+      })),
+    },
+    subscription,
+    usageVsLimits,
+  });
 }
 
 export async function patchTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
-  throw new AppError(404, 'Tenant not found');
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const id = getParam(req, 'id');
+  const body = patchTenantSubscriptionSchema.parse(req.body);
+
+  const tenant = await prisma.tenant.findUnique({ where: { id } });
+  if (!tenant) throw new AppError(404, 'Tenant not found');
+
+  if (body.name) {
+    await prisma.tenant.update({ where: { id }, data: { name: body.name } });
+  }
+
+  let subscription = null;
+  if (body.planCode || body.status !== undefined || body.currentPeriodEnd !== undefined) {
+    subscription = await adminUpdateTenantSubscription(id, {
+      planCode: body.planCode,
+      status: body.status,
+      currentPeriodEnd: body.currentPeriodEnd,
+    });
+  } else {
+    subscription = await getSubscriptionForTenant(id);
+  }
+
+  await writeAdminAuditLog({
+    adminUserId: req.user.userId,
+    action: 'tenant.patch',
+    targetType: 'tenant',
+    targetId: id,
+    metadata: body,
+  });
+
+  const updated = await prisma.tenant.findUniqueOrThrow({ where: { id } });
+  res.json({ tenant: formatTenant(updated), subscription });
 }
 
 export async function listContents(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -494,6 +692,7 @@ export async function listSubscriptions(req: AuthenticatedRequest, res: Response
     search: query.search,
     status: query.status,
     plan: query.plan,
+    kind: query.kind,
   });
   res.json(result);
 }

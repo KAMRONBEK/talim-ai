@@ -10,6 +10,7 @@ import {
   getSectionBody,
   resolveSectionTitle,
 } from '../services/section.service.js';
+import { assertCanAccessContent } from '../services/contentAccess.service.js';
 
 function formatSection(
   section: {
@@ -34,19 +35,11 @@ function formatSection(
   };
 }
 
-async function assertContentAccess(userId: string, contentId: string) {
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId },
-  });
-  if (!content) throw new AppError(404, 'Content not found');
-  return content;
-}
-
 export async function listSections(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const locale = resolveLocale(req) as AppLocale;
-  await assertContentAccess(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId);
 
   const sections = await prisma.contentSection.findMany({
     where: { contentId },
@@ -70,7 +63,7 @@ export async function getSection(req: AuthenticatedRequest, res: Response): Prom
   const contentId = getParam(req, 'id');
   const sectionId = getParam(req, 'sectionId');
   const locale = resolveLocale(req) as AppLocale;
-  await assertContentAccess(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId);
 
   const section = await prisma.contentSection.findFirst({
     where: { id: sectionId, contentId },

@@ -16,6 +16,7 @@ export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
+export type TenantMemberRole = 'OWNER' | 'LEARNER';
 
 export type PlanKind = 'INDIVIDUAL' | 'TENANT';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
@@ -44,11 +45,23 @@ export interface AdminUserSubscription {
   effectivePlanCode: string;
 }
 
-export interface AdminSubscriptionListItem extends AdminUserSubscription {
+export interface AdminSubscriptionListItemUser extends AdminUserSubscription {
+  subjectType: 'user';
   userId: string;
   userEmail: string;
   userName: string | null;
 }
+
+export interface AdminSubscriptionListItemTenant extends AdminUserSubscription {
+  subjectType: 'tenant';
+  tenantId: string;
+  tenantName: string;
+  tenantSlug: string;
+}
+
+export type AdminSubscriptionListItem =
+  | AdminSubscriptionListItemUser
+  | AdminSubscriptionListItemTenant;
 
 export interface AdminUsageVsLimits {
   periodStart: string;
@@ -57,6 +70,12 @@ export interface AdminUsageVsLimits {
   generations: { used: number; limit: number | null };
   tutorMessages: { used: number; limit: number | null };
   apiCostUsd: number;
+}
+
+export interface AdminTenantUsageVsLimits extends AdminUsageVsLimits {
+  students: { used: number; limit: number | null };
+  contentItems: { used: number; limit: number | null };
+  subscription?: AdminUserSubscription | null;
 }
 
 export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE';
@@ -84,11 +103,22 @@ export interface BillingUsageVsLimits {
   tutorMessages: { used: number; limit: number | null };
 }
 
+export interface TenantBillingUsageVsLimits extends BillingUsageVsLimits {
+  students: { used: number; limit: number | null };
+  contentItems: { used: number; limit: number | null };
+}
+
 export interface BillingMeResponse {
   subscription: UserSubscription;
-  usage: BillingUsageVsLimits;
+  usage: BillingUsageVsLimits | TenantBillingUsageVsLimits;
   periodStart: string;
   periodEnd: string;
+  tenantId?: string | null;
+}
+
+export interface CreateTenantStudentResponse {
+  student: TenantStudent;
+  temporaryPassword: string;
 }
 
 export type UsageFeature =
@@ -109,7 +139,60 @@ export interface User {
   name: string | null;
   role: UserRole;
   preferredLocale: AppLocale;
+  tenantId: string | null;
   createdAt: string;
+}
+
+export interface Tenant {
+  id: string;
+  name: string;
+  slug: string;
+  ownerId: string;
+  createdAt: string;
+}
+
+export interface TenantMembership {
+  id: string;
+  tenantId: string;
+  userId: string;
+  role: TenantMemberRole;
+  active: boolean;
+  joinedAt: string;
+}
+
+export interface ContentAssignment {
+  id: string;
+  contentId: string;
+  learnerId: string;
+  assignedById: string;
+  assignedAt: string;
+}
+
+export interface TenantStudent {
+  id: string;
+  email: string;
+  name: string | null;
+  active: boolean;
+  joinedAt: string;
+  assignedCount: number;
+  lastActivityAt: string | null;
+  avgQuizScore: number | null;
+}
+
+export interface StudentContentProgress {
+  contentId: string;
+  contentTitle: string;
+  overallCoverage: number;
+  lastActivityAt: string | null;
+  quizAttempts: number;
+  avgQuizScore: number | null;
+}
+
+export interface StudentProgressSummary {
+  student: Pick<TenantStudent, 'id' | 'email' | 'name' | 'active'>;
+  activityDays: string[];
+  streakDays: number;
+  contentProgress: StudentContentProgress[];
 }
 
 export interface AdminUserListItem extends User {
@@ -123,6 +206,43 @@ export interface AdminUserDetail extends AdminUserListItem {
   quizCount: number;
   summaryCount: number;
   usageLast30Days: number;
+  ownedTenant: Pick<Tenant, 'id' | 'name' | 'slug'> | null;
+  learnerTenant: Pick<Tenant, 'id' | 'name' | 'slug'> | null;
+}
+
+export interface AdminTenantListItem extends Tenant {
+  ownerEmail: string;
+  ownerName: string | null;
+  studentCount: number;
+  contentCount: number;
+  planCode: string | null;
+  subscriptionStatus: SubscriptionStatus | null;
+}
+
+export interface AdminTenantMember {
+  membershipId: string;
+  userId: string;
+  email: string;
+  name: string | null;
+  userRole: UserRole;
+  memberRole: TenantMemberRole;
+  active: boolean;
+  joinedAt: string;
+}
+
+export interface AdminTenantDetail extends Tenant {
+  owner: Pick<User, 'id' | 'email' | 'name'>;
+  studentCount: number;
+  contentCount: number;
+  members: AdminTenantMember[];
+}
+
+export interface AdminPatchUserInput {
+  name?: string;
+  role?: UserRole;
+  preferredLocale?: AppLocale;
+  tenantId?: string;
+  orgName?: string;
 }
 
 export interface AdminContentItem {
@@ -204,6 +324,7 @@ export interface AuthResponse {
 export interface Content {
   id: string;
   userId: string;
+  tenantId?: string | null;
   type: ContentType;
   title: string;
   url: string | null;

@@ -7,6 +7,7 @@ import { summaryRoutes } from './summary.routes.js';
 import { adminRoutes } from './admin.routes.js';
 import { usageRoutes } from './usage.routes.js';
 import { billingRoutes } from './billing.routes.js';
+import { tenantRoutes } from './tenant.routes.js';
 
 export const routes = Router();
 
@@ -22,3 +23,4 @@ routes.use('/summary', summaryRoutes);
 routes.use('/admin', adminRoutes);
 routes.use('/usage', usageRoutes);
 routes.use('/billing', billingRoutes);
+routes.use('/tenant', tenantRoutes);

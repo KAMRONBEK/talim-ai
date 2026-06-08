@@ -11,13 +11,7 @@ import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage } from '../services/pdf.service.js';
-import { assertQuota } from '../services/subscription.service.js';
-import {
-  assertCanAccessContent,
-  assertCanMutateContent,
-  assertCanGenerate,
-  buildContentListWhere,
-} from '../services/contentAccess.service.js';
+import { assertTenantOwnsContent } from '../services/contentAccess.service.js';
 
 const youtubeSchema = z.object({
   url: z.string().url(),
@@ -32,6 +26,7 @@ const ocrRegionSchema = z.object({
 function formatContent(content: {
   id: string;
   userId: string;
+  tenantId: string | null;
   type: string;
   title: string;
   url: string | null;
@@ -42,6 +37,7 @@ function formatContent(content: {
   return {
     id: content.id,
     userId: content.userId,
+    tenantId: content.tenantId,
     type: content.type,
     title: content.title,
     url: content.url,
@@ -49,6 +45,159 @@ function formatContent(content: {
     status: content.status,
     createdAt: content.createdAt.toISOString(),
   };
+}
+
+function requireTenantId(req: AuthenticatedRequest): string {
+  if (!req.user?.tenantId) throw new AppError(403, 'Organization context required');
+  return req.user.tenantId;
+}
+
+export async function listContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const contents = await prisma.content.findMany({
+    where: { tenantId },
+    orderBy: { createdAt: 'desc' },
+  });
+  res.json({ contents: contents.map(formatContent) });
+}
+
+export async function getContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+  const content = await prisma.content.findFirstOrThrow({
+    where: { id: getParam(req, 'id'), tenantId },
+  });
+  res.json({ content: formatContent(content) });
+}
+
+export async function uploadContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireTenantId(req);
+  if (!req.file) throw new AppError(400, 'No file uploaded');
+
+  const isPdf = req.file.mimetype === 'application/pdf' || req.file.originalname.endsWith('.pdf');
+  const type = isPdf ? ContentType.PDF : ContentType.SLIDE;
+  const storagePath = await storageService.save(req.file.buffer, req.file.originalname);
+
+  const content = await prisma.content.create({
+    data: {
+      userId: req.user.userId,
+      tenantId,
+      type,
+      title: req.file.originalname,
+      storagePath,
+      status: 'PENDING',
+    },
+  });
+
+  await contentQueue.add({ contentId: content.id });
+  res.status(201).json({ content: formatContent(content) });
+}
+
+export async function createYoutubeContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireTenantId(req);
+  const body = youtubeSchema.parse(req.body);
+  const videoId = extractYoutubeVideoId(body.url);
+  if (!videoId) throw new AppError(400, 'Invalid YouTube URL');
+
+  const content = await prisma.content.create({
+    data: {
+      userId: req.user.userId,
+      tenantId,
+      type: ContentType.YOUTUBE,
+      title: body.title ?? `YouTube Video ${videoId}`,
+      url: body.url,
+      status: 'PENDING',
+    },
+  });
+
+  await contentQueue.add({ contentId: content.id });
+  res.status(201).json({ content: formatContent(content) });
+}
+
+export async function retryContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+  if (content.status !== 'FAILED') {
+    throw new AppError(400, 'Only failed content can be retried');
+  }
+
+  const updated = await prisma.content.update({
+    where: { id: content.id },
+    data: { status: 'PENDING' },
+  });
+
+  await contentQueue.add({ contentId: content.id });
+  res.json({ content: formatContent(updated) });
+}
+
+export async function deleteContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+
+  await cancelContentJobs(content.id);
+
+  const podcasts = await prisma.podcast.findMany({
+    where: { contentId: content.id },
+    include: { episodes: true },
+  });
+  for (const podcast of podcasts) {
+    await Promise.all(
+      podcast.episodes
+        .filter((episode) => episode.audioPath)
+        .map((episode) => storageService.delete(episode.audioPath!)),
+    );
+  }
+
+  const videos = await prisma.contentVideo.findMany({ where: { contentId: content.id } });
+  await Promise.all(
+    videos.filter((v) => v.storagePath).map((v) => storageService.delete(v.storagePath!)),
+  );
+
+  if (content.storagePath) {
+    await storageService.delete(content.storagePath);
+  }
+
+  await prisma.content.delete({ where: { id: content.id } });
+  res.status(204).send();
+}
+
+export async function getContentFile(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireTenantId(req);
+  const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+  if (!content.storagePath) throw new AppError(404, 'File not available');
+
+  const buffer = await storageService.get(content.storagePath);
+  const ext = path.extname(content.storagePath).toLowerCase();
+  const contentType =
+    ext === '.pdf'
+      ? 'application/pdf'
+      : ext === '.ppt' || ext === '.pptx'
+        ? 'application/vnd.ms-powerpoint'
+        : 'application/octet-stream';
+
+  res.setHeader('Content-Type', contentType);
+  res.setHeader('Content-Disposition', `inline; filename="${path.basename(content.storagePath)}"`);
+  res.send(buffer);
+}
+
+export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireTenantId(req);
+  const body = ocrRegionSchema.parse(req.body);
+  const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+  if (content.type !== 'PDF') throw new AppError(404, 'PDF content not found');
+
+  const base64 = body.image.replace(/^data:image\/\w+;base64,/, '');
+  const imageBuffer = Buffer.from(base64, 'base64');
+  if (imageBuffer.length === 0) throw new AppError(400, 'Invalid image data');
+
+  const text = await extractRegionTextFromImage(imageBuffer, {
+    userId: req.user.userId,
+    metadata: { contentId: content.id, tenantId },
+  });
+  res.json({ text, page: body.page });
 }
 
 function formatTranscriptSegment(segment: {
@@ -71,97 +220,11 @@ function formatTranscriptSegment(segment: {
   };
 }
 
-export async function listContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  const where = await buildContentListWhere(req.user);
-  const contents = await prisma.content.findMany({
-    where,
-    orderBy: { createdAt: 'desc' },
-  });
-  res.json({ contents: contents.map(formatContent) });
-}
-
-export async function getContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
-  res.json({ content: formatContent(content as never) });
-}
-
-export async function uploadContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  assertCanMutateContent(req.user);
-  if (!req.file) throw new AppError(400, 'No file uploaded');
-
-  const isPdf = req.file.mimetype === 'application/pdf' || req.file.originalname.endsWith('.pdf');
-  const type = isPdf ? ContentType.PDF : ContentType.SLIDE;
-  const storagePath = await storageService.save(req.file.buffer, req.file.originalname);
-
-  const content = await prisma.content.create({
-    data: {
-      userId: req.user.userId,
-      type,
-      title: req.file.originalname,
-      storagePath,
-      status: 'PENDING',
-    },
-  });
-
-  await contentQueue.add({ contentId: content.id });
-  res.status(201).json({ content: formatContent(content) });
-}
-
-export async function createYoutubeContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  assertCanMutateContent(req.user);
-  const body = youtubeSchema.parse(req.body);
-  const videoId = extractYoutubeVideoId(body.url);
-  if (!videoId) throw new AppError(400, 'Invalid YouTube URL');
-
-  const content = await prisma.content.create({
-    data: {
-      userId: req.user.userId,
-      type: ContentType.YOUTUBE,
-      title: body.title ?? `YouTube Video ${videoId}`,
-      url: body.url,
-      status: 'PENDING',
-    },
-  });
-
-  await contentQueue.add({ contentId: content.id });
-  res.status(201).json({ content: formatContent(content) });
-}
-
-export async function retryContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  assertCanMutateContent(req.user);
-  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
-  if (content.status !== 'FAILED') {
-    throw new AppError(400, 'Only failed content can be retried');
-  }
-  if (content.type === 'YOUTUBE') {
-    if (!content.url) throw new AppError(400, 'YouTube URL missing');
-  } else if (!content.storagePath) {
-    throw new AppError(400, 'File no longer available — please upload again');
-  }
-
-  await assertQuota(req.user.userId, 'GENERATION', {
-    role: req.user.role,
-    tenantId: req.user.tenantId,
-  });
-
-  const updated = await prisma.content.update({
-    where: { id: content.id },
-    data: { status: 'PENDING' },
-  });
-
-  await contentQueue.add({ contentId: content.id });
-  res.json({ content: formatContent(updated) });
-}
-
 export async function getContentTranscript(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireTenantId(req);
   const contentId = getParam(req, 'id');
-  const content = await assertCanAccessContent(req.user, contentId);
+  const content = await assertTenantOwnsContent(tenantId, contentId);
   if (content.type !== ContentType.YOUTUBE) throw new AppError(404, 'YouTube content not found');
 
   let segments = await prisma.contentTranscriptSegment.findMany({
@@ -173,7 +236,7 @@ export async function getContentTranscript(req: AuthenticatedRequest, res: Respo
     const transcript = await extractYoutubeTranscript(content.url, {
       title: content.title,
       locale: env.DEFAULT_CONTENT_LOCALE,
-      usage: { userId: req.user.userId, metadata: { contentId } },
+      usage: { userId: req.user.userId, tenantId, metadata: { contentId } },
     });
     await prisma.$transaction([
       prisma.contentTranscriptSegment.deleteMany({ where: { contentId } }),
@@ -195,7 +258,6 @@ export async function getContentTranscript(req: AuthenticatedRequest, res: Respo
   }
 
   const lastSegment = segments.at(-1);
-
   res.json({
     transcript: {
       contentId,
@@ -204,77 +266,4 @@ export async function getContentTranscript(req: AuthenticatedRequest, res: Respo
       segments: segments.map(formatTranscriptSegment),
     },
   });
-}
-
-export async function deleteContent(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  assertCanMutateContent(req.user);
-  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
-
-  await cancelContentJobs(content.id);
-
-  const podcasts = await prisma.podcast.findMany({
-    where: { contentId: content.id },
-    include: { episodes: true },
-  });
-  for (const podcast of podcasts) {
-    await Promise.all(
-      podcast.episodes
-        .filter((episode) => episode.audioPath)
-        .map((episode) => storageService.delete(episode.audioPath!)),
-    );
-  }
-
-  const videos = await prisma.contentVideo.findMany({
-    where: { contentId: content.id },
-  });
-  await Promise.all(
-    videos
-      .filter((v) => v.storagePath)
-      .map((v) => storageService.delete(v.storagePath!)),
-  );
-
-  if (content.storagePath) {
-    await storageService.delete(content.storagePath);
-  }
-
-  await prisma.content.delete({ where: { id: content.id } });
-  res.status(204).send();
-}
-
-export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  const body = ocrRegionSchema.parse(req.body);
-
-  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
-  if (content.type !== 'PDF') throw new AppError(404, 'PDF content not found');
-
-  const base64 = body.image.replace(/^data:image\/\w+;base64,/, '');
-  const imageBuffer = Buffer.from(base64, 'base64');
-  if (imageBuffer.length === 0) throw new AppError(400, 'Invalid image data');
-
-  const text = await extractRegionTextFromImage(imageBuffer, {
-    userId: req.user.userId,
-    metadata: { contentId: content.id },
-  });
-  res.json({ text, page: body.page });
-}
-
-export async function getContentFile(req: AuthenticatedRequest, res: Response): Promise<void> {
-  if (!req.user) throw new AppError(401, 'Unauthorized');
-  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
-  if (!content.storagePath) throw new AppError(404, 'File not available');
-
-  const buffer = await storageService.get(content.storagePath);
-  const ext = path.extname(content.storagePath).toLowerCase();
-  const contentType =
-    ext === '.pdf'
-      ? 'application/pdf'
-      : ext === '.ppt' || ext === '.pptx'
-        ? 'application/vnd.ms-powerpoint'
-        : 'application/octet-stream';
-
-  res.setHeader('Content-Type', contentType);
-  res.setHeader('Content-Disposition', `inline; filename="${path.basename(content.storagePath)}"`);
-  res.send(buffer);
 }

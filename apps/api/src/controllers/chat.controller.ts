@@ -24,6 +24,7 @@ import { resolveLocale } from '../lib/locale.js';
 import { manimQueue } from '../services/queue.service.js';
 import { getManimAssetPath } from '../jobs/renderManim.job.js';
 import { storageService } from '../services/storage.service.js';
+import { assertCanAccessContent } from '../services/contentAccess.service.js';
 
 const streamSchema = z.object({
   contentId: z.string().min(1),
@@ -98,10 +99,7 @@ export async function getContentChat(req: AuthenticatedRequest, res: Response): 
   const contentId = getParam(req, 'contentId');
   const locale = resolveLocale(req) as AppLocale;
 
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId: req.user.userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const session = await prisma.chatSession.findFirst({
     where: { userId: req.user.userId, contentId, locale },
@@ -152,10 +150,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const body = streamSchema.parse(req.body);
 
-  const content = await prisma.content.findFirst({
-    where: { id: body.contentId, userId: req.user.userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
+  const content = await assertCanAccessContent(req.user, body.contentId, { requireReady: true });
 
   const locale = (body.locale ?? resolveLocale(req)) as AppLocale;
 

@@ -88,6 +88,11 @@ enum SubscriptionSource {
   PAYMENT_PROVIDER
 }
 
+enum TenantMemberRole {
+  OWNER
+  LEARNER
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
@@ -95,6 +100,7 @@ model User {
   name                    String?
   role                    UserRole                 @default(INDIVIDUAL)
   preferredLocale         String                   @default("uz")
+  stripeCustomerId        String?
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
   contents                Content[]
@@ -109,14 +115,65 @@ model User {
   apiUsageEvents          ApiUsageEvent[]
   adminAuditLogs          AdminAuditLog[]
   subscription            Subscription?
+  ownedTenants            Tenant[]                 @relation("OwnedTenants")
+  tenantMemberships       TenantMembership[]
+  assignmentsMade         ContentAssignment[]      @relation("AssignmentsMade")
+  contentAssignments      ContentAssignment[]      @relation("LearnerAssignments")
 
   @@index([email])
   @@index([role])
 }
 
+model Tenant {
+  id               String             @id @default(cuid())
+  name             String
+  slug             String             @unique
+  ownerId          String
+  stripeCustomerId String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  owner            User               @relation("OwnedTenants", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberships      TenantMembership[]
+  contents         Content[]
+  subscription     Subscription?
+
+  @@index([ownerId])
+}
+
+model TenantMembership {
+  id        String           @id @default(cuid())
+  tenantId  String
+  userId    String
+  role      TenantMemberRole
+  active    Boolean          @default(true)
+  joinedAt  DateTime         @default(now())
+  tenant    Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, userId])
+  @@index([tenantId])
+  @@index([userId])
+}
+
+model ContentAssignment {
+  id           String   @id @default(cuid())
+  contentId    String
+  learnerId    String
+  assignedById String
+  assignedAt   DateTime @default(now())
+  content      Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  learner      User     @relation("LearnerAssignments", fields: [learnerId], references: [id], onDelete: Cascade)
+  assignedBy   User     @relation("AssignmentsMade", fields: [assignedById], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, learnerId])
+  @@index([learnerId])
+  @@index([contentId])
+}
+
 model Content {
   id               String            @id @default(cuid())
   userId           String
+  tenantId         String?
   type             ContentType
   title            String
   url              String?
@@ -125,6 +182,7 @@ model Content {
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant           Tenant?           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   chunks           Chunk[]
   chatSessions     ChatSession[]
   quizzes          Quiz[]
@@ -134,8 +192,10 @@ model Content {
   transcriptSegments ContentTranscriptSegment[]
   contentProgress  ContentProgress[]
   contentSummaries ContentSummary[]
+  assignments      ContentAssignment[]
 
   @@index([userId])
+  @@index([tenantId])
   @@index([status])
 }
 
@@ -449,6 +509,7 @@ model Subscription {
   createdAt              DateTime           @default(now())
   updatedAt              DateTime           @updatedAt
   user                   User?              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant                 Tenant?            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   plan                   Plan               @relation(fields: [planId], references: [id])
 
   @@index([planId])

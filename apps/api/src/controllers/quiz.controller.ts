@@ -9,6 +9,7 @@ import { resolveLocale } from '../lib/locale.js';
 import { isSelectedAnswerCorrect, resolveCorrectAnswer } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
 import { assertQuota } from '../services/subscription.service.js';
+import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 
 const createQuizSchema = z.object({
   sectionId: z.string().min(1),
@@ -136,26 +137,37 @@ function evaluateQuizAnswers(
   return { answers, correct, total, score };
 }
 
+async function assertQuizAccess(req: AuthenticatedRequest, quizId: string) {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
+  if (!quiz) throw new AppError(404, 'Quiz not found');
+  await assertCanAccessContent(req.user, quiz.contentId, { requireReady: true });
+  return quiz;
+}
+
+function quizCreatorUserId(user: NonNullable<AuthenticatedRequest['user']>): string {
+  return user.userId;
+}
+
 export async function createQuiz(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
+  assertCanGenerate(req.user);
   const contentId = getParam(req, 'contentId');
   const body = createQuizSchema.parse(req.body ?? {});
   const locale = body.locale ?? resolveLocale(req);
 
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId: req.user.userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const section = await prisma.contentSection.findFirst({
     where: { id: body.sectionId, contentId },
   });
   if (!section) throw new AppError(404, 'Section not found');
 
+  const creatorId = quizCreatorUserId(req.user);
   const existing = await prisma.quiz.findFirst({
     where: {
       contentId,
-      userId: req.user.userId,
+      userId: creatorId,
       sectionId: body.sectionId,
       kind: body.kind,
       locale,
@@ -169,14 +181,17 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
     return;
   }
 
-  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
+  await assertQuota(req.user.userId, 'GENERATION', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
 
   const quiz =
     existing ??
     (await prisma.quiz.create({
       data: {
         contentId,
-        userId: req.user.userId,
+        userId: creatorId,
         sectionId: body.sectionId,
         kind: body.kind,
         locale,
@@ -185,7 +200,7 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
 
   await quizQueue.add({
     contentId,
-    userId: req.user.userId,
+    userId: creatorId,
     quizId: quiz.id,
     sectionId: body.sectionId,
     kind: body.kind,
@@ -203,13 +218,13 @@ export async function listQuizzesByContent(req: AuthenticatedRequest, res: Respo
   const contentId = getParam(req, 'contentId');
   const locale = resolveLocale(req);
 
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId: req.user.userId },
-  });
-  if (!content) throw new AppError(404, 'Content not found');
+  await assertCanAccessContent(req.user, contentId);
+
+  const quizUserFilter =
+    req.user.role === 'INDIVIDUAL' ? { userId: req.user.userId } : {};
 
   const quizzes = await prisma.quiz.findMany({
-    where: { contentId, userId: req.user.userId, locale },
+    where: { contentId, locale, ...quizUserFilter },
     include: {
       questions: { select: { id: true } },
       attempts: {
@@ -238,8 +253,9 @@ export async function listQuizzesByContent(req: AuthenticatedRequest, res: Respo
 
 export async function getQuiz(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
-  const quiz = await prisma.quiz.findFirst({
-    where: { id: getParam(req, 'id'), userId: req.user.userId },
+  const base = await assertQuizAccess(req, getParam(req, 'id'));
+  const quiz = await prisma.quiz.findUnique({
+    where: { id: base.id },
     include: { questions: true },
   });
   if (!quiz) throw new AppError(404, 'Quiz not found');
@@ -251,10 +267,7 @@ export async function listAttempts(req: AuthenticatedRequest, res: Response): Pr
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const quizId = getParam(req, 'id');
 
-  const quiz = await prisma.quiz.findFirst({
-    where: { id: quizId, userId: req.user.userId },
-  });
-  if (!quiz) throw new AppError(404, 'Quiz not found');
+  await assertQuizAccess(req, quizId);
 
   const attempts = await prisma.quizAttempt.findMany({
     where: { quizId, userId: req.user.userId },
@@ -268,10 +281,7 @@ export async function getLatestAttempt(req: AuthenticatedRequest, res: Response)
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const quizId = getParam(req, 'id');
 
-  const quiz = await prisma.quiz.findFirst({
-    where: { id: quizId, userId: req.user.userId },
-  });
-  if (!quiz) throw new AppError(404, 'Quiz not found');
+  await assertQuizAccess(req, quizId);
 
   const attempt = await prisma.quizAttempt.findFirst({
     where: { quizId, userId: req.user.userId },
@@ -301,27 +311,28 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const body = submitSchema.parse(req.body);
 
-  const quiz = await prisma.quiz.findFirst({
-    where: { id: getParam(req, 'id'), userId: req.user.userId },
+  const quiz = await assertQuizAccess(req, getParam(req, 'id'));
+  const fullQuiz = await prisma.quiz.findUnique({
+    where: { id: quiz.id },
     include: { questions: true },
   });
-  if (!quiz) throw new AppError(404, 'Quiz not found');
-  if (quiz.questions.length === 0) {
+  if (!fullQuiz) throw new AppError(404, 'Quiz not found');
+  if (fullQuiz.questions.length === 0) {
     throw new AppError(400, 'Quiz is still being generated');
   }
 
-  const evaluation = evaluateQuizAnswers(quiz.questions, body.answers);
+  const evaluation = evaluateQuizAnswers(fullQuiz.questions, body.answers);
 
   const attempt = await prisma.quizAttempt.create({
     data: {
-      quizId: quiz.id,
+      quizId: fullQuiz.id,
       userId: req.user.userId,
       score: evaluation.score,
       answers: evaluation.answers,
     },
   });
 
-  await updateProgressAfterQuizSubmit(req.user.userId, quiz, attempt, evaluation.answers);
+  await updateProgressAfterQuizSubmit(req.user.userId, fullQuiz, attempt, evaluation.answers);
 
   res.json({
     attempt: formatAttempt(attempt),

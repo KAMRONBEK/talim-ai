@@ -1,6 +1,11 @@
 import { Router } from 'express';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { authMiddleware } from '../middleware/auth.middleware.js';
+import {
+  attachTenantId,
+  blockIndividualContentForOwner,
+  blockLearnerMutations,
+} from '../middleware/tenant.middleware.js';
 import { upload } from '../middleware/upload.middleware.js';
 import { enforceQuota } from '../middleware/quota.middleware.js';
 import * as contentController from '../controllers/content.controller.js';
@@ -11,7 +16,8 @@ import * as videoController from '../controllers/video.controller.js';
 
 export const contentRoutes = Router();
 
-contentRoutes.use(authMiddleware);
+contentRoutes.use(authMiddleware, attachTenantId, blockIndividualContentForOwner);
+contentRoutes.use(blockLearnerMutations);
 contentRoutes.get('/', asyncHandler(contentController.listContent));
 contentRoutes.get('/:id/progress', asyncHandler(progressController.getContentProgress));
 contentRoutes.patch('/:id/progress', asyncHandler(progressController.patchContentProgress));

@@ -1,0 +1,78 @@
+import type { Response } from 'express';
+import { AppError } from '../middleware/error.middleware.js';
+import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
+import { getParam } from '../lib/params.js';
+import * as tenantService from '../services/tenant.service.js';
+
+function requireOwnerTenant(req: AuthenticatedRequest): string {
+  if (!req.user?.tenantId) throw new AppError(403, 'Organization context required');
+  return req.user.tenantId;
+}
+
+export async function getTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenant = await tenantService.getTenantForOwner(req.user.userId);
+  res.json({ tenant });
+}
+
+export async function patchTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenant = await tenantService.patchTenantForOwner(req.user.userId, req.body ?? {});
+  res.json({ tenant });
+}
+
+export async function listStudents(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const students = await tenantService.listStudents(tenantId);
+  res.json({ students });
+}
+
+export async function createStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const result = await tenantService.createStudent(tenantId, req.user.userId, req.body);
+  res.status(201).json(result);
+}
+
+export async function patchStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const student = await tenantService.patchStudent(tenantId, getParam(req, 'id'), req.body);
+  res.json({ student });
+}
+
+export async function deleteStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  await tenantService.deleteStudent(tenantId, getParam(req, 'id'));
+  res.status(204).send();
+}
+
+export async function getStudentProgress(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const progress = await tenantService.getStudentProgress(tenantId, getParam(req, 'id'));
+  res.json(progress);
+}
+
+export async function assignContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const assignment = await tenantService.assignContent(tenantId, req.user.userId, req.body);
+  res.status(201).json({ assignment });
+}
+
+export async function unassignContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  await tenantService.unassignContent(tenantId, req.body);
+  res.status(204).send();
+}
+
+export async function listContentAssignments(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const assignments = await tenantService.listContentAssignments(
+    tenantId,
+    getParam(req, 'contentId'),
+  );
+  res.json({ assignments });
+}

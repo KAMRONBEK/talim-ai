@@ -16,6 +16,7 @@ import { getSectionBody } from '../services/section.service.js';
 import { recordLearningActivity } from '../services/learningProgress.service.js';
 import type { AppLocale } from '@talim/types';
 import { assertQuota } from '../services/subscription.service.js';
+import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 
 const summaryBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -26,12 +27,12 @@ function scopeKey(sectionId?: string): string {
   return sectionId ?? 'full';
 }
 
-async function assertContentReady(userId: string, contentId: string) {
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
-  return content;
+function summaryUserId(
+  user: NonNullable<AuthenticatedRequest['user']>,
+  content: { userId: string },
+): string {
+  if (user.role === 'TENANT_LEARNER') return content.userId;
+  return user.userId;
 }
 
 async function generateSummaryText(
@@ -95,12 +96,13 @@ export async function getSummary(req: AuthenticatedRequest, res: Response): Prom
   const contentId = getParam(req, 'contentId');
   const sectionId = typeof req.query.sectionId === 'string' ? req.query.sectionId : undefined;
   const locale = resolveLocale(req);
-  await assertContentReady(req.user.userId, contentId);
+  const content = await assertCanAccessContent(req.user, contentId, { requireReady: true });
+  const ownerUserId = summaryUserId(req.user, content);
 
   const saved = await prisma.contentSummary.findUnique({
     where: {
       userId_contentId_scopeKey_locale: {
-        userId: req.user.userId,
+        userId: ownerUserId,
         contentId,
         scopeKey: scopeKey(sectionId),
         locale,
@@ -117,16 +119,18 @@ export async function getSummary(req: AuthenticatedRequest, res: Response): Prom
 
 export async function generateSummary(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
+  assertCanGenerate(req.user);
   const contentId = getParam(req, 'contentId');
   const body = summaryBodySchema.parse(req.body ?? {});
   const locale = body.locale ?? resolveLocale(req);
-  const content = await assertContentReady(req.user.userId, contentId);
+  const content = await assertCanAccessContent(req.user, contentId, { requireReady: true });
+  const ownerUserId = summaryUserId(req.user, content);
   const key = scopeKey(body.sectionId);
 
   const existing = await prisma.contentSummary.findUnique({
     where: {
       userId_contentId_scopeKey_locale: {
-        userId: req.user.userId,
+        userId: ownerUserId,
         contentId,
         scopeKey: key,
         locale,
@@ -139,10 +143,13 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
     return;
   }
 
-  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
+  await assertQuota(req.user.userId, 'GENERATION', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
 
   const summaryText = await generateSummaryText(
-    req.user.userId,
+    ownerUserId,
     contentId,
     content.title,
     locale,
@@ -152,14 +159,14 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
   const saved = await prisma.contentSummary.upsert({
     where: {
       userId_contentId_scopeKey_locale: {
-        userId: req.user.userId,
+        userId: ownerUserId,
         contentId,
         scopeKey: key,
         locale,
       },
     },
     create: {
-      userId: req.user.userId,
+      userId: ownerUserId,
       contentId,
       scopeKey: key,
       sectionId: body.sectionId ?? null,

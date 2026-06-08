@@ -6,6 +6,7 @@ import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { assertQuota } from '../services/subscription.service.js';
+import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 
 const videoBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -42,20 +43,12 @@ function formatVideo(row: {
   };
 }
 
-async function assertContentReady(userId: string, contentId: string) {
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
-  return content;
-}
-
 export async function getVideo(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const sectionId = typeof req.query.sectionId === 'string' ? req.query.sectionId : undefined;
   const locale = resolveLocale(req);
-  await assertContentReady(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const video = await prisma.contentVideo.findUnique({
     where: {
@@ -72,10 +65,11 @@ export async function getVideo(req: AuthenticatedRequest, res: Response): Promis
 
 export async function createVideo(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
+  assertCanGenerate(req.user);
   const contentId = getParam(req, 'id');
   const body = videoBodySchema.parse(req.body ?? {});
   const locale = body.locale ?? resolveLocale(req);
-  await assertContentReady(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const key = scopeKey(body.sectionId);
 
@@ -94,7 +88,10 @@ export async function createVideo(req: AuthenticatedRequest, res: Response): Pro
     return;
   }
 
-  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
+  await assertQuota(req.user.userId, 'GENERATION', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
 
   const video = await prisma.contentVideo.create({
     data: {

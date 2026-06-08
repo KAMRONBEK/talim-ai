@@ -8,6 +8,7 @@ import { resolveLocale } from '../lib/locale.js';
 import { podcastQueue } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
 import { assertQuota } from '../services/subscription.service.js';
+import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 
 const createPodcastSchema = z.object({
   locale: z.enum(['uz', 'en', 'ru']).optional(),
@@ -33,19 +34,11 @@ function formatEpisode(episode: {
   };
 }
 
-async function assertContentReady(userId: string, contentId: string) {
-  const content = await prisma.content.findFirst({
-    where: { id: contentId, userId, status: 'READY' },
-  });
-  if (!content) throw new AppError(404, 'Content not found or not ready');
-  return content;
-}
-
 export async function getPodcast(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const locale = resolveLocale(req);
-  await assertContentReady(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const podcast = await prisma.podcast.findUnique({
     where: { contentId_locale: { contentId, locale } },
@@ -73,7 +66,8 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
   const contentId = getParam(req, 'id');
   const body = createPodcastSchema.parse(req.body ?? {});
   const locale = body.locale ?? resolveLocale(req);
-  await assertContentReady(req.user.userId, contentId);
+  assertCanGenerate(req.user);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const existing = await prisma.podcast.findUnique({
     where: { contentId_locale: { contentId, locale } },
@@ -94,7 +88,10 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
     return;
   }
 
-  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role });
+  await assertQuota(req.user.userId, 'GENERATION', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
 
   const podcast =
     existing ??
@@ -133,7 +130,7 @@ export async function streamEpisodeAudio(req: AuthenticatedRequest, res: Respons
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const episodeId = getParam(req, 'episodeId');
-  await assertContentReady(req.user.userId, contentId);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
   const episode = await prisma.podcastEpisode.findFirst({
     where: {
