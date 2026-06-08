@@ -23,6 +23,12 @@ interface GeneratedSection {
 }
 
 export async function generateContentSections(contentId: string, chunkCount: number): Promise<void> {
+  const content = await prisma.content.findUnique({
+    where: { id: contentId },
+    select: { userId: true },
+  });
+  const userId = content?.userId;
+
   await prisma.contentSection.deleteMany({ where: { contentId } });
 
   if (chunkCount === 0) return;
@@ -53,10 +59,21 @@ export async function generateContentSections(contentId: string, chunkCount: num
     .join('\n\n');
 
   try {
-    const result = await generateJsonCompletion<{ sections: GeneratedSection[] }>([
-      { role: 'system', content: SECTION_SYSTEM_PROMPT },
-      { role: 'user', content: buildSectionUserPrompt(chunkCount, preview) },
-    ]);
+    const result = await generateJsonCompletion<{ sections: GeneratedSection[] }>(
+      [
+        { role: 'system', content: SECTION_SYSTEM_PROMPT },
+        { role: 'user', content: buildSectionUserPrompt(chunkCount, preview) },
+      ],
+      userId
+        ? {
+            usage: {
+              userId,
+              feature: 'SECTION_GEN',
+              metadata: { contentId },
+            },
+          }
+        : undefined,
+    );
 
     const sections = (result.sections ?? []).slice(0, 12);
     if (sections.length === 0) throw new Error('No sections');

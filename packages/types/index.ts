@@ -15,13 +15,92 @@ export type MessageRole = 'USER' | 'ASSISTANT';
 export type PodcastStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
+export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
+
+export type UsageFeature =
+  | 'EMBED'
+  | 'TUTOR_CHAT'
+  | 'QUIZ_GEN'
+  | 'PODCAST_GEN'
+  | 'SECTION_GEN'
+  | 'SUMMARY_GEN'
+  | 'SLIDESHOW_GEN'
+  | 'TRANSCRIBE'
+  | 'PDF_PARSE'
+  | 'TENANT_ASSISTANT';
 
 export interface User {
   id: string;
   email: string;
   name: string | null;
+  role: UserRole;
   preferredLocale: AppLocale;
   createdAt: string;
+}
+
+export interface AdminUserListItem extends User {
+  contentCount: number;
+  lastActivityAt: string | null;
+}
+
+export interface AdminUserDetail extends AdminUserListItem {
+  quizCount: number;
+  summaryCount: number;
+  usageLast30Days: number;
+}
+
+export interface AdminContentItem {
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string | null;
+  type: ContentType;
+  title: string;
+  status: ContentStatus;
+  createdAt: string;
+}
+
+export interface AdminGeneratedItem {
+  id: string;
+  kind: 'podcast' | 'quiz' | 'slideshow' | 'summary';
+  contentId: string;
+  contentTitle: string;
+  userId: string;
+  userEmail: string;
+  status?: string;
+  createdAt: string;
+}
+
+export interface AdminUsageSummaryRow {
+  userId: string;
+  userEmail: string;
+  userName: string | null;
+  tenantId: string | null;
+  totalInputTokens: number;
+  totalOutputTokens: number;
+  estimatedCostUsd: number;
+  eventCount: number;
+}
+
+export interface AdminPlatformStats {
+  totalUsers: number;
+  signupsLast7Days: number;
+  signupsLast30Days: number;
+  totalContents: number;
+  contentsByStatus: Record<ContentStatus, number>;
+  totalQuizzes: number;
+  totalPodcasts: number;
+  totalSlideshows: number;
+  totalSummaries: number;
+  estimatedApiSpendUsd: number;
+  activeUsersLast30Days: number;
+}
+
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  page: number;
+  pageSize: number;
 }
 
 export interface AuthResponse {

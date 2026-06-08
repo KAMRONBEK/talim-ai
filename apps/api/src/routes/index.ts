@@ -4,6 +4,7 @@ import { contentRoutes } from './content.routes.js';
 import { chatRoutes } from './chat.routes.js';
 import { quizRoutes } from './quiz.routes.js';
 import { summaryRoutes } from './summary.routes.js';
+import { adminRoutes } from './admin.routes.js';
 
 export const routes = Router();
 
@@ -16,3 +17,4 @@ routes.use('/content', contentRoutes);
 routes.use('/chat', chatRoutes);
 routes.use('/quiz', quizRoutes);
 routes.use('/summary', summaryRoutes);
+routes.use('/admin', adminRoutes);

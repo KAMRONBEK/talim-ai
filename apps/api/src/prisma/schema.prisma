@@ -51,11 +51,32 @@ enum TranscriptSource {
   AI_TRANSCRIPTION
 }
 
+enum UserRole {
+  INDIVIDUAL
+  TENANT_OWNER
+  TENANT_LEARNER
+  ADMIN
+}
+
+enum UsageFeature {
+  EMBED
+  TUTOR_CHAT
+  QUIZ_GEN
+  PODCAST_GEN
+  SECTION_GEN
+  SUMMARY_GEN
+  SLIDESHOW_GEN
+  TRANSCRIBE
+  PDF_PARSE
+  TENANT_ASSISTANT
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
   passwordHash            String
   name                    String?
+  role                    UserRole                 @default(INDIVIDUAL)
   preferredLocale         String                   @default("uz")
   createdAt               DateTime                 @default(now())
   updatedAt               DateTime                 @updatedAt
@@ -68,8 +89,11 @@ model User {
   contentSummaries        ContentSummary[]
   podcastEpisodeProgress  PodcastEpisodeProgress[]
   learningActivityDays    LearningActivityDay[]
+  apiUsageEvents          ApiUsageEvent[]
+  adminAuditLogs          AdminAuditLog[]
 
   @@index([email])
+  @@index([role])
 }
 
 model Content {
@@ -349,4 +373,36 @@ model LearningActivityDay {
 
   @@unique([userId, date])
   @@index([userId])
+}
+
+model ApiUsageEvent {
+  id               String       @id @default(cuid())
+  userId           String
+  tenantId         String?
+  feature          UsageFeature
+  model            String
+  inputTokens      Int          @default(0)
+  outputTokens     Int          @default(0)
+  estimatedCostUsd Decimal      @default(0) @db.Decimal(12, 6)
+  metadata         Json?
+  createdAt        DateTime     @default(now())
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([tenantId, createdAt])
+  @@index([feature, createdAt])
+}
+
+model AdminAuditLog {
+  id          String   @id @default(cuid())
+  adminUserId String
+  action      String
+  targetType  String
+  targetId    String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  adminUser   User     @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+
+  @@index([adminUserId, createdAt])
+  @@index([targetType, targetId])
 }

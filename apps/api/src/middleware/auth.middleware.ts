@@ -1,10 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import type { UserRole } from '@prisma/client';
 import { env } from '../config/env.js';
 
 export interface AuthPayload {
   userId: string;
   email: string;
+  role: UserRole;
 }
 
 export interface AuthenticatedRequest extends Request {
@@ -26,4 +28,18 @@ export function authMiddleware(req: AuthenticatedRequest, res: Response, next: N
   } catch {
     res.status(401).json({ message: 'Invalid or expired token' });
   }
+}
+
+export function requireRole(...roles: UserRole[]) {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
+    if (!req.user) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+    if (!roles.includes(req.user.role)) {
+      res.status(403).json({ message: 'Forbidden' });
+      return;
+    }
+    next();
+  };
 }

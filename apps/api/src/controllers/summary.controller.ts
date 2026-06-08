@@ -34,6 +34,7 @@ async function assertContentReady(userId: string, contentId: string) {
 }
 
 async function generateSummaryText(
+  userId: string,
   contentId: string,
   title: string,
   locale: AppLocale,
@@ -53,10 +54,17 @@ async function generateSummaryText(
     context = buildRagContext(chunks);
   }
 
-  const raw = await generateChatCompletion([
-    { role: 'system', content: getSummarySystemPrompt(locale) },
-    { role: 'user', content: buildSummaryUserPrompt(locale, title, context) },
-  ]);
+  const raw = await generateChatCompletion(
+    [
+      { role: 'system', content: getSummarySystemPrompt(locale) },
+      { role: 'user', content: buildSummaryUserPrompt(locale, title, context) },
+    ],
+    {
+      userId,
+      feature: 'SUMMARY_GEN',
+      metadata: { contentId, sectionId },
+    },
+  );
 
   return sanitizeSummaryOutput(locale, raw);
 }
@@ -130,7 +138,13 @@ export async function generateSummary(req: AuthenticatedRequest, res: Response):
     return;
   }
 
-  const summaryText = await generateSummaryText(contentId, content.title, locale, body.sectionId);
+  const summaryText = await generateSummaryText(
+    req.user.userId,
+    contentId,
+    content.title,
+    locale,
+    body.sectionId,
+  );
 
   const saved = await prisma.contentSummary.upsert({
     where: {

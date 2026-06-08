@@ -256,7 +256,14 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   const manimJobs: Array<{ jobId: string; script: string }> = [];
 
   try {
-    for await (const event of streamTutorWithTools(messages, { graphIntent })) {
+    for await (const event of streamTutorWithTools(messages, {
+      graphIntent,
+      usage: {
+        userId: req.user.userId,
+        feature: 'TUTOR_CHAT',
+        metadata: { contentId: body.contentId, sessionId },
+      },
+    })) {
       if (event.type === 'text') {
         fullResponse += event.text;
         res.write(`data: ${JSON.stringify({ text: event.text })}\n\n`);

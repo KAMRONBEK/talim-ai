@@ -1,8 +1,17 @@
 import OpenAI from 'openai';
+import type { UsageFeature } from '@prisma/client';
 import type { VisualBlock } from '@talim/types';
 import { env } from '../config/env.js';
 import type { TutorGraphIntent } from '../lib/tutor-graph-intent.js';
 import { getTutorTools, handleTutorToolCall } from '../lib/tutor-tools.js';
+import { recordUsage } from './usage.service.js';
+
+export interface AiUsageContext {
+  userId: string;
+  tenantId?: string | null;
+  feature: UsageFeature;
+  metadata?: Record<string, unknown>;
+}
 
 const deepseek = new OpenAI({
   apiKey: env.DEEPSEEK_API_KEY,
@@ -51,6 +60,23 @@ function toTextOnlyMessages(
   }));
 }
 
+function recordCompletionUsage(
+  usage: AiUsageContext | undefined,
+  model: string,
+  response: { usage?: { prompt_tokens?: number; completion_tokens?: number } | null },
+): void {
+  if (!usage) return;
+  recordUsage({
+    userId: usage.userId,
+    tenantId: usage.tenantId,
+    feature: usage.feature,
+    model,
+    inputTokens: response.usage?.prompt_tokens ?? 0,
+    outputTokens: response.usage?.completion_tokens ?? 0,
+    metadata: usage.metadata,
+  });
+}
+
 function createDeepSeekChatCompletion(
   messages: ChatMessageInput[],
   options?: { temperature?: number },
@@ -80,8 +106,12 @@ function createDeepSeekChatStream(messages: ChatMessageInput[]) {
   } as any);
 }
 
-export async function generateChatCompletion(messages: ChatMessageInput[]): Promise<string> {
+export async function generateChatCompletion(
+  messages: ChatMessageInput[],
+  usage?: AiUsageContext,
+): Promise<string> {
   const response = await createDeepSeekChatCompletion(messages);
+  recordCompletionUsage(usage, env.DEEPSEEK_MODEL, response);
   return response.choices[0]?.message?.content ?? '';
 }
 
@@ -134,7 +164,7 @@ function withTutorToolInstructions(
 
 export async function* streamTutorWithTools(
   messages: ChatMessageInput[],
-  options?: TutorToolOptions,
+  options?: TutorToolOptions & { usage?: AiUsageContext },
 ): AsyncGenerator<TutorStreamEvent> {
   let currentMessages = withTutorToolInstructions(messages, options);
   let rounds = 0;
@@ -146,9 +176,12 @@ export async function* streamTutorWithTools(
       tools: getTutorTools(),
       temperature: env.TUTOR_TEMPERATURE,
       stream: true,
+      stream_options: { include_usage: true },
     });
 
     let assistantText = '';
+    let roundInputTokens = 0;
+    let roundOutputTokens = 0;
     const toolCallsAcc: Record<
       number,
       { id: string; name: string; arguments: string }
@@ -156,6 +189,10 @@ export async function* streamTutorWithTools(
     let finishReason: string | null = null;
 
     for await (const chunk of stream) {
+      if (chunk.usage) {
+        roundInputTokens += chunk.usage.prompt_tokens ?? 0;
+        roundOutputTokens += chunk.usage.completion_tokens ?? 0;
+      }
       const choice = chunk.choices[0];
       finishReason = choice?.finish_reason ?? finishReason;
       const delta = choice?.delta;
@@ -178,6 +215,18 @@ export async function* streamTutorWithTools(
           }
         }
       }
+    }
+
+    if (options?.usage && (roundInputTokens > 0 || roundOutputTokens > 0)) {
+      recordUsage({
+        userId: options.usage.userId,
+        tenantId: options.usage.tenantId,
+        feature: options.usage.feature,
+        model: env.TUTOR_MODEL,
+        inputTokens: roundInputTokens,
+        outputTokens: roundOutputTokens,
+        metadata: options.usage.metadata,
+      });
     }
 
     const toolCalls = Object.values(toolCallsAcc).filter((tc) => tc.id && tc.name);
@@ -229,9 +278,10 @@ export async function* streamTutorWithTools(
 
 export async function generateJsonCompletion<T>(
   messages: ChatMessageInput[],
-  options?: { temperature?: number },
+  options?: { temperature?: number; usage?: AiUsageContext },
 ): Promise<T> {
   const response = await createDeepSeekChatCompletion(messages, options);
+  recordCompletionUsage(options?.usage, env.DEEPSEEK_MODEL, response);
   const text = response.choices[0]?.message?.content ?? '';
   const jsonMatch = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
   if (!jsonMatch) {

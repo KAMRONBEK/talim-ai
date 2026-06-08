@@ -54,10 +54,19 @@ export function registerGenerateQuizJob(): void {
       context = buildRagContext(chunks);
     }
 
-    const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>([
-      { role: 'system', content: getQuizSystemPrompt(locale) },
-      { role: 'user', content: buildQuizUserPrompt(locale, content.title, context, quizKind) },
-    ]);
+    const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>(
+      [
+        { role: 'system', content: getQuizSystemPrompt(locale) },
+        { role: 'user', content: buildQuizUserPrompt(locale, content.title, context, quizKind) },
+      ],
+      {
+        usage: {
+          userId: content.userId,
+          feature: 'QUIZ_GEN',
+          metadata: { contentId, quizId },
+        },
+      },
+    );
 
     const questions = result.questions ?? [];
     if (questions.length === 0) {

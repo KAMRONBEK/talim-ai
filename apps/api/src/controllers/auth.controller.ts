@@ -2,17 +2,21 @@ import type { Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
+import type { UserRole } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
 import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { parseAppLocale } from '@talim/types';
 
-const registerSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  name: z.string().min(1).optional(),
-});
+const registerSchema = z
+  .object({
+    email: z.string().email(),
+    password: z.string().min(8),
+    name: z.string().min(1).optional(),
+    role: z.never().optional(),
+  })
+  .strict();
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -24,14 +28,15 @@ const updateMeSchema = z.object({
   name: z.string().min(1).optional(),
 });
 
-function signToken(userId: string, email: string): string {
-  return jwt.sign({ userId, email }, env.JWT_SECRET, { expiresIn: '7d' });
+function signToken(userId: string, email: string, role: UserRole): string {
+  return jwt.sign({ userId, email, role }, env.JWT_SECRET, { expiresIn: '7d' });
 }
 
 function formatUser(user: {
   id: string;
   email: string;
   name: string | null;
+  role: UserRole;
   preferredLocale: string;
   createdAt: Date;
 }) {
@@ -39,6 +44,7 @@ function formatUser(user: {
     id: user.id,
     email: user.email,
     name: user.name,
+    role: user.role,
     preferredLocale: parseAppLocale(user.preferredLocale),
     createdAt: user.createdAt.toISOString(),
   };
@@ -57,10 +63,11 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
       email: body.email,
       passwordHash,
       name: body.name ?? null,
+      role: 'INDIVIDUAL',
     },
   });
 
-  const token = signToken(user.id, user.email);
+  const token = signToken(user.id, user.email, user.role);
   res.status(201).json({ user: formatUser(user), token });
 }
 
@@ -76,7 +83,7 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
     throw new AppError(401, 'Invalid credentials');
   }
 
-  const token = signToken(user.id, user.email);
+  const token = signToken(user.id, user.email, user.role);
   res.json({ user: formatUser(user), token });
 }
 

@@ -75,13 +75,20 @@ export function registerGeneratePodcastJob(): void {
           ? buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })))
           : '';
 
-      const script = await generateChatCompletion([
-        { role: 'system', content: getPodcastSystemPrompt(locale) },
+      const script = await generateChatCompletion(
+        [
+          { role: 'system', content: getPodcastSystemPrompt(locale) },
+          {
+            role: 'user',
+            content: buildPodcastUserPrompt(locale, sec.title, context || content.title),
+          },
+        ],
         {
-          role: 'user',
-          content: buildPodcastUserPrompt(locale, sec.title, context || content.title),
+          userId: content.userId,
+          feature: 'PODCAST_GEN',
+          metadata: { contentId, podcastId },
         },
-      ]);
+      );
 
       const episode = await prisma.podcastEpisode.create({
         data: {

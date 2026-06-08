@@ -21,7 +21,8 @@ async function bootstrap(): Promise<void> {
 
   const app = express();
 
-  app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
+  const corsOrigins = env.CORS_ORIGIN.split(',').map((o) => o.trim()).filter(Boolean);
+  app.use(cors({ origin: corsOrigins.length === 1 ? corsOrigins[0] : corsOrigins, credentials: true }));
   app.use(express.json({ limit: '10mb' }));
   app.use(routes);
   app.use(errorMiddleware);

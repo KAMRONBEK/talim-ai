@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "create-admin": "tsx src/scripts/create-admin.ts"
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.16.12",
