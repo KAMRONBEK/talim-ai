@@ -14,7 +14,9 @@ import {
   SheetTitle,
 } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useBilling } from '@/hooks/useBilling';
 import { useContents } from '@/hooks/useContent';
+import { planMessageKey } from '@/lib/plan';
 
 export interface DashboardSidebarBodyProps {
   onNavigate?: () => void;
@@ -25,6 +27,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
   const tCommon = useTranslations('common');
   const router = useRouter();
   const { user, logout } = useAuthStore();
+  const { data: billing } = useBilling();
   const { data: contents } = useContents();
 
   const recents = useMemo(() => (contents ?? []).slice(0, 5), [contents]);
@@ -39,6 +42,9 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
     : user?.email?.slice(0, 2).toUpperCase() ?? '?';
 
   const displayName = user?.name ?? user?.email?.split('@')[0] ?? tCommon('user');
+  const planKey = billing?.subscription
+    ? planMessageKey(billing.subscription.effectivePlanCode)
+    : null;
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -88,6 +94,9 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
             <p className="truncate text-sm font-medium">{displayName}</p>
             {user?.email && (
               <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+            )}
+            {planKey && (
+              <p className="truncate text-xs text-muted-foreground">{tCommon(planKey)}</p>
             )}
           </div>
         </div>
