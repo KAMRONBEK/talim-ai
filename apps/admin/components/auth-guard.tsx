@@ -4,30 +4,36 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/useAuthStore';
 
+function useAuthHydrated() {
+  const [hydrated, setHydrated] = useState(() => useAuthStore.persist.hasHydrated());
+
+  useEffect(() => {
+    const unsub = useAuthStore.persist.onFinishHydration(() => setHydrated(true));
+    setHydrated(useAuthStore.persist.hasHydrated());
+    return unsub;
+  }, []);
+
+  return hydrated;
+}
+
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
-  const [mounted, setMounted] = useState(false);
+  const hydrated = useAuthHydrated();
+
+  const isAdmin = Boolean(token && user?.role === 'ADMIN');
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    if (!token) {
-      router.replace('/login');
-      return;
-    }
-    if (user && user.role !== 'ADMIN') {
-      logout();
+    if (!hydrated) return;
+    if (!isAdmin) {
+      if (token || user) logout();
       router.replace('/login');
     }
-  }, [token, user, mounted, router, logout]);
+  }, [hydrated, isAdmin, token, user, router, logout]);
 
-  if (!mounted || !token || (user && user.role !== 'ADMIN')) {
+  if (!hydrated || !isAdmin) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="text-muted-foreground">Loading…</p>

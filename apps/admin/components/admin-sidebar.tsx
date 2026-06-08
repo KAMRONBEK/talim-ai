@@ -18,7 +18,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 
 const navItems = [
-  { href: '/', label: 'Statistics', icon: LayoutDashboard },
+  { href: '/dashboard', label: 'Statistics', icon: LayoutDashboard },
   { href: '/users', label: 'Users', icon: Users },
   { href: '/tenants', label: 'Tenants', icon: Building2 },
   { href: '/content', label: 'Content', icon: FileText },
@@ -51,7 +51,7 @@ export function AdminSidebar() {
       </div>
       <nav className="flex-1 space-y-1 p-3">
         {navItems.map(({ href, label, icon: Icon }) => {
-          const active = href === '/' ? pathname === '/' : pathname.startsWith(href);
+          const active = pathname === href || pathname.startsWith(`${href}/`);
           return (
             <Link
               key={href}

@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (mounted && token && user?.role === 'ADMIN') {
-      router.replace('/');
+      router.replace('/dashboard');
     }
   }, [mounted, token, user, router]);
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
         return;
       }
       setAuth(data.user, data.token);
-      router.replace('/');
+      router.replace('/dashboard');
     } catch (err: unknown) {
       const status = (err as { response?: { status?: number } })?.response?.status;
       setError(status === 401 ? 'Invalid email or password.' : 'Something went wrong. Try again.');
