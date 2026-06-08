@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { LandingPage } from '@/components/marketing/landing-page';
 import { useAuthStore } from '@/store/useAuthStore';
+import { getPostLoginPath } from '@/lib/auth-routing';
 
 export default function HomePage() {
   const router = useRouter();
   const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -15,10 +17,10 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (mounted && token) {
-      router.replace('/dashboard');
+    if (mounted && token && user) {
+      router.replace(getPostLoginPath(user.role));
     }
-  }, [mounted, token, router]);
+  }, [mounted, token, user, router]);
 
   if (!mounted) {
     return (

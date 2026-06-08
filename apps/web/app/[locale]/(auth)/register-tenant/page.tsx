@@ -11,23 +11,23 @@ import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
 import { getPostLoginPath } from '@/lib/auth-routing';
 
-export default function LoginPage() {
+export default function RegisterTenantPage() {
   const t = useTranslations('auth');
+  const tTenant = useTranslations('tenant');
   const tCommon = useTranslations('common');
   const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
   const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
   const [mounted, setMounted] = useState(false);
+  const [orgName, setOrgName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const user = useAuthStore((s) => s.user);
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (mounted && token && user) router.replace(getPostLoginPath(user.role));
@@ -38,12 +38,16 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
+      const { data } = await api.post<AuthResponse>('/auth/register-tenant', {
+        orgName,
+        name,
+        email,
+        password,
+      });
       setAuth(data.user, data.token);
       router.replace(getPostLoginPath(data.user.role));
-    } catch (err: unknown) {
-      const status = (err as { response?: { status?: number } })?.response?.status;
-      setError(status === 401 ? t('invalidCredentials') : t('serverError'));
+    } catch {
+      setError(t('registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -72,44 +76,34 @@ export default function LoginPage() {
       <Card className="w-full max-w-md border shadow-lg">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold">{t('welcomeBack')}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{t('signInContinue')}</p>
+            <h1 className="text-2xl font-bold">{tTenant('register.title')}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{tTenant('register.desc')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
+              <Label htmlFor="orgName">{tTenant('settings.orgName')}</Label>
+              <Input id="orgName" value={orgName} onChange={(e) => setOrgName(e.target.value)} required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name">{t('name')}</Label>
+              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className="space-y-2">
               <Label htmlFor="email">{t('email')}</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">{t('password')}</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? t('signingIn') : t('signIn')}
+              {loading ? t('registering') : tTenant('register.submit')}
             </Button>
           </form>
           <p className="text-center text-sm text-muted-foreground">
-            {t('noAccount')}{' '}
             <Link href="/register" className="font-medium text-primary hover:underline">
-              {t('createOne')}
-            </Link>
-            {' · '}
-            <Link href="/register-tenant" className="font-medium text-primary hover:underline">
-              {t('registerOrg')}
+              {tTenant('register.individual')}
             </Link>
           </p>
         </CardContent>

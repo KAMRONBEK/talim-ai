@@ -9,6 +9,8 @@
     "logout": "Log out",
     "freePlan": "Free plan",
     "proPlan": "Pro plan",
+    "tenantStarterPlan": "Tenant Starter",
+    "tenantGrowthPlan": "Tenant Growth",
     "searchPlaceholder": "Search your materials...",
     "search": "Search",
     "aiTutor": "AI Tutor",
@@ -39,7 +41,8 @@
     "name": "Name",
     "registering": "Creating account...",
     "registerFailed": "Registration failed. Email may already be in use.",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "registerOrg": "Register organization"
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -220,5 +223,84 @@
     "uz": "O'zbek",
     "en": "English",
     "ru": "Русский"
+  },
+  "tenant": {
+    "loading": "Loading...",
+    "subscriptionRequired": "Subscription required",
+    "welcome": "Welcome, {name}",
+    "dashboardDesc": "Manage materials and track student progress.",
+    "addMaterial": "Add material",
+    "recentMaterials": "Recent materials",
+    "allMaterials": "All materials",
+    "uploadFailed": "Upload failed",
+    "nav": {
+      "dashboard": "Dashboard",
+      "materials": "Materials",
+      "students": "Students",
+      "billing": "Billing",
+      "settings": "Settings"
+    },
+    "stats": {
+      "materials": "Materials",
+      "students": "Active students"
+    },
+    "register": {
+      "title": "Create your organization",
+      "desc": "For tutors, schools, and training teams",
+      "submit": "Create organization",
+      "individual": "Individual account instead"
+    },
+    "settings": {
+      "title": "Organization settings",
+      "orgName": "Organization name",
+      "slug": "URL slug",
+      "save": "Save changes"
+    },
+    "billing": {
+      "title": "Billing",
+      "plan": "Current plan",
+      "adminHint": "Ask your platform admin to assign a tenant subscription.",
+      "students": "Students",
+      "materials": "Materials",
+      "generations": "Generations this month"
+    },
+    "students": {
+      "title": "Students",
+      "desc": "Invite learners and assign materials.",
+      "add": "Add student",
+      "name": "Name",
+      "email": "Email",
+      "assigned": "Assigned",
+      "lastActive": "Last active",
+      "avgQuiz": "Avg quiz",
+      "create": "Create student",
+      "tempPasswordHint": "Share this temporary password with the student (shown once):",
+      "done": "Done",
+      "back": "Back to students",
+      "streak": "Learning streak: {days} days",
+      "activity": "Recent activity",
+      "noActivity": "No activity yet",
+      "progress": "Progress by material",
+      "noProgress": "No progress yet",
+      "coverage": "Coverage {value}%",
+      "quizAttempts": "{count} quiz attempts",
+      "avgQuizValue": "Avg quiz {value}%"
+    },
+    "assign": {
+      "title": "Assign to students",
+      "desc": "Select learners who should access this material.",
+      "noStudents": "Add students first.",
+      "assigned": "assigned",
+      "remove": "Remove",
+      "submit": "Assign selected",
+      "back": "Back to {title}"
+    }
+  },
+  "learner": {
+    "loading": "Loading...",
+    "welcome": "Welcome, {name}",
+    "dashboardDesc": "Your assigned learning materials.",
+    "assignedMaterials": "Assigned materials",
+    "noAssigned": "No materials assigned yet."
   }
 }

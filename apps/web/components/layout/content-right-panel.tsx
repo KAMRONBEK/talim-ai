@@ -21,6 +21,7 @@ export interface ContentRightPanelBodyProps {
   history?: LearningHistory;
   onOpenSummary: (summary: string) => void;
   onAction?: () => void;
+  hideGenerateActions?: boolean;
 }
 
 export function ContentRightPanelBody({
@@ -38,6 +39,7 @@ export function ContentRightPanelBody({
   history,
   onOpenSummary,
   onAction,
+  hideGenerateActions = false,
 }: ContentRightPanelBodyProps) {
   const t = useTranslations('content');
   const circumference = 2 * Math.PI * 52;
@@ -82,6 +84,7 @@ export function ContentRightPanelBody({
       <div className="border-b p-5">
         <h3 className="mb-3 text-sm font-semibold">{t('resources')}</h3>
         <div className="space-y-2">
+          {!hideGenerateActions && (
           <button
             type="button"
             onClick={wrapAction(onSummary)}
@@ -96,6 +99,7 @@ export function ContentRightPanelBody({
               <div className="text-[11px] text-muted-foreground">{t('savedSummary')}</div>
             </div>
           </button>
+          )}
           <Link
             href={`/content/${contentId}/podcast`}
             onClick={onAction}
@@ -109,36 +113,40 @@ export function ContentRightPanelBody({
               <div className="text-[11px] text-muted-foreground">{t('listenAction')}</div>
             </div>
           </Link>
-          <button
-            type="button"
-            onClick={wrapAction(onQuiz)}
-            disabled={quizPending}
-            className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
-          >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-success-muted text-sm">
-              ❓
-            </span>
-            <div>
-              <div className="font-medium">{t('practiceQuiz')}</div>
-              <div className="text-[11px] text-muted-foreground">
-                {quizCount > 0 ? t('quizCount', { count: quizCount }) : t('fiveQuestions')}
-              </div>
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={wrapAction(onQuickCheck)}
-            disabled={quickCheckPending}
-            className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
-          >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-warning-muted text-sm">
-              ⚡
-            </span>
-            <div>
-              <div className="font-medium">{t('quickQuiz')}</div>
-              <div className="text-[11px] text-muted-foreground">{t('twoQuestions')}</div>
-            </div>
-          </button>
+          {!hideGenerateActions && (
+            <>
+              <button
+                type="button"
+                onClick={wrapAction(onQuiz)}
+                disabled={quizPending}
+                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-success-muted text-sm">
+                  ❓
+                </span>
+                <div>
+                  <div className="font-medium">{t('practiceQuiz')}</div>
+                  <div className="text-[11px] text-muted-foreground">
+                    {quizCount > 0 ? t('quizCount', { count: quizCount }) : t('fiveQuestions')}
+                  </div>
+                </div>
+              </button>
+              <button
+                type="button"
+                onClick={wrapAction(onQuickCheck)}
+                disabled={quickCheckPending}
+                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-warning-muted text-sm">
+                  ⚡
+                </span>
+                <div>
+                  <div className="font-medium">{t('quickQuiz')}</div>
+                  <div className="text-[11px] text-muted-foreground">{t('twoQuestions')}</div>
+                </div>
+              </button>
+            </>
+          )}
         </div>
       </div>
 

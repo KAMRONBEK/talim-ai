@@ -14,6 +14,7 @@ import { DeleteContentDialog } from '@/components/content/delete-content-dialog'
 
 interface RecentContentGridProps {
   contents: Content[];
+  showDelete?: boolean;
 }
 
 const typeStyles: Record<
@@ -60,7 +61,7 @@ function ContentThumbnail({ content }: { content: Content }) {
   );
 }
 
-export function RecentContentGrid({ contents }: RecentContentGridProps) {
+export function RecentContentGrid({ contents, showDelete = true }: RecentContentGridProps) {
   const t = useTranslations('common');
   const locale = useLocale() as AppLocale;
   const [deleteTarget, setDeleteTarget] = useState<Content | null>(null);
@@ -80,16 +81,18 @@ export function RecentContentGrid({ contents }: RecentContentGridProps) {
               <Link href={`/content/${content.id}`} className="block">
                 <ContentThumbnail content={content} />
               </Link>
-              <Button
-                type="button"
-                variant="secondary"
-                size="icon"
-                className="absolute right-2 top-2 z-10 h-8 w-8 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 focus:opacity-100"
-                aria-label={`${content.title} ni o'chirish`}
-                onClick={() => setDeleteTarget(content)}
-              >
-                <Trash2 className="h-4 w-4 text-destructive" />
-              </Button>
+              {showDelete && (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="icon"
+                  className="absolute right-2 top-2 z-10 h-8 w-8 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 focus:opacity-100"
+                  aria-label={`${content.title} ni o'chirish`}
+                  onClick={() => setDeleteTarget(content)}
+                >
+                  <Trash2 className="h-4 w-4 text-destructive" />
+                </Button>
+              )}
             </div>
             <Link href={`/content/${content.id}`} className="mt-2 flex items-start gap-2">
               {content.status === 'FAILED' ? (

@@ -9,6 +9,8 @@
     "logout": "Chiqish",
     "freePlan": "Bepul reja",
     "proPlan": "Pro reja",
+    "tenantStarterPlan": "Tenant Starter",
+    "tenantGrowthPlan": "Tenant Growth",
     "searchPlaceholder": "Materiallaringizni qidiring...",
     "search": "Qidiruv",
     "aiTutor": "AI O'qituvchi",
@@ -39,7 +41,8 @@
     "name": "Ism",
     "registering": "Hisob yaratilmoqda...",
     "registerFailed": "Ro'yxatdan o'tib bo'lmadi. Email band bo'lishi mumkin.",
-    "haveAccount": "Hisobingiz bormi?"
+    "haveAccount": "Hisobingiz bormi?",
+    "registerOrg": "Tashkilot ro'yxatdan o'tish"
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
@@ -220,5 +223,84 @@
     "uz": "O'zbek",
     "en": "English",
     "ru": "Русский"
+  },
+  "tenant": {
+    "loading": "Yuklanmoqda...",
+    "subscriptionRequired": "Obuna talab qilinadi",
+    "welcome": "Xush kelibsiz, {name}",
+    "dashboardDesc": "Materiallar va o'quvchilar progressini boshqaring.",
+    "addMaterial": "Material qo'shish",
+    "recentMaterials": "So'nggi materiallar",
+    "allMaterials": "Barcha materiallar",
+    "uploadFailed": "Yuklash muvaffaqiyatsiz",
+    "nav": {
+      "dashboard": "Bosh sahifa",
+      "materials": "Materiallar",
+      "students": "O'quvchilar",
+      "billing": "To'lov",
+      "settings": "Sozlamalar"
+    },
+    "stats": {
+      "materials": "Materiallar",
+      "students": "Faol o'quvchilar"
+    },
+    "register": {
+      "title": "Tashkilot yarating",
+      "desc": "O'qituvchilar, maktablar va jamoalar uchun",
+      "submit": "Tashkilot yaratish",
+      "individual": "Shaxsiy hisob"
+    },
+    "settings": {
+      "title": "Tashkilot sozlamalari",
+      "orgName": "Tashkilot nomi",
+      "slug": "URL slug",
+      "save": "Saqlash"
+    },
+    "billing": {
+      "title": "To'lov",
+      "plan": "Joriy reja",
+      "adminHint": "Admin tenant obunasini tayinlashi kerak.",
+      "students": "O'quvchilar",
+      "materials": "Materiallar",
+      "generations": "Oy generatsiyalari"
+    },
+    "students": {
+      "title": "O'quvchilar",
+      "desc": "O'quvchilarni qo'shing va materiallarni tayinlang.",
+      "add": "O'quvchi qo'shish",
+      "name": "Ism",
+      "email": "Email",
+      "assigned": "Tayinlangan",
+      "lastActive": "Oxirgi faollik",
+      "avgQuiz": "O'rtacha test",
+      "create": "Yaratish",
+      "tempPasswordHint": "Vaqtinchalik parol (bir marta ko'rsatiladi):",
+      "done": "Tayyor",
+      "back": "O'quvchilarga qaytish",
+      "streak": "Ketma-ketlik: {days} kun",
+      "activity": "Faollik",
+      "noActivity": "Hali faollik yo'q",
+      "progress": "Material bo'yicha progress",
+      "noProgress": "Hali progress yo'q",
+      "coverage": "Qamrov {value}%",
+      "quizAttempts": "{count} test urinishi",
+      "avgQuizValue": "O'rtacha test {value}%"
+    },
+    "assign": {
+      "title": "O'quvchilarga tayinlash",
+      "desc": "Ushbu materialga kirish huquqini tanlang.",
+      "noStudents": "Avval o'quvchi qo'shing.",
+      "assigned": "tayinlangan",
+      "remove": "Olib tashlash",
+      "submit": "Tayinlash",
+      "back": "{title} ga qaytish"
+    }
+  },
+  "learner": {
+    "loading": "Yuklanmoqda...",
+    "welcome": "Xush kelibsiz, {name}",
+    "dashboardDesc": "Sizga tayinlangan materiallar.",
+    "assignedMaterials": "Tayinlangan materiallar",
+    "noAssigned": "Hali material tayinlanmagan."
   }
 }

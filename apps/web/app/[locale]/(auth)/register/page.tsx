@@ -9,6 +9,7 @@ import { LanguageSwitcher } from '@/components/language-switcher';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
+import { getPostLoginPath } from '@/lib/auth-routing';
 
 export default function RegisterPage() {
   const t = useTranslations('auth');
@@ -16,6 +17,7 @@ export default function RegisterPage() {
   const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
   const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
   const [mounted, setMounted] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,8 +30,8 @@ export default function RegisterPage() {
   }, []);
 
   useEffect(() => {
-    if (mounted && token) router.replace('/dashboard');
-  }, [mounted, token, router]);
+    if (mounted && token && user) router.replace(getPostLoginPath(user.role));
+  }, [mounted, token, user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ export default function RegisterPage() {
         password,
       });
       setAuth(data.user, data.token);
-      router.replace('/dashboard');
+      router.replace(getPostLoginPath(data.user.role));
     } catch {
       setError(t('registerFailed'));
     } finally {

@@ -13,6 +13,9 @@ import {
   DialogTitle,
 } from '@talim/ui';
 import { useContent, useRetryContent } from '@/hooks/useContent';
+import { useAuthStore } from '@/store/useAuthStore';
+import { getHomePathForRole } from '@/lib/auth-routing';
+import { AssignStudentsPanel } from '@/components/tenant/assign-students-panel';
 import { useSections, useSection } from '@/hooks/useSections';
 import {
   useCreateQuiz,
@@ -34,6 +37,10 @@ function ContentDetailInner({ id }: { id: string }) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
   const router = useRouter();
+  const user = useAuthStore((s) => s.user);
+  const isLearner = user?.role === 'TENANT_LEARNER';
+  const isTenantOwner = user?.role === 'TENANT_OWNER';
+  const homePath = getHomePathForRole(user?.role);
   const searchParams = useSearchParams();
   const sectionId = searchParams.get('section') ?? undefined;
   const { data: content } = useContent(id);
@@ -107,16 +114,20 @@ function ContentDetailInner({ id }: { id: string }) {
             <h2 className="text-lg font-semibold">{t('failed')}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{t('failedDesc')}</p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
-              <Button
-                disabled={retryContent.isPending}
-                onClick={() => retryContent.mutate(id)}
-              >
-                {retryContent.isPending ? t('retrying') : t('retry')}
-              </Button>
-              <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                {tCommon('delete')}
-              </Button>
-              <Link href="/dashboard">
+              {!isLearner && (
+                <>
+                  <Button
+                    disabled={retryContent.isPending}
+                    onClick={() => retryContent.mutate(id)}
+                  >
+                    {retryContent.isPending ? t('retrying') : t('retry')}
+                  </Button>
+                  <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+                    {tCommon('delete')}
+                  </Button>
+                </>
+              )}
+              <Link href={homePath}>
                 <Button variant="outline" type="button">
                   {t('backToLibrary')}
                 </Button>
@@ -128,7 +139,7 @@ function ContentDetailInner({ id }: { id: string }) {
           open={deleteOpen}
           onOpenChange={setDeleteOpen}
           content={{ id: content.id, title: content.title }}
-          onDeleted={() => router.push('/dashboard')}
+          onDeleted={() => router.push(homePath)}
         />
       </>
     );
@@ -143,18 +154,20 @@ function ContentDetailInner({ id }: { id: string }) {
             <p className="mt-2 text-sm text-muted-foreground">
               {t('processingDesc', { status: content.status })}
             </p>
-            <div className="mt-6">
-              <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                {tCommon('delete')}
-              </Button>
-            </div>
+            {!isLearner && (
+              <div className="mt-6">
+                <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
+                  {tCommon('delete')}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
         <DeleteContentDialog
           open={deleteOpen}
           onOpenChange={setDeleteOpen}
           content={{ id: content.id, title: content.title }}
-          onDeleted={() => router.push('/dashboard')}
+          onDeleted={() => router.push(homePath)}
         />
       </>
     );
@@ -177,6 +190,7 @@ function ContentDetailInner({ id }: { id: string }) {
     quizCount: history?.quizzes.length ?? 0,
     history,
     onOpenSummary: handleOpenSummary,
+    hideGenerateActions: isLearner,
   };
 
   return (
@@ -184,7 +198,7 @@ function ContentDetailInner({ id }: { id: string }) {
       <div className="flex flex-1 flex-col overflow-hidden">
         <div className="flex-1 overflow-y-auto px-4 py-8 md:px-12">
           <nav className="mb-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/dashboard" className="hover:text-foreground">
+            <Link href={homePath} className="hover:text-foreground">
               {tCommon('home')}
             </Link>
             <span>/</span>
@@ -231,22 +245,32 @@ function ContentDetailInner({ id }: { id: string }) {
             )}
           </div>
 
+          {isTenantOwner && (
+            <div className="mt-8 max-w-3xl">
+              <AssignStudentsPanel contentId={id} />
+            </div>
+          )}
+
           <div className="mt-10 flex flex-wrap gap-2.5 border-t pt-8">
-            <Button
-              className="w-full touch-manipulation sm:w-auto"
-              onClick={() => handleCreateQuiz('FULL')}
-              disabled={createQuiz.isPending || !activeSectionId}
-            >
-              ❓ {createQuiz.isPending ? t('creating') : t('quiz')}
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full touch-manipulation sm:w-auto"
-              onClick={() => handleCreateQuiz('QUICK')}
-              disabled={createQuiz.isPending || !activeSectionId}
-            >
-              ⚡ {createQuiz.isPending ? t('creating') : t('quickQuiz')}
-            </Button>
+            {!isLearner && (
+              <>
+                <Button
+                  className="w-full touch-manipulation sm:w-auto"
+                  onClick={() => handleCreateQuiz('FULL')}
+                  disabled={createQuiz.isPending || !activeSectionId}
+                >
+                  ❓ {createQuiz.isPending ? t('creating') : t('quiz')}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full touch-manipulation sm:w-auto"
+                  onClick={() => handleCreateQuiz('QUICK')}
+                  disabled={createQuiz.isPending || !activeSectionId}
+                >
+                  ⚡ {createQuiz.isPending ? t('creating') : t('quickQuiz')}
+                </Button>
+              </>
+            )}
             <Button
               variant="outline"
               className="w-full touch-manipulation sm:w-auto"
@@ -269,14 +293,16 @@ function ContentDetailInner({ id }: { id: string }) {
             >
               🎬 {tCommon('videoComingSoon')}
             </Button>
-            <Button
-              variant="outline"
-              type="button"
-              className="w-full touch-manipulation sm:w-auto"
-              onClick={() => setDeleteOpen(true)}
-            >
-              {tCommon('delete')}
-            </Button>
+            {!isLearner && (
+              <Button
+                variant="outline"
+                type="button"
+                className="w-full touch-manipulation sm:w-auto"
+                onClick={() => setDeleteOpen(true)}
+              >
+                {tCommon('delete')}
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -311,7 +337,7 @@ function ContentDetailInner({ id }: { id: string }) {
         open={deleteOpen}
         onOpenChange={setDeleteOpen}
         content={{ id: content.id, title: content.title }}
-        onDeleted={() => router.push('/dashboard')}
+        onDeleted={() => router.push(homePath)}
       />
     </div>
   );

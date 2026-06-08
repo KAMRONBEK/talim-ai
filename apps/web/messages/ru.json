@@ -9,6 +9,8 @@
     "logout": "Выйти",
     "freePlan": "Бесплатный план",
     "proPlan": "Pro план",
+    "tenantStarterPlan": "Tenant Starter",
+    "tenantGrowthPlan": "Tenant Growth",
     "searchPlaceholder": "Поиск материалов...",
     "search": "Поиск",
     "aiTutor": "ИИ-репетитор",
@@ -39,7 +41,8 @@
     "name": "Имя",
     "registering": "Создание аккаунта...",
     "registerFailed": "Не удалось зарегистрироваться. Email может быть занят.",
-    "haveAccount": "Уже есть аккаунт?"
+    "haveAccount": "Уже есть аккаунт?",
+    "registerOrg": "Регистрация организации"
   },
   "dashboard": {
     "readyToLearn": "Готовы учиться, {name}?",
@@ -220,5 +223,84 @@
     "uz": "O'zbek",
     "en": "English",
     "ru": "Русский"
+  },
+  "tenant": {
+    "loading": "Загрузка...",
+    "subscriptionRequired": "Требуется подписка",
+    "welcome": "Добро пожаловать, {name}",
+    "dashboardDesc": "Управляйте материалами и прогрессом учеников.",
+    "addMaterial": "Добавить материал",
+    "recentMaterials": "Недавние материалы",
+    "allMaterials": "Все материалы",
+    "uploadFailed": "Ошибка загрузки",
+    "nav": {
+      "dashboard": "Главная",
+      "materials": "Материалы",
+      "students": "Ученики",
+      "billing": "Оплата",
+      "settings": "Настройки"
+    },
+    "stats": {
+      "materials": "Материалы",
+      "students": "Активные ученики"
+    },
+    "register": {
+      "title": "Создайте организацию",
+      "desc": "Для репетиторов, школ и команд",
+      "submit": "Создать организацию",
+      "individual": "Личный аккаунт"
+    },
+    "settings": {
+      "title": "Настройки организации",
+      "orgName": "Название организации",
+      "slug": "URL slug",
+      "save": "Сохранить"
+    },
+    "billing": {
+      "title": "Оплата",
+      "plan": "Текущий план",
+      "adminHint": "Попросите администратора назначить подписку организации.",
+      "students": "Ученики",
+      "materials": "Материалы",
+      "generations": "Генерации за месяц"
+    },
+    "students": {
+      "title": "Ученики",
+      "desc": "Добавляйте учеников и назначайте материалы.",
+      "add": "Добавить ученика",
+      "name": "Имя",
+      "email": "Email",
+      "assigned": "Назначено",
+      "lastActive": "Последняя активность",
+      "avgQuiz": "Средний тест",
+      "create": "Создать",
+      "tempPasswordHint": "Временный пароль (показывается один раз):",
+      "done": "Готово",
+      "back": "К ученикам",
+      "streak": "Серия: {days} дн.",
+      "activity": "Активность",
+      "noActivity": "Пока нет активности",
+      "progress": "Прогресс по материалам",
+      "noProgress": "Пока нет прогресса",
+      "coverage": "Охват {value}%",
+      "quizAttempts": "{count} попыток теста",
+      "avgQuizValue": "Средний тест {value}%"
+    },
+    "assign": {
+      "title": "Назначить ученикам",
+      "desc": "Выберите учеников с доступом к материалу.",
+      "noStudents": "Сначала добавьте учеников.",
+      "assigned": "назначено",
+      "remove": "Убрать",
+      "submit": "Назначить",
+      "back": "Назад к {title}"
+    }
+  },
+  "learner": {
+    "loading": "Загрузка...",
+    "welcome": "Добро пожаловать, {name}",
+    "dashboardDesc": "Ваши назначенные материалы.",
+    "assignedMaterials": "Назначенные материалы",
+    "noAssigned": "Материалы пока не назначены."
   }
 }
