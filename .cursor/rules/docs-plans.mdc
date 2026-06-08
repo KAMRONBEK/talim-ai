@@ -1,0 +1,36 @@
+---
+description: Apply when implementing from docs/plans epic prompts, docs/PLANS.md, or any roadmap/backlog feature spec. Auto-loads the correct project rules — user should never need to @ mention rules manually.
+globs: docs/plans/**, docs/PLANS.md
+alwaysApply: false
+---
+
+# Epic & roadmap implementation
+
+User pastes an epic prompt or references `docs/plans/` — **you** load context and rules. Do not ask them to attach `@api-express-prisma`, `@web-next-patterns`, etc.
+
+## Before coding
+
+1. Read the epic file (e.g. `docs/plans/epic-3-tenant-experience.md`) and skim `docs/PLANS.md` for product context.
+2. Note **Depends on** / **Blocks** in the epic header — do not skip prerequisites.
+3. Read applicable rule files from `.cursor/rules/` **before** editing matching paths (use Read tool if not already loaded):
+
+| You will edit… | Read this rule |
+|----------------|----------------|
+| `apps/api/**`, Prisma schema/migrations | `api-express-prisma.mdc` |
+| `apps/web/**`, `packages/ui/**` | `web-next-patterns.mdc` |
+| `packages/types/**` | Both API + web rules (shared types) |
+| `env.template`, Docker, nginx, deploy workflow | `infra-deploy.mdc` |
+| Post-UI verification, browser smoke | `mcp-qa.mdc` |
+
+4. Full-stack epic → read **both** API and web rules up front, then implement backend before frontend unless the epic says otherwise.
+
+## Scope discipline
+
+- Implement only what the epic prompt specifies; do not expand scope.
+- Reuse existing patterns (auth, content pipeline, ChatWindow, TanStack Query, Zustand).
+- Secrets in Doppler only; document new env var **names** in `env.template`.
+- After UI changes → smoke test per `project-workflow.mdc`.
+
+## Epic build order (when user asks "what next")
+
+5 → 1 → 3 → 2 → 4 → 6 (see `docs/plans/README.md`).

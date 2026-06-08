@@ -1,5 +1,6 @@
 ---
 description: Apply when changing Docker Compose, nginx, GitHub Actions deploy workflow, VPS/SSH scripts, Doppler env templates, or deploying talim-ai to the VPS
+globs: docker-compose*.yml, nginx.conf, env.template, .github/workflows/**, scripts/**
 alwaysApply: false
 ---
 

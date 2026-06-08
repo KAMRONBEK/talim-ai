@@ -15,16 +15,17 @@ Monorepo: `apps/web`, `apps/api`, `packages/types`, `packages/ui`.
 
 ## Rule routing
 
-Apply the matching project rule for the task (Cursor loads them via globs or description):
+Rules apply automatically — **do not ask the user to @ mention them.**
 
-| When you are… | Rule |
+| When you are… | Rule (read from `.cursor/rules/` if not loaded) |
 |---------------|------|
+| Implementing `docs/plans/*` or `docs/PLANS.md` epics | `docs-plans` (orchestrates the rest) |
 | Editing web UI, pages, hooks, stores, `packages/ui` | `web-next-patterns` |
 | Editing API routes, services, jobs, Prisma schema | `api-express-prisma` |
 | Editing Docker, nginx, deploy workflow, VPS scripts, env template | `infra-deploy` |
 | Browser QA, Playwright MCP, talim-vps ops, post-UI verification | `mcp-qa` |
 
-If scope is unclear, read the relevant rule before editing. Use `@rule-name` to force a rule.
+If scope is unclear, read the relevant rule before editing.
 
 ## After changes
 
