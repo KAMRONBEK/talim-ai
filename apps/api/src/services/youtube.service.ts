@@ -2,6 +2,7 @@ import { YoutubeTranscript } from 'youtube-transcript';
 import ytdl from '@distube/ytdl-core';
 import OpenAI, { toFile } from 'openai';
 import { env } from '../config/env.js';
+import { recordUsage, type UsageContext } from './usage.service.js';
 
 const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) : null;
 
@@ -137,7 +138,7 @@ function buildTranscriptionPrompt(options?: { title?: string; locale?: string })
 
 async function generateYoutubeTranscript(
   url: string,
-  options?: { title?: string; locale?: string },
+  options?: { title?: string; locale?: string; usage?: UsageContext },
 ): Promise<YoutubeTranscriptResult> {
   if (!openai) {
     throw new Error('No transcript available for this video');
@@ -160,12 +161,25 @@ async function generateYoutubeTranscript(
     throw new Error('No transcript available for this video');
   }
 
+  if (options?.usage) {
+    const durationSec = segments.reduce((max, s) => Math.max(max, s.endMs / 1000), 0);
+    recordUsage({
+      userId: options.usage.userId,
+      tenantId: options.usage.tenantId,
+      feature: 'TRANSCRIBE',
+      model: env.TRANSCRIPTION_MODEL,
+      inputTokens: Math.round(durationSec),
+      outputTokens: 0,
+      metadata: { ...options.usage.metadata, durationSec },
+    });
+  }
+
   return { text, segments, source: 'AI_TRANSCRIPTION' };
 }
 
 export async function extractYoutubeTranscript(
   url: string,
-  options?: { title?: string; locale?: string },
+  options?: { title?: string; locale?: string; usage?: UsageContext },
 ): Promise<YoutubeTranscriptResult> {
   const videoId = extractYoutubeVideoId(url);
   if (!videoId) {

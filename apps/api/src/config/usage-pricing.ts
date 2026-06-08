@@ -4,8 +4,10 @@ export const TOKEN_PRICING_PER_MILLION: Record<string, { input: number; output: 
   'deepseek-chat': { input: 0.14, output: 0.28 },
   'gpt-4o': { input: 2.5, output: 10 },
   'gpt-4o-mini': { input: 0.15, output: 0.6 },
-  'whisper-1': { input: 0, output: 0 },
-  'tts-1-hd': { input: 0, output: 0 },
+  'text-embedding-3-small': { input: 0.02, output: 0 },
+  'whisper-1': { input: 0.006, output: 0 },
+  'tts-1-hd': { input: 15, output: 0 },
+  'tts-1': { input: 15, output: 0 },
   default: { input: 1, output: 3 },
 };
 

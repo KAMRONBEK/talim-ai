@@ -4,6 +4,7 @@ import type { AppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
+import type { UsageContext } from './usage.service.js';
 
 const CHUNK_SIZE = 512;
 const CHUNK_OVERLAP = 50;
@@ -17,10 +18,14 @@ export async function chunkText(text: string): Promise<string[]> {
   return splitter.splitText(text);
 }
 
-export async function storeChunksWithEmbeddings(contentId: string, chunks: string[]): Promise<void> {
+export async function storeChunksWithEmbeddings(
+  contentId: string,
+  chunks: string[],
+  usage?: UsageContext,
+): Promise<void> {
   await prisma.$executeRaw`DELETE FROM "Chunk" WHERE "contentId" = ${contentId}`;
 
-  const embeddings = await generateEmbeddings(chunks);
+  const embeddings = await generateEmbeddings(chunks, usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined);
 
   for (let i = 0; i < chunks.length; i++) {
     const chunk = chunks[i];
@@ -62,8 +67,12 @@ export async function searchSimilarChunks(
   contentId: string,
   query: string,
   limit: number = TOP_K,
+  usage?: UsageContext,
 ): Promise<{ text: string; chunkIndex: number }[]> {
-  const queryEmbedding = await generateEmbedding(query);
+  const queryEmbedding = await generateEmbedding(
+    query,
+    usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
+  );
   const vectorSql = embeddingToSql(queryEmbedding);
 
   const results = await prisma.$queryRawUnsafe<

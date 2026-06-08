@@ -1,6 +1,7 @@
 import pdfParse from 'pdf-parse';
 import OpenAI, { toFile } from 'openai';
 import { env } from '../config/env.js';
+import { recordUsage, type UsageContext } from './usage.service.js';
 
 const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) : null;
 
@@ -10,7 +11,11 @@ async function extractWithPdfParse(buffer: Buffer): Promise<string> {
 }
 
 /** OCR fallback for scanned/image PDFs via OpenAI vision. */
-async function extractWithOpenAI(buffer: Buffer, filename: string): Promise<string> {
+async function extractWithOpenAI(
+  buffer: Buffer,
+  filename: string,
+  usage?: UsageContext,
+): Promise<string> {
   if (!openai) {
     throw new Error(
       'PDF has no selectable text (likely scanned). Set OPENAI_API_KEY to enable OCR processing.',
@@ -23,8 +28,9 @@ async function extractWithOpenAI(buffer: Buffer, filename: string): Promise<stri
   });
 
   try {
+    const model = 'gpt-4o-mini';
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model,
       messages: [
         {
           role: 'user',
@@ -39,6 +45,18 @@ async function extractWithOpenAI(buffer: Buffer, filename: string): Promise<stri
       ],
     });
 
+    if (usage) {
+      recordUsage({
+        userId: usage.userId,
+        tenantId: usage.tenantId,
+        feature: 'PDF_PARSE',
+        model,
+        inputTokens: response.usage?.prompt_tokens ?? 0,
+        outputTokens: response.usage?.completion_tokens ?? 0,
+        metadata: usage.metadata,
+      });
+    }
+
     const text = response.choices[0]?.message?.content?.trim();
     if (!text) {
       throw new Error('No text could be extracted from PDF');
@@ -49,22 +67,30 @@ async function extractWithOpenAI(buffer: Buffer, filename: string): Promise<stri
   }
 }
 
-export async function extractPdfText(buffer: Buffer, filename = 'document.pdf'): Promise<string> {
+export async function extractPdfText(
+  buffer: Buffer,
+  filename = 'document.pdf',
+  usage?: UsageContext,
+): Promise<string> {
   const parsed = await extractWithPdfParse(buffer);
   if (parsed) return parsed;
 
-  return extractWithOpenAI(buffer, filename);
+  return extractWithOpenAI(buffer, filename, usage);
 }
 
 /** OCR a cropped page region (image/png or jpeg) from a scanned PDF viewer selection. */
-export async function extractRegionTextFromImage(imageBuffer: Buffer): Promise<string> {
+export async function extractRegionTextFromImage(
+  imageBuffer: Buffer,
+  usage?: UsageContext,
+): Promise<string> {
   if (!openai) {
     throw new Error('OPENAI_API_KEY is required for scanned PDF region OCR');
   }
 
+  const model = 'gpt-4o-mini';
   const base64 = imageBuffer.toString('base64');
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model,
     messages: [
       {
         role: 'user',
@@ -81,6 +107,18 @@ export async function extractRegionTextFromImage(imageBuffer: Buffer): Promise<s
       },
     ],
   });
+
+  if (usage) {
+    recordUsage({
+      userId: usage.userId,
+      tenantId: usage.tenantId,
+      feature: 'PDF_PARSE',
+      model,
+      inputTokens: response.usage?.prompt_tokens ?? 0,
+      outputTokens: response.usage?.completion_tokens ?? 0,
+      metadata: usage.metadata,
+    });
+  }
 
   const text = response.choices[0]?.message?.content?.trim();
   if (!text) {

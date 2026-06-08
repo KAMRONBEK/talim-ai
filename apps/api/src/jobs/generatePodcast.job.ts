@@ -101,7 +101,10 @@ export function registerGeneratePodcastJob(): void {
       });
 
       try {
-        const audio = await synthesizeSpeech(script, locale);
+        const audio = await synthesizeSpeech(script, locale, {
+          userId: content.userId,
+          metadata: { contentId, podcastId, episodeId: episode.id },
+        });
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
         const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({

@@ -50,7 +50,10 @@ export function registerGenerateQuizJob(): void {
     if (sectionId) {
       context = await getSectionContext(contentId, sectionId);
     } else {
-      const chunks = await searchSimilarChunks(contentId, content.title, 10);
+      const chunks = await searchSimilarChunks(contentId, content.title, 10, {
+        userId: content.userId,
+        metadata: { contentId, quizId },
+      });
       context = buildRagContext(chunks);
     }
 

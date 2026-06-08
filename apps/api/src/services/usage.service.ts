@@ -2,6 +2,12 @@ import type { Prisma, UsageFeature } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
 import { estimateTokenCostUsd } from '../config/usage-pricing.js';
 
+export interface UsageContext {
+  userId: string;
+  tenantId?: string | null;
+  metadata?: Record<string, unknown>;
+}
+
 export interface RecordUsageInput {
   userId: string;
   tenantId?: string | null;

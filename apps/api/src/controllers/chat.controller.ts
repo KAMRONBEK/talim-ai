@@ -182,10 +182,14 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     take: 20,
   });
 
-  const messageChunks = await searchSimilarChunks(body.contentId, body.message);
+  const embedUsage = {
+    userId: req.user.userId,
+    metadata: { contentId: body.contentId, sessionId },
+  };
+  const messageChunks = await searchSimilarChunks(body.contentId, body.message, 7, embedUsage);
   const excerptChunks =
     !body.selectedImage && body.selectedExcerpt?.trim()
-      ? await searchSimilarChunks(body.contentId, body.selectedExcerpt)
+      ? await searchSimilarChunks(body.contentId, body.selectedExcerpt, 7, embedUsage)
       : [];
   const chunks = excerptChunks.length
     ? mergeSimilarChunks(excerptChunks, messageChunks)
