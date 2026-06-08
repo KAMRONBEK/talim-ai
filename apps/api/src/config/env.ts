@@ -19,7 +19,7 @@ const envSchema = z.object({
   TUTOR_TEMPERATURE: z.coerce.number().min(0).max(2).default(0.7),
   MANIM_BIN: z.string().default(''),
   UPLOAD_DIR: z.string().default('/uploads'),
-  CORS_ORIGIN: z.string().default('http://localhost:3000'),
+  CORS_ORIGIN: z.string().default('http://localhost:3000,http://localhost:3001'),
 });
 
 export type Env = z.infer<typeof envSchema>;

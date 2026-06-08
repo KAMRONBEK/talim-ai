@@ -35,6 +35,8 @@ export default function UsersPage() {
               <th className="px-4 py-3 text-left font-medium">Email</th>
               <th className="px-4 py-3 text-left font-medium">Name</th>
               <th className="px-4 py-3 text-left font-medium">Role</th>
+              <th className="px-4 py-3 text-left font-medium">Plan</th>
+              <th className="px-4 py-3 text-left font-medium">Status</th>
               <th className="px-4 py-3 text-left font-medium">Content</th>
               <th className="px-4 py-3 text-right font-medium">Actions</th>
             </tr>
@@ -42,7 +44,7 @@ export default function UsersPage() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
                 </td>
               </tr>
@@ -57,6 +59,16 @@ export default function UsersPage() {
                 <td className="px-4 py-3">{user.name ?? '—'}</td>
                 <td className="px-4 py-3">
                   <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{user.role}</span>
+                </td>
+                <td className="px-4 py-3">{user.planCode ?? '—'}</td>
+                <td className="px-4 py-3">
+                  {user.subscriptionStatus ? (
+                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                      {user.subscriptionStatus}
+                    </span>
+                  ) : (
+                    '—'
+                  )}
                 </td>
                 <td className="px-4 py-3">{user.contentCount}</td>
                 <td className="px-4 py-3 text-right">

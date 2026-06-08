@@ -20,7 +20,6 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s) => s.user);
-  const logout = useAuthStore((s) => s.logout);
   const hydrated = useAuthHydrated();
 
   const isAdmin = Boolean(token && user?.role === 'ADMIN');
@@ -28,18 +27,18 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!hydrated) return;
     if (!isAdmin) {
-      if (token || user) logout();
       router.replace('/login');
     }
-  }, [hydrated, isAdmin, token, user, router, logout]);
+  }, [hydrated, isAdmin, router]);
 
-  if (!hydrated || !isAdmin) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-muted-foreground">Loading…</p>
-      </div>
-    );
+  // Post-login state is already in memory — do not block on persist hydration.
+  if (isAdmin) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <p className="text-muted-foreground">Loading…</p>
+    </div>
+  );
 }

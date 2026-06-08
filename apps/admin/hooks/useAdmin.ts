@@ -4,9 +4,13 @@ import type {
   AdminContentItem,
   AdminGeneratedItem,
   AdminPlatformStats,
+  AdminSubscriptionListItem,
+  AdminUpdateSubscriptionInput,
   AdminUsageSummaryRow,
+  AdminUsageVsLimits,
   AdminUserDetail,
   AdminUserListItem,
+  AdminUserSubscription,
   PaginatedResponse,
 } from '@talim/types';
 
@@ -38,11 +42,49 @@ export function useAdminUser(id: string) {
     queryFn: async () => {
       const { data } = await api.get<{
         user: AdminUserDetail;
+        subscription: AdminUserSubscription;
+        usageVsLimits: AdminUsageVsLimits;
         contents: Array<{ id: string; title: string; type: string; status: string; createdAt: string }>;
       }>(`/admin/users/${id}`);
       return data;
     },
     enabled: Boolean(id),
+  });
+}
+
+export function useAdminSubscriptions(params: {
+  page?: number;
+  search?: string;
+  status?: string;
+  plan?: string;
+}) {
+  return useQuery({
+    queryKey: ['admin', 'subscriptions', params],
+    queryFn: async () => {
+      const { data } = await api.get<PaginatedResponse<AdminSubscriptionListItem>>(
+        '/admin/subscriptions',
+        { params },
+      );
+      return data;
+    },
+  });
+}
+
+export function useUpdateUserSubscription() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ userId, ...body }: AdminUpdateSubscriptionInput & { userId: string }) => {
+      const { data } = await api.patch<{ subscription: AdminUserSubscription }>(
+        `/admin/users/${userId}/subscription`,
+        body,
+      );
+      return data.subscription;
+    },
+    onSuccess: (_data, vars) => {
+      qc.invalidateQueries({ queryKey: ['admin', 'users', vars.userId] });
+      qc.invalidateQueries({ queryKey: ['admin', 'users'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'subscriptions'] });
+    },
   });
 }
 
