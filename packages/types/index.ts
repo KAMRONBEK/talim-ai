@@ -76,6 +76,21 @@ export interface AdminUpdateSubscriptionInput {
   currentPeriodEnd?: string | null;
 }
 
+export type UserSubscription = AdminUserSubscription;
+
+export interface BillingUsageVsLimits {
+  uploads: { used: number; limit: number | null };
+  generations: { used: number; limit: number | null };
+  tutorMessages: { used: number; limit: number | null };
+}
+
+export interface BillingMeResponse {
+  subscription: UserSubscription;
+  usage: BillingUsageVsLimits;
+  periodStart: string;
+  periodEnd: string;
+}
+
 export type UsageFeature =
   | 'EMBED'
   | 'TUTOR_CHAT'
