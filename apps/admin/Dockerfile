@@ -21,6 +21,7 @@ COPY packages/types ./packages/types
 COPY packages/ui ./packages/ui
 ARG NEXT_PUBLIC_API_URL=http://localhost:4000
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NODE_OPTIONS="--max-old-space-size=768"
 WORKDIR /app/apps/admin
 RUN pnpm build
 

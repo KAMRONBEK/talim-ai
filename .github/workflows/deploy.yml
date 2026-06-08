@@ -72,10 +72,20 @@ jobs:
             fi
 
             export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
-            # Build app tier first; nginx is recreated separately so it does not proxy to
+            export COMPOSE_PARALLEL_LIMIT=1
+            DOPPLER_RUN="doppler run --project talim-ai --config prd --"
+
+            # Free page cache before builds on the 2GB VPS (deploy runs as root).
+            sync
+            echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
+
+            # Build images one service at a time — parallel Next.js builds OOM the host.
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build api
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build web
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build admin
+
+            # Start app tier; nginx is recreated separately so it does not proxy to
             # stale container IPs while --wait marks the deploy failed.
-            doppler run --project talim-ai --config prd -- \
-              docker compose ${COMPOSE_FILES} up -d --build --wait db redis api web admin
-            doppler run --project talim-ai --config prd -- \
-              docker compose ${COMPOSE_FILES} up -d --force-recreate --no-deps --wait nginx
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --wait db redis api web admin
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --force-recreate --no-deps --wait nginx
             docker image prune -f
