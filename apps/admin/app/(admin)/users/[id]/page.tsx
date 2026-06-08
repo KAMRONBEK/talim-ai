@@ -2,39 +2,69 @@
 
 import Link from 'next/link';
 import { use, useState } from 'react';
-import { Button, Card, CardContent, CardHeader, Label } from '@talim/ui';
-import type { PlanCode, SubscriptionStatus } from '@talim/types';
-import { useAdminUser, useUpdateUserSubscription } from '@/hooks/useAdmin';
+import { Button, Card, CardContent, CardHeader, Input, Label } from '@talim/ui';
+import type {
+  AdminTenantUsageVsLimits,
+  AdminUsageVsLimits,
+  PlanCode,
+  SubscriptionStatus,
+  UserRole,
+} from '@talim/types';
+import {
+  useAdminTenants,
+  useAdminUser,
+  usePatchUser,
+  useUpdateUserSubscription,
+} from '@/hooks/useAdmin';
 
-const PLAN_OPTIONS: PlanCode[] = ['FREE', 'INDIVIDUAL_PRO'];
+const INDIVIDUAL_PLANS: PlanCode[] = ['FREE', 'INDIVIDUAL_PRO'];
 const STATUS_OPTIONS: SubscriptionStatus[] = ['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'];
+const ROLE_OPTIONS: UserRole[] = ['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN'];
 
 function formatLimit(used: number, limit: number | null): string {
   if (limit === null) return `${used} / ∞`;
   return `${used} / ${limit}`;
 }
 
+function isTenantUsage(
+  usage: AdminUsageVsLimits | AdminTenantUsageVsLimits,
+): usage is AdminTenantUsageVsLimits {
+  return 'students' in usage;
+}
+
 export default function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data, isLoading } = useAdminUser(id);
   const updateSubscription = useUpdateUserSubscription();
+  const patchUser = usePatchUser();
+  const { data: tenantsData } = useAdminTenants({ page: 1, pageSize: 100 });
 
   const [planCode, setPlanCode] = useState<PlanCode | ''>('');
   const [status, setStatus] = useState<SubscriptionStatus | ''>('');
   const [periodEnd, setPeriodEnd] = useState('');
+  const [role, setRole] = useState<UserRole | ''>('');
+  const [orgName, setOrgName] = useState('');
+  const [tenantId, setTenantId] = useState('');
 
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading user…</p>;
   }
 
   const { user, subscription, usageVsLimits, contents } = data;
-  const currentPlan = planCode || subscription.planCode;
-  const currentStatus = status || subscription.status;
+  const isTenantOwner = user.role === 'TENANT_OWNER';
+  const isTenantLearner = user.role === 'TENANT_LEARNER';
+  const targetRole = role || user.role;
+  const needsOrgName =
+    targetRole === 'TENANT_OWNER' && !user.ownedTenant && role !== '' && role !== user.role;
+  const needsTenantId =
+    targetRole === 'TENANT_LEARNER' ||
+    (targetRole === 'TENANT_OWNER' && role !== '' && role !== user.role && !orgName.trim());
+
+  const currentPlan = planCode || subscription?.planCode || 'FREE';
+  const currentStatus = status || subscription?.status || 'ACTIVE';
   const currentPeriodEnd =
     periodEnd ||
-    (subscription.currentPeriodEnd
-      ? subscription.currentPeriodEnd.slice(0, 10)
-      : '');
+    (subscription?.currentPeriodEnd ? subscription.currentPeriodEnd.slice(0, 10) : '');
 
   return (
     <div className="space-y-6">
@@ -74,94 +104,259 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Subscription</h2>
+          <h2 className="font-semibold">Role & organization</h2>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-            <div>
-              <p className="text-xs text-muted-foreground">Effective plan</p>
-              <p className="font-medium">{subscription.effectivePlanCode}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Stored plan</p>
-              <p className="font-medium">{subscription.planCode}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">Source</p>
-              <p className="font-medium">{subscription.source}</p>
-            </div>
-            <div>
-              <p className="text-xs text-muted-foreground">External ID</p>
-              <p className="font-medium">{subscription.externalSubscriptionId ?? '—'}</p>
-            </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
+          {user.ownedTenant && (
+            <p className="text-sm text-muted-foreground">
+              Owns organization:{' '}
+              <Link href={`/tenants/${user.ownedTenant.id}`} className="text-primary hover:underline">
+                {user.ownedTenant.name}
+              </Link>
+            </p>
+          )}
+          {user.learnerTenant && (
+            <p className="text-sm text-muted-foreground">
+              Learner in:{' '}
+              <Link href={`/tenants/${user.learnerTenant.id}`} className="text-primary hover:underline">
+                {user.learnerTenant.name}
+              </Link>
+            </p>
+          )}
+          <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1">
-              <Label htmlFor="plan">Plan</Label>
+              <Label htmlFor="role">Role</Label>
               <select
-                id="plan"
-                value={currentPlan}
-                onChange={(e) => setPlanCode(e.target.value as PlanCode)}
+                id="role"
+                value={targetRole}
+                onChange={(e) => setRole(e.target.value as UserRole)}
                 className="h-9 w-full rounded-md border bg-background px-3 text-sm"
               >
-                {PLAN_OPTIONS.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
+                {ROLE_OPTIONS.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
                   </option>
                 ))}
               </select>
             </div>
-            <div className="space-y-1">
-              <Label htmlFor="status">Status</Label>
-              <select
-                id="status"
-                value={currentStatus}
-                onChange={(e) => setStatus(e.target.value as SubscriptionStatus)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
-              >
-                {STATUS_OPTIONS.map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="periodEnd">Period end (optional)</Label>
-              <input
-                id="periodEnd"
-                type="date"
-                value={currentPeriodEnd}
-                onChange={(e) => setPeriodEnd(e.target.value)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
-              />
-            </div>
+            {needsOrgName && (
+              <div className="space-y-1">
+                <Label htmlFor="orgName">New organization name</Label>
+                <Input
+                  id="orgName"
+                  placeholder="Acme School"
+                  value={orgName}
+                  onChange={(e) => setOrgName(e.target.value)}
+                />
+              </div>
+            )}
+            {needsTenantId && (
+              <div className="space-y-1">
+                <Label htmlFor="tenantId">Organization</Label>
+                <select
+                  id="tenantId"
+                  value={tenantId || user.learnerTenant?.id || user.ownedTenant?.id || ''}
+                  onChange={(e) => setTenantId(e.target.value)}
+                  className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                >
+                  <option value="">Select organization…</option>
+                  {tenantsData?.items.map((t) => (
+                    <option key={t.id} value={t.id}>
+                      {t.name} ({t.slug})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
           <Button
-            disabled={updateSubscription.isPending}
+            disabled={patchUser.isPending}
             onClick={() => {
-              const body: { planCode?: PlanCode; status?: SubscriptionStatus; currentPeriodEnd?: string | null } =
-                {};
-              if (planCode && planCode !== subscription.planCode) body.planCode = planCode;
-              if (status && status !== subscription.status) body.status = status;
-              if (periodEnd !== (subscription.currentPeriodEnd?.slice(0, 10) ?? '')) {
-                body.currentPeriodEnd = periodEnd ? new Date(periodEnd).toISOString() : null;
+              if (role && role === user.role) return;
+              const body: {
+                role?: UserRole;
+                orgName?: string;
+                tenantId?: string;
+              } = {};
+              if (role && role !== user.role) body.role = role;
+              if (orgName.trim()) body.orgName = orgName.trim();
+              const selectedTenant =
+                tenantId || user.learnerTenant?.id || user.ownedTenant?.id || undefined;
+              if (selectedTenant && (targetRole === 'TENANT_LEARNER' || targetRole === 'TENANT_OWNER')) {
+                body.tenantId = selectedTenant;
               }
-              if (Object.keys(body).length === 0) return;
-              updateSubscription.mutate({ userId: id, ...body });
+              if (!body.role) return;
+              patchUser.mutate({ userId: id, ...body });
             }}
           >
-            {updateSubscription.isPending ? 'Saving…' : 'Save subscription'}
+            {patchUser.isPending ? 'Saving…' : 'Save role'}
           </Button>
+          {patchUser.isError && (
+            <p className="text-sm text-destructive">
+              {(patchUser.error as { response?: { data?: { message?: string } } })?.response?.data
+                ?.message ?? 'Failed to update role'}
+            </p>
+          )}
         </CardContent>
       </Card>
+
+      {isTenantOwner ? (
+        <Card>
+          <CardHeader>
+            <h2 className="font-semibold">Subscription</h2>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <p className="text-muted-foreground">
+              Tenant owners are billed via the organization subscription, not a personal plan.
+            </p>
+            {user.ownedTenant ? (
+              <Link
+                href={`/tenants/${user.ownedTenant.id}`}
+                className="inline-block text-primary hover:underline"
+              >
+                Manage {user.ownedTenant.name} subscription →
+              </Link>
+            ) : (
+              <p className="text-muted-foreground">No organization linked yet.</p>
+            )}
+            {subscription && (
+              <div className="pt-2">
+                <p className="text-xs text-muted-foreground">Current org plan</p>
+                <p className="font-medium">
+                  {subscription.effectivePlanCode} · {subscription.status}
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      ) : (
+        <Card>
+          <CardHeader>
+            <h2 className="font-semibold">Subscription</h2>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {isTenantLearner && (
+              <p className="text-sm text-muted-foreground">
+                Learners use the organization subscription. No personal plan applies.
+              </p>
+            )}
+            {subscription ? (
+              <>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+                  <div>
+                    <p className="text-xs text-muted-foreground">Effective plan</p>
+                    <p className="font-medium">{subscription.effectivePlanCode}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Stored plan</p>
+                    <p className="font-medium">{subscription.planCode}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Source</p>
+                    <p className="font-medium">{subscription.source}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">External ID</p>
+                    <p className="font-medium">{subscription.externalSubscriptionId ?? '—'}</p>
+                  </div>
+                </div>
+                {!isTenantLearner && (
+                  <>
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <div className="space-y-1">
+                        <Label htmlFor="plan">Plan</Label>
+                        <select
+                          id="plan"
+                          value={currentPlan}
+                          onChange={(e) => setPlanCode(e.target.value as PlanCode)}
+                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                        >
+                          {INDIVIDUAL_PLANS.map((p) => (
+                            <option key={p} value={p}>
+                              {p}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <Label htmlFor="status">Status</Label>
+                        <select
+                          id="status"
+                          value={currentStatus}
+                          onChange={(e) => setStatus(e.target.value as SubscriptionStatus)}
+                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                        >
+                          {STATUS_OPTIONS.map((s) => (
+                            <option key={s} value={s}>
+                              {s}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="space-y-1">
+                        <Label htmlFor="periodEnd">Period end (optional)</Label>
+                        <input
+                          id="periodEnd"
+                          type="date"
+                          value={currentPeriodEnd}
+                          onChange={(e) => setPeriodEnd(e.target.value)}
+                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                        />
+                      </div>
+                    </div>
+                    <Button
+                      disabled={updateSubscription.isPending}
+                      onClick={() => {
+                        const body: {
+                          planCode?: PlanCode;
+                          status?: SubscriptionStatus;
+                          currentPeriodEnd?: string | null;
+                        } = {};
+                        if (planCode && planCode !== subscription.planCode) body.planCode = planCode;
+                        if (status && status !== subscription.status) body.status = status;
+                        if (periodEnd !== (subscription.currentPeriodEnd?.slice(0, 10) ?? '')) {
+                          body.currentPeriodEnd = periodEnd
+                            ? new Date(periodEnd).toISOString()
+                            : null;
+                        }
+                        if (Object.keys(body).length === 0) return;
+                        updateSubscription.mutate({ userId: id, ...body });
+                      }}
+                    >
+                      {updateSubscription.isPending ? 'Saving…' : 'Save subscription'}
+                    </Button>
+                  </>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground">No subscription on file.</p>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>
           <h2 className="font-semibold">Usage vs limits (this month)</h2>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 text-sm">
+            {isTenantUsage(usageVsLimits) && (
+              <>
+                <div>
+                  <p className="text-xs text-muted-foreground">Students</p>
+                  <p className="font-medium">
+                    {formatLimit(usageVsLimits.students.used, usageVsLimits.students.limit)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Content items</p>
+                  <p className="font-medium">
+                    {formatLimit(usageVsLimits.contentItems.used, usageVsLimits.contentItems.limit)}
+                  </p>
+                </div>
+              </>
+            )}
             <div>
               <p className="text-xs text-muted-foreground">Uploads</p>
               <p className="font-medium">
