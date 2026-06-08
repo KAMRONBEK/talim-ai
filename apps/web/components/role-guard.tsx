@@ -7,7 +7,7 @@ import type { UserRole } from '@talim/types';
 import { getPostLoginPath } from '@/lib/auth-routing';
 
 function useAuthHydrated() {
-  const [hydrated, setHydrated] = useState(() => useAuthStore.persist.hasHydrated());
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const unsub = useAuthStore.persist.onFinishHydration(() => setHydrated(true));
