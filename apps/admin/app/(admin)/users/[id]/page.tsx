@@ -12,6 +12,7 @@ import type {
 } from '@talim/types';
 import {
   useAdminTenants,
+  useAdminTenant,
   useAdminUser,
   usePatchUser,
   useUpdateUserSubscription,
@@ -45,6 +46,10 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const [role, setRole] = useState<UserRole | ''>('');
   const [orgName, setOrgName] = useState('');
   const [tenantId, setTenantId] = useState('');
+  const [newOwnerId, setNewOwnerId] = useState('');
+
+  const ownedTenantId = data?.user.ownedTenant?.id ?? '';
+  const { data: ownedTenantData } = useAdminTenant(ownedTenantId);
 
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading user…</p>;
@@ -59,6 +64,12 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const needsTenantId =
     targetRole === 'TENANT_LEARNER' ||
     (targetRole === 'TENANT_OWNER' && role !== '' && role !== user.role && !orgName.trim());
+  const needsNewOwner =
+    Boolean(user.ownedTenant) &&
+    user.role === 'TENANT_OWNER' &&
+    role === 'INDIVIDUAL';
+  const transferCandidates =
+    ownedTenantData?.tenant.members.filter((member) => member.userId !== user.id) ?? [];
 
   const currentPlan = planCode || subscription?.planCode || 'FREE';
   const currentStatus = status || subscription?.status || 'ACTIVE';
@@ -168,18 +179,41 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 </select>
               </div>
             )}
+            {needsNewOwner && (
+              <div className="space-y-1 sm:col-span-2">
+                <Label htmlFor="newOwnerId">Transfer ownership to</Label>
+                <select
+                  id="newOwnerId"
+                  value={newOwnerId}
+                  onChange={(e) => setNewOwnerId(e.target.value)}
+                  className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                >
+                  <option value="">Select new owner…</option>
+                  {transferCandidates.map((member) => (
+                    <option key={member.userId} value={member.userId}>
+                      {member.name ?? member.email} ({member.email})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-muted-foreground">
+                  Required before demoting an organization owner to individual.
+                </p>
+              </div>
+            )}
           </div>
           <Button
-            disabled={patchUser.isPending}
+            disabled={patchUser.isPending || (needsNewOwner && !newOwnerId)}
             onClick={() => {
               if (role && role === user.role) return;
               const body: {
                 role?: UserRole;
                 orgName?: string;
                 tenantId?: string;
+                newOwnerId?: string;
               } = {};
               if (role && role !== user.role) body.role = role;
               if (orgName.trim()) body.orgName = orgName.trim();
+              if (needsNewOwner && newOwnerId) body.newOwnerId = newOwnerId;
               const selectedTenant =
                 tenantId || user.learnerTenant?.id || user.ownedTenant?.id || undefined;
               if (selectedTenant && (targetRole === 'TENANT_LEARNER' || targetRole === 'TENANT_OWNER')) {

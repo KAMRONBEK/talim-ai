@@ -243,6 +243,7 @@ export interface AdminPatchUserInput {
   preferredLocale?: AppLocale;
   tenantId?: string;
   orgName?: string;
+  newOwnerId?: string;
 }
 
 export interface AdminContentItem {

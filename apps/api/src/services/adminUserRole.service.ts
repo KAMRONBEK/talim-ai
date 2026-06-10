@@ -6,6 +6,51 @@ import { createTenantForOwner } from './tenant.service.js';
 export interface AdminRoleChangeInput {
   tenantId?: string;
   orgName?: string;
+  newOwnerId?: string;
+}
+
+async function transferTenantOwnership(
+  tenantId: string,
+  fromUserId: string,
+  toUserId: string,
+): Promise<void> {
+  if (fromUserId === toUserId) {
+    throw new AppError(400, 'Cannot transfer ownership to the same user');
+  }
+
+  const tenant = await prisma.tenant.findUnique({ where: { id: tenantId } });
+  if (!tenant) throw new AppError(404, 'Organization not found');
+  if (tenant.ownerId !== fromUserId) {
+    throw new AppError(400, 'User is not the current organization owner');
+  }
+
+  const newOwner = await prisma.user.findUnique({ where: { id: toUserId } });
+  if (!newOwner) throw new AppError(404, 'New owner not found');
+
+  const membership = await prisma.tenantMembership.findUnique({
+    where: { tenantId_userId: { tenantId, userId: toUserId } },
+  });
+  if (!membership) {
+    throw new AppError(400, 'New owner must be a member of the organization');
+  }
+
+  await prisma.$transaction([
+    prisma.tenant.update({ where: { id: tenantId }, data: { ownerId: toUserId } }),
+    prisma.user.update({ where: { id: toUserId }, data: { role: 'TENANT_OWNER' } }),
+    prisma.tenantMembership.updateMany({
+      where: { userId: toUserId, tenantId, role: 'LEARNER' },
+      data: { active: false },
+    }),
+    prisma.tenantMembership.upsert({
+      where: { tenantId_userId: { tenantId, userId: toUserId } },
+      create: { tenantId, userId: toUserId, role: 'OWNER' },
+      update: { active: true, role: 'OWNER' },
+    }),
+    prisma.tenantMembership.updateMany({
+      where: { userId: fromUserId, role: 'OWNER' },
+      data: { active: false },
+    }),
+  ]);
 }
 
 async function ensureIndividualSubscription(userId: string): Promise<void> {
@@ -57,15 +102,19 @@ export async function applyAdminRoleChange(
     if (fromRole === 'TENANT_OWNER') {
       const owned = await prisma.tenant.findFirst({ where: { ownerId: userId } });
       if (owned) {
-        throw new AppError(
-          400,
-          `User owns organization "${owned.name}". Reassign the owner before demoting to individual.`,
-        );
+        if (!input.newOwnerId) {
+          throw new AppError(
+            400,
+            `User owns organization "${owned.name}". Select a new owner before demoting to individual.`,
+          );
+        }
+        await transferTenantOwnership(owned.id, userId, input.newOwnerId);
+      } else {
+        await prisma.tenantMembership.updateMany({
+          where: { userId, role: 'OWNER' },
+          data: { active: false },
+        });
       }
-      await prisma.tenantMembership.updateMany({
-        where: { userId, role: 'OWNER' },
-        data: { active: false },
-      });
     }
     if (fromRole === 'TENANT_LEARNER') {
       await prisma.tenantMembership.updateMany({

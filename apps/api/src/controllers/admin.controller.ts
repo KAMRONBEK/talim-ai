@@ -46,6 +46,7 @@ const patchUserSchema = z
     preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
     tenantId: z.string().min(1).optional(),
     orgName: z.string().min(1).optional(),
+    newOwnerId: z.string().min(1).optional(),
   })
   .refine(
     (body) => {
@@ -278,6 +279,7 @@ export async function patchUser(req: AuthenticatedRequest, res: Response): Promi
     await applyAdminRoleChange(id, existing.role, body.role, {
       tenantId: body.tenantId,
       orgName: body.orgName,
+      newOwnerId: body.newOwnerId,
     });
   }
 
