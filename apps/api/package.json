@@ -13,6 +13,7 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "create-admin": "tsx src/scripts/create-admin.ts",
+    "create-tenant-owner": "tsx src/scripts/create-tenant-owner.ts",
     "inspect-chunks": "tsx src/scripts/inspect-chunks.ts"
   },
   "dependencies": {
