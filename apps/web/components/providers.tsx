@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { makeQueryClient } from '@/lib/queryClient';
 import { ThemeProvider } from '@/components/theme-provider';
 import { LocaleSync } from '@/components/locale-sync';
+import { SessionSync } from '@/components/session-sync';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => makeQueryClient());
@@ -12,6 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <LocaleSync />
+        <SessionSync />
         {children}
       </QueryClientProvider>
     </ThemeProvider>

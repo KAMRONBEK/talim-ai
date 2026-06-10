@@ -189,7 +189,14 @@ export async function me(req: AuthenticatedRequest, res: Response): Promise<void
   if (!user) {
     throw new AppError(404, 'User not found');
   }
-  res.json({ user: await formatUser(user) });
+  const formatted = await formatUser(user);
+  const body: { user: Awaited<ReturnType<typeof formatUser>>; token?: string } = {
+    user: formatted,
+  };
+  if (req.legacyToken) {
+    body.token = signToken(user.id, user.email, user.role, formatted.tenantId);
+  }
+  res.json(body);
 }
 
 export async function updateMe(req: AuthenticatedRequest, res: Response): Promise<void> {

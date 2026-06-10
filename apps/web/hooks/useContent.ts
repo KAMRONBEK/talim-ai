@@ -8,6 +8,7 @@ function contentApiBase(role?: UserRole): string {
 }
 
 export function useContents() {
+  const token = useAuthStore((s) => s.token);
   const role = useAuthStore((s) => s.user?.role);
   const base = contentApiBase(role);
   return useQuery({
@@ -16,6 +17,7 @@ export function useContents() {
       const { data } = await api.get<{ contents: Content[] }>(base);
       return data.contents;
     },
+    enabled: Boolean(token),
   });
 }
 
