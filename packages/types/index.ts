@@ -17,6 +17,10 @@ export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
 export type TenantMemberRole = 'OWNER' | 'LEARNER';
+export type QuestionType = 'SHORT_ANSWER' | 'NUMERIC' | 'MULTIPLE_CHOICE';
+export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
+export type TenantAssessmentStatus = 'DRAFT' | 'PUBLISHED';
+export type AssessmentAttemptStatus = 'SUBMITTED' | 'GRADED';
 
 export type PlanKind = 'INDIVIDUAL' | 'TENANT';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
@@ -125,6 +129,7 @@ export type UsageFeature =
   | 'EMBED'
   | 'TUTOR_CHAT'
   | 'QUIZ_GEN'
+  | 'QUESTION_DRAFT'
   | 'PODCAST_GEN'
   | 'SECTION_GEN'
   | 'SUMMARY_GEN'
@@ -140,6 +145,7 @@ export interface User {
   role: UserRole;
   preferredLocale: AppLocale;
   tenantId: string | null;
+  tenantName?: string | null;
   createdAt: string;
 }
 
@@ -193,6 +199,94 @@ export interface StudentProgressSummary {
   activityDays: string[];
   streakDays: number;
   contentProgress: StudentContentProgress[];
+}
+
+export interface TenantProgressSummary {
+  totals: {
+    students: number;
+    activeStudents: number;
+    materials: number;
+    avgCoverage: number;
+    avgQuizScore: number | null;
+  };
+  students: TenantStudent[];
+}
+
+export interface LearnerSummary {
+  tenantName: string | null;
+  assignedCount: number;
+  streakDays: number;
+  avgQuizScore: number | null;
+  lastActivityAt: string | null;
+  continueContent: {
+    contentId: string;
+    title: string;
+    lastSectionId: string | null;
+    overallCoverage: number;
+  } | null;
+}
+
+export interface QuestionBank {
+  id: string;
+  tenantId: string;
+  title: string;
+  topic: string | null;
+  createdById: string;
+  createdAt: string;
+  questionCount: number;
+  approvedCount: number;
+}
+
+export interface BankQuestion {
+  id: string;
+  bankId: string;
+  type: QuestionType;
+  prompt: string;
+  options: string[] | null;
+  acceptableAnswers: string[];
+  explanation: string | null;
+  status: BankQuestionStatus;
+  sourceContentId: string | null;
+  sourceSectionId: string | null;
+  createdAt: string;
+}
+
+export interface TenantAssessment {
+  id: string;
+  tenantId: string;
+  bankId: string | null;
+  title: string;
+  instructions: string | null;
+  maxAttempts: number;
+  status: TenantAssessmentStatus;
+  createdAt: string;
+  questionCount: number;
+  assignmentCount: number;
+}
+
+export interface AssessmentAssignment {
+  id: string;
+  assessmentId: string;
+  learnerId: string | null;
+  contentId: string | null;
+  sectionId: string | null;
+  assignedById: string;
+  assignedAt: string;
+}
+
+export interface LearnerAssessment {
+  id: string;
+  title: string;
+  instructions: string | null;
+  maxAttempts: number;
+  attemptCount: number;
+  latestScore: number | null;
+  questions: Array<{
+    id: string;
+    type: QuestionType;
+    prompt: string;
+    options: string[] | null;
+  }>;
 }
 
 export interface AdminUserListItem extends User {

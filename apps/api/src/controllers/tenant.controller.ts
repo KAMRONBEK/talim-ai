@@ -27,6 +27,12 @@ export async function listStudents(req: AuthenticatedRequest, res: Response): Pr
   res.json({ students });
 }
 
+export async function getProgress(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const progress = await tenantService.getTenantProgress(tenantId);
+  res.json(progress);
+}
+
 export async function createStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const tenantId = requireOwnerTenant(req);
@@ -44,6 +50,12 @@ export async function deleteStudent(req: AuthenticatedRequest, res: Response): P
   const tenantId = requireOwnerTenant(req);
   await tenantService.deleteStudent(tenantId, getParam(req, 'id'));
   res.status(204).send();
+}
+
+export async function resetStudentPassword(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const result = await tenantService.resetStudentPassword(tenantId, getParam(req, 'id'));
+  res.json(result);
 }
 
 export async function getStudentProgress(req: AuthenticatedRequest, res: Response): Promise<void> {

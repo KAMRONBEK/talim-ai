@@ -143,9 +143,7 @@ pnpm create-tenant-owner -- \
 
 On production, run the same command on the VPS with `--config prd` (as for `create-admin` above). Re-running updates password/role and ensures the org subscription is active.
 
-**Self-serve UI** — http://localhost:3000/register-tenant (or production `/register-tenant`). Creates `TENANT_OWNER` + org; assign a tenant subscription via the admin panel if uploads or student limits are blocked.
-
-**Upgrade** — an existing individual user can become a tenant owner via `POST /auth/upgrade-to-tenant` while logged in.
+**Admin provisioning** — tenant owner accounts are created by platform admins (CLI above or admin panel). Public self-serve signup at `/register-tenant` is disabled; the login page directs new tutors to contact the admin.
 
 ### Tenant learners (students)
 

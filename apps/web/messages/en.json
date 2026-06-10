@@ -42,7 +42,9 @@
     "registering": "Creating account...",
     "registerFailed": "Registration failed. Email may already be in use.",
     "haveAccount": "Already have an account?",
-    "registerOrg": "Register organization"
+    "registerOrg": "Register organization",
+    "tutorAccount": "Tutor or school account?",
+    "contactAdmin": "Contact admin"
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -233,10 +235,13 @@
     "recentMaterials": "Recent materials",
     "allMaterials": "All materials",
     "uploadFailed": "Upload failed",
+    "organization": "Organization",
     "nav": {
       "dashboard": "Dashboard",
       "materials": "Materials",
       "students": "Students",
+      "progress": "Progress",
+      "assessments": "Assessments",
       "billing": "Billing",
       "settings": "Settings"
     },
@@ -268,6 +273,7 @@
       "title": "Students",
       "desc": "Invite learners and assign materials.",
       "add": "Add student",
+      "resetPassword": "Reset student password",
       "name": "Name",
       "email": "Email",
       "assigned": "Assigned",

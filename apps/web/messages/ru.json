@@ -42,7 +42,9 @@
     "registering": "Создание аккаунта...",
     "registerFailed": "Не удалось зарегистрироваться. Email может быть занят.",
     "haveAccount": "Уже есть аккаунт?",
-    "registerOrg": "Регистрация организации"
+    "registerOrg": "Регистрация организации",
+    "tutorAccount": "Аккаунт учителя или школы?",
+    "contactAdmin": "Связаться с админом"
   },
   "dashboard": {
     "readyToLearn": "Готовы учиться, {name}?",
@@ -233,10 +235,13 @@
     "recentMaterials": "Недавние материалы",
     "allMaterials": "Все материалы",
     "uploadFailed": "Ошибка загрузки",
+    "organization": "Организация",
     "nav": {
       "dashboard": "Главная",
       "materials": "Материалы",
       "students": "Ученики",
+      "progress": "Прогресс",
+      "assessments": "Задания",
       "billing": "Оплата",
       "settings": "Настройки"
     },
@@ -268,6 +273,7 @@
       "title": "Ученики",
       "desc": "Добавляйте учеников и назначайте материалы.",
       "add": "Добавить ученика",
+      "resetPassword": "Сбросить пароль ученика",
       "name": "Имя",
       "email": "Email",
       "assigned": "Назначено",

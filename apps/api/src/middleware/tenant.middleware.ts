@@ -1,6 +1,7 @@
 import type { Response, NextFunction } from 'express';
 import { AppError } from './error.middleware.js';
 import type { AuthenticatedRequest } from './auth.middleware.js';
+import { prisma } from '../lib/prisma.js';
 import { resolveTenantIdForUser } from '../services/contentAccess.service.js';
 
 export async function attachTenantId(
@@ -49,6 +50,38 @@ export function requireTenantMember(
     !req.user.tenantId
   ) {
     res.status(403).json({ message: 'Forbidden' });
+    return;
+  }
+  next();
+}
+
+export async function requireActiveLearner(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+): Promise<void> {
+  if (!req.user) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
+  if (req.user.role !== 'TENANT_LEARNER') {
+    next();
+    return;
+  }
+  if (!req.user.tenantId) {
+    res.status(403).json({ message: 'Forbidden' });
+    return;
+  }
+  const membership = await prisma.tenantMembership.findFirst({
+    where: {
+      userId: req.user.userId,
+      tenantId: req.user.tenantId,
+      role: 'LEARNER',
+      active: true,
+    },
+  });
+  if (!membership) {
+    res.status(403).json({ message: 'Student account is deactivated' });
     return;
   }
   next();

@@ -10,6 +10,7 @@ import {
 } from '../middleware/tenant.middleware.js';
 import * as tenantController from '../controllers/tenant.controller.js';
 import * as tenantContentController from '../controllers/tenant-content.controller.js';
+import * as assessmentController from '../controllers/assessment.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as videoController from '../controllers/video.controller.js';
@@ -20,11 +21,13 @@ tenantRoutes.use(authMiddleware, attachTenantId, requireTenantOwner);
 
 tenantRoutes.get('/', asyncHandler(tenantController.getTenant));
 tenantRoutes.patch('/', asyncHandler(tenantController.patchTenant));
+tenantRoutes.get('/progress', asyncHandler(tenantController.getProgress));
 
 tenantRoutes.get('/students', asyncHandler(tenantController.listStudents));
 tenantRoutes.post('/students', asyncHandler(tenantController.createStudent));
 tenantRoutes.patch('/students/:id', asyncHandler(tenantController.patchStudent));
 tenantRoutes.delete('/students/:id', asyncHandler(tenantController.deleteStudent));
+tenantRoutes.post('/students/:id/reset-password', asyncHandler(tenantController.resetStudentPassword));
 tenantRoutes.get('/students/:id/progress', asyncHandler(tenantController.getStudentProgress));
 
 tenantRoutes.post('/assignments', asyncHandler(tenantController.assignContent));
@@ -32,6 +35,25 @@ tenantRoutes.delete('/assignments', asyncHandler(tenantController.unassignConten
 tenantRoutes.get(
   '/content/:contentId/assignments',
   asyncHandler(tenantController.listContentAssignments),
+);
+
+tenantRoutes.get('/question-banks', asyncHandler(assessmentController.listBanks));
+tenantRoutes.post('/question-banks', asyncHandler(assessmentController.createBank));
+tenantRoutes.get('/question-banks/:bankId/questions', asyncHandler(assessmentController.listQuestions));
+tenantRoutes.post(
+  '/question-banks/:bankId/generate',
+  enforceQuota('GENERATION'),
+  asyncHandler(assessmentController.generateQuestions),
+);
+tenantRoutes.patch(
+  '/question-banks/:bankId/questions/:questionId',
+  asyncHandler(assessmentController.patchQuestion),
+);
+tenantRoutes.get('/assessments', asyncHandler(assessmentController.listAssessments));
+tenantRoutes.post('/assessments', asyncHandler(assessmentController.createAssessment));
+tenantRoutes.post(
+  '/assessments/:assessmentId/assign',
+  asyncHandler(assessmentController.assignAssessment),
 );
 
 const tenantContent = Router({ mergeParams: true });

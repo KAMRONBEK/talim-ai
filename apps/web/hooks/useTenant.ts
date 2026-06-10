@@ -2,8 +2,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
   ContentAssignment,
   CreateTenantStudentResponse,
+  LearnerSummary,
   StudentProgressSummary,
   Tenant,
+  TenantProgressSummary,
   TenantStudent,
 } from '@talim/types';
 import { api } from '@/lib/api';
@@ -65,6 +67,39 @@ export function usePatchTenantStudent() {
       return data.student;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] }),
+  });
+}
+
+export function useResetTenantStudentPassword() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (studentId: string) => {
+      const { data } = await api.post<CreateTenantStudentResponse>(
+        `/tenant/students/${studentId}/reset-password`,
+      );
+      return data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] }),
+  });
+}
+
+export function useTenantProgress() {
+  return useQuery({
+    queryKey: ['tenant', 'progress'],
+    queryFn: async () => {
+      const { data } = await api.get<TenantProgressSummary>('/tenant/progress');
+      return data;
+    },
+  });
+}
+
+export function useLearnerSummary() {
+  return useQuery({
+    queryKey: ['learner', 'summary'],
+    queryFn: async () => {
+      const { data } = await api.get<{ summary: LearnerSummary }>('/learner/summary');
+      return data.summary;
+    },
   });
 }
 

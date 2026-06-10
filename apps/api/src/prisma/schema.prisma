@@ -62,6 +62,7 @@ enum UsageFeature {
   EMBED
   TUTOR_CHAT
   QUIZ_GEN
+  QUESTION_DRAFT
   PODCAST_GEN
   SECTION_GEN
   SUMMARY_GEN
@@ -93,6 +94,28 @@ enum TenantMemberRole {
   LEARNER
 }
 
+enum QuestionType {
+  SHORT_ANSWER
+  NUMERIC
+  MULTIPLE_CHOICE
+}
+
+enum BankQuestionStatus {
+  DRAFT
+  APPROVED
+  REJECTED
+}
+
+enum TenantAssessmentStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum AssessmentAttemptStatus {
+  SUBMITTED
+  GRADED
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
@@ -119,6 +142,12 @@ model User {
   tenantMemberships       TenantMembership[]
   assignmentsMade         ContentAssignment[]      @relation("AssignmentsMade")
   contentAssignments      ContentAssignment[]      @relation("LearnerAssignments")
+  questionBanksCreated    QuestionBank[]           @relation("QuestionBanksCreated")
+  bankQuestionsCreated    BankQuestion[]           @relation("BankQuestionsCreated")
+  assessmentsCreated      TenantAssessment[]       @relation("AssessmentsCreated")
+  assessmentAssignments   AssessmentAssignment[]   @relation("AssessmentAssignmentsMade")
+  assignedAssessments     AssessmentAssignment[]   @relation("AssessmentLearnerAssignments")
+  assessmentAttempts      AssessmentAttempt[]
 
   @@index([email])
   @@index([role])
@@ -136,6 +165,8 @@ model Tenant {
   memberships      TenantMembership[]
   contents         Content[]
   subscription     Subscription?
+  questionBanks    QuestionBank[]
+  assessments      TenantAssessment[]
 
   @@index([ownerId])
 }
@@ -193,6 +224,8 @@ model Content {
   contentProgress  ContentProgress[]
   contentSummaries ContentSummary[]
   assignments      ContentAssignment[]
+  bankQuestions    BankQuestion[]
+  assessmentAssignments AssessmentAssignment[]
 
   @@index([userId])
   @@index([tenantId])
@@ -211,6 +244,8 @@ model ContentSection {
   quizzes         Quiz[]
   sectionProgress SectionProgress[]
   localizedTitles ContentSectionTitle[]
+  bankQuestions   BankQuestion[]
+  assessmentAssignments AssessmentAssignment[]
 
   @@index([contentId])
   @@index([contentId, order])
@@ -369,6 +404,125 @@ model QuizAttempt {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([quizId])
+  @@index([userId])
+}
+
+model QuestionBank {
+  id          String         @id @default(cuid())
+  tenantId    String
+  title       String
+  topic       String?
+  createdById String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  tenant      Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdBy   User           @relation("QuestionBanksCreated", fields: [createdById], references: [id], onDelete: Cascade)
+  questions   BankQuestion[]
+  assessments TenantAssessment[]
+
+  @@index([tenantId])
+  @@index([createdById])
+}
+
+model BankQuestion {
+  id                String             @id @default(cuid())
+  bankId            String
+  createdById       String
+  sourceContentId   String?
+  sourceSectionId   String?
+  type              QuestionType       @default(SHORT_ANSWER)
+  prompt            String             @db.Text
+  options           Json?
+  acceptableAnswers Json
+  explanation       String?            @db.Text
+  status            BankQuestionStatus @default(DRAFT)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  bank              QuestionBank       @relation(fields: [bankId], references: [id], onDelete: Cascade)
+  createdBy         User               @relation("BankQuestionsCreated", fields: [createdById], references: [id], onDelete: Cascade)
+  sourceContent     Content?           @relation(fields: [sourceContentId], references: [id], onDelete: SetNull)
+  sourceSection     ContentSection?    @relation(fields: [sourceSectionId], references: [id], onDelete: SetNull)
+  assessmentLinks   AssessmentQuestion[]
+
+  @@index([bankId])
+  @@index([createdById])
+  @@index([sourceContentId])
+  @@index([sourceSectionId])
+  @@index([status])
+}
+
+model TenantAssessment {
+  id           String                 @id @default(cuid())
+  tenantId     String
+  bankId       String?
+  title        String
+  instructions String?
+  maxAttempts  Int                    @default(1)
+  status       TenantAssessmentStatus @default(DRAFT)
+  createdById  String
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  tenant       Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  bank         QuestionBank?          @relation(fields: [bankId], references: [id], onDelete: SetNull)
+  createdBy    User                   @relation("AssessmentsCreated", fields: [createdById], references: [id], onDelete: Cascade)
+  questions    AssessmentQuestion[]
+  assignments  AssessmentAssignment[]
+  attempts     AssessmentAttempt[]
+
+  @@index([tenantId])
+  @@index([bankId])
+  @@index([createdById])
+  @@index([status])
+}
+
+model AssessmentQuestion {
+  id           String           @id @default(cuid())
+  assessmentId String
+  questionId   String
+  order        Int
+  points       Float            @default(1)
+  assessment   TenantAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  question     BankQuestion     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([assessmentId, questionId])
+  @@index([assessmentId])
+  @@index([questionId])
+}
+
+model AssessmentAssignment {
+  id           String           @id @default(cuid())
+  assessmentId String
+  learnerId    String?
+  contentId    String?
+  sectionId    String?
+  assignedById String
+  assignedAt   DateTime         @default(now())
+  assessment   TenantAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  learner      User?            @relation("AssessmentLearnerAssignments", fields: [learnerId], references: [id], onDelete: Cascade)
+  content      Content?         @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  section      ContentSection?  @relation(fields: [sectionId], references: [id], onDelete: SetNull)
+  assignedBy   User             @relation("AssessmentAssignmentsMade", fields: [assignedById], references: [id], onDelete: Cascade)
+
+  @@index([assessmentId])
+  @@index([learnerId])
+  @@index([contentId])
+  @@index([sectionId])
+  @@index([assignedById])
+}
+
+model AssessmentAttempt {
+  id           String                  @id @default(cuid())
+  assessmentId String
+  userId       String
+  answers      Json
+  score        Float?
+  status       AssessmentAttemptStatus @default(SUBMITTED)
+  submittedAt  DateTime                @default(now())
+  createdAt    DateTime                @default(now())
+  assessment   TenantAssessment        @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  user         User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([assessmentId])
   @@index([userId])
 }
 

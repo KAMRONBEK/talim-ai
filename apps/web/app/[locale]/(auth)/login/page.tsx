@@ -107,10 +107,12 @@ export default function LoginPage() {
             <Link href="/register" className="font-medium text-primary hover:underline">
               {t('createOne')}
             </Link>
-            {' · '}
-            <Link href="/register-tenant" className="font-medium text-primary hover:underline">
-              {t('registerOrg')}
-            </Link>
+            <span className="mt-2 block">
+              {t('tutorAccount')}{' '}
+              <a href="mailto:admin@talim-ai.uz" className="font-medium text-primary hover:underline">
+                {t('contactAdmin')}
+              </a>
+            </span>
           </p>
         </CardContent>
       </Card>

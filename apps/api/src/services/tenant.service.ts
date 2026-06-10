@@ -102,9 +102,9 @@ async function formatStudentRow(
 ) {
   const learnerId = membership.user.id;
   const [assignedCount, progressRows, quizAttempts] = await Promise.all([
-    prisma.contentAssignment.count({ where: { learnerId } }),
+    prisma.contentAssignment.count({ where: { learnerId, content: { tenantId } } }),
     prisma.contentProgress.findMany({
-      where: { userId: learnerId },
+      where: { userId: learnerId, content: { tenantId } },
       select: { lastActivityAt: true },
       orderBy: { lastActivityAt: 'desc' },
       take: 1,
@@ -225,6 +225,101 @@ export async function deleteStudent(tenantId: string, learnerId: string) {
     where: { id: membership.id },
     data: { active: false },
   });
+}
+
+export async function resetStudentPassword(tenantId: string, learnerId: string) {
+  const membership = await prisma.tenantMembership.findFirst({
+    where: { tenantId, userId: learnerId, role: 'LEARNER' },
+    include: { user: { select: { id: true, email: true, name: true } } },
+  });
+  if (!membership) throw new AppError(404, 'Student not found');
+
+  const temporaryPassword = crypto.randomUUID().slice(0, 12);
+  const passwordHash = await bcrypt.hash(temporaryPassword, 12);
+  await prisma.user.update({ where: { id: learnerId }, data: { passwordHash } });
+  const student = await formatStudentRow(membership, tenantId);
+  return { student, temporaryPassword };
+}
+
+export async function getTenantProgress(tenantId: string) {
+  const [students, materials, progressRows, quizAttempts] = await Promise.all([
+    listStudents(tenantId),
+    prisma.content.count({ where: { tenantId } }),
+    prisma.contentProgress.findMany({
+      where: { content: { tenantId } },
+      select: { overallCoverage: true },
+    }),
+    prisma.quizAttempt.findMany({
+      where: { quiz: { content: { tenantId } } },
+      select: { score: true },
+    }),
+  ]);
+
+  const avgCoverage =
+    progressRows.length > 0
+      ? progressRows.reduce((sum, row) => sum + row.overallCoverage, 0) / progressRows.length
+      : 0;
+  const avgQuizScore =
+    quizAttempts.length > 0
+      ? quizAttempts.reduce((sum, row) => sum + row.score, 0) / quizAttempts.length
+      : null;
+
+  return {
+    totals: {
+      students: students.length,
+      activeStudents: students.filter((s) => s.active).length,
+      materials,
+      avgCoverage,
+      avgQuizScore,
+    },
+    students,
+  };
+}
+
+export async function getLearnerSummary(userId: string) {
+  const membership = await prisma.tenantMembership.findFirst({
+    where: { userId, role: 'LEARNER', active: true },
+    include: { tenant: { select: { id: true, name: true } } },
+  });
+  if (!membership) throw new AppError(404, 'Organization not found');
+
+  const [assignedCount, progressRows, quizAttempts, streakDays] = await Promise.all([
+    prisma.contentAssignment.count({
+      where: { learnerId: userId, content: { tenantId: membership.tenantId } },
+    }),
+    prisma.contentProgress.findMany({
+      where: { userId, content: { tenantId: membership.tenantId } },
+      include: { content: { select: { title: true } } },
+      orderBy: { lastActivityAt: 'desc' },
+    }),
+    prisma.quizAttempt.findMany({
+      where: { userId, quiz: { content: { tenantId: membership.tenantId } } },
+      select: { score: true },
+    }),
+    computeStreakDays(userId),
+  ]);
+
+  const latest = progressRows[0];
+  const avgQuizScore =
+    quizAttempts.length > 0
+      ? quizAttempts.reduce((sum, row) => sum + row.score, 0) / quizAttempts.length
+      : null;
+
+  return {
+    tenantName: membership.tenant.name,
+    assignedCount,
+    streakDays,
+    avgQuizScore,
+    lastActivityAt: latest?.lastActivityAt.toISOString() ?? null,
+    continueContent: latest
+      ? {
+          contentId: latest.contentId,
+          title: latest.content.title,
+          lastSectionId: latest.lastSectionId,
+          overallCoverage: latest.overallCoverage,
+        }
+      : null,
+  };
 }
 
 export async function assignContent(

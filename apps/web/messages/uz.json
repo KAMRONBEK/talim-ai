@@ -42,7 +42,9 @@
     "registering": "Hisob yaratilmoqda...",
     "registerFailed": "Ro'yxatdan o'tib bo'lmadi. Email band bo'lishi mumkin.",
     "haveAccount": "Hisobingiz bormi?",
-    "registerOrg": "Tashkilot ro'yxatdan o'tish"
+    "registerOrg": "Tashkilot ro'yxatdan o'tish",
+    "tutorAccount": "O'qituvchi yoki maktab hisobimi?",
+    "contactAdmin": "Admin bilan bog'laning"
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
@@ -233,10 +235,13 @@
     "recentMaterials": "So'nggi materiallar",
     "allMaterials": "Barcha materiallar",
     "uploadFailed": "Yuklash muvaffaqiyatsiz",
+    "organization": "Tashkilot",
     "nav": {
       "dashboard": "Bosh sahifa",
       "materials": "Materiallar",
       "students": "O'quvchilar",
+      "progress": "Progress",
+      "assessments": "Topshiriqlar",
       "billing": "To'lov",
       "settings": "Sozlamalar"
     },
@@ -268,6 +273,7 @@
       "title": "O'quvchilar",
       "desc": "O'quvchilarni qo'shing va materiallarni tayinlang.",
       "add": "O'quvchi qo'shish",
+      "resetPassword": "O'quvchi parolini tiklash",
       "name": "Ism",
       "email": "Email",
       "assigned": "Tayinlangan",

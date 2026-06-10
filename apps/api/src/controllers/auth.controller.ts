@@ -8,7 +8,6 @@ import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { parseAppLocale } from '@talim/types';
-import { createTenantForOwner } from '../services/tenant.service.js';
 import { resolveTenantIdForUser } from '../services/contentAccess.service.js';
 
 const registerSchema = z
@@ -20,17 +19,6 @@ const registerSchema = z
   })
   .strict();
 
-const registerTenantSchema = z.object({
-  orgName: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(8),
-  name: z.string().min(1).optional(),
-});
-
-const upgradeTenantSchema = z.object({
-  orgName: z.string().min(1),
-});
-
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
@@ -39,6 +27,11 @@ const loginSchema = z.object({
 const updateMeSchema = z.object({
   preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
   name: z.string().min(1).optional(),
+});
+
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1),
+  newPassword: z.string().min(8),
 });
 
 function signToken(
@@ -63,6 +56,10 @@ async function formatUser(user: {
   createdAt: Date;
 }) {
   const tenantId = await resolveTenantIdForUser(user.id, user.role);
+  const tenant =
+    tenantId && (user.role === 'TENANT_OWNER' || user.role === 'TENANT_LEARNER')
+      ? await prisma.tenant.findUnique({ where: { id: tenantId }, select: { name: true } })
+      : null;
   return {
     id: user.id,
     email: user.email,
@@ -70,6 +67,7 @@ async function formatUser(user: {
     role: user.role,
     preferredLocale: parseAppLocale(user.preferredLocale),
     tenantId,
+    tenantName: tenant?.name ?? null,
     createdAt: user.createdAt.toISOString(),
   };
 }
@@ -110,51 +108,12 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
 }
 
 export async function registerTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
-  const body = registerTenantSchema.parse(req.body);
-  const existing = await prisma.user.findUnique({ where: { email: body.email } });
-  if (existing) {
-    throw new AppError(409, 'Email already registered');
-  }
-
-  const passwordHash = await bcrypt.hash(body.password, 12);
-
-  const user = await prisma.user.create({
-    data: {
-      email: body.email,
-      passwordHash,
-      name: body.name ?? null,
-      role: 'TENANT_OWNER',
-    },
-  });
-
-  const { tenantId } = await createTenantForOwner(user.id, body.orgName);
-  const formatted = await formatUser(user);
-  const token = signToken(user.id, user.email, user.role, tenantId);
-  res.status(201).json({ user: { ...formatted, tenantId }, token });
+  throw new AppError(403, 'Tenant accounts are created by platform admins');
 }
 
 export async function upgradeToTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
-  const body = upgradeTenantSchema.parse(req.body);
-
-  const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
-  if (!user) throw new AppError(404, 'User not found');
-  if (user.role !== 'INDIVIDUAL') {
-    throw new AppError(400, 'Only individual accounts can upgrade to an organization');
-  }
-
-  const existingTenant = await prisma.tenant.findFirst({ where: { ownerId: user.id } });
-  if (existingTenant) throw new AppError(409, 'Organization already exists');
-
-  const updated = await prisma.user.update({
-    where: { id: user.id },
-    data: { role: 'TENANT_OWNER' },
-  });
-
-  const { tenantId } = await createTenantForOwner(user.id, body.orgName);
-  const formatted = await formatUser(updated);
-  const token = signToken(updated.id, updated.email, updated.role, tenantId);
-  res.json({ user: { ...formatted, tenantId }, token });
+  throw new AppError(403, 'Contact the platform admin to become a tutor');
 }
 
 export async function login(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -212,4 +171,18 @@ export async function updateMe(req: AuthenticatedRequest, res: Response): Promis
   });
 
   res.json({ user: await formatUser(user) });
+}
+
+export async function changePassword(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const body = changePasswordSchema.parse(req.body ?? {});
+  const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
+  if (!user) throw new AppError(404, 'User not found');
+
+  const valid = await bcrypt.compare(body.currentPassword, user.passwordHash);
+  if (!valid) throw new AppError(400, 'Current password is incorrect');
+
+  const passwordHash = await bcrypt.hash(body.newPassword, 12);
+  await prisma.user.update({ where: { id: user.id }, data: { passwordHash } });
+  res.json({ ok: true });
 }

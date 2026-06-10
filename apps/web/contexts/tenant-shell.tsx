@@ -5,6 +5,7 @@ import { RoleGuard } from '@/components/role-guard';
 import { TenantSidebar, TenantSidebarSheet } from '@/components/layout/tenant-sidebar';
 import { DashboardHeader } from '@/components/layout/dashboard-header';
 import { useSidebarSheet } from '@/hooks/useSidebarSheet';
+import { useBilling } from '@/hooks/useBilling';
 
 const TenantSearchContext = createContext({
   search: '',
@@ -18,6 +19,8 @@ export function useTenantSearch() {
 export function TenantShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState('');
   const { open: sidebarOpen, setOpen: setSidebarOpen } = useSidebarSheet();
+  const { data: billing } = useBilling();
+  const inactive = billing?.subscription && billing.subscription.status !== 'ACTIVE';
 
   return (
     <RoleGuard allowedRoles={['TENANT_OWNER']}>
@@ -27,6 +30,11 @@ export function TenantShell({ children }: { children: ReactNode }) {
           <TenantSidebarSheet open={sidebarOpen} onOpenChange={setSidebarOpen} />
           <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
             <DashboardHeader onMenuClick={() => setSidebarOpen(true)} />
+            {inactive && (
+              <div className="border-b border-warning/40 bg-warning-muted/30 px-4 py-3 text-sm text-warning-foreground md:px-6">
+                Your organization subscription is not active. Uploads, students, and AI generation may be limited.
+              </div>
+            )}
             <main className="min-h-0 flex-1 overflow-y-auto px-4 py-8 md:px-6">{children}</main>
           </div>
         </div>
