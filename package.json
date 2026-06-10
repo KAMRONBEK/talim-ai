@@ -14,6 +14,8 @@
     "db:migrate": "doppler run -- pnpm --filter @talim/api exec prisma migrate dev",
     "db:migrate:deploy": "doppler run -- pnpm --filter @talim/api exec prisma migrate deploy",
     "db:push": "doppler run -- pnpm --filter @talim/api exec prisma db push",
+    "db:studio": "doppler run -- pnpm --filter @talim/api exec prisma studio",
+    "inspect-chunks": "doppler run -- pnpm --filter @talim/api inspect-chunks --",
     "docker:up": "bash scripts/doppler-docker.sh up -d --build --wait",
     "docker:down": "docker compose down",
     "docker:re": "bash scripts/doppler-docker-restart.sh",

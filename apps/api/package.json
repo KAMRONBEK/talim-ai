@@ -11,7 +11,9 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
-    "create-admin": "tsx src/scripts/create-admin.ts"
+    "db:studio": "prisma studio",
+    "create-admin": "tsx src/scripts/create-admin.ts",
+    "inspect-chunks": "tsx src/scripts/inspect-chunks.ts"
   },
   "dependencies": {
     "@distube/ytdl-core": "^4.16.12",

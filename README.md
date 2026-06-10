@@ -99,6 +99,8 @@ pnpm lint                   # Lint all packages
 pnpm typecheck              # Typecheck all packages
 pnpm db:generate            # Regenerate Prisma client
 pnpm db:migrate             # Run Prisma migrations
+pnpm db:studio              # Prisma Studio (Doppler dev DB)
+pnpm inspect-chunks -- --contentId <id> [--query "…"]  # List chunks / test RAG search (query uses OpenAI)
 pnpm docker:up              # Full stack in Docker (Doppler-injected)
 pnpm docker:down            # Stop Docker stack
 ```
