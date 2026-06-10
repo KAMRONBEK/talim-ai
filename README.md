@@ -101,9 +101,57 @@ pnpm db:generate            # Regenerate Prisma client
 pnpm db:migrate             # Run Prisma migrations
 pnpm db:studio              # Prisma Studio (Doppler dev DB)
 pnpm inspect-chunks -- --contentId <id> [--query "…"]  # List chunks / test RAG search (query uses OpenAI)
+pnpm create-tenant-owner -- --email … --password … --orgName …  # Bootstrap tenant owner + org + plan
 pnpm docker:up              # Full stack in Docker (Doppler-injected)
 pnpm docker:down            # Stop Docker stack
 ```
+
+## Bootstrap accounts
+
+User roles: **individual learner** (self-study), **tenant owner** (school/tutor org admin), **tenant learner** (student under an org), **platform admin** (operator panel). Secrets and DB access go through Doppler — use config `dev` locally and `prd` on the VPS.
+
+### Platform admin
+
+Not self-registered. Creates an `ADMIN` user for [`apps/admin`](apps/admin) (local `:3001`, production `admin.talim-ai.uz`).
+
+```bash
+# Local (Doppler dev)
+doppler run -- pnpm --filter @talim/api create-admin -- \
+  --email you@example.com --password 'your-secure-password' --name 'Operator'
+
+# Production — on the VPS with Doppler prd (see docs/DEPLOY.md)
+doppler run --project talim-ai --config prd -- pnpm --filter @talim/api create-admin -- \
+  --email you@example.com --password 'your-secure-password' --name 'Operator'
+```
+
+From the admin panel you can change user roles, assign tenant subscriptions, and reset passwords.
+
+### Tenant owner (organization)
+
+Owns an org: uploads materials, assigns content, manages students. Lands on `/tenant/dashboard` after login.
+
+**CLI (recommended for dev/staging)** — creates owner + organization + active tenant plan (`TENANT_STARTER` by default):
+
+```bash
+pnpm create-tenant-owner -- \
+  --email owner@school.uz \
+  --password 'your-secure-password' \
+  --orgName 'My School' \
+  --name 'School Admin' \
+  --planCode TENANT_STARTER
+```
+
+On production, run the same command on the VPS with `--config prd` (as for `create-admin` above). Re-running updates password/role and ensures the org subscription is active.
+
+**Self-serve UI** — http://localhost:3000/register-tenant (or production `/register-tenant`). Creates `TENANT_OWNER` + org; assign a tenant subscription via the admin panel if uploads or student limits are blocked.
+
+**Upgrade** — an existing individual user can become a tenant owner via `POST /auth/upgrade-to-tenant` while logged in.
+
+### Tenant learners (students)
+
+Created by the **tenant owner** in the web app: **Students → Add student**. The UI shows a one-time temporary password to share with the learner. Students log in at the normal login page and land on `/learner/dashboard` with assigned materials only.
+
+Platform admins can also set a user’s role to `TENANT_LEARNER` and attach them to a tenant from the admin user detail page.
 
 ## Docker (full stack)
 
