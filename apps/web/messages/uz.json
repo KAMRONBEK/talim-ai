@@ -56,7 +56,12 @@
     "linkDesc": "YouTube, veb-sayt",
     "addViaLink": "Havola orqali qo'shish",
     "searchMaterials": "Materiallarni qidirish...",
-    "learnAnything": "Har qanday narsani o'rganing"
+    "learnAnything": "Har qanday narsani o'rganing",
+    "settings": {
+      "title": "Hisob sozlamalari",
+      "desc": "Profil, parol va rejangizni boshqaring.",
+      "languageHint": "Tilni sarlavhadagi tanlov orqali o'zgartiring."
+    }
   },
   "sidebar": {
     "recents": "So'nggilar",
@@ -226,6 +231,48 @@
     "en": "English",
     "ru": "Русский"
   },
+  "account": {
+    "profile": {
+      "title": "Profil",
+      "desc": "Ko'rsatiladigan ismingiz yon panel va ilovada ko'rinadi.",
+      "name": "Ko'rsatiladigan ism",
+      "email": "Email",
+      "save": "Profilni saqlash",
+      "saving": "Saqlanmoqda...",
+      "success": "Profil yangilandi.",
+      "error": "Profilni yangilab bo'lmadi."
+    },
+    "password": {
+      "title": "Parol",
+      "desc": "Vaqtinchalik parolni saqlashingiz mumkin, lekin o'zgartirish tavsiya etiladi.",
+      "current": "Joriy parol",
+      "new": "Yangi parol",
+      "save": "Parolni saqlash",
+      "saving": "Saqlanmoqda...",
+      "success": "Parol yangilandi.",
+      "error": "Parolni yangilab bo'lmadi. Joriy parolni tekshiring."
+    },
+    "billing": {
+      "title": "Reja va foydalanish",
+      "desc": "Joriy reja va ushbu davr uchun foydalanish.",
+      "plan": "Joriy reja",
+      "uploads": "Yuklamalar",
+      "generations": "AI generatsiyalar",
+      "tutorMessages": "Tyutor xabarlari",
+      "viewBilling": "To'liq to'lov sahifasi"
+    },
+    "summary": {
+      "title": "Hisob ma'lumotlari",
+      "desc": "Rolingiz va tashkilotingiz.",
+      "role": "Hisob turi",
+      "organization": "Tashkilot",
+      "roleIndividual": "Shaxsiy o'quvchi",
+      "roleOwner": "O'qituvchi / tashkilot egasi",
+      "roleLearner": "O'quvchi",
+      "roleAdmin": "Platforma admini"
+    },
+    "settingsLink": "Hisob sozlamalari"
+  },
   "tenant": {
     "loading": "Yuklanmoqda...",
     "subscriptionRequired": "Obuna talab qilinadi",
@@ -256,10 +303,21 @@
       "individual": "Shaxsiy hisob"
     },
     "settings": {
-      "title": "Tashkilot sozlamalari",
+      "title": "Sozlamalar",
+      "accountTitle": "Mening hisobim",
+      "orgTitle": "Tashkilot",
       "orgName": "Tashkilot nomi",
       "slug": "URL slug",
       "save": "Saqlash"
+    },
+    "onboarding": {
+      "title": "O'qituvchi sozlash ro'yxati",
+      "desc": "Materiallar, o'quvchilar va tayinlashlar bilan boshlang.",
+      "password": "Sozlamalarda parolingizni o'zgartiring",
+      "material": "Birinchi o'quv materialini yuklang",
+      "student": "Birinchi o'quvchini qo'shing",
+      "assign": "O'quvchilarga material tayinlang",
+      "assessment": "AI savollardan yozma topshiriq yarating"
     },
     "billing": {
       "title": "To'lov",
@@ -307,6 +365,24 @@
     "welcome": "Xush kelibsiz, {name}",
     "dashboardDesc": "Sizga tayinlangan materiallar.",
     "assignedMaterials": "Tayinlangan materiallar",
-    "noAssigned": "Hali material tayinlanmagan."
+    "noAssigned": "Hali material tayinlanmagan.",
+    "nav": {
+      "materials": "Materiallar",
+      "progress": "Progress",
+      "tasks": "Topshiriqlar",
+      "settings": "Sozlamalar"
+    },
+    "settings": {
+      "title": "Sozlamalar",
+      "desc": "O'quvchi hisobingizni boshqaring.",
+      "accountTitle": "Mening hisobim",
+      "schoolTitle": "Maktab"
+    },
+    "onboarding": {
+      "title": "Talim AI ga xush kelibsiz",
+      "desc": "O'qituvchingiz bu hisobni yaratdi. Xavfsizlik uchun vaqtinchalik parolni Sozlamalarda o'zgartiring.",
+      "cta": "Sozlamalarga o'tish",
+      "dismiss": "Yopish"
+    }
   }
 }

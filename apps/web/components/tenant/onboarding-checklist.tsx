@@ -1,6 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { CheckCircle2, Circle } from 'lucide-react';
 import type { Content, TenantStudent } from '@talim/types';
 
@@ -13,15 +14,17 @@ export function OnboardingChecklist({
   students: TenantStudent[] | undefined;
   hasAssessments?: boolean;
 }) {
+  const t = useTranslations('tenant.onboarding');
+
   const hasMaterial = (contents?.length ?? 0) > 0;
   const hasStudent = (students?.length ?? 0) > 0;
   const hasAssigned = (students ?? []).some((s) => s.assignedCount > 0);
   const steps = [
-    { done: true, label: 'Use the password shared by admin, or change it in Settings', href: '/tenant/settings' },
-    { done: hasMaterial, label: 'Upload your first learning material', href: '/tenant/materials' },
-    { done: hasStudent, label: 'Add your first student', href: '/tenant/students' },
-    { done: hasAssigned, label: 'Assign a material to students', href: '/tenant/materials' },
-    { done: hasAssessments, label: 'Create a written assessment from AI questions', href: '/tenant/assessments' },
+    { done: true, label: t('password'), href: '/tenant/settings#account' },
+    { done: hasMaterial, label: t('material'), href: '/tenant/materials' },
+    { done: hasStudent, label: t('student'), href: '/tenant/students' },
+    { done: hasAssigned, label: t('assign'), href: '/tenant/materials' },
+    { done: hasAssessments, label: t('assessment'), href: '/tenant/assessments' },
   ];
 
   if (steps.every((step) => step.done)) return null;
@@ -29,10 +32,8 @@ export function OnboardingChecklist({
   return (
     <section className="rounded-2xl border bg-card p-5 shadow-sm">
       <div className="mb-4">
-        <h2 className="font-semibold">Tutor setup checklist</h2>
-        <p className="text-sm text-muted-foreground">
-          Start with materials, students, and assignments. You can come back anytime.
-        </p>
+        <h2 className="font-semibold">{t('title')}</h2>
+        <p className="text-sm text-muted-foreground">{t('desc')}</p>
       </div>
       <div className="grid gap-2">
         {steps.map((step) => (

@@ -9,6 +9,7 @@ import { useLearnerAssessments } from '@/hooks/useAssessments';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@talim/ui';
 import { RecentContentGrid } from '@/components/dashboard/recent-content-grid';
+import { StudentWelcomeBanner } from '@/components/learner/student-welcome-banner';
 
 export default function LearnerDashboardPage() {
   const t = useTranslations('learner');
@@ -21,6 +22,7 @@ export default function LearnerDashboardPage() {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
+      <StudentWelcomeBanner />
       <div className="rounded-3xl border bg-card p-6 text-center shadow-sm">
         <p className="text-sm font-medium text-primary">
           {summary?.tenantName ?? user?.tenantName ?? 'Your school'}

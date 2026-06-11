@@ -56,7 +56,12 @@
     "linkDesc": "YouTube, website",
     "addViaLink": "Add via link",
     "searchMaterials": "Search materials...",
-    "learnAnything": "Learn anything"
+    "learnAnything": "Learn anything",
+    "settings": {
+      "title": "Account settings",
+      "desc": "Manage your profile, password, and plan.",
+      "languageHint": "Change your language using the selector in the header."
+    }
   },
   "sidebar": {
     "recents": "Recent",
@@ -226,6 +231,48 @@
     "en": "English",
     "ru": "Русский"
   },
+  "account": {
+    "profile": {
+      "title": "Profile",
+      "desc": "Your display name appears in the sidebar and across the app.",
+      "name": "Display name",
+      "email": "Email",
+      "save": "Save profile",
+      "saving": "Saving...",
+      "success": "Profile updated.",
+      "error": "Could not update profile."
+    },
+    "password": {
+      "title": "Password",
+      "desc": "You may keep the temporary password, but changing it is recommended.",
+      "current": "Current password",
+      "new": "New password",
+      "save": "Save password",
+      "saving": "Saving...",
+      "success": "Password updated.",
+      "error": "Could not update password. Check your current password."
+    },
+    "billing": {
+      "title": "Plan & usage",
+      "desc": "Your current plan and usage for this billing period.",
+      "plan": "Current plan",
+      "uploads": "Uploads",
+      "generations": "AI generations",
+      "tutorMessages": "Tutor messages",
+      "viewBilling": "View full billing"
+    },
+    "summary": {
+      "title": "Account details",
+      "desc": "Your role and organization.",
+      "role": "Account type",
+      "organization": "Organization",
+      "roleIndividual": "Individual learner",
+      "roleOwner": "Tutor / organization owner",
+      "roleLearner": "Student",
+      "roleAdmin": "Platform admin"
+    },
+    "settingsLink": "Account settings"
+  },
   "tenant": {
     "loading": "Loading...",
     "subscriptionRequired": "Subscription required",
@@ -256,10 +303,21 @@
       "individual": "Individual account instead"
     },
     "settings": {
-      "title": "Organization settings",
+      "title": "Settings",
+      "accountTitle": "My account",
+      "orgTitle": "Organization",
       "orgName": "Organization name",
       "slug": "URL slug",
       "save": "Save changes"
+    },
+    "onboarding": {
+      "title": "Tutor setup checklist",
+      "desc": "Start with materials, students, and assignments. You can come back anytime.",
+      "password": "Change your password in Settings",
+      "material": "Upload your first learning material",
+      "student": "Add your first student",
+      "assign": "Assign a material to students",
+      "assessment": "Create a written assessment from AI questions"
     },
     "billing": {
       "title": "Billing",
@@ -307,6 +365,24 @@
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
     "assignedMaterials": "Assigned materials",
-    "noAssigned": "No materials assigned yet."
+    "noAssigned": "No materials assigned yet.",
+    "nav": {
+      "materials": "Materials",
+      "progress": "Progress",
+      "tasks": "Tasks",
+      "settings": "Settings"
+    },
+    "settings": {
+      "title": "Settings",
+      "desc": "Manage your student account.",
+      "accountTitle": "My account",
+      "schoolTitle": "School"
+    },
+    "onboarding": {
+      "title": "Welcome to Talim AI",
+      "desc": "Your tutor created this account for you. For security, change your temporary password in Settings.",
+      "cta": "Go to Settings",
+      "dismiss": "Dismiss"
+    }
   }
 }

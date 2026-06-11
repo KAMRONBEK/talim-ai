@@ -1,22 +1,12 @@
 'use client';
 
-import { Link, useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Play } from 'lucide-react';
-import {
-  Avatar,
-  AvatarFallback,
-  Button,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@talim/ui';
-import { useAuthStore } from '@/store/useAuthStore';
-import { useBilling } from '@/hooks/useBilling';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useContents } from '@/hooks/useContent';
-import { planMessageKey } from '@/lib/plan';
+import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 
 export interface DashboardSidebarBodyProps {
   onNavigate?: () => void;
@@ -24,27 +14,9 @@ export interface DashboardSidebarBodyProps {
 
 export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
   const t = useTranslations('sidebar');
-  const tCommon = useTranslations('common');
-  const router = useRouter();
-  const { user, logout } = useAuthStore();
-  const { data: billing } = useBilling();
   const { data: contents } = useContents();
 
   const recents = useMemo(() => (contents ?? []).slice(0, 5), [contents]);
-
-  const initials = user?.name
-    ? user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .slice(0, 2)
-        .toUpperCase()
-    : user?.email?.slice(0, 2).toUpperCase() ?? '?';
-
-  const displayName = user?.name ?? user?.email?.split('@')[0] ?? tCommon('user');
-  const planKey = billing?.subscription
-    ? planMessageKey(billing.subscription.effectivePlanCode)
-    : null;
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -85,34 +57,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
         )}
       </div>
 
-      <div className="shrink-0 border-t p-3">
-        <div className="flex items-center gap-2 rounded-lg px-2 py-2">
-          <Avatar className="h-9 w-9 shrink-0">
-            <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium">{displayName}</p>
-            {user?.email && (
-              <p className="truncate text-xs text-muted-foreground">{user.email}</p>
-            )}
-            {planKey && (
-              <p className="truncate text-xs text-muted-foreground">{tCommon(planKey)}</p>
-            )}
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="mt-1 w-full justify-start text-muted-foreground"
-          onClick={() => {
-            onNavigate?.();
-            logout();
-            router.push('/login');
-          }}
-        >
-          {tCommon('logout')}
-        </Button>
-      </div>
+      <UserSidebarFooter onNavigate={onNavigate} showEmail showSettingsIcon />
     </div>
   );
 }

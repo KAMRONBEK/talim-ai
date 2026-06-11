@@ -1,21 +1,12 @@
 'use client';
 
-import { Link, useRouter, usePathname } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { BarChart3, BookOpen, CreditCard, FileQuestion, GraduationCap, LayoutDashboard, Settings } from 'lucide-react';
-import {
-  Avatar,
-  AvatarFallback,
-  Button,
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@talim/ui';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useBilling } from '@/hooks/useBilling';
 import { useTenant } from '@/hooks/useTenant';
-import { planMessageKey } from '@/lib/plan';
+import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { cn } from '@/lib/utils';
 
 const navItems = [
@@ -30,25 +21,9 @@ const navItems = [
 
 export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   const t = useTranslations('tenant');
-  const tCommon = useTranslations('common');
-  const router = useRouter();
   const pathname = usePathname();
-  const { user, logout } = useAuthStore();
-  const { data: billing } = useBilling();
+  const user = useAuthStore((s) => s.user);
   const { data: tenant } = useTenant();
-
-  const initials = user?.name
-    ? user.name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .slice(0, 2)
-        .toUpperCase()
-    : user?.email?.slice(0, 2).toUpperCase() ?? '?';
-
-  const planKey = billing?.subscription
-    ? planMessageKey(billing.subscription.effectivePlanCode)
-    : null;
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -88,33 +63,7 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      <div className="shrink-0 border-t p-3">
-        <div className="flex items-center gap-2 rounded-lg px-2 py-2">
-          <Avatar className="h-9 w-9">
-            <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium">{user?.name ?? user?.email}</p>
-            {planKey ? (
-              <p className="truncate text-xs text-muted-foreground">{tCommon(planKey)}</p>
-            ) : (
-              <p className="truncate text-xs text-muted-foreground">{t('subscriptionRequired')}</p>
-            )}
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="mt-1 w-full justify-start text-muted-foreground"
-          onClick={() => {
-            onNavigate?.();
-            logout();
-            router.push('/login');
-          }}
-        >
-          {tCommon('logout')}
-        </Button>
-      </div>
+      <UserSidebarFooter onNavigate={onNavigate} planFallback={t('subscriptionRequired')} />
     </div>
   );
 }

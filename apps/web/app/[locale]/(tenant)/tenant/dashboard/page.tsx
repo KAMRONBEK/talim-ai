@@ -31,6 +31,16 @@ export default function TenantDashboardPage() {
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
+      {!user?.name?.trim() && (
+        <section className="rounded-2xl border bg-card p-4">
+          <p className="text-sm text-muted-foreground">
+            {t('settings.accountTitle')}:{' '}
+            <Link href="/tenant/settings#account" className="font-medium text-primary hover:underline">
+              {t('nav.settings')}
+            </Link>
+          </p>
+        </section>
+      )}
       <div className="rounded-3xl border bg-card p-6 shadow-sm">
         <p className="text-sm font-medium text-primary">{user?.tenantName ?? t('organization')}</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight">
