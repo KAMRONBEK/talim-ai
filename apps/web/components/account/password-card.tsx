@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button, Input, Label } from '@talim/ui';
 import { useChangePassword } from '@/hooks/useAccount';
 
-export function PasswordCard() {
+export function PasswordCard({ onSuccess }: { onSuccess?: () => void }) {
+  const t = useTranslations('account.password');
   const changePassword = useChangePassword();
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -17,22 +19,21 @@ export function PasswordCard() {
       await changePassword.mutateAsync({ currentPassword, newPassword });
       setCurrentPassword('');
       setNewPassword('');
-      setMessage('Password updated.');
+      setMessage(t('success'));
+      onSuccess?.();
     } catch {
-      setMessage('Could not update password. Check your current password.');
+      setMessage(t('error'));
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border bg-card p-6">
       <div>
-        <h2 className="font-semibold">Password</h2>
-        <p className="text-sm text-muted-foreground">
-          You may keep the temporary password, but changing it is recommended.
-        </p>
+        <h2 className="font-semibold">{t('title')}</h2>
+        <p className="text-sm text-muted-foreground">{t('desc')}</p>
       </div>
       <div className="space-y-2">
-        <Label htmlFor="currentPassword">Current password</Label>
+        <Label htmlFor="currentPassword">{t('current')}</Label>
         <Input
           id="currentPassword"
           type="password"
@@ -42,7 +43,7 @@ export function PasswordCard() {
         />
       </div>
       <div className="space-y-2">
-        <Label htmlFor="newPassword">New password</Label>
+        <Label htmlFor="newPassword">{t('new')}</Label>
         <Input
           id="newPassword"
           type="password"
@@ -54,7 +55,7 @@ export function PasswordCard() {
       </div>
       {message && <p className="text-sm text-muted-foreground">{message}</p>}
       <Button type="submit" disabled={changePassword.isPending}>
-        Save password
+        {changePassword.isPending ? t('saving') : t('save')}
       </Button>
     </form>
   );

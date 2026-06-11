@@ -15,3 +15,14 @@ export function getHomePathForRole(role: UserRole | undefined): string {
   if (!role) return '/dashboard';
   return getPostLoginPath(role);
 }
+
+export function getSettingsPathForRole(role: UserRole | undefined): string {
+  switch (role) {
+    case 'TENANT_OWNER':
+      return '/tenant/settings';
+    case 'TENANT_LEARNER':
+      return '/learner/settings';
+    default:
+      return '/dashboard/settings';
+  }
+}
