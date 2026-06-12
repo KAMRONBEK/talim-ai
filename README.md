@@ -38,7 +38,7 @@ packages/
 ## Prerequisites
 
 - Node.js 20+
-- [pnpm](https://pnpm.io/) 9+
+- [pnpm](https://pnpm.io/) 10+
 - [Docker](https://www.docker.com/) (PostgreSQL + Redis locally)
 - [Doppler CLI](https://docs.doppler.com/docs/install-cli) (secrets for local dev and deploy)
 

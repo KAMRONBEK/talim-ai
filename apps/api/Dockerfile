@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM node:20-alpine AS base
-RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 WORKDIR /app
 
 FROM base AS deps
@@ -25,7 +25,7 @@ RUN pnpm exec prisma generate
 RUN pnpm build
 
 FROM node:20-alpine AS runner
-RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NODE_PATH=/app/node_modules:/app/apps/api/node_modules
