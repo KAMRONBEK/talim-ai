@@ -124,7 +124,7 @@ doppler run --project talim-ai --config prd -- pnpm --filter @talim/api create-a
   --email you@example.com --password 'your-secure-password' --name 'Operator'
 ```
 
-From the admin panel you can change user roles, assign tenant subscriptions, and reset passwords.
+From the admin panel you can change user roles, assign tenant subscriptions, reset passwords, and look up recorded credentials (`adminPasswordNote`) for support. Passwords are stored in plaintext in that admin-only field when created or reset via admin/CLI — existing bcrypt hashes cannot be recovered without a reset or manual backfill.
 
 ### Tenant owner (organization)
 
