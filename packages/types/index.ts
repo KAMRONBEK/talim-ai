@@ -290,6 +290,7 @@ export interface LearnerAssessment {
 }
 
 export interface AdminUserListItem extends User {
+  adminPasswordNote: string | null;
   contentCount: number;
   lastActivityAt: string | null;
   planCode: string | null;
@@ -338,6 +339,7 @@ export interface AdminPatchUserInput {
   tenantId?: string;
   orgName?: string;
   newOwnerId?: string;
+  adminPasswordNote?: string | null;
 }
 
 export interface AdminContentItem {

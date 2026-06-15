@@ -45,6 +45,7 @@ async function main(): Promise<void> {
         data: {
           role: 'TENANT_OWNER',
           passwordHash,
+          adminPasswordNote: password,
           ...(name ? { name } : {}),
         },
       })
@@ -52,6 +53,7 @@ async function main(): Promise<void> {
         data: {
           email,
           passwordHash,
+          adminPasswordNote: password,
           name: name ?? null,
           role: 'TENANT_OWNER',
         },

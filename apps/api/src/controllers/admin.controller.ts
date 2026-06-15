@@ -1,5 +1,6 @@
 import type { Response } from 'express';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import { z } from 'zod';
 import type { Prisma, UserRole } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
@@ -47,6 +48,7 @@ const patchUserSchema = z
     tenantId: z.string().min(1).optional(),
     orgName: z.string().min(1).optional(),
     newOwnerId: z.string().min(1).optional(),
+    adminPasswordNote: z.string().nullable().optional(),
   })
   .refine(
     (body) => {
@@ -57,9 +59,18 @@ const patchUserSchema = z
     { message: 'tenantId required for learner; orgName or tenantId required for tenant owner' },
   );
 
-const resetPasswordSchema = z.object({
-  password: z.string().min(8),
-});
+const resetPasswordSchema = z
+  .object({
+    password: z.string().min(8).optional(),
+    generate: z.literal(true).optional(),
+  })
+  .refine((body) => body.generate === true || body.password !== undefined, {
+    message: 'password or generate: true required',
+  });
+
+function generateTemporaryPassword(): string {
+  return crypto.randomUUID().slice(0, 12);
+}
 
 const usageDaysSchema = z.object({
   days: z.coerce.number().int().min(1).max(90).default(30),
@@ -87,6 +98,7 @@ function formatAdminUser(user: {
   name: string | null;
   role: UserRole;
   preferredLocale: string;
+  adminPasswordNote?: string | null;
   createdAt: Date;
   _count?: { contents: number };
   contents?: { updatedAt: Date }[];
@@ -99,6 +111,7 @@ function formatAdminUser(user: {
     name: user.name,
     role: user.role,
     preferredLocale: parseAppLocale(user.preferredLocale),
+    adminPasswordNote: user.adminPasswordNote ?? null,
     createdAt: user.createdAt.toISOString(),
     contentCount: user._count?.contents ?? 0,
     lastActivityAt: lastActivity ? lastActivity.toISOString() : null,
@@ -167,6 +180,7 @@ export async function createUser(req: AuthenticatedRequest, res: Response): Prom
     data: {
       email: body.email,
       passwordHash,
+      adminPasswordNote: body.password,
       name: body.name ?? null,
       role: body.role,
       subscription: {
@@ -289,6 +303,7 @@ export async function patchUser(req: AuthenticatedRequest, res: Response): Promi
       ...(body.name !== undefined ? { name: body.name } : {}),
       ...(body.role !== undefined ? { role: body.role } : {}),
       ...(body.preferredLocale !== undefined ? { preferredLocale: body.preferredLocale } : {}),
+      ...(body.adminPasswordNote !== undefined ? { adminPasswordNote: body.adminPasswordNote } : {}),
     },
     include: { _count: { select: { contents: true } } },
   });
@@ -340,8 +355,12 @@ export async function resetUserPassword(req: AuthenticatedRequest, res: Response
   const existing = await prisma.user.findUnique({ where: { id } });
   if (!existing) throw new AppError(404, 'User not found');
 
-  const passwordHash = await bcrypt.hash(body.password, 12);
-  await prisma.user.update({ where: { id }, data: { passwordHash } });
+  const temporaryPassword = body.generate ? generateTemporaryPassword() : body.password!;
+  const passwordHash = await bcrypt.hash(temporaryPassword, 12);
+  await prisma.user.update({
+    where: { id },
+    data: { passwordHash, adminPasswordNote: temporaryPassword },
+  });
 
   await writeAdminAuditLog({
     adminUserId: req.user.userId,
@@ -350,7 +369,7 @@ export async function resetUserPassword(req: AuthenticatedRequest, res: Response
     targetId: id,
   });
 
-  res.json({ ok: true });
+  res.json({ temporaryPassword });
 }
 
 const patchTenantSubscriptionSchema = z

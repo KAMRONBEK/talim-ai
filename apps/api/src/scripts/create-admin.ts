@@ -39,12 +39,13 @@ async function main(): Promise<void> {
   const user = existing
     ? await prisma.user.update({
         where: { email },
-        data: { role: 'ADMIN', passwordHash, ...(name ? { name } : {}) },
+        data: { role: 'ADMIN', passwordHash, adminPasswordNote: password, ...(name ? { name } : {}) },
       })
     : await prisma.user.create({
         data: {
           email,
           passwordHash,
+          adminPasswordNote: password,
           name: name ?? null,
           role: 'ADMIN',
           ...(freePlan

@@ -120,6 +120,7 @@ model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
   passwordHash            String
+  adminPasswordNote       String?
   name                    String?
   role                    UserRole                 @default(INDIVIDUAL)
   preferredLocale         String                   @default("uz")
