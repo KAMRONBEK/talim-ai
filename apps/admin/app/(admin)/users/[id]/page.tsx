@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Button, Card, CardContent, CardHeader, Input, Label } from '@talim/ui';
 import type {
   AdminTenantUsageVsLimits,
@@ -15,6 +15,7 @@ import {
   useAdminTenant,
   useAdminUser,
   usePatchUser,
+  useResetUserPassword,
   useUpdateUserSubscription,
 } from '@/hooks/useAdmin';
 
@@ -38,6 +39,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const { data, isLoading } = useAdminUser(id);
   const updateSubscription = useUpdateUserSubscription();
   const patchUser = usePatchUser();
+  const resetPassword = useResetUserPassword();
   const { data: tenantsData } = useAdminTenants({ page: 1, pageSize: 100 });
 
   const [planCode, setPlanCode] = useState<PlanCode | ''>('');
@@ -47,9 +49,18 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const [orgName, setOrgName] = useState('');
   const [tenantId, setTenantId] = useState('');
   const [newOwnerId, setNewOwnerId] = useState('');
+  const [passwordNote, setPasswordNote] = useState('');
+  const [customPassword, setCustomPassword] = useState('');
+  const [generatedPassword, setGeneratedPassword] = useState<string | null>(null);
 
   const ownedTenantId = data?.user.ownedTenant?.id ?? '';
   const { data: ownedTenantData } = useAdminTenant(ownedTenantId);
+
+  useEffect(() => {
+    if (data?.user) {
+      setPasswordNote(data.user.adminPasswordNote ?? '');
+    }
+  }, [data?.user.id, data?.user.adminPasswordNote]);
 
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading user…</p>;
@@ -112,6 +123,126 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader>
+          <h2 className="font-semibold">Credentials</h2>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Last known password for support lookups. Updating the note alone does not change the login
+            password unless you use Set password or Generate new password.
+          </p>
+          {passwordNote ? (
+            <div className="space-y-2">
+              <p className="text-xs text-muted-foreground">Recorded password</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <code className="rounded-lg bg-muted px-3 py-2 font-mono text-sm">{passwordNote}</code>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigator.clipboard?.writeText(passwordNote)}
+                >
+                  Copy
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground">Not recorded</p>
+          )}
+          {generatedPassword && (
+            <div className="space-y-2 rounded-lg border border-primary/30 bg-primary/5 p-4">
+              <p className="text-sm font-medium">New password (save it now)</p>
+              <code className="block rounded-lg bg-muted px-3 py-2 font-mono text-sm">
+                {generatedPassword}
+              </code>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => navigator.clipboard?.writeText(generatedPassword)}
+              >
+                Copy
+              </Button>
+            </div>
+          )}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-1 sm:col-span-2">
+              <Label htmlFor="passwordNote">Password note (backfill)</Label>
+              <Input
+                id="passwordNote"
+                placeholder="Record a known password without changing login"
+                value={passwordNote}
+                onChange={(e) => setPasswordNote(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1 sm:col-span-2">
+              <Label htmlFor="customPassword">Set new password</Label>
+              <Input
+                id="customPassword"
+                type="password"
+                placeholder="Minimum 8 characters"
+                value={customPassword}
+                onChange={(e) => setCustomPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              disabled={patchUser.isPending}
+              onClick={() => {
+                if (passwordNote === (user.adminPasswordNote ?? '')) return;
+                patchUser.mutate({ userId: id, adminPasswordNote: passwordNote || null });
+              }}
+            >
+              {patchUser.isPending ? 'Saving…' : 'Save note'}
+            </Button>
+            <Button
+              variant="outline"
+              disabled={resetPassword.isPending || customPassword.length < 8}
+              onClick={async () => {
+                const temporaryPassword = await resetPassword.mutateAsync({
+                  userId: id,
+                  password: customPassword,
+                });
+                setGeneratedPassword(temporaryPassword);
+                setCustomPassword('');
+                setPasswordNote(temporaryPassword);
+              }}
+            >
+              {resetPassword.isPending ? 'Saving…' : 'Set password'}
+            </Button>
+            <Button
+              disabled={resetPassword.isPending}
+              onClick={async () => {
+                if (
+                  !confirm(
+                    `Generate a new password for ${user.email}? The previous password will stop working.`,
+                  )
+                ) {
+                  return;
+                }
+                const temporaryPassword = await resetPassword.mutateAsync({
+                  userId: id,
+                  generate: true,
+                });
+                setGeneratedPassword(temporaryPassword);
+                setPasswordNote(temporaryPassword);
+              }}
+            >
+              {resetPassword.isPending ? 'Generating…' : 'Generate new password'}
+            </Button>
+          </div>
+          {resetPassword.isError && (
+            <p className="text-sm text-destructive">
+              {(resetPassword.error as { response?: { data?: { message?: string } } })?.response?.data
+                ?.message ?? 'Failed to reset password'}
+            </p>
+          )}
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>

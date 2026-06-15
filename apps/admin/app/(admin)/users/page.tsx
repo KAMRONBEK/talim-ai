@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
-import { useAdminUsers, useDeleteUser } from '@/hooks/useAdmin';
+import { useAdminUsers, useDeleteUser, useResetUserPassword } from '@/hooks/useAdmin';
 
 export default function UsersPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const { data, isLoading } = useAdminUsers({ page, search: search || undefined });
   const deleteUser = useDeleteUser();
+  const resetPassword = useResetUserPassword();
 
   return (
     <div className="space-y-6">
@@ -34,6 +35,7 @@ export default function UsersPage() {
             <tr>
               <th className="px-4 py-3 text-left font-medium">Email</th>
               <th className="px-4 py-3 text-left font-medium">Name</th>
+              <th className="px-4 py-3 text-left font-medium">Password</th>
               <th className="px-4 py-3 text-left font-medium">Role</th>
               <th className="px-4 py-3 text-left font-medium">Plan</th>
               <th className="px-4 py-3 text-left font-medium">Status</th>
@@ -44,7 +46,7 @@ export default function UsersPage() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
+                <td colSpan={8} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
                 </td>
               </tr>
@@ -57,6 +59,26 @@ export default function UsersPage() {
                   </Link>
                 </td>
                 <td className="px-4 py-3">{user.name ?? '—'}</td>
+                <td className="px-4 py-3">
+                  {user.adminPasswordNote ? (
+                    <div className="flex items-center gap-2">
+                      <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                        {user.adminPasswordNote}
+                      </code>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 px-2 text-xs"
+                        onClick={() => navigator.clipboard?.writeText(user.adminPasswordNote!)}
+                      >
+                        Copy
+                      </Button>
+                    </div>
+                  ) : (
+                    <span className="text-muted-foreground">Not recorded</span>
+                  )}
+                </td>
                 <td className="px-4 py-3">
                   <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{user.role}</span>
                 </td>
@@ -72,16 +94,35 @@ export default function UsersPage() {
                 </td>
                 <td className="px-4 py-3">{user.contentCount}</td>
                 <td className="px-4 py-3 text-right">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={deleteUser.isPending}
-                    onClick={() => {
-                      if (confirm(`Delete ${user.email}?`)) deleteUser.mutate(user.id);
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  <div className="flex justify-end gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={resetPassword.isPending}
+                      onClick={() => {
+                        if (
+                          !confirm(
+                            `Generate a new password for ${user.email}? The previous password will stop working.`,
+                          )
+                        ) {
+                          return;
+                        }
+                        resetPassword.mutate({ userId: user.id, generate: true });
+                      }}
+                    >
+                      Reset
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      disabled={deleteUser.isPending}
+                      onClick={() => {
+                        if (confirm(`Delete ${user.email}?`)) deleteUser.mutate(user.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}

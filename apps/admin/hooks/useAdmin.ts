@@ -194,6 +194,26 @@ export function useAdminUsage(days = 30) {
   });
 }
 
+export function useResetUserPassword() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      userId,
+      ...body
+    }: { userId: string; password?: string; generate?: true }) => {
+      const { data } = await api.post<{ temporaryPassword: string }>(
+        `/admin/users/${userId}/reset-password`,
+        body,
+      );
+      return data.temporaryPassword;
+    },
+    onSuccess: (_data, vars) => {
+      qc.invalidateQueries({ queryKey: ['admin', 'users', vars.userId] });
+      qc.invalidateQueries({ queryKey: ['admin', 'users'] });
+    },
+  });
+}
+
 export function useDeleteUser() {
   const qc = useQueryClient();
   return useMutation({
