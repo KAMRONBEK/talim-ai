@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { authMiddleware } from '../middleware/auth.middleware.js';
 import { enforceQuota } from '../middleware/quota.middleware.js';
+import { reparseRateLimit } from '../middleware/rate-limit.middleware.js';
 import { upload } from '../middleware/upload.middleware.js';
 import {
   attachTenantId,
@@ -83,7 +84,7 @@ tenantContent.post(
   asyncHandler(tenantContentController.createYoutubeContent),
 );
 tenantContent.post('/:id/retry', enforceQuota('GENERATION'), asyncHandler(tenantContentController.retryContent));
-tenantContent.post('/:id/reparse', asyncHandler(tenantContentController.reparseContent));
+tenantContent.post('/:id/reparse', reparseRateLimit, asyncHandler(tenantContentController.reparseContent));
 tenantContent.delete('/:id', asyncHandler(tenantContentController.deleteContent));
 tenantContent.get('/:id/file', asyncHandler(tenantContentController.getContentFile));
 tenantContent.post('/:id/ocr-region', asyncHandler(tenantContentController.ocrPdfRegion));

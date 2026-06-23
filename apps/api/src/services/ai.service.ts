@@ -64,9 +64,9 @@ function recordCompletionUsage(
   usage: AiUsageContext | undefined,
   model: string,
   response: { usage?: { prompt_tokens?: number; completion_tokens?: number } | null },
-): void {
-  if (!usage) return;
-  recordUsage({
+): Promise<void> {
+  if (!usage) return Promise.resolve();
+  return recordUsage({
     userId: usage.userId,
     tenantId: usage.tenantId,
     feature: usage.feature,
@@ -281,7 +281,9 @@ export async function generateJsonCompletion<T>(
   options?: { temperature?: number; usage?: AiUsageContext },
 ): Promise<T> {
   const response = await createDeepSeekChatCompletion(messages, options);
-  recordCompletionUsage(options?.usage, env.DEEPSEEK_MODEL, response);
+  // Await so usage is persisted before any subsequent quota check (sequential
+  // generation loops, e.g. auto-generating a deck per section).
+  await recordCompletionUsage(options?.usage, env.DEEPSEEK_MODEL, response);
   const text = response.choices[0]?.message?.content ?? '';
   const jsonMatch = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
   if (!jsonMatch) {

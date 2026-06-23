@@ -8,6 +8,7 @@ import { extractYoutubeTranscript } from '../services/youtube.service.js';
 import { chunkText, storeChunksWithEmbeddings } from '../services/rag.service.js';
 import { generateContentSections } from '../services/section.service.js';
 import { assertQuota } from '../services/subscription.service.js';
+import { autoGenerateSectionDecks } from '../services/slides.service.js';
 
 export function registerProcessContentJob(): void {
   contentQueue.process(async (job) => {
@@ -75,6 +76,27 @@ export function registerProcessContentJob(): void {
         where: { id: contentId },
         data: { status: ContentStatus.READY },
       });
+
+      // Pre-generate section slide decks so students see ready slides immediately.
+      // Best-effort and quota-aware — never fails an already-READY content.
+      try {
+        const owner = await prisma.user.findUnique({
+          where: { id: content.userId },
+          select: { role: true },
+        });
+        if (owner) {
+          await autoGenerateSectionDecks({
+            contentId,
+            userId: content.userId,
+            tenantId: content.tenantId,
+            role: owner.role,
+            title: content.title,
+            locale: env.DEFAULT_CONTENT_LOCALE,
+          });
+        }
+      } catch (slideErr) {
+        console.warn(`Auto slide generation failed for content ${contentId}:`, slideErr);
+      }
     } catch (error) {
       await prisma.content.update({
         where: { id: contentId },

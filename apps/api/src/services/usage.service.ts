@@ -22,12 +22,15 @@ export function estimateCost(model: string, inputTokens: number, outputTokens: n
   return estimateTokenCostUsd(model, inputTokens, outputTokens);
 }
 
-export function recordUsage(input: RecordUsageInput): void {
+// Returns the write promise so callers that need the usage persisted before the
+// next quota check (e.g. sequential generation loops) can await it; fire-and-forget
+// callers may ignore it.
+export function recordUsage(input: RecordUsageInput): Promise<void> {
   const inputTokens = input.inputTokens ?? 0;
   const outputTokens = input.outputTokens ?? 0;
   const estimatedCostUsd = estimateCost(input.model, inputTokens, outputTokens);
 
-  prisma.apiUsageEvent
+  return prisma.apiUsageEvent
     .create({
       data: {
         userId: input.userId,
@@ -40,6 +43,7 @@ export function recordUsage(input: RecordUsageInput): void {
         metadata: (input.metadata ?? undefined) as Prisma.InputJsonValue | undefined,
       },
     })
+    .then(() => {})
     .catch((err) => {
       console.error('Failed to record API usage:', err);
     });

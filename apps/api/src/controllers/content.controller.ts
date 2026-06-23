@@ -12,6 +12,7 @@ import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/you
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
 import { ingestText } from '../services/ingest.service.js';
+import { autoGenerateSectionDecks } from '../services/slides.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import {
   assertCanAccessContent,
@@ -32,7 +33,7 @@ const ocrRegionSchema = z.object({
 
 const reparseSchema = z.object({
   // Per-page images (data URLs) rasterized by the client; OCR'd server-side.
-  pages: z.array(z.string().min(1)).min(1).max(40),
+  pages: z.array(z.string().min(1)).min(1).max(30),
 });
 
 /**
@@ -65,6 +66,15 @@ export async function reparseContent(req: AuthenticatedRequest, res: Response): 
     const { chunkCount } = await ingestText(content.id, text, usage);
     const updated = await prisma.content.update({ where: { id: content.id }, data: { status: 'READY' } });
     res.json({ content: formatContent(updated), chunks: chunkCount });
+    // Pre-generate the new section decks in the background (best-effort).
+    void autoGenerateSectionDecks({
+      contentId: content.id,
+      userId: content.userId,
+      tenantId: content.tenantId ?? null,
+      role: req.user.role,
+      title: content.title,
+      locale: env.DEFAULT_CONTENT_LOCALE,
+    }).catch(() => {});
   } catch (error) {
     await prisma.content.update({ where: { id: content.id }, data: { status: 'FAILED' } });
     throw error;

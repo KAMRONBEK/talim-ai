@@ -50,6 +50,7 @@ export async function createSlides(req: AuthenticatedRequest, res: Response): Pr
 
   const slides = await generateAndStoreSlideDeck({
     userId: req.user.userId,
+    tenantId: req.user.tenantId,
     contentId,
     title: content.title,
     locale,

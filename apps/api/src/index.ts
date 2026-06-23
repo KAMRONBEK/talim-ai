@@ -60,7 +60,9 @@ async function bootstrap(): Promise<void> {
       credentials: true,
     }),
   );
-  app.use(express.json({ limit: '10mb' }));
+  // 20mb headroom for the re-read OCR payload (client-rasterized page images);
+  // ordinary JSON requests are far smaller and validated per-route.
+  app.use(express.json({ limit: '20mb' }));
   app.use(routes);
   app.use(errorMiddleware);
 

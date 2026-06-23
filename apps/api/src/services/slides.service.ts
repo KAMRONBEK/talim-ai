@@ -1,6 +1,8 @@
+import type { UserRole } from '@prisma/client';
 import type { AppLocale, Deck, DeckAudience, DeckSlide, ContentSlideDeck } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
-import { AppError } from '../middleware/error.middleware.js';
+import { AppError, QuotaExceededError } from '../middleware/error.middleware.js';
+import { assertQuota } from './subscription.service.js';
 import { getOrderedChunks, buildRagContext } from './rag.service.js';
 import { getSectionBody } from './section.service.js';
 import { generateJsonCompletion } from './ai.service.js';
@@ -181,13 +183,14 @@ function coerceDeck(raw: unknown, overrides: Overrides): Deck {
 
 export async function generateSlideDeck(params: {
   userId: string;
+  tenantId?: string | null;
   contentId: string;
   title: string;
   locale: AppLocale;
   audience: DeckAudience;
   sectionId?: string;
 }): Promise<Deck> {
-  const { userId, contentId, title, locale, audience, sectionId } = params;
+  const { userId, tenantId, contentId, title, locale, audience, sectionId } = params;
   const context = await buildContext(contentId, sectionId);
   const wordCount = context.split(/\s+/).filter(Boolean).length;
   const targetSlides = targetSlideCount(wordCount, audience);
@@ -203,7 +206,8 @@ export async function generateSlideDeck(params: {
     ],
     {
       temperature: 0.4,
-      usage: { userId, feature: 'SLIDESHOW_GEN', metadata: { contentId, sectionId } },
+      // tenantId is required so tenant generation counts toward the tenant's quota.
+      usage: { userId, tenantId: tenantId ?? undefined, feature: 'SLIDESHOW_GEN', metadata: { contentId, sectionId } },
     },
   );
 
@@ -212,6 +216,7 @@ export async function generateSlideDeck(params: {
 
 export async function generateAndStoreSlideDeck(params: {
   userId: string;
+  tenantId?: string | null;
   contentId: string;
   title: string;
   locale: AppLocale;
@@ -243,4 +248,51 @@ export async function generateAndStoreSlideDeck(params: {
     },
   });
   return formatSlideDeck(row);
+}
+
+/**
+ * Pre-generate a slide deck for every section of a content right after ingestion,
+ * so students see ready slides without triggering generation themselves. Best-effort
+ * and quota-aware: skips sections that already have a deck, and stops cleanly once
+ * the owner's monthly generation limit is reached (never throws / never fails ingest).
+ */
+export async function autoGenerateSectionDecks(params: {
+  contentId: string;
+  userId: string;
+  tenantId: string | null;
+  role: UserRole;
+  title: string;
+  locale: AppLocale;
+  audience?: DeckAudience;
+}): Promise<void> {
+  const sections = await prisma.contentSection.findMany({
+    where: { contentId: params.contentId },
+    orderBy: { order: 'asc' },
+    select: { id: true },
+  });
+  const audience = params.audience ?? 'students';
+
+  for (const section of sections) {
+    try {
+      const existing = await getSlideDeck(params.contentId, params.locale, section.id);
+      if (existing?.status === 'READY' && existing.deck) continue;
+      // Respect the plan limit; recorded SLIDESHOW_GEN usage makes this self-limiting.
+      await assertQuota(params.userId, 'GENERATION', {
+        role: params.role,
+        tenantId: params.tenantId ?? undefined,
+      });
+      await generateAndStoreSlideDeck({
+        userId: params.userId,
+        tenantId: params.tenantId,
+        contentId: params.contentId,
+        title: params.title,
+        locale: params.locale,
+        audience,
+        sectionId: section.id,
+      });
+    } catch (err) {
+      // Out of quota → stop; any other per-section failure → skip and continue.
+      if (err instanceof QuotaExceededError) break;
+    }
+  }
 }

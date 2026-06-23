@@ -22,3 +22,15 @@ export const authWriteRateLimit = rateLimit({
   legacyHeaders: false,
   message: { message: 'Too many requests. Please wait a few minutes and try again.' },
 });
+
+/**
+ * Re-read (OCR) limiter. Each re-read fans out one paid vision call per page, so
+ * cap how often it can be triggered to bound AI spend from repeated bursts.
+ */
+export const reparseRateLimit = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 8,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many re-read requests. Please wait a while and try again.' },
+});

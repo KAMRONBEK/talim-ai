@@ -9,7 +9,9 @@ export async function rasterizePdfToImages(
   url: string,
   opts?: { maxPages?: number; maxWidth?: number; quality?: number },
 ): Promise<{ images: string[]; totalPages: number }> {
-  const { maxPages = 40, maxWidth = 1100, quality = 0.72 } = opts ?? {};
+  // Conservative defaults keep the multi-page payload well under the API body limit
+  // while staying legible for OCR.
+  const { maxPages = 30, maxWidth = 900, quality = 0.6 } = opts ?? {};
   const pdfjs = await loadPdfJs();
   const doc = await pdfjs.getDocument(url).promise;
   const pageCount = Math.min(doc.numPages, maxPages);

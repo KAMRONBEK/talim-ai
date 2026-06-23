@@ -8,6 +8,7 @@ import {
 } from '../middleware/tenant.middleware.js';
 import { upload } from '../middleware/upload.middleware.js';
 import { enforceQuota } from '../middleware/quota.middleware.js';
+import { reparseRateLimit } from '../middleware/rate-limit.middleware.js';
 import * as contentController from '../controllers/content.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
@@ -35,7 +36,7 @@ contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
 contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
 contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
 contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
-contentRoutes.post('/:id/reparse', asyncHandler(contentController.reparseContent));
+contentRoutes.post('/:id/reparse', reparseRateLimit, asyncHandler(contentController.reparseContent));
 contentRoutes.patch(
   '/:id/podcast/episodes/:episodeId/progress',
   asyncHandler(progressController.patchEpisodeProgress),
