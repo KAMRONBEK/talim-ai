@@ -116,11 +116,24 @@ enum AssessmentAttemptStatus {
   GRADED
 }
 
+enum TutorRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AssessmentMode {
+  WRITTEN
+  GAME
+}
+
 model User {
   id                      String                   @id @default(cuid())
   email                   String                   @unique
+  username                String?                  @unique
   passwordHash            String
   adminPasswordNote       String?
+  mustChangePassword      Boolean                  @default(false)
   name                    String?
   role                    UserRole                 @default(INDIVIDUAL)
   preferredLocale         String                   @default("uz")
@@ -149,15 +162,34 @@ model User {
   assessmentAssignments   AssessmentAssignment[]   @relation("AssessmentAssignmentsMade")
   assignedAssessments     AssessmentAssignment[]   @relation("AssessmentLearnerAssignments")
   assessmentAttempts      AssessmentAttempt[]
+  tutorRequests           TutorRequest[]           @relation("TutorRequests")
 
   @@index([email])
   @@index([role])
+}
+
+model TutorRequest {
+  id          String             @id @default(cuid())
+  userId      String
+  orgName     String
+  note        String?
+  status      TutorRequestStatus @default(PENDING)
+  decidedById String?
+  decidedAt   DateTime?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  user        User               @relation("TutorRequests", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
 }
 
 model Tenant {
   id               String             @id @default(cuid())
   name             String
   slug             String             @unique
+  joinCode         String?            @unique
+  seatLimit        Int?
   ownerId          String
   stripeCustomerId String?
   createdAt        DateTime           @default(now())
@@ -459,6 +491,8 @@ model TenantAssessment {
   title        String
   instructions String?
   maxAttempts  Int                    @default(1)
+  mode         AssessmentMode         @default(WRITTEN)
+  secondsPerQuestion Int?
   status       TenantAssessmentStatus @default(DRAFT)
   createdById  String
   createdAt    DateTime               @default(now())
@@ -517,14 +551,32 @@ model AssessmentAttempt {
   userId       String
   answers      Json
   score        Float?
+  pointsTotal  Int                     @default(0)
+  maxStreak    Int                     @default(0)
+  durationMs   Int?
   status       AssessmentAttemptStatus @default(SUBMITTED)
   submittedAt  DateTime                @default(now())
   createdAt    DateTime                @default(now())
   assessment   TenantAssessment        @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
   user         User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answerDetails AttemptAnswer[]
 
   @@index([assessmentId])
   @@index([userId])
+  @@index([assessmentId, pointsTotal])
+}
+
+model AttemptAnswer {
+  id            String            @id @default(cuid())
+  attemptId     String
+  questionId    String
+  answer        String
+  correct       Boolean
+  responseMs    Int?
+  pointsAwarded Int               @default(0)
+  attempt       AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@index([attemptId])
 }
 
 model ContentProgress {
@@ -628,13 +680,18 @@ model ApiUsageEvent {
 
 model AdminAuditLog {
   id          String   @id @default(cuid())
-  adminUserId String
+  // Nullable + SetNull so deleting an admin never erases the audit trail. The
+  // actor's identity is snapshotted into adminEmail/adminName at write time so the
+  // log stays readable even after the user row is gone.
+  adminUserId String?
+  adminEmail  String?
+  adminName   String?
   action      String
   targetType  String
   targetId    String?
   metadata    Json?
   createdAt   DateTime @default(now())
-  adminUser   User     @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  adminUser   User?    @relation(fields: [adminUserId], references: [id], onDelete: SetNull)
 
   @@index([adminUserId, createdAt])
   @@index([targetType, targetId])

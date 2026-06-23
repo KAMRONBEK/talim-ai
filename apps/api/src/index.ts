@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import { env } from './config/env.js';
 import { routes } from './routes/index.js';
 import { errorMiddleware } from './middleware/error.middleware.js';
@@ -20,6 +21,21 @@ async function bootstrap(): Promise<void> {
   registerRenderManimJob();
 
   const app = express();
+
+  // Behind nginx in production — trust the first proxy hop so req.ip (and the
+  // rate limiter) use the real client IP from X-Forwarded-For.
+  app.set('trust proxy', 1);
+
+  // Security headers. CSP / cross-origin resource policies are disabled because
+  // this is a JSON API that also streams assets (audio, pdf, tutor visuals)
+  // consumed by the web app on a different origin.
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginResourcePolicy: false,
+      crossOriginEmbedderPolicy: false,
+    }),
+  );
 
   const corsOrigins = new Set(
     env.CORS_ORIGIN.split(',')

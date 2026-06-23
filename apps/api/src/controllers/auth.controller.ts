@@ -9,19 +9,27 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { parseAppLocale } from '@talim/types';
 import { resolveTenantIdForUser } from '../services/contentAccess.service.js';
+import { createTutorRequest, getMyLatestTutorRequest } from '../services/tutorRequest.service.js';
+import { joinTenantByCode } from '../services/tenant.service.js';
 
 const registerSchema = z
   .object({
     email: z.string().email(),
     password: z.string().min(8),
     name: z.string().min(1).optional(),
+    joinCode: z.string().min(4).max(12).optional(),
     role: z.never().optional(),
   })
   .strict();
 
+// `email` is an identifier here — it accepts an email OR a student username.
 const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.string().min(1),
   password: z.string().min(1),
+});
+
+const joinSchema = z.object({
+  joinCode: z.string().min(4).max(12),
 });
 
 const updateMeSchema = z.object({
@@ -50,8 +58,10 @@ function signToken(
 async function formatUser(user: {
   id: string;
   email: string;
+  username?: string | null;
   name: string | null;
   role: UserRole;
+  mustChangePassword?: boolean;
   preferredLocale: string;
   createdAt: Date;
 }) {
@@ -63,8 +73,10 @@ async function formatUser(user: {
   return {
     id: user.id,
     email: user.email,
+    username: user.username ?? null,
     name: user.name,
     role: user.role,
+    mustChangePassword: user.mustChangePassword ?? false,
     preferredLocale: parseAppLocale(user.preferredLocale),
     tenantId,
     tenantName: tenant?.name ?? null,
@@ -81,30 +93,45 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
 
   const passwordHash = await bcrypt.hash(body.password, 12);
   const freePlan = await prisma.plan.findUnique({ where: { code: 'FREE' } });
+  if (!freePlan) {
+    throw new AppError(500, 'FREE plan not configured. Run the plan seed (pnpm db:seed).');
+  }
 
-  const user = await prisma.user.create({
+  let user = await prisma.user.create({
     data: {
       email: body.email,
       passwordHash,
       name: body.name ?? null,
       role: 'INDIVIDUAL',
-      ...(freePlan
-        ? {
-            subscription: {
-              create: {
-                planId: freePlan.id,
-                status: 'ACTIVE',
-                source: 'ADMIN',
-              },
-            },
-          }
-        : {}),
+      subscription: {
+        create: {
+          planId: freePlan.id,
+          status: 'ACTIVE',
+          source: 'ADMIN',
+        },
+      },
     },
   });
+
+  // Optional: join a tutor's class immediately via a join code (becomes a learner).
+  if (body.joinCode) {
+    await joinTenantByCode(user.id, body.joinCode);
+    user = await prisma.user.findUniqueOrThrow({ where: { id: user.id } });
+  }
 
   const formatted = await formatUser(user);
   const token = signToken(user.id, user.email, user.role, formatted.tenantId);
   res.status(201).json({ user: formatted, token });
+}
+
+export async function joinClass(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const body = joinSchema.parse(req.body);
+  const { tenantName } = await joinTenantByCode(req.user.userId, body.joinCode);
+  const user = await prisma.user.findUniqueOrThrow({ where: { id: req.user.userId } });
+  const formatted = await formatUser(user);
+  const token = signToken(user.id, user.email, user.role, formatted.tenantId);
+  res.json({ user: formatted, token, tenantName });
 }
 
 export async function registerTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -113,12 +140,23 @@ export async function registerTenant(req: AuthenticatedRequest, res: Response): 
 
 export async function upgradeToTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
-  throw new AppError(403, 'Contact the platform admin to become a tutor');
+  const request = await createTutorRequest(req.user.userId, req.body);
+  res.status(201).json({ request });
+}
+
+export async function getTutorRequest(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const request = await getMyLatestTutorRequest(req.user.userId);
+  res.json({ request });
 }
 
 export async function login(req: AuthenticatedRequest, res: Response): Promise<void> {
   const body = loginSchema.parse(req.body);
-  const user = await prisma.user.findUnique({ where: { email: body.email } });
+  const identifier = body.email.trim();
+  // Accept either an email or a student username.
+  const user = identifier.includes('@')
+    ? await prisma.user.findUnique({ where: { email: identifier } })
+    : await prisma.user.findUnique({ where: { username: identifier } });
   if (!user) {
     throw new AppError(401, 'Invalid credentials');
   }
@@ -183,6 +221,15 @@ export async function changePassword(req: AuthenticatedRequest, res: Response): 
   if (!valid) throw new AppError(400, 'Current password is incorrect');
 
   const passwordHash = await bcrypt.hash(body.newPassword, 12);
-  await prisma.user.update({ where: { id: user.id }, data: { passwordHash } });
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      passwordHash,
+      mustChangePassword: false,
+      // The admin-recorded plaintext note no longer matches the password once the
+      // user sets their own — clear it so support never surfaces a stale secret.
+      adminPasswordNote: null,
+    },
+  });
   res.json({ ok: true });
 }

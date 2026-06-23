@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import type { VisualBlock } from '@talim/types';
 import { serializeVisualBlock } from '@talim/types';
 import type OpenAI from 'openai';
@@ -86,7 +87,9 @@ export function handleTutorToolCall(
       }
       case 'render_manim': {
         const script = validateManimScript(raw);
-        const jobId = manimJobId ?? `manim-${Date.now()}`;
+        // Unguessable job id closes the asset-enumeration vector on the
+        // (authenticated) manim asset endpoint.
+        const jobId = manimJobId ?? `manim-${crypto.randomUUID()}`;
         const payload = buildPendingManimPayload(jobId, script);
         const block: VisualBlock = { kind: 'manim', payload };
         return {

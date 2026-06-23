@@ -97,6 +97,7 @@ export interface AdminUpdateSubscriptionInput {
   planCode?: PlanCode;
   status?: SubscriptionStatus;
   currentPeriodEnd?: string | null;
+  seatLimit?: number | null;
 }
 
 export type UserSubscription = AdminUserSubscription;
@@ -141,8 +142,10 @@ export type UsageFeature =
 export interface User {
   id: string;
   email: string;
+  username?: string | null;
   name: string | null;
   role: UserRole;
+  mustChangePassword?: boolean;
   preferredLocale: AppLocale;
   tenantId: string | null;
   tenantName?: string | null;
@@ -154,6 +157,8 @@ export interface Tenant {
   name: string;
   slug: string;
   ownerId: string;
+  seatLimit: number | null;
+  joinCode: string | null;
   createdAt: string;
 }
 
@@ -176,7 +181,8 @@ export interface ContentAssignment {
 
 export interface TenantStudent {
   id: string;
-  email: string;
+  email: string | null;
+  username: string | null;
   name: string | null;
   active: boolean;
   joinedAt: string;
@@ -251,6 +257,8 @@ export interface BankQuestion {
   createdAt: string;
 }
 
+export type AssessmentMode = 'WRITTEN' | 'GAME';
+
 export interface TenantAssessment {
   id: string;
   tenantId: string;
@@ -258,6 +266,8 @@ export interface TenantAssessment {
   title: string;
   instructions: string | null;
   maxAttempts: number;
+  mode: AssessmentMode;
+  secondsPerQuestion: number | null;
   status: TenantAssessmentStatus;
   createdAt: string;
   questionCount: number;
@@ -279,14 +289,75 @@ export interface LearnerAssessment {
   title: string;
   instructions: string | null;
   maxAttempts: number;
+  mode: AssessmentMode;
+  secondsPerQuestion: number | null;
   attemptCount: number;
   latestScore: number | null;
+  latestPoints: number | null;
   questions: Array<{
     id: string;
     type: QuestionType;
     prompt: string;
     options: string[] | null;
   }>;
+}
+
+export interface AssessmentQuestionResult {
+  questionId: string;
+  correct: boolean;
+  submittedAnswer: string;
+  acceptableAnswers: string[];
+  explanation: string | null;
+  pointsAwarded: number;
+}
+
+export interface AssessmentSubmitResult {
+  attempt: {
+    id: string;
+    assessmentId: string;
+    score: number;
+    pointsTotal: number;
+    maxStreak: number;
+    status: string;
+    submittedAt: string;
+  };
+  correct: number;
+  total: number;
+  results: AssessmentQuestionResult[];
+}
+
+export interface AssessmentLeaderboardRow {
+  rank: number;
+  learnerId: string;
+  learnerName: string;
+  pointsTotal: number;
+  score: number;
+  maxStreak: number;
+}
+
+export interface AssessmentLeaderboard {
+  assessmentId: string;
+  mode: AssessmentMode;
+  title: string;
+  rows: AssessmentLeaderboardRow[];
+}
+
+export interface AssessmentResultLearner {
+  learnerId: string;
+  learnerName: string;
+  attempts: number;
+  submitted: boolean;
+  bestScore: number | null;
+  bestPoints: number;
+  maxStreak: number;
+}
+
+export interface AssessmentResults {
+  assessmentId: string;
+  mode: AssessmentMode;
+  title: string;
+  questionCount: number;
+  learners: AssessmentResultLearner[];
 }
 
 export interface AdminUserListItem extends User {
@@ -330,6 +401,35 @@ export interface AdminTenantDetail extends Tenant {
   studentCount: number;
   contentCount: number;
   members: AdminTenantMember[];
+}
+
+export type TutorRequestStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+
+export interface TutorRequest {
+  id: string;
+  userId: string;
+  orgName: string;
+  note: string | null;
+  status: TutorRequestStatus;
+  decidedAt: string | null;
+  createdAt: string;
+}
+
+export interface AdminTutorRequest extends TutorRequest {
+  userEmail: string;
+  userName: string | null;
+  userRole: UserRole;
+}
+
+export interface AdminAuditLogItem {
+  id: string;
+  action: string;
+  targetType: string;
+  targetId: string | null;
+  metadata: unknown;
+  createdAt: string;
+  adminEmail: string;
+  adminName: string | null;
 }
 
 export interface AdminPatchUserInput {

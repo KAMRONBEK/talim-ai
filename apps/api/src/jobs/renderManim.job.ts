@@ -120,11 +120,15 @@ export function registerRenderManimJob(): void {
   });
 }
 
-export async function getManimAssetPath(jobId: string): Promise<string | null> {
+export async function resolveManimAsset(
+  jobId: string,
+): Promise<{ storagePath: string; messageId: string } | null> {
   const jobs = await manimQueue.getJobs(['completed', 'failed', 'active', 'waiting'], 0, 200);
   const match = jobs.find((j) => (j.data as RenderManimJobData).jobId === jobId);
   if (!match) return null;
+  const data = match.data as RenderManimJobData & { storagePath?: string };
   const rv = match.returnvalue as { storagePath?: string } | undefined;
-  if (rv?.storagePath) return rv.storagePath;
-  return (match.data as RenderManimJobData & { storagePath?: string }).storagePath ?? null;
+  const storagePath = rv?.storagePath ?? data.storagePath ?? null;
+  if (!storagePath) return null;
+  return { storagePath, messageId: data.messageId };
 }

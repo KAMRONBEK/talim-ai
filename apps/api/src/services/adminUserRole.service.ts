@@ -1,7 +1,7 @@
 import type { UserRole } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
-import { createTenantForOwner } from './tenant.service.js';
+import { createTenantForOwner, ensureTenantSubscription } from './tenant.service.js';
 
 export interface AdminRoleChangeInput {
   tenantId?: string;
@@ -136,6 +136,7 @@ export async function applyAdminRoleChange(
         create: { tenantId: existingOwned.id, userId, role: 'OWNER' },
         update: { active: true, role: 'OWNER' },
       });
+      await ensureTenantSubscription(existingOwned.id);
       return { tenantId: existingOwned.id };
     }
 
@@ -159,6 +160,7 @@ export async function applyAdminRoleChange(
           update: { active: true, role: 'OWNER' },
         }),
       ]);
+      await ensureTenantSubscription(tenant.id);
       return { tenantId: tenant.id };
     }
 

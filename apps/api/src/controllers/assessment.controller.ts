@@ -70,6 +70,33 @@ export async function assignAssessment(req: AuthenticatedRequest, res: Response)
   res.status(201).json({ assignments });
 }
 
+export async function assessmentResults(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const { tenantId } = requireTenant(req);
+  res.json(await assessmentService.getAssessmentResults(tenantId, getParam(req, 'assessmentId')));
+}
+
+export async function assessmentLeaderboard(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
+  const { tenantId } = requireTenant(req);
+  res.json(await assessmentService.getAssessmentLeaderboard(tenantId, getParam(req, 'assessmentId')));
+}
+
+export async function learnerAssessmentLeaderboard(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
+  const { tenantId, userId } = requireTenant(req);
+  res.json(
+    await assessmentService.getLearnerAssessmentLeaderboard(
+      tenantId,
+      userId,
+      getParam(req, 'assessmentId'),
+    ),
+  );
+}
+
 export async function listLearnerAssessments(
   req: AuthenticatedRequest,
   res: Response,

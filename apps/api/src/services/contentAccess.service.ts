@@ -21,9 +21,17 @@ export async function resolveTenantIdForUser(
   return null;
 }
 
-export async function getAssignedContentIds(learnerId: string): Promise<string[]> {
+export async function getAssignedContentIds(
+  learnerId: string,
+  tenantId?: string,
+): Promise<string[]> {
   const rows = await prisma.contentAssignment.findMany({
-    where: { learnerId },
+    where: {
+      learnerId,
+      // Scope to a single tenant's materials so a learner who switched tutors
+      // never sees assignments that survived from a former tenant.
+      ...(tenantId ? { content: { tenantId } } : {}),
+    },
     select: { contentId: true },
   });
   return rows.map((r) => r.contentId);
@@ -34,7 +42,17 @@ export async function buildContentListWhere(user: AuthPayload): Promise<Prisma.C
     return { userId: user.userId, tenantId: null };
   }
   if (user.role === 'TENANT_LEARNER') {
-    const ids = await getAssignedContentIds(user.userId);
+    // Only expose assigned content while the learner's membership is active, and
+    // only content owned by their CURRENT tenant. ContentAssignment rows are not
+    // deleted when a learner is deactivated or switches tutors via a join code,
+    // so without the tenant scope the list endpoint would leak a former tenant's
+    // content metadata.
+    const activeMembership = await prisma.tenantMembership.findFirst({
+      where: { userId: user.userId, role: 'LEARNER', active: true },
+      select: { tenantId: true },
+    });
+    if (!activeMembership) return { id: { in: [] } };
+    const ids = await getAssignedContentIds(user.userId, activeMembership.tenantId);
     return { id: { in: ids } };
   }
   throw new AppError(403, 'Use /api/tenant/content for organization materials');
@@ -100,7 +118,21 @@ export async function assertCanAccessContent(
       where: { contentId, learnerId: user.userId },
       include: { content: true },
     });
-    content = assignment?.content;
+    // A learner may only access assigned content while their tenant membership
+    // is still active — a deactivated/removed student loses access immediately,
+    // not only once their JWT expires.
+    if (assignment?.content?.tenantId) {
+      const activeMembership = await prisma.tenantMembership.findFirst({
+        where: {
+          userId: user.userId,
+          tenantId: assignment.content.tenantId,
+          role: 'LEARNER',
+          active: true,
+        },
+        select: { id: true },
+      });
+      if (activeMembership) content = assignment.content;
+    }
   } else {
     throw new AppError(403, 'Use /api/tenant/content for organization materials');
   }

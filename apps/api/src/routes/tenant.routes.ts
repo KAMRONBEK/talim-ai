@@ -21,6 +21,7 @@ tenantRoutes.use(authMiddleware, attachTenantId, requireTenantOwner);
 
 tenantRoutes.get('/', asyncHandler(tenantController.getTenant));
 tenantRoutes.patch('/', asyncHandler(tenantController.patchTenant));
+tenantRoutes.post('/join-code/regenerate', asyncHandler(tenantController.regenerateJoinCode));
 tenantRoutes.get('/progress', asyncHandler(tenantController.getProgress));
 
 tenantRoutes.get('/students', asyncHandler(tenantController.listStudents));
@@ -51,6 +52,14 @@ tenantRoutes.patch(
 );
 tenantRoutes.get('/assessments', asyncHandler(assessmentController.listAssessments));
 tenantRoutes.post('/assessments', asyncHandler(assessmentController.createAssessment));
+tenantRoutes.get(
+  '/assessments/:assessmentId/results',
+  asyncHandler(assessmentController.assessmentResults),
+);
+tenantRoutes.get(
+  '/assessments/:assessmentId/leaderboard',
+  asyncHandler(assessmentController.assessmentLeaderboard),
+);
 tenantRoutes.post(
   '/assessments/:assessmentId/assign',
   asyncHandler(assessmentController.assignAssessment),

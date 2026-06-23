@@ -22,7 +22,7 @@ import {
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { manimQueue } from '../services/queue.service.js';
-import { getManimAssetPath } from '../jobs/renderManim.job.js';
+import { resolveManimAsset } from '../jobs/renderManim.job.js';
 import { storageService } from '../services/storage.service.js';
 import { assertCanAccessContent } from '../services/contentAccess.service.js';
 
@@ -134,11 +134,18 @@ export async function getMessages(req: AuthenticatedRequest, res: Response): Pro
 export async function getManimAsset(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const jobId = getParam(req, 'jobId');
-  const storagePath = await getManimAssetPath(jobId);
-  if (!storagePath) throw new AppError(404, 'Asset not found');
+  const asset = await resolveManimAsset(jobId);
+  if (!asset) throw new AppError(404, 'Asset not found');
 
-  const buffer = await storageService.get(storagePath);
-  const ext = storagePath.split('.').pop()?.toLowerCase();
+  // Authorize: the asset belongs to a chat message; only its owner may fetch it.
+  const message = await prisma.chatMessage.findFirst({
+    where: { id: asset.messageId, session: { userId: req.user.userId } },
+    select: { id: true },
+  });
+  if (!message) throw new AppError(404, 'Asset not found');
+
+  const buffer = await storageService.get(asset.storagePath);
+  const ext = asset.storagePath.split('.').pop()?.toLowerCase();
   const contentType =
     ext === 'mp4' ? 'video/mp4' : ext === 'svg' ? 'image/svg+xml' : 'application/octet-stream';
   res.setHeader('Content-Type', contentType);

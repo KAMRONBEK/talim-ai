@@ -15,6 +15,10 @@ learnerRoutes.use(authMiddleware, attachTenantId, requireTenantMember, requireAc
 
 learnerRoutes.get('/summary', asyncHandler(learnerController.getSummary));
 learnerRoutes.get('/assessments', asyncHandler(assessmentController.listLearnerAssessments));
+learnerRoutes.get(
+  '/assessments/:assessmentId/leaderboard',
+  asyncHandler(assessmentController.learnerAssessmentLeaderboard),
+);
 learnerRoutes.post(
   '/assessments/:assessmentId/attempts',
   asyncHandler(assessmentController.submitLearnerAssessment),

@@ -6,6 +6,8 @@ Qoidalar:
 - Savollar o'zbek tilida, lotin yozuvida bo'lsin.
 - Kahoot/Bamboozle kabi qiziqarli, lekin ko'chirish oson bo'lmagan savollar tuzing.
 - Asosan yozma yoki raqamli javobli savollar bering. Ko'p tanlovli savol kamroq bo'lsin.
+- MULTIPLE_CHOICE savol uchun "options" ichida 3-4 ta variant bo'lsin va "acceptableAnswers" ichidagi to'g'ri javob AYNAN shu variantlardan biriga (harfma-harf) teng bo'lishi SHART. Aks holda bunday savol tuzmang.
+- SHORT_ANSWER va NUMERIC savollarda "options" qiymati null bo'lsin.
 - Agar material matni berilsa, undan foydalaning. Agar mavzu berilsa, mavzuga mos yangi savollar ham tuzing.
 - Return valid JSON only.`;
 
@@ -22,9 +24,9 @@ Material yoki kontekst:
 ${input.context ?? "Kontekst berilmagan. Mavzu bo'yicha yangi, aloqador savollar tuzing."}
 
 ${input.count} ta savol tuzing. Turlari:
-- SHORT_ANSWER: qisqa yozma javob
-- NUMERIC: raqamli javob
-- MULTIPLE_CHOICE: faqat kerak bo'lsa
+- SHORT_ANSWER: qisqa yozma javob (options: null)
+- NUMERIC: raqamli javob (options: null)
+- MULTIPLE_CHOICE: faqat kerak bo'lsa. options'da 3-4 variant, acceptableAnswers esa shu variantlardan biriga aynan teng bo'lsin.
 
 Return JSON:
 {

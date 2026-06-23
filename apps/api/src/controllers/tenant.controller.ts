@@ -21,6 +21,12 @@ export async function patchTenant(req: AuthenticatedRequest, res: Response): Pro
   res.json({ tenant });
 }
 
+export async function regenerateJoinCode(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenant = await tenantService.regenerateJoinCode(req.user.userId);
+  res.json({ tenant });
+}
+
 export async function listStudents(req: AuthenticatedRequest, res: Response): Promise<void> {
   const tenantId = requireOwnerTenant(req);
   const students = await tenantService.listStudents(tenantId);
