@@ -209,6 +209,22 @@ nextjs-portal {
   }
 }
 
+/* Indeterminate loading sweep for the content-processing screen. */
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(340%);
+  }
+}
+
+@layer utilities {
+  .animate-loading-slide {
+    animation: loading-slide 1.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+}
+
 /* Respect reduced-motion globally: collapse slide animations to their end state. */
 @media (prefers-reduced-motion: reduce) {
   *,
