@@ -66,6 +66,7 @@ export async function generateQuestions(
           topic: body.topic ?? bank.topic,
           context,
           count: body.count,
+          style: body.style,
         }),
       },
     ],

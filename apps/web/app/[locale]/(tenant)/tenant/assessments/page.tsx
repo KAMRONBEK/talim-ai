@@ -89,6 +89,9 @@ export default function TenantAssessmentsPage() {
   const [title, setTitle] = useState('');
   const [topic, setTopic] = useState('');
   const [draftTopic, setDraftTopic] = useState('');
+  const [draftStyle, setDraftStyle] = useState<
+    'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric'
+  >('mixed');
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [assessmentTitle, setAssessmentTitle] = useState('');
   const [assessmentId, setAssessmentId] = useState('');
@@ -175,7 +178,11 @@ export default function TenantAssessmentsPage() {
                 className="mt-4 flex flex-col gap-3 md:flex-row"
                 onSubmit={async (event) => {
                   event.preventDefault();
-                  await generate.mutateAsync({ topic: draftTopic || undefined, count: 12 });
+                  await generate.mutateAsync({
+                    topic: draftTopic || undefined,
+                    count: 12,
+                    style: draftStyle,
+                  });
                   setDraftTopic('');
                 }}
               >
@@ -184,6 +191,20 @@ export default function TenantAssessmentsPage() {
                   onChange={(event) => setDraftTopic(event.target.value)}
                   placeholder="Topic prompt, e.g. Algebra equations"
                 />
+                <select
+                  value={draftStyle}
+                  onChange={(event) =>
+                    setDraftStyle(event.target.value as typeof draftStyle)
+                  }
+                  className="rounded-lg border bg-background px-3 py-2 text-sm"
+                  aria-label="Question type"
+                >
+                  <option value="mixed">Mixed (all types)</option>
+                  <option value="multipleChoice">Multiple choice</option>
+                  <option value="trueFalse">True / False</option>
+                  <option value="written">Written (short answer)</option>
+                  <option value="numeric">Numeric</option>
+                </select>
                 <Button type="submit" disabled={generate.isPending}>
                   {generate.isPending ? 'Generating…' : 'Generate drafts'}
                 </Button>

@@ -9,11 +9,22 @@ export const createBankSchema = z.object({
   topic: z.string().min(1).optional(),
 });
 
+export const questionStyleEnum = z.enum([
+  'mixed',
+  'multipleChoice',
+  'trueFalse',
+  'written',
+  'numeric',
+]);
+export type QuestionStyle = z.infer<typeof questionStyleEnum>;
+
 export const generateSchema = z.object({
   topic: z.string().min(1).optional(),
   contentId: z.string().min(1).optional(),
   sectionId: z.string().min(1).optional(),
   count: z.number().int().min(1).max(30).default(12),
+  // What kind of questions to generate: a balanced mix, or all of one kind.
+  style: questionStyleEnum.default('mixed'),
 });
 
 export const patchQuestionSchema = z.object({

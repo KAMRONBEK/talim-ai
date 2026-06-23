@@ -54,6 +54,7 @@ export function useGenerateBankQuestions(bankId: string | null) {
       contentId?: string;
       sectionId?: string;
       count?: number;
+      style?: 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
     }) => {
       const { data } = await api.post<{ questions: BankQuestion[] }>(
         `/tenant/question-banks/${bankId}/generate`,
