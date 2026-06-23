@@ -1,10 +1,19 @@
 import type { AppLocale, DeckAccent, DeckAudience } from '@talim/types';
 
-const LANGUAGE_LABEL: Record<AppLocale, string> = {
-  uz: 'Uzbek',
-  en: 'English',
-  ru: 'Russian',
-};
+// Talim's audience is Uzbek teachers/students — Uzbek is the primary language and
+// must read as a native Uzbek teacher wrote it (not machine-translated); Russian is
+// the strong secondary; English is low priority.
+function languageGuidance(locale: AppLocale): string {
+  switch (locale) {
+    case 'uz':
+      return 'Write ALL text in natural, grammatically correct Uzbek (Latin script), exactly as a native Uzbek schoolteacher would write it — NOT machine-translated phrasing. Use standard Uzbek subject terminology. This is the platform\'s primary language, so prioritise Uzbek correctness and clarity.';
+    case 'ru':
+      return 'Write ALL text in natural, grammatically correct Russian appropriate for school students.';
+    case 'en':
+    default:
+      return 'Write ALL text in clear, correct English.';
+  }
+}
 
 const ACCENTS: DeckAccent[] = ['teal', 'indigo', 'violet', 'coral', 'amber', 'sky', 'emerald', 'fuchsia'];
 
@@ -26,7 +35,6 @@ export function estimatedMinutesFor(slideCount: number): number {
 }
 
 export function getDeckSystemPrompt(locale: AppLocale, audience: DeckAudience): string {
-  const language = LANGUAGE_LABEL[locale];
   return `You are a master instructional designer who builds study slide decks from PROVIDED material only.
 
 ABSOLUTE RULES:
@@ -57,7 +65,7 @@ STRUCTURE & VARIETY:
 
 ICONS: only from this set — lightbulb, alert-triangle, check-circle, book-open, target, zap, trending-up, trending-down, beaker, calculator, globe, clock, star, flag, puzzle, rocket, brain, flame, leaf, scale.
 
-Write ALL text in ${language}.
+LANGUAGE: ${languageGuidance(locale)}
 
 AUDIENCE TONE — ${audience}:
 ${audienceTone(audience)}`;
