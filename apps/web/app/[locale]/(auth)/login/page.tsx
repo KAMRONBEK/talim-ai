@@ -77,10 +77,11 @@ export default function LoginPage() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">{t('email')}</Label>
+              <Label htmlFor="email">{t('emailOrUsername')}</Label>
               <Input
                 id="email"
-                type="email"
+                type="text"
+                autoCapitalize="none"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -109,9 +110,9 @@ export default function LoginPage() {
             </Link>
             <span className="mt-2 block">
               {t('tutorAccount')}{' '}
-              <a href="mailto:admin@talim-ai.uz" className="font-medium text-primary hover:underline">
-                {t('contactAdmin')}
-              </a>
+              <Link href="/register" className="font-medium text-primary hover:underline">
+                {t('createOne')}
+              </Link>
             </span>
           </p>
         </CardContent>

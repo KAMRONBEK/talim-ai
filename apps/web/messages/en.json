@@ -1,4 +1,17 @@
 {
+  "becomeTutor": {
+    "title": "Become a tutor",
+    "desc": "Teach your own students on Talim — create materials and assessments and track their progress. An admin reviews each request.",
+    "pending": "Your tutor request is pending review. We'll enable your tutor tools once it's approved.",
+    "rejected": "Your previous request was declined. You can submit a new one.",
+    "orgNameLabel": "Organization / class name",
+    "orgNamePlaceholder": "e.g. Ali's Math Club",
+    "noteLabel": "Note (optional)",
+    "notePlaceholder": "Tell us about your students",
+    "submit": "Request tutor access",
+    "submitting": "Submitting…",
+    "error": "Could not submit your request."
+  },
   "common": {
     "loading": "Loading...",
     "back": "Back",
@@ -44,7 +57,10 @@
     "haveAccount": "Already have an account?",
     "registerOrg": "Register organization",
     "tutorAccount": "Tutor or school account?",
-    "contactAdmin": "Contact admin"
+    "contactAdmin": "Contact admin",
+    "emailOrUsername": "Email or username",
+    "classCode": "Class code (optional)",
+    "classCodeHint": "Have a class code from your tutor? Enter it to join their class."
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -348,7 +364,18 @@
       "noProgress": "No progress yet",
       "coverage": "Coverage {value}%",
       "quizAttempts": "{count} quiz attempts",
-      "avgQuizValue": "Avg quiz {value}%"
+      "avgQuizValue": "Avg quiz {value}%",
+      "username": "Username",
+      "password": "Password",
+      "emailOptional": "Email (optional)",
+      "usernameOptional": "Username (for students without email)",
+      "passwordOptional": "Password (optional — auto-generated if blank)",
+      "identifierRequired": "Enter an email or a username.",
+      "createError": "Could not add the student.",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "credentialsHint": "Share these credentials with the student (shown once):",
+      "seatUsage": "{used} of {limit} seats used"
     },
     "assign": {
       "title": "Assign to students",
@@ -358,6 +385,14 @@
       "remove": "Remove",
       "submit": "Assign selected",
       "back": "Back to {title}"
+    },
+    "joinCode": {
+      "title": "Class join code",
+      "desc": "Students can self-enroll at sign-up using this code.",
+      "copy": "Copy code",
+      "regenerate": "Regenerate",
+      "regenerateConfirm": "Regenerate the join code? The old code will stop working.",
+      "none": "No code yet"
     }
   },
   "learner": {
@@ -383,6 +418,100 @@
       "desc": "Your tutor created this account for you. For security, change your temporary password in Settings.",
       "cta": "Go to Settings",
       "dismiss": "Dismiss"
+    }
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "how": "How it works",
+      "forTutors": "For tutors",
+      "preview": "Product",
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "hero": {
+      "badge": "Learn with AI",
+      "titleLead": "Learn anything.",
+      "titleEmphasis": "Your way.",
+      "subtitle": "Upload any material — PDF, video, slides or a lecture — and get AI-generated summaries, podcasts, quizzes and a personal tutor.",
+      "primaryCta": "Get started free",
+      "secondaryCta": "See features",
+      "trust": "Works with PDFs, YouTube, slides and lectures",
+      "cardTitle": "The genetic code & translation",
+      "cardSubtitle": "Biology 101 · Chapter 11",
+      "cardSummary": "Summary ready · 3 min read",
+      "cardPodcast": "Podcast ready · 8 min listen",
+      "cardQuiz": "Quiz available · 12 questions",
+      "cardProgressLabel": "Your progress"
+    },
+    "features": {
+      "title": "Everything you need to master any topic",
+      "subtitle": "From upload to mastery — one platform that adapts to the way you learn best.",
+      "summaryTitle": "AI summaries",
+      "summaryDesc": "Pull the key points out of any material. No need to re-read a whole chapter — grasp the core ideas in minutes.",
+      "podcastTitle": "Listen and learn",
+      "podcastDesc": "Turn your content into AI-generated podcasts. Learn while commuting, working out or doing chores.",
+      "quizTitle": "Test your knowledge",
+      "quizDesc": "Generate custom exams and quizzes with detailed answer explanations. Track your progress over time.",
+      "tutorTitle": "AI tutor chat",
+      "tutorDesc": "Select any part of your material and ask precise questions. Answers come with direct references to your content."
+    },
+    "how": {
+      "title": "How Talim AI works",
+      "subtitle": "Three simple steps from raw material to deep understanding.",
+      "step1Title": "Upload your content",
+      "step1Text": "Drop in PDFs, paste YouTube links, upload slides or share lectures. We handle the rest.",
+      "step2Title": "AI processes everything",
+      "step2Text": "AI breaks your material into sections, writes summaries, produces podcasts and builds quizzes.",
+      "step3Title": "Learn your way",
+      "step3Text": "Read the summaries, listen to podcasts, take quizzes or chat with your AI tutor."
+    },
+    "tutors": {
+      "badge": "For tutors and schools",
+      "title": "Teaching your own students?",
+      "subtitle": "Talim is not just for solo learning. Tutors can manage their own students, create materials and game-style quizzes, and track progress in one place.",
+      "point1Title": "Assign your materials",
+      "point1Text": "Upload your own textbooks and notes, then assign them to the right students.",
+      "point2Title": "Game-style quizzes",
+      "point2Text": "Build quizzes for every topic and test your students in an engaging way.",
+      "point3Title": "Track progress",
+      "point3Text": "See each student's coverage, quiz scores and activity in a single dashboard.",
+      "cta": "Become a tutor"
+    },
+    "preview": {
+      "title": "See it in action",
+      "subtitle": "A clean interface built for deep learning — no clutter.",
+      "navContent": "Genetic code",
+      "section1": "Transcription",
+      "section2": "Translation",
+      "section3": "Mutations",
+      "actionQuiz": "Quiz",
+      "actionPodcast": "Podcast",
+      "actionTutor": "AI Tutor",
+      "chapterLabel": "Chapter 11",
+      "contentTitle": "The genetic code & translation",
+      "paragraph1Lead": "The genetic code is the set of rules living cells use to translate information encoded in genetic material into proteins. It is a ",
+      "paragraph1Highlight": "triplet code",
+      "paragraph1Tail": ", where each sequence of three nucleotides is called a codon.",
+      "paragraph2Lead": "During translation, the ribosome reads the mRNA sequence and, with the help of tRNA, assembles amino acids into a polypeptide chain — which happens in the ",
+      "paragraph2Highlight": "cytoplasm",
+      "paragraph2Tail": ".",
+      "chipListen": "Listen",
+      "chipQuiz": "Take a quiz",
+      "chipAsk": "Ask the AI"
+    },
+    "cta": {
+      "title": "Ready to learn smarter?",
+      "subtitle": "Upload your material and get AI-powered summaries, podcasts, quizzes and a personal tutor.",
+      "button": "Start learning for free"
+    },
+    "footer": {
+      "tagline": "Talim AI",
+      "rights": "© {year} Talim AI. All rights reserved.",
+      "app": "App",
+      "signIn": "Sign in",
+      "privacy": "Privacy",
+      "terms": "Terms"
     }
   }
 }

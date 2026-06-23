@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, type ReactNode } from 'react';
-import { AuthGuard } from '@/components/auth-guard';
+import { RoleGuard } from '@/components/role-guard';
 import { DashboardSidebar, DashboardSidebarSheet } from '@/components/layout/dashboard-sidebar';
 import { DashboardHeader } from '@/components/layout/dashboard-header';
 import { useSidebarSheet } from '@/hooks/useSidebarSheet';
@@ -19,8 +19,10 @@ export function DashboardShell({ children }: { children: ReactNode }) {
   const [search, setSearch] = useState('');
   const { open: sidebarOpen, setOpen: setSidebarOpen } = useSidebarSheet();
 
+  // The B2C dashboard (personal uploads/learning) is for solo learners only;
+  // tutors use /tenant and students use /learner.
   return (
-    <AuthGuard>
+    <RoleGuard allowedRoles={['INDIVIDUAL']}>
       <DashboardSearchContext.Provider value={{ search, setSearch }}>
         <div className="flex h-dvh overflow-hidden">
           <DashboardSidebar />
@@ -31,6 +33,6 @@ export function DashboardShell({ children }: { children: ReactNode }) {
           </div>
         </div>
       </DashboardSearchContext.Provider>
-    </AuthGuard>
+    </RoleGuard>
   );
 }

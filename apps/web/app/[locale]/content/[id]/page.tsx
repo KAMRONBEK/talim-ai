@@ -1,6 +1,6 @@
 'use client';
 
-import { use, Suspense, useEffect } from 'react';
+import { use, Suspense, useState } from 'react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -12,20 +12,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@talim/ui';
-import { useContent, useRetryContent } from '@/hooks/useContent';
+import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getHomePathForRole } from '@/lib/auth-routing';
 import { AssignStudentsPanel } from '@/components/tenant/assign-students-panel';
 import { useSections, useSection } from '@/hooks/useSections';
-import {
-  useCreateQuiz,
-  useGenerateSummary,
-  useSavedSummary,
-} from '@/hooks/useQuiz';
 import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
+import { useContentActions } from '@/hooks/useContentActions';
 import { ContentRightPanel, ContentRightPanelSheet } from '@/components/layout/content-right-panel';
+import { ContentStatusGate } from '@/components/content/content-status-gate';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
-import { useState } from 'react';
 import { SummaryText } from '@/components/learning/summary-text';
 
 function ContentPageLoading() {
@@ -56,120 +52,41 @@ function ContentDetailInner({ id }: { id: string }) {
   const activeIndex = sections.findIndex((s) => s.id === activeSectionId);
   const { data: sectionData, isLoading: sectionLoading } = useSection(id, activeSectionId);
   const { data: history } = useLearningHistory(id);
-  const createQuiz = useCreateQuiz();
-  const generateSummary = useGenerateSummary();
-  const { data: savedSummary } = useSavedSummary(id, activeSectionId);
-  const retryContent = useRetryContent();
-  const [summary, setSummary] = useState<string | null>(null);
-  const [summaryOpen, setSummaryOpen] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [progressOpen, setProgressOpen] = useState(false);
 
-  useEffect(() => {
-    if (savedSummary) setSummary(savedSummary);
-  }, [savedSummary]);
+  const {
+    createQuiz,
+    generateSummary,
+    retryContent,
+    summary,
+    summaryOpen,
+    setSummaryOpen,
+    deleteOpen,
+    setDeleteOpen,
+    handleCreateQuiz,
+    handleSummary,
+    handleOpenSummary,
+  } = useContentActions(id, activeSectionId);
+
+  const [progressOpen, setProgressOpen] = useState(false);
 
   const sectionProgress = activeSectionId
     ? progressData?.sections[activeSectionId]
     : undefined;
 
-  const handleCreateQuiz = async (kind: 'FULL' | 'QUICK') => {
-    if (!activeSectionId) return;
-    const quiz = await createQuiz.mutateAsync({
-      contentId: id,
-      sectionId: activeSectionId,
-      kind,
-    });
-    router.push(`/quiz/${quiz.id}`);
-  };
-
-  const handleSummary = async () => {
-    if (savedSummary) {
-      setSummary(savedSummary);
-      setSummaryOpen(true);
-      return;
-    }
-    const text = await generateSummary.mutateAsync({
-      contentId: id,
-      sectionId: activeSectionId,
-    });
-    setSummary(text);
-    setSummaryOpen(true);
-  };
-
-  const handleOpenSummary = (text: string) => {
-    setSummary(text);
-    setSummaryOpen(true);
-  };
-
   if (!content) {
     return <p className="p-8 text-muted-foreground">{tCommon('loading')}</p>;
   }
 
-  if (content.status === 'FAILED') {
-    return (
-      <>
-        <div className="flex flex-1 items-center justify-center p-8">
-          <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-            <h2 className="text-lg font-semibold">{t('failed')}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{t('failedDesc')}</p>
-            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
-              {!isLearner && (
-                <>
-                  <Button
-                    disabled={retryContent.isPending}
-                    onClick={() => retryContent.mutate(id)}
-                  >
-                    {retryContent.isPending ? t('retrying') : t('retry')}
-                  </Button>
-                  <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                    {tCommon('delete')}
-                  </Button>
-                </>
-              )}
-              <Link href={homePath}>
-                <Button variant="outline" type="button">
-                  {t('backToLibrary')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <DeleteContentDialog
-          open={deleteOpen}
-          onOpenChange={setDeleteOpen}
-          content={{ id: content.id, title: content.title }}
-          onDeleted={() => router.push(homePath)}
-        />
-      </>
-    );
-  }
-
   if (content.status !== 'READY') {
     return (
-      <>
-        <div className="flex flex-1 items-center justify-center p-8">
-          <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-            <h2 className="text-lg font-semibold">{t('processing')}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {t('processingDesc', { status: content.status })}
-            </p>
-            {!isLearner && (
-              <div className="mt-6">
-                <Button variant="outline" type="button" onClick={() => setDeleteOpen(true)}>
-                  {tCommon('delete')}
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-        <DeleteContentDialog
-          open={deleteOpen}
-          onOpenChange={setDeleteOpen}
-          content={{ id: content.id, title: content.title }}
-          onDeleted={() => router.push(homePath)}
-        />
-      </>
+      <ContentStatusGate
+        content={content}
+        isLearner={isLearner}
+        homePath={homePath}
+        retryContent={retryContent}
+        deleteOpen={deleteOpen}
+        setDeleteOpen={setDeleteOpen}
+      />
     );
   }
 

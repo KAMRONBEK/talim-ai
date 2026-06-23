@@ -18,6 +18,12 @@ import {
   useResetTenantStudentPassword,
   useTenantStudents,
 } from '@/hooks/useTenant';
+import { useBilling } from '@/hooks/useBilling';
+import { JoinCodeCard } from '@/components/tenant/join-code-card';
+
+function apiError(err: unknown, fallback: string): string {
+  return (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
+}
 
 export default function TenantStudentsPage() {
   const t = useTranslations('tenant');
@@ -25,25 +31,60 @@ export default function TenantStudentsPage() {
   const createStudent = useCreateTenantStudent();
   const patchStudent = usePatchTenantStudent();
   const resetPassword = useResetTenantStudentPassword();
+  const { data: billing } = useBilling();
+  const seats = (billing?.usage as { students?: { used: number; limit: number | null } } | undefined)
+    ?.students;
+  const atSeatCap = seats?.limit != null && seats.used >= seats.limit;
   const [open, setOpen] = useState(false);
   const [dialogMode, setDialogMode] = useState<'add' | 'reset'>('add');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [tempPassword, setTempPassword] = useState<string | null>(null);
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [credentials, setCredentials] = useState<{ username: string | null; password: string } | null>(
+    null,
+  );
   const [search, setSearch] = useState('');
 
   const filteredStudents = (students ?? []).filter((student) => {
     const q = search.toLowerCase().trim();
     if (!q) return true;
-    return `${student.name ?? ''} ${student.email}`.toLowerCase().includes(q);
+    return `${student.name ?? ''} ${student.email ?? ''} ${student.username ?? ''}`
+      .toLowerCase()
+      .includes(q);
   });
+
+  const resetForm = () => {
+    setEmail('');
+    setUsername('');
+    setPassword('');
+    setName('');
+    setCreateError(null);
+  };
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await createStudent.mutateAsync({ email, name: name || undefined });
-    setTempPassword(result.temporaryPassword);
-    setEmail('');
-    setName('');
+    setCreateError(null);
+    if (!email.trim() && !username.trim()) {
+      setCreateError(t('students.identifierRequired'));
+      return;
+    }
+    try {
+      const result = await createStudent.mutateAsync({
+        name: name.trim() || undefined,
+        email: email.trim() || undefined,
+        username: username.trim() || undefined,
+        password: password.trim() || undefined,
+      });
+      setCredentials({
+        username: result.student.username,
+        password: result.temporaryPassword,
+      });
+      resetForm();
+    } catch (err) {
+      setCreateError(apiError(err, t('students.createError')));
+    }
   };
 
   return (
@@ -52,17 +93,28 @@ export default function TenantStudentsPage() {
         <div>
           <h1 className="text-2xl font-bold">{t('students.title')}</h1>
           <p className="text-muted-foreground">{t('students.desc')}</p>
+          {seats && (
+            <p className="mt-1 text-sm text-muted-foreground">
+              {t('students.seatUsage', { used: seats.used, limit: seats.limit ?? '∞' })}
+            </p>
+          )}
         </div>
         <Button
+          disabled={atSeatCap}
+          title={atSeatCap ? t('students.seatUsage', { used: seats!.used, limit: seats!.limit ?? '∞' }) : undefined}
           onClick={() => {
             setDialogMode('add');
             setOpen(true);
-            setTempPassword(null);
+            setCredentials(null);
+            resetForm();
           }}
         >
           {t('students.add')}
         </Button>
       </div>
+
+      <JoinCodeCard />
+
       <Input
         value={search}
         onChange={(event) => setSearch(event.target.value)}
@@ -85,7 +137,15 @@ export default function TenantStudentsPage() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={6} className="px-4 py-6 text-muted-foreground">{t('loading')}</td>
+                <td colSpan={6} className="px-4 py-6 text-muted-foreground">
+                  {t('loading')}
+                </td>
+              </tr>
+            ) : filteredStudents.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="px-4 py-10 text-center text-muted-foreground">
+                  {t('students.desc')}
+                </td>
               </tr>
             ) : (
               filteredStudents.map((s) => (
@@ -95,7 +155,9 @@ export default function TenantStudentsPage() {
                       {s.name ?? '—'}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">{s.email}</td>
+                  <td className="px-4 py-3">
+                    {s.email ?? (s.username ? `@${s.username}` : '—')}
+                  </td>
                   <td className="px-4 py-3">{s.assignedCount}</td>
                   <td className="px-4 py-3">
                     {s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}
@@ -112,7 +174,7 @@ export default function TenantStudentsPage() {
                         resetPassword.mutate(s.id, {
                           onSuccess: (data) => {
                             setDialogMode('reset');
-                            setTempPassword(data.temporaryPassword);
+                            setCredentials({ username: data.student.username, password: data.temporaryPassword });
                             setOpen(true);
                           },
                         })
@@ -142,9 +204,11 @@ export default function TenantStudentsPage() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <Link href={`/tenant/students/${s.id}`} className="font-medium">
-                  {s.name ?? s.email}
+                  {s.name ?? s.email ?? s.username}
                 </Link>
-                <p className="text-sm text-muted-foreground">{s.email}</p>
+                <p className="text-sm text-muted-foreground">
+                  {s.email ?? (s.username ? `@${s.username}` : '')}
+                </p>
               </div>
               <span className="rounded-full bg-secondary px-2 py-1 text-xs">
                 {s.active ? 'Active' : 'Inactive'}
@@ -157,11 +221,15 @@ export default function TenantStudentsPage() {
               </div>
               <div>
                 <p className="text-muted-foreground">{t('students.avgQuiz')}</p>
-                <p className="font-semibold">{s.avgQuizScore != null ? `${Math.round(s.avgQuizScore)}%` : '—'}</p>
+                <p className="font-semibold">
+                  {s.avgQuizScore != null ? `${Math.round(s.avgQuizScore)}%` : '—'}
+                </p>
               </div>
               <div>
                 <p className="text-muted-foreground">{t('students.lastActive')}</p>
-                <p className="font-semibold">{s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}</p>
+                <p className="font-semibold">
+                  {s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}
+                </p>
               </div>
             </div>
             <div className="mt-3 flex gap-2">
@@ -172,7 +240,7 @@ export default function TenantStudentsPage() {
                   resetPassword.mutate(s.id, {
                     onSuccess: (data) => {
                       setDialogMode('reset');
-                      setTempPassword(data.temporaryPassword);
+                      setCredentials({ username: data.student.username, password: data.temporaryPassword });
                       setOpen(true);
                     },
                   })
@@ -180,7 +248,11 @@ export default function TenantStudentsPage() {
               >
                 Reset
               </Button>
-              <Button size="sm" variant="ghost" onClick={() => patchStudent.mutate({ id: s.id, active: !s.active })}>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => patchStudent.mutate({ id: s.id, active: !s.active })}
+              >
                 {s.active ? 'Deactivate' : 'Reactivate'}
               </Button>
             </div>
@@ -195,26 +267,61 @@ export default function TenantStudentsPage() {
               {dialogMode === 'add' ? t('students.add') : t('students.resetPassword')}
             </DialogTitle>
           </DialogHeader>
-          {tempPassword ? (
+          {credentials ? (
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">{t('students.tempPasswordHint')}</p>
-              <p className="rounded-lg bg-muted p-3 font-mono text-sm">{tempPassword}</p>
-              <Button type="button" variant="outline" onClick={() => navigator.clipboard?.writeText(tempPassword)}>
-                Copy password
+              <p className="text-sm text-muted-foreground">{t('students.credentialsHint')}</p>
+              <div className="space-y-1 rounded-lg bg-muted p-3 font-mono text-sm">
+                {credentials.username && (
+                  <p>
+                    {t('students.username')}: <span className="font-semibold">{credentials.username}</span>
+                  </p>
+                )}
+                <p>
+                  {t('students.password')}: <span className="font-semibold">{credentials.password}</span>
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() =>
+                  navigator.clipboard?.writeText(
+                    credentials.username
+                      ? `${credentials.username} / ${credentials.password}`
+                      : credentials.password,
+                  )
+                }
+              >
+                {t('students.copy')}
               </Button>
               <Button onClick={() => setOpen(false)}>{t('students.done')}</Button>
             </div>
           ) : (
             <form onSubmit={handleCreate} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">{t('students.email')}</Label>
-                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="name">{t('students.name')}</Label>
                 <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
               </div>
-              <Button type="submit" disabled={createStudent.isPending}>{t('students.create')}</Button>
+              <div className="space-y-2">
+                <Label htmlFor="email">{t('students.emailOptional')}</Label>
+                <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="username">{t('students.usernameOptional')}</Label>
+                <Input
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  autoCapitalize="none"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">{t('students.passwordOptional')}</Label>
+                <Input id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </div>
+              {createError && <p className="text-sm text-destructive">{createError}</p>}
+              <Button type="submit" disabled={createStudent.isPending}>
+                {t('students.create')}
+              </Button>
             </form>
           )}
         </DialogContent>

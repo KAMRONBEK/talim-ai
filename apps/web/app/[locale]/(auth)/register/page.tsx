@@ -22,6 +22,7 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [joinCode, setJoinCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -42,11 +43,14 @@ export default function RegisterPage() {
         name,
         email,
         password,
+        ...(joinCode.trim() ? { joinCode: joinCode.trim().toUpperCase() } : {}),
       });
       setAuth(data.user, data.token);
       router.replace(getPostLoginPath(data.user.role));
-    } catch {
-      setError(t('registerFailed'));
+    } catch (err) {
+      const message = (err as { response?: { data?: { message?: string } } })?.response?.data
+        ?.message;
+      setError(message ?? t('registerFailed'));
     } finally {
       setLoading(false);
     }
@@ -103,6 +107,17 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="joinCode">{t('classCode')}</Label>
+              <Input
+                id="joinCode"
+                value={joinCode}
+                autoCapitalize="characters"
+                placeholder="ABC123"
+                onChange={(e) => setJoinCode(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">{t('classCodeHint')}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>

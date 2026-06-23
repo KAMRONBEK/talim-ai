@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
   AssessmentAssignment,
+  AssessmentLeaderboard,
+  AssessmentMode,
+  AssessmentResults,
+  AssessmentSubmitResult,
   BankQuestion,
   LearnerAssessment,
   QuestionBank,
@@ -95,6 +99,8 @@ export function useCreateAssessment() {
       title: string;
       instructions?: string;
       maxAttempts?: number;
+      mode?: AssessmentMode;
+      secondsPerQuestion?: number;
       questionIds: string[];
       publish?: boolean;
     }) => {
@@ -102,6 +108,45 @@ export function useCreateAssessment() {
       return data.assessment;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'assessments'] }),
+  });
+}
+
+export function useAssessmentResults(assessmentId: string | null) {
+  return useQuery({
+    queryKey: ['tenant', 'assessments', assessmentId, 'results'],
+    queryFn: async () => {
+      const { data } = await api.get<AssessmentResults>(
+        `/tenant/assessments/${assessmentId}/results`,
+      );
+      return data;
+    },
+    enabled: Boolean(assessmentId),
+  });
+}
+
+export function useAssessmentLeaderboard(assessmentId: string | null) {
+  return useQuery({
+    queryKey: ['tenant', 'assessments', assessmentId, 'leaderboard'],
+    queryFn: async () => {
+      const { data } = await api.get<AssessmentLeaderboard>(
+        `/tenant/assessments/${assessmentId}/leaderboard`,
+      );
+      return data;
+    },
+    enabled: Boolean(assessmentId),
+  });
+}
+
+export function useLearnerLeaderboard(assessmentId: string | null) {
+  return useQuery({
+    queryKey: ['learner', 'assessments', assessmentId, 'leaderboard'],
+    queryFn: async () => {
+      const { data } = await api.get<AssessmentLeaderboard>(
+        `/learner/assessments/${assessmentId}/leaderboard`,
+      );
+      return data;
+    },
+    enabled: Boolean(assessmentId),
   });
 }
 
@@ -141,17 +186,25 @@ export function useSubmitLearnerAssessment() {
     mutationFn: async ({
       assessmentId,
       answers,
+      timings,
+      durationMs,
     }: {
       assessmentId: string;
       answers: Record<string, string>;
+      timings?: Record<string, number>;
+      durationMs?: number;
     }) => {
-      const { data } = await api.post<{
-        attempt: { id: string; score: number; status: string; submittedAt: string };
-        correct: number;
-        total: number;
-      }>(`/learner/assessments/${assessmentId}/attempts`, { answers });
+      const { data } = await api.post<AssessmentSubmitResult>(
+        `/learner/assessments/${assessmentId}/attempts`,
+        { answers, timings, durationMs },
+      );
       return data;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['learner', 'assessments'] }),
+    onSuccess: (_data, vars) => {
+      queryClient.invalidateQueries({ queryKey: ['learner', 'assessments'] });
+      queryClient.invalidateQueries({
+        queryKey: ['learner', 'assessments', vars.assessmentId, 'leaderboard'],
+      });
+    },
   });
 }

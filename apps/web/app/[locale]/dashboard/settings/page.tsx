@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { ProfileCard } from '@/components/account/profile-card';
 import { PasswordCard } from '@/components/account/password-card';
 import { BillingSummaryCard } from '@/components/account/billing-summary-card';
+import { BecomeTutorCard } from '@/components/account/become-tutor-card';
 
 export default function DashboardSettingsPage() {
   const t = useTranslations('dashboard.settings');
@@ -17,6 +18,7 @@ export default function DashboardSettingsPage() {
       <ProfileCard />
       <PasswordCard />
       <BillingSummaryCard />
+      <BecomeTutorCard />
       <p className="text-sm text-muted-foreground">{t('languageHint')}</p>
     </div>
   );

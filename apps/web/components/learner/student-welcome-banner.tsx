@@ -14,9 +14,11 @@ export function StudentWelcomeBanner() {
 
   useEffect(() => {
     if (user?.id) {
-      setVisible(isOnboardingPending(user.id));
+      // Prefer the server-driven flag (works across devices); fall back to the
+      // legacy per-device localStorage flag.
+      setVisible(Boolean(user.mustChangePassword) || isOnboardingPending(user.id));
     }
-  }, [user?.id]);
+  }, [user?.id, user?.mustChangePassword]);
 
   if (!visible || !user) return null;
 

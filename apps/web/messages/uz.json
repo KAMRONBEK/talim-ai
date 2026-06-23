@@ -1,4 +1,17 @@
 {
+  "becomeTutor": {
+    "title": "O'qituvchi bo'lish",
+    "desc": "Talimda o'z o'quvchilaringizga dars bering — materiallar va testlar yarating, natijalarni kuzating. Har bir so'rovni admin ko'rib chiqadi.",
+    "pending": "So'rovingiz ko'rib chiqilmoqda. Tasdiqlangach, o'qituvchi imkoniyatlari yoqiladi.",
+    "rejected": "Oldingi so'rovingiz rad etilgan. Yangi so'rov yuborishingiz mumkin.",
+    "orgNameLabel": "Tashkilot / sinf nomi",
+    "orgNamePlaceholder": "masalan, Ali matematika to'garagi",
+    "noteLabel": "Izoh (ixtiyoriy)",
+    "notePlaceholder": "O'quvchilaringiz haqida yozing",
+    "submit": "O'qituvchi bo'lishni so'rash",
+    "submitting": "Yuborilmoqda…",
+    "error": "So'rovni yuborib bo'lmadi."
+  },
   "common": {
     "loading": "Yuklanmoqda...",
     "back": "Orqaga",
@@ -44,7 +57,10 @@
     "haveAccount": "Hisobingiz bormi?",
     "registerOrg": "Tashkilot ro'yxatdan o'tish",
     "tutorAccount": "O'qituvchi yoki maktab hisobimi?",
-    "contactAdmin": "Admin bilan bog'laning"
+    "contactAdmin": "Admin bilan bog'laning",
+    "emailOrUsername": "Email yoki foydalanuvchi nomi",
+    "classCode": "Sinf kodi (ixtiyoriy)",
+    "classCodeHint": "O'qituvchingizdan sinf kodi bormi? Sinfga qo'shilish uchun kiriting."
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
@@ -348,7 +364,18 @@
       "noProgress": "Hali progress yo'q",
       "coverage": "Qamrov {value}%",
       "quizAttempts": "{count} test urinishi",
-      "avgQuizValue": "O'rtacha test {value}%"
+      "avgQuizValue": "O'rtacha test {value}%",
+      "username": "Foydalanuvchi nomi",
+      "password": "Parol",
+      "emailOptional": "Email (ixtiyoriy)",
+      "usernameOptional": "Foydalanuvchi nomi (emaili yo'q o'quvchilar uchun)",
+      "passwordOptional": "Parol (ixtiyoriy — bo'sh qoldirilsa avtomatik yaratiladi)",
+      "identifierRequired": "Email yoki foydalanuvchi nomini kiriting.",
+      "createError": "O'quvchini qo'shib bo'lmadi.",
+      "copy": "Nusxalash",
+      "copied": "Nusxalandi!",
+      "credentialsHint": "Ushbu ma'lumotlarni o'quvchiga bering (bir marta ko'rsatiladi):",
+      "seatUsage": "{limit} tadan {used} ta joy band"
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",
@@ -358,6 +385,14 @@
       "remove": "Olib tashlash",
       "submit": "Tayinlash",
       "back": "{title} ga qaytish"
+    },
+    "joinCode": {
+      "title": "Sinf kodi",
+      "desc": "O'quvchilar ro'yxatdan o'tishda shu kod orqali qo'shilishi mumkin.",
+      "copy": "Kodni nusxalash",
+      "regenerate": "Yangilash",
+      "regenerateConfirm": "Kodni yangilaysizmi? Eski kod ishlamay qoladi.",
+      "none": "Kod yo'q"
     }
   },
   "learner": {
@@ -383,6 +418,100 @@
       "desc": "O'qituvchingiz bu hisobni yaratdi. Xavfsizlik uchun vaqtinchalik parolni Sozlamalarda o'zgartiring.",
       "cta": "Sozlamalarga o'tish",
       "dismiss": "Yopish"
+    }
+  },
+  "landing": {
+    "nav": {
+      "features": "Xususiyatlar",
+      "how": "Qanday ishlaydi",
+      "forTutors": "O'qituvchilar uchun",
+      "preview": "Mahsulot",
+      "signIn": "Kirish",
+      "getStarted": "Boshlash"
+    },
+    "hero": {
+      "badge": "AI bilan o'rganish",
+      "titleLead": "Har qanday narsani.",
+      "titleEmphasis": "O'zingizning yo'lingiz bilan.",
+      "subtitle": "Har qanday materialni yuklang — PDF, video, slayd yoki ma'ruza — va AI yaratgan xulosalar, podkastlar, testlar va shaxsiy o'qituvchiga ega bo'ling.",
+      "primaryCta": "Bepul boshlash",
+      "secondaryCta": "Xususiyatlarni ko'rish",
+      "trust": "PDF, YouTube, slaydlar va ma'ruzalar bilan ishlaydi",
+      "cardTitle": "Genetik kod va tarjima",
+      "cardSubtitle": "Biologiya 101 · 11-bob",
+      "cardSummary": "Xulosa yaratildi · 3 daqiqa o'qish",
+      "cardPodcast": "Podkast tayyor · 8 daqiqa tinglash",
+      "cardQuiz": "Test mavjud · 12 ta savol",
+      "cardProgressLabel": "Sizning taraqqiyotingiz"
+    },
+    "features": {
+      "title": "Har qanday mavzuni egallash uchun kerakli barcha narsalar",
+      "subtitle": "Yuklashdan to mukammallikgacha — siz eng yaxshi o'rganish uslubingizga moslashadigan bitta platforma.",
+      "summaryTitle": "AI xulosalari",
+      "summaryDesc": "Har qanday materialdan asosiy nuqtalarni ajratib oling. Butun bobni qayta o'qish shart emas — asosiy tushunchalarni bir necha daqiqada tushuning.",
+      "podcastTitle": "Tinglang va o'rganing",
+      "podcastDesc": "Kontentingizni AI yaratgan podkastlarga aylantiring. Sayohat, mashq yoki uy ishlari paytida o'rganing.",
+      "quizTitle": "Bilimingizni sinang",
+      "quizDesc": "Shaxsiy imtihonlar va testlar yarating, batafsil javob tahlillarini oling. Taraqqiyotingizni kuzating.",
+      "tutorTitle": "AI o'qituvchi suhbati",
+      "tutorDesc": "Materialingizning istalgan qismini tanlang va aniq savollar bering. Kontentingizga bevosita havolalar bilan javoblar."
+    },
+    "how": {
+      "title": "Talim AI qanday ishlaydi",
+      "subtitle": "Xom materialdan chuqur tushunchagacha uchta oddiy qadam.",
+      "step1Title": "Kontentingizni yuklang",
+      "step1Text": "PDF fayllarni tashlang, YouTube havolalarini joylashtiring, slaydlarni yuklang yoki ma'ruzalarni ulashing. Qolganini biz hal qilamiz.",
+      "step2Title": "AI hamma narsani qayta ishlaydi",
+      "step2Text": "AI materialingizni bo'laklarga ajratadi, xulosalar yaratadi, podkastlar ishlab chiqadi va testlar tuzadi.",
+      "step3Title": "O'zingizning yo'lingiz bilan o'rganing",
+      "step3Text": "Xulosalarni o'qing, podkastlarni tinglang, testlarni bajaring yoki AI o'qituvchingiz bilan suhbatlashing."
+    },
+    "tutors": {
+      "badge": "O'qituvchilar va maktablar uchun",
+      "title": "O'z o'quvchilaringizga dars beryapsizmi?",
+      "subtitle": "Talim shunchaki shaxsiy o'rganish uchun emas. O'qituvchilar o'z o'quvchilarini boshqarib, materiallar va o'yin-testlar yaratib, progressni bir joyda kuzatishi mumkin.",
+      "point1Title": "Materiallaringizni tayinlang",
+      "point1Text": "O'z darsliklaringiz va konspektlaringizni yuklang, kerakli o'quvchilarga tayinlang.",
+      "point2Title": "O'yin shaklidagi testlar",
+      "point2Text": "Har bir mavzu uchun testlar yarating va o'quvchilar bilimini qiziqarli tarzda sinang.",
+      "point3Title": "Progressni kuzating",
+      "point3Text": "Har bir o'quvchining qamrovi, test natijalari va faolligini bir panelda ko'ring.",
+      "cta": "O'qituvchi bo'lish"
+    },
+    "preview": {
+      "title": "Amalda ko'rish",
+      "subtitle": "Chuqur o'rganish uchun mo'ljallangan toza interfeys — tartibsizlik yo'q.",
+      "navContent": "Genetik kod",
+      "section1": "Transkripsiya",
+      "section2": "Tarjima",
+      "section3": "Mutatsiyalar",
+      "actionQuiz": "Test",
+      "actionPodcast": "Podkast",
+      "actionTutor": "AI O'qituvchi",
+      "chapterLabel": "11-bob",
+      "contentTitle": "Genetik kod va tarjima",
+      "paragraph1Lead": "Genetik kod — bu tirik hujayralar tomonidan genetik materialga kiritilgan ma'lumotlarni oqsillarga tarjima qilish uchun ishlatiladigan qoidalar to'plami. Bu ",
+      "paragraph1Highlight": "uchlik kodi",
+      "paragraph1Tail": " bo'lib, har uchta nukleotidning ketma-ketligi kodon deb ataladi.",
+      "paragraph2Lead": "Tarjima paytida ribosom mRNA ketma-ketligini o'qiydi va tRNA yordamida aminokislotalarni polipeptid zanjiriga yig'adi — ",
+      "paragraph2Highlight": "tsitoplazmada",
+      "paragraph2Tail": " sodir bo'ladi.",
+      "chipListen": "Tinglang",
+      "chipQuiz": "Test ishlang",
+      "chipAsk": "AI dan so'rang"
+    },
+    "cta": {
+      "title": "Aqlliroq o'rganishga tayyormisiz?",
+      "subtitle": "Materialingizni yuklang va AI yordamida xulosalar, podkastlar, testlar hamda shaxsiy o'qituvchiga ega bo'ling.",
+      "button": "Bepul o'rganishni boshlang"
+    },
+    "footer": {
+      "tagline": "Talim AI",
+      "rights": "© {year} Talim AI. Barcha huquqlar himoyalangan.",
+      "app": "Ilova",
+      "signIn": "Kirish",
+      "privacy": "Maxfiylik",
+      "terms": "Shartlar"
     }
   }
 }

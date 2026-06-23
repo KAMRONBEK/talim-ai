@@ -44,11 +44,31 @@ export function useTenantStudents() {
 export function useCreateTenantStudent() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (input: { email: string; name?: string }) => {
+    mutationFn: async (input: {
+      name?: string;
+      email?: string;
+      username?: string;
+      password?: string;
+    }) => {
       const { data } = await api.post<CreateTenantStudentResponse>('/tenant/students', input);
       return data;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      // Refresh seat usage + the at-cap gate, which read from the billing query.
+      queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
+    },
+  });
+}
+
+export function useRegenerateJoinCode() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await api.post<{ tenant: Tenant }>('/tenant/join-code/regenerate');
+      return data.tenant;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant'] }),
   });
 }
 
@@ -66,7 +86,11 @@ export function usePatchTenantStudent() {
       const { data } = await api.patch<{ student: TenantStudent }>(`/tenant/students/${id}`, body);
       return data.student;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      // Activating/deactivating a student changes seat usage (billing query).
+      queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
+    },
   });
 }
 
