@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
 import { loadPdfJs, type PdfDocumentProxy, type PdfJsModule, type PdfViewport } from '@/lib/pdfjs-cdn';
@@ -14,6 +14,11 @@ import {
 const MIN_TEXT_LENGTH = 5;
 const MIN_AREA_PX = 12;
 const PAGE_PADDING = 4;
+const MIN_PAGE_WIDTH = 280;
+// Ignore sub-pixel resize jitter so a scrollbar appearing or a 1px layout shift
+// never triggers a full re-rasterize of every page.
+const WIDTH_EPSILON = 2;
+const RESIZE_DEBOUNCE_MS = 150;
 
 export type PdfSelectionMode = 'area';
 
@@ -32,8 +37,14 @@ export interface PdfViewerProps {
   onEmptySelection?: () => void;
 }
 
+interface PageDimensions {
+  width: number;
+  height: number;
+}
+
 interface PageState {
   pageNumber: number;
+  width: number;
   height: number;
 }
 
@@ -111,32 +122,59 @@ export function PdfViewer({
   const dragRectRef = useRef<Rect | null>(null);
   const pdfDocRef = useRef<PdfDocumentProxy | null>(null);
   const pdfjsRef = useRef<PdfJsModule | null>(null);
+  // Intrinsic (scale 1) page dimensions, captured once per document. Display sizes
+  // and re-renders are derived from these without ever re-downloading the PDF.
+  const pageDimsRef = useRef<Map<number, PageDimensions>>(new Map());
   const viewportByPageRef = useRef<Map<number, PdfViewport>>(new Map());
-  const pagesRenderedRef = useRef(false);
+  // 0 = not yet measured. We measure synchronously before paint so the first
+  // render already uses the real width (no 600px → real-width re-render flash).
+  const [pageWidth, setPageWidth] = useState(0);
+  const [numPages, setNumPages] = useState(0);
   const [pages, setPages] = useState<PageState[]>([]);
-  const [pageWidth, setPageWidth] = useState(600);
   const [dragRect, setDragRect] = useState<Rect | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const dragStartRef = useRef<{ x: number; y: number; pageNumber: number } | null>(null);
 
-  useEffect(() => {
+  // Measure the container width before paint and keep it in sync, debounced so a
+  // resize gesture doesn't re-rasterize every page on each animation frame.
+  useLayoutEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const update = () => setPageWidth(Math.max(280, el.clientWidth - PAGE_PADDING * 2));
-    update();
-    const ro = new ResizeObserver(update);
+    const measure = () => Math.max(MIN_PAGE_WIDTH, el.clientWidth - PAGE_PADDING * 2);
+    setPageWidth((prev) => {
+      const next = measure();
+      return Math.abs(prev - next) > WIDTH_EPSILON ? next : prev;
+    });
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setPageWidth((prev) => {
+          const next = measure();
+          return Math.abs(prev - next) > WIDTH_EPSILON ? next : prev;
+        });
+      }, RESIZE_DEBOUNCE_MS);
+    });
     ro.observe(el);
-    return () => ro.disconnect();
+    return () => {
+      clearTimeout(timer);
+      ro.disconnect();
+    };
   }, []);
 
+  // Load the document ONCE per url and capture intrinsic page dimensions. This is
+  // independent of width, so resizing never re-downloads or re-parses the PDF.
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     setError(false);
+    setNumPages(0);
     setPages([]);
-    pagesRenderedRef.current = false;
+    pageDimsRef.current = new Map();
+    viewportByPageRef.current.clear();
+    pdfDocRef.current = null;
 
     void (async () => {
       try {
@@ -146,15 +184,16 @@ export function PdfViewer({
         const doc = await pdfjs.getDocument(url).promise;
         if (cancelled) return;
         pdfDocRef.current = doc;
-        const nextPages: PageState[] = [];
+        const dims = new Map<number, PageDimensions>();
         for (let i = 1; i <= doc.numPages; i++) {
           const page = await doc.getPage(i);
+          if (cancelled) return;
           const viewport = page.getViewport({ scale: 1 });
-          const scale = pageWidth / viewport.width;
-          const scaled = page.getViewport({ scale });
-          nextPages.push({ pageNumber: i, height: scaled.height });
+          dims.set(i, { width: viewport.width, height: viewport.height });
         }
-        if (!cancelled) setPages(nextPages);
+        if (cancelled) return;
+        pageDimsRef.current = dims;
+        setNumPages(doc.numPages);
       } catch {
         if (!cancelled) setError(true);
       } finally {
@@ -165,23 +204,40 @@ export function PdfViewer({
     return () => {
       cancelled = true;
       pdfDocRef.current = null;
+      pageDimsRef.current = new Map();
       viewportByPageRef.current.clear();
-      pagesRenderedRef.current = false;
     };
-  }, [url, pageWidth]);
+  }, [url]);
 
+  // Derive display sizes from the cached intrinsic dimensions whenever the width
+  // changes. Cheap, synchronous, and keeps each page's aspect ratio fixed so there
+  // is no layout shift while pages re-render.
+  useEffect(() => {
+    if (!numPages || pageWidth <= 0) return;
+    const dims = pageDimsRef.current;
+    const next: PageState[] = [];
+    for (let i = 1; i <= numPages; i++) {
+      const dim = dims.get(i);
+      if (!dim) continue;
+      const height = dim.width > 0 ? (pageWidth * dim.height) / dim.width : pageWidth;
+      next.push({ pageNumber: i, width: pageWidth, height });
+    }
+    setPages(next);
+  }, [numPages, pageWidth]);
+
+  // Rasterize each page + its text layer. Depends only on `pages` (which already
+  // changes when the width changes), so it runs exactly once per layout change.
   useEffect(() => {
     if (!pages.length || !pdfDocRef.current || !pdfjsRef.current) return;
 
     let cancelled = false;
-    pagesRenderedRef.current = false;
 
     void (async () => {
       const doc = pdfDocRef.current;
       const pdfjs = pdfjsRef.current;
       if (!doc || !pdfjs) return;
 
-      for (const { pageNumber } of pages) {
+      for (const { pageNumber, width } of pages) {
         if (cancelled) return;
         const pageEl = pageRefs.current.get(pageNumber);
         if (!pageEl) continue;
@@ -191,13 +247,14 @@ export function PdfViewer({
         if (!canvas || !textLayer) continue;
 
         const page = await doc.getPage(pageNumber);
-        const viewport = page.getViewport({ scale: 1 });
-        const scale = pageWidth / viewport.width;
+        if (cancelled) return;
+        const baseViewport = page.getViewport({ scale: 1 });
+        const scale = baseViewport.width > 0 ? width / baseViewport.width : 1;
         const scaledViewport = page.getViewport({ scale });
         viewportByPageRef.current.set(pageNumber, scaledViewport);
 
-        canvas.width = scaledViewport.width;
-        canvas.height = scaledViewport.height;
+        if (canvas.width !== scaledViewport.width) canvas.width = scaledViewport.width;
+        if (canvas.height !== scaledViewport.height) canvas.height = scaledViewport.height;
         const ctx = canvas.getContext('2d');
         if (!ctx) continue;
 
@@ -206,15 +263,12 @@ export function PdfViewer({
 
         await renderTextLayer(pdfjs, page, textLayer, scaledViewport);
       }
-
-      if (!cancelled) pagesRenderedRef.current = true;
     })();
 
     return () => {
       cancelled = true;
-      pagesRenderedRef.current = false;
     };
-  }, [pages, pageWidth]);
+  }, [pages]);
 
   const finishAreaSelection = useCallback(
     async (dragStart: { x: number; y: number; pageNumber: number }, rect: Rect) => {
@@ -343,6 +397,8 @@ export function PdfViewer({
     };
   }, [isDragging, finishAreaSelection]);
 
+  const showLoading = !error && (loading || pages.length === 0);
+
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex shrink-0 items-center border-b bg-muted/40 px-3 py-1.5">
@@ -353,11 +409,10 @@ export function PdfViewer({
         ref={containerRef}
         className="relative min-h-0 flex-1 cursor-crosshair overflow-y-auto overscroll-contain px-1 py-2"
       >
-        {loading && <p className="p-4 text-sm text-muted-foreground">{t('pdfLoading')}</p>}
+        {showLoading && <p className="p-4 text-sm text-muted-foreground">{t('pdfLoading')}</p>}
         {error && <p className="p-4 text-sm text-destructive">{t('pdfLoadError')}</p>}
-        {!loading &&
-          !error &&
-          pages.map(({ pageNumber, height }) => (
+        {!error &&
+          pages.map(({ pageNumber, width, height }) => (
             <div
               key={pageNumber}
               ref={(el) => {
@@ -365,7 +420,7 @@ export function PdfViewer({
                 else pageRefs.current.delete(pageNumber);
               }}
               className="pdf-page relative mx-auto mb-3 bg-white shadow-sm"
-              style={{ width: pageWidth, height }}
+              style={{ width, height }}
             >
               <div
                 className={cn(
