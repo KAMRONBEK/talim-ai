@@ -146,3 +146,22 @@
 nextjs-portal {
   display: none !important;
 }
+
+/* Slide-deck staggered element entrance (capped so late items don't lag). */
+@layer utilities {
+  .deck-stagger {
+    animation-delay: calc(min(var(--i, 0), 6) * 60ms);
+  }
+}
+
+/* Respect reduced-motion globally: collapse slide animations to their end state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

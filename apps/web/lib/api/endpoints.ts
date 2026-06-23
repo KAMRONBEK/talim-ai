@@ -52,6 +52,8 @@ export const contentEndpoints = {
   learningHistory: (contentId: string) => `/content/${contentId}/learning-history`,
   transcript: (contentId: string) => `/content/${contentId}/transcript`,
   video: (contentId: string) => `/content/${contentId}/video`,
+  slides: (contentId: string, isTenantOwner = false) =>
+    `${isTenantOwner ? '/tenant/content' : '/content'}/${contentId}/slides`,
 } as const;
 
 export const assessmentEndpoints = {

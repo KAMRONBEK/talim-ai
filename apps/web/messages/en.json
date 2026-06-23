@@ -95,6 +95,7 @@
     "quickQuiz": "Quick check",
     "listen": "Listen",
     "askTutor": "Ask AI tutor",
+    "slides": "Slides",
     "creating": "Creating...",
     "processing": "Processing material",
     "processingDesc": "Status: {status}. The page will refresh when ready.",
@@ -419,6 +420,17 @@
       "cta": "Go to Settings",
       "dismiss": "Dismiss"
     }
+  },
+  "slides": {
+    "subtitle": "AI-generated slides from this material",
+    "generate": "Generate slides",
+    "regenerate": "Regenerate",
+    "generating": "Designing your slides…",
+    "generatingHint": "Our AI is turning this material into a presentation. This takes a moment.",
+    "emptyTitle": "Turn this material into slides",
+    "emptyBody": "Generate a clean, visual slide deck from this content — perfect for studying or teaching.",
+    "notAvailableLearner": "Your tutor hasn't created slides for this material yet.",
+    "error": "Couldn't generate slides. Please try again."
   },
   "landing": {
     "nav": {

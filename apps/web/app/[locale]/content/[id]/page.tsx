@@ -205,10 +205,9 @@ function ContentDetailInner({ id }: { id: string }) {
             <Button
               variant="outline"
               className="w-full touch-manipulation sm:w-auto"
-              disabled
-              title={tCommon('videoComingSoon')}
+              onClick={() => router.push(`/content/${id}/slides`)}
             >
-              🎬 {tCommon('videoComingSoon')}
+              🎞️ {t('slides')}
             </Button>
             {!isLearner && (
               <Button

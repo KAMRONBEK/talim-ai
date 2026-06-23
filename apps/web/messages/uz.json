@@ -95,6 +95,7 @@
     "quickQuiz": "Tez savol",
     "listen": "Tinglang",
     "askTutor": "AI o'qituvchidan so'rang",
+    "slides": "Slaydlar",
     "creating": "Yaratilmoqda...",
     "processing": "Material qayta ishlanmoqda",
     "processingDesc": "Holat: {status}. Tayyor bo'lganda sahifa avtomatik yangilanadi.",
@@ -419,6 +420,17 @@
       "cta": "Sozlamalarga o'tish",
       "dismiss": "Yopish"
     }
+  },
+  "slides": {
+    "subtitle": "Ushbu material asosida AI yaratgan slaydlar",
+    "generate": "Slayd yaratish",
+    "regenerate": "Qayta yaratish",
+    "generating": "Slaydlaringiz tayyorlanmoqda…",
+    "generatingHint": "AI ushbu materialni taqdimotga aylantirmoqda. Bu biroz vaqt oladi.",
+    "emptyTitle": "Materialni slaydlarga aylantiring",
+    "emptyBody": "Ushbu materialdan ko‘rgazmali slaydlar to‘plamini yarating — o‘qish va dars berish uchun qulay.",
+    "notAvailableLearner": "O‘qituvchingiz hali bu material uchun slayd yaratmagan.",
+    "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring."
   },
   "landing": {
     "nav": {
