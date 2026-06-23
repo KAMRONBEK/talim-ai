@@ -116,8 +116,25 @@ export default function UsersPage() {
                       variant="outline"
                       size="sm"
                       disabled={deleteUser.isPending}
-                      onClick={() => {
-                        if (confirm(`Delete ${user.email}?`)) deleteUser.mutate(user.id);
+                      onClick={async () => {
+                        if (!confirm(`Delete ${user.email}?`)) return;
+                        try {
+                          await deleteUser.mutateAsync({ id: user.id });
+                        } catch (err) {
+                          const res = (err as { response?: { status?: number; data?: { message?: string } } })
+                            ?.response;
+                          if (res?.status === 409) {
+                            if (
+                              confirm(
+                                `${res.data?.message ?? 'This will destroy the organization.'}\n\nProceed anyway?`,
+                              )
+                            ) {
+                              await deleteUser.mutateAsync({ id: user.id, confirmCascade: true });
+                            }
+                          } else {
+                            alert(res?.data?.message ?? 'Failed to delete user');
+                          }
+                        }
                       }}
                     >
                       Delete

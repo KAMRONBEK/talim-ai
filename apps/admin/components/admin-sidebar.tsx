@@ -9,7 +9,9 @@ import {
   FileText,
   LayoutDashboard,
   LogOut,
+  ScrollText,
   Sparkles,
+  UserPlus,
   Users,
   Wallet,
 } from 'lucide-react';
@@ -19,12 +21,14 @@ import { useRouter } from 'next/navigation';
 
 const navItems = [
   { href: '/dashboard', label: 'Statistics', icon: LayoutDashboard },
+  { href: '/tutor-requests', label: 'Tutor requests', icon: UserPlus },
   { href: '/users', label: 'Users', icon: Users },
   { href: '/tenants', label: 'Tenants', icon: Building2 },
   { href: '/content', label: 'Content', icon: FileText },
   { href: '/generated', label: 'Generated media', icon: Sparkles },
   { href: '/subscriptions', label: 'Subscriptions', icon: CreditCard },
   { href: '/usage', label: 'Usage & costs', icon: Wallet },
+  { href: '/audit', label: 'Audit log', icon: ScrollText },
 ];
 
 export function AdminSidebar() {

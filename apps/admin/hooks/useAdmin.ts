@@ -8,7 +8,9 @@ import type {
   AdminSubscriptionListItem,
   AdminTenantDetail,
   AdminTenantListItem,
+  AdminAuditLogItem,
   AdminTenantUsageVsLimits,
+  AdminTutorRequest,
   AdminUpdateSubscriptionInput,
   AdminUsageSummaryRow,
   AdminUsageVsLimits,
@@ -217,10 +219,16 @@ export function useResetUserPassword() {
 export function useDeleteUser() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (id: string) => {
-      await api.delete(`/admin/users/${id}`);
+    mutationFn: async ({ id, confirmCascade }: { id: string; confirmCascade?: boolean }) => {
+      await api.delete(
+        `/admin/users/${id}`,
+        confirmCascade ? { data: { confirmCascade: true } } : undefined,
+      );
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'users'] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['admin', 'users'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'tenants'] });
+    },
   });
 }
 
@@ -241,5 +249,57 @@ export function useRetryContent() {
       await api.post(`/admin/contents/${id}/retry-job`);
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'contents'] }),
+  });
+}
+
+export function useAdminAuditLogs(params: { page?: number; action?: string; targetType?: string }) {
+  return useQuery({
+    queryKey: ['admin', 'audit-logs', params],
+    queryFn: async () => {
+      const { data } = await api.get<PaginatedResponse<AdminAuditLogItem>>('/admin/audit-logs', {
+        params,
+      });
+      return data;
+    },
+  });
+}
+
+export function useAdminTutorRequests(params: { status?: string; page?: number }) {
+  return useQuery({
+    queryKey: ['admin', 'tutor-requests', params],
+    queryFn: async () => {
+      const { data } = await api.get<PaginatedResponse<AdminTutorRequest>>('/admin/tutor-requests', {
+        params,
+      });
+      return data;
+    },
+  });
+}
+
+export function useApproveTutorRequest() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, seatLimit }: { id: string; seatLimit?: number | null }) => {
+      const { data } = await api.post(
+        `/admin/tutor-requests/${id}/approve`,
+        seatLimit != null ? { seatLimit } : {},
+      );
+      return data;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['admin', 'tutor-requests'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'users'] });
+      qc.invalidateQueries({ queryKey: ['admin', 'tenants'] });
+    },
+  });
+}
+
+export function useRejectTutorRequest() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, note }: { id: string; note?: string }) => {
+      await api.post(`/admin/tutor-requests/${id}/reject`, note ? { note } : {});
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'tutor-requests'] }),
   });
 }

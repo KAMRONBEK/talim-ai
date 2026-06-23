@@ -23,6 +23,8 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
   const [planCode, setPlanCode] = useState<PlanCode | ''>('');
   const [status, setStatus] = useState<SubscriptionStatus | ''>('');
   const [periodEnd, setPeriodEnd] = useState('');
+  // null = untouched (show stored value); '' = explicitly cleared (use plan default).
+  const [seatLimit, setSeatLimit] = useState<string | null>(null);
 
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading organization…</p>;
@@ -133,6 +135,21 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
               />
             </div>
           </div>
+          <div className="space-y-1 sm:max-w-xs">
+            <Label htmlFor="seatLimit">Seat limit (students)</Label>
+            <Input
+              id="seatLimit"
+              type="number"
+              min={0}
+              value={seatLimit === null ? (tenant.seatLimit?.toString() ?? '') : seatLimit}
+              placeholder="Plan default"
+              onChange={(e) => setSeatLimit(e.target.value)}
+            />
+            <p className="text-xs text-muted-foreground">
+              Custom student cap for this organization. Leave blank to use the plan default
+              {usageVsLimits ? ` (currently ${usageVsLimits.students.limit ?? '∞'})` : ''}.
+            </p>
+          </div>
           <Button
             disabled={updateTenant.isPending}
             onClick={() => {
@@ -141,6 +158,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
                 planCode?: PlanCode;
                 status?: SubscriptionStatus;
                 currentPeriodEnd?: string | null;
+                seatLimit?: number | null;
               } = {};
               if (name && name !== tenant.name) body.name = name;
               if (!subscription || (planCode && planCode !== subscription.planCode)) {
@@ -152,6 +170,10 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
               const storedEnd = subscription?.currentPeriodEnd?.slice(0, 10) ?? '';
               if (periodEnd !== storedEnd) {
                 body.currentPeriodEnd = periodEnd ? new Date(periodEnd).toISOString() : null;
+              }
+              if (seatLimit !== null) {
+                const parsed = seatLimit.trim() === '' ? null : Number(seatLimit);
+                if (parsed !== (tenant.seatLimit ?? null)) body.seatLimit = parsed;
               }
               if (Object.keys(body).length === 0) return;
               updateTenant.mutate({ tenantId: id, ...body });
