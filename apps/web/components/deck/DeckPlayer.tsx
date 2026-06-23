@@ -17,9 +17,28 @@ interface FullscreenDoc extends Document {
   webkitFullscreenElement?: Element | null;
 }
 
-export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?: boolean }) {
+export function DeckPlayer({
+  deck,
+  autoFocus = false,
+  initialIndex,
+  onPastEnd,
+  onBeforeStart,
+}: {
+  deck: Deck;
+  autoFocus?: boolean;
+  /** Where to open: a slide index, or 'last' (used when arriving from the next deck via "prev"). */
+  initialIndex?: number | 'last';
+  /** Called when "next" is pressed on the last slide (e.g. advance to the next section). */
+  onPastEnd?: () => void;
+  /** Called when "prev" is pressed on the first slide (e.g. go back to the previous section). */
+  onBeforeStart?: () => void;
+}) {
   const total = deck.slides.length;
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => {
+    if (initialIndex === 'last') return Math.max(0, total - 1);
+    if (typeof initialIndex === 'number') return Math.max(0, Math.min(initialIndex, total - 1));
+    return 0;
+  });
   const [dir, setDir] = useState<'next' | 'prev'>('next');
   const [fullscreen, setFullscreen] = useState(false);
   const [scale, setScale] = useState(0);
@@ -36,8 +55,16 @@ export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?
     },
     [total],
   );
-  const next = useCallback(() => goTo(index + 1, 'next'), [goTo, index]);
-  const prev = useCallback(() => goTo(index - 1, 'prev'), [goTo, index]);
+  const atStart = index === 0;
+  const atEnd = index === total - 1;
+  const next = useCallback(() => {
+    if (index < total - 1) goTo(index + 1, 'next');
+    else onPastEnd?.();
+  }, [goTo, index, total, onPastEnd]);
+  const prev = useCallback(() => {
+    if (index > 0) goTo(index - 1, 'prev');
+    else onBeforeStart?.();
+  }, [goTo, index, onBeforeStart]);
 
   // Standalone presentation focuses itself so keyboard nav works without a click.
   useEffect(() => {
@@ -165,7 +192,7 @@ export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?
           aria-hidden
           tabIndex={-1}
           onClick={prev}
-          disabled={index === 0}
+          disabled={atStart && !onBeforeStart}
           className="absolute inset-y-0 left-0 w-[18%] cursor-w-resize disabled:cursor-default"
         />
         <button
@@ -173,7 +200,7 @@ export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?
           aria-hidden
           tabIndex={-1}
           onClick={next}
-          disabled={index === total - 1}
+          disabled={atEnd && !onPastEnd}
           className="absolute inset-y-0 right-0 w-[18%] cursor-e-resize disabled:cursor-default"
         />
       </div>
@@ -193,7 +220,7 @@ export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?
           <button
             type="button"
             onClick={prev}
-            disabled={index === 0}
+            disabled={atStart && !onBeforeStart}
             aria-label="Previous slide"
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
           >
@@ -205,7 +232,7 @@ export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?
           <button
             type="button"
             onClick={next}
-            disabled={index === total - 1}
+            disabled={atEnd && !onPastEnd}
             aria-label="Next slide"
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
           >

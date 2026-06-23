@@ -147,16 +147,24 @@ function ContentDetailInner({ id }: { id: string }) {
           )}
 
           <div className="mt-8 max-w-5xl">
-            {sectionLoading ? (
-              <p className="text-muted-foreground">{t('sectionLoading')}</p>
-            ) : (
-              <SectionReader
-                contentId={id}
-                sectionId={activeSectionId}
-                body={sectionData?.body}
-                isLearner={isLearner}
-              />
-            )}
+            <SectionReader
+              contentId={id}
+              sectionId={activeSectionId}
+              body={sectionData?.body}
+              isLearner={isLearner}
+              sectionLoading={sectionLoading}
+              entryEdge={searchParams.get('at') === 'end' ? 'end' : 'start'}
+              onAdvance={
+                activeIndex >= 0 && activeIndex < sections.length - 1
+                  ? () => router.push(`/content/${id}?section=${sections[activeIndex + 1]!.id}`)
+                  : undefined
+              }
+              onRetreat={
+                activeIndex > 0
+                  ? () => router.push(`/content/${id}?section=${sections[activeIndex - 1]!.id}&at=end`)
+                  : undefined
+              }
+            />
 
             {summary && (
               <div className="od-info-box mt-8 max-w-3xl">
