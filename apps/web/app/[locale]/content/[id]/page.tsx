@@ -23,6 +23,7 @@ import { ContentRightPanel, ContentRightPanelSheet } from '@/components/layout/c
 import { ContentStatusGate } from '@/components/content/content-status-gate';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
 import { SummaryText } from '@/components/learning/summary-text';
+import { SectionReader } from '@/components/learning/section-reader';
 
 function ContentPageLoading() {
   const t = useTranslations('common');
@@ -145,17 +146,20 @@ function ContentDetailInner({ id }: { id: string }) {
             <p className="mt-3 text-sm text-muted-foreground">{sectionProgress.aiFeedback}</p>
           )}
 
-          <div className="mt-8 max-w-3xl">
+          <div className="mt-8 max-w-5xl">
             {sectionLoading ? (
               <p className="text-muted-foreground">{t('sectionLoading')}</p>
             ) : (
-              <article className="prose prose-sm max-w-none whitespace-pre-wrap text-[15px] leading-relaxed text-foreground">
-                {sectionData?.body ?? t('selectSection')}
-              </article>
+              <SectionReader
+                contentId={id}
+                sectionId={activeSectionId}
+                body={sectionData?.body}
+                isLearner={isLearner}
+              />
             )}
 
             {summary && (
-              <div className="od-info-box mt-8">
+              <div className="od-info-box mt-8 max-w-3xl">
                 <div className="od-info-box-title">💡 {t('keyConcept')}</div>
                 <SummaryText text={summary} />
               </div>

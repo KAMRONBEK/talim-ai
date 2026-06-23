@@ -96,6 +96,8 @@
     "listen": "Listen",
     "askTutor": "Ask AI tutor",
     "slides": "Slides",
+    "viewSlides": "Slides",
+    "viewText": "Text",
     "creating": "Creating...",
     "processing": "Processing material",
     "processingDesc": "Status: {status}. The page will refresh when ready.",

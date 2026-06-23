@@ -96,6 +96,8 @@
     "listen": "Tinglang",
     "askTutor": "AI o'qituvchidan so'rang",
     "slides": "Slaydlar",
+    "viewSlides": "Slaydlar",
+    "viewText": "Matn",
     "creating": "Yaratilmoqda...",
     "processing": "Material qayta ishlanmoqda",
     "processingDesc": "Holat: {status}. Tayyor bo'lganda sahifa avtomatik yangilanadi.",

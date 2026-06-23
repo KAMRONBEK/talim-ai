@@ -17,7 +17,7 @@ interface FullscreenDoc extends Document {
   webkitFullscreenElement?: Element | null;
 }
 
-export function DeckPlayer({ deck }: { deck: Deck }) {
+export function DeckPlayer({ deck, autoFocus = false }: { deck: Deck; autoFocus?: boolean }) {
   const total = deck.slides.length;
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState<'next' | 'prev'>('next');
@@ -38,6 +38,11 @@ export function DeckPlayer({ deck }: { deck: Deck }) {
   );
   const next = useCallback(() => goTo(index + 1, 'next'), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1, 'prev'), [goTo, index]);
+
+  // Standalone presentation focuses itself so keyboard nav works without a click.
+  useEffect(() => {
+    if (autoFocus) rootRef.current?.focus();
+  }, [autoFocus]);
 
   // Scale the fixed 1280×720 canvas to fit the stage; measure before paint.
   useLayoutEffect(() => {
@@ -64,6 +69,10 @@ export function DeckPlayer({ deck }: { deck: Deck }) {
       ) {
         return;
       }
+      // Only capture keys when the deck is focused or fullscreen, so an embedded
+      // deck never steals arrow/space scrolling from the surrounding page.
+      const root = rootRef.current;
+      if (root && document.fullscreenElement !== root && !root.contains(target)) return;
       switch (e.key) {
         case 'ArrowRight':
         case 'PageDown':
@@ -121,7 +130,8 @@ export function DeckPlayer({ deck }: { deck: Deck }) {
   return (
     <div
       ref={rootRef}
-      className="relative flex h-full w-full flex-col bg-zinc-100 dark:bg-zinc-950"
+      tabIndex={0}
+      className="relative flex h-full w-full flex-col bg-zinc-100 outline-none dark:bg-zinc-950"
       role="region"
       aria-roledescription="carousel"
       aria-label={deck.title}

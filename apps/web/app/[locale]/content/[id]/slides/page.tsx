@@ -47,7 +47,7 @@ function SlidesInner({ id }: { id: string }) {
 
       <div className="relative flex min-h-0 flex-1 flex-col">
         {deck ? (
-          <DeckPlayer deck={deck} />
+          <DeckPlayer deck={deck} autoFocus />
         ) : generating ? (
           <GeneratingState message={t('generating')} hint={t('generatingHint')} />
         ) : isLoading ? (
