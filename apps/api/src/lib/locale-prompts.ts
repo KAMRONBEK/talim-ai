@@ -3,6 +3,15 @@ import type { AppLocale } from '@talim/types';
 import { getQuestionCount } from './quiz-prompt.js';
 import { sanitizeSummaryOutput as sanitizeUz } from './summary-prompt.js';
 
+// Talim's audience is Uzbek teachers/students; Uzbek is the primary platform
+// language, Russian the strong secondary. Appended to every generation system
+// prompt so output reads as a native speaker wrote it, not machine-translated.
+const LANGUAGE_QUALITY: Record<AppLocale, string> = {
+  uz: "\n\nTil sifati (muhim): tabiiy, savodli o'zbek tilida — ona tilida so'zlashuvchi o'qituvchidek yozing, tarjima qilingandek g'aliz iboralar ishlatmang. Standart o'zbekcha (lotin yozuvi) atamalardan foydalaning.",
+  ru: '\n\nКачество языка (важно): пишите естественным, грамотным русским языком, как преподаватель-носитель — без калькированных, «переведённых» оборотов. Используйте стандартную терминологию.',
+  en: '',
+};
+
 const PODCAST_PROMPTS: Record<AppLocale, string> = {
   uz: `Siz o'quv materiallaridan podcast matni yozadigan o'qituvchisiz.
 
@@ -238,7 +247,7 @@ const SUMMARY_PREFIX_PATTERNS_RU = [
 ];
 
 export function getPodcastSystemPrompt(locale: AppLocale): string {
-  return PODCAST_PROMPTS[locale];
+  return PODCAST_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
 export function buildPodcastUserPrompt(locale: AppLocale, title: string, context: string): string {
@@ -246,7 +255,7 @@ export function buildPodcastUserPrompt(locale: AppLocale, title: string, context
 }
 
 export function getSummarySystemPrompt(locale: AppLocale): string {
-  return SUMMARY_PROMPTS[locale];
+  return SUMMARY_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
 export function buildSummaryUserPrompt(locale: AppLocale, title: string, context: string): string {
@@ -263,7 +272,7 @@ export function sanitizeSummaryOutput(locale: AppLocale, text: string): string {
 }
 
 export function getQuizSystemPrompt(locale: AppLocale): string {
-  return QUIZ_PROMPTS[locale];
+  return QUIZ_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
 export function buildQuizUserPrompt(
@@ -289,7 +298,7 @@ Return JSON: { "questions": [{ "question": "...", "options": ["A","B","C","D"], 
 }
 
 export function getTutorSystemPrompt(locale: AppLocale): string {
-  return TUTOR_PROMPTS[locale];
+  return TUTOR_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
 const RAG_CHUNK_LABEL: Record<AppLocale, string> = {
