@@ -253,6 +253,7 @@ model Content {
   sections         ContentSection[]
   podcasts         Podcast[]
   contentVideos    ContentVideo[]
+  slideDecks       ContentSlideDeck[]
   transcriptSegments ContentTranscriptSegment[]
   contentProgress  ContentProgress[]
   contentSummaries ContentSummary[]
@@ -642,6 +643,24 @@ model ContentVideo {
   script      String?
   storagePath String?
   durationSec Int?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  content     Content              @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([contentId, locale, scopeKey])
+  @@index([contentId])
+}
+
+model ContentSlideDeck {
+  id          String               @id @default(cuid())
+  contentId   String
+  locale      String               @default("uz")
+  scopeKey    String
+  sectionId   String?
+  status      GeneratedMediaStatus @default(PENDING)
+  audience    String               @default("students")
+  accent      String               @default("teal")
+  deck        Json?
   createdAt   DateTime             @default(now())
   updatedAt   DateTime             @updatedAt
   content     Content              @relation(fields: [contentId], references: [id], onDelete: Cascade)

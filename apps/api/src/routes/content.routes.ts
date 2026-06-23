@@ -13,6 +13,7 @@ import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as progressController from '../controllers/progress.controller.js';
 import * as videoController from '../controllers/video.controller.js';
+import * as slidesController from '../controllers/slides.controller.js';
 
 export const contentRoutes = Router();
 
@@ -32,6 +33,8 @@ contentRoutes.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 contentRoutes.post('/:id/podcast', asyncHandler(podcastController.createPodcast));
 contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
 contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
+contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
+contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
 contentRoutes.patch(
   '/:id/podcast/episodes/:episodeId/progress',
   asyncHandler(progressController.patchEpisodeProgress),

@@ -14,6 +14,7 @@ import * as assessmentController from '../controllers/assessment.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as videoController from '../controllers/video.controller.js';
+import * as slidesController from '../controllers/slides.controller.js';
 
 export const tenantRoutes = Router();
 
@@ -92,5 +93,7 @@ tenantContent.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 tenantContent.post('/:id/podcast', enforceQuota('GENERATION'), asyncHandler(podcastController.createPodcast));
 tenantContent.get('/:id/video', asyncHandler(videoController.getVideo));
 tenantContent.post('/:id/video', enforceQuota('GENERATION'), asyncHandler(videoController.createVideo));
+tenantContent.get('/:id/slides', asyncHandler(slidesController.getSlides));
+tenantContent.post('/:id/slides', asyncHandler(slidesController.createSlides));
 
 tenantRoutes.use('/content', tenantContent);
