@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "talim-vps": {
+      "command": "bash",
+      "args": ["scripts/cursor-talim-vps-mcp.sh"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
+    }
+  }
+}
