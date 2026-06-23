@@ -34,7 +34,7 @@
     --border: 214 20% 90%;
     --input: 214 20% 90%;
     --ring: 168 55% 40%;
-    --radius: 0.625rem;
+    --radius: 0.75rem;
     --topbar-height: 3.5rem;
     --sidebar-width: 16rem;
   }
@@ -75,6 +75,31 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  /* Display-weight headings for the modern/polished look (Inter at tight tracking). */
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Brand gradient text (teal → violet). */
+  .text-gradient-brand {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+
+  /* Interactive card lift on hover. */
+  .hover-lift {
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-elevated;
+  }
+
+  /* Subtle dotted texture for hero / section backgrounds. */
+  .bg-dots {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
   }
 }
 
