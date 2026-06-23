@@ -23,13 +23,13 @@ export function Hero() {
           </span>
           <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
             {t('hero.titleLead')}{' '}
-            <em className="text-primary not-italic">{t('hero.titleEmphasis')}</em>
+            <em className="text-gradient-brand not-italic">{t('hero.titleEmphasis')}</em>
           </h1>
           <p className="mt-6 max-w-lg text-lg text-muted-foreground">{t('hero.subtitle')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/register"
-              className="inline-flex items-center rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+              className="inline-flex items-center rounded-xl bg-gradient-brand px-6 py-3.5 text-base font-semibold text-white shadow-glow transition-all hover:-translate-y-0.5 hover:opacity-95"
             >
               {t('hero.primaryCta')}
             </Link>

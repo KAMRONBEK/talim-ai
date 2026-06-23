@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { BookOpen, TrendingUp, Users } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useTenantContents } from '@/hooks/useTenantContent';
@@ -61,17 +62,43 @@ export default function TenantDashboardPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Link href="/tenant/materials" className="rounded-xl border bg-card p-4 transition-colors hover:bg-secondary/40">
-          <p className="text-sm text-muted-foreground">{t('stats.materials')}</p>
-          <p className="text-2xl font-semibold">{contents?.length ?? 0}</p>
+        <Link
+          href="/tenant/materials"
+          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+        >
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">{t('stats.materials')}</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <BookOpen className="h-[18px] w-[18px]" />
+            </span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">{contents?.length ?? 0}</p>
         </Link>
-        <Link href="/tenant/students" className="rounded-xl border bg-card p-4 transition-colors hover:bg-secondary/40">
-          <p className="text-sm text-muted-foreground">{t('stats.students')}</p>
-          <p className="text-2xl font-semibold">{students?.filter((s) => s.active).length ?? 0}</p>
+        <Link
+          href="/tenant/students"
+          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+        >
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">{t('stats.students')}</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--accent-secondary))]/10 text-[hsl(var(--accent-secondary))]">
+              <Users className="h-[18px] w-[18px]" />
+            </span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">
+            {students?.filter((s) => s.active).length ?? 0}
+          </p>
         </Link>
-        <Link href="/tenant/progress" className="rounded-xl border bg-card p-4 transition-colors hover:bg-secondary/40">
-          <p className="text-sm text-muted-foreground">{t('nav.progress')}</p>
-          <p className="text-2xl font-semibold">
+        <Link
+          href="/tenant/progress"
+          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+        >
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">{t('nav.progress')}</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-success">
+              <TrendingUp className="h-[18px] w-[18px]" />
+            </span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">
             {students?.filter((s) => s.lastActivityAt).length ?? 0}
           </p>
         </Link>

@@ -65,18 +65,21 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center bg-background p-4">
-      <div className="absolute right-4 top-4 flex items-center gap-2">
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background p-4">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-dots opacity-70" />
+      <div aria-hidden className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-24 h-96 w-96 rounded-full bg-[hsl(var(--accent-secondary))]/20 blur-3xl" />
+      <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
         <LanguageSwitcher compact />
         <ThemeToggle compact />
       </div>
-      <Link href="/" className="mb-8 flex items-center gap-2 text-xl font-bold">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+      <Link href="/" className="relative z-10 mb-8 flex items-center gap-2.5 text-xl font-bold">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand text-lg font-bold text-white shadow-glow">
           T
         </span>
         Talim AI
       </Link>
-      <Card className="w-full max-w-md border shadow-lg">
+      <Card className="relative z-10 w-full max-w-md animate-scale-in shadow-elevated">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold">{t('createAccount')}</h1>
@@ -120,7 +123,7 @@ export default function RegisterPage() {
               <p className="text-xs text-muted-foreground">{t('classCodeHint')}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" variant="gradient" className="w-full" disabled={loading}>
               {loading ? t('registering') : t('register')}
             </Button>
           </form>

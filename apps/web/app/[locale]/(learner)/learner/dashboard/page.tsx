@@ -52,17 +52,28 @@ export default function LearnerDashboardPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border bg-card p-4">
-          <p className="text-sm text-muted-foreground">Assigned</p>
-          <p className="text-2xl font-semibold">{summary?.assignedCount ?? assigned.length}</p>
+        <div className="rounded-2xl border bg-card p-5 shadow-soft">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">Assigned</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-lg">📚</span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">
+            {summary?.assignedCount ?? assigned.length}
+          </p>
         </div>
-        <div className="rounded-xl border bg-card p-4">
-          <p className="text-sm text-muted-foreground">Streak</p>
-          <p className="text-2xl font-semibold">{summary?.streakDays ?? 0} days</p>
+        <div className="rounded-2xl border bg-card p-5 shadow-soft">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">Streak</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-warning/10 text-lg">🔥</span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">{summary?.streakDays ?? 0} days</p>
         </div>
-        <div className="rounded-xl border bg-card p-4">
-          <p className="text-sm text-muted-foreground">Avg quiz</p>
-          <p className="text-2xl font-semibold">
+        <div className="rounded-2xl border bg-card p-5 shadow-soft">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">Avg quiz</p>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-lg">🎯</span>
+          </div>
+          <p className="mt-3 text-3xl font-bold tracking-tight">
             {summary?.avgQuizScore != null ? `${Math.round(summary.avgQuizScore)}%` : '—'}
           </p>
         </div>
