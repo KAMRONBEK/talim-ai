@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { FileText, RefreshCw, Sparkles, Wand2 } from 'lucide-react';
+import { FileText, Lock, RefreshCw, Sparkles, Wand2 } from 'lucide-react';
 import { cn } from '@talim/ui';
 import { useSlides, useGenerateSlides } from '@/hooks/useSlides';
+import { classifyGenerationError } from '@/lib/generation-error';
 import { DeckPlayer } from '@/components/deck/DeckPlayer';
 
 type Mode = 'slides' | 'text';
@@ -45,13 +46,27 @@ export function SectionReader({
   const attempted = useRef<Set<string>>(new Set());
   const generateRef = useRef(generate);
   generateRef.current = generate;
+  // Once a plan/quota limit is hit, stop auto-generating for other sections too,
+  // and remember the message so it persists when the per-section mutation resets.
+  const limitBlocked = useRef(false);
+  const lastLimit = useRef<ReturnType<typeof classifyGenerationError> | null>(null);
 
   const deck = deckRow?.deck ?? null;
   const hasBody = !!body && body.trim().length > 0;
+  const errorInfo = classifyGenerationError(generate.error);
+  if (generate.isError && errorInfo.kind !== 'error') {
+    limitBlocked.current = true;
+    lastLimit.current = errorInfo;
+  }
+  const limited = limitBlocked.current;
+  const limitMessage =
+    lastLimit.current?.kind === 'quota'
+      ? t('limitReached', { used: lastLimit.current.used ?? 0, limit: lastLimit.current.limit ?? 0 })
+      : t('limitReachedGeneric');
 
   // Auto-generate the deck once per section for users who can generate.
   useEffect(() => {
-    if (mode !== 'slides' || !sectionId || isLearner) return;
+    if (mode !== 'slides' || !sectionId || isLearner || limitBlocked.current) return;
     if (deck || isLoading || generateRef.current.isPending || generateRef.current.isError) return;
     if (!hasBody) return;
     if (attempted.current.has(sectionId)) return;
@@ -92,7 +107,7 @@ export function SectionReader({
             {tContent('viewText')}
           </button>
         </div>
-        {mode === 'slides' && deck && !isLearner && (
+        {mode === 'slides' && deck && !isLearner && !limited && (
           <button
             type="button"
             onClick={() => generate.mutate({})}
@@ -121,7 +136,7 @@ export function SectionReader({
         <CenteredCard>
           <p className="text-sm text-muted-foreground">{tContent('sectionLoading')}</p>
         </CenteredCard>
-      ) : generate.isPending || (!isLearner && hasBody && !generate.isError) ? (
+      ) : generate.isPending ? (
         <CenteredCard>
           <div className="relative flex h-14 w-14 items-center justify-center">
             <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
@@ -133,6 +148,22 @@ export function SectionReader({
       ) : isLearner ? (
         // Learner with no tutor-generated deck yet — show the text instead.
         TextView
+      ) : limited ? (
+        // Plan/quota limit reached — explain it; offer the text instead of a futile retry.
+        <CenteredCard>
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600">
+            <Lock className="h-6 w-6" />
+          </div>
+          <p className="max-w-md text-sm text-muted-foreground">{limitMessage}</p>
+          <button
+            type="button"
+            onClick={() => setMode('text')}
+            className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+          >
+            <FileText className="h-4 w-4" />
+            {tContent('viewText')}
+          </button>
+        </CenteredCard>
       ) : generate.isError ? (
         <CenteredCard>
           <p className="text-sm text-destructive">{t('error')}</p>
@@ -147,6 +178,16 @@ export function SectionReader({
           <button type="button" onClick={() => setMode('text')} className="text-sm text-muted-foreground underline">
             {tContent('viewText')}
           </button>
+        </CenteredCard>
+      ) : !isLearner && hasBody ? (
+        // About to auto-generate this section's deck.
+        <CenteredCard>
+          <div className="relative flex h-14 w-14 items-center justify-center">
+            <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
+            <Sparkles className="h-7 w-7 animate-pulse text-primary" />
+          </div>
+          <p className="text-base font-semibold">{t('generating')}</p>
+          <p className="max-w-sm text-sm text-muted-foreground">{t('generatingHint')}</p>
         </CenteredCard>
       ) : (
         // No body to build slides from — fall back to text.

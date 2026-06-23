@@ -20,6 +20,7 @@ import { useSections, useSection } from '@/hooks/useSections';
 import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
 import { useContentActions } from '@/hooks/useContentActions';
 import { useReparseContent } from '@/hooks/useReparseContent';
+import { classifyGenerationError } from '@/lib/generation-error';
 import { ContentRightPanel, ContentRightPanelSheet } from '@/components/layout/content-right-panel';
 import { ContentStatusGate } from '@/components/content/content-status-gate';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
@@ -34,6 +35,7 @@ function ContentPageLoading() {
 function ContentDetailInner({ id }: { id: string }) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
+  const tSlides = useTranslations('slides');
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
   const isLearner = user?.role === 'TENANT_LEARNER';
@@ -246,9 +248,17 @@ function ContentDetailInner({ id }: { id: string }) {
               </Button>
             )}
           </div>
-          {reparse.isError && (
-            <p className="mt-3 max-w-3xl text-sm text-destructive">{t('rereadError')}</p>
-          )}
+          {reparse.isError &&
+            (() => {
+              const info = classifyGenerationError(reparse.error);
+              const msg =
+                info.kind === 'quota'
+                  ? tSlides('limitReached', { used: info.used ?? 0, limit: info.limit ?? 0 })
+                  : info.kind === 'plan'
+                    ? tSlides('limitReachedGeneric')
+                    : t('rereadError');
+              return <p className="mt-3 max-w-3xl text-sm text-destructive">{msg}</p>;
+            })()}
         </div>
       </div>
 

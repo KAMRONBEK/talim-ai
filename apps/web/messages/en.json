@@ -436,7 +436,9 @@
     "emptyTitle": "Turn this material into slides",
     "emptyBody": "Generate a clean, visual slide deck from this content — perfect for studying or teaching.",
     "notAvailableLearner": "Your tutor hasn't created slides for this material yet.",
-    "error": "Couldn't generate slides. Please try again."
+    "error": "Couldn't generate slides. Please try again.",
+    "limitReached": "You've reached your AI generation limit ({used}/{limit} this month). Contact your admin to raise it.",
+    "limitReachedGeneric": "AI generation isn't available on your current plan. Please contact your admin."
   },
   "landing": {
     "nav": {

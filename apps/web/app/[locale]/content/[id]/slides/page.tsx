@@ -7,6 +7,7 @@ import { Button } from '@talim/ui';
 import { Link } from '@/i18n/navigation';
 import { useContent } from '@/hooks/useContent';
 import { useSlides, useGenerateSlides } from '@/hooks/useSlides';
+import { classifyGenerationError } from '@/lib/generation-error';
 import { useAuthStore } from '@/store/useAuthStore';
 import { DeckPlayer } from '@/components/deck/DeckPlayer';
 
@@ -20,6 +21,12 @@ function SlidesInner({ id }: { id: string }) {
 
   const deck = deckRow?.deck ?? null;
   const generating = generate.isPending;
+  const errInfo = classifyGenerationError(generate.error);
+  const isLimit = generate.isError && errInfo.kind !== 'error';
+  const limitMessage =
+    errInfo.kind === 'quota'
+      ? t('limitReached', { used: errInfo.used ?? 0, limit: errInfo.limit ?? 0 })
+      : t('limitReachedGeneric');
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
@@ -54,6 +61,8 @@ function SlidesInner({ id }: { id: string }) {
           <CenteredMessage>{tCommon('loading')}</CenteredMessage>
         ) : isLearner ? (
           <CenteredMessage>{t('notAvailableLearner')}</CenteredMessage>
+        ) : isLimit ? (
+          <CenteredMessage>{limitMessage}</CenteredMessage>
         ) : (
           <EmptyState
             title={t('emptyTitle')}

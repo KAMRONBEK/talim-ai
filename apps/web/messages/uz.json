@@ -436,7 +436,9 @@
     "emptyTitle": "Materialni slaydlarga aylantiring",
     "emptyBody": "Ushbu materialdan ko‘rgazmali slaydlar to‘plamini yarating — o‘qish va dars berish uchun qulay.",
     "notAvailableLearner": "O‘qituvchingiz hali bu material uchun slayd yaratmagan.",
-    "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring."
+    "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring.",
+    "limitReached": "AI yaratish limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun administratoringizga murojaat qiling.",
+    "limitReachedGeneric": "AI yaratish hozircha tarifingizda mavjud emas. Iltimos, administratoringizga murojaat qiling."
   },
   "landing": {
     "nav": {
