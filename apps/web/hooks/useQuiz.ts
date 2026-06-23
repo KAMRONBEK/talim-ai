@@ -1,7 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useLocale } from 'next-intl';
-import type { Quiz, QuizAttempt, QuizKind, QuizWithLatestAttempt, AppLocale } from '@talim/types';
+import type {
+  Quiz,
+  QuizAttempt,
+  QuizKind,
+  QuestionStyle,
+  QuizWithLatestAttempt,
+  AppLocale,
+} from '@talim/types';
 import { api } from '@/lib/api';
 
 export function useQuiz(id: string, pollInterval?: number) {
@@ -59,14 +66,20 @@ export function useCreateQuiz() {
       contentId,
       sectionId,
       kind = 'FULL' as QuizKind,
+      style,
+      count,
     }: {
       contentId: string;
       sectionId: string;
       kind?: QuizKind;
+      style?: QuestionStyle;
+      count?: number;
     }) => {
       const { data } = await api.post<{ quiz: Quiz }>(`/quiz/content/${contentId}`, {
         sectionId,
         kind,
+        ...(style ? { style } : {}),
+        ...(count ? { count } : {}),
         locale,
       });
       return data.quiz;

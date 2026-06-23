@@ -18,6 +18,8 @@ export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
 export type TenantMemberRole = 'OWNER' | 'LEARNER';
 export type QuestionType = 'SHORT_ANSWER' | 'NUMERIC' | 'MULTIPLE_CHOICE';
+
+export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
 export type TenantAssessmentStatus = 'DRAFT' | 'PUBLISHED';
 export type AssessmentAttemptStatus = 'SUBMITTED' | 'GRADED';
@@ -609,8 +611,11 @@ export interface QuizQuestion {
   id: string;
   quizId: string;
   question: string;
-  options: string[];
+  type: QuestionType;
+  /** Present only for MULTIPLE_CHOICE; null for SHORT_ANSWER / NUMERIC. */
+  options: string[] | null;
   correctAnswer: string;
+  acceptableAnswers: string[];
   explanation: string | null;
 }
 
@@ -620,6 +625,8 @@ export interface Quiz {
   userId: string;
   sectionId: string | null;
   kind: QuizKind;
+  style: QuestionStyle;
+  count: number | null;
   locale: AppLocale;
   createdAt: string;
   questions?: QuizQuestion[];

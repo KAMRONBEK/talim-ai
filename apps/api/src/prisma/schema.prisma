@@ -402,6 +402,13 @@ model Quiz {
   userId    String
   sectionId String?
   kind      QuizKind       @default(FULL)
+  // Generation style chosen by the learner (mixed | multipleChoice | trueFalse |
+  // written | numeric). Mirrors the tutor question-bank styles so individuals get
+  // the same range of question types. Kept as a string (not a Prisma enum) to match
+  // the zod questionStyleEnum without a migration whenever a style is added.
+  style     String         @default("mixed")
+  // Requested question count; null means "derive from kind" (QUICK=2, FULL=5).
+  count     Int?
   locale    String         @default("uz")
   createdAt DateTime       @default(now())
   content   Content        @relation(fields: [contentId], references: [id], onDelete: Cascade)
@@ -412,17 +419,24 @@ model Quiz {
 
   @@index([contentId])
   @@index([userId])
-  @@index([contentId, userId, sectionId, kind, locale])
+  @@index([contentId, userId, sectionId, kind, locale, style])
 }
 
 model QuizQuestion {
-  id            String @id @default(cuid())
+  id            String       @id @default(cuid())
   quizId        String
   question      String
-  options       Json
+  type          QuestionType @default(MULTIPLE_CHOICE)
+  // Options are only present for MULTIPLE_CHOICE; null for SHORT_ANSWER / NUMERIC.
+  options       Json?
+  // Legacy single-answer field, still populated (with acceptableAnswers[0]) for
+  // backward compatibility and multiple-choice grading.
   correctAnswer String
+  // Accepted answers for grading all question types. Null on pre-migration rows
+  // (those are multiple-choice and fall back to correctAnswer).
+  acceptableAnswers Json?
   explanation   String?
-  quiz          Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quiz          Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
   @@index([quizId])
 }

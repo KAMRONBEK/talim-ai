@@ -1,4 +1,5 @@
 import type { Response } from 'express';
+import type { QuestionType } from '@prisma/client';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
@@ -10,10 +11,15 @@ import { isSelectedAnswerCorrect, resolveCorrectAnswer } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
+import { questionStyleEnum, jsonStringArray } from '../services/assessment/shared.js';
 
 const createQuizSchema = z.object({
   sectionId: z.string().min(1),
   kind: z.enum(['FULL', 'QUICK']).default('FULL'),
+  // Question-type style, mirroring the tutor question-bank generator.
+  style: questionStyleEnum.default('mixed'),
+  // Optional explicit question count (1–30); null/omitted derives from kind.
+  count: z.number().int().min(1).max(30).optional(),
   locale: z.enum(['uz', 'en', 'ru']).optional(),
 });
 
@@ -27,14 +33,18 @@ function formatQuiz(quiz: {
   userId: string;
   sectionId: string | null;
   kind: 'FULL' | 'QUICK';
+  style: string;
+  count: number | null;
   locale: string;
   createdAt: Date;
   questions?: {
     id: string;
     quizId: string;
     question: string;
+    type: QuestionType;
     options: unknown;
     correctAnswer: string;
+    acceptableAnswers: unknown;
     explanation: string | null;
   }[];
 }) {
@@ -44,14 +54,18 @@ function formatQuiz(quiz: {
     userId: quiz.userId,
     sectionId: quiz.sectionId,
     kind: quiz.kind,
+    style: quiz.style,
+    count: quiz.count,
     locale: quiz.locale,
     createdAt: quiz.createdAt.toISOString(),
     questions: quiz.questions?.map((q) => ({
       id: q.id,
       quizId: q.quizId,
       question: q.question,
-      options: q.options as string[],
+      type: q.type,
+      options: q.options ? (q.options as string[]) : null,
       correctAnswer: q.correctAnswer,
+      acceptableAnswers: jsonStringArray(q.acceptableAnswers),
       explanation: q.explanation,
     })),
   };
@@ -77,12 +91,32 @@ function formatAttempt(attempt: {
 
 type QuizQuestionForEvaluation = {
   id: string;
+  type: QuestionType;
   options: unknown;
   correctAnswer: string;
+  acceptableAnswers: unknown;
 };
 
 function normalizeAnswer(value: string): string {
   return value.trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
+/**
+ * Grade a SHORT_ANSWER or NUMERIC answer against the accepted answers. Mirrors the
+ * tenant-assessment grading: numeric tolerance for NUMERIC, normalized exact match
+ * for SHORT_ANSWER. A blank answer is never correct.
+ */
+function isOpenAnswerCorrect(type: QuestionType, acceptable: string[], answer: string): boolean {
+  if (!answer.trim() || acceptable.length === 0) return false;
+  if (type === 'NUMERIC') {
+    const answerNumber = Number(answer.replace(',', '.'));
+    if (Number.isNaN(answerNumber)) return false;
+    return acceptable.some(
+      (value) => Math.abs(Number(value.replace(',', '.')) - answerNumber) <= 0.001,
+    );
+  }
+  const normalized = normalizeAnswer(answer);
+  return acceptable.some((value) => normalizeAnswer(value) === normalized);
 }
 
 function getSubmittedOptionLabel(value: string): string | null {
@@ -122,12 +156,23 @@ function evaluateQuizAnswers(
   let correct = 0;
 
   for (const question of questions) {
-    const options = Array.isArray(question.options) ? (question.options as string[]) : [];
-    const resolvedCorrectAnswer = resolveCorrectAnswer(options, question.correctAnswer);
-    const selectedAnswer = resolveSubmittedAnswer(options, submittedAnswers[question.id]);
-    answers[question.id] = selectedAnswer;
+    if (question.type === 'MULTIPLE_CHOICE') {
+      const options = Array.isArray(question.options) ? (question.options as string[]) : [];
+      const resolvedCorrectAnswer = resolveCorrectAnswer(options, question.correctAnswer);
+      const selectedAnswer = resolveSubmittedAnswer(options, submittedAnswers[question.id]);
+      answers[question.id] = selectedAnswer;
+      if (isSelectedAnswerCorrect(options, selectedAnswer, resolvedCorrectAnswer)) {
+        correct++;
+      }
+      continue;
+    }
 
-    if (isSelectedAnswerCorrect(options, selectedAnswer, resolvedCorrectAnswer)) {
+    // SHORT_ANSWER / NUMERIC: grade the raw typed answer against acceptable answers.
+    const raw = (submittedAnswers[question.id] ?? '').trim();
+    answers[question.id] = raw;
+    const acceptable = jsonStringArray(question.acceptableAnswers);
+    const accepted = acceptable.length > 0 ? acceptable : question.correctAnswer ? [question.correctAnswer] : [];
+    if (isOpenAnswerCorrect(question.type, accepted, raw)) {
       correct++;
     }
   }
@@ -170,6 +215,8 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
       userId: creatorId,
       sectionId: body.sectionId,
       kind: body.kind,
+      style: body.style,
+      count: body.count ?? null,
       locale,
     },
     include: { questions: true },
@@ -194,6 +241,8 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
         userId: creatorId,
         sectionId: body.sectionId,
         kind: body.kind,
+        style: body.style,
+        count: body.count ?? null,
         locale,
       },
     }));
@@ -204,6 +253,8 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
     quizId: quiz.id,
     sectionId: body.sectionId,
     kind: body.kind,
+    style: body.style,
+    count: body.count,
     locale,
   });
 

@@ -16,6 +16,9 @@ export interface GenerateQuizJobData {
   quizId: string;
   sectionId?: string;
   kind?: 'FULL' | 'QUICK';
+  // Question-type style and resolved question count (mirrors the tutor generator).
+  style?: 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
+  count?: number;
   locale?: string;
 }
 

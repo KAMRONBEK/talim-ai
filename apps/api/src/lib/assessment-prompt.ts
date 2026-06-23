@@ -8,7 +8,7 @@ Qoidalar:
 - Savollar tabiiy, savodli o'zbek tilida, lotin yozuvida bo'lsin (ona tilida so'zlashuvchi o'qituvchidek — tarjima qilingandek emas).
 - Kahoot/Baamboozle kabi qiziqarli, lekin javobini ko'chirish oson bo'lmagan savollar tuzing.
 - Savol turlari:
-  - SHORT_ANSWER: qisqa yozma javob (options: null).
+  - SHORT_ANSWER: qisqa yozma javob (options: null). Javob qisqa so'z, atama yoki raqamli qiymat bo'lsin — formula, tenglama yoki uzun ifoda BO'LMASIN. Agar tabiiy javob formula/hisob natijasi bo'lsa, NUMERIC ishlating.
   - NUMERIC: raqamli javob (options: null).
   - MULTIPLE_CHOICE: 3-4 ta variant. "acceptableAnswers" ichidagi to'g'ri javob AYNAN shu variantlardan biriga (harfma-harf) teng bo'lishi SHART. Aks holda bunday savol tuzmang.
   - To'g'ri/Noto'g'ri savol = MULTIPLE_CHOICE bo'lib, options AYNAN ["To'g'ri", "Noto'g'ri"] bo'lsin va acceptableAnswers shu ikkitadan biriga teng bo'lsin.

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { QuizKind } from '@talim/types';
+import type { QuizKind, QuestionStyle } from '@talim/types';
 import { useRouter } from '@/i18n/navigation';
 import { useRetryContent } from '@/hooks/useContent';
 import { useCreateQuiz, useGenerateSummary, useSavedSummary } from '@/hooks/useQuiz';
@@ -26,12 +26,17 @@ export function useContentActions(id: string, activeSectionId: string | undefine
     if (savedSummary) setSummary(savedSummary);
   }, [savedSummary]);
 
-  const handleCreateQuiz = async (kind: QuizKind) => {
+  const handleCreateQuiz = async (
+    kind: QuizKind,
+    opts?: { style?: QuestionStyle; count?: number },
+  ) => {
     if (!activeSectionId) return;
     const quiz = await createQuiz.mutateAsync({
       contentId: id,
       sectionId: activeSectionId,
       kind,
+      ...(opts?.style ? { style: opts.style } : {}),
+      ...(opts?.count ? { count: opts.count } : {}),
     });
     router.push(`/quiz/${quiz.id}`);
   };

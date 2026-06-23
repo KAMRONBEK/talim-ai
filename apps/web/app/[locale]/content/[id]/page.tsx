@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@talim/ui';
+import type { QuestionStyle } from '@talim/types';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getHomePathForRole } from '@/lib/auth-routing';
@@ -73,6 +74,16 @@ function ContentDetailInner({ id }: { id: string }) {
 
   const reparse = useReparseContent(id);
   const [progressOpen, setProgressOpen] = useState(false);
+  // Quiz generation options — mirror the tutor question styles for individuals.
+  const [quizStyle, setQuizStyle] = useState<QuestionStyle>('mixed');
+  const [quizCount, setQuizCount] = useState(5);
+  const quizStyleOptions: { value: QuestionStyle; label: string }[] = [
+    { value: 'mixed', label: t('quizStyleMixed') },
+    { value: 'multipleChoice', label: t('quizStyleMultipleChoice') },
+    { value: 'trueFalse', label: t('quizStyleTrueFalse') },
+    { value: 'written', label: t('quizStyleWritten') },
+    { value: 'numeric', label: t('quizStyleNumeric') },
+  ];
 
   const sectionProgress = activeSectionId
     ? progressData?.sections[activeSectionId]
@@ -186,10 +197,46 @@ function ContentDetailInner({ id }: { id: string }) {
 
           <div className="mt-10 flex flex-wrap gap-2.5 border-t border-border/70 pt-8">
             {!isLearner && (
+              <div className="flex w-full flex-wrap items-end gap-3">
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('quizStyle')}
+                  </span>
+                  <select
+                    value={quizStyle}
+                    onChange={(e) => setQuizStyle(e.target.value as QuestionStyle)}
+                    className="h-10 rounded-xl border border-input bg-background px-3 text-sm text-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+                  >
+                    {quizStyleOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {t('quizCountLabel')}
+                  </span>
+                  <select
+                    value={quizCount}
+                    onChange={(e) => setQuizCount(Number(e.target.value))}
+                    className="h-10 rounded-xl border border-input bg-background px-3 text-sm text-foreground focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30"
+                  >
+                    {[3, 5, 8, 10, 15].map((n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            )}
+            {!isLearner && (
               <>
                 <Button
                   className="w-full touch-manipulation sm:w-auto"
-                  onClick={() => handleCreateQuiz('FULL')}
+                  onClick={() => handleCreateQuiz('FULL', { style: quizStyle, count: quizCount })}
                   disabled={createQuiz.isPending || !activeSectionId}
                 >
                   ❓ {createQuiz.isPending ? t('creating') : t('quiz')}
@@ -197,7 +244,7 @@ function ContentDetailInner({ id }: { id: string }) {
                 <Button
                   variant="outline"
                   className="w-full touch-manipulation sm:w-auto"
-                  onClick={() => handleCreateQuiz('QUICK')}
+                  onClick={() => handleCreateQuiz('QUICK', { style: quizStyle })}
                   disabled={createQuiz.isPending || !activeSectionId}
                 >
                   ⚡ {createQuiz.isPending ? t('creating') : t('quickQuiz')}

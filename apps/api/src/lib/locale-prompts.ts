@@ -1,6 +1,5 @@
-import type { QuizKind } from '@prisma/client';
 import type { AppLocale } from '@talim/types';
-import { getQuestionCount } from './quiz-prompt.js';
+import type { QuestionStyle } from './assessment-prompt.js';
 import { sanitizeSummaryOutput as sanitizeUz } from './summary-prompt.js';
 
 // Talim's audience is Uzbek teachers/students; Uzbek is the primary platform
@@ -91,29 +90,68 @@ const QUIZ_PROMPTS: Record<AppLocale, string> = {
   uz: `Siz o'quv materiallaridan test savollari tuzadigan o'qituvchisiz.
 
 Qoidalar:
-- Savol, variantlar (A, B, C, D) va tushuntirish faqat o'zbek tilida bo'lsin (lotin yozuvi).
+- Savollar va tushuntirishlar faqat o'zbek tilida bo'lsin (lotin yozuvi).
 - Savollar material mazmuniga asoslangan bo'lsin.
+- Savol turlari:
+  - MULTIPLE_CHOICE: 3-4 ta variant. "acceptableAnswers" ichidagi to'g'ri javob AYNAN variantlardan biriga (harfma-harf) teng bo'lsin.
+  - To'g'ri/Noto'g'ri = MULTIPLE_CHOICE bo'lib, options AYNAN ["To'g'ri", "Noto'g'ri"].
+  - SHORT_ANSWER: qisqa yozma javob (options: null). Javob qisqa so'z, atama yoki raqamli qiymat bo'lsin — formula, tenglama yoki uzun ifoda BO'LMASIN (ularni harfma-harf tekshirib bo'lmaydi). Agar tabiiy javob formula yoki hisob-kitob natijasi bo'lsa, NUMERIC turidan foydalaning. acceptableAnswers'ga bir nechta maqbul variant kiriting.
+  - NUMERIC: raqamli javob (options: null). Faqat manbada haqiqiy raqam bo'lsa tuzing.
+- Har bir savolga qisqa "explanation" (tushuntirish) qo'shing.
 - Return valid JSON only.`,
 
   en: `You create quiz questions from learning materials.
 
 Rules:
-- Questions, options (A, B, C, D), and explanations must be in English only.
+- Questions and explanations must be in English only.
 - Questions must be grounded in the material content.
+- Question types:
+  - MULTIPLE_CHOICE: 3-4 options. A correct answer in "acceptableAnswers" must match one option exactly.
+  - True/False = MULTIPLE_CHOICE with options exactly ["True", "False"].
+  - SHORT_ANSWER: a short written answer (options: null). The answer must be a short word, term, or numeric value — NOT a formula, equation, or long expression (those can't be graded by exact match). If the natural answer is a formula or a calculation result, use NUMERIC instead. Put several acceptable variants in acceptableAnswers.
+  - NUMERIC: a numeric answer (options: null). Only when the source has real numbers.
+- Add a short "explanation" to each question.
 - Return valid JSON only.`,
 
   ru: `Вы составляете тестовые вопросы по учебным материалам.
 
 Правила:
-- Вопросы, варианты (A, B, C, D) и пояснения только на русском языке.
+- Вопросы и пояснения только на русском языке.
 - Вопросы должны опираться на содержание материала.
+- Типы вопросов:
+  - MULTIPLE_CHOICE: 3-4 варианта. Правильный ответ в "acceptableAnswers" должен точно совпадать с одним из вариантов.
+  - Верно/Неверно = MULTIPLE_CHOICE с вариантами ровно ["Верно", "Неверно"].
+  - SHORT_ANSWER: короткий письменный ответ (options: null). Ответ — короткое слово, термин или числовое значение, а НЕ формула, уравнение или длинное выражение (их нельзя проверить точным сравнением). Если естественный ответ — формула или результат вычисления, используйте NUMERIC. Добавьте несколько допустимых вариантов в acceptableAnswers.
+  - NUMERIC: числовой ответ (options: null). Только если в источнике есть реальные числа.
+- Добавляйте краткое "explanation" (пояснение) к каждому вопросу.
 - Return valid JSON only.`,
 };
 
-const QUIZ_KIND_LABEL: Record<AppLocale, { quick: string; full: string }> = {
-  uz: { quick: 'tez tekshiruv', full: "to'liq mashq testi" },
-  en: { quick: 'quick check', full: 'full practice quiz' },
-  ru: { quick: 'быстрая проверка', full: 'полный тренировочный тест' },
+const QUIZ_STYLE: Record<AppLocale, Record<QuestionStyle, string>> = {
+  uz: {
+    mixed:
+      "Turli savol turlarini muvozanatli aralashtiring: ko'p tanlovli, to'g'ri/noto'g'ri, qisqa yozma va mos bo'lsa raqamli.",
+    multipleChoice: "BARCHA savollar MULTIPLE_CHOICE bo'lsin (har biri 3-4 ta variant).",
+    trueFalse: "BARCHA savollar to'g'ri/noto'g'ri bo'lsin (options AYNAN [\"To'g'ri\", \"Noto'g'ri\"]).",
+    written: "BARCHA savollar SHORT_ANSWER bo'lsin (qisqa yozma javob, options: null).",
+    numeric: "BARCHA savollar NUMERIC bo'lsin (raqamli javob, options: null).",
+  },
+  en: {
+    mixed:
+      'Mix question types in a balanced way: multiple-choice, true/false, short written, and numeric where it fits.',
+    multipleChoice: 'ALL questions must be MULTIPLE_CHOICE (3-4 options each).',
+    trueFalse: 'ALL questions must be true/false (options exactly ["True", "False"]).',
+    written: 'ALL questions must be SHORT_ANSWER (short written answer, options: null).',
+    numeric: 'ALL questions must be NUMERIC (numeric answer, options: null).',
+  },
+  ru: {
+    mixed:
+      'Сбалансированно смешивайте типы: множественный выбор, верно/неверно, короткий письменный и числовой, где уместно.',
+    multipleChoice: 'ВСЕ вопросы должны быть MULTIPLE_CHOICE (3-4 варианта каждый).',
+    trueFalse: 'ВСЕ вопросы — верно/неверно (варианты ровно ["Верно", "Неверно"]).',
+    written: 'ВСЕ вопросы — SHORT_ANSWER (короткий письменный ответ, options: null).',
+    numeric: 'ВСЕ вопросы — NUMERIC (числовой ответ, options: null).',
+  },
 };
 
 const TUTOR_MATH_RULES: Record<AppLocale, string> = {
@@ -279,22 +317,23 @@ export function buildQuizUserPrompt(
   locale: AppLocale,
   title: string,
   context: string,
-  kind: QuizKind,
+  options: { style: QuestionStyle; count: number },
 ): string {
-  const count = getQuestionCount(kind);
-  const labels = QUIZ_KIND_LABEL[locale];
-  const kindLabel = kind === 'QUICK' ? labels.quick : labels.full;
-  const countWord = locale === 'ru' ? 'вопросов' : locale === 'en' ? 'questions' : 'ta';
-
   return `Material: ${title}
-Type: ${kindLabel}
 
 Content:
 ${context}
 
-Create exactly ${count} multiple-choice ${countWord}.
+Create exactly ${options.count} questions.
+Question type requirement: ${QUIZ_STYLE[locale][options.style]}
 
-Return JSON: { "questions": [{ "question": "...", "options": ["A","B","C","D"], "correctAnswer": "A", "explanation": "..." }] }`;
+Return JSON:
+{
+  "questions": [
+    { "type": "MULTIPLE_CHOICE", "prompt": "...", "options": ["A","B","C","D"], "acceptableAnswers": ["A"], "explanation": "..." },
+    { "type": "SHORT_ANSWER", "prompt": "...", "options": null, "acceptableAnswers": ["answer 1", "answer 2"], "explanation": "..." }
+  ]
+}`;
 }
 
 export function getTutorSystemPrompt(locale: AppLocale): string {
