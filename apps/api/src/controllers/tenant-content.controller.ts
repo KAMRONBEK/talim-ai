@@ -10,7 +10,9 @@ import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
-import { extractRegionTextFromImage } from '../services/pdf.service.js';
+import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
+import { ingestText } from '../services/ingest.service.js';
+import { assertQuota } from '../services/subscription.service.js';
 import { assertTenantOwnsContent } from '../services/contentAccess.service.js';
 
 const youtubeSchema = z.object({
@@ -114,6 +116,35 @@ export async function createYoutubeContent(req: AuthenticatedRequest, res: Respo
 
   await contentQueue.add({ contentId: content.id });
   res.status(201).json({ content: formatContent(content) });
+}
+
+const reparseSchema = z.object({
+  pages: z.array(z.string().min(1)).min(1).max(40),
+});
+
+/** Re-read a tenant document via vision OCR of client-rasterized page images. */
+export async function reparseContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireTenantId(req);
+  const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
+  if (content.type !== ContentType.PDF && content.type !== ContentType.SLIDE) {
+    throw new AppError(400, 'Only PDF or slide documents can be re-read');
+  }
+  const { pages } = reparseSchema.parse(req.body ?? {});
+
+  await assertQuota(req.user.userId, 'GENERATION', { role: req.user.role, tenantId });
+
+  await prisma.content.update({ where: { id: content.id }, data: { status: 'PROCESSING' } });
+  try {
+    const usage = { userId: content.userId, tenantId, metadata: { contentId: content.id, reparse: true } };
+    const text = await extractTextFromPageImages(pages, usage);
+    const { chunkCount } = await ingestText(content.id, text, usage);
+    const updated = await prisma.content.update({ where: { id: content.id }, data: { status: 'READY' } });
+    res.json({ content: formatContent(updated), chunks: chunkCount });
+  } catch (error) {
+    await prisma.content.update({ where: { id: content.id }, data: { status: 'FAILED' } });
+    throw error;
+  }
 }
 
 export async function retryContent(req: AuthenticatedRequest, res: Response): Promise<void> {

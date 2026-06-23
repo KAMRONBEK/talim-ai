@@ -35,6 +35,7 @@ contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
 contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
 contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
 contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
+contentRoutes.post('/:id/reparse', asyncHandler(contentController.reparseContent));
 contentRoutes.patch(
   '/:id/podcast/episodes/:episodeId/progress',
   asyncHandler(progressController.patchEpisodeProgress),

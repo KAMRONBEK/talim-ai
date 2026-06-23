@@ -78,31 +78,23 @@ export async function extractPdfText(
   return extractWithOpenAI(buffer, filename, usage);
 }
 
-/** OCR a cropped page region (image/png or jpeg) from a scanned PDF viewer selection. */
-export async function extractRegionTextFromImage(
-  imageBuffer: Buffer,
-  usage?: UsageContext,
-): Promise<string> {
-  if (!openai) {
-    throw new Error('OPENAI_API_KEY is required for scanned PDF region OCR');
-  }
+const OCR_INSTRUCTION =
+  'Extract all readable text visible in this image, exactly as written. Preserve the original language (Uzbek, Russian, or English). Write any math formulas in LaTeX using $...$ (inline) or $$...$$ (display). Return plain text only — no introduction, commentary, or meta phrases (never write "Here is the text" or "No text could be parsed"). If the image truly has no text, return an empty response.';
 
+/** Vision OCR a single image (data URL). Reliable for scanned pages, unlike file-based OCR. */
+async function ocrImageDataUrl(dataUrl: string, usage?: UsageContext): Promise<string> {
+  if (!openai) {
+    throw new Error('OPENAI_API_KEY is required for OCR');
+  }
   const model = 'gpt-4o-mini';
-  const base64 = imageBuffer.toString('base64');
   const response = await openai.chat.completions.create({
     model,
     messages: [
       {
         role: 'user',
         content: [
-          {
-            type: 'image_url',
-            image_url: { url: `data:image/png;base64,${base64}` },
-          },
-          {
-            type: 'text',
-            text: 'Extract all readable text visible in this image. Return plain text only with no introduction or commentary. Preserve the original language.',
-          },
+          { type: 'image_url', image_url: { url: dataUrl } },
+          { type: 'text', text: OCR_INSTRUCTION },
         ],
       },
     ],
@@ -120,9 +112,57 @@ export async function extractRegionTextFromImage(
     });
   }
 
-  const text = response.choices[0]?.message?.content?.trim();
+  return response.choices[0]?.message?.content?.trim() ?? '';
+}
+
+/** OCR a cropped page region (image/png or jpeg) from a scanned PDF viewer selection. */
+export async function extractRegionTextFromImage(
+  imageBuffer: Buffer,
+  usage?: UsageContext,
+): Promise<string> {
+  const text = await ocrImageDataUrl(`data:image/png;base64,${imageBuffer.toString('base64')}`, usage);
   if (!text) {
     throw new Error('No text could be extracted from the selected region');
   }
   return text;
+}
+
+/**
+ * OCR a whole document from per-page images (data URLs rasterized by the client).
+ * Pages are OCR'd with bounded concurrency and joined in order — the reliable path
+ * for scanned/image PDFs that have no embedded text layer.
+ */
+export async function extractTextFromPageImages(
+  images: string[],
+  usage?: UsageContext,
+  concurrency = 4,
+): Promise<string> {
+  if (!openai) {
+    throw new Error('OPENAI_API_KEY is required for OCR');
+  }
+  const results = new Array<string>(images.length).fill('');
+  let cursor = 0;
+  async function worker() {
+    while (cursor < images.length) {
+      const i = cursor++;
+      const img = images[i];
+      if (!img) continue;
+      const dataUrl = img.startsWith('data:') ? img : `data:image/jpeg;base64,${img}`;
+      try {
+        results[i] = await ocrImageDataUrl(dataUrl, usage);
+      } catch {
+        results[i] = '';
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, images.length) }, () => worker()));
+
+  const joined = results
+    .map((t, i) => (t.trim() ? `[${i + 1}] ${t.trim()}` : ''))
+    .filter(Boolean)
+    .join('\n\n');
+  if (!joined.trim()) {
+    throw new Error('No text could be extracted from the document pages');
+  }
+  return joined;
 }

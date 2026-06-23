@@ -10,7 +10,8 @@ import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
-import { extractRegionTextFromImage } from '../services/pdf.service.js';
+import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
+import { ingestText } from '../services/ingest.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import {
   assertCanAccessContent,
@@ -28,6 +29,47 @@ const ocrRegionSchema = z.object({
   page: z.number().int().min(1),
   image: z.string().min(1),
 });
+
+const reparseSchema = z.object({
+  // Per-page images (data URLs) rasterized by the client; OCR'd server-side.
+  pages: z.array(z.string().min(1)).min(1).max(40),
+});
+
+/**
+ * Re-read a document via vision OCR of client-rasterized page images, then
+ * re-ingest (replaces chunks + sections). The reliable path for scanned/image
+ * PDFs whose embedded text layer is empty or junk.
+ */
+export async function reparseContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  assertCanMutateContent(req.user);
+  const content = await assertCanAccessContent(req.user, getParam(req, 'id'));
+  if (content.type !== ContentType.PDF && content.type !== ContentType.SLIDE) {
+    throw new AppError(400, 'Only PDF or slide documents can be re-read');
+  }
+  const { pages } = reparseSchema.parse(req.body ?? {});
+
+  await assertQuota(req.user.userId, 'GENERATION', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
+
+  await prisma.content.update({ where: { id: content.id }, data: { status: 'PROCESSING' } });
+  try {
+    const usage = {
+      userId: content.userId,
+      tenantId: content.tenantId ?? undefined,
+      metadata: { contentId: content.id, reparse: true },
+    };
+    const text = await extractTextFromPageImages(pages, usage);
+    const { chunkCount } = await ingestText(content.id, text, usage);
+    const updated = await prisma.content.update({ where: { id: content.id }, data: { status: 'READY' } });
+    res.json({ content: formatContent(updated), chunks: chunkCount });
+  } catch (error) {
+    await prisma.content.update({ where: { id: content.id }, data: { status: 'FAILED' } });
+    throw error;
+  }
+}
 
 function formatContent(content: {
   id: string;

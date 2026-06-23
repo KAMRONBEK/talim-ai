@@ -54,6 +54,10 @@ export const contentEndpoints = {
   video: (contentId: string) => `/content/${contentId}/video`,
   slides: (contentId: string, isTenantOwner = false) =>
     `${isTenantOwner ? '/tenant/content' : '/content'}/${contentId}/slides`,
+  file: (contentId: string, isTenantOwner = false) =>
+    `${isTenantOwner ? '/tenant/content' : '/content'}/${contentId}/file`,
+  reparse: (contentId: string, isTenantOwner = false) =>
+    `${isTenantOwner ? '/tenant/content' : '/content'}/${contentId}/reparse`,
 } as const;
 
 export const assessmentEndpoints = {

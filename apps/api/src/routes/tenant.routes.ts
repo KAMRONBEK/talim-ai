@@ -83,6 +83,7 @@ tenantContent.post(
   asyncHandler(tenantContentController.createYoutubeContent),
 );
 tenantContent.post('/:id/retry', enforceQuota('GENERATION'), asyncHandler(tenantContentController.retryContent));
+tenantContent.post('/:id/reparse', asyncHandler(tenantContentController.reparseContent));
 tenantContent.delete('/:id', asyncHandler(tenantContentController.deleteContent));
 tenantContent.get('/:id/file', asyncHandler(tenantContentController.getContentFile));
 tenantContent.post('/:id/ocr-region', asyncHandler(tenantContentController.ocrPdfRegion));

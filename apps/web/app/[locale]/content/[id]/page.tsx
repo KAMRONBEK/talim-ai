@@ -19,6 +19,7 @@ import { AssignStudentsPanel } from '@/components/tenant/assign-students-panel';
 import { useSections, useSection } from '@/hooks/useSections';
 import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
 import { useContentActions } from '@/hooks/useContentActions';
+import { useReparseContent } from '@/hooks/useReparseContent';
 import { ContentRightPanel, ContentRightPanelSheet } from '@/components/layout/content-right-panel';
 import { ContentStatusGate } from '@/components/content/content-status-gate';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
@@ -68,6 +69,7 @@ function ContentDetailInner({ id }: { id: string }) {
     handleOpenSummary,
   } = useContentActions(id, activeSectionId);
 
+  const reparse = useReparseContent(id);
   const [progressOpen, setProgressOpen] = useState(false);
 
   const sectionProgress = activeSectionId
@@ -221,6 +223,18 @@ function ContentDetailInner({ id }: { id: string }) {
             >
               🎞️ {t('slides')}
             </Button>
+            {!isLearner && (content.type === 'PDF' || content.type === 'SLIDE') && (
+              <Button
+                variant="outline"
+                type="button"
+                className="w-full touch-manipulation sm:w-auto"
+                onClick={() => reparse.mutate()}
+                disabled={reparse.isPending}
+                title={t('rereadHint')}
+              >
+                {reparse.isPending ? `🔄 ${t('rereading')}` : `🔁 ${t('reread')}`}
+              </Button>
+            )}
             {!isLearner && (
               <Button
                 variant="outline"
@@ -232,6 +246,9 @@ function ContentDetailInner({ id }: { id: string }) {
               </Button>
             )}
           </div>
+          {reparse.isError && (
+            <p className="mt-3 max-w-3xl text-sm text-destructive">{t('rereadError')}</p>
+          )}
         </div>
       </div>
 
