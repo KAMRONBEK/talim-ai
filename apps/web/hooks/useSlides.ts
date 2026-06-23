@@ -11,7 +11,9 @@ function slidesKey(contentId: string, sectionId: string | undefined, locale: str
 
 export function useSlides(contentId: string, sectionId?: string) {
   const locale = useLocale() as AppLocale;
-  const isTenantOwner = useAuthStore((s) => s.user?.role === 'TENANT_OWNER');
+  const role = useAuthStore((s) => s.user?.role);
+  const isTenantOwner = role === 'TENANT_OWNER';
+  const isLearner = role === 'TENANT_LEARNER';
 
   return useQuery({
     queryKey: slidesKey(contentId, sectionId, locale),
@@ -23,6 +25,18 @@ export function useSlides(contentId: string, sectionId?: string) {
       return data.slides;
     },
     enabled: !!contentId,
+    // A learner can't trigger generation; the deck may still be rendering from
+    // ingest right after upload. Poll briefly so it appears without a manual
+    // refresh, then give up (the section falls back to text).
+    refetchInterval: (query) => {
+      if (!isLearner) return false;
+      const deck = query.state.data as ContentSlideDeck | null | undefined;
+      if (deck?.deck) return false;
+      // Stop after ~6 empty polls (deck never arrived) or a persistent fetch error,
+      // so a missing deck or a 403/404 doesn't poll forever.
+      if (query.state.dataUpdateCount >= 6 || query.state.fetchFailureCount >= 3) return false;
+      return 5000;
+    },
   });
 }
 

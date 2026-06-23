@@ -1,6 +1,7 @@
 import type { UserRole } from '@prisma/client';
 import type { AppLocale, Deck, DeckAudience, DeckSlide, ContentSlideDeck } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
+import { env } from '../config/env.js';
 import { AppError, QuotaExceededError } from '../middleware/error.middleware.js';
 import { assertQuota } from './subscription.service.js';
 import { getOrderedChunks, buildRagContext } from './rag.service.js';
@@ -56,6 +57,26 @@ export async function getSlideDeck(
     },
   });
   return row ? formatSlideDeck(row) : null;
+}
+
+/**
+ * Learners cannot trigger generation, so when no deck exists in their interface
+ * locale we serve any READY deck for the same content/section — preferring the
+ * default content locale. Slides are pre-generated at ingest in the default
+ * locale (Uzbek); without this fallback a student using the English/Russian UI
+ * sees raw text under the "Slides" tab even though a deck exists.
+ */
+export async function getReadySlideDeckAnyLocale(
+  contentId: string,
+  sectionId?: string,
+): Promise<ContentSlideDeck | null> {
+  const rows = await prisma.contentSlideDeck.findMany({
+    where: { contentId, scopeKey: deckScopeKey(sectionId), status: 'READY' },
+  });
+  const ready = rows.filter((r) => r.deck);
+  if (ready.length === 0) return null;
+  const preferred = ready.find((r) => r.locale === env.DEFAULT_CONTENT_LOCALE) ?? ready[0]!;
+  return formatSlideDeck(preferred);
 }
 
 async function buildContext(contentId: string, sectionId?: string): Promise<string> {

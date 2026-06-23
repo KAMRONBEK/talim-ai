@@ -7,7 +7,11 @@ import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
-import { getSlideDeck, generateAndStoreSlideDeck } from '../services/slides.service.js';
+import {
+  getSlideDeck,
+  getReadySlideDeckAnyLocale,
+  generateAndStoreSlideDeck,
+} from '../services/slides.service.js';
 
 const slidesBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -22,7 +26,12 @@ export async function getSlides(req: AuthenticatedRequest, res: Response): Promi
   const locale = resolveLocale(req);
   await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
-  const deck = await getSlideDeck(contentId, locale, sectionId);
+  let deck = await getSlideDeck(contentId, locale, sectionId);
+  // A learner can't generate, so fall back to the deck pre-generated at ingest in
+  // the default locale rather than leaving them on raw text under the Slides tab.
+  if (!deck?.deck && req.user.role === 'TENANT_LEARNER') {
+    deck = await getReadySlideDeckAnyLocale(contentId, sectionId);
+  }
   res.json({ slides: deck });
 }
 
