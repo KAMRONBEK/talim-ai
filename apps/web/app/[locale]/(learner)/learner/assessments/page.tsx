@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Input } from '@talim/ui';
+import { Badge, Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
   useLearnerAssessments,
@@ -28,15 +28,15 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   if (result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
     return (
-      <div className="space-y-3 rounded-2xl border bg-card p-5">
-        <p className="font-semibold">
+      <div className="space-y-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+        <p className="font-display font-semibold">
           Result: {result.correct}/{result.total} correct
         </p>
         {result.results.map((r, i) => (
           <div
             key={r.questionId}
             className={`rounded-xl border p-3 ${
-              r.correct ? 'border-emerald-500/40 bg-emerald-500/5' : 'border-destructive/40 bg-destructive/5'
+              r.correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5'
             }`}
           >
             <p className="text-sm font-medium">
@@ -57,7 +57,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
 
   return (
     <form
-      className="space-y-4 rounded-2xl border bg-card p-5"
+      className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
       onSubmit={async (event) => {
         event.preventDefault();
         setError(null);
@@ -77,7 +77,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
     >
       <div className="space-y-3">
         {assessment.questions.map((question, index) => (
-          <div key={question.id} className="space-y-2 rounded-xl border p-3">
+          <div key={question.id} className="space-y-2 rounded-xl border border-border/70 p-3">
             <p className="text-sm font-medium">
               {index + 1}. {question.prompt}
             </p>
@@ -128,15 +128,15 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
   }
 
   return (
-    <div className="space-y-3 rounded-2xl border bg-card p-5">
+    <div className="space-y-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold">{assessment.title}</h2>
+            <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
             {isGame && (
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+              <Badge className="bg-accent-secondary/15 text-warning hover:bg-accent-secondary/15">
                 Game
-              </span>
+              </Badge>
             )}
           </div>
           <p className="text-sm text-muted-foreground">
@@ -150,7 +150,7 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
         </div>
         <div className="flex gap-2">
           {isGame && (
-            <Button disabled={locked} onClick={() => setPlaying(true)}>
+            <Button variant="spark" disabled={locked} onClick={() => setPlaying(true)}>
               {locked ? 'Attempt limit reached' : 'Play'}
             </Button>
           )}
@@ -174,15 +174,17 @@ export default function LearnerAssessmentsPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Quizzes &amp; tasks</h1>
-        <p className="text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Assessments</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">Quizzes &amp; tasks</h1>
+        <p className="mt-1 text-muted-foreground">
           Play game quizzes for points, or answer written tasks. Attempts are limited.
         </p>
       </div>
       {assessments.length === 0 && (
-        <p className="rounded-xl border bg-card p-8 text-center text-muted-foreground">
-          Nothing assigned yet.
-        </p>
+        <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">🎯</div>
+          <p className="mt-4 text-muted-foreground">Nothing assigned yet.</p>
+        </div>
       )}
       {assessments.map((assessment) => (
         <AssessmentCard key={assessment.id} assessment={assessment} />

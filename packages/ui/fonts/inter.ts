@@ -1,10 +1,11 @@
-import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 
-export const inter = localFont({
-  src: './inter-latin.woff2',
+// Body / UI workhorse. Loaded with Cyrillic + Latin-ext so the ru locale and
+// Uzbek special characters (oʻ, gʻ) render in the real typeface, not a fallback.
+export const inter = Inter({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
   display: 'swap',
   variable: '--font-inter',
-  weight: '100 900',
   fallback: [
     'system-ui',
     '-apple-system',

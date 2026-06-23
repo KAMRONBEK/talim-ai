@@ -19,8 +19,10 @@ export function ActivityHeatmap({ days }: { days: string[] }) {
           key={cell.key}
           title={cell.label}
           className={cn(
-            'h-7 rounded-md border',
-            cell.active ? 'border-primary/30 bg-primary/70' : 'bg-muted/40',
+            'h-7 rounded-lg border transition-colors',
+            cell.active
+              ? 'border-primary/40 bg-primary shadow-soft'
+              : 'border-border/60 bg-muted/40',
           )}
         />
       ))}

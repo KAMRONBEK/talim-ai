@@ -98,8 +98,8 @@ function ChatPageInner({ id }: { id: string }) {
 
   const materialPanel = (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-card">
-      <div className="shrink-0 border-b px-5 py-4">
-        <h3 className="text-sm font-semibold">{content.title}</h3>
+      <div className="shrink-0 border-b border-border/70 px-5 py-4">
+        <h3 className="font-display text-sm font-semibold">{content.title}</h3>
         <p className="text-xs text-muted-foreground">{content.type}</p>
       </div>
       <div className="flex shrink-0 border-b bg-muted/30">

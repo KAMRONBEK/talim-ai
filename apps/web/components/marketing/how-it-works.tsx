@@ -12,20 +12,27 @@ export function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="border-t px-6 py-24">
+    <section id="how" className="border-t border-border/70 px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t('how.title')}</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {t('nav.how')}
+          </p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{t('how.title')}</h2>
           <p className="mt-3 text-muted-foreground">{t('how.subtitle')}</p>
         </div>
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="relative grid gap-10 md:grid-cols-3">
+          {/* Connecting line — the steps are a real sequence, so the track reads left→right. */}
+          <div className="pointer-events-none absolute left-0 right-0 top-7 hidden border-t-2 border-dashed border-border md:block" />
           {steps.map((step) => (
             <div key={step.n} className="relative text-center">
-              <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-[14px] border-2 border-primary bg-card text-xl font-bold text-primary">
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand font-display text-xl font-bold text-white shadow-glow ring-8 ring-background">
                 {step.n}
               </div>
               <h3 className="text-xl font-semibold">{step.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
+              <p className="mx-auto mt-2.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                {step.text}
+              </p>
             </div>
           ))}
         </div>

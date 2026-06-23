@@ -68,7 +68,10 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
 
   if (contents.length === 0) {
     return (
-      <p className="text-center text-muted-foreground">{t('noMaterials')}</p>
+      <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">📚</div>
+        <p className="mt-4 text-muted-foreground">{t('noMaterials')}</p>
+      </div>
     );
   }
 
@@ -76,7 +79,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
     <>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {contents.map((content) => (
-          <article key={content.id} className="group relative transition-transform hover:scale-[1.02]">
+          <article key={content.id} className="hover-lift group relative">
             <div className="relative">
               <Link href={`/content/${content.id}`} className="block">
                 <ContentThumbnail content={content} />

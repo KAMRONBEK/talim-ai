@@ -79,9 +79,9 @@ export function ChatWindow({
   const hasExcerptSelection = Boolean(selectedExcerpt || selectedExcerptImage);
 
   return (
-    <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-lg border bg-card">
-      <div className="border-b px-4 py-3">
-        <h2 className="font-semibold">{t('title')}</h2>
+    <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
+      <div className="border-b border-border/70 px-4 py-3">
+        <h2 className="font-display font-semibold">{t('title')}</h2>
         <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
       </div>
 
@@ -109,7 +109,7 @@ export function ChatWindow({
         <div ref={bottomRef} />
       </div>
 
-      <div className="border-t p-4">
+      <div className="border-t border-border/70 p-4">
         {hasExcerptSelection && (
           <div className="mb-2 flex items-start gap-2">
             <div className="min-w-0 flex-1 rounded-md border border-primary/20 bg-accent/30 p-1.5">

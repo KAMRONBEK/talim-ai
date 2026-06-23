@@ -71,7 +71,7 @@ export function ContentRightPanelBody({
               strokeDashoffset={offset}
             />
           </svg>
-          <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold">
+          <span className="absolute inset-0 flex items-center justify-center font-display text-2xl font-bold tabular-nums">
             {displayPercent}%
           </span>
         </div>
@@ -161,10 +161,10 @@ export function ContentRightPanelBody({
 
       <div className="p-5">
         <h3 className="mb-3 text-sm font-semibold">{t('learningStreak')}</h3>
-        <div className="flex items-center gap-3 rounded-[10px] bg-muted/50 p-3.5">
+        <div className="flex items-center gap-3 rounded-xl bg-accent-secondary/10 p-3.5">
           <span className="text-3xl">🔥</span>
           <div>
-            <div className="text-lg font-bold">
+            <div className="font-display text-lg font-bold tabular-nums">
               {streakDays} {streakDays === 1 ? t('day') : t('days')}
             </div>
             <div className="text-xs text-muted-foreground">

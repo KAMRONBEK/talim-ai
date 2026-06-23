@@ -22,8 +22,8 @@ export function LearnerSidebar() {
   return (
     <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r bg-card md:flex md:flex-col">
       <div className="border-b px-4 py-4">
-        <Link href="/learner/dashboard" className="flex items-center gap-2 font-bold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
+        <Link href="/learner/dashboard" className="flex items-center gap-2.5 font-display font-bold">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
             T
           </span>
           <span className="min-w-0">
@@ -42,10 +42,10 @@ export function LearnerSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors',
                 pathname.startsWith(item.href)
-                  ? 'bg-secondary text-foreground'
-                  : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground',
+                  ? 'bg-primary/10 font-semibold text-primary'
+                  : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
               )}
             >
               <Icon className="h-4 w-4" />

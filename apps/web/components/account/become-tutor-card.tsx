@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { GraduationCap } from 'lucide-react';
 import { Button, Card, CardContent, CardHeader, Input, Label } from '@talim/ui';
 import { useMyTutorRequest, useRequestTutor } from '@/hooks/useTutorRequest';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -22,14 +23,21 @@ export function BecomeTutorCard() {
   const rejected = request?.status === 'REJECTED';
 
   return (
-    <Card>
+    <Card className="shadow-soft">
       <CardHeader>
-        <h2 className="font-semibold">{t('title')}</h2>
-        <p className="text-sm text-muted-foreground">{t('desc')}</p>
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
+            <GraduationCap className="h-5 w-5" />
+          </span>
+          <div>
+            <h2 className="font-display text-lg font-semibold">{t('title')}</h2>
+            <p className="text-sm text-muted-foreground">{t('desc')}</p>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="space-y-3">
         {pending ? (
-          <p className="rounded-md bg-muted px-3 py-2 text-sm">{t('pending')}</p>
+          <p className="rounded-xl border border-info/30 bg-info-muted/40 px-4 py-3 text-sm text-info">{t('pending')}</p>
         ) : (
           <>
             {rejected && <p className="text-sm text-destructive">{t('rejected')}</p>}
@@ -53,6 +61,7 @@ export function BecomeTutorCard() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button
+              variant="gradient"
               disabled={requestTutor.isPending || orgName.trim().length < 2}
               onClick={async () => {
                 setError(null);

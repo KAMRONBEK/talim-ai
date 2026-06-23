@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Button, Input, Label } from '@talim/ui';
+import { Badge, Button, Input, Label } from '@talim/ui';
 import {
   useAssessmentLeaderboard,
   useAssessmentResults,
@@ -34,10 +34,10 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
       <p className="text-sm text-muted-foreground">
         {submitted}/{results.learners.length} learners submitted · {results.mode === 'GAME' ? 'Game' : 'Written'}
       </p>
-      <div className="overflow-hidden rounded-xl border">
+      <div className="overflow-hidden rounded-xl border border-border/70">
         <table className="w-full text-left text-sm">
-          <thead className="border-b bg-muted/40">
-            <tr>
+          <thead className="border-b border-border/70 bg-muted/40">
+            <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               <th className="px-3 py-2">Student</th>
               <th className="px-3 py-2">Status</th>
               <th className="px-3 py-2">Best score</th>
@@ -47,18 +47,18 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
           </thead>
           <tbody>
             {results.learners.map((l) => (
-              <tr key={l.learnerId} className="border-b last:border-0">
-                <td className="px-3 py-2">{l.learnerName}</td>
+              <tr key={l.learnerId} className="border-b border-border/60 last:border-0">
+                <td className="px-3 py-2 font-medium">{l.learnerName}</td>
                 <td className="px-3 py-2">
                   {l.submitted ? (
-                    <span className="text-emerald-600">Submitted</span>
+                    <Badge variant="success">Submitted</Badge>
                   ) : (
                     <span className="text-muted-foreground">Not yet</span>
                   )}
                 </td>
-                <td className="px-3 py-2">{l.bestScore != null ? `${Math.round(l.bestScore)}%` : '—'}</td>
-                {results.mode === 'GAME' && <td className="px-3 py-2">{l.bestPoints}</td>}
-                <td className="px-3 py-2">{l.attempts}</td>
+                <td className="px-3 py-2 tabular-nums">{l.bestScore != null ? `${Math.round(l.bestScore)}%` : '—'}</td>
+                {results.mode === 'GAME' && <td className="px-3 py-2 tabular-nums">{l.bestPoints}</td>}
+                <td className="px-3 py-2 tabular-nums">{l.attempts}</td>
               </tr>
             ))}
             {results.learners.length === 0 && (
@@ -117,15 +117,16 @@ export default function TenantAssessmentsPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <div>
-        <h1 className="text-2xl font-bold">Assessments</h1>
-        <p className="text-muted-foreground">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Assessments</p>
+        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">Assessments</h1>
+        <p className="mt-1 text-muted-foreground">
           Generate many draft questions, approve the best ones, and assign written tasks.
         </p>
       </div>
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
-        <aside className="space-y-4 rounded-2xl border bg-card p-4">
-          <h2 className="font-semibold">Question banks</h2>
+        <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <h2 className="font-display text-lg font-semibold">Question banks</h2>
           <form
             className="space-y-3"
             onSubmit={async (event) => {
@@ -154,12 +155,14 @@ export default function TenantAssessmentsPage() {
                 key={bank.id}
                 type="button"
                 onClick={() => setSelectedBankId(bank.id)}
-                className={`w-full rounded-xl border p-3 text-left text-sm ${
-                  selectedBankId === bank.id ? 'bg-secondary' : 'hover:bg-secondary/50'
+                className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
+                  selectedBankId === bank.id
+                    ? 'border-primary/30 bg-primary/10 text-primary'
+                    : 'border-border/70 hover:bg-secondary/50'
                 }`}
               >
                 <span className="block font-medium">{bank.title}</span>
-                <span className="text-muted-foreground">
+                <span className="text-xs tabular-nums text-muted-foreground">
                   {bank.approvedCount}/{bank.questionCount} approved
                 </span>
               </button>
@@ -168,8 +171,8 @@ export default function TenantAssessmentsPage() {
         </aside>
 
         <main className="space-y-6">
-          <section className="rounded-2xl border bg-card p-4">
-            <h2 className="font-semibold">{selectedBank?.title ?? 'Select a question bank'}</h2>
+          <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+            <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? 'Select a question bank'}</h2>
             <p className="text-sm text-muted-foreground">
               Topic mode can create related questions beyond the uploaded material. Section-scoped generation stays closer to material.
             </p>
@@ -196,7 +199,7 @@ export default function TenantAssessmentsPage() {
                   onChange={(event) =>
                     setDraftStyle(event.target.value as typeof draftStyle)
                   }
-                  className="rounded-lg border bg-background px-3 py-2 text-sm"
+                  className="rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   aria-label="Question type"
                 >
                   <option value="mixed">Mixed (all types)</option>
@@ -217,10 +220,10 @@ export default function TenantAssessmentsPage() {
 
           <section className="grid gap-3">
             {questions.map((question) => (
-              <div key={question.id} className="rounded-xl border bg-card p-4">
+              <div key={question.id} className="rounded-xl border border-border/70 bg-card p-4 shadow-soft">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <span className="rounded-full bg-secondary px-2 py-1 text-xs">{question.type}</span>
+                    <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>{question.type}</Badge>
                     <p className="mt-3 font-medium">{question.prompt}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       Answers: {question.acceptableAnswers.join(', ')}
@@ -254,7 +257,7 @@ export default function TenantAssessmentsPage() {
 
       <section className="grid gap-6 lg:grid-cols-2">
         <form
-          className="space-y-4 rounded-2xl border bg-card p-4"
+          className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
             const assessment = await createAssessment.mutateAsync({
@@ -272,7 +275,7 @@ export default function TenantAssessmentsPage() {
             setSelectedQuestions([]);
           }}
         >
-          <h2 className="font-semibold">Publish assessment</h2>
+          <h2 className="font-display text-lg font-semibold">Publish assessment</h2>
           <Input
             value={assessmentTitle}
             onChange={(event) => setAssessmentTitle(event.target.value)}
@@ -294,7 +297,7 @@ export default function TenantAssessmentsPage() {
                 <Button
                   type="button"
                   size="sm"
-                  variant={mode === 'GAME' ? 'default' : 'outline'}
+                  variant={mode === 'GAME' ? 'spark' : 'outline'}
                   onClick={() => setMode('GAME')}
                 >
                   Game
@@ -328,11 +331,12 @@ export default function TenantAssessmentsPage() {
               />
             </div>
           )}
-          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border p-3">
+          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border border-border/70 p-3">
             {approvedQuestions.map((question) => (
               <label key={question.id} className="flex items-start gap-2 text-sm">
                 <input
                   type="checkbox"
+                  className="mt-0.5 h-4 w-4 accent-[hsl(var(--primary))]"
                   checked={selectedQuestions.includes(question.id)}
                   onChange={() =>
                     setSelectedQuestions((prev) =>
@@ -355,18 +359,18 @@ export default function TenantAssessmentsPage() {
         </form>
 
         <form
-          className="space-y-4 rounded-2xl border bg-card p-4"
+          className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
             await assignAssessment.mutateAsync({ assessmentId, learnerIds });
             setLearnerIds([]);
           }}
         >
-          <h2 className="font-semibold">Assign assessment</h2>
+          <h2 className="font-display text-lg font-semibold">Assign assessment</h2>
           <select
             value={assessmentId}
             onChange={(event) => setAssessmentId(event.target.value)}
-            className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+            className="w-full rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             required
           >
             <option value="">Choose assessment</option>
@@ -376,11 +380,12 @@ export default function TenantAssessmentsPage() {
               </option>
             ))}
           </select>
-          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border p-3">
+          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border border-border/70 p-3">
             {students.filter((s) => s.active).map((student) => (
               <label key={student.id} className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
+                  className="h-4 w-4 accent-[hsl(var(--primary))]"
                   checked={learnerIds.includes(student.id)}
                   onChange={() =>
                     setLearnerIds((prev) =>
@@ -406,12 +411,12 @@ export default function TenantAssessmentsPage() {
         </form>
       </section>
 
-      <section className="space-y-4 rounded-2xl border bg-card p-4">
-        <h2 className="font-semibold">Results &amp; leaderboard</h2>
+      <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+        <h2 className="font-display text-lg font-semibold">Results &amp; leaderboard</h2>
         <select
           value={resultsId}
           onChange={(event) => setResultsId(event.target.value)}
-          className="w-full max-w-md rounded-md border bg-background px-3 py-2 text-sm"
+          className="w-full max-w-md rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         >
           <option value="">Choose assessment</option>
           {assessments.map((assessment) => (

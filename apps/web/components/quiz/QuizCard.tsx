@@ -132,7 +132,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               {t('multipleChoice')}
             </span>
           </div>
-          <p className="text-lg font-semibold leading-snug">{q.question}</p>
+          <p className="font-display text-lg font-semibold leading-snug">{q.question}</p>
           <div className="space-y-2.5">
             {q.options.map((option, i) => {
               const selected = selectedAnswer === option;

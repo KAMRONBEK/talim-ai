@@ -124,9 +124,12 @@ function PodcastPageInner({ id }: { id: string }) {
   if (!podcast && !isLoading) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-8">
-        <h2 className="text-xl font-semibold">{t('noPodcast')}</h2>
+        <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-success-muted to-info-muted text-4xl shadow-soft">
+          🎧
+        </div>
+        <h2 className="font-display text-xl font-semibold">{t('noPodcast')}</h2>
         <p className="max-w-md text-center text-sm text-muted-foreground">{t('noPodcastDesc')}</p>
-        <Button onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
+        <Button variant="gradient" onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
           {createPodcast.isPending ? t('podcastGenerating') : t('createPodcast')}
         </Button>
       </div>
@@ -138,9 +141,9 @@ function PodcastPageInner({ id }: { id: string }) {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
-      <aside className="w-full shrink-0 overflow-y-auto border-b bg-card md:w-80 md:border-b-0 md:border-r">
-        <div className="border-b p-4 md:p-5">
-          <h2 className="text-[15px] font-semibold">{content.title}</h2>
+      <aside className="w-full shrink-0 overflow-y-auto border-b border-border/70 bg-card md:w-80 md:border-b-0 md:border-r">
+        <div className="border-b border-border/70 p-4 md:p-5">
+          <h2 className="font-display text-[15px] font-semibold">{content.title}</h2>
           <p className="text-xs text-muted-foreground">
             {t('episodes', { count: episodes.length })}
             {generating && ` · ${t('podcastGenerating')}`}

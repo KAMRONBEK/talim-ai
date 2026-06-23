@@ -7,11 +7,11 @@ export function Footer() {
   const t = useTranslations('landing');
 
   return (
-    <footer className="border-t bg-card px-6 py-12">
+    <footer className="border-t border-border/70 bg-card px-6 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:gap-6">
-          <Link href="/" className="flex items-center gap-2 font-bold">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
+          <Link href="/" className="flex items-center gap-2.5 font-display font-bold">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
               T
             </span>
             {t('footer.tagline')}

@@ -23,71 +23,75 @@ export default function LearnerDashboardPage() {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
       <StudentWelcomeBanner />
-      <div className="rounded-3xl border bg-card p-6 text-center shadow-sm">
-        <p className="text-sm font-medium text-primary">
-          {summary?.tenantName ?? user?.tenantName ?? 'Your school'}
-        </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">
-          {t('welcome', { name: user?.name ?? user?.email ?? '' })}
-        </h1>
-        <p className="mt-2 text-muted-foreground">{t('dashboardDesc')}</p>
-        {summary?.continueContent && (
-          <div className="mx-auto mt-5 max-w-lg rounded-2xl border bg-background p-4 text-left">
-            <p className="text-sm text-muted-foreground">Continue where you left off</p>
-            <p className="font-semibold">{summary.continueContent.title}</p>
-            <p className="text-sm text-muted-foreground">
-              {Math.round(summary.continueContent.overallCoverage)}% complete
-            </p>
-            <Link
-              href={`/content/${summary.continueContent.contentId}${
-                summary.continueContent.lastSectionId
-                  ? `?section=${summary.continueContent.lastSectionId}`
-                  : ''
-              }`}
-            >
-              <Button className="mt-3">Continue learning</Button>
-            </Link>
-          </div>
-        )}
+      <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft bg-girih">
+        <div className="relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {summary?.tenantName ?? user?.tenantName ?? 'Your school'}
+          </p>
+          <h1 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('welcome', { name: user?.name ?? user?.email ?? '' })}
+          </h1>
+          <p className="mt-2 text-muted-foreground">{t('dashboardDesc')}</p>
+          {summary?.continueContent && (
+            <div className="mx-auto mt-6 max-w-lg rounded-2xl border border-border/70 bg-background p-5 text-left shadow-soft">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Continue where you left off
+              </p>
+              <p className="mt-1 font-display text-lg font-semibold">{summary.continueContent.title}</p>
+              <p className="text-sm text-muted-foreground">
+                {Math.round(summary.continueContent.overallCoverage)}% complete
+              </p>
+              <Link
+                href={`/content/${summary.continueContent.contentId}${
+                  summary.continueContent.lastSectionId
+                    ? `?section=${summary.continueContent.lastSectionId}`
+                    : ''
+                }`}
+              >
+                <Button variant="gradient" className="mt-4">Continue learning</Button>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border bg-card p-5 shadow-soft">
-          <div className="flex items-center justify-between">
+        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-start justify-between">
             <p className="text-sm font-medium text-muted-foreground">Assigned</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-lg">📚</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-lg">📚</span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">
+          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
             {summary?.assignedCount ?? assigned.length}
           </p>
         </div>
-        <div className="rounded-2xl border bg-card p-5 shadow-soft">
-          <div className="flex items-center justify-between">
+        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-start justify-between">
             <p className="text-sm font-medium text-muted-foreground">Streak</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-warning/10 text-lg">🔥</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-lg">🔥</span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">{summary?.streakDays ?? 0} days</p>
+          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">{summary?.streakDays ?? 0} days</p>
         </div>
-        <div className="rounded-2xl border bg-card p-5 shadow-soft">
-          <div className="flex items-center justify-between">
+        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-start justify-between">
             <p className="text-sm font-medium text-muted-foreground">Avg quiz</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-lg">🎯</span>
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-lg">🎯</span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">
+          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
             {summary?.avgQuizScore != null ? `${Math.round(summary.avgQuizScore)}%` : '—'}
           </p>
         </div>
       </div>
 
       <div className="w-full">
-        <h2 className="mb-4 text-lg font-semibold">{t('assignedMaterials')}</h2>
+        <h2 className="mb-4 font-display text-lg font-semibold">{t('assignedMaterials')}</h2>
         {isLoading ? (
           <p className="text-muted-foreground">{t('loading')}</p>
         ) : assigned.length === 0 ? (
-          <div className="rounded-2xl border bg-card p-10 text-center">
-            <p className="text-4xl font-bold text-primary">T</p>
-            <p className="mt-3 font-medium">{t('noAssigned')}</p>
-            <p className="text-sm text-muted-foreground">Your teacher will assign materials here.</p>
+          <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">📚</div>
+            <p className="mt-4 font-display font-semibold">{t('noAssigned')}</p>
+            <p className="mt-1 text-sm text-muted-foreground">Your teacher will assign materials here.</p>
           </div>
         ) : (
           <RecentContentGrid contents={assigned} showDelete={false} />
@@ -97,8 +101,8 @@ export default function LearnerDashboardPage() {
       {(assessments?.length ?? 0) > 0 && (
         <section>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Written tasks</h2>
-            <Link href="/learner/assessments" className="text-sm text-primary hover:underline">
+            <h2 className="font-display text-lg font-semibold">Written tasks</h2>
+            <Link href="/learner/assessments" className="text-sm font-medium text-primary hover:underline">
               View all
             </Link>
           </div>
@@ -107,10 +111,10 @@ export default function LearnerDashboardPage() {
               <Link
                 key={assessment.id}
                 href="/learner/assessments"
-                className="rounded-xl border bg-card p-4 hover:bg-secondary/40"
+                className="hover-lift rounded-2xl border border-border/70 bg-card p-4 shadow-soft"
               >
                 <p className="font-medium">{assessment.title}</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="mt-1 text-sm text-muted-foreground">
                   {assessment.questions.length} questions · {assessment.attemptCount}/{assessment.maxAttempts} attempts
                 </p>
               </Link>

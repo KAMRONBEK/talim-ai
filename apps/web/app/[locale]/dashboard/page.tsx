@@ -37,8 +37,8 @@ export default function DashboardPage() {
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col items-center gap-10">
-      <div className="w-full text-center">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+      <div className="relative w-full overflow-hidden rounded-3xl border border-border/70 bg-card px-6 py-10 text-center shadow-soft bg-brand-radial">
+        <h1 className="relative font-display text-3xl font-bold tracking-tight sm:text-4xl">
           {t('readyToLearn', { name: firstName })}
         </h1>
       </div>
@@ -49,7 +49,7 @@ export default function DashboardPage() {
 
       <section id="dashboard-recents" className="w-full">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">{t('recents')}</h2>
+          <h2 className="font-display text-lg font-semibold">{t('recents')}</h2>
           {!isLoading && filtered.length > 0 && (
             <span className="text-sm text-muted-foreground">
               {t('count', { count: filtered.length })}

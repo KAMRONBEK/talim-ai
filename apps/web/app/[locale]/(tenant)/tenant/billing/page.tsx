@@ -1,6 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { AlertTriangle } from 'lucide-react';
+import { Badge } from '@talim/ui';
 import { useBilling } from '@/hooks/useBilling';
 import { planMessageKey } from '@/lib/plan';
 
@@ -21,43 +23,53 @@ export default function TenantBillingPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <h1 className="text-2xl font-bold">{t('billing.title')}</h1>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.billing')}</p>
+        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('billing.title')}</h1>
+      </div>
       {!sub || sub.status !== 'ACTIVE' ? (
-        <div className="rounded-xl border border-warning/40 bg-warning-muted/30 p-6">
-          <p className="font-medium">{t('subscriptionRequired')}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{t('billing.adminHint')}</p>
+        <div className="flex items-start gap-4 rounded-2xl border border-warning/40 bg-warning-muted/30 p-6 shadow-soft">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-warning/15 text-warning">
+            <AlertTriangle className="h-5 w-5" />
+          </span>
+          <div>
+            <p className="font-display font-semibold">{t('subscriptionRequired')}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{t('billing.adminHint')}</p>
+          </div>
         </div>
       ) : (
         <>
-          <div className="rounded-xl border p-4">
-            <p className="text-sm text-muted-foreground">{t('billing.plan')}</p>
-            <p className="text-lg font-semibold">{planKey ? tCommon(planKey) : sub.planName}</p>
-            <p className="text-sm text-muted-foreground">{sub.status}</p>
+          <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+            <p className="text-sm font-medium text-muted-foreground">{t('billing.plan')}</p>
+            <div className="mt-2 flex items-center gap-3">
+              <p className="font-display text-xl font-bold tracking-tight">{planKey ? tCommon(planKey) : sub.planName}</p>
+              <Badge variant="success">{sub.status}</Badge>
+            </div>
           </div>
           {usage && (
             <div className="grid gap-4 sm:grid-cols-2">
               {usage.students && (
-                <div className="rounded-xl border p-4">
-                  <p className="text-sm text-muted-foreground">{t('billing.students')}</p>
-                  <p className="text-xl font-semibold">
+                <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <p className="text-sm font-medium text-muted-foreground">{t('billing.students')}</p>
+                  <p className="mt-2 font-display text-3xl font-bold tracking-tight tabular-nums">
                     {usage.students.used}
                     {usage.students.limit != null ? ` / ${usage.students.limit}` : ''}
                   </p>
                 </div>
               )}
               {usage.contentItems && (
-                <div className="rounded-xl border p-4">
-                  <p className="text-sm text-muted-foreground">{t('billing.materials')}</p>
-                  <p className="text-xl font-semibold">
+                <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <p className="text-sm font-medium text-muted-foreground">{t('billing.materials')}</p>
+                  <p className="mt-2 font-display text-3xl font-bold tracking-tight tabular-nums">
                     {usage.contentItems.used}
                     {usage.contentItems.limit != null ? ` / ${usage.contentItems.limit}` : ''}
                   </p>
                 </div>
               )}
               {usage.generations && (
-                <div className="rounded-xl border p-4">
-                  <p className="text-sm text-muted-foreground">{t('billing.generations')}</p>
-                  <p className="text-xl font-semibold">
+                <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <p className="text-sm font-medium text-muted-foreground">{t('billing.generations')}</p>
+                  <p className="mt-2 font-display text-3xl font-bold tracking-tight tabular-nums">
                     {usage.generations.used}
                     {usage.generations.limit != null ? ` / ${usage.generations.limit}` : ''}
                   </p>

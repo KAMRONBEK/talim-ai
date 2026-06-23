@@ -13,13 +13,13 @@ export function JoinCodeCard() {
   const code = tenant?.joinCode ?? null;
 
   return (
-    <Card>
+    <Card className="shadow-soft">
       <CardHeader>
-        <h2 className="font-semibold">{t('joinCode.title')}</h2>
+        <h2 className="font-display text-lg font-semibold">{t('joinCode.title')}</h2>
         <p className="text-sm text-muted-foreground">{t('joinCode.desc')}</p>
       </CardHeader>
       <CardContent className="flex flex-wrap items-center gap-3">
-        <span className="rounded-lg bg-muted px-4 py-2 font-mono text-lg tracking-[0.3em]">
+        <span className="rounded-xl border border-primary/20 bg-primary/5 px-5 py-2.5 font-display text-xl font-bold tracking-[0.3em] text-primary">
           {code ?? t('joinCode.none')}
         </span>
         {code && (

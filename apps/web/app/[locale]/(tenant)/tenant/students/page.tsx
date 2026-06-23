@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Users as UsersIcon } from 'lucide-react';
 import {
+  Badge,
   Button,
   Dialog,
   DialogContent,
@@ -89,17 +91,19 @@ export default function TenantStudentsPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{t('students.title')}</h1>
-          <p className="text-muted-foreground">{t('students.desc')}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.students')}</p>
+          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('students.title')}</h1>
+          <p className="mt-1 text-muted-foreground">{t('students.desc')}</p>
           {seats && (
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-2 inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium tabular-nums text-muted-foreground">
               {t('students.seatUsage', { used: seats.used, limit: seats.limit ?? '∞' })}
             </p>
           )}
         </div>
         <Button
+          variant="gradient"
           disabled={atSeatCap}
           title={atSeatCap ? t('students.seatUsage', { used: seats!.used, limit: seats!.limit ?? '∞' }) : undefined}
           onClick={() => {
@@ -122,10 +126,10 @@ export default function TenantStudentsPage() {
         className="max-w-sm"
       />
 
-      <div className="hidden overflow-x-auto rounded-xl border md:block">
+      <div className="hidden overflow-x-auto rounded-2xl border border-border/70 bg-card shadow-soft md:block">
         <table className="w-full text-left text-sm">
-          <thead className="border-b bg-muted/40">
-            <tr>
+          <thead className="border-b border-border/70 bg-muted/40">
+            <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               <th className="px-4 py-3">{t('students.name')}</th>
               <th className="px-4 py-3">{t('students.email')}</th>
               <th className="px-4 py-3">{t('students.assigned')}</th>
@@ -143,26 +147,31 @@ export default function TenantStudentsPage() {
               </tr>
             ) : filteredStudents.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-10 text-center text-muted-foreground">
-                  {t('students.desc')}
+                <td colSpan={6} className="px-4 py-12">
+                  <div className="flex flex-col items-center gap-3 text-center">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <UsersIcon className="h-6 w-6" />
+                    </span>
+                    <p className="text-sm text-muted-foreground">{t('students.desc')}</p>
+                  </div>
                 </td>
               </tr>
             ) : (
               filteredStudents.map((s) => (
-                <tr key={s.id} className="border-b last:border-0">
+                <tr key={s.id} className="border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/40">
                   <td className="px-4 py-3">
-                    <Link href={`/tenant/students/${s.id}`} className="font-medium hover:underline">
+                    <Link href={`/tenant/students/${s.id}`} className="font-medium text-foreground hover:text-primary hover:underline">
                       {s.name ?? '—'}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 text-muted-foreground">
                     {s.email ?? (s.username ? `@${s.username}` : '—')}
                   </td>
-                  <td className="px-4 py-3">{s.assignedCount}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 tabular-nums">{s.assignedCount}</td>
+                  <td className="px-4 py-3 tabular-nums text-muted-foreground">
                     {s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 font-medium tabular-nums">
                     {s.avgQuizScore != null ? `${Math.round(s.avgQuizScore)}%` : '—'}
                   </td>
                   <td className="px-4 py-3 text-right">
@@ -200,19 +209,19 @@ export default function TenantStudentsPage() {
 
       <div className="grid gap-3 md:hidden">
         {filteredStudents.map((s) => (
-          <div key={s.id} className="rounded-xl border bg-card p-4">
+          <div key={s.id} className="rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <Link href={`/tenant/students/${s.id}`} className="font-medium">
+                <Link href={`/tenant/students/${s.id}`} className="font-medium hover:text-primary">
                   {s.name ?? s.email ?? s.username}
                 </Link>
                 <p className="text-sm text-muted-foreground">
                   {s.email ?? (s.username ? `@${s.username}` : '')}
                 </p>
               </div>
-              <span className="rounded-full bg-secondary px-2 py-1 text-xs">
+              <Badge variant={s.active ? 'success' : 'secondary'}>
                 {s.active ? 'Active' : 'Inactive'}
-              </span>
+              </Badge>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
               <div>
@@ -270,7 +279,7 @@ export default function TenantStudentsPage() {
           {credentials ? (
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground">{t('students.credentialsHint')}</p>
-              <div className="space-y-1 rounded-lg bg-muted p-3 font-mono text-sm">
+              <div className="space-y-1 rounded-xl border border-border/70 bg-muted p-3 font-mono text-sm">
                 {credentials.username && (
                   <p>
                     {t('students.username')}: <span className="font-semibold">{credentials.username}</span>

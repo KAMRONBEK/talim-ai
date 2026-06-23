@@ -8,7 +8,7 @@ const preset = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -55,7 +55,10 @@ const preset = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        'accent-secondary': 'hsl(var(--accent-secondary))',
+        'accent-secondary': {
+          DEFAULT: 'hsl(var(--accent-secondary))',
+          foreground: 'hsl(var(--accent-secondary-foreground))',
+        },
       },
       borderRadius: {
         '2xl': 'calc(var(--radius) + 6px)',

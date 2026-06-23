@@ -24,9 +24,9 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
         <Link
           href="/dashboard"
           onClick={onNavigate}
-          className="flex min-w-0 items-center gap-2 font-bold tracking-tight"
+          className="flex min-w-0 items-center gap-2.5 font-display font-bold tracking-tight"
         >
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
             T
           </span>
           <span className="truncate">Talim AI</span>

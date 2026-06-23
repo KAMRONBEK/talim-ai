@@ -37,7 +37,9 @@ export function ContentSidebarBody({
         onClick={onNavigate}
         className={cn(
           'flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
-          active ? 'bg-accent font-medium text-accent-foreground' : 'text-muted-foreground hover:bg-secondary',
+          active
+            ? 'bg-primary/10 font-semibold text-primary'
+            : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
         )}
       >
         <span>{icon}</span>
@@ -48,8 +50,8 @@ export function ContentSidebarBody({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="shrink-0 border-b p-4">
-        <h2 className="truncate font-semibold">{contentTitle}</h2>
+      <div className="shrink-0 border-b border-border/70 p-4">
+        <h2 className="truncate font-display font-semibold">{contentTitle}</h2>
         <p className="text-xs text-muted-foreground">
           {t('sectionCount', { count: sections.length })}
         </p>
@@ -71,8 +73,8 @@ export function ContentSidebarBody({
                 className={cn(
                   'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
                   activeSectionId === section.id
-                    ? 'bg-accent font-medium text-accent-foreground'
-                    : 'text-muted-foreground hover:bg-secondary',
+                    ? 'bg-primary/10 font-semibold text-primary'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
                 )}
               >
                 <span>📄</span>

@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { BookOpen, TrendingUp, Users } from 'lucide-react';
+import { AlertTriangle, BookOpen, TrendingUp, Users, UserX } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useTenantContents } from '@/hooks/useTenantContent';
@@ -33,7 +33,7 @@ export default function TenantDashboardPage() {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
       {!user?.name?.trim() && (
-        <section className="rounded-2xl border bg-card p-4">
+        <section className="rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
           <p className="text-sm text-muted-foreground">
             {t('settings.accountTitle')}:{' '}
             <Link href="/tenant/settings#account" className="font-medium text-primary hover:underline">
@@ -42,63 +42,68 @@ export default function TenantDashboardPage() {
           </p>
         </section>
       )}
-      <div className="rounded-3xl border bg-card p-6 shadow-sm">
-        <p className="text-sm font-medium text-primary">{user?.tenantName ?? t('organization')}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">
-          {t('welcome', { name: user?.name ?? user?.email ?? '' })}
-        </h1>
-        <p className="mt-2 max-w-2xl text-muted-foreground">{t('dashboardDesc')}</p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Link href="/tenant/materials">
-            <Button>{t('addMaterial')}</Button>
-          </Link>
-          <Link href="/tenant/students">
-            <Button variant="outline">{t('students.add')}</Button>
-          </Link>
-          <Link href="/tenant/assessments">
-            <Button variant="outline">{t('nav.assessments')}</Button>
-          </Link>
+      <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-7 shadow-soft sm:p-8">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-girih opacity-50 [mask-image:radial-gradient(ellipse_70%_80%_at_80%_0%,black,transparent)]" />
+        <div className="relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {user?.tenantName ?? t('organization')}
+          </p>
+          <h1 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('welcome', { name: user?.name ?? user?.email ?? '' })}
+          </h1>
+          <p className="mt-3 max-w-2xl text-muted-foreground">{t('dashboardDesc')}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/tenant/materials">
+              <Button variant="gradient">{t('addMaterial')}</Button>
+            </Link>
+            <Link href="/tenant/students">
+              <Button variant="outline">{t('students.add')}</Button>
+            </Link>
+            <Link href="/tenant/assessments">
+              <Button variant="outline">{t('nav.assessments')}</Button>
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Link
           href="/tenant/materials"
-          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-muted-foreground">{t('stats.materials')}</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <BookOpen className="h-[18px] w-[18px]" />
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <BookOpen className="h-5 w-5" />
             </span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">{contents?.length ?? 0}</p>
+          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">{contents?.length ?? 0}</p>
         </Link>
         <Link
           href="/tenant/students"
-          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-muted-foreground">{t('stats.students')}</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[hsl(var(--accent-secondary))]/10 text-[hsl(var(--accent-secondary))]">
-              <Users className="h-[18px] w-[18px]" />
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
+              <Users className="h-5 w-5" />
             </span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">
+          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">
             {students?.filter((s) => s.active).length ?? 0}
           </p>
         </Link>
         <Link
           href="/tenant/progress"
-          className="group rounded-2xl border bg-card p-5 shadow-soft hover-lift"
+          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-muted-foreground">{t('nav.progress')}</p>
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/10 text-success">
-              <TrendingUp className="h-[18px] w-[18px]" />
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-success">
+              <TrendingUp className="h-5 w-5" />
             </span>
           </div>
-          <p className="mt-3 text-3xl font-bold tracking-tight">
+          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">
             {students?.filter((s) => s.lastActivityAt).length ?? 0}
           </p>
         </Link>
@@ -111,17 +116,29 @@ export default function TenantDashboardPage() {
       />
 
       {(failedMaterials.length > 0 || inactiveStudents.length > 0) && (
-        <section className="rounded-2xl border bg-card p-5">
-          <h2 className="font-semibold">Needs attention</h2>
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
+        <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <h2 className="font-display text-lg font-semibold">Needs attention</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
             {failedMaterials.length > 0 && (
-              <Link href="/tenant/materials" className="rounded-xl border border-destructive/30 p-4 text-sm">
-                {failedMaterials.length} materials failed processing.
+              <Link
+                href="/tenant/materials"
+                className="flex items-center gap-3 rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm transition-colors hover:bg-destructive/10"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
+                  <AlertTriangle className="h-[18px] w-[18px]" />
+                </span>
+                <span className="font-medium">{failedMaterials.length} materials failed processing.</span>
               </Link>
             )}
             {inactiveStudents.length > 0 && (
-              <Link href="/tenant/students" className="rounded-xl border p-4 text-sm">
-                {inactiveStudents.length} inactive students.
+              <Link
+                href="/tenant/students"
+                className="flex items-center gap-3 rounded-xl border border-border/70 p-4 text-sm transition-colors hover:bg-secondary/60"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-warning/10 text-warning">
+                  <UserX className="h-[18px] w-[18px]" />
+                </span>
+                <span className="font-medium">{inactiveStudents.length} inactive students.</span>
               </Link>
             )}
           </div>
@@ -129,7 +146,7 @@ export default function TenantDashboardPage() {
       )}
 
       <section>
-        <h2 className="mb-4 text-lg font-semibold">{t('recentMaterials')}</h2>
+        <h2 className="mb-4 font-display text-lg font-semibold">{t('recentMaterials')}</h2>
         {isLoading ? (
           <p className="text-muted-foreground">{t('loading')}</p>
         ) : (

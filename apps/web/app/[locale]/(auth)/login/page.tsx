@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { LanguageSwitcher } from '@/components/language-switcher';
+import { AuthShell } from '@/components/auth/auth-shell';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 import type { AuthResponse } from '@talim/types';
@@ -58,21 +57,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background p-4">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-dots opacity-70" />
-      <div aria-hidden className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-24 h-96 w-96 rounded-full bg-[hsl(var(--accent-secondary))]/20 blur-3xl" />
-      <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
-        <LanguageSwitcher compact />
-        <ThemeToggle compact />
-      </div>
-      <Link href="/" className="relative z-10 mb-8 flex items-center gap-2.5 text-xl font-bold">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand text-lg font-bold text-white shadow-glow">
-          T
-        </span>
-        Talim AI
-      </Link>
-      <Card className="relative z-10 w-full max-w-md animate-scale-in shadow-elevated">
+    <AuthShell>
+      <Card className="animate-scale-in shadow-elevated">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold">{t('welcomeBack')}</h1>
@@ -120,6 +106,6 @@ export default function LoginPage() {
           </p>
         </CardContent>
       </Card>
-    </div>
+    </AuthShell>
   );
 }

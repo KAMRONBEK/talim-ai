@@ -28,8 +28,8 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b px-4 py-4">
-        <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2 font-bold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
+        <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2.5 font-display font-bold">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
             T
           </span>
           <span className="min-w-0">
@@ -50,10 +50,10 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                'flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors',
                 pathname.startsWith(item.href)
-                  ? 'bg-secondary text-foreground'
-                  : 'text-muted-foreground hover:bg-secondary/60 hover:text-foreground',
+                  ? 'bg-primary/10 font-semibold text-primary'
+                  : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
               )}
             >
               <Icon className="h-4 w-4" />

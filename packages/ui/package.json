@@ -6,7 +6,8 @@
   "types": "./index.ts",
   "exports": {
     ".": "./index.ts",
-    "./fonts/inter": "./fonts/inter.ts"
+    "./fonts/inter": "./fonts/inter.ts",
+    "./fonts/display": "./fonts/display.ts"
   },
   "scripts": {
     "lint": "eslint .",

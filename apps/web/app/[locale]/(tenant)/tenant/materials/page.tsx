@@ -41,46 +41,50 @@ export default function TenantMaterialsPage() {
   };
 
   return (
-    <div className="mx-auto flex max-w-4xl flex-col items-center gap-10">
+    <div className="mx-auto flex max-w-4xl flex-col items-center gap-8">
+      <div className="w-full max-w-2xl text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.materials')}</p>
+        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('allMaterials')}</h1>
+      </div>
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={tDash('learnAnything')}
-        className="mx-auto h-12 w-full max-w-2xl rounded-full"
+        className="mx-auto h-12 w-full max-w-2xl rounded-full shadow-soft"
       />
       <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
         <label
           className={cn(
-            'dashboard-card flex cursor-pointer flex-col items-start gap-3 rounded-2xl border bg-card p-5',
+            'group flex cursor-pointer flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-card',
             upload.isPending && 'pointer-events-none opacity-60',
           )}
         >
           <input type="file" accept={FILE_UPLOAD_ACCEPT} className="sr-only" onChange={handleFile} disabled={upload.isPending} />
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
             <FileUp className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">{tDash('uploadTitle')}</p>
+            <p className="font-display font-semibold">{tDash('uploadTitle')}</p>
             <p className="text-sm text-muted-foreground">{tDash('uploadDesc')}</p>
           </div>
         </label>
         <button
           type="button"
           onClick={() => setLinkOpen(true)}
-          className="dashboard-card flex flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left hover:border-primary/30"
+          className="group flex flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 text-left shadow-soft transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-card"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary transition-colors group-hover:bg-accent-secondary/20">
             <Link2 className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">{tDash('linkTitle')}</p>
+            <p className="font-display font-semibold">{tDash('linkTitle')}</p>
             <p className="text-sm text-muted-foreground">{tDash('linkDesc')}</p>
           </div>
         </button>
       </div>
       {error && <p className="text-sm text-destructive">{error}</p>}
       <div className="w-full">
-        <h2 className="mb-4 text-lg font-semibold">{t('allMaterials')}</h2>
+        <h2 className="mb-4 font-display text-lg font-semibold">{t('allMaterials')}</h2>
         {isLoading ? (
           <p className="text-muted-foreground">{tCommon('loading')}</p>
         ) : (

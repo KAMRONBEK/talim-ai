@@ -28,12 +28,12 @@ export function QuickActionCards() {
           disabled={isPending}
           onClick={openFilePicker}
           className={cn(
-            'dashboard-card group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
-            'hover:border-primary/30 hover:shadow-md',
+            'hover-lift group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 text-left shadow-soft',
+            'hover:border-primary/30',
             isPending && 'pointer-events-none opacity-60',
           )}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
             <FileUp className="h-5 w-5" />
           </div>
           <div>
@@ -48,11 +48,11 @@ export function QuickActionCards() {
           type="button"
           onClick={() => setLinkOpen(true)}
           className={cn(
-            'dashboard-card group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border bg-card p-5 text-left transition-all',
-            'hover:border-primary/30 hover:shadow-md',
+            'hover-lift group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 text-left shadow-soft',
+            'hover:border-primary/30',
           )}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary text-foreground">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent-secondary/15 text-warning">
             <Link2 className="h-5 w-5" />
           </div>
           <div>

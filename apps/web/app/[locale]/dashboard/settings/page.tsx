@@ -12,8 +12,9 @@ export default function DashboardSettingsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <p className="text-muted-foreground">{t('desc')}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('title')}</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>
       <ProfileCard />
       <PasswordCard />

@@ -28,16 +28,19 @@ export function StudentWelcomeBanner() {
   };
 
   return (
-    <section className="rounded-2xl border border-primary/30 bg-primary/5 p-5">
-      <h2 className="font-semibold">{t('title')}</h2>
-      <p className="mt-2 text-sm text-muted-foreground">{t('desc')}</p>
-      <div className="mt-4 flex flex-wrap gap-3">
-        <Link href="/learner/settings">
-          <Button size="sm">{t('cta')}</Button>
-        </Link>
-        <Button size="sm" variant="outline" onClick={handleDismiss}>
-          {t('dismiss')}
-        </Button>
+    <section className="flex flex-col gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-5 shadow-soft sm:flex-row sm:items-start">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-secondary/20 text-xl">👋</div>
+      <div className="flex-1">
+        <h2 className="font-display font-semibold">{t('title')}</h2>
+        <p className="mt-1 text-sm text-muted-foreground">{t('desc')}</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link href="/learner/settings">
+            <Button variant="gradient" size="sm">{t('cta')}</Button>
+          </Link>
+          <Button size="sm" variant="outline" onClick={handleDismiss}>
+            {t('dismiss')}
+          </Button>
+        </div>
       </div>
     </section>
   );

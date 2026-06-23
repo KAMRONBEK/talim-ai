@@ -48,8 +48,9 @@ export function ContentStatusGate({
     return (
       <>
         <div className="flex flex-1 items-center justify-center p-8">
-          <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-            <h2 className="text-lg font-semibold">{t('failed')}</h2>
+          <div className="max-w-md rounded-2xl border border-border/70 bg-card p-8 text-center shadow-soft">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-2xl">⚠️</div>
+            <h2 className="mt-4 font-display text-lg font-semibold">{t('failed')}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{t('failedDesc')}</p>
             <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
               {!isLearner && (
@@ -81,8 +82,11 @@ export function ContentStatusGate({
   return (
     <>
       <div className="flex flex-1 items-center justify-center p-8">
-        <div className="max-w-md rounded-xl border bg-card p-8 text-center">
-          <h2 className="text-lg font-semibold">{t('processing')}</h2>
+        <div className="max-w-md rounded-2xl border border-border/70 bg-card p-8 text-center shadow-soft">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">
+            <span className="animate-pulse">⏳</span>
+          </div>
+          <h2 className="mt-4 font-display text-lg font-semibold">{t('processing')}</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             {t('processingDesc', { status: content.status })}
           </p>

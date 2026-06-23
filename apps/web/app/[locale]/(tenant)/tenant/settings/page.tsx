@@ -31,18 +31,21 @@ export default function TenantSettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-8">
-      <h1 className="text-2xl font-bold">{t('settings.title')}</h1>
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.settings')}</p>
+        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
+      </div>
 
       <section id="account" className="space-y-4 scroll-mt-8">
-        <h2 className="text-lg font-semibold">{t('settings.accountTitle')}</h2>
+        <h2 className="font-display text-lg font-semibold">{t('settings.accountTitle')}</h2>
         <ProfileCard />
         <PasswordCard />
         <BillingSummaryCard />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">{t('settings.orgTitle')}</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border p-6">
+        <h2 className="font-display text-lg font-semibold">{t('settings.orgTitle')}</h2>
+        <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
           <div className="space-y-2">
             <Label htmlFor="orgName">{t('settings.orgName')}</Label>
             <Input id="orgName" value={name} onChange={(e) => setName(e.target.value)} required />

@@ -133,7 +133,7 @@ function ContentDetailInner({ id }: { id: string }) {
             )}
           </nav>
 
-          <h1 className="text-2xl font-bold tracking-tight md:text-3xl">{sectionTitle}</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{sectionTitle}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             {chapterLabel && <Badge variant="secondary">{chapterLabel}</Badge>}
             {sectionData?.section.readMinutes != null && (
@@ -184,7 +184,7 @@ function ContentDetailInner({ id }: { id: string }) {
             </div>
           )}
 
-          <div className="mt-10 flex flex-wrap gap-2.5 border-t pt-8">
+          <div className="mt-10 flex flex-wrap gap-2.5 border-t border-border/70 pt-8">
             {!isLearner && (
               <>
                 <Button
@@ -212,7 +212,7 @@ function ContentDetailInner({ id }: { id: string }) {
               🎧 {t('listen')}
             </Button>
             <Button
-              variant="outline"
+              variant="gradient"
               className="w-full touch-manipulation sm:w-auto"
               onClick={() => router.push(`/content/${id}/chat`)}
             >

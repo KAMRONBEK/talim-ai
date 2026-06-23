@@ -19,7 +19,7 @@ export function QuizResult({ score, correct, total, onRetry }: QuizResultProps) 
         <CardTitle>{t('resultsTitle')}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-3xl font-bold text-primary">{score.toFixed(0)}%</p>
+        <p className="font-display text-5xl font-bold tabular-nums text-primary">{score.toFixed(0)}%</p>
         <p className="mt-2 text-muted-foreground">{t('scoreLine', { correct, total })}</p>
         {onRetry && (
           <Button type="button" variant="outline" className="mt-4" onClick={onRetry}>

@@ -99,7 +99,7 @@ export function PodcastPlayer({
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
-      <div className="flex justify-between text-xs text-muted-foreground">
+      <div className="flex justify-between text-xs tabular-nums text-muted-foreground">
         <span>{formatTime(current)}</span>
         <span>{formatTime(duration)}</span>
       </div>

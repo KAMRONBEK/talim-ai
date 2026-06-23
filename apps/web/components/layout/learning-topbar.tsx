@@ -51,8 +51,8 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
             <Menu className="h-5 w-5" />
           </Button>
         )}
-        <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-semibold">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-xs text-primary-foreground">
+        <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-display font-semibold">
+          <span className="avatar-gradient flex h-7 w-7 items-center justify-center rounded-lg text-xs">
             T
           </span>
           <span className="hidden sm:inline">Talim AI</span>

@@ -7,66 +7,69 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222 20% 12%;
+    /* Talim "spark of learning" — violet brand + marigold accent on warm paper. */
+    --background: 250 40% 99%;
+    --foreground: 250 28% 13%;
     --card: 0 0% 100%;
-    --card-foreground: 222 20% 12%;
-    --primary: 168 55% 40%;
+    --card-foreground: 250 28% 13%;
+    --primary: 255 80% 62%;
     --primary-foreground: 0 0% 100%;
-    --accent-secondary: 255 70% 55%;
-    --secondary: 210 25% 96%;
-    --secondary-foreground: 222 20% 12%;
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 14% 45%;
-    --accent: 168 40% 94%;
-    --accent-foreground: 168 55% 28%;
+    --accent-secondary: 38 96% 55%;
+    --accent-secondary-foreground: 250 35% 12%;
+    --secondary: 250 30% 96%;
+    --secondary-foreground: 250 28% 18%;
+    --muted: 250 24% 96%;
+    --muted-foreground: 250 10% 45%;
+    --accent: 255 72% 96%;
+    --accent-foreground: 255 58% 40%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --success: 142 71% 35%;
+    --success: 152 58% 40%;
     --success-foreground: 0 0% 100%;
-    --success-muted: 142 76% 94%;
-    --warning: 38 92% 40%;
+    --success-muted: 152 60% 94%;
+    --warning: 38 92% 44%;
     --warning-foreground: 0 0% 100%;
-    --warning-muted: 48 96% 89%;
-    --info: 217 91% 50%;
+    --warning-muted: 42 96% 90%;
+    --info: 235 84% 62%;
     --info-foreground: 0 0% 100%;
-    --info-muted: 214 95% 93%;
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 168 55% 40%;
-    --radius: 0.75rem;
+    --info-muted: 235 92% 95%;
+    --border: 250 22% 90%;
+    --input: 250 22% 90%;
+    --ring: 255 80% 62%;
+    --radius: 0.85rem;
     --topbar-height: 3.5rem;
     --sidebar-width: 16rem;
   }
 
   .dark {
-    --background: 222 20% 8%;
-    --foreground: 210 20% 98%;
-    --card: 222 20% 10%;
-    --card-foreground: 210 20% 98%;
-    --primary: 168 55% 45%;
-    --primary-foreground: 222 20% 8%;
-    --accent-secondary: 255 65% 65%;
-    --secondary: 217 20% 18%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 217 20% 18%;
-    --muted-foreground: 215 15% 65%;
-    --accent: 217 20% 18%;
-    --accent-foreground: 210 20% 98%;
-    --destructive: 0 62% 35%;
-    --destructive-foreground: 210 20% 98%;
-    --success: 142 60% 45%;
-    --success-foreground: 222 20% 8%;
-    --success-muted: 142 40% 16%;
-    --warning: 38 80% 50%;
-    --warning-foreground: 222 20% 8%;
-    --warning-muted: 38 40% 16%;
-    --info: 217 70% 55%;
-    --info-foreground: 222 20% 8%;
-    --info-muted: 217 40% 16%;
-    --border: 217 20% 22%;
-    --input: 217 20% 22%;
-    --ring: 168 55% 45%;
+    --background: 250 28% 8%;
+    --foreground: 250 20% 96%;
+    --card: 250 26% 11%;
+    --card-foreground: 250 20% 96%;
+    --primary: 255 85% 70%;
+    --primary-foreground: 250 30% 10%;
+    --accent-secondary: 38 95% 60%;
+    --accent-secondary-foreground: 250 40% 10%;
+    --secondary: 250 18% 18%;
+    --secondary-foreground: 250 20% 96%;
+    --muted: 250 16% 18%;
+    --muted-foreground: 250 12% 66%;
+    --accent: 250 30% 22%;
+    --accent-foreground: 255 70% 86%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 250 20% 96%;
+    --success: 152 55% 52%;
+    --success-foreground: 250 28% 8%;
+    --success-muted: 152 35% 16%;
+    --warning: 38 82% 56%;
+    --warning-foreground: 250 28% 8%;
+    --warning-muted: 38 42% 16%;
+    --info: 235 78% 70%;
+    --info-foreground: 250 28% 8%;
+    --info-muted: 235 40% 18%;
+    --border: 250 16% 22%;
+    --input: 250 16% 22%;
+    --ring: 255 85% 70%;
   }
 
   * {
@@ -100,6 +103,33 @@
   .bg-dots {
     background-image: radial-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+
+  /* Signature: marigold highlighter stroke behind key words (studying = highlighting). */
+  .marker-highlight {
+    background-image: linear-gradient(
+      180deg,
+      transparent 58%,
+      hsl(var(--accent-secondary) / 0.5) 58%,
+      hsl(var(--accent-secondary) / 0.5) 94%,
+      transparent 94%
+    );
+    background-repeat: no-repeat;
+    padding-inline: 0.1em;
+  }
+
+  /* Signature: faint girih-inspired 8-point star lattice — a nod to Central Asian
+     tilework. Kept very low opacity so it reads as texture, not decoration. */
+  .bg-girih {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%236d5ce7' stroke-opacity='0.06' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 72px 72px;
+  }
+
+  /* Soft radial brand wash for hero / feature backdrops. */
+  .bg-brand-radial {
+    background-image:
+      radial-gradient(60% 55% at 15% 0%, hsl(var(--primary) / 0.14) 0%, transparent 60%),
+      radial-gradient(50% 50% at 100% 10%, hsl(var(--accent-secondary) / 0.16) 0%, transparent 55%);
   }
 }
 

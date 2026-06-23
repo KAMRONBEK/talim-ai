@@ -85,14 +85,16 @@ export function GameQuizPlayer({
 
   if (phase === 'intro') {
     return (
-      <div className="rounded-2xl border bg-card p-8 text-center">
-        <h2 className="text-xl font-bold">{assessment.title}</h2>
+      <div className="rounded-2xl border border-border/70 bg-card p-8 text-center shadow-soft">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-secondary/15 text-3xl">🎮</div>
+        <h2 className="mt-4 font-display text-xl font-bold">{assessment.title}</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           {assessment.questions.length} questions · {limitSec}s each · faster answers and streaks
           score more points.
         </p>
         <div className="mt-6 flex justify-center gap-2">
           <Button
+            variant="spark"
             onClick={() => {
               startTotalRef.current = Date.now();
               setPhase('playing');
@@ -110,7 +112,7 @@ export function GameQuizPlayer({
 
   if (phase === 'submitting') {
     return (
-      <div className="rounded-2xl border bg-card p-8 text-center text-muted-foreground">
+      <div className="rounded-2xl border border-border/70 bg-card p-8 text-center text-muted-foreground shadow-soft">
         Scoring…
       </div>
     );
@@ -119,11 +121,11 @@ export function GameQuizPlayer({
   if (phase === 'results' && result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
     return (
-      <div className="space-y-4 rounded-2xl border bg-card p-6">
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">Your score</p>
-          <p className="text-4xl font-extrabold text-primary">{result.attempt.pointsTotal}</p>
-          <p className="text-sm text-muted-foreground">
+      <div className="space-y-4 rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
+        <div className="rounded-2xl bg-brand-radial p-6 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Your score</p>
+          <p className="font-display text-5xl font-extrabold tabular-nums text-primary">{result.attempt.pointsTotal}</p>
+          <p className="mt-1 text-sm text-muted-foreground">
             {result.correct}/{result.total} correct · best streak {result.attempt.maxStreak}
           </p>
         </div>
@@ -132,7 +134,7 @@ export function GameQuizPlayer({
             <div
               key={r.questionId}
               className={`rounded-xl border p-3 ${
-                r.correct ? 'border-emerald-500/40 bg-emerald-500/5' : 'border-destructive/40 bg-destructive/5'
+                r.correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5'
               }`}
             >
               <p className="text-sm font-medium">
@@ -166,12 +168,12 @@ export function GameQuizPlayer({
 
   const pct = Math.round((timeLeft / limitSec) * 100);
   return (
-    <div className="space-y-4 rounded-2xl border bg-card p-6">
+    <div className="space-y-4 rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
       <div className="flex items-center justify-between text-sm text-muted-foreground">
-        <span>
+        <span className="font-medium">
           Question {index + 1} / {assessment.questions.length}
         </span>
-        <span className="font-mono">{Math.ceil(timeLeft)}s</span>
+        <span className="font-display font-bold tabular-nums">{Math.ceil(timeLeft)}s</span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-muted">
         <div
@@ -179,7 +181,7 @@ export function GameQuizPlayer({
           style={{ width: `${pct}%` }}
         />
       </div>
-      <p className="text-lg font-semibold">{question.prompt}</p>
+      <p className="font-display text-lg font-semibold">{question.prompt}</p>
       {question.type === 'MULTIPLE_CHOICE' && question.options?.length ? (
         <div className="grid gap-2 sm:grid-cols-2">
           {question.options.map((option) => (

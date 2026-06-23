@@ -30,7 +30,7 @@ function SlidesInner({ id }: { id: string }) {
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
-      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b bg-card/60 px-4 py-2.5 backdrop-blur">
+      <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-border/70 bg-card/60 px-4 py-2.5 backdrop-blur">
         <div className="flex min-w-0 items-center gap-3">
           <Link
             href={`/content/${id}`}
@@ -88,7 +88,7 @@ function GeneratingState({ message, hint }: { message: string; hint: string }) {
         <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
         <Sparkles className="h-8 w-8 animate-pulse text-primary" />
       </div>
-      <p className="text-lg font-semibold">{message}</p>
+      <p className="font-display text-lg font-semibold">{message}</p>
       <p className="max-w-sm text-sm text-muted-foreground">{hint}</p>
     </div>
   );
@@ -109,14 +109,14 @@ function EmptyState({
 }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-5 p-8 text-center">
-      <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-fuchsia-500 text-white shadow-xl">
+      <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-brand text-white shadow-soft">
         <Sparkles className="h-10 w-10" />
       </div>
       <div>
-        <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
+        <h2 className="font-display text-2xl font-bold tracking-tight">{title}</h2>
         <p className="mt-2 max-w-md text-muted-foreground">{body}</p>
       </div>
-      <Button size="lg" onClick={onGenerate}>
+      <Button variant="gradient" size="lg" onClick={onGenerate}>
         <Sparkles className="h-5 w-5" />
         {cta}
       </Button>

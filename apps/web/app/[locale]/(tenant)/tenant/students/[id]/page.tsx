@@ -3,6 +3,7 @@
 import { use } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { ArrowLeft, Flame } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { useAssignContent, useStudentProgress } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
@@ -26,22 +27,31 @@ export default function TenantStudentDetailPage({
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       <div>
-        <Link href="/tenant/students" className="text-sm text-muted-foreground hover:underline">
+        <Link
+          href="/tenant/students"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
           {t('students.back')}
         </Link>
-        <h1 className="mt-2 text-2xl font-bold">{data.student.name ?? data.student.email}</h1>
-        <p className="text-muted-foreground">
+        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight">{data.student.name ?? data.student.email}</h1>
+        <p className="mt-1 text-muted-foreground">
           {t('students.streak', { days: data.streakDays })}
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border bg-card p-4">
-          <p className="text-sm text-muted-foreground">{t('students.streak', { days: data.streakDays })}</p>
-          <p className="mt-1 text-3xl font-semibold">{data.streakDays}</p>
+        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-center justify-between">
+            <p className="text-sm font-medium text-muted-foreground">{t('students.streak', { days: data.streakDays })}</p>
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
+              <Flame className="h-5 w-5" />
+            </span>
+          </div>
+          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">{data.streakDays}</p>
         </div>
-        <div className="rounded-xl border bg-card p-4 md:col-span-2">
-          <h2 className="font-semibold">{t('students.activity')}</h2>
+        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft md:col-span-2">
+          <h2 className="font-display text-lg font-semibold">{t('students.activity')}</h2>
           <div className="mt-3">
             {data.activityDays.length > 0 ? (
               <ActivityHeatmap days={data.activityDays} />
@@ -54,15 +64,15 @@ export default function TenantStudentDetailPage({
 
       <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-3">
-          <h2 className="font-semibold">{t('students.progress')}</h2>
+          <h2 className="font-display text-lg font-semibold">{t('students.progress')}</h2>
           {data.contentProgress.length === 0 ? (
             <p className="text-muted-foreground">{t('students.noProgress')}</p>
           ) : (
             data.contentProgress.map((row) => (
-              <div key={row.contentId} className="rounded-xl border bg-card p-4">
+              <div key={row.contentId} className="rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
                 <div className="flex items-center justify-between gap-3">
                   <p className="font-medium">{row.contentTitle}</p>
-                  <span className="text-sm font-medium">{Math.round(row.overallCoverage)}%</span>
+                  <span className="font-display text-sm font-bold tabular-nums text-primary">{Math.round(row.overallCoverage)}%</span>
                 </div>
                 <div className="mt-3">
                   <ProgressBar value={row.overallCoverage} />
@@ -76,13 +86,13 @@ export default function TenantStudentDetailPage({
             ))
           )}
         </div>
-        <aside className="rounded-xl border bg-card p-4">
-          <h2 className="font-semibold">Assign material</h2>
+        <aside className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <h2 className="font-display text-lg font-semibold">Assign material</h2>
           <p className="mt-1 text-sm text-muted-foreground">Give this student access to a material.</p>
           <div className="mt-4 space-y-2">
             {(contents ?? []).map((content) => (
-              <div key={content.id} className="flex items-center justify-between gap-2 rounded-lg border p-2 text-sm">
-                <span className="truncate">{content.title}</span>
+              <div key={content.id} className="flex items-center justify-between gap-2 rounded-xl border border-border/70 p-2.5 text-sm transition-colors hover:bg-secondary/40">
+                <span className="truncate font-medium">{content.title}</span>
                 <Button
                   type="button"
                   size="sm"

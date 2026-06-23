@@ -30,8 +30,8 @@ export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: Ch
       <div className={cn('max-w-[85%]', isUser && 'text-right')}>
         <div
           className={cn(
-            'rounded-xl px-4 py-3 text-sm leading-relaxed',
-            isUser ? 'bg-primary text-primary-foreground' : 'border bg-card',
+            'rounded-2xl px-4 py-3 text-sm leading-relaxed',
+            isUser ? 'bg-primary text-primary-foreground shadow-soft' : 'border border-border/70 bg-card',
           )}
         >
           {hasExcerpt && isUser && (

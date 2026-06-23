@@ -20,18 +20,19 @@ export default function LearnerSettingsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-8">
       <div>
-        <h1 className="text-2xl font-bold">{t('title')}</h1>
-        <p className="text-muted-foreground">{t('desc')}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('accountTitle')}</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>
 
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">{t('accountTitle')}</h2>
+        <h2 className="font-display text-lg font-semibold">{t('accountTitle')}</h2>
         <ProfileCard />
         <PasswordCard onSuccess={handlePasswordSuccess} />
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">{t('schoolTitle')}</h2>
+        <h2 className="font-display text-lg font-semibold">{t('schoolTitle')}</h2>
         <AccountSummary tenantName={summary?.tenantName} />
       </section>
     </div>

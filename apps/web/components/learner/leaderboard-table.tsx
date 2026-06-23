@@ -13,12 +13,12 @@ export function LeaderboardTable({
     return <p className="text-sm text-muted-foreground">No scores yet.</p>;
   }
   return (
-    <div className="overflow-hidden rounded-xl border">
+    <div className="overflow-hidden rounded-xl border border-border/70">
       {rows.map((r) => (
         <div
           key={r.learnerId}
-          className={`flex items-center justify-between border-b px-3 py-2 text-sm last:border-0 ${
-            r.learnerId === highlightId ? 'bg-primary/10 font-medium' : ''
+          className={`flex items-center justify-between border-b border-border/70 px-3 py-2.5 text-sm last:border-0 ${
+            r.learnerId === highlightId ? 'bg-primary/10 font-semibold text-primary' : ''
           }`}
         >
           <span className="flex items-center gap-2">
@@ -37,7 +37,7 @@ export function LeaderboardTable({
             </span>
             {r.learnerName}
           </span>
-          <span className="font-semibold">
+          <span className="font-display font-semibold tabular-nums">
             {mode === 'GAME' ? `${r.pointsTotal} pts` : `${Math.round(r.score)}%`}
           </span>
         </div>
