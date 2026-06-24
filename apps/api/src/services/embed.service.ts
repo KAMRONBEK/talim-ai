@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { encode, decode } from 'gpt-tokenizer';
 import type { UsageFeature } from '@prisma/client';
 import { env } from '../config/env.js';
 import { recordUsage, type UsageContext } from './usage.service.js';
@@ -9,6 +10,14 @@ const openai = new OpenAI({
 
 const EMBEDDING_MODEL = 'text-embedding-3-small';
 const EMBEDDING_DIMENSIONS = 1536;
+// text-embedding-3-small rejects inputs over 8192 tokens, and one bad input fails
+// the whole batch. Clamp defensively so a single overlong chunk can't kill ingest.
+const EMBED_MAX_TOKENS = 8000;
+
+function clampToTokenLimit(text: string): string {
+  const tokens = encode(text);
+  return tokens.length <= EMBED_MAX_TOKENS ? text : decode(tokens.slice(0, EMBED_MAX_TOKENS));
+}
 
 function recordEmbedUsage(
   usage: UsageContext | undefined,
@@ -33,7 +42,7 @@ export async function generateEmbedding(
 ): Promise<number[]> {
   const response = await openai.embeddings.create({
     model: EMBEDDING_MODEL,
-    input: text,
+    input: clampToTokenLimit(text),
     dimensions: EMBEDDING_DIMENSIONS,
   });
   const embedding = response.data[0]?.embedding;
@@ -51,7 +60,7 @@ export async function generateEmbeddings(
   if (texts.length === 0) return [];
   const response = await openai.embeddings.create({
     model: EMBEDDING_MODEL,
-    input: texts,
+    input: texts.map(clampToTokenLimit),
     dimensions: EMBEDDING_DIMENSIONS,
   });
   recordEmbedUsage(usage, response, { chunkCount: texts.length });

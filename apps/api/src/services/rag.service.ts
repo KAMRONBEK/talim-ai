@@ -26,6 +26,18 @@ function tokenTail(text: string, maxTokens: number): string {
   return decode(tokens.slice(tokens.length - maxTokens)).trimStart();
 }
 
+/** Hard-split text into token windows of at most `maxTokens` (no natural boundary needed). */
+function splitByTokens(text: string, maxTokens: number): string[] {
+  const tokens = encode(text);
+  if (tokens.length <= maxTokens) return [text];
+  const out: string[] = [];
+  for (let i = 0; i < tokens.length; i += maxTokens) {
+    const part = decode(tokens.slice(i, i + maxTokens)).trim();
+    if (part) out.push(part);
+  }
+  return out;
+}
+
 /** Split into structural blocks (paragraphs), further splitting oversized ones by sentence. */
 function toBlocks(text: string): string[] {
   const paragraphs = text
@@ -40,17 +52,22 @@ function toBlocks(text: string): string[] {
       continue;
     }
     const sentences = para
-      .split(/(?<=[.!?…。])\s+/)
+      .split(/(?<=[.!?…。؟])\s+/)
       .map((s) => s.trim())
       .filter(Boolean);
     let buf = '';
     for (const sentence of sentences) {
-      const candidate = buf ? `${buf} ${sentence}` : sentence;
-      if (buf && countTokens(candidate) > MAX_BLOCK_TOKENS) {
-        blocks.push(buf);
-        buf = sentence;
-      } else {
-        buf = candidate;
+      // A single "sentence" can exceed the cap when text lacks sentence punctuation
+      // (e.g. Arabic/Cyrillic OCR), so hard-split by tokens — guaranteeing no block
+      // (and thus no embedding input) is ever oversized.
+      for (const part of splitByTokens(sentence, MAX_BLOCK_TOKENS)) {
+        const candidate = buf ? `${buf} ${part}` : part;
+        if (buf && countTokens(candidate) > MAX_BLOCK_TOKENS) {
+          blocks.push(buf);
+          buf = part;
+        } else {
+          buf = candidate;
+        }
       }
     }
     if (buf) blocks.push(buf);

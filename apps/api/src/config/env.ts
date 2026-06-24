@@ -17,7 +17,9 @@ const envSchema = z.object({
   // Scanned-PDF ingest: max pages to rasterize + OCR, and OCR concurrency. Default
   // concurrency is conservative (3) to stay within the 2GB VPS during fallback OCR.
   OCR_MAX_PAGES: z.coerce.number().int().min(1).max(600).default(250),
-  OCR_CONCURRENCY: z.coerce.number().int().min(1).max(12).default(3),
+  // OCR calls are network-bound (each page holds ~9MB); 8-in-flight stays well
+  // within the api container's 512MB limit and cuts a 200-page book to ~15-20 min.
+  OCR_CONCURRENCY: z.coerce.number().int().min(1).max(16).default(8),
   // Optional OpenRouter-hosted Mistral OCR. When OPENROUTER_API_KEY is set it's the
   // PRIMARY scanned-PDF path: OpenRouter's file-parser plugin runs Mistral OCR
   // (verbatim — correct for Quranic Arabic) and we read the parsed text from the
