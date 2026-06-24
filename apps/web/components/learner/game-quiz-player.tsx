@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import { useSubmitLearnerAssessment } from '@/hooks/useAssessments';
+import { RichText } from '@/components/learning/rich-text';
 
 type Phase = 'intro' | 'playing' | 'submitting' | 'results';
 
@@ -181,7 +182,9 @@ export function GameQuizPlayer({
           style={{ width: `${pct}%` }}
         />
       </div>
-      <p className="font-display text-lg font-semibold">{question.prompt}</p>
+      <div className="font-display text-lg font-semibold">
+        <RichText>{question.prompt}</RichText>
+      </div>
       {question.type === 'MULTIPLE_CHOICE' && question.options?.length ? (
         <div className="grid gap-2 sm:grid-cols-2">
           {question.options.map((option) => (
@@ -191,7 +194,7 @@ export function GameQuizPlayer({
               className="h-auto justify-start py-3 text-left"
               onClick={() => lockAnswer(option)}
             >
-              {option}
+              <RichText inline>{option}</RichText>
             </Button>
           ))}
         </div>

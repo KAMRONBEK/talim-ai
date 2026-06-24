@@ -9,6 +9,7 @@ import {
   type Quiz,
   type QuizQuestion,
 } from '@talim/types';
+import { RichText } from '@/components/learning/rich-text';
 
 interface QuizCardProps {
   quiz: Quiz;
@@ -168,7 +169,9 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               {typeLabel}
             </span>
           </div>
-          <p className="font-display text-lg font-semibold leading-snug">{q.question}</p>
+          <div className="font-display text-lg font-semibold leading-snug">
+            <RichText>{q.question}</RichText>
+          </div>
 
           {isMultipleChoice ? (
             <div className="space-y-2.5">
@@ -195,7 +198,9 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                     >
                       {letter}
                     </span>
-                    <span className="text-[15px]">{option}</span>
+                    <span className="text-[15px]">
+                      <RichText inline>{option}</RichText>
+                    </span>
                   </label>
                 );
               })}
@@ -242,7 +247,9 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
           {isRevealed && !isMultipleChoice && !isCorrect && q.acceptableAnswers?.length > 0 && (
             <p className="text-sm text-muted-foreground">
               {t('correctAnswerLabel')}{' '}
-              <span className="font-semibold text-foreground">{q.acceptableAnswers[0]}</span>
+              <span className="font-semibold text-foreground">
+                <RichText inline>{q.acceptableAnswers[0] ?? ''}</RichText>
+              </span>
             </p>
           )}
           {isRevealed && q.explanation && (
@@ -250,7 +257,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               <div className={isCorrect ? 'od-quiz-explanation-title' : 'od-quiz-explanation-wrong-title'}>
                 {isCorrect ? t('explanationCorrect') : t('explanationWrong')}
               </div>
-              <p>{q.explanation}</p>
+              <RichText>{q.explanation}</RichText>
             </div>
           )}
 
