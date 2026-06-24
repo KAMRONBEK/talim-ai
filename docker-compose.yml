@@ -54,7 +54,7 @@ services:
       # OpenRouter-hosted Mistral OCR (primary scanned-PDF path). Empty default so
       # compose doesn't warn when it's unset (dev / local).
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
-      OPENROUTER_OCR_MODEL: ${OPENROUTER_OCR_MODEL:-google/gemini-flash-1.5}
+      OPENROUTER_OCR_MODEL: ${OPENROUTER_OCR_MODEL:-google/gemini-2.5-flash-lite}
       UPLOAD_DIR: ${UPLOAD_DIR:-/uploads}
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:3001}
     volumes:

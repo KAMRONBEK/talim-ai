@@ -24,7 +24,7 @@ const envSchema = z.object({
   // response annotations. The chat model only triggers parsing, so use a cheap,
   // large-context one (a 210-page book yields a lot of parsed text to carry).
   OPENROUTER_API_KEY: z.string().default(''),
-  OPENROUTER_OCR_MODEL: z.string().default('google/gemini-flash-1.5'),
+  OPENROUTER_OCR_MODEL: z.string().default('google/gemini-2.5-flash-lite'),
   TTS_MODEL: z.string().default('tts-1-hd'),
   TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
   ELEVENLABS_API_KEY: z.string().default(''),
