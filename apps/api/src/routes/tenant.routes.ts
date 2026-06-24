@@ -16,6 +16,7 @@ import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as videoController from '../controllers/video.controller.js';
 import * as slidesController from '../controllers/slides.controller.js';
+import * as progressController from '../controllers/progress.controller.js';
 
 export const tenantRoutes = Router();
 
@@ -97,5 +98,19 @@ tenantContent.get('/:id/video', asyncHandler(videoController.getVideo));
 tenantContent.post('/:id/video', enforceQuota('GENERATION'), asyncHandler(videoController.createVideo));
 tenantContent.get('/:id/slides', asyncHandler(slidesController.getSlides));
 tenantContent.post('/:id/slides', asyncHandler(slidesController.createSlides));
+// Progress / history / podcast-progress so an owner can read & track their own
+// material in the reader (the B2C /content/* paths are owner-blocked).
+tenantContent.get('/:id/progress', asyncHandler(progressController.getContentProgress));
+tenantContent.patch('/:id/progress', asyncHandler(progressController.patchContentProgress));
+tenantContent.get('/:id/learning-history', asyncHandler(progressController.getLearningHistory));
+tenantContent.get('/:id/podcast/progress', asyncHandler(progressController.getEpisodeProgress));
+tenantContent.patch(
+  '/:id/podcast/episodes/:episodeId/progress',
+  asyncHandler(progressController.patchEpisodeProgress),
+);
+tenantContent.get(
+  '/:id/podcast/episodes/:episodeId/audio',
+  asyncHandler(podcastController.streamEpisodeAudio),
+);
 
 tenantRoutes.use('/content', tenantContent);

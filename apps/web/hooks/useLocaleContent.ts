@@ -9,6 +9,7 @@ import { setApiLocale } from '@/lib/locale-api';
 import { api } from '@/lib/api';
 import { useGenerateSummary } from '@/hooks/useQuiz';
 import { useCreatePodcast } from '@/hooks/usePodcast';
+import { useContentBase } from '@/hooks/useContentBase';
 
 export function useLocaleSync() {
   const locale = useLocale() as AppLocale;
@@ -26,6 +27,7 @@ export function useAutoGenerateOnLocaleChange(contentId: string, sectionId?: str
   const queryClient = useQueryClient();
   const generateSummary = useGenerateSummary();
   const createPodcast = useCreatePodcast();
+  const base = useContentBase();
 
   useEffect(() => {
     if (prevLocale.current === locale) return;
@@ -54,12 +56,12 @@ export function useAutoGenerateOnLocaleChange(contentId: string, sectionId?: str
       }
 
       const { data } = await api.get<{ podcast: { status: string } | null }>(
-        `/content/${contentId}/podcast`,
+        `${base}/${contentId}/podcast`,
         { params: { locale } },
       );
       if (!data.podcast || data.podcast.status === 'FAILED') {
         void createPodcast.mutateAsync({ contentId });
       }
     })();
-  }, [locale, contentId, sectionId, queryClient, generateSummary, createPodcast]);
+  }, [locale, contentId, sectionId, queryClient, generateSummary, createPodcast, base]);
 }
