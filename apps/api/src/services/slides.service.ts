@@ -4,7 +4,7 @@ import { prisma } from '../lib/prisma.js';
 import { env } from '../config/env.js';
 import { AppError, QuotaExceededError } from '../middleware/error.middleware.js';
 import { assertQuota } from './subscription.service.js';
-import { getOrderedChunks, buildRagContext } from './rag.service.js';
+import { getOrderedChunks, buildRagContext, boundContextByTokens } from './rag.service.js';
 import { getSectionBody } from './section.service.js';
 import { generateJsonCompletion } from './ai.service.js';
 import { deckSchema, slideSchema } from '../lib/deck-schema.js';
@@ -83,11 +83,12 @@ async function buildContext(contentId: string, sectionId?: string): Promise<stri
   if (sectionId) {
     const body = await getSectionBody(contentId, sectionId);
     if (!body.trim()) throw new AppError(400, 'No section text available for slides');
-    return body.slice(0, 16000);
+    // Token-bound (not a tiny char cap) so a long section produces a full deck.
+    return boundContextByTokens(body, 12000);
   }
   const chunks = await getOrderedChunks(contentId);
   if (chunks.length === 0) throw new AppError(400, 'No content text available for slides');
-  return buildRagContext(chunks).slice(0, 16000);
+  return boundContextByTokens(buildRagContext(chunks), 18000);
 }
 
 type Overrides = Pick<Deck, 'accent' | 'language' | 'audience' | 'sourceContentId'> & { title: string };

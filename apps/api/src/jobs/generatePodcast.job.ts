@@ -1,7 +1,7 @@
 import { parseAppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateChatCompletion } from '../services/ai.service.js';
-import { buildRagContext } from '../services/rag.service.js';
+import { buildRagContext, boundContextByTokens } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
 import { synthesizeSpeech } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
@@ -61,18 +61,22 @@ export function registerGeneratePodcastJob(): void {
       const sec = sections[i];
       if (!sec) continue;
 
+      // Use the WHOLE section (it's already a bounded slice of the document) rather
+      // than the first 15 chunks, so the episode covers the section fully.
       const chunks = await prisma.chunk.findMany({
         where: {
           contentId,
           chunkIndex: { gte: sec.startChunk, lte: sec.endChunk },
         },
         orderBy: { chunkIndex: 'asc' },
-        take: 15,
       });
 
       const context =
         chunks.length > 0
-          ? buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })))
+          ? boundContextByTokens(
+              buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex }))),
+              8000,
+            )
           : '';
 
       const script = await generateChatCompletion(

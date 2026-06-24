@@ -259,10 +259,20 @@ export function buildRagContext(chunks: { text: string }[], locale: AppLocale = 
   return chunks.map((c, i) => `--- ${label} ${i + 1} ---\n${c.text}`).join('\n\n');
 }
 
-/** Chunks in document order — better for summaries than semantic search alone. */
+/** Bound a context string to a token budget (keeps whole-document context from
+ *  overflowing the model while no longer silently truncating at a tiny char cap). */
+export function boundContextByTokens(text: string, maxTokens: number): string {
+  const tokens = encode(text);
+  if (tokens.length <= maxTokens) return text;
+  return decode(tokens.slice(0, maxTokens));
+}
+
+/** Chunks in document order — better for whole-document tasks than semantic search.
+ *  Default raised to 200 so summaries/full decks see the whole material, not the
+ *  first ~40 chunks (callers bound the final context by tokens). */
 export async function getOrderedChunks(
   contentId: string,
-  limit: number = 40,
+  limit: number = 200,
 ): Promise<{ text: string; chunkIndex: number }[]> {
   return prisma.chunk.findMany({
     where: { contentId },

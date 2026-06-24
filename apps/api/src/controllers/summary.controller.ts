@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
-import { getOrderedChunks, buildRagContext } from '../services/rag.service.js';
+import { getOrderedChunks, buildRagContext, boundContextByTokens } from '../services/rag.service.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import {
   getSummarySystemPrompt,
@@ -47,13 +47,14 @@ async function generateSummaryText(
   if (sectionId) {
     const body = await getSectionBody(contentId, sectionId);
     if (!body.trim()) throw new AppError(400, 'No section text available for summary');
-    context = body.slice(0, 12000);
+    context = boundContextByTokens(body, 8000);
   } else {
     const chunks = await getOrderedChunks(contentId);
     if (chunks.length === 0) {
       throw new AppError(400, 'No content text available for summary');
     }
-    context = buildRagContext(chunks);
+    // Whole-document summary now sees the full material (token-bounded), not 40 chunks.
+    context = boundContextByTokens(buildRagContext(chunks), 12000);
   }
 
   const raw = await generateChatCompletion(
