@@ -5,87 +5,141 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Serialize deploys (don't cancel one mid-restart) so two runs never race the VPS.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  deploy:
+  # Decide which app images actually need rebuilding from the diff. Shared deps fan
+  # out: a lockfile / packages/types / compose / workflow change rebuilds everything;
+  # packages/ui rebuilds web+admin. An api-only change builds just api.
+  changes:
+    name: Detect changed apps
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
     steps:
-      - name: Deploy via SSH with Doppler
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: set
+        run: |
+          set -euo pipefail
+          ALL='["api","web","admin"]'
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "matrix=$ALL" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          BEFORE="${{ github.event.before }}"
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            echo "matrix=$ALL" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          FILES=$(git diff --name-only "$BEFORE" "${{ github.sha }}")
+          echo "Changed files:"; echo "$FILES"
+          # Anything shared rebuilds all three.
+          if echo "$FILES" | grep -qE '^(\.github/workflows/|docker-compose|pnpm-lock\.yaml|package\.json|pnpm-workspace\.yaml|packages/types/)'; then
+            echo "matrix=$ALL" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          apps=()
+          echo "$FILES" | grep -qE '^apps/api/'              && apps+=("api")   || true
+          echo "$FILES" | grep -qE '^(apps/web/|packages/ui/)'   && apps+=("web")   || true
+          echo "$FILES" | grep -qE '^(apps/admin/|packages/ui/)' && apps+=("admin") || true
+          if [ ${#apps[@]} -eq 0 ]; then
+            echo "matrix=[]" >> "$GITHUB_OUTPUT"
+          else
+            printf '%s\n' "${apps[@]}" | sort -u | jq -R . | jq -cs . \
+              | sed 's/^/matrix=/' >> "$GITHUB_OUTPUT"
+          fi
+
+  # Build only the changed images, in parallel, on a 4-vCPU/16GB runner with a
+  # persistent layer cache, and push to GHCR. The 2GB VPS never builds anything.
+  build:
+    name: Build & push ${{ matrix.app }}
+    needs: changes
+    if: needs.changes.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: true
+      matrix:
+        app: ${{ fromJSON(needs.changes.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/${{ matrix.app }}/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/kamronbek/talim-${{ matrix.app }}:latest
+            ghcr.io/kamronbek/talim-${{ matrix.app }}:${{ github.sha }}
+          # Inlined into the web/admin client bundle at build (public URL, mirrors
+          # Doppler prd NEXT_PUBLIC_API_URL). The api Dockerfile ignores it.
+          build-args: |
+            NEXT_PUBLIC_API_URL=https://talim-ai.uz/api
+          cache-from: type=gha,scope=${{ matrix.app }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.app }}
+
+  # The VPS logs into GHCR, pulls :latest for the app tier, and restarts only the
+  # containers whose image changed. No building.
+  deploy:
+    name: Deploy to VPS
+    needs: [changes, build]
+    if: needs.changes.outputs.matrix != '[]' && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Pull images & restart on the VPS
         uses: appleboy/ssh-action@v1.2.0
         env:
           DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GHCR_USER: ${{ github.actor }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
-          command_timeout: 65m
-          envs: DOPPLER_TOKEN
+          command_timeout: 15m
+          envs: DOPPLER_TOKEN,GHCR_TOKEN,GHCR_USER
           script: |
             set -euo pipefail
 
-            COMPOSE_FILES="-f docker-compose.yml -f docker-compose.prod.yml"
+            COMPOSE_FILES="-f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.registry.yml"
             REPO_DIR="${HOME}/talim-ai"
             REPO_URL="https://github.com/KAMRONBEK/talim-ai.git"
 
-            if ! command -v docker >/dev/null 2>&1; then
-              export DEBIAN_FRONTEND=noninteractive
-              apt-get update
-              apt-get install -y ca-certificates curl git
-              install -m 0755 -d /etc/apt/keyrings
-              curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-              chmod a+r /etc/apt/keyrings/docker.asc
-              echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${VERSION_CODENAME}") stable" > /etc/apt/sources.list.d/docker.list
-              apt-get update
-              apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-              systemctl enable --now docker
-            fi
+            command -v doppler >/dev/null 2>&1 || \
+              curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh \
+                | sh -s -- --install-path /usr/local/bin
 
-            if ! command -v doppler >/dev/null 2>&1; then
-              curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh -s -- --install-path /usr/local/bin
-            fi
-
-            if [ ! -d "${REPO_DIR}/.git" ]; then
-              git clone "${REPO_URL}" "${REPO_DIR}"
-            fi
-
+            [ -d "${REPO_DIR}/.git" ] || git clone "${REPO_URL}" "${REPO_DIR}"
             cd "${REPO_DIR}"
             git fetch origin main
             git reset --hard origin/main
 
-            systemctl stop caddy 2>/dev/null || true
-            systemctl disable caddy 2>/dev/null || true
-            # Do not use pkill -f '/opt/jarviddin' — it matches this script's argv and kills the SSH session
-            fuser -k 3000/tcp 2>/dev/null || true
+            echo "${GHCR_TOKEN}" | docker login ghcr.io -u "${GHCR_USER}" --password-stdin
 
-            export DOCKER_BUILDKIT=1
-            export COMPOSE_DOCKER_CLI_BUILD=1
-
-            # Prune BuildKit cache once per week; keep ~5GB to avoid filling the 40GB disk
-            PRUNE_STAMP="${HOME}/.talim-docker-builder-prune-at"
-            PRUNE_AGE_SEC=$((7 * 24 * 60 * 60))
-            LAST_PRUNE=$([ -f "${PRUNE_STAMP}" ] && stat -c %Y "${PRUNE_STAMP}" || echo 0)
-            NOW=$(date +%s)
-            if [ $((NOW - LAST_PRUNE)) -ge "${PRUNE_AGE_SEC}" ]; then
-              docker builder prune -f --max-used-space 5gb
-              touch "${PRUNE_STAMP}"
-            fi
-
-            export DOPPLER_TOKEN="${DOPPLER_TOKEN}"
-            export COMPOSE_PARALLEL_LIMIT=1
+            export DOPPLER_TOKEN
             DOPPLER_RUN="doppler run --project talim-ai --config prd --"
 
-            # Free page cache before builds on the 2GB VPS (deploy runs as root).
-            sync
-            echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
-
-            # Build images one service at a time — parallel Next.js builds OOM the host.
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build api
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build web
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} build admin
-
-            # Start app tier; nginx is recreated separately so it does not proxy to
-            # stale container IPs while --wait marks the deploy failed.
+            # Pull :latest for the app tier (db/redis/nginx come from public registries).
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull
+            # up recreates only containers whose image digest changed.
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --wait db redis api web admin
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --force-recreate --no-deps --wait nginx
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --force-recreate --no-deps --wait nginx
+
+            docker logout ghcr.io || true
             docker image prune -f

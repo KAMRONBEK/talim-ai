@@ -1,0 +1,11 @@
+# Run the app tier from prebuilt images (built & pushed by CI to GHCR) instead of
+# building on the 2GB VPS. Combine after the base + prod files, e.g.:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.registry.yml pull
+# IMAGE_TAG is set by the deploy workflow to the commit SHA; falls back to :latest.
+services:
+  api:
+    image: ghcr.io/kamronbek/talim-api:${IMAGE_TAG:-latest}
+  web:
+    image: ghcr.io/kamronbek/talim-web:${IMAGE_TAG:-latest}
+  admin:
+    image: ghcr.io/kamronbek/talim-admin:${IMAGE_TAG:-latest}
