@@ -29,9 +29,9 @@ RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NODE_PATH=/app/node_modules:/app/apps/api/node_modules
-# openssl for Prisma; fontconfig/freetype so the native canvas (PDF rasterizer
-# used for scanned-PDF OCR) renders pages correctly on Alpine.
-RUN apk add --no-cache openssl fontconfig freetype ttf-dejavu
+# openssl for Prisma; poppler-utils provides `pdftoppm` (the PDF→image rasterizer
+# used for scanned-PDF OCR) — a CLI tool, so no fragile native node bindings.
+RUN apk add --no-cache openssl poppler-utils
 COPY --from=builder /app/apps/api/dist ./dist
 COPY --from=builder /app/apps/api/package.json ./package.json
 COPY --from=builder /app/apps/api/src/prisma ./src/prisma

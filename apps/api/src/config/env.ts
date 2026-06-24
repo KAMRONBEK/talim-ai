@@ -14,9 +14,13 @@ const envSchema = z.object({
   // (rerank-v3.5) for a quality boost; when empty, retrieval falls back to RRF order.
   COHERE_API_KEY: z.string().default(''),
   TRANSCRIPTION_MODEL: z.string().default('whisper-1'),
-  // Scanned-PDF ingest: max pages to rasterize + OCR, and OCR concurrency.
+  // Scanned-PDF ingest: max pages to rasterize + OCR, and OCR concurrency. Default
+  // concurrency is conservative (3) to stay within the 2GB VPS during fallback OCR.
   OCR_MAX_PAGES: z.coerce.number().int().min(1).max(600).default(250),
-  OCR_CONCURRENCY: z.coerce.number().int().min(1).max(12).default(6),
+  OCR_CONCURRENCY: z.coerce.number().int().min(1).max(12).default(3),
+  // Optional Mistral OCR (dedicated document OCR). When set, it's the PRIMARY path
+  // for scanned PDFs — transcribes verbatim (correct for Quranic Arabic) off-box.
+  MISTRAL_API_KEY: z.string().default(''),
   TTS_MODEL: z.string().default('tts-1-hd'),
   TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
   ELEVENLABS_API_KEY: z.string().default(''),
