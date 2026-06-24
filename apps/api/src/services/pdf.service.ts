@@ -9,14 +9,15 @@ import { recordUsage, type UsageContext } from './usage.service.js';
 
 const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) : null;
 
-// Optional dedicated document OCR (Mistral). When configured it's the PRIMARY
-// scanned-PDF path: it transcribes verbatim (no re-diacritization of Quranic
-// verses) entirely server-side. Called over plain HTTPS with the built-in fetch —
+// Optional dedicated document OCR via OpenRouter's Mistral-OCR file-parser plugin.
+// When configured it's the PRIMARY scanned-PDF path: Mistral OCR transcribes
+// verbatim (no re-diacritization of Quranic verses) and we read the parsed text
+// from the response annotations. Called over plain HTTPS with the built-in fetch —
 // no SDK — to avoid any ESM/CJS module-resolution surface in the prod image.
-const MISTRAL_API = 'https://api.mistral.ai/v1';
+const OPENROUTER_API = 'https://openrouter.ai/api/v1';
 
 /** True when a dedicated OCR provider is configured (primary scanned-PDF path). */
-export const hasPrimaryOcrProvider = (): boolean => env.MISTRAL_API_KEY.length > 0;
+export const hasPrimaryOcrProvider = (): boolean => env.OPENROUTER_API_KEY.length > 0;
 
 async function extractWithPdfParse(buffer: Buffer): Promise<string> {
   const data = await pdfParse(buffer);
@@ -187,70 +188,72 @@ async function rasterizeAndOcrPdf(buffer: Buffer, usage?: UsageContext): Promise
     .join('\n\n');
 }
 
+type OpenRouterFileAnnotation = {
+  type?: string;
+  file?: { content?: { type?: string; text?: string }[] };
+};
+
 /**
- * Primary scanned-PDF OCR via Mistral's dedicated document OCR: upload the file,
- * OCR it server-side in one call, return ordered per-page text. A dedicated OCR
- * (not an LLM) is the correct choice for VERBATIM transcription — it won't
- * paraphrase or re-diacritize Arabic/Quranic verses the way LLM vision can.
+ * Primary scanned-PDF OCR via OpenRouter's Mistral-OCR file-parser plugin. The
+ * plugin OCRs the PDF server-side and returns the parsed text in the message
+ * annotations (independent of what the chat model writes back), so we read the
+ * verbatim text straight from `annotations[].file.content` — no paraphrase or
+ * re-diacritization of Arabic/Quranic verses the way an LLM-vision OCR can.
  */
-async function mistralOcrPdf(
+async function ocrViaOpenRouter(
   buffer: Buffer,
   filename: string,
   usage?: UsageContext,
 ): Promise<string> {
-  const key = env.MISTRAL_API_KEY;
-  if (!key) throw new Error('MISTRAL_API_KEY is not configured');
-  const auth = { Authorization: `Bearer ${key}` };
+  const key = env.OPENROUTER_API_KEY;
+  if (!key) throw new Error('OPENROUTER_API_KEY is not configured');
 
-  // 1) Upload the PDF to Mistral cloud (multipart).
-  const form = new FormData();
-  form.append('purpose', 'ocr');
-  form.append('file', new Blob([new Uint8Array(buffer)], { type: 'application/pdf' }), filename);
-  const upRes = await fetch(`${MISTRAL_API}/files`, { method: 'POST', headers: auth, body: form });
-  if (!upRes.ok) throw new Error(`Mistral upload ${upRes.status}: ${await upRes.text()}`);
-  const fileId = ((await upRes.json()) as { id: string }).id;
+  const dataUrl = `data:application/pdf;base64,${buffer.toString('base64')}`;
+  const res = await fetch(`${OPENROUTER_API}/chat/completions`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: env.OPENROUTER_OCR_MODEL,
+      max_tokens: 4, // we only need parsing to run; the model's reply is ignored
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'text', text: 'Parse this document.' },
+            { type: 'file', file: { filename, file_data: dataUrl } },
+          ],
+        },
+      ],
+      plugins: [{ id: 'file-parser', pdf: { engine: 'mistral-ocr' } }],
+    }),
+  });
+  if (!res.ok) throw new Error(`OpenRouter OCR ${res.status}: ${(await res.text()).slice(0, 300)}`);
 
-  try {
-    // 2) Short-lived signed URL for the uploaded file.
-    const urlRes = await fetch(`${MISTRAL_API}/files/${fileId}/url?expiry=24`, { headers: auth });
-    if (!urlRes.ok) throw new Error(`Mistral signed-url ${urlRes.status}: ${await urlRes.text()}`);
-    const signedUrl = ((await urlRes.json()) as { url: string }).url;
+  const data = (await res.json()) as {
+    choices?: { message?: { annotations?: OpenRouterFileAnnotation[] } }[];
+    usage?: { prompt_tokens?: number; completion_tokens?: number };
+  };
+  const text = (data.choices?.[0]?.message?.annotations ?? [])
+    .filter((a) => a.type === 'file')
+    .flatMap((a) => a.file?.content ?? [])
+    .filter((c) => c.type === 'text' && c.text)
+    .map((c) => c.text!.trim())
+    .filter(Boolean)
+    .join('\n\n')
+    .trim();
 
-    // 3) OCR the whole document in one call.
-    const ocrRes = await fetch(`${MISTRAL_API}/ocr`, {
-      method: 'POST',
-      headers: { ...auth, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'mistral-ocr-latest',
-        document: { type: 'document_url', document_url: signedUrl },
-      }),
+  if (usage) {
+    recordUsage({
+      userId: usage.userId,
+      tenantId: usage.tenantId,
+      feature: 'PDF_PARSE',
+      model: `openrouter:${env.OPENROUTER_OCR_MODEL}+mistral-ocr`,
+      inputTokens: data.usage?.prompt_tokens ?? 0,
+      outputTokens: data.usage?.completion_tokens ?? 0,
+      metadata: usage.metadata,
     });
-    if (!ocrRes.ok) throw new Error(`Mistral OCR ${ocrRes.status}: ${await ocrRes.text()}`);
-    const pages = ((await ocrRes.json()) as { pages?: { index: number; markdown: string }[] })
-      .pages ?? [];
-
-    if (usage) {
-      recordUsage({
-        userId: usage.userId,
-        tenantId: usage.tenantId,
-        feature: 'PDF_PARSE',
-        model: 'mistral-ocr-latest',
-        inputTokens: 0,
-        outputTokens: 0,
-        metadata: usage.metadata,
-      });
-    }
-    return [...pages]
-      .sort((a, b) => a.index - b.index)
-      .map((p) => (p.markdown?.trim() ? `[${p.index + 1}] ${p.markdown.trim()}` : ''))
-      .filter(Boolean)
-      .join('\n\n');
-  } finally {
-    // Best-effort cleanup of the uploaded file.
-    await fetch(`${MISTRAL_API}/files/${fileId}`, { method: 'DELETE', headers: auth }).catch(
-      () => {},
-    );
   }
+  return text;
 }
 
 export async function extractPdfText(
@@ -262,13 +265,13 @@ export async function extractPdfText(
   if (parsed) return parsed;
 
   // Scanned/image PDF (no text layer). Reliability ladder, best → last-resort:
-  // 1) Mistral dedicated OCR (verbatim, off-box) when configured.
-  if (env.MISTRAL_API_KEY) {
+  // 1) OpenRouter Mistral-OCR (verbatim, off-box) when configured.
+  if (env.OPENROUTER_API_KEY) {
     try {
-      const text = await mistralOcrPdf(buffer, filename, usage);
+      const text = await ocrViaOpenRouter(buffer, filename, usage);
       if (text.trim()) return text;
     } catch (err) {
-      console.warn('Mistral OCR failed, falling back to local OCR:', (err as Error)?.message);
+      console.warn('OpenRouter OCR failed, falling back to local OCR:', (err as Error)?.message);
     }
   }
 

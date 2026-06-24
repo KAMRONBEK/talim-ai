@@ -18,9 +18,13 @@ const envSchema = z.object({
   // concurrency is conservative (3) to stay within the 2GB VPS during fallback OCR.
   OCR_MAX_PAGES: z.coerce.number().int().min(1).max(600).default(250),
   OCR_CONCURRENCY: z.coerce.number().int().min(1).max(12).default(3),
-  // Optional Mistral OCR (dedicated document OCR). When set, it's the PRIMARY path
-  // for scanned PDFs — transcribes verbatim (correct for Quranic Arabic) off-box.
-  MISTRAL_API_KEY: z.string().default(''),
+  // Optional OpenRouter-hosted Mistral OCR. When OPENROUTER_API_KEY is set it's the
+  // PRIMARY scanned-PDF path: OpenRouter's file-parser plugin runs Mistral OCR
+  // (verbatim — correct for Quranic Arabic) and we read the parsed text from the
+  // response annotations. The chat model only triggers parsing, so use a cheap,
+  // large-context one (a 210-page book yields a lot of parsed text to carry).
+  OPENROUTER_API_KEY: z.string().default(''),
+  OPENROUTER_OCR_MODEL: z.string().default('google/gemini-flash-1.5'),
   TTS_MODEL: z.string().default('tts-1-hd'),
   TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
   ELEVENLABS_API_KEY: z.string().default(''),
