@@ -51,6 +51,10 @@ services:
       JWT_SECRET: ${JWT_SECRET:-talim-ai-local-dev-jwt-secret-change-in-production}
       DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      # OpenRouter-hosted Mistral OCR (primary scanned-PDF path). Empty default so
+      # compose doesn't warn when it's unset (dev / local).
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_OCR_MODEL: ${OPENROUTER_OCR_MODEL:-google/gemini-flash-1.5}
       UPLOAD_DIR: ${UPLOAD_DIR:-/uploads}
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:3001}
     volumes:
