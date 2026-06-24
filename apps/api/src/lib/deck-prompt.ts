@@ -44,6 +44,13 @@ ABSOLUTE RULES:
 - NEVER produce slides about the system, the file, or the process: do not say the document "could not be read", is empty/unreadable, or ask the user to retry/upload again. Build slides ONLY from the material's subject matter. (Insufficient material is handled before you are called.)
 - Return ONE JSON object matching the schema. No prose, no markdown code fences, no commentary.
 
+SOURCE HANDLING:
+- The CONTEXT may be a spoken lecture or video transcript — conversational, with filler, repetition, self-promotion, and speech-to-text errors. Do NOT quote it verbatim or turn raw spoken fragments into slides.
+- DISTILL it into the underlying lesson: pull out the concepts, definitions, formulas, worked examples, steps, and data, and present them as clean, well-structured slides.
+- IGNORE greetings, sign-offs, asides, repeated passages, and any subscribe / channel / "join our telegram" / self-promotion lines.
+- Silently correct obvious transcription errors (garbled terms or numbers) when the intended meaning is clear from context — this is cleaning the SAME material, not inventing. Never add facts or numbers the source does not support.
+- When the source works through a problem, show the problem statement and its solution steps (process / twoColumn / definition), not the speaker's chatter.
+
 JSON SHAPE (follow EXACTLY):
 - The deck object MUST include: "schemaVersion":"1", "title" (a real lesson title, NOT a filename), "subtitle", "audience", "accent", "language", "estimatedMinutes", "sourceContentId", and "slides" (an array).
 - Each slide object's layout field MUST be named "layout" (NOT "type"), set to one of the layout names listed below.
