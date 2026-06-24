@@ -79,16 +79,24 @@ export async function getReadySlideDeckAnyLocale(
   return formatSlideDeck(preferred);
 }
 
+// Below this much readable text we refuse to generate — better to fail cleanly
+// than let the model fabricate a "couldn't read the document" placeholder deck.
+const MIN_SLIDE_CONTEXT_CHARS = 400;
+
 async function buildContext(contentId: string, sectionId?: string): Promise<string> {
   if (sectionId) {
     const body = await getSectionBody(contentId, sectionId);
-    if (!body.trim()) throw new AppError(400, 'No section text available for slides');
+    if (body.trim().length < MIN_SLIDE_CONTEXT_CHARS) {
+      throw new AppError(422, 'Not enough readable text in this section to build slides');
+    }
     // Token-bound (not a tiny char cap) so a long section produces a full deck.
     return boundContextByTokens(body, 12000);
   }
-  const chunks = await getOrderedChunks(contentId);
-  if (chunks.length === 0) throw new AppError(400, 'No content text available for slides');
-  return boundContextByTokens(buildRagContext(chunks), 18000);
+  const context = buildRagContext(await getOrderedChunks(contentId));
+  if (context.trim().length < MIN_SLIDE_CONTEXT_CHARS) {
+    throw new AppError(422, 'Not enough readable text to build slides');
+  }
+  return boundContextByTokens(context, 18000);
 }
 
 type Overrides = Pick<Deck, 'accent' | 'language' | 'audience' | 'sourceContentId'> & { title: string };

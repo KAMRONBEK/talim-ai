@@ -71,6 +71,9 @@ export function registerProcessContentJob(): void {
       }
 
       await generateContentSections(contentId, chunks.length);
+      // Sections were regenerated with fresh ids — drop stale slide decks (incl. any
+      // placeholder from a prior failed read) so they regenerate from the new text.
+      await prisma.contentSlideDeck.deleteMany({ where: { contentId } });
 
       await prisma.content.update({
         where: { id: contentId },

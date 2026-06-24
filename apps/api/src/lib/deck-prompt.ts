@@ -41,6 +41,7 @@ ABSOLUTE RULES:
 - Use ONLY facts, numbers, dates, names, and quotes present in the CONTEXT. Never invent anything. If unsure, omit it.
 - For "bigStat", "statTrio", and "chart", every value MUST appear in the source. Emit a "chart" ONLY when the source contains real numeric data.
 - Output is SEMANTIC CONTENT ONLY. Never emit colors, hex, CSS, HTML, font sizes, or inline styles. The renderer owns all styling.
+- NEVER produce slides about the system, the file, or the process: do not say the document "could not be read", is empty/unreadable, or ask the user to retry/upload again. Build slides ONLY from the material's subject matter. (Insufficient material is handled before you are called.)
 - Return ONE JSON object matching the schema. No prose, no markdown code fences, no commentary.
 
 JSON SHAPE (follow EXACTLY):
