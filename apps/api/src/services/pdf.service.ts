@@ -67,6 +67,59 @@ async function extractWithOpenAI(
   }
 }
 
+/**
+ * Reliable OCR for scanned/image PDFs: rasterize each page server-side and run
+ * vision OCR per page (bounded concurrency with backpressure so only a few page
+ * images are held in memory at once). This is the path that actually reads a
+ * scanned book whose embedded text layer is empty.
+ */
+async function rasterizeAndOcrPdf(buffer: Buffer, usage?: UsageContext): Promise<string> {
+  if (!openai) throw new Error('OPENAI_API_KEY is required for OCR');
+
+  // Dynamic import: the rasterizer pulls a native canvas binary (@napi-rs/canvas).
+  // Loading it lazily means a missing/incompatible binary only disables this path
+  // (caller falls back to file OCR) instead of crashing the API at startup.
+  const { pdf: rasterizePdf } = await import('pdf-to-img');
+  const doc = await rasterizePdf(buffer, { scale: 2 });
+  const results: string[] = [];
+  const inFlight = new Set<Promise<void>>();
+  let pageNo = 0;
+  let truncated = false;
+
+  for await (const png of doc) {
+    if (pageNo >= env.OCR_MAX_PAGES) {
+      truncated = true;
+      break;
+    }
+    const idx = pageNo++;
+    const dataUrl = `data:image/png;base64,${png.toString('base64')}`;
+    let task!: Promise<void>;
+    task = ocrImageDataUrl(dataUrl, usage)
+      .then((text) => {
+        results[idx] = text;
+      })
+      .catch(() => {
+        results[idx] = '';
+      })
+      .finally(() => {
+        inFlight.delete(task);
+      });
+    inFlight.add(task);
+    // Backpressure: don't rasterize further than the OCR window (bounds memory).
+    if (inFlight.size >= env.OCR_CONCURRENCY) await Promise.race(inFlight);
+  }
+  await Promise.all(inFlight);
+
+  if (truncated) {
+    console.warn(`rasterizeAndOcrPdf: stopped at OCR_MAX_PAGES=${env.OCR_MAX_PAGES} (document is longer)`);
+  }
+
+  return results
+    .map((text, i) => (text && text.trim() ? `[${i + 1}] ${text.trim()}` : ''))
+    .filter(Boolean)
+    .join('\n\n');
+}
+
 export async function extractPdfText(
   buffer: Buffer,
   filename = 'document.pdf',
@@ -75,11 +128,20 @@ export async function extractPdfText(
   const parsed = await extractWithPdfParse(buffer);
   if (parsed) return parsed;
 
+  // No embedded text layer (scanned/image PDF) → rasterize + vision OCR per page.
+  try {
+    const ocr = await rasterizeAndOcrPdf(buffer, usage);
+    if (ocr.trim()) return ocr;
+  } catch (err) {
+    console.warn('rasterizeAndOcrPdf failed, falling back to file OCR:', (err as Error)?.message);
+  }
+
+  // Last resort: hand the whole file to the model (works for short scans).
   return extractWithOpenAI(buffer, filename, usage);
 }
 
 const OCR_INSTRUCTION =
-  'Extract all readable text visible in this image, exactly as written. Preserve the original language (Uzbek, Russian, or English). Write any math formulas in LaTeX using $...$ (inline) or $$...$$ (display). Return plain text only — no introduction, commentary, or meta phrases (never write "Here is the text" or "No text could be parsed"). If the image truly has no text, return an empty response.';
+  'Extract all readable text visible in this image, exactly as written. Preserve the original language and script (Uzbek in Latin OR Cyrillic, Russian, Arabic, or English). Write math formulas in LaTeX using $...$ (inline) or $$...$$ (display). If the page has a meaningful illustration, diagram, chart, or table, add a short description of it in square brackets, e.g. [Rasm: ...]. Return plain text only — no introduction, commentary, or meta phrases (never write "Here is the text" or "No text could be parsed"). If the image truly has no content, return an empty response.';
 
 /** Vision OCR a single image (data URL). Reliable for scanned pages, unlike file-based OCR. */
 async function ocrImageDataUrl(dataUrl: string, usage?: UsageContext): Promise<string> {

@@ -14,6 +14,9 @@ const envSchema = z.object({
   // (rerank-v3.5) for a quality boost; when empty, retrieval falls back to RRF order.
   COHERE_API_KEY: z.string().default(''),
   TRANSCRIPTION_MODEL: z.string().default('whisper-1'),
+  // Scanned-PDF ingest: max pages to rasterize + OCR, and OCR concurrency.
+  OCR_MAX_PAGES: z.coerce.number().int().min(1).max(600).default(250),
+  OCR_CONCURRENCY: z.coerce.number().int().min(1).max(12).default(6),
   TTS_MODEL: z.string().default('tts-1-hd'),
   TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
   ELEVENLABS_API_KEY: z.string().default(''),
