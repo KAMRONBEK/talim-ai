@@ -11,6 +11,7 @@ import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
+import { captionAndStoreFigures } from '../services/figure.service.js';
 import { ingestText } from '../services/ingest.service.js';
 import { autoGenerateSectionDecks } from '../services/slides.service.js';
 import { assertQuota } from '../services/subscription.service.js';
@@ -142,6 +143,8 @@ export async function reparseContent(req: AuthenticatedRequest, res: Response): 
     const { chunkCount } = await ingestText(content.id, text, usage);
     const updated = await prisma.content.update({ where: { id: content.id }, data: { status: 'READY' } });
     res.json({ content: formatContent(updated), chunks: chunkCount });
+    // Caption + index the page figures (best-effort) so diagrams are retrievable.
+    void captionAndStoreFigures(content.id, pages, usage).catch(() => {});
     // Pre-generate the new section decks in the background (best-effort).
     void autoGenerateSectionDecks({
       contentId: content.id,

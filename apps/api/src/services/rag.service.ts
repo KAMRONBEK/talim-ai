@@ -1,21 +1,87 @@
 import { randomUUID } from 'crypto';
-import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
+import { encode, decode } from 'gpt-tokenizer';
 import type { AppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
 import type { UsageContext } from './usage.service.js';
 
-const CHUNK_SIZE = 512;
-const CHUNK_OVERLAP = 50;
+// Token-based, structure-aware chunking (replaces the old 512-*character* splitter,
+// which produced ~120-token fragments). Chunks fall on paragraph/sentence boundaries
+// and target ~600 tokens with a token-bounded overlap so retrieval keeps meaning intact.
+const TARGET_TOKENS = 600;
+const OVERLAP_TOKENS = 80;
+const MAX_BLOCK_TOKENS = 900;
 const TOP_K = 7;
 
+function countTokens(text: string): number {
+  return encode(text).length;
+}
+
+/** Tail of `text` bounded to ~`maxTokens`, decoded back to clean text (for overlap). */
+function tokenTail(text: string, maxTokens: number): string {
+  const tokens = encode(text);
+  if (tokens.length <= maxTokens) return text;
+  return decode(tokens.slice(tokens.length - maxTokens)).trimStart();
+}
+
+/** Split into structural blocks (paragraphs), further splitting oversized ones by sentence. */
+function toBlocks(text: string): string[] {
+  const paragraphs = text
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  const blocks: string[] = [];
+  for (const para of paragraphs) {
+    if (countTokens(para) <= MAX_BLOCK_TOKENS) {
+      blocks.push(para);
+      continue;
+    }
+    const sentences = para
+      .split(/(?<=[.!?…。])\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    let buf = '';
+    for (const sentence of sentences) {
+      const candidate = buf ? `${buf} ${sentence}` : sentence;
+      if (buf && countTokens(candidate) > MAX_BLOCK_TOKENS) {
+        blocks.push(buf);
+        buf = sentence;
+      } else {
+        buf = candidate;
+      }
+    }
+    if (buf) blocks.push(buf);
+  }
+  return blocks;
+}
+
 export async function chunkText(text: string): Promise<string[]> {
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: CHUNK_SIZE,
-    chunkOverlap: CHUNK_OVERLAP,
-  });
-  return splitter.splitText(text);
+  const clean = text.replace(/\r\n/g, '\n').trim();
+  if (!clean) return [];
+
+  const blocks = toBlocks(clean);
+  const chunks: string[] = [];
+  let current: string[] = [];
+  let currentTokens = 0;
+
+  for (const block of blocks) {
+    const blockTokens = countTokens(block);
+    if (current.length > 0 && currentTokens + blockTokens > TARGET_TOKENS) {
+      const joined = current.join('\n\n');
+      chunks.push(joined);
+      // Seed the next chunk with a token-bounded overlap tail for continuity.
+      const overlap = tokenTail(joined, OVERLAP_TOKENS);
+      current = overlap ? [overlap] : [];
+      currentTokens = overlap ? countTokens(overlap) : 0;
+    }
+    current.push(block);
+    currentTokens += blockTokens;
+  }
+  if (current.length > 0) chunks.push(current.join('\n\n'));
+
+  return chunks.map((c) => c.trim()).filter(Boolean);
 }
 
 export async function storeChunksWithEmbeddings(

@@ -260,6 +260,7 @@ model Content {
   assignments      ContentAssignment[]
   bankQuestions    BankQuestion[]
   assessmentAssignments AssessmentAssignment[]
+  figures          ContentFigure[]
 
   @@index([userId])
   @@index([tenantId])
@@ -350,6 +351,22 @@ model Chunk {
 
   @@index([contentId])
   @@index([chunkIndex])
+}
+
+// A figure/diagram/chart/table extracted from the source, described by a vision
+// model. The caption is embedded so figures are retrievable alongside text chunks,
+// and storagePath (when present) lets generated content re-surface the actual image.
+model ContentFigure {
+  id          String                      @id @default(cuid())
+  contentId   String
+  page        Int?
+  caption     String
+  storagePath String?
+  embedding   Unsupported("vector(1536)")?
+  createdAt   DateTime                    @default(now())
+  content     Content                     @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@index([contentId])
 }
 
 model ContentTranscriptSegment {
