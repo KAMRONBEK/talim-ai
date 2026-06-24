@@ -92,6 +92,7 @@ const QUIZ_PROMPTS: Record<AppLocale, string> = {
 Qoidalar:
 - Savollar va tushuntirishlar faqat o'zbek tilida bo'lsin (lotin yozuvi).
 - Savollar material mazmuniga asoslangan bo'lsin.
+- Savollar matndagi gaplarni AYNAN ko'chirmasin — mavzuni TUSHUNISHNI sinang (qo'llash, tahlil, sabab-natija), yodlashni emas. To'g'ri javob o'ylashni talab qilsin, matndan to'g'ridan-to'g'ri topilmasin.
 - Savol turlari:
   - MULTIPLE_CHOICE: 3-4 ta variant. "acceptableAnswers" ichidagi to'g'ri javob AYNAN variantlardan biriga (harfma-harf) teng bo'lsin.
   - To'g'ri/Noto'g'ri = MULTIPLE_CHOICE bo'lib, options AYNAN ["To'g'ri", "Noto'g'ri"].
@@ -105,6 +106,7 @@ Qoidalar:
 Rules:
 - Questions and explanations must be in English only.
 - Questions must be grounded in the material content.
+- Do NOT copy sentences from the material — test UNDERSTANDING (apply, analyze, cause-effect), not recall. The correct answer must require reasoning, not be findable verbatim in the text.
 - Question types:
   - MULTIPLE_CHOICE: 3-4 options. A correct answer in "acceptableAnswers" must match one option exactly.
   - True/False = MULTIPLE_CHOICE with options exactly ["True", "False"].
@@ -118,6 +120,7 @@ Rules:
 Правила:
 - Вопросы и пояснения только на русском языке.
 - Вопросы должны опираться на содержание материала.
+- НЕ копируйте предложения из материала — проверяйте ПОНИМАНИЕ (применение, анализ, причинно-следственные связи), а не запоминание. Правильный ответ должен требовать рассуждения, а не находиться дословно в тексте.
 - Типы вопросов:
   - MULTIPLE_CHOICE: 3-4 варианта. Правильный ответ в "acceptableAnswers" должен точно совпадать с одним из вариантов.
   - Верно/Неверно = MULTIPLE_CHOICE с вариантами ровно ["Верно", "Неверно"].

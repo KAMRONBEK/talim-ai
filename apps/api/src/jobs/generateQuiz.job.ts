@@ -7,6 +7,7 @@ import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.j
 import { getQuizSystemPrompt, buildQuizUserPrompt } from '../lib/locale-prompts.js';
 import { getQuestionCount } from '../lib/quiz-prompt.js';
 import { normalizeQuestionType, type QuestionStyle } from '../lib/assessment-prompt.js';
+import { dropParrotingQuestions } from '../lib/question-quality.js';
 import {
   type GeneratedQuestion,
   isAnswerableMultipleChoice,
@@ -84,12 +85,14 @@ export function registerGenerateQuizJob(): void {
     if (generated.length === 0) {
       throw new Error('No quiz questions generated');
     }
+    // Drop questions copied near-verbatim from the material (no parroting).
+    const usable = dropParrotingQuestions(generated, context);
 
     await prisma.quizQuestion.deleteMany({ where: { quizId } });
 
     let created = 0;
     let skipped = 0;
-    for (const q of generated) {
+    for (const q of usable) {
       const acceptableAnswers = jsonStringArray(q.acceptableAnswers);
       if (!q.prompt || !acceptableAnswers.length) {
         skipped++;

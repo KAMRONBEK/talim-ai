@@ -7,6 +7,7 @@ import {
   buildAssessmentPrompt,
   normalizeQuestionType,
 } from '../../lib/assessment-prompt.js';
+import { dropParrotingQuestions } from '../../lib/question-quality.js';
 import {
   type GeneratedQuestion,
   assertBank,
@@ -83,7 +84,8 @@ export async function generateQuestions(
 
   const created = [];
   let skipped = 0;
-  for (const q of result.questions ?? []) {
+  // Drop questions copied near-verbatim from the material (no parroting).
+  for (const q of dropParrotingQuestions(result.questions ?? [], context ?? '')) {
     const acceptableAnswers = jsonStringArray(q.acceptableAnswers);
     if (!q.prompt || !acceptableAnswers.length) {
       skipped++;

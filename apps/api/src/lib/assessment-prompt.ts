@@ -13,6 +13,9 @@ Qoidalar:
   - MULTIPLE_CHOICE: 3-4 ta variant. "acceptableAnswers" ichidagi to'g'ri javob AYNAN shu variantlardan biriga (harfma-harf) teng bo'lishi SHART. Aks holda bunday savol tuzmang.
   - To'g'ri/Noto'g'ri savol = MULTIPLE_CHOICE bo'lib, options AYNAN ["To'g'ri", "Noto'g'ri"] bo'lsin va acceptableAnswers shu ikkitadan biriga teng bo'lsin.
 - Agar material matni berilsa, undan foydalaning. Agar mavzu berilsa, mavzuga mos yangi savollar ham tuzing.
+- TUSHUNISHNI sinang, yodlashni emas: savollar matndagi gaplarni AYNAN ko'chirmasin. O'quvchi mavzuni tushunganini sinang — qo'llash, tahlil, sabab-natija, taqqoslash, xulosa chiqarish (faqat "esda saqlash" emas).
+- To'g'ri javobni matndan to'g'ridan-to'g'ri ko'chirib topib bo'lmasin; o'ylash va tushunish talab qilinsin. Savol matndagi jumlani qayta aytib bermasin.
+- Chalg'ituvchi (noto'g'ri) variantlar ishonarli bo'lsin — keng tarqalgan tushunmovchiliklarga asoslangan, lekin aniq noto'g'ri.
 - Har bir savolga qisqa "explanation" (tushuntirish) qo'shing.
 - Return valid JSON only.`;
 
