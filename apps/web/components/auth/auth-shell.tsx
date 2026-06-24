@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { LogoMark } from '@/components/brand/logo';
 
 /**
  * Split-screen auth shell: a violet brand panel (with the girih signature
@@ -23,8 +24,8 @@ export function AuthShell({ children }: { children: ReactNode }) {
         <div className="pointer-events-none absolute inset-0 bg-girih opacity-50 mix-blend-overlay" />
         <div className="pointer-events-none absolute -bottom-24 -left-16 h-80 w-80 rounded-full bg-accent-secondary/30 blur-3xl" />
         <Link href="/" className="relative flex items-center gap-2.5 font-display text-xl font-bold">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 text-lg font-bold shadow-soft backdrop-blur">
-            T
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 shadow-soft backdrop-blur">
+            <LogoMark mono className="h-6 w-6" />
           </span>
           Talim AI
         </Link>
@@ -59,9 +60,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
           href="/"
           className="relative z-10 mb-8 flex items-center gap-2.5 font-display text-xl font-bold lg:hidden"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand text-lg font-bold text-white shadow-glow">
-            T
-          </span>
+          <LogoMark className="h-10 w-10 shadow-glow" />
           Talim AI
         </Link>
         <div className="relative z-10 w-full max-w-md">{children}</div>

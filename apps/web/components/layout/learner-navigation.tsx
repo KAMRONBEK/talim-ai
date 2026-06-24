@@ -6,6 +6,7 @@ import { BarChart3, BookOpen, Home, Settings } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { cn } from '@/lib/utils';
+import { LogoMark } from '@/components/brand/logo';
 
 const learnerNavKeys = [
   { href: '/learner/dashboard', key: 'materials' as const, icon: Home },
@@ -23,9 +24,7 @@ export function LearnerSidebar() {
     <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r bg-card md:flex md:flex-col">
       <div className="border-b px-4 py-4">
         <Link href="/learner/dashboard" className="flex items-center gap-2.5 font-display font-bold">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
-            T
-          </span>
+          <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="min-w-0">
             <span className="block">Talim AI</span>
             <span className="block truncate text-xs font-normal text-muted-foreground">

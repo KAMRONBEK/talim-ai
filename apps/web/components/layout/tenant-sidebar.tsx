@@ -8,6 +8,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useTenant } from '@/hooks/useTenant';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { cn } from '@/lib/utils';
+import { LogoMark } from '@/components/brand/logo';
 
 const navItems = [
   { href: '/tenant/dashboard', key: 'dashboard' as const, icon: LayoutDashboard },
@@ -29,9 +30,7 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex shrink-0 items-center gap-2 border-b px-4 py-4">
         <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2.5 font-display font-bold">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
-            T
-          </span>
+          <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="min-w-0">
             <span className="block truncate">Talim AI</span>
             <span className="block truncate text-xs font-normal text-muted-foreground">

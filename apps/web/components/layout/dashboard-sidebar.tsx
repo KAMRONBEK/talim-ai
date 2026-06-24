@@ -7,6 +7,7 @@ import { Play } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useContents } from '@/hooks/useContent';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
+import { LogoMark } from '@/components/brand/logo';
 
 export interface DashboardSidebarBodyProps {
   onNavigate?: () => void;
@@ -26,9 +27,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
           onClick={onNavigate}
           className="flex min-w-0 items-center gap-2.5 font-display font-bold tracking-tight"
         >
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-sm font-bold text-white shadow-soft">
-            T
-          </span>
+          <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="truncate">Talim AI</span>
         </Link>
       </div>

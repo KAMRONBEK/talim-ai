@@ -13,6 +13,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useFileUpload } from '@/hooks/useFileUpload';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { LogoMark } from '@/components/brand/logo';
 
 interface LearningTopbarProps {
   contentId: string;
@@ -52,9 +53,7 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
           </Button>
         )}
         <Link href="/dashboard" className="flex shrink-0 items-center gap-2 font-display font-semibold">
-          <span className="avatar-gradient flex h-7 w-7 items-center justify-center rounded-lg text-xs">
-            T
-          </span>
+          <LogoMark className="h-7 w-7" />
           <span className="hidden sm:inline">Talim AI</span>
         </Link>
         <Input
