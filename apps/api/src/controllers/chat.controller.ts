@@ -6,8 +6,10 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import {
   searchSimilarChunks,
+  searchSimilarFigures,
   mergeSimilarChunks,
   buildRagContext,
+  buildFigureContext,
 } from '../services/rag.service.js';
 import { streamTutorWithTools } from '../services/ai.service.js';
 import { serializeBlockForMessage } from '../lib/tutor-tools.js';
@@ -196,7 +198,11 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   const chunks = excerptChunks.length
     ? mergeSimilarChunks(excerptChunks, messageChunks)
     : messageChunks;
-  const context = buildRagContext(chunks, locale);
+  // Pull relevant captioned figures so the tutor can reason about diagrams/charts.
+  const figures = await searchSimilarFigures(body.contentId, body.message, 3, embedUsage);
+  const baseContext = buildRagContext(chunks, locale);
+  const figureContext = buildFigureContext(figures, locale);
+  const context = figureContext ? `${baseContext}\n\n${figureContext}` : baseContext;
   const scopeDecision = await classifyTutorScope({
     locale,
     contentTitle: content.title,

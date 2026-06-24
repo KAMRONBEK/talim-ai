@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { encode, decode } from 'gpt-tokenizer';
 import type { AppLocale } from '@talim/types';
+import { env } from '../config/env.js';
 import { prisma } from '../lib/prisma.js';
 import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
@@ -129,6 +130,43 @@ export function mergeSimilarChunks(
   return merged;
 }
 
+const RERANK_CANDIDATES = 20;
+
+/**
+ * Rerank candidates with Cohere Rerank when COHERE_API_KEY is set; otherwise keep
+ * the RRF order. Never throws — degrades to the top-`limit` candidates on any error.
+ */
+async function rerank(
+  query: string,
+  rows: { text: string; chunkIndex: number }[],
+  limit: number,
+): Promise<{ text: string; chunkIndex: number }[]> {
+  if (!env.COHERE_API_KEY || rows.length <= 1) return rows.slice(0, limit);
+  try {
+    const res = await fetch('https://api.cohere.com/v2/rerank', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${env.COHERE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'rerank-v3.5',
+        query,
+        documents: rows.map((r) => r.text),
+        top_n: limit,
+      }),
+    });
+    if (!res.ok) return rows.slice(0, limit);
+    const data = (await res.json()) as { results?: { index: number }[] };
+    const ordered = (data.results ?? [])
+      .map((r) => rows[r.index])
+      .filter((r): r is { text: string; chunkIndex: number } => Boolean(r));
+    return ordered.length ? ordered.slice(0, limit) : rows.slice(0, limit);
+  } catch {
+    return rows.slice(0, limit);
+  }
+}
+
 export async function searchSimilarChunks(
   contentId: string,
   query: string,
@@ -140,12 +178,59 @@ export async function searchSimilarChunks(
     usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
   );
   const vectorSql = embeddingToSql(queryEmbedding);
+  const candidateCount = Math.max(limit, RERANK_CANDIDATES);
 
-  const results = await prisma.$queryRawUnsafe<
-    { text: string; chunkIndex: number }[]
-  >(
-    `SELECT "text", "chunkIndex"
-     FROM "Chunk"
+  // Hybrid retrieval: dense (cosine) + lexical (tsvector) fused with Reciprocal
+  // Rank Fusion (k=60). Lexical recall catches exact terms/names/numbers that dense
+  // search misses — important for low-resource Uzbek where dense recall is weaker.
+  const rows = await prisma.$queryRawUnsafe<{ text: string; chunkIndex: number }[]>(
+    `WITH vec AS (
+       SELECT "id", "text", "chunkIndex",
+              ROW_NUMBER() OVER (ORDER BY "embedding" <=> $2::vector) AS rnk
+       FROM "Chunk"
+       WHERE "contentId" = $1 AND "embedding" IS NOT NULL
+       ORDER BY "embedding" <=> $2::vector
+       LIMIT 40
+     ),
+     lex AS (
+       SELECT "id", "text", "chunkIndex",
+              ROW_NUMBER() OVER (ORDER BY ts_rank("tsv", q) DESC) AS rnk
+       FROM "Chunk", websearch_to_tsquery('simple', $3) q
+       WHERE "contentId" = $1 AND "tsv" @@ q
+       LIMIT 40
+     )
+     SELECT f."text", f."chunkIndex"
+     FROM (
+       SELECT "id", "text", "chunkIndex", SUM(1.0 / (60 + rnk)) AS score
+       FROM (SELECT * FROM vec UNION ALL SELECT * FROM lex) u
+       GROUP BY "id", "text", "chunkIndex"
+     ) f
+     ORDER BY f.score DESC
+     LIMIT $4`,
+    contentId,
+    vectorSql,
+    query,
+    candidateCount,
+  );
+
+  return rerank(query, rows, limit);
+}
+
+/** Retrieve the most relevant captioned figures for a query (vector similarity). */
+export async function searchSimilarFigures(
+  contentId: string,
+  query: string,
+  limit = 3,
+  usage?: UsageContext,
+): Promise<{ caption: string; page: number | null }[]> {
+  const queryEmbedding = await generateEmbedding(
+    query,
+    usage ? { ...usage, metadata: { ...usage.metadata, contentId, figures: true } } : undefined,
+  );
+  const vectorSql = embeddingToSql(queryEmbedding);
+  return prisma.$queryRawUnsafe<{ caption: string; page: number | null }[]>(
+    `SELECT "caption", "page"
+     FROM "ContentFigure"
      WHERE "contentId" = $1 AND "embedding" IS NOT NULL
      ORDER BY "embedding" <=> $2::vector
      LIMIT $3`,
@@ -153,8 +238,20 @@ export async function searchSimilarChunks(
     vectorSql,
     limit,
   );
+}
 
-  return results;
+const FIGURE_LABEL: Record<AppLocale, string> = { uz: 'Rasm', en: 'Figure', ru: 'Рисунок' };
+
+/** Format retrieved figures as labeled lines for injection into the RAG context. */
+export function buildFigureContext(
+  figures: { caption: string; page: number | null }[],
+  locale: AppLocale = 'uz',
+): string {
+  if (figures.length === 0) return '';
+  const label = FIGURE_LABEL[locale];
+  return figures
+    .map((f) => `[${label}${f.page ? ` ${f.page}` : ''}] ${f.caption}`)
+    .join('\n');
 }
 
 export function buildRagContext(chunks: { text: string }[], locale: AppLocale = 'uz'): string {

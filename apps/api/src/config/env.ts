@@ -10,6 +10,9 @@ const envSchema = z.object({
   DEEPSEEK_MODEL: z.string().default('deepseek-v4-flash'),
   DEEPSEEK_THINKING: z.enum(['enabled', 'disabled']).default('disabled'),
   OPENAI_API_KEY: z.string().default(''),
+  // Optional Cohere Rerank API key. When set, hybrid retrieval results are reranked
+  // (rerank-v3.5) for a quality boost; when empty, retrieval falls back to RRF order.
+  COHERE_API_KEY: z.string().default(''),
   TRANSCRIPTION_MODEL: z.string().default('whisper-1'),
   TTS_MODEL: z.string().default('tts-1-hd'),
   TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
