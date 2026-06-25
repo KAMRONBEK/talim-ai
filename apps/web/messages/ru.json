@@ -88,7 +88,7 @@
     "recents": "Недавние",
     "noMaterials": "Материалов пока нет",
     "sections": "Разделы",
-    "sectionCount": "{count} разделов",
+    "sectionCount": "{count, plural, one {# раздел} few {# раздела} many {# разделов} other {# раздела}}",
     "actions": "Действия",
     "read": "Читать",
     "listenPodcast": "Слушать подкаст"
@@ -142,7 +142,7 @@
     "aiPodcast": "ИИ-подкаст",
     "listenAction": "Слушать",
     "practiceQuiz": "Тренировочный тест",
-    "quizCount": "{count} тестов",
+    "quizCount": "{count, plural, one {# тест} few {# теста} many {# тестов} other {# теста}}",
     "fiveQuestions": "5 вопросов",
     "twoQuestions": "2 вопроса",
     "learningStreak": "Серия обучения",
@@ -156,7 +156,7 @@
     "noPodcast": "Подкаста пока нет",
     "noPodcastDesc": "Создайте ИИ-подкаст из разделов вашего материала.",
     "podcastLearnerEmpty": "Преподаватель ещё не добавил подкаст для этого материала.",
-    "episodes": "{count} эпизодов",
+    "episodes": "{count, plural, one {# эпизод} few {# эпизода} many {# эпизодов} other {# эпизода}}",
     "episodeReady": "Готово",
     "episodePreparing": "Подготовка",
     "episodeCompleted": "Завершено",
@@ -270,7 +270,7 @@
     "quickLabel": "Быстрая проверка",
     "fullLabel": "Тренировочный тест",
     "defaultTitle": "Тест",
-    "questionCount": "{count} вопросов"
+    "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}"
   },
   "theme": {
     "light": "Светлая",
@@ -398,7 +398,7 @@
       "progress": "Прогресс по материалам",
       "noProgress": "Пока нет прогресса",
       "coverage": "Охват {value}%",
-      "quizAttempts": "{count} попыток теста",
+      "quizAttempts": "{count, plural, one {# попытка теста} few {# попытки теста} many {# попыток теста} other {# попытки теста}}",
       "avgQuizValue": "Средний тест {value}%",
       "username": "Имя пользователя",
       "password": "Пароль",

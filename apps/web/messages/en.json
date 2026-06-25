@@ -70,7 +70,7 @@
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
     "recents": "Recent",
-    "count": "{count} items",
+    "count": "{count, plural, one {# item} other {# items}}",
     "uploadTitle": "Upload",
     "uploadDesc": "File, audio, video",
     "linkTitle": "Link",
@@ -88,7 +88,7 @@
     "recents": "Recent",
     "noMaterials": "No materials yet",
     "sections": "Sections",
-    "sectionCount": "{count} sections",
+    "sectionCount": "{count, plural, one {# section} other {# sections}}",
     "actions": "Actions",
     "read": "Read",
     "listenPodcast": "Listen to podcast"
@@ -142,7 +142,7 @@
     "aiPodcast": "AI Podcast",
     "listenAction": "Listen",
     "practiceQuiz": "Practice quiz",
-    "quizCount": "{count} quizzes",
+    "quizCount": "{count, plural, one {# quiz} other {# quizzes}}",
     "fiveQuestions": "5 questions",
     "twoQuestions": "2 questions",
     "learningStreak": "Learning streak",
@@ -156,7 +156,7 @@
     "noPodcast": "No podcast yet",
     "noPodcastDesc": "Create an AI voice podcast from your content sections.",
     "podcastLearnerEmpty": "Your tutor hasn't shared a podcast for this material yet.",
-    "episodes": "{count} episodes",
+    "episodes": "{count, plural, one {# episode} other {# episodes}}",
     "episodeReady": "Ready",
     "episodePreparing": "Preparing",
     "episodeCompleted": "Completed",
@@ -270,7 +270,7 @@
     "quickLabel": "Quick check",
     "fullLabel": "Practice quiz",
     "defaultTitle": "Quiz",
-    "questionCount": "{count} questions"
+    "questionCount": "{count, plural, one {# question} other {# questions}}"
   },
   "theme": {
     "light": "Light",
@@ -398,7 +398,7 @@
       "progress": "Progress by material",
       "noProgress": "No progress yet",
       "coverage": "Coverage {value}%",
-      "quizAttempts": "{count} quiz attempts",
+      "quizAttempts": "{count, plural, one {# quiz attempt} other {# quiz attempts}}",
       "avgQuizValue": "Avg quiz {value}%",
       "username": "Username",
       "password": "Password",
