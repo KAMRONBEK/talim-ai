@@ -54,6 +54,7 @@
     "invalidCredentials": "Invalid email or password",
     "serverError": "Could not reach the server. Please try again.",
     "accountDeactivated": "Your account has been deactivated. Please contact your tutor.",
+    "adminNotAllowed": "This is an admin account. Please sign in to the Talim Admin panel instead.",
     "createAccount": "Create your account",
     "registerContinue": "Start learning with Talim AI",
     "name": "Name",

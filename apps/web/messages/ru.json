@@ -54,6 +54,7 @@
     "invalidCredentials": "Неверный email или пароль",
     "serverError": "Не удалось подключиться к серверу. Попробуйте снова.",
     "accountDeactivated": "Ваш аккаунт деактивирован. Пожалуйста, свяжитесь с вашим преподавателем.",
+    "adminNotAllowed": "Это аккаунт администратора. Войдите в панель Talim Admin.",
     "createAccount": "Создайте аккаунт",
     "registerContinue": "Начните учиться с Talim AI",
     "name": "Имя",

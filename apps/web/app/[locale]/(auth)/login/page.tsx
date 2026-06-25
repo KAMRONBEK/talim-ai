@@ -15,6 +15,7 @@ export default function LoginPage() {
   const tCommon = useTranslations('common');
   const router = useRouter();
   const setAuth = useAuthStore((s) => s.setAuth);
+  const logout = useAuthStore((s) => s.logout);
   const token = useAuthStore((s) => s.token);
   const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState('');
@@ -29,8 +30,16 @@ export default function LoginPage() {
   const user = useAuthStore((s) => s.user);
 
   useEffect(() => {
-    if (mounted && token && user) router.replace(getPostLoginPath(user.role));
-  }, [mounted, token, user, router]);
+    if (!mounted || !token || !user) return;
+    // Admins belong in the admin panel, not this app. A persisted admin token
+    // would otherwise redirect into an INDIVIDUAL-only route and loop forever.
+    if (user.role === 'ADMIN') {
+      logout();
+      setError(t('adminNotAllowed'));
+      return;
+    }
+    router.replace(getPostLoginPath(user.role));
+  }, [mounted, token, user, router, logout, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +47,10 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const { data } = await api.post<AuthResponse>('/auth/login', { email, password });
+      if (data.user.role === 'ADMIN') {
+        setError(t('adminNotAllowed'));
+        return;
+      }
       setAuth(data.user, data.token);
       router.replace(getPostLoginPath(data.user.role));
     } catch (err: unknown) {

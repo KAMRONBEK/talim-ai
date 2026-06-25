@@ -54,6 +54,7 @@
     "invalidCredentials": "Email yoki parol noto'g'ri",
     "serverError": "Serverga ulanib bo'lmadi. Qayta urinib ko'ring.",
     "accountDeactivated": "Hisobingiz faolsizlantirilgan. Iltimos, o'qituvchingizga murojaat qiling.",
+    "adminNotAllowed": "Bu administrator hisobi. Iltimos, Talim Admin paneliga kiring.",
     "createAccount": "Hisob yarating",
     "registerContinue": "Talim AI bilan o'rganishni boshlang",
     "name": "Ism",

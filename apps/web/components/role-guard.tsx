@@ -28,6 +28,7 @@ export function RoleGuard({
   const router = useRouter();
   const token = useAuthStore((s) => s.token);
   const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
   const hydrated = useAuthHydrated();
 
   const allowed = Boolean(token && user && allowedRoles.includes(user.role));
@@ -38,10 +39,18 @@ export function RoleGuard({
       router.replace('/login');
       return;
     }
+    // ADMIN has no home in the learner/tenant web app (admins use apps/admin).
+    // Without this, getPostLoginPath('ADMIN') → /dashboard, which bounces them
+    // right back here — an infinite redirect loop. Sign them out instead.
+    if (user && user.role === 'ADMIN') {
+      logout();
+      router.replace('/login');
+      return;
+    }
     if (user && !allowedRoles.includes(user.role)) {
       router.replace(getPostLoginPath(user.role));
     }
-  }, [hydrated, token, user, allowedRoles, router]);
+  }, [hydrated, token, user, allowedRoles, router, logout]);
 
   if (allowed) return <>{children}</>;
 
