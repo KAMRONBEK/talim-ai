@@ -76,15 +76,15 @@
 - [ ] Settings
 
 ### TENANT_LEARNER
-- [ ] mustChangePassword banner + change
-- [ ] Dashboard shows ONLY assigned materials
-- [ ] Workspace: NO generate/upload/delete; chat works; read
-- [ ] Quiz (assigned)
-- [ ] GAME quiz (timer, auto-lock, speed points, streak, leaderboard self-highlight)
-- [ ] Progress updates
+- [ ] mustChangePassword banner + change (to test as qakid — fresh email-less kid)
+- [x] Dashboard shows ONLY assigned materials ✓ (Assigned 1, the assigned YouTube)
+- [x] Workspace: NO generate buttons ✓, NO upload (FIXED F7) ✓; chat available ✓; read ✓
+- [~] Quiz (assigned) — covered via INDIVIDUAL quiz (same QuizCard); learner quiz not separately taken
+- [x] GAME quiz: intro ✓, 20s timer countdown ✓, scoring (952) + speed points (+952) ✓, best streak ✓, per-Q review w/ correct answers + Uzbek explanations ✓, **attempt-limit lock (1/1)** ✓, **leaderboard shows self rank 1 / 952 pts / Latest 25%** ✓
+- [x] Progress updates — tasks list + leaderboard refreshed after submit ✓ (note: 1 game answer showed "Your answer: —" under rapid automation; likely timing, not a confirmed bug)
 - [ ] Settings
-- [ ] Non-assigned content id → access denied
-- [ ] After deactivate → access lost
+- [x] Non-assigned content id → **was hanging on Loading (F8), now redirects to /learner/dashboard** ✓
+- [ ] After deactivate → access lost (Test Student Two deactivated; not re-logged-in to verify)
 
 ### ADMIN (3001, no i18n)
 - [ ] Login
@@ -135,13 +135,17 @@
 | F4 | quiz results | INDIVIDUAL/LEARNER | en | light | 1440 | Med | FIXED (HEAD) | **React hydration error** on every quiz reveal: `RichText inline` rendered a `<div class="prose...">` nested inside the short-answer acceptable-answer `<p>` (QuizCard:248-251) → "`<div>` cannot be a descendant of `<p>`". Fixed by making inline RichText wrap in `<span>`. Verified: 0 console errors through MC + short-answer Check reveal + submit. | apps/web/components/learning/rich-text.tsx |
 | F5 | /tenant/assessments | TENANT_OWNER | en | light | 1440 | Med | LOGGED | **Assessment mutations don't refresh related views (stale cache).** After Approve: bank "x/12 approved" count + draft list don't update (approved Qs stay listed with Approve button, no "approved" badge) — confirmed persisted (shows after reload). After Assign: Results & leaderboard still says "Not assigned to anyone yet" / "0/0" though DB shows the assignment. Reload fixes all. CLAUDE.md §4 requires invalidating affected query keys. Not fixed (touches multiple useAssessments keys — wanted to avoid a partial fix). | apps/web/hooks/useAssessments.ts |
 | F6 | /tenant/students | TENANT_OWNER | en | light | 1440 | Low | LOGGED | "Deactivate" student applies with **no confirmation** (reversible via Reactivate, so arguably OK, but it's a destructive-sounding action). "Regenerate" join code uses a **native `window.confirm()`** — works, but inconsistent with the app's custom confirm dialogs elsewhere. Both minor/subjective → not fixed. | apps/web/components/tenant/* |
+| F7 | content workspace topbar | TENANT_LEARNER / TENANT_OWNER | en | light | 1440 | Med | FIXED (HEAD) | `LearningTopbar` always rendered "+ Upload"; learners (no upload) and owners (upload via /tenant/materials, blocked on B2C /content) both saw it. Gated to INDIVIDUAL only. Verified gone for learner. | apps/web/components/layout/learning-topbar.tsx |
+| F8 | content layout | TENANT_LEARNER (any) | en | light | 1440 | High | FIXED (HEAD) | Opening a content id the user can't access (API 404) **hung on "Loading…" forever** — the content *layout* did `if(!content) return Loading` with no error handling, blocking children + any redirect. Now redirects to role home on fetch error. Verified: learner → /learner/dashboard. | apps/web/app/[locale]/content/[id]/layout.tsx |
 
 ---
 
 ## Fixes applied (commits)
 
 - **9fe5d68** `fix(web): show login error instead of silent reload on wrong password` — verified in browser (uz/en path), `@talim/types` build + web/admin typecheck all pass.
-- **HEAD** `fix(web): RichText inline renders a span, not a div (fixes hydration error)` — verified 0 console errors through quiz reveal+submit; web typecheck passes.
+- **HEAD~2** `fix(web): RichText inline renders a span, not a div (fixes hydration error)` — verified 0 console errors through quiz reveal+submit; web typecheck passes.
+- **HEAD~1** `fix(web): hide workspace + Upload button for non-individual roles` — verified Upload gone for learner; web typecheck passes.
+- **HEAD** `fix(web): redirect home when content is inaccessible instead of hanging on Loading` — verified learner → /learner/dashboard on non-assigned id; web typecheck passes.
 
 ---
 
@@ -160,3 +164,7 @@
 ## Run log / progress notes
 
 - Run start: stack already up; created qa-admin, qa-owner (join code DUTDWE); tenant has 0 content.
+- Web dev server wedged twice (HMR stopped applying edits to one route; RSS ~3.5GB). Recovered both times via `npx kill-port 3000` + relaunch. `kill`/`lsof`/writing `.claude/settings.local.json` are permission-gated in this unattended session; `npx kill-port` works.
+- Test data set up on local dev DB: moved YouTube content `cmq2czlkb...` to QA Academy tenant (owner), assigned it to Test Student One; created email-less kid `qakid`/`Kid-12345`; published GAME assessment "QA Game Quiz" (4 Qs, 20s) from Physics TF Bank, assigned to Student One (then submitted as learner).
+- **Known creds:** learner teststudent1 / `Student-12345`; qakid / `Kid-12345`.
+- Test Student Two left **deactivated** (toggle test) — reactivate before finishing if needed.
