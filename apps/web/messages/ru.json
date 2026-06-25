@@ -196,7 +196,14 @@
     "pdfOrSlides": "PDF или слайды",
     "youtubeLink": "Ссылка YouTube",
     "addLink": "Добавить",
-    "linkFailed": "Не удалось добавить ссылку. Проверьте URL и попробуйте снова."
+    "linkFailed": "Не удалось добавить ссылку. Проверьте URL и попробуйте снова.",
+    "deleteMaterialTitle": "Удалить материал",
+    "deleteMaterialDescription": "<b>«{title}»</b> будет удалён безвозвратно. Главы, чат, тесты и данные подкаста также будут потеряны. Это действие нельзя отменить.",
+    "deleteMaterialDescriptionGeneric": "Материал будет удалён безвозвратно. Это действие нельзя отменить.",
+    "deleteMaterialAria": "Удалить {title}",
+    "deleteCancel": "Отмена",
+    "deleteConfirm": "Удалить",
+    "deleting": "Удаление…"
   },
   "chat": {
     "title": "ИИ-репетитор",

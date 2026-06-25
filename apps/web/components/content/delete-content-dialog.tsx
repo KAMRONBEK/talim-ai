@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import {
   Button,
   Dialog,
@@ -24,6 +25,7 @@ export function DeleteContentDialog({
   content,
   onDeleted,
 }: DeleteContentDialogProps) {
+  const t = useTranslations('content');
   const deleteContent = useDeleteContent({
     onDeleted: (id) => {
       onOpenChange(false);
@@ -40,17 +42,16 @@ export function DeleteContentDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Materialni o&apos;chirish</DialogTitle>
+          <DialogTitle>{t('deleteMaterialTitle')}</DialogTitle>
           <DialogDescription>
-            {content ? (
-              <>
-                <span className="font-medium text-foreground">&ldquo;{content.title}&rdquo;</span>{' '}
-                butunlay o&apos;chiriladi. Boblar, chat, test va podkast ma&apos;lumotlari ham yo&apos;qoladi.
-                Bu amalni qaytarib bo&apos;lmaydi.
-              </>
-            ) : (
-              'Material butunlay o&apos;chiriladi. Bu amalni qaytarib bo&apos;lmaydi.'
-            )}
+            {content
+              ? t.rich('deleteMaterialDescription', {
+                  title: content.title,
+                  b: (chunks) => (
+                    <span className="font-medium text-foreground">{chunks}</span>
+                  ),
+                })
+              : t('deleteMaterialDescriptionGeneric')}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -60,7 +61,7 @@ export function DeleteContentDialog({
             disabled={deleteContent.isPending}
             onClick={() => onOpenChange(false)}
           >
-            Bekor qilish
+            {t('deleteCancel')}
           </Button>
           <Button
             variant="destructive"
@@ -68,7 +69,7 @@ export function DeleteContentDialog({
             disabled={deleteContent.isPending || !content}
             onClick={handleDelete}
           >
-            {deleteContent.isPending ? 'O\'chirilmoqda...' : 'O\'chirish'}
+            {deleteContent.isPending ? t('deleting') : t('deleteConfirm')}
           </Button>
         </DialogFooter>
       </DialogContent>

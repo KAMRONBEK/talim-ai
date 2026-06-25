@@ -196,7 +196,14 @@
     "pdfOrSlides": "PDF or slides",
     "youtubeLink": "YouTube link",
     "addLink": "Add",
-    "linkFailed": "Could not add link. Check the URL and try again."
+    "linkFailed": "Could not add link. Check the URL and try again.",
+    "deleteMaterialTitle": "Delete material",
+    "deleteMaterialDescription": "<b>“{title}”</b> will be permanently deleted. Its chapters, chat, quizzes and podcast data will also be lost. This action cannot be undone.",
+    "deleteMaterialDescriptionGeneric": "The material will be permanently deleted. This action cannot be undone.",
+    "deleteMaterialAria": "Delete {title}",
+    "deleteCancel": "Cancel",
+    "deleteConfirm": "Delete",
+    "deleting": "Deleting…"
   },
   "chat": {
     "title": "AI Tutor",

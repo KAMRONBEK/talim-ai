@@ -196,7 +196,14 @@
     "pdfOrSlides": "PDF yoki slaydlar",
     "youtubeLink": "YouTube havolasi",
     "addLink": "Qo'shish",
-    "linkFailed": "Havola qo'shilmadi. URL ni tekshirib qayta urinib ko'ring."
+    "linkFailed": "Havola qo'shilmadi. URL ni tekshirib qayta urinib ko'ring.",
+    "deleteMaterialTitle": "Materialni o'chirish",
+    "deleteMaterialDescription": "<b>“{title}”</b> butunlay o'chiriladi. Boblar, chat, test va podkast ma'lumotlari ham yo'qoladi. Bu amalni qaytarib bo'lmaydi.",
+    "deleteMaterialDescriptionGeneric": "Material butunlay o'chiriladi. Bu amalni qaytarib bo'lmaydi.",
+    "deleteMaterialAria": "{title} ni o'chirish",
+    "deleteCancel": "Bekor qilish",
+    "deleteConfirm": "O'chirish",
+    "deleting": "O'chirilmoqda…"
   },
   "chat": {
     "title": "AI O'qituvchi",
