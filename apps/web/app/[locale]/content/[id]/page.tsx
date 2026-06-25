@@ -84,8 +84,14 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const [inputSeed, setInputSeed] = useState<string | null>(null);
 
   // Navigating to ?panel=chat (e.g. the topbar "AI tutor" link) opens the Chat tab.
+  // On mobile the Learn panel is a drawer, so also open it — otherwise the tap just
+  // flips a hidden (desktop-only) tab and nothing visible happens.
   useEffect(() => {
-    if (panelParam === 'chat') setLearnTab('chat');
+    if (panelParam !== 'chat') return;
+    setLearnTab('chat');
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
+      setPanelOpen(true);
+    }
   }, [panelParam]);
 
   const handleExcerpt = useCallback((p: StageExcerpt) => {
