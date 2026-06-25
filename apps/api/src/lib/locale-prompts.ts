@@ -12,40 +12,42 @@ const LANGUAGE_QUALITY: Record<AppLocale, string> = {
 };
 
 const PODCAST_PROMPTS: Record<AppLocale, string> = {
-  uz: `Siz o'quv materiallaridan podcast matni yozadigan o'qituvchisiz.
+  uz: `Siz ikki nafar boshlovchi ishtirokidagi ta'limiy podkast (suhbat) matnini yozasiz.
 
-Qoidalar:
-- Matn faqat o'zbek tilida bo'lsin (lotin yozuvi).
-- Talaffuz qilinadigan, qiziqarli va tushunarli matn yozing (og'zaki gapirishda taxminan 3-4 daqiqa).
-- Sahna ko'rsatmalari, qavs ichidagi izohlar yozmang — faqat o'qiladigan matn.
-- O'quvchi uchun sodda va rag'batlantiruvchi ohangda yozing.`,
+Format (juda muhim):
+- Bu A va B — materialni o'qib chiqqan ikki kishining tabiiy suhbati: ular mavzuni birga muhokama qiladi ("deep dive" uslubida).
+- HAR BIR gapni "A:" yoki "B:" bilan boshlang va boshqa hech qanday belgi qo'ymang.
+- Navbat bilan gapirishsin: biri savol beradi yoki hayratlanadi, ikkinchisi tushuntiradi va misol keltiradi; bir-birining fikrini to'ldiradi.
+- Tabiiy og'zaki suhbat: qisqa jonli gaplar, ba'zan "ha", "to'g'ri", "qiziq" kabi tabiiy javoblar.
+- Sahna ko'rsatmalari, qavs ichidagi izohlar yo'q — faqat aytiladigan so'zlar.
+- Faqat o'zbek tilida (lotin yozuvi). Boshida qisqa kirish, oxirida qisqa yakun. Taxminan 3-4 daqiqa.`,
 
-  en: `You write podcast narration scripts from learning materials.
+  en: `You write a two-host educational podcast as a natural CONVERSATION.
 
-Rules:
-- Write only in clear, neutral academic English.
-- Use short sentences (10–20 words) for natural spoken pacing.
-- Spell out acronyms on first use (e.g., "RAG" as "R A G" or "retrieval augmented generation").
-- No stage directions, bracketed cues, or parenthetical notes — only speakable narration.
-- Target roughly 3–4 minutes when read aloud. Keep an encouraging, teacher-like tone.`,
+Format (critical):
+- Two hosts, A and B, who have both read the material and are discussing it together (a friendly "deep dive").
+- Start EVERY line with "A:" or "B:" and nothing else as a label.
+- Alternate turns: one asks or reacts, the other explains with examples; they build on each other and interject naturally ("right", "exactly", "interesting").
+- Natural spoken dialogue: short, lively sentences. No stage directions, bracketed cues, or parentheticals — only spoken words.
+- Spell out acronyms on first use. Open with a brief intro, close with a short wrap-up. ~3–4 minutes when read aloud.`,
 
-  ru: `Вы пишете текст подкаста на основе учебных материалов.
+  ru: `Вы пишете образовательный подкаст из ДВУХ ведущих в формате живой беседы.
 
-Правила:
-- Текст только на русском языке.
-- Используйте короткие предложения (10–20 слов) для естественного темпа речи.
-- Расшифровывайте аббревиатуры при первом упоминании.
-- Без сценических указаний и комментариев в скобках — только текст для озвучки.
-- Ориентир: 3–4 минуты при чтении вслух. Простой, ободряющий тон преподавателя.`,
+Формат (важно):
+- Двое ведущих, A и B, прочитали материал и вместе его обсуждают (дружеский «разбор»).
+- КАЖДУЮ реплику начинайте с «A:» или «B:» и больше никакой пометки.
+- Чередуйте: один спрашивает или реагирует, другой объясняет с примерами; они дополняют друг друга и вставляют естественные реакции («да», «точно», «интересно»).
+- Естественный разговорный диалог: короткие живые фразы. Без сценических указаний и скобок — только текст для озвучки.
+- Расшифровывайте аббревиатуры при первом упоминании. В начале короткое вступление, в конце краткий итог. ~3–4 минуты при чтении вслух.`,
 };
 
 const PODCAST_USER: Record<AppLocale, (title: string, context: string) => string> = {
   uz: (title, context) =>
-    `Mavzu: ${title}\n\nMaterial:\n${context}\n\nYuqoridagi mavzu bo'yicha podcast matnini yozing.`,
+    `Mavzu: ${title}\n\nMaterial:\n${context}\n\nYuqoridagi material yuzasidan ikki boshlovchi (A va B) suhbatini yozing. Har bir gap "A:" yoki "B:" bilan boshlansin.`,
   en: (title, context) =>
-    `Topic: ${title}\n\nMaterial:\n${context}\n\nWrite a podcast narration script for the topic above.`,
+    `Topic: ${title}\n\nMaterial:\n${context}\n\nWrite a two-host (A and B) conversation discussing the material above. Every line must start with "A:" or "B:".`,
   ru: (title, context) =>
-    `Тема: ${title}\n\nМатериал:\n${context}\n\nНапишите текст подкаста по указанной теме.`,
+    `Тема: ${title}\n\nМатериал:\n${context}\n\nНапишите беседу двух ведущих (A и B) по материалу выше. Каждая реплика должна начинаться с «A:» или «B:».`,
 };
 
 const SUMMARY_PROMPTS: Record<AppLocale, string> = {
@@ -293,6 +295,33 @@ export function getPodcastSystemPrompt(locale: AppLocale): string {
 
 export function buildPodcastUserPrompt(locale: AppLocale, title: string, context: string): string {
   return PODCAST_USER[locale](title, context);
+}
+
+export interface ParsedTurn {
+  speaker: 0 | 1;
+  text: string;
+}
+
+/**
+ * Parse a two-host podcast script ("A: …" / "B: …" lines, Latin or Cyrillic A/B)
+ * into ordered turns. Untagged lines are appended to the current turn.
+ */
+export function parsePodcastDialogue(script: string): ParsedTurn[] {
+  const turns: ParsedTurn[] = [];
+  const lineRe = /^\s*([ABАБ])\s*[:).\-–—]\s*(.*)$/;
+  for (const rawLine of script.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    const m = line.match(lineRe);
+    if (m) {
+      const speaker: 0 | 1 = /[AА]/.test(m[1]!) ? 0 : 1;
+      turns.push({ speaker, text: (m[2] ?? '').trim() });
+    } else if (turns.length > 0) {
+      const last = turns[turns.length - 1]!;
+      last.text = `${last.text} ${line}`.trim();
+    }
+  }
+  return turns.filter((t) => t.text.length > 0);
 }
 
 export function getSummarySystemPrompt(locale: AppLocale): string {

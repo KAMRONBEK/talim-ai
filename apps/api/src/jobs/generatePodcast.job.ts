@@ -3,11 +3,12 @@ import { prisma } from '../lib/prisma.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import { buildRagContext, boundContextByTokens } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
-import { synthesizeSpeech } from '../services/tts.service.js';
+import { synthesizeSpeech, synthesizeDialogue } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
 import {
   getPodcastSystemPrompt,
   buildPodcastUserPrompt,
+  parsePodcastDialogue,
 } from '../lib/locale-prompts.js';
 
 export function registerGeneratePodcastJob(): void {
@@ -105,10 +106,17 @@ export function registerGeneratePodcastJob(): void {
       });
 
       try {
-        const audio = await synthesizeSpeech(script, locale, {
+        // Two-host conversation when the model produced an A:/B: dialogue (each
+        // host gets a distinct native voice); fall back to single-voice narration.
+        const ttsUsage = {
           userId: content.userId,
           metadata: { contentId, podcastId, episodeId: episode.id },
-        });
+        };
+        const turns = parsePodcastDialogue(script);
+        const audio =
+          turns.length >= 2
+            ? await synthesizeDialogue(turns, locale, ttsUsage)
+            : await synthesizeSpeech(script, locale, ttsUsage);
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
         const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({

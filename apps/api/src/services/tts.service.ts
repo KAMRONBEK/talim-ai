@@ -8,10 +8,13 @@ const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
 });
 
-const VOICE_BY_LOCALE: Record<AppLocale, 'alloy' | 'nova' | 'onyx' | 'shimmer'> = {
-  uz: 'alloy',
-  en: 'nova',
-  ru: 'onyx',
+type OpenAiVoice = 'alloy' | 'nova' | 'onyx' | 'shimmer' | 'echo' | 'fable';
+// [host A, host B] per locale — two distinct voices so the conversational podcast
+// has two speakers. Index 0 is also the single voice used for narrated videos.
+const OPENAI_VOICES_BY_LOCALE: Record<AppLocale, [OpenAiVoice, OpenAiVoice]> = {
+  uz: ['onyx', 'nova'],
+  en: ['onyx', 'shimmer'],
+  ru: ['onyx', 'nova'],
 };
 
 // OpenAI's voices are English-trained — they read Uzbek/Russian with an English
@@ -22,11 +25,15 @@ const VOICE_BY_LOCALE: Record<AppLocale, 'alloy' | 'nova' | 'onyx' | 'shimmer'> 
 const azureConfigured = Boolean(env.AZURE_SPEECH_KEY && env.AZURE_SPEECH_REGION);
 
 const AZURE_LANG: Record<AppLocale, string> = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' };
-const AZURE_VOICE_BY_LOCALE: Record<AppLocale, string> = {
-  uz: env.AZURE_TTS_VOICE_UZ,
-  ru: env.AZURE_TTS_VOICE_RU,
-  en: env.AZURE_TTS_VOICE_EN,
+// [host A, host B] native voices per locale.
+const AZURE_VOICES_BY_LOCALE: Record<AppLocale, [string, string]> = {
+  uz: [env.AZURE_TTS_VOICE_UZ, env.AZURE_TTS_VOICE_UZ_2],
+  ru: [env.AZURE_TTS_VOICE_RU, env.AZURE_TTS_VOICE_RU_2],
+  en: [env.AZURE_TTS_VOICE_EN, env.AZURE_TTS_VOICE_EN_2],
 };
+
+/** Host index in a two-speaker podcast (0 = host A, 1 = host B). */
+export type Speaker = 0 | 1;
 
 // Bound how many synthesis requests run at once. Long scripts split into many
 // ~700-char chunks; firing them all at once trips Azure's per-resource rate limit.
@@ -103,9 +110,10 @@ async function azurePostWithRetry(ssml: string, voice: string): Promise<Buffer> 
 async function synthesizeChunkAzure(
   text: string,
   locale: AppLocale,
-  usage?: UsageContext,
+  usage: UsageContext | undefined,
+  speaker: Speaker,
 ): Promise<Buffer> {
-  const voice = AZURE_VOICE_BY_LOCALE[locale];
+  const voice = AZURE_VOICES_BY_LOCALE[locale][speaker];
   const ssml =
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${AZURE_LANG[locale]}">` +
     `<voice name="${voice}">${sanitizeForXml(text)}</voice>` +
@@ -119,11 +127,12 @@ async function synthesizeChunkAzure(
 async function synthesizeChunkOpenai(
   text: string,
   locale: AppLocale,
-  usage?: UsageContext,
+  usage: UsageContext | undefined,
+  speaker: Speaker,
 ): Promise<Buffer> {
   const response = await openai.audio.speech.create({
     model: env.TTS_MODEL,
-    voice: VOICE_BY_LOCALE[locale],
+    voice: OPENAI_VOICES_BY_LOCALE[locale][speaker],
     input: text,
     response_format: 'mp3',
   });
@@ -134,11 +143,12 @@ async function synthesizeChunkOpenai(
 function synthesizeChunk(
   text: string,
   locale: AppLocale,
-  usage?: UsageContext,
+  usage: UsageContext | undefined,
+  speaker: Speaker = 0,
 ): Promise<Buffer> {
   return azureConfigured
-    ? synthesizeChunkAzure(text, locale, usage)
-    : synthesizeChunkOpenai(text, locale, usage);
+    ? synthesizeChunkAzure(text, locale, usage, speaker)
+    : synthesizeChunkOpenai(text, locale, usage, speaker);
 }
 
 /** Run async tasks with a bounded concurrency, preserving input order. */
@@ -175,6 +185,42 @@ export async function synthesizeSpeech(
 
   const buffers = await mapLimit(chunks, TTS_CONCURRENCY, (chunk) =>
     synthesizeChunk(chunk, locale, usage),
+  );
+  return Buffer.concat(buffers);
+}
+
+export interface DialogueTurn {
+  speaker: Speaker;
+  text: string;
+}
+
+/**
+ * Synthesize a two-host conversation: each turn is voiced by its speaker's voice
+ * (host A vs host B), then concatenated in order — a 2-person podcast.
+ */
+export async function synthesizeDialogue(
+  turns: DialogueTurn[],
+  locale: AppLocale = 'uz',
+  usage?: UsageContext,
+): Promise<Buffer> {
+  if (!azureConfigured && !env.OPENAI_API_KEY) {
+    throw new Error(
+      'No TTS provider configured. Set AZURE_SPEECH_KEY + AZURE_SPEECH_REGION (native voices) or OPENAI_API_KEY.',
+    );
+  }
+
+  // Flatten turns into chunk tasks (long turns still split), preserving order + speaker.
+  const tasks: { text: string; speaker: Speaker }[] = [];
+  for (const turn of turns) {
+    const normalized = normalizeScriptForTts(turn.text, locale);
+    for (const chunk of splitScriptIntoChunks(normalized)) {
+      tasks.push({ text: chunk, speaker: turn.speaker });
+    }
+  }
+  if (tasks.length === 0) return Buffer.alloc(0);
+
+  const buffers = await mapLimit(tasks, TTS_CONCURRENCY, (t) =>
+    synthesizeChunk(t.text, locale, usage, t.speaker),
   );
   return Buffer.concat(buffers);
 }

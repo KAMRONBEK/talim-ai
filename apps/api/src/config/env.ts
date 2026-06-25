@@ -37,6 +37,10 @@ const envSchema = z.object({
   AZURE_TTS_VOICE_UZ: z.string().default('uz-UZ-SardorNeural'),
   AZURE_TTS_VOICE_RU: z.string().default('ru-RU-DmitryNeural'),
   AZURE_TTS_VOICE_EN: z.string().default('en-US-GuyNeural'),
+  // Second host voice (for the 2-person conversational podcast).
+  AZURE_TTS_VOICE_UZ_2: z.string().default('uz-UZ-MadinaNeural'),
+  AZURE_TTS_VOICE_RU_2: z.string().default('ru-RU-SvetlanaNeural'),
+  AZURE_TTS_VOICE_EN_2: z.string().default('en-US-JennyNeural'),
   DEFAULT_CONTENT_LOCALE: z.enum(['uz', 'en', 'ru']).default('uz'),
   TUTOR_MODEL: z.string().default('gpt-4o'),
   TUTOR_TEMPERATURE: z.coerce.number().min(0).max(2).default(0.7),
