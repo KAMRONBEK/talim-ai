@@ -29,6 +29,10 @@ function VideoInner({ id }: { id: string }) {
   const generating =
     generate.isPending || video?.status === 'GENERATING' || video?.status === 'PENDING';
   const ready = video?.status === 'READY' && !!segments?.length && !!deck;
+  // The video is finished but its slide deck hasn't loaded yet (still fetching) —
+  // show "preparing visuals", never the "Generate" empty state, so a generated
+  // video never looks like it doesn't exist.
+  const readyAwaitingDeck = video?.status === 'READY' && !!segments?.length && !deck;
 
   const errInfo = classifyGenerationError(generate.error);
   const isLimit = generate.isError && errInfo.kind !== 'error';
@@ -80,6 +84,8 @@ function VideoInner({ id }: { id: string }) {
             playLabel={t('play')}
             pauseLabel={t('pause')}
           />
+        ) : readyAwaitingDeck ? (
+          <GeneratingState message={t('preparingVisuals')} hint={t('preparingVisualsHint')} />
         ) : generating ? (
           <GeneratingState message={t('generating')} hint={t('generatingHint')} />
         ) : isLoading ? (
