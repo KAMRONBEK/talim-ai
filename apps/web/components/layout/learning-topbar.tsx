@@ -38,7 +38,10 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b bg-card px-4 md:px-5">
-      {fileInput}
+      {/* The hidden upload input must also be gated to INDIVIDUAL — otherwise it
+          stays in the DOM/a11y tree (as a focusable "Choose File" control wired
+          to the B2C upload endpoint) for learners/owners who cannot upload here. */}
+      {user?.role === 'INDIVIDUAL' && fileInput}
       <div className="flex min-w-0 items-center gap-2 md:gap-4">
         {onMenuClick && (
           <Button
