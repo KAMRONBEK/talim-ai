@@ -199,14 +199,70 @@ type OpenRouterFileAnnotation = {
   file?: { content?: { type?: string; text?: string }[] };
 };
 
+/** Run a CLI tool to completion, rejecting on non-zero exit. */
+function runCli(cmd: string, args: string[], timeoutMs = 120_000): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(cmd, args);
+    let stderr = '';
+    proc.stderr.on('data', (d) => {
+      stderr += d.toString();
+    });
+    const timer = setTimeout(() => proc.kill('SIGKILL'), timeoutMs);
+    proc.on('error', (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+    proc.on('close', (code) => {
+      clearTimeout(timer);
+      code === 0 ? resolve() : reject(new Error(`${cmd} exited ${code}: ${stderr.slice(0, 200)}`));
+    });
+  });
+}
+
+/** Extract pages [first..last] of a PDF into a standalone PDF buffer via poppler. */
+async function extractPdfPageRange(buffer: Buffer, first: number, last: number): Promise<Buffer> {
+  const dir = await mkdtemp(join(tmpdir(), 'talim-ocr-split-'));
+  try {
+    const inPath = join(dir, 'in.pdf');
+    await writeFile(inPath, buffer);
+    // pdfseparate emits one file per page, named with the original page number.
+    await runCli('pdfseparate', [
+      '-f',
+      String(first),
+      '-l',
+      String(last),
+      inPath,
+      join(dir, 'p-%d.pdf'),
+    ]);
+    const pageNum = (f: string) => Number(f.match(/(\d+)/)?.[1] ?? 0);
+    const parts = (await readdir(dir))
+      .filter((f) => /^p-\d+\.pdf$/.test(f))
+      .sort((a, b) => pageNum(a) - pageNum(b))
+      .map((f) => join(dir, f));
+    if (parts.length === 0) throw new Error('pdfseparate produced no pages');
+    if (parts.length === 1) return await readFile(parts[0]!);
+    const outPath = join(dir, 'merged.pdf');
+    await runCli('pdfunite', [...parts, outPath]);
+    return await readFile(outPath);
+  } finally {
+    await rm(dir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
+// OpenRouter rejects file content whose base64 exceeds 30MB ("Downloaded image
+// content cannot exceed 30MB", returned as HTTP 200 with an `error` body, code
+// 413). Keep each request under it; larger PDFs are split into page batches below.
+const OCR_MAX_BASE64_BYTES = 30 * 1024 * 1024;
+const OCR_BATCH_RAW_BYTES = 18 * 1024 * 1024; // ~24MB once base64'd — safely under the cap
+
 /**
- * Primary scanned-PDF OCR via OpenRouter's Mistral-OCR file-parser plugin. The
- * plugin OCRs the PDF server-side and returns the parsed text in the message
- * annotations (independent of what the chat model writes back), so we read the
- * verbatim text straight from `annotations[].file.content` — no paraphrase or
- * re-diacritization of Arabic/Quranic verses the way an LLM-vision OCR can.
+ * One OpenRouter file-parser → Mistral-OCR request for a single (sub-)PDF. The
+ * plugin OCRs server-side and returns the parsed text in the message annotations
+ * (independent of what the chat model writes back), so we read the verbatim text
+ * straight from `annotations[].file.content` — no paraphrase or re-diacritization
+ * of Arabic/Quranic verses the way an LLM-vision OCR can.
  */
-async function ocrViaOpenRouter(
+async function ocrRequestOnce(
   buffer: Buffer,
   filename: string,
   usage?: UsageContext,
@@ -231,8 +287,7 @@ async function ocrViaOpenRouter(
   });
 
   // OpenRouter / the Mistral-OCR gateway returns transient 429/5xx (e.g. 502) on
-  // load or for large scans. Retry with backoff so a blip doesn't drop us to the
-  // much slower local-rasterize fallback. Only the LAST failure surfaces.
+  // load. Retry with backoff so a blip doesn't drop us to the slower local OCR.
   const maxAttempts = 3;
   let res: Response | undefined;
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
@@ -254,9 +309,18 @@ async function ocrViaOpenRouter(
   if (!res || !res.ok) throw new Error('OpenRouter OCR failed after retries');
 
   const data = (await res.json()) as {
+    error?: { message?: string; code?: number };
     choices?: { message?: { annotations?: OpenRouterFileAnnotation[] } }[];
     usage?: { prompt_tokens?: number; completion_tokens?: number };
   };
+  // OpenRouter signals some failures (e.g. the 30MB content cap → code 413) as an
+  // `error` body on an HTTP 200. Surface it so the caller can batch / fall back.
+  if (data.error) {
+    throw new Error(
+      `OpenRouter OCR error ${data.error.code ?? ''}: ${data.error.message ?? 'unknown'}`.trim(),
+    );
+  }
+
   const text = (data.choices?.[0]?.message?.annotations ?? [])
     .filter((a) => a.type === 'file')
     .flatMap((a) => a.file?.content ?? [])
@@ -278,6 +342,39 @@ async function ocrViaOpenRouter(
     });
   }
   return text;
+}
+
+/**
+ * Primary scanned-PDF OCR via OpenRouter's Mistral-OCR. A whole PDF goes in one
+ * request when its base64 fits under OpenRouter's 30MB content cap; larger scans
+ * (e.g. a 200-page book → ~37MB base64) are split into page batches that each fit,
+ * OCR'd via Mistral, and concatenated in page order — so big PDFs still use Mistral
+ * (one key) instead of silently falling through to the slow local rasterizer.
+ */
+async function ocrViaOpenRouter(
+  buffer: Buffer,
+  filename: string,
+  usage?: UsageContext,
+): Promise<string> {
+  if (!env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY is not configured');
+
+  const base64Bytes = Math.ceil(buffer.length / 3) * 4;
+  if (base64Bytes <= OCR_MAX_BASE64_BYTES) {
+    return ocrRequestOnce(buffer, filename, usage);
+  }
+
+  const pageCount = (await getPdfPageCount(buffer)) ?? 0;
+  if (pageCount <= 1) return ocrRequestOnce(buffer, filename, usage); // can't split further
+
+  const bytesPerPage = buffer.length / pageCount;
+  const pagesPerBatch = Math.max(1, Math.floor(OCR_BATCH_RAW_BYTES / bytesPerPage));
+  const texts: string[] = [];
+  for (let first = 1; first <= pageCount; first += pagesPerBatch) {
+    const last = Math.min(pageCount, first + pagesPerBatch - 1);
+    const sub = await extractPdfPageRange(buffer, first, last);
+    texts.push(await ocrRequestOnce(sub, `${filename}#p${first}-${last}`, usage));
+  }
+  return texts.join('\n\n').trim();
 }
 
 export async function extractPdfText(
