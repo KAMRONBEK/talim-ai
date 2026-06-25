@@ -467,6 +467,14 @@
     "percentComplete": "{percent}% bajarildi",
     "continueLearning": "O'rganishni davom ettirish",
     "schoolFallback": "Maktabingiz",
+    "progress": {
+      "eyebrow": "Taraqqiyot",
+      "title": "Mening taraqqiyotim",
+      "desc": "Faolligingiz va tayinlangan materiallar.",
+      "learningStreak": "O'rganish ketma-ketligi",
+      "averageQuiz": "O'rtacha test",
+      "emptyDesc": "Taraqqiyotni kuzatishni boshlash uchun tayinlangan materialni oching."
+    },
     "nav": {
       "materials": "Materiallar",
       "progress": "Progress",

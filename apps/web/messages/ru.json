@@ -467,6 +467,14 @@
     "percentComplete": "{percent}% завершено",
     "continueLearning": "Продолжить обучение",
     "schoolFallback": "Ваша школа",
+    "progress": {
+      "eyebrow": "Прогресс",
+      "title": "Мой прогресс",
+      "desc": "Ваша активность и назначенные материалы.",
+      "learningStreak": "Серия обучения",
+      "averageQuiz": "Средний балл",
+      "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс."
+    },
     "nav": {
       "materials": "Материалы",
       "progress": "Прогресс",

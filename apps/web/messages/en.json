@@ -467,6 +467,14 @@
     "percentComplete": "{percent}% complete",
     "continueLearning": "Continue learning",
     "schoolFallback": "Your school",
+    "progress": {
+      "eyebrow": "Progress",
+      "title": "My progress",
+      "desc": "Your activity and assigned materials.",
+      "learningStreak": "Learning streak",
+      "averageQuiz": "Average quiz",
+      "emptyDesc": "Open an assigned material to start tracking progress."
+    },
     "nav": {
       "materials": "Materials",
       "progress": "Progress",
