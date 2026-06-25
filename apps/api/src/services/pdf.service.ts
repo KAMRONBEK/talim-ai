@@ -215,25 +215,43 @@ async function ocrViaOpenRouter(
   if (!key) throw new Error('OPENROUTER_API_KEY is not configured');
 
   const dataUrl = `data:application/pdf;base64,${buffer.toString('base64')}`;
-  const res = await fetch(`${OPENROUTER_API}/chat/completions`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: env.OPENROUTER_OCR_MODEL,
-      max_tokens: 4, // we only need parsing to run; the model's reply is ignored
-      messages: [
-        {
-          role: 'user',
-          content: [
-            { type: 'text', text: 'Parse this document.' },
-            { type: 'file', file: { filename, file_data: dataUrl } },
-          ],
-        },
-      ],
-      plugins: [{ id: 'file-parser', pdf: { engine: 'mistral-ocr' } }],
-    }),
+  const body = JSON.stringify({
+    model: env.OPENROUTER_OCR_MODEL,
+    max_tokens: 4, // we only need parsing to run; the model's reply is ignored
+    messages: [
+      {
+        role: 'user',
+        content: [
+          { type: 'text', text: 'Parse this document.' },
+          { type: 'file', file: { filename, file_data: dataUrl } },
+        ],
+      },
+    ],
+    plugins: [{ id: 'file-parser', pdf: { engine: 'mistral-ocr' } }],
   });
-  if (!res.ok) throw new Error(`OpenRouter OCR ${res.status}: ${(await res.text()).slice(0, 300)}`);
+
+  // OpenRouter / the Mistral-OCR gateway returns transient 429/5xx (e.g. 502) on
+  // load or for large scans. Retry with backoff so a blip doesn't drop us to the
+  // much slower local-rasterize fallback. Only the LAST failure surfaces.
+  const maxAttempts = 3;
+  let res: Response | undefined;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    res = await fetch(`${OPENROUTER_API}/chat/completions`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body,
+    });
+    if (res.ok) break;
+    const retriable = res.status === 429 || res.status >= 500;
+    if (retriable && attempt < maxAttempts - 1) {
+      const retryAfter = Number(res.headers.get('retry-after'));
+      const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(15000, 2000 * 2 ** attempt);
+      await new Promise((r) => setTimeout(r, backoff));
+      continue;
+    }
+    throw new Error(`OpenRouter OCR ${res.status}: ${(await res.text()).slice(0, 300)}`);
+  }
+  if (!res || !res.ok) throw new Error('OpenRouter OCR failed after retries');
 
   const data = (await res.json()) as {
     choices?: { message?: { annotations?: OpenRouterFileAnnotation[] } }[];

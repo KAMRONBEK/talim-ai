@@ -55,6 +55,10 @@ services:
       # compose doesn't warn when it's unset (dev / local).
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
       OPENROUTER_OCR_MODEL: ${OPENROUTER_OCR_MODEL:-google/gemini-2.5-flash-lite}
+      # Azure AI Speech — native uz/ru voices for podcasts & videos (empty default
+      # so compose doesn't warn locally; set via Doppler prd).
+      AZURE_SPEECH_KEY: ${AZURE_SPEECH_KEY:-}
+      AZURE_SPEECH_REGION: ${AZURE_SPEECH_REGION:-}
       UPLOAD_DIR: ${UPLOAD_DIR:-/uploads}
       CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:3001}
     volumes:
