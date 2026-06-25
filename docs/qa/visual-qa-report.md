@@ -46,7 +46,7 @@
 - [x] Workspace (YouTube): source render ✓, Material/Summary toggle ✓, resizable divider persists ✓ (45.1% after reload), sidebar/sections nav ✓, transcript clickable ✓ | progress ring shows 0% (reading-progress update not yet checked)
 - [x] Learn: Summary (English markdown renders correctly for en locale) — LaTeX/KaTeX not yet exercised (answer used plain text)
 - [x] Learn: Quiz — generate (loading state ✓), MC + short-answer types ✓, Check reveal ✓, submit → score 80%/4-of-5 ✓, "Try again" retry ✓. Standalone /quiz/<id> page ✓. (formula/LaTeX in a quiz not yet seen — content was arithmetic.) **Fixed hydration bug F4 here.**
-- [ ] Learn: Podcast (player + transcript)
+- [x] Learn: Podcast — page renders empty state ("No podcast yet" + Create podcast for owner/individual; learner sees info msg, no button — F12). Player not exercised (no TTS generated).
 - [x] Chat: streamed answer renders (markdown), scoped to material, sources shown ✓ — mermaid/LaTeX not yet exercised
 - [ ] Chat: select transcript text + marquee PDF region → seeded → scoped answer
 - [ ] Chat: visual tutor tools (Manim/Desmos/mermaid)
@@ -139,6 +139,7 @@
 | F8 | content layout | TENANT_LEARNER (any) | en | light | 1440 | High | FIXED | Opening a content id the user can't access (API 404) **hung on "Loading…" forever** — the content *layout* did `if(!content) return Loading` with no error handling, blocking children + any redirect. Now redirects to role home on fetch error. Verified: learner → /learner/dashboard. | apps/web/app/[locale]/content/[id]/layout.tsx |
 | F9 | ALL admin pages | ADMIN | (n/a) | (n/a) | (n/a) | High | FIXED (757d2bb) | **Every admin route 500'd on SSR**: `useAuthHydrated` (auth-guard.tsx) initialized state via `useAuthStore.persist.hasHydrated()`, whose lazy initializer runs server-side where persist/localStorage is undefined → "Cannot read properties of undefined (reading 'hasHydrated')". Pages only recovered client-side. Fixed to `useState(false)` + read persist in the client effect (matches web RoleGuard). Verified SSR 200 on all admin routes. | apps/admin/components/auth-guard.tsx |
 | F10 | admin tutor-requests | ADMIN | (n/a) | (n/a) | 1440 | Low | LOGGED | "Reject" uses a native `window.confirm()` (consistent with admin's other native dialogs, acceptable for an internal panel). Noting only. | apps/admin |
+| F12 | /content/[id]/podcast | TENANT_LEARNER | en | light/dark | 1440 | Med | FIXED (a39657b) | The podcast page showed the **"Create podcast" generate button to learners** (who can't generate; server blocks it). Gated to non-learners; learners now see an informational "your tutor hasn't shared a podcast yet" message (new `podcastLearnerEmpty` string in uz/en/ru). Verified button gone for learner. (Slides route checked — no similar leak.) | apps/web/app/[locale]/content/[id]/podcast/page.tsx |
 | F11 | tenant pages | (newly-promoted owner) | en | uz | 1440 | Med | LOGGED | **Stale session token after a role change.** When an admin approves a tutor request for a user who is *currently logged in*, that user's JWT still carries the old role (INDIVIDUAL). `/auth/me` updates the stored user → the tenant UI renders, but every `/tenant/*` call returns **403** (token role mismatch) until the user logs out/in. Repro: approved qa-individual while their session was live → /tenant dashboard showed but all data 403'd. Fix is structural (force re-auth on role change, or have auth middleware re-resolve role from DB on mismatch) → LOGGED not fixed. | apps/api auth.middleware / session handling |
 
 ---
@@ -171,13 +172,13 @@
 
 **Coverage:** All 5 surfaces exercised end-to-end — AUTH (login/register/validation/redirects/logout/deep-link), INDIVIDUAL (workspace: source render, Material/Summary, resizable-persist, chat-streaming, quiz generate+take+score, dashboard), TENANT_OWNER (dashboard/onboarding, students incl. email-less kid + deactivate/reactivate, join code, material assign, question-bank approve, GAME assessment publish+assign), TENANT_LEARNER (assigned-only dashboard, restricted workspace, full GAME quiz w/ timer+speed-points+streak+leaderboard+attempt-lock, mustChangePassword+change, access-denied), ADMIN (dashboard, tutor-request approve+reject, users, tenants, content, audit). Cross-cutting: uz/ru/en locales (no raw keys/leak), light+dark, mobile 390 (no overflow), console/network checks, XSS-escaping edge.
 
-**Bugs fixed (6 commits on `claude/visual-qa`, all typecheck-verified + re-tested live):**
+**Bugs fixed (6 code commits on `claude/visual-qa`, all typecheck-verified + re-tested live):**
 1. `9fe5d68` — login wrong-password showed no error (401 interceptor wiped it). [F2]
-2. RichText inline `<div>`-in-`<p>` hydration error on quiz reveal. [F4]
-3. "+ Upload" button shown to learners/owners in workspace topbar. [F7]
-4. Inaccessible content hung on "Loading…" forever (no redirect). [F8]
+2. `8d0c0ff` — RichText inline `<div>`-in-`<p>` hydration error on quiz reveal. [F4]
+3. `5a934e9` — "+ Upload" button shown to learners/owners in workspace topbar. [F7]
+4. `90e170a` — inaccessible content hung on "Loading…" forever (no redirect). [F8]
 5. `757d2bb` — **every admin page SSR-500'd** (auth-guard hydration init). [F9]
-6. (report checkpoints)
+6. `a39657b` — "Create podcast" generate button shown to learners. [F12]
 
 **Issues logged (not fixed — structural/subjective):** F3 summary-404 console noise; F5 assessment mutations don't invalidate cache (stale approve-count/results); F6 deactivate no-confirm + native regenerate confirm; F10 admin native reject confirm; F11 **stale JWT role after admin role-change → 403s until re-login** (medium).
 
