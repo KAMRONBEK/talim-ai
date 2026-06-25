@@ -81,32 +81,55 @@ function PodcastPageInner({ id }: { id: string }) {
     [activeEpisode, flushProgress],
   );
 
+  // Stable ref to the latest flushProgress so cleanup-only effects don't list
+  // it as a dependency. flushProgress changes identity every render (it closes
+  // over the react-query mutation object), so depending on it re-runs effects
+  // on every render.
+  const flushProgressRef = useRef(flushProgress);
   useEffect(() => {
-    return () => {
-      flushProgress();
-    };
+    flushProgressRef.current = flushProgress;
   }, [flushProgress]);
 
   useEffect(() => {
-    if (!activeEpisode?.hasAudio) {
+    return () => {
+      flushProgressRef.current();
+    };
+  }, []);
+
+  // Only (re)fetch the audio blob when the episode that has audio actually
+  // changes. Previously this depended on activeEpisode/flushProgress identity,
+  // so while the podcast was still generating (3s poll → constant re-render)
+  // the blob URL was revoked + recreated every render — spamming blob 404s and
+  // resetting playback to 0 so it could never start.
+  const audioEpisodeId = activeEpisode?.hasAudio ? activeEpisode.id : null;
+  useEffect(() => {
+    if (!audioEpisodeId) {
       setAudioUrl(null);
       return;
     }
     let revoked: string | null = null;
+    let cancelled = false;
     lastSavedRef.current = 0;
     pendingProgressRef.current = null;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-    fetchAuthenticatedBlob(`/content/${id}/podcast/episodes/${activeEpisode.id}/audio`)
+    fetchAuthenticatedBlob(`/content/${id}/podcast/episodes/${audioEpisodeId}/audio`)
       .then((url) => {
+        if (cancelled) {
+          URL.revokeObjectURL(url);
+          return;
+        }
         revoked = url;
         setAudioUrl(url);
       })
-      .catch(() => setAudioUrl(null));
+      .catch(() => {
+        if (!cancelled) setAudioUrl(null);
+      });
     return () => {
-      flushProgress();
+      cancelled = true;
+      flushProgressRef.current();
       if (revoked) URL.revokeObjectURL(revoked);
     };
-  }, [activeEpisode, id, flushProgress]);
+  }, [audioEpisodeId, id]);
 
   useEffect(() => {
     const ready = podcast?.episodes.filter((e) => e.hasAudio) ?? [];
