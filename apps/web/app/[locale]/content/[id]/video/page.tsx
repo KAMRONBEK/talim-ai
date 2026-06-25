@@ -89,8 +89,15 @@ function VideoInner({ id }: { id: string }) {
             deck={deck}
             segments={segments}
             loadAudioUrl={loadAudioUrl}
-            playLabel={t('play')}
-            pauseLabel={t('pause')}
+            labels={{
+              play: t('play'),
+              pause: t('pause'),
+              seek: t('seek'),
+              prev: t('prevChapter'),
+              next: t('nextChapter'),
+              fullscreen: t('fullscreen'),
+              exitFullscreen: t('exitFullscreen'),
+            }}
           />
         ) : readyAwaitingDeck ? (
           <GeneratingState message={t('preparingVisuals')} hint={t('preparingVisualsHint')} />

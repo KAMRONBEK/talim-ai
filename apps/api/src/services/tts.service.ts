@@ -14,32 +14,145 @@ const VOICE_BY_LOCALE: Record<AppLocale, 'alloy' | 'nova' | 'onyx' | 'shimmer'> 
   ru: 'onyx',
 };
 
-async function synthesizeChunk(
+// OpenAI's voices are English-trained — they read Uzbek/Russian with an English
+// accent. Azure AI Speech has genuinely NATIVE neural voices (uz-UZ-SardorNeural,
+// ru-RU-DmitryNeural, …), so when an Azure Speech resource is configured we route
+// synthesis through it for natural Uzbek/Russian/English. Falls back to OpenAI
+// when Azure isn't configured, so nothing breaks without the key.
+const azureConfigured = Boolean(env.AZURE_SPEECH_KEY && env.AZURE_SPEECH_REGION);
+
+const AZURE_LANG: Record<AppLocale, string> = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' };
+const AZURE_VOICE_BY_LOCALE: Record<AppLocale, string> = {
+  uz: env.AZURE_TTS_VOICE_UZ,
+  ru: env.AZURE_TTS_VOICE_RU,
+  en: env.AZURE_TTS_VOICE_EN,
+};
+
+// Bound how many synthesis requests run at once. Long scripts split into many
+// ~700-char chunks; firing them all at once trips Azure's per-resource rate limit.
+const TTS_CONCURRENCY = 4;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+function escapeXml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+/**
+ * SSML-safe text. Strips characters that are illegal in XML 1.0 even when escaped
+ * (NUL/control chars, the form-feed PDF page-break char, …) — Azure rejects such
+ * SSML with HTTP 400 — keeping tab/newline/CR, then escapes the XML metacharacters.
+ */
+function sanitizeForXml(text: string): string {
+  let out = '';
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    // Drop C0 control chars except tab (9), LF (10), CR (13).
+    out += code < 0x20 && code !== 9 && code !== 10 && code !== 13 ? ' ' : text[i];
+  }
+  return escapeXml(out);
+}
+
+function recordTtsUsage(model: string, text: string, usage?: UsageContext): void {
+  if (!usage) return;
+  recordUsage({
+    userId: usage.userId,
+    tenantId: usage.tenantId,
+    feature: 'PODCAST_GEN',
+    model,
+    inputTokens: text.length,
+    outputTokens: 0,
+    metadata: usage.metadata,
+  });
+}
+
+async function azurePostWithRetry(ssml: string, voice: string): Promise<Buffer> {
+  const url = `https://${env.AZURE_SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/v1`;
+  const maxAttempts = 4;
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': env.AZURE_SPEECH_KEY,
+        'Content-Type': 'application/ssml+xml',
+        'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+        'User-Agent': 'talim-ai',
+      },
+      body: ssml,
+    });
+    if (res.ok) return Buffer.from(await res.arrayBuffer());
+
+    // Back off + retry on throttling / transient server errors (honor Retry-After).
+    const retriable = res.status === 429 || res.status >= 500;
+    if (retriable && attempt < maxAttempts - 1) {
+      const retryAfter = Number(res.headers.get('retry-after'));
+      const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(8000, 500 * 2 ** attempt);
+      await sleep(backoff);
+      continue;
+    }
+    const detail = await res.text().catch(() => '');
+    throw new Error(`Azure TTS failed (${res.status} ${voice}): ${detail.slice(0, 300)}`);
+  }
+  throw new Error(`Azure TTS failed after ${maxAttempts} attempts (${voice})`);
+}
+
+async function synthesizeChunkAzure(
   text: string,
-  voice: string,
+  locale: AppLocale,
+  usage?: UsageContext,
+): Promise<Buffer> {
+  const voice = AZURE_VOICE_BY_LOCALE[locale];
+  const ssml =
+    `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${AZURE_LANG[locale]}">` +
+    `<voice name="${voice}">${sanitizeForXml(text)}</voice>` +
+    `</speak>`;
+
+  const buffer = await azurePostWithRetry(ssml, voice);
+  recordTtsUsage(`azure-tts:${voice}`, text, usage);
+  return buffer;
+}
+
+async function synthesizeChunkOpenai(
+  text: string,
+  locale: AppLocale,
   usage?: UsageContext,
 ): Promise<Buffer> {
   const response = await openai.audio.speech.create({
     model: env.TTS_MODEL,
-    voice: voice as 'alloy' | 'nova' | 'onyx' | 'shimmer',
+    voice: VOICE_BY_LOCALE[locale],
     input: text,
     response_format: 'mp3',
   });
+  recordTtsUsage(env.TTS_MODEL, text, usage);
+  return Buffer.from(await response.arrayBuffer());
+}
 
-  if (usage) {
-    recordUsage({
-      userId: usage.userId,
-      tenantId: usage.tenantId,
-      feature: 'PODCAST_GEN',
-      model: env.TTS_MODEL,
-      inputTokens: text.length,
-      outputTokens: 0,
-      metadata: usage.metadata,
-    });
+function synthesizeChunk(
+  text: string,
+  locale: AppLocale,
+  usage?: UsageContext,
+): Promise<Buffer> {
+  return azureConfigured
+    ? synthesizeChunkAzure(text, locale, usage)
+    : synthesizeChunkOpenai(text, locale, usage);
+}
+
+/** Run async tasks with a bounded concurrency, preserving input order. */
+async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let cursor = 0;
+  async function worker(): Promise<void> {
+    while (cursor < items.length) {
+      const i = cursor++;
+      results[i] = await fn(items[i]!);
+    }
   }
-
-  const arrayBuffer = await response.arrayBuffer();
-  return Buffer.from(arrayBuffer);
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
 }
 
 export async function synthesizeSpeech(
@@ -47,20 +160,21 @@ export async function synthesizeSpeech(
   locale: AppLocale = 'uz',
   usage?: UsageContext,
 ): Promise<Buffer> {
-  if (!env.OPENAI_API_KEY) {
-    throw new Error('OPENAI_API_KEY is required for podcast generation');
+  if (!azureConfigured && !env.OPENAI_API_KEY) {
+    throw new Error(
+      'No TTS provider configured. Set AZURE_SPEECH_KEY + AZURE_SPEECH_REGION (native voices) or OPENAI_API_KEY.',
+    );
   }
 
   const normalized = normalizeScriptForTts(script, locale);
   const chunks = splitScriptIntoChunks(normalized);
-  const voice = VOICE_BY_LOCALE[locale];
 
   if (chunks.length === 1) {
-    return synthesizeChunk(chunks[0]!, voice, usage);
+    return synthesizeChunk(chunks[0]!, locale, usage);
   }
 
-  const buffers = await Promise.all(
-    chunks.map((chunk) => synthesizeChunk(chunk, voice, usage)),
+  const buffers = await mapLimit(chunks, TTS_CONCURRENCY, (chunk) =>
+    synthesizeChunk(chunk, locale, usage),
   );
   return Buffer.concat(buffers);
 }

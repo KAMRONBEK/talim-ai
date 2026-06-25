@@ -28,8 +28,15 @@ const envSchema = z.object({
   OPENROUTER_API_KEY: z.string().default(''),
   OPENROUTER_OCR_MODEL: z.string().default('google/gemini-2.5-flash-lite'),
   TTS_MODEL: z.string().default('tts-1-hd'),
-  TTS_PROVIDER: z.enum(['openai', 'elevenlabs']).default('openai'),
+  TTS_PROVIDER: z.enum(['openai', 'elevenlabs', 'azure']).default('openai'),
   ELEVENLABS_API_KEY: z.string().default(''),
+  // Azure AI Speech — native uz/ru/en neural voices. Set KEY + REGION to activate
+  // (overrides OpenAI TTS automatically). Voice IDs overridable per locale.
+  AZURE_SPEECH_KEY: z.string().default(''),
+  AZURE_SPEECH_REGION: z.string().default(''),
+  AZURE_TTS_VOICE_UZ: z.string().default('uz-UZ-SardorNeural'),
+  AZURE_TTS_VOICE_RU: z.string().default('ru-RU-DmitryNeural'),
+  AZURE_TTS_VOICE_EN: z.string().default('en-US-GuyNeural'),
   DEFAULT_CONTENT_LOCALE: z.enum(['uz', 'en', 'ru']).default('uz'),
   TUTOR_MODEL: z.string().default('gpt-4o'),
   TUTOR_TEMPERATURE: z.coerce.number().min(0).max(2).default(0.7),
