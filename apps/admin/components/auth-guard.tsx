@@ -5,7 +5,13 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/useAuthStore';
 
 function useAuthHydrated() {
-  const [hydrated, setHydrated] = useState(() => useAuthStore.persist.hasHydrated());
+  // Must start false: the lazy initializer used to call
+  // useAuthStore.persist.hasHydrated() during SSR, where the persist API /
+  // localStorage isn't available, throwing "Cannot read properties of
+  // undefined (reading 'hasHydrated')" and 500-ing every admin page on the
+  // server. Only touch persist on the client, inside the effect (matches the
+  // web app's RoleGuard).
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const unsub = useAuthStore.persist.onFinishHydration(() => setHydrated(true));
