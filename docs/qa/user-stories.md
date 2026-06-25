@@ -117,6 +117,47 @@ and unassigned from students.
 | EC6 | Another owner's material (cross-tenant) via crafted ID | 403 via `contentAccess.service.ts`; never deletable | ⬜ | — | **S1 — isolation** |
 | EC7 | Double-click delete / double submit | Single delete, no duplicate error | ⬜ | — | — |
 
+### US-LEARNER-01: Sees only assigned materials (multi-tenant isolation)
+**As a** tenant learner, **I want** to see only the materials my tutor assigned me, **so that** my
+classmates' and other orgs' content stay private.
+**Routes/code:** `/learner/dashboard` · `GET /content`, `GET /content/:id(/*)` · `contentAccess.service.ts` (`assertCanAccessContent`, `buildContentListWhere`).
+**Priority:** P0 (S1 isolation) · **Last verified:** 2026-06-25 on `4a0a57a` (live, run 4)
+
+**Acceptance criteria**
+- AC1 — The dashboard + `GET /content` return only content assigned to *me* while my membership is active.
+- AC2 — Any per-record access to content I'm not assigned returns 404 (no existence leak), via the central guard.
+
+**Edge cases & negative paths** — verified live with each learner's real bearer token (crafted `fetch`).
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Assigned learner dashboard | Shows only assigned content (1 article) | ✅ | — | `teststudent1`: 1 assigned |
+| EC2 | `GET /content/:id` for **own assigned** content | 200 (control) | ✅ | — | — |
+| EC3 | `GET /content/:id` for **B2C** content (`tenantId=null`) via crafted id | 404 "Content not found" | ✅ | — | cross-boundary blocked |
+| EC4 | `GET /content/:id` for **another student's** content in the **same tenant** (unassigned) | 404 — never leaks | ✅ | — | **S1**: `teststudent2`→`teststudent1`'s id = 404 |
+| EC5 | `GET /content/:id/file` (sub-resource) for unauthorized content | 404 (sub-paths guarded too) | ✅ | — | — |
+| EC6 | `GET /content/:id` for a garbage / nonexistent id | 404, no crash | ✅ | — | — |
+| EC7 | `GET /content` list as an **unassigned** learner | `contents:0` (empty) | ✅ | — | `teststudent2`: 0 |
+| EC8 | UI navigate to an unauthorized content URL | Redirect to `/learner/dashboard`, no hang/leak | ✅ | — | F8 fix holds |
+| EC9 | Cross-tenant learner via crafted id (other org) | 404 | ⬜ | — | other tenants have no content yet |
+| EC10 | Deactivated mid-session then access (same token) | 404/403 immediately (not at JWT expiry) | ✅ | — | live: content 200→404, list→0, `/learner` 403; reactivate restores |
+
+**Notes / open questions**
+- The guard keys on a `ContentAssignment` for *this* learner **and** an active membership — same-tenant-unassigned and cross-boundary both correctly 404.
+
+### US-LEARNER-04: Cannot reach owner/admin tools (role guard)
+**As the** platform, **I want** a learner blocked from owner/admin routes, **so that** privilege escalation is impossible.
+**Routes/code:** `/tenant/*` (`requireTenantOwner`), `/admin/*` (`requireRole('ADMIN')`), web RoleGuard.
+**Priority:** P0 (S1) · **Last verified:** 2026-06-25 on `4a0a57a` (live, run 4)
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Learner → `GET /tenant/content` / `/tenant/students` | 403 Forbidden | ✅ | — | both 403 |
+| EC2 | Learner → `GET /admin/users` / `/admin/tenants` | 403 Forbidden | ✅ | — | both 403 |
+| EC3 | Learner UI navigate to `/tenant/dashboard` | Redirect to `/learner/dashboard` | ✅ | — | — |
+| EC4 | Learner own routes `/learner/assessments`, `/usage/me` | 200 (control) | ✅ | — | — |
+| EC5 | Learner upload via B2C workspace topbar | No upload control rendered (incl. hidden file input) | ✅ | — | F7+F13 fixed prior runs |
+
 ---
 
 ## Story index (backlog — expand each with the template)
@@ -156,10 +197,10 @@ and unassigned from students.
 - [ ] US-OWNER-13 Settings / org rename
 
 ### TENANT_LEARNER
-- [ ] US-LEARNER-01 Sees **only assigned** materials (isolation)
+- [x] US-LEARNER-01 Sees **only assigned** materials (isolation) · spec'd ✅ · done (P0 ECs green)
 - [ ] US-LEARNER-02 Take quiz / game, see own progress
-- [ ] US-LEARNER-03 **Deactivated → content access lost immediately** (S1 isolation)
-- [ ] US-LEARNER-04 Cannot upload / cannot reach owner tools (role guard)
+- [x] US-LEARNER-03 **Deactivated → content access lost immediately** (S1 isolation) · login-side (F16) + live mid-session (US-LEARNER-01·EC10) ✅
+- [x] US-LEARNER-04 Cannot upload / cannot reach owner tools (role guard) · spec'd ✅ · done
 
 ### ADMIN (3001)
 - [ ] US-ADMIN-01 Tutor-requests: approve + set seat limit → org + ACTIVE subscription

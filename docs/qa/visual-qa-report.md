@@ -268,3 +268,25 @@
 **Fix committed this run:** `59dc681` `fix(api): case-insensitive email/username login + normalize email on register` [F17]. `@talim/api` typecheck ✓.
 
 **Test-data left on local dev DB (run 3):** none new (login-only flows; no records created). Currently signed in as `qa-owner` (TENANT_OWNER) in `uz`/`en` during testing.
+
+---
+
+## Run 4 (resumed) — multi-tenant role-isolation (S1), live
+
+**Focus:** the highest-severity untested area — verify the `contentAccess.service.ts` isolation contract *live*, not just in code. Mapped the dev DB first (3 tenants: QA Academy, QA Tutor Org, Smoke Tutoring; the only tenant content is QA Academy's YouTube `cmq2czlkb`, **assigned to `teststudent1` only**; B2C contents have `tenantId=null`). Drove the **real authenticated client** — extracted each learner's bearer token from the persisted auth store and issued crafted `fetch`es (this is exactly the attacker surface: a learner hand-crafting API calls). Spec'd **US-LEARNER-01** + **US-LEARNER-04** with full EC matrices.
+
+**US-LEARNER-01 (sees only assigned) — all green:**
+- Assigned learner (`teststudent1`) dashboard shows exactly 1 assigned article; `GET /content` → `contents:1`.
+- `GET /content/<own assigned>` → **200** (control). `GET /content/<B2C id>` (×2) → **404**; `/content/<B2C id>/file` → **404**; garbage id → **404**; `GET /tenant/content` → **403**.
+- **Same-tenant isolation (S1):** `teststudent2` (QA Academy, **no** assignment) → `GET /content` = `contents:0`; `GET /content/<teststudent1's id>` (same org) → **404**; its `/file` → **404**. A learner cannot reach a classmate's content even within the same tenant.
+- **UI:** navigating the browser to the unauthorized content URL → redirects to `/learner/dashboard` (F8 fix holds; no hang, no leak).
+
+**US-LEARNER-04 (role guard) — all green:** learner token → `/tenant/content` **403**, `/tenant/students` **403**, `/admin/users` **403**, `/admin/tenants` **403**; own `/learner/assessments` **200** + `/usage/me` **200** (controls). UI navigate to `/tenant/dashboard` → redirects to `/learner/dashboard`.
+
+**Result: no findings.** Live isolation matches the code-level audit — every content/assessment path is centralized through `assertCanAccessContent` / `assertTenantOwnsContent` / role middleware. The CLAUDE.md invariant #1 holds in practice. (All 4xx/403 responses produced the expected console-error noise; no 500s, no hydration errors.)
+
+**Deactivate-mid-session (US-LEARNER-01·EC10, S1) — verified live:** logged in as `teststudent1` (baseline `GET /content/<assigned>` → 200, `/content` → 1), flipped their membership `active=false` in the DB (the same flag the owner UI sets), then re-hit the API **with the unchanged token** → content **200→404**, `/content` → **0**, `/learner/assessments` → **403** (`requireActiveLearner`). Access is lost **immediately on the existing session**, not at JWT expiry — the CLAUDE.md guarantee. Reactivated (`active=true`) → access restored (200, list 1). Clean.
+
+**Still ⬜ for isolation:** US-LEARNER-01·EC9 (cross-*tenant* content via crafted id — logically covered by EC4's mechanism since the learner guard only returns content via an explicit assignment, but not proven live as no second tenant has content yet).
+
+**Test-data left on local dev DB (run 4):** none — `teststudent1` membership toggled off→on and **restored to active** (verified); read-only probes otherwise.
