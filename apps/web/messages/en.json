@@ -154,6 +154,7 @@
     "summaries": "Summaries",
     "noPodcast": "No podcast yet",
     "noPodcastDesc": "Create an AI voice podcast from your content sections.",
+    "podcastLearnerEmpty": "Your tutor hasn't shared a podcast for this material yet.",
     "episodes": "{count} episodes",
     "episodeReady": "Ready",
     "episodePreparing": "Preparing",

@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
+import { useAuthStore } from '@/store/useAuthStore';
 import { usePodcast, useCreatePodcast } from '@/hooks/usePodcast';
 import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
@@ -22,6 +23,7 @@ function PodcastPageInner({ id }: { id: string }) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
   const { data: content } = useContent(id);
+  const isLearner = useAuthStore((s) => s.user?.role) === 'TENANT_LEARNER';
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
   const { data: progressList = [] } = usePodcastProgress(id);
@@ -128,10 +130,18 @@ function PodcastPageInner({ id }: { id: string }) {
           🎧
         </div>
         <h2 className="font-display text-xl font-semibold">{t('noPodcast')}</h2>
-        <p className="max-w-md text-center text-sm text-muted-foreground">{t('noPodcastDesc')}</p>
-        <Button variant="gradient" onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
-          {createPodcast.isPending ? t('podcastGenerating') : t('createPodcast')}
-        </Button>
+        {/* Learners cannot generate content — show an informational message
+            instead of the (server-blocked) "Create podcast" action. */}
+        {isLearner ? (
+          <p className="max-w-md text-center text-sm text-muted-foreground">{t('podcastLearnerEmpty')}</p>
+        ) : (
+          <>
+            <p className="max-w-md text-center text-sm text-muted-foreground">{t('noPodcastDesc')}</p>
+            <Button variant="gradient" onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
+              {createPodcast.isPending ? t('podcastGenerating') : t('createPodcast')}
+            </Button>
+          </>
+        )}
       </div>
     );
   }

@@ -154,6 +154,7 @@
     "summaries": "Конспекты",
     "noPodcast": "Подкаста пока нет",
     "noPodcastDesc": "Создайте ИИ-подкаст из разделов вашего материала.",
+    "podcastLearnerEmpty": "Преподаватель ещё не добавил подкаст для этого материала.",
     "episodes": "{count} эпизодов",
     "episodeReady": "Готово",
     "episodePreparing": "Подготовка",

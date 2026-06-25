@@ -154,6 +154,7 @@
     "summaries": "Xulosalar",
     "noPodcast": "Hali podkast yo'q",
     "noPodcastDesc": "Kontent bo'laklaridan AI ovozli podkast yarating.",
+    "podcastLearnerEmpty": "O'qituvchingiz hali bu material uchun podkast qo'shmagan.",
     "episodes": "{count} epizod",
     "episodeReady": "Tayyor",
     "episodePreparing": "Tayyorlanmoqda",
