@@ -30,10 +30,16 @@ export type SubscriptionSource = 'ADMIN' | 'PAYMENT_PROVIDER';
 export type PlanCode = 'FREE' | 'INDIVIDUAL_PRO' | 'TENANT_STARTER' | 'TENANT_GROWTH';
 
 export interface PlanLimits {
-  maxUploads?: number | null;
-  maxGenerationsPerMonth?: number | null;
-  maxTutorMessages?: number | null;
-  maxVideosPerMonth?: number | null;
+  // Per-day allowances (reset at local midnight). null = unlimited.
+  maxUploadsPerDay?: number | null;
+  maxGenerationsPerDay?: number | null;
+  maxPodcastsPerDay?: number | null;
+  maxVideosPerDay?: number | null;
+  maxTutorMessagesPerDay?: number | null;
+  // Per-file upload gating.
+  maxPagesPerFile?: number | null;
+  maxFileSizeMb?: number | null;
+  // Tenant lifetime caps.
   maxStudents?: number | null;
   maxContentItems?: number | null;
   /** Monthly price in USD (0 for free plans). Manual billing — no payment gateway. */
@@ -87,7 +93,13 @@ export interface AdminTenantUsageVsLimits extends AdminUsageVsLimits {
   subscription?: AdminUserSubscription | null;
 }
 
-export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE' | 'VIDEO' | 'STUDENT';
+export type QuotaFeature =
+  | 'UPLOAD'
+  | 'GENERATION'
+  | 'TUTOR_MESSAGE'
+  | 'VIDEO'
+  | 'PODCAST'
+  | 'STUDENT';
 
 export interface QuotaExceededResponse {
   message: string;
@@ -95,6 +107,17 @@ export interface QuotaExceededResponse {
   feature: QuotaFeature;
   used: number;
   limit: number;
+  upgradePlanCode: PlanCode | null;
+}
+
+/** A file rejected at upload because it exceeds the plan's page/size caps. */
+export interface PlanFileLimitResponse {
+  message: string;
+  code: 'PLAN_FILE_LIMIT';
+  maxPages: number | null;
+  maxFileSizeMb: number | null;
+  pages: number | null;
+  fileSizeMb: number | null;
   upgradePlanCode: PlanCode | null;
 }
 
@@ -112,6 +135,7 @@ export interface BillingUsageVsLimits {
   generations: { used: number; limit: number | null };
   tutorMessages: { used: number; limit: number | null };
   videos?: { used: number; limit: number | null };
+  podcasts?: { used: number; limit: number | null };
 }
 
 export interface TenantBillingUsageVsLimits extends BillingUsageVsLimits {

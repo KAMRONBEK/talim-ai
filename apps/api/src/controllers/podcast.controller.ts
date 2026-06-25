@@ -88,7 +88,7 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
     return;
   }
 
-  await assertQuota(req.user.userId, 'GENERATION', {
+  await assertQuota(req.user.userId, 'PODCAST', {
     role: req.user.role,
     tenantId: req.user.tenantId,
   });

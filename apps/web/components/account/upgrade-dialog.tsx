@@ -10,7 +10,18 @@ import { useRequestUpgrade } from '@/hooks/useBilling';
  * records a signal for an admin to activate rather than charging. Lightweight
  * self-contained overlay — @talim/ui has no Dialog primitive.
  */
-export function UpgradeDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function UpgradeDialog({
+  open,
+  onClose,
+  headline,
+  subhead,
+}: {
+  open: boolean;
+  onClose: () => void;
+  /** Optional override headline (e.g. the "file exceeds your plan" prompt). */
+  headline?: string;
+  subhead?: string;
+}) {
   const t = useTranslations('account.billing.upgrade');
   const requestUpgrade = useRequestUpgrade();
 
@@ -18,10 +29,11 @@ export function UpgradeDialog({ open, onClose }: { open: boolean; onClose: () =>
 
   const proFeatures = [
     t('features.uploads'),
-    t('features.generations'),
-    t('features.videos'),
     t('features.tutor'),
-    t('features.podcastsSlides'),
+    t('features.podcasts'),
+    t('features.videos'),
+    t('features.quizzes'),
+    t('features.files'),
   ];
 
   return (
@@ -49,8 +61,9 @@ export function UpgradeDialog({ open, onClose }: { open: boolean; onClose: () =>
             <Sparkles className="h-5 w-5" />
             <span className="text-sm font-semibold uppercase tracking-wide opacity-90">{t('proName')}</span>
           </div>
-          <h2 className="mt-2 font-display text-2xl font-bold">{t('title')}</h2>
-          <p className="mt-1 text-3xl font-extrabold">
+          <h2 className="mt-2 font-display text-2xl font-bold">{headline ?? t('title')}</h2>
+          {subhead && <p className="mt-1 text-sm opacity-90">{subhead}</p>}
+          <p className="mt-2 text-3xl font-extrabold">
             {t('price')}
             <span className="ml-1 text-base font-medium opacity-80">{t('perMonth')}</span>
           </p>

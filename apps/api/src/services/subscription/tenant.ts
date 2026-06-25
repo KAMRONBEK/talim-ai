@@ -5,11 +5,10 @@ import { AppError } from '../../middleware/error.middleware.js';
 import { getUsageForPeriod } from '../usage.service.js';
 import {
   GENERATION_FEATURES,
-  VIDEO_FEATURE,
   QuotaExceededError,
   type SubscriptionView,
+  dayRange,
   formatSubscription,
-  monthToDateRange,
 } from './shared.js';
 
 function resolveTenantUpgradePlanCode(effectivePlanCode: string): PlanCode | null {
@@ -56,9 +55,25 @@ async function getTenantGenerationCount(tenantId: string, from: Date, to: Date):
 }
 
 async function getTenantVideoCount(tenantId: string, from: Date, to: Date): Promise<number> {
-  return prisma.apiUsageEvent.count({
-    where: { tenantId, feature: VIDEO_FEATURE, createdAt: { gte: from, lte: to } },
+  return prisma.contentVideo.count({
+    where: { content: { tenantId }, createdAt: { gte: from, lte: to } },
   });
+}
+
+async function getTenantPodcastCount(tenantId: string, from: Date, to: Date): Promise<number> {
+  return prisma.podcast.count({
+    where: { content: { tenantId }, createdAt: { gte: from, lte: to } },
+  });
+}
+
+/** Per-file page/size caps for a tenant's current plan (for upload gating). */
+export async function getFileLimitsForTenant(tenantId: string) {
+  const sub = await getSubscriptionForTenant(tenantId);
+  return {
+    maxPagesPerFile: sub?.limits.maxPagesPerFile ?? null,
+    maxFileSizeMb: sub?.limits.maxFileSizeMb ?? null,
+    upgradePlanCode: sub ? resolveTenantUpgradePlanCode(sub.effectivePlanCode) : null,
+  };
 }
 
 export async function assertTenantQuota(
@@ -68,7 +83,7 @@ export async function assertTenantQuota(
   const subscription = await requireActiveTenantSubscription(tenantId);
   const limits = subscription.limits;
   const upgradePlanCode = resolveTenantUpgradePlanCode(subscription.effectivePlanCode);
-  const { from, to } = monthToDateRange();
+  const { from, to } = dayRange();
 
   if (feature === 'STUDENT') {
     // A per-tenant seatLimit set by an admin overrides the plan's maxStudents.
@@ -86,6 +101,7 @@ export async function assertTenantQuota(
   }
 
   if (feature === 'UPLOAD') {
+    // Tenants are capped on total materials (lifetime), not per-day.
     const limit = limits.maxContentItems;
     if (limit == null) return;
     const used = await getTenantContentCount(tenantId);
@@ -96,7 +112,7 @@ export async function assertTenantQuota(
   }
 
   if (feature === 'GENERATION') {
-    const limit = limits.maxGenerationsPerMonth;
+    const limit = limits.maxGenerationsPerDay;
     if (limit == null) return;
     const used = await getTenantGenerationCount(tenantId, from, to);
     if (used >= limit) {
@@ -106,7 +122,7 @@ export async function assertTenantQuota(
   }
 
   if (feature === 'VIDEO') {
-    const limit = limits.maxVideosPerMonth;
+    const limit = limits.maxVideosPerDay;
     if (limit == null) return;
     const used = await getTenantVideoCount(tenantId, from, to);
     if (used >= limit) {
@@ -115,14 +131,20 @@ export async function assertTenantQuota(
     return;
   }
 
-  const limit = limits.maxTutorMessages;
+  if (feature === 'PODCAST') {
+    const limit = limits.maxPodcastsPerDay;
+    if (limit == null) return;
+    const used = await getTenantPodcastCount(tenantId, from, to);
+    if (used >= limit) {
+      throw new QuotaExceededError('PODCAST', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
+  const limit = limits.maxTutorMessagesPerDay;
   if (limit == null) return;
   const used = await prisma.apiUsageEvent.count({
-    where: {
-      tenantId,
-      feature: 'TUTOR_CHAT',
-      createdAt: { gte: from, lte: to },
-    },
+    where: { tenantId, feature: 'TUTOR_CHAT', createdAt: { gte: from, lte: to } },
   });
   if (used >= limit) {
     throw new QuotaExceededError('TUTOR_MESSAGE', used, limit, upgradePlanCode);
@@ -132,16 +154,18 @@ export async function assertTenantQuota(
 export async function getTenantUsageVsLimits(tenantId: string) {
   const sub = await getSubscriptionForTenant(tenantId);
   const limits = sub?.limits ?? {};
-  const { from, to } = monthToDateRange();
+  const { from, to } = dayRange();
 
-  const [contentCount, studentCount, generationCount, videoCount, usage, tenant] = await Promise.all([
-    getTenantContentCount(tenantId),
-    getActiveStudentCount(tenantId),
-    getTenantGenerationCount(tenantId, from, to),
-    getTenantVideoCount(tenantId, from, to),
-    getUsageForPeriod({ tenantId, from, to }),
-    prisma.tenant.findUnique({ where: { id: tenantId }, select: { seatLimit: true } }),
-  ]);
+  const [contentCount, studentCount, generationCount, videoCount, podcastCount, usage, tenant] =
+    await Promise.all([
+      getTenantContentCount(tenantId),
+      getActiveStudentCount(tenantId),
+      getTenantGenerationCount(tenantId, from, to),
+      getTenantVideoCount(tenantId, from, to),
+      getTenantPodcastCount(tenantId, from, to),
+      getUsageForPeriod({ tenantId, from, to }),
+      prisma.tenant.findUnique({ where: { id: tenantId }, select: { seatLimit: true } }),
+    ]);
   const seatLimit = tenant?.seatLimit ?? limits.maxStudents ?? null;
 
   return {
@@ -149,12 +173,13 @@ export async function getTenantUsageVsLimits(tenantId: string) {
     periodStart: from.toISOString(),
     periodEnd: to.toISOString(),
     uploads: { used: contentCount, limit: limits.maxContentItems ?? null },
-    generations: { used: generationCount, limit: limits.maxGenerationsPerMonth ?? null },
+    generations: { used: generationCount, limit: limits.maxGenerationsPerDay ?? null },
     tutorMessages: {
       used: usage.byFeature.TUTOR_CHAT?.count ?? 0,
-      limit: limits.maxTutorMessages ?? null,
+      limit: limits.maxTutorMessagesPerDay ?? null,
     },
-    videos: { used: videoCount, limit: limits.maxVideosPerMonth ?? null },
+    videos: { used: videoCount, limit: limits.maxVideosPerDay ?? null },
+    podcasts: { used: podcastCount, limit: limits.maxPodcastsPerDay ?? null },
     students: { used: studentCount, limit: seatLimit },
     contentItems: { used: contentCount, limit: limits.maxContentItems ?? null },
     apiCostUsd: usage.totalCostUsd,

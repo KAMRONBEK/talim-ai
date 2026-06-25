@@ -6,13 +6,12 @@ import { getUsageForPeriod } from '../usage.service.js';
 import {
   FREE_PLAN_CODE,
   GENERATION_FEATURES,
-  VIDEO_FEATURE,
   QuotaExceededError,
   type SubscriptionView,
   assertIndividualPlan,
+  dayRange,
   formatSubscription,
   getFreePlan,
-  monthToDateRange,
   parseLimits,
 } from './shared.js';
 import { assertTenantQuota } from './tenant.js';
@@ -94,8 +93,8 @@ export async function adminUpdateUserSubscription(
   return formatSubscription(updated);
 }
 
-async function getUploadCount(userId: string): Promise<number> {
-  return prisma.content.count({ where: { userId } });
+async function getUploadCount(userId: string, from: Date, to: Date): Promise<number> {
+  return prisma.content.count({ where: { userId, createdAt: { gte: from, lte: to } } });
 }
 
 async function getGenerationCount(userId: string, from: Date, to: Date): Promise<number> {
@@ -108,26 +107,34 @@ async function getGenerationCount(userId: string, from: Date, to: Date): Promise
 
 async function getTutorMessageCount(userId: string, from: Date, to: Date): Promise<number> {
   return prisma.apiUsageEvent.count({
-    where: {
-      userId,
-      feature: 'TUTOR_CHAT',
-      createdAt: { gte: from, lte: to },
-    },
+    where: { userId, feature: 'TUTOR_CHAT', createdAt: { gte: from, lte: to } },
   });
 }
 
 async function getVideoCount(userId: string, from: Date, to: Date): Promise<number> {
-  return prisma.apiUsageEvent.count({
-    where: {
-      userId,
-      feature: VIDEO_FEATURE,
-      createdAt: { gte: from, lte: to },
-    },
+  return prisma.contentVideo.count({
+    where: { content: { userId }, createdAt: { gte: from, lte: to } },
+  });
+}
+
+async function getPodcastCount(userId: string, from: Date, to: Date): Promise<number> {
+  return prisma.podcast.count({
+    where: { content: { userId }, createdAt: { gte: from, lte: to } },
   });
 }
 
 function resolveUpgradePlanCode(effectivePlanCode: string): PlanCode | null {
   return effectivePlanCode === FREE_PLAN_CODE ? 'INDIVIDUAL_PRO' : null;
+}
+
+/** Per-file page/size caps for a user's current plan (for upload gating). */
+export async function getFileLimitsForUser(userId: string) {
+  const subscription = await getSubscriptionForUser(userId);
+  return {
+    maxPagesPerFile: subscription.limits.maxPagesPerFile ?? null,
+    maxFileSizeMb: subscription.limits.maxFileSizeMb ?? null,
+    upgradePlanCode: resolveUpgradePlanCode(subscription.effectivePlanCode),
+  };
 }
 
 export async function assertQuota(
@@ -138,7 +145,7 @@ export async function assertQuota(
   if (options?.role === 'ADMIN') return;
 
   if (options?.role === 'TENANT_LEARNER') {
-    if (feature === 'UPLOAD' || feature === 'GENERATION') {
+    if (feature === 'UPLOAD' || feature === 'GENERATION' || feature === 'VIDEO' || feature === 'PODCAST') {
       throw new AppError(403, 'Learners cannot upload or generate content');
     }
   }
@@ -151,39 +158,41 @@ export async function assertQuota(
   const subscription = await getSubscriptionForUser(userId);
   const limits = subscription.limits;
   const upgradePlanCode = resolveUpgradePlanCode(subscription.effectivePlanCode);
-  const { from, to } = monthToDateRange();
+  const { from, to } = dayRange();
 
   if (feature === 'UPLOAD') {
-    const limit = limits.maxUploads;
+    const limit = limits.maxUploadsPerDay;
     if (limit == null) return;
-    const used = await getUploadCount(userId);
-    if (used >= limit) {
-      throw new QuotaExceededError('UPLOAD', used, limit, upgradePlanCode);
-    }
+    const used = await getUploadCount(userId, from, to);
+    if (used >= limit) throw new QuotaExceededError('UPLOAD', used, limit, upgradePlanCode);
     return;
   }
 
   if (feature === 'GENERATION') {
-    const limit = limits.maxGenerationsPerMonth;
+    const limit = limits.maxGenerationsPerDay;
     if (limit == null) return;
     const used = await getGenerationCount(userId, from, to);
-    if (used >= limit) {
-      throw new QuotaExceededError('GENERATION', used, limit, upgradePlanCode);
-    }
+    if (used >= limit) throw new QuotaExceededError('GENERATION', used, limit, upgradePlanCode);
     return;
   }
 
   if (feature === 'VIDEO') {
-    const limit = limits.maxVideosPerMonth;
+    const limit = limits.maxVideosPerDay;
     if (limit == null) return;
     const used = await getVideoCount(userId, from, to);
-    if (used >= limit) {
-      throw new QuotaExceededError('VIDEO', used, limit, upgradePlanCode);
-    }
+    if (used >= limit) throw new QuotaExceededError('VIDEO', used, limit, upgradePlanCode);
     return;
   }
 
-  const limit = limits.maxTutorMessages;
+  if (feature === 'PODCAST') {
+    const limit = limits.maxPodcastsPerDay;
+    if (limit == null) return;
+    const used = await getPodcastCount(userId, from, to);
+    if (used >= limit) throw new QuotaExceededError('PODCAST', used, limit, upgradePlanCode);
+    return;
+  }
+
+  const limit = limits.maxTutorMessagesPerDay;
   if (limit == null) return;
   const used = await getTutorMessageCount(userId, from, to);
   if (used >= limit) {
@@ -193,37 +202,28 @@ export async function assertQuota(
 
 export async function getUsageVsLimits(userId: string) {
   const subscription = await getSubscriptionForUser(userId);
-  const { from, to } = monthToDateRange();
+  const { from, to } = dayRange();
 
-  const [uploadCount, generationCount, tutorCount, videoCount, usage] = await Promise.all([
-    getUploadCount(userId),
-    getGenerationCount(userId, from, to),
-    getTutorMessageCount(userId, from, to),
-    getVideoCount(userId, from, to),
-    getUsageForPeriod({ userId, from, to }),
-  ]);
+  const [uploadCount, generationCount, tutorCount, videoCount, podcastCount, usage] =
+    await Promise.all([
+      getUploadCount(userId, from, to),
+      getGenerationCount(userId, from, to),
+      getTutorMessageCount(userId, from, to),
+      getVideoCount(userId, from, to),
+      getPodcastCount(userId, from, to),
+      getUsageForPeriod({ userId, from, to }),
+    ]);
 
   const limits = subscription.limits;
 
   return {
     periodStart: from.toISOString(),
     periodEnd: to.toISOString(),
-    uploads: {
-      used: uploadCount,
-      limit: limits.maxUploads ?? null,
-    },
-    generations: {
-      used: generationCount,
-      limit: limits.maxGenerationsPerMonth ?? null,
-    },
-    tutorMessages: {
-      used: tutorCount,
-      limit: limits.maxTutorMessages ?? null,
-    },
-    videos: {
-      used: videoCount,
-      limit: limits.maxVideosPerMonth ?? null,
-    },
+    uploads: { used: uploadCount, limit: limits.maxUploadsPerDay ?? null },
+    generations: { used: generationCount, limit: limits.maxGenerationsPerDay ?? null },
+    tutorMessages: { used: tutorCount, limit: limits.maxTutorMessagesPerDay ?? null },
+    videos: { used: videoCount, limit: limits.maxVideosPerDay ?? null },
+    podcasts: { used: podcastCount, limit: limits.maxPodcastsPerDay ?? null },
     apiCostUsd: usage.totalCostUsd,
   };
 }

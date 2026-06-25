@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
 import { useCreateYoutubeContent } from '@/hooks/useContent';
 import { useFileUpload } from '@/hooks/useFileUpload';
+import { UpgradeDialog } from '@/components/account/upgrade-dialog';
 
 interface UploadCallbacks {
   onSuccess?: () => void;
@@ -13,7 +14,7 @@ interface UploadCallbacks {
 export function FileUploadField({ onSuccess }: UploadCallbacks) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
-  const { fileInput, openFilePicker, isPending, error } = useFileUpload({
+  const { fileInput, openFilePicker, isPending, error, planLimit, clearPlanLimit } = useFileUpload({
     onSuccess,
     uploadFailedMessage: t('uploadFailed'),
   });
@@ -34,6 +35,19 @@ export function FileUploadField({ onSuccess }: UploadCallbacks) {
         {isPending ? tCommon('uploading') : t('selectFile')}
       </button>
       {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
+      <UpgradeDialog
+        open={!!planLimit}
+        onClose={clearPlanLimit}
+        headline={t('fileExceedsTitle')}
+        subhead={
+          planLimit
+            ? t('fileExceedsBody', {
+                pages: planLimit.maxPages ?? 0,
+                sizeMb: planLimit.maxFileSizeMb ?? 0,
+              })
+            : undefined
+        }
+      />
     </div>
   );
 }

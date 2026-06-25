@@ -93,6 +93,9 @@ export function BillingSummaryCard() {
               {usage.videos && (
                 <UsageMeter label={t('videos')} used={usage.videos.used} limit={usage.videos.limit} />
               )}
+              {usage.podcasts && (
+                <UsageMeter label={t('podcasts')} used={usage.podcasts.used} limit={usage.podcasts.limit} />
+              )}
             </>
           )}
           {role === 'TENANT_OWNER' && tenantUsage && (
@@ -121,6 +124,10 @@ export function BillingSummaryCard() {
             </>
           )}
         </div>
+      )}
+
+      {role === 'INDIVIDUAL' && usage && (
+        <p className="text-xs text-muted-foreground">{t('dailyNote')}</p>
       )}
 
       {role === 'INDIVIDUAL' && sub?.effectivePlanCode === 'FREE' && (

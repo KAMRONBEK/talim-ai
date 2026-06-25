@@ -88,9 +88,9 @@ async function main(): Promise<void> {
   }
 
   const limits = freePlan.limits as {
-    maxUploads?: number;
-    maxGenerationsPerMonth?: number;
-    maxTutorMessages?: number;
+    maxUploadsPerDay?: number;
+    maxGenerationsPerDay?: number;
+    maxTutorMessagesPerDay?: number;
   };
 
   console.log(`Testing quota for ${email} (${user.id})`);
@@ -98,8 +98,8 @@ async function main(): Promise<void> {
   const usage = await getUsageVsLimits(user.id);
   console.log('Current usage vs limits:', JSON.stringify(usage, null, 2));
 
-  const uploadLimit = limits.maxUploads ?? 3;
-  const uploadCount = await prisma.content.count({ where: { userId: user.id } });
+  const uploadLimit = limits.maxUploadsPerDay ?? 3;
+  const uploadCount = usage.uploads.used;
 
   if (uploadCount < uploadLimit) {
     await expectQuotaPass('UPLOAD under limit', () => assertQuota(user.id, 'UPLOAD'));
@@ -107,7 +107,7 @@ async function main(): Promise<void> {
     await expectQuotaError('UPLOAD at limit', () => assertQuota(user.id, 'UPLOAD'), 'UPLOAD');
   }
 
-  const genLimit = limits.maxGenerationsPerMonth ?? 20;
+  const genLimit = limits.maxGenerationsPerDay ?? 5;
   const genUsed = usage.generations.used;
   if (genUsed < genLimit) {
     await expectQuotaPass('GENERATION under limit', () => assertQuota(user.id, 'GENERATION'));
@@ -119,7 +119,7 @@ async function main(): Promise<void> {
     );
   }
 
-  const tutorLimit = limits.maxTutorMessages ?? 50;
+  const tutorLimit = limits.maxTutorMessagesPerDay ?? 20;
   const tutorUsed = usage.tutorMessages.used;
   if (tutorUsed < tutorLimit) {
     await expectQuotaPass('TUTOR_MESSAGE under limit', () => assertQuota(user.id, 'TUTOR_MESSAGE'));

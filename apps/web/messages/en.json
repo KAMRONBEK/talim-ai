@@ -195,6 +195,8 @@
     "viewerNotAvailable": "No viewer available for this type.",
     "selectFile": "Choose file",
     "uploadFailed": "Upload failed. Please try again.",
+    "fileExceedsTitle": "This file exceeds your plan's limits",
+    "fileExceedsBody": "Upgrade for {pages} pages and {sizeMb} MB files",
     "uploadMaterial": "Upload material",
     "pdfOrSlides": "PDF or slides",
     "youtubeLink": "YouTube link",
@@ -313,6 +315,8 @@
       "generations": "AI generations",
       "tutorMessages": "Tutor messages",
       "videos": "AI videos",
+      "podcasts": "Podcasts",
+      "dailyNote": "Limits reset daily.",
       "viewBilling": "View full billing",
       "upgrade": {
         "cta": "Upgrade to Pro",
@@ -322,10 +326,11 @@
         "perMonth": "/ month",
         "features": {
           "uploads": "Unlimited uploads",
-          "generations": "600 AI generations / month",
-          "videos": "30 AI videos / month",
           "tutor": "Unlimited AI tutor chat",
-          "podcastsSlides": "Unlimited podcasts, slides & summaries"
+          "podcasts": "12 podcasts / day",
+          "videos": "4 AI videos / day",
+          "quizzes": "Unlimited quizzes & exams",
+          "files": "Upload files up to 2,000 pages / 300 MB"
         },
         "manualNote": "Billing is manual. Request an upgrade and an admin will activate Pro on your account.",
         "requestCta": "Request upgrade",

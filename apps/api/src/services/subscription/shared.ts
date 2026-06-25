@@ -14,23 +14,25 @@ export { QuotaExceededError };
 
 export const FREE_PLAN_CODE = 'FREE';
 
+// "Generations" = the general AI generation bucket. Podcasts and videos have
+// their own per-day allowances, so they are NOT counted here.
 export const GENERATION_FEATURES = [
   'QUIZ_GEN',
-  'PODCAST_GEN',
   'SECTION_GEN',
   'SUMMARY_GEN',
   'SLIDESHOW_GEN',
 ] as const;
 
-// Video has its own monthly allowance (a video is a heavy compound generation:
-// a deck + per-slide TTS). Metered separately from GENERATION_FEATURES.
 export const VIDEO_FEATURE = 'VIDEO_GEN' as const;
 
 export interface PlanLimits {
-  maxUploads?: number | null;
-  maxGenerationsPerMonth?: number | null;
-  maxTutorMessages?: number | null;
-  maxVideosPerMonth?: number | null;
+  maxUploadsPerDay?: number | null;
+  maxGenerationsPerDay?: number | null;
+  maxPodcastsPerDay?: number | null;
+  maxVideosPerDay?: number | null;
+  maxTutorMessagesPerDay?: number | null;
+  maxPagesPerFile?: number | null;
+  maxFileSizeMb?: number | null;
   maxStudents?: number | null;
   maxContentItems?: number | null;
   priceMonthlyUsd?: number | null;
@@ -58,6 +60,13 @@ export function parseLimits(raw: Prisma.JsonValue): PlanLimits {
 export function monthToDateRange(): { from: Date; to: Date } {
   const to = new Date();
   const from = new Date(to.getFullYear(), to.getMonth(), 1);
+  return { from, to };
+}
+
+/** Today's window: local midnight → now. Per-day quotas reset at this boundary. */
+export function dayRange(): { from: Date; to: Date } {
+  const to = new Date();
+  const from = new Date(to.getFullYear(), to.getMonth(), to.getDate());
   return { from, to };
 }
 

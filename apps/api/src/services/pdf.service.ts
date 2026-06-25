@@ -24,6 +24,12 @@ async function extractWithPdfParse(buffer: Buffer): Promise<string> {
   return data.text?.trim() ?? '';
 }
 
+/** Page count for plan gating. Returns null when the PDF can't be parsed. */
+export async function getPdfPageCount(buffer: Buffer): Promise<number | null> {
+  const info = await pdfParse(buffer).catch(() => null);
+  return info?.numpages ?? null;
+}
+
 /** OCR fallback for scanned/image PDFs via OpenAI vision. */
 async function extractWithOpenAI(
   buffer: Buffer,

@@ -93,9 +93,9 @@ tenantContent.get('/:id/transcript', asyncHandler(tenantContentController.getCon
 tenantContent.get('/:id/sections', asyncHandler(sectionController.listSections));
 tenantContent.get('/:id/sections/:sectionId', asyncHandler(sectionController.getSection));
 tenantContent.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
-tenantContent.post('/:id/podcast', enforceQuota('GENERATION'), asyncHandler(podcastController.createPodcast));
+tenantContent.post('/:id/podcast', enforceQuota('PODCAST'), asyncHandler(podcastController.createPodcast));
 tenantContent.get('/:id/video', asyncHandler(videoController.getVideo));
-tenantContent.post('/:id/video', enforceQuota('GENERATION'), asyncHandler(videoController.createVideo));
+tenantContent.post('/:id/video', enforceQuota('VIDEO'), asyncHandler(videoController.createVideo));
 tenantContent.get(
   '/:id/video/segments/:index/audio',
   asyncHandler(videoController.streamVideoSegmentAudio),

@@ -195,6 +195,8 @@
     "viewerNotAvailable": "Ushbu tur uchun ko'ruvchi mavjud emas.",
     "selectFile": "Fayl tanlash",
     "uploadFailed": "Yuklash amalga oshmadi. Qayta urinib ko'ring.",
+    "fileExceedsTitle": "Bu fayl tarifingiz limitidan oshib ketdi",
+    "fileExceedsBody": "{pages} sahifa va {sizeMb} MB fayllar uchun tarifni yangilang",
     "uploadMaterial": "Material yuklash",
     "pdfOrSlides": "PDF yoki slaydlar",
     "youtubeLink": "YouTube havolasi",
@@ -313,6 +315,8 @@
       "generations": "AI generatsiyalar",
       "tutorMessages": "Tyutor xabarlari",
       "videos": "AI videolar",
+      "podcasts": "Podkastlar",
+      "dailyNote": "Limitlar har kuni yangilanadi.",
       "viewBilling": "To'liq to'lov sahifasi",
       "upgrade": {
         "cta": "Pro tarifiga o'tish",
@@ -322,10 +326,11 @@
         "perMonth": "/ oy",
         "features": {
           "uploads": "Cheksiz yuklamalar",
-          "generations": "Oyiga 600 AI generatsiya",
-          "videos": "Oyiga 30 AI video",
           "tutor": "Cheksiz AI tyutor suhbati",
-          "podcastsSlides": "Cheksiz podkast, slayd va xulosalar"
+          "podcasts": "Kuniga 12 podkast",
+          "videos": "Kuniga 4 AI video",
+          "quizzes": "Cheksiz testlar va imtihonlar",
+          "files": "2 000 sahifa / 300 MB gacha fayllar"
         },
         "manualNote": "To'lov qo'lda amalga oshiriladi. So'rov yuboring va administrator hisobingizda Pro'ni faollashtiradi.",
         "requestCta": "So'rov yuborish",
