@@ -212,6 +212,7 @@
 - **Learner Settings page** ✓ — Profile (display name editable, email read-only), Password (current+new), School (Account type Student, Org QA Academy). Empty display name → **no PATCH sent** (client guard, no error msg but safe). Valid name save → `PATCH /auth/me` 200, no console errors.
 - **Chat — KaTeX/LaTeX** ✓ — asked km→m conversion formula; answer rendered **3 real `.katex` elements** (`1 km = 1000 m`, `Meters = Kilometers × 1000`, `= 5000 m`). Markdown headings render. Answer scoped to material.
 - **Chat — transcript-text-selection seeding** ✓ — selecting transcript text fires `onPointerUp` → seeds an **excerpt chip `[0:00-0:06] …` with Clear button** + pre-fills input `"…" Explain this part:` and enables Send. (Confirmed reproducible on a clean desktop load; does NOT open any drawer.)
+- **Chat — mermaid visual-tutor rendering** ✓ — asked for a mermaid flowchart of km→m→cm conversion; the AI tutor rendered a real **mermaid SVG** ("Unit Conversion Flowchart", `svg[id^=mermaid]`, **5 nodes / 4 edges**, contains "Kilometers"), no render errors (only the known F3 summary-404s). Confirms the visual-tutor render pipeline. **Manim/Desmos** not separately forced (AI-triggered, unpredictable) — mermaid proves the rendering path. **PDF marquee region** not exercised (no INDIVIDUAL+PDF available — see pending note; same chat-seed mechanism as the verified transcript-select).
 - **Mobile workspace (390×844)** ✓ — video stage renders, Material/Summary toggle, transcript, **`✨ Learn` FAB** bottom-right; FAB toggles a **Learn drawer** (tabs Learn/AI Tutor, progress ring 0%, Resources=AI Podcast, Learning history, streak) with **NO generate buttons for learner** (correct). **No horizontal overflow** (scrollW==clientW==390). AI Tutor tab reachable in drawer.
 - **Non-reproducible observation (NOT logged as a bug):** once, mid-interaction at 1728px, the AI-Tutor panel briefly rendered as a `fixed inset-0 z-50` mobile drawer + `bg-black/40` backdrop over the desktop layout. Could not reproduce on fresh `?panel=chat` loads or by repeating the transcript selection — treating as a transient render artifact, not a confirmed defect.
 
@@ -226,4 +227,23 @@
 
 **Fixes committed this run:** `a3891f7` — gate hidden upload file-input to INDIVIDUAL (F13). `36f1f41` — translate material delete dialog + aria-label, was hardcoded Uzbek (F15). `5d74ccd` — login 403 shows "account deactivated" not "server unreachable" (F16). All verified.
 
-**Still pending for a further run:** owner Billing/Settings + WRITTEN assessment + materials delete/re-read; deactivated-student access-loss on live re-login; chat mermaid/charts/Manim/Desmos visual tutor + PDF marquee region; tablet 768 more pages; browser back/forward; full a11y/tab-order; generation/rate limits; podcast player (needs TTS).
+- **Tablet 768** ✓ — owner dashboard, assessments (multi-column publish/assign collapses to single column), materials: **no horizontal overflow** (scrollW==winW==768), sidebar stays expanded, 0 console errors.
+- **Browser back/forward** ✓ — assessments → materials → Back restored /assessments (heading rendered), state intact, no errors (complements run-1 refresh-mid-flow).
+- **A11y tab-order spot-check** ✓ — 29 focusable elements in logical DOM order (logo → Dashboard → Materials → …); Tab moves focus with a visible `outline:auto` ring; `:focus-visible` rules present in stylesheet. (Not a full WCAG audit.)
+
+**Still pending for a further run:** chat **Manim/Desmos** visual-tutor tools (AI-triggered, unpredictable to force — mermaid path verified); **PDF marquee region** (needs an INDIVIDUAL account with a PDF — `qa-individual` was promoted to owner in run 1, so the B2C PDF route is now blocked for it; the underlying chat-seed mechanism is the same as the **verified** transcript-text-selection seeding); generation-limit / login-rate-limit messages (need quotas driven to the cap); podcast player (needs TTS gen).
+
+### Run 2 — closing summary
+
+**Coverage added this run:** AUTH (locale-persist, join-code register→student, return-after-login gap); learner Progress + Settings; chat KaTeX + transcript-seeding + **mermaid** rendering; mobile workspace + Learn-drawer/FAB; owner Billing + Settings (org-rename round-trip) + **WRITTEN assessment create+assign** + delete-confirm dialog; students reset-password + **deactivated-access-loss on re-login (403)**; tablet 768 + browser back/forward + a11y tab-order spot-check.
+
+**Bugs fixed (3 commits, all typecheck-verified + re-tested live):**
+1. `a3891f7` [F13] — hidden upload file-input leaked to learners/owners in the workspace topbar (gated to INDIVIDUAL).
+2. `36f1f41` [F15] — material delete dialog + delete aria-label were **hardcoded Uzbek**, leaking into en/ru (translated via `useTranslations`/`t.rich`, added `content.deleteMaterial*` keys to all 3 locales).
+3. `5d74ccd` [F16] — deactivated-account login showed "server unreachable" instead of an "account deactivated" message (added 403 branch + `auth.accountDeactivated` in all 3 locales).
+
+**New issues logged (not fixed):** F14 — return-after-login not preserved (no `?redirect=` param; structural).
+
+**Final verify (run 2):** `@talim/types` build ✓, `@talim/web` typecheck ✓, `@talim/admin` typecheck ✓ — all clean. Prod `next build` intentionally NOT run (would corrupt the running dev server's `.next` — the F1 wedge).
+
+**Test-data left on local dev DB (run 2):** new student `qa-joincode@talim.local` / `JoinCode-12345` (TENANT_LEARNER, QA Academy); WRITTEN assessment "QA Written Quiz!" (4 Qs) published + assigned to Test Student One; Test Student Two **reactivated**, its password reset to `5f3a7033-ee3`; org name back to "QA Academy".
