@@ -158,6 +158,44 @@ classmates' and other orgs' content stay private.
 | EC4 | Learner own routes `/learner/assessments`, `/usage/me` | 200 (control) | ✅ | — | — |
 | EC5 | Learner upload via B2C workspace topbar | No upload control rendered (incl. hidden file input) | ✅ | — | F7+F13 fixed prior runs |
 
+### US-IND-03 / 04 / 06: B2C workspace — Summary, Quiz, Chat (PDF)
+**As an** individual, **I want** AI summary, quizzes, and a region-scoped tutor on my PDF, **so that** I can study it.
+**Routes/code:** `/[locale]/content/[id]` · `/quiz/[id]` · chat panel · `components/learning/*`, `components/quiz/*`.
+**Priority:** P0 · **Last verified:** 2026-06-25 on `b4ba377` (run 5, qa-individual PDF "Ven diagrammasi 2-qism.pdf", uz)
+
+**Edge cases & negative paths**
+| # | Story · Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | IND-03 · Summary auto-generates on Xulosa toggle | Renders fluent proper-Uzbek summary (3 paras), persists to history | ✅ | — | accurate Venn/perimeter summary |
+| EC2 | IND-03 · summary content quality | No raw dumps / hallucinated UI | 🟡 | — | one garbled source word "masquniyoq" (model/OCR artifact, not UI) |
+| EC3 | IND-04 · Quiz generate from PDF | Valid MC + short-answer, proper Uzbek, good distractors | ✅ | — | 4 Qs (button said 5 — AI count variance) |
+| EC4 | IND-04 · short-answer Check reveal | "To'g'ri!" + Uzbek explanation, **no `<div>`-in-`<p>` hydration error** | ✅ | — | F4 regression holds (console clean) |
+| EC5 | IND-04 · submit → score → retry | "50% · 2/4 to'g'ri" + Qayta ishlash | ✅ | — | — |
+| EC6 | IND-06 · **PDF marquee region → chat seed** | Drag region → "[Page 1] Tanlangan hudud" chip + Uzbek prompt; answer scoped to region (vision) | ✅ | — | pending since run 1 — now verified |
+| EC7 | IND-06 · chat history persists across tab/view switch | Conversation retained when toggling Material/Xulosa & Learn/Tutor tabs | ✅ | — | — |
+
+### US-XCUT-01: i18n — every user-facing string localized, Uzbek-first
+**As an** Uzbek-first user, **I want** every string/date/number correctly localized in uz/en/ru, **so that** the product reads natively with no raw keys, English leaks, or broken formatting.
+**Routes/code:** `apps/web/messages/{uz,en,ru}.json` · `lib/format-relative-time.ts` · any `Intl.*` / `toLocale*` call.
+**Priority:** P1 · **Last verified:** 2026-06-25 on `b4ba377`
+
+**Acceptance criteria**
+- AC1 — Every visible string resolves in all 3 locales; no raw keys (`content.foo`), no hardcoded English/Uzbek leaking across locales.
+- AC2 — Dates, relative times, numbers, and plurals render correctly **including Uzbek** (where ICU data is thin).
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Relative timestamp in **uz** (content card, history) | Uzbek words ("3 hafta oldin"), not raw "-3 w" | 🐛→✅ | F18 | `b4ba377` |
+| EC2 | Relative timestamp in en/ru | "3 weeks ago" / "3 недели назад" | ✅ | — | Intl correct for en/ru |
+| EC3 | `toLocaleDateString()` (no locale arg) on tenant progress/students/heatmap | Renders a valid date, but in **system** locale not app locale | 🟡 | — | works; not app-locale-aware (low pri) |
+| EC4 | Material delete dialog + aria-label across locales | Translated (was hardcoded Uzbek) | 🐛→✅ | F15 | `36f1f41` |
+| EC5 | Login/marketing strings in uz/ru | Fully translated, no English leak, layout holds | ✅ | — | verified runs 1–2 |
+| EC6 | Number formatting (scores, counts) in uz | No broken/raw output | ⬜ | — | — |
+
+**Notes / open questions**
+- ICU in V8/Node lacks Uzbek data for `RelativeTimeFormat` (and likely thin for `DateTimeFormat`/`PluralRules`) — any new `Intl`-based formatting for `uz` must be checked manually (see F18).
+
 ---
 
 ## Story index (backlog — expand each with the template)
@@ -175,11 +213,11 @@ classmates' and other orgs' content stay private.
 ### INDIVIDUAL (B2C)
 - [ ] US-IND-01 Upload PDF → processing → READY → workspace (+ OCR scanned-PDF ladder)
 - [ ] US-IND-02 Add YouTube → transcript → READY
-- [ ] US-IND-03 Summary (markdown, KaTeX, proper Uzbek output)
-- [ ] US-IND-04 Quiz generate → MC/short → check → submit → retry
+- [x] US-IND-03 Summary (markdown, KaTeX, proper Uzbek output) · spec'd ✅ · PDF summary verified (run 5)
+- [x] US-IND-04 Quiz generate → MC/short → check → submit → retry · spec'd ✅ · PDF quiz verified (run 5)
 - [ ] US-IND-05 Podcast generate + player
-- [ ] US-IND-06 Chat: streamed, scoped-to-material, sources, seeding from selection, visual tutor (Manim/Desmos/mermaid)
-- [ ] US-IND-07 Dashboard grid / empty / search / thumbnails
+- [x] US-IND-06 Chat: streamed, scoped-to-material, sources, seeding from selection, visual tutor · spec'd ✅ · **PDF marquee seed verified (run 5)**; transcript-seed+mermaid+KaTeX (run 2)
+- [x] US-IND-07 Dashboard grid / empty / search / thumbnails · search filter verified (run 5, F19 logged)
 
 ### TENANT_OWNER
 - [ ] US-OWNER-01 Create student (email + email-less kid, credentials-once, seat count)
@@ -207,7 +245,7 @@ classmates' and other orgs' content stay private.
 - [ ] US-ADMIN-02 Users / tenants / content / generated / subscriptions / usage / audit
 
 ### XCUT (cross-cutting)
-- [ ] US-XCUT-01 i18n: every user-facing string in uz/en/ru, no hardcoded leaks (Uzbek-first)
+- [x] US-XCUT-01 i18n: every user-facing string in uz/en/ru, no hardcoded leaks (Uzbek-first) · spec'd ✅
 - [ ] US-XCUT-02 Mobile (drawer/FAB) + tablet (768) layouts
 - [ ] US-XCUT-03 a11y: focus, aria-labels, keyboard nav, back/forward
 - [ ] US-XCUT-04 Security: role isolation via `contentAccess.service.ts`, XSS escape, no enumeration
@@ -225,4 +263,6 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | F15 | S3 | US-OWNER-12 · EC1 | Material delete dialog + aria-label hardcoded Uzbek | ✅ fixed | `36f1f41` |
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
 | F17 | S2 | US-AUTH-01 · EC7 | Email/username login was **case-sensitive** — any capitalization difference (mobile auto-capitalize) → "Invalid email or password", user locked out of a P0 flow. Register also stored email verbatim. Fixed: lowercase+dedupe email on register; case-insensitive (`mode:'insensitive'`) email & username match on login. | ✅ fixed | `59dc681` |
+| F18 | S2 | US-XCUT-01 · EC1 | **Uzbek relative timestamps rendered broken.** `Intl.RelativeTimeFormat('uz')` resolves to `uz` but ICU (V8/Node) ships **no Uzbek relative-time data**, so it emitted raw fallback `"-3 w"` / `"-2 d"` / `"-5 h"` (leading minus + English abbreviations) on **every content card timestamp** — shown to the **primary Uzbek audience** on the B2C dashboard + learning-history panel. en/ru correct. Fixed: format Uzbek manually (`"3 hafta oldin"`, `"hozirgina"`, future `"3 kundan keyin"`); keep `Intl` for en/ru. Verified live: card now reads "3 hafta oldin". | ✅ fixed | `b4ba377` |
+| F19 | S3 | US-IND-07 · EC | **Dashboard search "no results" shows the "no content yet" empty state.** Typing a non-matching term in the dashboard hero search (client-side filter of the recents grid) empties the list and renders "Hali material yo'q. …birinchi materialingizni qo'shing" ("You have no materials yet, add your first") — confusing for a user who *does* have content but filtered it out. Should show a distinct "no results match your search" state. Not fixed: needs a new string in uz/en/ru + grid logic to distinguish filtered-empty from truly-empty (product copy decision). | 🟡 logged | — |
 | … | | | *(backfill F1–F14 here)* | | |

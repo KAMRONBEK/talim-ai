@@ -300,3 +300,25 @@
 **Fix (user-approved, destructive test-data cleanup):** demoted `qa-individual` back to **INDIVIDUAL**. The supported `applyAdminRoleChange` refuses to demote a sole owner (it requires reassigning ownership — by design, never deletes the org), so done as a one-off on local dev: deleted QA Tutor Org's tenant subscription + owner membership, deleted the tenant (cascades), set `role=INDIVIDUAL`, cleared the stale APPROVED `TutorRequest`, kept its existing FREE personal subscription. **Verified live:** `qa-individual@talim.local`/`Individual-12345` now logs into `/en/dashboard` (B2C), `role=INDIVIDUAL`, `tenantName=null`, `/content`+`/billing/me` 200, `/tenant/content` **403**. `qa-owner` + QA Academy (5 learners, 1 content) untouched; tenants now = {Smoke Tutoring, QA Academy}. **No code change** (no bug to fix). The QA suite has its B2C INDIVIDUAL account back.
 
 > Note: after the demote, qa-individual's *old* session token still said TENANT_OWNER until re-login — that's the already-logged **F11** (stale JWT after role change), not new.
+
+---
+
+## Run 5 (resumed) — B2C deep pass (PDF workspace) + Uzbek i18n bug
+
+**Env:** stack already up (api 200, web/admin 307). `qa-individual` is back to INDIVIDUAL (run 4b) with a real PDF "Ven diagrammasi 2-qism.pdf" attached — this unblocked the **PDF marquee-region chat seeding** pending since run 1. Tested in `uz` (primary locale), light/system theme, desktop 1728.
+
+**🐛→✅ F18 (S2) — Uzbek relative timestamps rendered broken (FIXED `b4ba377`).** `Intl.RelativeTimeFormat('uz')` resolves to `uz` but ICU (V8/Node) ships **no Uzbek relative-time data**, so every content-card / learning-history timestamp showed raw fallback `"-3 w"` / `"-2 d"` / `"-5 h"` (leading minus + English abbreviations) to the **primary Uzbek audience**. en/ru correct. Fixed by formatting Uzbek manually (`lib/format-relative-time.ts`) — `"3 hafta oldin"`, `"hozirgina"`, future `"3 kundan keyin"` — keeping `Intl` for en/ru. **Verified live:** dashboard card "-3 w"→"3 hafta oldin"; learning-history "To'liq xulosa · 1 daqiqa oldin". types build + web typecheck pass.
+
+**F19 (S3) logged — dashboard search "no results" shows the "no content yet" empty state.** Typing a non-matching term in the hero search (client-side filter of the recents grid) shows "Hali material yo'q… add your first material" — wrong for a user who has content but filtered it out. Needs a distinct "no results" string in 3 locales (not fixed — copy/product decision).
+
+**Verified this run (all ✅, proper-Uzbek, console clean except the known F3 summary-404s):**
+- **PDF workspace render** — extracted PDF text renders cleanly in uz; 4 boblar (sections) nav; Material/Xulosa toggle; marquee hint "Hududni belgilash uchun sudrab torting".
+- **US-IND-06 · PDF marquee region → chat seed (NEW)** — dragging a region on the material seeds an excerpt chip **"[Page 1] Tanlangan hudud"** + Clear + Uzbek prompt; sending returns a **vision-scoped Uzbek answer** about the basketball/volleyball problem on that page. Chat history persists across Material/Xulosa + Learn/Tutor tab switches.
+- **US-IND-03 · Summary** — auto-generates on Xulosa toggle; fluent 3-paragraph proper-Uzbek summary of the Venn/perimeter lessons; persists to "O'rganish tarixi" (To'liq xulosa). (One garbled source word "masquniyoq" — model/OCR artifact, not a UI bug.)
+- **US-IND-04 · Quiz** — generates from PDF (MC "Ven diagrammasida… umumiy qism" → Kesishma; short-answer "geometrik shakl" → doira); short-answer **Check reveal** shows "To'g'ri!" + Uzbek explanation with **no hydration error (F4 holds)**; submit → "Test natijalari · 50% · 4 ta savoldan 2 tasi to'g'ri" + Qayta ishlash. (Button said "5 ta savol", model returned 4 — AI count variance.)
+- **US-IND-07 · Dashboard search** — client-side filter of recents; matching term keeps card, non-matching empties to the (mislabeled, F19) empty state.
+- **US-AUTH-02 · logged-in revisits /register** — bounces to `/dashboard` (same pattern as login EC12).
+
+**Fix committed this run:** `b4ba377` `fix(web): format Uzbek relative time manually (ICU lacks uz data)` [F18]. types build ✓, web typecheck ✓.
+
+**Test-data left on local dev DB (run 5):** generated a saved summary + practice quiz `cmqtiyt5w…` (submitted once, 50%) on qa-individual's PDF — harmless, regenerable. One AI-tutor chat message on the PDF.
