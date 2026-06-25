@@ -1,0 +1,19 @@
+---
+source_file: "apps/admin/hooks/useAdmin.ts"
+type: "code"
+community: "Admin Subscriptions UI"
+location: "L125"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Admin_Subscriptions_UI
+---
+
+# useAdminSubscriptions()
+
+## Connections
+- [[SubscriptionsPage()]] - `calls` [EXTRACTED]
+- [[page.tsx_4]] - `imports` [EXTRACTED]
+- [[useAdmin.ts]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Admin_Subscriptions_UI

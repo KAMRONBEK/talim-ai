@@ -18,3 +18,14 @@ coverage
 .playwright-mcp/
 # Ephemeral QA screenshots (repo root — delete after MCP/browser testing)
 /*.png
+
+# Graphify knowledge graph — commit the graph + Obsidian vault so they sync
+# across machines via git. Ignore machine-specific + local-only bits.
+# NOTE: git does not support inline (end-of-line) comments in .gitignore —
+# the whole line is treated as the pattern, so comments must be on their own line.
+# local-only cost data
+graphify-out/cost.json
+# large extraction cache
+graphify-out/cache/
+# machine-specific working files (interpreter path, scan root, labels)
+graphify-out/.graphify_*

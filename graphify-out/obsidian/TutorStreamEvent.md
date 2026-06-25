@@ -1,0 +1,17 @@
+---
+source_file: "apps/api/src/services/ai.service.ts"
+type: "code"
+community: "AI Service (DeepSeek/tools)"
+location: "L37"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/AI_Service_DeepSeek/tools
+---
+
+# TutorStreamEvent
+
+## Connections
+- [[ai.service.ts]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek/tools

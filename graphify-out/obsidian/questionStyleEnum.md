@@ -1,0 +1,18 @@
+---
+source_file: "apps/api/src/services/assessment/shared.ts"
+type: "code"
+community: "Quiz Controller & Grading"
+location: "L12"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Quiz_Controller__Grading
+---
+
+# questionStyleEnum
+
+## Connections
+- [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[shared.ts_1]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading

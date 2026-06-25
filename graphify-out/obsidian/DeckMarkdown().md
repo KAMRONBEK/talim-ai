@@ -1,0 +1,19 @@
+---
+source_file: "apps/web/components/deck/DeckMarkdown.tsx"
+type: "code"
+community: "Shared UI Primitives (@talim/ui)"
+location: "L10"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Shared_UI_Primitives_talim/ui
+---
+
+# DeckMarkdown()
+
+## Connections
+- [[DeckMarkdown.tsx]] - `contains` [EXTRACTED]
+- [[Slide.tsx]] - `imports` [EXTRACTED]
+- [[cn()]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui

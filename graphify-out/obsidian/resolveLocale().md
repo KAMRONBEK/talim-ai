@@ -1,0 +1,42 @@
+---
+source_file: "apps/api/src/lib/locale.ts"
+type: "code"
+community: "Podcast & Progress Controllers"
+location: "L7"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Podcast__Progress_Controllers
+---
+
+# resolveLocale()
+
+## Connections
+- [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[createPodcast()]] - `calls` [EXTRACTED]
+- [[createQuiz()]] - `calls` [EXTRACTED]
+- [[createSlides()]] - `calls` [EXTRACTED]
+- [[createVideo()]] - `calls` [EXTRACTED]
+- [[generateSummary()]] - `calls` [EXTRACTED]
+- [[getContentChat()]] - `calls` [EXTRACTED]
+- [[getEpisodeProgress()]] - `calls` [EXTRACTED]
+- [[getLearningHistory()]] - `calls` [EXTRACTED]
+- [[getPodcast()]] - `calls` [EXTRACTED]
+- [[getSection()]] - `calls` [EXTRACTED]
+- [[getSlides()]] - `calls` [EXTRACTED]
+- [[getSummary()_1]] - `calls` [EXTRACTED]
+- [[getVideo()]] - `calls` [EXTRACTED]
+- [[listQuizzesByContent()]] - `calls` [EXTRACTED]
+- [[listSections()]] - `calls` [EXTRACTED]
+- [[locale.ts]] - `contains` [EXTRACTED]
+- [[parseAppLocale()]] - `calls` [EXTRACTED]
+- [[podcast.controller.ts]] - `imports` [EXTRACTED]
+- [[progress.controller.ts]] - `imports` [EXTRACTED]
+- [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[section.controller.ts]] - `imports` [EXTRACTED]
+- [[slides.controller.ts]] - `imports` [EXTRACTED]
+- [[streamChat()]] - `calls` [EXTRACTED]
+- [[summary.controller.ts]] - `imports` [EXTRACTED]
+- [[video.controller.ts]] - `imports` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers

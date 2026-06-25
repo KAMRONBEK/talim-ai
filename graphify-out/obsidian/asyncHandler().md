@@ -1,0 +1,29 @@
+---
+source_file: "apps/api/src/lib/asyncHandler.ts"
+type: "code"
+community: "API Middleware (auth/quota/rate-limit)"
+location: "L3"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/API_Middleware_auth/quota/rate-limit
+---
+
+# asyncHandler()
+
+## Connections
+- [[admin.routes.ts]] - `imports` [EXTRACTED]
+- [[asyncHandler.ts]] - `contains` [EXTRACTED]
+- [[auth.routes.ts]] - `imports` [EXTRACTED]
+- [[billing.routes.ts]] - `imports` [EXTRACTED]
+- [[chat.routes.ts]] - `imports` [EXTRACTED]
+- [[content.routes.ts]] - `imports` [EXTRACTED]
+- [[enforceQuota()]] - `calls` [EXTRACTED]
+- [[learner.routes.ts]] - `imports` [EXTRACTED]
+- [[quiz.routes.ts]] - `imports` [EXTRACTED]
+- [[quota.middleware.ts]] - `imports` [EXTRACTED]
+- [[summary.routes.ts]] - `imports` [EXTRACTED]
+- [[tenant.routes.ts]] - `imports` [EXTRACTED]
+- [[usage.routes.ts]] - `imports` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/API_Middleware_auth/quota/rate-limit
