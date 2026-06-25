@@ -158,6 +158,21 @@ classmates' and other orgs' content stay private.
 | EC4 | Learner own routes `/learner/assessments`, `/usage/me` | 200 (control) | ✅ | — | — |
 | EC5 | Learner upload via B2C workspace topbar | No upload control rendered (incl. hidden file input) | ✅ | — | F7+F13 fixed prior runs |
 
+### US-IND-05: Podcast — generate + player
+**As an** individual, **I want** an AI voice podcast of my content with a working player, **so that** I can listen.
+**Routes/code:** `/[locale]/content/[id]/podcast` · `components/podcast/PodcastPlayer.tsx` · `generatePodcast` job.
+**Priority:** P1 · **Last verified:** 2026-06-25 on `5adc666` (run 5, qa-individual PDF, en/dark)
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | INDIVIDUAL "Create podcast" → generation | Episodes stream in (per section), Ready badge, TTS audio | ✅ | — | 2 episodes generated, ep1 Ready 2:31 |
+| EC2 | Play an episode while/after generating | Audio plays, position advances; no blob churn / console spam | 🐛→✅ | F21 | `46e2473` |
+| EC3 | Player "Speed:" label localized | en "Speed:", not hardcoded "Tezlik:" | 🐛→✅ | F22 | `5adc666` |
+| EC4 | Learner views podcast page | Info message, **no** Create button (server-blocked) | ✅ | — | F12 (prior run) holds |
+| EC5 | Episode list duration vs player duration | Should match | 🟡 | — | list "2:31" vs player "2:16" — minor estimate mismatch, not fixed |
+| EC6 | Speed buttons 0.75/1/1.25/1.5x, ±15s, seek | All adjust playback | ⬜ | — | controls present; play verified, fine-controls not each clicked |
+
 ### US-IND-03 / 04 / 06: B2C workspace — Summary, Quiz, Chat (PDF)
 **As an** individual, **I want** AI summary, quizzes, and a region-scoped tutor on my PDF, **so that** I can study it.
 **Routes/code:** `/[locale]/content/[id]` · `/quiz/[id]` · chat panel · `components/learning/*`, `components/quiz/*`.
@@ -215,7 +230,7 @@ classmates' and other orgs' content stay private.
 - [ ] US-IND-02 Add YouTube → transcript → READY
 - [x] US-IND-03 Summary (markdown, KaTeX, proper Uzbek output) · spec'd ✅ · PDF summary verified (run 5)
 - [x] US-IND-04 Quiz generate → MC/short → check → submit → retry · spec'd ✅ · PDF quiz verified (run 5)
-- [ ] US-IND-05 Podcast generate + player
+- [x] US-IND-05 Podcast generate + player · spec'd ✅ · generation + playback verified (run 5); F21/F22 fixed
 - [x] US-IND-06 Chat: streamed, scoped-to-material, sources, seeding from selection, visual tutor · spec'd ✅ · **PDF marquee seed verified (run 5)**; transcript-seed+mermaid+KaTeX (run 2)
 - [x] US-IND-07 Dashboard grid / empty / search / thumbnails · search filter verified (run 5, F19 logged)
 
@@ -264,6 +279,8 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
 | F17 | S2 | US-AUTH-01 · EC7 | Email/username login was **case-sensitive** — any capitalization difference (mobile auto-capitalize) → "Invalid email or password", user locked out of a P0 flow. Register also stored email verbatim. Fixed: lowercase+dedupe email on register; case-insensitive (`mode:'insensitive'`) email & username match on login. | ✅ fixed | `59dc681` |
 | F18 | S2 | US-XCUT-01 · EC1 | **Uzbek relative timestamps rendered broken.** `Intl.RelativeTimeFormat('uz')` resolves to `uz` but ICU (V8/Node) ships **no Uzbek relative-time data**, so it emitted raw fallback `"-3 w"` / `"-2 d"` / `"-5 h"` (leading minus + English abbreviations) on **every content card timestamp** — shown to the **primary Uzbek audience** on the B2C dashboard + learning-history panel. en/ru correct. Fixed: format Uzbek manually (`"3 hafta oldin"`, `"hozirgina"`, future `"3 kundan keyin"`); keep `Intl` for en/ru. Verified live: card now reads "3 hafta oldin". | ✅ fixed | `b4ba377` |
+| F21 | S2 | US-IND-05 · EC2 | **Podcast playback broken + blob-404 spam.** The audio-loading effect (`podcast/page.tsx`) depended on `flushProgress` — a `useCallback` over the react-query mutation, so a new identity every render. While the podcast polled (3s) during generation the parent re-rendered constantly, re-running the effect: it revoked the current audio blob URL and created a new one **every render**, spamming `blob: ERR_FILE_NOT_FOUND` (10+/play) and resetting `<audio>` to 0 so `play()` never stuck (`paused:true, t:0`). Scoped the effect to the audio episode id via a stable `flushProgressRef` + `cancelled` guard. Verified live: src stable across poll cycles, playback advances (`paused:false, t:1.52`), console 0 errors. | ✅ fixed | `46e2473` |
+| F22 | S3 | US-IND-05 · EC3 | **Podcast player "Speed:" label hardcoded Uzbek.** `PodcastPlayer.tsx` rendered the literal `"Tezlik:"`, shown on en/ru pages too. Added `content.playbackSpeed` (uz/en/ru) + `useTranslations`. Verified: en "Speed:". | ✅ fixed | `5adc666` |
 | F20 | S3 | US-XCUT-01 · EC6 | **Count strings not pluralized (Russian + English).** `sectionCount`/`quizCount`/`questionCount`/`episodes`/`quizAttempts` hardcoded the genitive-plural suffix (`"{count} разделов"`, `"{count} sections"`) instead of ICU `plural`. Russian showed `"4 разделов"` (needs paucal `"4 раздела"`; "разделов" is 5+ only) and English `"1 sections"`. Fixed all 5 in en (`one`/`other`) + ru (`one`/`few`/`many`/`other`) using next-intl ICU `plural`; uz left unchanged (Uzbek nouns invariant after numerals). Verified live: ru "4 раздела"/"2 вопроса"/"5 вопросов", en "4 sections". | ✅ fixed | `aa42bf1` |
 | F19 | S3 | US-IND-07 · EC | **Dashboard search "no results" shows the "no content yet" empty state.** Typing a non-matching term in the dashboard hero search (client-side filter of the recents grid) empties the list and renders "Hali material yo'q. …birinchi materialingizni qo'shing" ("You have no materials yet, add your first") — confusing for a user who *does* have content but filtered it out. Should show a distinct "no results match your search" state. Not fixed: needs a new string in uz/en/ru + grid logic to distinguish filtered-empty from truly-empty (product copy decision). | 🟡 logged | — |
 | … | | | *(backfill F1–F14 here)* | | |

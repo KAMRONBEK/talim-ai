@@ -321,4 +321,13 @@
 
 **Fix committed this run:** `b4ba377` `fix(web): format Uzbek relative time manually (ICU lacks uz data)` [F18]. types build ✓, web typecheck ✓.
 
-**Test-data left on local dev DB (run 5):** generated a saved summary + practice quiz `cmqtiyt5w…` (submitted once, 50%) on qa-individual's PDF — harmless, regenerable. One AI-tutor chat message on the PDF.
+**Podcast (US-IND-05) — first-ever test, two bugs found + fixed:**
+- **🐛→✅ F21 (S2) — podcast playback broken + blob-404 spam (FIXED `46e2473`).** Generation works (2 episodes streamed in with TTS, ep1 "Ready" 2:31). But pressing ▶ never started playback (`paused:true, currentTime:0`) and console filled with `blob: ERR_FILE_NOT_FOUND` (10+ per play). Root cause: the audio-loading `useEffect` listed `flushProgress` in deps — a `useCallback` over the react-query mutation (new identity every render). During generation the 3s poll re-rendered the parent constantly → effect re-ran every render → revoked the current audio blob + created a new one each time (`currentSrc` changed `c5c635a8`→`b72ac9ce`→`4d87d921`…), resetting `<audio>` to 0. Fixed by scoping the effect to the audio episode id with a stable `flushProgressRef` + cancelled guard. **Verified live:** src stable across poll cycles, playback advances (`paused:false, t:1.52`), console 0 errors, "Speed:" plays.
+- **🐛→✅ F22 (S3) — player "Speed:" label hardcoded Uzbek "Tezlik:" (FIXED `5adc666`).** Shown on en/ru pages. Added `content.playbackSpeed` (uz/en/ru) + `useTranslations`. Verified en "Speed:".
+- Minor (not fixed): episode-list duration "2:31" vs player "2:16" — estimate mismatch.
+
+**Cross-cutting on the PDF workspace (dark + en + ru):** all strings translated, **no raw keys, no Uzbek leak** (ru: Загрузить/Разделы/Действия/Материал/Конспект/AI репетитор/Ресурсы…); dark contrast good (material card is an intentional light "paper" surface for reading). This surfaced **F20** (count pluralization) on the ru/en "{count} sections" → fixed.
+
+**Fixes committed run 5 (total 4):** `b4ba377` [F18] Uzbek relative time; `aa42bf1` [F20] ICU plural counts (ru/en); `46e2473` [F21] podcast playback blob churn; `5adc666` [F22] podcast Speed: label. All typecheck-clean + verified live. **Logged:** F19 (search no-results empty state).
+
+**Test-data left on local dev DB (run 5):** generated a saved summary + practice quiz `cmqtiyt5w…` (submitted once, 50%) + a **podcast (2 episodes, TTS audio)** on qa-individual's PDF — harmless, regenerable. One AI-tutor chat message on the PDF.
