@@ -1,6 +1,7 @@
 import type { AppLocale } from '@talim/types';
 import { z } from 'zod';
 import { generateJsonCompletion } from '../services/ai.service.js';
+import { scriptVariants } from './uzbek-translit.js';
 
 export type TutorScopeRoute =
   | 'direct'
@@ -70,9 +71,9 @@ const STOP_WORDS = new Set([
 ]);
 
 const OUT_OF_SCOPE_PREFIX: Record<AppLocale, string> = {
-  uz: "Bu savol hozir o'rganayotgan material/bob doirasidan tashqarida.",
-  en: 'This question is outside the scope of the material/chapter we are studying.',
-  ru: 'Этот вопрос выходит за рамки материала/главы, которую мы сейчас изучаем.',
+  uz: "Bu savol o'rganayotgan materialingiz doirasidan tashqarida.",
+  en: 'This question is outside the scope of your material.',
+  ru: 'Этот вопрос выходит за рамки вашего материала.',
 };
 
 const OUT_OF_SCOPE_FOLLOWUP: Record<AppLocale, string> = {
@@ -99,7 +100,9 @@ function overlapCount(a: string[], b: string[]): number {
 }
 
 function guessScopeHeuristically(input: ClassifyTutorScopeInput): TutorScopeDecision {
-  const queryTokens = tokenize(input.message);
+  // Include both script forms of the query so a Latin question ("shin") overlaps
+  // Cyrillic material ("шин") — otherwise cross-script questions look "unrelated".
+  const queryTokens = tokenize(scriptVariants(input.message).join(' '));
   if (queryTokens.length === 0) {
     return {
       route: 'needs_clarification',
@@ -107,7 +110,7 @@ function guessScopeHeuristically(input: ClassifyTutorScopeInput): TutorScopeDeci
     };
   }
 
-  const titleTokens = tokenize(input.contentTitle);
+  const titleTokens = tokenize(scriptVariants(input.contentTitle).join(' '));
   const contextTokens = tokenize(input.context).slice(0, 400);
   const excerptTokens = tokenize(input.selectedExcerpt ?? '');
   const materialTokens = [...titleTokens, ...contextTokens, ...excerptTokens];
@@ -169,6 +172,10 @@ Definitions:
 
 Important:
 - Prefer related_extension over unrelated when the core concept/entity matches.
+- The material and the question may be written in DIFFERENT scripts (Uzbek Latin vs
+  Cyrillic, e.g. "shin" = "шин", "nuqta" = "нуқта"). Transliterate mentally and treat
+  them as the same language — never mark a question "unrelated" just because the
+  retrieved context is in another script.
 - Use the retrieved context and title, not previous assistant refusals.
 - Keep reason concise.
 - scopeNote should be present for direct or related_extension.`,

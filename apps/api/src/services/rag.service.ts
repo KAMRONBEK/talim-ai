@@ -5,6 +5,7 @@ import { env } from '../config/env.js';
 import { prisma } from '../lib/prisma.js';
 import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
+import { scriptVariants } from '../lib/uzbek-translit.js';
 import type { UsageContext } from './usage.service.js';
 
 // Token-based, structure-aware chunking (replaces the old 512-*character* splitter,
@@ -190,8 +191,15 @@ export async function searchSimilarChunks(
   limit: number = TOP_K,
   usage?: UsageContext,
 ): Promise<{ text: string; chunkIndex: number }[]> {
+  // Bridge the Latin↔Cyrillic Uzbek script gap: materials are often Cyrillic while
+  // learners type Latin (and vice versa). Embed both scripts together so dense recall
+  // reaches cross-script chunks, and OR both tsqueries so the lexical arm matches a
+  // Cyrillic chunk for a Latin query — otherwise "shin" never finds "шин".
+  const variants = scriptVariants(query);
+  const denseQuery = variants.join(' ') || query;
+  const lexAlt = variants[1] ?? variants[0] ?? query;
   const queryEmbedding = await generateEmbedding(
-    query,
+    denseQuery,
     usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
   );
   const vectorSql = embeddingToSql(queryEmbedding);
@@ -211,9 +219,12 @@ export async function searchSimilarChunks(
      ),
      lex AS (
        SELECT "id", "text", "chunkIndex",
-              ROW_NUMBER() OVER (ORDER BY ts_rank("tsv", q) DESC) AS rnk
-       FROM "Chunk", websearch_to_tsquery('simple', $3) q
-       WHERE "contentId" = $1 AND "tsv" @@ q
+              ROW_NUMBER() OVER (ORDER BY ts_rank("tsv", qq.q) DESC) AS rnk
+       FROM "Chunk"
+       CROSS JOIN (
+         SELECT websearch_to_tsquery('simple', $3) || websearch_to_tsquery('simple', $5) AS q
+       ) qq
+       WHERE "contentId" = $1 AND "tsv" @@ qq.q
        LIMIT 40
      )
      SELECT f."text", f."chunkIndex"
@@ -228,6 +239,7 @@ export async function searchSimilarChunks(
     vectorSql,
     query,
     candidateCount,
+    lexAlt,
   );
 
   return rerank(query, rows, limit);
