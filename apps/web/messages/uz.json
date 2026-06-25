@@ -118,6 +118,7 @@
     "rereadError": "Hujjatni qayta o'qib bo'lmadi. Yana urinib ko'ring.",
     "creating": "Yaratilmoqda...",
     "processing": "Material qayta ishlanmoqda",
+    "failedBadge": "Xato",
     "processingDesc": "Holat: {status}. Tayyor bo'lganda sahifa avtomatik yangilanadi.",
     "processingStepReading": "Matn o'qilyapti",
     "processingStepAnalyzing": "Mazmun tahlil qilinyapti",

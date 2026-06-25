@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { FileText, Presentation, Play, AlertCircle, Trash2 } from 'lucide-react';
+import { FileText, Presentation, Play, AlertCircle, Trash2, Loader2 } from 'lucide-react';
 import { Badge, Button } from '@talim/ui';
 import { useLocale, useTranslations } from 'next-intl';
 import type { AppLocale, Content, ContentType } from '@talim/types';
@@ -85,6 +85,14 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
               <Link href={`/content/${content.id}`} className="block">
                 <ContentThumbnail content={content} />
               </Link>
+              {(content.status === 'PENDING' || content.status === 'PROCESSING') && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-xl bg-background/70 backdrop-blur-sm">
+                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                  <span className="text-xs font-medium text-muted-foreground">
+                    {tContent('processing')}
+                  </span>
+                </div>
+              )}
               {showDelete && (
                 <Button
                   type="button"
@@ -115,7 +123,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
                       variant="outline"
                       className="h-5 border-destructive/50 px-1.5 text-[10px] text-destructive"
                     >
-                      Xato
+                      {tContent('failedBadge')}
                     </Badge>
                   )}
                 </div>

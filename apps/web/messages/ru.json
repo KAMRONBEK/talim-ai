@@ -118,6 +118,7 @@
     "rereadError": "Не удалось перечитать документ. Попробуйте ещё раз.",
     "creating": "Создание...",
     "processing": "Обработка материала",
+    "failedBadge": "Ошибка",
     "processingDesc": "Статус: {status}. Страница обновится, когда будет готово.",
     "processingStepReading": "Чтение текста",
     "processingStepAnalyzing": "Анализ содержания",

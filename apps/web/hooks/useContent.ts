@@ -2,6 +2,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Content, UserRole } from '@talim/types';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
+import {
+  invalidateContentLists,
+  prependContentToLists,
+  removeContentFromLists,
+  restoreContentLists,
+  snapshotContentLists,
+  listHasProcessing,
+} from '@/lib/content-cache';
 
 function contentApiBase(role?: UserRole): string {
   return role === 'TENANT_OWNER' ? '/tenant/content' : '/content';
@@ -18,6 +26,9 @@ export function useContents() {
       return data.contents;
     },
     enabled: Boolean(token),
+    // Keep the list live while any newly-added item is still ingesting so it
+    // flips from "processing" to ready without a manual refresh.
+    refetchInterval: (query) => (listHasProcessing(query.state.data as Content[] | undefined) ? 3000 : false),
   });
 }
 
@@ -49,7 +60,7 @@ export function useRetryContent() {
       return data.content;
     },
     onSuccess: (_data, id) => {
-      queryClient.invalidateQueries({ queryKey: ['contents'] });
+      invalidateContentLists(queryClient);
       queryClient.invalidateQueries({ queryKey: ['content', id] });
     },
   });
@@ -66,7 +77,10 @@ export function useUploadContent() {
       });
       return data.content;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['contents'] }),
+    onSuccess: (content) => {
+      prependContentToLists(queryClient, content);
+      invalidateContentLists(queryClient);
+    },
   });
 }
 
@@ -77,7 +91,10 @@ export function useCreateYoutubeContent() {
       const { data } = await api.post<{ content: Content }>('/content/youtube', { url, title });
       return data.content;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['contents'] }),
+    onSuccess: (content) => {
+      prependContentToLists(queryClient, content);
+      invalidateContentLists(queryClient);
+    },
   });
 }
 
@@ -89,10 +106,21 @@ export function useDeleteContent(options?: { onDeleted?: (id: string) => void })
     mutationFn: async (id: string) => {
       await api.delete(`${base}/${id}`);
     },
+    // Remove the card immediately (across both list keys), roll back on failure.
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: ['contents'] });
+      await queryClient.cancelQueries({ queryKey: ['tenant', 'contents'] });
+      const snapshot = snapshotContentLists(queryClient);
+      removeContentFromLists(queryClient, id);
+      return { snapshot };
+    },
+    onError: (_err, _id, ctx) => {
+      if (ctx?.snapshot) restoreContentLists(queryClient, ctx.snapshot);
+    },
     onSuccess: (_data, id) => {
-      queryClient.invalidateQueries({ queryKey: ['contents'] });
       queryClient.removeQueries({ queryKey: ['content', id] });
       options?.onDeleted?.(id);
     },
+    onSettled: () => invalidateContentLists(queryClient),
   });
 }

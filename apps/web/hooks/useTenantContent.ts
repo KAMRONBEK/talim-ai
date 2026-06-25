@@ -1,6 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Content } from '@talim/types';
 import { api } from '@/lib/api';
+import {
+  invalidateContentLists,
+  prependContentToLists,
+  removeContentFromLists,
+  restoreContentLists,
+  snapshotContentLists,
+  listHasProcessing,
+} from '@/lib/content-cache';
 
 const base = '/tenant/content';
 
@@ -11,6 +19,9 @@ export function useTenantContents() {
       const { data } = await api.get<{ contents: Content[] }>(base);
       return data.contents;
     },
+    // Poll while a freshly-added material is still ingesting so the grid flips
+    // from "processing" to ready on its own.
+    refetchInterval: (query) => (listHasProcessing(query.state.data as Content[] | undefined) ? 3000 : false),
   });
 }
 
@@ -41,7 +52,10 @@ export function useUploadTenantContent() {
       });
       return data.content;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'contents'] }),
+    onSuccess: (content) => {
+      prependContentToLists(queryClient, content);
+      invalidateContentLists(queryClient);
+    },
   });
 }
 
@@ -52,7 +66,10 @@ export function useCreateTenantYoutubeContent() {
       const { data } = await api.post<{ content: Content }>(`${base}/youtube`, { url, title });
       return data.content;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'contents'] }),
+    onSuccess: (content) => {
+      prependContentToLists(queryClient, content);
+      invalidateContentLists(queryClient);
+    },
   });
 }
 
@@ -62,10 +79,20 @@ export function useDeleteTenantContent() {
     mutationFn: async (id: string) => {
       await api.delete(`${base}/${id}`);
     },
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: ['contents'] });
+      await queryClient.cancelQueries({ queryKey: ['tenant', 'contents'] });
+      const snapshot = snapshotContentLists(queryClient);
+      removeContentFromLists(queryClient, id);
+      return { snapshot };
+    },
+    onError: (_err, _id, ctx) => {
+      if (ctx?.snapshot) restoreContentLists(queryClient, ctx.snapshot);
+    },
     onSuccess: (_data, id) => {
-      queryClient.invalidateQueries({ queryKey: ['tenant', 'contents'] });
       queryClient.removeQueries({ queryKey: ['tenant', 'content', id] });
     },
+    onSettled: () => invalidateContentLists(queryClient),
   });
 }
 
@@ -77,7 +104,7 @@ export function useRetryTenantContent() {
       return data.content;
     },
     onSuccess: (_data, id) => {
-      queryClient.invalidateQueries({ queryKey: ['tenant', 'contents'] });
+      invalidateContentLists(queryClient);
       queryClient.invalidateQueries({ queryKey: ['tenant', 'content', id] });
     },
   });
