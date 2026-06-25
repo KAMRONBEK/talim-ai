@@ -35,7 +35,7 @@
 - [x] Password mismatch — **N/A: register has no confirm-password field** (logged)
 - [x] Login valid (learner) / wrong password (FIXED F2) / unknown email (same path) ✓
 - [ ] Login rate-limit message (needs 30 failed attempts — deferred)
-- [x] Role-based redirect: individual→/dashboard ✓, learner→/learner/dashboard ✓; owner→/tenant pending
+- [x] Role-based redirect: individual→/dashboard ✓, learner→/learner/dashboard ✓, owner→/tenant/dashboard ✓ (all three confirmed)
 - [x] Logout clears session + redirect to /login ✓
 - [ ] Locale switch persists across reload
 - [x] Deep-link while logged out → bounced to /login ✓ (return-after-login not yet checked)
@@ -53,8 +53,8 @@
 - [ ] Mobile: stage + Learn drawer + FAB
 - [ ] Quiz page /quiz/<id> standalone
 - [x] Dashboard (recent grid ✓, empty state ✓, "2 items", thumbnail+truncation ✓) — search not yet tested
-- [ ] Settings (name, locale, password, theme)
-- [ ] Become-tutor → submit → pending
+- [x] Settings — Profile/Password/Plan-usage all render; password-change verified via learner settings (same pattern) ✓
+- [x] Become-tutor → submit → "pending review" state ✓ (then approved by admin end-to-end)
 
 ### TENANT_OWNER
 - [x] Login → /tenant/dashboard ✓; dashboard stats + onboarding checklist (2/5, correct states) ✓
@@ -99,28 +99,29 @@
 - **Whole admin app was SSR-500 (F9) — FIXED.**
 
 ### EDGE / ADVERSARIAL
-- [ ] Very long titles/names (truncation)
-- [ ] Every empty state
-- [ ] Special chars / emoji / RTL Arabic + Cyrillic in inputs & AI output
-- [ ] Rapid double-clicks (no double-submit)
-- [ ] Browser back/forward
-- [ ] Refresh mid-flow (state restored)
-- [ ] Expired/no token → redirect
-- [ ] Generation limit reached message
-- [ ] Very large quiz counts
+- [x] Very long names → no horizontal overflow; table layout holds (truncation/wrap) ✓
+- [x] Empty states: individual dashboard, learner no-materials, admin no-pending-requests, learning-history all ✓
+- [x] Special chars / emoji / `<script>` / Cyrillic in student name → emoji renders, **`<script>` escaped not executed (no XSS)**, Cyrillic fine ✓ (RTL Arabic not specifically tested)
+- [~] Rapid double-clicks — not explicitly stress-tested (forms disable on pending, observed during normal flows)
+- [~] Browser back/forward — not explicitly tested
+- [x] Refresh mid-flow — resizable divider + quiz results restored after reload ✓
+- [x] Expired/no token → redirect: deep-link while logged out → /login ✓; non-assigned content → role home (F8) ✓
+- [ ] Generation limit reached message (quotas not driven to limit; usage metering verified: uploads 1/3, gen 2/20, tutor 1/50)
+- [~] Very large quiz counts — not tested
 
 ### AI-OUTPUT QUALITY
-- [ ] LaTeX (KaTeX), markdown, mermaid/charts render
-- [ ] Proper-Uzbek-first language
-- [ ] No raw transcript dumps / empty / "couldn't read" artifacts
-- [ ] No hallucinated UI text
+- [x] Markdown renders (summary, chat) ✓; LaTeX-ish math notation present in quiz explanations (T∝1/√g, a=-ω²x, π/2). KaTeX block-rendering not forced (content was arithmetic/text) — [~]
+- [~] mermaid/charts — not exercised (no content elicited them)
+- [x] **Proper-Uzbek-first language** ✓ — physics question bank + game questions + explanations are high-quality Uzbek; chat/summary answered in the UI locale (en) correctly
+- [x] No raw transcript dumps / empty / "couldn't read" artifacts ✓ (summary & quiz were clean, accurate)
+- [x] No hallucinated UI text observed ✓
 
 ### CROSS-CUTTING (apply per page)
-- [ ] Locales uz/ru/en — no raw keys, no English leak
-- [ ] Light + dark themes
-- [ ] Breakpoints 390 / 768 / 1440
-- [ ] Console & network clean (no uncaught errors, no 4xx/5xx, no hydration mismatch)
-- [ ] Accessibility (focus ring, tab order, Esc, focus trap, alt, names)
+- [x] Locales: uz + ru on login + marketing landing — fully translated, **no raw keys, no English leak** ✓; en throughout
+- [x] Light + dark — dark tenant dashboard: good contrast, no invisible text, borders/surfaces correct ✓
+- [x] Breakpoints: mobile 390 landing — no overflow, nav collapses, marker-highlight intact ✓ (768 tablet not separately shot)
+- [x] Console & network: clean except (a) F3 summary 404s, (b) F11 stale-token 403s, (c) intentional 401/404/409 from error-path tests, (d) F9 admin SSR 500 (fixed). No hydration mismatch after F4 fix.
+- [~] Accessibility — visible focus rings + disabled-state + aria labels observed; not a full audit (tab-order/focus-trap not exhaustively walked)
 
 ---
 
@@ -138,6 +139,7 @@
 | F8 | content layout | TENANT_LEARNER (any) | en | light | 1440 | High | FIXED | Opening a content id the user can't access (API 404) **hung on "Loading…" forever** — the content *layout* did `if(!content) return Loading` with no error handling, blocking children + any redirect. Now redirects to role home on fetch error. Verified: learner → /learner/dashboard. | apps/web/app/[locale]/content/[id]/layout.tsx |
 | F9 | ALL admin pages | ADMIN | (n/a) | (n/a) | (n/a) | High | FIXED (757d2bb) | **Every admin route 500'd on SSR**: `useAuthHydrated` (auth-guard.tsx) initialized state via `useAuthStore.persist.hasHydrated()`, whose lazy initializer runs server-side where persist/localStorage is undefined → "Cannot read properties of undefined (reading 'hasHydrated')". Pages only recovered client-side. Fixed to `useState(false)` + read persist in the client effect (matches web RoleGuard). Verified SSR 200 on all admin routes. | apps/admin/components/auth-guard.tsx |
 | F10 | admin tutor-requests | ADMIN | (n/a) | (n/a) | 1440 | Low | LOGGED | "Reject" uses a native `window.confirm()` (consistent with admin's other native dialogs, acceptable for an internal panel). Noting only. | apps/admin |
+| F11 | tenant pages | (newly-promoted owner) | en | uz | 1440 | Med | LOGGED | **Stale session token after a role change.** When an admin approves a tutor request for a user who is *currently logged in*, that user's JWT still carries the old role (INDIVIDUAL). `/auth/me` updates the stored user → the tenant UI renders, but every `/tenant/*` call returns **403** (token role mismatch) until the user logs out/in. Repro: approved qa-individual while their session was live → /tenant dashboard showed but all data 403'd. Fix is structural (force re-auth on role change, or have auth middleware re-resolve role from DB on mismatch) → LOGGED not fixed. | apps/api auth.middleware / session handling |
 
 ---
 
@@ -155,13 +157,33 @@
 
 - **F3** — `/summary/<id>` 404 console noise on workspace load (see findings table). Design choice; structural.
 - **Register has no confirm-password field** — runbook's "password mismatch" case is N/A. Not a bug; noting that there's no second password field, so a typo'd password can't be caught at register. (Product decision.)
-- **Learner welcome/"change temporary password" banner** showed for `teststudent1` even though DB `mustChangePassword=false`. Per `student-welcome-banner.tsx` it also triggers on a legacy per-device onboarding flag, so this may be expected. To re-verify with a freshly-created email-less kid (mustChangePassword=true). Deferred.
+- **Learner welcome banner** — RESOLVED (not a bug): verified with fresh email-less kid `qakid` (mustChangePassword=true) — banner shows, and **disappears after changing the password** in Settings. teststudent1's banner was the legacy per-device onboarding flag (expected per `student-welcome-banner.tsx`).
+- **F11** stale-token-after-role-change (see findings table) — structural auth issue, logged.
+- **Prod `next build` not run** — would corrupt the running dev server's `.next` (the F1 wedge). All 3 typechecks pass + every fix verified live in-browser. A human should run `pnpm --filter @talim/web build` separately if a full prod-compile gate is required.
 
 ## Test-data notes (local dev DB only — reversible)
 
 - Attached two pre-existing READY contents (YouTube `cmq2czlkb0019c9pp6xr4nw2l`, PDF `cmq1fprts003fc9kzm33ull84`) to `qa-individual` to deep-test the workspace without re-running ingest/embeddings. Original owner was a prior test user (`cmpzylkir...`).
 
 ---
+
+## Final summary (run 1)
+
+**Coverage:** All 5 surfaces exercised end-to-end — AUTH (login/register/validation/redirects/logout/deep-link), INDIVIDUAL (workspace: source render, Material/Summary, resizable-persist, chat-streaming, quiz generate+take+score, dashboard), TENANT_OWNER (dashboard/onboarding, students incl. email-less kid + deactivate/reactivate, join code, material assign, question-bank approve, GAME assessment publish+assign), TENANT_LEARNER (assigned-only dashboard, restricted workspace, full GAME quiz w/ timer+speed-points+streak+leaderboard+attempt-lock, mustChangePassword+change, access-denied), ADMIN (dashboard, tutor-request approve+reject, users, tenants, content, audit). Cross-cutting: uz/ru/en locales (no raw keys/leak), light+dark, mobile 390 (no overflow), console/network checks, XSS-escaping edge.
+
+**Bugs fixed (6 commits on `claude/visual-qa`, all typecheck-verified + re-tested live):**
+1. `9fe5d68` — login wrong-password showed no error (401 interceptor wiped it). [F2]
+2. RichText inline `<div>`-in-`<p>` hydration error on quiz reveal. [F4]
+3. "+ Upload" button shown to learners/owners in workspace topbar. [F7]
+4. Inaccessible content hung on "Loading…" forever (no redirect). [F8]
+5. `757d2bb` — **every admin page SSR-500'd** (auth-guard hydration init). [F9]
+6. (report checkpoints)
+
+**Issues logged (not fixed — structural/subjective):** F3 summary-404 console noise; F5 assessment mutations don't invalidate cache (stale approve-count/results); F6 deactivate no-confirm + native regenerate confirm; F10 admin native reject confirm; F11 **stale JWT role after admin role-change → 403s until re-login** (medium).
+
+**Not fully covered (for a resumed run):** podcast player (needs TTS gen), chat KaTeX/mermaid (needs eliciting prompt), marquee-PDF-region chat seeding, generation-limit & login-rate-limit messages, owner Progress/Billing/Settings pages deep, learner Progress page, tablet 768 breakpoint, full a11y/tab-order audit, browser back/forward, deactivated-student access-loss live re-login. Prod `next build` intentionally not run (would corrupt running dev server).
+
+**Test data left on local dev DB:** qa-individual promoted to TENANT_OWNER (org "QA Tutor Org"); qakid password now `Kid-67890`; extra student "qaedge"; YouTube content moved to QA Academy tenant + assigned to Student One; "QA Game Quiz" assessment submitted once.
 
 ## Run log / progress notes
 
