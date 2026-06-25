@@ -57,21 +57,22 @@
 - [ ] Become-tutor → submit → pending
 
 ### TENANT_OWNER
-- [ ] Students: create (email + email-less kid)
-- [ ] Students: reset password
-- [ ] Students: deactivate → confirm content access lost
-- [ ] Students: reactivate
-- [ ] Join code: copy, regenerate (confirm) → old rejected
-- [ ] Materials: upload
-- [ ] Materials: assign to students / class → student sees it
+- [x] Login → /tenant/dashboard ✓; dashboard stats + onboarding checklist (2/5, correct states) ✓
+- [x] Students: create email-less kid (qakid → "credentials shown once" dialog ✓; seats 2→3 ✓)
+- [~] Students: reset password (Reset button present; not exercised)
+- [x] Students: deactivate → toggles to Reactivate ✓ (no confirm — F6); content-access-lost verified later as learner
+- [~] Students: reactivate (button present; Test Student Two left deactivated — restore at end)
+- [x] Join code: regenerate shows native confirm dialog ✓ (cancelled to preserve DUTDWE); copy not exercised; "old rejected" pending
+- [~] Materials: upload UI present (Upload/Link cards); real upload not done (no parseable PDF) — see F-PDF note
+- [x] Materials: assign to student via assign panel → student ASSIGNED count 1 ✓ (learner-sees-it verified later)
 - [ ] Materials: re-read (OCR) PDF
 - [ ] Materials: delete (confirm)
-- [ ] Assessments: question bank (AI generate, verify types)
-- [ ] Assessments: WRITTEN create + assign + results
-- [ ] Assessments: GAME create + assign + results + leaderboard
+- [x] Assessments: question bank — reused "Physics TF Bank"; approve works (persists); **proper-Uzbek questions + explanations + LaTeX-ish, excellent** ✓; type controls present (Mixed/MC/TF/Written/Numeric). Stale-cache F5.
+- [~] Assessments: WRITTEN create — same publish flow as GAME (not separately published; deferred)
+- [x] Assessments: GAME create (Game mode → "Seconds per question"=20 timer ✓) + publish (4 Qs) + assign to Student One (DB-confirmed) ✓ — results panel stale (F5)
 - [ ] Progress: per-student + class update after submit
 - [ ] Billing (manual plan/seat view)
-- [ ] Dashboard onboarding checklist
+- [x] Dashboard onboarding checklist ✓
 - [ ] Settings
 
 ### TENANT_LEARNER
@@ -132,6 +133,8 @@
 | F2 | /login | all | en | light | 1440 | High | FIXED (9fe5d68) | Wrong password → API 401 but **no error shown**; page silently reloaded. Global axios 401 interceptor hard-redirected to /login on the login endpoint's own 401, discarding the inline error. Fixed by excluding auth entry-point endpoints from the global redirect. | apps/web/lib/api.ts |
 | F3 | content workspace | INDIVIDUAL | en | light | 1440 | Low | LOGGED | On workspace load, `GET /summary/<id>` and `GET /summary/<id>?sectionId=...` return **404** (no summary/section-summary yet) → 2 console errors + failed network requests. Functionally fine (Summary tab still renders the whole-content summary, generate still offered), but violates the "zero console errors / no 4xx" rule. Consider treating absent-summary as 200+null. Structural → not fixed. | apps/web (summary fetch hook) |
 | F4 | quiz results | INDIVIDUAL/LEARNER | en | light | 1440 | Med | FIXED (HEAD) | **React hydration error** on every quiz reveal: `RichText inline` rendered a `<div class="prose...">` nested inside the short-answer acceptable-answer `<p>` (QuizCard:248-251) → "`<div>` cannot be a descendant of `<p>`". Fixed by making inline RichText wrap in `<span>`. Verified: 0 console errors through MC + short-answer Check reveal + submit. | apps/web/components/learning/rich-text.tsx |
+| F5 | /tenant/assessments | TENANT_OWNER | en | light | 1440 | Med | LOGGED | **Assessment mutations don't refresh related views (stale cache).** After Approve: bank "x/12 approved" count + draft list don't update (approved Qs stay listed with Approve button, no "approved" badge) — confirmed persisted (shows after reload). After Assign: Results & leaderboard still says "Not assigned to anyone yet" / "0/0" though DB shows the assignment. Reload fixes all. CLAUDE.md §4 requires invalidating affected query keys. Not fixed (touches multiple useAssessments keys — wanted to avoid a partial fix). | apps/web/hooks/useAssessments.ts |
+| F6 | /tenant/students | TENANT_OWNER | en | light | 1440 | Low | LOGGED | "Deactivate" student applies with **no confirmation** (reversible via Reactivate, so arguably OK, but it's a destructive-sounding action). "Regenerate" join code uses a **native `window.confirm()`** — works, but inconsistent with the app's custom confirm dialogs elsewhere. Both minor/subjective → not fixed. | apps/web/components/tenant/* |
 
 ---
 
