@@ -87,17 +87,16 @@
 - [ ] After deactivate → access lost (Test Student Two deactivated; not re-logged-in to verify)
 
 ### ADMIN (3001, no i18n)
-- [ ] Login
-- [ ] Dashboard stats
-- [ ] Tutor-requests: approve (seat limit → org + ACTIVE sub)
-- [ ] Tutor-requests: reject
-- [ ] Users: list/search/detail, reset password, patch subscription
-- [ ] Tenants: list/detail
-- [ ] Content: list, delete, retry job
-- [ ] Generated media
-- [ ] Subscriptions
-- [ ] Usage
-- [ ] Audit log shows the admin actions performed
+- [x] Login (session present; admin@talim.local) ✓
+- [x] Dashboard stats ✓ (users/content/API spend/generations — live data)
+- [x] Tutor-requests: approve "QA Tutor Org" w/ seat limit 10 → org + ACTIVE TENANT_STARTER sub + owner role (verified in Users + Tenants + audit) ✓
+- [x] Tutor-requests: reject "Reject Org" (native confirm) → qa-rejectme stays INDIVIDUAL ✓; PENDING empty state ✓
+- [x] Users: list + search box + plaintext password notes (Copy) + Reset present ✓ (detail/reset/patch not exercised)
+- [x] Tenants: list shows new QA Tutor Org + QA Academy with plan/status/students/content ✓ (detail not exercised)
+- [x] Content: list with Delete (READY) + Retry (FAILED) actions ✓ (not clicked — destructive)
+- [x] Generated media / Subscriptions / Usage — SSR 200, render (not deeply exercised)
+- [x] Audit log shows tutor_request.approve (w/ tenantId metadata) + tutor_request.reject ✓
+- **Whole admin app was SSR-500 (F9) — FIXED.**
 
 ### EDGE / ADVERSARIAL
 - [ ] Very long titles/names (truncation)
@@ -136,7 +135,9 @@
 | F5 | /tenant/assessments | TENANT_OWNER | en | light | 1440 | Med | LOGGED | **Assessment mutations don't refresh related views (stale cache).** After Approve: bank "x/12 approved" count + draft list don't update (approved Qs stay listed with Approve button, no "approved" badge) — confirmed persisted (shows after reload). After Assign: Results & leaderboard still says "Not assigned to anyone yet" / "0/0" though DB shows the assignment. Reload fixes all. CLAUDE.md §4 requires invalidating affected query keys. Not fixed (touches multiple useAssessments keys — wanted to avoid a partial fix). | apps/web/hooks/useAssessments.ts |
 | F6 | /tenant/students | TENANT_OWNER | en | light | 1440 | Low | LOGGED | "Deactivate" student applies with **no confirmation** (reversible via Reactivate, so arguably OK, but it's a destructive-sounding action). "Regenerate" join code uses a **native `window.confirm()`** — works, but inconsistent with the app's custom confirm dialogs elsewhere. Both minor/subjective → not fixed. | apps/web/components/tenant/* |
 | F7 | content workspace topbar | TENANT_LEARNER / TENANT_OWNER | en | light | 1440 | Med | FIXED (HEAD) | `LearningTopbar` always rendered "+ Upload"; learners (no upload) and owners (upload via /tenant/materials, blocked on B2C /content) both saw it. Gated to INDIVIDUAL only. Verified gone for learner. | apps/web/components/layout/learning-topbar.tsx |
-| F8 | content layout | TENANT_LEARNER (any) | en | light | 1440 | High | FIXED (HEAD) | Opening a content id the user can't access (API 404) **hung on "Loading…" forever** — the content *layout* did `if(!content) return Loading` with no error handling, blocking children + any redirect. Now redirects to role home on fetch error. Verified: learner → /learner/dashboard. | apps/web/app/[locale]/content/[id]/layout.tsx |
+| F8 | content layout | TENANT_LEARNER (any) | en | light | 1440 | High | FIXED | Opening a content id the user can't access (API 404) **hung on "Loading…" forever** — the content *layout* did `if(!content) return Loading` with no error handling, blocking children + any redirect. Now redirects to role home on fetch error. Verified: learner → /learner/dashboard. | apps/web/app/[locale]/content/[id]/layout.tsx |
+| F9 | ALL admin pages | ADMIN | (n/a) | (n/a) | (n/a) | High | FIXED (757d2bb) | **Every admin route 500'd on SSR**: `useAuthHydrated` (auth-guard.tsx) initialized state via `useAuthStore.persist.hasHydrated()`, whose lazy initializer runs server-side where persist/localStorage is undefined → "Cannot read properties of undefined (reading 'hasHydrated')". Pages only recovered client-side. Fixed to `useState(false)` + read persist in the client effect (matches web RoleGuard). Verified SSR 200 on all admin routes. | apps/admin/components/auth-guard.tsx |
+| F10 | admin tutor-requests | ADMIN | (n/a) | (n/a) | 1440 | Low | LOGGED | "Reject" uses a native `window.confirm()` (consistent with admin's other native dialogs, acceptable for an internal panel). Noting only. | apps/admin |
 
 ---
 
@@ -145,7 +146,8 @@
 - **9fe5d68** `fix(web): show login error instead of silent reload on wrong password` — verified in browser (uz/en path), `@talim/types` build + web/admin typecheck all pass.
 - **HEAD~2** `fix(web): RichText inline renders a span, not a div (fixes hydration error)` — verified 0 console errors through quiz reveal+submit; web typecheck passes.
 - **HEAD~1** `fix(web): hide workspace + Upload button for non-individual roles` — verified Upload gone for learner; web typecheck passes.
-- **HEAD** `fix(web): redirect home when content is inaccessible instead of hanging on Loading` — verified learner → /learner/dashboard on non-assigned id; web typecheck passes.
+- `fix(web): redirect home when content is inaccessible instead of hanging on Loading` — verified learner → /learner/dashboard on non-assigned id; web typecheck passes.
+- **757d2bb** `fix(admin): stop SSR 500 on every admin page from auth-guard hydration check` — verified all admin routes SSR 200; admin typecheck passes.
 
 ---
 
