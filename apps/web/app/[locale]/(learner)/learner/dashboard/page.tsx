@@ -26,7 +26,7 @@ export default function LearnerDashboardPage() {
       <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft bg-girih">
         <div className="relative">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            {summary?.tenantName ?? user?.tenantName ?? 'Your school'}
+            {summary?.tenantName ?? user?.tenantName ?? t('schoolFallback')}
           </p>
           <h1 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
             {t('welcome', { name: user?.name ?? user?.email ?? '' })}
@@ -35,11 +35,11 @@ export default function LearnerDashboardPage() {
           {summary?.continueContent && (
             <div className="mx-auto mt-6 max-w-lg rounded-2xl border border-border/70 bg-background p-5 text-left shadow-soft">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Continue where you left off
+                {t('continueTitle')}
               </p>
               <p className="mt-1 font-display text-lg font-semibold">{summary.continueContent.title}</p>
               <p className="text-sm text-muted-foreground">
-                {Math.round(summary.continueContent.overallCoverage)}% complete
+                {t('percentComplete', { percent: Math.round(summary.continueContent.overallCoverage) })}
               </p>
               <Link
                 href={`/content/${summary.continueContent.contentId}${
@@ -48,7 +48,7 @@ export default function LearnerDashboardPage() {
                     : ''
                 }`}
               >
-                <Button variant="gradient" className="mt-4">Continue learning</Button>
+                <Button variant="gradient" className="mt-4">{t('continueLearning')}</Button>
               </Link>
             </div>
           )}
@@ -58,7 +58,7 @@ export default function LearnerDashboardPage() {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
           <div className="flex items-start justify-between">
-            <p className="text-sm font-medium text-muted-foreground">Assigned</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('statAssigned')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-lg">📚</span>
           </div>
           <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
@@ -67,14 +67,14 @@ export default function LearnerDashboardPage() {
         </div>
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
           <div className="flex items-start justify-between">
-            <p className="text-sm font-medium text-muted-foreground">Streak</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('statStreak')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-lg">🔥</span>
           </div>
-          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">{summary?.streakDays ?? 0} days</p>
+          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">{t('streakDays', { count: summary?.streakDays ?? 0 })}</p>
         </div>
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
           <div className="flex items-start justify-between">
-            <p className="text-sm font-medium text-muted-foreground">Avg quiz</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('statAvgQuiz')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-lg">🎯</span>
           </div>
           <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
@@ -91,7 +91,7 @@ export default function LearnerDashboardPage() {
           <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">📚</div>
             <p className="mt-4 font-display font-semibold">{t('noAssigned')}</p>
-            <p className="mt-1 text-sm text-muted-foreground">Your teacher will assign materials here.</p>
+            <p className="mt-1 text-sm text-muted-foreground">{t('noAssignedDesc')}</p>
           </div>
         ) : (
           <RecentContentGrid contents={assigned} showDelete={false} />
@@ -101,9 +101,9 @@ export default function LearnerDashboardPage() {
       {(assessments?.length ?? 0) > 0 && (
         <section>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-lg font-semibold">Written tasks</h2>
+            <h2 className="font-display text-lg font-semibold">{t('tasksTitle')}</h2>
             <Link href="/learner/assessments" className="text-sm font-medium text-primary hover:underline">
-              View all
+              {t('viewAll')}
             </Link>
           </div>
           <div className="grid gap-3 md:grid-cols-2">
@@ -115,7 +115,11 @@ export default function LearnerDashboardPage() {
               >
                 <p className="font-medium">{assessment.title}</p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {assessment.questions.length} questions · {assessment.attemptCount}/{assessment.maxAttempts} attempts
+                  {t('taskMeta', {
+                    count: assessment.questions.length,
+                    used: assessment.attemptCount,
+                    max: assessment.maxAttempts,
+                  })}
                 </p>
               </Link>
             ))}
