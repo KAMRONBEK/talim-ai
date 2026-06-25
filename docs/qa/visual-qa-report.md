@@ -347,6 +347,18 @@
 **Learner dashboard i18n (US-XCUT-01) — every student's landing page:**
 - **🐛→✅ F28 (S3) — learner dashboard hardcoded English (FIXED `295cdc0`).** ~11 strings leaked to uz/ru (stat labels, streak "N days", the Tasks section, the "Continue where you left off" card, "Your school"). Added `learner.*` keys (uz/en/ru, ICU plural) + wired the existing `useTranslations('learner')`. Verified live: uz dashboard now has **zero** English leaks ("Tayinlangan"/"Ketma-ketlik · 1 kun"/"O'rtacha test"/"Topshiriqlar"/"Hammasini ko'rish"/"4 ta savol · 1/1 urinish"/"QOLDIRGAN JOYINGIZDAN DAVOM ETING").
 
-**Fixes committed run 5 (total 8):** `b4ba377` [F18] Uzbek relative time; `aa42bf1` [F20] ICU plural counts (ru/en); `46e2473` [F21] podcast playback blob churn; `5adc666` [F22] podcast Speed: label; `e57e4ef` [F23] GAME player+leaderboard i18n; `73e41c9` [F25] admin credential-field autofill; `4978bb3` [F26] seat-limit-full quota message; `295cdc0` [F28] learner dashboard i18n. All typecheck-clean (full `pnpm typecheck` green) + verified live. **Logged:** F19 (search no-results empty state), F24 (assessments list/admin pages still English — learner dashboard now done), F27 (orphaned account on seat-full register).
+**Fixes committed run 5 (total 9):** `b4ba377` [F18] Uzbek relative time; `aa42bf1` [F20] ICU plural counts (ru/en); `46e2473` [F21] podcast playback blob churn; `5adc666` [F22] podcast Speed: label; `e57e4ef` [F23] GAME player+leaderboard i18n; `73e41c9` [F25] admin credential-field autofill; `4978bb3` [F26] seat-limit-full quota message; `295cdc0` [F28] learner dashboard i18n; `65e2b73` [F29] learner progress i18n. All typecheck-clean (full `pnpm typecheck` green) + verified live. **Logged:** F19 (search no-results empty state), F24 (assessments list/tenant pages still English), F27 (orphaned account on seat-full register).
+
+### Run 5 — closing summary
+
+**Coverage added:** B2C PDF workspace (marquee-region→chat seed [pending since run 1], summary, quiz generate/take/score, F4 hydration regression) · podcast generate + player (first-ever test) · GAME quiz played end-to-end in uz · admin user-detail + subscription patch + audit · seat-limit/join-code boundary · learner dashboard + progress + cross-cutting uz/en/ru + dark on the workspace.
+
+**9 bugs fixed (all verified live, full `pnpm typecheck` green):** F18 Uzbek relative time ("-3 w"→"3 hafta oldin"); F20 ru/en count pluralization (ICU); F21 **podcast playback broken by audio-blob churn** (real functional bug); F22 podcast "Speed:" leak; F23 GAME player+leaderboard i18n (~15 strings); F25 **admin credential-field browser-autofill** (S2 security); F26 seat-limit-full said "Upload limit reached"; F28 learner dashboard i18n; F29 learner progress i18n.
+
+**Logged (not fixed — structural/large):** F19 dashboard search no-results copy; F24 assessments list + tenant pages still English (large i18n surface); F27 **orphaned account on register-with-join-code when class full** (S2, register-flow reorder needed).
+
+**Not yet covered (for a resumed run):** owner question-bank **fresh AI generation** (each question type); admin content retry/delete; learner Settings + tenant `/tenant/*` i18n completeness; marketing landing ru/dark/mobile re-check. Recurring observation: post-login client redirect occasionally stalls on `/login` (direct nav works) — possibly automation-aggravated, not logged.
+
+**Test data left on local dev DB (run 5):** saved summary + practice quiz + 2-episode podcast on qa-individual's PDF; QA Game Quiz assigned to QA JoinCode Student (attempt 1/1 consumed). QA Academy seat limit + the two orphaned seat-test accounts were **cleaned up** (reverted/deleted).
 
 **Test-data left on local dev DB (run 5):** generated a saved summary + practice quiz `cmqtiyt5w…` (submitted once, 50%) + a **podcast (2 episodes, TTS audio)** on qa-individual's PDF — harmless, regenerable. One AI-tutor chat message on the PDF.
