@@ -53,6 +53,7 @@
     "register": "Регистрация",
     "invalidCredentials": "Неверный email или пароль",
     "serverError": "Не удалось подключиться к серверу. Попробуйте снова.",
+    "accountDeactivated": "Ваш аккаунт деактивирован. Пожалуйста, свяжитесь с вашим преподавателем.",
     "createAccount": "Создайте аккаунт",
     "registerContinue": "Начните учиться с Talim AI",
     "name": "Имя",

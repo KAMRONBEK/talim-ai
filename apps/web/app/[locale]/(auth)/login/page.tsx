@@ -42,7 +42,13 @@ export default function LoginPage() {
       router.replace(getPostLoginPath(data.user.role));
     } catch (err: unknown) {
       const status = (err as { response?: { status?: number } })?.response?.status;
-      setError(status === 401 ? t('invalidCredentials') : t('serverError'));
+      setError(
+        status === 401
+          ? t('invalidCredentials')
+          : status === 403
+            ? t('accountDeactivated')
+            : t('serverError'),
+      );
     } finally {
       setLoading(false);
     }

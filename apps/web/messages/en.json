@@ -53,6 +53,7 @@
     "register": "Register",
     "invalidCredentials": "Invalid email or password",
     "serverError": "Could not reach the server. Please try again.",
+    "accountDeactivated": "Your account has been deactivated. Please contact your tutor.",
     "createAccount": "Create your account",
     "registerContinue": "Start learning with Talim AI",
     "name": "Name",
