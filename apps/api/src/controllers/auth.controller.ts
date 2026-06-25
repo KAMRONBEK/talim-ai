@@ -86,7 +86,12 @@ async function formatUser(user: {
 
 export async function register(req: AuthenticatedRequest, res: Response): Promise<void> {
   const body = registerSchema.parse(req.body);
-  const existing = await prisma.user.findUnique({ where: { email: body.email } });
+  // Normalize the email so capitalization/whitespace never splits one person into
+  // two accounts and so they can later sign in regardless of how they type it.
+  const email = body.email.trim().toLowerCase();
+  const existing = await prisma.user.findFirst({
+    where: { email: { equals: email, mode: 'insensitive' } },
+  });
   if (existing) {
     throw new AppError(409, 'Email already registered');
   }
@@ -99,7 +104,7 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
 
   let user = await prisma.user.create({
     data: {
-      email: body.email,
+      email,
       passwordHash,
       name: body.name ?? null,
       role: 'INDIVIDUAL',
@@ -153,10 +158,12 @@ export async function getTutorRequest(req: AuthenticatedRequest, res: Response):
 export async function login(req: AuthenticatedRequest, res: Response): Promise<void> {
   const body = loginSchema.parse(req.body);
   const identifier = body.email.trim();
-  // Accept either an email or a student username.
+  // Accept either an email or a student username. Match case-insensitively so a
+  // different capitalization (mobile keyboards auto-capitalize the first letter)
+  // or an email stored with mixed case still resolves to the right account.
   const user = identifier.includes('@')
-    ? await prisma.user.findUnique({ where: { email: identifier } })
-    : await prisma.user.findUnique({ where: { username: identifier } });
+    ? await prisma.user.findFirst({ where: { email: { equals: identifier, mode: 'insensitive' } } })
+    : await prisma.user.findFirst({ where: { username: { equals: identifier, mode: 'insensitive' } } });
   if (!user) {
     throw new AppError(401, 'Invalid credentials');
   }
