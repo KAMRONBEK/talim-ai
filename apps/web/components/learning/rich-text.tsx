@@ -20,8 +20,12 @@ export function RichText({
   className?: string;
   inline?: boolean;
 }) {
+  // In inline mode this renderer is dropped inside a line of phrasing content
+  // (e.g. inside a quiz explanation <p>/<span>), so the wrapper must be a
+  // <span> — a <div> there is invalid HTML and triggers a hydration error.
+  const Wrapper = inline ? 'span' : 'div';
   return (
-    <div
+    <Wrapper
       className={cn(
         'prose prose-sm max-w-none dark:prose-invert prose-p:my-1 prose-p:leading-relaxed',
         inline && 'prose-p:m-0 prose-p:inline',
@@ -35,6 +39,6 @@ export function RichText({
       >
         {children}
       </ReactMarkdown>
-    </div>
+    </Wrapper>
   );
 }
