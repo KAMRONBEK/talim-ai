@@ -41,9 +41,17 @@ function VideoInner({ id }: { id: string }) {
       ? t('limitReached', { used: errInfo.used ?? 0, limit: errInfo.limit ?? 0 })
       : t('limitReachedGeneric');
 
+  // Pin the request to the video's own locale. fetchAuthenticatedBlob uses a raw
+  // fetch (not the axios client), so it doesn't send our locale param — without
+  // this the server resolves the browser's Accept-Language (e.g. en) and 404s
+  // because the video/segment audio is looked up per locale (the video is uz).
+  const audioLocale = video?.locale;
   const loadAudioUrl = useCallback(
-    (index: number) => fetchAuthenticatedBlob(`${base}/${id}/video/segments/${index}/audio`),
-    [base, id],
+    (index: number) =>
+      fetchAuthenticatedBlob(
+        `${base}/${id}/video/segments/${index}/audio${audioLocale ? `?locale=${audioLocale}` : ''}`,
+      ),
+    [base, id, audioLocale],
   );
 
   return (
