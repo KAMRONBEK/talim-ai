@@ -7,6 +7,7 @@ import { errorMiddleware } from './middleware/error.middleware.js';
 import { registerProcessContentJob } from './jobs/processContent.job.js';
 import { registerGenerateQuizJob } from './jobs/generateQuiz.job.js';
 import { registerGeneratePodcastJob } from './jobs/generatePodcast.job.js';
+import { registerGenerateVideoJob } from './jobs/generateVideo.job.js';
 import { registerRenderManimJob } from './jobs/renderManim.job.js';
 import { LocalStorageService, storageService } from './services/storage.service.js';
 
@@ -18,6 +19,7 @@ async function bootstrap(): Promise<void> {
   registerProcessContentJob();
   registerGenerateQuizJob();
   registerGeneratePodcastJob();
+  registerGenerateVideoJob();
   registerRenderManimJob();
 
   const app = express();

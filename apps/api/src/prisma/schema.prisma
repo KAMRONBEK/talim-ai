@@ -67,6 +67,7 @@ enum UsageFeature {
   SECTION_GEN
   SUMMARY_GEN
   SLIDESHOW_GEN
+  VIDEO_GEN
   TRANSCRIBE
   PDF_PARSE
   TENANT_ASSISTANT
@@ -674,6 +675,10 @@ model ContentVideo {
   script      String?
   storagePath String?
   durationSec Int?
+  // Per-slide narration timeline: [{ index, title, narration, audioPath, durationSec }].
+  // The "video" is rendered in-browser as a narrated slideshow (deck slides synced
+  // to these per-slide TTS clips), so there is no single encoded file.
+  segments    Json?
   createdAt   DateTime             @default(now())
   updatedAt   DateTime             @updatedAt
   content     Content              @relation(fields: [contentId], references: [id], onDelete: Cascade)

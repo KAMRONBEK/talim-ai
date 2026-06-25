@@ -96,6 +96,10 @@ tenantContent.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 tenantContent.post('/:id/podcast', enforceQuota('GENERATION'), asyncHandler(podcastController.createPodcast));
 tenantContent.get('/:id/video', asyncHandler(videoController.getVideo));
 tenantContent.post('/:id/video', enforceQuota('GENERATION'), asyncHandler(videoController.createVideo));
+tenantContent.get(
+  '/:id/video/segments/:index/audio',
+  asyncHandler(videoController.streamVideoSegmentAudio),
+);
 tenantContent.get('/:id/slides', asyncHandler(slidesController.getSlides));
 tenantContent.post('/:id/slides', asyncHandler(slidesController.createSlides));
 // Progress / history / podcast-progress so an owner can read & track their own

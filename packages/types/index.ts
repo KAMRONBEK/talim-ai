@@ -33,8 +33,11 @@ export interface PlanLimits {
   maxUploads?: number | null;
   maxGenerationsPerMonth?: number | null;
   maxTutorMessages?: number | null;
+  maxVideosPerMonth?: number | null;
   maxStudents?: number | null;
   maxContentItems?: number | null;
+  /** Monthly price in USD (0 for free plans). Manual billing — no payment gateway. */
+  priceMonthlyUsd?: number | null;
 }
 
 export interface AdminUserSubscription {
@@ -84,7 +87,7 @@ export interface AdminTenantUsageVsLimits extends AdminUsageVsLimits {
   subscription?: AdminUserSubscription | null;
 }
 
-export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE' | 'STUDENT';
+export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE' | 'VIDEO' | 'STUDENT';
 
 export interface QuotaExceededResponse {
   message: string;
@@ -108,6 +111,7 @@ export interface BillingUsageVsLimits {
   uploads: { used: number; limit: number | null };
   generations: { used: number; limit: number | null };
   tutorMessages: { used: number; limit: number | null };
+  videos?: { used: number; limit: number | null };
 }
 
 export interface TenantBillingUsageVsLimits extends BillingUsageVsLimits {
@@ -137,6 +141,7 @@ export type UsageFeature =
   | 'SECTION_GEN'
   | 'SUMMARY_GEN'
   | 'SLIDESHOW_GEN'
+  | 'VIDEO_GEN'
   | 'TRANSCRIBE'
   | 'PDF_PARSE'
   | 'TENANT_ASSISTANT';
@@ -678,6 +683,16 @@ export interface ContentSummary {
   createdAt: string;
 }
 
+/** One slide's narration clip in a generated narrated-slideshow video. */
+export interface VideoSegment {
+  index: number;
+  title: string;
+  narration: string;
+  /** True once the TTS clip for this segment has been rendered and stored. */
+  hasAudio: boolean;
+  durationSec: number;
+}
+
 export interface ContentVideo {
   id: string;
   contentId: string;
@@ -688,6 +703,7 @@ export interface ContentVideo {
   script: string | null;
   storagePath: string | null;
   durationSec: number | null;
+  segments: VideoSegment[] | null;
   createdAt: string;
 }
 

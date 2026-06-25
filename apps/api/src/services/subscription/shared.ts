@@ -22,12 +22,18 @@ export const GENERATION_FEATURES = [
   'SLIDESHOW_GEN',
 ] as const;
 
+// Video has its own monthly allowance (a video is a heavy compound generation:
+// a deck + per-slide TTS). Metered separately from GENERATION_FEATURES.
+export const VIDEO_FEATURE = 'VIDEO_GEN' as const;
+
 export interface PlanLimits {
   maxUploads?: number | null;
   maxGenerationsPerMonth?: number | null;
   maxTutorMessages?: number | null;
+  maxVideosPerMonth?: number | null;
   maxStudents?: number | null;
   maxContentItems?: number | null;
+  priceMonthlyUsd?: number | null;
 }
 
 export interface SubscriptionView {

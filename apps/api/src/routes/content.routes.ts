@@ -34,6 +34,7 @@ contentRoutes.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 contentRoutes.post('/:id/podcast', asyncHandler(podcastController.createPodcast));
 contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
 contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
+contentRoutes.get('/:id/video/segments/:index/audio', asyncHandler(videoController.streamVideoSegmentAudio));
 contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
 contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
 contentRoutes.post('/:id/reparse', reparseRateLimit, asyncHandler(contentController.reparseContent));

@@ -6,6 +6,7 @@ import { getUsageForPeriod } from '../usage.service.js';
 import {
   FREE_PLAN_CODE,
   GENERATION_FEATURES,
+  VIDEO_FEATURE,
   QuotaExceededError,
   type SubscriptionView,
   assertIndividualPlan,
@@ -115,6 +116,16 @@ async function getTutorMessageCount(userId: string, from: Date, to: Date): Promi
   });
 }
 
+async function getVideoCount(userId: string, from: Date, to: Date): Promise<number> {
+  return prisma.apiUsageEvent.count({
+    where: {
+      userId,
+      feature: VIDEO_FEATURE,
+      createdAt: { gte: from, lte: to },
+    },
+  });
+}
+
 function resolveUpgradePlanCode(effectivePlanCode: string): PlanCode | null {
   return effectivePlanCode === FREE_PLAN_CODE ? 'INDIVIDUAL_PRO' : null;
 }
@@ -162,6 +173,16 @@ export async function assertQuota(
     return;
   }
 
+  if (feature === 'VIDEO') {
+    const limit = limits.maxVideosPerMonth;
+    if (limit == null) return;
+    const used = await getVideoCount(userId, from, to);
+    if (used >= limit) {
+      throw new QuotaExceededError('VIDEO', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
   const limit = limits.maxTutorMessages;
   if (limit == null) return;
   const used = await getTutorMessageCount(userId, from, to);
@@ -174,10 +195,11 @@ export async function getUsageVsLimits(userId: string) {
   const subscription = await getSubscriptionForUser(userId);
   const { from, to } = monthToDateRange();
 
-  const [uploadCount, generationCount, tutorCount, usage] = await Promise.all([
+  const [uploadCount, generationCount, tutorCount, videoCount, usage] = await Promise.all([
     getUploadCount(userId),
     getGenerationCount(userId, from, to),
     getTutorMessageCount(userId, from, to),
+    getVideoCount(userId, from, to),
     getUsageForPeriod({ userId, from, to }),
   ]);
 
@@ -197,6 +219,10 @@ export async function getUsageVsLimits(userId: string) {
     tutorMessages: {
       used: tutorCount,
       limit: limits.maxTutorMessages ?? null,
+    },
+    videos: {
+      used: videoCount,
+      limit: limits.maxVideosPerMonth ?? null,
     },
     apiCostUsd: usage.totalCostUsd,
   };

@@ -5,6 +5,7 @@ import { AppError } from '../../middleware/error.middleware.js';
 import { getUsageForPeriod } from '../usage.service.js';
 import {
   GENERATION_FEATURES,
+  VIDEO_FEATURE,
   QuotaExceededError,
   type SubscriptionView,
   formatSubscription,
@@ -54,6 +55,12 @@ async function getTenantGenerationCount(tenantId: string, from: Date, to: Date):
   );
 }
 
+async function getTenantVideoCount(tenantId: string, from: Date, to: Date): Promise<number> {
+  return prisma.apiUsageEvent.count({
+    where: { tenantId, feature: VIDEO_FEATURE, createdAt: { gte: from, lte: to } },
+  });
+}
+
 export async function assertTenantQuota(
   tenantId: string,
   feature: QuotaFeature | 'STUDENT',
@@ -98,6 +105,16 @@ export async function assertTenantQuota(
     return;
   }
 
+  if (feature === 'VIDEO') {
+    const limit = limits.maxVideosPerMonth;
+    if (limit == null) return;
+    const used = await getTenantVideoCount(tenantId, from, to);
+    if (used >= limit) {
+      throw new QuotaExceededError('VIDEO', used, limit, upgradePlanCode);
+    }
+    return;
+  }
+
   const limit = limits.maxTutorMessages;
   if (limit == null) return;
   const used = await prisma.apiUsageEvent.count({
@@ -117,10 +134,11 @@ export async function getTenantUsageVsLimits(tenantId: string) {
   const limits = sub?.limits ?? {};
   const { from, to } = monthToDateRange();
 
-  const [contentCount, studentCount, generationCount, usage, tenant] = await Promise.all([
+  const [contentCount, studentCount, generationCount, videoCount, usage, tenant] = await Promise.all([
     getTenantContentCount(tenantId),
     getActiveStudentCount(tenantId),
     getTenantGenerationCount(tenantId, from, to),
+    getTenantVideoCount(tenantId, from, to),
     getUsageForPeriod({ tenantId, from, to }),
     prisma.tenant.findUnique({ where: { id: tenantId }, select: { seatLimit: true } }),
   ]);
@@ -136,6 +154,7 @@ export async function getTenantUsageVsLimits(tenantId: string) {
       used: usage.byFeature.TUTOR_CHAT?.count ?? 0,
       limit: limits.maxTutorMessages ?? null,
     },
+    videos: { used: videoCount, limit: limits.maxVideosPerMonth ?? null },
     students: { used: studentCount, limit: seatLimit },
     contentItems: { used: contentCount, limit: limits.maxContentItems ?? null },
     apiCostUsd: usage.totalCostUsd,
