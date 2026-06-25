@@ -93,6 +93,7 @@ export function ContentSidebarBody({
           {navLink(`/content/${contentId}`, t('read'), '📖')}
           {navLink(`/content/${contentId}?panel=chat`, tContent('askTutor'), '💬')}
           {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
+          {navLink(`/content/${contentId}/video`, t('watchVideo'), '🎬')}
         </div>
       </div>
     </div>

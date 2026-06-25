@@ -91,7 +91,8 @@
     "sectionCount": "{count, plural, one {# section} other {# sections}}",
     "actions": "Actions",
     "read": "Read",
-    "listenPodcast": "Listen to podcast"
+    "listenPodcast": "Listen to podcast",
+    "watchVideo": "Watch video"
   },
   "content": {
     "summary": "Summary",
@@ -311,7 +312,28 @@
       "uploads": "Uploads",
       "generations": "AI generations",
       "tutorMessages": "Tutor messages",
-      "viewBilling": "View full billing"
+      "videos": "AI videos",
+      "viewBilling": "View full billing",
+      "upgrade": {
+        "cta": "Upgrade to Pro",
+        "title": "Unlock everything",
+        "proName": "Pro",
+        "price": "$10",
+        "perMonth": "/ month",
+        "features": {
+          "uploads": "Unlimited uploads",
+          "generations": "600 AI generations / month",
+          "videos": "30 AI videos / month",
+          "tutor": "Unlimited AI tutor chat",
+          "podcastsSlides": "Unlimited podcasts, slides & summaries"
+        },
+        "manualNote": "Billing is manual. Request an upgrade and an admin will activate Pro on your account.",
+        "requestCta": "Request upgrade",
+        "requesting": "Sending…",
+        "requested": "Request sent! An admin will activate Pro shortly.",
+        "requestError": "Couldn't send the request. Please try again.",
+        "close": "Close"
+      }
     },
     "summary": {
       "title": "Account details",
@@ -506,6 +528,21 @@
     "error": "Couldn't generate slides. Please try again.",
     "limitReached": "You've reached your AI generation limit ({used}/{limit} this month). Contact your admin to raise it.",
     "limitReachedGeneric": "AI generation isn't available on your current plan. Please contact your admin."
+  },
+  "video": {
+    "subtitle": "An AI narrated-slideshow video from this material",
+    "generate": "Generate video",
+    "regenerate": "Regenerate",
+    "play": "Play",
+    "pause": "Pause",
+    "generating": "Producing your video…",
+    "generatingHint": "Our AI is building slides and recording narration. This takes a minute.",
+    "emptyTitle": "Turn this material into a video",
+    "emptyBody": "Generate a narrated slideshow — visual slides with an AI voice-over walking through this content.",
+    "notAvailableLearner": "Your tutor hasn't created a video for this material yet.",
+    "error": "Couldn't generate the video. Please try again.",
+    "limitReached": "You've reached your AI video limit ({used}/{limit} this month). Upgrade or contact your admin to raise it.",
+    "limitReachedGeneric": "AI video isn't available on your current plan. Please upgrade or contact your admin."
   },
   "landing": {
     "nav": {

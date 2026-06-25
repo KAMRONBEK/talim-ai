@@ -91,7 +91,8 @@
     "sectionCount": "{count} bob",
     "actions": "Harakatlar",
     "read": "O'qish",
-    "listenPodcast": "Podkastni tinglang"
+    "listenPodcast": "Podkastni tinglang",
+    "watchVideo": "Videoni ko'rish"
   },
   "content": {
     "summary": "Xulosa",
@@ -311,7 +312,28 @@
       "uploads": "Yuklamalar",
       "generations": "AI generatsiyalar",
       "tutorMessages": "Tyutor xabarlari",
-      "viewBilling": "To'liq to'lov sahifasi"
+      "videos": "AI videolar",
+      "viewBilling": "To'liq to'lov sahifasi",
+      "upgrade": {
+        "cta": "Pro tarifiga o'tish",
+        "title": "Hammasini oching",
+        "proName": "Pro",
+        "price": "$10",
+        "perMonth": "/ oy",
+        "features": {
+          "uploads": "Cheksiz yuklamalar",
+          "generations": "Oyiga 600 AI generatsiya",
+          "videos": "Oyiga 30 AI video",
+          "tutor": "Cheksiz AI tyutor suhbati",
+          "podcastsSlides": "Cheksiz podkast, slayd va xulosalar"
+        },
+        "manualNote": "To'lov qo'lda amalga oshiriladi. So'rov yuboring va administrator hisobingizda Pro'ni faollashtiradi.",
+        "requestCta": "So'rov yuborish",
+        "requesting": "Yuborilmoqda…",
+        "requested": "So'rov yuborildi! Administrator tez orada Pro'ni faollashtiradi.",
+        "requestError": "So'rovni yuborib bo'lmadi. Yana urinib ko'ring.",
+        "close": "Yopish"
+      }
     },
     "summary": {
       "title": "Hisob ma'lumotlari",
@@ -506,6 +528,21 @@
     "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring.",
     "limitReached": "AI yaratish limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun administratoringizga murojaat qiling.",
     "limitReachedGeneric": "AI yaratish hozircha tarifingizda mavjud emas. Iltimos, administratoringizga murojaat qiling."
+  },
+  "video": {
+    "subtitle": "Ushbu material asosida AI ovozli slayd-video",
+    "generate": "Video yaratish",
+    "regenerate": "Qayta yaratish",
+    "play": "Ijro",
+    "pause": "To'xtatish",
+    "generating": "Videongiz tayyorlanmoqda…",
+    "generatingHint": "AI slaydlar yasab, ovozli izoh yozmoqda. Bu bir daqiqa oladi.",
+    "emptyTitle": "Materialni videoga aylantiring",
+    "emptyBody": "Ovozli slayd-video yarating — AI ovozi materialni slaydlar orqali tushuntiradi.",
+    "notAvailableLearner": "O‘qituvchingiz hali bu material uchun video yaratmagan.",
+    "error": "Videoni yaratib bo‘lmadi. Yana urinib ko‘ring.",
+    "limitReached": "AI video limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun tarifni yangilang yoki administratoringizga murojaat qiling.",
+    "limitReachedGeneric": "AI video hozircha tarifingizda mavjud emas. Iltimos, tarifni yangilang yoki administratoringizga murojaat qiling."
   },
   "landing": {
     "nav": {

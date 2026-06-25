@@ -8,3 +8,4 @@ export const billingRoutes = Router();
 
 billingRoutes.use(authMiddleware, attachTenantId);
 billingRoutes.get('/me', asyncHandler(billingController.getBillingMe));
+billingRoutes.post('/request-upgrade', asyncHandler(billingController.requestUpgrade));
