@@ -1,9 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
 import type { Deck, VideoSegment } from '@talim/types';
 import { Slide } from './Slide';
+import { TeacherMascot } from './TeacherMascot';
 
 const STAGE_W = 1280;
 const STAGE_H = 720;
@@ -34,6 +35,35 @@ export function NarratedVideoPlayer({
   const stageRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const blobRef = useRef<string | null>(null);
+  // Web Audio graph for driving the mascot's lip-sync from live amplitude.
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const mascotRef = useRef<HTMLDivElement>(null);
+
+  // Lazily build the analyser graph on first play (needs a user gesture). The
+  // MediaElementSource can only be created once per <audio> element.
+  const ensureAudioGraph = useCallback(() => {
+    if (audioCtxRef.current || !audioRef.current) return;
+    const Ctx =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!Ctx) return;
+    try {
+      const ctx = new Ctx();
+      const source = ctx.createMediaElementSource(audioRef.current);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      audioCtxRef.current = ctx;
+      analyserRef.current = analyser;
+      sourceRef.current = source;
+    } catch {
+      // Web Audio unavailable → mascot just idles (no lip-sync), audio still plays.
+    }
+  }, []);
 
   const clamp = useCallback((n: number) => Math.max(0, Math.min(n, total - 1)), [total]);
 
@@ -102,6 +132,7 @@ export function NarratedVideoPlayer({
   useEffect(() => {
     return () => {
       if (blobRef.current) URL.revokeObjectURL(blobRef.current);
+      void audioCtxRef.current?.close().catch(() => undefined);
     };
   }, []);
 
@@ -115,6 +146,8 @@ export function NarratedVideoPlayer({
 
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
+    ensureAudioGraph();
+    void audioCtxRef.current?.resume().catch(() => undefined);
     setPlaying((p) => {
       const next = !p;
       if (audio) {
@@ -123,7 +156,38 @@ export function NarratedVideoPlayer({
       }
       return next;
     });
-  }, []);
+  }, [ensureAudioGraph]);
+
+  // Animate the mascot's mouth from the narration's RMS amplitude each frame.
+  // Writes a CSS variable (no React re-render) so it stays smooth at 60fps.
+  useEffect(() => {
+    const setMouth = (v: number) => mascotRef.current?.style.setProperty('--mouth', v.toFixed(3));
+    if (!playing) {
+      setMouth(0.1);
+      return;
+    }
+    const analyser = analyserRef.current;
+    if (!analyser) return;
+    const buf = new Uint8Array(analyser.fftSize);
+    let smooth = 0;
+    const tick = () => {
+      analyser.getByteTimeDomainData(buf);
+      let sum = 0;
+      for (let i = 0; i < buf.length; i++) {
+        const v = ((buf[i] ?? 128) - 128) / 128;
+        sum += v * v;
+      }
+      const rms = Math.sqrt(sum / buf.length);
+      const target = Math.min(1, rms * 3.2);
+      smooth += (target - smooth) * 0.35;
+      setMouth(0.1 + smooth * 0.9);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [playing]);
 
   const goTo = useCallback(
     (n: number) => {
@@ -149,6 +213,15 @@ export function NarratedVideoPlayer({
             </div>
           </div>
         )}
+
+        {/* Animated teacher narrator — lip-syncs to the narration audio. */}
+        <div
+          ref={mascotRef}
+          className="pointer-events-none absolute bottom-2 left-2 z-10 h-24 w-24 sm:bottom-4 sm:left-4 sm:h-36 sm:w-36"
+          style={{ ['--mouth' as string]: 0.1 } as CSSProperties}
+        >
+          <TeacherMascot speaking={playing} />
+        </div>
       </div>
 
       <audio ref={audioRef} onEnded={onEnded} className="hidden" />
