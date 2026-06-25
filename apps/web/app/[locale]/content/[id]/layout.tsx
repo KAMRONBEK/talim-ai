@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, use, useEffect, useRef } from 'react';
+import type { UserRole } from '@talim/types';
 import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useAutoGenerateOnLocaleChange } from '@/hooks/useLocaleContent';
@@ -8,6 +9,8 @@ import { AuthGuard } from '@/components/auth-guard';
 import { ContentSidebar, ContentSidebarSheet } from '@/components/layout/content-sidebar';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
 import { useSidebarSheet } from '@/hooks/useSidebarSheet';
+import { useAuthStore } from '@/store/useAuthStore';
+import { getHomePathForRole } from '@/lib/auth-routing';
 import { useContent } from '@/hooks/useContent';
 import { useSections } from '@/hooks/useSections';
 import { useTranslations } from 'next-intl';
@@ -26,7 +29,8 @@ function ContentLayoutInner({
   const searchParams = useSearchParams();
   const sectionParam = searchParams.get('section');
   const isReaderPage = pathname === `/content/${id}`;
-  const { data: content } = useContent(id);
+  const role = useAuthStore((s) => s.user?.role);
+  const { data: content, isError: contentError } = useContent(id);
   const { data: sections = [] } = useSections(id);
   const { data: progressData } = useContentProgress(id);
   const markViewed = useMarkSectionViewed(id);
@@ -60,6 +64,14 @@ function ContentLayoutInner({
     markViewed.mutate(activeId);
   }, [isReaderPage, activeId, content?.status, sections, markViewed]);
 
+  // A failed content fetch (404) means the content is missing or the user has
+  // no access — e.g. a learner opening a non-assigned id. Without this the
+  // layout hangs forever on "Loading…" (content stays undefined), so bounce
+  // them to their role home instead.
+  if (contentError) {
+    return <ContentAccessRedirect role={role} />;
+  }
+
   if (!content) {
     return <p className="p-8 text-muted-foreground">{t('loading')}</p>;
   }
@@ -90,6 +102,15 @@ function ContentLayoutInner({
       </div>
     </div>
   );
+}
+
+function ContentAccessRedirect({ role }: { role?: UserRole }) {
+  const t = useTranslations('common');
+  const router = useRouter();
+  useEffect(() => {
+    router.replace(getHomePathForRole(role));
+  }, [role, router]);
+  return <p className="p-8 text-muted-foreground">{t('loading')}</p>;
 }
 
 function ContentLayoutSuspenseFallback() {
