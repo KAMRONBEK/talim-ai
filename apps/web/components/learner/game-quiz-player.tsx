@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import { useSubmitLearnerAssessment } from '@/hooks/useAssessments';
@@ -15,6 +16,7 @@ export function GameQuizPlayer({
   assessment: LearnerAssessment;
   onExit: () => void;
 }) {
+  const t = useTranslations('learner.game');
   const submit = useSubmitLearnerAssessment();
   const limitSec = assessment.secondsPerQuestion ?? 20;
   const [phase, setPhase] = useState<Phase>('intro');
@@ -78,7 +80,7 @@ export function GameQuizPlayer({
     } catch (err) {
       alert(
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-          'Could not submit your answers.',
+          t('submitError'),
       );
       onExit();
     }
@@ -90,8 +92,7 @@ export function GameQuizPlayer({
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-accent-secondary/15 text-3xl">🎮</div>
         <h2 className="mt-4 font-display text-xl font-bold">{assessment.title}</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          {assessment.questions.length} questions · {limitSec}s each · faster answers and streaks
-          score more points.
+          {t('introMeta', { count: assessment.questions.length, seconds: limitSec })}
         </p>
         <div className="mt-6 flex justify-center gap-2">
           <Button
@@ -101,10 +102,10 @@ export function GameQuizPlayer({
               setPhase('playing');
             }}
           >
-            Start
+            {t('start')}
           </Button>
           <Button variant="outline" onClick={onExit}>
-            Cancel
+            {t('cancel')}
           </Button>
         </div>
       </div>
@@ -114,7 +115,7 @@ export function GameQuizPlayer({
   if (phase === 'submitting') {
     return (
       <div className="rounded-2xl border border-border/70 bg-card p-8 text-center text-muted-foreground shadow-soft">
-        Scoring…
+        {t('scoring')}
       </div>
     );
   }
@@ -124,10 +125,10 @@ export function GameQuizPlayer({
     return (
       <div className="space-y-4 rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
         <div className="rounded-2xl bg-brand-radial p-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Your score</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{t('yourScore')}</p>
           <p className="font-display text-5xl font-extrabold tabular-nums text-primary">{result.attempt.pointsTotal}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            {result.correct}/{result.total} correct · best streak {result.attempt.maxStreak}
+            {t('resultSummary', { correct: result.correct, total: result.total, streak: result.attempt.maxStreak })}
           </p>
         </div>
         <div className="space-y-2">
@@ -144,12 +145,12 @@ export function GameQuizPlayer({
               <p className="mt-1 text-sm">
                 {r.correct ? `✓ +${r.pointsAwarded}` : '✗'} ·{' '}
                 <span className="text-muted-foreground">
-                  Your answer: {r.submittedAnswer || '—'}
+                  {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
                 </span>
               </p>
               {!r.correct && r.acceptableAnswers.length > 0 && (
                 <p className="text-sm text-muted-foreground">
-                  Correct: {r.acceptableAnswers.join(', ')}
+                  {t('correctAnswer', { answers: r.acceptableAnswers.join(', ') })}
                 </p>
               )}
               {r.explanation && (
@@ -159,7 +160,7 @@ export function GameQuizPlayer({
           ))}
         </div>
         <Button onClick={onExit} className="w-full">
-          Done
+          {t('done')}
         </Button>
       </div>
     );
@@ -172,7 +173,7 @@ export function GameQuizPlayer({
     <div className="space-y-4 rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <span className="font-medium">
-          Question {index + 1} / {assessment.questions.length}
+          {t('questionProgress', { current: index + 1, total: assessment.questions.length })}
         </span>
         <span className="font-display font-bold tabular-nums">{Math.ceil(timeLeft)}s</span>
       </div>
@@ -210,9 +211,9 @@ export function GameQuizPlayer({
             autoFocus
             value={textAnswer}
             onChange={(e) => setTextAnswer(e.target.value)}
-            placeholder={question.type === 'NUMERIC' ? 'Number' : 'Your answer'}
+            placeholder={question.type === 'NUMERIC' ? t('numberPlaceholder') : t('answerPlaceholder')}
           />
-          <Button type="submit">Next</Button>
+          <Button type="submit">{t('next')}</Button>
         </form>
       )}
     </div>
