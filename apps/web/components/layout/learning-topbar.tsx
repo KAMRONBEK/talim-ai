@@ -75,16 +75,21 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
       <div className="flex items-center gap-2">
         <LanguageSwitcher compact />
         <ThemeToggle compact />
-        <Button
-          size="sm"
-          variant="outline"
-          type="button"
-          className="hidden touch-manipulation sm:inline-flex"
-          disabled={isPending}
-          onClick={openFilePicker}
-        >
-          {isPending ? t('uploading') : `+ ${t('upload')}`}
-        </Button>
+        {/* Only B2C individuals upload via this workspace. Tenant learners may
+            not upload at all, and tenant owners upload via /tenant/materials —
+            so the picker must not be offered to them here. */}
+        {user?.role === 'INDIVIDUAL' && (
+          <Button
+            size="sm"
+            variant="outline"
+            type="button"
+            className="hidden touch-manipulation sm:inline-flex"
+            disabled={isPending}
+            onClick={openFilePicker}
+          >
+            {isPending ? t('uploading') : `+ ${t('upload')}`}
+          </Button>
+        )}
         <Link
           href={`/content/${contentId}?panel=chat`}
           className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent"
