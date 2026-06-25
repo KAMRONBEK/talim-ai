@@ -135,8 +135,10 @@ jobs:
             export DOPPLER_TOKEN
             DOPPLER_RUN="doppler run --project talim-ai --config prd --"
 
-            # Pull :latest for the app tier (db/redis/nginx come from public registries).
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull
+            # Pull :latest for the app tier ONLY (api/web/admin from GHCR). db/redis/nginx
+            # are pinned public images already on the host — pulling them from Docker Hub
+            # every deploy intermittently fails on TLS timeouts and aborts the whole deploy.
+            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull api web admin
             # up recreates only containers whose image digest changed.
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --wait db redis api web admin
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --force-recreate --no-deps --wait nginx
