@@ -10,9 +10,9 @@
 | --- | --- | --- | --- |
 | ADMIN | `qa-admin@talim.local` | `QaAdmin-12345` | apps/admin (3001) |
 | TENANT_OWNER | `qa-owner@talim.local` | `QaOwner-12345` | Org "QA Academy", slug `qa-academy`, **join code `DUTDWE`**, plan TENANT_STARTER ACTIVE, seatLimit null |
-| TENANT_LEARNER | `teststudent1` / `teststudent1@students.talim.local` | (unknown — reset via owner) | email-less kid, active |
-| TENANT_LEARNER | `teststudent2` / `teststudent2@students.talim.local` | (unknown) | active |
-| INDIVIDUAL | (to create at /uz/register) | — | B2C solo |
+| TENANT_LEARNER | `teststudent1` / `teststudent1@students.talim.local` | `Student-12345` | email-less kid, active, QA Academy |
+| TENANT_LEARNER | `teststudent2` / `teststudent2@students.talim.local` | `5f3a7033-ee3` | active, QA Academy |
+| INDIVIDUAL | `qa-individual@talim.local` | `Individual-12345` | B2C solo, FREE plan (restored to INDIVIDUAL run 4b — see note) |
 
 > Tenant "QA Academy" has **0 content** at run start — owner must upload a PDF + add a YouTube link.
 
@@ -290,3 +290,13 @@
 **Still ⬜ for isolation:** US-LEARNER-01·EC9 (cross-*tenant* content via crafted id — logically covered by EC4's mechanism since the learner guard only returns content via an explicit assignment, but not proven live as no second tenant has content yet).
 
 **Test-data left on local dev DB (run 4):** none — `teststudent1` membership toggled off→on and **restored to active** (verified); read-only probes otherwise.
+
+---
+
+## Run 4b — "qa-individual & qa-owner both log in as tenant owner": investigated → **no bug** (test-data fix)
+
+**Report:** both accounts log in as TENANT_OWNER. **Investigation (every layer):** DB roles are two *distinct* owners (qa-owner→QA Academy, qa-individual→QA Tutor Org); no case-insensitive email collision (each `ILIKE` returns 1 row, so the run-3 `findFirst` change is safe); API login returns correct distinct identities + JWTs; UI logout→login across accounts shows the right org each time (no Zustand/React-Query leak); tenant data is correctly scoped (qa-individual saw its own empty org's 0 students/0 content, **not** QA Academy's). **Conclusion: not an auth/isolation bug** — `qa-individual` was *deliberately promoted* to owner in run 1's become-tutor→admin-approve test, so both genuinely being owners is correct behavior.
+
+**Fix (user-approved, destructive test-data cleanup):** demoted `qa-individual` back to **INDIVIDUAL**. The supported `applyAdminRoleChange` refuses to demote a sole owner (it requires reassigning ownership — by design, never deletes the org), so done as a one-off on local dev: deleted QA Tutor Org's tenant subscription + owner membership, deleted the tenant (cascades), set `role=INDIVIDUAL`, cleared the stale APPROVED `TutorRequest`, kept its existing FREE personal subscription. **Verified live:** `qa-individual@talim.local`/`Individual-12345` now logs into `/en/dashboard` (B2C), `role=INDIVIDUAL`, `tenantName=null`, `/content`+`/billing/me` 200, `/tenant/content` **403**. `qa-owner` + QA Academy (5 learners, 1 content) untouched; tenants now = {Smoke Tutoring, QA Academy}. **No code change** (no bug to fix). The QA suite has its B2C INDIVIDUAL account back.
+
+> Note: after the demote, qa-individual's *old* session token still said TENANT_OWNER until re-login — that's the already-logged **F11** (stale JWT after role change), not new.
