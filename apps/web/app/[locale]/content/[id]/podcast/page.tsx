@@ -174,6 +174,8 @@ function PodcastPageInner({ id }: { id: string }) {
 
   const episodes = podcast?.episodes ?? [];
   const generating = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
+  const failed = podcast?.status === 'FAILED';
+  const missingAudio = episodes.some((e) => !e.hasAudio);
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
@@ -183,7 +185,19 @@ function PodcastPageInner({ id }: { id: string }) {
           <p className="text-xs text-muted-foreground">
             {t('episodes', { count: episodes.length })}
             {generating && ` · ${t('podcastGenerating')}`}
+            {failed && ` · ${t('podcastFailed')}`}
           </p>
+          {!isLearner && (failed || (generating && missingAudio) || (!generating && missingAudio)) && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-3 w-full"
+              disabled={createPodcast.isPending}
+              onClick={() => createPodcast.mutate({ contentId: id, regenerate: true })}
+            >
+              {createPodcast.isPending ? t('podcastGenerating') : t('retryPodcast')}
+            </Button>
+          )}
         </div>
         <div className="space-y-1 p-3">
           {episodes.map((ep, i) => {

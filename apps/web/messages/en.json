@@ -212,7 +212,9 @@
     "deleteMaterialAria": "Delete {title}",
     "deleteCancel": "Cancel",
     "deleteConfirm": "Delete",
-    "deleting": "Deleting…"
+    "deleting": "Deleting…",
+    "podcastFailed": "Generation failed",
+    "retryPodcast": "Retry"
   },
   "chat": {
     "title": "AI Tutor",

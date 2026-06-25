@@ -2,9 +2,12 @@
 
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Loader2 } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { cn } from '@talim/ui';
 import type { ContentSection, SectionProgress } from '@talim/types';
+import { usePodcast } from '@/hooks/usePodcast';
+import { useVideo } from '@/hooks/useVideo';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
 
@@ -28,8 +31,12 @@ export function ContentSidebarBody({
   const t = useTranslations('sidebar');
   const tContent = useTranslations('content');
   const pathname = usePathname();
+  const { data: podcast } = usePodcast(contentId);
+  const { data: video } = useVideo(contentId);
+  const podcastBusy = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
+  const videoBusy = video?.status === 'GENERATING' || video?.status === 'PENDING';
 
-  const navLink = (href: string, label: string, icon: string) => {
+  const navLink = (href: string, label: string, icon: string, busy = false) => {
     const active = pathname === href;
     return (
       <Link
@@ -44,6 +51,7 @@ export function ContentSidebarBody({
       >
         <span>{icon}</span>
         <span>{label}</span>
+        {busy && <Loader2 className="ml-auto h-3.5 w-3.5 shrink-0 animate-spin text-primary" />}
       </Link>
     );
   };
@@ -92,8 +100,8 @@ export function ContentSidebarBody({
         <div className="space-y-0.5">
           {navLink(`/content/${contentId}`, t('read'), '📖')}
           {navLink(`/content/${contentId}?panel=chat`, tContent('askTutor'), '💬')}
-          {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
-          {navLink(`/content/${contentId}/video`, t('watchVideo'), '🎬')}
+          {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧', podcastBusy)}
+          {navLink(`/content/${contentId}/video`, t('watchVideo'), '🎬', videoBusy)}
         </div>
       </div>
     </div>

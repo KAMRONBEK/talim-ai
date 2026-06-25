@@ -212,7 +212,9 @@
     "deleteMaterialAria": "Удалить {title}",
     "deleteCancel": "Отмена",
     "deleteConfirm": "Удалить",
-    "deleting": "Удаление…"
+    "deleting": "Удаление…",
+    "podcastFailed": "Ошибка генерации",
+    "retryPodcast": "Повторить"
   },
   "chat": {
     "title": "ИИ-репетитор",

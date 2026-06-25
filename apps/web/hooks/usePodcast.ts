@@ -33,10 +33,16 @@ export function useCreatePodcast() {
   const base = useContentBase();
 
   return useMutation({
-    mutationFn: async ({ contentId }: { contentId: string }) => {
+    mutationFn: async ({
+      contentId,
+      regenerate,
+    }: {
+      contentId: string;
+      regenerate?: boolean;
+    }) => {
       const { data } = await api.post<{ podcast: { id: string; status: string } }>(
         `${base}/${contentId}/podcast`,
-        { locale },
+        { locale, ...(regenerate ? { regenerate: true } : {}) },
       );
       return data.podcast;
     },

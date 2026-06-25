@@ -212,7 +212,9 @@
     "deleteMaterialAria": "{title} ni o'chirish",
     "deleteCancel": "Bekor qilish",
     "deleteConfirm": "O'chirish",
-    "deleting": "O'chirilmoqda…"
+    "deleting": "O'chirilmoqda…",
+    "podcastFailed": "Yaratishda xatolik yuz berdi",
+    "retryPodcast": "Qayta urinish"
   },
   "chat": {
     "title": "AI O'qituvchi",

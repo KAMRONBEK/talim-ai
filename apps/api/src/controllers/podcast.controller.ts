@@ -12,6 +12,9 @@ import { assertCanAccessContent, assertCanGenerate } from '../services/contentAc
 
 const createPodcastSchema = z.object({
   locale: z.enum(['uz', 'en', 'ru']).optional(),
+  // Force a fresh generation even when the podcast is stuck GENERATING or already
+  // READY — backs the "retry" button for stuck/failed podcasts.
+  regenerate: z.boolean().optional(),
 });
 
 function formatEpisode(episode: {
@@ -73,10 +76,11 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
     where: { contentId_locale: { contentId, locale } },
   });
 
-  if (existing?.status === 'GENERATING') {
+  const force = body.regenerate === true;
+  if (existing?.status === 'GENERATING' && !force) {
     throw new AppError(409, 'Podcast generation already in progress');
   }
-  if (existing?.status === 'READY') {
+  if (existing?.status === 'READY' && !force) {
     res.json({
       podcast: {
         id: existing.id,
@@ -99,18 +103,20 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
       data: { contentId, locale, status: 'PENDING' },
     }));
 
-  if (existing && existing.status === 'FAILED') {
+  // FAILED retry, or a forced regenerate of a stuck/READY podcast: wipe old
+  // episodes + audio so the job rebuilds cleanly.
+  if (force || existing?.status === 'FAILED') {
     const episodes = await prisma.podcastEpisode.findMany({
-      where: { podcastId: existing.id },
+      where: { podcastId: podcast.id },
     });
     await Promise.all(
       episodes
         .filter((e) => e.audioPath)
         .map((e) => storageService.delete(e.audioPath!)),
     );
-    await prisma.podcastEpisode.deleteMany({ where: { podcastId: existing.id } });
+    await prisma.podcastEpisode.deleteMany({ where: { podcastId: podcast.id } });
     await prisma.podcast.update({
-      where: { id: existing.id },
+      where: { id: podcast.id },
       data: { status: 'PENDING' },
     });
   }
