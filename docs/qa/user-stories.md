@@ -158,6 +158,22 @@ classmates' and other orgs' content stay private.
 | EC4 | Learner own routes `/learner/assessments`, `/usage/me` | 200 (control) | ✅ | — | — |
 | EC5 | Learner upload via B2C workspace topbar | No upload control rendered (incl. hidden file input) | ✅ | — | F7+F13 fixed prior runs |
 
+### US-AUTH-03: Join-code enrolment + seat limits
+**As a** student, **I want** to self-enrol in my tutor's class with a join code, **so that** I get their materials — but never past the paid seat limit.
+**Routes/code:** `/[locale]/register` (+joinCode) · `POST /auth/join-class` · `joinTenantByCode` · `assertTenantQuota('STUDENT')`.
+**Priority:** P0 (billing boundary) · **Last verified:** 2026-06-25 on `4978bb3` (run 5)
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Valid join code at register | Enrols as TENANT_LEARNER in that org | ✅ | — | run 2 (qa-joincode) |
+| EC2 | Seat limit full — **enforcement** | Enrol blocked, 402 QUOTA_EXCEEDED (no over-enrol past paid seats) | ✅ | — | both `/register`+joinCode and `/join-class` call `assertTenantQuota('STUDENT')` |
+| EC3 | Seat-full **error message** | "Seat limit reached", not "Upload limit reached" | 🐛→✅ | F26 | `4978bb3` |
+| EC4 | Seat-full via **register** (account side-effect) | No orphaned account; clean failure | ❌ | F27 | — (structural, logged) |
+| EC5 | Already an active member re-joins | Idempotent (no extra seat consumed) | ✅ | — | code: returns early if `existing.active` |
+| EC6 | Owner tries to join own/other class | 400 "Tutors cannot join a class" | ✅ | — | code-verified guard |
+| EC7 | Reactivating an inactive membership | Consumes a seat (re-checks quota) | ✅ | — | code: `if (!existing?.active) assertTenantQuota` |
+
 ### US-IND-05: Podcast — generate + player
 **As an** individual, **I want** an AI voice podcast of my content with a working player, **so that** I can listen.
 **Routes/code:** `/[locale]/content/[id]/podcast` · `components/podcast/PodcastPlayer.tsx` · `generatePodcast` job.
@@ -220,7 +236,7 @@ classmates' and other orgs' content stay private.
 ### AUTH
 - [x] US-AUTH-01 Login · spec'd ✅
 - [ ] US-AUTH-02 Register (valid / duplicate email / weak pw / join-code self-enroll)
-- [ ] US-AUTH-03 Join-code enrol: valid / wrong / expired / **seat-limit full** / already-member
+- [x] US-AUTH-03 Join-code enrol: valid / wrong / **seat-limit full** / already-member · spec'd ✅ · seat-limit enforced (both paths); F26 fixed, F27 logged (run 5)
 - [ ] US-AUTH-04 Reset password (request → email/link → set → re-login)
 - [ ] US-AUTH-05 Logout (clears session, redirect, back-button can't re-enter)
 - [ ] US-AUTH-06 Become-tutor request → admin approval → role unlock
@@ -279,6 +295,8 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
 | F17 | S2 | US-AUTH-01 · EC7 | Email/username login was **case-sensitive** — any capitalization difference (mobile auto-capitalize) → "Invalid email or password", user locked out of a P0 flow. Register also stored email verbatim. Fixed: lowercase+dedupe email on register; case-insensitive (`mode:'insensitive'`) email & username match on login. | ✅ fixed | `59dc681` |
 | F18 | S2 | US-XCUT-01 · EC1 | **Uzbek relative timestamps rendered broken.** `Intl.RelativeTimeFormat('uz')` resolves to `uz` but ICU (V8/Node) ships **no Uzbek relative-time data**, so it emitted raw fallback `"-3 w"` / `"-2 d"` / `"-5 h"` (leading minus + English abbreviations) on **every content card timestamp** — shown to the **primary Uzbek audience** on the B2C dashboard + learning-history panel. en/ru correct. Fixed: format Uzbek manually (`"3 hafta oldin"`, `"hozirgina"`, future `"3 kundan keyin"`); keep `Intl` for en/ru. Verified live: card now reads "3 hafta oldin". | ✅ fixed | `b4ba377` |
+| F26 | S3 | US-AUTH-03 · EC | **Seat-limit-full reported as "Upload limit reached".** When a tenant's student seat limit is hit (owner adding a student, or a learner self-enrolling via join code), `subscription/tenant.ts` threw `QuotaExceededError('UPLOAD', …)` because `QuotaFeature` had no `STUDENT` member — so the API/UI showed the misleading "Upload limit reached" (`feature:UPLOAD`) for a full class. Added a `STUDENT` QuotaFeature + "Seat limit reached" message; threw it from the tenant STUDENT branch. Verified live: full-class register → 402 `{message:"Seat limit reached", feature:"STUDENT"}`. | ✅ fixed | `4978bb3` |
+| F27 | S2 | US-AUTH-03 · EC | **Orphaned account when register-with-join-code hits a full class.** `POST /auth/register` creates the user **before** calling `joinTenantByCode`, so when the class is seat-full the join throws 402 *after* the account already exists. The user sees "Seat limit reached" and assumes registration failed, but their account was created as a plain **INDIVIDUAL** (verified: login as the email succeeds, role INDIVIDUAL, tenantId null) — they're not in the class, and retrying the same email now hits "Email already registered". Fix is structural (validate the join code + seat quota *before* creating the user, or make create+join atomic) → logged, not fixed. | 🟡 logged | — |
 | F25 | S2 | US-ADMIN-02 · EC | **Admin user-detail credential fields silently browser-autofilled.** On `/users/[id]`, the "Password note (backfill)" and "Set new password" inputs had no `autoComplete` guard, so Chrome **silently pre-filled the operator's own saved login** (`admin@talim.local` / `Talim-655ed15296ab`) into them on every page load (verified `:autofill = true`); the "Recorded password" display even reflected the autofilled note, making it look like the *target* user had that password. Clicking "Set password"/"Save note" would then overwrite the target user's password with the admin's own — a credential-leak + silent password-change. Fixed: `autoComplete="off"` on the note, `autoComplete="new-password"` on the set-password input. Verified live: both fields now empty, `:autofill = false`. | ✅ fixed | `73e41c9` |
 | F23 | S3 | US-LEARNER-02 · EC | **GAME quiz player + leaderboard hardcoded English** (CLAUDE.md-flagged debt). `game-quiz-player.tsx` + `leaderboard-table.tsx` rendered ~15 English literals (intro meta, Start/Cancel, Scoring, Your score, result summary, Your answer/Correct, Done, Question N/M, Number/Your-answer placeholders, Next, No scores, pts) — shown to Uzbek students in the marquee GAME feature. Added `learner.game` namespace (uz/en/ru, ICU plural for ru points/questions) + `useTranslations`. **Verified live**: full game played in uz (intro "4 ta savol…", "1 / 4-savol", "SIZNING BALLINGIZ", "Tayyor", leaderboard "1510 ball"), 0 console errors. | ✅ fixed | `e57e4ef` |
 | F24 | S3 | US-XCUT-01 · EC7 | **Assessments pages largely un-i18n'd (hardcoded English).** The tenant assessments admin page (`/tenant/assessments`) and the learner assessments **list** page (`/learner/assessments`) render English on uz/ru: "Assessments", "Question banks", "Publish assessment", "Mode"/"Written"/"Game", "Max attempts", "Assign", "Results & leaderboard"; learner list "Quizzes & tasks", "Play", "Leaderboard", "Attempts: N/M · Latest X% · N pts", "Attempt limit reached", "Hide leaderboard". The GAME *player* + *leaderboard table* are now localized (F23); these surrounding list/admin pages are a larger remaining surface → logged, not fixed. | 🟡 logged | — |
