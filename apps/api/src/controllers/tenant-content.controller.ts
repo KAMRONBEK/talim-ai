@@ -1,14 +1,12 @@
 import type { Response } from 'express';
-import path from 'path';
 import { ContentType } from '@prisma/client';
-import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
 import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
-import { extractYoutubeTranscript, extractYoutubeVideoId } from '../services/youtube.service.js';
+import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
 import { captionAndStoreFigures } from '../services/figure.service.js';
@@ -16,16 +14,13 @@ import { ingestText } from '../services/ingest.service.js';
 import { autoGenerateSectionDecks } from '../services/slides.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertTenantOwnsContent } from '../services/contentAccess.service.js';
-
-const youtubeSchema = z.object({
-  url: z.string().url(),
-  title: z.string().min(1).optional(),
-});
-
-const ocrRegionSchema = z.object({
-  page: z.number().int().min(1),
-  image: z.string().min(1),
-});
+import {
+  youtubeSchema,
+  ocrRegionSchema,
+  reparseSchema,
+  sendContentFile,
+  loadOrBackfillTranscript,
+} from './content-shared.js';
 
 function formatContent(content: {
   id: string;
@@ -120,10 +115,6 @@ export async function createYoutubeContent(req: AuthenticatedRequest, res: Respo
   res.status(201).json({ content: formatContent(content) });
 }
 
-const reparseSchema = z.object({
-  pages: z.array(z.string().min(1)).min(1).max(30),
-});
-
 /** Re-read a tenant document via vision OCR of client-rasterized page images. */
 export async function reparseContent(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
@@ -165,6 +156,13 @@ export async function retryContent(req: AuthenticatedRequest, res: Response): Pr
   const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
   if (content.status !== 'FAILED') {
     throw new AppError(400, 'Only failed content can be retried');
+  }
+  // Match the B2C retry path: don't re-queue content whose source is gone — the
+  // ingest job would just fail again. Surface the actionable error up front.
+  if (content.type === 'YOUTUBE') {
+    if (!content.url) throw new AppError(400, 'YouTube URL missing');
+  } else if (!content.storagePath) {
+    throw new AppError(400, 'File no longer available — please upload again');
   }
 
   const updated = await prisma.content.update({
@@ -212,18 +210,7 @@ export async function getContentFile(req: AuthenticatedRequest, res: Response): 
   const content = await assertTenantOwnsContent(tenantId, getParam(req, 'id'));
   if (!content.storagePath) throw new AppError(404, 'File not available');
 
-  const buffer = await storageService.get(content.storagePath);
-  const ext = path.extname(content.storagePath).toLowerCase();
-  const contentType =
-    ext === '.pdf'
-      ? 'application/pdf'
-      : ext === '.ppt' || ext === '.pptx'
-        ? 'application/vnd.ms-powerpoint'
-        : 'application/octet-stream';
-
-  res.setHeader('Content-Type', contentType);
-  res.setHeader('Content-Disposition', `inline; filename="${path.basename(content.storagePath)}"`);
-  res.send(buffer);
+  await sendContentFile(res, content.storagePath);
 }
 
 export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -244,26 +231,6 @@ export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Pr
   res.json({ text, page: body.page });
 }
 
-function formatTranscriptSegment(segment: {
-  id: string;
-  contentId: string;
-  order: number;
-  startMs: number;
-  endMs: number;
-  text: string;
-  source: string;
-}) {
-  return {
-    id: segment.id,
-    contentId: segment.contentId,
-    order: segment.order,
-    startMs: segment.startMs,
-    endMs: segment.endMs,
-    text: segment.text,
-    source: segment.source,
-  };
-}
-
 export async function getContentTranscript(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const tenantId = requireTenantId(req);
@@ -271,43 +238,10 @@ export async function getContentTranscript(req: AuthenticatedRequest, res: Respo
   const content = await assertTenantOwnsContent(tenantId, contentId);
   if (content.type !== ContentType.YOUTUBE) throw new AppError(404, 'YouTube content not found');
 
-  let segments = await prisma.contentTranscriptSegment.findMany({
-    where: { contentId },
-    orderBy: { order: 'asc' },
+  const transcript = await loadOrBackfillTranscript(content, {
+    userId: req.user.userId,
+    tenantId,
+    metadata: { contentId },
   });
-
-  if (segments.length === 0 && content.url) {
-    const transcript = await extractYoutubeTranscript(content.url, {
-      title: content.title,
-      locale: env.DEFAULT_CONTENT_LOCALE,
-      usage: { userId: req.user.userId, tenantId, metadata: { contentId } },
-    });
-    await prisma.$transaction([
-      prisma.contentTranscriptSegment.deleteMany({ where: { contentId } }),
-      prisma.contentTranscriptSegment.createMany({
-        data: transcript.segments.map((segment) => ({
-          contentId,
-          order: segment.order,
-          startMs: segment.startMs,
-          endMs: segment.endMs,
-          text: segment.text,
-          source: segment.source,
-        })),
-      }),
-    ]);
-    segments = await prisma.contentTranscriptSegment.findMany({
-      where: { contentId },
-      orderBy: { order: 'asc' },
-    });
-  }
-
-  const lastSegment = segments.at(-1);
-  res.json({
-    transcript: {
-      contentId,
-      source: segments[0]?.source ?? null,
-      durationMs: lastSegment?.endMs ?? null,
-      segments: segments.map(formatTranscriptSegment),
-    },
-  });
+  res.json({ transcript });
 }
