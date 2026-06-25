@@ -70,10 +70,10 @@
 - [x] Assessments: question bank — reused "Physics TF Bank"; approve works (persists); **proper-Uzbek questions + explanations + LaTeX-ish, excellent** ✓; type controls present (Mixed/MC/TF/Written/Numeric). Stale-cache F5.
 - [~] Assessments: WRITTEN create — same publish flow as GAME (not separately published; deferred)
 - [x] Assessments: GAME create (Game mode → "Seconds per question"=20 timer ✓) + publish (4 Qs) + assign to Student One (DB-confirmed) ✓ — results panel stale (F5)
-- [ ] Progress: per-student + class update after submit
-- [ ] Billing (manual plan/seat view)
+- [x] Progress: per-student + class — renders (Avg quiz 65%, coverage 5%); **Student One "Active this week" + game submission reflected after submit** ✓; XSS name escaped + long-name wraps in dark ✓
+- [ ] Billing (manual plan/seat view) — not opened
 - [x] Dashboard onboarding checklist ✓
-- [ ] Settings
+- [~] Settings — not opened (learner settings pattern verified)
 
 ### TENANT_LEARNER
 - [ ] mustChangePassword banner + change (to test as qakid — fresh email-less kid)
@@ -119,7 +119,7 @@
 ### CROSS-CUTTING (apply per page)
 - [x] Locales: uz + ru on login + marketing landing — fully translated, **no raw keys, no English leak** ✓; en throughout
 - [x] Light + dark — dark tenant dashboard: good contrast, no invisible text, borders/surfaces correct ✓
-- [x] Breakpoints: mobile 390 landing — no overflow, nav collapses, marker-highlight intact ✓ (768 tablet not separately shot)
+- [x] Breakpoints: mobile 390 landing (no overflow, nav collapses, marker-highlight) ✓; tablet 768 tenant dashboard (no overflow, sidebar intact, 0 console errors) ✓; desktop 1440 throughout ✓
 - [x] Console & network: clean except (a) F3 summary 404s, (b) F11 stale-token 403s, (c) intentional 401/404/409 from error-path tests, (d) F9 admin SSR 500 (fixed). No hydration mismatch after F4 fix.
 - [~] Accessibility — visible focus rings + disabled-state + aria labels observed; not a full audit (tab-order/focus-trap not exhaustively walked)
 
