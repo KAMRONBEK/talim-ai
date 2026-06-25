@@ -54,7 +54,12 @@ export async function cancelContentJobs(contentId: string): Promise<void> {
     await Promise.all(
       jobs
         .filter((job) => (job.data as ContentScopedJobData).contentId === contentId)
-        .map((job) => job.remove()),
+        // An ACTIVE (currently-running) job is locked by its worker, so Bull
+        // rejects job.remove() with "Could not remove job …". That must not fail
+        // the caller (e.g. deleting a material that is still processing) — skip
+        // the locked job; it finishes on its own and its writes to the now-deleted
+        // content are handled by the processor. Waiting/delayed jobs are removed.
+        .map((job) => job.remove().catch(() => undefined)),
     );
   }
 }

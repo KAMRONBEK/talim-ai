@@ -101,7 +101,10 @@ export function registerProcessContentJob(): void {
         console.warn(`Auto slide generation failed for content ${contentId}:`, slideErr);
       }
     } catch (error) {
-      await prisma.content.update({
+      // updateMany (not update) so a content deleted mid-ingest — e.g. the user
+      // deleted a still-processing material — doesn't throw P2025 here and mask
+      // the real error.
+      await prisma.content.updateMany({
         where: { id: contentId },
         data: { status: ContentStatus.FAILED },
       });

@@ -86,7 +86,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
                 <ContentThumbnail content={content} />
               </Link>
               {(content.status === 'PENDING' || content.status === 'PROCESSING') && (
-                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-xl bg-background/70 backdrop-blur-sm">
+                <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-xl bg-background/70 backdrop-blur-sm">
                   <Loader2 className="h-6 w-6 animate-spin text-primary" />
                   <span className="text-xs font-medium text-muted-foreground">
                     {tContent('processing')}
