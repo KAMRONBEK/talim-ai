@@ -1,4 +1,8 @@
 {
+  "learnHub": {
+    "learn": "O'rganish",
+    "chat": "AI o'qituvchi"
+  },
   "becomeTutor": {
     "title": "O'qituvchi bo'lish",
     "desc": "Talimda o'z o'quvchilaringizga dars bering — materiallar va testlar yarating, natijalarni kuzating. Har bir so'rovni admin ko'rib chiqadi.",

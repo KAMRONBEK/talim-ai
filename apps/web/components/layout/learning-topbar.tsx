@@ -86,7 +86,7 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
           {isPending ? t('uploading') : `+ ${t('upload')}`}
         </Button>
         <Link
-          href={`/content/${contentId}/chat`}
+          href={`/content/${contentId}?panel=chat`}
           className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent"
         >
           💬 {t('aiTutor')}

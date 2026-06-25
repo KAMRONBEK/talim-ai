@@ -91,7 +91,7 @@ export function ContentSidebarBody({
         </p>
         <div className="space-y-0.5">
           {navLink(`/content/${contentId}`, t('read'), '📖')}
-          {navLink(`/content/${contentId}/chat`, tContent('askTutor'), '💬')}
+          {navLink(`/content/${contentId}?panel=chat`, tContent('askTutor'), '💬')}
           {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧')}
         </div>
       </div>

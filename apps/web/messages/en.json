@@ -1,4 +1,8 @@
 {
+  "learnHub": {
+    "learn": "Learn",
+    "chat": "AI Tutor"
+  },
   "becomeTutor": {
     "title": "Become a tutor",
     "desc": "Teach your own students on Talim — create materials and assessments and track their progress. An admin reviews each request.",
