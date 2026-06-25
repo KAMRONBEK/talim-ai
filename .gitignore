@@ -29,3 +29,5 @@ graphify-out/cost.json
 graphify-out/cache/
 # machine-specific working files (interpreter path, scan root, labels)
 graphify-out/.graphify_*
+# dated graph backups written by `graphify update`
+graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
