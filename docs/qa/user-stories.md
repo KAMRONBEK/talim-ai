@@ -66,7 +66,7 @@ does it work?" at any moment.
 ### US-AUTH-01: Email/password login
 **As a** registered user, **I want** to log in, **so that** I reach my role's workspace.
 **Routes/code:** `/[locale]/login` · `apps/api .../auth` · role redirect in web middleware.
-**Priority:** P0 · **Last verified:** 2026-06-25 on `claude/visual-qa`
+**Priority:** P0 · **Last verified:** 2026-06-25 on `59dc681` (run 3: EC4/6/7/10/11/12/14)
 
 **Acceptance criteria**
 - AC1 — Given valid credentials, When I submit, Then I land on my role's home
@@ -81,17 +81,17 @@ does it work?" at any moment.
 | EC1 | Wrong password | "Invalid email or password" (not "server unreachable") | 🐛→✅ | F2 | — |
 | EC2 | Unknown email | Same generic message as EC1 (no user enumeration) | ✅ | — | — |
 | EC3 | **Deactivated** account logs in | 403 → "account deactivated" message, not "server unreachable" | 🐛→✅ | F16 | `d5a13cc` |
-| EC4 | Email-less kid logs in by **username** | Resolves `username@students.talim.local`, succeeds | ⬜ | — | — |
+| EC4 | Email-less kid logs in by **username** | Resolves `username@students.talim.local`, succeeds | ✅ | — | `teststudent1`→/learner/dashboard, 200 |
 | EC5 | Kid with `mustChangePassword` | Forced to change-password screen before workspace | ⬜ | — | — |
-| EC6 | Email with leading/trailing spaces | Trimmed, login succeeds | ⬜ | — | — |
-| EC7 | Email differing only in case | Case-insensitive match, succeeds | ⬜ | — | — |
+| EC6 | Email with leading/trailing spaces | Trimmed, login succeeds | ✅ | — | `"  qa-owner@…  "` trims, logs in |
+| EC7 | Email/username differing only in case | Case-insensitive match, succeeds | 🐛→✅ | F17 | `59dc681` |
 | EC8 | Rate limit after N failed attempts | Clear "too many attempts" message, not a 500 | ⏭️ | — | needs 30 attempts; deferred |
 | EC9 | XSS/SQL payload in fields | Escaped, no execution, generic error | ✅ | — | XSS-escape verified |
-| EC10 | Very long inputs (10k chars) | Rejected gracefully, no crash | ⬜ | — | — |
-| EC11 | Locale switch then login | Lands in the chosen locale, not default | ⬜ | — | — |
-| EC12 | Logged-in user revisits `/login` | Redirected to their home, not shown the form | ⬜ | — | — |
+| EC10 | Very long inputs (10k chars) | Rejected gracefully, no crash | ✅ | — | 10k email/pw → 401, no 500 |
+| EC11 | Locale switch then login | Lands in the chosen locale, not default | ✅ | — | uz selected → /uz/tenant/dashboard |
+| EC12 | Logged-in user revisits `/login` | Redirected to their home, not shown the form | ✅ | — | bounces to /learner/dashboard (brief hydration flash) |
 | EC13 | Session expiry mid-session | Bounced to `/login`, return-after-login honoured | ⬜ | — | — |
-| EC14 | Submit with empty fields | Native required validation, no network call | ⬜ | — | — |
+| EC14 | Submit with empty fields | Native required validation, no network call | ✅ | — | native "Please fill out this field."; no /auth/login call |
 
 **Notes / open questions**
 - Register has **no confirm-password field** → password-mismatch EC is 🚫 N/A (logged in run 1).
@@ -183,4 +183,5 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | --- | --- | --- | --- | --- | --- |
 | F15 | S3 | US-OWNER-12 · EC1 | Material delete dialog + aria-label hardcoded Uzbek | ✅ fixed | `36f1f41` |
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
+| F17 | S2 | US-AUTH-01 · EC7 | Email/username login was **case-sensitive** — any capitalization difference (mobile auto-capitalize) → "Invalid email or password", user locked out of a P0 flow. Register also stored email verbatim. Fixed: lowercase+dedupe email on register; case-insensitive (`mode:'insensitive'`) email & username match on login. | ✅ fixed | `59dc681` |
 | … | | | *(backfill F1–F14 here)* | | |

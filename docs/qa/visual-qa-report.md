@@ -247,3 +247,24 @@
 **Final verify (run 2):** `@talim/types` build ✓, `@talim/web` typecheck ✓, `@talim/admin` typecheck ✓ — all clean. Prod `next build` intentionally NOT run (would corrupt the running dev server's `.next` — the F1 wedge).
 
 **Test-data left on local dev DB (run 2):** new student `qa-joincode@talim.local` / `JoinCode-12345` (TENANT_LEARNER, QA Academy); WRITTEN assessment "QA Written Quiz!" (4 Qs) published + assigned to Test Student One; Test Student Two **reactivated**, its password reset to `5f3a7033-ee3`; org name back to "QA Academy".
+
+---
+
+## Run 3 (resumed) — depth pass on US-AUTH-01 (login edge cases)
+
+**Env:** stack already up (api/web/admin healthy). Drove the real login form via Playwright MCP, logged-out state enforced by clearing `localStorage` between cases.
+
+**US-AUTH-01 edge cases closed (7):**
+- **EC14 — empty fields** ✅ — Sign in with both fields blank fires native `"Please fill out this field."` validation, stays on `/login`, **no `/auth/login` request** (verified via network log).
+- **EC4 — email-less kid by username** ✅ — `teststudent1` (no `@`) → `POST /auth/login` 200 + `/auth/me` 200 → `/en/learner/dashboard`. Email field is `type=text` (accepts username by design).
+- **EC12 — logged-in user revisits `/login`** ✅ — client-redirects to `/en/learner/dashboard`; login form not shown (brief hydration flash before the bounce — acceptable, same client-auth pattern as RoleGuard).
+- **EC7 — case-insensitive login** 🐛→✅ **(F17, fixed `59dc681`)** — `TESTSTUDENT1` and `QA-OWNER@TALIM.LOCAL` (correct password) both returned **"Invalid email or password"**; the *lowercase* form logged straight in, proving casing — not the password — was the cause. Login used a case-sensitive `findUnique`; register stored the email verbatim. Fixed (lowercase+dedupe on register, `mode:'insensitive'` email & username match on login). **Re-verified live:** `QA-OWNER@TALIM.LOCAL` now logs into `/tenant/dashboard`, 0 console errors; lowercase + username + 10k-input paths still behave.
+- **EC6 — leading/trailing whitespace** ✅ — `"  qa-owner@talim.local  "` trims and logs in (existing `.trim()` + the new normalization).
+- **EC11 — locale switch then login** ✅ — selecting **O'zbek** on `/login` then signing in lands on `/uz/tenant/dashboard` (chosen locale preserved, not default `/en`).
+- **EC10 — very long input (10k chars)** ✅ — 10k-char email + password → graceful **401**, no 500 crash.
+
+**Still ⬜ on US-AUTH-01:** EC5 (mustChangePassword forced screen), EC13 (session expiry mid-session → bounce + return-after-login, related to the logged F14).
+
+**Fix committed this run:** `59dc681` `fix(api): case-insensitive email/username login + normalize email on register` [F17]. `@talim/api` typecheck ✓.
+
+**Test-data left on local dev DB (run 3):** none new (login-only flows; no records created). Currently signed in as `qa-owner` (TENANT_OWNER) in `uz`/`en` during testing.
