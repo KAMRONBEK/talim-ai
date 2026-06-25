@@ -84,7 +84,7 @@ export interface AdminTenantUsageVsLimits extends AdminUsageVsLimits {
   subscription?: AdminUserSubscription | null;
 }
 
-export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE';
+export type QuotaFeature = 'UPLOAD' | 'GENERATION' | 'TUTOR_MESSAGE' | 'STUDENT';
 
 export interface QuotaExceededResponse {
   message: string;

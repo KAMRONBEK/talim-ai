@@ -16,6 +16,7 @@ const QUOTA_MESSAGES: Record<QuotaFeature, string> = {
   UPLOAD: 'Upload limit reached',
   GENERATION: 'Monthly AI generation limit reached',
   TUTOR_MESSAGE: 'Monthly tutor message limit reached',
+  STUDENT: 'Seat limit reached',
 };
 
 export class QuotaExceededError extends AppError {

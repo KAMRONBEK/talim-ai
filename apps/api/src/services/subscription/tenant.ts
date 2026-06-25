@@ -73,7 +73,7 @@ export async function assertTenantQuota(
     if (limit == null) return;
     const used = await getActiveStudentCount(tenantId);
     if (used >= limit) {
-      throw new QuotaExceededError('UPLOAD', used, limit, upgradePlanCode);
+      throw new QuotaExceededError('STUDENT', used, limit, upgradePlanCode);
     }
     return;
   }
