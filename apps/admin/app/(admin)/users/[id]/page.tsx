@@ -173,6 +173,10 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               <Input
                 id="passwordNote"
                 placeholder="Record a known password without changing login"
+                // Prevent the browser from silently autofilling the operator's own
+                // saved credentials into this field (clicking Save/Set would then
+                // overwrite the target user's note/password with the admin's).
+                autoComplete="off"
                 value={passwordNote}
                 onChange={(e) => setPasswordNote(e.target.value)}
               />
@@ -182,6 +186,9 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               <Input
                 id="customPassword"
                 type="password"
+                // "new-password" reliably stops Chrome from silently filling the
+                // operator's saved login password into this set-password field.
+                autoComplete="new-password"
                 placeholder="Minimum 8 characters"
                 value={customPassword}
                 onChange={(e) => setCustomPassword(e.target.value)}
