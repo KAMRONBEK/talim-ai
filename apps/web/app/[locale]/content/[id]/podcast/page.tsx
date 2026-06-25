@@ -24,6 +24,7 @@ function PodcastPageInner({ id }: { id: string }) {
   const tCommon = useTranslations('common');
   const { data: content } = useContent(id);
   const isLearner = useAuthStore((s) => s.user?.role) === 'TENANT_LEARNER';
+  const isTenantOwner = useAuthStore((s) => s.user?.role) === 'TENANT_OWNER';
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
   const { data: progressList = [] } = usePodcastProgress(id);
@@ -112,7 +113,9 @@ function PodcastPageInner({ id }: { id: string }) {
     lastSavedRef.current = 0;
     pendingProgressRef.current = null;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-    fetchAuthenticatedBlob(`/content/${id}/podcast/episodes/${audioEpisodeId}/audio`)
+    fetchAuthenticatedBlob(
+      `${isTenantOwner ? '/tenant/content' : '/content'}/${id}/podcast/episodes/${audioEpisodeId}/audio`,
+    )
       .then((url) => {
         if (cancelled) {
           URL.revokeObjectURL(url);
@@ -129,7 +132,7 @@ function PodcastPageInner({ id }: { id: string }) {
       flushProgressRef.current();
       if (revoked) URL.revokeObjectURL(revoked);
     };
-  }, [audioEpisodeId, id]);
+  }, [audioEpisodeId, id, isTenantOwner]);
 
   useEffect(() => {
     const ready = podcast?.episodes.filter((e) => e.hasAudio) ?? [];

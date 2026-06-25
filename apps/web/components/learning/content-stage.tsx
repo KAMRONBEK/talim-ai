@@ -6,6 +6,8 @@ import { cn } from '@talim/ui';
 import type { Content } from '@talim/types';
 import { useGenerateSummary } from '@/hooks/useQuiz';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
+import { useAuthStore } from '@/store/useAuthStore';
+import { contentEndpoints } from '@/lib/api/endpoints';
 import { SummaryText } from '@/components/learning/summary-text';
 import { SectionReader } from '@/components/learning/section-reader';
 import { PdfViewer } from '@/components/learning/PdfViewerLazy';
@@ -61,11 +63,12 @@ export function ContentStage({
   const [selectionHint, setSelectionHint] = useState<string | null>(null);
 
   const isPdf = content.type === 'PDF' || content.type === 'SLIDE';
+  const isTenantOwner = useAuthStore((s) => s.user?.role) === 'TENANT_OWNER';
 
   useEffect(() => {
     if (!isPdf || !content.storagePath) return;
     let revoked: string | null = null;
-    fetchAuthenticatedBlob(`/content/${contentId}/file`)
+    fetchAuthenticatedBlob(contentEndpoints.file(contentId, isTenantOwner))
       .then((url) => {
         revoked = url;
         setPdfUrl(url);
@@ -74,7 +77,7 @@ export function ContentStage({
     return () => {
       if (revoked) URL.revokeObjectURL(revoked);
     };
-  }, [isPdf, content.storagePath, contentId]);
+  }, [isPdf, content.storagePath, contentId, isTenantOwner]);
 
   const loadSummary = useCallback(async () => {
     if (summary || generateSummary.isPending) return;
