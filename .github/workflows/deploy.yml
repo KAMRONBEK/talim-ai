@@ -138,7 +138,14 @@ jobs:
             # Pull :latest for the app tier ONLY (api/web/admin from GHCR). db/redis/nginx
             # are pinned public images already on the host — pulling them from Docker Hub
             # every deploy intermittently fails on TLS timeouts and aborts the whole deploy.
-            ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull api web admin
+            # Retry: a single transient GHCR TLS-handshake timeout on one image must not
+            # abort an otherwise-healthy deploy.
+            for attempt in 1 2 3; do
+              if ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull api web admin; then break; fi
+              if [ "${attempt}" = 3 ]; then echo "image pull failed after 3 attempts"; exit 1; fi
+              echo "pull attempt ${attempt} failed (transient registry error); retrying in 10s..."
+              sleep 10
+            done
             # up recreates only containers whose image digest changed.
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --wait db redis api web admin
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --force-recreate --no-deps --wait nginx
