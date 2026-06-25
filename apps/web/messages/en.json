@@ -162,6 +162,7 @@
     "episodeCompleted": "Completed",
     "selectEpisode": "Select an episode",
     "audioNotReady": "Audio is not ready for this episode yet.",
+    "playbackSpeed": "Speed:",
     "backToContent": "Back to content",
     "podcastNeedsReady": "Content must be ready before creating a podcast.",
     "fullSummary": "Full summary",

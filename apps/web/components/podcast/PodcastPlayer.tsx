@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 
 function formatTime(sec: number): string {
@@ -29,6 +30,7 @@ export function PodcastPlayer({
   initialPositionSec = 0,
   onProgress,
 }: PodcastPlayerProps) {
+  const t = useTranslations('content');
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
   const [current, setCurrent] = useState(0);
@@ -133,7 +135,7 @@ export function PodcastPlayer({
         </Button>
       </div>
       <div className="flex items-center justify-center gap-2 text-sm">
-        <span className="text-muted-foreground">Tezlik:</span>
+        <span className="text-muted-foreground">{t('playbackSpeed')}</span>
         {[0.75, 1, 1.25, 1.5].map((rate) => (
           <button
             key={rate}

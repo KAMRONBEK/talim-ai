@@ -162,6 +162,7 @@
     "episodeCompleted": "Завершено",
     "selectEpisode": "Выберите эпизод",
     "audioNotReady": "Аудио для этого эпизода ещё не готово.",
+    "playbackSpeed": "Скорость:",
     "backToContent": "К материалу",
     "podcastNeedsReady": "Материал должен быть готов, чтобы создать подкаст.",
     "fullSummary": "Полный конспект",
