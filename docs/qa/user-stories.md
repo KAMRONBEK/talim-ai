@@ -291,6 +291,7 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
+| F30 | S3 | US-IND-05 · EC | **Podcast per-episode regenerate (+ overall retry) gave no error feedback.** The new per-episode "Qayta urinish" button (and the stuck/failed retry button) called the regenerate/create mutation but never surfaced its rejection — a 402 quota (FREE plan, podcast quota 1/1 already spent by the bulk generation) returned silently, so the button looked like it did nothing. Added `classifyGenerationError` → visible header message ("Podkast cheklovi tugadi {used}/{limit}" for quota; plan/generic otherwise). Verified via Playwright: FREE regenerate → 402 → "Podkast cheklovi tugadi (1/1)." | ✅ fixed | `b861405` |
 | F15 | S3 | US-OWNER-12 · EC1 | Material delete dialog + aria-label hardcoded Uzbek | ✅ fixed | `36f1f41` |
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
 | F17 | S2 | US-AUTH-01 · EC7 | Email/username login was **case-sensitive** — any capitalization difference (mobile auto-capitalize) → "Invalid email or password", user locked out of a P0 flow. Register also stored email verbatim. Fixed: lowercase+dedupe email on register; case-insensitive (`mode:'insensitive'`) email & username match on login. | ✅ fixed | `59dc681` |

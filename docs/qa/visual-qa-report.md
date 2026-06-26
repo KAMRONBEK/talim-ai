@@ -362,3 +362,22 @@
 **Test data left on local dev DB (run 5):** saved summary + practice quiz + 2-episode podcast on qa-individual's PDF; QA Game Quiz assigned to QA JoinCode Student (attempt 1/1 consumed). QA Academy seat limit + the two orphaned seat-test accounts were **cleaned up** (reverted/deleted).
 
 **Test-data left on local dev DB (run 5):** generated a saved summary + practice quiz `cmqtiyt5w…` (submitted once, 50%) + a **podcast (2 episodes, TTS audio)** on qa-individual's PDF — harmless, regenerable. One AI-tutor chat message on the PDF.
+
+---
+
+## Run 6 — 2026-06-26 (overnight, unattended) · session feature verification
+
+**Branch:** `claude/visual-qa` (ff'd to `5107853`). **Scope:** the AI-media "per-section parts" + tutor/audio fixes shipped to `main` this session, verified locally where local data allows (prod-only items noted).
+
+**Verified (local, Playwright, as qa-individual on the 4-section "Ven diagrammasi" PDF):**
+- ✅ **Per-section VIDEO parts** — header "1-qism · <section>", a parts bar `1-qism … 4-qism`; clicking 3-qism re-headers ("3-qism · Masalalarni davom ettirish…") with its own empty state ("3-qism uchun video yoʻq" + "Bu qismni yaratish"). Proper Uzbek throughout, 0 console errors.
+- ✅ **Sidebar generating indicator** — while a podcast generates, the 🎧 "Podkastni tinglang" sidebar tab shows a spinner; the 🎬 video tab does not (correct).
+- ✅ **Podcast per-section (4 episodes = 4 sections), per-episode regenerate buttons (×4), playback** — generated to READY (uz, 4 episodes, all audio); active episode plays (`blob:` src, `readyState 4`, 108s). Confirmed exactly 4 episodes (the "8" was uz+en podcast rows merged in a GROUP BY, not duplication).
+- 🐛→✅ **F30** — per-episode regenerate (+ overall retry) gave **no feedback** on a 402 quota; the request fired correctly (`POST …/regenerate → 402`, FREE podcast quota 1/1 spent by the bulk run) but the button looked dead. Fixed (`b861405`): visible message "Podkast cheklovi tugadi (1/1)." Verified live.
+
+**Verified on PROD during development (not re-testable locally — local DB has thin data: Qur'on stub = 1 chunk, no large scans, no owner-owned generated podcasts):**
+- ✅ **Role-aware podcast/PDF audio for TENANT_OWNER** — `GET /content/.../audio → 403`, `GET /tenant/content/.../audio → 200 audio/mpeg`. (Local INDIVIDUAL audio plays — the role-aware change didn't regress the `/content` path.)
+- ✅ **Cross-script Latin↔Cyrillic tutor retrieval** — for "shin nuqtasining shakillanishini", OLD retrieval missed the Cyrillic Shin section (FALSE), NEW retrieval surfaces it (TRUE); deployed `884f73a`.
+- ✅ **Mistral-OCR batching** (>30MB base64) — 27 MB / 210-page scan → 2 batches, 166k chars, ~48s; deployed `5c9d563`.
+
+**Typechecks:** `@talim/api` + `@talim/web` pass. **Findings:** 1 logged + fixed (F30). **Deferred:** deeper cross-script + role-audio re-test needs richer local seed data (the rich Cyrillic content + owner-owned generated podcasts live only on prod).
