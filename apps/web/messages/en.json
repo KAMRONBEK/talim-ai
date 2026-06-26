@@ -214,7 +214,10 @@
     "deleteConfirm": "Delete",
     "deleting": "Deleting…",
     "podcastFailed": "Generation failed",
-    "retryPodcast": "Retry"
+    "retryPodcast": "Retry",
+    "podcastLimitReached": "Podcast limit reached ({used}/{limit}).",
+    "podcastLimitGeneric": "Your plan does not include podcast generation.",
+    "podcastRetryError": "Could not regenerate. Try again later."
   },
   "chat": {
     "title": "AI Tutor",

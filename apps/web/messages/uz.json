@@ -214,7 +214,10 @@
     "deleteConfirm": "O'chirish",
     "deleting": "O'chirilmoqda…",
     "podcastFailed": "Yaratishda xatolik yuz berdi",
-    "retryPodcast": "Qayta urinish"
+    "retryPodcast": "Qayta urinish",
+    "podcastLimitReached": "Podkast cheklovi tugadi ({used}/{limit}).",
+    "podcastLimitGeneric": "Rejangizda podkast yaratish mavjud emas.",
+    "podcastRetryError": "Qayta yaratib boʻlmadi. Keyinroq urinib koʻring."
   },
   "chat": {
     "title": "AI O'qituvchi",

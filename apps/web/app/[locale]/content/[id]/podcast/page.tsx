@@ -10,6 +10,7 @@ import { RefreshCw } from 'lucide-react';
 import { usePodcast, useCreatePodcast, useRegenerateEpisode } from '@/hooks/usePodcast';
 import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
+import { classifyGenerationError } from '@/lib/generation-error';
 import { PodcastPlayer } from '@/components/podcast/PodcastPlayer';
 import type { PodcastEpisode } from '@talim/types';
 
@@ -178,6 +179,21 @@ function PodcastPageInner({ id }: { id: string }) {
   const generating = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
   const failed = podcast?.status === 'FAILED';
   const missingAudio = episodes.some((e) => !e.hasAudio);
+  // Surface create/regenerate errors (e.g. 402 quota) — otherwise the buttons
+  // silently do nothing.
+  const genError = regenerateEpisode.isError
+    ? regenerateEpisode.error
+    : createPodcast.isError
+      ? createPodcast.error
+      : null;
+  const genErrInfo = genError ? classifyGenerationError(genError) : null;
+  const genErrMsg = !genErrInfo
+    ? null
+    : genErrInfo.kind === 'quota'
+      ? t('podcastLimitReached', { used: genErrInfo.used ?? 0, limit: genErrInfo.limit ?? 0 })
+      : genErrInfo.kind === 'error'
+        ? t('podcastRetryError')
+        : t('podcastLimitGeneric');
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
@@ -200,6 +216,7 @@ function PodcastPageInner({ id }: { id: string }) {
               {createPodcast.isPending ? t('podcastGenerating') : t('retryPodcast')}
             </Button>
           )}
+          {genErrMsg && <p className="mt-2 text-xs text-destructive">{genErrMsg}</p>}
         </div>
         <div className="space-y-1 p-3">
           {episodes.map((ep, i) => {

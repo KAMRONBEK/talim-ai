@@ -214,7 +214,10 @@
     "deleteConfirm": "Удалить",
     "deleting": "Удаление…",
     "podcastFailed": "Ошибка генерации",
-    "retryPodcast": "Повторить"
+    "retryPodcast": "Повторить",
+    "podcastLimitReached": "Достигнут лимит подкастов ({used}/{limit}).",
+    "podcastLimitGeneric": "Ваш план не включает создание подкастов.",
+    "podcastRetryError": "Не удалось пересоздать. Попробуйте позже."
   },
   "chat": {
     "title": "ИИ-репетитор",
