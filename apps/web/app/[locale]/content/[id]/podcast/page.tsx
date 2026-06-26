@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Loader2 } from 'lucide-react';
 import { usePodcast, useCreatePodcast, useRegenerateEpisode } from '@/hooks/usePodcast';
 import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
@@ -221,6 +221,11 @@ function PodcastPageInner({ id }: { id: string }) {
         <div className="space-y-1 p-3">
           {episodes.map((ep, i) => {
             const epProgress = progressMap.get(ep.id);
+            // This specific episode is being produced: no audio yet while the
+            // podcast is generating, or it's the one being manually regenerated.
+            const epRegenPending =
+              regenerateEpisode.isPending && regenerateEpisode.variables?.episodeId === ep.id;
+            const epBusy = (!ep.hasAudio && generating) || epRegenPending;
             return (
               <div
                 key={ep.id}
@@ -250,9 +255,11 @@ function PodcastPageInner({ id }: { id: string }) {
                       {epProgress?.completed && ` · ${t('episodeCompleted')}`}
                     </p>
                   </div>
-                  {ep.hasAudio && (
+                  {epBusy ? (
+                    <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
+                  ) : ep.hasAudio ? (
                     <span className="shrink-0 text-[11px] font-medium text-success">{t('episodeReady')}</span>
-                  )}
+                  ) : null}
                 </button>
                 {!isLearner && (
                   <button
@@ -260,16 +267,10 @@ function PodcastPageInner({ id }: { id: string }) {
                     title={t('retryPodcast')}
                     aria-label={t('retryPodcast')}
                     onClick={() => regenerateEpisode.mutate({ episodeId: ep.id })}
-                    disabled={regenerateEpisode.isPending}
+                    disabled={regenerateEpisode.isPending || epBusy}
                     className="shrink-0 rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-50"
                   >
-                    <RefreshCw
-                      className={`h-3.5 w-3.5 ${
-                        regenerateEpisode.isPending && regenerateEpisode.variables?.episodeId === ep.id
-                          ? 'animate-spin'
-                          : ''
-                      }`}
-                    />
+                    <RefreshCw className="h-3.5 w-3.5" />
                   </button>
                 )}
               </div>
