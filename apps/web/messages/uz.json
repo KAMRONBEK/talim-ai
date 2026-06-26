@@ -560,7 +560,11 @@
     "notAvailableLearner": "O‘qituvchingiz hali bu material uchun video yaratmagan.",
     "error": "Videoni yaratib bo‘lmadi. Yana urinib ko‘ring.",
     "limitReached": "AI video limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun tarifni yangilang yoki administratoringizga murojaat qiling.",
-    "limitReachedGeneric": "AI video hozircha tarifingizda mavjud emas. Iltimos, tarifni yangilang yoki administratoringizga murojaat qiling."
+    "limitReachedGeneric": "AI video hozircha tarifingizda mavjud emas. Iltimos, tarifni yangilang yoki administratoringizga murojaat qiling.",
+    "part": "{n}-qism",
+    "partEmptyTitle": "{n}-qism uchun video yoʻq",
+    "partEmptyBody": "Shu boʻlim uchun videoni yarating. Har bir qism alohida yaratiladi.",
+    "generatePart": "Bu qismni yaratish"
   },
   "landing": {
     "nav": {

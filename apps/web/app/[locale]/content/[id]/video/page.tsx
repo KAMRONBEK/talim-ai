@@ -1,11 +1,12 @@
 'use client';
 
-import { use, Suspense, useCallback } from 'react';
+import { use, Suspense, useCallback, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, RefreshCw, Sparkles } from 'lucide-react';
-import { Button } from '@talim/ui';
+import { Button, cn } from '@talim/ui';
 import { Link } from '@/i18n/navigation';
 import { useContent } from '@/hooks/useContent';
+import { useSections } from '@/hooks/useSections';
 import { useSlides } from '@/hooks/useSlides';
 import { useVideo, useGenerateVideo } from '@/hooks/useVideo';
 import { useContentBase } from '@/hooks/useContentBase';
@@ -20,9 +21,18 @@ function VideoInner({ id }: { id: string }) {
   const isLearner = useAuthStore((s) => s.user?.role === 'TENANT_LEARNER');
   const base = useContentBase();
   const { data: content } = useContent(id);
-  const { data: deckRow } = useSlides(id);
-  const { data: video, isLoading } = useVideo(id);
-  const generate = useGenerateVideo(id);
+  const { data: sections = [] } = useSections(id);
+  // Each section is a video "part", generated on demand (a 200-page book can't fit
+  // in one ~22-slide video). Default to the first section; the parts bar switches.
+  const [activeSectionId, setActiveSectionId] = useState<string | undefined>(undefined);
+  const sectionId = activeSectionId ?? sections[0]?.id;
+  const activeIndex = Math.max(0, sections.findIndex((s) => s.id === sectionId));
+  const activeSection = sections[activeIndex];
+  const hasParts = sections.length > 1;
+
+  const { data: deckRow } = useSlides(id, sectionId);
+  const { data: video, isLoading } = useVideo(id, sectionId);
+  const generate = useGenerateVideo(id, sectionId);
 
   const deck = deckRow?.deck ?? null;
   const segments = video?.segments ?? null;
@@ -41,17 +51,19 @@ function VideoInner({ id }: { id: string }) {
       ? t('limitReached', { used: errInfo.used ?? 0, limit: errInfo.limit ?? 0 })
       : t('limitReachedGeneric');
 
-  // Pin the request to the video's own locale. fetchAuthenticatedBlob uses a raw
-  // fetch (not the axios client), so it doesn't send our locale param — without
-  // this the server resolves the browser's Accept-Language (e.g. en) and 404s
-  // because the video/segment audio is looked up per locale (the video is uz).
+  // Pin the request to the video's own locale AND part (sectionId). fetchAuthenticatedBlob
+  // uses a raw fetch (not the axios client) so it doesn't send our locale param, and the
+  // segment audio is resolved per (locale, scopeKey=sectionId).
   const audioLocale = video?.locale;
   const loadAudioUrl = useCallback(
-    (index: number) =>
-      fetchAuthenticatedBlob(
-        `${base}/${id}/video/segments/${index}/audio${audioLocale ? `?locale=${audioLocale}` : ''}`,
-      ),
-    [base, id, audioLocale],
+    (index: number) => {
+      const qs = new URLSearchParams();
+      if (audioLocale) qs.set('locale', audioLocale);
+      if (sectionId) qs.set('sectionId', sectionId);
+      const q = qs.toString();
+      return fetchAuthenticatedBlob(`${base}/${id}/video/segments/${index}/audio${q ? `?${q}` : ''}`);
+    },
+    [base, id, audioLocale, sectionId],
   );
 
   return (
@@ -66,7 +78,11 @@ function VideoInner({ id }: { id: string }) {
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">{content?.title ?? tCommon('loading')}</p>
+            <p className="truncate text-sm font-semibold">
+              {hasParts && activeSection
+                ? `${t('part', { n: activeIndex + 1 })} · ${activeSection.title}`
+                : (content?.title ?? tCommon('loading'))}
+            </p>
             <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
@@ -83,9 +99,32 @@ function VideoInner({ id }: { id: string }) {
         )}
       </header>
 
+      {/* Per-section parts selector — each section is a video "part", generated on demand. */}
+      {hasParts && (
+        <div className="flex shrink-0 gap-2 overflow-x-auto border-b border-border/70 bg-card/40 px-4 py-2">
+          {sections.map((s, i) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => setActiveSectionId(s.id)}
+              title={s.title}
+              className={cn(
+                'shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors',
+                s.id === sectionId
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-input text-muted-foreground hover:text-foreground',
+              )}
+            >
+              {t('part', { n: i + 1 })}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="relative flex min-h-0 flex-1 flex-col">
         {ready && deck && segments ? (
           <NarratedVideoPlayer
+            key={sectionId}
             deck={deck}
             segments={segments}
             loadAudioUrl={loadAudioUrl}
@@ -111,9 +150,9 @@ function VideoInner({ id }: { id: string }) {
           <CenteredMessage>{limitMessage}</CenteredMessage>
         ) : (
           <EmptyState
-            title={t('emptyTitle')}
-            body={t('emptyBody')}
-            cta={t('generate')}
+            title={hasParts ? t('partEmptyTitle', { n: activeIndex + 1 }) : t('emptyTitle')}
+            body={hasParts ? t('partEmptyBody') : t('emptyBody')}
+            cta={hasParts ? t('generatePart') : t('generate')}
             onGenerate={() => generate.mutate({})}
             error={generate.isError ? t('error') : null}
           />

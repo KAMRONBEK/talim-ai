@@ -560,7 +560,11 @@
     "notAvailableLearner": "Your tutor hasn't created a video for this material yet.",
     "error": "Couldn't generate the video. Please try again.",
     "limitReached": "You've reached your AI video limit ({used}/{limit} this month). Upgrade or contact your admin to raise it.",
-    "limitReachedGeneric": "AI video isn't available on your current plan. Please upgrade or contact your admin."
+    "limitReachedGeneric": "AI video isn't available on your current plan. Please upgrade or contact your admin.",
+    "part": "Part {n}",
+    "partEmptyTitle": "No video for part {n}",
+    "partEmptyBody": "Generate the video for this section. Each part is generated separately.",
+    "generatePart": "Generate this part"
   },
   "landing": {
     "nav": {
