@@ -6,7 +6,8 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
-import { usePodcast, useCreatePodcast } from '@/hooks/usePodcast';
+import { RefreshCw } from 'lucide-react';
+import { usePodcast, useCreatePodcast, useRegenerateEpisode } from '@/hooks/usePodcast';
 import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
 import { PodcastPlayer } from '@/components/podcast/PodcastPlayer';
@@ -27,6 +28,7 @@ function PodcastPageInner({ id }: { id: string }) {
   const isTenantOwner = useAuthStore((s) => s.user?.role) === 'TENANT_OWNER';
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
+  const regenerateEpisode = useRegenerateEpisode(id);
   const { data: progressList = [] } = usePodcastProgress(id);
   const updateProgress = useUpdatePodcastProgress(id);
   const [activeEpisode, setActiveEpisode] = useState<PodcastEpisode | null>(null);
@@ -203,35 +205,57 @@ function PodcastPageInner({ id }: { id: string }) {
           {episodes.map((ep, i) => {
             const epProgress = progressMap.get(ep.id);
             return (
-              <button
+              <div
                 key={ep.id}
-                type="button"
-                onClick={() => setActiveEpisode(ep)}
-                className={`flex w-full items-center gap-3 rounded-[10px] p-3 text-left text-sm transition-colors ${
+                className={`flex items-center gap-1 rounded-[10px] pr-1 transition-colors ${
                   activeEpisode?.id === ep.id ? 'bg-accent' : 'hover:bg-muted/60'
                 }`}
               >
-                <span
-                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${
-                    activeEpisode?.id === ep.id
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground'
-                  }`}
+                <button
+                  type="button"
+                  onClick={() => setActiveEpisode(ep)}
+                  className="flex min-w-0 flex-1 items-center gap-3 p-3 text-left text-sm"
                 >
-                  {i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium">{ep.title}</p>
-                  <p className="text-[11px] text-muted-foreground">
-                    {formatDuration(ep.durationSec)}
-                    {!ep.hasAudio && ` · ${t('episodePreparing')}`}
-                    {epProgress?.completed && ` · ${t('episodeCompleted')}`}
-                  </p>
-                </div>
-                {ep.hasAudio && (
-                  <span className="shrink-0 text-[11px] font-medium text-success">{t('episodeReady')}</span>
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold ${
+                      activeEpisode?.id === ep.id
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
+                    {i + 1}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium">{ep.title}</p>
+                    <p className="text-[11px] text-muted-foreground">
+                      {formatDuration(ep.durationSec)}
+                      {!ep.hasAudio && ` · ${t('episodePreparing')}`}
+                      {epProgress?.completed && ` · ${t('episodeCompleted')}`}
+                    </p>
+                  </div>
+                  {ep.hasAudio && (
+                    <span className="shrink-0 text-[11px] font-medium text-success">{t('episodeReady')}</span>
+                  )}
+                </button>
+                {!isLearner && (
+                  <button
+                    type="button"
+                    title={t('retryPodcast')}
+                    aria-label={t('retryPodcast')}
+                    onClick={() => regenerateEpisode.mutate({ episodeId: ep.id })}
+                    disabled={regenerateEpisode.isPending}
+                    className="shrink-0 rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-50"
+                  >
+                    <RefreshCw
+                      className={`h-3.5 w-3.5 ${
+                        regenerateEpisode.isPending && regenerateEpisode.variables?.episodeId === ep.id
+                          ? 'animate-spin'
+                          : ''
+                      }`}
+                    />
+                  </button>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>

@@ -51,3 +51,23 @@ export function useCreatePodcast() {
     },
   });
 }
+
+/** Manual per-section trigger: (re)generate a single episode. */
+export function useRegenerateEpisode(contentId: string) {
+  const queryClient = useQueryClient();
+  const locale = useLocale() as AppLocale;
+  const base = useContentBase();
+
+  return useMutation({
+    mutationFn: async ({ episodeId }: { episodeId: string }) => {
+      const { data } = await api.post<{ podcast: { id: string; status: string } }>(
+        `${base}/${contentId}/podcast/episodes/${episodeId}/regenerate`,
+        { locale },
+      );
+      return data.podcast;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['podcast', contentId, locale] });
+    },
+  });
+}

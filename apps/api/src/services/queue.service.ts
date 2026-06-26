@@ -27,6 +27,8 @@ export interface GeneratePodcastJobData {
   contentId: string;
   podcastId: string;
   locale?: string;
+  /** When set, (re)generate ONLY this one episode (manual per-section trigger). */
+  episodeId?: string;
 }
 
 export interface GenerateVideoJobData {

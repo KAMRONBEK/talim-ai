@@ -132,6 +132,40 @@ export async function createPodcast(req: AuthenticatedRequest, res: Response): P
   });
 }
 
+// Manual per-section trigger: (re)generate a single episode's script + audio,
+// leaving the other episodes untouched.
+export async function regenerateEpisode(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const contentId = getParam(req, 'id');
+  const episodeId = getParam(req, 'episodeId');
+  assertCanGenerate(req.user);
+  await assertCanAccessContent(req.user, contentId, { requireReady: true });
+  const locale = resolveLocale(req);
+
+  const podcast = await prisma.podcast.findUnique({
+    where: { contentId_locale: { contentId, locale } },
+  });
+  if (!podcast) throw new AppError(404, 'Podcast not found');
+  const episode = await prisma.podcastEpisode.findFirst({
+    where: { id: episodeId, podcastId: podcast.id },
+  });
+  if (!episode) throw new AppError(404, 'Episode not found');
+
+  await assertQuota(req.user.userId, 'PODCAST', {
+    role: req.user.role,
+    tenantId: req.user.tenantId,
+  });
+
+  await podcastQueue.add({ contentId, podcastId: podcast.id, locale, episodeId });
+  await prisma.podcast.update({
+    where: { id: podcast.id },
+    data: { status: 'GENERATING' },
+  });
+  res.status(202).json({
+    podcast: { id: podcast.id, contentId, locale, status: 'GENERATING' },
+  });
+}
+
 export async function streamEpisodeAudio(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');

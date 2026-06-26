@@ -116,5 +116,10 @@ tenantContent.get(
   '/:id/podcast/episodes/:episodeId/audio',
   asyncHandler(podcastController.streamEpisodeAudio),
 );
+tenantContent.post(
+  '/:id/podcast/episodes/:episodeId/regenerate',
+  enforceQuota('PODCAST'),
+  asyncHandler(podcastController.regenerateEpisode),
+);
 
 tenantRoutes.use('/content', tenantContent);

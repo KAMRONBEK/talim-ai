@@ -43,6 +43,10 @@ contentRoutes.patch(
   asyncHandler(progressController.patchEpisodeProgress),
 );
 contentRoutes.get('/:id/podcast/episodes/:episodeId/audio', asyncHandler(podcastController.streamEpisodeAudio));
+contentRoutes.post(
+  '/:id/podcast/episodes/:episodeId/regenerate',
+  asyncHandler(podcastController.regenerateEpisode),
+);
 contentRoutes.get('/:id', asyncHandler(contentController.getContent));
 contentRoutes.post(
   '/upload',
