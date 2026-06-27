@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import type { PlanFileLimitResponse } from '@talim/types';
 import { useUploadContent } from '@/hooks/useContent';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 export const FILE_UPLOAD_ACCEPT = '.pdf,.ppt,.pptx';
 
@@ -11,19 +11,11 @@ interface UseFileUploadOptions {
   uploadFailedMessage?: string;
 }
 
-function asPlanFileLimit(err: unknown): PlanFileLimitResponse | null {
-  const data = (err as { response?: { data?: unknown } })?.response?.data;
-  if (data && typeof data === 'object' && (data as { code?: string }).code === 'PLAN_FILE_LIMIT') {
-    return data as PlanFileLimitResponse;
-  }
-  return null;
-}
-
 export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadOptions = {}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const uploadMutation = useUploadContent();
+  const handleLimitError = useLimitErrorHandler();
   const [error, setError] = useState<string | null>(null);
-  const [planLimit, setPlanLimit] = useState<PlanFileLimitResponse | null>(null);
 
   const openFilePicker = () => {
     if (!uploadMutation.isPending) inputRef.current?.click();
@@ -35,15 +27,14 @@ export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadO
     if (!file) return;
 
     setError(null);
-    setPlanLimit(null);
     try {
       await uploadMutation.mutateAsync(file);
       onSuccess?.();
     } catch (err) {
-      // A plan page/size cap surfaces the upgrade modal instead of an inline error.
-      const limit = asPlanFileLimit(err);
-      if (limit) setPlanLimit(limit);
-      else setError(uploadFailedMessage ?? 'Upload failed');
+      // Upgradeable limits (daily upload cap, plan file cap) open the promotion
+      // modal and return null; the hard 120 MB cap / other failures return an
+      // inline message.
+      setError(handleLimitError(err, uploadFailedMessage ?? 'Upload failed'));
     }
   };
 
@@ -63,7 +54,5 @@ export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadO
     openFilePicker,
     isPending: uploadMutation.isPending,
     error,
-    planLimit,
-    clearPlanLimit: () => setPlanLimit(null),
   };
 }

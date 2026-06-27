@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
 import { useCreateYoutubeContent } from '@/hooks/useContent';
 import { useFileUpload } from '@/hooks/useFileUpload';
-import { UpgradeDialog } from '@/components/account/upgrade-dialog';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 interface UploadCallbacks {
   onSuccess?: () => void;
@@ -14,7 +14,9 @@ interface UploadCallbacks {
 export function FileUploadField({ onSuccess }: UploadCallbacks) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
-  const { fileInput, openFilePicker, isPending, error, planLimit, clearPlanLimit } = useFileUpload({
+  // Plan/quota limits surface the global promotion modal from inside the hook;
+  // `error` only carries the inline fallbacks (hard cap / generic failure).
+  const { fileInput, openFilePicker, isPending, error } = useFileUpload({
     onSuccess,
     uploadFailedMessage: t('uploadFailed'),
   });
@@ -35,19 +37,6 @@ export function FileUploadField({ onSuccess }: UploadCallbacks) {
         {isPending ? tCommon('uploading') : t('selectFile')}
       </button>
       {error && <p className="mt-2 text-sm text-destructive">{error}</p>}
-      <UpgradeDialog
-        open={!!planLimit}
-        onClose={clearPlanLimit}
-        headline={t('fileExceedsTitle')}
-        subhead={
-          planLimit
-            ? t('fileExceedsBody', {
-                pages: planLimit.maxPages ?? 0,
-                sizeMb: planLimit.maxFileSizeMb ?? 0,
-              })
-            : undefined
-        }
-      />
     </div>
   );
 }
@@ -57,6 +46,7 @@ export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
   const youtubeMutation = useCreateYoutubeContent();
+  const handleLimitError = useLimitErrorHandler();
 
   const handleYoutubeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,8 +57,10 @@ export function YoutubeLinkForm({ onSuccess }: UploadCallbacks) {
       await youtubeMutation.mutateAsync({ url: youtubeUrl.trim() });
       setYoutubeUrl('');
       onSuccess?.();
-    } catch {
-      setError(t('linkFailed'));
+    } catch (err) {
+      // A daily upload/generation quota opens the promotion modal; other failures
+      // show the inline link error.
+      setError(handleLimitError(err, t('linkFailed')));
     }
   };
 

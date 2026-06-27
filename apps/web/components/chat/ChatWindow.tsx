@@ -6,6 +6,7 @@ import { Button } from '@talim/ui';
 import { ChatMessage } from './ChatMessage';
 import { useChatSession } from '@/hooks/useChat';
 import { useChatStore } from '@/store/useChatStore';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 interface ChatWindowProps {
   contentId: string;
@@ -31,10 +32,12 @@ export function ChatWindow({
   const tCommon = useTranslations('common');
   const quickActions = t.raw('quickActions') as string[];
   const [input, setInput] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const hydratedKeyRef = useRef<string | null>(null);
   const { data: sessionData, isLoading } = useChatSession(contentId);
   const { messages, isStreaming, streamMessage, hydrate, reset } = useChatStore();
+  const handleLimitError = useLimitErrorHandler();
 
   const placeholder = useMemo(() => {
     if (quickActions.length === 0) return t('placeholder');
@@ -71,8 +74,17 @@ export function ChatWindow({
     if (!input.trim() || isStreaming) return;
     const message = input.trim();
     setInput('');
-    await streamMessage(contentId, message, selectedExcerpt, selectedExcerptImage);
-    onClearExcerpt?.();
+    setError(null);
+    try {
+      await streamMessage(contentId, message, selectedExcerpt, selectedExcerptImage);
+      onClearExcerpt?.();
+    } catch (err) {
+      // A daily tutor-message quota opens the promotion modal; other failures
+      // show inline so the user isn't left with a silently dropped message.
+      setError(handleLimitError(err, t('error')));
+      // Nothing was sent — restore the composed text so the user can retry.
+      setInput(message);
+    }
   };
 
   const showGreeting = !isLoading && messages.length === 0;
@@ -133,6 +145,7 @@ export function ChatWindow({
             )}
           </div>
         )}
+        {error && <p className="mb-2 text-sm text-destructive">{error}</p>}
         <form onSubmit={handleSubmit} className="flex gap-2">
           <textarea
             value={input}

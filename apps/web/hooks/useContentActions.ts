@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import type { QuizKind, QuestionStyle } from '@talim/types';
 import { useRouter } from '@/i18n/navigation';
 import { useRetryContent } from '@/hooks/useContent';
 import { useCreateQuiz, useGenerateSummary, useSavedSummary } from '@/hooks/useQuiz';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 /**
  * Encapsulates the quiz / summary / retry / delete interactions for a content
@@ -17,10 +19,15 @@ export function useContentActions(id: string, activeSectionId: string | undefine
   const generateSummary = useGenerateSummary();
   const { data: savedSummary } = useSavedSummary(id, activeSectionId);
   const retryContent = useRetryContent();
+  const handleLimitError = useLimitErrorHandler();
+  const t = useTranslations('content');
 
   const [summary, setSummary] = useState<string | null>(null);
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  // Generation quota errors open the promotion modal; this holds the inline
+  // fallback message for non-upgradeable failures.
+  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     if (savedSummary) setSummary(savedSummary);
@@ -31,14 +38,19 @@ export function useContentActions(id: string, activeSectionId: string | undefine
     opts?: { style?: QuestionStyle; count?: number },
   ) => {
     if (!activeSectionId) return;
-    const quiz = await createQuiz.mutateAsync({
-      contentId: id,
-      sectionId: activeSectionId,
-      kind,
-      ...(opts?.style ? { style: opts.style } : {}),
-      ...(opts?.count ? { count: opts.count } : {}),
-    });
-    router.push(`/quiz/${quiz.id}`);
+    setActionError(null);
+    try {
+      const quiz = await createQuiz.mutateAsync({
+        contentId: id,
+        sectionId: activeSectionId,
+        kind,
+        ...(opts?.style ? { style: opts.style } : {}),
+        ...(opts?.count ? { count: opts.count } : {}),
+      });
+      router.push(`/quiz/${quiz.id}`);
+    } catch (err) {
+      setActionError(handleLimitError(err, t('generationFailed')));
+    }
   };
 
   const handleSummary = async () => {
@@ -47,12 +59,17 @@ export function useContentActions(id: string, activeSectionId: string | undefine
       setSummaryOpen(true);
       return;
     }
-    const text = await generateSummary.mutateAsync({
-      contentId: id,
-      sectionId: activeSectionId,
-    });
-    setSummary(text);
-    setSummaryOpen(true);
+    setActionError(null);
+    try {
+      const text = await generateSummary.mutateAsync({
+        contentId: id,
+        sectionId: activeSectionId,
+      });
+      setSummary(text);
+      setSummaryOpen(true);
+    } catch (err) {
+      setActionError(handleLimitError(err, t('generationFailed')));
+    }
   };
 
   const handleOpenSummary = (text: string) => {
@@ -72,6 +89,9 @@ export function useContentActions(id: string, activeSectionId: string | undefine
     // delete state
     deleteOpen,
     setDeleteOpen,
+    // inline error for non-upgradeable generation failures
+    actionError,
+    clearActionError: () => setActionError(null),
     // handlers
     handleCreateQuiz,
     handleSummary,

@@ -76,6 +76,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       ],
     }));
 
+    try {
     const response = await fetch(`${getApiBaseUrl()}/chat/stream`, {
       method: 'POST',
       headers: {
@@ -94,8 +95,18 @@ export const useChatStore = create<ChatState>((set, get) => ({
     });
 
     if (!response.ok || !response.body) {
-      set({ isStreaming: false });
-      throw new Error('Failed to stream chat response');
+      // Surface limit errors (402 TUTOR_MESSAGE quota etc.) as an axios-shaped
+      // error so the caller can classify it and open the promotion modal. The
+      // catch below clears the optimistic bubbles + unlocks the composer.
+      let data: unknown;
+      try {
+        data = await response.json();
+      } catch {
+        /* non-JSON error body */
+      }
+      throw Object.assign(new Error('chat_stream_failed'), {
+        response: { status: response.status, data },
+      });
     }
 
     const reader = response.body.getReader();
@@ -156,5 +167,16 @@ export const useChatStore = create<ChatState>((set, get) => ({
         m.id === assistantMsgId ? { ...m, text: fullText, streaming: false } : m,
       ),
     }));
+    } catch (err) {
+      // Any failure — non-OK response, network reject, or a mid-stream read error —
+      // unlocks the composer and removes the optimistic user + assistant bubbles so
+      // nothing is left half-sent. The caller (ChatWindow) restores the input text
+      // and surfaces the error / opens the upgrade modal.
+      set((state) => ({
+        isStreaming: false,
+        messages: state.messages.filter((m) => m.id !== userMsgId && m.id !== assistantMsgId),
+      }));
+      throw err;
+    }
   },
 }));

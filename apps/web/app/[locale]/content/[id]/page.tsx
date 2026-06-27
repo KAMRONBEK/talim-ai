@@ -19,7 +19,7 @@ import { useSections, useSection } from '@/hooks/useSections';
 import { useContentProgress, useLearningHistory } from '@/hooks/useProgress';
 import { useContentActions } from '@/hooks/useContentActions';
 import { useReparseContent } from '@/hooks/useReparseContent';
-import { classifyGenerationError } from '@/lib/generation-error';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 import { ContentStatusGate } from '@/components/content/content-status-gate';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
 import { SummaryText } from '@/components/learning/summary-text';
@@ -39,7 +39,6 @@ function ContentPageLoading() {
 function ContentWorkspaceInner({ id }: { id: string }) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
-  const tSlides = useTranslations('slides');
   const tLearn = useTranslations('learnHub');
   const router = useRouter();
   const user = useAuthStore((s) => s.user);
@@ -71,12 +70,16 @@ function ContentWorkspaceInner({ id }: { id: string }) {
     setSummaryOpen,
     deleteOpen,
     setDeleteOpen,
+    actionError,
+    clearActionError,
     handleCreateQuiz,
     handleSummary,
     handleOpenSummary,
   } = useContentActions(id, activeSectionId);
 
   const reparse = useReparseContent(id);
+  const handleLimitError = useLimitErrorHandler();
+  const [rereadError, setRereadError] = useState<string | null>(null);
   const [learnTab, setLearnTab] = useState<LearnTab>(panelParam === 'chat' ? 'chat' : 'learn');
   const [panelOpen, setPanelOpen] = useState(false);
   const [selectedExcerpt, setSelectedExcerpt] = useState('');
@@ -168,18 +171,8 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   );
 
   // Tutor-only material actions (assign + re-read OCR + delete) preserved from the
-  // old reader, surfaced in the Learn tab footer.
-  const rereadError = reparse.isError
-    ? (() => {
-        const info = classifyGenerationError(reparse.error);
-        return info.kind === 'quota'
-          ? tSlides('limitReached', { used: info.used ?? 0, limit: info.limit ?? 0 })
-          : info.kind === 'plan'
-            ? tSlides('limitReachedGeneric')
-            : t('rereadError');
-      })()
-    : null;
-
+  // old reader, surfaced in the Learn tab footer. A quota/limit error routes through
+  // the shared handler (tenant owner → inline message; no individual upgrade modal).
   const learnFooter = isTenantOwner ? (
     <div className="space-y-4">
       <AssignStudentsPanel contentId={id} />
@@ -189,7 +182,12 @@ function ContentWorkspaceInner({ id }: { id: string }) {
             variant="outline"
             size="sm"
             type="button"
-            onClick={() => reparse.mutate()}
+            onClick={() =>
+              reparse.mutate(undefined, {
+                onError: (err) => setRereadError(handleLimitError(err, t('rereadError'))),
+                onSuccess: () => setRereadError(null),
+              })
+            }
             disabled={reparse.isPending}
             title={t('rereadHint')}
           >
@@ -219,6 +217,19 @@ function ContentWorkspaceInner({ id }: { id: string }) {
 
   return (
     <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
+      {actionError && (
+        <div className="absolute left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-lg border border-destructive/40 bg-card px-4 py-2.5 text-sm shadow-lg">
+          <span className="text-destructive">{actionError}</span>
+          <button
+            type="button"
+            onClick={clearActionError}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label={tCommon('close')}
+          >
+            ✕
+          </button>
+        </div>
+      )}
       {/* Desktop: resizable 2-pane workspace (stage | Learn hub). */}
       <div className="hidden min-h-0 flex-1 overflow-hidden md:flex">
         <ResizableSplit

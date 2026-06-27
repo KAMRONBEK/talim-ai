@@ -1,13 +1,13 @@
 'use client';
 
-import { use, Suspense } from 'react';
+import { use, useState, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, RefreshCw, Sparkles } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { Link } from '@/i18n/navigation';
 import { useContent } from '@/hooks/useContent';
 import { useSlides, useGenerateSlides } from '@/hooks/useSlides';
-import { classifyGenerationError } from '@/lib/generation-error';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 import { useAuthStore } from '@/store/useAuthStore';
 import { DeckPlayer } from '@/components/deck/DeckPlayer';
 
@@ -18,15 +18,17 @@ function SlidesInner({ id }: { id: string }) {
   const { data: content } = useContent(id);
   const { data: deckRow, isLoading } = useSlides(id);
   const generate = useGenerateSlides(id);
+  const handleLimitError = useLimitErrorHandler();
+  // Upgradeable quota errors open the promotion modal (genError stays null);
+  // tenant/at-cap/other failures fall back to an inline message.
+  const [genError, setGenError] = useState<string | null>(null);
+  const runGenerate = () => {
+    setGenError(null);
+    generate.mutate({}, { onError: (err) => setGenError(handleLimitError(err, t('error'))) });
+  };
 
   const deck = deckRow?.deck ?? null;
   const generating = generate.isPending;
-  const errInfo = classifyGenerationError(generate.error);
-  const isLimit = generate.isError && errInfo.kind !== 'error';
-  const limitMessage =
-    errInfo.kind === 'quota'
-      ? t('limitReached', { used: errInfo.used ?? 0, limit: errInfo.limit ?? 0 })
-      : t('limitReachedGeneric');
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
@@ -44,12 +46,21 @@ function SlidesInner({ id }: { id: string }) {
             <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
-        {!isLearner && deck && (
-          <Button variant="outline" size="sm" onClick={() => generate.mutate({})} disabled={generating}>
-            <RefreshCw className={generating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
-            {t('regenerate')}
-          </Button>
-        )}
+        <div className="flex items-center gap-3">
+          {/* When a deck already exists the EmptyState (which renders genError)
+              isn't shown, so surface regenerate errors here too. */}
+          {genError && deck && (
+            <span className="max-w-[16rem] truncate text-sm text-destructive" title={genError}>
+              {genError}
+            </span>
+          )}
+          {!isLearner && deck && (
+            <Button variant="outline" size="sm" onClick={runGenerate} disabled={generating}>
+              <RefreshCw className={generating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
+              {t('regenerate')}
+            </Button>
+          )}
+        </div>
       </header>
 
       <div className="relative flex min-h-0 flex-1 flex-col">
@@ -61,15 +72,13 @@ function SlidesInner({ id }: { id: string }) {
           <CenteredMessage>{tCommon('loading')}</CenteredMessage>
         ) : isLearner ? (
           <CenteredMessage>{t('notAvailableLearner')}</CenteredMessage>
-        ) : isLimit ? (
-          <CenteredMessage>{limitMessage}</CenteredMessage>
         ) : (
           <EmptyState
             title={t('emptyTitle')}
             body={t('emptyBody')}
             cta={t('generate')}
-            onGenerate={() => generate.mutate({})}
-            error={generate.isError ? t('error') : null}
+            onGenerate={runGenerate}
+            error={genError}
           />
         )}
       </div>

@@ -1,14 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { Sparkles } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useBilling } from '@/hooks/useBilling';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useUpgradeModal } from '@/store/useUpgradeModal';
 import { planMessageKey } from '@/lib/plan';
-import { UpgradeDialog } from '@/components/account/upgrade-dialog';
 import type { TenantBillingUsageVsLimits } from '@talim/types';
 
 function UsageMeter({
@@ -37,7 +36,7 @@ export function BillingSummaryCard() {
   const tTenant = useTranslations('tenant');
   const role = useAuthStore((s) => s.user?.role);
   const { data: billing, isLoading } = useBilling();
-  const [upgradeOpen, setUpgradeOpen] = useState(false);
+  const openUpgrade = useUpgradeModal((s) => s.openUpgrade);
 
   if (role === 'TENANT_LEARNER' || role === 'ADMIN') return null;
 
@@ -131,7 +130,7 @@ export function BillingSummaryCard() {
       )}
 
       {role === 'INDIVIDUAL' && sub?.effectivePlanCode === 'FREE' && (
-        <Button variant="gradient" size="sm" onClick={() => setUpgradeOpen(true)}>
+        <Button variant="gradient" size="sm" onClick={() => openUpgrade()}>
           <Sparkles className="h-4 w-4" />
           {t('upgrade.cta')}
         </Button>
@@ -144,8 +143,6 @@ export function BillingSummaryCard() {
           </Button>
         </Link>
       )}
-
-      <UpgradeDialog open={upgradeOpen} onClose={() => setUpgradeOpen(false)} />
     </div>
   );
 }

@@ -11,7 +11,7 @@ import { useSlides } from '@/hooks/useSlides';
 import { useVideo, useGenerateVideo } from '@/hooks/useVideo';
 import { useContentBase } from '@/hooks/useContentBase';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
-import { classifyGenerationError } from '@/lib/generation-error';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 import { useAuthStore } from '@/store/useAuthStore';
 import { NarratedVideoPlayer } from '@/components/deck/NarratedVideoPlayer';
 
@@ -33,6 +33,14 @@ function VideoInner({ id }: { id: string }) {
   const { data: deckRow } = useSlides(id, sectionId);
   const { data: video, isLoading } = useVideo(id, sectionId);
   const generate = useGenerateVideo(id, sectionId);
+  const handleLimitError = useLimitErrorHandler();
+  // Upgradeable quota errors open the promotion modal (genError stays null);
+  // tenant/at-cap/other failures fall back to an inline message.
+  const [genError, setGenError] = useState<string | null>(null);
+  const runGenerate = (input: { regenerate?: boolean }) => {
+    setGenError(null);
+    generate.mutate(input, { onError: (err) => setGenError(handleLimitError(err, t('error'))) });
+  };
 
   const deck = deckRow?.deck ?? null;
   const segments = video?.segments ?? null;
@@ -43,13 +51,6 @@ function VideoInner({ id }: { id: string }) {
   // show "preparing visuals", never the "Generate" empty state, so a generated
   // video never looks like it doesn't exist.
   const readyAwaitingDeck = video?.status === 'READY' && !!segments?.length && !deck;
-
-  const errInfo = classifyGenerationError(generate.error);
-  const isLimit = generate.isError && errInfo.kind !== 'error';
-  const limitMessage =
-    errInfo.kind === 'quota'
-      ? t('limitReached', { used: errInfo.used ?? 0, limit: errInfo.limit ?? 0 })
-      : t('limitReachedGeneric');
 
   // Pin the request to the video's own locale AND part (sectionId). fetchAuthenticatedBlob
   // uses a raw fetch (not the axios client) so it doesn't send our locale param, and the
@@ -86,17 +87,26 @@ function VideoInner({ id }: { id: string }) {
             <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
-        {!isLearner && ready && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => generate.mutate({ regenerate: true })}
-            disabled={generating}
-          >
-            <RefreshCw className={generating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
-            {t('regenerate')}
-          </Button>
-        )}
+        <div className="flex items-center gap-3">
+          {/* When a video already exists the EmptyState (which renders genError)
+              isn't shown, so surface regenerate errors here too. */}
+          {genError && ready && (
+            <span className="max-w-[16rem] truncate text-sm text-destructive" title={genError}>
+              {genError}
+            </span>
+          )}
+          {!isLearner && ready && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => runGenerate({ regenerate: true })}
+              disabled={generating}
+            >
+              <RefreshCw className={generating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
+              {t('regenerate')}
+            </Button>
+          )}
+        </div>
       </header>
 
       {/* Per-section parts selector — each section is a video "part", generated on demand. */}
@@ -146,15 +156,13 @@ function VideoInner({ id }: { id: string }) {
           <CenteredMessage>{tCommon('loading')}</CenteredMessage>
         ) : isLearner ? (
           <CenteredMessage>{t('notAvailableLearner')}</CenteredMessage>
-        ) : isLimit ? (
-          <CenteredMessage>{limitMessage}</CenteredMessage>
         ) : (
           <EmptyState
             title={hasParts ? t('partEmptyTitle', { n: activeIndex + 1 }) : t('emptyTitle')}
             body={hasParts ? t('partEmptyBody') : t('emptyBody')}
             cta={hasParts ? t('generatePart') : t('generate')}
-            onGenerate={() => generate.mutate({})}
-            error={generate.isError ? t('error') : null}
+            onGenerate={() => runGenerate({})}
+            error={genError}
           />
         )}
       </div>

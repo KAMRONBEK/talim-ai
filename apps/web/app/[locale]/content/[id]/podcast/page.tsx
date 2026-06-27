@@ -10,7 +10,7 @@ import { RefreshCw, Loader2 } from 'lucide-react';
 import { usePodcast, useCreatePodcast, useRegenerateEpisode } from '@/hooks/usePodcast';
 import { usePodcastProgress, useUpdatePodcastProgress } from '@/hooks/useProgress';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
-import { classifyGenerationError } from '@/lib/generation-error';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 import { PodcastPlayer } from '@/components/podcast/PodcastPlayer';
 import type { PodcastEpisode } from '@talim/types';
 
@@ -30,6 +30,11 @@ function PodcastPageInner({ id }: { id: string }) {
   const { data: podcast, isLoading } = usePodcast(id, 3000);
   const createPodcast = useCreatePodcast();
   const regenerateEpisode = useRegenerateEpisode(id);
+  const handleLimitError = useLimitErrorHandler();
+  // Upgradeable quota errors open the promotion modal; this holds the inline
+  // fallback (tenant/at-cap/generic). Cleared on a successful (re)generate.
+  const [genErrMsg, setGenErrMsg] = useState<string | null>(null);
+  const onGenError = (err: unknown) => setGenErrMsg(handleLimitError(err, t('podcastRetryError')));
   const { data: progressList = [] } = usePodcastProgress(id);
   const updateProgress = useUpdatePodcastProgress(id);
   const [activeEpisode, setActiveEpisode] = useState<PodcastEpisode | null>(null);
@@ -166,9 +171,21 @@ function PodcastPageInner({ id }: { id: string }) {
         ) : (
           <>
             <p className="max-w-md text-center text-sm text-muted-foreground">{t('noPodcastDesc')}</p>
-            <Button variant="gradient" onClick={() => createPodcast.mutate({ contentId: id })} disabled={createPodcast.isPending}>
+            <Button
+              variant="gradient"
+              onClick={() =>
+                createPodcast.mutate(
+                  { contentId: id },
+                  { onError: onGenError, onSuccess: () => setGenErrMsg(null) },
+                )
+              }
+              disabled={createPodcast.isPending}
+            >
               {createPodcast.isPending ? t('podcastGenerating') : t('createPodcast')}
             </Button>
+            {/* Non-promotable create errors (tenant/at-cap/generic) — promotable
+                individual quota opens the global modal instead. */}
+            {genErrMsg && <p className="text-xs text-destructive">{genErrMsg}</p>}
           </>
         )}
       </div>
@@ -179,21 +196,6 @@ function PodcastPageInner({ id }: { id: string }) {
   const generating = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
   const failed = podcast?.status === 'FAILED';
   const missingAudio = episodes.some((e) => !e.hasAudio);
-  // Surface create/regenerate errors (e.g. 402 quota) — otherwise the buttons
-  // silently do nothing.
-  const genError = regenerateEpisode.isError
-    ? regenerateEpisode.error
-    : createPodcast.isError
-      ? createPodcast.error
-      : null;
-  const genErrInfo = genError ? classifyGenerationError(genError) : null;
-  const genErrMsg = !genErrInfo
-    ? null
-    : genErrInfo.kind === 'quota'
-      ? t('podcastLimitReached', { used: genErrInfo.used ?? 0, limit: genErrInfo.limit ?? 0 })
-      : genErrInfo.kind === 'error'
-        ? t('podcastRetryError')
-        : t('podcastLimitGeneric');
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
@@ -211,7 +213,12 @@ function PodcastPageInner({ id }: { id: string }) {
               size="sm"
               className="mt-3 w-full"
               disabled={createPodcast.isPending}
-              onClick={() => createPodcast.mutate({ contentId: id, regenerate: true })}
+              onClick={() =>
+                createPodcast.mutate(
+                  { contentId: id, regenerate: true },
+                  { onError: onGenError, onSuccess: () => setGenErrMsg(null) },
+                )
+              }
             >
               {createPodcast.isPending ? t('podcastGenerating') : t('retryPodcast')}
             </Button>
@@ -266,7 +273,12 @@ function PodcastPageInner({ id }: { id: string }) {
                     type="button"
                     title={t('retryPodcast')}
                     aria-label={t('retryPodcast')}
-                    onClick={() => regenerateEpisode.mutate({ episodeId: ep.id })}
+                    onClick={() =>
+                      regenerateEpisode.mutate(
+                        { episodeId: ep.id },
+                        { onError: onGenError, onSuccess: () => setGenErrMsg(null) },
+                      )
+                    }
                     disabled={regenerateEpisode.isPending || epBusy}
                     className="shrink-0 rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-50"
                   >
