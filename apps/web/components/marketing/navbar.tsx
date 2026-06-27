@@ -33,6 +33,14 @@ export function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <Link
+              href="/pricing"
+              className="rounded-full px-3.5 py-1.5 transition-colors hover:bg-secondary hover:text-foreground"
+            >
+              {t('nav.pricing')}
+            </Link>
+          </li>
         </ul>
         <div className="flex items-center gap-2.5">
           <ThemeToggle compact />
