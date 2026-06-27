@@ -96,6 +96,16 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
     throw new AppError(409, 'Email already registered');
   }
 
+  // Validate a supplied join code BEFORE creating the user: joinTenantByCode runs AFTER
+  // user.create, so an invalid code would otherwise leave an orphaned INDIVIDUAL account
+  // (with a FREE sub) that blocks the email on retry. joinTenantByCode still does the
+  // authoritative join (seat quota, membership) once the account exists.
+  if (body.joinCode) {
+    const code = body.joinCode.trim().toUpperCase();
+    const tenant = await prisma.tenant.findUnique({ where: { joinCode: code } });
+    if (!tenant) throw new AppError(404, 'Invalid join code');
+  }
+
   const passwordHash = await bcrypt.hash(body.password, 12);
   const freePlan = await prisma.plan.findUnique({ where: { code: 'FREE' } });
   if (!freePlan) {
