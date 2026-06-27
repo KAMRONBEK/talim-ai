@@ -448,7 +448,12 @@
       "copy": "Nusxalash",
       "copied": "Nusxalandi!",
       "credentialsHint": "Ushbu ma'lumotlarni o'quvchiga bering (bir marta ko'rsatiladi):",
-      "seatUsage": "{limit} tadan {used} ta joy band"
+      "seatUsage": "{limit} tadan {used} ta joy band",
+      "reset": "Tiklash",
+      "deactivate": "Faolsizlantirish",
+      "reactivate": "Qayta faollashtirish",
+      "active": "Faol",
+      "inactive": "Faolsiz"
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",
@@ -513,7 +518,8 @@
       "assignTitle": "Baholashni tayinlash",
       "chooseAssessment": "Baholashni tanlang",
       "assignButton": "Tayinlash",
-      "resultsTitle": "Natijalar va reyting"
+      "resultsTitle": "Natijalar va reyting",
+      "questionType": "Savol turi"
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -536,7 +542,10 @@
     "quickCheck": "Tezkor savol",
     "revealAnswer": "Javobni ko'rsatish",
     "prevSlide": "Oldingi slayd",
-    "nextSlide": "Keyingi slayd"
+    "nextSlide": "Keyingi slayd",
+    "enterFullscreen": "To'liq ekran",
+    "exitFullscreen": "To'liq ekrandan chiqish",
+    "slideProgress": "{total} dan {index}-slayd"
   },
   "learner": {
     "loading": "Yuklanmoqda...",

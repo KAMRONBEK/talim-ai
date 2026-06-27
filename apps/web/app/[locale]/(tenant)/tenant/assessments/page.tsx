@@ -203,7 +203,7 @@ export default function TenantAssessmentsPage() {
                     setDraftStyle(event.target.value as typeof draftStyle)
                   }
                   className="rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label={t('modeLabel')}
+                  aria-label={t('questionType')}
                 >
                   <option value="mixed">{t('styleMixed')}</option>
                   <option value="multipleChoice">{t('styleMultipleChoice')}</option>

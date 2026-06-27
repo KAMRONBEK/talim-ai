@@ -448,7 +448,12 @@
       "copy": "Копировать",
       "copied": "Скопировано!",
       "credentialsHint": "Передайте эти данные ученику (показывается один раз):",
-      "seatUsage": "Занято мест: {used} из {limit}"
+      "seatUsage": "Занято мест: {used} из {limit}",
+      "reset": "Сбросить",
+      "deactivate": "Деактивировать",
+      "reactivate": "Реактивировать",
+      "active": "Активен",
+      "inactive": "Неактивен"
     },
     "assign": {
       "title": "Назначить ученикам",
@@ -513,7 +518,8 @@
       "assignTitle": "Назначить оценивание",
       "chooseAssessment": "Выберите оценивание",
       "assignButton": "Назначить",
-      "resultsTitle": "Результаты и таблица лидеров"
+      "resultsTitle": "Результаты и таблица лидеров",
+      "questionType": "Тип вопроса"
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -536,7 +542,10 @@
     "quickCheck": "Быстрая проверка",
     "revealAnswer": "Показать ответ",
     "prevSlide": "Предыдущий слайд",
-    "nextSlide": "Следующий слайд"
+    "nextSlide": "Следующий слайд",
+    "enterFullscreen": "Полный экран",
+    "exitFullscreen": "Выйти из полноэкранного режима",
+    "slideProgress": "Слайд {index} из {total}"
   },
   "learner": {
     "loading": "Загрузка...",

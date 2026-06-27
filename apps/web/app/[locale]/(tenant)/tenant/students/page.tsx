@@ -189,7 +189,7 @@ export default function TenantStudentsPage() {
                         })
                       }
                     >
-                      Reset
+                      {t('students.reset')}
                     </Button>
                     <Button
                       type="button"
@@ -197,7 +197,7 @@ export default function TenantStudentsPage() {
                       variant="ghost"
                       onClick={() => patchStudent.mutate({ id: s.id, active: !s.active })}
                     >
-                      {s.active ? 'Deactivate' : 'Reactivate'}
+                      {s.active ? t('students.deactivate') : t('students.reactivate')}
                     </Button>
                   </td>
                 </tr>
@@ -220,7 +220,7 @@ export default function TenantStudentsPage() {
                 </p>
               </div>
               <Badge variant={s.active ? 'success' : 'secondary'}>
-                {s.active ? 'Active' : 'Inactive'}
+                {s.active ? t('students.active') : t('students.inactive')}
               </Badge>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
@@ -255,14 +255,14 @@ export default function TenantStudentsPage() {
                   })
                 }
               >
-                Reset
+                {t('students.reset')}
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => patchStudent.mutate({ id: s.id, active: !s.active })}
               >
-                {s.active ? 'Deactivate' : 'Reactivate'}
+                {s.active ? t('students.deactivate') : t('students.reactivate')}
               </Button>
             </div>
           </div>

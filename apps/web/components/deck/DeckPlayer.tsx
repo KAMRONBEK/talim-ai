@@ -243,7 +243,7 @@ export function DeckPlayer({
           <button
             type="button"
             onClick={toggleFullscreen}
-            aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            aria-label={fullscreen ? t('exitFullscreen') : t('enterFullscreen')}
             className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5"
           >
             {fullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
@@ -252,7 +252,7 @@ export function DeckPlayer({
       </div>
 
       <span aria-live="polite" className="sr-only">
-        Slide {index + 1} of {total}
+        {t('slideProgress', { index: index + 1, total })}
       </span>
     </div>
   );

@@ -448,7 +448,12 @@
       "copy": "Copy",
       "copied": "Copied!",
       "credentialsHint": "Share these credentials with the student (shown once):",
-      "seatUsage": "{used} of {limit} seats used"
+      "seatUsage": "{used} of {limit} seats used",
+      "reset": "Reset",
+      "deactivate": "Deactivate",
+      "reactivate": "Reactivate",
+      "active": "Active",
+      "inactive": "Inactive"
     },
     "assign": {
       "title": "Assign to students",
@@ -513,7 +518,8 @@
       "assignTitle": "Assign assessment",
       "chooseAssessment": "Choose assessment",
       "assignButton": "Assign",
-      "resultsTitle": "Results & leaderboard"
+      "resultsTitle": "Results & leaderboard",
+      "questionType": "Question type"
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -536,7 +542,10 @@
     "quickCheck": "Quick check",
     "revealAnswer": "Reveal answer",
     "prevSlide": "Previous slide",
-    "nextSlide": "Next slide"
+    "nextSlide": "Next slide",
+    "enterFullscreen": "Enter fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "slideProgress": "Slide {index} of {total}"
   },
   "learner": {
     "loading": "Loading...",
