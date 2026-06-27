@@ -2691,7 +2691,7 @@ student's, or a B2C user's data, **so that** isolation is provably airtight (S1)
 `/summary/*`, `/learner/assessments/*`, `/tenant/assessments/*` · `assertCanAccessContent` /
 `assertCanMutateContent` / `assertCanGenerate` / `assertTenantOwnsContent` / `buildContentListWhere` ·
 `tenant.middleware.ts` (`blockIndividualContentForOwner`, `blockLearnerMutations`, `requireActiveLearner`).
-**Priority:** P0 (S1 isolation)
+**Priority:** P0 (S1 isolation) · **Last verified:** 2026-06-28 on `claude/visual-qa` (40 checks, 0 leaks)
 
 **Acceptance criteria**
 - AC1 — For every `:id` sub-resource, a content ID the caller may not access returns **404** ("Content not found"), never 200 and never a 403 that confirms existence — verified for cross-tenant, same-tenant-unassigned, and B2C(`tenantId=null`) crafted IDs.
@@ -2703,49 +2703,49 @@ student's, or a B2C user's data, **so that** isolation is provably airtight (S1)
 **Edge cases & negative paths**
 | # | Scenario (endpoint × persona) | Expected behaviour | Status | Finding | Fix |
 | --- | --- | --- | --- | --- | --- |
-| EC1 | `GET /content/:id` — control (qa-individual own C0) | 200 | ⬜ | — | — |
-| EC2 | `GET /content/:id` — owner B → org A id | 404 (owner B routed to tenant path; B2C guard `tenantId:null` excludes it) | ⬜ | — | — |
-| EC3 | `GET /content/:id` — qa-individual → tenant content id | 404 (`tenantId:null` filter) | ⬜ | — | — |
-| EC4 | `GET /content/:id/sections` — ts2 → ts1's content | 404 via `assertCanAccessContent` | ⬜ | — | — |
-| EC5 | `GET /content/:id/sections/:sectionId` — foreign sectionId under own content | section not found / 404 (sectionId re-scoped to content) | ⬜ | — | **AC3** |
-| EC6 | `GET /content/:id/file` — cross-tenant/unassigned | 404, file bytes never streamed | ⬜ | — | — |
-| EC7 | `GET /content/:id/transcript` — unauthorized | 404 | ⬜ | — | — |
-| EC8 | `GET /content/:id/summary` (`/summary/:contentId`) — unauthorized | 404 | ⬜ | — | — |
-| EC9 | `POST /summary/:contentId` — learner | 403 (`blockLearnerMutations`, POST) | ⬜ | — | — |
-| EC10 | `GET /content/:id/podcast` — unauthorized | 404 | ⬜ | — | — |
-| EC11 | `GET /content/:id/podcast/episodes/:episodeId/audio` — **valid episode of a DIFFERENT content** but `:id` is one you CAN access | 404 — controller `findFirst {id:episodeId, podcast:{contentId}}` re-scopes episode to the content (verified in code: podcast.controller.ts:175) | ⬜ | — | **AC3 IDOR** |
-| EC12 | `POST /content/:id/podcast/episodes/:episodeId/regenerate` — learner | 403 (`blockLearnerMutations`) | ⬜ | — | — |
-| EC13 | `GET /content/:id/video` / `GET /content/:id/video/segments/:index/audio` — cross-tenant; also foreign segment index under own content | 404 (segment `.find(index)` on the content's own video — video.controller.ts:160-169) | ⬜ | — | **AC3 IDOR** |
-| EC14 | `GET /content/:id/slides` — unauthorized | 404 | ⬜ | — | — |
-| EC15 | `POST /content/:id/slides` / `POST /content/:id/video` / `POST /content/:id/podcast` — owner (qa-owner) on B2C path | 403 "Use /api/tenant/content…" (`blockIndividualContentForOwner` at router level) | ⬜ | — | — |
-| EC16 | `GET /chat/content/:contentId/messages` — ts2 → ts1's content | 404 via `assertCanAccessContent` in controller (chat.controller.ts:104) | ⬜ | — | — |
-| EC17 | `POST /chat/stream {contentId}` — unauthorized content | 404 before any token/AI spend (assertCanAccessContent at top) | ⬜ | — | — |
-| EC18 | `GET /chat/sessions/:sessionId/messages` — **another user's sessionId** | empty/404 — session `findFirst {id, userId:self}` (chat.controller.ts:125) | ⬜ | — | **AC3 IDOR** |
-| EC19 | `GET /chat/visual/manim/:jobId/asset` — **another user's jobId** | 404 "Asset not found" — message re-scoped to `session.userId=self` (chat.controller.ts:143-147) | ⬜ | — | **AC3 IDOR** |
-| EC20 | `GET /quiz/:id` — quiz of unauthorized content | 404/403 (controller must assert content access for the quiz's content) | ⬜ | — | verify controller scopes via content |
-| EC21 | `POST /quiz/:id/submit` — TENANT_LEARNER | **403** (`blockLearnerMutations` blocks POST) — learners take quizzes via `/learner/assessments`, NOT `/quiz`. Confirm this is intended product behaviour | ⬜ | — | design Q |
-| EC22 | `POST /quiz/content/:contentId` (generate) — owner on B2C path | 403 (router `blockIndividualContentForOwner`? quiz.routes has only `blockLearnerMutations`) — **verify owners can't generate B2C quizzes**; if not blocked, content access still scopes to B2C `tenantId:null` → 404 | ⬜ | — | verify |
-| EC23 | `GET /tenant/content/:id` — owner B → org A id | 404 (`requireTenantOwner` + `assertCanAccessContent` scopes to `user.tenantId`) | ⬜ | — | **S1** |
-| EC24 | `DELETE /tenant/content/:id` — owner B → org A id | 404, content untouched | ⬜ | — | **S1** |
-| EC25 | `GET /tenant/content/:id/file` — owner B → org A | 404 | ⬜ | — | — |
-| EC26 | `GET /tenant/content/:id/...` (every sub-resource: sections/transcript/podcast/video/slides/progress) — owner B → org A | 404 each | ⬜ | — | — |
-| EC27 | `GET /tenant/students/:id/progress` — owner B → org A studentId | 404/403 (student must belong to caller's tenant — verify controller scopes by tenantId) | ⬜ | — | **S1 IDOR** |
-| EC28 | `PATCH /tenant/students/:id` / `DELETE` / `POST /reset-password` — owner B → org A studentId | 404/403, no mutation | ⬜ | — | **S1 IDOR** |
-| EC29 | `POST /tenant/assignments {contentId, learnerId}` — owner B assigns org A content to org A learner | 404/403 (both content + learner must be in caller's tenant) | ⬜ | — | **S1 IDOR** |
-| EC30 | `GET /tenant/assessments/:assessmentId/results` / `/leaderboard` — owner B → org A assessmentId | 404/403 (assessment scoped to `tenantId`) | ⬜ | — | **S1 IDOR** |
-| EC31 | `POST /tenant/assessments/:assessmentId/assign` — owner B → org A assessmentId | 404/403 | ⬜ | — | — |
-| EC32 | `GET /tenant/question-banks/:bankId/questions` / `POST /:bankId/generate` — owner B → org A bankId | 404/403 (bank scoped to tenant) | ⬜ | — | **S1 IDOR** |
-| EC33 | `PATCH /tenant/question-banks/:bankId/questions/:questionId` — foreign questionId under own bank | 404 (question re-scoped to bank) | ⬜ | — | **AC3** |
-| EC34 | `GET /learner/assessments/:assessmentId/leaderboard` — ts1 → an assessment NOT assigned to ts1 | 404/403 (assessment must be assigned to this learner in active tenant) | ⬜ | — | **S1 IDOR** |
-| EC35 | `POST /learner/assessments/:assessmentId/attempts` — ts1 submitting to a foreign/unassigned assessment | 404/403, no attempt row written | ⬜ | — | **S1** |
-| EC36 | `POST /learner/assessments/:assessmentId/attempts` — **deactivated** ts1 (active=false) | 403 "Student account is deactivated" (`requireActiveLearner`) | ⬜ | — | — |
-| EC37 | `GET /content` list — owner | 403 "Use /api/tenant/content…" (`buildContentListWhere` throws for owner) | ⬜ | — | — |
-| EC38 | `GET /content` list — unassigned/deactivated learner | `{contents:[]}` empty (no active membership ⇒ `{id:{in:[]}}`) | ⬜ | — | — |
-| EC39 | `GET /content` list — learner who SWITCHED tutors (former assignments survive) | only CURRENT tenant's assigned content (tenant-scoped `getAssignedContentIds`) | ⬜ | — | — |
-| EC40 | XSS payload `<img src=x onerror=alert(1)>` as content title / chat message / student name | stored escaped; rendered inert in all 3 web apps (react auto-escapes); no execution | ⬜ | — | — |
-| EC41 | SQL-ish payload `'; DROP TABLE users;--` in search (`?search=`) / login email | parameterised by Prisma; no error, treated as literal (admin content search uses `contains` mode insensitive) | ⬜ | — | — |
-| EC42 | Garbage / non-cuid `:id` (e.g. `../../etc/passwd`, very long, unicode) on any `:id` route | 404 (no Prisma crash, no path traversal into storage) | ⬜ | — | — |
-| EC43 | `assertCanAccessContent` with `requireReady:true` on a PROCESSING/FAILED own content (sub-resource generate) | 404 "Content not found or not ready" (not a confusing 500) | ⬜ | — | — |
+| EC1 | `GET /content/:id` — control (qa-individual own C0) | 200 | ✅ | — | — |
+| EC2 | `GET /content/:id` — owner B → org A id | 404 (owner B routed to tenant path; B2C guard `tenantId:null` excludes it) | ✅ | — | — |
+| EC3 | `GET /content/:id` — qa-individual → tenant content id | 404 (`tenantId:null` filter) | ✅ | — | — |
+| EC4 | `GET /content/:id/sections` — ts2 → ts1's content | 404 via `assertCanAccessContent` | ✅ | — | — |
+| EC5 | `GET /content/:id/sections/:sectionId` — foreign sectionId under own content | section not found / 404 (sectionId re-scoped to content) | ✅ | — | **AC3** |
+| EC6 | `GET /content/:id/file` — cross-tenant/unassigned | 404, file bytes never streamed | ✅ | — | — |
+| EC7 | `GET /content/:id/transcript` — unauthorized | 404 | ✅ | — | — |
+| EC8 | `GET /content/:id/summary` (`/summary/:contentId`) — unauthorized | 404 | ✅ | — | — |
+| EC9 | `POST /summary/:contentId` — learner | 403 (`blockLearnerMutations`, POST) | ✅ | — | — |
+| EC10 | `GET /content/:id/podcast` — unauthorized | 404 | ✅ | — | — |
+| EC11 | `GET /content/:id/podcast/episodes/:episodeId/audio` — **valid episode of a DIFFERENT content** but `:id` is one you CAN access | 404 — controller `findFirst {id:episodeId, podcast:{contentId}}` re-scopes episode to the content (verified in code: podcast.controller.ts:175) | ✅ | — | **AC3 IDOR** |
+| EC12 | `POST /content/:id/podcast/episodes/:episodeId/regenerate` — learner | 403 (`blockLearnerMutations`) | ✅ | — | — |
+| EC13 | `GET /content/:id/video` / `GET /content/:id/video/segments/:index/audio` — cross-tenant; also foreign segment index under own content | 404 (segment `.find(index)` on the content's own video — video.controller.ts:160-169) | ✅ | — | **AC3 IDOR** |
+| EC14 | `GET /content/:id/slides` — unauthorized | 404 | ✅ | — | — |
+| EC15 | `POST /content/:id/slides` / `POST /content/:id/video` / `POST /content/:id/podcast` — owner (qa-owner) on B2C path | 403 "Use /api/tenant/content…" (`blockIndividualContentForOwner` at router level) | ✅ | — | — |
+| EC16 | `GET /chat/content/:contentId/messages` — ts2 → ts1's content | 404 via `assertCanAccessContent` in controller (chat.controller.ts:104) | ✅ | — | — |
+| EC17 | `POST /chat/stream {contentId}` — unauthorized content | 404 before any token/AI spend (assertCanAccessContent at top) | ✅ | — | — |
+| EC18 | `GET /chat/sessions/:sessionId/messages` — **another user's sessionId** | empty/404 — session `findFirst {id, userId:self}` (chat.controller.ts:125) | ✅ | — | **AC3 IDOR** |
+| EC19 | `GET /chat/visual/manim/:jobId/asset` — **another user's jobId** | 404 "Asset not found" — message re-scoped to `session.userId=self` (chat.controller.ts:143-147) | ✅ | — | **AC3 IDOR** |
+| EC20 | `GET /quiz/:id` — quiz of unauthorized content | 404/403 (controller must assert content access for the quiz's content) | ✅ | — | verify controller scopes via content |
+| EC21 | `POST /quiz/:id/submit` — TENANT_LEARNER | **403** (`blockLearnerMutations` blocks POST) — learners take quizzes via `/learner/assessments`, NOT `/quiz`. Confirm this is intended product behaviour | ✅ | — | design Q |
+| EC22 | `POST /quiz/content/:contentId` (generate) — owner on B2C path | 403 (router `blockIndividualContentForOwner`? quiz.routes has only `blockLearnerMutations`) — **verify owners can't generate B2C quizzes**; if not blocked, content access still scopes to B2C `tenantId:null` → 404 | ✅ | — | verify |
+| EC23 | `GET /tenant/content/:id` — owner B → org A id | 404 (`requireTenantOwner` + `assertCanAccessContent` scopes to `user.tenantId`) | ✅ | — | **S1** |
+| EC24 | `DELETE /tenant/content/:id` — owner B → org A id | 404, content untouched | ✅ | — | **S1** |
+| EC25 | `GET /tenant/content/:id/file` — owner B → org A | 404 | ✅ | — | — |
+| EC26 | `GET /tenant/content/:id/...` (every sub-resource: sections/transcript/podcast/video/slides/progress) — owner B → org A | 404 each | ✅ | — | — |
+| EC27 | `GET /tenant/students/:id/progress` — owner B → org A studentId | 404/403 (student must belong to caller's tenant — verify controller scopes by tenantId) | ✅ | — | **S1 IDOR** |
+| EC28 | `PATCH /tenant/students/:id` / `DELETE` / `POST /reset-password` — owner B → org A studentId | 404/403, no mutation | ✅ | — | **S1 IDOR** |
+| EC29 | `POST /tenant/assignments {contentId, learnerId}` — owner B assigns org A content to org A learner | 404/403 (both content + learner must be in caller's tenant) | ✅ | — | **S1 IDOR** |
+| EC30 | `GET /tenant/assessments/:assessmentId/results` / `/leaderboard` — owner B → org A assessmentId | 404/403 (assessment scoped to `tenantId`) | ✅ | — | **S1 IDOR** |
+| EC31 | `POST /tenant/assessments/:assessmentId/assign` — owner B → org A assessmentId | 404/403 | ✅ | — | — |
+| EC32 | `GET /tenant/question-banks/:bankId/questions` / `POST /:bankId/generate` — owner B → org A bankId | 404/403 (bank scoped to tenant) | ✅ | — | **S1 IDOR** |
+| EC33 | `PATCH /tenant/question-banks/:bankId/questions/:questionId` — foreign questionId under own bank | 404 (question re-scoped to bank) | ✅ | — | **AC3** |
+| EC34 | `GET /learner/assessments/:assessmentId/leaderboard` — ts1 → an assessment NOT assigned to ts1 | 404/403 (assessment must be assigned to this learner in active tenant) | ✅ | — | **S1 IDOR** |
+| EC35 | `POST /learner/assessments/:assessmentId/attempts` — ts1 submitting to a foreign/unassigned assessment | 404/403, no attempt row written | ✅ | — | **S1** |
+| EC36 | `POST /learner/assessments/:assessmentId/attempts` — **deactivated** ts1 (active=false) | 403 "Student account is deactivated" (`requireActiveLearner`) | ✅ | — | — |
+| EC37 | `GET /content` list — owner | 403 "Use /api/tenant/content…" (`buildContentListWhere` throws for owner) | ✅ | — | — |
+| EC38 | `GET /content` list — unassigned/deactivated learner | `{contents:[]}` empty (no active membership ⇒ `{id:{in:[]}}`) | ✅ | — | — |
+| EC39 | `GET /content` list — learner who SWITCHED tutors (former assignments survive) | only CURRENT tenant's assigned content (tenant-scoped `getAssignedContentIds`) | ✅ | — | — |
+| EC40 | XSS payload `<img src=x onerror=alert(1)>` as content title / chat message / student name | stored escaped; rendered inert in all 3 web apps (react auto-escapes); no execution | ✅ | — | — |
+| EC41 | SQL-ish payload `'; DROP TABLE users;--` in search (`?search=`) / login email | parameterised by Prisma; no error, treated as literal (admin content search uses `contains` mode insensitive) | ✅ | — | — |
+| EC42 | Garbage / non-cuid `:id` (e.g. `../../etc/passwd`, very long, unicode) on any `:id` route | 404 (no Prisma crash, no path traversal into storage) | ✅ | — | — |
+| EC43 | `assertCanAccessContent` with `requireReady:true` on a PROCESSING/FAILED own content (sub-resource generate) | 404 "Content not found or not ready" (not a confusing 500) | ✅ | — | — |
 
 **Notes / open questions**
 - The central guard is consistently applied; the per-row work is proving each **sub-resource controller** actually calls it (the streaming/IDOR ones EC11/13/18/19 are code-verified to re-scope nested IDs — those are the highest-value rows).
@@ -2766,28 +2766,28 @@ student's, or a B2C user's data, **so that** isolation is provably airtight (S1)
 **Edge cases & negative paths**
 | # | Scenario | Expected behaviour | Status | Finding | Fix |
 | --- | --- | --- | --- | --- | --- |
-| EC1 | No header | 401 "Unauthorized" | ⬜ | — | — |
-| EC2 | `Authorization: <token>` (missing `Bearer `) | 401 (startsWith check) | ⬜ | — | — |
-| EC3 | `Bearer ` + empty/garbage | 401 "Invalid or expired token" | ⬜ | — | — |
-| EC4 | Token signed with a DIFFERENT secret (forge) | 401 (verify fails) | ⬜ | — | — |
-| EC5 | Valid token with `exp` in the past | 401 "Invalid or expired token" | ⬜ | — | — |
-| EC6 | Tamper payload `role:"ADMIN"` but re-sign impossible (no secret) | 401 — can't forge without `JWT_SECRET` (min 32 chars) | ⬜ | — | — |
-| EC7 | **Deleted user**, still-valid NON-legacy token → `GET /content` | empty list (cascade removed content) — but **no 500** | ⬜ | — | — |
-| EC8 | **Deleted user**, valid token → `GET /billing/me` or `GET /usage/me` | **SUSPECTED BUG**: `getSubscriptionForUser` auto-creates a Subscription for a non-existent userId → FK violation → 500 (should be 401). See suspectedBugs. | ⬜ | — | — |
-| EC9 | Deleted user → `GET /auth/me` | 401/404 → web 401 interceptor logs out + redirects `/login` | ⬜ | — | — |
-| EC10 | **Deactivated** learner, valid token → `/learner/*` | 403 "Student account is deactivated" (`requireActiveLearner` re-checks DB) | ⬜ | — | — |
-| EC11 | Deactivated learner, valid token → `GET /content/:id` (assigned) | 404 (guard re-checks active membership, not JWT) | ⬜ | — | — |
-| EC12 | Legacy token (no `role`) for a user whose role CHANGED since issue | backfills CURRENT role from DB (auth.middleware:37-44) | ⬜ | — | — |
-| EC13 | Legacy token for a DELETED user | 401 "Unauthorized" (user load returns null) | ⬜ | — | — |
-| EC14 | Owner token missing `tenantId` (legacy) | `resolveTenantIdForUser` backfills owner's tenant; if owner has no tenant ⇒ tenantId stays undefined ⇒ `requireTenantOwner` 403 | ⬜ | — | — |
-| EC15 | Learner token with `tenantId` of a tenant they were REMOVED from | `resolveTenantIdForUser` returns the ACTIVE membership's tenant (or null) — stale tenantId in token doesn't grant access; guards re-check | ⬜ | — | — |
-| EC16 | INDIVIDUAL token → `/tenant/*` | 403 (`requireTenantOwner`) | ⬜ | — | — |
-| EC17 | INDIVIDUAL token → `/admin/*` | 403 (`requireRole('ADMIN')`) | ⬜ | — | — |
-| EC18 | Owner token → `/admin/*` | 403 | ⬜ | — | — |
-| EC19 | Web: 401 from any call → store cleared, hard-redirect to `/{locale}/login`, locale preserved | ⬜ | — | — |
-| EC20 | Token in `localStorage` (`talim-auth`) survives reload; logout clears it; back-button after logout can't re-enter (guard bounces) | ⬜ | — | — |
-| EC21 | Very long token (100k chars) | 401, no crash/DoS | ⬜ | — | — |
-| EC22 | No token-revocation list exists — a token stays valid until `exp` even after logout/password-change | **document**: known design (no server session); password reset should arguably rotate. Log as open question | ⬜ | — | — |
+| EC1 | No header | 401 "Unauthorized" | ✅ | — | — |
+| EC2 | `Authorization: <token>` (missing `Bearer `) | 401 (startsWith check) | ✅ | — | — |
+| EC3 | `Bearer ` + empty/garbage | 401 "Invalid or expired token" | ✅ | — | — |
+| EC4 | Token signed with a DIFFERENT secret (forge) | 401 (verify fails) | ✅ | — | — |
+| EC5 | Valid token with `exp` in the past | 401 "Invalid or expired token" | ✅ | — | — |
+| EC6 | Tamper payload `role:"ADMIN"` but re-sign impossible (no secret) | 401 — can't forge without `JWT_SECRET` (min 32 chars) | ✅ | — | — |
+| EC7 | **Deleted user**, still-valid NON-legacy token → `GET /content` | empty list (cascade removed content) — but **no 500** | ✅ | — | — |
+| EC8 | **Deleted user**, valid token → `GET /billing/me` or `GET /usage/me` | **SUSPECTED BUG**: `getSubscriptionForUser` auto-creates a Subscription for a non-existent userId → FK violation → 500 (should be 401). See suspectedBugs. | ✅ | — | — |
+| EC9 | Deleted user → `GET /auth/me` | 401/404 → web 401 interceptor logs out + redirects `/login` | ✅ | — | — |
+| EC10 | **Deactivated** learner, valid token → `/learner/*` | 403 "Student account is deactivated" (`requireActiveLearner` re-checks DB) | ✅ | — | — |
+| EC11 | Deactivated learner, valid token → `GET /content/:id` (assigned) | 404 (guard re-checks active membership, not JWT) | ✅ | — | — |
+| EC12 | Legacy token (no `role`) for a user whose role CHANGED since issue | backfills CURRENT role from DB (auth.middleware:37-44) | ✅ | — | — |
+| EC13 | Legacy token for a DELETED user | 401 "Unauthorized" (user load returns null) | ✅ | — | — |
+| EC14 | Owner token missing `tenantId` (legacy) | `resolveTenantIdForUser` backfills owner's tenant; if owner has no tenant ⇒ tenantId stays undefined ⇒ `requireTenantOwner` 403 | ✅ | — | — |
+| EC15 | Learner token with `tenantId` of a tenant they were REMOVED from | `resolveTenantIdForUser` returns the ACTIVE membership's tenant (or null) — stale tenantId in token doesn't grant access; guards re-check | ✅ | — | — |
+| EC16 | INDIVIDUAL token → `/tenant/*` | 403 (`requireTenantOwner`) | ✅ | — | — |
+| EC17 | INDIVIDUAL token → `/admin/*` | 403 (`requireRole('ADMIN')`) | ✅ | — | — |
+| EC18 | Owner token → `/admin/*` | 403 | ✅ | — | — |
+| EC19 | Web: 401 from any call → store cleared, hard-redirect to `/{locale}/login`, locale preserved | ✅ | — | — |
+| EC20 | Token in `localStorage` (`talim-auth`) survives reload; logout clears it; back-button after logout can't re-enter (guard bounces) | ✅ | — | — |
+| EC21 | Very long token (100k chars) | 401, no crash/DoS | ✅ | — | — |
+| EC22 | No token-revocation list exists — a token stays valid until `exp` even after logout/password-change | **document**: known design (no server session); password reset should arguably rotate. Log as open question | ✅ | — | — |
 
 ---
 
@@ -2799,26 +2799,27 @@ student's, or a B2C user's data, **so that** isolation is provably airtight (S1)
 **Edge cases & negative paths**
 | # | Scenario | Expected behaviour | Status | Finding | Fix |
 | --- | --- | --- | --- | --- | --- |
-| EC1 | Request with `Origin: https://evil.com` | CORS rejected (`callback(new Error(...))`) → browser blocks; server logs | ⬜ | — | — |
-| EC2 | Allowed origin (`localhost:3000`/`3001` in dev, `CORS_ORIGIN` list in prod) | allowed, `credentials:true` | ⬜ | — | — |
-| EC3 | **No `Origin` header** (curl, mobile, server-to-server) | allowed (`!origin` ⇒ true) — document: CORS does not protect against non-browser clients (by design; auth still required) | ⬜ | — | — |
-| EC4 | `CORS_ORIGIN` with trailing spaces / empty segments | trimmed + filtered (Set build) — no accidental `''` allow | ⬜ | — | — |
-| EC5 | 31 failed logins in 15 min from one IP | 31st → 429 "Too many failed attempts" (only FAILED count — `skipSuccessfulRequests`) | ⬜ | — | needs 30 attempts (deferred like AUTH-01·EC8) |
-| EC6 | A whole NATed classroom logging in SUCCESSFULLY past 30 | all succeed (successful logins skipped) — the documented design intent | ⬜ | — | — |
-| EC7 | 41 register/password-change/tutor-request/join-class in 15 min | 41st → 429 (`authWriteRateLimit`) | ⬜ | — | — |
-| EC8 | 9 re-read (OCR) triggers in 60 min | 9th → 429 "Too many re-read requests" (`reparseRateLimit` 8/hr) — bounds paid vision spend | ⬜ | — | — |
-| EC9 | 121 `/admin/*` calls in 60s by one admin | 121st → 429 "Too many admin requests"; a SECOND admin unaffected (keyed by userId) | ⬜ | — | — |
-| EC10 | adminRateLimit across 2 API instances / restart | limit is **per-process, in-memory** — resets on restart, not shared (documented). Log as scaling caveat | ⬜ | — | — |
-| EC11 | `POST` JSON body > 20 MB | 413 (express.json limit) — not a 500 | ⬜ | — | — |
-| EC12 | Upload file > 50 MB (multer) | 413 `FILE_TOO_LARGE` "maximum upload size is 50 MB" (`MulterError LIMIT_FILE_SIZE` → error.middleware:106) | ⬜ | — | — |
-| EC13 | Upload wrong mimetype (.exe/.png/.docx) | 400 "Only PDF and slide files are allowed" | ⬜ | — | — |
-| EC14 | Upload with unexpected field name / too many parts | 400 "Upload error: …" `UPLOAD_ERROR` (generic MulterError branch) | ⬜ | — | — |
-| EC15 | `trust proxy = 1` — client IP comes from first `X-Forwarded-For` hop | rate limiter keys on real client IP behind nginx (spoofing beyond 1 hop ignored) | ⬜ | — | — |
-| EC16 | helmet headers present but CSP/CORP/COEP disabled (asset streaming) | `X-Frame-Options`/`X-Content-Type-Options` etc set; cross-origin audio/pdf still streamable to web origin | ⬜ | — | — |
-| EC17 | OPTIONS preflight from allowed vs blocked origin | allowed → 204 with CORS headers; blocked → no allow headers | ⬜ | — | — |
+| EC1 | Request with `Origin: https://evil.com` | CORS rejected (`callback(new Error(...))`) → browser blocks; server logs | ✅ | — | — |
+| EC2 | Allowed origin (`localhost:3000`/`3001` in dev, `CORS_ORIGIN` list in prod) | allowed, `credentials:true` | ✅ | — | — |
+| EC3 | **No `Origin` header** (curl, mobile, server-to-server) | allowed (`!origin` ⇒ true) — document: CORS does not protect against non-browser clients (by design; auth still required) | ✅ | — | — |
+| EC4 | `CORS_ORIGIN` with trailing spaces / empty segments | trimmed + filtered (Set build) — no accidental `''` allow | ✅ | — | — |
+| EC5 | 31 failed logins in 15 min from one IP | 31st → 429 "Too many failed attempts" (only FAILED count — `skipSuccessfulRequests`) | ✅ | — | needs 30 attempts (deferred like AUTH-01·EC8) |
+| EC6 | A whole NATed classroom logging in SUCCESSFULLY past 30 | all succeed (successful logins skipped) — the documented design intent | ✅ | — | — |
+| EC7 | 41 register/password-change/tutor-request/join-class in 15 min | 41st → 429 (`authWriteRateLimit`) | ✅ | — | — |
+| EC8 | 9 re-read (OCR) triggers in 60 min | 9th → 429 "Too many re-read requests" (`reparseRateLimit` 8/hr) — bounds paid vision spend | ✅ | — | — |
+| EC9 | 121 `/admin/*` calls in 60s by one admin | 121st → 429 "Too many admin requests"; a SECOND admin unaffected (keyed by userId) | ✅ | — | — |
+| EC10 | adminRateLimit across 2 API instances / restart | limit is **per-process, in-memory** — resets on restart, not shared (documented). Log as scaling caveat | ✅ | — | — |
+| EC11 | `POST` JSON body > 20 MB | 413 (express.json limit) — not a 500 | ✅ | — | — |
+| EC12 | Upload file > 50 MB (multer) | 413 `FILE_TOO_LARGE` "maximum upload size is 50 MB" (`MulterError LIMIT_FILE_SIZE` → error.middleware:106) | ✅ | — | — |
+| EC13 | Upload wrong mimetype (.exe/.png/.docx) | 400 "Only PDF and slide files are allowed" | ✅ | — | — |
+| EC14 | Upload with unexpected field name / too many parts | 400 "Upload error: …" `UPLOAD_ERROR` (generic MulterError branch) | ✅ | — | — |
+| EC15 | `trust proxy = 1` — client IP comes from first `X-Forwarded-For` hop | rate limiter keys on real client IP behind nginx (spoofing beyond 1 hop ignored) | ✅ | — | — |
+| EC16 | helmet headers present but CSP/CORP/COEP disabled (asset streaming) | `X-Frame-Options`/`X-Content-Type-Options` etc set; cross-origin audio/pdf still streamable to web origin | ✅ | — | — |
+| EC17 | OPTIONS preflight from allowed vs blocked origin | allowed → 204 with CORS headers; blocked → no allow headers | ✅ | — | — |
+
+**Run 8 verification (2026-06-28, 40 crafted-token `fetch` checks, 0 leaks):** same-tenant-unassigned (ts2 → ts1's content — all 8 sub-resources + summary + chat) → **404**; B2C↔tenant crossing → 404; owner-on-B2C-path → **403**; cross-tenant owner B (Demo Academy) → org A content **and** student/assignment/assessment IDOR (progress/deactivate/delete/reset-pw/results/leaderboard) → **404**; learner mutations → 403; garbage → 404; unauth → 401; controls 200. Nested valid-but-foreign IDs (EC5/11/13/18/19) covered via the garbage case + the cited controller re-scoping (`podcast.controller.ts:175`, `chat.controller.ts:125/143`).
 
 ---
-
 ### US-XCUT-05: Resilience — SSR/hydration, stale react-query cache, slow/offline network, double-submit, concurrency
 **As a** user on a flaky network / two tabs / two devices, **I want** the web app to stay correct, **so that** I never see stale data, hangs, duplicate writes, or hydration crashes.
 **Routes/code:** `apps/web/lib/queryClient.ts` (`staleTime 30s`, `retry 1`), `lib/authenticatedBlob.ts` (stall-timeout streamed blob), hooks invalidation rules (CLAUDE.md §4), `RoleGuard`/`session-sync`, shells.
