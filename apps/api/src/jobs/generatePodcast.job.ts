@@ -1,5 +1,6 @@
 import { parseAppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
+import { jobEvents } from '../services/events/jobEvents.service.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import { buildRagContext, boundContextByTokens } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
@@ -100,6 +101,12 @@ export function registerGeneratePodcastJob(): void {
       await prisma.podcast.update({
         where: { id: podcastId },
         data: { status: withAudio > 0 ? 'READY' : 'FAILED' },
+      });
+      jobEvents.publish(content.userId, {
+        type: 'podcast.status',
+        contentId,
+        episodeId,
+        status: withAudio > 0 ? 'READY' : 'FAILED',
       });
       return;
     }
@@ -214,12 +221,21 @@ export function registerGeneratePodcastJob(): void {
       where: { id: podcastId },
       data: { status: audioCount > 0 ? 'READY' : 'FAILED' },
     });
+    jobEvents.publish(content.userId, {
+      type: 'podcast.status',
+      contentId,
+      status: audioCount > 0 ? 'READY' : 'FAILED',
+    });
   });
 
   podcastQueue.on('failed', async (job, err) => {
     console.error(`Podcast job ${job?.id} failed:`, err.message);
     const data = job?.data as GeneratePodcastJobData | undefined;
     if (!data?.podcastId) return;
+    const owner = await prisma.content.findUnique({
+      where: { id: data.contentId },
+      select: { userId: true },
+    });
     if (data.episodeId) {
       // A single-episode (manual per-section) regeneration that fails must NOT nuke
       // the whole podcast — keep it READY as long as another episode still has audio
@@ -227,15 +243,21 @@ export function registerGeneratePodcastJob(): void {
       const withAudio = await prisma.podcastEpisode.count({
         where: { podcastId: data.podcastId, audioPath: { not: null } },
       });
-      await prisma.podcast.update({
-        where: { id: data.podcastId },
-        data: { status: withAudio > 0 ? 'READY' : 'FAILED' },
-      });
+      const status = withAudio > 0 ? 'READY' : 'FAILED';
+      await prisma.podcast.update({ where: { id: data.podcastId }, data: { status } });
+      if (owner) {
+        jobEvents.publish(owner.userId, {
+          type: 'podcast.status',
+          contentId: data.contentId,
+          episodeId: data.episodeId,
+          status,
+        });
+      }
       return;
     }
-    await prisma.podcast.update({
-      where: { id: data.podcastId },
-      data: { status: 'FAILED' },
-    });
+    await prisma.podcast.update({ where: { id: data.podcastId }, data: { status: 'FAILED' } });
+    if (owner) {
+      jobEvents.publish(owner.userId, { type: 'podcast.status', contentId: data.contentId, status: 'FAILED' });
+    }
   });
 }

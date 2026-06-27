@@ -3,6 +3,7 @@ import { useLocale } from 'next-intl';
 import type { AppLocale, ContentVideo } from '@talim/types';
 import { api } from '@/lib/api';
 import { useContentBase } from '@/hooks/useContentBase';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
 
 function videoKey(contentId: string, sectionId: string | undefined, locale: string) {
   return ['video', contentId, sectionId ?? 'full', locale] as const;
@@ -11,6 +12,7 @@ function videoKey(contentId: string, sectionId: string | undefined, locale: stri
 export function useVideo(contentId: string, sectionId?: string) {
   const locale = useLocale() as AppLocale;
   const base = useContentBase();
+  const connected = useJobStreamStore((s) => s.connected);
 
   return useQuery({
     queryKey: videoKey(contentId, sectionId, locale),
@@ -21,12 +23,12 @@ export function useVideo(contentId: string, sectionId?: string) {
       return data.video;
     },
     enabled: !!contentId,
-    // Poll while the narrated slideshow is still rendering so it appears without
-    // a manual refresh, then stop once it's READY/FAILED.
+    // SSE-primary (generateVideo publishes video.status, incl. a FAILED push so a stuck
+    // render no longer polls forever); slow safety-net poll only while disconnected.
     refetchInterval: (query) => {
       const video = query.state.data as ContentVideo | null | undefined;
-      if (video && (video.status === 'GENERATING' || video.status === 'PENDING')) return 4000;
-      return false;
+      if (!video || (video.status !== 'GENERATING' && video.status !== 'PENDING')) return false;
+      return connected ? 30_000 : 4000;
     },
   });
 }

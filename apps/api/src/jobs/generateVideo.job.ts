@@ -5,6 +5,7 @@ import { synthesizeSpeech } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
 import { getSlideDeck, generateAndStoreSlideDeck } from '../services/slides.service.js';
 import { videoQueue, type GenerateVideoJobData } from '../services/queue.service.js';
+import { jobEvents } from '../services/events/jobEvents.service.js';
 
 /**
  * "AI video" = a narrated slideshow. We reuse the slide-deck generator for the
@@ -190,16 +191,32 @@ export function registerGenerateVideoJob(): void {
         segments: segments as unknown as object,
       },
     });
+    jobEvents.publish(content.userId, {
+      type: 'video.status',
+      contentId,
+      sectionId,
+      status: audioCount > 0 ? 'READY' : 'FAILED',
+    });
   });
 
   videoQueue.on('failed', async (job, err) => {
     console.error(`Video job ${job?.id} failed:`, err.message);
     const data = job?.data as GenerateVideoJobData | undefined;
-    if (data?.videoId) {
-      await prisma.contentVideo.update({
-        where: { id: data.videoId },
-        data: { status: 'FAILED' },
-      }).catch(() => undefined);
+    if (!data?.videoId) return;
+    const video = await prisma.contentVideo
+      .update({ where: { id: data.videoId }, data: { status: 'FAILED' } })
+      .catch(() => null);
+    const owner = await prisma.content.findUnique({
+      where: { id: data.contentId },
+      select: { userId: true },
+    });
+    if (owner) {
+      jobEvents.publish(owner.userId, {
+        type: 'video.status',
+        contentId: data.contentId,
+        sectionId: video?.sectionId ?? undefined,
+        status: 'FAILED',
+      });
     }
   });
 }

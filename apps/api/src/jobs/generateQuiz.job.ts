@@ -4,6 +4,7 @@ import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
+import { jobEvents } from '../services/events/jobEvents.service.js';
 import { getQuizSystemPrompt, buildQuizUserPrompt } from '../lib/locale-prompts.js';
 import { getQuestionCount } from '../lib/quiz-prompt.js';
 import { normalizeQuestionType, type QuestionStyle } from '../lib/assessment-prompt.js';
@@ -126,9 +127,26 @@ export function registerGenerateQuizJob(): void {
     if (skipped > 0) {
       console.warn(`generateQuiz: skipped ${skipped} invalid question(s) for quiz ${quizId} (created ${created})`);
     }
+    jobEvents.publish(content.userId, { type: 'quiz.status', quizId, contentId, status: 'READY' });
   });
 
-  quizQueue.on('failed', (job, err) => {
+  quizQueue.on('failed', async (job, err) => {
     console.error(`Quiz job ${job?.id} failed:`, err.message);
+    // Quiz has no status column, so a hard failure would otherwise make the client poll
+    // forever — push a FAILED so it can stop.
+    const data = job?.data as GenerateQuizJobData | undefined;
+    if (!data?.quizId) return;
+    const owner = await prisma.content.findUnique({
+      where: { id: data.contentId },
+      select: { userId: true },
+    });
+    if (owner) {
+      jobEvents.publish(owner.userId, {
+        type: 'quiz.status',
+        quizId: data.quizId,
+        contentId: data.contentId,
+        status: 'FAILED',
+      });
+    }
   });
 }

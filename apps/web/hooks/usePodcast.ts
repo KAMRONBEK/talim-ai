@@ -4,10 +4,12 @@ import { useLocale } from 'next-intl';
 import type { AppLocale } from '@talim/types';
 import { api } from '@/lib/api';
 import { useContentBase } from '@/hooks/useContentBase';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
 
 export function usePodcast(contentId: string, pollMs?: number) {
   const locale = useLocale() as AppLocale;
   const base = useContentBase();
+  const connected = useJobStreamStore((s) => s.connected);
 
   return useQuery({
     queryKey: ['podcast', contentId, locale],
@@ -19,10 +21,12 @@ export function usePodcast(contentId: string, pollMs?: number) {
       return data.podcast;
     },
     enabled: !!contentId,
+    // SSE-primary (generatePodcast publishes podcast.status); slow safety-net poll only
+    // while disconnected.
     refetchInterval: (query) => {
       const status = query.state.data?.status;
-      if (status === 'GENERATING' || status === 'PENDING') return pollMs ?? 3000;
-      return false;
+      if (status !== 'GENERATING' && status !== 'PENDING') return false;
+      return connected ? 30_000 : (pollMs ?? 3000);
     },
   });
 }

@@ -10,8 +10,10 @@ import type {
   AppLocale,
 } from '@talim/types';
 import { api } from '@/lib/api';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
 
 export function useQuiz(id: string, pollInterval?: number) {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['quiz', id],
     queryFn: async () => {
@@ -19,9 +21,12 @@ export function useQuiz(id: string, pollInterval?: number) {
       return data.quiz;
     },
     enabled: !!id,
+    // SSE-primary (generateQuiz publishes quiz.status READY/FAILED); when connected, poll
+    // slowly as a safety net only for callers that asked to poll during generation.
     refetchInterval: (query) => {
       const quiz = query.state.data as Quiz | undefined;
-      return quiz?.questions?.length ? false : pollInterval;
+      if (quiz?.questions?.length || pollInterval == null) return false;
+      return connected ? 30_000 : pollInterval;
     },
   });
 }
