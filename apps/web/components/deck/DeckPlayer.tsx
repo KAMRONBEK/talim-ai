@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from 'lucide-react';
 import { cn } from '@talim/ui';
 import type { Deck } from '@talim/types';
@@ -33,6 +34,7 @@ export function DeckPlayer({
   /** Called when "prev" is pressed on the first slide (e.g. go back to the previous section). */
   onBeforeStart?: () => void;
 }) {
+  const t = useTranslations('deck');
   const total = deck.slides.length;
   const [index, setIndex] = useState(() => {
     if (initialIndex === 'last') return Math.max(0, total - 1);
@@ -221,7 +223,7 @@ export function DeckPlayer({
             type="button"
             onClick={prev}
             disabled={atStart && !onBeforeStart}
-            aria-label="Previous slide"
+            aria-label={t('prevSlide')}
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -233,7 +235,7 @@ export function DeckPlayer({
             type="button"
             onClick={next}
             disabled={atEnd && !onPastEnd}
-            aria-label="Next slide"
+            aria-label={t('nextSlide')}
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
           >
             <ChevronRight className="h-5 w-5" />
@@ -241,7 +243,7 @@ export function DeckPlayer({
           <button
             type="button"
             onClick={toggleFullscreen}
-            aria-label={fullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            aria-label={fullscreen ? t('exitFullscreen') : t('enterFullscreen')}
             className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5"
           >
             {fullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
@@ -250,7 +252,7 @@ export function DeckPlayer({
       </div>
 
       <span aria-live="polite" className="sr-only">
-        Slide {index + 1} of {total}
+        {t('slideProgress', { index: index + 1, total })}
       </span>
     </div>
   );

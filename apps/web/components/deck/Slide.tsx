@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Check, Minus, Quote as QuoteIcon, TrendingDown, TrendingUp, X } from 'lucide-react';
 import { cn } from '@talim/ui';
 import type {
@@ -217,9 +218,10 @@ function QuoteLayout({ slide }: { slide: QuoteSlide }) {
 }
 
 function Definition({ slide }: { slide: DefinitionSlide }) {
+  const t = useTranslations('deck');
   return (
     <div className="flex h-full w-full flex-col justify-center">
-      <Kicker>Definition</Kicker>
+      <Kicker>{t('definition')}</Kicker>
       <h2 className={cn(T.title, 'mt-4 text-[3rem]', fadeUp)}>{slide.term}</h2>
       {slide.pronunciation && (
         <p className="mt-1 text-xl italic text-zinc-400">/{slide.pronunciation}/</p>
@@ -360,9 +362,10 @@ function Callout({ slide }: { slide: CalloutSlide }) {
 }
 
 function Recap({ slide }: { slide: RecapSlide }) {
+  const t = useTranslations('deck');
   return (
     <div className="flex h-full w-full flex-col justify-center">
-      <Kicker>Recap</Kicker>
+      <Kicker>{t('recap')}</Kicker>
       <SlideTitle className="mt-3 mb-6 max-w-[26ch]">{slide.title}</SlideTitle>
       <ul className="space-y-3">
         {slide.points.map((p, i) => (
@@ -383,10 +386,11 @@ function Recap({ slide }: { slide: RecapSlide }) {
 }
 
 function QuickCheck({ slide }: { slide: QuickCheckSlide }) {
+  const t = useTranslations('deck');
   const [revealed, setRevealed] = useState(false);
   return (
     <div className="flex h-full w-full flex-col justify-center">
-      <Kicker>Quick check</Kicker>
+      <Kicker>{t('quickCheck')}</Kicker>
       <h2 className={cn(T.title, 'mt-3 max-w-[34ch] text-[2.25rem]', fadeUp)}>{slide.question}</h2>
       {slide.options && slide.options.length > 0 && (
         <ul className="mt-8 grid grid-cols-2 gap-4">
@@ -424,7 +428,7 @@ function QuickCheck({ slide }: { slide: QuickCheckSlide }) {
           onClick={() => setRevealed(true)}
           className="mt-8 w-fit rounded-xl bg-[var(--slide-accent)] px-5 py-2.5 font-semibold text-white transition-transform duration-150 hover:-translate-y-0.5"
         >
-          Reveal answer
+          {t('revealAnswer')}
         </button>
       )}
       {revealed && slide.answerExplanation && (

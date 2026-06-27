@@ -87,8 +87,8 @@ export default function TenantStudentDetailPage({
           )}
         </div>
         <aside className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <h2 className="font-display text-lg font-semibold">Assign material</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Give this student access to a material.</p>
+          <h2 className="font-display text-lg font-semibold">{t('assignMaterial')}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{t('assignMaterialDesc')}</p>
           <div className="mt-4 space-y-2">
             {(contents ?? []).map((content) => (
               <div key={content.id} className="flex items-center justify-between gap-2 rounded-xl border border-border/70 p-2.5 text-sm transition-colors hover:bg-secondary/40">
@@ -100,7 +100,7 @@ export default function TenantStudentDetailPage({
                   disabled={assign.isPending}
                   onClick={() => assign.mutate({ contentId: content.id, learnerId: id })}
                 >
-                  Assign
+                  {t('assignAction')}
                 </Button>
               </div>
             ))}
