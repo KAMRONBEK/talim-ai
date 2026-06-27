@@ -54,7 +54,7 @@ const PLANS: PlanSeed[] = [
   {
     id: 'plan_tenant_starter',
     code: 'TENANT_STARTER',
-    name: 'Tenant Starter',
+    name: 'Team',
     kind: 'TENANT',
     limits: {
       maxStudents: 25,
@@ -70,7 +70,7 @@ const PLANS: PlanSeed[] = [
   {
     id: 'plan_tenant_growth',
     code: 'TENANT_GROWTH',
-    name: 'Tenant Growth',
+    name: 'School',
     kind: 'TENANT',
     limits: {
       maxStudents: 100,

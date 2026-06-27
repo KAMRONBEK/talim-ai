@@ -18,6 +18,7 @@ import {
   useResetUserPassword,
   useUpdateUserSubscription,
 } from '@/hooks/useAdmin';
+import { planLabel } from '@/lib/plan';
 
 const INDIVIDUAL_PLANS: PlanCode[] = ['FREE', 'INDIVIDUAL_PRO'];
 const STATUS_OPTIONS: SubscriptionStatus[] = ['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'];
@@ -395,7 +396,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               <div className="pt-2">
                 <p className="text-xs text-muted-foreground">Current org plan</p>
                 <p className="font-medium">
-                  {subscription.effectivePlanCode} · {subscription.status}
+                  {planLabel(subscription.effectivePlanCode)} · {subscription.status}
                 </p>
               </div>
             )}
@@ -417,11 +418,11 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
                   <div>
                     <p className="text-xs text-muted-foreground">Effective plan</p>
-                    <p className="font-medium">{subscription.effectivePlanCode}</p>
+                    <p className="font-medium">{planLabel(subscription.effectivePlanCode)}</p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Stored plan</p>
-                    <p className="font-medium">{subscription.planCode}</p>
+                    <p className="font-medium">{planLabel(subscription.planCode)}</p>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Source</p>
@@ -445,7 +446,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                         >
                           {INDIVIDUAL_PLANS.map((p) => (
                             <option key={p} value={p}>
-                              {p}
+                              {planLabel(p)}
                             </option>
                           ))}
                         </select>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import { useAdminSubscriptions } from '@/hooks/useAdmin';
+import { planLabel } from '@/lib/plan';
 
 const STATUS_OPTIONS = ['', 'ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'] as const;
 const PLAN_OPTIONS = [
@@ -84,7 +85,7 @@ export default function SubscriptionsPage() {
           >
             {PLAN_OPTIONS.map((p) => (
               <option key={p || 'all'} value={p}>
-                {p || 'All plans'}
+                {p ? planLabel(p) : 'All plans'}
               </option>
             ))}
           </select>
@@ -143,9 +144,9 @@ export default function SubscriptionsPage() {
                   </span>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="font-medium">{sub.effectivePlanCode}</span>
+                  <span className="font-medium">{planLabel(sub.effectivePlanCode)}</span>
                   {sub.planCode !== sub.effectivePlanCode && (
-                    <span className="ml-1 text-xs text-muted-foreground">({sub.planCode})</span>
+                    <span className="ml-1 text-xs text-muted-foreground">({planLabel(sub.planCode)})</span>
                   )}
                 </td>
                 <td className="px-4 py-3">

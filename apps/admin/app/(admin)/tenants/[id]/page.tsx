@@ -5,6 +5,7 @@ import { use, useState } from 'react';
 import { Button, Card, CardContent, CardHeader, Input, Label } from '@talim/ui';
 import type { PlanCode, SubscriptionStatus } from '@talim/types';
 import { useAdminTenant, useUpdateTenant } from '@/hooks/useAdmin';
+import { planLabel } from '@/lib/plan';
 
 const TENANT_PLANS: PlanCode[] = ['TENANT_STARTER', 'TENANT_GROWTH'];
 const STATUS_OPTIONS: SubscriptionStatus[] = ['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'];
@@ -75,7 +76,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Subscription</p>
-            <p className="font-semibold">{subscription?.effectivePlanCode ?? 'None'}</p>
+            <p className="font-semibold">{subscription ? planLabel(subscription.effectivePlanCode) : 'None'}</p>
           </CardContent>
         </Card>
       </div>
@@ -104,7 +105,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
               >
                 {TENANT_PLANS.map((p) => (
                   <option key={p} value={p}>
-                    {p}
+                    {planLabel(p)}
                   </option>
                 ))}
               </select>

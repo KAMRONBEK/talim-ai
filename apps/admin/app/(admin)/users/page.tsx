@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import { useAdminUsers, useDeleteUser, useResetUserPassword } from '@/hooks/useAdmin';
+import { planLabel } from '@/lib/plan';
 
 export default function UsersPage() {
   const [search, setSearch] = useState('');
@@ -82,7 +83,7 @@ export default function UsersPage() {
                 <td className="px-4 py-3">
                   <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{user.role}</span>
                 </td>
-                <td className="px-4 py-3">{user.planCode ?? '—'}</td>
+                <td className="px-4 py-3">{planLabel(user.planCode)}</td>
                 <td className="px-4 py-3">
                   {user.subscriptionStatus ? (
                     <span className="rounded-full bg-muted px-2 py-0.5 text-xs">

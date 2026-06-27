@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import { useAdminTenants } from '@/hooks/useAdmin';
+import { planLabel } from '@/lib/plan';
 
 export default function TenantsPage() {
   const [search, setSearch] = useState('');
@@ -67,7 +68,7 @@ export default function TenantsPage() {
                   )}
                   <p className="text-xs text-muted-foreground">Tenant owner</p>
                 </td>
-                <td className="px-4 py-3">{tenant.planCode ?? '—'}</td>
+                <td className="px-4 py-3">{planLabel(tenant.planCode)}</td>
                 <td className="px-4 py-3">
                   {tenant.subscriptionStatus ? (
                     <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
