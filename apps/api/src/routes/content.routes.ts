@@ -29,7 +29,7 @@ contentRoutes.get('/:id/sections', asyncHandler(sectionController.listSections))
 contentRoutes.get('/:id/sections/:sectionId', asyncHandler(sectionController.getSection));
 contentRoutes.get('/:id/transcript', asyncHandler(contentController.getContentTranscript));
 contentRoutes.get('/:id/file', asyncHandler(contentController.getContentFile));
-contentRoutes.post('/:id/ocr-region', asyncHandler(contentController.ocrPdfRegion));
+contentRoutes.post('/:id/ocr-region', reparseRateLimit, asyncHandler(contentController.ocrPdfRegion));
 contentRoutes.get('/:id/podcast', asyncHandler(podcastController.getPodcast));
 contentRoutes.post('/:id/podcast', asyncHandler(podcastController.createPodcast));
 contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));

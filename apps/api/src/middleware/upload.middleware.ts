@@ -15,15 +15,14 @@ export const upload = multer({
   storage,
   limits: { fileSize: UPLOAD_MAX_MB * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
-    const allowed = [
-      'application/pdf',
-      'application/vnd.ms-powerpoint',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    ];
-    if (allowed.includes(file.mimetype) || file.originalname.endsWith('.pdf')) {
+    // Only PDF is supported end-to-end. PowerPoint was accepted here historically but has
+    // no extractor (processContent routes SLIDE through pdf-parse, which throws on a .pptx
+    // ZIP), so it silently FAILED during ingest. Reject it up front with a clear message
+    // (mapped to a 400 in error.middleware) instead of accepting then failing.
+    if (file.mimetype === 'application/pdf' || file.originalname.toLowerCase().endsWith('.pdf')) {
       cb(null, true);
     } else {
-      cb(new Error('Only PDF and slide files are allowed'));
+      cb(new Error('Only PDF files are supported. Please export PowerPoint (.ppt/.pptx) to PDF and upload that.'));
     }
   },
 });

@@ -219,11 +219,23 @@ export function registerGeneratePodcastJob(): void {
   podcastQueue.on('failed', async (job, err) => {
     console.error(`Podcast job ${job?.id} failed:`, err.message);
     const data = job?.data as GeneratePodcastJobData | undefined;
-    if (data?.podcastId) {
+    if (!data?.podcastId) return;
+    if (data.episodeId) {
+      // A single-episode (manual per-section) regeneration that fails must NOT nuke
+      // the whole podcast — keep it READY as long as another episode still has audio
+      // (mirrors the success path at lines 97-103).
+      const withAudio = await prisma.podcastEpisode.count({
+        where: { podcastId: data.podcastId, audioPath: { not: null } },
+      });
       await prisma.podcast.update({
         where: { id: data.podcastId },
-        data: { status: 'FAILED' },
+        data: { status: withAudio > 0 ? 'READY' : 'FAILED' },
       });
+      return;
     }
+    await prisma.podcast.update({
+      where: { id: data.podcastId },
+      data: { status: 'FAILED' },
+    });
   });
 }

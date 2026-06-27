@@ -96,7 +96,7 @@ export function errorMiddleware(
     return;
   }
 
-  if (err.message === 'Only PDF and slide files are allowed') {
+  if (err.message.startsWith('Only PDF files are supported')) {
     res.status(400).json({ message: err.message });
     return;
   }

@@ -27,7 +27,8 @@ export async function getSubscriptionForTenant(tenantId: string): Promise<Subscr
 
 export async function requireActiveTenantSubscription(tenantId: string): Promise<SubscriptionView> {
   const sub = await getSubscriptionForTenant(tenantId);
-  if (!sub || sub.status !== 'ACTIVE') {
+  // TRIALING is an active-access state (a trial); only PAST_DUE/CANCELED/missing block.
+  if (!sub || (sub.status !== 'ACTIVE' && sub.status !== 'TRIALING')) {
     throw new AppError(402, 'Tenant subscription required. Contact admin to activate your organization.');
   }
   if (sub.planKind !== 'TENANT') {

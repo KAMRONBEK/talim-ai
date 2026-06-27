@@ -73,11 +73,10 @@ export async function adminUpdateUserSubscription(
   }
 
   if (input.status) {
+    // Keep the paid plan on cancel (matches the tenant path). CANCELED already gets
+    // free-plan limits at read time (getSubscriptionForUser), so rewriting planId→FREE
+    // here only loses the original plan, making a later re-ACTIVATE return FREE.
     data.status = input.status;
-    if (input.status === 'CANCELED') {
-      const freePlan = await getFreePlan();
-      data.plan = { connect: { id: freePlan.id } };
-    }
   }
 
   if (input.currentPeriodEnd !== undefined) {
