@@ -6,6 +6,13 @@ its deepest edge cases, and each edge case carries a **live status**, the **find
 produced, and the **fix** that closed it. Read this to answer "is behaviour X tested, and
 does it work?" at any moment.
 
+> **Backlog expansion:** [`user-stories-expansion.md`](./user-stories-expansion.md) holds **76**
+> additional deep stories (~1,470 edge cases) mined from a full code read — AI video, slides,
+> assessments, the admin panel, the multi-tenant isolation matrix, a11y, background jobs, the
+> quota matrix and cascade-deletes. Promote stories from there into this ledger as they are
+> verified. That pass also surfaced **90 suspected bugs** (its own ledger); the confirmed +
+> fixed ones are recorded below as **F32–F39**.
+
 ---
 
 ## How to read this
@@ -306,6 +313,14 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
+| F32 | S2 | US-IND-25 · podcast | **A single per-episode podcast regenerate failure marked the WHOLE podcast FAILED** — the shared Bull `failed` handler ignored `episodeId` and forced `status:FAILED`, destroying an otherwise-READY podcast whose other episodes were intact. Now episode-scoped: recompute status from surviving audio (READY if any episode still has audio). | 🐛→✅ | `e0a8846` |
+| F33 | S2 | US-OWNER-11 · billing | **TRIALING tenant subscription was fully locked out** — `requireActiveTenantSubscription` 402'd every non-ACTIVE status, so a trial org couldn't upload / add students / generate. TRIALING now counts as active access; PAST_DUE/CANCELED still block. | 🐛→✅ | `e0a8846` |
+| F34 | S2 | US-LEARNER-06 | **`mustChangePassword` was not enforced** — surfaced only as a *dismissible* welcome banner, so a student could use the whole app on a temporary password. Added a learner-shell route gate forcing `/learner/settings` until changed (store flag cleared on success). Verified live: flagged student bounced to settings (stable, no loop); normal learners unaffected. | 🐛→✅ | `15acc73` |
+| F35 | S2 | US-IND-01 · upload | **PowerPoint (.ppt/.pptx) uploads ALWAYS failed** — accepted by multer, then `processContent` routed `SLIDE` through `pdf-parse` (PDF-only), which throws on a pptx ZIP (no extractor exists). Now rejected at the upload boundary with a clear 400 ("export to PDF and upload that"). | 🐛→✅ | `e0a8846` |
+| F36 | S3 | US-IND-23 · chat | **Chat mid-stream server error rendered the raw English "Stream failed"** (un-localized on uz/ru) and didn't persist (ghost message on reload). Now flagged → routed through the outer catch (removes the optimistic bubbles) → ChatWindow surfaces the localized chat error + restores the composer. | 🐛→✅ | `15acc73` |
+| F37 | S2 | US-ADMIN-03 · sub | **Admin cancel of an individual subscription rewrote `planId`→FREE**, so a later re-ACTIVATE returned FREE (the paid plan was lost); the tenant path kept it. CANCELED already gets free-plan limits at read time, so now only the status is written. | 🐛→✅ | `e0a8846` |
+| F38 | S2 | US-IND-20 · OCR | **`POST /content/:id/ocr-region` (paid vision OCR) had no rate limit** (unlike `/reparse`) — a cost-abuse vector. Added `reparseRateLimit` (access was already guarded by `blockLearnerMutations` + `assertCanAccessContent`). | 🐛→✅ | `e0a8846` |
+| F39 | S2 | US-OWNER-09 · GAME | **GAME leaderboard speed-points are computed from client-supplied per-question `timings`** (trusted), so a learner can POST `timings:0` to force `speedFactor=1.0` and inflate points. A correct fix needs a server-measured clock (persist a per-attempt/served timestamp) → logged, not fixed. | 🟡 logged | — |
 | F31 | S3 | US-IND-08 | **Usage-limit errors mostly didn't surface the upgrade modal.** Only file uploads (PLAN_FILE_LIMIT) opened it; daily quota errors (UPLOAD/GENERATION/PODCAST/VIDEO/TUTOR_MESSAGE) failed silently or with ad-hoc inline text — the tutor stream threw an unhandled rejection (empty assistant bubble left behind), and video/podcast/quiz/summary had no or partial 402 handling. Built a unified `classifyLimitError` + role-aware `useLimitErrorHandler` + one global `useUpgradeModal`/`GlobalUpgradeModal` (mounted in `providers.tsx`) and wired every quota-gated call site. Self-serve INDIVIDUAL limits → modal; tenant / top-plan / hard 120 MB cap → inline. Verified all 7 cases live (run 7). | ✅ fixed | _pending commit (this session)_ |
 | F30 | S3 | US-IND-05 · EC | **Podcast per-episode regenerate (+ overall retry) gave no error feedback.** The new per-episode "Qayta urinish" button (and the stuck/failed retry button) called the regenerate/create mutation but never surfaced its rejection — a 402 quota (FREE plan, podcast quota 1/1 already spent by the bulk generation) returned silently, so the button looked like it did nothing. Added `classifyGenerationError` → visible header message ("Podkast cheklovi tugadi {used}/{limit}" for quota; plan/generic otherwise). Verified via Playwright: FREE regenerate → 402 → "Podkast cheklovi tugadi (1/1)." | ✅ fixed | `b861405` |
 | F15 | S3 | US-OWNER-12 · EC1 | Material delete dialog + aria-label hardcoded Uzbek | ✅ fixed | `36f1f41` |
