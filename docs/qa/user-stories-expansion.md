@@ -3331,3 +3331,39 @@ Hypotheses from reading source during the expansion. **Not verified at runtime**
 - [xcut-quality] components/language-switcher.tsx:26-28 — locale switch uses window.location.assign (full reload), discarding all unsaved client state (form inputs, chat draft, scroll, open dialogs) and possibly dropping query/hash params; conflicts with the 'locale switch mid-flow keeps state' requirement. PATCH /auth/me failure is also swallowed silently (.catch(()=>{})).
 - [xcut-quality] No skip-to-content link found anywhere in app/components — keyboard users tab through the full nav on every page (WCAG 2.4.1).
 
+
+---
+
+<!-- ===== AREA: sse-events ===== -->
+## Area: SSE job-events (push completion, replaces polling)
+
+### US-XCUT-21: SSE job-events stream replaces completion polling
+**As the** platform, **I want** async-job completion pushed over one SSE stream per tab instead of every tab polling `/content`/`/podcast`/`/video`/`/quiz` every 3–5s, **so that** the server load drops and the UI updates instantly — without ever regressing if the stream drops.
+**Routes/code:** `GET /events` · `controllers/events.controller.ts` · `services/events/jobEvents.service.ts` (in-process bus) · jobs `processContent`/`generatePodcast`/`generateVideo`/`generateQuiz` (publish) · web `lib/jobStream.ts` · `hooks/useJobEvents.ts` · `store/useJobStreamStore.ts` · the 6 gated polling hooks.
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
+
+**Acceptance criteria**
+- AC1 — `GET /events` (auth) returns `text/event-stream`, holds open, heartbeats; events push job completion and the web invalidates the matching react-query key.
+- AC2 — Events are scoped to the owning user; carry no content payload (id-only) — the refetch re-runs `assertCanAccessContent`.
+- AC3 — Polling is demoted to a 30s safety-net gated on `!connected`, so a failed handshake never regresses below the old UX.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | `GET /events` with auth | 200 `text/event-stream` + `X-Accel-Buffering:no`, holds open | ✅ | — | curl |
+| EC2 | `GET /events` no/invalid token | 401 | ✅ | — | — |
+| EC3 | Upload → ingest finishes | `content.status` READY/FAILED pushed to the owner's stream | ✅ | — | live |
+| EC4 | Hard ingest/quiz failure | terminal `FAILED` pushed (fixes prior poll-forever-on-failure) | ✅ | — | live |
+| EC5 | **Per-user scoping (S1)** | user A's event reaches A, NOT user B's stream | ✅ | — | live, no leak |
+| EC6 | Defence-in-depth | events carry only ids; refetch goes through `assertCanAccessContent` | ✅ | — | by design |
+| EC7 | **Multi-tab** (2 streams, same user) | BOTH receive the event | ✅ | — | live |
+| EC8 | **Last-Event-ID = seqN** (reconnect) | does NOT re-deliver the already-seen event | ✅ | — | live |
+| EC9 | **Last-Event-ID = seqN-1** | REPLAYS the missed event | ✅ | — | live |
+| EC10 | Ring-gap older than buffer/TTL | sends `event: resync` → client full-invalidates | ✅ | — | logic-verified |
+| EC11 | **Heartbeat** (idle) | `: ping` every 20s keeps nginx from idle-closing | ✅ | — | live (1 ping/23s) |
+| EC12 | **Media parity** — quiz | `quiz.status` READY pushed by a real generation job | ✅ | — | live |
+| EC13 | Media parity — podcast/video | `podcast.status`/`video.status` pushed (identical path; +episodeId/+sectionId) | 🟡 | — | code-verified; podcast slow to finish in-test |
+| EC14 | **Job decoupled from delivery** | a dead subscriber's `res.write` error never fails the job (publish + send swallow it) | ✅ | — | hardened |
+| EC15 | Connected → steady-state polling | `/content` etc. drop to ≤1 req/30s while connected; 0 console errors | ✅ | — | browser |
+| EC16 | Disconnected (handshake fail / API down) | fast 3–5s safety-net poll resumes (watchdog 45s reconnect, retry:5000) | 🟡 | — | code-verified; not live-stressed |
+| EC17 | No regression | content/media pages render clean after the polling→push change | ✅ | — | 5 tenant pages, 0 errors |

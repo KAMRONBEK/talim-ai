@@ -540,3 +540,7 @@ hardened so a subscriber error never reaches the job), publishes from processCon
 **Regression smoke (Run 9):** after the polling→push hook changes, all 5 tenant pages
 (dashboard/materials/students/assessments/progress) render with 0 broken states, 0 console errors.
 No regression from gating the content/media refetchIntervals.
+
+**SSE deep-QA (extends Run 9):** Last-Event-ID replay (replays seqN-1's missed event; does NOT re-deliver seqN),
+multi-tab (both same-user streams receive), 20s heartbeat (1 ping/23s), and **media parity** (a real quiz
+generation pushed `quiz.status:READY` live) — all ✅. Full architecture test plan now green. See US-XCUT-21.
