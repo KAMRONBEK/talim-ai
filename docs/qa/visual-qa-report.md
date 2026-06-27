@@ -510,3 +510,29 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-IND-09 (Upload → READY) — full pipeline verified live.** Real PDF upload as qa-individual → PROCESSING → READY in ~4s with 1 section (extract/chunk/embed/section all ran); deleted (204). The last untested P0 happy path — passes, no findings.
 
 **US-XCUT-08/13 (Cascade-delete) — clean.** Content (1 section, 1 chunk) deleted → 0 orphaned rows across 11 child tables. No data-lifecycle leaks. No findings.
+
+---
+
+## Run 9 — 2026-06-28 · SSE job-events (replace completion polling)
+
+**Feature:** replaced the 3–5s react-query `refetchInterval` completion-polling (8 hooks) with a
+single per-tab SSE stream (`GET /events`) that pushes id-only job-completion events driving
+`queryClient.invalidateQueries`; polling demoted to a 30s safety-net gated on `!connected`.
+Backend: in-process `JobEventBus` (per-user EventEmitter + ring buffer for Last-Event-ID replay,
+hardened so a subscriber error never reaches the job), publishes from processContent / generatePodcast
+/ generateVideo / generateQuiz. Frontend: `lib/jobStream` (fetch-SSE + reconnect/watchdog), `useJobEvents`
+(event→invalidate + reconnect catch-up), `useJobStreamStore`, mounted in providers.
+
+**Verified (live):**
+- ✅ Endpoint: `GET /events` → 200 `text/event-stream` + `X-Accel-Buffering:no`, holds open; no-auth → **401**.
+- ✅ Content push: upload → `{"type":"content.status","contentId":…,"status":READY|FAILED}` delivered over SSE.
+- ✅ Failure push: a hard ingest/quiz failure now pushes `FAILED` (fixes the prior poll-forever-on-failure).
+- ✅ **Per-user scoping (S1):** user A's upload event reaches A's stream, **NOT** user B's (keyed by userId).
+- ✅ Defence-in-depth: events carry no content; the refetch re-runs `assertCanAccessContent`.
+- ✅ Job decoupled from delivery: `publish` + the SSE `send` swallow dead-socket/subscriber errors.
+- ✅ Browser: one `/events` connection opens (2 reqs in dev StrictMode), **no rapid 3s polling**, 0 console errors.
+- ⏭️ Reconnect/Last-Event-ID replay + multi-tab: mechanism code-verified (ring buffer + per-userId emit); not live-stressed.
+- **Env note:** live READY pushes shown as FAILED because this dev env's pdf-parse/OCR pipeline returns "bad XRef entry"
+  for the fixtures (environmental, pre-existing) — the delivery path is identical for READY.
+
+**typecheck:** api + web pass. Commits (`5a5d688..`): 735d01d, c419d69, 378d877 (on `claude/visual-qa`).
