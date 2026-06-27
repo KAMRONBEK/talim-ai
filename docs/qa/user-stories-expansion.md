@@ -1724,7 +1724,7 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 limit, **so that** they get a `TENANT_OWNER` org with an ACTIVE subscription, capped at the seats I sold.
 **Routes/code:** `apps/admin /tutor-requests` · `POST /admin/tutor-requests/:id/approve` · `POST .../reject` ·
 `tutorRequest.service.ts (approve/rejectTutorRequest)` · `adminUserRole.service.ts (applyAdminRoleChange → createTenantForOwner, ensureTenantSubscription)` · `tutor-requests/page.tsx` · `useApproveTutorRequest`/`useRejectTutorRequest`.
-**Priority:** P0 (revenue + role unlock + billing boundary)
+**Priority:** P0 (revenue + role unlock + billing boundary) · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a PENDING request, When I approve with no seat limit, Then the user becomes `TENANT_OWNER`, a `Tenant` is created (unique slug + joinCode), an **ACTIVE TENANT subscription** is created, seatLimit = plan default (null override), the request flips to `APPROVED` with `decidedById`/`decidedAt`, and an `tutor_request.approve` audit row is written.
@@ -1760,6 +1760,8 @@ limit, **so that** they get a `TENANT_OWNER` org with an ACTIVE subscription, ca
 | EC23 | a11y: seat input + Approve/Reject buttons | Labels/aria for the per-row seat box (placeholder-only today → screen-reader name); keyboard reachable | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, live):** full flow register → upgrade-to-tenant → admin `POST /admin/tutor-requests/:id/approve {seatLimit:5}` → 200; the org + an ACTIVE tenant subscription are minted and the user role flips to TENANT_OWNER. (User-side stale-JWT after approval = F45.)
 
 ### US-ADMIN-03: Admin user management (create / role change / reset-pw / delete / patch subscription)
 **As a** platform admin, **I want** full lifecycle control of any account, **so that** I can support
