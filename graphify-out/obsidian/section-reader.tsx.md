@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Community 44"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Community_44
 ---
 
 # section-reader.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useSlides()]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Community_44

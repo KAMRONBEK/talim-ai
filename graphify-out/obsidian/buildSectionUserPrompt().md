@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/section-prompt.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Section & Summary API"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Section__Summary_API
 ---
 
 # buildSectionUserPrompt()
@@ -16,4 +16,4 @@ tags:
 - [[section-prompt.ts]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Section__Summary_API

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Admin Login & Audit Pages"
+community: "Admin Auth Pages & UI"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Login__Audit_Pages
+  - community/Admin_Auth_Pages__UI
 ---
 
 # Card
@@ -29,4 +29,4 @@ tags:
 - [[page.tsx_13]] - `imports` [EXTRACTED]
 - [[page.tsx_14]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Login__Audit_Pages
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

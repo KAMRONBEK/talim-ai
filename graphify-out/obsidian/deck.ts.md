@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Slide & Mermaid Diagram Components"
+community: "Slide Deck Types"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide__Mermaid_Diagram_Components
+  - community/Slide_Deck_Types
 ---
 
 # deck.ts
@@ -43,4 +43,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[tutor-visual.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide__Mermaid_Diagram_Components
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

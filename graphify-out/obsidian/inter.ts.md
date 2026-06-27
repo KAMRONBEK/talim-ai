@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/inter.ts"
 type: "code"
-community: "Web Root Layout & Font"
+community: "App Layout & Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Root_Layout__Font
+  - community/App_Layout__Guards
 ---
 
 # inter.ts
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_1]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_6]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Root_Layout__Font
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

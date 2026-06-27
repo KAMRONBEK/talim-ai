@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Detail UI"
+community: "Admin Plan/Status UI"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # SubscriptionStatus
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

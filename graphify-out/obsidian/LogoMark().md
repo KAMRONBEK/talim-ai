@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/brand/logo.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 40"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_40
 ---
 
 # LogoMark()
@@ -22,4 +22,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_40

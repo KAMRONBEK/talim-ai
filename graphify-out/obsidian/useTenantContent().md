@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Assign Content UI"
-location: "L17"
+community: "Community 30"
+location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assign_Content_UI
+  - community/Community_30
 ---
 
 # useTenantContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_22]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assign_Content_UI
+#graphify/code #graphify/EXTRACTED #community/Community_30

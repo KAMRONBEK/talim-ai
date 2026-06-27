@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Locale-Aware AI Prompts"
+community: "Community 39"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale-Aware_AI_Prompts
+  - community/Community_39
 ---
 
 # locale-prompts.ts
@@ -16,6 +16,7 @@ tags:
 - [[LANGUAGE_QUALITY]] - `contains` [EXTRACTED]
 - [[PODCAST_PROMPTS]] - `contains` [EXTRACTED]
 - [[PODCAST_USER]] - `contains` [EXTRACTED]
+- [[ParsedTurn]] - `contains` [EXTRACTED]
 - [[QUIZ_PROMPTS]] - `contains` [EXTRACTED]
 - [[QUIZ_STYLE]] - `contains` [EXTRACTED]
 - [[QuestionStyle]] - `imports` [EXTRACTED]
@@ -42,10 +43,11 @@ tags:
 - [[getSummarySystemPrompt()]] - `contains` [EXTRACTED]
 - [[getTutorSystemPrompt()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[parsePodcastDialogue()]] - `contains` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[sanitizeSummaryOutput()]] - `contains` [EXTRACTED]
 - [[sanitizeSummaryOutput()_1]] - `imports` [EXTRACTED]
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale-Aware_AI_Prompts
+#graphify/code #graphify/EXTRACTED #community/Community_39

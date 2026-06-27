@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "concept"
-community: "QA-Run Skill & Traceability"
+community: "Community 84"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA-Run_Skill__Traceability
+  - community/Community_84
 ---
 
 # Edge Case (EC) Traceability
@@ -15,4 +15,4 @@ tags:
 - [[Role-Isolation Check (S1)]] - `conceptually_related_to` [INFERRED]
 - [[user-stories.md (durable spec + results ledger)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA-Run_Skill__Traceability
+#graphify/concept #graphify/EXTRACTED #community/Community_84

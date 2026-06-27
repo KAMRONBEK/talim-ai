@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "Desmos Graph Component"
+community: "Community 69"
 location: "L133"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Desmos_Graph_Component
+  - community/Community_69
 ---
 
 # axisLine()
@@ -15,4 +15,4 @@ tags:
 - [[DesmosGraph.tsx]] - `contains` [EXTRACTED]
 - [[FallbackSvgGraph()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Desmos_Graph_Component
+#graphify/code #graphify/EXTRACTED #community/Community_69

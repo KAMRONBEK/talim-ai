@@ -1,16 +1,19 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Assessments & Game Quiz Concepts"
+community: "Community 71"
+location: "§4.4"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Assessments__Game_Quiz_Concepts
+  - graphify/INFERRED
+  - community/Community_71
 ---
 
-# Assignment, Attempts & Max Attempts
+# Assignment, attempts & max attempts
 
 ## Connections
-- [[Assessments & Game Quizzes]] - `references` [EXTRACTED]
+- [[Per-question results & feedback]] - `references` [INFERRED]
+- [[Progress (per-student + class)]] - `conceptually_related_to` [INFERRED]
+- [[Written assessments]] - `references` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Assessments__Game_Quiz_Concepts
+#graphify/concept #graphify/INFERRED #community/Community_71

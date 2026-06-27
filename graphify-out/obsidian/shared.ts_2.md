@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "Subscription Service"
+community: "Billing & Usage API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Service
+  - community/Billing__Usage_API
 ---
 
 # shared.ts
@@ -18,8 +18,10 @@ tags:
 - [[QuotaExceededError]] - `imports` [EXTRACTED]
 - [[QuotaFeature]] - `imports` [EXTRACTED]
 - [[SubscriptionView]] - `contains` [EXTRACTED]
+- [[VIDEO_FEATURE]] - `contains` [EXTRACTED]
 - [[admin.ts]] - `imports_from` [EXTRACTED]
 - [[assertIndividualPlan()]] - `contains` [EXTRACTED]
+- [[dayRange()]] - `contains` [EXTRACTED]
 - [[error.middleware.ts]] - `re_exports` [EXTRACTED]
 - [[formatSubscription()]] - `contains` [EXTRACTED]
 - [[getFreePlan()]] - `contains` [EXTRACTED]
@@ -33,4 +35,4 @@ tags:
 - [[tenant.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

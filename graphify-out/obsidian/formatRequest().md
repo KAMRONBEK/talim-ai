@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tutorRequest.service.ts"
 type: "code"
-community: "Auth Controller (login/join/password)"
+community: "Admin Audit & Auth"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller_login/join/password
+  - community/Admin_Audit__Auth
 ---
 
 # formatRequest()
@@ -18,4 +18,4 @@ tags:
 - [[rejectTutorRequest()_1]] - `calls` [EXTRACTED]
 - [[tutorRequest.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller_login/join/password
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Page & Hooks"
+community: "Community 36"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Page__Hooks
+  - community/Community_36
 ---
 
 # useQuiz.ts
@@ -20,7 +20,7 @@ tags:
 - [[QuizWithLatestAttempt]] - `imports` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_37]] - `imports_from` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useCreateQuiz()]] - `contains` [EXTRACTED]
 - [[useGenerateSummary()]] - `contains` [EXTRACTED]
@@ -31,4 +31,4 @@ tags:
 - [[useSavedSummary()]] - `contains` [EXTRACTED]
 - [[useSubmitQuiz()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_36

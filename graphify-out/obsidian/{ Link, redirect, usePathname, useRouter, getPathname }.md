@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # { Link, redirect, usePathname, useRouter, getPathname }
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[navigation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Community 30"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_30
 ---
 
 # content-status-gate.tsx
@@ -27,4 +27,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useRetryContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_30

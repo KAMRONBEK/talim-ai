@@ -1,16 +1,16 @@
 ---
-source_file: "CLAUDE.md"
-type: "concept"
-community: "API Backend Architecture"
+source_file: "docs/FEATURES.md"
+type: "rationale"
+community: "Community 71"
 tags:
-  - graphify/concept
-  - graphify/EXTRACTED
-  - community/API_Backend_Architecture
+  - graphify/rationale
+  - graphify/INFERRED
+  - community/Community_71
 ---
 
 # Barrel-split module pattern
 
 ## Connections
-- [[appsapi — Express+Prisma+Bull backend (port 4000)]] - `conceptually_related_to` [EXTRACTED]
+- [[Written assessments]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/API_Backend_Architecture
+#graphify/rationale #graphify/INFERRED #community/Community_71

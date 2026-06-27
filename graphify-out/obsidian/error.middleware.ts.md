@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Learner/Section/Usage Controllers"
+community: "Billing & Usage API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner/Section/Usage_Controllers
+  - community/Billing__Usage_API
 ---
 
 # error.middleware.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AppError]] - `contains` [EXTRACTED]
 - [[PlanCode]] - `imports` [EXTRACTED]
+- [[PlanFileLimitError]] - `contains` [EXTRACTED]
 - [[QUOTA_MESSAGES]] - `contains` [EXTRACTED]
 - [[QuotaExceededError]] - `contains` [EXTRACTED]
 - [[QuotaFeature]] - `imports` [EXTRACTED]
@@ -56,9 +57,10 @@ tags:
 - [[tenant.ts]] - `imports_from` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tutorRequest.service.ts]] - `imports_from` [EXTRACTED]
+- [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[usage.controller.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner/Section/Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

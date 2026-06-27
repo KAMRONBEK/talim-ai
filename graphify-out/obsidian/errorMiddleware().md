@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
-location: "L35"
+community: "Env Config & Jobs"
+location: "L55"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # errorMiddleware()
@@ -15,4 +15,4 @@ tags:
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

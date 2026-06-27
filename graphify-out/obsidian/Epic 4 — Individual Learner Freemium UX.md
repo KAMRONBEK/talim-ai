@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-4-individual-freemium.md"
 type: "document"
-community: "Product Roadmap & Epics"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Roadmap__Epics
+  - community/Deployment__Infra_Docs
 ---
 
 # Epic 4 — Individual Learner Freemium UX
@@ -16,4 +16,4 @@ tags:
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 - [[Quota-exceeded UpgradeModal UX]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Roadmap__Epics
+#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs

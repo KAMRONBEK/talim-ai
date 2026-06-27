@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Learner/Section/Usage Controllers"
+community: "Admin Analytics & Subscriptions"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner/Section/Usage_Controllers
+  - community/Admin_Analytics__Subscriptions
 ---
 
 # AuthenticatedRequest
@@ -39,4 +39,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner/Section/Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions

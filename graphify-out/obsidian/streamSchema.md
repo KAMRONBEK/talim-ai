@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Chat Controller & Sessions"
+community: "Community 48"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller__Sessions
+  - community/Community_48
 ---
 
 # streamSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller__Sessions
+#graphify/code #graphify/EXTRACTED #community/Community_48

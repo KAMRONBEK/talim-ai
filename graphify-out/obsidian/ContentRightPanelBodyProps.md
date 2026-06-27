@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Sheet UI Component"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Sheet_UI_Component
 ---
 
 # ContentRightPanelBodyProps
@@ -17,4 +17,4 @@ tags:
 - [[content-learn-panel.tsx]] - `imports` [EXTRACTED]
 - [[content-right-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

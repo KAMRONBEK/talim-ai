@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
+community: "Env Config & Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # queue.service.ts
@@ -17,6 +17,7 @@ tags:
 - [[Env]] - `imports` [EXTRACTED]
 - [[GeneratePodcastJobData]] - `contains` [EXTRACTED]
 - [[GenerateQuizJobData]] - `contains` [EXTRACTED]
+- [[GenerateVideoJobData]] - `contains` [EXTRACTED]
 - [[ProcessContentJobData]] - `contains` [EXTRACTED]
 - [[RenderManimJobData]] - `contains` [EXTRACTED]
 - [[cancelContentJobs()]] - `contains` [EXTRACTED]
@@ -27,6 +28,7 @@ tags:
 - [[env.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[manimQueue]] - `contains` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[podcastQueue]] - `contains` [EXTRACTED]
@@ -35,5 +37,7 @@ tags:
 - [[quizQueue]] - `contains` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
+- [[video.controller.ts]] - `imports_from` [EXTRACTED]
+- [[videoQueue]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

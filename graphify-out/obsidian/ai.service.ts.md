@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Service (DeepSeek/tools)"
+community: "Community 57"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Service_DeepSeek/tools
+  - community/Community_57
 ---
 
 # ai.service.ts
@@ -31,6 +31,7 @@ tags:
 - [[generateJsonCompletion()]] - `contains` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[getTutorTools()]] - `imports` [EXTRACTED]
 - [[handleTutorToolCall()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
@@ -48,4 +49,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[withTutorToolInstructions()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek/tools
+#graphify/code #graphify/EXTRACTED #community/Community_57

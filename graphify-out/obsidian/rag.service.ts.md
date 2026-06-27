@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Usage Pricing & Chunk Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # rag.service.ts
@@ -40,6 +40,7 @@ tags:
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[rerank()]] - `contains` [EXTRACTED]
+- [[scriptVariants()]] - `imports` [EXTRACTED]
 - [[searchSimilarChunks()]] - `contains` [EXTRACTED]
 - [[searchSimilarFigures()]] - `contains` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
@@ -50,5 +51,6 @@ tags:
 - [[toBlocks()]] - `contains` [EXTRACTED]
 - [[tokenTail()]] - `contains` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
+- [[uzbek-translit.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

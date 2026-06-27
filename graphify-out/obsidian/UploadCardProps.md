@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
-location: "L80"
+community: "Admin Auth Pages & UI"
+location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Admin_Auth_Pages__UI
 ---
 
 # UploadCardProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[UploadCard.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

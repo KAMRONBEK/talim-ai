@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "AI Question Banks"
+community: "Community 46"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Question_Banks
+  - community/Community_46
 ---
 
 # listQuestions()
@@ -15,4 +15,4 @@ tags:
 - [[assertBank()]] - `calls` [EXTRACTED]
 - [[banks.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Question_Banks
+#graphify/code #graphify/EXTRACTED #community/Community_46

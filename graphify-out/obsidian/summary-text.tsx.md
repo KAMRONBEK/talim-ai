@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Content Stage & PDF Excerpt"
+community: "Content Detail Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Stage__PDF_Excerpt
+  - community/Content_Detail_Page
 ---
 
 # summary-text.tsx
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_29]] - `imports_from` [EXTRACTED]
 - [[splitSummaryParagraphs()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Stage__PDF_Excerpt
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

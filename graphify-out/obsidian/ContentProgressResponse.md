@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
-location: "L666"
+community: "Content Progress Hooks"
+location: "L695"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Content_Progress_Hooks
 ---
 
 # ContentProgressResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks

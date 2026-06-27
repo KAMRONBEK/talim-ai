@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Chat Controller & Sessions"
+community: "Community 48"
 location: "L123"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller__Sessions
+  - community/Community_48
 ---
 
 # resolveManimAsset()
@@ -16,4 +16,4 @@ tags:
 - [[getManimAsset()]] - `calls` [EXTRACTED]
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller__Sessions
+#graphify/code #graphify/EXTRACTED #community/Community_48

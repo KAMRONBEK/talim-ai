@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx"
 type: "code"
-community: "Assign Content UI"
+community: "Tenant Web Pages"
 location: "L12"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Assign_Content_UI
+  - community/Tenant_Web_Pages
 ---
 
 # TenantStudentDetailPage()
@@ -18,4 +18,4 @@ tags:
 - [[useStudentProgress()]] - `calls` [INFERRED]
 - [[useTenantContents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Assign_Content_UI
+#graphify/code #graphify/INFERRED #community/Tenant_Web_Pages

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/theme-toggle.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 70"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_70
 ---
 
 # ThemeToggle()
@@ -18,4 +18,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[theme-toggle.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_70

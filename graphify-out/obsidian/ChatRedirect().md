@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/chat/page.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # ChatRedirect()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_28]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

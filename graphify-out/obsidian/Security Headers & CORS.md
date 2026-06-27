@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 99"
+location: "§6.5"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - graphify/INFERRED
+  - community/Community_99
 ---
 
-# Security Headers & CORS
+# Security headers & CORS
 
 ## Connections
-- [[Feature Catalog]] - `references` [EXTRACTED]
+- [[JWT sessions]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/INFERRED #community/Community_99

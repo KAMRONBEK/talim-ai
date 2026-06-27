@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "Tutor Chat Message Components"
+community: "Community 43"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Chat_Message_Components
+  - community/Community_43
 ---
 
 # normalizeSegment()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[preprocess-latex.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Message_Components
+#graphify/code #graphify/EXTRACTED #community/Community_43

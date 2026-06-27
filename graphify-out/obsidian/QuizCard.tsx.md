@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizCard.tsx"
 type: "code"
-community: "Rich Text & Quiz Card UI"
+community: "Community 83"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Rich_Text__Quiz_Card_UI
+  - community/Community_83
 ---
 
 # QuizCard.tsx
@@ -29,8 +29,8 @@ tags:
 - [[isQuestionCorrect()]] - `contains` [EXTRACTED]
 - [[isSelectedAnswerCorrect()]] - `imports` [EXTRACTED]
 - [[normalize()]] - `contains` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_37]] - `imports_from` [EXTRACTED]
 - [[resolveCorrectAnswer()]] - `imports` [EXTRACTED]
 - [[rich-text.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Rich_Text__Quiz_Card_UI
+#graphify/code #graphify/EXTRACTED #community/Community_83

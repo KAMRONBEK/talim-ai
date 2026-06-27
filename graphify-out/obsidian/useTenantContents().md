@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Tenant Dashboard UI"
-location: "L7"
+community: "Tenant Web Pages"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard_UI
+  - community/Tenant_Web_Pages
 ---
 
 # useTenantContents()
@@ -22,4 +22,4 @@ tags:
 - [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

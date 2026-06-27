@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/create-admin.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Tenant Admin & Prisma"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Tenant_Admin__Prisma
 ---
 
 # main()
@@ -15,4 +15,4 @@ tags:
 - [[create-admin.ts]] - `contains` [EXTRACTED]
 - [[parseArgs()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "document"
-community: "Deployment Infrastructure"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment_Infrastructure
+  - community/Deployment__Infra_Docs
 ---
 
 # VPS Docker Deployment
@@ -19,4 +19,4 @@ tags:
 - [[Tech Stack & Infra]] - `conceptually_related_to` [INFERRED]
 - [[nginx Reverse Proxy]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment_Infrastructure
+#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs

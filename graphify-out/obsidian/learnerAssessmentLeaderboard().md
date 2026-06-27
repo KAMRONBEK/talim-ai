@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Tutor-Request & Assessment Controllers"
+community: "Community 62"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor-Request__Assessment_Controllers
+  - community/Community_62
 ---
 
 # learnerAssessmentLeaderboard()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[requireTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor-Request__Assessment_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_62

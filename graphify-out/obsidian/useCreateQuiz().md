@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Community 36"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_36
 ---
 
 # useCreateQuiz()
@@ -16,4 +16,4 @@ tags:
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_36

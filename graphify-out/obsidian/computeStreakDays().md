@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage Scoring"
+community: "Tenant Admin & Prisma"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage_Scoring
+  - community/Tenant_Admin__Prisma
 ---
 
 # computeStreakDays()
@@ -20,4 +20,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[todayUtcDate()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage_Scoring
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

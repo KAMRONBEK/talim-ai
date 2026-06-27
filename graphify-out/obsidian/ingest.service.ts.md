@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ingest.service.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Usage Pricing & Chunk Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # ingest.service.ts
@@ -25,4 +25,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

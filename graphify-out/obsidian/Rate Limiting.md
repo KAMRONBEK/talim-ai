@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 94"
+location: "§6.4"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_94
 ---
 
-# Rate Limiting
+# Rate limiting
 
 ## Connections
-- [[Feature Catalog]] - `references` [EXTRACTED]
+- [[Signup  login by email OR username]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_94

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/features.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 40"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_40
 ---
 
 # Features()
@@ -16,4 +16,4 @@ tags:
 - [[features.tsx]] - `contains` [EXTRACTED]
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_40

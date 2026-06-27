@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "TTS Normalization Service"
+community: "Community 33"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Normalization_Service
+  - community/Community_33
 ---
 
 # EN_ACRONYMS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tts-normalize.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Normalization_Service
+#graphify/code #graphify/EXTRACTED #community/Community_33

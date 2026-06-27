@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 70"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_70
 ---
 
 # learning-topbar.tsx
@@ -26,9 +26,9 @@ tags:
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[logo.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_37]] - `imports_from` [EXTRACTED]
 - [[theme-toggle.tsx]] - `imports_from` [EXTRACTED]
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_70

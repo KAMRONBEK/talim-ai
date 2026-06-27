@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Slide & Mermaid Diagram Components"
+community: "Slide Deck Types"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide__Mermaid_Diagram_Components
+  - community/Slide_Deck_Types
 ---
 
 # ChartPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-chart.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide__Mermaid_Diagram_Components
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

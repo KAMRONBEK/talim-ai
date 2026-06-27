@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "AI Slide-Deck Prompting"
+community: "Content Controller"
 location: "L289"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Slide-Deck_Prompting
+  - community/Content_Controller
 ---
 
 # autoGenerateSectionDecks()
@@ -22,4 +22,4 @@ tags:
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Slide-Deck_Prompting
+#graphify/code #graphify/EXTRACTED #community/Content_Controller

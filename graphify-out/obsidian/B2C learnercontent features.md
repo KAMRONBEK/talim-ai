@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "README & API Route Map"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/README__API_Route_Map
+  - community/Admin_Panel_Docs
 ---
 
 # B2C learner/content features
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI README]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/README__API_Route_Map
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

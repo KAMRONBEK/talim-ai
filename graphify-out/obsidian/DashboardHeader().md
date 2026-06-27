@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 38"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_38
 ---
 
 # DashboardHeader()
@@ -19,4 +19,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useBilling()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_38

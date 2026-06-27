@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/adminUserRole.service.ts"
 type: "code"
-community: "Tenant-Owner Bootstrap & Role Service"
+community: "Tenant Admin & Prisma"
 location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant-Owner_Bootstrap__Role_Service
+  - community/Tenant_Admin__Prisma
 ---
 
 # applyAdminRoleChange()
@@ -22,4 +22,4 @@ tags:
 - [[tutorRequest.service.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant-Owner_Bootstrap__Role_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

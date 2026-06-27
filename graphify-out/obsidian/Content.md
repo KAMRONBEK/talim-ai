@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content List Components"
-location: "L523"
+community: "Community 30"
+location: "L552"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_List_Components
+  - community/Community_30
 ---
 
 # Content
@@ -18,6 +18,7 @@ tags:
 - [[ContentState]] - `references` [EXTRACTED]
 - [[ContentStatusGateProps]] - `references` [EXTRACTED]
 - [[RecentContentGridProps]] - `references` [EXTRACTED]
+- [[content-cache.ts]] - `imports` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
@@ -27,4 +28,4 @@ tags:
 - [[useContentStore.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_List_Components
+#graphify/code #graphify/EXTRACTED #community/Community_30

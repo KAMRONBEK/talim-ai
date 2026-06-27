@@ -1,17 +1,16 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "rationale"
-community: "Isolation Guard & Visual Direction"
+community: "Community 95"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Isolation_Guard__Visual_Direction
+  - graphify/EXTRACTED
+  - community/Community_95
 ---
 
 # Role Adaptations (server-side security)
 
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
-- [[Multi-tenant Isolation Guard]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Isolation_Guard__Visual_Direction
+#graphify/rationale #graphify/EXTRACTED #community/Community_95

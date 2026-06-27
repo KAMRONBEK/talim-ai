@@ -1,21 +1,23 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "TTS Normalization Service"
-location: "L45"
+community: "Community 33"
+location: "L168"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Normalization_Service
+  - community/Community_33
 ---
 
 # synthesizeSpeech()
 
 ## Connections
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
+- [[mapLimit()]] - `calls` [EXTRACTED]
 - [[normalizeScriptForTts()]] - `calls` [EXTRACTED]
 - [[splitScriptIntoChunks()]] - `calls` [EXTRACTED]
 - [[synthesizeChunk()]] - `calls` [EXTRACTED]
 - [[tts.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Normalization_Service
+#graphify/code #graphify/EXTRACTED #community/Community_33

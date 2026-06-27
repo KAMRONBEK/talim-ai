@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/login/page.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Community 56"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Community_56
 ---
 
 # LoginPage()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_13]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Community_56

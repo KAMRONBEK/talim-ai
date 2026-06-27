@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/podcast-prompt.ts"
 type: "code"
-community: "Podcast Prompt Builder"
+community: "Community 132"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Prompt_Builder
+  - community/Community_132
 ---
 
 # podcast-prompt.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[buildPodcastUserPrompt()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Prompt_Builder
+#graphify/code #graphify/EXTRACTED #community/Community_132

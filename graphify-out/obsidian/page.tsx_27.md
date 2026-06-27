@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/students/page.tsx"
 type: "code"
-community: "Tenant Students Management UI"
+community: "Tenant Web Pages"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Students_Management_UI
+  - community/Tenant_Web_Pages
 ---
 
 # page.tsx
@@ -34,4 +34,4 @@ tags:
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Students_Management_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

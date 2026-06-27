@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Assessments & Game Quiz Concepts"
+community: "Community 71"
+location: "§4.6"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Assessments__Game_Quiz_Concepts
+  - community/Community_71
 ---
 
-# Class Leaderboard
+# Class leaderboard
 
 ## Connections
-- [[Assessments & Game Quizzes]] - `references` [EXTRACTED]
+- [[GAME mode (per-question timer, speed points, streaks)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Assessments__Game_Quiz_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Community_71

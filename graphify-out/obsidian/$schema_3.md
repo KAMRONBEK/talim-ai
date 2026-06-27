@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "Node TSConfig"
+community: "Community 85"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Node_TSConfig
+  - community/Community_85
 ---
 
 # $schema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[node.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Node_TSConfig
+#graphify/code #graphify/EXTRACTED #community/Community_85

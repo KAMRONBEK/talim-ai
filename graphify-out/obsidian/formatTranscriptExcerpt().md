@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Community 34"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Community_34
 ---
 
 # formatTranscriptExcerpt()
@@ -16,4 +16,4 @@ tags:
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 - [[formatTimestamp()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Community_34

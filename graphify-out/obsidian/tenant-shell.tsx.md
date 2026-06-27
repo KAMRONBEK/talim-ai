@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 42"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_42
 ---
 
 # tenant-shell.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantSearch()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_42

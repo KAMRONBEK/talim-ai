@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/prisma/seed.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Tenant Admin & Prisma"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Tenant_Admin__Prisma
 ---
 
 # PLANS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[seed.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

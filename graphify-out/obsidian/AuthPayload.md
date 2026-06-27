@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Content Controller (B2C)"
+community: "Admin Audit & Auth"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Admin_Audit__Auth
 ---
 
 # AuthPayload
@@ -15,4 +15,4 @@ tags:
 - [[auth.middleware.ts]] - `contains` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

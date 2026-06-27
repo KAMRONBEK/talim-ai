@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Monorepo Root Tooling Config"
-location: "L12"
+community: "Root Build Config"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Monorepo_Root_Tooling_Config
+  - community/Root_Build_Config
 ---
 
 # typecheck
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Tooling_Config
+#graphify/code #graphify/EXTRACTED #community/Root_Build_Config

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/admin-sidebar.tsx"
 type: "code"
-community: "Admin Layout & Sidebar"
+community: "Community 90"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Layout__Sidebar
+  - community/Community_90
 ---
 
 # admin-sidebar.tsx
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navItems]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Layout__Sidebar
+#graphify/code #graphify/EXTRACTED #community/Community_90

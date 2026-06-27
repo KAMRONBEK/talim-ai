@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 38"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_38
 ---
 
 # useBilling.ts
@@ -19,7 +19,9 @@ tags:
 - [[page.tsx_20]] - `imports_from` [EXTRACTED]
 - [[page.tsx_27]] - `imports_from` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
+- [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 - [[useBilling()]] - `contains` [EXTRACTED]
+- [[useRequestUpgrade()]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_38

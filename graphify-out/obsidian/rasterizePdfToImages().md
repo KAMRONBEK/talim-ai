@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/rasterize-pdf.ts"
 type: "code"
-community: "PDF Viewer"
+community: "Community 73"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer
+  - community/Community_73
 ---
 
 # rasterizePdfToImages()
@@ -16,4 +16,4 @@ tags:
 - [[rasterize-pdf.ts]] - `contains` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_73

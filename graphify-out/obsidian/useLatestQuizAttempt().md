@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Page & Hooks"
+community: "Community 36"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Page__Hooks
+  - community/Community_36
 ---
 
 # useLatestQuizAttempt()
 
 ## Connections
 - [[QuizPage()]] - `calls` [INFERRED]
-- [[page.tsx_35]] - `imports` [EXTRACTED]
+- [[page.tsx_37]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_36

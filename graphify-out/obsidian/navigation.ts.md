@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # navigation.ts
@@ -43,17 +43,20 @@ tags:
 - [[page.tsx_29]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
-- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_32]] - `imports_from` [EXTRACTED]
 - [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_37]] - `imports_from` [EXTRACTED]
+- [[pricing.tsx]] - `imports_from` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[routing]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
+- [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[{ Link, redirect, usePathname, useRouter, getPathname }]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

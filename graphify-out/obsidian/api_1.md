@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api.ts"
 type: "code"
-community: "Web API Client & Locale"
+community: "Community 35"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Locale
+  - community/Community_35
 ---
 
 # api
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[api.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Locale
+#graphify/code #graphify/EXTRACTED #community/Community_35

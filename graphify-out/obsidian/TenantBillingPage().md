@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 38"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_38
 ---
 
 # TenantBillingPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_20]] - `contains` [EXTRACTED]
 - [[useBilling()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_38

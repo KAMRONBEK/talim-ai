@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Tenant Service & Content Assignment"
+community: "Billing & Usage API"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Service__Content_Assignment
+  - community/Billing__Usage_API
 ---
 
 # resolveTenantUpgradePlanCode()
 
 ## Connections
 - [[assertTenantQuota()]] - `calls` [EXTRACTED]
+- [[getFileLimitsForTenant()]] - `calls` [EXTRACTED]
 - [[tenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Service__Content_Assignment
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Tenant Students Management UI"
+community: "Tenant Web Pages"
 location: "L12"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Students_Management_UI
+  - community/Tenant_Web_Pages
 ---
 
 # TenantProgressPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_24]] - `contains` [EXTRACTED]
 - [[useTenantProgress()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Students_Management_UI
+#graphify/code #graphify/INFERRED #community/Tenant_Web_Pages

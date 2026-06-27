@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Learner Dashboard UI"
+community: "Community 49"
 location: "L14"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Learner_Dashboard_UI
+  - community/Community_49
 ---
 
 # LearnerDashboardPage()
@@ -18,4 +18,4 @@ tags:
 - [[useLearnerAssessments()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Learner_Dashboard_UI
+#graphify/code #graphify/INFERRED #community/Community_49

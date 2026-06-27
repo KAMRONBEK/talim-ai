@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "document"
-community: "Admin App Guide & Monorepo Concepts"
+community: "Admin Panel Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_App_Guide__Monorepo_Concepts
+  - community/Admin_Panel_Docs
 ---
 
 # apps/admin Guide (CLAUDE.md)
@@ -15,4 +15,4 @@ tags:
 - [[adminPasswordNote plaintext support-lookup (sensitive)]] - `references` [EXTRACTED]
 - [[appsadmin — platform-admin panel (Talim Admin, port 3001)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_App_Guide__Monorepo_Concepts
+#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Docs

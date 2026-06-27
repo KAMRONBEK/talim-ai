@@ -1,21 +1,24 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Content Progress Hooks"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Content_Progress_Hooks
 ---
 
 # useContentBase()
 
 ## Connections
+- [[VideoInner()]] - `calls` [EXTRACTED]
+- [[page.tsx_32]] - `imports` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useContentBase.ts]] - `contains` [EXTRACTED]
 - [[useContentProgress()]] - `calls` [EXTRACTED]
 - [[useCreatePodcast()]] - `calls` [EXTRACTED]
+- [[useGenerateVideo()]] - `calls` [EXTRACTED]
 - [[useLearningHistory()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[useMarkSectionViewed()]] - `calls` [EXTRACTED]
@@ -23,6 +26,7 @@ tags:
 - [[usePodcast.ts]] - `imports` [EXTRACTED]
 - [[usePodcastProgress()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
+- [[useRegenerateEpisode()]] - `calls` [EXTRACTED]
 - [[useSection()]] - `calls` [EXTRACTED]
 - [[useSections()]] - `calls` [EXTRACTED]
 - [[useSections.ts]] - `imports` [EXTRACTED]
@@ -32,4 +36,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 61"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_61
 ---
 
 # UserSidebarFooter()
@@ -22,4 +22,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_61

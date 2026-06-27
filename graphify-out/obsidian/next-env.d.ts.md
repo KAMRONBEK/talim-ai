@@ -1,14 +1,14 @@
 ---
 source_file: "apps/admin/next-env.d.ts"
 type: "code"
-community: "Next Env Types"
+community: "Community 139"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Next_Env_Types
+  - community/Community_139
 ---
 
 # next-env.d.ts
 
-#graphify/code #graphify/EXTRACTED #community/Next_Env_Types
+#graphify/code #graphify/EXTRACTED #community/Community_139

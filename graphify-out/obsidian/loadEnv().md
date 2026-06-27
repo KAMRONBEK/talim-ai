@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
-location: "L43"
+community: "Env Config & Jobs"
+location: "L54"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # loadEnv()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[env.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

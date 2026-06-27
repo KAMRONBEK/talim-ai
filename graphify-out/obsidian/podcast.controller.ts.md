@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
+community: "Content & Podcast API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Content__Podcast_API
 ---
 
 # podcast.controller.ts
@@ -33,10 +33,11 @@ tags:
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
+- [[regenerateEpisode()]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `contains` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

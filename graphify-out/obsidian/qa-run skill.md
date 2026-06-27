@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "document"
-community: "QA-Run Skill & Traceability"
+community: "Community 84"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA-Run_Skill__Traceability
+  - community/Community_84
 ---
 
 # qa-run skill
@@ -18,4 +18,4 @@ tags:
 - [[user-stories.md (durable spec + results ledger)]] - `references` [EXTRACTED]
 - [[visual-qa-report.md (run journal)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA-Run_Skill__Traceability
+#graphify/document #graphify/EXTRACTED #community/Community_84

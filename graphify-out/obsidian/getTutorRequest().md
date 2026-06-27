@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
-community: "Auth Controller (login/join/password)"
-location: "L147"
+community: "Admin Audit & Auth"
+location: "L152"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller_login/join/password
+  - community/Admin_Audit__Auth
 ---
 
 # getTutorRequest()
@@ -15,4 +15,4 @@ tags:
 - [[auth.controller.ts]] - `contains` [EXTRACTED]
 - [[getMyLatestTutorRequest()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller_login/join/password
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

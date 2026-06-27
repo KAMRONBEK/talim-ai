@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
+community: "Quiz Controller"
 location: "L197"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Quiz_Controller
 ---
 
 # createQuiz()
@@ -21,4 +21,4 @@ tags:
 - [[quizCreatorUserId()]] - `calls` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller

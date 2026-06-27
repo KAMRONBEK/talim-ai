@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Deck Player Slides & Theme"
+community: "Shared UI Components"
 location: "L76"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player_Slides__Theme
+  - community/Shared_UI_Components
 ---
 
 # ACCENT_TO_PALETTE
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player_Slides__Theme
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

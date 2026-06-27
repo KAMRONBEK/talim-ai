@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Content Progress Hooks"
 location: "L121"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Content_Progress_Hooks
 ---
 
 # ContentLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "API Middleware (auth/quota/rate-limit)"
+community: "Admin Audit & Auth"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware_auth/quota/rate-limit
+  - community/Admin_Audit__Auth
 ---
 
 # tenant.routes.ts
@@ -38,4 +38,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware_auth/quota/rate-limit
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-schema.ts"
 type: "code"
-community: "Slide Deck Schema"
+community: "Deck Prompt Builder"
 location: "L65"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Schema
+  - community/Deck_Prompt_Builder
 ---
 
 # TITLE
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[deck-schema.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Schema
+#graphify/code #graphify/EXTRACTED #community/Deck_Prompt_Builder

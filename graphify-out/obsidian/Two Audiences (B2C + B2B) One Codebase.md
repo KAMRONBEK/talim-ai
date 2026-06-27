@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "rationale"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # Two Audiences (B2C + B2B) One Codebase
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/rationale #graphify/EXTRACTED #community/Deployment__Infra_Docs

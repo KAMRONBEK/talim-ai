@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Config (cva/clsx)"
+community: "UI Styling Deps"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config_cva/clsx
+  - community/UI_Styling_Deps
 ---
 
 # package.json
@@ -23,4 +23,4 @@ tags:
 - [[types_1]] - `contains` [EXTRACTED]
 - [[version_8]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config_cva/clsx
+#graphify/code #graphify/EXTRACTED #community/UI_Styling_Deps

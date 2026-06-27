@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Content Detail Page"
 location: "L39"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Status__Processing_UI
+  - community/Content_Detail_Page
 ---
 
 # ContentWorkspaceInner()
@@ -19,8 +19,9 @@ tags:
 - [[useContentActions()]] - `calls` [INFERRED]
 - [[useContentProgress()]] - `calls` [INFERRED]
 - [[useLearningHistory()]] - `calls` [INFERRED]
+- [[useLimitErrorHandler()]] - `calls` [INFERRED]
 - [[useReparseContent()]] - `calls` [INFERRED]
 - [[useSection()]] - `calls` [INFERRED]
 - [[useSections()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Content_Status__Processing_UI
+#graphify/code #graphify/INFERRED #community/Content_Detail_Page

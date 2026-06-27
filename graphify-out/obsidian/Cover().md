@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Deck Player Slides & Theme"
+community: "Shared UI Components"
 location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player_Slides__Theme
+  - community/Shared_UI_Components
 ---
 
 # Cover()
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[paletteFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player_Slides__Theme
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
+community: "Env Config & Jobs"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # contentQueue
@@ -18,4 +18,4 @@ tags:
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

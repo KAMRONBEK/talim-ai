@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "AI Slide-Deck Prompting"
+community: "Deck Prompt Builder"
 location: "L119"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Slide-Deck_Prompting
+  - community/Deck_Prompt_Builder
 ---
 
 # normalizeSlide()
@@ -16,4 +16,4 @@ tags:
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 - [[toBulletObjects()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Slide-Deck_Prompting
+#graphify/code #graphify/EXTRACTED #community/Deck_Prompt_Builder

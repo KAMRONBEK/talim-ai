@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
-location: "L107"
+community: "Slide Deck Types"
+location: "L133"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Slide_Deck_Types
 ---
 
 # BillingUsageVsLimits
@@ -15,4 +15,4 @@ tags:
 - [[TenantBillingUsageVsLimits]] - `inherits` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "Admin Dashboard UI"
+community: "Admin Auth Pages & UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_UI
+  - community/Admin_Auth_Pages__UI
 ---
 
 # page.tsx
@@ -21,4 +21,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[usePlatformStats()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

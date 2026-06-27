@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "shadcn Components Config"
+community: "Community 52"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/shadcn_Components_Config
+  - community/Community_52
 ---
 
 # tailwind
@@ -19,4 +19,4 @@ tags:
 - [[cssVariables]] - `contains` [EXTRACTED]
 - [[prefix]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/shadcn_Components_Config
+#graphify/code #graphify/EXTRACTED #community/Community_52

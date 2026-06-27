@@ -1,17 +1,16 @@
 ---
 source_file: "apps/web/CLAUDE.md"
 type: "concept"
-community: "Project Guide & Isolation Concepts"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Project_Guide__Isolation_Concepts
+  - community/Admin_Panel_Docs
 ---
 
 # Role-based post-login routing (getPostLoginPath / RoleGuard)
 
 ## Connections
-- [[UserRole product model (ADMINTENANT_OWNERTENANT_LEARNERINDIVIDUAL)]] - `conceptually_related_to` [EXTRACTED]
 - [[appsweb — learner+tenant Next.js app (port 3000)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Project_Guide__Isolation_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

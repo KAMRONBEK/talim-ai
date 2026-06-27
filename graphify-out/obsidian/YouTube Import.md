@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "B2C AI Learning Loop"
+community: "Community 92"
+location: "§1.2"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/B2C_AI_Learning_Loop
+  - graphify/INFERRED
+  - community/Community_92
 ---
 
-# YouTube Import
+# YouTube import
 
 ## Connections
-- [[Content & AI Learning Loop]] - `references` [EXTRACTED]
+- [[Sectioning]] - `references` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/B2C_AI_Learning_Loop
+#graphify/concept #graphify/INFERRED #community/Community_92

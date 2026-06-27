@@ -1,16 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Tenant Owner Capabilities"
+community: "Community 77"
+location: "§3.2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Capabilities
+  - community/Community_77
 ---
 
-# Materials + Assignment
+# Materials + assignment
 
 ## Connections
-- [[Tenant (B2B Tutor) Experience]] - `references` [EXTRACTED]
+- [[US-OWNER-12 Delete a material]] - `references` [EXTRACTED]
+- [[Upload PDFs  slides]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Tenant_Owner_Capabilities
+#graphify/concept #graphify/EXTRACTED #community/Community_77

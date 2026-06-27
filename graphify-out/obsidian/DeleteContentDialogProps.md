@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/delete-content-dialog.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Community 31"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_31
 ---
 
 # DeleteContentDialogProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[delete-content-dialog.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_31

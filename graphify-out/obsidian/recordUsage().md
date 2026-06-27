@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Usage Pricing & PDF Extraction"
+community: "Usage Pricing & Chunk Tools"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__PDF_Extraction
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # recordUsage()
@@ -20,13 +20,13 @@ tags:
 - [[figure.service.ts]] - `imports` [EXTRACTED]
 - [[generateYoutubeTranscript()]] - `calls` [EXTRACTED]
 - [[ocrImageDataUrl()]] - `calls` [EXTRACTED]
-- [[ocrViaOpenRouter()]] - `calls` [EXTRACTED]
+- [[ocrRequestOnce()]] - `calls` [EXTRACTED]
 - [[pdf.service.ts]] - `imports` [EXTRACTED]
 - [[recordCompletionUsage()]] - `calls` [EXTRACTED]
 - [[recordEmbedUsage()]] - `calls` [EXTRACTED]
-- [[synthesizeChunk()]] - `calls` [EXTRACTED]
+- [[recordTtsUsage()]] - `calls` [EXTRACTED]
 - [[tts.service.ts]] - `imports` [EXTRACTED]
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 - [[youtube.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__PDF_Extraction
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

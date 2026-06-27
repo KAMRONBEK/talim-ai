@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/generation-error.ts"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Community 44"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Community_44
 ---
 
 # generation-error.ts
@@ -15,8 +15,6 @@ tags:
 - [[GenerationErrorInfo]] - `contains` [EXTRACTED]
 - [[GenerationErrorKind]] - `contains` [EXTRACTED]
 - [[classifyGenerationError()]] - `contains` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
-- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Community_44

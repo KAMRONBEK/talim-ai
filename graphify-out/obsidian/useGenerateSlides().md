@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Community 44"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Community_44
 ---
 
 # useGenerateSlides()
@@ -18,4 +18,4 @@ tags:
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Community_44

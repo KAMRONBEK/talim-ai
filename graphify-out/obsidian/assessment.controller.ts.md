@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Tutor-Request & Assessment Controllers"
+community: "Community 62"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor-Request__Assessment_Controllers
+  - community/Community_62
 ---
 
 # assessment.controller.ts
@@ -36,4 +36,4 @@ tags:
 - [[submitLearnerAssessment()]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor-Request__Assessment_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_62

@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Learner/Section/Usage Controllers"
-location: "L5"
+community: "Tenant Admin & Prisma"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner/Section/Usage_Controllers
+  - community/Tenant_Admin__Prisma
 ---
 
 # AppError
 
 ## Connections
 - [[.constructor()]] - `method` [EXTRACTED]
+- [[PlanFileLimitError]] - `inherits` [EXTRACTED]
 - [[QuotaExceededError]] - `inherits` [EXTRACTED]
 - [[admin-tutor-request.controller.ts]] - `imports` [EXTRACTED]
 - [[adminUserRole.service.ts]] - `imports` [EXTRACTED]
@@ -56,4 +57,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner/Section/Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

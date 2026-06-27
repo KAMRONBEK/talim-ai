@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/quick-action-cards.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Community 31"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_31
 ---
 
 # quick-action-cards.tsx
@@ -21,8 +21,8 @@ tags:
 - [[YoutubeLinkForm()]] - `imports` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_32]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_31

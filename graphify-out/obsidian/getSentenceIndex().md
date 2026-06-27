@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Community 34"
 location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Community_34
 ---
 
 # getSentenceIndex()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Community_34

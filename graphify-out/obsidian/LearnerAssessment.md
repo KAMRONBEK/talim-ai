@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Learner Assessments UI"
-location: "L289"
+community: "Learner Assessment Pages"
+location: "L318"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # LearnerAssessment
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

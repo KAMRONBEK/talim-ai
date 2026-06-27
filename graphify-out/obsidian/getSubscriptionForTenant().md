@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Admin Tenants Controller"
+community: "Billing & Usage API"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_Controller
+  - community/Billing__Usage_API
 ---
 
 # getSubscriptionForTenant()
 
 ## Connections
 - [[formatSubscription()]] - `calls` [EXTRACTED]
+- [[getFileLimitsForTenant()]] - `calls` [EXTRACTED]
 - [[getTenant()]] - `calls` [EXTRACTED]
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[getUser()]] - `calls` [EXTRACTED]
@@ -22,4 +23,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_Controller
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/layout.tsx"
 type: "code"
-community: "Dashboard Search UI"
+community: "Community 42"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dashboard_Search_UI
+  - community/Community_42
 ---
 
 # DashboardLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dashboard_Search_UI
+#graphify/code #graphify/EXTRACTED #community/Community_42

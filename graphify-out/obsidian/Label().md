@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/label.tsx"
 type: "code"
-community: "Admin Login & Audit Pages"
+community: "Community 68"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Login__Audit_Pages
+  - community/Community_68
 ---
 
 # Label()
@@ -26,4 +26,4 @@ tags:
 - [[page.tsx_27]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Login__Audit_Pages
+#graphify/code #graphify/EXTRACTED #community/Community_68

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage Scoring"
+community: "Quiz Controller"
 location: "L308"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage_Scoring
+  - community/Quiz_Controller
 ---
 
 # refineSectionProgressWithAi()
@@ -20,4 +20,4 @@ tags:
 - [[persistSectionProgress()]] - `calls` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage_Scoring
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller

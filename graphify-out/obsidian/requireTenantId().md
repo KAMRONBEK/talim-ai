@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant-content.controller.ts"
 type: "code"
-community: "Tenant Content Controller"
-location: "L54"
+community: "Content Controller"
+location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Content_Controller
+  - community/Content_Controller
 ---
 
 # requireTenantId()
@@ -24,4 +24,4 @@ tags:
 - [[tenant-content.controller.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Content_Controller
+#graphify/code #graphify/EXTRACTED #community/Content_Controller

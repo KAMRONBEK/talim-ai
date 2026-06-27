@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Chat Store & Tutor Graph Payloads"
+community: "Community 45"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Store__Tutor_Graph_Payloads
+  - community/Community_45
 ---
 
 # useChatStore.ts
@@ -28,4 +28,4 @@ tags:
 - [[serializeVisualBlock()]] - `imports` [EXTRACTED]
 - [[useChatStore]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph_Payloads
+#graphify/code #graphify/EXTRACTED #community/Community_45

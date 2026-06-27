@@ -1,13 +1,13 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "Graphify Interpreter Guard"
+community: "Community 140"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Interpreter_Guard
+  - community/Community_140
 ---
 
 # Python Interpreter Guard
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Interpreter_Guard
+#graphify/rationale #graphify/EXTRACTED #community/Community_140

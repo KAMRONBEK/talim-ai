@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Transcript Panel"
-location: "L545"
+community: "Community 34"
+location: "L574"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Community_34
 ---
 
 # TranscriptSegment
@@ -16,4 +16,4 @@ tags:
 - [[TranscriptPanelProps]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Community_34

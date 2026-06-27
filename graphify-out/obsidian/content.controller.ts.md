@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/content.controller.ts"
 type: "code"
-community: "Admin Audit & Content Controller"
+community: "Admin Analytics & Subscriptions"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Content_Controller
+  - community/Admin_Analytics__Subscriptions
 ---
 
 # content.controller.ts
@@ -36,4 +36,4 @@ tags:
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Content_Controller
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions

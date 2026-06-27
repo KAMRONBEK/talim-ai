@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "Content Stage & PDF Excerpt"
+community: "Content Detail Page"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Stage__PDF_Excerpt
+  - community/Content_Detail_Page
 ---
 
 # PdfExcerptPayload
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewer.tsx]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Stage__PDF_Excerpt
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

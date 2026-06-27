@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Sheet UI Component"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Sheet_UI_Component
 ---
 
 # content-right-panel.tsx
@@ -30,4 +30,4 @@ tags:
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

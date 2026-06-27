@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L13"
+community: "Community 41"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_41
 ---
 
 # isNearEnd()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[PodcastPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_41

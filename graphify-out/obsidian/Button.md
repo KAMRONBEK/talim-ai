@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Admin Generated & Usage UI"
+community: "Admin Auth Pages & UI"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated__Usage_UI
+  - community/Admin_Auth_Pages__UI
 ---
 
 # Button
@@ -54,10 +54,12 @@ tags:
 - [[page.tsx_29]] - `imports` [EXTRACTED]
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
+- [[page.tsx_32]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports` [EXTRACTED]
 - [[theme-toggle.tsx]] - `imports` [EXTRACTED]
+- [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated__Usage_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

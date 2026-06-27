@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 38"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_38
 ---
 
 # planMessageKey
@@ -15,7 +15,7 @@ tags:
 - [[billing-summary-card.tsx]] - `imports` [EXTRACTED]
 - [[dashboard-header.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_20]] - `imports` [EXTRACTED]
-- [[plan.ts]] - `contains` [EXTRACTED]
+- [[plan.ts_1]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_38

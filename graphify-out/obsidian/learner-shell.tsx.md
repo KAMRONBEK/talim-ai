@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/learner-shell.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 61"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_61
 ---
 
 # learner-shell.tsx
@@ -22,4 +22,4 @@ tags:
 - [[learner-navigation.tsx]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_61

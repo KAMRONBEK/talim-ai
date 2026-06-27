@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Login Page & Sheet UI"
-location: "L656"
+community: "Community 89"
+location: "L685"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Community_89
 ---
 
 # SectionProgress
@@ -16,4 +16,4 @@ tags:
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Community_89

@@ -1,19 +1,20 @@
 ---
 source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L25"
+community: "Community 41"
+location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_41
 ---
 
 # PodcastPlayer()
 
 ## Connections
 - [[PodcastPlayer.tsx]] - `contains` [EXTRACTED]
-- [[formatTime()]] - `calls` [EXTRACTED]
+- [[T]] - `calls` [INFERRED]
+- [[formatTime()_1]] - `calls` [EXTRACTED]
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_41

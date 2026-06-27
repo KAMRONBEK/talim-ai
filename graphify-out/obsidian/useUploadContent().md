@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
-location: "L58"
+community: "Community 70"
+location: "L69"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_70
 ---
 
 # useUploadContent()
@@ -16,4 +16,4 @@ tags:
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_70

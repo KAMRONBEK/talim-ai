@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/middleware.ts"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[middleware.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/podcast/page.tsx"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L15"
+community: "Community 41"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_41
 ---
 
 # formatDuration()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_30]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_41

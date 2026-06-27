@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Assessments UI"
-location: "L331"
+community: "Learner Assessment Pages"
+location: "L360"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # AssessmentLeaderboardRow
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[leaderboard-table.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

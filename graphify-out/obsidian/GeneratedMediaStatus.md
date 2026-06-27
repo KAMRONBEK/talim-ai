@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
+community: "Slide Deck Types"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Slide_Deck_Types
 ---
 
 # GeneratedMediaStatus
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

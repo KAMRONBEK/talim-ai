@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Assessments UI"
-location: "L262"
+community: "Learner Assessment Pages"
+location: "L291"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # AssessmentMode
@@ -16,4 +16,4 @@ tags:
 - [[leaderboard-table.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

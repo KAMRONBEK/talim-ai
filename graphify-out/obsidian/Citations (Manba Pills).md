@@ -1,17 +1,17 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "B2C AI Learning Loop"
+community: "Community 92"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/B2C_AI_Learning_Loop
+  - graphify/EXTRACTED
+  - community/Community_92
 ---
 
 # Citations (Manba Pills)
 
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
-- [[RAG AI Tutor Chat]] - `conceptually_related_to` [INFERRED]
+- [[RAG AI tutor chat]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/B2C_AI_Learning_Loop
+#graphify/concept #graphify/EXTRACTED #community/Community_92

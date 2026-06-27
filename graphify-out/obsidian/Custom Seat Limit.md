@@ -1,16 +1,22 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Tenant Owner Capabilities"
+community: "Community 82"
+location: "§3.5"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Capabilities
+  - community/Community_82
 ---
 
-# Custom Seat Limit
+# Custom seat limit
 
 ## Connections
-- [[Tenant (B2B Tutor) Experience]] - `references` [EXTRACTED]
+- [[Class JOIN CODE self-enroll]] - `references` [INFERRED]
+- [[F26 Seat-limit-full reported as 'Upload limit reached']] - `references` [EXTRACTED]
+- [[Students management (email + email-less username students)]] - `references` [EXTRACTED]
+- [[Tenant management + subscriptions]] - `references` [EXTRACTED]
+- [[Tutor-request approvals (org + subscription + seat limit)]] - `references` [EXTRACTED]
+- [[US-AUTH-03 Join-code enrolment + seat limits]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Tenant_Owner_Capabilities
+#graphify/concept #graphify/EXTRACTED #community/Community_82

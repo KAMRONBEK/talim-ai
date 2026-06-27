@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Students Management UI"
+community: "Tenant Web Pages"
 location: "L64"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Students_Management_UI
+  - community/Tenant_Web_Pages
 ---
 
 # useRegenerateJoinCode()
@@ -16,4 +16,4 @@ tags:
 - [[join-code-card.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Students_Management_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

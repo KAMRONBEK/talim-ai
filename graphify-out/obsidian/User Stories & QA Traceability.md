@@ -1,20 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "QA Runbook & Error Fixtures"
+community: "Community 75"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Runbook__Error_Fixtures
+  - community/Community_75
 ---
 
 # User Stories & QA Traceability
 
 ## Connections
-- [[Finding Severity Scale (S1-S4)]] - `references` [EXTRACTED]
-- [[Findings Ledger]] - `references` [EXTRACTED]
-- [[Overnight Visual QA Report]] - `references` [EXTRACTED]
-- [[US-AUTH-01 Emailpassword login]] - `references` [EXTRACTED]
-- [[US-OWNER-12 Delete a material]] - `references` [EXTRACTED]
+- [[Overnight Visual QA Report — Talim AI]] - `references` [EXTRACTED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Runbook__Error_Fixtures
+#graphify/document #graphify/EXTRACTED #community/Community_75

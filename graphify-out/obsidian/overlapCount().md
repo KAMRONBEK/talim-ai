@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Tutor Scope Classification"
-location: "L96"
+community: "Community 37"
+location: "L97"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classification
+  - community/Community_37
 ---
 
 # overlapCount()
@@ -15,4 +15,4 @@ tags:
 - [[guessScopeHeuristically()]] - `calls` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classification
+#graphify/code #graphify/EXTRACTED #community/Community_37

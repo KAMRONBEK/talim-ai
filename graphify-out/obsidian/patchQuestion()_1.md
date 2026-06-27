@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "AI Question Banks"
+community: "Community 46"
 location: "L125"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Question_Banks
+  - community/Community_46
 ---
 
 # patchQuestion()
@@ -18,4 +18,4 @@ tags:
 - [[isAnswerableMultipleChoice()]] - `calls` [EXTRACTED]
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Question_Banks
+#graphify/code #graphify/EXTRACTED #community/Community_46

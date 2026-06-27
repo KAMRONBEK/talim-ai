@@ -1,17 +1,17 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Isolation Guard & Visual Direction"
+community: "Community 95"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/Isolation_Guard__Visual_Direction
+  - graphify/EXTRACTED
+  - community/Community_95
 ---
 
 # Flashcards & Notes Generators
 
 ## Connections
 - [[Generate Grid (Yaratish)]] - `references` [EXTRACTED]
-- [[Subscriptions  Plans (manual activation)]] - `conceptually_related_to` [INFERRED]
+- [[Subscriptions  plans (manual activation)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Isolation_Guard__Visual_Direction
+#graphify/concept #graphify/EXTRACTED #community/Community_95

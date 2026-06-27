@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/preview.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 40"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_40
 ---
 
 # Preview()
@@ -16,4 +16,4 @@ tags:
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 - [[preview.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_40

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Shared UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Shared_UI_Components
 ---
 
 # utils.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[cn()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

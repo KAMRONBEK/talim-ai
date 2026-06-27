@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Community 70"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_70
 ---
 
 # LearningTopbar()
@@ -15,7 +15,7 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
 - [[learning-topbar.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_35]] - `imports` [EXTRACTED]
+- [[page.tsx_37]] - `imports` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_70

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Locale-Aware AI Prompts"
-location: "L284"
+community: "Community 39"
+location: "L286"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale-Aware_AI_Prompts
+  - community/Community_39
 ---
 
 # SUMMARY_PREFIX_PATTERNS_RU
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale-Aware_AI_Prompts
+#graphify/code #graphify/EXTRACTED #community/Community_39

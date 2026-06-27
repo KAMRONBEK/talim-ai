@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Content Stage & PDF Excerpt"
+community: "Content Detail Page"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Stage__PDF_Excerpt
+  - community/Content_Detail_Page
 ---
 
 # formatSummaryForDisplay()
@@ -15,4 +15,4 @@ tags:
 - [[format-summary.ts]] - `contains` [EXTRACTED]
 - [[splitSummaryParagraphs()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Stage__PDF_Excerpt
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "document"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # Platform Guide
@@ -21,4 +21,4 @@ tags:
 - [[Three Apps Architecture]] - `references` [EXTRACTED]
 - [[Two Audiences (B2C + B2B) One Codebase]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs

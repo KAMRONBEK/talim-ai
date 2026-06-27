@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 42"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_42
 ---
 
 # TenantShell()
@@ -17,4 +17,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_42

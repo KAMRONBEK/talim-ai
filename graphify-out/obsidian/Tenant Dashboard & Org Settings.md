@@ -1,16 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Tenant Owner Capabilities"
+community: "Community 82"
+location: "§3.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Capabilities
+  - community/Community_82
 ---
 
-# Tenant Dashboard & Org Settings
+# Tenant dashboard & org settings
 
 ## Connections
-- [[Tenant (B2B Tutor) Experience]] - `references` [EXTRACTED]
+- [[Class JOIN CODE self-enroll]] - `references` [EXTRACTED]
+- [[F6 Deactivate no confirm + native regenerate confirm]] - `references` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Tenant_Owner_Capabilities
+#graphify/concept #graphify/EXTRACTED #community/Community_82

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Community 77"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Community_77
 ---
 
 # Content Pipeline & Job Model
@@ -14,4 +14,4 @@ tags:
 - [[Platform Guide]] - `references` [EXTRACTED]
 - [[processContent Job (ingest→RAG)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Community_77

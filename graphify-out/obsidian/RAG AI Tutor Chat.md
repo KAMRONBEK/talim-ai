@@ -1,18 +1,21 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "B2C AI Learning Loop"
+community: "Community 92"
+location: "§1.7"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/B2C_AI_Learning_Loop
+  - graphify/INFERRED
+  - community/Community_92
 ---
 
-# RAG AI Tutor Chat
+# RAG AI tutor chat
 
 ## Connections
-- [[AI Tutor Visuals (Manim)]] - `references` [EXTRACTED]
+- [[AI tutor visuals (Manim)]] - `references` [EXTRACTED]
 - [[Citations (Manba Pills)]] - `conceptually_related_to` [INFERRED]
-- [[Content & AI Learning Loop]] - `references` [EXTRACTED]
+- [[Internationalization (uz  en  ru)]] - `conceptually_related_to` [INFERRED]
+- [[Sectioning]] - `shares_data_with` [INFERRED]
+- [[US-IND-030406 B2C workspace — Summary, Quiz, Chat (PDF)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/B2C_AI_Learning_Loop
+#graphify/concept #graphify/INFERRED #community/Community_92

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
-location: "L420"
+community: "Slide Deck Types"
+location: "L449"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Slide_Deck_Types
 ---
 
 # AdminTutorRequest
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

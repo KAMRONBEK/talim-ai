@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/YoutubeVideoPlayer.tsx"
 type: "code"
-community: "Video Tutorial & Transcript UI"
+community: "Community 34"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Community_34
 ---
 
 # YoutubeVideoPlayer.tsx
@@ -19,4 +19,4 @@ tags:
 - [[YoutubeVideoPlayerProps]] - `contains` [EXTRACTED]
 - [[loadYoutubeApi()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Community_34

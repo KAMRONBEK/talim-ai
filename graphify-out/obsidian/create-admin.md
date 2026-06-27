@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Root pnpm Scripts"
+community: "Community 54"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_pnpm_Scripts
+  - community/Community_54
 ---
 
 # create-admin
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_pnpm_Scripts
+#graphify/code #graphify/EXTRACTED #community/Community_54

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
-community: "Auth Controller (login/join/password)"
-location: "L153"
+community: "Admin Audit & Auth"
+location: "L158"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller_login/join/password
+  - community/Admin_Audit__Auth
 ---
 
 # login()
@@ -16,4 +16,4 @@ tags:
 - [[formatUser()]] - `calls` [EXTRACTED]
 - [[signToken()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller_login/join/password
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

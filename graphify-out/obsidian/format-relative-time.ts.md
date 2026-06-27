@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Recent Content Grid UI"
+community: "Sheet UI Component"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Recent_Content_Grid_UI
+  - community/Sheet_UI_Component
 ---
 
 # format-relative-time.ts
@@ -15,9 +15,11 @@ tags:
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[LOCALE_MAP]] - `contains` [EXTRACTED]
 - [[UNITS]] - `contains` [EXTRACTED]
+- [[UZ_UNIT_LABELS]] - `contains` [EXTRACTED]
 - [[formatRelativeTime()]] - `contains` [EXTRACTED]
+- [[formatUzbek()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Recent_Content_Grid_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

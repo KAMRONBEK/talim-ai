@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Subscription Service"
+community: "Billing & Usage API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Service
+  - community/Billing__Usage_API
 ---
 
 # tenant.ts
@@ -20,16 +20,19 @@ tags:
 - [[SubscriptionView]] - `imports` [EXTRACTED]
 - [[adminUpdateTenantSubscription()]] - `contains` [EXTRACTED]
 - [[assertTenantQuota()]] - `contains` [EXTRACTED]
+- [[dayRange()]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[formatSubscription()]] - `imports` [EXTRACTED]
 - [[getActiveStudentCount()]] - `contains` [EXTRACTED]
+- [[getFileLimitsForTenant()]] - `contains` [EXTRACTED]
 - [[getSubscriptionForTenant()]] - `contains` [EXTRACTED]
 - [[getTenantContentCount()]] - `contains` [EXTRACTED]
 - [[getTenantGenerationCount()]] - `contains` [EXTRACTED]
+- [[getTenantPodcastCount()]] - `contains` [EXTRACTED]
 - [[getTenantUsageVsLimits()]] - `contains` [EXTRACTED]
+- [[getTenantVideoCount()]] - `contains` [EXTRACTED]
 - [[getUsageForPeriod()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[monthToDateRange()_1]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[requireActiveTenantSubscription()]] - `contains` [EXTRACTED]
@@ -39,4 +42,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

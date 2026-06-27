@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
+community: "Content & Podcast API"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Content__Podcast_API
 ---
 
 # assertCanGenerate()
@@ -21,8 +21,9 @@ tags:
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[regenerateEpisode()]] - `calls` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

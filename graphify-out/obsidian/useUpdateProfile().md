@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Profile & Become-Tutor UI"
+community: "Community 68"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Profile__Become-Tutor_UI
+  - community/Community_68
 ---
 
 # useUpdateProfile()
@@ -16,4 +16,4 @@ tags:
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[useAccount.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Profile__Become-Tutor_UI
+#graphify/code #graphify/EXTRACTED #community/Community_68

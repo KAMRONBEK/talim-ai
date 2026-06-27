@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/avatar.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 31"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_31
 ---
 
 # AvatarFallback()
@@ -18,4 +18,4 @@ tags:
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_31

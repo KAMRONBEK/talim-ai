@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller & Grading"
+community: "Content & Podcast API"
 location: "L267"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Content__Podcast_API
 ---
 
 # listQuizzesByContent()
@@ -17,4 +17,4 @@ tags:
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

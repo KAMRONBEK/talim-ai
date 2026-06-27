@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
+community: "Slide Deck Types"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Slide_Deck_Types
 ---
 
 # index.ts
@@ -100,8 +100,10 @@ tags:
 - [[MermaidDiagram.tsx]] - `imports_from` [EXTRACTED]
 - [[MermaidPayload]] - `re_exports` [EXTRACTED]
 - [[MessageRole]] - `contains` [EXTRACTED]
+- [[NarratedVideoPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[PaginatedResponse]] - `contains` [EXTRACTED]
 - [[PlanCode]] - `contains` [EXTRACTED]
+- [[PlanFileLimitResponse]] - `contains` [EXTRACTED]
 - [[PlanKind]] - `contains` [EXTRACTED]
 - [[PlanLimits_1]] - `contains` [EXTRACTED]
 - [[Podcast]] - `contains` [EXTRACTED]
@@ -157,6 +159,7 @@ tags:
 - [[UserRole]] - `contains` [EXTRACTED]
 - [[UserSubscription]] - `contains` [EXTRACTED]
 - [[UserUsageSummary]] - `contains` [EXTRACTED]
+- [[VideoSegment]] - `contains` [EXTRACTED]
 - [[VisualBlock]] - `re_exports` [EXTRACTED]
 - [[VisualBlockRenderer.tsx]] - `imports_from` [EXTRACTED]
 - [[VisualKind]] - `re_exports` [EXTRACTED]
@@ -168,6 +171,7 @@ tags:
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
+- [[content-cache.ts]] - `imports_from` [EXTRACTED]
 - [[content-right-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
@@ -181,6 +185,7 @@ tags:
 - [[game-quiz-player.tsx]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[html-sandbox-templates.ts]] - `imports_from` [EXTRACTED]
 - [[isAppLocale()]] - `re_exports` [EXTRACTED]
 - [[isSelectedAnswerCorrect()]] - `re_exports` [EXTRACTED]
@@ -188,6 +193,7 @@ tags:
 - [[leaderboard-table.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
+- [[limit-error.ts]] - `imports_from` [EXTRACTED]
 - [[locale-api.ts]] - `imports_from` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
@@ -204,6 +210,7 @@ tags:
 - [[parseFenceBlock()]] - `re_exports` [EXTRACTED]
 - [[parseGraphBlock()]] - `re_exports` [EXTRACTED]
 - [[parseVisualBlock()]] - `re_exports` [EXTRACTED]
+- [[pricing.ts]] - `imports_from` [EXTRACTED]
 - [[quiz-answer.ts]] - `re_exports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports_from` [EXTRACTED]
@@ -261,5 +268,6 @@ tags:
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 - [[user-display.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
+- [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

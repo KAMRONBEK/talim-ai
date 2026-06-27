@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Usage Pricing & PDF Extraction"
+community: "Usage Pricing & Chunk Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__PDF_Extraction
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # usage-pricing.ts
@@ -16,4 +16,4 @@ tags:
 - [[estimateTokenCostUsd()]] - `contains` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__PDF_Extraction
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

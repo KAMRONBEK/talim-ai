@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Content & Users UI"
+community: "Admin Content Pages"
 location: "L162"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Users_UI
+  - community/Admin_Content_Pages
 ---
 
 # useAdminContents()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_1]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Users_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages

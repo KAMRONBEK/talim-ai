@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-prompt.ts"
 type: "code"
-community: "Tutor Prompt Builder"
+community: "Community 117"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Prompt_Builder
+  - community/Community_117
 ---
 
 # buildTutorSystemMessage()
@@ -15,4 +15,4 @@ tags:
 - [[buildTutorContextBlock()]] - `calls` [EXTRACTED]
 - [[tutor-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Prompt_Builder
+#graphify/code #graphify/EXTRACTED #community/Community_117

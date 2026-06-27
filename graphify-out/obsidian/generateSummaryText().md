@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Section & Summary API"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Section__Summary_API
 ---
 
 # generateSummaryText()
@@ -23,4 +23,4 @@ tags:
 - [[sanitizeSummaryOutput()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Section__Summary_API

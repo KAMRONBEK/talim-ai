@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "API Backend Architecture"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/API_Backend_Architecture
+  - community/Admin_Panel_Docs
 ---
 
 # Bull background jobs (processContent/generateQuiz/generatePodcast/renderManim)
@@ -15,4 +15,4 @@ tags:
 - [[Talim AI README]] - `references` [EXTRACTED]
 - [[appsapi — Express+Prisma+Bull backend (port 4000)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/API_Backend_Architecture
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

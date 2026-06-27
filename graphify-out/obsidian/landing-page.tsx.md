@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/landing-page.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 40"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_40
 ---
 
 # landing-page.tsx
@@ -28,7 +28,7 @@ tags:
 - [[hero.tsx]] - `imports_from` [EXTRACTED]
 - [[how-it-works.tsx]] - `imports_from` [EXTRACTED]
 - [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_35]] - `imports_from` [EXTRACTED]
 - [[preview.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_40

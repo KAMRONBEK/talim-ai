@@ -1,17 +1,16 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "rationale"
-community: "Isolation Guard & Visual Direction"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Isolation_Guard__Visual_Direction
+  - graphify/EXTRACTED
+  - community/Deployment__Infra_Docs
 ---
 
 # Multi-tenancy & Data Isolation
 
 ## Connections
-- [[Multi-tenant Isolation Guard]] - `conceptually_related_to` [INFERRED]
 - [[Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/Isolation_Guard__Visual_Direction
+#graphify/rationale #graphify/EXTRACTED #community/Deployment__Infra_Docs

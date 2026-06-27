@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/summary-prompt.ts"
 type: "code"
-community: "Locale-Aware AI Prompts"
+community: "Community 39"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale-Aware_AI_Prompts
+  - community/Community_39
 ---
 
 # sanitizeSummaryOutput()
@@ -15,4 +15,4 @@ tags:
 - [[locale-prompts.ts]] - `imports` [EXTRACTED]
 - [[summary-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale-Aware_AI_Prompts
+#graphify/code #graphify/EXTRACTED #community/Community_39

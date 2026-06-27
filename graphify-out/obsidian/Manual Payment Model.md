@@ -1,17 +1,17 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "rationale"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 93"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - graphify/EXTRACTED
+  - community/Community_93
 ---
 
 # Manual Payment Model
 
 ## Connections
 - [[Platform Guide]] - `references` [EXTRACTED]
-- [[Subscriptions  Plans (manual activation)]] - `conceptually_related_to` [INFERRED]
+- [[Subscriptions  plans (manual activation)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/rationale #graphify/EXTRACTED #community/Community_93

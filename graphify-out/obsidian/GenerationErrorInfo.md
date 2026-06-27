@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/generation-error.ts"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Community 44"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Community_44
 ---
 
 # GenerationErrorInfo
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generation-error.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Community_44

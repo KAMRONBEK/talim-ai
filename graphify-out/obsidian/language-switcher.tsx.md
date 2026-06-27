@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # language-switcher.tsx
@@ -23,4 +23,4 @@ tags:
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[setApiLocale()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

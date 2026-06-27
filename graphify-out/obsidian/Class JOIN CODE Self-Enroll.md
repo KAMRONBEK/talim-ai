@@ -1,16 +1,20 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Tenant Owner Capabilities"
+community: "Community 82"
+location: "§3.4"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Capabilities
+  - community/Community_82
 ---
 
-# Class JOIN CODE Self-Enroll
+# Class JOIN CODE self-enroll
 
 ## Connections
-- [[Tenant (B2B Tutor) Experience]] - `references` [EXTRACTED]
+- [[Custom seat limit]] - `references` [INFERRED]
+- [[F27 Orphaned account when register-with-join-code hits a full class]] - `references` [EXTRACTED]
+- [[Tenant dashboard & org settings]] - `references` [EXTRACTED]
+- [[US-AUTH-03 Join-code enrolment + seat limits]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Tenant_Owner_Capabilities
+#graphify/concept #graphify/EXTRACTED #community/Community_82

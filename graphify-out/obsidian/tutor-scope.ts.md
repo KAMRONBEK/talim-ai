@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Tutor Scope Classification"
+community: "Community 37"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classification
+  - community/Community_37
 ---
 
 # tutor-scope.ts
@@ -31,7 +31,9 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isTutorScopeRefusal()]] - `contains` [EXTRACTED]
 - [[overlapCount()]] - `contains` [EXTRACTED]
+- [[scriptVariants()]] - `imports` [EXTRACTED]
 - [[tokenize()]] - `contains` [EXTRACTED]
 - [[tutor-scope-smoke.ts]] - `imports_from` [EXTRACTED]
+- [[uzbek-translit.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classification
+#graphify/code #graphify/EXTRACTED #community/Community_37

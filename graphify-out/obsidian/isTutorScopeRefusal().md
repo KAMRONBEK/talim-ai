@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Tutor Scope Classification"
-location: "L205"
+community: "Community 37"
+location: "L212"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classification
+  - community/Community_37
 ---
 
 # isTutorScopeRefusal()
@@ -15,4 +15,4 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classification
+#graphify/code #graphify/EXTRACTED #community/Community_37

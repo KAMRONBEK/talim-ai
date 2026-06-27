@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # Three Apps Architecture
@@ -14,4 +14,4 @@ tags:
 - [[Platform Guide]] - `references` [EXTRACTED]
 - [[QA with Playwright MCP]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs

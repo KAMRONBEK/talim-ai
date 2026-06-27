@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "PDF Viewer"
+community: "Community 73"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer
+  - community/Community_73
 ---
 
 # loadPdfJs()
@@ -17,4 +17,4 @@ tags:
 - [[rasterize-pdf.ts]] - `imports` [EXTRACTED]
 - [[rasterizePdfToImages()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_73

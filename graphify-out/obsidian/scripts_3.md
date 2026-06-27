@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Monorepo Root Tooling Config"
+community: "Root Build Config"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Monorepo_Root_Tooling_Config
+  - community/Root_Build_Config
 ---
 
 # scripts
@@ -24,6 +24,7 @@ tags:
 - [[dev_3]] - `contains` [EXTRACTED]
 - [[devadmin]] - `contains` [EXTRACTED]
 - [[devall]] - `contains` [EXTRACTED]
+- [[devclean]] - `contains` [EXTRACTED]
 - [[devinfra]] - `contains` [EXTRACTED]
 - [[dockerdown]] - `contains` [EXTRACTED]
 - [[dockerre]] - `contains` [EXTRACTED]
@@ -37,4 +38,4 @@ tags:
 - [[qaovernight]] - `contains` [EXTRACTED]
 - [[typecheck_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Tooling_Config
+#graphify/code #graphify/EXTRACTED #community/Root_Build_Config

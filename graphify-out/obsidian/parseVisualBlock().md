@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Chat Store & Tutor Graph Payloads"
+community: "Community 45"
 location: "L76"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Store__Tutor_Graph_Payloads
+  - community/Community_45
 ---
 
 # parseVisualBlock()
@@ -16,4 +16,4 @@ tags:
 - [[parseFenceBlock()]] - `calls` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph_Payloads
+#graphify/code #graphify/EXTRACTED #community/Community_45

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Admin Generated & Usage UI"
+community: "Admin Content Pages"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated__Usage_UI
+  - community/Admin_Content_Pages
 ---
 
 # GeneratedPage()
@@ -15,4 +15,4 @@ tags:
 - [[page.tsx_3]] - `contains` [EXTRACTED]
 - [[useAdminGenerated()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated__Usage_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages

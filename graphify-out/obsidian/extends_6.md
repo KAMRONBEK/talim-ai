@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/tsconfig.json"
 type: "code"
-community: "TSConfig (jsx)"
+community: "Community 105"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TSConfig_jsx
+  - community/Community_105
 ---
 
 # extends
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tsconfig.json_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TSConfig_jsx
+#graphify/code #graphify/EXTRACTED #community/Community_105

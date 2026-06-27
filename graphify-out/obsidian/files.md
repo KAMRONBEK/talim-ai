@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/package.json"
 type: "code"
-community: "ESLint Config Package"
+community: "Community 112"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ESLint_Config_Package
+  - community/Community_112
 ---
 
 # files
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ESLint_Config_Package
+#graphify/code #graphify/EXTRACTED #community/Community_112

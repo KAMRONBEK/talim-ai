@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Slide & Mermaid Diagram Components"
+community: "Shared UI Components"
 location: "L280"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide__Mermaid_Diagram_Components
+  - community/Shared_UI_Components
 ---
 
 # Process()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide__Mermaid_Diagram_Components
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

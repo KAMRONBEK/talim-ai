@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api/endpoints.ts"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Community 73"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Community_73
 ---
 
 # endpoints.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[assessmentEndpoints]] - `contains` [EXTRACTED]
 - [[authEndpoints]] - `contains` [EXTRACTED]
+- [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[contentEndpoints]] - `contains` [EXTRACTED]
 - [[endpoints]] - `contains` [EXTRACTED]
 - [[learnerEndpoints]] - `contains` [EXTRACTED]
@@ -21,4 +22,4 @@ tags:
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Community_73

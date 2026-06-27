@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/slides.controller.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
+community: "Content & Podcast API"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Content__Podcast_API
 ---
 
 # createSlides()
@@ -21,4 +21,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[slides.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

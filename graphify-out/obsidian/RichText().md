@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/rich-text.tsx"
 type: "code"
-community: "Rich Text & Quiz Card UI"
+community: "Community 83"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Rich_Text__Quiz_Card_UI
+  - community/Community_83
 ---
 
 # RichText()
@@ -17,4 +17,4 @@ tags:
 - [[game-quiz-player.tsx]] - `imports` [EXTRACTED]
 - [[rich-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Rich_Text__Quiz_Card_UI
+#graphify/code #graphify/EXTRACTED #community/Community_83

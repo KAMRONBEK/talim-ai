@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/progress.ts"
 type: "code"
-community: "Learning Progress & Coverage Scoring"
+community: "Tenant Admin & Prisma"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage_Scoring
+  - community/Tenant_Admin__Prisma
 ---
 
 # progress.ts
@@ -25,4 +25,4 @@ tags:
 - [[students.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage_Scoring
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

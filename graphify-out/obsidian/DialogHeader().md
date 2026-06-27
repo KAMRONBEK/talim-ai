@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Community 31"
 location: "L77"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_31
 ---
 
 # DialogHeader()
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_29]] - `imports` [EXTRACTED]
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_31

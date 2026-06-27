@@ -1,18 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 99"
+location: "§2.4"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_99
 ---
 
-# Become-a-tutor Request Flow
+# Become-a-tutor request flow
 
 ## Connections
-- [[Accounts & Auth]] - `references` [EXTRACTED]
-- [[End-to-end Journeys]] - `conceptually_related_to` [INFERRED]
-- [[Subscriptions  Plans (manual activation)]] - `shares_data_with` [EXTRACTED]
+- [[F11 Stale session JWT role after admin role-change → 403s until re-login]] - `references` [INFERRED]
+- [[Tutor-request approvals (org + subscription + seat limit)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_99

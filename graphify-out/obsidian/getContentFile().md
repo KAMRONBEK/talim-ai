@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content Controller (B2C)"
-location: "L318"
+community: "Content & Podcast API"
+location: "L286"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content__Podcast_API
 ---
 
 # getContentFile()
@@ -15,5 +15,6 @@ tags:
 - [[assertCanAccessContent()]] - `calls` [EXTRACTED]
 - [[content.controller.ts_1]] - `contains` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
+- [[sendContentFile()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

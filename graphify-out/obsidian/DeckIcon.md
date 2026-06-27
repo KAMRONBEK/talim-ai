@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Deck Player Slides & Theme"
+community: "Shared UI Components"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player_Slides__Theme
+  - community/Shared_UI_Components
 ---
 
 # DeckIcon
@@ -16,4 +16,4 @@ tags:
 - [[deck.ts]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player_Slides__Theme
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

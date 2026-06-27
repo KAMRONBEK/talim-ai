@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/README.md"
 type: "document"
-community: "Product Roadmap & Epics"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Roadmap__Epics
+  - community/Deployment__Infra_Docs
 ---
 
 # Epic Prompts Index
@@ -19,4 +19,4 @@ tags:
 - [[Epic 6 — Tenant AI Assistant]] - `references` [EXTRACTED]
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Roadmap__Epics
+#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs

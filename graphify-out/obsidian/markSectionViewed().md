@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage Scoring"
+community: "Content & Podcast API"
 location: "L59"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage_Scoring
+  - community/Content__Podcast_API
 ---
 
 # markSectionViewed()
@@ -18,4 +18,4 @@ tags:
 - [[recalculateContentProgress()]] - `calls` [EXTRACTED]
 - [[recordLearningActivity()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage_Scoring
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

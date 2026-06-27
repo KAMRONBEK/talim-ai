@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/figure.service.ts"
 type: "code"
-community: "Embedding Inspection Script"
+community: "Content Controller"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding_Inspection_Script
+  - community/Content_Controller
 ---
 
 # captionAndStoreFigures()
@@ -20,4 +20,4 @@ tags:
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding_Inspection_Script
+#graphify/code #graphify/EXTRACTED #community/Content_Controller

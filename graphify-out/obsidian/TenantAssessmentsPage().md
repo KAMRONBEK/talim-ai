@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessments UI"
+community: "Learner Assessment Pages"
 location: "L84"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # TenantAssessmentsPage()
@@ -24,4 +24,4 @@ tags:
 - [[useTenantAssessments()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessments_UI
+#graphify/code #graphify/INFERRED #community/Learner_Assessment_Pages

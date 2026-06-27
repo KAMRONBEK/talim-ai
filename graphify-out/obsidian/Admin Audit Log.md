@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 109"
+location: "§5.7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_109
 ---
 
-# Admin Audit Log
+# Admin audit log
 
 ## Connections
-- [[Admin Panel Features]] - `references` [EXTRACTED]
+- [[US-ADMIN-02 Users  tenants  content  generated  subscriptions  usage  audit]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_109

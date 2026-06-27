@@ -1,16 +1,20 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 94"
+location: "§2.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_94
 ---
 
-# Signup / Login by email OR username
+# Signup / login by email OR username
 
 ## Connections
-- [[Accounts & Auth]] - `references` [EXTRACTED]
+- [[F14 Return-after-login not preserved (no redirect= param)]] - `references` [INFERRED]
+- [[Rate limiting]] - `references` [EXTRACTED]
+- [[US-AUTH-01 Emailpassword login]] - `references` [EXTRACTED]
+- [[mustChangePassword & password reset]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_94

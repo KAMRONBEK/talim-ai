@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
-location: "L122"
+community: "Billing & Usage API"
+location: "L140"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Billing__Usage_API
 ---
 
 # assertQuota()
@@ -19,17 +19,20 @@ tags:
 - [[createQuiz()]] - `calls` [EXTRACTED]
 - [[createSlides()]] - `calls` [EXTRACTED]
 - [[createVideo()]] - `calls` [EXTRACTED]
+- [[dayRange()]] - `calls` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getGenerationCount()]] - `calls` [EXTRACTED]
+- [[getPodcastCount()]] - `calls` [EXTRACTED]
 - [[getSubscriptionForUser()]] - `calls` [EXTRACTED]
 - [[getTutorMessageCount()]] - `calls` [EXTRACTED]
 - [[getUploadCount()]] - `calls` [EXTRACTED]
+- [[getVideoCount()]] - `calls` [EXTRACTED]
 - [[main()_4]] - `calls` [EXTRACTED]
-- [[monthToDateRange()_1]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports` [EXTRACTED]
+- [[regenerateEpisode()]] - `calls` [EXTRACTED]
 - [[reparseContent()]] - `calls` [EXTRACTED]
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[resolveUpgradePlanCode()]] - `calls` [EXTRACTED]
@@ -42,4 +45,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

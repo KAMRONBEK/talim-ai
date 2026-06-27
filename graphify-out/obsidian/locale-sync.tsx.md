@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/locale-sync.tsx"
 type: "code"
-community: "App Providers & Sync"
+community: "Community 41"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Providers__Sync
+  - community/Community_41
 ---
 
 # locale-sync.tsx
@@ -17,4 +17,4 @@ tags:
 - [[useLocaleContent.ts]] - `imports_from` [EXTRACTED]
 - [[useLocaleSync()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Providers__Sync
+#graphify/code #graphify/EXTRACTED #community/Community_41

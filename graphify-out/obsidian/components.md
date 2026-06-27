@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "shadcn Components Config"
+community: "Community 52"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/shadcn_Components_Config
+  - community/Community_52
 ---
 
 # components
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[aliases]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/shadcn_Components_Config
+#graphify/code #graphify/EXTRACTED #community/Community_52

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx"
 type: "code"
-community: "Tenant Dashboard UI"
+community: "Tenant Web Pages"
 location: "L16"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Dashboard_UI
+  - community/Tenant_Web_Pages
 ---
 
 # TenantDashboardPage()
@@ -19,4 +19,4 @@ tags:
 - [[useTenantSearch()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Dashboard_UI
+#graphify/code #graphify/INFERRED #community/Tenant_Web_Pages

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Community 42"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Community_42
 ---
 
 # tenant-sidebar.tsx
@@ -31,4 +31,4 @@ tags:
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Community_42

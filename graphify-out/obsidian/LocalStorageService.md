@@ -1,18 +1,18 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Local File Storage Service"
+community: "Community 96"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Local_File_Storage_Service
+  - community/Community_96
 ---
 
 # LocalStorageService
 
 ## Connections
-- [[.constructor()_2]] - `method` [EXTRACTED]
+- [[.constructor()_3]] - `method` [EXTRACTED]
 - [[.delete()]] - `method` [EXTRACTED]
 - [[.ensureDir()]] - `method` [EXTRACTED]
 - [[.get()]] - `method` [EXTRACTED]
@@ -22,4 +22,4 @@ tags:
 - [[index.ts]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Local_File_Storage_Service
+#graphify/code #graphify/EXTRACTED #community/Community_96

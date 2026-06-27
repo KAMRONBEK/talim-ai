@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Usage Pricing & PDF Extraction"
+community: "Usage Pricing & Chunk Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__PDF_Extraction
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # usage.service.ts
@@ -15,6 +15,7 @@ tags:
 - [[RecordUsageInput]] - `contains` [EXTRACTED]
 - [[UsageContext]] - `contains` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
+- [[content-shared.ts]] - `imports_from` [EXTRACTED]
 - [[embed.service.ts]] - `imports_from` [EXTRACTED]
 - [[estimateCost()]] - `contains` [EXTRACTED]
 - [[estimateTokenCostUsd()]] - `imports` [EXTRACTED]
@@ -34,4 +35,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__PDF_Extraction
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

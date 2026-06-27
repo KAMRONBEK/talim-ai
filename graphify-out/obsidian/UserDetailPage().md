@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Tenant/User Detail UI"
-location: "L37"
+community: "Admin Plan/Status UI"
+location: "L38"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Admin_Tenant/User_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # UserDetailPage()
@@ -15,6 +15,7 @@ tags:
 - [[formatLimit()_1]] - `calls` [EXTRACTED]
 - [[isTenantUsage()]] - `calls` [EXTRACTED]
 - [[page.tsx_9]] - `contains` [EXTRACTED]
+- [[planLabel()]] - `calls` [INFERRED]
 - [[useAdminTenant()]] - `calls` [INFERRED]
 - [[useAdminTenants()]] - `calls` [INFERRED]
 - [[useAdminUser()]] - `calls` [INFERRED]
@@ -22,4 +23,4 @@ tags:
 - [[useResetUserPassword()]] - `calls` [INFERRED]
 - [[useUpdateUserSubscription()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Admin_Tenant/User_Detail_UI
+#graphify/code #graphify/INFERRED #community/Admin_Plan/Status_UI

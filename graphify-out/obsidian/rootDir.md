@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/tsconfig.json"
 type: "code"
-community: "TSConfig (types build)"
+community: "Community 86"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TSConfig_types_build
+  - community/Community_86
 ---
 
 # rootDir
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TSConfig_types_build
+#graphify/code #graphify/EXTRACTED #community/Community_86

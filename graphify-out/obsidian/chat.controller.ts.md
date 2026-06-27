@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Chat Controller & Sessions"
+community: "Community 48"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller__Sessions
+  - community/Community_48
 ---
 
 # chat.controller.ts
@@ -60,4 +60,4 @@ tags:
 - [[tutor-scope.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller__Sessions
+#graphify/code #graphify/EXTRACTED #community/Community_48

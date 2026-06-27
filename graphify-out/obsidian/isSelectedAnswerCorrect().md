@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Rich Text & Quiz Card UI"
+community: "Community 97"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Rich_Text__Quiz_Card_UI
+  - community/Community_97
 ---
 
 # isSelectedAnswerCorrect()
@@ -24,4 +24,4 @@ tags:
 - [[resolveCorrectAnswer()]] - `calls` [EXTRACTED]
 - [[stripOptionLabel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Rich_Text__Quiz_Card_UI
+#graphify/code #graphify/EXTRACTED #community/Community_97

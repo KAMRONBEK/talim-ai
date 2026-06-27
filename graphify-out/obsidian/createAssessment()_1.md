@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/assessments.ts"
 type: "code"
-community: "Assessment Service"
+community: "Community 87"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Service
+  - community/Community_87
 ---
 
 # createAssessment()
@@ -15,4 +15,4 @@ tags:
 - [[assessments.ts]] - `contains` [EXTRACTED]
 - [[formatAssessment()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Service
+#graphify/code #graphify/EXTRACTED #community/Community_87

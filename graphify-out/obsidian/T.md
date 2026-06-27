@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Content Detail Page"
 location: "L127"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Login_Page__Sheet_UI
+  - community/Content_Detail_Page
 ---
 
 # T
@@ -47,12 +47,15 @@ tags:
 - [[FileUploadField()]] - `calls` [INFERRED]
 - [[Footer()]] - `calls` [INFERRED]
 - [[ForTutors()]] - `calls` [INFERRED]
+- [[GameQuizPlayer()]] - `calls` [INFERRED]
 - [[GeoGebraEmbed()]] - `calls` [INFERRED]
 - [[Hero()]] - `calls` [INFERRED]
 - [[HowItWorks()]] - `calls` [INFERRED]
 - [[HtmlSandbox()]] - `calls` [INFERRED]
 - [[JoinCodeCard()]] - `calls` [INFERRED]
+- [[LeaderboardTable()]] - `calls` [INFERRED]
 - [[LearnerDashboardPage()]] - `calls` [INFERRED]
+- [[LearnerProgressPage()]] - `calls` [INFERRED]
 - [[LearnerSettingsPage()]] - `calls` [INFERRED]
 - [[LearnerSidebar()]] - `calls` [INFERRED]
 - [[LearningHistoryPanel()]] - `calls` [INFERRED]
@@ -65,7 +68,9 @@ tags:
 - [[PdfViewer()]] - `calls` [INFERRED]
 - [[PdfViewerLoading()]] - `calls` [INFERRED]
 - [[PodcastPageInner()]] - `calls` [INFERRED]
+- [[PodcastPlayer()]] - `calls` [INFERRED]
 - [[Preview()]] - `calls` [INFERRED]
+- [[Pricing()]] - `calls` [INFERRED]
 - [[ProcessingCard()]] - `calls` [INFERRED]
 - [[ProfileCard()]] - `calls` [INFERRED]
 - [[QuickActionCards()]] - `calls` [INFERRED]
@@ -90,9 +95,11 @@ tags:
 - [[TenantStudentsPage()]] - `calls` [INFERRED]
 - [[TranscriptPanel()]] - `calls` [INFERRED]
 - [[TutorChart()]] - `calls` [INFERRED]
+- [[UpgradeDialog()]] - `calls` [INFERRED]
 - [[UploadCard()]] - `calls` [INFERRED]
+- [[VideoInner()]] - `calls` [INFERRED]
 - [[VideoTutorialViewer()]] - `calls` [INFERRED]
 - [[YoutubeLinkForm()]] - `calls` [INFERRED]
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/INFERRED #community/Content_Detail_Page

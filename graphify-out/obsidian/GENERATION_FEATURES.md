@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "Subscription Service"
-location: "L17"
+community: "Billing & Usage API"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Service
+  - community/Billing__Usage_API
 ---
 
 # GENERATION_FEATURES
@@ -16,4 +16,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

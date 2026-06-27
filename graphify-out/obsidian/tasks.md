@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Monorepo Root Tooling Config"
+community: "Root Build Config"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Monorepo_Root_Tooling_Config
+  - community/Root_Build_Config
 ---
 
 # tasks
@@ -18,4 +18,4 @@ tags:
 - [[turbo.json]] - `contains` [EXTRACTED]
 - [[typecheck_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Tooling_Config
+#graphify/code #graphify/EXTRACTED #community/Root_Build_Config

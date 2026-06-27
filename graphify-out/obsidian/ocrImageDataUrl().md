@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Usage Pricing & PDF Extraction"
-location: "L294"
+community: "Community 65"
+location: "L415"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__PDF_Extraction
+  - community/Community_65
 ---
 
 # ocrImageDataUrl()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__PDF_Extraction
+#graphify/code #graphify/EXTRACTED #community/Community_65

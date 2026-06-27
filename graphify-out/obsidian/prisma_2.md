@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "AI Summary Generation"
+community: "Tenant Admin & Prisma"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Summary_Generation
+  - community/Tenant_Admin__Prisma
 ---
 
 # prisma
@@ -21,7 +21,9 @@ tags:
 - [[auth.controller.ts]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports` [EXTRACTED]
 - [[banks.ts]] - `imports` [EXTRACTED]
+- [[billing.controller.ts]] - `imports` [EXTRACTED]
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[content-shared.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports` [EXTRACTED]
@@ -30,6 +32,7 @@ tags:
 - [[figure.service.ts]] - `imports` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[ingest.service.ts]] - `imports` [EXTRACTED]
 - [[inspect-chunks.ts]] - `imports` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
@@ -64,4 +67,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Summary_Generation
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Content Stage & PDF Excerpt"
+community: "Content Detail Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Stage__PDF_Excerpt
+  - community/Content_Detail_Page
 ---
 
 # content-stage.tsx
@@ -28,6 +28,8 @@ tags:
 - [[VideoTutorialViewer.tsx]] - `imports_from` [EXTRACTED]
 - [[authenticatedBlob.ts]] - `imports_from` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
+- [[contentEndpoints]] - `imports` [EXTRACTED]
+- [[endpoints.ts]] - `imports_from` [EXTRACTED]
 - [[fetchAuthenticatedBlob()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
@@ -37,4 +39,4 @@ tags:
 - [[useGenerateSummary()]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Stage__PDF_Excerpt
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

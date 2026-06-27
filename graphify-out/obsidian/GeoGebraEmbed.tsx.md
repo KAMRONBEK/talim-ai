@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/GeoGebraEmbed.tsx"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community 47"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_47
 ---
 
 # GeoGebraEmbed.tsx
@@ -18,4 +18,4 @@ tags:
 - [[Window_1]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_47

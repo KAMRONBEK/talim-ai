@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph-intent.ts"
 type: "code"
-community: "Tutor Graph Schema & Intent"
+community: "Community 48"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Graph_Schema__Intent
+  - community/Community_48
 ---
 
 # detectTutorGraphIntent()
@@ -18,4 +18,4 @@ tags:
 - [[tutor-graph-intent.ts]] - `contains` [EXTRACTED]
 - [[tutor-graph-smoke.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Graph_Schema__Intent
+#graphify/code #graphify/EXTRACTED #community/Community_48

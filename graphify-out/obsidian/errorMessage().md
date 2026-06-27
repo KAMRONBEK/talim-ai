@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
 type: "code"
-community: "Admin Tutor-Requests UI"
+community: "Admin Auth Pages & UI"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tutor-Requests_UI
+  - community/Admin_Auth_Pages__UI
 ---
 
 # errorMessage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tutor-Requests_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

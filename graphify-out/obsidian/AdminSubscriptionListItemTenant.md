@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared TypeScript Types (@talim/types)"
-location: "L61"
+community: "Slide Deck Types"
+location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Types_talim/types
+  - community/Slide_Deck_Types
 ---
 
 # AdminSubscriptionListItemTenant
@@ -15,4 +15,4 @@ tags:
 - [[AdminUserSubscription]] - `inherits` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Types_talim/types
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

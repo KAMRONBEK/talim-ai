@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Video Tutorial & Transcript UI"
+community: "Community 34"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Community_34
 ---
 
 # TranscriptExcerptPayload
@@ -17,4 +17,4 @@ tags:
 - [[VideoTutorialViewerProps]] - `references` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Community_34

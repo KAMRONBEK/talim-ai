@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
+community: "Env Config & Jobs"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # renderWithManimCli()
@@ -15,4 +15,4 @@ tags:
 - [[execFileAsync]] - `calls` [EXTRACTED]
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

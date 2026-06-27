@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "App Providers & Sync"
+community: "Community 41"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Providers__Sync
+  - community/Community_41
 ---
 
 # useLocaleSync()
@@ -17,4 +17,4 @@ tags:
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Providers__Sync
+#graphify/code #graphify/EXTRACTED #community/Community_41

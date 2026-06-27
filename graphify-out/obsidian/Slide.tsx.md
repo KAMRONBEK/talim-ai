@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Slide & Mermaid Diagram Components"
+community: "Shared UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide__Mermaid_Diagram_Components
+  - community/Shared_UI_Components
 ---
 
 # Slide.tsx
@@ -39,6 +39,7 @@ tags:
 - [[Kicker()]] - `contains` [EXTRACTED]
 - [[MermaidDiagram()]] - `imports` [EXTRACTED]
 - [[MermaidDiagram.tsx]] - `imports_from` [EXTRACTED]
+- [[NarratedVideoPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[Process()]] - `contains` [EXTRACTED]
 - [[ProcessSlide]] - `imports` [EXTRACTED]
 - [[QuickCheck()]] - `contains` [EXTRACTED]
@@ -67,4 +68,4 @@ tags:
 - [[paletteFor()]] - `imports` [EXTRACTED]
 - [[resolveSlideAccentHex()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide__Mermaid_Diagram_Components
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

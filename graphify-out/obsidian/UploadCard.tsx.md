@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Admin Auth Pages & UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Admin_Auth_Pages__UI
 ---
 
 # UploadCard.tsx
@@ -31,5 +31,7 @@ tags:
 - [[useCreateYoutubeContent()]] - `imports` [EXTRACTED]
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

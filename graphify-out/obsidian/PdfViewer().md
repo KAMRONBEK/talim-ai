@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "PDF Viewer"
+community: "Community 32"
 location: "L113"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer
+  - community/Community_32
 ---
 
 # PdfViewer()
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewer.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_32

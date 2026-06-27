@@ -1,18 +1,18 @@
 ---
-source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
+source_file: "apps/web/components/deck/NarratedVideoPlayer.tsx"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L6"
+community: "Community 80"
+location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_80
 ---
 
 # formatTime()
 
 ## Connections
-- [[PodcastPlayer()]] - `calls` [EXTRACTED]
-- [[PodcastPlayer.tsx]] - `contains` [EXTRACTED]
+- [[NarratedVideoPlayer()]] - `calls` [EXTRACTED]
+- [[NarratedVideoPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_80

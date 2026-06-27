@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/dashboard-search.tsx"
 type: "code"
-community: "Dashboard Search UI"
+community: "Community 42"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dashboard_Search_UI
+  - community/Community_42
 ---
 
 # DashboardShell()
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_5]] - `imports` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dashboard_Search_UI
+#graphify/code #graphify/EXTRACTED #community/Community_42

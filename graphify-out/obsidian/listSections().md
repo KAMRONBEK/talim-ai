@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/section.controller.ts"
 type: "code"
-community: "Learner/Section/Usage Controllers"
+community: "Content & Podcast API"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner/Section/Usage_Controllers
+  - community/Content__Podcast_API
 ---
 
 # listSections()
@@ -18,4 +18,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner/Section/Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

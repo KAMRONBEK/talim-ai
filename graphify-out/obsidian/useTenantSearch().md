@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Tenant Dashboard UI"
+community: "Tenant Web Pages"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard_UI
+  - community/Tenant_Web_Pages
 ---
 
 # useTenantSearch()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[tenant-shell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

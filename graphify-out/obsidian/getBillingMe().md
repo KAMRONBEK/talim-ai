@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/billing.controller.ts"
 type: "code"
-community: "Quota Smoke Test"
-location: "L11"
+community: "Billing & Usage API"
+location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quota_Smoke_Test
+  - community/Billing__Usage_API
 ---
 
 # getBillingMe()
@@ -17,4 +17,4 @@ tags:
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[getUsageVsLimits()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quota_Smoke_Test
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

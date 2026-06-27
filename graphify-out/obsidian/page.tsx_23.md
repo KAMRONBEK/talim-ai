@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Tenant Dashboard UI"
+community: "Community 31"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard_UI
+  - community/Community_31
 ---
 
 # page.tsx
@@ -31,4 +31,4 @@ tags:
 - [[useTenantSearch()]] - `imports` [EXTRACTED]
 - [[useUploadTenantContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

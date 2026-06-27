@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/layout.tsx"
 type: "code"
-community: "Web Root Layout & Font"
+community: "App Layout & Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Root_Layout__Font
+  - community/App_Layout__Guards
 ---
 
 # layout.tsx
@@ -17,4 +17,4 @@ tags:
 - [[inter.ts]] - `imports_from` [EXTRACTED]
 - [[metadata]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Root_Layout__Font
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

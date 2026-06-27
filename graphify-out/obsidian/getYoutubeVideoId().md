@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "Recent Content Grid UI"
+community: "Community 34"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Recent_Content_Grid_UI
+  - community/Community_34
 ---
 
 # getYoutubeVideoId()
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeThumbnailUrl()]] - `calls` [EXTRACTED]
 - [[youtube.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Recent_Content_Grid_UI
+#graphify/code #graphify/EXTRACTED #community/Community_34

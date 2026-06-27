@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "Tutor Chat Message Components"
+community: "Community 43"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Chat_Message_Components
+  - community/Community_43
 ---
 
 # ChatWindow.tsx
@@ -23,5 +23,7 @@ tags:
 - [[useChatSession()]] - `imports` [EXTRACTED]
 - [[useChatStore]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports_from` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Message_Components
+#graphify/code #graphify/EXTRACTED #community/Community_43

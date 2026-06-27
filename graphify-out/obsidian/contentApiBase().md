@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L6"
+community: "Community 30"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_30
 ---
 
 # contentApiBase()
@@ -18,4 +18,4 @@ tags:
 - [[useDeleteContent()_1]] - `calls` [EXTRACTED]
 - [[useRetryContent()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_30

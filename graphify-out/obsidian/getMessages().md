@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Chat Controller & Sessions"
+community: "App Layout & Guards"
 location: "L122"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller__Sessions
+  - community/App_Layout__Guards
 ---
 
 # getMessages()
@@ -16,4 +16,4 @@ tags:
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller__Sessions
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

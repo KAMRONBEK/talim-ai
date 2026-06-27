@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Tenant Detail UI"
+community: "Admin Plan/Status UI"
 location: "L104"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # useUpdateTenant()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

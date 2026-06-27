@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/[id]/page.tsx"
 type: "code"
-community: "Tenant Detail UI"
-location: "L10"
+community: "Admin Plan/Status UI"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # STATUS_OPTIONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

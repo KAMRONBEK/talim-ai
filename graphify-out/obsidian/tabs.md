@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Admin Generated & Usage UI"
+community: "Admin Content Pages"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated__Usage_UI
+  - community/Admin_Content_Pages
 ---
 
 # tabs
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated__Usage_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages

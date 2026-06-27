@@ -1,20 +1,21 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 93"
+location: "§6.2"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_93
 ---
 
-# Subscriptions / Plans (manual activation)
+# Subscriptions / plans (manual activation)
 
 ## Connections
-- [[Admin Panel Features]] - `references` [EXTRACTED]
-- [[Become-a-tutor Request Flow]] - `shares_data_with` [EXTRACTED]
 - [[Flashcards & Notes Generators]] - `conceptually_related_to` [INFERRED]
 - [[Manual Payment Model]] - `conceptually_related_to` [INFERRED]
-- [[Usage Metering]] - `conceptually_related_to` [INFERRED]
+- [[Tutor-request approvals (org + subscription + seat limit)]] - `references` [EXTRACTED]
+- [[Usage metering]] - `conceptually_related_to` [INFERRED]
+- [[Usage-limit UX & subscription promotion modal]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/INFERRED #community/Community_93

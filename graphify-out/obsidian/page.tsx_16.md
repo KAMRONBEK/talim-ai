@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Learner Dashboard UI"
+community: "Community 49"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard_UI
+  - community/Community_49
 ---
 
 # page.tsx
@@ -27,4 +27,4 @@ tags:
 - [[useLearnerSummary()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_49

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Admin Tenants Controller"
+community: "Tenant Admin & Prisma"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_Controller
+  - community/Tenant_Admin__Prisma
 ---
 
 # patchTenant()
@@ -19,4 +19,4 @@ tags:
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_Controller
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

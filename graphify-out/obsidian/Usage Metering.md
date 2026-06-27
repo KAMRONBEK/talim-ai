@@ -1,17 +1,19 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 93"
+location: "§6.3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_93
 ---
 
-# Usage Metering
+# Usage metering
 
 ## Connections
-- [[Feature Catalog]] - `references` [EXTRACTED]
-- [[Subscriptions  Plans (manual activation)]] - `conceptually_related_to` [INFERRED]
+- [[Subscriptions  plans (manual activation)]] - `conceptually_related_to` [INFERRED]
+- [[Usage & cost metering (admin)]] - `shares_data_with` [EXTRACTED]
+- [[Usage-limit UX & subscription promotion modal]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_93

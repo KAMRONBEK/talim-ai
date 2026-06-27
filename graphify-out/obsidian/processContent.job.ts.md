@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/processContent.job.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
+community: "Env Config & Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # processContent.job.ts
@@ -37,4 +37,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

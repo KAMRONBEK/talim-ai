@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "rationale"
-community: "QA-Run Skill & Traceability"
+community: "Community 84"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/QA-Run_Skill__Traceability
+  - community/Community_84
 ---
 
 # claude/visual-qa Branch
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[qa-run skill]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/QA-Run_Skill__Traceability
+#graphify/rationale #graphify/EXTRACTED #community/Community_84

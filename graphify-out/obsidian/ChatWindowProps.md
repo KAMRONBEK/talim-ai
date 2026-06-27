@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "Tutor Chat Message Components"
-location: "L10"
+community: "Community 43"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Chat_Message_Components
+  - community/Community_43
 ---
 
 # ChatWindowProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[ChatWindow.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Message_Components
+#graphify/code #graphify/EXTRACTED #community/Community_43

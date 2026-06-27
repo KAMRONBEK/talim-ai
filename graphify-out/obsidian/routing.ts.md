@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/routing.ts"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "App Layout & Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/App_Layout__Guards
 ---
 
 # routing.ts
@@ -21,4 +21,4 @@ tags:
 - [[request.ts]] - `imports_from` [EXTRACTED]
 - [[routing]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards

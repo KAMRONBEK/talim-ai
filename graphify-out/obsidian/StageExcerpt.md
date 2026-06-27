@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Content Stage & PDF Excerpt"
-location: "L16"
+community: "Content Detail Page"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Stage__PDF_Excerpt
+  - community/Content_Detail_Page
 ---
 
 # StageExcerpt
@@ -15,4 +15,4 @@ tags:
 - [[content-stage.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_29]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Stage__PDF_Excerpt
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

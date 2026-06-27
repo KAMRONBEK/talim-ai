@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/MermaidDiagram.tsx"
 type: "code"
-community: "Slide & Mermaid Diagram Components"
+community: "Community 47"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide__Mermaid_Diagram_Components
+  - community/Community_47
 ---
 
 # MermaidDiagram()
@@ -17,4 +17,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide__Mermaid_Diagram_Components
+#graphify/code #graphify/EXTRACTED #community/Community_47

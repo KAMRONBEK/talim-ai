@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "Chat Controller & Sessions"
+community: "App Layout & Guards"
 location: "L19"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Chat_Controller__Sessions
+  - community/App_Layout__Guards
 ---
 
 # LocaleLayout()
@@ -15,4 +15,4 @@ tags:
 - [[getMessages()]] - `calls` [INFERRED]
 - [[layout.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Chat_Controller__Sessions
+#graphify/code #graphify/INFERRED #community/App_Layout__Guards

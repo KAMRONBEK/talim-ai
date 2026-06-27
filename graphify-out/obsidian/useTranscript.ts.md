@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Video Tutorial & Transcript UI"
+community: "Content Progress Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Content_Progress_Hooks
 ---
 
 # useTranscript.ts
@@ -19,4 +19,4 @@ tags:
 - [[useContentBase.ts]] - `imports_from` [EXTRACTED]
 - [[useTranscript()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks

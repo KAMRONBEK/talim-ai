@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/base.json"
 type: "code"
-community: "Base TSConfig"
+community: "Community 58"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Base_TSConfig
+  - community/Community_58
 ---
 
 # moduleResolution
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Base_TSConfig
+#graphify/code #graphify/EXTRACTED #community/Community_58

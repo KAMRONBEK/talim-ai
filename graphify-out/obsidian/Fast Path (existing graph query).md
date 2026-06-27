@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "Graphify Build Pipeline"
+community: "Graphify Skill Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Build_Pipeline
+  - community/Graphify_Skill_Docs
 ---
 
 # Fast Path (existing graph query)
@@ -14,4 +14,4 @@ tags:
 - [[graph.json]] - `references` [EXTRACTED]
 - [[graphify query]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Build_Pipeline
+#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs

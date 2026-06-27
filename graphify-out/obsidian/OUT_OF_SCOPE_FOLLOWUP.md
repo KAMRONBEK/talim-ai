@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Tutor Scope Classification"
-location: "L78"
+community: "Community 37"
+location: "L79"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classification
+  - community/Community_37
 ---
 
 # OUT_OF_SCOPE_FOLLOWUP
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classification
+#graphify/code #graphify/EXTRACTED #community/Community_37

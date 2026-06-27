@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Podcast & Progress Controllers"
+community: "Content & Podcast API"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast__Progress_Controllers
+  - community/Content__Podcast_API
 ---
 
 # assertCanAccessContent()
@@ -42,13 +42,15 @@ tags:
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[progress.controller.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[regenerateEpisode()]] - `calls` [EXTRACTED]
 - [[reparseContent()]] - `calls` [EXTRACTED]
 - [[retryContent()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `calls` [EXTRACTED]
+- [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API

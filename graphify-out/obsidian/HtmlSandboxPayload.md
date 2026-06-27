@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community 47"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_47
 ---
 
 # HtmlSandboxPayload
@@ -18,4 +18,4 @@ tags:
 - [[tutor-html-sandbox.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_47

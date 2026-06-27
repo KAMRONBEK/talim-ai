@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "Env Config & Background Job Registration"
-location: "L41"
+community: "Env Config & Jobs"
+location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Job_Registration
+  - community/Env_Config__Jobs
 ---
 
 # Env
@@ -15,6 +15,7 @@ tags:
 - [[ai.service.ts]] - `imports` [EXTRACTED]
 - [[auth.controller.ts]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports` [EXTRACTED]
+- [[content-shared.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[embed.service.ts]] - `imports` [EXTRACTED]
 - [[env.ts]] - `contains` [EXTRACTED]
@@ -32,4 +33,4 @@ tags:
 - [[upload.middleware.ts]] - `imports` [EXTRACTED]
 - [[youtube.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Job_Registration
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs

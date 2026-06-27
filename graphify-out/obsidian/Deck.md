@@ -1,21 +1,23 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Deck Player Slides & Theme"
+community: "Shared UI Components"
 location: "L209"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player_Slides__Theme
+  - community/Shared_UI_Components
 ---
 
 # Deck
 
 ## Connections
 - [[DeckPlayer.tsx]] - `imports` [EXTRACTED]
+- [[NarratedVideoPlayer.tsx]] - `imports` [EXTRACTED]
 - [[deck-schema.ts]] - `imports` [EXTRACTED]
 - [[deck.ts]] - `contains` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player_Slides__Theme
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

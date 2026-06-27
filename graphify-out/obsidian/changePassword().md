@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
-community: "Auth Controller (login/join/password)"
-location: "L214"
+community: "Admin Audit & Auth"
+location: "L221"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller_login/join/password
+  - community/Admin_Audit__Auth
 ---
 
 # changePassword()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[auth.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller_login/join/password
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

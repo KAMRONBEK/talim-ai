@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Recent Content Grid UI"
+community: "Community 66"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Recent_Content_Grid_UI
+  - community/Community_66
 ---
 
 # recent-content-grid.tsx
@@ -32,8 +32,8 @@ tags:
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
 - [[page.tsx_23]] - `imports_from` [EXTRACTED]
-- [[page.tsx_32]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[typeStyles]] - `contains` [EXTRACTED]
 - [[youtube.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Recent_Content_Grid_UI
+#graphify/code #graphify/EXTRACTED #community/Community_66

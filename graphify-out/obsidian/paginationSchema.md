@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/shared.ts"
 type: "code"
-community: "Admin Audit & Content Controller"
+community: "Admin Analytics & Subscriptions"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Content_Controller
+  - community/Admin_Analytics__Subscriptions
 ---
 
 # paginationSchema
@@ -18,4 +18,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Content_Controller
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "TTS Normalization Service"
+community: "Community 35"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Normalization_Service
+  - community/Community_35
 ---
 
 # AppLocale
@@ -22,6 +22,7 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[deck-prompt.ts]] - `imports` [EXTRACTED]
 - [[format-relative-time.ts]] - `imports` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports` [EXTRACTED]
 - [[locale-api.ts]] - `imports` [EXTRACTED]
@@ -47,4 +48,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Normalization_Service
+#graphify/code #graphify/EXTRACTED #community/Community_35

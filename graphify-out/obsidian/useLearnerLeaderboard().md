@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Learner Assessments UI"
+community: "Learner Assessment Pages"
 location: "L141"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # useLearnerLeaderboard()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

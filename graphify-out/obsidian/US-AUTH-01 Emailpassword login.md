@@ -1,18 +1,19 @@
 ---
 source_file: "docs/qa/user-stories.md"
-type: "concept"
-community: "QA Runbook & Error Fixtures"
+type: "document"
+community: "Community 94"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Runbook__Error_Fixtures
+  - community/Community_94
 ---
 
-# US-AUTH-01 Email/password login
+# US-AUTH-01: Email/password login
 
 ## Connections
-- [[F16 deactivated login shows server-unreachable not deactivated]] - `cites` [EXTRACTED]
-- [[F2 wrong-password shows no error (login 401 interceptor)]] - `cites` [EXTRACTED]
-- [[User Stories & QA Traceability]] - `references` [EXTRACTED]
+- [[F16 Deactivated login showed 'server unreachable' not 'deactivated']] - `references` [EXTRACTED]
+- [[F17 Emailusername login was case-sensitive]] - `references` [EXTRACTED]
+- [[F2 Wrong password → 401 but no error shown (interceptor wiped it)]] - `references` [EXTRACTED]
+- [[Signup  login by email OR username]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Runbook__Error_Fixtures
+#graphify/document #graphify/EXTRACTED #community/Community_94

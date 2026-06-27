@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/subscriptions/page.tsx"
 type: "code"
-community: "Admin Subscriptions UI"
-location: "L8"
+community: "Admin Plan/Status UI"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscriptions_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # STATUS_OPTIONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscriptions_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

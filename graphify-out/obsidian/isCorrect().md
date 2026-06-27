@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Learner Assessment Service"
+community: "Community 51"
 location: "L216"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Service
+  - community/Community_51
 ---
 
 # isCorrect()
@@ -18,4 +18,4 @@ tags:
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Service
+#graphify/code #graphify/EXTRACTED #community/Community_51

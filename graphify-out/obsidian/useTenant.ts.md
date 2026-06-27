@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Students Management UI"
+community: "Tenant Web Pages"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Students_Management_UI
+  - community/Tenant_Web_Pages
 ---
 
 # useTenant.ts
@@ -46,4 +46,4 @@ tags:
 - [[useTenantStudents()]] - `contains` [EXTRACTED]
 - [[useUnassignContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Students_Management_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

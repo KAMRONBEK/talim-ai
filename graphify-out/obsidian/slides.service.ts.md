@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "AI Slide-Deck Prompting"
+community: "Deck Prompt Builder"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Slide-Deck_Prompting
+  - community/Deck_Prompt_Builder
 ---
 
 # slides.service.ts
@@ -43,6 +43,7 @@ tags:
 - [[generateAndStoreSlideDeck()]] - `contains` [EXTRACTED]
 - [[generateJsonCompletion()]] - `imports` [EXTRACTED]
 - [[generateSlideDeck()]] - `contains` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[getDeckSystemPrompt()]] - `imports` [EXTRACTED]
 - [[getOrderedChunks()]] - `imports` [EXTRACTED]
 - [[getReadySlideDeckAnyLocale()]] - `contains` [EXTRACTED]
@@ -64,4 +65,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[toBulletObjects()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Slide-Deck_Prompting
+#graphify/code #graphify/EXTRACTED #community/Deck_Prompt_Builder

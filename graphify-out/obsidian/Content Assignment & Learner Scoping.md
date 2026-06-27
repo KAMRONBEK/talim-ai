@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-3-tenant-experience.md"
 type: "concept"
-community: "Product Roadmap & Epics"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Product_Roadmap__Epics
+  - community/Deployment__Infra_Docs
 ---
 
 # Content Assignment & Learner Scoping
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Epic 3 — Tenant (Organization) Experience]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Roadmap__Epics
+#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs

@@ -1,16 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "B2C AI Learning Loop"
+community: "Community 77"
+location: "§1.8"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/B2C_AI_Learning_Loop
+  - community/Community_77
 ---
 
-# AI Tutor Visuals (Manim)
+# AI tutor visuals (Manim)
 
 ## Connections
-- [[RAG AI Tutor Chat]] - `references` [EXTRACTED]
+- [[Background jobs (Bull  Redis)]] - `references` [EXTRACTED]
+- [[RAG AI tutor chat]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/B2C_AI_Learning_Loop
+#graphify/concept #graphify/EXTRACTED #community/Community_77

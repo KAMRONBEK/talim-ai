@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api.ts"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community 47"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_47
 ---
 
 # getApiBaseUrl()
@@ -19,4 +19,4 @@ tags:
 - [[fetchAuthenticatedBlob()]] - `calls` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_47

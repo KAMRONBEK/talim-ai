@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Login Page & Sheet UI"
-location: "L694"
+community: "Sheet UI Component"
+location: "L734"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Sheet_UI_Component
 ---
 
 # LearningHistory
@@ -19,4 +19,4 @@ tags:
 - [[learning-history-panel.tsx]] - `imports` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

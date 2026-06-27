@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/package.json"
 type: "code"
-community: "Admin App Dependencies"
+community: "UI Package Deps"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_Dependencies
+  - community/UI_Package_Deps
 ---
 
 # package.json
@@ -19,4 +19,4 @@ tags:
 - [[scripts]] - `contains` [EXTRACTED]
 - [[version]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/UI_Package_Deps

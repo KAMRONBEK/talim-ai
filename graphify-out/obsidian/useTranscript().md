@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Video Tutorial & Transcript UI"
+community: "Community 34"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Community_34
 ---
 
 # useTranscript()
@@ -17,4 +17,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useTranscript.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Community_34

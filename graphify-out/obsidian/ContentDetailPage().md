@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L259"
+community: "Content Detail Page"
+location: "L276"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Content_Detail_Page
 ---
 
 # ContentDetailPage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_29]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

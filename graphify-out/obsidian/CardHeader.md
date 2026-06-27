@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Admin Dashboard UI"
+community: "Admin Auth Pages & UI"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_UI
+  - community/Admin_Auth_Pages__UI
 ---
 
 # CardHeader
@@ -23,4 +23,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI

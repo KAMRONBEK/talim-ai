@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/exports.md"
 type: "concept"
-community: "Graphify Build Pipeline"
+community: "Graphify Skill Docs"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Graphify_Build_Pipeline
+  - community/Graphify_Skill_Docs
 ---
 
 # MCP Stdio Server
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[graphify query]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Graphify_Build_Pipeline
+#graphify/concept #graphify/INFERRED #community/Graphify_Skill_Docs

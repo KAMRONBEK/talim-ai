@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/become-tutor-card.tsx"
 type: "code"
-community: "Profile & Become-Tutor UI"
+community: "Community 68"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Profile__Become-Tutor_UI
+  - community/Community_68
 ---
 
 # become-tutor-card.tsx
@@ -20,9 +20,9 @@ tags:
 - [[Input]] - `imports` [EXTRACTED]
 - [[Label()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[useMyTutorRequest()]] - `imports` [EXTRACTED]
 - [[useRequestTutor()]] - `imports` [EXTRACTED]
 - [[useTutorRequest.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Profile__Become-Tutor_UI
+#graphify/code #graphify/EXTRACTED #community/Community_68

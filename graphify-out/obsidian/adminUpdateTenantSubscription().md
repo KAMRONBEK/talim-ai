@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Tenant-Owner Bootstrap & Role Service"
-location: "L145"
+community: "Tenant Admin & Prisma"
+location: "L189"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant-Owner_Bootstrap__Role_Service
+  - community/Tenant_Admin__Prisma
 ---
 
 # adminUpdateTenantSubscription()
@@ -19,4 +19,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant-Owner_Bootstrap__Role_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

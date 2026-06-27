@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/leaderboard-table.tsx"
 type: "code"
-community: "Tenant Assessments UI"
+community: "Learner Assessment Pages"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # leaderboard-table.tsx
@@ -19,4 +19,4 @@ tags:
 - [[page.tsx_15]] - `imports_from` [EXTRACTED]
 - [[page.tsx_19]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

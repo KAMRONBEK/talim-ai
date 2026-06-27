@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Subscription Service"
-location: "L118"
+community: "Billing & Usage API"
+location: "L126"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Service
+  - community/Billing__Usage_API
 ---
 
 # resolveUpgradePlanCode()
 
 ## Connections
 - [[assertQuota()]] - `calls` [EXTRACTED]
+- [[getFileLimitsForUser()]] - `calls` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

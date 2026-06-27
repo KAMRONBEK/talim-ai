@@ -1,17 +1,19 @@
 ---
-source_file: "apps/api/src/controllers/content.controller.ts"
+source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller (B2C)"
-location: "L25"
+community: "Content Controller"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content_Controller
 ---
 
 # youtubeSchema
 
 ## Connections
-- [[content.controller.ts_1]] - `contains` [EXTRACTED]
+- [[content-shared.ts]] - `contains` [EXTRACTED]
+- [[content.controller.ts_1]] - `imports` [EXTRACTED]
+- [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content_Controller

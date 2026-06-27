@@ -1,17 +1,21 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Assessments & Game Quiz Concepts"
+community: "Community 71"
+location: "§4.2"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Assessments__Game_Quiz_Concepts
+  - graphify/INFERRED
+  - community/Community_71
 ---
 
-# Written Assessments
+# Written assessments
 
 ## Connections
-- [[Assessments & Game Quizzes]] - `references` [EXTRACTED]
-- [[Question Banks (AI-generated approve flow)]] - `shares_data_with` [EXTRACTED]
+- [[Assignment, attempts & max attempts]] - `references` [INFERRED]
+- [[Auto quizzes (per-content)]] - `semantically_similar_to` [INFERRED]
+- [[Barrel-split module pattern]] - `conceptually_related_to` [INFERRED]
+- [[F5 Assessment mutations don't refresh related views (stale cache)]] - `references` [EXTRACTED]
+- [[Question banks (AI-generated, approve flow)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Assessments__Game_Quiz_Concepts
+#graphify/concept #graphify/INFERRED #community/Community_71

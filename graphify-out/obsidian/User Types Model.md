@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # User Types Model
@@ -14,4 +14,4 @@ tags:
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 - [[Roles & Personas]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs

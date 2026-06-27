@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Rich Text & Quiz Card UI"
-location: "L610"
+community: "Slide Deck Types"
+location: "L639"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Rich_Text__Quiz_Card_UI
+  - community/Slide_Deck_Types
 ---
 
 # QuizQuestion
@@ -15,4 +15,4 @@ tags:
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Rich_Text__Quiz_Card_UI
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types

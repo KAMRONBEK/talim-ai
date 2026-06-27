@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Learner Dashboard UI"
-location: "L10"
+community: "Community 49"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard_UI
+  - community/Community_49
 ---
 
 # useContents()
@@ -20,7 +20,7 @@ tags:
 - [[dashboard-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[page.tsx_17]] - `imports` [EXTRACTED]
-- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_49

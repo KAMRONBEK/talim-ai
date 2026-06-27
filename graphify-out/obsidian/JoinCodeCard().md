@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/join-code-card.tsx"
 type: "code"
-community: "Tenant Students Management UI"
+community: "Tenant Web Pages"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Students_Management_UI
+  - community/Tenant_Web_Pages
 ---
 
 # JoinCodeCard()
@@ -18,4 +18,4 @@ tags:
 - [[useRegenerateJoinCode()]] - `calls` [EXTRACTED]
 - [[useTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Students_Management_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages

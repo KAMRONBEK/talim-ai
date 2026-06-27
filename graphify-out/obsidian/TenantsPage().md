@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/page.tsx"
 type: "code"
-community: "Admin Tenant/User Detail UI"
-location: "L8"
+community: "Admin Plan/Status UI"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant/User_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # TenantsPage()
@@ -15,4 +15,4 @@ tags:
 - [[page.tsx_6]] - `contains` [EXTRACTED]
 - [[useAdminTenants()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant/User_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

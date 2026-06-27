@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/onboarding.ts"
 type: "code"
-community: "Learner Dashboard UI"
+community: "Community 49"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard_UI
+  - community/Community_49
 ---
 
 # onboarding.ts
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_18]] - `imports_from` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_49

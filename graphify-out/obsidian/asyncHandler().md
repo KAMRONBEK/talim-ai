@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/asyncHandler.ts"
 type: "code"
-community: "API Middleware (auth/quota/rate-limit)"
+community: "Admin Audit & Auth"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware_auth/quota/rate-limit
+  - community/Admin_Audit__Auth
 ---
 
 # asyncHandler()
@@ -26,4 +26,4 @@ tags:
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 - [[usage.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware_auth/quota/rate-limit
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

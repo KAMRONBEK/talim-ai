@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Tenant Controller (students/progress)"
+community: "Community 63"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Controller_students/progress
+  - community/Community_63
 ---
 
 # createStudent()
@@ -15,4 +15,4 @@ tags:
 - [[requireOwnerTenant()]] - `calls` [EXTRACTED]
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Controller_students/progress
+#graphify/code #graphify/EXTRACTED #community/Community_63

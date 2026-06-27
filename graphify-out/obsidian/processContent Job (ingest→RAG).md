@@ -1,17 +1,17 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Community 77"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - graphify/EXTRACTED
+  - community/Community_77
 ---
 
 # processContent Job (ingest→RAG)
 
 ## Connections
-- [[Background Jobs (BullRedis)]] - `conceptually_related_to` [INFERRED]
+- [[Background jobs (Bull  Redis)]] - `conceptually_related_to` [INFERRED]
 - [[Content Pipeline & Job Model]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Community_77

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Isolation Guard & Visual Direction"
+community: "Community 95"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Isolation_Guard__Visual_Direction
+  - community/Community_95
 ---
 
 # Visual Direction (girih, marker-highlight)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Isolation_Guard__Visual_Direction
+#graphify/concept #graphify/EXTRACTED #community/Community_95

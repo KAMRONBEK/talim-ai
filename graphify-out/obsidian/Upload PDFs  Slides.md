@@ -1,16 +1,19 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "B2C AI Learning Loop"
+community: "Community 77"
+location: "§1.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/B2C_AI_Learning_Loop
+  - community/Community_77
 ---
 
-# Upload PDFs / Slides
+# Upload PDFs / slides
 
 ## Connections
-- [[Content & AI Learning Loop]] - `references` [EXTRACTED]
+- [[Background jobs (Bull  Redis)]] - `references` [EXTRACTED]
+- [[Content viewing extras (download, OCR region, transcript, history)]] - `conceptually_related_to` [INFERRED]
+- [[Materials + assignment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/B2C_AI_Learning_Loop
+#graphify/concept #graphify/EXTRACTED #community/Community_77

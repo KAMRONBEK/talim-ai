@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/learner.controller.ts"
 type: "code"
-community: "Learner/Section/Usage Controllers"
+community: "Admin Analytics & Subscriptions"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner/Section/Usage_Controllers
+  - community/Admin_Analytics__Subscriptions
 ---
 
 # getSummary()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner/Section/Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions

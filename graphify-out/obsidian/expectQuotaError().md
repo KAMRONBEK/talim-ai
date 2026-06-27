@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "Quota Smoke Test"
+community: "Billing & Usage API"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quota_Smoke_Test
+  - community/Billing__Usage_API
 ---
 
 # expectQuotaError()
@@ -15,4 +15,4 @@ tags:
 - [[main()_4]] - `calls` [EXTRACTED]
 - [[smoke-quota.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quota_Smoke_Test
+#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API

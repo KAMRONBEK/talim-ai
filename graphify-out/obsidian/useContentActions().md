@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContentActions.ts"
 type: "code"
-community: "Content Status & Processing UI"
-location: "L14"
+community: "Community 36"
+location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Community_36
 ---
 
 # useContentActions()
@@ -17,7 +17,8 @@ tags:
 - [[useContentActions.ts]] - `contains` [EXTRACTED]
 - [[useCreateQuiz()]] - `calls` [EXTRACTED]
 - [[useGenerateSummary()]] - `calls` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 - [[useRetryContent()_1]] - `calls` [EXTRACTED]
 - [[useSavedSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Community_36

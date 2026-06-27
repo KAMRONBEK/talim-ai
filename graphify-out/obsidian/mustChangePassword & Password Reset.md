@@ -1,16 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog (Auth/Admin/i18n)"
+community: "Community 82"
+location: "§2.3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Auth/Admin/i18n
+  - community/Community_82
 ---
 
-# mustChangePassword & Password Reset
+# mustChangePassword & password reset
 
 ## Connections
-- [[Accounts & Auth]] - `references` [EXTRACTED]
+- [[Signup  login by email OR username]] - `references` [EXTRACTED]
+- [[Students management (email + email-less username students)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Auth/Admin/i18n
+#graphify/concept #graphify/EXTRACTED #community/Community_82

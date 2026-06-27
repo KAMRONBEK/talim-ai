@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/navbar.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 40"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_40
 ---
 
 # Navbar()
@@ -15,5 +15,6 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 - [[navbar.tsx]] - `contains` [EXTRACTED]
+- [[page.tsx_36]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_40

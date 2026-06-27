@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Usage Pricing & PDF Extraction"
-location: "L259"
+community: "Community 65"
+location: "L380"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__PDF_Extraction
+  - community/Community_65
 ---
 
 # extractPdfText()
@@ -19,4 +19,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rasterizeAndOcrPdf()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__PDF_Extraction
+#graphify/code #graphify/EXTRACTED #community/Community_65

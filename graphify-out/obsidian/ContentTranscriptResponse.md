@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Video Tutorial & Transcript UI"
-location: "L555"
+community: "Content Progress Hooks"
+location: "L584"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Content_Progress_Hooks
 ---
 
 # ContentTranscriptResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTranscript.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks

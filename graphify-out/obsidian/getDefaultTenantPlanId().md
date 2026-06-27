@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant-Owner Bootstrap & Role Service"
+community: "Tenant Admin & Prisma"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant-Owner_Bootstrap__Role_Service
+  - community/Tenant_Admin__Prisma
 ---
 
 # getDefaultTenantPlanId()
@@ -17,4 +17,4 @@ tags:
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant-Owner_Bootstrap__Role_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

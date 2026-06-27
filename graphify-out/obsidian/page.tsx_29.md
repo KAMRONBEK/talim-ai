@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Status & Processing UI"
+community: "Content Detail Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status__Processing_UI
+  - community/Content_Detail_Page
 ---
 
 # page.tsx
@@ -32,12 +32,10 @@ tags:
 - [[SummaryText()]] - `imports` [EXTRACTED]
 - [[assign-students-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[auth-routing.ts]] - `imports_from` [EXTRACTED]
-- [[classifyGenerationError()]] - `imports` [EXTRACTED]
 - [[content-learn-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports_from` [EXTRACTED]
 - [[delete-content-dialog.tsx]] - `imports_from` [EXTRACTED]
-- [[generation-error.ts]] - `imports_from` [EXTRACTED]
 - [[getHomePathForRole()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
@@ -49,6 +47,8 @@ tags:
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useContentProgress()]] - `imports` [EXTRACTED]
 - [[useLearningHistory()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 - [[useProgress.ts]] - `imports_from` [EXTRACTED]
 - [[useReparseContent()]] - `imports` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
@@ -56,4 +56,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status__Processing_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

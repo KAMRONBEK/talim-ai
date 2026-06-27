@@ -1,21 +1,21 @@
 ---
 source_file: "CLAUDE.md"
 type: "document"
-community: "Project Guide & Isolation Concepts"
+community: "Community 74"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Project_Guide__Isolation_Concepts
+  - community/Community_74
 ---
 
-# Talim AI Project Guide (CLAUDE.md)
+# Talim AI project guide (CLAUDE.md)
 
 ## Connections
-- [[Doppler secrets management (devprd)]] - `references` [EXTRACTED]
-- [[GAME quiz  AssessmentMode (speed points, streaks, leaderboard)]] - `references` [EXTRACTED]
-- [[Manual Activation  No Payment Integration]] - `references` [EXTRACTED]
-- [[Multi-tenant Isolation Contract]] - `references` [EXTRACTED]
-- [[Talim AI Monorepo (pnpm + Turborepo)]] - `references` [EXTRACTED]
-- [[UserRole product model (ADMINTENANT_OWNERTENANT_LEARNERINDIVIDUAL)]] - `references` [EXTRACTED]
+- [[API routes mounted at root; health is GET health]] - `references` [EXTRACTED]
+- [[Manual activation — no payment integration]] - `references` [EXTRACTED]
+- [[Multi-tenant isolation enforced centrally (assertCanAccessContent)]] - `references` [EXTRACTED]
+- [[Roles & product model (ADMINTENANT_OWNERTENANT_LEARNERINDIVIDUAL)]] - `references` [EXTRACTED]
+- [[Use dbmigratedeploy locally (checksum drift)]] - `references` [EXTRACTED]
+- [[i18n lives only in appsweb (next-intl + locale)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Project_Guide__Isolation_Concepts
+#graphify/document #graphify/EXTRACTED #community/Community_74

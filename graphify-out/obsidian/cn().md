@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
+community: "Shared UI Components"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Shared_UI_Components
 ---
 
 # cn()
@@ -75,6 +75,8 @@ tags:
 - [[learner-navigation.tsx]] - `imports` [EXTRACTED]
 - [[logo.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
+- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[pricing.tsx]] - `imports` [EXTRACTED]
 - [[progress.tsx]] - `imports` [EXTRACTED]
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
@@ -84,7 +86,8 @@ tags:
 - [[separator.tsx]] - `imports` [EXTRACTED]
 - [[sheet.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
+- [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

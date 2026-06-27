@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learner-navigation.tsx"
 type: "code"
-community: "Billing & Role-Guard UI"
+community: "Community 61"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Role-Guard_UI
+  - community/Community_61
 ---
 
 # LearnerBottomNav()
@@ -15,4 +15,4 @@ tags:
 - [[learner-navigation.tsx]] - `contains` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Role-Guard_UI
+#graphify/code #graphify/EXTRACTED #community/Community_61

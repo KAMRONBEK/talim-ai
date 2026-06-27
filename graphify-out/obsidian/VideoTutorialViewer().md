@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/VideoTutorialViewer.tsx"
 type: "code"
-community: "Video Tutorial & Transcript UI"
+community: "Community 34"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Video_Tutorial__Transcript_UI
+  - community/Community_34
 ---
 
 # VideoTutorialViewer()
@@ -18,4 +18,4 @@ tags:
 - [[getYoutubeVideoId()]] - `calls` [EXTRACTED]
 - [[useTranscript()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Video_Tutorial__Transcript_UI
+#graphify/code #graphify/EXTRACTED #community/Community_34

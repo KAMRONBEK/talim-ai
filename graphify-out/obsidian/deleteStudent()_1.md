@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Tenant Service & Content Assignment"
+community: "Tenant Admin & Prisma"
 location: "L173"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Service__Content_Assignment
+  - community/Tenant_Admin__Prisma
 ---
 
 # deleteStudent()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Service__Content_Assignment
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/QA.md"
 type: "document"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # QA with Playwright MCP
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Three Apps Architecture]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/document #graphify/INFERRED #community/Deployment__Infra_Docs

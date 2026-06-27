@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/page.tsx"
 type: "code"
-community: "Auth Guard & App Shell"
+community: "Community 56"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Guard__App_Shell
+  - community/Community_56
 ---
 
 # HomePage()
 
 ## Connections
-- [[page.tsx_34]] - `contains` [EXTRACTED]
+- [[page.tsx_35]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Guard__App_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_56

@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "document"
-community: "Graphify Build Pipeline"
+community: "Graphify Skill Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Build_Pipeline
+  - community/Graphify_Skill_Docs
 ---
 
 # graphify skill
@@ -26,4 +26,4 @@ tags:
 - [[Wiki Export]] - `references` [EXTRACTED]
 - [[graphify add URL]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Build_Pipeline
+#graphify/document #graphify/EXTRACTED #community/Graphify_Skill_Docs

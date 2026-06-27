@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessments UI"
+community: "Learner Assessment Pages"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessments_UI
+  - community/Learner_Assessment_Pages
 ---
 
 # useCreateQuestionBank()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages

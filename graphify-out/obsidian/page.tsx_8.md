@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/usage/page.tsx"
 type: "code"
-community: "Admin Generated & Usage UI"
+community: "Admin Content Pages"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated__Usage_UI
+  - community/Admin_Content_Pages
 ---
 
 # page.tsx
@@ -18,4 +18,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminUsage()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated__Usage_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "YouTube Transcription Service"
+community: "Community 55"
 location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/YouTube_Transcription_Service
+  - community/Community_55
 ---
 
 # generateYoutubeTranscript()
@@ -21,4 +21,4 @@ tags:
 - [[recordUsage()]] - `calls` [EXTRACTED]
 - [[youtube.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/YouTube_Transcription_Service
+#graphify/code #graphify/EXTRACTED #community/Community_55

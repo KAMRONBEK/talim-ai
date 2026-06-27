@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Sheet UI Component"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Sheet_UI_Component
 ---
 
 # SheetTrigger()
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

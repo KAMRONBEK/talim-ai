@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "API Endpoints Map & Deck Player"
+community: "Shared UI Components"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints_Map__Deck_Player
+  - community/Shared_UI_Components
 ---
 
 # DeckPlayer()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints_Map__Deck_Player
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Tenant-Owner Bootstrap & Role Service"
+community: "Tenant Admin & Prisma"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant-Owner_Bootstrap__Role_Service
+  - community/Tenant_Admin__Prisma
 ---
 
 # createTenantForOwner()
@@ -21,4 +21,4 @@ tags:
 - [[organization.ts]] - `contains` [EXTRACTED]
 - [[uniqueSlug()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant-Owner_Bootstrap__Role_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

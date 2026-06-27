@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/audit.service.ts"
 type: "code"
-community: "Admin Audit & Content Controller"
+community: "Tenant Admin & Prisma"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Content_Controller
+  - community/Tenant_Admin__Prisma
 ---
 
 # audit.service.ts
@@ -22,4 +22,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Content_Controller
+#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma

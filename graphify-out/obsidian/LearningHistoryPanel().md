@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/learning-history-panel.tsx"
 type: "code"
-community: "Login Page & Sheet UI"
+community: "Sheet UI Component"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login_Page__Sheet_UI
+  - community/Sheet_UI_Component
 ---
 
 # LearningHistoryPanel()
@@ -16,4 +16,4 @@ tags:
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login_Page__Sheet_UI
+#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Tenant/User Detail UI"
+community: "Admin Plan/Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant/User_Detail_UI
+  - community/Admin_Plan/Status_UI
 ---
 
 # page.tsx
@@ -31,6 +31,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[isTenantUsage()]] - `contains` [EXTRACTED]
+- [[planLabel()]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminTenant()]] - `imports` [EXTRACTED]
 - [[useAdminTenants()]] - `imports` [EXTRACTED]
@@ -39,4 +40,4 @@ tags:
 - [[useResetUserPassword()]] - `imports` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant/User_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI

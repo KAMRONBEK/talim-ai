@@ -1,17 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
-type: "concept"
-community: "QA Runbook & Error Fixtures"
+type: "document"
+community: "Community 77"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Runbook__Error_Fixtures
+  - community/Community_77
 ---
 
-# US-OWNER-12 Delete a material
+# US-OWNER-12: Delete a material
 
 ## Connections
-- [[F15 material delete dialog hardcoded Uzbek leak]] - `cites` [EXTRACTED]
-- [[User Stories & QA Traceability]] - `references` [EXTRACTED]
+- [[F15 Material delete dialog + aria-label hardcoded Uzbek]] - `references` [EXTRACTED]
+- [[Materials + assignment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Runbook__Error_Fixtures
+#graphify/document #graphify/EXTRACTED #community/Community_77

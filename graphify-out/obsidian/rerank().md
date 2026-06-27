@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Chat Controller & Sessions"
-location: "L156"
+community: "Usage Pricing & Chunk Tools"
+location: "L157"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller__Sessions
+  - community/Usage_Pricing__Chunk_Tools
 ---
 
 # rerank()
@@ -15,4 +15,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[searchSimilarChunks()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller__Sessions
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools

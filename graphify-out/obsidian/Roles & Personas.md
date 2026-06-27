@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Deployment & Infra Docs"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Deployment__Infra_Docs
 ---
 
 # Roles & Personas
@@ -14,4 +14,4 @@ tags:
 - [[Platform Guide]] - `references` [EXTRACTED]
 - [[User Types Model]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/INFERRED #community/Deployment__Infra_Docs

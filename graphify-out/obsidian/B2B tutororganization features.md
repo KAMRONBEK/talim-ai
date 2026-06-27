@@ -1,17 +1,16 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Web App & GAME Quiz Concepts"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_App__GAME_Quiz_Concepts
+  - community/Admin_Panel_Docs
 ---
 
 # B2B tutor/organization features
 
 ## Connections
-- [[GAME quiz  AssessmentMode (speed points, streaks, leaderboard)]] - `conceptually_related_to` [EXTRACTED]
 - [[Talim AI README]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Web_App__GAME_Quiz_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "TSConfig Package"
+community: "Community 59"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TSConfig_Package
+  - community/Community_59
 ---
 
 # package.json
@@ -21,4 +21,4 @@ tags:
 - [[types]] - `contains` [EXTRACTED]
 - [[version_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TSConfig_Package
+#graphify/code #graphify/EXTRACTED #community/Community_59

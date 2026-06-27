@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Tenant/User Detail UI"
-location: "L72"
+community: "Admin Content Pages"
+location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant/User_Detail_UI
+  - community/Admin_Content_Pages
 ---
 
 # AdminUsageVsLimits
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant/User_Detail_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages

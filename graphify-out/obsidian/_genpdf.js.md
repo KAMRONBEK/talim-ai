@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/screenshots/_genpdf.js"
 type: "code"
-community: "PDF Generation Script"
+community: "Community 111"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Generation_Script
+  - community/Community_111
 ---
 
 # _genpdf.js
@@ -17,4 +17,4 @@ tags:
 - [[lines]] - `contains` [EXTRACTED]
 - [[objs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Generation_Script
+#graphify/code #graphify/EXTRACTED #community/Community_111

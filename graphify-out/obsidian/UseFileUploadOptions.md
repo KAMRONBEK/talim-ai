@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "Shared UI Primitives (@talim/ui)"
-location: "L8"
+community: "Community 70"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives_talim/ui
+  - community/Community_70
 ---
 
 # UseFileUploadOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useFileUpload.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives_talim/ui
+#graphify/code #graphify/EXTRACTED #community/Community_70

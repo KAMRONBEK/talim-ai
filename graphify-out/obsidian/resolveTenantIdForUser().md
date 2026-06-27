@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "API Middleware (auth/quota/rate-limit)"
+community: "Admin Audit & Auth"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware_auth/quota/rate-limit
+  - community/Admin_Audit__Auth
 ---
 
 # resolveTenantIdForUser()
@@ -23,4 +23,4 @@ tags:
 - [[tenant.middleware.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware_auth/quota/rate-limit
+#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth

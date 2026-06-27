@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/qa-pythagoras.txt"
 type: "document"
-community: "QA Runbook & Error Fixtures"
+community: "Community 75"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/QA_Runbook__Error_Fixtures
+  - community/Community_75
 ---
 
 # Pythagoras QA fixture text
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Pythagorean Theorem QA test PDF]] - `semantically_similar_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/QA_Runbook__Error_Fixtures
+#graphify/document #graphify/INFERRED #community/Community_75

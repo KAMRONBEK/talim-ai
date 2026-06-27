@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/assessment-prompt.ts"
 type: "code"
-community: "AI Question Banks"
+community: "Community 46"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Question_Banks
+  - community/Community_46
 ---
 
 # styleInstruction()
@@ -15,4 +15,4 @@ tags:
 - [[assessment-prompt.ts]] - `contains` [EXTRACTED]
 - [[buildAssessmentPrompt()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Question_Banks
+#graphify/code #graphify/EXTRACTED #community/Community_46

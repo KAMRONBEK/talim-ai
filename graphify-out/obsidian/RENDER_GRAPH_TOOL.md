@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "Tutor Graph Schema & Intent"
+community: "Tutor Visual Tools"
 location: "L89"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Graph_Schema__Intent
+  - community/Tutor_Visual_Tools
 ---
 
 # RENDER_GRAPH_TOOL
@@ -15,4 +15,4 @@ tags:
 - [[tutor-graph.ts]] - `contains` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Graph_Schema__Intent
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

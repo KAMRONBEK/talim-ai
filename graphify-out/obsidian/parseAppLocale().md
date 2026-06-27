@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Web API Client & Locale"
+community: "Community 35"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Locale
+  - community/Community_35
 ---
 
 # parseAppLocale()
@@ -17,6 +17,7 @@ tags:
 - [[formatUser()]] - `calls` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
+- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[getApiLocale()]] - `calls` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[isAppLocale()]] - `calls` [EXTRACTED]
@@ -26,4 +27,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[shared.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Locale
+#graphify/code #graphify/EXTRACTED #community/Community_35
