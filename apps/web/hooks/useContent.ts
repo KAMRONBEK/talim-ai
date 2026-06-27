@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Content, UserRole } from '@talim/types';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
 import {
   invalidateContentLists,
   prependContentToLists,
@@ -19,6 +20,7 @@ export function useContents() {
   const token = useAuthStore((s) => s.token);
   const role = useAuthStore((s) => s.user?.role);
   const base = contentApiBase(role);
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['contents', base],
     queryFn: async () => {
@@ -26,15 +28,17 @@ export function useContents() {
       return data.contents;
     },
     enabled: Boolean(token),
-    // Keep the list live while any newly-added item is still ingesting so it
-    // flips from "processing" to ready without a manual refresh.
-    refetchInterval: (query) => (listHasProcessing(query.state.data as Content[] | undefined) ? 3000 : false),
+    // Ingest completion is pushed over SSE (useJobEvents); poll only as a slow safety net
+    // while disconnected, so a list with a still-ingesting item still flips without SSE.
+    refetchInterval: (query) =>
+      listHasProcessing(query.state.data as Content[] | undefined) ? (connected ? 30_000 : 3000) : false,
   });
 }
 
 export function useContent(id: string) {
   const role = useAuthStore((s) => s.user?.role);
   const base = contentApiBase(role);
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['content', id, base],
     queryFn: async () => {
@@ -42,10 +46,11 @@ export function useContent(id: string) {
       return data.content;
     },
     enabled: !!id,
+    // SSE-primary (useJobEvents pushes content.status); slow poll only as a safety net.
     refetchInterval: (query) => {
       const status = query.state.data?.status;
-      if (status === 'PENDING' || status === 'PROCESSING') return 3000;
-      return false;
+      if (status !== 'PENDING' && status !== 'PROCESSING') return false;
+      return connected ? 30_000 : 3000;
     },
   });
 }

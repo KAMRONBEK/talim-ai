@@ -32,7 +32,13 @@ class InProcessJobEventBus {
     st.buffer.push({ e: seqEvent, t: Date.now() });
     if (st.buffer.length > RING) st.buffer.shift();
     this.state.set(userId, st);
-    this.emitter.emit(userId, seqEvent);
+    // A failing subscriber (e.g. a dead SSE socket whose cleanup didn't fire) must NEVER
+    // propagate into the publisher — a job's success cannot depend on event delivery.
+    try {
+      this.emitter.emit(userId, seqEvent);
+    } catch (err) {
+      console.error('jobEvents.publish: subscriber threw', err);
+    }
   }
 
   subscribe(userId: string, fn: (e: SeqJobEvent) => void): () => void {

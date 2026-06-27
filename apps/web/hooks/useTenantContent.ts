@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { Content } from '@talim/types';
 import { api } from '@/lib/api';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
 import {
   invalidateContentLists,
   prependContentToLists,
@@ -13,19 +14,21 @@ import {
 const base = '/tenant/content';
 
 export function useTenantContents() {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['tenant', 'contents'],
     queryFn: async () => {
       const { data } = await api.get<{ contents: Content[] }>(base);
       return data.contents;
     },
-    // Poll while a freshly-added material is still ingesting so the grid flips
-    // from "processing" to ready on its own.
-    refetchInterval: (query) => (listHasProcessing(query.state.data as Content[] | undefined) ? 3000 : false),
+    // SSE-primary (useJobEvents); slow safety-net poll only while disconnected.
+    refetchInterval: (query) =>
+      listHasProcessing(query.state.data as Content[] | undefined) ? (connected ? 30_000 : 3000) : false,
   });
 }
 
 export function useTenantContent(id: string) {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['tenant', 'content', id],
     queryFn: async () => {
@@ -35,8 +38,8 @@ export function useTenantContent(id: string) {
     enabled: !!id,
     refetchInterval: (query) => {
       const status = query.state.data?.status;
-      if (status === 'PENDING' || status === 'PROCESSING') return 3000;
-      return false;
+      if (status !== 'PENDING' && status !== 'PROCESSING') return false;
+      return connected ? 30_000 : 3000;
     },
   });
 }

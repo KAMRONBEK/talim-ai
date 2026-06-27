@@ -21,10 +21,23 @@ export async function streamEvents(req: AuthenticatedRequest, res: Response): Pr
   res.flushHeaders?.();
   res.write('retry: 5000\n\n');
 
+  let unsubscribe: () => void = () => {};
+  let heartbeat: ReturnType<typeof setInterval> | undefined;
+  const cleanup = () => {
+    if (heartbeat) clearInterval(heartbeat);
+    unsubscribe();
+  };
+
+  // A write to a closed/destroyed socket throws; swallow it and clean up so the failure
+  // never propagates back into the publisher (which runs on the job thread).
   const send = ({ seq, event }: SeqJobEvent) => {
-    res.write(`id: ${seq}\n`);
-    res.write('event: job\n');
-    res.write(`data: ${JSON.stringify(event)}\n\n`);
+    try {
+      res.write(`id: ${seq}\n`);
+      res.write('event: job\n');
+      res.write(`data: ${JSON.stringify(event)}\n\n`);
+    } catch {
+      cleanup();
+    }
   };
 
   // Last-Event-ID replay (header set by the browser/our reader, or ?lastEventId=).
@@ -39,12 +52,7 @@ export async function streamEvents(req: AuthenticatedRequest, res: Response): Pr
     }
   }
 
-  const unsubscribe = jobEvents.subscribe(userId, send);
-  let heartbeat: ReturnType<typeof setInterval>;
-  const cleanup = () => {
-    clearInterval(heartbeat);
-    unsubscribe();
-  };
+  unsubscribe = jobEvents.subscribe(userId, send);
   heartbeat = setInterval(() => {
     try {
       res.write(': ping\n\n');

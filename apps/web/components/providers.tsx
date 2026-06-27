@@ -7,6 +7,13 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { LocaleSync } from '@/components/locale-sync';
 import { SessionSync } from '@/components/session-sync';
 import { GlobalUpgradeModal } from '@/components/account/global-upgrade-modal';
+import { useJobEvents } from '@/hooks/useJobEvents';
+
+/** Opens the SSE job-events stream once, inside the QueryClientProvider. */
+function JobStream() {
+  useJobEvents();
+  return null;
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => makeQueryClient());
@@ -15,6 +22,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <LocaleSync />
         <SessionSync />
+        <JobStream />
         {children}
         <GlobalUpgradeModal />
       </QueryClientProvider>
