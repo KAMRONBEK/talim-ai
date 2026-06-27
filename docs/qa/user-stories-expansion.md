@@ -1359,7 +1359,7 @@ unassigned from students, its media files cleaned, and any running jobs cancelle
 **As a** tenant owner, **I want** to rename my organization and see my seat limit/usage and slug,
 **so that** my class is correctly branded and I understand my paid capacity.
 **Routes/code:** `/[locale]/tenant/settings` · `PATCH /tenant` (`{name}`) · `organization.ts:patchTenantForOwner` · `GET /tenant` (`getTenantForOwner`) · `usePatchTenant`/`useTenant` · `BillingSummaryCard` · `OnboardingChecklist`.
-**Priority:** P2
+**Priority:** P2 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given my org, When I edit the name and Save, Then `Tenant.name` updates and the header/sidebar reflect it after `['tenant']` invalidate; `slug` is shown read-only and is **not** changed by a rename.
@@ -1389,6 +1389,8 @@ unassigned from students, its media files cleaned, and any running jobs cancelle
 | EC19 | `getTenantForOwner` for owner with no tenant | 404 "Organization not found" | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, live):** PATCH /tenant {name} → 200 and persists; empty name → 400; original restored. **S4 note (not fixed):** a 500-char org name is accepted (no `.max()` on the tenant-name schema) — could break layout / allow abuse; low priority.
 
 ### US-OWNER-14: Cross-tenant isolation — owner A vs owner B (consolidated IDOR matrix)
 **As the** platform, **I want** owner A unable to read or mutate owner B's students, materials,
