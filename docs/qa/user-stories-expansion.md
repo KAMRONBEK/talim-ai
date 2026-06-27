@@ -1289,7 +1289,7 @@ extracted and ready to assign.
 **As a** tenant owner, **I want** to assign a material to one or many active students (and unassign),
 **so that** each learner sees exactly the content I gave them and changes propagate to their view.
 **Routes/code:** `/[locale]/tenant/materials/[id]/assign` · `AssignStudentsPanel` · `POST /tenant/assignments` / `DELETE /tenant/assignments` (`{contentId,learnerId}`) · `GET /tenant/content/:contentId/assignments` · `assignments.ts` · `useAssignContent`/`useUnassignContent`/`useContentAssignments`.
-**Priority:** P0 (drives LEARNER-01 visibility)
+**Priority:** P0 (drives LEARNER-01 visibility) · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given my content + my active student, When I assign, Then a `ContentAssignment{contentId,learnerId,assignedById}` upserts; assigning twice is idempotent (no dup, `update:{}`).
@@ -1323,6 +1323,8 @@ extracted and ready to assign.
 | EC22 | Assignment persists after material **delete** | Cascade removes assignments (US-OWNER-12 EC2); learner no longer sees it | ⬜ | — | cross-ref OWNER-12 |
 
 ---
+
+**Run 8 verification (2026-06-28, live):** unassigned ts2 → content 404, list 0; owner POST /tenant/assignments → 201; ts2 → content 200, list 1 (access GRANTED); owner DELETE /tenant/assignments → 204; ts2 → content 404, list 0 (access REVOKED). 7/7, no findings.
 
 ### US-OWNER-12 (DEEPENED): Delete a material — cascade, mid-generation, IDOR, double-click
 **As a** tenant owner, **I want** to delete a material, **so that** stale content is removed,
@@ -2010,7 +2012,7 @@ individual + tenant, **so that** manual billing actually controls what works.
 **As a** tenant owner, **I want** to see my plan, seat usage, and quotas, and be warned when my org is
 inactive, **so that** I know what I can do and when to contact the admin.
 **Routes/code:** `/[locale]/tenant/billing` · `GET /billing/me` (tenant branch) · `POST /billing/request-upgrade` · `contexts/tenant-shell.tsx` (banner) · `hooks/useBilling.ts` · `billing.controller.ts`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Billing page shows the tenant subscription (plan/status/period) + usage-vs-limits: uploads(=content items, lifetime), generations, tutorMessages, videos, podcasts, students(=seatLimit), contentItems.
@@ -2070,6 +2072,8 @@ inactive, **so that** I know what I can do and when to contact the admin.
 >   `apps/web/lib/onboarding.ts`.
 
 ---
+
+**Run 8 verification (2026-06-28, live) — F33 confirmed end-to-end:** a tenant subscription set to **TRIALING** now passes gated actions (create-student → 201; was 402 before the fix), while **PAST_DUE** still → 402. ACTIVE/TRIALING allowed; PAST_DUE/CANCELED blocked.
 
 ### US-LEARNER-06: Forced password change on first login (`mustChangePassword` kid)
 **As a** TENANT_LEARNER created email-less by a tutor (synthetic `username@students.talim.local`,

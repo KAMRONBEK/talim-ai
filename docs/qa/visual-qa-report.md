@@ -490,3 +490,7 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-OWNER-04 (Join-code regenerate) — 3/3.** Regen returns a new code; old code → 404 (invalidated); new code → 200. No findings.
 
 **US-IND-15 (PDF reader) — 87b0ae1 re-confirmed on branch.** Happy → PDF (not slides); fetch fail → error+Retry (not slides); Retry → recovers. No new findings.
+
+**US-OWNER-06 (Assign/unassign material) — 7/7.** Assignment grants a learner access (content 404→200, list 0→1); unassign revokes it (→404, list→0). No findings.
+
+**US-OWNER-11 / F33 (TRIALING) — verified live.** Tenant sub set to TRIALING → create-student 201 (was 402); PAST_DUE → 402. Confirms the F33 fix; restored to ACTIVE.
