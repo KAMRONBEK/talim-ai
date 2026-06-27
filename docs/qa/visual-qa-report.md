@@ -498,3 +498,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-AUTH-06/07 (Become-tutor / session) — F45 (S2) confirmed.** Admin approval flips the DB role to TENANT_OWNER, but the old JWT still encodes INDIVIDUAL → `/tenant/*` 403 until re-login (`/auth/me` already shows OWNER, so the web routes to a dashboard whose API calls all 403). Structural fix (token reissue/version) logged, not auto-applied on the auth hot path.
 
 **US-ADMIN-01/02 (Admin panel, 3001).** Tutor-request approval verified end-to-end (org+ACTIVE sub+role flip). Smoke of all 9 nav pages (dashboard/tutor-requests/users/tenants/content/generated/subscriptions/usage/audit): every page renders with real data, **0 broken states, 0 console errors**. Dashboard stats: 19 users, 6 content (3 ready), $0.4455 spend.
+
+**US-AUTH-04/05 (session/logout) — F46 (S2) confirmed.** Old token still 200s after a password change → no session revocation (stateless JWT, no tokenVersion). Same structural root as F45; one `tokenVersion` fix covers role-change staleness, password-change revocation, and logout. Logged for human review (auth hot path).
