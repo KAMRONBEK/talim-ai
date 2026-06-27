@@ -1200,6 +1200,8 @@ access at once — not at JWT expiry.
 
 ---
 
+**Run 8 verification (2026-06-28, live, same token):** active ts1 → assigned content 200 + list shows 1; owner PATCH active:false → 200; **deactivated ts1 (same JWT) → assigned content 404, list 0, /learner/assessments 403 immediately** (not at token expiry); owner PATCH active:true → 200; reactivated ts1 → content 200 restored. 8/8, no findings.
+
 ### US-OWNER-04: Regenerate the class join code
 **As a** tenant owner, **I want** to regenerate my class join code (invalidating the old one),
 **so that** a leaked code can be rotated and only people I share the new code with can self-enroll.

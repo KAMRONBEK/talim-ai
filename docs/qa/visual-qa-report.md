@@ -484,3 +484,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-AUTH-02 (Register) — 8 ECs via API; F43 logged+fixed.** Happy 201, duplicate/case-normalize 409, pw<8 400, privilege-escalation `role:ADMIN` 400 (S1 ok), joinCode<4 400. **EC13:** invalid join code orphaned an INDIVIDUAL account — broadens F27. Fixed (F43, 0379da8): pre-validate code before user.create → 404, no orphan. EC15 seat-full orphan remains structural.
 
 **US-OWNER-01 (Create student) — AC1-3 + dup/case/concurrency.** Email + email-less + tutor-set-pw all 201 (mustChangePassword driven by `!body.password`). Exact dup username 409; case-variant (QaKidB1/qakidb1) graceful 409 (not the suspected 500 — email-collision path catches it). **F44 (27f6ac6):** 3 concurrent identical creates were 201/500/500 (uncaught P2002) → now 201/409/409.
+
+**US-OWNER-03 (Deactivate/reactivate) — 8/8 clean.** Owner PATCH active:false → deactivated student loses access on the *same token* immediately (assigned content 404, list 0, /learner 403); reactivate → restored. Confirms the live `TenantMembership.active` access switch from the owner-action side. No findings.
