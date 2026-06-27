@@ -227,6 +227,13 @@ export async function changePassword(req: AuthenticatedRequest, res: Response): 
   const valid = await bcrypt.compare(body.currentPassword, user.passwordHash);
   if (!valid) throw new AppError(400, 'Current password is incorrect');
 
+  // The new password must actually rotate — otherwise a mustChangePassword kid could
+  // "change" to the same tutor-set secret and clear the forced-change flag without
+  // rotating anything.
+  if (body.newPassword === body.currentPassword) {
+    throw new AppError(400, 'New password must be different from the current password');
+  }
+
   const passwordHash = await bcrypt.hash(body.newPassword, 12);
   await prisma.user.update({
     where: { id: user.id },
