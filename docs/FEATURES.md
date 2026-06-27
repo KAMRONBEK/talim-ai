@@ -240,7 +240,7 @@ No i18n. Login at `/login`; everything else under `app/(admin)/*`. Backend gated
 - **What:** Plans and subscriptions with **no payment integration** — an admin activates. `PlanKind {INDIVIDUAL, TENANT}`, `SubscriptionStatus {ACTIVE, PAST_DUE, CANCELED, TRIALING}`, `SubscriptionSource {ADMIN, PAYMENT_PROVIDER}` (today: ADMIN). Approving a tutor request mints an ACTIVE subscription.
 - **Who:** ADMIN (manage); TENANT_OWNER / INDIVIDUAL (subject to).
 - **API:** `services/subscription/{admin,tenant,user,shared}.ts` (barrel `services/subscription.service.ts`), `controllers/billing.controller.ts` (`getBillingMe`, `GET /billing/me`). Models `Plan`, `Subscription`.
-- **Web:** `app/[locale]/(tenant)/tenant/billing/page.tsx`, `hooks/useBilling.ts`.
+- **Web:** `app/[locale]/(tenant)/tenant/billing/page.tsx`, `hooks/useBilling.ts`, the public pricing page `app/[locale]/pricing/page.tsx` (+ `components/marketing/pricing.tsx`, config `lib/pricing.ts`), and the promotion modal flow in §6.8.
 
 ### 6.3 Usage metering
 - **What:** Every metered AI action records an `ApiUsageEvent`; quotas are enforced before expensive operations.
@@ -261,6 +261,14 @@ No i18n. Login at `/login`; everything else under `app/(admin)/*`. Backend gated
 ### 6.7 Background jobs (Bull / Redis)
 - **What:** Heavy work runs off-request on Redis-backed Bull queues, registered at boot.
 - **API:** `services/queue.service.ts`; jobs `jobs/processContent.job.ts` (ingest/section/chunk/embed), `jobs/generateQuiz.job.ts`, `jobs/generatePodcast.job.ts`, `jobs/renderManim.job.ts`. Infra in `docker-compose.yml` (PostgreSQL 16 + pgvector, Redis).
+
+### 6.8 Usage-limit UX & subscription promotion (web)
+- **What:** A single, app-wide **promotion modal** surfaces consistently whenever a self-serve usage limit is hit, instead of each call site failing silently or with ad-hoc text. Backed by the manual-activation flow (`POST /billing/request-upgrade`).
+- **Error contract (API):** quota-gated actions return **402 `QUOTA_EXCEEDED`** `{feature, used, limit, upgradePlanCode}` (features `UPLOAD/GENERATION/TUTOR_MESSAGE/VIDEO/PODCAST/STUDENT`); per-file plan caps return **413 `PLAN_FILE_LIMIT`** `{maxPages, maxFileSizeMb, pages, fileSizeMb, upgradePlanCode}`; the hard upload cap returns **413 `FILE_TOO_LARGE`** `{maxFileSizeMb}` (no upgrade lifts it). `upgradePlanCode` is role-aware: FREE individual → `INDIVIDUAL_PRO`, STARTER tenant → `TENANT_GROWTH`, top plan → `null` (`services/subscription/{user,tenant}.ts`).
+- **Web decision logic:** `lib/limit-error.ts` (`classifyLimitError`) → `hooks/useLimitErrorHandler.ts` chooses **modal vs inline message** by role + `upgradePlanCode`: a self-serve INDIVIDUAL quota/plan-file limit opens the global modal with a feature-specific headline; tenant-owner limits, already-top-plan limits, the hard 120 MB cap, inactive subs, and learner blocks return a localized inline message (no modal).
+- **One global modal:** `store/useUpgradeModal.ts` + `components/account/global-upgrade-modal.tsx`, mounted once in `components/providers.tsx`; openable anywhere via `useUpgradeModal().openUpgrade()`. `billing-summary-card.tsx` and the upload card now open this shared instance.
+- **Wired call sites:** file upload (`hooks/useFileUpload.tsx`), YouTube ingest + quiz/summary (`components/content/UploadCard.tsx`, `hooks/useContentActions.ts`), AI video (`content/[id]/video/page.tsx`), podcast generate + per-episode regenerate (`content/[id]/podcast/page.tsx`), AI tutor stream (`store/useChatStore.ts` → `components/chat/ChatWindow.tsx`).
+- **Upgrade modal + pricing:** `components/account/upgrade-dialog.tsx` (so'm price, monthly/annual toggle, "Request upgrade", "see team plans" link) and the public **pricing page** `app/[locale]/pricing/page.tsx` + `components/marketing/pricing.tsx` are both driven by `lib/pricing.ts` (Free/Pro for individuals, Team/School for tutors & schools; prices in so'm; monthly + annual ~20% off). Hard upload cap `UPLOAD_MAX_MB = 120` (`middleware/upload.middleware.ts`) is kept in sync with nginx `client_max_body_size 120m`.
 
 ---
 

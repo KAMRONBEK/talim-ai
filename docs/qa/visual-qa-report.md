@@ -382,3 +382,27 @@
 - ✅ **Mistral-OCR batching** (>30MB base64) — 27 MB / 210-page scan → 2 batches, 166k chars, ~48s; deployed `5c9d563`.
 
 **Typechecks:** `@talim/api` + `@talim/web` pass. **Findings:** 1 logged + fixed (F30). **Deferred:** deeper cross-script + role-audio re-test needs richer local seed data (the rich Cyrillic content + owner-owned generated podcasts live only on prod).
+
+## Run 7 — 2026-06-26 · usage-limit UX, pricing page & upload cap
+
+**Scope:** new public **pricing page** + redesigned **upgrade modal**, the **120 MB upload cap** fix (500→413), and a unified **usage-limit → promotion modal** mechanism wired across every quota-gated action (F31). All verified locally (Playwright, as `qa-individual` on FREE).
+
+**Pricing page (`/pricing`) & modal — verified live:**
+- ✅ Audience toggle (Individuals: Free/Pro · Tutors & Schools: Team/School), monthly/annual toggle (annual ~20% off), so'm prices (Pro 119 000/mo, Team 349 000, School 1 190 000), real seed limits, manual-activation CTAs. Renders 200 in en + uz.
+- ✅ Upgrade modal redesign (gradient+girih header, PRO badge, annual/monthly, "Request upgrade", "see team plans" → /pricing).
+
+**Upload cap (F: 500→413):**
+- ✅ Oversized upload now returns **413 `FILE_TOO_LARGE`** (was a generic 500 — no `MulterError` branch in the error middleware). `UPLOAD_MAX_MB` 50→**120**, nginx `client_max_body_size` 50m→**120m**. Boundary-tested: 80 MB → passes multer (hits plan check), 130 MB → 413.
+
+**F31 — usage-limit → promotion modal (all 7 cases, daily limits forced to 0 then restored):**
+- ✅ UPLOAD (dashboard upload) → modal "today's upload limit"
+- ✅ GENERATION (practice quiz) → modal "today's AI generation limit"
+- ✅ PODCAST (per-episode regenerate) → modal "today's podcast limit"
+- ✅ VIDEO (generate part) → modal (GENERATION quota fires first → "generation" headline)
+- ✅ TUTOR_MESSAGE (chat send) → modal "today's tutor message limit" (empty assistant bubble removed)
+- ✅ PLAN_FILE_LIMIT (30 MB vs FREE 25 MB) → modal "too big for the Free plan" + "100 pages / 25 MB"
+- ✅ FILE_TOO_LARGE (130 MB > 120 MB hard cap) → **inline** "maximum upload size is 120 MB", **no** modal (upgrade wouldn't lift it)
+
+**Test-data hygiene:** FREE plan limits zeroed for the matrix then restored to seed defaults (3/5/20/1/1, 100 pg / 25 MB); content count for `qa-individual` unchanged (the 402/413s threw before any content was created — no orphans).
+
+**Typechecks:** `@talim/web` passes. **Findings:** F31 logged + fixed. **Not re-tested locally:** tenant-owner limit message + already-Pro at-cap message (need a tenant/Pro login) — covered by the `upgradePlanCode` branch in `useLimitErrorHandler` (logic-verified).

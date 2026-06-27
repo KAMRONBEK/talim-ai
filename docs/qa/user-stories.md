@@ -227,6 +227,20 @@ classmates' and other orgs' content stay private.
 **Notes / open questions**
 - ICU in V8/Node lacks Uzbek data for `RelativeTimeFormat` (and likely thin for `DateTimeFormat`/`PluralRules`) — any new `Intl`-based formatting for `uz` must be checked manually (see F18).
 
+### US-IND-08: Usage limit → subscription promotion modal
+**As** a FREE individual who hits a usage limit, **I want** a clear upgrade prompt **so that** I know how to unblock myself.
+- **AC:** every quota-gated action returning 402 `QUOTA_EXCEEDED` (with `upgradePlanCode: INDIVIDUAL_PRO`) or 413 `PLAN_FILE_LIMIT` opens the single global promotion modal with a feature-specific headline; the hard 120 MB cap (`FILE_TOO_LARGE`) shows an **inline** message, not the modal (upgrading wouldn't lift it); tenant-owner / already-Pro limits show an inline message, not the individual modal (role + `upgradePlanCode` branch in `useLimitErrorHandler`).
+- **EC matrix (verified run 7 — Playwright, qa-individual on FREE with daily limits temporarily set to 0):**
+  - EC1 **UPLOAD** (dashboard upload) → modal "today's upload limit" ✅
+  - EC2 **GENERATION** (practice quiz) → modal "today's AI generation limit" ✅
+  - EC3 **PODCAST** (per-episode regenerate) → modal "today's podcast limit" ✅
+  - EC4 **VIDEO** (generate part) → modal ✅ (the video controller checks GENERATION before VIDEO, so the headline reads "generation")
+  - EC5 **TUTOR_MESSAGE** (chat send) → modal "today's tutor message limit"; empty assistant placeholder removed on error ✅
+  - EC6 **PLAN_FILE_LIMIT** (30 MB file vs FREE 25 MB cap) → modal "too big for the Free plan" + "100 pages / 25 MB" ✅
+  - EC7 **FILE_TOO_LARGE** (130 MB > 120 MB hard cap) → **inline** "maximum upload size is 120 MB", no modal ✅
+  - EC8 (logic) tenant-owner / already-Pro → inline message, no individual modal (no self-serve Pro path)
+- **Files:** `lib/limit-error.ts`, `hooks/useLimitErrorHandler.ts`, `store/useUpgradeModal.ts`, `components/account/{global-upgrade-modal,upgrade-dialog}.tsx`, `lib/pricing.ts`, the wired pages/hooks (upload/youtube/quiz/summary/video/podcast/chat). See FEATURES.md §6.8.
+
 ---
 
 ## Story index (backlog — expand each with the template)
@@ -249,6 +263,7 @@ classmates' and other orgs' content stay private.
 - [x] US-IND-05 Podcast generate + player · spec'd ✅ · generation + playback verified (run 5); F21/F22 fixed
 - [x] US-IND-06 Chat: streamed, scoped-to-material, sources, seeding from selection, visual tutor · spec'd ✅ · **PDF marquee seed verified (run 5)**; transcript-seed+mermaid+KaTeX (run 2)
 - [x] US-IND-07 Dashboard grid / empty / search / thumbnails · search filter verified (run 5, F19 logged)
+- [x] US-IND-08 Usage limit → subscription promotion modal (upload / gen / podcast / video / tutor + plan-file cap) · spec'd ✅ · all 7 cases verified live (run 7); F31 fixed
 
 ### TENANT_OWNER
 - [ ] US-OWNER-01 Create student (email + email-less kid, credentials-once, seat count)
@@ -291,6 +306,7 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
+| F31 | S3 | US-IND-08 | **Usage-limit errors mostly didn't surface the upgrade modal.** Only file uploads (PLAN_FILE_LIMIT) opened it; daily quota errors (UPLOAD/GENERATION/PODCAST/VIDEO/TUTOR_MESSAGE) failed silently or with ad-hoc inline text — the tutor stream threw an unhandled rejection (empty assistant bubble left behind), and video/podcast/quiz/summary had no or partial 402 handling. Built a unified `classifyLimitError` + role-aware `useLimitErrorHandler` + one global `useUpgradeModal`/`GlobalUpgradeModal` (mounted in `providers.tsx`) and wired every quota-gated call site. Self-serve INDIVIDUAL limits → modal; tenant / top-plan / hard 120 MB cap → inline. Verified all 7 cases live (run 7). | ✅ fixed | _pending commit (this session)_ |
 | F30 | S3 | US-IND-05 · EC | **Podcast per-episode regenerate (+ overall retry) gave no error feedback.** The new per-episode "Qayta urinish" button (and the stuck/failed retry button) called the regenerate/create mutation but never surfaced its rejection — a 402 quota (FREE plan, podcast quota 1/1 already spent by the bulk generation) returned silently, so the button looked like it did nothing. Added `classifyGenerationError` → visible header message ("Podkast cheklovi tugadi {used}/{limit}" for quota; plan/generic otherwise). Verified via Playwright: FREE regenerate → 402 → "Podkast cheklovi tugadi (1/1)." | ✅ fixed | `b861405` |
 | F15 | S3 | US-OWNER-12 · EC1 | Material delete dialog + aria-label hardcoded Uzbek | ✅ fixed | `36f1f41` |
 | F16 | S2 | US-AUTH-01 · EC3 | Deactivated login showed "server unreachable" not "deactivated" | ✅ fixed | `d5a13cc` |
