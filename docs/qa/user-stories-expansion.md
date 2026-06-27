@@ -59,7 +59,7 @@ join code), **so that** I get a B2C workspace — or land in my tutor's class if
 `auth.controller.ts register()` (`registerSchema`: email `.email()`, password `.min(8)`,
 name `.min(1).optional()`, joinCode `.min(4).max(12).optional()`, `role: z.never()`, `.strict()`) ·
 `joinTenantByCode()` · web `register/page.tsx`.
-**Priority:** P0
+**Priority:** P0 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a unique, valid email + ≥8-char password, When I submit, Then a `INDIVIDUAL` user +
@@ -72,22 +72,22 @@ name `.min(1).optional()`, joinCode `.min(4).max(12).optional()`, `role: z.never
 **Edge cases & negative paths**
 | # | Scenario | Expected behaviour | Status | Finding | Fix |
 | --- | --- | --- | --- | --- | --- |
-| EC1 | Happy path, no join code | 201, INDIVIDUAL + FREE ACTIVE sub, lands `/dashboard` | ⬜ | — | — |
-| EC2 | Duplicate email (exact) | 409 "Email already registered"; no second account | ⬜ | — | — |
-| EC3 | Duplicate email differing only in **case/whitespace** (`Foo@x.com ` vs `foo@x.com`) | 409 — `findFirst` uses `mode:'insensitive'`, register lowercases+trims first | ⬜ | — | — |
-| EC4 | Password 7 chars (under min) | Server 400 (Zod `.min(8)`); web also blocks via `minLength={8}` native validation → no network call | ⬜ | — | — |
-| EC5 | Password exactly 8 chars (boundary) | Accepted | ⬜ | — | — |
+| EC1 | Happy path, no join code | 201, INDIVIDUAL + FREE ACTIVE sub, lands `/dashboard` | ✅ | — | — |
+| EC2 | Duplicate email (exact) | 409 "Email already registered"; no second account | ✅ | — | — |
+| EC3 | Duplicate email differing only in **case/whitespace** (`Foo@x.com ` vs `foo@x.com`) | 409 — `findFirst` uses `mode:'insensitive'`, register lowercases+trims first | ✅ | — | — |
+| EC4 | Password 7 chars (under min) | Server 400 (Zod `.min(8)`); web also blocks via `minLength={8}` native validation → no network call | ✅ | — | — |
+| EC5 | Password exactly 8 chars (boundary) | Accepted | ✅ | — | — |
 | EC6 | Password with spaces / unicode / emoji | Accepted verbatim (not trimmed) and bcrypt-hashed; later login with same string works | ⬜ | — | bcrypt truncates >72 bytes — see EC7 |
 | EC7 | Very long password (>72 bytes, e.g. 200 chars) | **bcrypt silently truncates at 72 bytes** — register succeeds, but only first 72 bytes matter on login. No crash; document behaviour | ⬜ | — | **possible silent-truncation surprise** |
 | EC8 | Malformed email (`a@`, `a b@x.com`, no `@`) | 400 Zod email error; web `type=email` native-blocks | ⬜ | — | — |
 | EC9 | Empty name | Allowed — `name` optional; stored null (web marks input `required` so UI blocks, but API accepts omitted) | ⬜ | — | web/API mismatch (UI stricter) |
 | EC10 | Name 200+ chars | Accepted (no max on name in registerSchema) — verify no layout break echoing it | ⬜ | — | no max-length guard |
-| EC11 | Extra/unknown body field (e.g. `role:'ADMIN'`, `isAdmin:true`) | 400 — schema is `.strict()` and `role: z.never()`; **privilege-escalation attempt rejected** | ⬜ | — | **S1 verify** |
+| EC11 | Extra/unknown body field (e.g. `role:'ADMIN'`, `isAdmin:true`) | 400 — schema is `.strict()` and `role: z.never()`; **privilege-escalation attempt rejected** | ✅ | — | S1 ok |
 | EC12 | Valid join code at register | Enrolled as TENANT_LEARNER, role flipped, lands `/learner/dashboard` (web posts uppercased code) | ⬜ | — | overlaps AUTH-03·EC1 |
-| EC13 | **Invalid** join code at register (no such tenant) | `joinTenantByCode` throws 404 *after* `user.create` already ran → **orphaned INDIVIDUAL account** created; user sees "Invalid join code" and assumes signup failed, but retry hits "Email already registered" | ⬜ | — | **S2 — broadens F27 beyond seat-full to ANY join failure** |
+| EC13 | **Invalid** join code at register (no such tenant) | `joinTenantByCode` throws 404 *after* `user.create` already ran → **orphaned INDIVIDUAL account** created; user sees "Invalid join code" and assumes signup failed, but retry hits "Email already registered" | 🐛→✅ | F43 | `0379da8` |
 | EC14 | Join code = own/owner's code edge, or `role!==INDIVIDUAL` path | At register the user is brand-new INDIVIDUAL so `ownerId===userId` impossible; covered by AUTH-03 for join-class | ⬜ | — | 🚫 N/A at register |
 | EC15 | Seat-full join code at register | 402 STUDENT QUOTA after account create → orphaned INDIVIDUAL (F27) | ⬜ | F27 | logged |
-| EC16 | Join code shorter than 4 / longer than 12 chars | Zod `joinCode.min(4).max(12)` → 400 before any user create (good — no orphan in this case) | ⬜ | — | — |
+| EC16 | Join code shorter than 4 / longer than 12 chars | Zod `joinCode.min(4).max(12)` → 400 before any user create (good — no orphan in this case) | ✅ | — | — |
 | EC17 | Join code with lowercase letters | Web uppercases (`toUpperCase()`); `joinTenantByCode` also uppercases → matches | ⬜ | — | — |
 | EC18 | Join code with surrounding spaces / mixed | Trimmed+uppercased both client and server | ⬜ | — | — |
 | EC19 | Double-submit (rapid double Enter / button click) | Button `disabled={loading}`; but two near-simultaneous requests could both pass duplicate-check before either commits → **2 accounts or unique-constraint 500**. Verify single account, graceful 409 | ⬜ | — | **race: no DB unique pre-write lock; check email unique constraint exists** |
@@ -109,6 +109,8 @@ name `.min(1).optional()`, joinCode `.min(4).max(12).optional()`, `role: z.never
   fix = validate code + quota before create, or wrap in one transaction.
 
 ---
+
+**Run 8 verification (2026-06-28, API contract):** EC1/EC5 happy 201; EC2 dup 409; EC3 case/whitespace dedup 409; EC4 pw<8 400; EC11 privilege-escalation (`role:ADMIN`) 400 (S1 ok); EC16 joinCode<4 400. **EC13 orphan CONFIRMED then FIXED (F43, `0379da8`)**: invalid join code now 404s before `user.create`, re-register of the same email succeeds (no orphan). EC15 (seat-full → orphan) remains the deeper structural case (F27/logged).
 
 ### US-AUTH-04: Change password + tutor/admin reset + forced first-login change
 **As a** user (incl. an email-less kid on a tutor-issued temp password), **I want** to change my

@@ -480,3 +480,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 200. **No isolation findings** — `assertCanAccessContent` + the tenant middleware hold. All ECs ✅.
 
 **US-LEARNER-06 (forced password change) — F34 gate confirmed end-to-end + F42 fixed.** Flagged teststudent1 → bounced to /learner/settings (stable, no loop); changing the password releases the gate → dashboard (0 console errors). API contract: <8 → 400, wrong current → 400 "incorrect". **F42 (0169859):** new==current was accepted (forced-change defeatable) → now 400. (Observed a stray "-10 Issue" button on the learner settings page — flagged for follow-up, not yet characterized.)
+
+**US-AUTH-02 (Register) — 8 ECs via API; F43 logged+fixed.** Happy 201, duplicate/case-normalize 409, pw<8 400, privilege-escalation `role:ADMIN` 400 (S1 ok), joinCode<4 400. **EC13:** invalid join code orphaned an INDIVIDUAL account — broadens F27. Fixed (F43, 0379da8): pre-validate code before user.create → 404, no orphan. EC15 seat-full orphan remains structural.
