@@ -93,9 +93,12 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
             {isPending ? t('uploading') : `+ ${t('upload')}`}
           </Button>
         )}
+        {/* The AI tutor is a permanent tab in the right Learn panel on desktop, so
+            this header shortcut is redundant there — show it only on mobile, where
+            the Learn panel is a hidden drawer and the chat would otherwise be buried. */}
         <Link
           href={`/content/${contentId}?panel=chat`}
-          className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent"
+          className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent md:hidden"
         >
           💬 {t('aiTutor')}
         </Link>

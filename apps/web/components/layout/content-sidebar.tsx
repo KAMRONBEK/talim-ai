@@ -29,7 +29,6 @@ export function ContentSidebarBody({
   onNavigate,
 }: ContentSidebarBodyProps) {
   const t = useTranslations('sidebar');
-  const tContent = useTranslations('content');
   const pathname = usePathname();
   const { data: podcast } = usePodcast(contentId);
   const { data: video } = useVideo(contentId);
@@ -99,7 +98,6 @@ export function ContentSidebarBody({
         </p>
         <div className="space-y-0.5">
           {navLink(`/content/${contentId}`, t('read'), '📖')}
-          {navLink(`/content/${contentId}?panel=chat`, tContent('askTutor'), '💬')}
           {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧', podcastBusy)}
           {navLink(`/content/${contentId}/video`, t('watchVideo'), '🎬', videoBusy)}
         </div>
