@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Loader2, RefreshCw } from 'lucide-react';
 import { cn } from '@talim/ui';
 import type { Content } from '@talim/types';
 import { useGenerateSummary } from '@/hooks/useQuiz';
@@ -14,6 +15,9 @@ import { PdfViewer } from '@/components/learning/PdfViewerLazy';
 import { VideoTutorialViewer } from '@/components/learning/VideoTutorialViewer';
 import type { TranscriptExcerptPayload } from '@/components/learning/TranscriptPanel';
 import type { PdfExcerptPayload } from '@/components/learning/PdfViewer';
+
+/** Transient-failure retries for the (potentially large) PDF blob fetch before giving up. */
+const MAX_PDF_RETRIES = 2;
 
 export interface StageExcerpt {
   excerpt: string;
@@ -58,6 +62,8 @@ export function ContentStage({
   const tChat = useTranslations('chat');
   const generateSummary = useGenerateSummary();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [pdfError, setPdfError] = useState(false);
+  const [pdfReload, setPdfReload] = useState(0);
   const [view, setView] = useState<'material' | 'summary'>('material');
   const [summary, setSummary] = useState<string | null>(null);
   const [selectionHint, setSelectionHint] = useState<string | null>(null);
@@ -65,19 +71,59 @@ export function ContentStage({
   const isPdf = content.type === 'PDF' || content.type === 'SLIDE';
   const isTenantOwner = useAuthStore((s) => s.user?.role) === 'TENANT_OWNER';
 
+  // The PDF is fetched as one authenticated blob (the file endpoint needs a Bearer
+  // token), which for a large scan can be slow or stall mid-download on a flaky
+  // connection without ever erroring. Track loading/error explicitly so the reader
+  // shows a spinner — not the slide deck — while it loads, and a Retry on failure.
+  // The fetch opts into a stall timeout (abort if no bytes arrive for a while) and is
+  // aborted on unmount; transient failures auto-retry, permanent ones (4xx) don't.
   useEffect(() => {
     if (!isPdf || !content.storagePath) return;
     let revoked: string | null = null;
-    fetchAuthenticatedBlob(contentEndpoints.file(contentId, isTenantOwner))
-      .then((url) => {
-        revoked = url;
-        setPdfUrl(url);
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let activeController: AbortController | null = null;
+    let attempts = 0;
+    setPdfUrl(null);
+    setPdfError(false);
+
+    const load = () => {
+      const controller = new AbortController();
+      activeController = controller;
+      fetchAuthenticatedBlob(contentEndpoints.file(contentId, isTenantOwner), {
+        signal: controller.signal,
+        stallTimeoutMs: 30_000,
       })
-      .catch(() => setPdfUrl(null));
+        .then((url) => {
+          if (cancelled) {
+            URL.revokeObjectURL(url);
+            return;
+          }
+          revoked = url;
+          setPdfUrl(url);
+        })
+        .catch((err: unknown) => {
+          if (cancelled) return;
+          // Don't retry permanent failures (4xx) — they will never succeed.
+          const status = (err as { status?: number } | null)?.status;
+          const permanent = typeof status === 'number' && status >= 400 && status < 500;
+          attempts += 1;
+          if (!permanent && attempts <= MAX_PDF_RETRIES) {
+            timer = setTimeout(load, 800 * attempts);
+          } else {
+            setPdfError(true);
+          }
+        });
+    };
+    load();
+
     return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+      activeController?.abort();
       if (revoked) URL.revokeObjectURL(revoked);
     };
-  }, [isPdf, content.storagePath, contentId, isTenantOwner]);
+  }, [isPdf, content.storagePath, contentId, isTenantOwner, pdfReload]);
 
   const loadSummary = useCallback(async () => {
     if (summary || generateSummary.isPending) return;
@@ -170,15 +216,34 @@ export function ContentStage({
               onSelectionCleared={clearSelection}
             />
           </div>
-        ) : isPdf && pdfUrl ? (
-          <div className="min-h-0 flex-1">
-            <PdfViewer
-              url={pdfUrl}
-              onExcerptSelected={handlePdfExcerpt}
-              onSelectionCleared={clearSelection}
-              onEmptySelection={() => setSelectionHint(t('pdfNoTextInSelection'))}
-            />
-          </div>
+        ) : isPdf && content.storagePath ? (
+          pdfUrl ? (
+            <div className="min-h-0 flex-1">
+              <PdfViewer
+                url={pdfUrl}
+                onExcerptSelected={handlePdfExcerpt}
+                onSelectionCleared={clearSelection}
+                onEmptySelection={() => setSelectionHint(t('pdfNoTextInSelection'))}
+              />
+            </div>
+          ) : pdfError ? (
+            <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
+              <p className="text-sm text-muted-foreground">{t('pdfLoadError')}</p>
+              <button
+                type="button"
+                onClick={() => setPdfReload((k) => k + 1)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-background px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary"
+              >
+                <RefreshCw className="h-4 w-4" />
+                {t('pdfRetry')}
+              </button>
+            </div>
+          ) : (
+            <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 p-8 text-center text-muted-foreground">
+              <Loader2 className="h-6 w-6 animate-spin text-primary" />
+              <p className="text-sm">{t('pdfLoading')}</p>
+            </div>
+          )
         ) : (
           <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 md:px-8">
             <SectionReader

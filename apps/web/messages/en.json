@@ -215,7 +215,8 @@
     "podcastFailed": "Generation failed",
     "retryPodcast": "Retry",
     "podcastRetryError": "Could not regenerate. Try again later.",
-    "generationFailed": "Couldn't generate. Please try again."
+    "generationFailed": "Couldn't generate. Please try again.",
+    "pdfRetry": "Retry"
   },
   "chat": {
     "title": "AI Tutor",

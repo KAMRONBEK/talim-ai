@@ -215,7 +215,8 @@
     "podcastFailed": "Yaratishda xatolik yuz berdi",
     "retryPodcast": "Qayta urinish",
     "podcastRetryError": "Qayta yaratib boʻlmadi. Keyinroq urinib koʻring.",
-    "generationFailed": "Yaratib bo'lmadi. Iltimos, qayta urinib ko'ring."
+    "generationFailed": "Yaratib bo'lmadi. Iltimos, qayta urinib ko'ring.",
+    "pdfRetry": "Qayta urinish"
   },
   "chat": {
     "title": "AI O'qituvchi",
