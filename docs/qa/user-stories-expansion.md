@@ -426,12 +426,12 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 ### US-IND-10: Upload validation, size & plan-cap boundaries
 **As the** platform, **I want** uploads rejected with the right structured error for size/page/type violations, **so that** quota/plan gating and the upgrade modal behave correctly and bad files don't crash the worker.
 **Routes/code:** `upload.middleware.ts` (multer 120 MB + fileFilter) · `content.controller.ts:124-168` (plan gating via `getFileLimitsForUser`) · `error.middleware.ts:99-118` · `pdf.service.ts:28` (`getPdfPageCount`).
-**Priority:** P0
+**Priority:** P0 · **Last verified:** 2026-06-28 on `claude/visual-qa` (EC8/EC9/EC15/EC22)
 
 **Acceptance criteria**
 - AC1 — Given a file > 120 MB, When uploaded, Then multer rejects with **413** `{code:'FILE_TOO_LARGE', maxFileSizeMb:120}` and the web shows an **inline** message (not the upgrade modal — upgrading won't lift the hard cap).
 - AC2 — Given a file over the *plan* page/size cap (e.g. FREE 100 pages / 25 MB) but under 120 MB, When uploaded, Then **413** `{code:'PLAN_FILE_LIMIT', maxPages, maxFileSizeMb, pages, fileSizeMb, upgradePlanCode}` opens the global promotion modal.
-- AC3 — Given a non-PDF/non-PPT file, When uploaded, Then **400** `Only PDF and slide files are allowed`.
+- AC3 — Given a non-PDF file (incl. PowerPoint, post-F35), When uploaded, Then **400** `Only PDF files are supported. Please export PowerPoint (.ppt/.pptx) to PDF and upload that.`
 
 **Edge cases & negative paths**
 | # | Scenario | Expected behaviour | Status | Finding | Fix |
@@ -443,20 +443,21 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 | EC5 | 0-byte file | multer accepts (no min); `getPdfPageCount`→null; saved; job: `pdfParse` on empty buffer throws → **FAILED** | ⬜ | — | confirm FAILED not 500 |
 | EC6 | Non-PDF disguised as `.pdf` (e.g. `.txt`/`.zip` renamed) | fileFilter **passes** (allows any `*.pdf` name, mw:23); `isPdf=true`; `getPdfPageCount`→null→gating skipped; job `pdfParse` throws → **FAILED** | ⬜ | — | — |
 | EC7 | Real PDF with wrong mimetype (`application/octet-stream`) but `.pdf` name | Accepted (name suffix), processes normally | ⬜ | — | — |
-| EC8 | **`.pptx` PowerPoint** (allowed by fileFilter) | type=SLIDE; job routes through `extractPdfText`→`pdf-parse` which throws on a ZIP/PPTX → **always FAILED** (no real PPTX extractor) | ⬜ | — | **S2 — SLIDE uploads can't be ingested** |
-| EC9 | `.ppt` legacy PowerPoint | Same as EC8 — FAILED (pdf-parse can't read PPT) | ⬜ | — | **S2** |
+| EC8 | **`.pptx` PowerPoint** upload | **400** `Only PDF files are supported…` at the upload boundary — verified live: server curl 400 + uz UI toast. (Was: accepted by fileFilter then **always FAILED** at ingest — no PPTX extractor.) | 🐛→✅ | F35 | `e0a8846` |
+| EC9 | `.ppt` legacy PowerPoint | Same as EC8 — rejected **400** at upload (was FAILED at ingest). | 🐛→✅ | F35 | `e0a8846` |
 | EC10 | Image file `.png`/`.jpg` renamed `.pdf` | fileFilter passes on name; job pdfParse throws → FAILED | ⬜ | — | — |
 | EC11 | Password-protected / encrypted PDF | `getPdfPageCount`→null (pdfParse catch); **plan page-cap silently bypassed**; job: pdfParse on encrypted throws → FAILED | ⬜ | — | **S3 — page-cap bypass for encrypted/corrupt** |
 | EC12 | Corrupt/truncated PDF (valid header, broken body) | `getPdfPageCount`→null; job extraction fails → FAILED; clear FAILED screen | ⬜ | — | — |
 | EC13 | Scanned PDF with 500 pages on FREE (no text layer) | `getPdfPageCount` returns real count → 413 PLAN_FILE_LIMIT if > cap; but if pdfParse can't read pages, null → bypass (see EC11) | ⬜ | — | — |
 | EC14 | Multi-file select (multiple files in picker) | `useFileUpload` reads `files?.[0]` only — silently uploads **first** file, ignores rest; no error/notice | ⬜ | — | **S3 — silent drop of extra files** |
-| EC15 | Wrong-type rejection copy | Web shows `t('uploadFailed')` inline in active locale; not a raw English server string | ⬜ | — | — |
+| EC15 | Wrong-type rejection copy | Localized `content.uploadFailed` toast in the active locale (uz "Yuklash amalga oshmadi…"). **Was** hardcoded English "Upload failed" via the dashboard quick-action + topbar callers. | 🐛→✅ | F41 | `a80ddad` |
 | EC16 | Quota-exceeded user uploads 120 MB | Whole file buffered into memory (multer memory storage) **before** `enforceQuota` returns 402 — resource cost on a blocked user | ⬜ | — | **S4 — quota checked after full buffering** |
 | EC17 | Double-buffer cost: `getPdfPageCount` (controller) + job both run `pdfParse` on full buffer | Large PDF parsed twice in memory; acceptable but noted | ⬜ | — | — |
 | EC18 | Upload with no file part (`req.file` undefined) | 400 `No file uploaded` (controller:127) | ⬜ | — | — |
 | EC19 | Upload as TENANT_OWNER to `/content/upload` | Blocked by `blockIndividualContentForOwner` (owners must use `/tenant/content`) | ⬜ | — | role boundary |
 | EC20 | Upload as TENANT_LEARNER | Blocked by `blockLearnerMutations` (learners can't upload) | ⬜ | — | role boundary |
 | EC21 | TENANT_OWNER plan caps (`getFileLimitsForTenant`) differ from individual | Correct limits applied per role branch (controller:134-137) | ⬜ | — | — |
+| EC22 | File picker `accept` attribute | `.pdf` only — picker no longer offers `.ppt/.pptx` (was `.pdf,.ppt,.pptx`, inviting a type the server 400s post-F35). | 🐛→✅ | F40 | `a80ddad` |
 
 ---
 

@@ -444,3 +444,30 @@
 **4 bugs fixed (all verified, full typecheck green):** F24 (tenant+learner assessments i18n, ~69 keys), F31 (4 tenant pages stragglers, 13 keys), F32 (deck labels, 4 keys), F33 (students/deck-nav/resize a11y, 4 keys). Total ~90 new message keys × 3 locales, all ICU-validated via the next-intl formatter.
 
 **Not covered (for a resumed run):** admin content retry/delete (destructive — deferred); generation-limit / login-rate-limit UI messages (need quotas driven to cap — expensive); marketing landing ru/dark/mobile re-check; live slide-deck render (needs a generated deck). graphify is permission-gated in this unattended session (used Read/Grep). No structural/risky issues fixed (per HARD RULES).
+
+---
+
+## Run 8 — 2026-06-28 · US-IND-10 upload validation (F35 verified live; F40/F41 logged+fixed)
+
+**Setup:** `claude/visual-qa` fast-forwarded to `main` (1a124c3) to test the latest code + the
+expanded story matrix. Stack healthy (api `/health` 200, web/admin 307). Restored the documented
+test-account passwords (qa-owner / qa-individual / teststudent1 — they had been changed during
+earlier ad-hoc testing this session).
+
+**US-IND-10 (Upload validation) — drove EC8/EC9/EC15 and grew the matrix (+EC22):**
+- **EC8/EC9 — `.pptx`/`.ppt` upload (verifies F35):** server `POST /content/upload` → **400**
+  `{message:"Only PDF files are supported. Please export PowerPoint (.ppt/.pptx) to PDF and upload
+  that."}` (curl), and the uz dashboard upload (Playwright `setInputFiles`) surfaced a localized
+  toast. The matrix's pre-fix expectation ("accepted then **always FAILED** at ingest", flagged S2)
+  is now stale → reconciled to 🐛→✅ F35.
+- **🐛→✅ F40 (S3) — picker still offered PowerPoint.** `FILE_UPLOAD_ACCEPT='.pdf,.ppt,.pptx'`
+  invited users to pick a `.ppt/.pptx` the server now 400s (UI/server mismatch). Narrowed to `.pdf`
+  (`a80ddad`). Verified: input `accept=".pdf"`.
+- **🐛→✅ F41 (S3) — English "Upload failed" on uz/ru.** `useFileUpload` fell back to a hardcoded
+  `'Upload failed'`; the dashboard quick-action + learning-topbar callers don't pass a localized
+  message (only `UploadCard` does), so non-English users saw English on every failed upload.
+  Defaulted the hook fallback to `t('content.uploadFailed')` (`a80ddad`). Verified live (uz):
+  "Yuklash amalga oshmadi. Qayta urinib ko'ring."
+
+**Typecheck:** `@talim/web` passes. **Findings:** F40, F41 logged + fixed (`a80ddad`). Commits are
+local-only on `claude/visual-qa` (never pushed).
