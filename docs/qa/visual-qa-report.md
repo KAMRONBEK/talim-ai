@@ -506,3 +506,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-OWNER-08/09 + US-LEARNER-02 (Assessments take-flow).** Assigned ts1 sees both PUBLISHED assessments + leaderboards (200); unassigned ts2 → empty list + 403 leaderboard (assignment isolation). **F39 (GAME timings cheat) re-confirmed by code** (computeGamePoints uses client responseMs → speedFactor 1.0 at timings:0, no server clock). maxAttempts=1 blocked a non-destructive live demo.
 
 **US-OWNER-13 (Org rename) — 4/5.** Rename persists, empty → 400, restored. S4 note: no max-length on org name (500 chars accepted).
+
+**US-IND-09 (Upload → READY) — full pipeline verified live.** Real PDF upload as qa-individual → PROCESSING → READY in ~4s with 1 section (extract/chunk/embed/section all ran); deleted (204). The last untested P0 happy path — passes, no findings.

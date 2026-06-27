@@ -396,7 +396,7 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 ### US-IND-09: Upload a PDF → processing → READY → workspace
 **As an** INDIVIDUAL, **I want** to upload a PDF and have it ingested into a study workspace, **so that** I can read it and use AI summary/quiz/podcast/tutor.
 **Routes/code:** `/[locale]/dashboard` → `POST /content/upload` · `content.controller.ts:124` (`uploadContent`) · `useFileUpload.tsx` · `UploadCard.tsx` · `processContent.job.ts` · `useContent.ts` (`useUploadContent`, `useContents` poll) · `content-status-gate.tsx`.
-**Priority:** P0
+**Priority:** P0 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a valid text-layer PDF under plan caps, When I upload it, Then API returns **201** with `status:'PENDING'`, the card is prepended to the dashboard grid, and the list polls every 3s until it flips to `READY`.
@@ -426,6 +426,8 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 - EC12: `uploadContent` does `prisma.content.create({status:PENDING})` then `await contentQueue.add(...)` — if the queue add rejects, the response 201 is never sent (handler throws → 500) but the PENDING row persists with no job. There is no reconciler/sweeper. Worth confirming live with Redis stopped.
 
 ---
+
+**Run 8 verification (2026-06-28, live, full pipeline):** uploaded a real 1-page PDF as qa-individual via `POST /content/upload` → content created PENDING → **PROCESSING → READY in ~4s** with 1 section generated (extract→chunk→embed→section all ran); content accessible; `DELETE /content/:id` → 204 (cleanup). The end-to-end ingest happy path works. No findings.
 
 ### US-IND-10: Upload validation, size & plan-cap boundaries
 **As the** platform, **I want** uploads rejected with the right structured error for size/page/type violations, **so that** quota/plan gating and the upgrade modal behave correctly and bad files don't crash the worker.
