@@ -606,7 +606,7 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 ### US-IND-15: PDF reader blob load — spinner / stall-timeout / retry / abort
 **As an** INDIVIDUAL, **I want** a large PDF to load with a spinner (not the slide deck), auto-retry transient failures, and abort on leave, **so that** a 93 MB scan on a flaky connection still opens or fails cleanly.
 **Routes/code:** `content-stage.tsx:80-126` (blob effect) · `lib/authenticatedBlob.ts` (`fetchAuthenticatedBlob`, `BlobFetchError`, `stallTimeoutMs`) · `GET /content/:id/file` · `content-shared.ts:49` (`sendContentFile`).
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a PDF is loading, Then a spinner + `pdfLoading` text shows (never the section/slide fallback) until the blob resolves.
@@ -639,6 +639,8 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 | EC20 | Memory: object URLs revoked on every reload/unmount | No `blob:` URL leak across reloads (revoke in cleanup + cancelled branch) | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, Playwright, qa-individual uz):** verifies `87b0ae1`. Happy path → PDF canvas renders, NO slide-deck fallback; forced file-fetch failure → "PDF yuklanmadi" + "Qayta urinish" (not slides); clicking Retry → PDF recovers. (Streaming/stall-timeout/no-retry-on-4xx were verified at fix time.) Key ECs ✅, no new findings.
 
 ### US-IND-16: OCR a selected PDF region (marquee → text)
 **As an** INDIVIDUAL, **I want** to marquee-select a region of a scanned PDF and OCR just that area, **so that** I can seed the tutor or copy text from an image page.
@@ -1206,7 +1208,7 @@ access at once — not at JWT expiry.
 **As a** tenant owner, **I want** to regenerate my class join code (invalidating the old one),
 **so that** a leaked code can be rotated and only people I share the new code with can self-enroll.
 **Routes/code:** `/[locale]/tenant/students` (`JoinCodeCard`) + dashboard · `POST /tenant/join-code/regenerate` · `organization.ts:regenerateJoinCode` · `generateUniqueJoinCode` (`shared.ts`) · `useRegenerateJoinCode`.
-**Priority:** P1 (enrolment security)
+**Priority:** P1 (enrolment security) · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given my org, When I confirm Regenerate, Then a new unique 6-char code (alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789`, no 0/O/1/I/L) replaces the old; the card shows the new code after invalidate.
@@ -1234,6 +1236,8 @@ access at once — not at JWT expiry.
 | EC16 | Rapid repeated regen | Each yields a distinct code; seat/members unaffected | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, API as owner B):** regenerate → 200 with a new code (5FEXJ9 → N9HPS8); joining with the OLD code → 404 "Invalid join code" (invalidated); joining with the NEW code → 200. 3/3, no findings.
 
 ### US-OWNER-05: Upload / re-read (OCR) / retry a tenant material
 **As a** tenant owner, **I want** to upload PDFs/slides (or YouTube) as org materials and re-read a

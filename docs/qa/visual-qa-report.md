@@ -486,3 +486,7 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-OWNER-01 (Create student) — AC1-3 + dup/case/concurrency.** Email + email-less + tutor-set-pw all 201 (mustChangePassword driven by `!body.password`). Exact dup username 409; case-variant (QaKidB1/qakidb1) graceful 409 (not the suspected 500 — email-collision path catches it). **F44 (27f6ac6):** 3 concurrent identical creates were 201/500/500 (uncaught P2002) → now 201/409/409.
 
 **US-OWNER-03 (Deactivate/reactivate) — 8/8 clean.** Owner PATCH active:false → deactivated student loses access on the *same token* immediately (assigned content 404, list 0, /learner 403); reactivate → restored. Confirms the live `TenantMembership.active` access switch from the owner-action side. No findings.
+
+**US-OWNER-04 (Join-code regenerate) — 3/3.** Regen returns a new code; old code → 404 (invalidated); new code → 200. No findings.
+
+**US-IND-15 (PDF reader) — 87b0ae1 re-confirmed on branch.** Happy → PDF (not slides); fetch fail → error+Retry (not slides); Retry → recovers. No new findings.
