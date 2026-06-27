@@ -2069,7 +2069,7 @@ inactive, **so that** I know what I can do and when to contact the admin.
 `components/learner/student-welcome-banner.tsx` · `lib/onboarding.ts` · `components/account/password-card.tsx` ·
 API `POST /auth/change-password` (`auth.controller.ts changePassword`, sets `mustChangePassword:false`,
 clears `adminPasswordNote`).
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a learner with `mustChangePassword=true`, When they reach the learner workspace,
@@ -2084,11 +2084,11 @@ clears `adminPasswordNote`).
 | # | Scenario | Expected behaviour | Status | Finding | Fix |
 | --- | --- | --- | --- | --- | --- |
 | EC1 | `mustChangePassword` kid lands on workspace | Welcome banner visible (driven by `user.mustChangePassword`, not just localStorage) | ⬜ | — | — |
-| EC2 | Kid **dismisses** banner WITHOUT changing password | **Spec gap:** banner is dismissible and there is **no route guard** in `learner-shell.tsx` — workspace stays fully usable with `mustChangePassword` still true. Expected (per product intent) = blocked/nagged until changed | ⬜ | **suspected bug — forced change not enforced** | — |
+| EC2 | Kid **dismisses** banner WITHOUT changing password | **Spec gap:** banner is dismissible and there is **no route guard** in `learner-shell.tsx` — workspace stays fully usable with `mustChangePassword` still true. Expected (per product intent) = blocked/nagged until changed | 🐛→✅ | F34 | `15acc73` |
 | EC3 | Same kid logs in on a **second device** after dismissing on first | Banner re-appears (server flag still true) — verifies server-driven, not just per-device localStorage | ⬜ | — | — |
-| EC4 | New password < 8 chars | Native `minLength={8}` blocks submit client-side; if bypassed, API Zod `newPassword.min(8)` → 400 | ⬜ | — | — |
-| EC5 | Current password wrong (kid forgot tutor-set pw) | API 400 "Current password is incorrect"; form shows generic `account.password.error` (note: card swallows server message into one generic string) | ⬜ | — | — |
-| EC6 | New password == current password | Accepted (no equality check) — weak-rotation allowed; flag still cleared | ⬜ | possible policy gap (no "must differ" rule) | — |
+| EC4 | New password < 8 chars | Native `minLength={8}` blocks submit client-side; if bypassed, API Zod `newPassword.min(8)` → 400 | ✅ | — | — |
+| EC5 | Current password wrong (kid forgot tutor-set pw) | API 400 "Current password is incorrect"; form shows generic `account.password.error` (note: card swallows server message into one generic string) | ✅ | — | — |
+| EC6 | New password == current password | Accepted (no equality check) — weak-rotation allowed; flag still cleared | 🐛→✅ | F42 | `0169859` |
 | EC7 | Weak/common new password (e.g. "12345678") | Accepted — only length ≥8 enforced, no complexity/breached-list check | ⬜ | policy note (S4) | — |
 | EC8 | Success message + flag clear, then revisit settings | Banner gone, PasswordCard still present for voluntary re-change | ⬜ | — | — |
 | EC9 | Double-click "Save" | Button `disabled={changePassword.isPending}` prevents 2nd submit; only one PATCH/POST | ⬜ | — | — |
@@ -2107,8 +2107,9 @@ clears `adminPasswordNote`).
   `mustChangePassword` kid as forced to change before workspace; the implementation is only a *dismissible*
   banner with no guard in `contexts/learner-shell.tsx`. Decide: hard gate vs. soft nag.
 
----
+**Run 8 verification (2026-06-28):** EC2 forced-change now ENFORCED by the F34 learner-shell gate (flagged kid bounced to /learner/settings, stable, no loop; password change releases the gate → dashboard, 0 console errors). EC4 (<8 → 400), EC5 (wrong current → 400 "incorrect") confirmed via API. EC6 reuse gap fixed (F42, `0169859`): new==current → 400. AC2/AC3 (flag cleared, navigation freed) verified live.
 
+---
 ### US-LEARNER-07: Learner account settings (profile, password, locale, theme) + no owner/upload surface
 **As a** TENANT_LEARNER, **I want** to edit my display name, change my password, switch UI locale and
 theme from settings, **so that** my account reflects me — but I must not see upload or tutor-tool controls.

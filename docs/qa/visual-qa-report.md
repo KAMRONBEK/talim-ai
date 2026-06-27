@@ -478,3 +478,5 @@ same-tenant-unassigned (ts2 → ts1's content) 404s on every content sub-resourc
 B2C↔tenant crossing 404; owner-on-B2C-path 403; cross-tenant owner → org A content **and**
 student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; unauth 401; controls
 200. **No isolation findings** — `assertCanAccessContent` + the tenant middleware hold. All ECs ✅.
+
+**US-LEARNER-06 (forced password change) — F34 gate confirmed end-to-end + F42 fixed.** Flagged teststudent1 → bounced to /learner/settings (stable, no loop); changing the password releases the gate → dashboard (0 console errors). API contract: <8 → 400, wrong current → 400 "incorrect". **F42 (0169859):** new==current was accepted (forced-change defeatable) → now 400. (Observed a stray "-10 Issue" button on the learner settings page — flagged for follow-up, not yet characterized.)
