@@ -1,10 +1,13 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useUploadContent } from '@/hooks/useContent';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
-export const FILE_UPLOAD_ACCEPT = '.pdf,.ppt,.pptx';
+// Only PDF is supported end-to-end (PowerPoint is rejected server-side), so keep the
+// picker's accept in sync — don't invite a file type the upload will 400 on.
+export const FILE_UPLOAD_ACCEPT = '.pdf';
 
 interface UseFileUploadOptions {
   onSuccess?: () => void;
@@ -15,6 +18,7 @@ export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadO
   const inputRef = useRef<HTMLInputElement>(null);
   const uploadMutation = useUploadContent();
   const handleLimitError = useLimitErrorHandler();
+  const t = useTranslations('content');
   const [error, setError] = useState<string | null>(null);
 
   const openFilePicker = () => {
@@ -34,7 +38,7 @@ export function useFileUpload({ onSuccess, uploadFailedMessage }: UseFileUploadO
       // Upgradeable limits (daily upload cap, plan file cap) open the promotion
       // modal and return null; the hard 120 MB cap / other failures return an
       // inline message.
-      setError(handleLimitError(err, uploadFailedMessage ?? 'Upload failed'));
+      setError(handleLimitError(err, uploadFailedMessage ?? t('uploadFailed')));
     }
   };
 
