@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import type { PlanCode, QuotaFeature } from '@talim/types';
 import { ZodError } from 'zod';
+import { UPLOAD_MAX_MB } from './upload.middleware.js';
 
 export class AppError extends Error {
   constructor(
@@ -97,6 +98,22 @@ export function errorMiddleware(
 
   if (err.message === 'Only PDF and slide files are allowed') {
     res.status(400).json({ message: err.message });
+    return;
+  }
+
+  // Multer rejects (oversized file, too many parts, unexpected field) arrive here
+  // as a MulterError — map them to a clear 413/400 instead of a generic 500.
+  if (err.name === 'MulterError') {
+    const code = (err as { code?: string }).code;
+    if (code === 'LIMIT_FILE_SIZE') {
+      res.status(413).json({
+        message: `File is too large. The maximum upload size is ${UPLOAD_MAX_MB} MB.`,
+        code: 'FILE_TOO_LARGE',
+        maxFileSizeMb: UPLOAD_MAX_MB,
+      });
+      return;
+    }
+    res.status(400).json({ message: `Upload error: ${err.message}`, code: 'UPLOAD_ERROR' });
     return;
   }
 
