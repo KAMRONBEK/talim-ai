@@ -1077,7 +1077,7 @@ collision-proof, **so that** the manual-activation model and account uniqueness 
 optional tutor-set password for email-less kids — **so that** every learner in my class can sign in
 and I can hand them credentials shown once.
 **Routes/code:** `/[locale]/tenant/students` · `POST /tenant/students` · `tenant.controller.createStudent` → `services/tenant/students.ts:createStudent` · zod `createStudentSchema` (`tenant/shared.ts`) · `assertTenantQuota(tenantId,'STUDENT')` · `useCreateTenantStudent` (`useTenant.ts`).
-**Priority:** P0
+**Priority:** P0 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a name + email, When I submit, Then a `TENANT_LEARNER` user is created with a `LEARNER` membership in my tenant, a 12-char auto temp password is returned **once**, `mustChangePassword=true`, and the credentials dialog shows it.
@@ -1128,6 +1128,8 @@ and I can hand them credentials shown once.
 - The re-add reactivation path (EC9) asserts quota **before** discovering the membership exists, so re-adding a removed student correctly consumes a seat — confirm seat accounting matches `listStudents`/billing.
 
 ---
+
+**Run 8 verification (2026-06-28, API as qa-owner):** AC1 email student → 201 + once-shown temp pw + mustChangePassword; AC2 email-less kid → 201 + synthetic email (roster hides it); AC3 tutor-set pw → `mustChangePassword:!body.password` (code-verified, not echoed in the response); exact dup username → 409 "Username already taken"; **case-variant** (QaKidB1 vs qakidb1) → graceful 409 "Student already exists" (email-collision path catches it, NOT a 500). **Concurrency (F44, `27f6ac6`):** 3 simultaneous identical creates were 201/500/500 (uncaught Prisma P2002) → now 201/409/409.
 
 ### US-OWNER-02: Reset a student's password
 **As a** tenant owner, **I want** to reset a student's password to a fresh temp value shown once,
