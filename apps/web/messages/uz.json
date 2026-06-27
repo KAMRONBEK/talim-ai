@@ -24,10 +24,10 @@
     "upload": "Yuklash",
     "uploading": "Yuklanmoqda...",
     "logout": "Chiqish",
-    "freePlan": "Bepul reja",
-    "proPlan": "Pro reja",
-    "tenantStarterPlan": "Tenant Starter",
-    "tenantGrowthPlan": "Tenant Growth",
+    "freePlan": "Bepul",
+    "proPlan": "Pro",
+    "tenantStarterPlan": "Jamoa",
+    "tenantGrowthPlan": "Maktab",
     "searchPlaceholder": "Materiallaringizni qidiring...",
     "search": "Qidiruv",
     "aiTutor": "AI O'qituvchi",
@@ -39,7 +39,8 @@
     "noMaterials": "Hali material yo'q. Yuqoridagi kartochkalar orqali birinchi materialingizni qo'shing.",
     "themeToggle": "Mavzuni almashtirish",
     "theme": "Mavzu",
-    "menu": "Menyu"
+    "menu": "Menyu",
+    "close": "Yopish"
   },
   "auth": {
     "welcomeBack": "Xush kelibsiz",
@@ -108,7 +109,6 @@
     "quizStyleWritten": "Yozma javob",
     "quizStyleNumeric": "Raqamli",
     "listen": "Tinglang",
-    "askTutor": "AI o'qituvchidan so'rang",
     "slides": "Slaydlar",
     "viewSlides": "Slaydlar",
     "viewText": "Matn",
@@ -199,8 +199,6 @@
     "viewerNotAvailable": "Ushbu tur uchun ko'ruvchi mavjud emas.",
     "selectFile": "Fayl tanlash",
     "uploadFailed": "Yuklash amalga oshmadi. Qayta urinib ko'ring.",
-    "fileExceedsTitle": "Bu fayl tarifingiz limitidan oshib ketdi",
-    "fileExceedsBody": "{pages} sahifa va {sizeMb} MB fayllar uchun tarifni yangilang",
     "uploadMaterial": "Material yuklash",
     "pdfOrSlides": "PDF yoki slaydlar",
     "youtubeLink": "YouTube havolasi",
@@ -215,9 +213,8 @@
     "deleting": "O'chirilmoqda…",
     "podcastFailed": "Yaratishda xatolik yuz berdi",
     "retryPodcast": "Qayta urinish",
-    "podcastLimitReached": "Podkast cheklovi tugadi ({used}/{limit}).",
-    "podcastLimitGeneric": "Rejangizda podkast yaratish mavjud emas.",
-    "podcastRetryError": "Qayta yaratib boʻlmadi. Keyinroq urinib koʻring."
+    "podcastRetryError": "Qayta yaratib boʻlmadi. Keyinroq urinib koʻring.",
+    "generationFailed": "Yaratib bo'lmadi. Iltimos, qayta urinib ko'ring."
   },
   "chat": {
     "title": "AI O'qituvchi",
@@ -256,7 +253,8 @@
     "manimLabel": "Animatsiya",
     "manimRendering": "Animatsiya yaratilmoqda...",
     "manimError": "Animatsiya xatosi",
-    "manimFailed": "Yaratish amalga oshmadi"
+    "manimFailed": "Yaratish amalga oshmadi",
+    "error": "Xabaringizni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring."
   },
   "quiz": {
     "loading": "Test yuklanmoqda...",
@@ -330,23 +328,31 @@
       "upgrade": {
         "cta": "Pro tarifiga o'tish",
         "title": "Hammasini oching",
-        "proName": "Pro",
-        "price": "$10",
-        "perMonth": "/ oy",
-        "features": {
-          "uploads": "Cheksiz yuklamalar",
-          "tutor": "Cheksiz AI tyutor suhbati",
-          "podcasts": "Kuniga 12 podkast",
-          "videos": "Kuniga 4 AI video",
-          "quizzes": "Cheksiz testlar va imtihonlar",
-          "files": "2 000 sahifa / 300 MB gacha fayllar"
-        },
         "manualNote": "To'lov qo'lda amalga oshiriladi. So'rov yuboring va administrator hisobingizda Pro'ni faollashtiradi.",
         "requestCta": "So'rov yuborish",
         "requesting": "Yuborilmoqda…",
         "requested": "So'rov yuborildi! Administrator tez orada Pro'ni faollashtiradi.",
         "requestError": "So'rovni yuborib bo'lmadi. Yana urinib ko'ring.",
-        "close": "Yopish"
+        "close": "Yopish",
+        "limits": {
+          "headline": {
+            "UPLOAD": "Bugungi yuklash chekloviga yetdingiz",
+            "GENERATION": "Bugungi AI generatsiya chekloviga yetdingiz",
+            "TUTOR_MESSAGE": "Bugungi repetitor xabari chekloviga yetdingiz",
+            "VIDEO": "Bugungi AI video chekloviga yetdingiz",
+            "PODCAST": "Bugungi podkast chekloviga yetdingiz",
+            "file": "Bu fayl Bepul tarif uchun juda katta"
+          },
+          "subheadDaily": "Bugun {limit} tadan {used} tasini ishlatdingiz. Pro'ga o'tib, ancha yuqori cheklovlarga ega bo'ling.",
+          "subheadFile": "Bepul tarif {pages} sahifa / {mb} MB gacha fayllarga ruxsat beradi. Kattaroq fayllar uchun tarifni oshiring.",
+          "seat": "O'quvchi o'rinlari chekloviga yetdingiz. Bittasini o'chiring yoki admindan limitni oshirishni so'rang.",
+          "tenantUpgrade": "Tarifingiz chekloviga yetdingiz. Yuqori tarifga o'tish uchun biz bilan bog'laning.",
+          "atCap": "Bugungi cheklovga yetdingiz. U ertaga yangilanadi.",
+          "fileLimit": "Bu fayl tarifingiz cheklovidan oshib ketdi.",
+          "fileTooLarge": "Fayl juda katta. Maksimal yuklash hajmi {mb} MB.",
+          "inactive": "Obunangiz faol emas. Davom etish uchun qo'llab-quvvatlashga murojaat qiling.",
+          "forbidden": "Buni bajarishga ruxsatingiz yo'q."
+        }
       }
     },
     "summary": {
@@ -562,8 +568,6 @@
     "emptyBody": "Ovozli slayd-video yarating — AI ovozi materialni slaydlar orqali tushuntiradi.",
     "notAvailableLearner": "O‘qituvchingiz hali bu material uchun video yaratmagan.",
     "error": "Videoni yaratib bo‘lmadi. Yana urinib ko‘ring.",
-    "limitReached": "AI video limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun tarifni yangilang yoki administratoringizga murojaat qiling.",
-    "limitReachedGeneric": "AI video hozircha tarifingizda mavjud emas. Iltimos, tarifni yangilang yoki administratoringizga murojaat qiling.",
     "part": "{n}-qism",
     "partEmptyTitle": "{n}-qism uchun video yoʻq",
     "partEmptyBody": "Shu boʻlim uchun videoni yarating. Har bir qism alohida yaratiladi.",
@@ -576,7 +580,8 @@
       "forTutors": "O'qituvchilar uchun",
       "preview": "Mahsulot",
       "signIn": "Kirish",
-      "getStarted": "Boshlash"
+      "getStarted": "Boshlash",
+      "pricing": "Narxlar"
     },
     "hero": {
       "badge": "AI bilan o'rganish",
@@ -661,6 +666,59 @@
       "signIn": "Kirish",
       "privacy": "Maxfiylik",
       "terms": "Shartlar"
+    }
+  },
+  "pricing": {
+    "eyebrow": "Narxlar",
+    "title": "Oddiy va halol <hl>narxlar</hl>",
+    "subtitle": "Bepul boshlang. Tayyor bo'lganda tarifni oshiring — karta shart emas, tariflarni jamoamiz faollashtiradi.",
+    "audience": {
+      "label": "Auditoriyani tanlang",
+      "individual": "Shaxslar uchun",
+      "team": "Repetitor va maktablar uchun"
+    },
+    "period": {
+      "monthly": "Oylik",
+      "annual": "Yillik",
+      "save": "{pct}% tejang"
+    },
+    "popular": "Eng mashhur",
+    "currency": "so'm",
+    "perMonth": "/ oy",
+    "billedAnnually": "Yiliga {total} so'm hisoblanadi",
+    "orAnnual": "Yillik to'lovda 20% tejang",
+    "plans": {
+      "free": "Bepul",
+      "pro": "Pro",
+      "team": "Jamoa",
+      "school": "Maktab"
+    },
+    "tagline": {
+      "free": "Talim AI'ni kundalik cheklovlar bilan sinab ko'ring",
+      "pro": "Jiddiy o'quvchilar uchun cheksiz imkoniyat",
+      "team": "Yakka repetitor va kichik sinflar uchun",
+      "school": "Maktab va katta guruhlar uchun"
+    },
+    "cta": {
+      "register": "Bepul boshlash",
+      "requestPro": "Pro olish",
+      "becomeTutor": "Repetitor bo'lish"
+    },
+    "manualNote": "To'lov qo'lda amalga oshiriladi: tarifni tanlang — jamoamiz uni faollashtiradi, karta shart emas.",
+    "needTeam": "Sinfga dars berasizmi?",
+    "needTeamLink": "Jamoa tariflari",
+    "features": {
+      "uploadsUnlimited": "Cheksiz yuklash",
+      "uploadsN": "Kuniga {n} ta yuklash",
+      "tutorUnlimited": "Cheksiz AI repetitor",
+      "tutorN": "Kuniga {n} ta repetitor xabari",
+      "genUnlimited": "Cheksiz test va konspekt",
+      "genN": "Kuniga {n} ta AI generatsiya",
+      "podcastsN": "Kuniga {n} ta podkast",
+      "videosN": "Kuniga {n} ta AI video",
+      "students": "{n} ta o'quvchi",
+      "materials": "{n} ta material",
+      "file": "Har bir fayl {pages} sahifa / {mb} MB gacha"
     }
   }
 }

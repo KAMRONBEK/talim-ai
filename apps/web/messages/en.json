@@ -24,10 +24,10 @@
     "upload": "Upload",
     "uploading": "Uploading...",
     "logout": "Log out",
-    "freePlan": "Free plan",
-    "proPlan": "Pro plan",
-    "tenantStarterPlan": "Tenant Starter",
-    "tenantGrowthPlan": "Tenant Growth",
+    "freePlan": "Free",
+    "proPlan": "Pro",
+    "tenantStarterPlan": "Team",
+    "tenantGrowthPlan": "School",
     "searchPlaceholder": "Search your materials...",
     "search": "Search",
     "aiTutor": "AI Tutor",
@@ -39,7 +39,8 @@
     "noMaterials": "No materials yet. Add your first one using the cards above.",
     "themeToggle": "Toggle theme",
     "theme": "Theme",
-    "menu": "Menu"
+    "menu": "Menu",
+    "close": "Close"
   },
   "auth": {
     "welcomeBack": "Welcome back",
@@ -108,7 +109,6 @@
     "quizStyleWritten": "Written answer",
     "quizStyleNumeric": "Numeric",
     "listen": "Listen",
-    "askTutor": "Ask AI tutor",
     "slides": "Slides",
     "viewSlides": "Slides",
     "viewText": "Text",
@@ -199,8 +199,6 @@
     "viewerNotAvailable": "No viewer available for this type.",
     "selectFile": "Choose file",
     "uploadFailed": "Upload failed. Please try again.",
-    "fileExceedsTitle": "This file exceeds your plan's limits",
-    "fileExceedsBody": "Upgrade for {pages} pages and {sizeMb} MB files",
     "uploadMaterial": "Upload material",
     "pdfOrSlides": "PDF or slides",
     "youtubeLink": "YouTube link",
@@ -215,9 +213,8 @@
     "deleting": "Deleting…",
     "podcastFailed": "Generation failed",
     "retryPodcast": "Retry",
-    "podcastLimitReached": "Podcast limit reached ({used}/{limit}).",
-    "podcastLimitGeneric": "Your plan does not include podcast generation.",
-    "podcastRetryError": "Could not regenerate. Try again later."
+    "podcastRetryError": "Could not regenerate. Try again later.",
+    "generationFailed": "Couldn't generate. Please try again."
   },
   "chat": {
     "title": "AI Tutor",
@@ -256,7 +253,8 @@
     "manimLabel": "Animation",
     "manimRendering": "Rendering animation...",
     "manimError": "Animation failed",
-    "manimFailed": "Render failed"
+    "manimFailed": "Render failed",
+    "error": "Couldn't send your message. Please try again."
   },
   "quiz": {
     "loading": "Loading quiz...",
@@ -330,23 +328,31 @@
       "upgrade": {
         "cta": "Upgrade to Pro",
         "title": "Unlock everything",
-        "proName": "Pro",
-        "price": "$10",
-        "perMonth": "/ month",
-        "features": {
-          "uploads": "Unlimited uploads",
-          "tutor": "Unlimited AI tutor chat",
-          "podcasts": "12 podcasts / day",
-          "videos": "4 AI videos / day",
-          "quizzes": "Unlimited quizzes & exams",
-          "files": "Upload files up to 2,000 pages / 300 MB"
-        },
         "manualNote": "Billing is manual. Request an upgrade and an admin will activate Pro on your account.",
         "requestCta": "Request upgrade",
         "requesting": "Sending…",
         "requested": "Request sent! An admin will activate Pro shortly.",
         "requestError": "Couldn't send the request. Please try again.",
-        "close": "Close"
+        "close": "Close",
+        "limits": {
+          "headline": {
+            "UPLOAD": "You've reached today's upload limit",
+            "GENERATION": "You've reached today's AI generation limit",
+            "TUTOR_MESSAGE": "You've reached today's tutor message limit",
+            "VIDEO": "You've reached today's AI video limit",
+            "PODCAST": "You've reached today's podcast limit",
+            "file": "This file is too big for the Free plan"
+          },
+          "subheadDaily": "You've used {used} of {limit} today on the Free plan. Upgrade to Pro for much higher limits.",
+          "subheadFile": "The Free plan allows files up to {pages} pages / {mb} MB. Upgrade for bigger files.",
+          "seat": "You’ve reached your student seat limit. Remove a student or ask an admin to raise the limit.",
+          "tenantUpgrade": "You've reached your plan's limit. Contact us to move to a higher plan.",
+          "atCap": "You've reached today's limit. It resets tomorrow.",
+          "fileLimit": "This file exceeds your plan's limits.",
+          "fileTooLarge": "File is too large. The maximum upload size is {mb} MB.",
+          "inactive": "Your subscription isn't active. Contact support to continue.",
+          "forbidden": "You don't have permission to do this."
+        }
       }
     },
     "summary": {
@@ -562,8 +568,6 @@
     "emptyBody": "Generate a narrated slideshow — visual slides with an AI voice-over walking through this content.",
     "notAvailableLearner": "Your tutor hasn't created a video for this material yet.",
     "error": "Couldn't generate the video. Please try again.",
-    "limitReached": "You've reached your AI video limit ({used}/{limit} this month). Upgrade or contact your admin to raise it.",
-    "limitReachedGeneric": "AI video isn't available on your current plan. Please upgrade or contact your admin.",
     "part": "Part {n}",
     "partEmptyTitle": "No video for part {n}",
     "partEmptyBody": "Generate the video for this section. Each part is generated separately.",
@@ -576,7 +580,8 @@
       "forTutors": "For tutors",
       "preview": "Product",
       "signIn": "Sign in",
-      "getStarted": "Get started"
+      "getStarted": "Get started",
+      "pricing": "Pricing"
     },
     "hero": {
       "badge": "Learn with AI",
@@ -661,6 +666,59 @@
       "signIn": "Sign in",
       "privacy": "Privacy",
       "terms": "Terms"
+    }
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Simple, honest <hl>pricing</hl>",
+    "subtitle": "Start free. Upgrade when you're ready — no card required, plans are activated by our team.",
+    "audience": {
+      "label": "Choose audience",
+      "individual": "For individuals",
+      "team": "For tutors & schools"
+    },
+    "period": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "save": "Save {pct}%"
+    },
+    "popular": "Most popular",
+    "currency": "UZS",
+    "perMonth": "/ mo",
+    "billedAnnually": "Billed {total} UZS / year",
+    "orAnnual": "Switch to annual and save 20%",
+    "plans": {
+      "free": "Free",
+      "pro": "Pro",
+      "team": "Team",
+      "school": "School"
+    },
+    "tagline": {
+      "free": "Try Talim AI with everyday limits",
+      "pro": "Unlimited learning for serious students",
+      "team": "For individual tutors and small classes",
+      "school": "For schools and large student groups"
+    },
+    "cta": {
+      "register": "Start free",
+      "requestPro": "Get Pro",
+      "becomeTutor": "Become a tutor"
+    },
+    "manualNote": "Billing is manual: choose a plan and our team activates it for you — no card needed.",
+    "needTeam": "Teaching a class?",
+    "needTeamLink": "See team plans",
+    "features": {
+      "uploadsUnlimited": "Unlimited uploads",
+      "uploadsN": "{n} uploads / day",
+      "tutorUnlimited": "Unlimited AI tutor chat",
+      "tutorN": "{n} AI tutor messages / day",
+      "genUnlimited": "Unlimited quizzes & summaries",
+      "genN": "{n} AI generations / day",
+      "podcastsN": "{n} podcasts / day",
+      "videosN": "{n} AI videos / day",
+      "students": "{n} students",
+      "materials": "{n} materials",
+      "file": "Files up to {pages} pages / {mb} MB each"
     }
   }
 }
