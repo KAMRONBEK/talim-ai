@@ -113,6 +113,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
     const decoder = new TextDecoder();
     let buffer = '';
     let fullText = '';
+    let streamFailed = false;
 
     while (true) {
       const { done, value } = await reader.read();
@@ -139,10 +140,10 @@ export const useChatStore = create<ChatState>((set, get) => ({
             set({ sessionId: parsed.sessionId });
           }
           if (parsed.error) {
-            fullText += fullText
-              ? `\n\n${parsed.error}`
-              : parsed.error;
-            get().updateStreamingMessage(assistantMsgId, fullText);
+            // Mid-stream server error: flag it and let the outer catch remove the
+            // optimistic bubbles + surface a localized message via ChatWindow — don't
+            // render the raw English server string (it also wouldn't persist → ghost).
+            streamFailed = true;
           }
           if (parsed.visual) {
             fullText = appendVisualToText(fullText, parsed.visual);
@@ -160,6 +161,8 @@ export const useChatStore = create<ChatState>((set, get) => ({
         }
       }
     }
+
+    if (streamFailed) throw new Error('chat_stream_failed');
 
     set((state) => ({
       isStreaming: false,

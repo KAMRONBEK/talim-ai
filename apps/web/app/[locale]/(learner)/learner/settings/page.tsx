@@ -11,10 +11,14 @@ import { dismissOnboarding } from '@/lib/onboarding';
 export default function LearnerSettingsPage() {
   const t = useTranslations('learner.settings');
   const user = useAuthStore((s) => s.user);
+  const setUser = useAuthStore((s) => s.setUser);
   const { data: summary } = useLearnerSummary();
 
   const handlePasswordSuccess = () => {
     if (user?.id) dismissOnboarding(user.id);
+    // Release the forced-change gate immediately (SessionSync only refetches /auth/me
+    // on a token change, so the store flag would otherwise stay stale until reload).
+    if (user?.mustChangePassword) setUser({ ...user, mustChangePassword: false });
   };
 
   return (
