@@ -1139,7 +1139,7 @@ and I can hand them credentials shown once.
 **As a** tenant owner, **I want** to reset a student's password to a fresh temp value shown once,
 **so that** a kid who forgot or leaked their password can sign in again and is forced to change it.
 **Routes/code:** `/[locale]/tenant/students` (per-row "Reset") · `POST /tenant/students/:id/reset-password` · `tenant.controller.resetStudentPassword` → `students.ts:resetStudentPassword` · `useResetTenantStudentPassword`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given my own student, When I click Reset, Then a 12-char temp password is generated, `passwordHash` updated, `mustChangePassword=true`, and the dialog (mode `reset`) shows username + temp password once.
@@ -1165,6 +1165,8 @@ and I can hand them credentials shown once.
 | EC15 | Mobile — Reset button in card view | Present and tappable (`md:hidden` card path) | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, live):** owner POST /tenant/students/:id/reset-password → 200 + a once-shown `temporaryPassword`; the student logs in successfully with the new temp password. No findings.
 
 ### US-OWNER-03: Deactivate / reactivate (and "delete") a student
 **As a** tenant owner, **I want** to deactivate a student (freeing a seat and revoking content access
