@@ -494,3 +494,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-OWNER-06 (Assign/unassign material) — 7/7.** Assignment grants a learner access (content 404→200, list 0→1); unassign revokes it (→404, list→0). No findings.
 
 **US-OWNER-11 / F33 (TRIALING) — verified live.** Tenant sub set to TRIALING → create-student 201 (was 402); PAST_DUE → 402. Confirms the F33 fix; restored to ACTIVE.
+
+**US-AUTH-06/07 (Become-tutor / session) — F45 (S2) confirmed.** Admin approval flips the DB role to TENANT_OWNER, but the old JWT still encodes INDIVIDUAL → `/tenant/*` 403 until re-login (`/auth/me` already shows OWNER, so the web routes to a dashboard whose API calls all 403). Structural fix (token reissue/version) logged, not auto-applied on the auth hot path.

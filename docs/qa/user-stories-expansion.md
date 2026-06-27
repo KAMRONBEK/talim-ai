@@ -205,7 +205,7 @@ with a seat limit, **so that** my role flips to TENANT_OWNER and tutor tools unl
 `rejectTutorRequest`, status `PENDING|APPROVED|REJECTED`) · `applyAdminRoleChange` (creates
 tenant + ACTIVE sub) · web `become-tutor-card.tsx` + `useTutorRequest` · admin
 `/admin/tutor-requests`.
-**Priority:** P0
+**Priority:** P0 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given an INDIVIDUAL submits orgName (2–120 chars), When created, Then a PENDING
@@ -255,6 +255,8 @@ tenant + ACTIVE sub) · web `become-tutor-card.tsx` + `useTutorRequest` · admin
   re-issue-token-on-role-change vs force-logout.
 
 ---
+
+**Run 8 verification (2026-06-28):** full flow register→upgrade-to-tenant→admin approve works (role flips, org+ACTIVE sub minted). **F45 (S2, logged):** the just-approved user's OLD JWT still says INDIVIDUAL → `/tenant/students` 403 (while `/auth/me` shows OWNER); re-login → 200. Every new tutor hits a broken dashboard until re-login.
 
 ### US-AUTH-07: Session / JWT lifecycle (expiry, tamper, deleted user, refresh, return-after-login)
 **As the** platform, **I want** sessions to expire, refuse forged/stale tokens, and recover the
