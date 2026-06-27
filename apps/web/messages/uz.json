@@ -528,6 +528,12 @@
     "assignSearch": "O'quvchilarni qidirish...",
     "assignSelectAll": "Barchasini tanlash"
   },
+  "deck": {
+    "definition": "Ta'rif",
+    "recap": "Takrorlash",
+    "quickCheck": "Tezkor savol",
+    "revealAnswer": "Javobni ko'rsatish"
+  },
   "learner": {
     "loading": "Yuklanmoqda...",
     "game": {

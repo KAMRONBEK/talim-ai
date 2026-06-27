@@ -528,6 +528,12 @@
     "assignSearch": "Поиск учеников...",
     "assignSelectAll": "Выбрать все"
   },
+  "deck": {
+    "definition": "Определение",
+    "recap": "Повторение",
+    "quickCheck": "Быстрая проверка",
+    "revealAnswer": "Показать ответ"
+  },
   "learner": {
     "loading": "Загрузка...",
     "game": {

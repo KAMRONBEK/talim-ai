@@ -528,6 +528,12 @@
     "assignSearch": "Search students...",
     "assignSelectAll": "Select all"
   },
+  "deck": {
+    "definition": "Definition",
+    "recap": "Recap",
+    "quickCheck": "Quick check",
+    "revealAnswer": "Reveal answer"
+  },
   "learner": {
     "loading": "Loading...",
     "game": {
