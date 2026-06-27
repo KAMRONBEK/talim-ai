@@ -2971,7 +2971,7 @@ student's, or a B2C user's data, **so that** isolation is provably airtight (S1)
 ### US-XCUT-13: Data lifecycle & cascade — delete content / student / tenant; deactivate / reactivate
 **As the** platform, **I want** deletes to cascade exactly (and deactivation to gate without deleting), **so that** there are no orphan rows, no leaked access, and reactivation restores prior state.
 **Routes/code:** `schema.prisma` `onDelete` relations, `cancelContentJobs`, tenant student CRUD, admin content/tenant/user delete, `contentAccess.service.ts` (active-membership gate).
-**Priority:** P0 (S1 — orphan access / data integrity)
+**Priority:** P0 (S1 — orphan access / data integrity) · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Delete content cascades ALL dependents and leaves zero orphans; the storage file + queued jobs are also removed.
@@ -3025,6 +3025,8 @@ temporal/streak correctness, the dual quiz system, and the absence of notificati
 All grounded in code read during the critic pass (file:line cited per EC where load-bearing).
 
 ---
+
+**Run 8 verification (2026-06-28, live):** uploaded a PDF → READY (1 section + 1 chunk) → `DELETE /content/:id` 204 → **0 orphaned rows** across Content/ContentSection/Chunk/ContentSummary/Quiz/Podcast/ContentVideo/ContentSlideDeck/ChatSession/ContentProgress/ContentTranscriptSegment. Cascade-delete is clean. No findings.
 
 ### US-XCUT-14: Identity transitions — INDIVIDUAL ↔ TENANT_LEARNER ↔ class-switch (content visibility & seat accounting)
 **As the** platform, **I want** a user's content, seat, and access to stay correct as their role flips between solo learner, a tutor's student, and back, **so that** nobody loses data, sees a stranger's content, or silently consumes/leaks a paid seat.

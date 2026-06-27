@@ -508,3 +508,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-OWNER-13 (Org rename) — 4/5.** Rename persists, empty → 400, restored. S4 note: no max-length on org name (500 chars accepted).
 
 **US-IND-09 (Upload → READY) — full pipeline verified live.** Real PDF upload as qa-individual → PROCESSING → READY in ~4s with 1 section (extract/chunk/embed/section all ran); deleted (204). The last untested P0 happy path — passes, no findings.
+
+**US-XCUT-08/13 (Cascade-delete) — clean.** Content (1 section, 1 chunk) deleted → 0 orphaned rows across 11 child tables. No data-lifecycle leaks. No findings.
