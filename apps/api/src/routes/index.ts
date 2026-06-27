@@ -9,6 +9,7 @@ import { usageRoutes } from './usage.routes.js';
 import { billingRoutes } from './billing.routes.js';
 import { tenantRoutes } from './tenant.routes.js';
 import { learnerRoutes } from './learner.routes.js';
+import { eventsRoutes } from './events.routes.js';
 
 export const routes = Router();
 
@@ -26,3 +27,4 @@ routes.use('/usage', usageRoutes);
 routes.use('/billing', billingRoutes);
 routes.use('/tenant', tenantRoutes);
 routes.use('/learner', learnerRoutes);
+routes.use('/events', eventsRoutes);

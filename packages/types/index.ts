@@ -1,5 +1,7 @@
 import type { AppLocale } from './locale';
 
+export type { JobEvent, SeqJobEvent, JobEventStatus } from './jobEvents';
+
 export {
   SUPPORTED_LOCALES,
   DEFAULT_LOCALE,
