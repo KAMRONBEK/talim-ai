@@ -122,7 +122,7 @@ export default function TenantStudentsPage() {
       <Input
         value={search}
         onChange={(event) => setSearch(event.target.value)}
-        placeholder="Search students..."
+        placeholder={t('assignSearch')}
         className="max-w-sm"
       />
 
@@ -135,7 +135,7 @@ export default function TenantStudentsPage() {
               <th className="px-4 py-3">{t('students.assigned')}</th>
               <th className="px-4 py-3">{t('students.lastActive')}</th>
               <th className="px-4 py-3">{t('students.avgQuiz')}</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+              <th className="px-4 py-3 text-right">{t('actionsCol')}</th>
             </tr>
           </thead>
           <tbody>

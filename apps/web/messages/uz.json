@@ -39,7 +39,8 @@
     "noMaterials": "Hali material yo'q. Yuqoridagi kartochkalar orqali birinchi materialingizni qo'shing.",
     "themeToggle": "Mavzuni almashtirish",
     "theme": "Mavzu",
-    "menu": "Menyu"
+    "menu": "Menyu",
+    "resizePanels": "Panellar o'lchamini o'zgartirish"
   },
   "auth": {
     "welcomeBack": "Xush kelibsiz",
@@ -526,13 +527,16 @@
     "assignMaterialDesc": "Bu o'quvchiga materialga kirish huquqini bering.",
     "assignAction": "Biriktirish",
     "assignSearch": "O'quvchilarni qidirish...",
-    "assignSelectAll": "Barchasini tanlash"
+    "assignSelectAll": "Barchasini tanlash",
+    "actionsCol": "Amallar"
   },
   "deck": {
     "definition": "Ta'rif",
     "recap": "Takrorlash",
     "quickCheck": "Tezkor savol",
-    "revealAnswer": "Javobni ko'rsatish"
+    "revealAnswer": "Javobni ko'rsatish",
+    "prevSlide": "Oldingi slayd",
+    "nextSlide": "Keyingi slayd"
   },
   "learner": {
     "loading": "Yuklanmoqda...",

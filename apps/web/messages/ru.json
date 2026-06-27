@@ -39,7 +39,8 @@
     "noMaterials": "Материалов пока нет. Добавьте первый с помощью карточек выше.",
     "themeToggle": "Сменить тему",
     "theme": "Тема",
-    "menu": "Меню"
+    "menu": "Меню",
+    "resizePanels": "Изменить размер панелей"
   },
   "auth": {
     "welcomeBack": "С возвращением",
@@ -526,13 +527,16 @@
     "assignMaterialDesc": "Предоставьте этому ученику доступ к материалу.",
     "assignAction": "Назначить",
     "assignSearch": "Поиск учеников...",
-    "assignSelectAll": "Выбрать все"
+    "assignSelectAll": "Выбрать все",
+    "actionsCol": "Действия"
   },
   "deck": {
     "definition": "Определение",
     "recap": "Повторение",
     "quickCheck": "Быстрая проверка",
-    "revealAnswer": "Показать ответ"
+    "revealAnswer": "Показать ответ",
+    "prevSlide": "Предыдущий слайд",
+    "nextSlide": "Следующий слайд"
   },
   "learner": {
     "loading": "Загрузка...",

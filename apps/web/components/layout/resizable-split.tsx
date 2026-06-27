@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
 
 interface ResizableSplitProps {
@@ -50,6 +51,7 @@ export function ResizableSplit({
   className,
   storageKey,
 }: ResizableSplitProps) {
+  const t = useTranslations('common');
   const containerRef = useRef<HTMLDivElement>(null);
   const [leftWidth, setLeftWidth] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -149,7 +151,7 @@ export function ResizableSplit({
       <div
         role="separator"
         aria-orientation="vertical"
-        aria-label="Resize panels"
+        aria-label={t('resizePanels')}
         className={cn(
           'group relative z-10 w-1.5 shrink-0 cursor-col-resize touch-none bg-border transition-colors hover:bg-primary/40',
           isDragging && 'bg-primary/50',

@@ -39,7 +39,8 @@
     "noMaterials": "No materials yet. Add your first one using the cards above.",
     "themeToggle": "Toggle theme",
     "theme": "Theme",
-    "menu": "Menu"
+    "menu": "Menu",
+    "resizePanels": "Resize panels"
   },
   "auth": {
     "welcomeBack": "Welcome back",
@@ -526,13 +527,16 @@
     "assignMaterialDesc": "Give this student access to a material.",
     "assignAction": "Assign",
     "assignSearch": "Search students...",
-    "assignSelectAll": "Select all"
+    "assignSelectAll": "Select all",
+    "actionsCol": "Actions"
   },
   "deck": {
     "definition": "Definition",
     "recap": "Recap",
     "quickCheck": "Quick check",
-    "revealAnswer": "Reveal answer"
+    "revealAnswer": "Reveal answer",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide"
   },
   "learner": {
     "loading": "Loading...",
