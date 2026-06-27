@@ -536,3 +536,7 @@ hardened so a subscriber error never reaches the job), publishes from processCon
   for the fixtures (environmental, pre-existing) — the delivery path is identical for READY.
 
 **typecheck:** api + web pass. Commits (`5a5d688..`): 735d01d, c419d69, 378d877 (on `claude/visual-qa`).
+
+**Regression smoke (Run 9):** after the polling→push hook changes, all 5 tenant pages
+(dashboard/materials/students/assessments/progress) render with 0 broken states, 0 console errors.
+No regression from gating the content/media refetchIntervals.
