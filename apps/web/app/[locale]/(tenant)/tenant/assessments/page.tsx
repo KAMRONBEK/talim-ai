@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Badge, Button, Input, Label } from '@talim/ui';
 import {
   useAssessmentLeaderboard,
@@ -17,32 +18,37 @@ import {
 import { useTenantStudents } from '@/hooks/useTenant';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
 
-function mutErr(e: unknown): string {
-  return (e as { response?: { data?: { message?: string } } })?.response?.data?.message ?? 'Something went wrong. Please try again.';
+function mutErr(e: unknown, fallback: string): string {
+  return (e as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
 }
 
 function ResultsSection({ assessmentId }: { assessmentId: string }) {
+  const t = useTranslations('tenant.assessments');
   const { data: results } = useAssessmentResults(assessmentId || null);
   const { data: board } = useAssessmentLeaderboard(assessmentId || null);
   if (!assessmentId) {
-    return <p className="text-sm text-muted-foreground">Choose an assessment to see results.</p>;
+    return <p className="text-sm text-muted-foreground">{t('chooseToSeeResults')}</p>;
   }
-  if (!results) return <p className="text-sm text-muted-foreground">Loading results…</p>;
+  if (!results) return <p className="text-sm text-muted-foreground">{t('loadingResults')}</p>;
   const submitted = results.learners.filter((l) => l.submitted).length;
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        {submitted}/{results.learners.length} learners submitted · {results.mode === 'GAME' ? 'Game' : 'Written'}
+        {t('submittedMeta', {
+          submitted,
+          total: results.learners.length,
+          mode: results.mode === 'GAME' ? t('modeGame') : t('modeWritten'),
+        })}
       </p>
       <div className="overflow-hidden rounded-xl border border-border/70">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border/70 bg-muted/40">
             <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              <th className="px-3 py-2">Student</th>
-              <th className="px-3 py-2">Status</th>
-              <th className="px-3 py-2">Best score</th>
-              {results.mode === 'GAME' && <th className="px-3 py-2">Points</th>}
-              <th className="px-3 py-2">Attempts</th>
+              <th className="px-3 py-2">{t('colStudent')}</th>
+              <th className="px-3 py-2">{t('colStatus')}</th>
+              <th className="px-3 py-2">{t('colBestScore')}</th>
+              {results.mode === 'GAME' && <th className="px-3 py-2">{t('colPoints')}</th>}
+              <th className="px-3 py-2">{t('colAttempts')}</th>
             </tr>
           </thead>
           <tbody>
@@ -51,9 +57,9 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
                 <td className="px-3 py-2 font-medium">{l.learnerName}</td>
                 <td className="px-3 py-2">
                   {l.submitted ? (
-                    <Badge variant="success">Submitted</Badge>
+                    <Badge variant="success">{t('statusSubmitted')}</Badge>
                   ) : (
-                    <span className="text-muted-foreground">Not yet</span>
+                    <span className="text-muted-foreground">{t('statusNotYet')}</span>
                   )}
                 </td>
                 <td className="px-3 py-2 tabular-nums">{l.bestScore != null ? `${Math.round(l.bestScore)}%` : '—'}</td>
@@ -64,7 +70,7 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
             {results.learners.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-3 py-6 text-center text-muted-foreground">
-                  Not assigned to anyone yet.
+                  {t('notAssigned')}
                 </td>
               </tr>
             )}
@@ -73,7 +79,7 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
       </div>
       {board && board.rows.length > 0 && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold">Leaderboard</h3>
+          <h3 className="text-sm font-semibold">{t('leaderboard')}</h3>
           <LeaderboardTable rows={board.rows} mode={board.mode} />
         </div>
       )}
@@ -82,6 +88,7 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
 }
 
 export default function TenantAssessmentsPage() {
+  const t = useTranslations('tenant.assessments');
   const { data: banks = [] } = useQuestionBanks();
   const { data: assessments = [] } = useTenantAssessments();
   const { data: students = [] } = useTenantStudents();
@@ -117,16 +124,14 @@ export default function TenantAssessmentsPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Assessments</p>
-        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">Assessments</h1>
-        <p className="mt-1 text-muted-foreground">
-          Generate many draft questions, approve the best ones, and assign written tasks.
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('eyebrow')}</p>
+        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
         <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <h2 className="font-display text-lg font-semibold">Question banks</h2>
+          <h2 className="font-display text-lg font-semibold">{t('banksTitle')}</h2>
           <form
             className="space-y-3"
             onSubmit={async (event) => {
@@ -138,15 +143,15 @@ export default function TenantAssessmentsPage() {
             }}
           >
             <div className="space-y-2">
-              <Label htmlFor="bankTitle">Title</Label>
+              <Label htmlFor="bankTitle">{t('bankTitleLabel')}</Label>
               <Input id="bankTitle" value={title} onChange={(e) => setTitle(e.target.value)} required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="bankTopic">Topic</Label>
+              <Label htmlFor="bankTopic">{t('bankTopicLabel')}</Label>
               <Input id="bankTopic" value={topic} onChange={(e) => setTopic(e.target.value)} />
             </div>
             <Button type="submit" disabled={createBank.isPending}>
-              Create bank
+              {t('createBank')}
             </Button>
           </form>
           <div className="space-y-2">
@@ -163,7 +168,7 @@ export default function TenantAssessmentsPage() {
               >
                 <span className="block font-medium">{bank.title}</span>
                 <span className="text-xs tabular-nums text-muted-foreground">
-                  {bank.approvedCount}/{bank.questionCount} approved
+                  {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                 </span>
               </button>
             ))}
@@ -172,10 +177,8 @@ export default function TenantAssessmentsPage() {
 
         <main className="space-y-6">
           <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-            <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? 'Select a question bank'}</h2>
-            <p className="text-sm text-muted-foreground">
-              Topic mode can create related questions beyond the uploaded material. Section-scoped generation stays closer to material.
-            </p>
+            <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? t('selectBank')}</h2>
+            <p className="text-sm text-muted-foreground">{t('topicHelp')}</p>
             {selectedBankId && (
               <form
                 className="mt-4 flex flex-col gap-3 md:flex-row"
@@ -192,7 +195,7 @@ export default function TenantAssessmentsPage() {
                 <Input
                   value={draftTopic}
                   onChange={(event) => setDraftTopic(event.target.value)}
-                  placeholder="Topic prompt, e.g. Algebra equations"
+                  placeholder={t('topicPlaceholder')}
                 />
                 <select
                   value={draftStyle}
@@ -200,21 +203,21 @@ export default function TenantAssessmentsPage() {
                     setDraftStyle(event.target.value as typeof draftStyle)
                   }
                   className="rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label="Question type"
+                  aria-label={t('modeLabel')}
                 >
-                  <option value="mixed">Mixed (all types)</option>
-                  <option value="multipleChoice">Multiple choice</option>
-                  <option value="trueFalse">True / False</option>
-                  <option value="written">Written (short answer)</option>
-                  <option value="numeric">Numeric</option>
+                  <option value="mixed">{t('styleMixed')}</option>
+                  <option value="multipleChoice">{t('styleMultipleChoice')}</option>
+                  <option value="trueFalse">{t('styleTrueFalse')}</option>
+                  <option value="written">{t('styleWritten')}</option>
+                  <option value="numeric">{t('styleNumeric')}</option>
                 </select>
                 <Button type="submit" disabled={generate.isPending}>
-                  {generate.isPending ? 'Generating…' : 'Generate drafts'}
+                  {generate.isPending ? t('generating') : t('generateDrafts')}
                 </Button>
               </form>
             )}
             {generate.isError && (
-              <p className="mt-2 text-sm text-destructive">{mutErr(generate.error)}</p>
+              <p className="mt-2 text-sm text-destructive">{mutErr(generate.error, t('genericError'))}</p>
             )}
           </section>
 
@@ -226,7 +229,7 @@ export default function TenantAssessmentsPage() {
                     <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>{question.type}</Badge>
                     <p className="mt-3 font-medium">{question.prompt}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Answers: {question.acceptableAnswers.join(', ')}
+                      {t('answersLabel', { answers: question.acceptableAnswers.join(', ') })}
                     </p>
                     {question.explanation && (
                       <p className="mt-1 text-sm text-muted-foreground">{question.explanation}</p>
@@ -238,14 +241,14 @@ export default function TenantAssessmentsPage() {
                       variant={question.status === 'APPROVED' ? 'default' : 'outline'}
                       onClick={() => patchQuestion.mutate({ id: question.id, status: 'APPROVED' })}
                     >
-                      Approve
+                      {t('approve')}
                     </Button>
                     <Button
                       size="sm"
                       variant="ghost"
                       onClick={() => patchQuestion.mutate({ id: question.id, status: 'REJECTED' })}
                     >
-                      Reject
+                      {t('reject')}
                     </Button>
                   </div>
                 </div>
@@ -275,16 +278,16 @@ export default function TenantAssessmentsPage() {
             setSelectedQuestions([]);
           }}
         >
-          <h2 className="font-display text-lg font-semibold">Publish assessment</h2>
+          <h2 className="font-display text-lg font-semibold">{t('publishTitle')}</h2>
           <Input
             value={assessmentTitle}
             onChange={(event) => setAssessmentTitle(event.target.value)}
-            placeholder="Assessment title"
+            placeholder={t('assessmentTitlePlaceholder')}
             required
           />
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
-              <Label>Mode</Label>
+              <Label>{t('modeLabel')}</Label>
               <div className="flex gap-2">
                 <Button
                   type="button"
@@ -292,7 +295,7 @@ export default function TenantAssessmentsPage() {
                   variant={mode === 'WRITTEN' ? 'default' : 'outline'}
                   onClick={() => setMode('WRITTEN')}
                 >
-                  Written
+                  {t('modeWritten')}
                 </Button>
                 <Button
                   type="button"
@@ -300,12 +303,12 @@ export default function TenantAssessmentsPage() {
                   variant={mode === 'GAME' ? 'spark' : 'outline'}
                   onClick={() => setMode('GAME')}
                 >
-                  Game
+                  {t('modeGame')}
                 </Button>
               </div>
             </div>
             <div className="space-y-1">
-              <Label htmlFor="maxAttempts">Max attempts</Label>
+              <Label htmlFor="maxAttempts">{t('maxAttemptsLabel')}</Label>
               <Input
                 id="maxAttempts"
                 type="number"
@@ -318,7 +321,7 @@ export default function TenantAssessmentsPage() {
           </div>
           {mode === 'GAME' && (
             <div className="space-y-1">
-              <Label htmlFor="secs">Seconds per question</Label>
+              <Label htmlFor="secs">{t('secondsLabel')}</Label>
               <Input
                 id="secs"
                 type="number"
@@ -351,10 +354,10 @@ export default function TenantAssessmentsPage() {
             ))}
           </div>
           <Button type="submit" disabled={selectedQuestions.length === 0 || createAssessment.isPending}>
-            Publish selected
+            {t('publishSelected')}
           </Button>
           {createAssessment.isError && (
-            <p className="text-sm text-destructive">{mutErr(createAssessment.error)}</p>
+            <p className="text-sm text-destructive">{mutErr(createAssessment.error, t('genericError'))}</p>
           )}
         </form>
 
@@ -366,14 +369,14 @@ export default function TenantAssessmentsPage() {
             setLearnerIds([]);
           }}
         >
-          <h2 className="font-display text-lg font-semibold">Assign assessment</h2>
+          <h2 className="font-display text-lg font-semibold">{t('assignTitle')}</h2>
           <select
             value={assessmentId}
             onChange={(event) => setAssessmentId(event.target.value)}
             className="w-full rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             required
           >
-            <option value="">Choose assessment</option>
+            <option value="">{t('chooseAssessment')}</option>
             {assessments.map((assessment) => (
               <option key={assessment.id} value={assessment.id}>
                 {assessment.title}
@@ -403,22 +406,22 @@ export default function TenantAssessmentsPage() {
             type="submit"
             disabled={!assessmentId || learnerIds.length === 0 || assignAssessment.isPending}
           >
-            Assign
+            {t('assignButton')}
           </Button>
           {assignAssessment.isError && (
-            <p className="text-sm text-destructive">{mutErr(assignAssessment.error)}</p>
+            <p className="text-sm text-destructive">{mutErr(assignAssessment.error, t('genericError'))}</p>
           )}
         </form>
       </section>
 
       <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-        <h2 className="font-display text-lg font-semibold">Results &amp; leaderboard</h2>
+        <h2 className="font-display text-lg font-semibold">{t('resultsTitle')}</h2>
         <select
           value={resultsId}
           onChange={(event) => setResultsId(event.target.value)}
           className="w-full max-w-md rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         >
-          <option value="">Choose assessment</option>
+          <option value="">{t('chooseAssessment')}</option>
           {assessments.map((assessment) => (
             <option key={assessment.id} value={assessment.id}>
               {assessment.title}

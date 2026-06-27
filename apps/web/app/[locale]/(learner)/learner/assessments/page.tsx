@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Badge, Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
@@ -12,13 +13,15 @@ import { GameQuizPlayer } from '@/components/learner/game-quiz-player';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
 
 function Leaderboard({ assessmentId }: { assessmentId: string }) {
+  const t = useTranslations('learner.assessments');
   const { data, isLoading } = useLearnerLeaderboard(assessmentId);
-  if (isLoading) return <p className="text-sm text-muted-foreground">Loading leaderboard…</p>;
+  if (isLoading) return <p className="text-sm text-muted-foreground">{t('loadingLeaderboard')}</p>;
   if (!data) return null;
   return <LeaderboardTable rows={data.rows} mode={data.mode} />;
 }
 
 function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
+  const t = useTranslations('learner.assessments');
   const submit = useSubmitLearnerAssessment();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
@@ -30,7 +33,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
     return (
       <div className="space-y-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
         <p className="font-display font-semibold">
-          Result: {result.correct}/{result.total} correct
+          {t('result', { correct: result.correct, total: result.total })}
         </p>
         {result.results.map((r, i) => (
           <div
@@ -43,10 +46,13 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
               {i + 1}. {promptById.get(r.questionId)}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              {r.correct ? '✓ Correct' : '✗ Incorrect'} · Your answer: {r.submittedAnswer || '—'}
+              {r.correct ? t('correctMark') : t('incorrectMark')} ·{' '}
+              {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
             </p>
             {!r.correct && r.acceptableAnswers.length > 0 && (
-              <p className="text-sm text-muted-foreground">Correct: {r.acceptableAnswers.join(', ')}</p>
+              <p className="text-sm text-muted-foreground">
+                {t('acceptable', { answers: r.acceptableAnswers.join(', ') })}
+              </p>
             )}
             {r.explanation && <p className="mt-1 text-xs text-muted-foreground">{r.explanation}</p>}
           </div>
@@ -70,7 +76,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
         } catch (err) {
           setError(
             (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
-              'Could not submit your answers.',
+              t('submitError'),
           );
         }
       }}
@@ -103,7 +109,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
                 onChange={(event) =>
                   setAnswers((prev) => ({ ...prev, [question.id]: event.target.value }))
                 }
-                placeholder={question.type === 'NUMERIC' ? 'Answer with a number' : 'Write your answer'}
+                placeholder={question.type === 'NUMERIC' ? t('numberPlaceholder') : t('textPlaceholder')}
               />
             )}
           </div>
@@ -111,13 +117,14 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
       </div>
       {error && <p className="text-sm text-destructive">{error}</p>}
       <Button type="submit" disabled={locked || submit.isPending}>
-        {locked ? 'Attempt limit reached' : 'Submit answers'}
+        {locked ? t('attemptLimit') : t('submit')}
       </Button>
     </form>
   );
 }
 
 function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
+  const t = useTranslations('learner.assessments');
   const [playing, setPlaying] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
@@ -135,14 +142,18 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
             <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
             {isGame && (
               <Badge className="bg-accent-secondary/15 text-warning hover:bg-accent-secondary/15">
-                Game
+                {t('gameBadge')}
               </Badge>
             )}
           </div>
           <p className="text-sm text-muted-foreground">
-            Attempts: {assessment.attemptCount}/{assessment.maxAttempts}
-            {assessment.latestScore != null ? ` · Latest ${Math.round(assessment.latestScore)}%` : ''}
-            {isGame && assessment.latestPoints != null ? ` · ${assessment.latestPoints} pts` : ''}
+            {t('attempts', { used: assessment.attemptCount, max: assessment.maxAttempts })}
+            {assessment.latestScore != null
+              ? ` · ${t('latest', { score: Math.round(assessment.latestScore) })}`
+              : ''}
+            {isGame && assessment.latestPoints != null
+              ? ` · ${t('points', { count: assessment.latestPoints })}`
+              : ''}
           </p>
           {assessment.instructions && (
             <p className="mt-1 text-sm text-muted-foreground">{assessment.instructions}</p>
@@ -151,11 +162,11 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
         <div className="flex gap-2">
           {isGame && (
             <Button variant="spark" disabled={locked} onClick={() => setPlaying(true)}>
-              {locked ? 'Attempt limit reached' : 'Play'}
+              {locked ? t('attemptLimit') : t('play')}
             </Button>
           )}
           <Button variant="outline" onClick={() => setShowBoard((v) => !v)}>
-            {showBoard ? 'Hide leaderboard' : 'Leaderboard'}
+            {showBoard ? t('hideLeaderboard') : t('leaderboard')}
           </Button>
         </div>
       </div>
@@ -167,23 +178,22 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
 }
 
 export default function LearnerAssessmentsPage() {
+  const t = useTranslations('learner.assessments');
   const { data: assessments = [], isLoading } = useLearnerAssessments();
 
-  if (isLoading) return <p className="text-muted-foreground">Loading...</p>;
+  if (isLoading) return <p className="text-muted-foreground">{t('loading')}</p>;
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Assessments</p>
-        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">Quizzes &amp; tasks</h1>
-        <p className="mt-1 text-muted-foreground">
-          Play game quizzes for points, or answer written tasks. Attempts are limited.
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('eyebrow')}</p>
+        <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{t('title')}</h1>
+        <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>
       {assessments.length === 0 && (
         <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">🎯</div>
-          <p className="mt-4 text-muted-foreground">Nothing assigned yet.</p>
+          <p className="mt-4 text-muted-foreground">{t('empty')}</p>
         </div>
       )}
       {assessments.map((assessment) => (
