@@ -502,3 +502,5 @@ student/assignment/assessment IDOR all 404; learner mutations 403; garbage 404; 
 **US-AUTH-04/05 (session/logout) — F46 (S2) confirmed.** Old token still 200s after a password change → no session revocation (stateless JWT, no tokenVersion). Same structural root as F45; one `tokenVersion` fix covers role-change staleness, password-change revocation, and logout. Logged for human review (auth hot path).
 
 **US-OWNER-02 (Reset student password) — pass.** Owner reset → 200 + once-shown temp password; student logs in with it. No findings.
+
+**US-OWNER-08/09 + US-LEARNER-02 (Assessments take-flow).** Assigned ts1 sees both PUBLISHED assessments + leaderboards (200); unassigned ts2 → empty list + 403 leaderboard (assignment isolation). **F39 (GAME timings cheat) re-confirmed by code** (computeGamePoints uses client responseMs → speedFactor 1.0 at timings:0, no server clock). maxAttempts=1 blocked a non-destructive live demo.

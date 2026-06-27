@@ -1568,7 +1568,7 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 ### US-OWNER-09: GAME assessment — timer, speed-weighted points, streaks, leaderboard
 **As a** tenant owner, **I want** to publish a GAME-mode assessment with a per-question timer that awards speed- and streak-weighted points and a class leaderboard, **so that** quizzing is competitive and engaging.
 **Routes/code:** `/[locale]/tenant/assessments` (GAME branch) · `POST /tenant/assessments` (`mode:'GAME'`, `secondsPerQuestion`) · `computeGamePoints` (`shared.ts:66`) · `GET /tenant/assessments/:id/leaderboard` (`results.ts:6`).
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given GAME mode, When published, Then `secondsPerQuestion = provided ?? 20` (never null) and `mode='GAME'` (`assessments.ts:33`).
@@ -1600,6 +1600,8 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 | EC20 | Owner views GAME leaderboard before anyone played | `rows:[]` → board hidden; results table all "Not yet" | ⬜ | — | — |
 
 ---
+
+**Run 8 verification (2026-06-28, live):** assigned ts1 → /learner/assessments lists both PUBLISHED assessments (QA Game Quiz, QA Written Quiz); GAME + WRITTEN leaderboards 200; unassigned ts2 → empty list + 403 on the GAME leaderboard (assignment isolation). **F39 (GAME timings cheat) confirmed by code:** `computeGamePoints(responseMs,...)` derives `speedFactor=0.5+0.5*(1-clamp(responseMs)/limit)` straight from the client-supplied `submitAssessmentSchema.timings`, with no server-measured clock — so `timings:0` forces speedFactor 1.0. (`maxAttempts=1` prevents a non-destructive live submission demo.)
 
 ### US-OWNER-10: Assessment-driven progress — per-student & class, post-submit update
 **As a** tenant owner, **I want** student assessment results to roll into per-student and class progress immediately after each submit, **so that** I see live mastery.
