@@ -113,20 +113,31 @@ export async function createStudent(
   const tempPassword = body.password ?? crypto.randomUUID().slice(0, 12);
   const passwordHash = await bcrypt.hash(tempPassword, 12);
 
-  const user = await prisma.user.create({
-    data: {
-      email,
-      username: username ?? null,
-      passwordHash,
-      // Auto-generated passwords should be changed on first login; tutor-set ones need not.
-      mustChangePassword: !body.password,
-      name: body.name ?? null,
-      role: 'TENANT_LEARNER',
-      tenantMemberships: {
-        create: { tenantId, role: 'LEARNER' },
+  let user;
+  try {
+    user = await prisma.user.create({
+      data: {
+        email,
+        username: username ?? null,
+        passwordHash,
+        // Auto-generated passwords should be changed on first login; tutor-set ones need not.
+        mustChangePassword: !body.password,
+        name: body.name ?? null,
+        role: 'TENANT_LEARNER',
+        tenantMemberships: {
+          create: { tenantId, role: 'LEARNER' },
+        },
       },
-    },
-  });
+    });
+  } catch (err) {
+    // Two simultaneous creates (e.g. a double-click) can both pass the findUnique checks
+    // above, then race onto the unique email/username constraint. Surface a clean 409
+    // instead of a raw 500 (Prisma P2002 unique-constraint violation).
+    if ((err as { code?: string }).code === 'P2002') {
+      throw new AppError(409, 'Username already taken');
+    }
+    throw err;
+  }
 
   const membership = await prisma.tenantMembership.findFirstOrThrow({
     where: { tenantId, userId: user.id },
