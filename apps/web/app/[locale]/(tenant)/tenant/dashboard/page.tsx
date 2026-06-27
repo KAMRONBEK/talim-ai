@@ -117,7 +117,7 @@ export default function TenantDashboardPage() {
 
       {(failedMaterials.length > 0 || inactiveStudents.length > 0) && (
         <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <h2 className="font-display text-lg font-semibold">Needs attention</h2>
+          <h2 className="font-display text-lg font-semibold">{t('needsAttention')}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {failedMaterials.length > 0 && (
               <Link
@@ -127,7 +127,7 @@ export default function TenantDashboardPage() {
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-destructive/10 text-destructive">
                   <AlertTriangle className="h-[18px] w-[18px]" />
                 </span>
-                <span className="font-medium">{failedMaterials.length} materials failed processing.</span>
+                <span className="font-medium">{t('materialsFailed', { count: failedMaterials.length })}</span>
               </Link>
             )}
             {inactiveStudents.length > 0 && (
@@ -138,7 +138,7 @@ export default function TenantDashboardPage() {
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-warning/10 text-warning">
                   <UserX className="h-[18px] w-[18px]" />
                 </span>
-                <span className="font-medium">{inactiveStudents.length} inactive students.</span>
+                <span className="font-medium">{t('inactiveStudentsCount', { count: inactiveStudents.length })}</span>
               </Link>
             )}
           </div>

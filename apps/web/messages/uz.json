@@ -513,7 +513,20 @@
       "chooseAssessment": "Baholashni tanlang",
       "assignButton": "Tayinlash",
       "resultsTitle": "Natijalar va reyting"
-    }
+    },
+    "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
+    "avgCoverage": "O'rtacha qamrov",
+    "progressActivity": "Faollik",
+    "activeThisWeek": "Bu hafta faol",
+    "inactiveLabel": "Nofaol",
+    "needsAttention": "E'tibor talab qiladi",
+    "materialsFailed": "{count} ta material qayta ishlanmadi.",
+    "inactiveStudentsCount": "{count} ta nofaol o'quvchi.",
+    "assignMaterial": "Material biriktirish",
+    "assignMaterialDesc": "Bu o'quvchiga materialga kirish huquqini bering.",
+    "assignAction": "Biriktirish",
+    "assignSearch": "O'quvchilarni qidirish...",
+    "assignSelectAll": "Barchasini tanlash"
   },
   "learner": {
     "loading": "Yuklanmoqda...",

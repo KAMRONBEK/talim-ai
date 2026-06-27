@@ -20,7 +20,7 @@ export default function TenantProgressPage() {
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.progress')}</p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('nav.progress')}</h1>
-        <p className="mt-1 text-muted-foreground">Track learning activity across your organization.</p>
+        <p className="mt-1 text-muted-foreground">{t('progressDesc')}</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-4">
@@ -33,7 +33,7 @@ export default function TenantProgressPage() {
           <p className="mt-2 font-display text-3xl font-bold tracking-tight tabular-nums">{data.totals.materials}</p>
         </div>
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <p className="text-sm font-medium text-muted-foreground">Avg coverage</p>
+          <p className="text-sm font-medium text-muted-foreground">{t('avgCoverage')}</p>
           <p className="mt-2 font-display text-3xl font-bold tracking-tight tabular-nums">{Math.round(data.totals.avgCoverage)}%</p>
         </div>
         <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
@@ -52,7 +52,7 @@ export default function TenantProgressPage() {
               <th className="px-4 py-3 text-left">{t('students.assigned')}</th>
               <th className="px-4 py-3 text-left">{t('students.lastActive')}</th>
               <th className="px-4 py-3 text-left">{t('students.avgQuiz')}</th>
-              <th className="px-4 py-3 text-left">Activity</th>
+              <th className="px-4 py-3 text-left">{t('progressActivity')}</th>
             </tr>
           </thead>
           <tbody>
@@ -79,7 +79,7 @@ export default function TenantProgressPage() {
                         : 'inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-muted-foreground'
                     }
                   >
-                    {isRecentlyActive(student.lastActivityAt) ? 'Active this week' : 'Inactive'}
+                    {isRecentlyActive(student.lastActivityAt) ? t('activeThisWeek') : t('inactiveLabel')}
                   </span>
                 </td>
               </tr>

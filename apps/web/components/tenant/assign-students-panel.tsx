@@ -48,7 +48,7 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
         <Input
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          placeholder="Search students..."
+          placeholder={t('assignSearch')}
         />
         <Button
           type="button"
@@ -57,7 +57,7 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
             setSelected(activeStudents.filter((s) => !assignedIds.has(s.id)).map((s) => s.id))
           }
         >
-          Select all
+          {t('assignSelectAll')}
         </Button>
       </div>
       <div className="mt-4 space-y-1.5">

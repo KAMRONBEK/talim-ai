@@ -513,7 +513,20 @@
       "chooseAssessment": "Выберите оценивание",
       "assignButton": "Назначить",
       "resultsTitle": "Результаты и таблица лидеров"
-    }
+    },
+    "progressDesc": "Отслеживайте учебную активность по всей организации.",
+    "avgCoverage": "Ср. охват",
+    "progressActivity": "Активность",
+    "activeThisWeek": "Активен на этой неделе",
+    "inactiveLabel": "Неактивен",
+    "needsAttention": "Требует внимания",
+    "materialsFailed": "{count, plural, one {# материал не обработан.} few {# материала не обработаны.} many {# материалов не обработаны.} other {# материала не обработаны.}}",
+    "inactiveStudentsCount": "{count, plural, one {# неактивный ученик.} few {# неактивных ученика.} many {# неактивных учеников.} other {# неактивных ученика.}}",
+    "assignMaterial": "Назначить материал",
+    "assignMaterialDesc": "Предоставьте этому ученику доступ к материалу.",
+    "assignAction": "Назначить",
+    "assignSearch": "Поиск учеников...",
+    "assignSelectAll": "Выбрать все"
   },
   "learner": {
     "loading": "Загрузка...",
