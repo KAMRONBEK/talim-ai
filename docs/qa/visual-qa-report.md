@@ -739,6 +739,8 @@ A second adversarial 3-agent verification pass (graphify-first) on contained rob
 
 **🟢 Light-theme spot pass (was mostly dark in runs 1–13), no findings.** Forced light on: **B2C dashboard** (gradient "Ready to learn, QA?" hero, Upload/Link cards, "Learn anything" search, Recent grid w/ thumbnail + "3 weeks ago" relative time, 3-state Light/Dark/System theme control) — clean contrast, no invisible text. **Content reader** (3-column: sections sidebar / "paper" reading pane w/ crisp proper-Uzbek markdown + decorative quote heading / Learn panel w/ progress-ring 0%/Overall 10% + 4-day marigold streak) — crisp, good contrast. **Mobile 390 (light):** reader collapses cleanly, **no horizontal overflow** (scrollW==clientW==390), ✨ Learn FAB present — completes the light+mobile matrix for these surfaces.
 
+**🟢 B2C quiz — NUMERIC question type (was untested in B2C), no findings.** Runbook wants every type answered + scored; prior B2C runs covered MC + short-answer, game covered TF + numeric — this closes **Numeric on the B2C `/quiz` player**. Generated a 2-Q "Quick check" (type=Numeric) off the Venn PDF: both Qs well-formed (triangle perimeter 34+21+15; rectangle perimeter 617×247). Input is `type=text inputmode="decimal"` (correct mobile keypad + a11y). **Correct path:** 70 → "Correct!" + accurate explanation (34+21+15=70). **Incorrect path:** 1000 → "Incorrect" + "Correct answer: **1728**" + explanation (2×(617+247)=1728). **Finish → "Quiz results · 50% · 1 of 2 correct" + Try again.** No hydration error (F4 holds); console only the known F3 summary-404s. **Test-data:** one Numeric quick-check quiz generated for qa-individual's PDF (harmless).
+
 ### Run 14 — closing summary
 
 **1 bug fixed (verified live + typecheck), 1 logged, broad untested-frontier coverage, all on `claude/visual-qa` (not pushed):**
@@ -746,7 +748,7 @@ A second adversarial 3-agent verification pass (graphify-first) on contained rob
 
 **Logged (structural, not auto-fixed):** **F62** (S2) — raw-English API error leak across owner/learner mutation surfaces (`tenant/students`, `tenant/assessments`, `learner/assessments`, `game-quiz-player`) — needs an API error-code contract.
 
-**Coverage added (no findings):** marketing landing (uz/ru, dark) + pricing page (audience + billing toggles, correct math); register validation matrix; **admin deep** (user detail, **subscription patch live + audit**, subscriptions overview, generated-media filter, users search); **flashcards** (first test — generate/flip/SRS/progress/i18n); **AI video page** (first test — parts/switching/i18n); **podcast player** (full controls, F21 re-confirmed); **light-theme** dashboard + reader + mobile-390.
+**Coverage added (no findings):** marketing landing (uz/ru, dark) + pricing page (audience + billing toggles, correct math); register validation matrix; **admin deep** (user detail, **subscription patch live + audit**, subscriptions overview, generated-media filter, users search); **flashcards** (first test — generate/flip/SRS/progress/i18n); **AI video page** (first test — parts/switching/i18n); **podcast player** (full controls, F21 re-confirmed); **light-theme** dashboard + reader + mobile-390; **B2C Numeric quiz type** (correct+incorrect+score).
 
 **Minor observations (not findings):** admin user-search no-match shows headers only (no "no users found" message, akin to F19); flashcard "reviewed" counter is session-only by design (no persistence endpoint); landing footer Privacy/Terms → `#` placeholders.
 
