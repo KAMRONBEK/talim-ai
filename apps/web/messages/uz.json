@@ -493,7 +493,8 @@
       "assigned": "tayinlangan",
       "remove": "Olib tashlash",
       "submit": "Tayinlash",
-      "back": "{title} ga qaytish"
+      "back": "{title} ga qaytish",
+      "partialError": "{count} ta o'quvchiga biriktirib bo'lmadi. Qayta urinib ko'ring."
     },
     "joinCode": {
       "title": "Sinf kodi",

@@ -493,7 +493,8 @@
       "assigned": "assigned",
       "remove": "Remove",
       "submit": "Assign selected",
-      "back": "Back to {title}"
+      "back": "Back to {title}",
+      "partialError": "Couldn't assign to {count, plural, one {# student} other {# students}}. Please try again."
     },
     "joinCode": {
       "title": "Class join code",

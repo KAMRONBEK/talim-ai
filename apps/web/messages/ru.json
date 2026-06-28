@@ -493,7 +493,8 @@
       "assigned": "назначено",
       "remove": "Убрать",
       "submit": "Назначить",
-      "back": "Назад к {title}"
+      "back": "Назад к {title}",
+      "partialError": "Не удалось назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}. Попробуйте снова."
     },
     "joinCode": {
       "title": "Код класса",

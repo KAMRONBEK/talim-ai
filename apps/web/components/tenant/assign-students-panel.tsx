@@ -19,6 +19,7 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
   const unassign = useUnassignContent();
   const [selected, setSelected] = useState<string[]>([]);
   const [search, setSearch] = useState('');
+  const [assignError, setAssignError] = useState<string | null>(null);
 
   const assignedIds = new Set(assignments?.map((a) => a.learnerId) ?? []);
   const activeStudents = (students?.filter((s) => s.active) ?? []).filter((student) => {
@@ -32,12 +33,22 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
   };
 
   const handleAssign = async () => {
+    setAssignError(null);
+    // Assign each learner independently: one failure (e.g. a learner deactivated since the panel
+    // loaded) must not silently abort the loop and skip the rest. Failed ids stay selected so the
+    // owner can retry just those.
+    const failed: string[] = [];
     for (const learnerId of selected) {
       if (!assignedIds.has(learnerId)) {
-        await assign.mutateAsync({ contentId, learnerId });
+        try {
+          await assign.mutateAsync({ contentId, learnerId });
+        } catch {
+          failed.push(learnerId);
+        }
       }
     }
-    setSelected([]);
+    setSelected(failed);
+    if (failed.length > 0) setAssignError(t('assign.partialError', { count: failed.length }));
   };
 
   return (
@@ -106,6 +117,11 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
           })
         )}
       </div>
+      {assignError && (
+        <p className="mt-3 text-sm text-destructive" role="alert">
+          {assignError}
+        </p>
+      )}
       {selected.length > 0 && (
         <Button className="mt-4 w-full" onClick={handleAssign} disabled={assign.isPending}>
           {t('assign.submit')}
