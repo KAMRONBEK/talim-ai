@@ -103,7 +103,12 @@ function ContentWorkspaceInner({ id }: { id: string }) {
     setSelectedExcerptImage(p.imageDataUrl ?? null);
     setInputSeed(p.inputSeed ?? null);
     setLearnTab('chat');
-    setPanelOpen(true);
+    // Only open the drawer on mobile — on desktop the Learn panel is already visible
+    // (the ContentLearnPanelSheet is breakpoint-agnostic, so opening it on desktop
+    // would render a second panel over the existing one). Mirrors the ?panel=chat effect.
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
+      setPanelOpen(true);
+    }
   }, []);
 
   const clearExcerpt = useCallback(() => {
