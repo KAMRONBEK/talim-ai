@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/students/page.tsx"
 type: "code"
-community: "Tenant Web Pages"
+community: "ui components"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/ui_components
 ---
 
 # apiError()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_27]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/ui_components

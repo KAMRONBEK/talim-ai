@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription.service.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "subscription"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # subscription.service.ts
@@ -19,6 +19,7 @@ tags:
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[create-tenant-owner.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
@@ -37,4 +38,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

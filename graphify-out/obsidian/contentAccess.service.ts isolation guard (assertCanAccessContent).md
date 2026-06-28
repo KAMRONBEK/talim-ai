@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "rationale"
-community: "Community 88"
+community: "docs · contentAccess.service.ts isolation guar"
 location: "§6.6"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_88
+  - community/docs__contentAccessservicets_isolation_guar
 ---
 
 # contentAccess.service.ts isolation guard (assertCanAccessContent)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Multi-tenant isolation]] - `implements` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_88
+#graphify/rationale #graphify/EXTRACTED #community/docs__contentAccessservicets_isolation_guar

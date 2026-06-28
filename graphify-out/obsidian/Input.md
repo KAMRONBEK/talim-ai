@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin components"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_components
 ---
 
 # Input
@@ -38,4 +38,4 @@ tags:
 - [[page.tsx_27]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_components

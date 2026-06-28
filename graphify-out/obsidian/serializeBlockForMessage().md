@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "Community 48"
+community: "src lib · tutor-graph-intent.ts"
 location: "L110"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/src_lib__tutor-graph-intentts
 ---
 
 # serializeBlockForMessage()
@@ -19,4 +19,4 @@ tags:
 - [[tutor-graph-smoke.ts]] - `imports` [EXTRACTED]
 - [[tutor-tools.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/src_lib__tutor-graph-intentts

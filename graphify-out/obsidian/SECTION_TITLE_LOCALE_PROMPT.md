@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Section & Summary API"
+community: "src services"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_services
 ---
 
 # SECTION_TITLE_LOCALE_PROMPT
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[section.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_services

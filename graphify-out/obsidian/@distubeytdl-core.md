@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Community 50"
+community: "api · dependencies"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/api__dependencies
 ---
 
 # @distube/ytdl-core
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/api__dependencies

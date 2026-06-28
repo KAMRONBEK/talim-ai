@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "Community 89"
+community: "components layout · content-generations.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/components_layout__content-generationstsx
 ---
 
 # content-sidebar.tsx
 
 ## Connections
+- [[ContentGenerationsBlock()]] - `imports` [EXTRACTED]
 - [[ContentSection]] - `imports` [EXTRACTED]
 - [[ContentSidebar()]] - `contains` [EXTRACTED]
 - [[ContentSidebarBody()]] - `contains` [EXTRACTED]
@@ -19,19 +20,18 @@ tags:
 - [[ContentSidebarProps]] - `contains` [EXTRACTED]
 - [[ContentSidebarSheet()]] - `contains` [EXTRACTED]
 - [[ContentSidebarSheetProps]] - `contains` [EXTRACTED]
+- [[QuestionStyle_2]] - `imports` [EXTRACTED]
 - [[SectionProgress]] - `imports` [EXTRACTED]
 - [[Sheet()]] - `imports` [EXTRACTED]
 - [[SheetContent()]] - `imports` [EXTRACTED]
 - [[SheetHeader()]] - `imports` [EXTRACTED]
 - [[SheetTitle()]] - `imports` [EXTRACTED]
+- [[SidebarGenerationProps]] - `contains` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
+- [[content-generations.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[usePodcast()]] - `imports` [EXTRACTED]
-- [[usePodcast.ts]] - `imports_from` [EXTRACTED]
-- [[useVideo()]] - `imports` [EXTRACTED]
-- [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_89
+#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx

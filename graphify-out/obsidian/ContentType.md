@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 66"
-location: "L11"
+community: "packages types"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/packages_types
 ---
 
 # ContentType
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/packages_types

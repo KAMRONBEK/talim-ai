@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/marketing/landing-page.tsx"
 type: "code"
-community: "Community 56"
+community: "components marketing"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/components_marketing
 ---
 
 # LandingPage()
 
 ## Connections
 - [[landing-page.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_35]] - `imports` [EXTRACTED]
+- [[page.tsx_36]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/components_marketing

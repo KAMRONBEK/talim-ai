@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/content/page.tsx"
 type: "code"
-community: "Admin Content Pages"
+community: "admin hooks"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content_Pages
+  - community/admin_hooks
 ---
 
 # ContentPage()
@@ -17,4 +17,4 @@ tags:
 - [[useDeleteContent()]] - `calls` [EXTRACTED]
 - [[useRetryContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

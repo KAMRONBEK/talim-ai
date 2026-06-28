@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSections.ts"
 type: "code"
-community: "Content Progress Hooks"
+community: "web hooks"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # useSections()
@@ -16,9 +16,9 @@ tags:
 - [[ContentWorkspaceInner()]] - `calls` [INFERRED]
 - [[VideoInner()]] - `calls` [EXTRACTED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
-- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useSections.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

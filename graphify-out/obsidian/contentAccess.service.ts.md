@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content Controller"
+community: "src controllers · content.controller.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_controllers__contentcontrollerts
 ---
 
 # contentAccess.service.ts
@@ -25,6 +25,7 @@ tags:
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[getAssignedContentIds()]] - `contains` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
@@ -40,4 +41,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_controllers__contentcontrollerts

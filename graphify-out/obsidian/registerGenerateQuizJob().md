@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Env Config & Jobs"
-location: "L35"
+community: "src jobs"
+location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # registerGenerateQuizJob()
@@ -16,4 +16,4 @@ tags:
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

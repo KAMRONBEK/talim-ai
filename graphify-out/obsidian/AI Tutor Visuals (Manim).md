@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 77"
+community: "plans · Internationalization (uz / en / ru)"
 location: "§1.8"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # AI tutor visuals (Manim)
@@ -15,4 +15,4 @@ tags:
 - [[Background jobs (Bull  Redis)]] - `references` [EXTRACTED]
 - [[RAG AI tutor chat]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_77
+#graphify/concept #graphify/EXTRACTED #community/plans__Internationalization_uz_/_en_/_ru

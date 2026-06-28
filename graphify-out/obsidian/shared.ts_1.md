@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 51"
+community: "assessment · learner.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/assessment__learnerts
 ---
 
 # shared.ts
@@ -18,6 +18,7 @@ tags:
 - [[QuestionStyle_1]] - `contains` [EXTRACTED]
 - [[assertBank()]] - `contains` [EXTRACTED]
 - [[assertLearnerAssignment()]] - `contains` [EXTRACTED]
+- [[assertTenantContentIds()]] - `contains` [EXTRACTED]
 - [[assessments.ts]] - `imports_from` [EXTRACTED]
 - [[assignAssessmentSchema]] - `contains` [EXTRACTED]
 - [[banks.ts]] - `imports_from` [EXTRACTED]
@@ -47,4 +48,4 @@ tags:
 - [[results.ts]] - `imports_from` [EXTRACTED]
 - [[submitAssessmentSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/assessment__learnerts

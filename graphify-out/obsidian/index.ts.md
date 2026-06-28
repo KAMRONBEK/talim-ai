@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/index.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # index.ts
@@ -19,11 +19,13 @@ tags:
 - [[env.ts]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[errorMiddleware()]] - `imports` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_1]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
+- [[registerGenerateFlashcardsJob()]] - `imports` [EXTRACTED]
 - [[registerGeneratePodcastJob()]] - `imports` [EXTRACTED]
 - [[registerGenerateQuizJob()]] - `imports` [EXTRACTED]
 - [[registerGenerateVideoJob()]] - `imports` [EXTRACTED]
@@ -33,4 +35,4 @@ tags:
 - [[routes]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

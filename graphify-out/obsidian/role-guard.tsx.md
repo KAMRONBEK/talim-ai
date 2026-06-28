@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "Community 56"
+community: "components layout · role-guard.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/components_layout__role-guardtsx
 ---
 
 # role-guard.tsx
@@ -23,4 +23,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useAuthHydrated()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/components_layout__role-guardtsx

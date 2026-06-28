@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # getParam()
@@ -21,6 +21,7 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
+- [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
 - [[createQuiz()]] - `calls` [EXTRACTED]
 - [[createSlides()]] - `calls` [EXTRACTED]
@@ -31,6 +32,7 @@ tags:
 - [[deleteGenerated()]] - `calls` [EXTRACTED]
 - [[deleteStudent()]] - `calls` [EXTRACTED]
 - [[deleteUser()]] - `calls` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[generateQuestions()]] - `calls` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getContent()]] - `calls` [EXTRACTED]
@@ -42,6 +44,7 @@ tags:
 - [[getContentTranscript()]] - `calls` [EXTRACTED]
 - [[getContentTranscript()_1]] - `calls` [EXTRACTED]
 - [[getEpisodeProgress()]] - `calls` [EXTRACTED]
+- [[getFlashcards()]] - `calls` [EXTRACTED]
 - [[getLatestAttempt()]] - `calls` [EXTRACTED]
 - [[getLearningHistory()]] - `calls` [EXTRACTED]
 - [[getManimAsset()]] - `calls` [EXTRACTED]
@@ -96,4 +99,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

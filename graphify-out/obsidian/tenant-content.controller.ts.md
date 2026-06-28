@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant-content.controller.ts"
 type: "code"
-community: "Content Controller"
+community: "src controllers · sendContentFile()"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_controllers__sendContentFile
 ---
 
 # tenant-content.controller.ts
@@ -62,4 +62,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_controllers__sendContentFile

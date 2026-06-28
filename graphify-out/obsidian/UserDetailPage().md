@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin hooks"
 location: "L38"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Admin_Plan/Status_UI
+  - community/admin_hooks
 ---
 
 # UserDetailPage()
@@ -23,4 +23,4 @@ tags:
 - [[useResetUserPassword()]] - `calls` [INFERRED]
 - [[useUpdateUserSubscription()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/INFERRED #community/admin_hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Shared UI Components"
+community: "components deck"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck
 ---
 
 # DeckAccent
@@ -19,4 +19,4 @@ tags:
 - [[deck.ts]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck

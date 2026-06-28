@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "Community 57"
+community: "src services · TutorGraphIntent"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_57
+  - community/src_services__TutorGraphIntent
 ---
 
 # ai.service.ts
@@ -28,6 +28,7 @@ tags:
 - [[deepseek]] - `contains` [EXTRACTED]
 - [[env.ts]] - `imports_from` [EXTRACTED]
 - [[generateChatCompletion()]] - `contains` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateJsonCompletion()]] - `contains` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
@@ -49,4 +50,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[withTutorToolInstructions()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_57
+#graphify/code #graphify/EXTRACTED #community/src_services__TutorGraphIntent

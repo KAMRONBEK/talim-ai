@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "rationale"
-community: "Community 93"
+community: "docs"
 tags:
   - graphify/rationale
-  - graphify/EXTRACTED
-  - community/Community_93
+  - graphify/INFERRED
+  - community/docs
 ---
 
 # Manual Payment Model
@@ -14,4 +14,4 @@ tags:
 - [[Platform Guide]] - `references` [EXTRACTED]
 - [[Subscriptions  plans (manual activation)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_93
+#graphify/rationale #graphify/INFERRED #community/docs

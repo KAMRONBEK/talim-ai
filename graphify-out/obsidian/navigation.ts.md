@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "App Layout & Guards"
+community: "ui components · become-tutor-card.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Layout__Guards
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # navigation.ts
@@ -16,7 +16,7 @@ tags:
 - [[auth-guard.tsx_1]] - `imports_from` [EXTRACTED]
 - [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
-- [[content-right-panel.tsx]] - `imports_from` [EXTRACTED]
+- [[content-generations.tsx]] - `imports_from` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports_from` [EXTRACTED]
 - [[cta.tsx]] - `imports_from` [EXTRACTED]
@@ -27,6 +27,7 @@ tags:
 - [[language-switcher.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[learner-navigation.tsx]] - `imports_from` [EXTRACTED]
+- [[learner-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
 - [[navbar.tsx]] - `imports_from` [EXTRACTED]
@@ -44,8 +45,9 @@ tags:
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
-- [[page.tsx_37]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_36]] - `imports_from` [EXTRACTED]
+- [[page.tsx_38]] - `imports_from` [EXTRACTED]
 - [[pricing.tsx]] - `imports_from` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
@@ -59,4 +61,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[{ Link, redirect, usePathname, useRouter, getPathname }]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

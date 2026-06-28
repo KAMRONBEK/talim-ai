@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/package.json"
 type: "code"
-community: "Community 112"
+community: "tsconfig · package.json"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_112
+  - community/tsconfig__packagejson
 ---
 
 # version
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_112
+#graphify/code #graphify/EXTRACTED #community/tsconfig__packagejson

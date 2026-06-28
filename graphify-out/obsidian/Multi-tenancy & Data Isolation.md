@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "rationale"
-community: "Deployment & Infra Docs"
+community: "docs · User Types Model"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/docs__User_Types_Model
 ---
 
 # Multi-tenancy & Data Isolation
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/rationale #graphify/EXTRACTED #community/docs__User_Types_Model

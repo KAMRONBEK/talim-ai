@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/hooks.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # Native CLAUDE.md Integration
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Graphify CLAUDE.md Integration]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/INFERRED #community/references

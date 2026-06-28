@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/account-summary.tsx"
 type: "code"
-community: "Community 49"
+community: "[locale] dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/locale_dashboard
 ---
 
 # account-summary.tsx
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_18]] - `imports_from` [EXTRACTED]
 - [[roleKey]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

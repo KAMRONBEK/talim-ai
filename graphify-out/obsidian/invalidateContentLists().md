@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "Community 30"
+community: "web lib"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/web_lib
 ---
 
 # invalidateContentLists()
@@ -16,4 +16,4 @@ tags:
 - [[useContent.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/web_lib

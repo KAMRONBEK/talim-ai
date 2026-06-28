@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Community 70"
+community: "ui components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/ui_components
 ---
 
 # learning-topbar.tsx
@@ -20,15 +20,13 @@ tags:
 - [[LearningTopbar()]] - `contains` [EXTRACTED]
 - [[LearningTopbarProps]] - `contains` [EXTRACTED]
 - [[LogoMark()]] - `imports` [EXTRACTED]
-- [[ThemeToggle()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[language-switcher.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[logo.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_37]] - `imports_from` [EXTRACTED]
-- [[theme-toggle.tsx]] - `imports_from` [EXTRACTED]
+- [[page.tsx_38]] - `imports_from` [EXTRACTED]
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/ui_components

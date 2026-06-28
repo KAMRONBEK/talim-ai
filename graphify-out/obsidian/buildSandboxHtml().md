@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/html-sandbox-templates.ts"
 type: "code"
-community: "Community 47"
+community: "components chat"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_47
+  - community/components_chat
 ---
 
 # buildSandboxHtml()
@@ -16,4 +16,4 @@ tags:
 - [[html-sandbox-templates.ts]] - `contains` [EXTRACTED]
 - [[num()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_47
+#graphify/code #graphify/EXTRACTED #community/components_chat

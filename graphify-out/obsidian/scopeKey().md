@@ -1,19 +1,19 @@
 ---
-source_file: "apps/api/src/controllers/summary.controller.ts"
+source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Section & Summary API"
-location: "L26"
+community: "src controllers"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_controllers
 ---
 
 # scopeKey()
 
 ## Connections
-- [[generateSummary()]] - `calls` [EXTRACTED]
-- [[getSummary()_1]] - `calls` [EXTRACTED]
-- [[summary.controller.ts]] - `contains` [EXTRACTED]
+- [[createFlashcards()]] - `calls` [EXTRACTED]
+- [[flashcards.controller.ts]] - `contains` [EXTRACTED]
+- [[getFlashcards()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

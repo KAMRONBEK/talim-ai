@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Slide Deck Types"
+community: "packages types"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Types
+  - community/packages_types
 ---
 
 # index.ts
@@ -87,11 +87,15 @@ tags:
 - [[DesmosSlider]] - `re_exports` [EXTRACTED]
 - [[DesmosViewport]] - `re_exports` [EXTRACTED]
 - [[DiagramSlide]] - `re_exports` [EXTRACTED]
+- [[Flashcard]] - `contains` [EXTRACTED]
+- [[FlashcardDeck]] - `contains` [EXTRACTED]
 - [[GeneratedMediaStatus]] - `contains` [EXTRACTED]
 - [[GeoGebraEmbed.tsx]] - `imports_from` [EXTRACTED]
 - [[GeoGebraPayload]] - `re_exports` [EXTRACTED]
 - [[HtmlSandbox.tsx]] - `imports_from` [EXTRACTED]
 - [[HtmlSandboxPayload]] - `re_exports` [EXTRACTED]
+- [[JobEvent]] - `re_exports` [EXTRACTED]
+- [[JobEventStatus]] - `re_exports` [EXTRACTED]
 - [[LearnerAssessment]] - `contains` [EXTRACTED]
 - [[LearnerSummary]] - `contains` [EXTRACTED]
 - [[LearningHistory]] - `contains` [EXTRACTED]
@@ -112,6 +116,7 @@ tags:
 - [[PodcastStatus]] - `contains` [EXTRACTED]
 - [[ProcessSlide]] - `re_exports` [EXTRACTED]
 - [[QuestionBank]] - `contains` [EXTRACTED]
+- [[QuestionBankMaterial]] - `contains` [EXTRACTED]
 - [[QuestionStyle_2]] - `contains` [EXTRACTED]
 - [[QuestionType]] - `contains` [EXTRACTED]
 - [[QuickCheckSlide]] - `re_exports` [EXTRACTED]
@@ -128,6 +133,7 @@ tags:
 - [[SUPPORTED_LOCALES]] - `re_exports` [EXTRACTED]
 - [[SectionProgress]] - `contains` [EXTRACTED]
 - [[SectionSlide]] - `re_exports` [EXTRACTED]
+- [[SeqJobEvent]] - `re_exports` [EXTRACTED]
 - [[Slide.tsx]] - `imports_from` [EXTRACTED]
 - [[SlideBase]] - `re_exports` [EXTRACTED]
 - [[SlideDeckStatus]] - `re_exports` [EXTRACTED]
@@ -172,6 +178,7 @@ tags:
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content-cache.ts]] - `imports_from` [EXTRACTED]
+- [[content-generations.tsx]] - `imports_from` [EXTRACTED]
 - [[content-right-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
@@ -181,14 +188,19 @@ tags:
 - [[deck-theme.ts]] - `imports_from` [EXTRACTED]
 - [[deck.ts]] - `re_exports` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[events.controller.ts]] - `imports_from` [EXTRACTED]
 - [[format-relative-time.ts]] - `imports_from` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports_from` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[html-sandbox-templates.ts]] - `imports_from` [EXTRACTED]
 - [[isAppLocale()]] - `re_exports` [EXTRACTED]
 - [[isSelectedAnswerCorrect()]] - `re_exports` [EXTRACTED]
+- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
+- [[jobEvents.ts]] - `re_exports` [EXTRACTED]
+- [[jobStream.ts]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[leaderboard-table.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
@@ -205,7 +217,9 @@ tags:
 - [[page.tsx_13]] - `imports_from` [EXTRACTED]
 - [[page.tsx_14]] - `imports_from` [EXTRACTED]
 - [[page.tsx_15]] - `imports_from` [EXTRACTED]
+- [[page.tsx_29]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `re_exports` [EXTRACTED]
 - [[parseFenceBlock()]] - `re_exports` [EXTRACTED]
 - [[parseGraphBlock()]] - `re_exports` [EXTRACTED]
@@ -255,6 +269,8 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useContentStore.ts]] - `imports_from` [EXTRACTED]
+- [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
+- [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports_from` [EXTRACTED]
 - [[usePodcast.ts]] - `imports_from` [EXTRACTED]
 - [[useProgress.ts]] - `imports_from` [EXTRACTED]
@@ -270,4 +286,4 @@ tags:
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types
+#graphify/code #graphify/EXTRACTED #community/packages_types

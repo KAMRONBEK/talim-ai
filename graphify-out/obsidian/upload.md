@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/upload.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # upload
@@ -16,4 +16,4 @@ tags:
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 - [[upload.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services · usage-pricing.ts"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services__usage-pricingts
 ---
 
 # TOKEN_PRICING_PER_MILLION
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[usage-pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts

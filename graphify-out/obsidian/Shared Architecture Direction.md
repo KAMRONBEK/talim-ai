@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "rationale"
-community: "Deployment & Infra Docs"
+community: "plans"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/plans
 ---
 
 # Shared Architecture Direction
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/rationale #graphify/EXTRACTED #community/plans

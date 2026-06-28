@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Community 35"
+community: "packages types · api.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/packages_types__apits
 ---
 
 # SUPPORTED_LOCALES
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[locale.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/packages_types__apits

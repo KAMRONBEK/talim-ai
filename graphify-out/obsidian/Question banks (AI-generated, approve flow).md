@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 71"
+community: "docs · Assignment, attempts & max attempts"
 location: "§4.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_71
+  - community/docs__Assignment_attempts__max_attempts
 ---
 
 # Question banks (AI-generated, approve flow)
@@ -15,4 +15,4 @@ tags:
 - [[GAME mode (per-question timer, speed points, streaks)]] - `references` [EXTRACTED]
 - [[Written assessments]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_71
+#graphify/concept #graphify/EXTRACTED #community/docs__Assignment_attempts__max_attempts

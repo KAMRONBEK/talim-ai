@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "concept"
-community: "Deployment & Infra Docs"
+community: "docs · Admin Subdomain DNS + SSL"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/docs__Admin_Subdomain_DNS__SSL
 ---
 
 # Admin Subdomain DNS + SSL
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[VPS Docker Deployment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/concept #graphify/EXTRACTED #community/docs__Admin_Subdomain_DNS__SSL

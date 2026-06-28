@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Community 77"
+community: "docs · Background jobs (Bull / Redis)"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Community_77
+  - graphify/INFERRED
+  - community/docs__Background_jobs_Bull_/_Redis
 ---
 
 # processContent Job (ingest→RAG)
@@ -14,4 +14,4 @@ tags:
 - [[Background jobs (Bull  Redis)]] - `conceptually_related_to` [INFERRED]
 - [[Content Pipeline & Job Model]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_77
+#graphify/concept #graphify/INFERRED #community/docs__Background_jobs_Bull_/_Redis

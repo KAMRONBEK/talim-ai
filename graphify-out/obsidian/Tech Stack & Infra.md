@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Deployment & Infra Docs"
+community: "docs · Admin Subdomain DNS + SSL"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Deployment__Infra_Docs
+  - community/docs__Admin_Subdomain_DNS__SSL
 ---
 
 # Tech Stack & Infra
@@ -14,4 +14,4 @@ tags:
 - [[Platform Guide]] - `references` [EXTRACTED]
 - [[VPS Docker Deployment]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Deployment__Infra_Docs
+#graphify/concept #graphify/INFERRED #community/docs__Admin_Subdomain_DNS__SSL

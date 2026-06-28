@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Community 67"
+community: "src lib · GeneratedQuestion"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/src_lib__GeneratedQuestion
 ---
 
 # generateQuiz.job.ts
@@ -27,6 +27,8 @@ tags:
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isAnswerableMultipleChoice()]] - `imports` [EXTRACTED]
+- [[jobEvents]] - `imports` [EXTRACTED]
+- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[jsonStringArray()]] - `imports` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[normalizeQuestionType()]] - `imports` [EXTRACTED]
@@ -42,4 +44,4 @@ tags:
 - [[searchSimilarChunks()]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion

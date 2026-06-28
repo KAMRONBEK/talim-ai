@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "controllers admin"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/controllers_admin
 ---
 
 # PlanFileLimitError
@@ -17,4 +17,4 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

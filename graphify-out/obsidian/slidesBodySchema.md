@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/slides.controller.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src services · slides.controller.ts"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_services__slidescontrollerts
 ---
 
 # slidesBodySchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[slides.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

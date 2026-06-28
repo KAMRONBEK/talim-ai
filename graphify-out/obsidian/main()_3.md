@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services"
 location: "L89"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services
 ---
 
 # main()
@@ -20,4 +20,4 @@ tags:
 - [[preview()]] - `calls` [EXTRACTED]
 - [[searchWithDistance()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services

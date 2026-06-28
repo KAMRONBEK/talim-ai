@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 92"
+community: "plans · Internationalization (uz / en / ru)"
 location: "§1.7"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_92
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # RAG AI tutor chat
@@ -16,6 +16,5 @@ tags:
 - [[Citations (Manba Pills)]] - `conceptually_related_to` [INFERRED]
 - [[Internationalization (uz  en  ru)]] - `conceptually_related_to` [INFERRED]
 - [[Sectioning]] - `shares_data_with` [INFERRED]
-- [[US-IND-030406 B2C workspace — Summary, Quiz, Chat (PDF)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_92
+#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru

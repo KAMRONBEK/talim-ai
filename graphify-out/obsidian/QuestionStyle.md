@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/assessment-prompt.ts"
 type: "code"
-community: "Community 46"
+community: "assessment"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/assessment
 ---
 
 # QuestionStyle
@@ -16,4 +16,4 @@ tags:
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/assessment

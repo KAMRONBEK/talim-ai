@@ -1,20 +1,20 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "Community 41"
-location: "L56"
+community: "web hooks"
+location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/web_hooks
 ---
 
 # useRegenerateEpisode()
 
 ## Connections
 - [[PodcastPageInner()]] - `calls` [EXTRACTED]
-- [[page.tsx_30]] - `imports` [EXTRACTED]
+- [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[usePodcast.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/web_hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "Community 38"
+community: "components layout · plan.ts"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_layout__plants
 ---
 
 # planMessageKey
@@ -18,4 +18,4 @@ tags:
 - [[plan.ts_1]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

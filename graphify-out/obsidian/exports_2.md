@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Styling Deps"
+community: "packages ui"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Styling_Deps
+  - community/packages_ui
 ---
 
 # exports
@@ -16,4 +16,4 @@ tags:
 - [[.fontsinter]] - `contains` [EXTRACTED]
 - [[package.json_9]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Styling_Deps
+#graphify/code #graphify/EXTRACTED #community/packages_ui

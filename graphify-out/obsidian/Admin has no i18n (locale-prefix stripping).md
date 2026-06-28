@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "rationale"
-community: "Admin Panel Docs"
+community: "api"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Admin_Panel_Docs
+  - community/api
 ---
 
 # Admin has no i18n (locale-prefix stripping)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[appsadmin Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Admin_Panel_Docs
+#graphify/rationale #graphify/EXTRACTED #community/api

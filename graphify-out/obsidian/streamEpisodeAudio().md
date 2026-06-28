@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L169"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # streamEpisodeAudio()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Learner Assessment Pages"
-location: "L21"
+community: "admin components"
+location: "L23"
 tags:
   - graphify/code
-  - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - graphify/INFERRED
+  - community/admin_components
 ---
 
 # WrittenForm()
 
 ## Connections
+- [[T]] - `calls` [INFERRED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
-- [[useSubmitLearnerAssessment()]] - `calls` [EXTRACTED]
+- [[useSubmitLearnerAssessment()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/INFERRED #community/admin_components

@@ -1,22 +1,23 @@
 ---
-source_file: "apps/web/app/[locale]/page.tsx"
+source_file: "apps/web/app/[locale]/dashboard/settings/page.tsx"
 type: "code"
-community: "Community 56"
+community: "[locale] dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/locale_dashboard
 ---
 
 # page.tsx
 
 ## Connections
-- [[HomePage()]] - `contains` [EXTRACTED]
-- [[LandingPage()]] - `imports` [EXTRACTED]
-- [[auth-routing.ts]] - `imports_from` [EXTRACTED]
-- [[getPostLoginPath()]] - `imports` [EXTRACTED]
-- [[landing-page.tsx]] - `imports_from` [EXTRACTED]
-- [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[BecomeTutorCard()]] - `imports` [EXTRACTED]
+- [[BillingSummaryCard()]] - `imports` [EXTRACTED]
+- [[DashboardSettingsPage()]] - `contains` [EXTRACTED]
+- [[ProfileCard()]] - `imports` [EXTRACTED]
+- [[become-tutor-card.tsx]] - `imports_from` [EXTRACTED]
+- [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
+- [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

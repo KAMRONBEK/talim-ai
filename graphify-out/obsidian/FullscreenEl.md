@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Shared UI Components"
-location: "L12"
+community: "components deck · DeckPlayer.tsx"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck__DeckPlayertsx
 ---
 
 # FullscreenEl
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[DeckPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck__DeckPlayertsx

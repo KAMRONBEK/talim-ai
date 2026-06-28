@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 51"
-location: "L12"
+community: "assessment · learner.ts"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/assessment__learnerts
 ---
 
 # questionStyleEnum
@@ -15,4 +15,4 @@ tags:
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/assessment__learnerts

@@ -1,23 +1,26 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "Content Progress Hooks"
+community: "web hooks"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # useContentBase()
 
 ## Connections
 - [[VideoInner()]] - `calls` [EXTRACTED]
-- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useContentBase.ts]] - `contains` [EXTRACTED]
 - [[useContentProgress()]] - `calls` [EXTRACTED]
 - [[useCreatePodcast()]] - `calls` [EXTRACTED]
+- [[useFlashcards()]] - `calls` [EXTRACTED]
+- [[useFlashcards.ts]] - `imports` [EXTRACTED]
+- [[useGenerateFlashcards()]] - `calls` [EXTRACTED]
 - [[useGenerateVideo()]] - `calls` [EXTRACTED]
 - [[useLearningHistory()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
@@ -36,4 +39,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

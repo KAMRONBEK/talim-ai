@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/update.md"
 type: "rationale"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # prune_sources (deleted-file pruning)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Incremental Update (--update)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/rationale #graphify/EXTRACTED #community/references

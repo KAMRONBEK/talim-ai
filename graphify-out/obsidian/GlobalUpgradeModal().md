@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/global-upgrade-modal.tsx"
 type: "code"
-community: "Community 38"
+community: "components account"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_account
 ---
 
 # GlobalUpgradeModal()
@@ -16,4 +16,4 @@ tags:
 - [[providers.tsx_1]] - `imports` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_account

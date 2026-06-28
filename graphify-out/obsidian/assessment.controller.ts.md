@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Community 62"
+community: "src controllers · assessment.controller.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/src_controllers__assessmentcontrollerts
 ---
 
 # assessment.controller.ts
@@ -36,4 +36,4 @@ tags:
 - [[submitLearnerAssessment()]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_62
+#graphify/code #graphify/EXTRACTED #community/src_controllers__assessmentcontrollerts

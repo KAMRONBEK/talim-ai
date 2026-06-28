@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tutorRequest.service.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "controllers admin"
 location: "L63"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/controllers_admin
 ---
 
 # listTutorRequests()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutorRequest.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

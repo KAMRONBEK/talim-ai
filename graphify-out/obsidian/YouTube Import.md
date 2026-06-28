@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 92"
+community: "plans · Internationalization (uz / en / ru)"
 location: "§1.2"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_92
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # YouTube import
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Sectioning]] - `references` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_92
+#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru

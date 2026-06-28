@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Community 52"
+community: "web · components.json"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/web__componentsjson
 ---
 
 # utils
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[aliases]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/web__componentsjson

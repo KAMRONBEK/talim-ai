@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Learner Assessment Pages"
+community: "admin components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - community/admin_components
 ---
 
 # page.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useLearnerLeaderboard()]] - `imports` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_components

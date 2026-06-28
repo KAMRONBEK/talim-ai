@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Community 44"
+community: "components learning"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/components_learning
 ---
 
 # SectionReader()
@@ -20,4 +20,4 @@ tags:
 - [[useGenerateSlides()]] - `calls` [EXTRACTED]
 - [[useSlides()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/components_learning

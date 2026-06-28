@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 77"
+community: "docs · Background jobs (Bull / Redis)"
 location: "§5.5"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/docs__Background_jobs_Bull_/_Redis
 ---
 
 # Content & generated media (admin)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Background jobs (Bull  Redis)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_77
+#graphify/concept #graphify/EXTRACTED #community/docs__Background_jobs_Bull_/_Redis

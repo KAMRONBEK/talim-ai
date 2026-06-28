@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # assertCanGenerate()
@@ -14,10 +14,12 @@ tags:
 ## Connections
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
+- [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
 - [[createQuiz()]] - `calls` [EXTRACTED]
 - [[createSlides()]] - `calls` [EXTRACTED]
 - [[createVideo()]] - `calls` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
@@ -26,4 +28,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

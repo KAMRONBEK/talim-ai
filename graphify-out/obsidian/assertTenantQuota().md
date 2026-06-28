@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L79"
+community: "subscription"
+location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # assertTenantQuota()
@@ -29,4 +29,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

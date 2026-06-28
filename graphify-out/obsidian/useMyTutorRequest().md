@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTutorRequest.ts"
 type: "code"
-community: "Community 68"
+community: "ui components · become-tutor-card.tsx"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # useMyTutorRequest()
@@ -16,4 +16,4 @@ tags:
 - [[become-tutor-card.tsx]] - `imports` [EXTRACTED]
 - [[useTutorRequest.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

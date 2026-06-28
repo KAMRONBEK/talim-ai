@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatMessage.tsx"
 type: "code"
-community: "Community 43"
+community: "components chat · ChatMessage.tsx"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/components_chat__ChatMessagetsx
 ---
 
 # ChatMessage()
@@ -17,4 +17,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[cn()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx

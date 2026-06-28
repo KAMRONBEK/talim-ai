@@ -1,19 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 92"
+community: "plans · Internationalization (uz / en / ru)"
 location: "§6.1"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_92
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # Internationalization (uz / en / ru)
 
 ## Connections
 - [[RAG AI tutor chat]] - `conceptually_related_to` [INFERRED]
-- [[US-IND-07 Dashboard grid  empty  search  thumbnails]] - `conceptually_related_to` [INFERRED]
-- [[US-XCUT-01 i18n — every user-facing string localized, Uzbek-first]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_92
+#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru

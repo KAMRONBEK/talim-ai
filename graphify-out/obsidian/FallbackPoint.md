@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "Community 69"
+community: "components chat · DesmosGraph.tsx"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_69
+  - community/components_chat__DesmosGraphtsx
 ---
 
 # FallbackPoint
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[DesmosGraph.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_69
+#graphify/code #graphify/EXTRACTED #community/components_chat__DesmosGraphtsx

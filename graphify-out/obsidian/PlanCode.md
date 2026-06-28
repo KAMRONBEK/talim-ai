@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L30"
+community: "web lib · upgrade-dialog.tsx"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/web_lib__upgrade-dialogtsx
 ---
 
 # PlanCode
@@ -25,4 +25,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/[id]/page.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin hooks"
 location: "L18"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Admin_Plan/Status_UI
+  - community/admin_hooks
 ---
 
 # TenantDetailPage()
@@ -18,4 +18,4 @@ tags:
 - [[useAdminTenant()]] - `calls` [INFERRED]
 - [[useUpdateTenant()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/INFERRED #community/admin_hooks

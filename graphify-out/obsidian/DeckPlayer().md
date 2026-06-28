@@ -1,20 +1,21 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Shared UI Components"
-location: "L20"
+community: "components learning"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_learning
 ---
 
 # DeckPlayer()
 
 ## Connections
 - [[DeckPlayer.tsx]] - `contains` [EXTRACTED]
+- [[T]] - `calls` [INFERRED]
 - [[cn()]] - `calls` [EXTRACTED]
-- [[page.tsx_31]] - `imports` [EXTRACTED]
+- [[page.tsx_32]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_learning

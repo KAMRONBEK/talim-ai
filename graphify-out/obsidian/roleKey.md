@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/account-summary.tsx"
 type: "code"
-community: "Community 49"
+community: "[locale] dashboard"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/locale_dashboard
 ---
 
 # roleKey
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[account-summary.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

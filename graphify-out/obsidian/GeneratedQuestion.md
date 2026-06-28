@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 67"
-location: "L78"
+community: "src lib · GeneratedQuestion"
+location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/src_lib__GeneratedQuestion
 ---
 
 # GeneratedQuestion
@@ -16,4 +16,4 @@ tags:
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion

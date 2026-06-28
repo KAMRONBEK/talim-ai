@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 36"
-location: "L664"
+community: "web hooks · page.tsx"
+location: "L673"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/web_hooks__pagetsx
 ---
 
 # QuizAttempt
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "concept"
-community: "Community 64"
+community: "workflows"
 location: "services.api"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Compose service: api (Express + Prisma + Bull)
@@ -20,4 +20,4 @@ tags:
 - [[Deploy Deploy to VPS job]] - `references` [INFERRED]
 - [[Doppler-injected Compose secrets]] - `rationale_for` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_64
+#graphify/concept #graphify/EXTRACTED #community/workflows

@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/query.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # NetworkX Inline Traversal Fallback
@@ -15,4 +15,4 @@ tags:
 - [[graphify path]] - `references` [EXTRACTED]
 - [[graphify query]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/references

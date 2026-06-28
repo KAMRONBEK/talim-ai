@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Community 48"
+community: "src controllers · chat.controller.ts"
 location: "L275"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/src_controllers__chatcontrollerts
 ---
 
 # buildFigureContext()
@@ -16,4 +16,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts

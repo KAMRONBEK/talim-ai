@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/qa-pythagoras.txt"
 type: "document"
-community: "Community 75"
+community: "qa · QA Cross-Cutting Matrix"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/Community_75
+  - community/qa__QA_Cross-Cutting_Matrix
 ---
 
 # Pythagoras QA fixture text
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Pythagorean Theorem QA test PDF]] - `semantically_similar_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/Community_75
+#graphify/document #graphify/INFERRED #community/qa__QA_Cross-Cutting_Matrix

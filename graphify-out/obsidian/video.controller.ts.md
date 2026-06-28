@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # video.controller.ts
@@ -37,7 +37,7 @@ tags:
 - [[publicSegments()]] - `contains` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
-- [[scopeKey()_1]] - `contains` [EXTRACTED]
+- [[scopeKey()_2]] - `contains` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamVideoSegmentAudio()]] - `contains` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
@@ -45,4 +45,4 @@ tags:
 - [[videoBodySchema]] - `contains` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

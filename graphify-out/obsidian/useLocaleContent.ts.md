@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "Community 41"
+community: "web hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/web_hooks
 ---
 
 # useLocaleContent.ts
@@ -27,4 +27,4 @@ tags:
 - [[usePodcast.ts]] - `imports_from` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/web_hooks

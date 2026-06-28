@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Community 54"
+community: "api · scripts"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/api__scripts
 ---
 
 # build
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/api__scripts

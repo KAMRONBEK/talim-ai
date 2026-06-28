@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/billing.controller.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "subscription"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # getBillingMe()
@@ -17,4 +17,4 @@ tags:
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[getUsageVsLimits()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

@@ -1,23 +1,22 @@
 ---
-source_file: "apps/web/app/[locale]/pricing/page.tsx"
+source_file: "apps/web/app/[locale]/page.tsx"
 type: "code"
-community: "Community 40"
+community: "ui components · become-tutor-card.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # page.tsx
 
 ## Connections
-- [[Footer()]] - `imports` [EXTRACTED]
-- [[Navbar()]] - `imports` [EXTRACTED]
-- [[Pricing()]] - `imports` [EXTRACTED]
-- [[PricingPage()]] - `contains` [EXTRACTED]
-- [[footer.tsx]] - `imports_from` [EXTRACTED]
-- [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[pricing.tsx]] - `imports_from` [EXTRACTED]
+- [[HomePage()]] - `contains` [EXTRACTED]
+- [[LandingPage()]] - `imports` [EXTRACTED]
+- [[auth-routing.ts]] - `imports_from` [EXTRACTED]
+- [[getPostLoginPath()]] - `imports` [EXTRACTED]
+- [[landing-page.tsx]] - `imports_from` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

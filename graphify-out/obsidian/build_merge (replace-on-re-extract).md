@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/update.md"
 type: "rationale"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # build_merge (replace-on-re-extract)
@@ -15,4 +15,4 @@ tags:
 - [[Node ID Format Rule]] - `rationale_for` [INFERRED]
 - [[source_file Verbatim Rule]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/rationale #graphify/EXTRACTED #community/references

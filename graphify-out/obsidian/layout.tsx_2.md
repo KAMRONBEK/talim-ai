@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/layout.tsx"
 type: "code"
-community: "Community 61"
+community: "components layout · role-guard.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/components_layout__role-guardtsx
 ---
 
 # layout.tsx
@@ -16,4 +16,4 @@ tags:
 - [[LearnerShell()]] - `imports` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/components_layout__role-guardtsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/tenant.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # tenant.middleware.ts
@@ -23,6 +23,7 @@ tags:
 - [[content.routes.ts]] - `imports_from` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[events.routes.ts]] - `imports_from` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[summary.routes.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/pricing/page.tsx"
 type: "code"
-community: "Community 40"
+community: "components marketing"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/components_marketing
 ---
 
 # PricingPage()
 
 ## Connections
-- [[page.tsx_36]] - `contains` [EXTRACTED]
+- [[page.tsx_37]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/components_marketing

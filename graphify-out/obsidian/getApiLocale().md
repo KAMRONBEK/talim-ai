@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/locale-api.ts"
 type: "code"
-community: "Community 35"
+community: "packages types · api.ts"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/packages_types__apits
 ---
 
 # getApiLocale()
@@ -17,4 +17,4 @@ tags:
 - [[parseAppLocale()]] - `calls` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/packages_types__apits

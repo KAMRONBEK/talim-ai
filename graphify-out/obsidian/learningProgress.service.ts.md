@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Quiz Controller"
+community: "src services · learning-coverage-prompt.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/src_services__learning-coverage-promptts
 ---
 
 # learningProgress.service.ts
@@ -46,4 +46,4 @@ tags:
 - [[todayUtcDate()]] - `contains` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts

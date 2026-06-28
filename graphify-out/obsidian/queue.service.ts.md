@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # queue.service.ts
@@ -15,6 +15,7 @@ tags:
 - [[CONTENT_QUEUES]] - `contains` [EXTRACTED]
 - [[ContentScopedJobData]] - `contains` [EXTRACTED]
 - [[Env]] - `imports` [EXTRACTED]
+- [[GenerateFlashcardsJobData]] - `contains` [EXTRACTED]
 - [[GeneratePodcastJobData]] - `contains` [EXTRACTED]
 - [[GenerateQuizJobData]] - `contains` [EXTRACTED]
 - [[GenerateVideoJobData]] - `contains` [EXTRACTED]
@@ -26,6 +27,9 @@ tags:
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[contentQueue]] - `contains` [EXTRACTED]
 - [[env.ts]] - `imports_from` [EXTRACTED]
+- [[flashcardQueue]] - `contains` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
@@ -40,4 +44,4 @@ tags:
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

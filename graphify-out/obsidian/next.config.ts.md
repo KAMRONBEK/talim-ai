@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/next.config.ts"
 type: "code"
-community: "Community 120"
+community: "apps admin · next.config.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_120
+  - community/apps_admin__nextconfigts
 ---
 
 # next.config.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[nextConfig]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_120
+#graphify/code #graphify/EXTRACTED #community/apps_admin__nextconfigts

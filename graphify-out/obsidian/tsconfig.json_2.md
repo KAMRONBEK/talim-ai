@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/tsconfig.json"
 type: "code"
-community: "Community 79"
+community: "web · tsconfig.json"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_79
+  - community/web__tsconfigjson
 ---
 
 # tsconfig.json
@@ -17,4 +17,4 @@ tags:
 - [[extends_2]] - `contains` [EXTRACTED]
 - [[include_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_79
+#graphify/code #graphify/EXTRACTED #community/web__tsconfigjson

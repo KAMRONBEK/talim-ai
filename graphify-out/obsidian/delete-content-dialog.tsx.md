@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/delete-content-dialog.tsx"
 type: "code"
-community: "Community 31"
+community: "ui components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # delete-content-dialog.tsx
@@ -23,9 +23,9 @@ tags:
 - [[DialogTitle()]] - `imports` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
+- [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useDeleteContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

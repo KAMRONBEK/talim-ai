@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useContentStore.ts"
 type: "code"
-community: "Community 30"
+community: "web lib"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/web_lib
 ---
 
 # ContentState
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[useContentStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/web_lib

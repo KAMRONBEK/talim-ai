@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-learn-panel.tsx"
 type: "code"
-community: "Sheet UI Component"
+community: "components layout"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet_UI_Component
+  - community/components_layout
 ---
 
 # content-learn-panel.tsx
@@ -29,6 +29,6 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[content-right-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
+- [[page.tsx_30]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component
+#graphify/code #graphify/EXTRACTED #community/components_layout

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-4-individual-freemium.md"
 type: "concept"
-community: "Deployment & Infra Docs"
+community: "plans"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/plans
 ---
 
 # Quota-exceeded UpgradeModal UX
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Epic 4 — Individual Learner Freemium UX]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/concept #graphify/EXTRACTED #community/plans

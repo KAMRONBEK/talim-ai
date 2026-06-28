@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 43"
-location: "L634"
+community: "components chat · ChatMessage.tsx"
+location: "L643"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/components_chat__ChatMessagetsx
 ---
 
 # ChatSessionResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useChat.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Community 50"
+community: "api · dependencies"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/api__dependencies
 ---
 
 # dependencies
@@ -31,4 +31,4 @@ tags:
 - [[youtube-transcript]] - `contains` [EXTRACTED]
 - [[zod]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/api__dependencies

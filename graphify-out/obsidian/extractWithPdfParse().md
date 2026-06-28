@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 65"
+community: "src services · usage-pricing.ts"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_65
+  - community/src_services__usage-pricingts
 ---
 
 # extractWithPdfParse()
@@ -15,4 +15,4 @@ tags:
 - [[extractPdfText()]] - `calls` [EXTRACTED]
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_65
+#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts

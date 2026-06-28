@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 51"
-location: "L19"
+community: "assessment · learner.ts"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/assessment__learnerts
 ---
 
 # QuestionStyle
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/assessment__learnerts

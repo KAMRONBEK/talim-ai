@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/admin.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "subscription"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # admin.ts
@@ -19,4 +19,4 @@ tags:
 - [[shared.ts_2]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

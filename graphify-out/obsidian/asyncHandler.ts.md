@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/asyncHandler.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # asyncHandler.ts
@@ -18,6 +18,7 @@ tags:
 - [[billing.routes.ts]] - `imports_from` [EXTRACTED]
 - [[chat.routes.ts]] - `imports_from` [EXTRACTED]
 - [[content.routes.ts]] - `imports_from` [EXTRACTED]
+- [[events.routes.ts]] - `imports_from` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.routes.ts]] - `imports_from` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports_from` [EXTRACTED]
@@ -25,4 +26,4 @@ tags:
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 - [[usage.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/QA.md"
 type: "document"
-community: "Deployment & Infra Docs"
+community: "docs · User Types Model"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/Deployment__Infra_Docs
+  - community/docs__User_Types_Model
 ---
 
 # QA with Playwright MCP
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Three Apps Architecture]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/Deployment__Infra_Docs
+#graphify/document #graphify/INFERRED #community/docs__User_Types_Model

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Community 52"
+community: "web · components.json"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/web__componentsjson
 ---
 
 # baseColor
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tailwind]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/web__componentsjson

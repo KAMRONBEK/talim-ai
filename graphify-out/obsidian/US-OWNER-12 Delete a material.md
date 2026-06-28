@@ -1,17 +1,13 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Community 77"
+community: "qa · US-OWNER-12: Delete a material"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/qa__US-OWNER-12_Delete_a_material
 ---
 
 # US-OWNER-12: Delete a material
 
-## Connections
-- [[F15 Material delete dialog + aria-label hardcoded Uzbek]] - `references` [EXTRACTED]
-- [[Materials + assignment]] - `references` [EXTRACTED]
-
-#graphify/document #graphify/EXTRACTED #community/Community_77
+#graphify/document #graphify/EXTRACTED #community/qa__US-OWNER-12_Delete_a_material

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L219"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # getContentTranscript()
@@ -17,4 +17,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[loadOrBackfillTranscript()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "services tenant"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/services_tenant
 ---
 
 # createTenantForOwner()
@@ -21,4 +21,4 @@ tags:
 - [[organization.ts]] - `contains` [EXTRACTED]
 - [[uniqueSlug()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/services_tenant

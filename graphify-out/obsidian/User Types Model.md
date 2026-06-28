@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "concept"
-community: "Deployment & Infra Docs"
+community: "docs · User Types Model"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/docs__User_Types_Model
 ---
 
 # User Types Model
@@ -14,4 +14,4 @@ tags:
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 - [[Roles & Personas]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/concept #graphify/EXTRACTED #community/docs__User_Types_Model

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Community 36"
-location: "L29"
+community: "web hooks · page.tsx"
+location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/web_hooks__pagetsx
 ---
 
 # useQuizHistory()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

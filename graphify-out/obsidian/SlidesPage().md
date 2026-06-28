@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "Community 44"
-location: "L137"
+community: "components learning"
+location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/components_learning
 ---
 
 # SlidesPage()
 
 ## Connections
-- [[page.tsx_31]] - `contains` [EXTRACTED]
+- [[page.tsx_32]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/components_learning

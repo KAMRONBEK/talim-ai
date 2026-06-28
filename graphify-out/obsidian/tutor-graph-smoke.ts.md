@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/tutor-graph-smoke.ts"
 type: "code"
-community: "Community 48"
+community: "src lib · tutor-graph-intent.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/src_lib__tutor-graph-intentts
 ---
 
 # tutor-graph-smoke.ts
@@ -23,4 +23,4 @@ tags:
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 - [[validateGraphPayload()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/src_lib__tutor-graph-intentts

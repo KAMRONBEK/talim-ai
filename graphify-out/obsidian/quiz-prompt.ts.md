@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/quiz-prompt.ts"
 type: "code"
-community: "Community 67"
+community: "src lib · GeneratedQuestion"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/src_lib__GeneratedQuestion
 ---
 
 # quiz-prompt.ts
@@ -16,4 +16,4 @@ tags:
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[getQuestionCount()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion

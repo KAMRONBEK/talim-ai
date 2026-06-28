@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/index.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # index.ts
@@ -22,6 +22,8 @@ tags:
 - [[chatRoutes]] - `imports` [EXTRACTED]
 - [[content.routes.ts]] - `imports_from` [EXTRACTED]
 - [[contentRoutes]] - `imports` [EXTRACTED]
+- [[events.routes.ts]] - `imports_from` [EXTRACTED]
+- [[eventsRoutes]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[learnerRoutes]] - `imports` [EXTRACTED]
@@ -35,4 +37,4 @@ tags:
 - [[usage.routes.ts]] - `imports_from` [EXTRACTED]
 - [[usageRoutes]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

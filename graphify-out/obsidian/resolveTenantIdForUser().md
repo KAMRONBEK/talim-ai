@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # resolveTenantIdForUser()
@@ -23,4 +23,4 @@ tags:
 - [[tenant.middleware.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

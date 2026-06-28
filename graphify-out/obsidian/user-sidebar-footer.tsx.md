@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Community 61"
+community: "web lib · user-sidebar-footer.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/web_lib__user-sidebar-footertsx
 ---
 
 # user-sidebar-footer.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[user-display.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/web_lib__user-sidebar-footertsx

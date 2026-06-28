@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/auth-guard.tsx"
 type: "code"
-community: "Community 116"
+community: "admin components · auth-guard.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_116
+  - community/admin_components__auth-guardtsx
 ---
 
 # auth-guard.tsx
@@ -15,4 +15,4 @@ tags:
 - [[AuthGuard()]] - `contains` [EXTRACTED]
 - [[useAuthHydrated()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_116
+#graphify/code #graphify/EXTRACTED #community/admin_components__auth-guardtsx

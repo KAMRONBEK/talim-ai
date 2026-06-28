@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/for-tutors.tsx"
 type: "code"
-community: "Community 40"
+community: "components marketing"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/components_marketing
 ---
 
 # ForTutors()
@@ -16,4 +16,4 @@ tags:
 - [[for-tutors.tsx]] - `contains` [EXTRACTED]
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/components_marketing

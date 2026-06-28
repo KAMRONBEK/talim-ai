@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Community 67"
-location: "L17"
+community: "src lib · GeneratedQuestion"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/src_lib__GeneratedQuestion
 ---
 
 # getSectionContext()
@@ -15,4 +15,4 @@ tags:
 - [[buildRagContext()]] - `calls` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion

@@ -1,17 +1,14 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 109"
+community: "docs · User management (role, reset/show passw"
 location: "§5.3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_109
+  - community/docs__User_management_role_reset/show_passw
 ---
 
 # User management (role, reset/show password, delete)
 
-## Connections
-- [[US-ADMIN-02 Users  tenants  content  generated  subscriptions  usage  audit]] - `references` [EXTRACTED]
-
-#graphify/concept #graphify/EXTRACTED #community/Community_109
+#graphify/concept #graphify/EXTRACTED #community/docs__User_management_role_reset/show_passw

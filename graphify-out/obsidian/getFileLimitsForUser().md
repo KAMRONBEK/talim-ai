@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L131"
+community: "src controllers · content.controller.ts"
+location: "L130"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/src_controllers__contentcontrollerts
 ---
 
 # getFileLimitsForUser()
@@ -18,4 +18,4 @@ tags:
 - [[uploadContent()]] - `calls` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers__contentcontrollerts

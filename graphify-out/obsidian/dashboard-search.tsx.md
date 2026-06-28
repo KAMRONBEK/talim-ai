@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/dashboard-search.tsx"
 type: "code"
-community: "Community 42"
+community: "components layout · dashboard-search.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_42
+  - community/components_layout__dashboard-searchtsx
 ---
 
 # dashboard-search.tsx
@@ -22,10 +22,10 @@ tags:
 - [[dashboard-search-bar.tsx]] - `imports_from` [EXTRACTED]
 - [[dashboard-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_5]] - `imports_from` [EXTRACTED]
-- [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[useDashboardSearch()]] - `contains` [EXTRACTED]
 - [[useSidebarSheet()]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_42
+#graphify/code #graphify/EXTRACTED #community/components_layout__dashboard-searchtsx

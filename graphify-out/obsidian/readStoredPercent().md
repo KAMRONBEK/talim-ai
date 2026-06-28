@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/resizable-split.tsx"
 type: "code"
-community: "Community 101"
-location: "L17"
+community: "components layout · resizable-split.tsx"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_101
+  - community/components_layout__resizable-splittsx
 ---
 
 # readStoredPercent()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[resizable-split.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_101
+#graphify/code #graphify/EXTRACTED #community/components_layout__resizable-splittsx

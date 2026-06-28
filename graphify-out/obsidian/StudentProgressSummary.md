@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Web Pages"
-location: "L234"
+community: "packages types · page.tsx"
+location: "L236"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/packages_types__pagetsx
 ---
 
 # StudentProgressSummary
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/packages_types__pagetsx

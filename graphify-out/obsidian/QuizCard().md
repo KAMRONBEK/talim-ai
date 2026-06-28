@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizCard.tsx"
 type: "code"
-community: "Community 83"
-location: "L86"
+community: "web hooks · page.tsx"
+location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_83
+  - community/web_hooks__pagetsx
 ---
 
 # QuizCard()
@@ -15,6 +15,7 @@ tags:
 - [[QuizCard.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [INFERRED]
 - [[isQuestionCorrect()]] - `calls` [EXTRACTED]
-- [[page.tsx_37]] - `imports` [EXTRACTED]
+- [[isQuizGenerationStale()]] - `calls` [EXTRACTED]
+- [[page.tsx_38]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_83
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

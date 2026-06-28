@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/_err.html"
 type: "document"
-community: "Community 133"
+community: "screenshots · Admin SSR error page (hasHydrate"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/Community_133
+  - community/screenshots__Admin_SSR_error_page_hasHydrate
 ---
 
 # Generic Internal Server Error page
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Admin SSR error page (hasHydrated TypeError)]] - `semantically_similar_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/Community_133
+#graphify/document #graphify/INFERRED #community/screenshots__Admin_SSR_error_page_hasHydrate

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/game-quiz-player.tsx"
 type: "code"
-community: "Learner Assessment Pages"
+community: "admin components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - community/admin_components
 ---
 
 # game-quiz-player.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useAssessments.ts]] - `imports_from` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_components

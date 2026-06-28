@@ -1,23 +1,28 @@
 ---
-source_file: "apps/web/app/[locale]/dashboard/settings/page.tsx"
+source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Community 68"
+community: "[locale] dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/locale_dashboard
 ---
 
 # page.tsx
 
 ## Connections
-- [[BecomeTutorCard()]] - `imports` [EXTRACTED]
-- [[BillingSummaryCard()]] - `imports` [EXTRACTED]
-- [[DashboardSettingsPage()]] - `contains` [EXTRACTED]
-- [[ProfileCard()]] - `imports` [EXTRACTED]
-- [[become-tutor-card.tsx]] - `imports_from` [EXTRACTED]
-- [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
-- [[profile-card.tsx]] - `imports_from` [EXTRACTED]
+- [[DashboardPage()]] - `contains` [EXTRACTED]
+- [[DashboardSearchBar()]] - `imports` [EXTRACTED]
+- [[QuickActionCards()]] - `imports` [EXTRACTED]
+- [[RecentContentGrid()]] - `imports` [EXTRACTED]
+- [[dashboard-search-bar.tsx]] - `imports_from` [EXTRACTED]
+- [[dashboard-search.tsx]] - `imports_from` [EXTRACTED]
+- [[getFirstName()]] - `contains` [EXTRACTED]
+- [[quick-action-cards.tsx]] - `imports_from` [EXTRACTED]
+- [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
+- [[useContent.ts]] - `imports_from` [EXTRACTED]
+- [[useContents()]] - `imports` [EXTRACTED]
+- [[useDashboardSearch()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

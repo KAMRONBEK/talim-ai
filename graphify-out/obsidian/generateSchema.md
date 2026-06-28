@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 46"
-location: "L21"
+community: "assessment"
+location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/assessment
 ---
 
 # generateSchema
@@ -15,4 +15,4 @@ tags:
 - [[banks.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/assessment

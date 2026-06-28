@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "Admin Audit & Auth"
-location: "L21"
+community: "src routes"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # tenantRoutes
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_1]] - `imports` [EXTRACTED]
 - [[tenant.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

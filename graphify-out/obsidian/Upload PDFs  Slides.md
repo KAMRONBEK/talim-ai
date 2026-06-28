@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 77"
+community: "docs · Background jobs (Bull / Redis)"
 location: "§1.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/docs__Background_jobs_Bull_/_Redis
 ---
 
 # Upload PDFs / slides
@@ -16,4 +16,4 @@ tags:
 - [[Content viewing extras (download, OCR region, transcript, history)]] - `conceptually_related_to` [INFERRED]
 - [[Materials + assignment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_77
+#graphify/concept #graphify/EXTRACTED #community/docs__Background_jobs_Bull_/_Redis

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "Community 33"
+community: "src services · tts-normalize.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/src_services__tts-normalizets
 ---
 
 # tts.service.ts
@@ -44,4 +44,4 @@ tags:
 - [[tts-normalize.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/src_services__tts-normalizets

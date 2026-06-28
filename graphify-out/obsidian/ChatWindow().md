@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "Community 43"
+community: "components chat · ChatMessage.tsx"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/components_chat__ChatMessagetsx
 ---
 
 # ChatWindow()
@@ -19,4 +19,4 @@ tags:
 - [[useChatStore]] - `calls` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx

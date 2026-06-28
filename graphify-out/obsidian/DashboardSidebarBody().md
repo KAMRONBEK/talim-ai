@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "Community 49"
+community: "components layout · dashboard-search.tsx"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/components_layout__dashboard-searchtsx
 ---
 
 # DashboardSidebarBody()
@@ -16,4 +16,4 @@ tags:
 - [[dashboard-sidebar.tsx]] - `contains` [EXTRACTED]
 - [[useContents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/components_layout__dashboard-searchtsx

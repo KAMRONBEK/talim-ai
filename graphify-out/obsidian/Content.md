@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 30"
-location: "L552"
+community: "web lib"
+location: "L561"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/web_lib
 ---
 
 # Content
@@ -28,4 +28,4 @@ tags:
 - [[useContentStore.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/web_lib

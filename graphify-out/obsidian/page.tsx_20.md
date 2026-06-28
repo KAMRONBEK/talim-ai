@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx"
 type: "code"
-community: "Community 38"
+community: "components layout · plan.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_layout__plants
 ---
 
 # page.tsx
@@ -19,4 +19,4 @@ tags:
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

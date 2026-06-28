@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L140"
+community: "subscription"
+location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # assertQuota()
@@ -15,11 +15,13 @@ tags:
 - [[assertTenantQuota()]] - `calls` [EXTRACTED]
 - [[autoGenerateSectionDecks()]] - `calls` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
+- [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
 - [[createQuiz()]] - `calls` [EXTRACTED]
 - [[createSlides()]] - `calls` [EXTRACTED]
 - [[createVideo()]] - `calls` [EXTRACTED]
 - [[dayRange()]] - `calls` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getGenerationCount()]] - `calls` [EXTRACTED]
 - [[getPodcastCount()]] - `calls` [EXTRACTED]
@@ -45,4 +47,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

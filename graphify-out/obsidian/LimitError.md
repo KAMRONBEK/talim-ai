@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/limit-error.ts"
 type: "code"
-community: "Community 36"
+community: "web lib · upgrade-dialog.tsx"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/web_lib__upgrade-dialogtsx
 ---
 
 # LimitError
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[limit-error.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx

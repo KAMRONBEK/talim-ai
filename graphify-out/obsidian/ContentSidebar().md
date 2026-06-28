@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "Community 89"
-location: "L111"
+community: "components layout · content-generations.tsx"
+location: "L137"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/components_layout__content-generationstsx
 ---
 
 # ContentSidebar()
@@ -15,4 +15,4 @@ tags:
 - [[content-sidebar.tsx]] - `contains` [EXTRACTED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_89
+#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx

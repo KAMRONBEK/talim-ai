@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Community 39"
+community: "src lib · locale-prompts.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/src_lib__locale-promptsts
 ---
 
 # locale-prompts.ts
@@ -50,4 +50,4 @@ tags:
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/src_lib__locale-promptsts

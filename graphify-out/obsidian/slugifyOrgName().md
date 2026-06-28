@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tenant-slug.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "services tenant"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/services_tenant
 ---
 
 # slugifyOrgName()
@@ -16,4 +16,4 @@ tags:
 - [[tenant-slug.ts]] - `contains` [EXTRACTED]
 - [[uniqueSlug()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/services_tenant

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/users.controller.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
-location: "L346"
+community: "controllers admin"
+location: "L366"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin
 ---
 
 # patchUserSubscription()
@@ -17,4 +17,4 @@ tags:
 - [[users.controller.ts]] - `contains` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

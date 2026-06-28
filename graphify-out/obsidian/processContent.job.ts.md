@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/processContent.job.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src services · env.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_services__envts
 ---
 
 # processContent.job.ts
@@ -24,6 +24,8 @@ tags:
 - [[extractYoutubeTranscript()]] - `imports` [EXTRACTED]
 - [[generateContentSections()]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
+- [[jobEvents]] - `imports` [EXTRACTED]
+- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[pdf.service.ts]] - `imports_from` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
@@ -37,4 +39,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_services__envts

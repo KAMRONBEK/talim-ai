@@ -1,18 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 82"
+community: "docs · Become-a-tutor request flow"
 location: "§3.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/docs__Become-a-tutor_request_flow
 ---
 
 # Tenant dashboard & org settings
 
 ## Connections
 - [[Class JOIN CODE self-enroll]] - `references` [EXTRACTED]
-- [[F6 Deactivate no confirm + native regenerate confirm]] - `references` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_82
+#graphify/concept #graphify/EXTRACTED #community/docs__Become-a-tutor_request_flow

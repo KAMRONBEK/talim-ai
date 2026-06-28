@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
 type: "code"
-community: "Admin Auth Pages & UI"
+community: "admin hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Auth_Pages__UI
+  - community/admin_hooks
 ---
 
 # page.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useApproveTutorRequest()]] - `imports` [EXTRACTED]
 - [[useRejectTutorRequest()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

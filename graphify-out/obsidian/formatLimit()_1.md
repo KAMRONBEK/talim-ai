@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin hooks"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_hooks
 ---
 
 # formatLimit()
@@ -15,4 +15,4 @@ tags:
 - [[UserDetailPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_9]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSidebarSheet.ts"
 type: "code"
-community: "Community 42"
+community: "components layout · plan.ts"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_42
+  - community/components_layout__plants
 ---
 
 # useSidebarSheet()
@@ -20,4 +20,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_42
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

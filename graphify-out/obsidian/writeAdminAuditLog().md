@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/audit.service.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
+community: "controllers admin"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin
 ---
 
 # writeAdminAuditLog()
@@ -25,7 +25,8 @@ tags:
 - [[patchUserSubscription()]] - `calls` [EXTRACTED]
 - [[rejectTutorRequest()]] - `calls` [EXTRACTED]
 - [[resetUserPassword()]] - `calls` [EXTRACTED]
+- [[retryContentJob()]] - `calls` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

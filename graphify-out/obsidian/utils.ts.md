@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/utils.ts"
 type: "code"
-community: "Community 31"
+community: "ui components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # utils.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

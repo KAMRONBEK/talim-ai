@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # Semantic (LLM) Extraction
@@ -16,4 +16,4 @@ tags:
 - [[Parallel Subagent Dispatch]] - `conceptually_related_to` [EXTRACTED]
 - [[graphify skill]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/references

@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Root Build Config"
+community: "package.json"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Build_Config
+  - community/packagejson
 ---
 
 # package.json
@@ -19,4 +19,4 @@ tags:
 - [[private_3]] - `contains` [EXTRACTED]
 - [[scripts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Build_Config
+#graphify/code #graphify/EXTRACTED #community/packagejson

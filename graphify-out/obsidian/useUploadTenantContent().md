@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Community 31"
-location: "L44"
+community: "ui components"
+location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # useUploadTenantContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

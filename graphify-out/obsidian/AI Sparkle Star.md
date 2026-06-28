@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/app/icon.svg"
 type: "concept"
-community: "Community 107"
+community: "web app"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_107
+  - community/web_app
 ---
 
 # AI Sparkle Star
@@ -14,4 +14,4 @@ tags:
 - [[Talim AI App Icon]] - `references` [EXTRACTED]
 - [[Web App Brand Favicon]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_107
+#graphify/concept #graphify/EXTRACTED #community/web_app

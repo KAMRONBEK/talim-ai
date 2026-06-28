@@ -1,12 +1,12 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "concept"
-community: "Community 64"
+community: "workflows"
 location: "jobs.deploy"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Deploy: Deploy to VPS job
@@ -19,4 +19,4 @@ tags:
 - [[GHCR image registry (ghcr.iokamronbektalim-)]] - `references` [EXTRACTED]
 - [[Pull latest for app tier only; dbredisnginx pinned]] - `rationale_for` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_64
+#graphify/concept #graphify/EXTRACTED #community/workflows

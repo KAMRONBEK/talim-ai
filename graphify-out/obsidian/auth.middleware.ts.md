@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # auth.middleware.ts
@@ -33,6 +33,9 @@ tags:
 - [[content.routes.ts]] - `imports_from` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[env.ts]] - `imports_from` [EXTRACTED]
+- [[events.controller.ts]] - `imports_from` [EXTRACTED]
+- [[events.routes.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[learner.controller.ts]] - `imports_from` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
@@ -58,4 +61,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

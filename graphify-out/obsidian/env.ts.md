@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src services · env.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_services__envts
 ---
 
 # env.ts
@@ -35,4 +35,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_services__envts

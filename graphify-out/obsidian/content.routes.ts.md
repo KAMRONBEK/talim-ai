@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/content.routes.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # content.routes.ts
@@ -22,6 +22,7 @@ tags:
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[contentRoutes]] - `contains` [EXTRACTED]
 - [[enforceQuota()]] - `imports` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_1]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

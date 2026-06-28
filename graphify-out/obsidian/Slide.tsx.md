@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Shared UI Components"
+community: "components deck"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck
 ---
 
 # Slide.tsx
@@ -68,4 +68,4 @@ tags:
 - [[paletteFor()]] - `imports` [EXTRACTED]
 - [[resolveSlideAccentHex()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck

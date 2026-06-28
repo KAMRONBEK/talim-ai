@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 93"
+community: "docs"
 location: "§6.3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_93
+  - community/docs
 ---
 
 # Usage metering
@@ -16,4 +16,4 @@ tags:
 - [[Usage & cost metering (admin)]] - `shares_data_with` [EXTRACTED]
 - [[Usage-limit UX & subscription promotion modal]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_93
+#graphify/concept #graphify/EXTRACTED #community/docs

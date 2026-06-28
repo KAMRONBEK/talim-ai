@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/content.controller.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
+community: "controllers admin"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin
 ---
 
 # deleteContent()
@@ -17,4 +17,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

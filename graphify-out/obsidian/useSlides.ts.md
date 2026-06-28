@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Community 44"
+community: "components learning"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/components_learning
 ---
 
 # useSlides.ts
@@ -18,11 +18,11 @@ tags:
 - [[contentEndpoints]] - `imports` [EXTRACTED]
 - [[endpoints.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 - [[slidesKey()]] - `contains` [EXTRACTED]
 - [[useGenerateSlides()]] - `contains` [EXTRACTED]
 - [[useSlides()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/components_learning

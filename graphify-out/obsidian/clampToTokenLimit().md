@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services
 ---
 
 # clampToTokenLimit()
@@ -15,4 +15,4 @@ tags:
 - [[embed.service.ts]] - `contains` [EXTRACTED]
 - [[generateEmbedding()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services

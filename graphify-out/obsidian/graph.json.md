@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # graph.json
@@ -14,4 +14,4 @@ tags:
 - [[Fast Path (existing graph query)]] - `references` [EXTRACTED]
 - [[Shrink Guard (refuse to clobber larger graph)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/references

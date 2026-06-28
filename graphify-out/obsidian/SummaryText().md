@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "components learning"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_learning
 ---
 
 # SummaryText()
@@ -14,8 +14,9 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[layout.tsx_4]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[splitSummaryParagraphs()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_learning

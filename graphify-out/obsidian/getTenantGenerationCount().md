@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L49"
+community: "subscription"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # getTenantGenerationCount()
@@ -17,4 +17,4 @@ tags:
 - [[getUsageForPeriod()]] - `calls` [EXTRACTED]
 - [[tenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

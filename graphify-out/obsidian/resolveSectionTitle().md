@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Section & Summary API"
+community: "src controllers"
 location: "L167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_controllers
 ---
 
 # resolveSectionTitle()
@@ -16,4 +16,4 @@ tags:
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learner-navigation.tsx"
 type: "code"
-community: "Community 61"
+community: "components layout · role-guard.tsx"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/components_layout__role-guardtsx
 ---
 
 # LearnerSidebar()
@@ -16,4 +16,4 @@ tags:
 - [[learner-navigation.tsx]] - `contains` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/components_layout__role-guardtsx

@@ -1,20 +1,22 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Content Progress Hooks"
+community: "web hooks"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # useLearningHistory()
 
 ## Connections
+- [[ContentLayoutInner()]] - `calls` [EXTRACTED]
 - [[ContentWorkspaceInner()]] - `calls` [INFERRED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[layout.tsx_4]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

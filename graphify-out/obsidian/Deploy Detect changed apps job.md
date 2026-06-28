@@ -1,12 +1,12 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "concept"
-community: "Community 64"
+community: "workflows"
 location: "jobs.changes"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Deploy: Detect changed apps job
@@ -16,4 +16,4 @@ tags:
 - [[Deploy Build & push images job]] - `references` [EXTRACTED]
 - [[Deploy Deploy to VPS job]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_64
+#graphify/concept #graphify/EXTRACTED #community/workflows

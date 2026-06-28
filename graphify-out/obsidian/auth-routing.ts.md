@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Community 56"
+community: "ui components · become-tutor-card.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # auth-routing.ts
@@ -20,9 +20,9 @@ tags:
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[page.tsx_13]] - `imports_from` [EXTRACTED]
 - [[page.tsx_14]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_36]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

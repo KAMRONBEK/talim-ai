@@ -1,20 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Community 100"
+community: "qa · US-IND-25: Podcast DEEPEN (fine controls,"
 tags:
   - graphify/document
-  - graphify/EXTRACTED
-  - community/Community_100
+  - graphify/INFERRED
+  - community/qa__US-IND-25_Podcast_DEEPEN_fine_controls
 ---
 
 # US-IND-05: Podcast — generate + player
 
 ## Connections
-- [[F12 'Create podcast' generate button shown to learners]] - `references` [EXTRACTED]
-- [[F21 Podcast playback broken + blob-404 spam]] - `references` [EXTRACTED]
-- [[F22 Podcast player 'Speed' label hardcoded Uzbek]] - `references` [EXTRACTED]
-- [[F30 Podcast per-episode regenerate gave no error feedback]] - `references` [EXTRACTED]
-- [[Podcasts (TTS)]] - `references` [EXTRACTED]
+- [[F21 (S2, fixed) podcast playback broken + blob-404 spam from audio-effect churn]] - `references` [EXTRACTED]
+- [[US-IND-25 Podcast DEEPEN (fine controls, multi-episode, per-episode regen)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_100
+#graphify/document #graphify/INFERRED #community/qa__US-IND-25_Podcast_DEEPEN_fine_controls

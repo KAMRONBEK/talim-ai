@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/uzbek-translit.ts"
 type: "code"
-community: "Community 37"
+community: "src lib · uzbek-translit.ts"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/src_lib__uzbek-translitts
 ---
 
 # LATIN_TO_CYRILLIC
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[uzbek-translit.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/src_lib__uzbek-translitts

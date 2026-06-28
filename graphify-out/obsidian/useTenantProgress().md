@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Web Pages"
+community: "packages types · page.tsx"
 location: "L110"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/packages_types__pagetsx
 ---
 
 # useTenantProgress()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_24]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/packages_types__pagetsx

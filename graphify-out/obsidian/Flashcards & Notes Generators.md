@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 95"
+community: "plans · Internationalization (uz / en / ru)"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
-  - community/Community_95
+  - graphify/INFERRED
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # Flashcards & Notes Generators
@@ -14,4 +14,4 @@ tags:
 - [[Generate Grid (Yaratish)]] - `references` [EXTRACTED]
 - [[Subscriptions  plans (manual activation)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_95
+#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru

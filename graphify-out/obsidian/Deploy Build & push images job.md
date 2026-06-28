@@ -1,12 +1,12 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "concept"
-community: "Community 64"
+community: "workflows"
 location: "jobs.build"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Deploy: Build & push images job
@@ -18,4 +18,4 @@ tags:
 - [[GHCR image registry (ghcr.iokamronbektalim-)]] - `references` [EXTRACTED]
 - [[NEXT_PUBLIC_API_URL inlined into webadmin at build]] - `rationale_for` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_64
+#graphify/concept #graphify/EXTRACTED #community/workflows

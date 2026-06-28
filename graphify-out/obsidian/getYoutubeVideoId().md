@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "Community 34"
+community: "components learning · ContentThumbnail()"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/components_learning__ContentThumbnail
 ---
 
 # getYoutubeVideoId()
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeThumbnailUrl()]] - `calls` [EXTRACTED]
 - [[youtube.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail

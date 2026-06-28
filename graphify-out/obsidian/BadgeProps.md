@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Community 31"
+community: "ui components"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # BadgeProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[badge.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

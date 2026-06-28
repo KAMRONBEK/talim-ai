@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L292"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # getPodcastSystemPrompt()
@@ -15,4 +15,4 @@ tags:
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

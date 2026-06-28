@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Community 39"
+community: "src lib · locale-prompts.ts"
 location: "L385"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/src_lib__locale-promptsts
 ---
 
 # buildTutorSystemMessage()
@@ -17,4 +17,4 @@ tags:
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/src_lib__locale-promptsts

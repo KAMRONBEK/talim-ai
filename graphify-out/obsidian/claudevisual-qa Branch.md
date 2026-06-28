@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "rationale"
-community: "Community 84"
+community: "qa run"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/qa_run
 ---
 
 # claude/visual-qa Branch
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[qa-run skill]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_84
+#graphify/rationale #graphify/EXTRACTED #community/qa_run

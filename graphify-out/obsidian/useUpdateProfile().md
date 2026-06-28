@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Community 68"
+community: "[locale] dashboard"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/locale_dashboard
 ---
 
 # useUpdateProfile()
@@ -16,4 +16,4 @@ tags:
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[useAccount.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Community 31"
+community: "ui components"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # TenantMaterialsPage()
@@ -20,4 +20,4 @@ tags:
 - [[useTenantSearch()]] - `calls` [EXTRACTED]
 - [[useUploadTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

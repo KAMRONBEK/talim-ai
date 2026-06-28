@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizResult.tsx"
 type: "code"
-community: "Admin Auth Pages & UI"
+community: "ui components · become-tutor-card.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Auth_Pages__UI
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # QuizResult.tsx
@@ -20,6 +20,6 @@ tags:
 - [[QuizResult()]] - `contains` [EXTRACTED]
 - [[QuizResultProps]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_37]] - `imports_from` [EXTRACTED]
+- [[page.tsx_38]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

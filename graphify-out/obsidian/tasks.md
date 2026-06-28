@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Root Build Config"
+community: "package.json"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Build_Config
+  - community/packagejson
 ---
 
 # tasks
@@ -18,4 +18,4 @@ tags:
 - [[turbo.json]] - `contains` [EXTRACTED]
 - [[typecheck_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Build_Config
+#graphify/code #graphify/EXTRACTED #community/packagejson

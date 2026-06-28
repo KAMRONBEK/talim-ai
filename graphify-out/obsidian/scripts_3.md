@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Root Build Config"
+community: "package.json"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Build_Config
+  - community/packagejson
 ---
 
 # scripts
@@ -38,4 +38,4 @@ tags:
 - [[qaovernight]] - `contains` [EXTRACTED]
 - [[typecheck_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Build_Config
+#graphify/code #graphify/EXTRACTED #community/packagejson

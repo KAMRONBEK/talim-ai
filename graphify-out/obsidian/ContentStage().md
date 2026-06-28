@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Content Detail Page"
-location: "L44"
+community: "components learning"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_learning
 ---
 
 # ContentStage()
@@ -14,7 +14,7 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[content-stage.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[useGenerateSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_learning

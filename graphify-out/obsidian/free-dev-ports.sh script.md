@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/free-dev-ports.sh"
 type: "code"
-community: "Community 118"
+community: "scripts · free-dev-ports.sh"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_118
+  - community/scripts__free-dev-portssh
 ---
 
 # free-dev-ports.sh script
@@ -15,4 +15,4 @@ tags:
 - [[free-dev-ports.sh]] - `contains` [EXTRACTED]
 - [[free_ports()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_118
+#graphify/code #graphify/EXTRACTED #community/scripts__free-dev-portssh

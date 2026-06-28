@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services"
 location: "L272"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services
 ---
 
 # FIGURE_LABEL
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services

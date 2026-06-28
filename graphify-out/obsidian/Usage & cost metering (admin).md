@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 93"
+community: "docs"
 location: "§5.6"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_93
+  - community/docs
 ---
 
 # Usage & cost metering (admin)
@@ -15,4 +15,4 @@ tags:
 - [[Platform stats]] - `conceptually_related_to` [INFERRED]
 - [[Usage metering]] - `shares_data_with` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_93
+#graphify/concept #graphify/INFERRED #community/docs

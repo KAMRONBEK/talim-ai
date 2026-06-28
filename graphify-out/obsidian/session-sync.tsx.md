@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/session-sync.tsx"
 type: "code"
-community: "Community 38"
+community: "web lib · providers.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/web_lib__providerstsx
 ---
 
 # session-sync.tsx
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[providers.tsx_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx

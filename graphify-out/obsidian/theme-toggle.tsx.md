@@ -1,12 +1,12 @@
 ---
-source_file: "apps/web/components/theme-toggle.tsx"
+source_file: "apps/admin/components/theme-toggle.tsx"
 type: "code"
-community: "Community 70"
+community: "admin components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/admin_components
 ---
 
 # theme-toggle.tsx
@@ -15,12 +15,8 @@ tags:
 - [[Button]] - `imports` [EXTRACTED]
 - [[ThemeToggle()]] - `contains` [EXTRACTED]
 - [[ThemeValue]] - `contains` [EXTRACTED]
-- [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
-- [[dashboard-header.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
-- [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[themeIcons]] - `contains` [EXTRACTED]
+- [[themeMeta]] - `contains` [EXTRACTED]
 - [[themeValues]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/admin_components

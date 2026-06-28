@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 71"
+community: "docs · Assignment, attempts & max attempts"
 location: "§4.2"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_71
+  - community/docs__Assignment_attempts__max_attempts
 ---
 
 # Written assessments
@@ -15,7 +15,6 @@ tags:
 - [[Assignment, attempts & max attempts]] - `references` [INFERRED]
 - [[Auto quizzes (per-content)]] - `semantically_similar_to` [INFERRED]
 - [[Barrel-split module pattern]] - `conceptually_related_to` [INFERRED]
-- [[F5 Assessment mutations don't refresh related views (stale cache)]] - `references` [EXTRACTED]
 - [[Question banks (AI-generated, approve flow)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_71
+#graphify/concept #graphify/INFERRED #community/docs__Assignment_attempts__max_attempts

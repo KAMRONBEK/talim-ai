@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/label.tsx"
 type: "code"
-community: "Community 68"
+community: "ui components · become-tutor-card.tsx"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # Label()
@@ -26,4 +26,4 @@ tags:
 - [[page.tsx_27]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

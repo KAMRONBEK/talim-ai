@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "services tenant"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/services_tenant
 ---
 
 # getDefaultTenantPlanId()
@@ -17,4 +17,4 @@ tags:
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/services_tenant

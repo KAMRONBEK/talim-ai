@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Content Progress Hooks"
+community: "components learning · ContentThumbnail()"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/components_learning__ContentThumbnail
 ---
 
 # useTranscript.ts
@@ -19,4 +19,4 @@ tags:
 - [[useContentBase.ts]] - `imports_from` [EXTRACTED]
 - [[useTranscript()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail

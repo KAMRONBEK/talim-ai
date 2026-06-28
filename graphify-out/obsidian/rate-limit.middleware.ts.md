@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/rate-limit.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # rate-limit.middleware.ts
@@ -19,4 +19,4 @@ tags:
 - [[reparseRateLimit]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/middleware.ts"
 type: "code"
-community: "Community 113"
+community: "apps admin · middleware.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_113
+  - community/apps_admin__middlewarets
 ---
 
 # middleware.ts
@@ -16,4 +16,4 @@ tags:
 - [[config]] - `contains` [EXTRACTED]
 - [[middleware()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_113
+#graphify/code #graphify/EXTRACTED #community/apps_admin__middlewarets

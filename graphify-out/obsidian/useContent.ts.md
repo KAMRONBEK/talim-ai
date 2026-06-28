@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 30"
+community: "web lib"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/web_lib
 ---
 
 # useContent.ts
@@ -31,7 +31,8 @@ tags:
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
 - [[page.tsx_33]] - `imports_from` [EXTRACTED]
-- [[page.tsx_37]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_38]] - `imports_from` [EXTRACTED]
 - [[prependContentToLists()]] - `imports` [EXTRACTED]
 - [[removeContentFromLists()]] - `imports` [EXTRACTED]
 - [[restoreContentLists()]] - `imports` [EXTRACTED]
@@ -42,7 +43,9 @@ tags:
 - [[useCreateYoutubeContent()]] - `contains` [EXTRACTED]
 - [[useDeleteContent()_1]] - `contains` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
+- [[useJobStreamStore]] - `imports` [EXTRACTED]
+- [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 - [[useRetryContent()_1]] - `contains` [EXTRACTED]
 - [[useUploadContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/web_lib

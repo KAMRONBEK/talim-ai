@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Slide Deck Types"
-location: "L439"
+community: "packages types"
+location: "L448"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Types
+  - community/packages_types
 ---
 
 # TutorRequest
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTutorRequest.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types
+#graphify/code #graphify/EXTRACTED #community/packages_types

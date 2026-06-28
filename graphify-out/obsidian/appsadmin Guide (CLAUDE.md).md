@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "document"
-community: "Admin Panel Docs"
+community: "api"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_Panel_Docs
+  - community/api
 ---
 
 # apps/admin Guide (CLAUDE.md)
@@ -15,4 +15,4 @@ tags:
 - [[adminPasswordNote plaintext support-lookup (sensitive)]] - `references` [EXTRACTED]
 - [[appsadmin — platform-admin panel (Talim Admin, port 3001)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Docs
+#graphify/document #graphify/EXTRACTED #community/api

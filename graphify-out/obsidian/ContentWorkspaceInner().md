@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
-location: "L39"
+community: "web hooks"
+location: "L40"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Detail_Page
+  - community/web_hooks
 ---
 
 # ContentWorkspaceInner()
@@ -14,7 +14,7 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[getHomePathForRole()]] - `calls` [INFERRED]
-- [[page.tsx_29]] - `contains` [EXTRACTED]
+- [[page.tsx_30]] - `contains` [EXTRACTED]
 - [[useContent()]] - `calls` [INFERRED]
 - [[useContentActions()]] - `calls` [INFERRED]
 - [[useContentProgress()]] - `calls` [INFERRED]
@@ -24,4 +24,4 @@ tags:
 - [[useSection()]] - `calls` [INFERRED]
 - [[useSections()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Content_Detail_Page
+#graphify/code #graphify/INFERRED #community/web_hooks

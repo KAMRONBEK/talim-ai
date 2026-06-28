@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller"
+community: "src controllers · quiz.controller.ts"
 location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/src_controllers__quizcontrollerts
 ---
 
 # QuizQuestionForEvaluation
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts

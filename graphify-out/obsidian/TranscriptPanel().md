@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Community 34"
+community: "components learning · ContentThumbnail()"
 location: "L136"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/components_learning__ContentThumbnail
 ---
 
 # TranscriptPanel()
@@ -16,4 +16,4 @@ tags:
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/figure.service.ts"
 type: "code"
-community: "Content Controller"
+community: "src controllers · sendContentFile()"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_controllers__sendContentFile
 ---
 
 # captionAndStoreFigures()
@@ -20,4 +20,4 @@ tags:
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_controllers__sendContentFile

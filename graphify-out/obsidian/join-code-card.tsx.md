@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/join-code-card.tsx"
 type: "code"
-community: "Tenant Web Pages"
+community: "ui components · become-tutor-card.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # join-code-card.tsx
@@ -23,4 +23,4 @@ tags:
 - [[useTenant()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

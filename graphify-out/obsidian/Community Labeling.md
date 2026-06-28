@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # Community Labeling
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Community Detection]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/references

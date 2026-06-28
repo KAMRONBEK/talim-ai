@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Community 37"
+community: "src lib · tutor-scope.ts"
 location: "L148"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/src_lib__tutor-scopets
 ---
 
 # classifyTutorScope()
@@ -19,4 +19,4 @@ tags:
 - [[tutor-scope-smoke.ts]] - `imports` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/src_lib__tutor-scopets

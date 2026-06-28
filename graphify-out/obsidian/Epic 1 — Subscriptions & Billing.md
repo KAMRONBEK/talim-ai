@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-1-subscriptions-billing.md"
 type: "document"
-community: "Deployment & Infra Docs"
+community: "plans"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/plans
 ---
 
 # Epic 1 — Subscriptions & Billing
@@ -19,4 +19,4 @@ tags:
 - [[Quota Enforcement Middleware (enforceQuota)]] - `references` [EXTRACTED]
 - [[Stripe Integration]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/document #graphify/EXTRACTED #community/plans

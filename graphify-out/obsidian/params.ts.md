@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # params.ts
@@ -17,6 +17,7 @@ tags:
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[getParam()]] - `contains` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
@@ -30,4 +31,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

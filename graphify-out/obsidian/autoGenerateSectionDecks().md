@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Content Controller"
+community: "src services · slides.controller.ts"
 location: "L289"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_services__slidescontrollerts
 ---
 
 # autoGenerateSectionDecks()
@@ -22,4 +22,4 @@ tags:
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

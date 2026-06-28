@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Styling Deps"
+community: "packages ui"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Styling_Deps
+  - community/packages_ui
 ---
 
 # package.json
@@ -23,4 +23,4 @@ tags:
 - [[types_1]] - `contains` [EXTRACTED]
 - [[version_8]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Styling_Deps
+#graphify/code #graphify/EXTRACTED #community/packages_ui

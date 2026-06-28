@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Web Pages"
+community: "web hooks · page.tsx"
 location: "L172"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # useUnassignContent()
@@ -16,4 +16,4 @@ tags:
 - [[assign-students-panel.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

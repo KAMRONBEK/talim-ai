@@ -1,20 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 94"
+community: "docs · Become-a-tutor request flow"
 location: "§2.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/docs__Become-a-tutor_request_flow
 ---
 
 # Signup / login by email OR username
 
 ## Connections
-- [[F14 Return-after-login not preserved (no redirect= param)]] - `references` [INFERRED]
 - [[Rate limiting]] - `references` [EXTRACTED]
-- [[US-AUTH-01 Emailpassword login]] - `references` [EXTRACTED]
 - [[mustChangePassword & password reset]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_94
+#graphify/concept #graphify/EXTRACTED #community/docs__Become-a-tutor_request_flow

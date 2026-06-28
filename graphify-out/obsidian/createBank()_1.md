@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Community 46"
-location: "L33"
+community: "assessment"
+location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/assessment
 ---
 
 # createBank()
 
 ## Connections
+- [[assertTenantContentIds()]] - `calls` [EXTRACTED]
 - [[banks.ts]] - `contains` [EXTRACTED]
 - [[formatBank()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/assessment

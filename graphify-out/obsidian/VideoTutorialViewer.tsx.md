@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/VideoTutorialViewer.tsx"
 type: "code"
-community: "Community 34"
+community: "components learning · ContentThumbnail()"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/components_learning__ContentThumbnail
 ---
 
 # VideoTutorialViewer.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useTranscript.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail

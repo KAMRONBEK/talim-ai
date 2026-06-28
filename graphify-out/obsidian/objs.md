@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/screenshots/_genpdf.js"
 type: "code"
-community: "Community 111"
+community: "screenshots"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_111
+  - community/screenshots
 ---
 
 # objs
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[_genpdf.js]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_111
+#graphify/code #graphify/EXTRACTED #community/screenshots

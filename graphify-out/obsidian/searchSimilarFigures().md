@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Community 48"
+community: "src services"
 location: "L249"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/src_services
 ---
 
 # searchSimilarFigures()
@@ -18,4 +18,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/src_services

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Learner Assessment Pages"
+community: "web hooks · page.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # page.tsx
@@ -34,6 +34,8 @@ tags:
 - [[useQuestionBanks()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantAssessments()]] - `imports` [EXTRACTED]
+- [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
+- [[useTenantContents()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

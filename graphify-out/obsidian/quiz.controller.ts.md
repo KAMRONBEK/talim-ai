@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller"
+community: "src controllers · quiz.controller.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/src_controllers__quizcontrollerts
 ---
 
 # quiz.controller.ts
@@ -58,4 +58,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts

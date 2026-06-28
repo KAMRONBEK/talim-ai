@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "App Layout & Guards"
+community: "i18n"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Layout__Guards
+  - community/i18n
 ---
 
 # language-switcher.tsx
@@ -23,4 +23,4 @@ tags:
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[setApiLocale()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards
+#graphify/code #graphify/EXTRACTED #community/i18n

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "ui components"
 location: "L91"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/ui_components
 ---
 
 # UploadCard()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[UploadCard.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/ui_components

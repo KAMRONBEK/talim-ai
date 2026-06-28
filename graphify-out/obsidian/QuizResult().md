@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizResult.tsx"
 type: "code"
-community: "Community 36"
+community: "ui components · become-tutor-card.tsx"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # QuizResult()
@@ -14,6 +14,6 @@ tags:
 ## Connections
 - [[QuizResult.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [INFERRED]
-- [[page.tsx_37]] - `imports` [EXTRACTED]
+- [[page.tsx_38]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

@@ -1,30 +1,23 @@
 ---
-source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
+source_file: "apps/web/app/[locale]/pricing/page.tsx"
 type: "code"
-community: "Community 36"
+community: "components marketing"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/components_marketing
 ---
 
 # page.tsx
 
 ## Connections
-- [[LearningTopbar()]] - `imports` [EXTRACTED]
-- [[QuizCard()]] - `imports` [EXTRACTED]
-- [[QuizCard.tsx]] - `imports_from` [EXTRACTED]
-- [[QuizPage()]] - `contains` [EXTRACTED]
-- [[QuizResult()]] - `imports` [EXTRACTED]
-- [[QuizResult.tsx]] - `imports_from` [EXTRACTED]
-- [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
-- [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[useContent()]] - `imports` [EXTRACTED]
-- [[useContent.ts]] - `imports_from` [EXTRACTED]
-- [[useLatestQuizAttempt()]] - `imports` [EXTRACTED]
-- [[useQuiz()]] - `imports` [EXTRACTED]
-- [[useQuiz.ts]] - `imports_from` [EXTRACTED]
-- [[useSubmitQuiz()]] - `imports` [EXTRACTED]
+- [[Footer()]] - `imports` [EXTRACTED]
+- [[Navbar()]] - `imports` [EXTRACTED]
+- [[Pricing()]] - `imports` [EXTRACTED]
+- [[PricingPage()]] - `contains` [EXTRACTED]
+- [[footer.tsx]] - `imports_from` [EXTRACTED]
+- [[navbar.tsx]] - `imports_from` [EXTRACTED]
+- [[pricing.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/components_marketing

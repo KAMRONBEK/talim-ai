@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 36"
-location: "L16"
+community: "web hooks · page.tsx"
+location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/web_hooks__pagetsx
 ---
 
 # QuizKind
@@ -16,4 +16,4 @@ tags:
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/admin.routes.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # admin.routes.ts
@@ -25,4 +25,4 @@ tags:
 - [[index.ts_1]] - `imports_from` [EXTRACTED]
 - [[requireRole()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

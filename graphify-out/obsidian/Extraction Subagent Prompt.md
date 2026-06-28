@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/extraction-spec.md"
 type: "document"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # Extraction Subagent Prompt
@@ -18,4 +18,4 @@ tags:
 - [[Semantic Similarity Edge]] - `references` [EXTRACTED]
 - [[source_file Verbatim Rule]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/document #graphify/EXTRACTED #community/references

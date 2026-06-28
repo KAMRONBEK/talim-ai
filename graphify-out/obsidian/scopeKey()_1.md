@@ -1,20 +1,19 @@
 ---
-source_file: "apps/api/src/controllers/video.controller.ts"
+source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Content & Podcast API"
-location: "L20"
+community: "src controllers · summary.controller.ts"
+location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers__summarycontrollerts
 ---
 
 # scopeKey()
 
 ## Connections
-- [[createVideo()]] - `calls` [EXTRACTED]
-- [[getVideo()]] - `calls` [EXTRACTED]
-- [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
-- [[video.controller.ts]] - `contains` [EXTRACTED]
+- [[generateSummary()]] - `calls` [EXTRACTED]
+- [[getSummary()_1]] - `calls` [EXTRACTED]
+- [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts

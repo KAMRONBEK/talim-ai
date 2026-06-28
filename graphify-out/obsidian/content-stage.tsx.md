@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "components learning"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_learning
 ---
 
 # content-stage.tsx
@@ -33,10 +33,10 @@ tags:
 - [[fetchAuthenticatedBlob()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
+- [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 - [[summary-text.tsx]] - `imports_from` [EXTRACTED]
 - [[useGenerateSummary()]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_learning

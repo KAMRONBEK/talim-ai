@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Content Pages"
+community: "admin hooks"
 location: "L235"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content_Pages
+  - community/admin_hooks
 ---
 
 # useDeleteContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_1]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

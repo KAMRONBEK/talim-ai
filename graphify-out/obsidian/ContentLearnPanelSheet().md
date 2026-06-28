@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-learn-panel.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "components layout"
 location: "L111"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_layout
 ---
 
 # ContentLearnPanelSheet()
@@ -14,6 +14,6 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[content-learn-panel.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_layout

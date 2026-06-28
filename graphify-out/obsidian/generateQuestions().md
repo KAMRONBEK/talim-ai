@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Community 62"
+community: "src controllers · assessment.controller.ts"
 location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/src_controllers__assessmentcontrollerts
 ---
 
 # generateQuestions()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[requireTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_62
+#graphify/code #graphify/EXTRACTED #community/src_controllers__assessmentcontrollerts

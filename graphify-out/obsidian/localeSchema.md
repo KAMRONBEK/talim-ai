@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # localeSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[locale.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

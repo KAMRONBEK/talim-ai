@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # generatePodcast.job.ts
@@ -22,6 +22,8 @@ tags:
 - [[getPodcastSystemPrompt()]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[jobEvents]] - `imports` [EXTRACTED]
+- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
 - [[parsePodcastDialogue()]] - `imports` [EXTRACTED]
@@ -36,4 +38,4 @@ tags:
 - [[synthesizeSpeech()]] - `imports` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

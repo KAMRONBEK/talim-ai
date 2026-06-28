@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Progress Hooks"
-location: "L720"
+community: "packages types · api.ts"
+location: "L729"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/packages_types__apits
 ---
 
 # ContentVideo
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/packages_types__apits

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Community 44"
+community: "packages types"
 location: "L224"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/packages_types
 ---
 
 # ContentSlideDeck
@@ -17,4 +17,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/packages_types

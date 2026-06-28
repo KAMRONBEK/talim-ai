@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Content Detail Page"
+community: "components learning"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_learning
 ---
 
 # splitSummaryParagraphs()
@@ -17,4 +17,4 @@ tags:
 - [[formatSummaryForDisplay()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_learning

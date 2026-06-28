@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Sheet UI Component"
-location: "L82"
+community: "components layout"
+location: "L150"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet_UI_Component
+  - community/components_layout
 ---
 
 # SheetTitle()
@@ -21,4 +21,4 @@ tags:
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet_UI_Component
+#graphify/code #graphify/EXTRACTED #community/components_layout

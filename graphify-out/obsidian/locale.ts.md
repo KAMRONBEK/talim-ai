@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # locale.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[localeSchema]] - `contains` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
@@ -26,4 +27,4 @@ tags:
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

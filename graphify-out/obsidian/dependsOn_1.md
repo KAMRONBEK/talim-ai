@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Root Build Config"
+community: "package.json"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Build_Config
+  - community/packagejson
 ---
 
 # dependsOn
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[lint_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Build_Config
+#graphify/code #graphify/EXTRACTED #community/packagejson

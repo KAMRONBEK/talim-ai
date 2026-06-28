@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin components"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_components
 ---
 
 # InputProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[input.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_components

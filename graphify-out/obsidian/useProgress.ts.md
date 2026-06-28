@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Content Progress Hooks"
+community: "web hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # useProgress.ts
@@ -17,8 +17,8 @@ tags:
 - [[LearningHistory]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[useContentBase()]] - `imports` [EXTRACTED]
 - [[useContentBase.ts]] - `imports_from` [EXTRACTED]
 - [[useContentProgress()]] - `contains` [EXTRACTED]
@@ -27,4 +27,4 @@ tags:
 - [[usePodcastProgress()]] - `contains` [EXTRACTED]
 - [[useUpdatePodcastProgress()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

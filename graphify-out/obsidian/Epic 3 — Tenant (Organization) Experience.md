@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-3-tenant-experience.md"
 type: "document"
-community: "Deployment & Infra Docs"
+community: "plans"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/plans
 ---
 
 # Epic 3 — Tenant (Organization) Experience
@@ -17,4 +17,4 @@ tags:
 - [[Epic Prompts Index]] - `references` [EXTRACTED]
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/document #graphify/EXTRACTED #community/plans

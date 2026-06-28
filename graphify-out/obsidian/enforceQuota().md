@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/quota.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # enforceQuota()
@@ -18,4 +18,4 @@ tags:
 - [[quota.middleware.ts]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

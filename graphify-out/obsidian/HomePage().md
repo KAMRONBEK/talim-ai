@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/page.tsx"
 type: "code"
-community: "Community 56"
+community: "ui components · become-tutor-card.tsx"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/ui_components__become-tutor-cardtsx
 ---
 
 # HomePage()
 
 ## Connections
-- [[page.tsx_35]] - `contains` [EXTRACTED]
+- [[page.tsx_36]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/base.json"
 type: "code"
-community: "Community 58"
+community: "tsconfig"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/tsconfig
 ---
 
 # esModuleInterop
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/tsconfig

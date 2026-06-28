@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller"
+community: "src services · env.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_services__envts
 ---
 
 # content-shared.ts
@@ -31,4 +31,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_services__envts

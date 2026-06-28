@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/inter.ts"
 type: "code"
-community: "App Layout & Guards"
+community: "i18n"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Layout__Guards
+  - community/i18n
 ---
 
 # inter
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_1]] - `imports` [EXTRACTED]
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards
+#graphify/code #graphify/EXTRACTED #community/i18n

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Progress Hooks"
-location: "L695"
+community: "packages types"
+location: "L704"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/packages_types
 ---
 
 # ContentProgressResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/packages_types

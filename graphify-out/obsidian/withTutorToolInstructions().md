@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "Community 57"
+community: "src services · TutorGraphIntent"
 location: "L144"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_57
+  - community/src_services__TutorGraphIntent
 ---
 
 # withTutorToolInstructions()
@@ -15,4 +15,4 @@ tags:
 - [[ai.service.ts]] - `contains` [EXTRACTED]
 - [[buildGraphIntentInstruction()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_57
+#graphify/code #graphify/EXTRACTED #community/src_services__TutorGraphIntent

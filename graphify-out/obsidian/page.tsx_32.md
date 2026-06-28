@@ -1,42 +1,33 @@
 ---
-source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
+source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "Content Progress Hooks"
+community: "components learning"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/components_learning
 ---
 
 # page.tsx
 
 ## Connections
 - [[Button]] - `imports` [EXTRACTED]
-- [[CenteredMessage()_1]] - `contains` [EXTRACTED]
-- [[EmptyState()_1]] - `contains` [EXTRACTED]
-- [[GeneratingState()_1]] - `contains` [EXTRACTED]
-- [[NarratedVideoPlayer()]] - `imports` [EXTRACTED]
-- [[NarratedVideoPlayer.tsx]] - `imports_from` [EXTRACTED]
-- [[VideoInner()]] - `contains` [EXTRACTED]
-- [[VideoPage()]] - `contains` [EXTRACTED]
-- [[authenticatedBlob.ts]] - `imports_from` [EXTRACTED]
-- [[cn()]] - `imports` [EXTRACTED]
-- [[fetchAuthenticatedBlob()]] - `imports` [EXTRACTED]
+- [[CenteredMessage()]] - `contains` [EXTRACTED]
+- [[DeckPlayer()]] - `imports` [EXTRACTED]
+- [[DeckPlayer.tsx]] - `imports_from` [EXTRACTED]
+- [[EmptyState()]] - `contains` [EXTRACTED]
+- [[GeneratingState()]] - `contains` [EXTRACTED]
+- [[SlidesInner()]] - `contains` [EXTRACTED]
+- [[SlidesPage()]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[useContent()]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
-- [[useContentBase()]] - `imports` [EXTRACTED]
-- [[useContentBase.ts]] - `imports_from` [EXTRACTED]
-- [[useGenerateVideo()]] - `imports` [EXTRACTED]
+- [[useGenerateSlides()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
-- [[useSections()]] - `imports` [EXTRACTED]
-- [[useSections.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides()]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
-- [[useVideo()]] - `imports` [EXTRACTED]
-- [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/components_learning

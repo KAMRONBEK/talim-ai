@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 65"
+community: "src controllers · sendContentFile()"
 location: "L450"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_65
+  - community/src_controllers__sendContentFile
 ---
 
 # extractRegionTextFromImage()
@@ -19,4 +19,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_65
+#graphify/code #graphify/EXTRACTED #community/src_controllers__sendContentFile

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Community 45"
+community: "packages types · useChatStore.ts"
 location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/packages_types__useChatStorets
 ---
 
 # parseFenceBlock()
@@ -20,4 +20,4 @@ tags:
 - [[tutor-graph-smoke.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets

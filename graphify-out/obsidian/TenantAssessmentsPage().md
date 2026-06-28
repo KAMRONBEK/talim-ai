@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Learner Assessment Pages"
-location: "L84"
+community: "web hooks · page.tsx"
+location: "L91"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Learner_Assessment_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # TenantAssessmentsPage()
 
 ## Connections
+- [[T]] - `calls` [INFERRED]
 - [[mutErr()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
 - [[useAssignAssessment()]] - `calls` [INFERRED]
@@ -22,6 +23,7 @@ tags:
 - [[usePatchBankQuestion()]] - `calls` [INFERRED]
 - [[useQuestionBanks()]] - `calls` [INFERRED]
 - [[useTenantAssessments()]] - `calls` [INFERRED]
+- [[useTenantContents()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Learner_Assessment_Pages
+#graphify/code #graphify/INFERRED #community/web_hooks__pagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Learner Assessment Pages"
+community: "web hooks · page.tsx"
 location: "L154"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # useAssignAssessment()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

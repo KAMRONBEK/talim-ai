@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 89"
-location: "L564"
+community: "components layout · content-generations.tsx"
+location: "L573"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/components_layout__content-generationstsx
 ---
 
 # ContentSection
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useSections.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_89
+#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx

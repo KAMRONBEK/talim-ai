@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-5-usage-metering.md"
 type: "document"
-community: "Deployment & Infra Docs"
+community: "plans"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/plans
 ---
 
 # Epic 5 — Usage Metering & Platform Cost
@@ -18,4 +18,4 @@ tags:
 - [[Epic Prompts Index]] - `references` [EXTRACTED]
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/document #graphify/EXTRACTED #community/plans

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Shared UI Components"
+community: "components deck"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck
 ---
 
 # cn()
@@ -75,7 +75,7 @@ tags:
 - [[learner-navigation.tsx]] - `imports` [EXTRACTED]
 - [[logo.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
-- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[pricing.tsx]] - `imports` [EXTRACTED]
 - [[progress.tsx]] - `imports` [EXTRACTED]
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
@@ -90,4 +90,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck

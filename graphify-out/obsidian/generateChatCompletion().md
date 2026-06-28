@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "Section & Summary API"
+community: "src services · TutorGraphIntent"
 location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_services__TutorGraphIntent
 ---
 
 # generateChatCompletion()
@@ -19,4 +19,4 @@ tags:
 - [[recordCompletionUsage()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_services__TutorGraphIntent

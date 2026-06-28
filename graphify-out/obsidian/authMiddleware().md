@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "src routes"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/src_routes
 ---
 
 # authMiddleware()
@@ -18,6 +18,7 @@ tags:
 - [[billing.routes.ts]] - `imports` [EXTRACTED]
 - [[chat.routes.ts]] - `imports` [EXTRACTED]
 - [[content.routes.ts]] - `imports` [EXTRACTED]
+- [[events.routes.ts]] - `imports` [EXTRACTED]
 - [[learner.routes.ts]] - `imports` [EXTRACTED]
 - [[quiz.routes.ts]] - `imports` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `calls` [EXTRACTED]
@@ -25,4 +26,4 @@ tags:
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 - [[usage.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/src_routes

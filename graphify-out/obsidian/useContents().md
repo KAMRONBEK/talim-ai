@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 49"
-location: "L18"
+community: "[locale] dashboard"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/locale_dashboard
 ---
 
 # useContents()
@@ -20,7 +20,8 @@ tags:
 - [[dashboard-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[page.tsx_17]] - `imports` [EXTRACTED]
-- [[page.tsx_33]] - `imports` [EXTRACTED]
+- [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

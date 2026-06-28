@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "controllers admin"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/controllers_admin
 ---
 
 # contentQueue
@@ -18,4 +18,4 @@ tags:
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # replaceManimBlockInText()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

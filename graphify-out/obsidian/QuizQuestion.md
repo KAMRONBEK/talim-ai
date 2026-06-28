@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Slide Deck Types"
-location: "L639"
+community: "web hooks · page.tsx"
+location: "L648"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Types
+  - community/web_hooks__pagetsx
 ---
 
 # QuizQuestion
@@ -15,4 +15,4 @@ tags:
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Types
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Community 44"
+community: "components learning"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/components_learning
 ---
 
 # slidesKey()
@@ -15,4 +15,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/components_learning

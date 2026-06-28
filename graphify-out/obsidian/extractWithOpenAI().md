@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 65"
+community: "src services · usage-pricing.ts"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_65
+  - community/src_services__usage-pricingts
 ---
 
 # extractWithOpenAI()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_65
+#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts

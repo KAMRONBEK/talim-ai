@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Community 45"
+community: "components chat"
 location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/components_chat
 ---
 
 # VisualBlock
@@ -20,4 +20,4 @@ tags:
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/components_chat

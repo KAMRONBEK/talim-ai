@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src controllers · summary.controller.ts"
 location: "L286"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_controllers__summarycontrollerts
 ---
 
 # buildRagContext()
@@ -26,4 +26,4 @@ tags:
 - [[streamChat()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts

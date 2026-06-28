@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src services · slides.controller.ts"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_services__slidescontrollerts
 ---
 
 # deckScopeKey()
@@ -17,4 +17,4 @@ tags:
 - [[getSlideDeck()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

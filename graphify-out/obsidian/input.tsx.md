@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_components
 ---
 
 # input.tsx
@@ -17,4 +17,4 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_components

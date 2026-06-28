@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Content Detail Page"
+community: "[locale] dashboard"
 location: "L127"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Detail_Page
+  - community/locale_dashboard
 ---
 
 # T
 
 ## Connections
 - [[AccountSummary()]] - `calls` [INFERRED]
+- [[AssessmentCard()]] - `calls` [INFERRED]
 - [[AssignContentPage()]] - `calls` [INFERRED]
 - [[AssignStudentsPanel()]] - `calls` [INFERRED]
 - [[AuthGuard()_1]] - `calls` [INFERRED]
@@ -22,6 +23,7 @@ tags:
 - [[ChatRedirect()]] - `calls` [INFERRED]
 - [[ChatWindow()]] - `calls` [INFERRED]
 - [[ContentAccessRedirect()]] - `calls` [INFERRED]
+- [[ContentGenerationsBlock()]] - `calls` [INFERRED]
 - [[ContentLayoutInner()]] - `calls` [INFERRED]
 - [[ContentLayoutSuspenseFallback()]] - `calls` [INFERRED]
 - [[ContentLearnPanelBody()]] - `calls` [INFERRED]
@@ -41,10 +43,13 @@ tags:
 - [[DashboardSettingsPage()]] - `calls` [INFERRED]
 - [[DashboardSidebarBody()]] - `calls` [INFERRED]
 - [[DashboardSidebarSheet()]] - `calls` [INFERRED]
+- [[DeckPlayer()]] - `calls` [INFERRED]
+- [[Definition()]] - `calls` [EXTRACTED]
 - [[DeleteContentDialog()]] - `calls` [INFERRED]
 - [[DesmosGraph()]] - `calls` [INFERRED]
 - [[Features()]] - `calls` [INFERRED]
 - [[FileUploadField()]] - `calls` [INFERRED]
+- [[FlashcardsPage()]] - `calls` [INFERRED]
 - [[Footer()]] - `calls` [INFERRED]
 - [[ForTutors()]] - `calls` [INFERRED]
 - [[GameQuizPlayer()]] - `calls` [INFERRED]
@@ -53,7 +58,9 @@ tags:
 - [[HowItWorks()]] - `calls` [INFERRED]
 - [[HtmlSandbox()]] - `calls` [INFERRED]
 - [[JoinCodeCard()]] - `calls` [INFERRED]
+- [[Leaderboard()]] - `calls` [INFERRED]
 - [[LeaderboardTable()]] - `calls` [INFERRED]
+- [[LearnerAssessmentsPage()]] - `calls` [INFERRED]
 - [[LearnerDashboardPage()]] - `calls` [INFERRED]
 - [[LearnerProgressPage()]] - `calls` [INFERRED]
 - [[LearnerSettingsPage()]] - `calls` [INFERRED]
@@ -74,16 +81,21 @@ tags:
 - [[ProcessingCard()]] - `calls` [INFERRED]
 - [[ProfileCard()]] - `calls` [INFERRED]
 - [[QuickActionCards()]] - `calls` [INFERRED]
+- [[QuickCheck()]] - `calls` [EXTRACTED]
 - [[QuizCard()]] - `calls` [INFERRED]
 - [[QuizPage()]] - `calls` [INFERRED]
 - [[QuizResult()]] - `calls` [INFERRED]
+- [[Recap()]] - `calls` [EXTRACTED]
 - [[RecentContentGrid()]] - `calls` [INFERRED]
 - [[RegisterPage()]] - `calls` [INFERRED]
+- [[ResizableSplit()]] - `calls` [INFERRED]
+- [[ResultsSection()]] - `calls` [INFERRED]
 - [[SectionReader()]] - `calls` [INFERRED]
 - [[Slide.tsx]] - `imports` [EXTRACTED]
 - [[SlidesInner()]] - `calls` [INFERRED]
 - [[StudentWelcomeBanner()]] - `calls` [INFERRED]
 - [[SummaryText()]] - `calls` [INFERRED]
+- [[TenantAssessmentsPage()]] - `calls` [INFERRED]
 - [[TenantBillingPage()]] - `calls` [INFERRED]
 - [[TenantDashboardPage()]] - `calls` [INFERRED]
 - [[TenantMaterialsPage()]] - `calls` [INFERRED]
@@ -99,7 +111,8 @@ tags:
 - [[UploadCard()]] - `calls` [INFERRED]
 - [[VideoInner()]] - `calls` [INFERRED]
 - [[VideoTutorialViewer()]] - `calls` [INFERRED]
+- [[WrittenForm()]] - `calls` [INFERRED]
 - [[YoutubeLinkForm()]] - `calls` [INFERRED]
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Content_Detail_Page
+#graphify/code #graphify/INFERRED #community/locale_dashboard

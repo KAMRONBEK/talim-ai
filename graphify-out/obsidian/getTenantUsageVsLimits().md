@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L154"
+community: "subscription"
+location: "L155"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # getTenantUsageVsLimits()
@@ -28,4 +28,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

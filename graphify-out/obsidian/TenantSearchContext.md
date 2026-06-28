@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Community 42"
+community: "components layout · plan.ts"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_42
+  - community/components_layout__plants
 ---
 
 # TenantSearchContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant-shell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_42
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # generateVideo.job.ts
@@ -26,6 +26,8 @@ tags:
 - [[getSlideDeck()]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[jobEvents]] - `imports` [EXTRACTED]
+- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
@@ -38,4 +40,4 @@ tags:
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

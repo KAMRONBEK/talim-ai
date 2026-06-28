@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useUpgradeModal.ts"
 type: "code"
-community: "Community 38"
+community: "components account"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_account
 ---
 
 # UpgradeModalState
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useUpgradeModal.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_account

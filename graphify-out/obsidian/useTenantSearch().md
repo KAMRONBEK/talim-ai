@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Tenant Web Pages"
+community: "ui components"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/ui_components
 ---
 
 # useTenantSearch()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[tenant-shell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/ui_components

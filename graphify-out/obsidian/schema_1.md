@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin-audit.controller.ts"
 type: "code"
-community: "Admin Audit & Auth"
+community: "controllers admin"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Audit__Auth
+  - community/controllers_admin
 ---
 
 # schema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[admin-audit.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Audit__Auth
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

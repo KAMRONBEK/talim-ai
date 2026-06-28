@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-prompt.ts"
 type: "code"
-community: "Deck Prompt Builder"
+community: "src services · slides.controller.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Prompt_Builder
+  - community/src_services__slidescontrollerts
 ---
 
 # deck-prompt.ts
@@ -26,4 +26,4 @@ tags:
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[targetSlideCount()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Prompt_Builder
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

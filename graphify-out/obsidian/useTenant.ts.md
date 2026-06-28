@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Web Pages"
+community: "packages types · page.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Web_Pages
+  - community/packages_types__pagetsx
 ---
 
 # useTenant.ts
@@ -46,4 +46,4 @@ tags:
 - [[useTenantStudents()]] - `contains` [EXTRACTED]
 - [[useUnassignContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Web_Pages
+#graphify/code #graphify/EXTRACTED #community/packages_types__pagetsx

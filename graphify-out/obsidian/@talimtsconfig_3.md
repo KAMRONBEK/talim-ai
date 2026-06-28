@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "Community 59"
+community: "packages types · package.json"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_59
+  - community/packages_types__packagejson
 ---
 
 # @talim/tsconfig
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_59
+#graphify/code #graphify/EXTRACTED #community/packages_types__packagejson

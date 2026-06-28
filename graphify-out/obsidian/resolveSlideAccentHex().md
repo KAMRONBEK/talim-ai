@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Shared UI Components"
+community: "components deck"
 location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck
 ---
 
 # resolveSlideAccentHex()
@@ -17,4 +17,4 @@ tags:
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 - [[paletteFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck

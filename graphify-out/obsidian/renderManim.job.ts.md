@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # renderManim.job.ts
@@ -35,4 +35,4 @@ tags:
 - [[resolveManimAsset()]] - `contains` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

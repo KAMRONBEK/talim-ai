@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/doppler-docker.sh"
 type: "code"
-community: "Community 135"
+community: "scripts · doppler-docker.sh"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_135
+  - community/scripts__doppler-dockersh
 ---
 
 # doppler-docker.sh script
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[doppler-docker.sh]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_135
+#graphify/code #graphify/EXTRACTED #community/scripts__doppler-dockersh

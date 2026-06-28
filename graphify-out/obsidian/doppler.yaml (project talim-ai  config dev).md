@@ -1,13 +1,13 @@
 ---
 source_file: "doppler.yaml"
 type: "document"
-community: "Community 144"
+community: "doppler.yaml (project talim-ai / con"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_144
+  - community/doppleryaml_project_talim-ai_/_con
 ---
 
 # doppler.yaml (project talim-ai / config dev)
 
-#graphify/document #graphify/EXTRACTED #community/Community_144
+#graphify/document #graphify/EXTRACTED #community/doppleryaml_project_talim-ai_/_con

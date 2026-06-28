@@ -1,13 +1,13 @@
 ---
 source_file: "docker-compose.prod.yml"
 type: "document"
-community: "Community 142"
+community: "docker-compose.prod.yml (production "
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_142
+  - community/docker-composeprodyml_production_
 ---
 
 # docker-compose.prod.yml (production override)
 
-#graphify/document #graphify/EXTRACTED #community/Community_142
+#graphify/document #graphify/EXTRACTED #community/docker-composeprodyml_production_

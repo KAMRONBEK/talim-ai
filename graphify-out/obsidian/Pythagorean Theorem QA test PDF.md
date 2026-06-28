@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/qa-pythagoras.pdf"
 type: "paper"
-community: "Community 75"
+community: "qa · QA Cross-Cutting Matrix"
 tags:
   - graphify/paper
   - graphify/INFERRED
-  - community/Community_75
+  - community/qa__QA_Cross-Cutting_Matrix
 ---
 
 # Pythagorean Theorem QA test PDF
@@ -14,4 +14,4 @@ tags:
 - [[Deep Flow Tests Per Role]] - `references` [INFERRED]
 - [[Pythagoras QA fixture text]] - `semantically_similar_to` [INFERRED]
 
-#graphify/paper #graphify/INFERRED #community/Community_75
+#graphify/paper #graphify/INFERRED #community/qa__QA_Cross-Cutting_Matrix

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "controllers admin"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/controllers_admin
 ---
 
 # tenants.controller.ts
@@ -36,4 +36,4 @@ tags:
 - [[tenant.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

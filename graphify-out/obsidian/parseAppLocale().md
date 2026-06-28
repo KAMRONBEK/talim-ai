@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Community 35"
+community: "packages types · api.ts"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/packages_types__apits
 ---
 
 # parseAppLocale()
@@ -15,6 +15,7 @@ tags:
 - [[auth.controller.ts]] - `imports` [EXTRACTED]
 - [[formatAdminUser()]] - `calls` [EXTRACTED]
 - [[formatUser()]] - `calls` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
@@ -27,4 +28,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[shared.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/packages_types__apits

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Community 39"
+community: "src lib · locale-prompts.ts"
 location: "L91"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/src_lib__locale-promptsts
 ---
 
 # QUIZ_PROMPTS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/src_lib__locale-promptsts

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "subscription"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/subscription
 ---
 
 # prisma.ts
@@ -30,6 +30,8 @@ tags:
 - [[create-admin.ts]] - `imports_from` [EXTRACTED]
 - [[create-tenant-owner.ts]] - `imports_from` [EXTRACTED]
 - [[figure.service.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
+- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
@@ -67,4 +69,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/subscription

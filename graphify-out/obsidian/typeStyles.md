@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Community 66"
+community: "ui components"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/ui_components
 ---
 
 # typeStyles
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/ui_components

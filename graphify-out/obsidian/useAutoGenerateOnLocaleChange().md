@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "Community 41"
+community: "web hooks"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/web_hooks
 ---
 
 # useAutoGenerateOnLocaleChange()
@@ -20,4 +20,4 @@ tags:
 - [[useLocaleContent.ts]] - `contains` [EXTRACTED]
 - [[useLocaleSync()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/web_hooks

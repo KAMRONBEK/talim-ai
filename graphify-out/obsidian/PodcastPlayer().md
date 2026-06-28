@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
 type: "code"
-community: "Community 41"
+community: "admin components"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/admin_components
 ---
 
 # PodcastPlayer()
@@ -15,6 +15,6 @@ tags:
 - [[PodcastPlayer.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [INFERRED]
 - [[formatTime()_1]] - `calls` [EXTRACTED]
-- [[page.tsx_30]] - `imports` [EXTRACTED]
+- [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/admin_components

@@ -1,18 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 71"
+community: "docs · Assignment, attempts & max attempts"
 location: "§3.6"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_71
+  - community/docs__Assignment_attempts__max_attempts
 ---
 
 # Progress (per-student + class)
 
 ## Connections
 - [[Assignment, attempts & max attempts]] - `conceptually_related_to` [INFERRED]
-- [[US-LEARNER-02 Take quiz  game, see own progress]] - `references` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_71
+#graphify/concept #graphify/INFERRED #community/docs__Assignment_attempts__max_attempts

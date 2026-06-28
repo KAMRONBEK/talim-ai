@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "Community 33"
+community: "src services · tts-normalize.ts"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/src_services__tts-normalizets
 ---
 
 # splitScriptIntoChunks()
@@ -17,4 +17,4 @@ tags:
 - [[tts-normalize.ts]] - `contains` [EXTRACTED]
 - [[tts.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/src_services__tts-normalizets

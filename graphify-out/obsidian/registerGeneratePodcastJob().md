@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "Env Config & Jobs"
-location: "L14"
+community: "src jobs"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # registerGeneratePodcastJob()
@@ -16,4 +16,4 @@ tags:
 - [[generatePodcast.job.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

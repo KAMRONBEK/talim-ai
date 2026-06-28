@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/landing-page.tsx"
 type: "code"
-community: "Community 40"
+community: "components marketing"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/components_marketing
 ---
 
 # landing-page.tsx
@@ -28,7 +28,7 @@ tags:
 - [[hero.tsx]] - `imports_from` [EXTRACTED]
 - [[how-it-works.tsx]] - `imports_from` [EXTRACTED]
 - [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[page.tsx_36]] - `imports_from` [EXTRACTED]
 - [[preview.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/components_marketing

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "document"
-community: "Deployment & Infra Docs"
+community: "docs · Admin Subdomain DNS + SSL"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment__Infra_Docs
+  - community/docs__Admin_Subdomain_DNS__SSL
 ---
 
 # VPS Docker Deployment
@@ -19,4 +19,4 @@ tags:
 - [[Tech Stack & Infra]] - `conceptually_related_to` [INFERRED]
 - [[nginx Reverse Proxy]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment__Infra_Docs
+#graphify/document #graphify/EXTRACTED #community/docs__Admin_Subdomain_DNS__SSL

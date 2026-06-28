@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Jobs"
-location: "L34"
+community: "src jobs"
+location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # GenerateVideoJobData
@@ -15,4 +15,4 @@ tags:
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

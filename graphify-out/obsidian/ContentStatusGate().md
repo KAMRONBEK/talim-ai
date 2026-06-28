@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "web lib"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/web_lib
 ---
 
 # ContentStatusGate()
@@ -14,6 +14,6 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[content-status-gate.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/web_lib

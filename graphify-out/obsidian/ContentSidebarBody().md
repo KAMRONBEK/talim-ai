@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "Community 41"
-location: "L23"
+community: "components layout · content-generations.tsx"
+location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_41
+  - community/components_layout__content-generationstsx
 ---
 
 # ContentSidebarBody()
@@ -14,7 +14,5 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[content-sidebar.tsx]] - `contains` [EXTRACTED]
-- [[usePodcast()]] - `calls` [EXTRACTED]
-- [[useVideo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_41
+#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx

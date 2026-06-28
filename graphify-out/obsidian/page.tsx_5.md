@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/[id]/page.tsx"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_hooks
 ---
 
 # page.tsx
@@ -31,4 +31,4 @@ tags:
 - [[useAdminTenant()]] - `imports` [EXTRACTED]
 - [[useUpdateTenant()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

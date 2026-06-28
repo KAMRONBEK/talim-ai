@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/middleware.ts"
 type: "code"
-community: "App Layout & Guards"
+community: "i18n"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Layout__Guards
+  - community/i18n
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[middleware.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards
+#graphify/code #graphify/EXTRACTED #community/i18n

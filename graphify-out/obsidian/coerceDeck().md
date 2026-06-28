@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Deck Prompt Builder"
+community: "src services · slides.controller.ts"
 location: "L175"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Prompt_Builder
+  - community/src_services__slidescontrollerts
 ---
 
 # coerceDeck()
@@ -18,4 +18,4 @@ tags:
 - [[isRecord()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Prompt_Builder
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

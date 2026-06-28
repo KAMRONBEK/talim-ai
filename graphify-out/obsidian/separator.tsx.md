@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/separator.tsx"
 type: "code"
-community: "Shared UI Components"
+community: "components deck"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Components
+  - community/components_deck
 ---
 
 # separator.tsx
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Components
+#graphify/code #graphify/EXTRACTED #community/components_deck

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-html-sandbox.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "src lib"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/src_lib
 ---
 
 # tutor-html-sandbox.ts
@@ -19,4 +19,4 @@ tags:
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 - [[validateHtmlSandboxPayload()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/src_lib

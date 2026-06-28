@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/qa-overnight.sh"
 type: "code"
-community: "Community 137"
+community: "scripts · qa-overnight.sh"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_137
+  - community/scripts__qa-overnightsh
 ---
 
 # qa-overnight.sh script
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[qa-overnight.sh]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_137
+#graphify/code #graphify/EXTRACTED #community/scripts__qa-overnightsh

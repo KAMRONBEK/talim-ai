@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Content Progress Hooks"
-location: "L7"
+community: "web hooks"
+location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # videoKey()
@@ -15,4 +15,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

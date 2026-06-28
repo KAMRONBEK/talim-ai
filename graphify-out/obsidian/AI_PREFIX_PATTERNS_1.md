@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Content Detail Page"
+community: "components learning"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/components_learning
 ---
 
 # AI_PREFIX_PATTERNS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[format-summary.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/components_learning

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
+community: "controllers admin"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/controllers_admin
 ---
 
 # AppError
@@ -28,6 +28,8 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
+- [[events.controller.ts]] - `imports` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[learner.controller.ts]] - `imports` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
@@ -57,4 +59,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

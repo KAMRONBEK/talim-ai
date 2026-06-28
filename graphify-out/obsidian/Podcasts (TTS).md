@@ -1,22 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 100"
+community: "docs · Background jobs (Bull / Redis)"
 location: "§1.5"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/docs__Background_jobs_Bull_/_Redis
 ---
 
 # Podcasts (TTS)
 
 ## Connections
 - [[Background jobs (Bull  Redis)]] - `references` [EXTRACTED]
-- [[F21 Podcast playback broken + blob-404 spam]] - `references` [EXTRACTED]
-- [[F22 Podcast player 'Speed' label hardcoded Uzbek]] - `references` [EXTRACTED]
-- [[F30 Podcast per-episode regenerate gave no error feedback]] - `references` [EXTRACTED]
-- [[Sectioning]] - `references` [INFERRED]
-- [[US-IND-05 Podcast — generate + player]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_100
+#graphify/concept #graphify/EXTRACTED #community/docs__Background_jobs_Bull_/_Redis

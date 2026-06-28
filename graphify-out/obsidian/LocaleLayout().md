@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "App Layout & Guards"
+community: "i18n"
 location: "L19"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/App_Layout__Guards
+  - community/i18n
 ---
 
 # LocaleLayout()
@@ -15,4 +15,4 @@ tags:
 - [[getMessages()]] - `calls` [INFERRED]
 - [[layout.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/App_Layout__Guards
+#graphify/code #graphify/INFERRED #community/i18n

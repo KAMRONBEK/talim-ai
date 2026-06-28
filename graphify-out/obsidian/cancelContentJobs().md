@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
-location: "L52"
+community: "controllers admin"
+location: "L59"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin
 ---
 
 # cancelContentJobs()
@@ -20,4 +20,4 @@ tags:
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/learner-shell.tsx"
 type: "code"
-community: "Community 61"
+community: "components layout · role-guard.tsx"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/components_layout__role-guardtsx
 ---
 
 # learner-shell.tsx
@@ -16,10 +16,12 @@ tags:
 - [[LearnerBottomNav()]] - `imports` [EXTRACTED]
 - [[LearnerShell()]] - `contains` [EXTRACTED]
 - [[LearnerSidebar()]] - `imports` [EXTRACTED]
+- [[MustChangePasswordGate()]] - `contains` [EXTRACTED]
 - [[RoleGuard()]] - `imports` [EXTRACTED]
 - [[dashboard-header.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_2]] - `imports_from` [EXTRACTED]
 - [[learner-navigation.tsx]] - `imports_from` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/components_layout__role-guardtsx

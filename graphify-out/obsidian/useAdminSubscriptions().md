@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Plan/Status UI"
+community: "admin hooks"
 location: "L125"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Plan/Status_UI
+  - community/admin_hooks
 ---
 
 # useAdminSubscriptions()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_4]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Plan/Status_UI
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

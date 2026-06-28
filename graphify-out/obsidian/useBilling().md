@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Community 38"
+community: "components layout · plan.ts"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_layout__plants
 ---
 
 # useBilling()
@@ -26,4 +26,4 @@ tags:
 - [[useBilling.ts]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

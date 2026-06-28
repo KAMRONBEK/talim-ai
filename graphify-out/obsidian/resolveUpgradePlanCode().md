@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L126"
+community: "subscription"
+location: "L125"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/subscription
 ---
 
 # resolveUpgradePlanCode()
@@ -16,4 +16,4 @@ tags:
 - [[getFileLimitsForUser()]] - `calls` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/subscription

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/admin.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
+community: "controllers admin · analytics.controller.ts"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin__analyticscontrollerts
 ---
 
 # listSubscriptionsForAdmin()
@@ -16,4 +16,4 @@ tags:
 - [[analytics.controller.ts]] - `imports` [EXTRACTED]
 - [[listSubscriptions()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin__analyticscontrollerts

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tsconfig.json"
 type: "code"
-community: "Community 104"
+community: "packages types · tsconfig.json"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/packages_types__tsconfigjson
 ---
 
 # compilerOptions
@@ -16,4 +16,4 @@ tags:
 - [[rootDir_2]] - `contains` [EXTRACTED]
 - [[tsconfig.json_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/packages_types__tsconfigjson

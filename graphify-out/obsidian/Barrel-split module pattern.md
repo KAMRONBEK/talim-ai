@@ -1,11 +1,11 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "rationale"
-community: "Community 71"
+community: "docs · Assignment, attempts & max attempts"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Community_71
+  - community/docs__Assignment_attempts__max_attempts
 ---
 
 # Barrel-split module pattern
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Written assessments]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Community_71
+#graphify/rationale #graphify/INFERRED #community/docs__Assignment_attempts__max_attempts

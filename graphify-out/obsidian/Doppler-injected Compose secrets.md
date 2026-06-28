@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "rationale"
-community: "Community 64"
+community: "workflows"
 location: "header comment"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Doppler-injected Compose secrets
@@ -15,4 +15,4 @@ tags:
 - [[Compose service api (Express + Prisma + Bull)]] - `rationale_for` [EXTRACTED]
 - [[Deploy Deploy to VPS job]] - `references` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Community_64
+#graphify/rationale #graphify/INFERRED #community/workflows

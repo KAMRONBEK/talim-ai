@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Community 46"
+community: "assessment"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/assessment
 ---
 
 # banks.ts
@@ -16,6 +16,7 @@ tags:
 - [[GeneratedQuestion]] - `imports` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
 - [[assertBank()]] - `imports` [EXTRACTED]
+- [[assertTenantContentIds()]] - `imports` [EXTRACTED]
 - [[assessment-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[assessment.service.ts]] - `re_exports` [EXTRACTED]
 - [[buildAssessmentPrompt()]] - `imports` [EXTRACTED]
@@ -41,4 +42,4 @@ tags:
 - [[question-quality.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/assessment

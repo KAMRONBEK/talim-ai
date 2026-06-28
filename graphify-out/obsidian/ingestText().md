@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ingest.service.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services
 ---
 
 # ingestText()
@@ -21,4 +21,4 @@ tags:
 - [[storeChunksWithEmbeddings()]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services

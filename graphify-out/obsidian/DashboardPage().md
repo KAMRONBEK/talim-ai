@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Community 66"
+community: "[locale] dashboard"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_66
+  - community/locale_dashboard
 ---
 
 # DashboardPage()
@@ -14,8 +14,8 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[getFirstName()]] - `calls` [EXTRACTED]
-- [[page.tsx_33]] - `contains` [EXTRACTED]
+- [[page.tsx_34]] - `contains` [EXTRACTED]
 - [[useContents()]] - `calls` [INFERRED]
 - [[useDashboardSearch()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_66
+#graphify/code #graphify/INFERRED #community/locale_dashboard

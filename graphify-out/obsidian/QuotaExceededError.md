@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "controllers admin"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/controllers_admin
 ---
 
 # QuotaExceededError
@@ -21,4 +21,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

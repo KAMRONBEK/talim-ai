@@ -1,23 +1,22 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Content Progress Hooks"
-location: "L11"
+community: "web hooks"
+location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Progress_Hooks
+  - community/web_hooks
 ---
 
 # useVideo()
 
 ## Connections
-- [[ContentSidebarBody()]] - `calls` [EXTRACTED]
 - [[VideoInner()]] - `calls` [EXTRACTED]
-- [[content-sidebar.tsx]] - `imports` [EXTRACTED]
-- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
 - [[videoKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Progress_Hooks
+#graphify/code #graphify/EXTRACTED #community/web_hooks

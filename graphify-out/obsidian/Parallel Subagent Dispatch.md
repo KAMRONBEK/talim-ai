@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # Parallel Subagent Dispatch
@@ -14,4 +14,4 @@ tags:
 - [[Extraction Subagent Prompt]] - `references` [EXTRACTED]
 - [[Semantic (LLM) Extraction]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/rationale #graphify/EXTRACTED #community/references

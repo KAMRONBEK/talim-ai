@@ -1,16 +1,16 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Community 88"
+community: "qa"
 tags:
   - graphify/document
-  - graphify/EXTRACTED
-  - community/Community_88
+  - graphify/INFERRED
+  - community/qa
 ---
 
 # US-LEARNER-03: Deactivated → content access lost immediately
 
 ## Connections
-- [[Multi-tenant isolation]] - `references` [EXTRACTED]
+- [[Multi-tenant isolation (contentAccess.service.ts  assertCanAccessContent)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_88
+#graphify/document #graphify/INFERRED #community/qa

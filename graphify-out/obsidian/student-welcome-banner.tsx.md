@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/student-welcome-banner.tsx"
 type: "code"
-community: "Community 49"
+community: "[locale] dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/locale_dashboard
 ---
 
 # student-welcome-banner.tsx
@@ -21,4 +21,4 @@ tags:
 - [[onboarding.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

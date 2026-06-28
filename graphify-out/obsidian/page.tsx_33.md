@@ -1,28 +1,42 @@
 ---
-source_file: "apps/web/app/[locale]/dashboard/page.tsx"
+source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
 type: "code"
-community: "Community 66"
+community: "web hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/web_hooks
 ---
 
 # page.tsx
 
 ## Connections
-- [[DashboardPage()]] - `contains` [EXTRACTED]
-- [[DashboardSearchBar()]] - `imports` [EXTRACTED]
-- [[QuickActionCards()]] - `imports` [EXTRACTED]
-- [[RecentContentGrid()]] - `imports` [EXTRACTED]
-- [[dashboard-search-bar.tsx]] - `imports_from` [EXTRACTED]
-- [[dashboard-search.tsx]] - `imports_from` [EXTRACTED]
-- [[getFirstName()]] - `contains` [EXTRACTED]
-- [[quick-action-cards.tsx]] - `imports_from` [EXTRACTED]
-- [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
+- [[Button]] - `imports` [EXTRACTED]
+- [[CenteredMessage()_1]] - `contains` [EXTRACTED]
+- [[EmptyState()_1]] - `contains` [EXTRACTED]
+- [[GeneratingState()_1]] - `contains` [EXTRACTED]
+- [[NarratedVideoPlayer()]] - `imports` [EXTRACTED]
+- [[NarratedVideoPlayer.tsx]] - `imports_from` [EXTRACTED]
+- [[VideoInner()]] - `contains` [EXTRACTED]
+- [[VideoPage()]] - `contains` [EXTRACTED]
+- [[authenticatedBlob.ts]] - `imports_from` [EXTRACTED]
+- [[cn()]] - `imports` [EXTRACTED]
+- [[fetchAuthenticatedBlob()]] - `imports` [EXTRACTED]
+- [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[useContent()]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
-- [[useContents()]] - `imports` [EXTRACTED]
-- [[useDashboardSearch()]] - `imports` [EXTRACTED]
+- [[useContentBase()]] - `imports` [EXTRACTED]
+- [[useContentBase.ts]] - `imports_from` [EXTRACTED]
+- [[useGenerateVideo()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
+- [[useSections()]] - `imports` [EXTRACTED]
+- [[useSections.ts]] - `imports_from` [EXTRACTED]
+- [[useSlides()]] - `imports` [EXTRACTED]
+- [[useSlides.ts]] - `imports_from` [EXTRACTED]
+- [[useVideo()]] - `imports` [EXTRACTED]
+- [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/web_hooks

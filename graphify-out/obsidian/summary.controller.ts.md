@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Section & Summary API"
+community: "src controllers · summary.controller.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_controllers__summarycontrollerts
 ---
 
 # summary.controller.ts
@@ -45,11 +45,11 @@ tags:
 - [[recordLearningActivity()]] - `imports` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[sanitizeSummaryOutput()]] - `imports` [EXTRACTED]
-- [[scopeKey()]] - `contains` [EXTRACTED]
+- [[scopeKey()_1]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.routes.ts]] - `imports_from` [EXTRACTED]
 - [[summaryBodySchema]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts

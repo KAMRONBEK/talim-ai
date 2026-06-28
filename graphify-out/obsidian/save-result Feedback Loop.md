@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/query.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "references"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/references
 ---
 
 # save-result Feedback Loop
@@ -14,4 +14,4 @@ tags:
 - [[Work Memory  LESSONS]] - `conceptually_related_to` [EXTRACTED]
 - [[graphify query]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/references

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/GeoGebraEmbed.tsx"
 type: "code"
-community: "Community 47"
+community: "components chat"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_47
+  - community/components_chat
 ---
 
 # GeoGebraEmbed()
@@ -16,4 +16,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_47
+#graphify/code #graphify/EXTRACTED #community/components_chat

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx"
 type: "code"
-community: "Tenant Web Pages"
+community: "web hooks · page.tsx"
 location: "L14"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Web_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # TenantSettingsPage()
@@ -20,4 +20,4 @@ tags:
 - [[useTenantContents()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Web_Pages
+#graphify/code #graphify/INFERRED #community/web_hooks__pagetsx

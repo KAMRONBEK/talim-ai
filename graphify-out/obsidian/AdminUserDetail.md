@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content Pages"
-location: "L402"
+community: "admin store"
+location: "L411"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content_Pages
+  - community/admin_store
 ---
 
 # AdminUserDetail
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_store

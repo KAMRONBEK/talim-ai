@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
-location: "L34"
+community: "[locale] dashboard"
+location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/locale_dashboard
 ---
 
 # ContentPageLoading()
 
 ## Connections
 - [[T]] - `calls` [INFERRED]
-- [[page.tsx_29]] - `contains` [EXTRACTED]
+- [[page.tsx_30]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

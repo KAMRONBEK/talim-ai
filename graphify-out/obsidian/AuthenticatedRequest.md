@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Admin Analytics & Subscriptions"
+community: "controllers admin"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics__Subscriptions
+  - community/controllers_admin
 ---
 
 # AuthenticatedRequest
@@ -23,6 +23,8 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
+- [[events.controller.ts]] - `imports` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[learner.controller.ts]] - `imports` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[progress.controller.ts]] - `imports` [EXTRACTED]
@@ -39,4 +41,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

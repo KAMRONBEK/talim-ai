@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Community 66"
+community: "[locale] dashboard"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/locale_dashboard
 ---
 
 # getFirstName()
 
 ## Connections
 - [[DashboardPage()]] - `calls` [EXTRACTED]
-- [[page.tsx_33]] - `contains` [EXTRACTED]
+- [[page.tsx_34]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

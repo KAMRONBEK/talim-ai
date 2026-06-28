@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Community 42"
+community: "components layout"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_42
+  - community/components_layout
 ---
 
 # navItems
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_42
+#graphify/code #graphify/EXTRACTED #community/components_layout

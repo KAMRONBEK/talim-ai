@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 93"
+community: "docs"
 location: "§6.2"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_93
+  - community/docs
 ---
 
 # Subscriptions / plans (manual activation)
@@ -18,4 +18,4 @@ tags:
 - [[Usage metering]] - `conceptually_related_to` [INFERRED]
 - [[Usage-limit UX & subscription promotion modal]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_93
+#graphify/concept #graphify/INFERRED #community/docs

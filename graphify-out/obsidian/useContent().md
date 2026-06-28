@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 36"
-location: "L35"
+community: "web hooks"
+location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/web_hooks
 ---
 
 # useContent()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[ContentLayoutInner()]] - `calls` [EXTRACTED]
 - [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[FlashcardsPage()]] - `calls` [EXTRACTED]
 - [[PodcastPageInner()]] - `calls` [EXTRACTED]
 - [[QuizPage()]] - `calls` [INFERRED]
 - [[SlidesInner()]] - `calls` [EXTRACTED]
@@ -24,7 +25,9 @@ tags:
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
-- [[page.tsx_37]] - `imports` [EXTRACTED]
+- [[page.tsx_33]] - `imports` [EXTRACTED]
+- [[page.tsx_38]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/web_hooks

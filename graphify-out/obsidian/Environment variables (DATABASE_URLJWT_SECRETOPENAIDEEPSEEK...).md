@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Admin Panel Docs"
+community: "api"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Admin_Panel_Docs
+  - community/api
 ---
 
 # Environment variables (DATABASE_URL/JWT_SECRET/OPENAI/DEEPSEEK/...)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI README]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs
+#graphify/concept #graphify/EXTRACTED #community/api

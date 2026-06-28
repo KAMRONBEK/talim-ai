@@ -1,12 +1,12 @@
 ---
-source_file: "apps/web/components/theme-toggle.tsx"
+source_file: "apps/admin/components/theme-toggle.tsx"
 type: "code"
-community: "Community 70"
-location: "L10"
+community: "admin components"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/admin_components
 ---
 
 # ThemeValue
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-toggle.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/admin_components

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/routing.ts"
 type: "code"
-community: "App Layout & Guards"
+community: "i18n"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/App_Layout__Guards
+  - community/i18n
 ---
 
 # routing
@@ -18,4 +18,4 @@ tags:
 - [[request.ts]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/App_Layout__Guards
+#graphify/code #graphify/EXTRACTED #community/i18n

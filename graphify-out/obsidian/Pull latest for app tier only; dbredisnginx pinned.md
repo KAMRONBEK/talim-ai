@@ -1,12 +1,12 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "rationale"
-community: "Community 64"
+community: "workflows"
 location: "jobs.deploy.script"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Pull :latest for app tier only; db/redis/nginx pinned
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Deploy Deploy to VPS job]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_64
+#graphify/rationale #graphify/EXTRACTED #community/workflows

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "Community 51"
+community: "assessment · learner.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/assessment__learnerts
 ---
 
 # learner.ts
@@ -29,4 +29,4 @@ tags:
 - [[submitAssessmentSchema]] - `imports` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/assessment__learnerts

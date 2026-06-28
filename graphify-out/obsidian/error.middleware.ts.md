@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing & Usage API"
+community: "controllers admin"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/controllers_admin
 ---
 
 # error.middleware.ts
@@ -31,6 +31,8 @@ tags:
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[errorMiddleware()]] - `contains` [EXTRACTED]
+- [[events.controller.ts]] - `imports_from` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learner.controller.ts]] - `imports_from` [EXTRACTED]
@@ -63,4 +65,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/controllers_admin

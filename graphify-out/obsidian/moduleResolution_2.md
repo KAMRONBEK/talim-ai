@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "Community 85"
+community: "tsconfig · node.json"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/tsconfig__nodejson
 ---
 
 # moduleResolution
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/tsconfig__nodejson

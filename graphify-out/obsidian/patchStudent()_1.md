@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
-location: "L140"
+community: "services tenant"
+location: "L151"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/services_tenant
 ---
 
 # patchStudent()
@@ -16,4 +16,4 @@ tags:
 - [[formatStudentRow()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/services_tenant

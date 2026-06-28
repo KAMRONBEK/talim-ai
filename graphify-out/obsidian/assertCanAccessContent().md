@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content & Podcast API"
+community: "src controllers"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Podcast_API
+  - community/src_controllers
 ---
 
 # assertCanAccessContent()
@@ -16,11 +16,13 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
+- [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
 - [[createQuiz()]] - `calls` [EXTRACTED]
 - [[createSlides()]] - `calls` [EXTRACTED]
 - [[createVideo()]] - `calls` [EXTRACTED]
 - [[deleteContent()_1]] - `calls` [EXTRACTED]
+- [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getContent()]] - `calls` [EXTRACTED]
 - [[getContentChat()]] - `calls` [EXTRACTED]
@@ -28,6 +30,7 @@ tags:
 - [[getContentProgress()]] - `calls` [EXTRACTED]
 - [[getContentTranscript()]] - `calls` [EXTRACTED]
 - [[getEpisodeProgress()]] - `calls` [EXTRACTED]
+- [[getFlashcards()]] - `calls` [EXTRACTED]
 - [[getLearningHistory()]] - `calls` [EXTRACTED]
 - [[getPodcast()]] - `calls` [EXTRACTED]
 - [[getSection()]] - `calls` [EXTRACTED]
@@ -53,4 +56,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Podcast_API
+#graphify/code #graphify/EXTRACTED #community/src_controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Community 46"
-location: "L51"
+community: "assessment"
+location: "L67"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/assessment
 ---
 
 # generateQuestions()
@@ -21,4 +21,4 @@ tags:
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[normalizeQuestionType()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/assessment

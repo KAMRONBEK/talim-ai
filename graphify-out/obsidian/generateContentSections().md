@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Usage Pricing & Chunk Tools"
+community: "src services"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Chunk_Tools
+  - community/src_services
 ---
 
 # generateContentSections()
@@ -18,4 +18,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Chunk_Tools
+#graphify/code #graphify/EXTRACTED #community/src_services

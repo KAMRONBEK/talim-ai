@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Community 44"
+community: "src services · slides.controller.ts"
 location: "L207"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/src_services__slidescontrollerts
 ---
 
 # DeckAudience
@@ -19,4 +19,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts

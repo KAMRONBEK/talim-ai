@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Learner Assessment Pages"
-location: "L20"
+community: "web hooks · page.tsx"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Assessment_Pages
+  - community/web_hooks__pagetsx
 ---
 
 # mutErr()
@@ -15,4 +15,4 @@ tags:
 - [[TenantAssessmentsPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Assessment_Pages
+#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx

@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "concept"
-community: "Community 64"
+community: "workflows"
 location: "services.redis"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_64
+  - community/workflows
 ---
 
 # Compose service: redis (redis:7-alpine)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Compose service api (Express + Prisma + Bull)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_64
+#graphify/concept #graphify/EXTRACTED #community/workflows

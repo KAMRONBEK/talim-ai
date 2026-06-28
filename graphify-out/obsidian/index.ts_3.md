@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/index.ts"
 type: "code"
-community: "Community 31"
+community: "ui components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/ui_components
 ---
 
 # index.ts
@@ -76,6 +76,7 @@ tags:
 - [[input.tsx]] - `re_exports` [EXTRACTED]
 - [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
 - [[label.tsx]] - `re_exports` [EXTRACTED]
+- [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
 - [[logo.tsx]] - `imports_from` [EXTRACTED]
 - [[page.tsx]] - `imports_from` [EXTRACTED]
@@ -105,6 +106,7 @@ tags:
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[pricing.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[progress.tsx]] - `re_exports` [EXTRACTED]
@@ -118,8 +120,9 @@ tags:
 - [[student-welcome-banner.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[theme-toggle.tsx]] - `imports_from` [EXTRACTED]
+- [[theme-toggle.tsx_1]] - `imports_from` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[utils.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/ui_components

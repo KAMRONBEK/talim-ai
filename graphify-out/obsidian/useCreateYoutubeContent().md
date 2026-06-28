@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Admin Auth Pages & UI"
-location: "L87"
+community: "ui components"
+location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Auth_Pages__UI
+  - community/ui_components
 ---
 
 # useCreateYoutubeContent()
@@ -16,4 +16,4 @@ tags:
 - [[YoutubeLinkForm()]] - `calls` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Pages__UI
+#graphify/code #graphify/EXTRACTED #community/ui_components

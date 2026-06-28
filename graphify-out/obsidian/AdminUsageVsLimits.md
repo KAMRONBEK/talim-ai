@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content Pages"
-location: "L81"
+community: "admin hooks"
+location: "L83"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content_Pages
+  - community/admin_hooks
 ---
 
 # AdminUsageVsLimits
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content_Pages
+#graphify/code #graphify/EXTRACTED #community/admin_hooks

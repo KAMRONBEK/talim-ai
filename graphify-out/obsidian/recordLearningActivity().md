@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Section & Summary API"
+community: "src services · learning-coverage-prompt.ts"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section__Summary_API
+  - community/src_services__learning-coverage-promptts
 ---
 
 # recordLearningActivity()
@@ -19,4 +19,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[todayUtcDate()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section__Summary_API
+#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts

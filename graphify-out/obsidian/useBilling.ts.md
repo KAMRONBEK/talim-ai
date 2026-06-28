@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Community 38"
+community: "components layout · plan.ts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_layout__plants
 ---
 
 # useBilling.ts
@@ -24,4 +24,4 @@ tags:
 - [[useRequestUpgrade()]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_layout__plants

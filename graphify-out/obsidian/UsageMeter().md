@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/billing-summary-card.tsx"
 type: "code"
-community: "Community 38"
+community: "components account"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/components_account
 ---
 
 # UsageMeter()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[billing-summary-card.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/components_account

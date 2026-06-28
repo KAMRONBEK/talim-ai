@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Billing & Usage API"
-location: "L131"
+community: "packages types"
+location: "L133"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Usage_API
+  - community/packages_types
 ---
 
 # UserSubscription
@@ -15,4 +15,4 @@ tags:
 - [[billing.controller.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Usage_API
+#graphify/code #graphify/EXTRACTED #community/packages_types

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Tenant Admin & Prisma"
-location: "L185"
+community: "services tenant"
+location: "L196"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Admin__Prisma
+  - community/services_tenant
 ---
 
 # resetStudentPassword()
@@ -15,4 +15,4 @@ tags:
 - [[formatStudentRow()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Admin__Prisma
+#graphify/code #graphify/EXTRACTED #community/services_tenant

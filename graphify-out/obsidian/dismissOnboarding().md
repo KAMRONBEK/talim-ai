@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/onboarding.ts"
 type: "code"
-community: "Community 49"
+community: "[locale] dashboard"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/locale_dashboard
 ---
 
 # dismissOnboarding()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_18]] - `imports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/locale_dashboard

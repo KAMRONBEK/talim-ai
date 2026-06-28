@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 35"
-location: "L603"
+community: "packages types · api.ts"
+location: "L612"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/packages_types__apits
 ---
 
 # Podcast
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[usePodcast.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/packages_types__apits

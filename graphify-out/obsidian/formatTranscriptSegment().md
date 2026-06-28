@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller"
+community: "src services · env.ts"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller
+  - community/src_services__envts
 ---
 
 # formatTranscriptSegment()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[content-shared.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller
+#graphify/code #graphify/EXTRACTED #community/src_services__envts

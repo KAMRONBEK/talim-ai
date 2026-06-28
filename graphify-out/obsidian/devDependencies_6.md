@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Styling Deps"
+community: "packages ui"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Styling_Deps
+  - community/packages_ui
 ---
 
 # devDependencies
@@ -21,4 +21,4 @@ tags:
 - [[react-dom_3]] - `contains` [EXTRACTED]
 - [[typescript_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Styling_Deps
+#graphify/code #graphify/EXTRACTED #community/packages_ui

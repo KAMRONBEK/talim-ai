@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 51"
-location: "L231"
+community: "assessment · learner.ts"
+location: "L254"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/assessment__learnerts
 ---
 
 # assertLearnerAssignment()
@@ -17,4 +17,4 @@ tags:
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/assessment__learnerts

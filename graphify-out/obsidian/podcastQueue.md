@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Env Config & Jobs"
+community: "src jobs"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Jobs
+  - community/src_jobs
 ---
 
 # podcastQueue
@@ -16,4 +16,4 @@ tags:
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Jobs
+#graphify/code #graphify/EXTRACTED #community/src_jobs

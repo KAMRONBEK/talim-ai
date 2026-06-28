@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Community 91"
+community: "api · package.json"
 location: "L59"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_91
+  - community/api__packagejson
 ---
 
 # schema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[prisma_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_91
+#graphify/code #graphify/EXTRACTED #community/api__packagejson

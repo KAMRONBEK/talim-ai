@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 95"
+community: "plans · Internationalization (uz / en / ru)"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_95
+  - community/plans__Internationalization_uz_/_en_/_ru
 ---
 
 # Visual Direction (girih, marker-highlight)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_95
+#graphify/concept #graphify/EXTRACTED #community/plans__Internationalization_uz_/_en_/_ru
