@@ -556,3 +556,5 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-OWNER-08/LEARNER-05 (Take WRITTEN + grade + maxAttempts) — 3/3.** Submit grades (numeric score/correct); 2nd submit → 409 "Attempt limit reached"; leaderboard 200. No findings.
 
 **US-ADMIN-03 (Admin user mutations) — role/reset/subscription/delete all 200 + audited.** **F51 (d3bcd3c):** a name/preferredLocale/adminPasswordNote edit wrote NO audit row (only role changes were) → fixed (user.update audit, field names only). reset-password needs {generate:true} (my earlier {} → 400, test error).
+
+**US-ADMIN-05 (Admin content/generated) — audit coverage.** deleteContent/deleteGenerated already audited; **F52 (dbf9f4e):** retry-job wrote no audit → fixed (content.retry_job). Verified live.

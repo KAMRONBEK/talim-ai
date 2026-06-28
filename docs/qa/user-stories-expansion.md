@@ -1872,7 +1872,7 @@ custom seat limit, **so that** manual billing and seat caps reflect what the tut
 **As a** platform admin, **I want** to browse all uploads + AI artifacts platform-wide and delete or
 retry them, **so that** I can clear stuck/abusive content and re-run failed ingestion.
 **Routes/code:** `/content`, `/generated` · `GET /admin/contents`, `DELETE /admin/contents/:id`, `POST /admin/contents/:id/retry-job`, `GET /admin/generated`, `DELETE /admin/generated/:id` · `admin/content.controller.ts` · `cancelContentJobs`, `contentQueue`, `storageService`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — `GET /admin/contents` lists ALL content (no tenant scoping — admin sees every org + B2C), search by title, paginated.
@@ -1903,6 +1903,8 @@ retry them, **so that** I can clear stuck/abusive content and re-run failed inge
 | EC18 | Retry burst (many FAILED) vs admin rate limit | 121st request in 60s → 429 "Too many admin requests" | ⬜ | — | — |
 
 ---
+
+**Run 9 verification (2026-06-28, live):** deleteContent → `content.delete` audit ✓; deleteGenerated → `generated.delete` ✓; **retryContentJob audited nothing → F52 fixed** (`content.retry_job` audit + auth guard); admin retry of a FAILED content → 200 + audit row. All admin content/generated mutations now audited.
 
 ### US-ADMIN-06: Usage & cost metering (per-user spend, platform stats)
 **As a** platform admin, **I want** per-user API spend over 7/30/90 days and platform KPIs, **so that** I
