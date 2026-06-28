@@ -257,6 +257,26 @@ export async function patchUser(req: AuthenticatedRequest, res: Response): Promi
     });
   }
 
+  // Non-role edits (name / locale / the sensitive plaintext password note) must also be
+  // audited — "every admin action recorded". Log only which fields changed, never the
+  // password-note value.
+  const updatedFields = [
+    body.name !== undefined && body.name !== existing.name ? 'name' : null,
+    body.preferredLocale !== undefined && body.preferredLocale !== existing.preferredLocale
+      ? 'preferredLocale'
+      : null,
+    body.adminPasswordNote !== undefined ? 'adminPasswordNote' : null,
+  ].filter((f): f is string => f !== null);
+  if (updatedFields.length > 0) {
+    await writeAdminAuditLog({
+      adminUserId: req.user.userId,
+      action: 'user.update',
+      targetType: 'user',
+      targetId: id,
+      metadata: { fields: updatedFields },
+    });
+  }
+
   const tenantId = await resolveTenantIdForUser(user.id, newRole);
   res.json({ user: { ...formatAdminUser(user), tenantId } });
 }
