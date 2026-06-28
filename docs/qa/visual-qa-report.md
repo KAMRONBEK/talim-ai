@@ -558,3 +558,11 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-ADMIN-03 (Admin user mutations) — role/reset/subscription/delete all 200 + audited.** **F51 (d3bcd3c):** a name/preferredLocale/adminPasswordNote edit wrote NO audit row (only role changes were) → fixed (user.update audit, field names only). reset-password needs {generate:true} (my earlier {} → 400, test error).
 
 **US-ADMIN-05 (Admin content/generated) — audit coverage.** deleteContent/deleteGenerated already audited; **F52 (dbf9f4e):** retry-job wrote no audit → fixed (content.retry_job). Verified live.
+
+---
+
+## Run 10 — 2026-06-28 · post-feature QA (flashcards isolation, quota matrix)
+
+**Flashcards (new feature) isolation — 5/5, S1-safe.** learner GET assigned deck → 200; learner POST generate → 403; cross-tenant owner B generate/GET on another tenant's content → 404; owner B via /content → 403 (owner-blocked). The new /content + /tenant/content flashcards routes correctly route through `assertCanAccessContent` — no hand-rolled scoping, no leak.
+
+**US-XCUT-07 quota matrix — 4/4.** A FREE individual at the GENERATION cap → **402 "Daily AI generation limit reached"** on flashcards / quiz / video generation; GET reads are not quota-gated (200). Consistent error contract across all generation features incl. the new flashcards route.
