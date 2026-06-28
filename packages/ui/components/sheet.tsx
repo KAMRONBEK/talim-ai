@@ -45,10 +45,74 @@ function SheetTrigger({ children }: { children: React.ReactElement }) {
 function SheetContent({ className, children, side = 'right', ...props }: React.HTMLAttributes<HTMLDivElement> & { side?: 'right' | 'left' }) {
   const ctx = React.useContext(SheetContext);
   const [mounted, setMounted] = React.useState(false);
+  const panelRef = React.useRef<HTMLDivElement>(null);
+  const open = ctx?.open ?? false;
+
+  // setOpen identity changes every render (inline context value), so read it through a ref
+  // and key the focus effect only on `open` — otherwise it would re-steal focus on every render.
+  const setOpenRef = React.useRef(ctx?.setOpen);
+  setOpenRef.current = ctx?.setOpen;
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Dialog behaviour while open: move focus in, trap Tab, close on Escape, restore focus on close,
+  // and lock background scroll. (This Sheet is hand-rolled, not Radix, so none of it is automatic.)
+  React.useEffect(() => {
+    if (!open || !mounted) return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    const heading = panel.querySelector('h1, h2, h3');
+    if (heading) {
+      if (!heading.id) heading.id = `sheet-title-${Math.random().toString(36).slice(2, 9)}`;
+      panel.setAttribute('aria-labelledby', heading.id);
+    }
+    panel.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setOpenRef.current?.(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => el.offsetParent !== null);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) {
+        e.preventDefault();
+        panel.focus();
+        return;
+      }
+      const active = document.activeElement;
+      if (e.shiftKey) {
+        if (active === first || active === panel) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    panel.addEventListener('keydown', onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      panel.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
+    };
+  }, [open, mounted]);
 
   if (!ctx?.open || !mounted) return null;
 
@@ -60,8 +124,12 @@ function SheetContent({ className, children, side = 'right', ...props }: React.H
         onClick={() => ctx.setOpen(false)}
       />
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
         className={cn(
-          'fixed top-0 z-10 flex h-full w-full max-w-md flex-col border bg-card shadow-lg',
+          'fixed top-0 z-10 flex h-full w-full max-w-md flex-col border bg-card shadow-lg outline-none',
           side === 'right' ? 'right-0' : 'left-0',
           className,
         )}
