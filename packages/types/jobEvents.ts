@@ -11,6 +11,12 @@ export type JobEvent =
   | { type: 'podcast.status'; contentId: string; status: 'READY' | 'FAILED' | 'GENERATING'; episodeId?: string }
   | { type: 'video.status'; contentId: string; sectionId?: string; status: 'READY' | 'FAILED' | 'GENERATING' }
   | { type: 'slides.status'; contentId: string; sectionId?: string; status: 'READY' | 'FAILED' }
+  | {
+      type: 'flashcards.status';
+      contentId: string;
+      sectionId?: string;
+      status: 'READY' | 'FAILED' | 'GENERATING';
+    }
   | { type: 'quiz.status'; quizId: string; contentId?: string; status: 'READY' | 'FAILED' };
 
 /** Wire frame: carries a monotonic per-user sequence id for Last-Event-ID replay. */

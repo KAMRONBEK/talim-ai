@@ -5,6 +5,7 @@ export const contentQueue = new Bull('process-content', env.REDIS_URL);
 export const quizQueue = new Bull('generate-quiz', env.REDIS_URL);
 export const podcastQueue = new Bull('generate-podcast', env.REDIS_URL);
 export const videoQueue = new Bull('generate-video', env.REDIS_URL);
+export const flashcardQueue = new Bull('generate-flashcards', env.REDIS_URL);
 export const manimQueue = new Bull('render-manim', env.REDIS_URL);
 
 export interface ProcessContentJobData {
@@ -37,6 +38,12 @@ export interface GenerateVideoJobData {
   locale?: string;
 }
 
+export interface GenerateFlashcardsJobData {
+  contentId: string;
+  deckId: string;
+  locale?: string;
+}
+
 export interface RenderManimJobData {
   jobId: string;
   script: string;
@@ -47,7 +54,7 @@ export interface RenderManimJobData {
 
 type ContentScopedJobData = { contentId?: string };
 
-const CONTENT_QUEUES = [contentQueue, quizQueue, podcastQueue, videoQueue] as const;
+const CONTENT_QUEUES = [contentQueue, quizQueue, podcastQueue, videoQueue, flashcardQueue] as const;
 
 export async function cancelContentJobs(contentId: string): Promise<void> {
   const states: Bull.JobStatus[] = ['waiting', 'active', 'delayed'];

@@ -254,6 +254,7 @@ model Content {
   sections         ContentSection[]
   podcasts         Podcast[]
   contentVideos    ContentVideo[]
+  flashcardDecks   FlashcardDeck[]
   slideDecks       ContentSlideDeck[]
   transcriptSegments ContentTranscriptSegment[]
   contentProgress  ContentProgress[]
@@ -472,6 +473,37 @@ model QuizAttempt {
 
   @@index([quizId])
   @@index([userId])
+}
+
+// AI-generated flashcard deck for a content (optionally scoped to a section + locale),
+// mirroring the ContentVideo per-scope pattern. Cards are simple front/back pairs studied
+// with a flip + again/good UI.
+model FlashcardDeck {
+  id        String               @id @default(cuid())
+  contentId String
+  locale    String               @default("uz")
+  scopeKey  String
+  sectionId String?
+  status    GeneratedMediaStatus @default(PENDING)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  content   Content              @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  cards     Flashcard[]
+
+  @@unique([contentId, locale, scopeKey])
+  @@index([contentId])
+}
+
+model Flashcard {
+  id        String        @id @default(cuid())
+  deckId    String
+  front     String        @db.Text
+  back      String        @db.Text
+  order     Int           @default(0)
+  createdAt DateTime      @default(now())
+  deck      FlashcardDeck @relation(fields: [deckId], references: [id], onDelete: Cascade)
+
+  @@index([deckId])
 }
 
 model QuestionBank {

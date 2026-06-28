@@ -740,6 +740,24 @@ export interface ContentVideo {
   createdAt: string;
 }
 
+export interface Flashcard {
+  id: string;
+  front: string;
+  back: string;
+  order: number;
+}
+
+export interface FlashcardDeck {
+  id: string;
+  contentId: string;
+  locale: AppLocale;
+  sectionId: string | null;
+  scopeKey: string;
+  status: GeneratedMediaStatus;
+  cards: Flashcard[];
+  createdAt: string;
+}
+
 export interface LearningHistory {
   quizzes: QuizWithLatestAttempt[];
   summaries: ContentSummary[];

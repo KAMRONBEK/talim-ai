@@ -14,6 +14,7 @@ import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as progressController from '../controllers/progress.controller.js';
 import * as videoController from '../controllers/video.controller.js';
+import * as flashcardsController from '../controllers/flashcards.controller.js';
 import * as slidesController from '../controllers/slides.controller.js';
 
 export const contentRoutes = Router();
@@ -35,6 +36,8 @@ contentRoutes.post('/:id/podcast', asyncHandler(podcastController.createPodcast)
 contentRoutes.get('/:id/video', asyncHandler(videoController.getVideo));
 contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
 contentRoutes.get('/:id/video/segments/:index/audio', asyncHandler(videoController.streamVideoSegmentAudio));
+contentRoutes.get('/:id/flashcards', asyncHandler(flashcardsController.getFlashcards));
+contentRoutes.post('/:id/flashcards', asyncHandler(flashcardsController.createFlashcards));
 contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
 contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
 contentRoutes.post('/:id/reparse', reparseRateLimit, asyncHandler(contentController.reparseContent));

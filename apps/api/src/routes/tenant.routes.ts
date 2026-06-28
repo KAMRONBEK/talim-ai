@@ -15,6 +15,7 @@ import * as assessmentController from '../controllers/assessment.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
 import * as podcastController from '../controllers/podcast.controller.js';
 import * as videoController from '../controllers/video.controller.js';
+import * as flashcardsController from '../controllers/flashcards.controller.js';
 import * as slidesController from '../controllers/slides.controller.js';
 import * as progressController from '../controllers/progress.controller.js';
 
@@ -100,6 +101,8 @@ tenantContent.get(
   '/:id/video/segments/:index/audio',
   asyncHandler(videoController.streamVideoSegmentAudio),
 );
+tenantContent.get('/:id/flashcards', asyncHandler(flashcardsController.getFlashcards));
+tenantContent.post('/:id/flashcards', asyncHandler(flashcardsController.createFlashcards));
 tenantContent.get('/:id/slides', asyncHandler(slidesController.getSlides));
 tenantContent.post('/:id/slides', asyncHandler(slidesController.createSlides));
 // Progress / history / podcast-progress so an owner can read & track their own
