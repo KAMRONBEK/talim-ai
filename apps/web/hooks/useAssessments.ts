@@ -25,7 +25,7 @@ export function useQuestionBanks() {
 export function useCreateQuestionBank() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (input: { title: string; topic?: string }) => {
+    mutationFn: async (input: { title: string; topic?: string; contentIds?: string[] }) => {
       const { data } = await api.post<{ bank: QuestionBank }>('/tenant/question-banks', input);
       return data.bank;
     },

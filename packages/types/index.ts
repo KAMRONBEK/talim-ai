@@ -265,6 +265,11 @@ export interface LearnerSummary {
   } | null;
 }
 
+export interface QuestionBankMaterial {
+  id: string;
+  title: string;
+}
+
 export interface QuestionBank {
   id: string;
   tenantId: string;
@@ -274,6 +279,8 @@ export interface QuestionBank {
   createdAt: string;
   questionCount: number;
   approvedCount: number;
+  /** Materials (Content) this bank is about. */
+  materials: QuestionBankMaterial[];
 }
 
 export interface BankQuestion {

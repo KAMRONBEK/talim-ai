@@ -16,6 +16,7 @@ import {
   useTenantAssessments,
 } from '@/hooks/useAssessments';
 import { useTenantStudents } from '@/hooks/useTenant';
+import { useTenantContents } from '@/hooks/useTenantContent';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
 
 function mutErr(e: unknown, fallback: string): string {
@@ -92,9 +93,11 @@ export default function TenantAssessmentsPage() {
   const { data: banks = [] } = useQuestionBanks();
   const { data: assessments = [] } = useTenantAssessments();
   const { data: students = [] } = useTenantStudents();
+  const { data: materials = [] } = useTenantContents();
   const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   const [title, setTitle] = useState('');
   const [topic, setTopic] = useState('');
+  const [bankContentIds, setBankContentIds] = useState<string[]>([]);
   const [draftTopic, setDraftTopic] = useState('');
   const [draftStyle, setDraftStyle] = useState<
     'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric'
@@ -136,10 +139,15 @@ export default function TenantAssessmentsPage() {
             className="space-y-3"
             onSubmit={async (event) => {
               event.preventDefault();
-              const bank = await createBank.mutateAsync({ title, topic: topic || undefined });
+              const bank = await createBank.mutateAsync({
+                title,
+                topic: topic || undefined,
+                contentIds: bankContentIds.length ? bankContentIds : undefined,
+              });
               setSelectedBankId(bank.id);
               setTitle('');
               setTopic('');
+              setBankContentIds([]);
             }}
           >
             <div className="space-y-2">
@@ -149,6 +157,32 @@ export default function TenantAssessmentsPage() {
             <div className="space-y-2">
               <Label htmlFor="bankTopic">{t('bankTopicLabel')}</Label>
               <Input id="bankTopic" value={topic} onChange={(e) => setTopic(e.target.value)} />
+            </div>
+            <div className="space-y-1.5">
+              <Label>{t('bankMaterialsLabel')}</Label>
+              <p className="text-[11px] text-muted-foreground">{t('bankMaterialsHint')}</p>
+              {materials.length === 0 ? (
+                <p className="text-xs text-muted-foreground">{t('bankNoMaterials')}</p>
+              ) : (
+                <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-border/70 p-2">
+                  {materials.map((material) => (
+                    <label key={material.id} className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={bankContentIds.includes(material.id)}
+                        onChange={(event) =>
+                          setBankContentIds((prev) =>
+                            event.target.checked
+                              ? [...prev, material.id]
+                              : prev.filter((id) => id !== material.id),
+                          )
+                        }
+                      />
+                      <span className="truncate">{material.title}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
             </div>
             <Button type="submit" disabled={createBank.isPending}>
               {t('createBank')}
@@ -170,6 +204,11 @@ export default function TenantAssessmentsPage() {
                 <span className="text-xs tabular-nums text-muted-foreground">
                   {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                 </span>
+                {bank.materials.length > 0 && (
+                  <span className="mt-1 block truncate text-[11px] text-muted-foreground">
+                    📄 {bank.materials.map((m) => m.title).join(', ')}
+                  </span>
+                )}
               </button>
             ))}
           </div>
