@@ -19,6 +19,7 @@ import {
   classifyTutorScope,
   getClarificationResponse,
   getOutOfScopeResponse,
+  isTutorClarification,
   isTutorScopeRefusal,
 } from '../lib/tutor-scope.js';
 import { getParam } from '../lib/params.js';
@@ -180,11 +181,34 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     },
   });
 
-  const history = await prisma.chatMessage.findMany({
-    where: { sessionId },
-    orderBy: { createdAt: 'asc' },
-    take: 20,
-  });
+  // Most-recent 20 turns, in chronological order. Fetch newest-first + reverse so a long
+  // session keeps RECENT memory — `orderBy: asc, take: 20` would pin the tutor to the 20
+  // OLDEST messages and silently drop everything the student just said.
+  const history = (
+    await prisma.chatMessage.findMany({
+      where: { sessionId },
+      orderBy: { createdAt: 'desc' },
+      take: 20,
+    })
+  ).reverse();
+
+  // Prior turns (everything before this just-saved message), with the tutor's own
+  // refusal/clarification replies stripped, so the scope classifier can resolve a
+  // follow-up ("explain more", "the last problem") instead of demanding clarification.
+  const recentTurns = history
+    .slice(0, -1)
+    .filter(
+      (m) =>
+        !(
+          m.role === 'ASSISTANT' &&
+          (isTutorScopeRefusal(locale, m.text) || isTutorClarification(m.text))
+        ),
+    )
+    .slice(-6)
+    .map((m) => ({
+      role: (m.role === 'USER' ? 'user' : 'assistant') as 'user' | 'assistant',
+      text: m.text,
+    }));
 
   const embedUsage = {
     userId: req.user.userId,
@@ -210,6 +234,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     context,
     selectedExcerpt: body.selectedExcerpt,
     hasSelectedImage: Boolean(body.selectedImage),
+    recentTurns,
   });
 
   res.setHeader('Content-Type', 'text/event-stream');
