@@ -160,7 +160,7 @@ export function DeckPlayer({
     <div
       ref={rootRef}
       tabIndex={0}
-      className="relative flex h-full w-full flex-col bg-zinc-100 outline-none dark:bg-zinc-950"
+      className="relative flex h-full w-full flex-col bg-zinc-100 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary dark:bg-zinc-950"
       role="region"
       aria-roledescription="carousel"
       aria-label={deck.title}
@@ -224,7 +224,7 @@ export function DeckPlayer({
             onClick={prev}
             disabled={atStart && !onBeforeStart}
             aria-label={t('prevSlide')}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 disabled:opacity-40 disabled:hover:translate-y-0"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -236,7 +236,7 @@ export function DeckPlayer({
             onClick={next}
             disabled={atEnd && !onPastEnd}
             aria-label={t('nextSlide')}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-40 disabled:hover:translate-y-0"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 disabled:opacity-40 disabled:hover:translate-y-0"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -244,7 +244,7 @@ export function DeckPlayer({
             type="button"
             onClick={toggleFullscreen}
             aria-label={fullscreen ? t('exitFullscreen') : t('enterFullscreen')}
-            className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5"
+            className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-lg border bg-background transition-transform duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
           >
             {fullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
           </button>
