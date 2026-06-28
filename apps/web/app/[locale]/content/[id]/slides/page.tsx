@@ -22,9 +22,11 @@ function SlidesInner({ id }: { id: string }) {
   // Upgradeable quota errors open the promotion modal (genError stays null);
   // tenant/at-cap/other failures fall back to an inline message.
   const [genError, setGenError] = useState<string | null>(null);
-  const runGenerate = () => {
+  const runGenerate = (regenerate = false) => {
     setGenError(null);
-    generate.mutate({}, { onError: (err) => setGenError(handleLimitError(err, t('error'))) });
+    generate.mutate(regenerate ? { regenerate: true } : {}, {
+      onError: (err) => setGenError(handleLimitError(err, t('error'))),
+    });
   };
 
   const deck = deckRow?.deck ?? null;
@@ -55,7 +57,7 @@ function SlidesInner({ id }: { id: string }) {
             </span>
           )}
           {!isLearner && deck && (
-            <Button variant="outline" size="sm" onClick={runGenerate} disabled={generating}>
+            <Button variant="outline" size="sm" onClick={() => runGenerate(true)} disabled={generating}>
               <RefreshCw className={generating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
               {t('regenerate')}
             </Button>
@@ -77,7 +79,7 @@ function SlidesInner({ id }: { id: string }) {
             title={t('emptyTitle')}
             body={t('emptyBody')}
             cta={t('generate')}
-            onGenerate={runGenerate}
+            onGenerate={() => runGenerate(false)}
             error={genError}
           />
         )}

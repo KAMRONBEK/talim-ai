@@ -17,6 +17,7 @@ const slidesBodySchema = z.object({
   sectionId: z.string().optional(),
   locale: z.enum(['uz', 'en', 'ru']).optional(),
   audience: z.enum(['kids', 'students', 'tutors']).optional(),
+  regenerate: z.boolean().optional(),
 });
 
 export async function getSlides(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -45,11 +46,15 @@ export async function createSlides(req: AuthenticatedRequest, res: Response): Pr
 
   const content = await assertCanAccessContent(req.user, contentId, { requireReady: true });
 
-  // Serve a cached, finished deck without re-spending generation quota.
-  const existing = await getSlideDeck(contentId, locale, body.sectionId);
-  if (existing && existing.status === 'READY' && existing.deck) {
-    res.json({ slides: existing, cached: true });
-    return;
+  // Serve a cached, finished deck without re-spending generation quota — unless the
+  // caller explicitly asked to regenerate (the "Regenerate" button), which must force a
+  // fresh deck rather than silently returning the existing one.
+  if (!body.regenerate) {
+    const existing = await getSlideDeck(contentId, locale, body.sectionId);
+    if (existing && existing.status === 'READY' && existing.deck) {
+      res.json({ slides: existing, cached: true });
+      return;
+    }
   }
 
   await assertQuota(req.user.userId, 'GENERATION', {

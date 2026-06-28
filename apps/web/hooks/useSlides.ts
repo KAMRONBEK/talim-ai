@@ -43,10 +43,15 @@ export function useGenerateSlides(contentId: string, sectionId?: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (input?: { audience?: DeckAudience }) => {
+    mutationFn: async (input?: { audience?: DeckAudience; regenerate?: boolean }) => {
       const { data } = await api.post<{ slides: ContentSlideDeck }>(
         contentEndpoints.slides(contentId, isTenantOwner),
-        { locale, ...(sectionId ? { sectionId } : {}), ...(input?.audience ? { audience: input.audience } : {}) },
+        {
+          locale,
+          ...(sectionId ? { sectionId } : {}),
+          ...(input?.audience ? { audience: input.audience } : {}),
+          ...(input?.regenerate ? { regenerate: true } : {}),
+        },
       );
       return data.slides;
     },
