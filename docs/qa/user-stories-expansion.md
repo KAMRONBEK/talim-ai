@@ -1612,7 +1612,7 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 ### US-OWNER-10: Assessment-driven progress — per-student & class, post-submit update
 **As a** tenant owner, **I want** student assessment results to roll into per-student and class progress immediately after each submit, **so that** I see live mastery.
 **Routes/code:** `/tenant/progress`, `/tenant/students/[id]` · `GET /tenant/assessments/:id/results` · `services/tenant/progress.ts`, `services/learningProgress.service.ts`, `results.ts` · learner submit invalidations (`useAssessments.ts:204`).
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — After a learner submits, their attempt count + best score appear in that assessment's results without a manual refresh on the learner side (learner list + leaderboard invalidated).
@@ -1633,6 +1633,8 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 | EC10 | Many attempts (maxAttempts=5 × N learners) results aggregation perf | Single query groups by user; no N+1 blow-up | ⬜ | — | `results.ts:48` one query |
 
 ---
+
+**Run 9 verification (2026-06-28, live):** `GET /tenant/progress` → 200 `{totals, students}`; `GET /tenant/students/:id/progress` → 200 `{student, activityDays, streakDays, contentProgress}`; cross-tenant owner B → org A student progress → 404 (isolation). No findings.
 
 ### US-OWNER-16: Assessment lifecycle — assign scope, unassign, delete, draft/publish transitions
 **As a** tenant owner, **I want** clear, reversible control over who an assessment is assigned to and over its publish state, **so that** I can correct mistakes without leaking or stranding assessments.
@@ -2224,7 +2226,7 @@ API `/content/*` guarded by `blockIndividualContentForOwner` + `blockLearnerMuta
 quiz score and a "continue" card, **so that** I see how I'm doing.
 **Routes/code:** `/[locale]/learner/progress` · `learner/progress/page.tsx` · `useLearnerSummary`
 (`GET /learner/summary` → `getLearnerSummary`), `useContents` · `computeStreakDays`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given activity, When the page loads, Then assigned-count, `streakDays` (ICU plural),
@@ -2254,6 +2256,8 @@ quiz score and a "continue" card, **so that** I see how I'm doing.
 | EC15 | Stale streak after activity in another tab | Refetch on focus surfaces updated streak | ⬜ | — | — |
 
 ---
+
+**Run 9 verification (2026-06-28, live):** learner `GET /learner/summary` → 200 `{summary}`. No findings.
 
 ### US-LEARNER-10: Take a WRITTEN assessment (learner POV — submit, grade, feedback)
 **As a** TENANT_LEARNER, **I want** to answer an assigned written assessment and see per-question

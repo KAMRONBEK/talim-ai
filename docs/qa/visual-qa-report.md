@@ -550,3 +550,5 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-XCUT-02 (mobile/tablet) — clean.** 10 pages @375px and @768px: 0 horizontal overflow, 0 console errors; students table→cards on mobile. No findings (progress keeps a fitting table at 375px).
 
 **US-OWNER-07 (Question bank build + approve) — 5/5.** createBank → AI-generate 3 DRAFT questions → approve/reject all work. No findings.
+
+**US-OWNER-10 + US-LEARNER-09 (Progress) — 4/4.** Class + per-student + learner-summary progress all 200; cross-tenant student-progress IDOR → 404. No findings.
