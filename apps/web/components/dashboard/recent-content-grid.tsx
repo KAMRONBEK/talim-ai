@@ -82,7 +82,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
         {contents.map((content) => (
           <article key={content.id} className="hover-lift group relative">
             <div className="relative">
-              <Link href={`/content/${content.id}`} className="block">
+              <Link href={`/content/${content.id}`} aria-label={content.title} className="block">
                 <ContentThumbnail content={content} />
               </Link>
               {(content.status === 'PENDING' || content.status === 'PROCESSING') && (

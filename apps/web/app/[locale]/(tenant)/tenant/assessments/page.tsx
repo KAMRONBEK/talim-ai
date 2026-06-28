@@ -373,6 +373,7 @@ export default function TenantAssessmentsPage() {
           <select
             value={assessmentId}
             onChange={(event) => setAssessmentId(event.target.value)}
+            aria-label={t('assignTitle')}
             className="w-full rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             required
           >
@@ -419,6 +420,7 @@ export default function TenantAssessmentsPage() {
         <select
           value={resultsId}
           onChange={(event) => setResultsId(event.target.value)}
+          aria-label={t('resultsTitle')}
           className="w-full max-w-md rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         >
           <option value="">{t('chooseAssessment')}</option>
