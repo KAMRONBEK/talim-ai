@@ -41,9 +41,25 @@ PROMPT="Follow docs/qa/overnight-visual-qa.md EXHAUSTIVELY. You are unattended o
 CAFFEINATE=""
 command -v caffeinate >/dev/null 2>&1 && CAFFEINATE="caffeinate -is"
 
+# Preflight + auto-recovery BEFORE burning agent budget: clears stale Playwright
+# Chrome profile locks, health-gates web/admin/api (recovers a wedged web server in
+# place, never touches user-owned api/admin), verifies Doppler. Aborts the whole run
+# if the stack is unreachable/unrecoverable — never drive a browser against a dead stack.
+$CAFFEINATE bash scripts/qa-preflight.sh 2>&1 | tee -a "$LOG"
+if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+  echo "❌ preflight failed — stack not healthy / unrecoverable. Fix it and re-run." | tee -a "$LOG"
+  exit 1
+fi
+
+# --allowedTools is allowlist-only (acceptEdits auto-approves edits). It MUST list
+# every command the run + its auto-recovery use, or an unattended session stalls
+# forever on the first un-allowed prompt. Recovery tools (kill/lsof/pkill/ps/pgrep/
+# rm/find/graphify) are included here (they were missing before, which is exactly
+# why runs 1/7/11/13 stalled). Push/main-checkout/prod-docker are intentionally NOT
+# allowlisted, so the unattended run cannot perform them.
 $CAFFEINATE claude -p "$PROMPT" \
   --permission-mode acceptEdits \
-  --allowedTools "Read,Edit,Write,Grep,Glob,mcp__playwright__*,Bash(pnpm *),Bash(docker *),Bash(doppler *),Bash(curl *),Bash(node *),Bash(npx *),Bash(mkdir *),Bash(ls *),Bash(git add *),Bash(git commit *),Bash(git status*),Bash(git diff*),Bash(git checkout claude/*)" \
+  --allowedTools "Read,Edit,Write,Grep,Glob,mcp__playwright__*,Bash(pnpm *),Bash(doppler *),Bash(curl *),Bash(node *),Bash(npx *),Bash(caffeinate *),Bash(ps *),Bash(pgrep *),Bash(pkill *),Bash(lsof *),Bash(kill *),Bash(sleep *),Bash(mkdir *),Bash(ls *),Bash(cat *),Bash(head *),Bash(tail *),Bash(wc *),Bash(date *),Bash(echo *),Bash(grep *),Bash(rg *),Bash(find *),Bash(awk *),Bash(sed *),Bash(graphify *),Bash(bash scripts/qa-preflight.sh*),Bash(bash scripts/free-dev-ports.sh*),Bash(rm -rf .playwright-mcp*),Bash(rm -f .playwright-mcp*),Bash(git add *),Bash(git commit *),Bash(git status*),Bash(git diff*),Bash(git log*),Bash(git show*),Bash(git branch*),Bash(git rev-parse*),Bash(git stash*),Bash(git checkout claude/*),Bash(git checkout -b claude/*)" \
   --max-budget-usd "$BUDGET" \
   --max-turns "$TURNS" \
   2>&1 | tee -a "$LOG"

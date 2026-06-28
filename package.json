@@ -8,6 +8,7 @@
     "dev:all": "pnpm dev:clean && pnpm dev:infra && pnpm db:migrate:deploy && pnpm db:seed && pnpm dev",
     "dev:clean": "bash scripts/free-dev-ports.sh",
     "dev:infra": "docker compose up -d --wait db redis",
+    "qa:preflight": "bash scripts/qa-preflight.sh",
     "qa:overnight": "bash scripts/qa-overnight.sh",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",

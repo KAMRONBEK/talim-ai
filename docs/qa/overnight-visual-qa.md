@@ -44,9 +44,51 @@ correctly in every state, down to the tiny details." Fix clear bugs on a branch;
 - **Accessibility:** Tab through every page (visible focus ring, logical order); Esc closes overlays;
   modals trap focus; images have alt; controls have accessible names.
 
-## 0. Bring up the local stack
-`pnpm dev:all` in the background. Wait for: `curl localhost:4000/health` → ok; `localhost:3000` →
-200; `localhost:3001` → 200. Reuse if already running.
+## 0. Preflight & auto-recovery (UNATTENDED — run FIRST, every session)
+
+Everything here must be **non-interactive** — overnight there is no human to approve a prompt or
+recover a wedge. The launcher (`scripts/qa-overnight.sh`) already runs `scripts/qa-preflight.sh`
+before you start; re-run it yourself if anything wedges mid-run. Permissions are pre-granted in
+`.claude/settings.local.json` + the launcher's `--allowedTools`, so recovery commands never prompt.
+
+- **0.1 Preflight (one approved Bash call):** `bash scripts/qa-preflight.sh`. It verifies Doppler,
+  clears stale Playwright Chrome profile locks, health-gates web/admin/api (`:4000/health`==200,
+  `:3000/uz` & `:3001/login` in 200/307/308), recovers a **wedged web server in place** (free :3000
+  → `rm -rf apps/web/.next` → relaunch **only** `@talim/web`), and cleans `.playwright-mcp/` + repo-root
+  `*.png`. **Exit 0 → proceed. Exit 1 → STOP**, write a `stack-down`/`web-wedge` note in
+  `visual-qa-report.md`; never keep navigating against a 500/unreachable stack. The user runs
+  `pnpm dev:all`; preflight **reuses** a healthy stack and never spawns a duplicate or relaunches
+  api/admin (those are the user's — if they're down, abort).
+
+- **0.2 Browser-lock fallback at navigate time.** `.mcp.json` runs Playwright `--isolated` so the
+  "Browser is already in use for …/mcp-chrome-<id>" lock should not recur. If it still does on the
+  FIRST `browser_navigate`, don't retry blindly — free it and re-navigate:
+  `node -e "require('child_process').execSync('ps ax -o pid=,command=').toString().split('\n').filter(l=>/mcp-chrome/.test(l)).map(l=>parseInt(l,10)).filter(Boolean).forEach(p=>{try{process.kill(p,'SIGTERM')}catch(e){}})"`
+  (`node -e process.kill` and the preflight script are pre-approved even where bare `kill` might not be.)
+
+- **0.3 Bounded waits only — never wait forever.** Cap every wait (navigation, element, generation).
+  **Login stall:** after submitting the login form, wait for the URL to leave `/login` with a **10s
+  cap**; if still on `/{locale}/login` but the auth token is in `localStorage` and `GET /auth/me` is
+  200, navigate **directly** to the role home (INDIVIDUAL→`/dashboard`, LEARNER→`/learner/dashboard`,
+  OWNER→`/tenant/dashboard`, ADMIN→`:3001/dashboard`) and log `post-login redirect stalled — direct-nav
+  fallback`. **Infinite spinners** (a quiz/deck/content that never resolves): cap the wait (~30s),
+  screenshot, log a finding, and move on — never block the run. (F8/F59/F60 already mitigate the known
+  ones; treat any new one the same way.)
+
+- **0.4 Health gate between roles.** Before each role switch (INDIVIDUAL→OWNER→LEARNER→ADMIN), re-poll
+  `GET :4000/health` (3 retries ×5s). On failure: re-run `bash scripts/qa-preflight.sh`; if it aborts,
+  STOP with `API health failure between <old> and <new>` rather than logging false 403/500 findings.
+
+- **0.5 Mid-run hygiene + browser recycle.** Every ~3 checkpoints (or on any `Browser closed` /
+  connection error), `mcp__playwright__browser_close` then reopen to free memory / reconnect (log as an
+  observation, not a finding), and `rm -rf .playwright-mcp` + delete repo-root `*.png`. Before EVERY
+  commit, confirm `git status` shows no `.png` / `.playwright-mcp/` staged.
+
+- **0.6 Console-error triage (don't mask crashes, don't over-report).** ABORT-worthy: HTTP 500s,
+  React/hydration `Cannot read properties of undefined`, lost network/connection. Log-and-continue:
+  the known F3 summary-404, and intentional 401/403/404/409 from negative tests. After any admin
+  role-change / password-change test, force logout+login before testing `/tenant/*` — post-change 403s
+  are expected (F11/F45/F46), not findings.
 
 ## 1. Test accounts (create if missing; record creds in the report)
 - ADMIN: `pnpm create-admin --email qa-admin@talim.local --password QaAdmin-12345`
