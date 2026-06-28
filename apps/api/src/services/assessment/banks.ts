@@ -11,6 +11,7 @@ import { dropParrotingQuestions } from '../../lib/question-quality.js';
 import {
   type GeneratedQuestion,
   assertBank,
+  assertTenantContentIds,
   createBankSchema,
   formatBank,
   formatQuestion,
@@ -24,7 +25,10 @@ import {
 export async function listBanks(tenantId: string) {
   const banks = await prisma.questionBank.findMany({
     where: { tenantId },
-    include: { questions: { select: { status: true } } },
+    include: {
+      questions: { select: { status: true } },
+      materials: { include: { content: { select: { id: true, title: true } } } },
+    },
     orderBy: { createdAt: 'desc' },
   });
   return banks.map(formatBank);
@@ -32,9 +36,21 @@ export async function listBanks(tenantId: string) {
 
 export async function createBank(tenantId: string, userId: string, input: unknown) {
   const body = createBankSchema.parse(input);
+  const contentIds = await assertTenantContentIds(tenantId, body.contentIds);
   const bank = await prisma.questionBank.create({
-    data: { tenantId, createdById: userId, title: body.title, topic: body.topic ?? null },
-    include: { questions: { select: { status: true } } },
+    data: {
+      tenantId,
+      createdById: userId,
+      title: body.title,
+      topic: body.topic ?? null,
+      ...(contentIds.length
+        ? { materials: { create: contentIds.map((contentId) => ({ contentId })) } }
+        : {}),
+    },
+    include: {
+      questions: { select: { status: true } },
+      materials: { include: { content: { select: { id: true, title: true } } } },
+    },
   });
   return formatBank(bank);
 }
@@ -56,7 +72,18 @@ export async function generateQuestions(
 ) {
   const bank = await assertBank(tenantId, bankId);
   const body = generateSchema.parse(input ?? {});
-  const context = await getSectionContext(tenantId, body.contentId, body.sectionId);
+  // Default the generation source to the bank's linked materials when the caller didn't pin a
+  // specific content, so questions are drawn from (and attributed to) the bank's materials.
+  let sourceContentId = body.contentId;
+  if (!sourceContentId) {
+    const link = await prisma.questionBankContent.findFirst({
+      where: { bankId },
+      orderBy: { createdAt: 'asc' },
+      select: { contentId: true },
+    });
+    sourceContentId = link?.contentId;
+  }
+  const context = await getSectionContext(tenantId, sourceContentId, body.sectionId);
   const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>(
     [
       { role: 'system', content: ASSESSMENT_SYSTEM_PROMPT },
@@ -76,7 +103,7 @@ export async function generateQuestions(
         userId,
         tenantId,
         feature: 'QUESTION_DRAFT',
-        metadata: { bankId, contentId: body.contentId, sectionId: body.sectionId },
+        metadata: { bankId, contentId: sourceContentId, sectionId: body.sectionId },
       },
       temperature: 0.7,
     },
@@ -103,7 +130,7 @@ export async function generateQuestions(
         data: {
           bankId,
           createdById: userId,
-          sourceContentId: body.contentId ?? null,
+          sourceContentId: sourceContentId ?? null,
           sourceSectionId: body.sectionId ?? null,
           type,
           prompt: q.prompt,

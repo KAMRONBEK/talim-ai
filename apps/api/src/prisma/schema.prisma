@@ -260,6 +260,7 @@ model Content {
   contentSummaries ContentSummary[]
   assignments      ContentAssignment[]
   bankQuestions    BankQuestion[]
+  bankLinks        QuestionBankContent[]
   assessmentAssignments AssessmentAssignment[]
   figures          ContentFigure[]
 
@@ -484,10 +485,25 @@ model QuestionBank {
   tenant      Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   createdBy   User           @relation("QuestionBanksCreated", fields: [createdById], references: [id], onDelete: Cascade)
   questions   BankQuestion[]
+  materials   QuestionBankContent[]
   assessments TenantAssessment[]
 
   @@index([tenantId])
   @@index([createdById])
+}
+
+// Join: a question bank is "about" one or more materials (Content). Generated questions can
+// then be sourced from the bank's linked materials. Tenant isolation is enforced at the API
+// layer (both bank and content belong to the same tenant).
+model QuestionBankContent {
+  bankId    String
+  contentId String
+  createdAt DateTime     @default(now())
+  bank      QuestionBank @relation(fields: [bankId], references: [id], onDelete: Cascade)
+  content   Content      @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@id([bankId, contentId])
+  @@index([contentId])
 }
 
 model BankQuestion {

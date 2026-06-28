@@ -7,6 +7,9 @@ import { buildRagContext } from '../rag.service.js';
 export const createBankSchema = z.object({
   title: z.string().min(1),
   topic: z.string().min(1).optional(),
+  // One or more materials (Content) this bank is about. Generated questions default to
+  // drawing their context from these materials.
+  contentIds: z.array(z.string().min(1)).optional(),
 });
 
 export const questionStyleEnum = z.enum([
@@ -110,6 +113,7 @@ export function formatBank(bank: {
   createdById: string;
   createdAt: Date;
   questions?: { status: BankQuestionStatus }[];
+  materials?: { content: { id: string; title: string } }[];
 }) {
   const questions = bank.questions ?? [];
   return {
@@ -121,7 +125,26 @@ export function formatBank(bank: {
     createdAt: bank.createdAt.toISOString(),
     questionCount: questions.length,
     approvedCount: questions.filter((q) => q.status === 'APPROVED').length,
+    materials: (bank.materials ?? []).map((m) => ({ id: m.content.id, title: m.content.title })),
   };
+}
+
+/**
+ * Validate that every given content id exists and belongs to this tenant, returning the
+ * de-duplicated list. Keeps bank↔material links inside the tenant boundary.
+ */
+export async function assertTenantContentIds(
+  tenantId: string,
+  contentIds?: string[],
+): Promise<string[]> {
+  if (!contentIds || contentIds.length === 0) return [];
+  const unique = [...new Set(contentIds)];
+  const found = await prisma.content.findMany({
+    where: { id: { in: unique }, tenantId },
+    select: { id: true },
+  });
+  if (found.length !== unique.length) throw new AppError(404, 'One or more materials not found');
+  return unique;
 }
 
 export function formatQuestion(question: {
