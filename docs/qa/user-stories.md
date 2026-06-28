@@ -313,6 +313,7 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
+| F51 | S2 | US-ADMIN-03 · audit | **`PATCH /admin/users/:id` did not audit non-role edits.** Only role changes wrote `user.role_change`; a name / `preferredLocale` / the sensitive plaintext `adminPasswordNote` edit persisted with NO audit row — breaking "every admin action recorded". Now also writes `user.update` (field names only, never the note value). Verified live: role-change/reset-pw/subscription/delete already audited; name+note edit → `user.update`. | 🐛→✅ | `d3bcd3c` |
 | F48 | S2 | US-XCUT-03 · a11y | **Two `<select>` on `/tenant/assessments` had no accessible name** (axe `select-name`, critical); added `aria-label` from each section title. Re-audit 2→0. | 🐛→✅ | `0d51248` |
 | F49 | S3 | US-XCUT-03 · a11y | **Dashboard content-card thumbnail link had no discernible text** (axe `link-name`); added `aria-label={content.title}`. Re-audit 1→0. | 🐛→✅ | `0d51248` |
 | F50 | S3 | US-XCUT-03 · a11y | **Active sidebar nav fails color-contrast** (`text-primary` on `bg-primary/10`, < 4.5:1); app-wide design-system decision → logged. | 🟡 logged | — |

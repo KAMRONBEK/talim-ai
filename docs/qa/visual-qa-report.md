@@ -554,3 +554,5 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-OWNER-10 + US-LEARNER-09 (Progress) — 4/4.** Class + per-student + learner-summary progress all 200; cross-tenant student-progress IDOR → 404. No findings.
 
 **US-OWNER-08/LEARNER-05 (Take WRITTEN + grade + maxAttempts) — 3/3.** Submit grades (numeric score/correct); 2nd submit → 409 "Attempt limit reached"; leaderboard 200. No findings.
+
+**US-ADMIN-03 (Admin user mutations) — role/reset/subscription/delete all 200 + audited.** **F51 (d3bcd3c):** a name/preferredLocale/adminPasswordNote edit wrote NO audit row (only role changes were) → fixed (user.update audit, field names only). reset-password needs {generate:true} (my earlier {} → 400, test error).

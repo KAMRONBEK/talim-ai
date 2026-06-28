@@ -1781,7 +1781,7 @@ limit, **so that** they get a `TENANT_OWNER` org with an ACTIVE subscription, ca
 **As a** platform admin, **I want** full lifecycle control of any account, **so that** I can support
 users, fix roles, and bill them — without leaking credentials or destroying orgs by accident.
 **Routes/code:** `/users`, `/users/[id]` · `POST /admin/users`, `GET/PATCH/DELETE /admin/users/:id`, `POST /admin/users/:id/reset-password`, `PATCH /admin/users/:id/subscription` · `admin/users.controller.ts` · `adminUserRole.service.ts` · `subscription/user.ts` · `useAdmin.ts`.
-**Priority:** P0 (credential safety + role isolation + data lifecycle)
+**Priority:** P0 (credential safety + role isolation + data lifecycle) · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Create user (email+password≥8+role) → 201, FREE ACTIVE subscription auto-created, `adminPasswordNote` set to the plaintext, `user.create` audited; duplicate email → 409.
@@ -1826,6 +1826,8 @@ users, fix roles, and bill them — without leaking credentials or destroying or
 | EC31 | Learner whose only active membership is in a deleted org, patched back to INDIVIDUAL | `ensureIndividualSubscription` gives them a FREE sub; old learner memberships deactivated | ⬜ | — | — |
 
 ---
+
+**Run 9 verification (2026-06-28, live, throwaway target):** PATCH role → 200 (role persists, audited `user.role_change`); reset-password `{generate:true}` → 200 + temp pw (audited); patch subscription → 200 (audited); DELETE → 204 (audited) → GET 404. **F51 (d3bcd3c):** name/note edit was unaudited → now writes `user.update`. All admin user mutations now audited.
 
 ### US-ADMIN-04: Tenant management — seat limit, plan, status, period; members + usage
 **As a** platform admin, **I want** to edit an org's name, plan, subscription status, period end, and a
