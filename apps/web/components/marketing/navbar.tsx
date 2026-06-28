@@ -22,7 +22,7 @@ export function Navbar() {
           <LogoMark className="h-8 w-8 shadow-glow" />
           Talim&nbsp;AI
         </Link>
-        <ul className="hidden items-center gap-1 rounded-full border border-border/70 bg-card/60 px-1.5 py-1 text-sm font-medium text-muted-foreground md:flex">
+        <ul className="hidden items-center gap-1 rounded-full border border-border/70 bg-card/60 px-1.5 py-1 text-sm font-medium text-muted-foreground lg:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a
