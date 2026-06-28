@@ -62,6 +62,8 @@
     "name": "Name",
     "registering": "Creating account...",
     "registerFailed": "Registration failed. Email may already be in use.",
+    "emailTaken": "This email is already registered.",
+    "invalidJoinCode": "Invalid class code.",
     "haveAccount": "Already have an account?",
     "registerOrg": "Register organization",
     "tutorAccount": "Tutor or school account?",

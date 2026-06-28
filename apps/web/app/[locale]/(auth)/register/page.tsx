@@ -47,9 +47,16 @@ export default function RegisterPage() {
       setAuth(data.user, data.token);
       router.replace(getPostLoginPath(data.user.role));
     } catch (err) {
-      const message = (err as { response?: { data?: { message?: string } } })?.response?.data
-        ?.message;
-      setError(message ?? t('registerFailed'));
+      // Map the API's English error responses to localized strings by status code
+      // (the same pattern as the login page) so uz/ru users don't see raw English.
+      const status = (err as { response?: { status?: number } })?.response?.status;
+      setError(
+        status === 409
+          ? t('emailTaken')
+          : status === 404
+            ? t('invalidJoinCode')
+            : t('registerFailed'),
+      );
     } finally {
       setLoading(false);
     }

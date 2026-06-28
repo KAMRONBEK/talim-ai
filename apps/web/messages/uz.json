@@ -62,6 +62,8 @@
     "name": "Ism",
     "registering": "Hisob yaratilmoqda...",
     "registerFailed": "Ro'yxatdan o'tib bo'lmadi. Email band bo'lishi mumkin.",
+    "emailTaken": "Bu email allaqachon ro'yxatdan o'tgan.",
+    "invalidJoinCode": "Sinf kodi noto'g'ri.",
     "haveAccount": "Hisobingiz bormi?",
     "registerOrg": "Tashkilot ro'yxatdan o'tish",
     "tutorAccount": "O'qituvchi yoki maktab hisobimi?",
