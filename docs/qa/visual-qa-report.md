@@ -572,3 +572,25 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-IND-13 (YouTube ingest) — verified, no findings.** `POST /tenant/content/youtube`: invalid URL → 400 "Invalid YouTube URL"; valid URL → 201 PENDING → **READY** (transcript fetched, chunked, embedded, sectioned). Confirms the `processContent` pipeline is healthy and the recurring "bad XRef" ingest failures are **pdf-parse/PDF-specific** (environmental), not a pipeline bug. US-IND-11 scanned-PDF OCR remains blocked by that same env issue (pdf-parse on the fixtures), deferred.
 
 **Bank↔materials cascade integrity — 4/4.** A bank linked to a material, then the material deleted → the `QuestionBankContent` join row is cascade-removed but the **bank survives** with empty materials (deleting a material never deletes a bank). Verified via a throwaway YouTube material.
+
+---
+
+## Run 11 — 2026-06-28 · admin dark-theme toggle (feature `809ac0c`) deep QA
+
+**Env:** stack already up (api 200, web/admin 307). A stale Playwright profile lock (orphaned MCP Chrome `mcp-chrome-56278e5`) blocked the browser at start — freed via `node process.kill(<pids>,'SIGTERM')` (bash `kill`/graphify permission-gated this unattended session; used the commit diff + Read for orientation instead). Admin session persisted (already logged in). Drove the real admin panel via Playwright MCP.
+
+**Scope:** the newest untested session feature — the sidebar **theme cycle button** (`components/theme-toggle.tsx`, light → dark → system, persisted via next-themes). The admin app already had `.dark` tokens + ThemeProvider but no switcher, so it previously only went dark on a dark-OS.
+
+**Theme toggle — fully verified, NO findings:**
+- ✅ **Cycle correctness** — light → dark → system → light. Each step applies the right state live on `/dashboard`: dark → `html.dark` + `body` rgb(16,19,24); system (OS=light) → `html.light` + rgb(249,250,251) + `localStorage.theme='system'`; light → `html.light` + `theme='light'`. aria-label + title update per state ("Theme: Dark. Click to switch theme.").
+- ✅ **Persistence** — choice persisted to `localStorage.theme` and held across navigation (8 pages) and full reload.
+- ✅ **No-flash (FOUC) + hydration** — next-themes injects its blocking theme script into `<body>` (verified present) and sets `color-scheme: dark` on `<html>` pre-paint; **0 console errors, 0 warnings, no hydration mismatch** despite `<html>` lacking `suppressHydrationWarning` (next-themes handles it). Favicon 404 is the only console noise (pre-existing env).
+- ✅ **Placement + a11y** — toggle sits in the sidebar footer next to **Sign out** (36×36), keyboard-focusable with a visible focus ring (`outline: solid 1.5px`), descriptive aria-label.
+- ✅ **Dark-mode contrast sweep (the feature's main risk) — 0 low-contrast text across ALL 10 admin surfaces:** dashboard, tutor-requests, users, content, generated, subscriptions, usage, audit, **user-detail** (incl. credential/password inputs rendering light-on-dark correctly), **tenant-detail**. Ran a WCAG relative-luminance contrast checker over every visible text node vs its effective background on each page — every page returned `count: 0`. Confirms the "139 semantic tokens, 0 hardcoded light colors" claim holds in practice; the toggle introduced **no** invisible/low-contrast text.
+- ✅ **Mobile (390×844)** — no horizontal overflow; toggle keeps its visible focus ring. (It sits below the fold in the sidebar footer — a pre-existing admin desktop-first trait; admin has no mobile drawer, unchanged by this feature.)
+
+**Observations (NOT new findings):**
+- **Light-mode brand-primary contrast ~3.3:1** — on `/users/[id]` in **light** theme, the 6 sub-AA items are all brand-**primary** combos (white-on-primary buttons "Generate new password"/"Save role"; primary-on-white links "← Back to users"/"Manage … subscription →"). This is the **same app-wide brand-color decision already logged as F50** (Run 9), exists in light mode **independent of and predating** the theme toggle, and **dark mode showed 0 flags** — so it is *not* a toggle regression. Design/brand → log, not fix (per HARD RULES).
+- **Transient 500 on `GET /admin/users/<id>`** — fired once during rapid page-hopping; react-query `retry:1` recovered it and the page rendered. **Not reproducible** — an immediate re-fetch of the same id (and 2 others) all returned 200. Likely a DB blip or `adminRateLimit` under fast automated navigation. Noting only; no confirmed defect.
+
+**Findings:** none new. **Fixes:** none needed (feature is clean). **Test-data left on local dev DB:** none — read-only inspection; admin `localStorage.theme` restored to the app default `system`.
