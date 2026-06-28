@@ -607,6 +607,8 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 
 **uz landing (primary audience) mobile 390 + tablet 768:** F53 fix confirmed for uz (grid 342px, no scroll); headings clean proper Uzbek ("Har qanday narsani. O'zingizning yo'lingiz bilan", "Talim AI qanday ishlaydi", "O'z o'quvchilaringizga dars beryapsizmi?"); no raw keys. All 5 landing grids collapse correctly at 768 (hero 1-col, features 2-col, how-it-works/preview 3-col).
 
+**Pricing page (`/uz/pricing`) tablet 768 + mobile 390 — clean.** 0 clipped text/interactive elements, 0 horizontal scroll, no raw keys; audience + billing-cycle toggles render in proper Uzbek ("Shaxslar uchun"/"Repetitor va maktablar uchun"/"Oylik"/"Yillik"). Shares the now-fixed Navbar (F54).
+
 **Test-data left on local dev DB:** none — read-only; web `talim-auth` was cleared to view the logged-out landing/auth pages (re-login with documented creds as needed).
 
 ### Run 11 — closing summary
