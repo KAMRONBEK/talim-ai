@@ -2477,7 +2477,7 @@ row highlighted, **so that** I see my standing.
 single-column/drawer layout with no horizontal scroll and tappable targets, **so that** the
 product is fully usable on the device most Uzbek students actually own.
 **Routes/code:** all of `app/[locale]/*` · `components/layout/{content-sidebar,learning-topbar,resizable-split}.tsx` · `components/deck/DeckPlayer.tsx` · `app/[locale]/(tenant)/tenant/students/page.tsx` (desktop `<table>` vs mobile card grid) · `app/[locale]/content/[id]/page.tsx` (FAB) · `packages/ui/components/sheet.tsx`
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given a viewport ≤640px, When I open any page, Then content reflows to one column, the content sidebar collapses to a hamburger-triggered `Sheet` drawer, and there is no horizontal scrollbar.
@@ -2515,6 +2515,8 @@ product is fully usable on the device most Uzbek students actually own.
   rather than rendering `ResizableSplit` (EC2).
 
 ---
+
+**Run 9 verification (2026-06-28, Playwright @375px + @768px):** 10 pages (tenant dashboard/materials/students/assessments/progress + landing/login/pricing + learner dashboard/assessments) → **0 horizontal overflow, 0 console errors** at both widths. Students table → cards on mobile (table at ≥768px). Minor note: the progress page keeps a `<table>` at 375px but it fits without overflow. No findings.
 
 ### US-XCUT-03: Accessibility — focus management, ARIA, keyboard, screen-reader, contrast, reduced-motion
 **As a** keyboard-only or screen-reader user, **I want** dialogs to trap+restore focus, every icon
