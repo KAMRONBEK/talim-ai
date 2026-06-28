@@ -694,3 +694,21 @@ A second adversarial 3-agent verification pass (graphify-first) on contained rob
 - **🐛→✅ F59 (S2) — quiz generation that returns 0 questions / FAILS spun forever (`a3d2be3`).** Two agents independently confirmed: `Quiz` has no `status` column, so a 0-question or failed `generateQuiz` job had nowhere to persist FAILED; `useQuiz` polled until `questions.length` (never, on failure) and `QuizCard`/quiz page rendered the "generating…" spinner indefinitely with no error/retry. **Fixed without a schema migration** (the riskiest autonomous change on this drift-prone DB): a self-correcting **staleness** check — `isQuizGenerationStale` (0 questions + older than the 120s generation window, which generation never exceeds) flips the spinner to a "Quiz generation failed — go back and try again" state (uz/en/ru), with a re-render timer so it fires without further polling. **Verified live:** a backdated empty quiz → failed state + a "← Back to content" escape; a *fresh* empty quiz → still "Generating questions…" (no false-flag); arrival of questions self-corrects (both test quizzes deleted after). A persisted `Quiz.status` (with the job writing READY/FAILED) remains the ideal robust fix — that part needs a migration and stays logged as the enhancement, deferred for human review (same discipline as F11/F45/F46).
 
 **Note on migrations:** the only confirmed bug NOT fully resolved this session is the *persisted-status* half of F59, deliberately deferred — schema migrations on this dev DB are the highest-risk autonomous change (a botched migration could wedge the user's environment with no one present to recover). The staleness fix resolves the user-facing infinite-spinner symptom safely in the meantime.
+
+### Run 13 — closing summary
+
+**6 bugs fixed, all verified live, full `pnpm typecheck` (6/6) green, committed on `claude/visual-qa`:**
+1. `1be7528` **F56** (S2, api) — reject assigning a DRAFT assessment (draft→400, published→201).
+2. `b433ea4` **F55** (S2, ui) — mobile Sheet drawer made a real modal dialog (focus-trap+wrap, Escape, focus-restore, scroll-lock, ARIA) — confirmed live before (Tab leaked to logo) → after (trapped).
+3. `a3bcd85` **F57** (S2, web) — slide-deck keyboard focus ring (2px inset primary).
+4. `f9e8652` **F58** (S2, web) — multi-assign continues on a per-learner failure + inline error (uz/en/ru); staged the deactivate-mid-flow race live.
+5. `a5680a6` **F60** (S3, api) — slide-deck "Regenerate" forces a fresh deck instead of returning cached (cached:true→cached:false, fresh deck in 37s).
+6. `a3d2be3` **F59** (S2, web) — stalled/failed quiz generation shows a failed state instead of an infinite spinner (no-migration self-correcting staleness check); verified with backdated vs fresh empty quizzes.
+
+**Coverage added (no findings):** admin content moderation (US-ADMIN-05 retry+delete — closed the Runs 7–11 deferral), tenant detail (04), usage range toggle (06), audit re-validated (07); US-IND-19 slide-deck live render (long deferred); US-LEARNER-08·EC9 (S1) live unassign-mid-view → clean redirect, no leak.
+
+**Method:** per round — frontier-map workflow (rank untested visual ECs across the 76-story backlog) → adversarial code-verification workflow (confirm/refute suspected bugs with file:line) → reproduce + fix + verify live + commit. 6 findings, all fixed.
+
+**Deferred for human review (needs a migration or touches a hot path — not safe to auto-apply):** persisted `Quiz.status` (F59's robust half) + deck audience cache-key (F60 extension) — both need schema migrations; **F39** GAME timings cheat + **F45/F46** stateless-JWT staleness on role/password change — structural auth/scoring-path items.
+
+**Test-data:** all changes restored (Test Student Two reactivated; QA Written Quiz! re-PUBLISHED; teststudent1 assignment restored; FREE gen-limit restored to 5; both F59 test quizzes deleted; one FAILED debug PDF deleted as cleanup). My fixtures untouched.
