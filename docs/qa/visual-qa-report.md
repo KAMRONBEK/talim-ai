@@ -548,3 +548,5 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-XCUT-03 (a11y) — axe-core (wcag2a/2aa) audit of login/dashboard/students/assessments.** Found + fixed **F48** (critical: 2 unlabeled assessment selects) and **F49** (dashboard thumbnail link with no text); both re-audit to 0. **F50** (serious: active-nav text-primary/bg-primary/10 contrast) logged as an app-wide design decision. Fix `0d51248`.
 
 **US-XCUT-02 (mobile/tablet) — clean.** 10 pages @375px and @768px: 0 horizontal overflow, 0 console errors; students table→cards on mobile. No findings (progress keeps a fitting table at 375px).
+
+**US-OWNER-07 (Question bank build + approve) — 5/5.** createBank → AI-generate 3 DRAFT questions → approve/reject all work. No findings.

@@ -1486,7 +1486,7 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 ### US-OWNER-07: Build a question bank — create, AI-generate drafts, approve/reject/edit
 **As a** tenant owner, **I want** to build a reusable question bank and curate AI-drafted questions (approve/reject/edit) with correct Uzbek + LaTeX, **so that** my assessments only ever use vetted, answerable questions.
 **Routes/code:** `/[locale]/tenant/assessments` · `POST /tenant/question-banks`, `GET /tenant/question-banks`, `GET /tenant/question-banks/:bankId/questions`, `POST /tenant/question-banks/:bankId/generate` (`enforceQuota('GENERATION')`), `PATCH /tenant/question-banks/:bankId/questions/:questionId` · `services/assessment/banks.ts`, `shared.ts`, `lib/assessment-prompt.ts`, `lib/question-quality.ts`, `hooks/useAssessments.ts`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given an owner, When they create a bank (title required, topic optional), Then a bank appears with `questionCount=0`, `approvedCount=0` (`banks.ts:33`).
@@ -1528,6 +1528,8 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 - The owner UI never exposes the per-question **edit** form (only Approve/Reject) — editing prompt/answers is API-only via PATCH. Worth a product note: tutors can't fix a typo from the UI.
 
 ---
+
+**Run 9 verification (2026-06-28, live as qa-owner):** createBank → 201; `POST /question-banks/:id/generate {count:3,style:mixed,topic}` → 201, generated **3 DRAFT questions** (SHORT_ANSWER + MULTIPLE_CHOICE); PATCH question `{status:APPROVED}` → 200 APPROVED; `{status:REJECTED}` → 200. 5/5, no findings. (AI question-gen works even though OCR ingest is down → ingest failure is pdf-parse/OCR-specific.)
 
 ### US-OWNER-08: Compose, publish, assign & review a WRITTEN assessment
 **As a** tenant owner, **I want** to assemble approved questions into a WRITTEN assessment, set max attempts, publish, assign to students, and review aggregate results, **so that** I can grade my class.
