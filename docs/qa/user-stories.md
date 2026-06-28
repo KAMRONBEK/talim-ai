@@ -296,6 +296,10 @@ classmates' and other orgs' content stay private.
 ### ADMIN (3001)
 - [ ] US-ADMIN-01 Tutor-requests: approve + set seat limit → org + ACTIVE subscription
 - [x] US-ADMIN-02 Users / tenants / content / generated / subscriptions / usage / audit · user-detail + **subscription patch + audit** verified (run 5); F25 fixed (credential autofill)
+- [x] US-ADMIN-04 Tenant detail — org/sub editor, members table (XSS-escaped, long-name wrap), usage-vs-limits · verified live (run 13)
+- [x] US-ADMIN-05 Content moderation — **Retry** (FAILED→PROCESSING→READY recovered + `content.retry_job` audit) + **Delete** (native confirm → 204 → live removal + `content.delete` audit) · verified live (run 13, closes Runs 7–11 deferral); F52 holds
+- [x] US-ADMIN-06 Usage & costs — per-user spend table + 7d/30d/90d range toggle (refetches `?days=`) · verified live (run 13)
+- [x] US-ADMIN-07 Audit log — newest-first, all mutation types + from/to metadata · re-validated (run 13)
 
 ### XCUT (cross-cutting)
 - [x] US-XCUT-01 i18n: every user-facing string in uz/en/ru, no hardcoded leaks (Uzbek-first) · spec'd ✅
