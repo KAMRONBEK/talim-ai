@@ -755,3 +755,19 @@ A second adversarial 3-agent verification pass (graphify-first) on contained rob
 **Still deferred (unchanged):** F11/F45/F46 stateless-JWT staleness; F39 GAME timings; persisted `Quiz.status` (F59) + deck cache-key (F60) — all need migrations or touch hot auth/scoring paths. Manim/Desmos chat visuals (AI-triggered; mermaid proven); generation-limit/rate-limit copy (needs quotas driven to cap); WRITTEN-assessment learner-take; full WCAG audit.
 
 **Test-data left on local dev DB (Run 14):** qa-individual subscription Free→Pro→**Free** (restored); one en flashcard deck generated for qa-individual's PDF (harmless). My fixtures otherwise untouched.
+
+## Run 15 — 2026-06-29 · user-reported regressions (PDF panel + AI tutor memory)
+
+Two bugs reported directly by the user from real usage (with screenshots), both reproduced, fixed, and verified live on `claude/visual-qa`.
+
+**F63 (S2) — PDF region-select opened a duplicate Learn/AI-tutor panel (desktop).** Selecting a region of the PDF spawned a *second* identical "O'rganish / AI o'qituvchi" panel over the existing one. Root cause: `handleExcerpt` (`content/[id]/page.tsx`) called `setPanelOpen(true)` unconditionally on a marquee select, but the mobile Learn drawer (`ContentLearnPanelSheet`) renders at *every* breakpoint — so on desktop it slid open over the already-visible `ContentLearnPanel`. (This was the same "non-repro overlay" first noted back in Run 2.) Gated the drawer-open to mobile (`matchMedia('(max-width: 767px)')`), mirroring the existing `?panel=chat` effect; on desktop the region now just seeds the visible panel's AI-Tutor tab. Verified live at 1440px (real marquee drag): 0 dialogs, no backdrop, AI-Tutor tab active, excerpt seeded. → `d52558f`.
+
+**F64 (S2) — AI tutor ignored chat history; follow-ups got a canned "please clarify".** After an in-scope answer, a follow-up like *"koproq tuwunting, chizib tushuntiring"* or *"oxirgi yechilgan masalni visual tushuntirib bering"* returned the static **"Savolingizni biroz aniqlashtirib bera olasizmi?"** clarification instead of answering. Root cause: the scope gate `classifyTutorScope` (`lib/tutor-scope.ts`) runs *before* the tutor LLM and was **stateless** — it saw only the current message + its RAG context, never the conversation, so anaphoric follow-ups had no referent → `needs_clarification` → controller short-circuits with the canned reply; the tutor (which *does* get history) never ran. Also found: `chat.controller.ts` fetched history `orderBy: asc, take: 20` = the **20 oldest** messages, so long sessions lost recent memory. Fix: thread the recent (refusal/clarification-stripped) turns into both the LLM classifier (+ explicit follow-up instruction) and the heuristic fallback (`looksLikeFollowUp`); fetch the most-recent 20 chronologically. Smoke test (`tutor-scope-smoke`) extended with both reported follow-ups (now `direct`, all 6 cases pass). Verified live via real `/chat/stream` (history from DB): in-scope Q → answer; follow-up → 509-char streamed answer referencing *"yuqoridagi diagramma"* (not the clarification). → `da1174c`.
+
+### Run 15 — closing summary
+
+**2 user-reported regressions fixed (both verified live + typecheck clean), pushed to main:**
+1. `d52558f` **F63** (S2, web) — PDF region-select duplicate panel; drawer-open gated to mobile.
+2. `da1174c` **F64** (S2, api) — AI tutor now conversation-aware (follow-ups answered; recent-20 memory window fixed).
+
+Both fixes also closed long-standing latent issues: F63 was the Run-2 "non-repro overlay"; F64's history-ordering bug silently degraded memory in any long chat.
