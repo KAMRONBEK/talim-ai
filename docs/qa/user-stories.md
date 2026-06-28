@@ -271,6 +271,7 @@ classmates' and other orgs' content stay private.
 - [x] US-IND-06 Chat: streamed, scoped-to-material, sources, seeding from selection, visual tutor · spec'd ✅ · **PDF marquee seed verified (run 5)**; transcript-seed+mermaid+KaTeX (run 2)
 - [x] US-IND-07 Dashboard grid / empty / search / thumbnails · search filter verified (run 5, F19 logged)
 - [x] US-IND-08 Usage limit → subscription promotion modal (upload / gen / podcast / video / tutor + plan-file cap) · spec'd ✅ · all 7 cases verified live (run 7); F31 fixed
+- [x] US-IND-19 Slides deck — DeckPlayer render + nav · **live render verified (run 13)** (5-slide deck, prev/next/fullscreen/progress/aria-live); F57 focus-ring fixed. Note: decks are **per-locale** (uz showed the generate-empty-state — by design, like podcast/video)
 
 ### TENANT_OWNER
 - [ ] US-OWNER-01 Create student (email + email-less kid, credentials-once, seat count)
@@ -278,9 +279,9 @@ classmates' and other orgs' content stay private.
 - [ ] US-OWNER-03 Deactivate / reactivate student
 - [ ] US-OWNER-04 Join code regenerate (old rejected) / copy
 - [ ] US-OWNER-05 Upload material / re-read OCR
-- [ ] US-OWNER-06 Assign material to student(s)
+- [ ] US-OWNER-06 Assign material to student(s) · F58 fixed (run 13): multi-assign now continues on a per-learner failure + shows error
 - [ ] US-OWNER-07 Question bank build + approve (proper Uzbek, LaTeX)
-- [ ] US-OWNER-08 WRITTEN assessment create + assign + grade
+- [ ] US-OWNER-08 WRITTEN assessment create + assign + grade · F56 fixed (run 13): assigning a DRAFT assessment now blocked (400)
 - [ ] US-OWNER-09 GAME assessment (timer, speed points, streaks, leaderboard)
 - [ ] US-OWNER-10 Progress: per-student + class, post-submit update
 - [ ] US-OWNER-11 Billing / seat-limit display
@@ -304,7 +305,7 @@ classmates' and other orgs' content stay private.
 ### XCUT (cross-cutting)
 - [x] US-XCUT-01 i18n: every user-facing string in uz/en/ru, no hardcoded leaks (Uzbek-first) · spec'd ✅
 - [ ] US-XCUT-02 Mobile (drawer/FAB) + tablet (768) layouts
-- [ ] US-XCUT-03 a11y: focus, aria-labels, keyboard nav, back/forward
+- [ ] US-XCUT-03 a11y: focus, aria-labels, keyboard nav, back/forward · F48/F49 (run 9); **F55 mobile-Sheet focus-trap + F57 deck focus-ring fixed (run 13)**
 - [ ] US-XCUT-04 Security: role isolation via `contentAccess.service.ts`, XSS escape, no enumeration
 - [ ] US-XCUT-05 Resilience: SSR errors, stale-cache, slow network, double-submit
 
@@ -317,6 +318,12 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
+| F58 | S2 | US-OWNER-06 · EC6 | **Multi-assign aborted silently on one failing learner.** `assign-students-panel.tsx` `handleAssign` awaited each assignment in a loop with **no try/catch** — if one learner rejected (e.g. deactivated since the panel loaded — a stale-cache race; backend `assignContent` 404s on an inactive membership) the whole loop threw, skipping the rest, with **no error toast** and the selection cleared/button stuck. Now each assignment is independent; failed ids stay selected for retry and an inline `assign.partialError` (uz/en/ru, ICU plural) shows. Verified live: selected a student → deactivated via API → Assign → "Couldn't assign to 1 student. Please try again." + student stayed selected. | 🐛→✅ | `f9e8652` |
+| F57 | S2 | US-XCUT-03 · EC8 | **Slide-deck player had no visible keyboard focus ring.** `DeckPlayer.tsx` focusable carousel root used `outline-none` with no `focus-visible` replacement (and the prev/next/fullscreen buttons had none) — keyboard users got no focus indicator (WCAG 2.4.7). Added `focus-visible:ring` (inset primary on the root, offset ring on buttons). Verified live on the 5-slide deck: keyboard focus renders a 2px inset primary ring `rgb(119,81,236)`. | 🐛→✅ | `a3bcd85` |
+| F56 | S2 | US-OWNER-08 · EC6 | **A DRAFT assessment could be assigned.** `assessment/assessments.ts` `assignAssessment` checked only existence, not `status` — a DRAFT is filtered out of the learner's PUBLISHED-only list (`learner.ts`) and 404s on submit, so an owner could create a **dead assignment with no signal**. Now 400 "Assessment must be published before it can be assigned". Verified live: flip to DRAFT → assign 400; PUBLISHED control → 201; restored. | 🐛→✅ | `1be7528` |
+| F55 | S2 | US-XCUT-03 · a11y | **Mobile Sheet drawer was not a real modal dialog.** Hand-rolled `packages/ui/components/sheet.tsx` (Menyu/Learn drawers, tenant/dashboard sidebars) had **no `role=dialog`/`aria-modal`, no initial focus, no focus trap (Tab leaked to the page behind the backdrop), no Escape-to-close, no focus restore, no scroll-lock** — confirmed live (Tab → background logo; Escape no-op). Added full dialog semantics + Tab-trap-with-wrap + Escape + focus-restore + scroll-lock + `aria-labelledby` from the first heading. Verified live (375px): focus moves in, Tab wraps inside, Escape closes + restores focus to trigger, body scroll locked/unlocked. | 🐛→✅ | `b433ea4` |
+| F54 | S3 | US-XCUT-02 · tablet | Marketing navbar links pill `md:flex` overflowed at 768px and **clipped the "Get started" CTA**; gated to `lg:flex` so the bar shows logo+toggle+Kirish+Boshlash at tablet (run 11). | 🐛→✅ | `c520bb6` |
+| F53 | S3 | US-XCUT-02 · mobile | Marketing **hero clipped at 390px** — the hero grid lacked a base `grid-cols-1`, so the mobile column sized to the product card's max-content (419px in a 342px container), clipping the headline/subtitle/card (all 3 locales; `overflow-hidden` hid the scroll). Added `grid-cols-1` (run 11). | 🐛→✅ | `4d5652a` |
 | F52 | S2 | US-ADMIN-05 · audit | **`POST /admin/contents/:id/retry-job` wrote no audit row** (delete-content/delete-generated do) — re-enqueueing a stuck job was invisible in the audit log. Added `content.retry_job` audit + a `req.user` guard. Verified live. | 🐛→✅ | `dbf9f4e` |
 | F51 | S2 | US-ADMIN-03 · audit | **`PATCH /admin/users/:id` did not audit non-role edits.** Only role changes wrote `user.role_change`; a name / `preferredLocale` / the sensitive plaintext `adminPasswordNote` edit persisted with NO audit row — breaking "every admin action recorded". Now also writes `user.update` (field names only, never the note value). Verified live: role-change/reset-pw/subscription/delete already audited; name+note edit → `user.update`. | 🐛→✅ | `d3bcd3c` |
 | F48 | S2 | US-XCUT-03 · a11y | **Two `<select>` on `/tenant/assessments` had no accessible name** (axe `select-name`, critical); added `aria-label` from each section title. Re-audit 2→0. | 🐛→✅ | `0d51248` |
