@@ -65,6 +65,12 @@ export async function requireActiveLearner(
     return;
   }
   if (req.user.role !== 'TENANT_LEARNER') {
+    // A non-learner (e.g. a TENANT_OWNER) may preview learner views (GET), but must never
+    // submit attempts or otherwise act as a student on the /learner surface.
+    if (req.method !== 'GET') {
+      res.status(403).json({ message: 'Only students can take assessments' });
+      return;
+    }
     next();
     return;
   }
@@ -112,17 +118,16 @@ export function blockLearnerMutations(
     res.status(401).json({ message: 'Unauthorized' });
     return;
   }
-  if (req.user.role === 'TENANT_LEARNER' && req.method !== 'GET' && req.method !== 'PATCH') {
-    res.status(403).json({ message: 'Learners cannot upload or generate content' });
-    return;
-  }
-  if (
-    req.user.role === 'TENANT_LEARNER' &&
-    req.method === 'PATCH' &&
-    !req.path.includes('/progress')
-  ) {
-    res.status(403).json({ message: 'Learners cannot modify content' });
-    return;
+  if (req.user.role === 'TENANT_LEARNER') {
+    // Learners may read, submit a quiz attempt, and update their reading progress — but not
+    // upload, generate, create, or otherwise modify content (apps/api/CLAUDE.md §3 "Learner
+    // mutations blocked except submit/progress semantics").
+    const isQuizSubmit = req.method === 'POST' && req.path.includes('/submit');
+    const isProgressPatch = req.method === 'PATCH' && req.path.includes('/progress');
+    if (req.method !== 'GET' && !isQuizSubmit && !isProgressPatch) {
+      res.status(403).json({ message: 'Learners cannot upload, generate, or modify content' });
+      return;
+    }
   }
   next();
 }
