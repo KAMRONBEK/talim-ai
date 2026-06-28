@@ -638,3 +638,14 @@ Verified the reader-layout changes (generations→left, narrower right, section�
 - **Section→PDF scroll:** first section → top (`scrollTop 8`), last of 4 → ~66% (`4833/7254px`).
 
 **Minor polish (non-blocking, not fixed):** (1) the "Resurslar" header is `text-sm font-semibold` while Boblar/Harakatlar are `text-xs uppercase muted` — slightly inconsistent in the sidebar; (2) "Harakatlar" now holds a single item (O'qish) after Podcast/Video moved into Resurslar. No functional issues.
+
+---
+
+## Run 12 — 2026-06-28 · Dark-mode sweep (admin + web)
+
+Programmatic white-island / overflow / console-error audit in dark mode:
+
+- **Admin (all 9 pages):** dashboard, tutor-requests, users, tenants, content, generated, subscriptions, usage, audit — every page `dark=true`, **0 white-islands, 0 overflow, 0 console errors, 0 broken states**. The new admin dark theme (139 semantic tokens, 0 hardcoded light colors) holds across the entire panel.
+- **Web tenant (7 pages):** dashboard, materials, students, assessments, progress, billing, settings — all dark, **0 white-islands, 0 overflow, 0 console errors**.
+
+No findings — dark mode is consistent across both apps; no surface leaked a light-colored island.
