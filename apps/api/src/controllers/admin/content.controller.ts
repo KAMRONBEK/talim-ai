@@ -69,6 +69,7 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
 }
 
 export async function retryContentJob(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
   const id = getParam(req, 'id');
   const content = await prisma.content.findUnique({ where: { id } });
   if (!content) throw new AppError(404, 'Content not found');
@@ -81,6 +82,13 @@ export async function retryContentJob(req: AuthenticatedRequest, res: Response):
     data: { status: 'PENDING' },
   });
   await contentQueue.add({ contentId: id });
+  await writeAdminAuditLog({
+    adminUserId: req.user.userId,
+    action: 'content.retry_job',
+    targetType: 'content',
+    targetId: id,
+    metadata: { title: content.title },
+  });
   res.json({
     content: {
       id: updated.id,
