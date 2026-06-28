@@ -649,3 +649,7 @@ Programmatic white-island / overflow / console-error audit in dark mode:
 - **Web tenant (7 pages):** dashboard, materials, students, assessments, progress, billing, settings — all dark, **0 white-islands, 0 overflow, 0 console errors**.
 
 No findings — dark mode is consistent across both apps; no surface leaked a light-colored island.
+
+**Marketing landing + public pages (Run 12 cont.):** the public landing (`/uz`, logged-out) and pricing — light + dark + mobile (390px): **0 dark-mode white-islands, 0 horizontal overflow** on all. Dark landing looks polished and on-brand (violet+marigold hero, feature-preview card). Tenant dashboard dark (incidental, logged-in `/uz` redirect) also clean. No findings.
+
+**Visual-testing summary (Runs 11–12):** reader layout (roles × themes × mobile), admin dark (9 pages), web tenant dark (7 pages), marketing landing (light/dark/mobile) — all clean. Only notes: the 2 minor reader-sidebar polish items in Run 11. No functional or visual defects found.
