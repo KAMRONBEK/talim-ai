@@ -147,6 +147,7 @@ classmates' and other orgs' content stay private.
 | EC8 | UI navigate to an unauthorized content URL | Redirect to `/learner/dashboard`, no hang/leak | ✅ | — | F8 fix holds |
 | EC9 | Cross-tenant learner via crafted id (other org) | 404 | ⬜ | — | other tenants have no content yet |
 | EC10 | Deactivated mid-session then access (same token) | 404/403 immediately (not at JWT expiry) | ✅ | — | live: content 200→404, list→0, `/learner` 403; reactivate restores |
+| EC11 | **Unassigned mid-view** (workspace open, owner revokes the ContentAssignment) | Access lost immediately on the same token; open page redirects to `/learner/dashboard` on next action, no hang/leak | ✅ | — | run 13 live: deleted assignment → content 200→**404**/file 404/list→0 (no JWT wait); reload → clean redirect to dashboard (F8 holds mid-session); restored |
 
 **Notes / open questions**
 - The guard keys on a `ContentAssignment` for *this* learner **and** an active membership — same-tenant-unassigned and cross-boundary both correctly 404.
