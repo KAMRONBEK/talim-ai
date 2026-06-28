@@ -56,6 +56,12 @@ export async function assignAssessment(
     where: { id: assessmentId, tenantId },
   });
   if (!assessment) throw new AppError(404, 'Assessment not found');
+  // Only PUBLISHED assessments can be assigned: a DRAFT is filtered out of the learner's
+  // PUBLISHED-only list (services/assessment/learner.ts) and 404s on submit, so assigning one
+  // silently produces a dead assignment the owner gets no signal about.
+  if (assessment.status !== 'PUBLISHED') {
+    throw new AppError(400, 'Assessment must be published before it can be assigned');
+  }
 
   if (body.contentId) {
     const content = await prisma.content.findFirst({ where: { id: body.contentId, tenantId } });
