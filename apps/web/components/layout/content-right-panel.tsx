@@ -133,6 +133,19 @@ export function ContentRightPanelBody({
               <div className="text-[11px] text-muted-foreground">{t('watchAction')}</div>
             </div>
           </Link>
+          <Link
+            href={`/content/${contentId}/flashcards`}
+            onClick={onAction}
+            className="flex items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-sm transition-colors hover:bg-muted"
+          >
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-secondary/15 text-sm">
+              🃏
+            </span>
+            <div>
+              <div className="font-medium">{t('flashcards')}</div>
+              <div className="text-[11px] text-muted-foreground">{t('flashcardsAction')}</div>
+            </div>
+          </Link>
           {!hideGenerateActions && (
             <>
               <div className="rounded-lg bg-muted/30 p-2.5">

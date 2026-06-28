@@ -32,6 +32,7 @@ export function useJobEvents(): void {
         qc.invalidateQueries({ queryKey: ['podcast'] });
         qc.invalidateQueries({ queryKey: ['video'] });
         qc.invalidateQueries({ queryKey: ['slides'] });
+        qc.invalidateQueries({ queryKey: ['flashcards'] });
       }
     });
     jobStream.start(token);
@@ -65,6 +66,9 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
       break;
     case 'slides.status':
       qc.invalidateQueries({ queryKey: ['slides', ev.contentId] });
+      break;
+    case 'flashcards.status':
+      qc.invalidateQueries({ queryKey: ['flashcards', ev.contentId] });
       break;
     case 'quiz.status':
       qc.invalidateQueries({ queryKey: ['quiz', ev.quizId] });
