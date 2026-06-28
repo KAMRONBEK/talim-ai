@@ -47,9 +47,11 @@ correctly in every state, down to the tiny details." Fix clear bugs on a branch;
 ## 0. Preflight & auto-recovery (UNATTENDED — run FIRST, every session)
 
 Everything here must be **non-interactive** — overnight there is no human to approve a prompt or
-recover a wedge. The launcher (`scripts/qa-overnight.sh`) already runs `scripts/qa-preflight.sh`
-before you start; re-run it yourself if anything wedges mid-run. Permissions are pre-granted in
-`.claude/settings.local.json` + the launcher's `--allowedTools`, so recovery commands never prompt.
+recover a wedge. The launcher (`scripts/qa-overnight.sh`) already **brought up the stack** if it was
+down (infra → migrate → all 3 dev servers, no seed) and ran `scripts/qa-preflight.sh` before you
+start, so the stack is up and healthy when you begin; re-run the preflight yourself if anything
+wedges mid-run. Permissions are pre-granted in `.claude/settings.local.json` + the launcher's
+`--allowedTools`, so recovery commands never prompt.
 
 - **0.1 Preflight (one approved Bash call):** `bash scripts/qa-preflight.sh`. It verifies Doppler,
   clears stale Playwright Chrome profile locks, health-gates web/admin/api (`:4000/health`==200,

@@ -6,6 +6,11 @@
 # deploy. Resumable: re-run any night and it continues from the checklist in
 # docs/qa/visual-qa-report.md. Full spec: docs/qa/overnight-visual-qa.md
 #
+# SELF-SUFFICIENT: one command. If the local stack isn't already running it brings it
+# up (docker db/redis → prisma migrate deploy → all 3 dev servers; NO seed, so QA test
+# data is preserved), runs a health/lock preflight, then drives the QA. Prereqs it
+# can't do for you: Docker Desktop running + Doppler logged in + `claude` CLI installed.
+#
 # Usage:   pnpm qa:overnight
 # Tunables: QA_BUDGET (USD, default 120)   QA_TURNS (default 2500)
 #          QA_REPORT_ONLY=1  → find + report only, fix nothing (safer first pass)
@@ -40,6 +45,36 @@ PROMPT="Follow docs/qa/overnight-visual-qa.md EXHAUSTIVELY. You are unattended o
 # Keep the Mac awake during the run (no-op on systems without caffeinate).
 CAFFEINATE=""
 command -v caffeinate >/dev/null 2>&1 && CAFFEINATE="caffeinate -is"
+
+# --- Self-sufficient stack bring-up: reuse a healthy stack, else start it ----------
+# This makes `pnpm qa:overnight` a true one-command overnight run: if the dev stack
+# isn't up it starts infra (db/redis) + applies migrations + launches all 3 dev
+# servers (NO seed → preserves accumulated QA test data). If the stack is already
+# running, it's reused untouched. caffeinate on the backgrounded `pnpm dev` keeps the
+# Mac awake for the whole night.
+qa_http(){ curl -s -o /dev/null -w '%{http_code}' -m 5 "$1" 2>/dev/null || echo 000; }
+qa_stack_healthy(){
+  [ "$(qa_http http://localhost:4000/health)" = 200 ] || return 1
+  case "$(qa_http http://localhost:3000/uz)"    in 200|307|308) ;; *) return 1;; esac
+  case "$(qa_http http://localhost:3001/login)" in 200|307|308) ;; *) return 1;; esac
+  return 0
+}
+if qa_stack_healthy; then
+  echo "▶ local stack already up — reusing it" | tee -a "$LOG"
+else
+  echo "▶ local stack down — bringing it up (infra → migrate → dev; NO seed)" | tee -a "$LOG"
+  docker info >/dev/null 2>&1 || { echo "❌ Docker not running — start Docker Desktop (db/redis need it), then re-run." | tee -a "$LOG"; exit 1; }
+  pnpm dev:infra 2>&1 | tee -a "$LOG" || { echo "❌ dev:infra (db/redis) failed." | tee -a "$LOG"; exit 1; }
+  pnpm db:migrate:deploy 2>&1 | tee -a "$LOG" || echo "⚠ db:migrate:deploy failed — continuing on the existing schema." | tee -a "$LOG"
+  bash scripts/free-dev-ports.sh 2>&1 | tee -a "$LOG" || true
+  DEV_LOG="/tmp/talim-dev-qa-$(date +%Y%m%d-%H%M).log"
+  echo "  starting dev servers in background → $DEV_LOG" | tee -a "$LOG"
+  nohup $CAFFEINATE pnpm dev >"$DEV_LOG" 2>&1 &
+  echo "  waiting up to ~5 min for web/admin/api to compile + report healthy…" | tee -a "$LOG"
+  for _ in $(seq 1 100); do qa_stack_healthy && break; sleep 3; done
+  qa_stack_healthy || { echo "❌ stack did not become healthy in time (see $DEV_LOG)." | tee -a "$LOG"; exit 1; }
+  echo "  stack healthy ✓" | tee -a "$LOG"
+fi
 
 # Preflight + auto-recovery BEFORE burning agent budget: clears stale Playwright
 # Chrome profile locks, health-gates web/admin/api (recovers a wedged web server in
