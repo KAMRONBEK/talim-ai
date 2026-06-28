@@ -35,6 +35,11 @@ export interface PdfViewerProps {
   onExcerptSelected: (payload: PdfExcerptPayload) => void;
   onSelectionCleared?: () => void;
   onEmptySelection?: () => void;
+  /**
+   * 0–1 document position to scroll to (e.g. the active section's start). Re-scrolls
+   * whenever it changes, so clicking a chapter jumps the PDF roughly to that section.
+   */
+  scrollToFraction?: number;
 }
 
 interface PageDimensions {
@@ -115,6 +120,7 @@ export function PdfViewer({
   onExcerptSelected,
   onSelectionCleared,
   onEmptySelection,
+  scrollToFraction,
 }: PdfViewerProps) {
   const t = useTranslations('content');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -136,6 +142,16 @@ export function PdfViewer({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const dragStartRef = useRef<{ x: number; y: number; pageNumber: number } | null>(null);
+
+  // Scroll to an active section's approximate page when it changes (clicking a chapter
+  // in the sidebar). Pages are all built up-front, so once numPages is known the target
+  // page div exists in pageRefs. Re-runs only when the fraction changes, so it never
+  // fights the user's manual scroll within a section.
+  useEffect(() => {
+    if (scrollToFraction == null || numPages <= 0) return;
+    const targetPage = Math.min(numPages, Math.max(1, Math.round(scrollToFraction * numPages) || 1));
+    pageRefs.current.get(targetPage)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [scrollToFraction, numPages]);
 
   // Measure the container width before paint and keep it in sync, debounced so a
   // resize gesture doesn't re-rasterize every page on each animation frame.

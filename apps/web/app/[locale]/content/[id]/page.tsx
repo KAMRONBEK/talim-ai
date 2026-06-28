@@ -147,13 +147,23 @@ function ContentWorkspaceInner({ id }: { id: string }) {
     history,
     onOpenSummary: handleOpenSummary,
     hideGenerateActions: isLearner,
+    // Generations now live in the left sidebar (content-sidebar). The right Learn panel keeps
+    // only progress / history / streak (+ the AI tutor tab).
+    showGenerations: false,
   };
+
+  // Approximate the active section's position in the document (chunks are sequential; there
+  // is no per-chunk page data), so clicking a chapter scrolls the PDF roughly to that section.
+  const maxEndChunk = sections.reduce((max, s) => Math.max(max, s.endChunk), 1);
+  const activeSection = sections.find((s) => s.id === activeSectionId);
+  const pdfScrollFraction = activeSection ? activeSection.startChunk / maxEndChunk : undefined;
 
   const stage = (
     <ContentStage
       contentId={id}
       content={content}
       activeSectionId={activeSectionId}
+      scrollToFraction={pdfScrollFraction}
       sectionBody={sectionData?.body}
       sectionLoading={sectionLoading}
       isLearner={isLearner}
@@ -238,8 +248,8 @@ function ContentWorkspaceInner({ id }: { id: string }) {
         <ResizableSplit
           left={stage}
           right={<ContentLearnPanel {...learnPanelShared} />}
-          defaultLeftPercent={62}
-          storageKey="content-workspace-split"
+          defaultLeftPercent={72}
+          storageKey="content-workspace-split-v2"
         />
       </div>
 

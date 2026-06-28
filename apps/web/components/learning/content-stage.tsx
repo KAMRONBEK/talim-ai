@@ -38,6 +38,8 @@ interface ContentStageProps {
   /** Bubble a transcript/PDF selection up so the Learn panel's Chat tab can use it. */
   onExcerptSelected?: (payload: StageExcerpt) => void;
   onSelectionCleared?: () => void;
+  /** 0–1 document position of the active section, to scroll the PDF when it changes. */
+  scrollToFraction?: number;
 }
 
 /**
@@ -57,6 +59,7 @@ export function ContentStage({
   onRetreat,
   onExcerptSelected,
   onSelectionCleared,
+  scrollToFraction,
 }: ContentStageProps) {
   const t = useTranslations('content');
   const tChat = useTranslations('chat');
@@ -221,6 +224,7 @@ export function ContentStage({
             <div className="min-h-0 flex-1">
               <PdfViewer
                 url={pdfUrl}
+                scrollToFraction={scrollToFraction}
                 onExcerptSelected={handlePdfExcerpt}
                 onSelectionCleared={clearSelection}
                 onEmptySelection={() => setSelectionHint(t('pdfNoTextInSelection'))}

@@ -5,16 +5,23 @@ import type { UserRole } from '@talim/types';
 import { useSearchParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { useAutoGenerateOnLocaleChange } from '@/hooks/useLocaleContent';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@talim/ui';
 import { AuthGuard } from '@/components/auth-guard';
-import { ContentSidebar, ContentSidebarSheet } from '@/components/layout/content-sidebar';
+import {
+  ContentSidebar,
+  ContentSidebarSheet,
+  type SidebarGenerationProps,
+} from '@/components/layout/content-sidebar';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
+import { SummaryText } from '@/components/learning/summary-text';
 import { useSidebarSheet } from '@/hooks/useSidebarSheet';
+import { useContentActions } from '@/hooks/useContentActions';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getHomePathForRole } from '@/lib/auth-routing';
 import { useContent } from '@/hooks/useContent';
 import { useSections } from '@/hooks/useSections';
 import { useTranslations } from 'next-intl';
-import { useContentProgress, useMarkSectionViewed } from '@/hooks/useProgress';
+import { useContentProgress, useLearningHistory, useMarkSectionViewed } from '@/hooks/useProgress';
 
 function ContentLayoutInner({
   children,
@@ -46,6 +53,23 @@ function ContentLayoutInner({
 
   useAutoGenerateOnLocaleChange(id, activeId);
 
+  // The generations live in the left sidebar now, so the generation actions are owned here
+  // in the layout (where the sidebar is mounted), not in the reader page.
+  const tContent = useTranslations('content');
+  const { data: history } = useLearningHistory(id);
+  const isLearner = role === 'TENANT_LEARNER';
+  const {
+    handleSummary,
+    handleCreateQuiz,
+    generateSummary,
+    createQuiz,
+    summary,
+    summaryOpen,
+    setSummaryOpen,
+    actionError,
+    clearActionError,
+  } = useContentActions(id, activeId);
+
   useEffect(() => {
     if (!isReaderPage) return;
     if (!content || content.status !== 'READY' || sections.length === 0) return;
@@ -76,16 +100,42 @@ function ContentLayoutInner({
     return <p className="p-8 text-muted-foreground">{t('loading')}</p>;
   }
 
+  const generations: SidebarGenerationProps = {
+    onSummary: handleSummary,
+    onQuiz: (style) => handleCreateQuiz('FULL', style ? { style } : undefined),
+    onQuickCheck: (style) => handleCreateQuiz('QUICK', style ? { style } : undefined),
+    summaryPending: generateSummary.isPending,
+    quizPending: createQuiz.isPending,
+    quickCheckPending: createQuiz.isPending,
+    quizCount: history?.quizzes.length ?? 0,
+    canQuiz: !!activeId,
+    hideGenerateActions: isLearner,
+  };
+
   const sidebarProps = {
     contentId: id,
     contentTitle: content.title,
     sections,
     activeSectionId: activeId,
     sectionProgressMap: progressData?.sections,
+    generations,
   };
 
   return (
-    <div className="flex h-dvh flex-col overflow-hidden">
+    <div className="relative flex h-dvh flex-col overflow-hidden">
+      {actionError && (
+        <div className="absolute left-1/2 top-16 z-50 flex -translate-x-1/2 items-center gap-3 rounded-lg border border-destructive/40 bg-card px-4 py-2.5 text-sm shadow-lg">
+          <span className="text-destructive">{actionError}</span>
+          <button
+            type="button"
+            onClick={clearActionError}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label={t('close')}
+          >
+            ✕
+          </button>
+        </div>
+      )}
       <LearningTopbar
         contentId={id}
         title={content.title}
@@ -100,6 +150,14 @@ function ContentLayoutInner({
         <ContentSidebar {...sidebarProps} />
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>
       </div>
+      <Dialog open={summaryOpen} onOpenChange={setSummaryOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{tContent('summaryTitle')}</DialogTitle>
+          </DialogHeader>
+          <SummaryText text={summary ?? ''} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -5,11 +5,23 @@ import { useTranslations } from 'next-intl';
 import { Loader2 } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { cn } from '@talim/ui';
-import type { ContentSection, SectionProgress } from '@talim/types';
-import { usePodcast } from '@/hooks/usePodcast';
-import { useVideo } from '@/hooks/useVideo';
+import type { ContentSection, QuestionStyle, SectionProgress } from '@talim/types';
+import { ContentGenerationsBlock } from '@/components/layout/content-generations';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
+
+/** Generation handlers wired in from the layout (where useContentActions lives). */
+export interface SidebarGenerationProps {
+  onSummary: () => void;
+  onQuiz: (style?: QuestionStyle) => void;
+  onQuickCheck: (style?: QuestionStyle) => void;
+  summaryPending?: boolean;
+  quizPending?: boolean;
+  quickCheckPending?: boolean;
+  quizCount?: number;
+  canQuiz?: boolean;
+  hideGenerateActions?: boolean;
+}
 
 export interface ContentSidebarBodyProps {
   contentId: string;
@@ -18,6 +30,8 @@ export interface ContentSidebarBodyProps {
   activeSectionId?: string;
   sectionProgressMap?: Record<string, SectionProgress>;
   onNavigate?: () => void;
+  /** When provided, the generations block renders below the section list. */
+  generations?: SidebarGenerationProps;
 }
 
 export function ContentSidebarBody({
@@ -27,13 +41,10 @@ export function ContentSidebarBody({
   activeSectionId,
   sectionProgressMap = {},
   onNavigate,
+  generations,
 }: ContentSidebarBodyProps) {
   const t = useTranslations('sidebar');
   const pathname = usePathname();
-  const { data: podcast } = usePodcast(contentId);
-  const { data: video } = useVideo(contentId);
-  const podcastBusy = podcast?.status === 'GENERATING' || podcast?.status === 'PENDING';
-  const videoBusy = video?.status === 'GENERATING' || video?.status === 'PENDING';
 
   const navLink = (href: string, label: string, icon: string, busy = false) => {
     const active = pathname === href;
@@ -63,7 +74,8 @@ export function ContentSidebarBody({
           {t('sectionCount', { count: sections.length })}
         </p>
       </div>
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto">
+        <div className="p-3">
         <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {t('sections')}
         </p>
@@ -98,9 +110,23 @@ export function ContentSidebarBody({
         </p>
         <div className="space-y-0.5">
           {navLink(`/content/${contentId}`, t('read'), '📖')}
-          {navLink(`/content/${contentId}/podcast`, t('listenPodcast'), '🎧', podcastBusy)}
-          {navLink(`/content/${contentId}/video`, t('watchVideo'), '🎬', videoBusy)}
         </div>
+        </div>
+        {generations && (
+          <ContentGenerationsBlock
+            contentId={contentId}
+            onSummary={generations.onSummary}
+            onQuiz={generations.onQuiz}
+            onQuickCheck={generations.onQuickCheck}
+            summaryPending={generations.summaryPending}
+            quizPending={generations.quizPending}
+            quickCheckPending={generations.quickCheckPending}
+            quizCount={generations.quizCount}
+            canQuiz={generations.canQuiz}
+            hideGenerateActions={generations.hideGenerateActions}
+            onAction={onNavigate}
+          />
+        )}
       </div>
     </div>
   );
