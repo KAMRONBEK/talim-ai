@@ -18,6 +18,7 @@ import {
 import { Button } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const navItems = [
   { href: '/dashboard', label: 'Statistics', icon: LayoutDashboard },
@@ -74,10 +75,18 @@ export function AdminSidebar() {
       </nav>
       <div className="border-t p-3">
         <p className="mb-2 truncate px-2 text-xs text-muted-foreground">{user?.email}</p>
-        <Button variant="outline" size="sm" className="w-full justify-start gap-2" onClick={handleLogout}>
-          <LogOut className="h-4 w-4" />
-          Sign out
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-9 flex-1 justify-start gap-2"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-4 w-4" />
+            Sign out
+          </Button>
+        </div>
       </div>
     </aside>
   );
