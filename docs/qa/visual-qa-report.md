@@ -552,3 +552,5 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **US-OWNER-07 (Question bank build + approve) — 5/5.** createBank → AI-generate 3 DRAFT questions → approve/reject all work. No findings.
 
 **US-OWNER-10 + US-LEARNER-09 (Progress) — 4/4.** Class + per-student + learner-summary progress all 200; cross-tenant student-progress IDOR → 404. No findings.
+
+**US-OWNER-08/LEARNER-05 (Take WRITTEN + grade + maxAttempts) — 3/3.** Submit grades (numeric score/correct); 2nd submit → 409 "Attempt limit reached"; leaderboard 200. No findings.

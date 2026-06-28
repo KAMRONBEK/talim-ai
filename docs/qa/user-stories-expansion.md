@@ -1534,7 +1534,7 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 ### US-OWNER-08: Compose, publish, assign & review a WRITTEN assessment
 **As a** tenant owner, **I want** to assemble approved questions into a WRITTEN assessment, set max attempts, publish, assign to students, and review aggregate results, **so that** I can grade my class.
 **Routes/code:** `/[locale]/tenant/assessments` · `POST /tenant/assessments`, `POST /tenant/assessments/:id/assign`, `GET /tenant/assessments/:id/results`, `GET /tenant/assessments/:id/leaderboard` · `services/assessment/{assessments,results}.ts`.
-**Priority:** P1
+**Priority:** P1 · **Last verified:** 2026-06-28 on `claude/visual-qa`
 
 **Acceptance criteria**
 - AC1 — Given ≥1 APPROVED question selected, When publish, Then a `PUBLISHED` assessment is created with `mode=WRITTEN`, chosen `maxAttempts`, `secondsPerQuestion=null` (`assessments.ts:33`).
@@ -1570,6 +1570,8 @@ quiz score, and a search box, **so that** I can monitor my class at a glance.
 | EC24 | Mobile: compose + assign two-column grid stacks; long question labels wrap in scroll box | Layout holds (`max-h-72 overflow-y-auto`) | ⬜ | — | — |
 
 ---
+
+**Run 9 verification (2026-06-28, live as ts1):** assessment list includes its questions; POST attempt → 201 with a numeric `score`/`correct` (graded; 0% for deliberately-wrong answers — grading ran); **2nd submit → 409 "Attempt limit reached" (maxAttempts=1 enforced)**; leaderboard 200. No findings.
 
 ### US-OWNER-09: GAME assessment — timer, speed-weighted points, streaks, leaderboard
 **As a** tenant owner, **I want** to publish a GAME-mode assessment with a per-question timer that awards speed- and streak-weighted points and a class leaderboard, **so that** quizzing is competitive and engaging.
