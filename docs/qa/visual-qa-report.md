@@ -624,3 +624,17 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 **Commits (claude/visual-qa, not pushed):** `78063e4` (admin theme docs), `4d5652a` (F53 fix), `c6b9fe4` (F53 docs), `c520bb6` (F54 fix), `640105a` + this note (docs). Final verify: `@talim/types` build + `@talim/web` typecheck pass; admin untouched (no code change there).
 
 **Not covered (for a resumed run):** admin content retry/delete (destructive — deferred); generation/login-rate-limit UI at-cap messages (need quotas driven to limit); live slide-deck render (needs a generated deck); US-IND-11 scanned-PDF OCR (env-blocked: pdf-parse "bad XRef" on fixtures). Structural items still logged-only per HARD RULES: F11/F45/F46 (stateless-JWT staleness on role/password change), F14/F27 (return-after-login + seat-full orphan), F50 (brand-primary contrast).
+
+---
+
+## Run 11 — 2026-06-28 · Visual pass: new reader layout
+
+Verified the reader-layout changes (generations→left, narrower right, section→PDF scroll) across roles/themes/viewports:
+
+- **Individual desktop (light & dark):** generations render in the left sidebar (Resurslar: Summary/Podcast/Video/Flashcards + Savol-turi picker + Mashq/Tez quiz). No horizontal overflow, quiz `<select>` (195px) fits the 256px sidebar uncut. Dark mode themed correctly (sidebar/panel dark; the PDF page stays white, expected for document content).
+- **Right panel (~25%):** shows only progress ring + study-history (TESTLAR/XULOSALAR/Podcast) + streak — no generations, no overflow, fits cleanly.
+- **TENANT_LEARNER (desktop & mobile):** correctly gated — Podcast/Video/Flashcards shown, **Summary + Quiz hidden** (`hideGenerateActions`); no `#quiz-style`. 0 console errors.
+- **Mobile:** the "Menyu" left drawer exposes Boblar + Resurslar (same component/props as desktop); right "✨ Learn" drawer = progress/AI-tutor.
+- **Section→PDF scroll:** first section → top (`scrollTop 8`), last of 4 → ~66% (`4833/7254px`).
+
+**Minor polish (non-blocking, not fixed):** (1) the "Resurslar" header is `text-sm font-semibold` while Boblar/Harakatlar are `text-xs uppercase muted` — slightly inconsistent in the sidebar; (2) "Harakatlar" now holds a single item (O'qish) after Podcast/Video moved into Resurslar. No functional issues.
