@@ -599,4 +599,18 @@ generation pushed `quiz.status:READY` live) — all ✅. Full architecture test 
 
 **Marketing landing cross-cutting (ru, dark, 390 + 1440):** no raw i18n keys; all hero/feature/section headings proper Russian (no English leak); dark-mode contrast clean (the auditor's only sub-AA hits were a translucent brand badge `bg-accent-secondary/15` — a false positive from not compositing alpha over the dark section — and the brand-primary CTA, F50-family). 0 console errors.
 
-**Test-data left on local dev DB:** none — read-only; web `talim-auth` was cleared to view the logged-out landing (re-login with documented creds as needed).
+**Auth funnel (login + register) — ru, dark, 390px — clean.** `/ru/login` + `/ru/register`: 0 horizontal overflow, 0 raw i18n keys, all labels proper Russian ("С возвращением"/"Войти"/"Создайте аккаунт"/"Код класса (необязательно)"/"Регистрация"), 0 console errors. The split marketing-hero panel coexists with the form at mobile without overflow.
+
+**Web theme toggle (marketing navbar) — works.** Localized aria-label "Сменить тему"; clicking cycles dark→system (OS=light) live (`html.dark`→`light`, bodyBg→rgb(252,251,253)). Confirms both theme switchers (admin sidebar `809ac0c` + web navbar) are functional and localized. Web `localStorage.theme` left at the default `system`.
+
+**Test-data left on local dev DB:** none — read-only; web `talim-auth` was cleared to view the logged-out landing/auth pages (re-login with documented creds as needed).
+
+### Run 11 — closing summary
+
+**Coverage:** (1) the new **admin dark-theme toggle** (`809ac0c`) deep-QA'd end-to-end — cycle/persistence/FOUC/hydration/a11y + a WCAG contrast sweep of **all 10 admin surfaces** in dark (0 low-contrast text); (2) **marketing landing** ru/dark/mobile (the long-pending re-check) — found + fixed **F53** (hero text clipped at 390px), then full-page grid scan confirmed no other section clips; (3) **auth funnel** (login/register) ru/dark/mobile — clean; (4) **web navbar theme toggle** — works.
+
+**1 bug fixed (verified live + typecheck-green):** F53 — hero grid missing base `grid-cols-1` clipped the headline/subtitle/product-card on mobile across all locales (`4d5652a`). **Findings logged:** none new (admin theme toggle is clean; the only sub-AA contrast hits are the pre-existing brand-primary F50 family + an auditor alpha-compositing false-positive, both noted not logged).
+
+**Commits (claude/visual-qa, not pushed):** `78063e4` (Run 11 admin theme docs), `4d5652a` (F53 fix), `c6b9fe4` (F53 docs), + this closing note. Final verify: `@talim/types` build + `@talim/web` typecheck pass; admin untouched (no code change there).
+
+**Not covered (for a resumed run):** admin content retry/delete (destructive — deferred); generation/login-rate-limit UI at-cap messages (need quotas driven to limit); live slide-deck render (needs a generated deck); US-IND-11 scanned-PDF OCR (env-blocked: pdf-parse "bad XRef" on fixtures). Structural items still logged-only per HARD RULES: F11/F45/F46 (stateless-JWT staleness on role/password change), F14/F27 (return-after-login + seat-full orphan), F50 (brand-primary contrast).
