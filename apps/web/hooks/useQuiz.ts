@@ -12,6 +12,17 @@ import type {
 import { api } from '@/lib/api';
 import { useJobStreamStore } from '@/store/useJobStreamStore';
 
+/** Quiz generation runs ~10-30s. The Quiz has no persisted status (F59), so a quiz that
+ *  still has 0 questions well past this window almost certainly failed (or returned no
+ *  questions) — surface a failed state instead of spinning forever. Generous so a slow
+ *  generation is never falsely flagged; self-corrects the moment questions arrive. */
+export const QUIZ_GENERATION_TIMEOUT_MS = 120_000;
+
+export function isQuizGenerationStale(quiz: Pick<Quiz, 'createdAt' | 'questions'>): boolean {
+  if ((quiz.questions?.length ?? 0) > 0) return false;
+  return Date.now() - new Date(quiz.createdAt).getTime() >= QUIZ_GENERATION_TIMEOUT_MS;
+}
+
 export function useQuiz(id: string, pollInterval?: number) {
   const connected = useJobStreamStore((s) => s.connected);
   return useQuery({

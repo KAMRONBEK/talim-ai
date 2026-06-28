@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input } from '@talim/ui';
 import {
@@ -10,6 +10,7 @@ import {
   type QuizQuestion,
 } from '@talim/types';
 import { RichText } from '@/components/learning/rich-text';
+import { isQuizGenerationStale, QUIZ_GENERATION_TIMEOUT_MS } from '@/hooks/useQuiz';
 
 interface QuizCardProps {
   quiz: Quiz;
@@ -88,9 +89,30 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [, setTick] = useState(0);
   const questions = quiz.questions ?? [];
 
+  // No persisted Quiz.status (F59): re-render once the generation window elapses so an
+  // empty quiz flips from the "generating" spinner to a failed state instead of forever.
+  useEffect(() => {
+    if (questions.length > 0) return;
+    const remaining = QUIZ_GENERATION_TIMEOUT_MS - (Date.now() - new Date(quiz.createdAt).getTime());
+    if (remaining <= 0) return;
+    const timer = setTimeout(() => setTick((n) => n + 1), remaining + 500);
+    return () => clearTimeout(timer);
+  }, [questions.length, quiz.createdAt]);
+
   if (questions.length === 0) {
+    if (isQuizGenerationStale(quiz)) {
+      return (
+        <Card>
+          <CardContent className="space-y-3 py-12 text-center">
+            <p className="font-semibold text-destructive">{t('generationFailed')}</p>
+            <p className="text-sm text-muted-foreground">{t('generationFailedHint')}</p>
+          </CardContent>
+        </Card>
+      );
+    }
     return (
       <Card>
         <CardContent className="space-y-4 py-12 text-center">

@@ -5,7 +5,12 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { QuizResult } from '@/components/quiz/QuizResult';
-import { useQuiz, useSubmitQuiz, useLatestQuizAttempt } from '@/hooks/useQuiz';
+import {
+  useQuiz,
+  useSubmitQuiz,
+  useLatestQuizAttempt,
+  isQuizGenerationStale,
+} from '@/hooks/useQuiz';
 import { LearningTopbar } from '@/components/layout/learning-topbar';
 import { AuthGuard } from '@/components/auth-guard';
 import { useContent } from '@/hooks/useContent';
@@ -65,7 +70,9 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
           <p className="mb-4 text-sm text-muted-foreground">
             {questionCount > 0
               ? t('questionCount', { count: questionCount })
-              : t('generatingQuestions')}
+              : isQuizGenerationStale(quiz)
+                ? t('generationFailed')
+                : t('generatingQuestions')}
           </p>
           {showResult && resultData.attempt ? (
             <QuizResult

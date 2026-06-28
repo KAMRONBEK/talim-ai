@@ -287,6 +287,8 @@
     "notFound": "Test topilmadi",
     "generating": "Test savollari yaratilmoqda...",
     "generatingQuestions": "Savollar yaratilmoqda...",
+    "generationFailed": "Testni yaratib bo'lmadi",
+    "generationFailedHint": "Ushbu testni yaratishda xatolik yuz berdi yoki u juda uzoq davom etdi. Orqaga qaytib, qayta urinib ko'ring.",
     "multipleChoice": "Ko'p tanlov",
     "shortAnswer": "Qisqa javob",
     "numeric": "Raqamli",

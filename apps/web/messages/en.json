@@ -287,6 +287,8 @@
     "notFound": "Quiz not found",
     "generating": "Generating quiz questions...",
     "generatingQuestions": "Generating questions...",
+    "generationFailed": "Quiz generation failed",
+    "generationFailedHint": "Something went wrong generating this quiz, or it took too long. Go back and try again.",
     "multipleChoice": "Multiple choice",
     "shortAnswer": "Short answer",
     "numeric": "Numeric",
