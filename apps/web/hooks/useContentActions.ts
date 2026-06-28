@@ -37,7 +37,12 @@ export function useContentActions(id: string, activeSectionId: string | undefine
     kind: QuizKind,
     opts?: { style?: QuestionStyle; count?: number },
   ) => {
-    if (!activeSectionId) return;
+    if (!activeSectionId) {
+      // No section to anchor the quiz to (e.g. a content that produced zero sections).
+      // Surface a hint instead of silently doing nothing.
+      setActionError(t('selectSectionForQuiz'));
+      return;
+    }
     setActionError(null);
     try {
       const quiz = await createQuiz.mutateAsync({

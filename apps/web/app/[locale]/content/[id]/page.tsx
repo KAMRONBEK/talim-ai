@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@talim/ui';
+import type { QuestionStyle } from '@talim/types';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getHomePathForRole } from '@/lib/auth-routing';
@@ -132,8 +133,10 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const panelProps = {
     contentId: id,
     onSummary: handleSummary,
-    onQuiz: () => handleCreateQuiz('FULL'),
-    onQuickCheck: () => handleCreateQuiz('QUICK'),
+    onQuiz: (style?: QuestionStyle) => handleCreateQuiz('FULL', style ? { style } : undefined),
+    onQuickCheck: (style?: QuestionStyle) =>
+      handleCreateQuiz('QUICK', style ? { style } : undefined),
+    canQuiz: !!activeSectionId,
     summaryPending: generateSummary.isPending,
     quizPending: createQuiz.isPending,
     quickCheckPending: createQuiz.isPending,

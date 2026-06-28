@@ -1,16 +1,19 @@
 'use client';
 
+import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
-import type { LearningHistory } from '@talim/types';
+import type { LearningHistory, QuestionStyle } from '@talim/types';
 import { LearningHistoryPanel } from '@/components/learning/learning-history-panel';
+
+const QUIZ_STYLES: QuestionStyle[] = ['mixed', 'multipleChoice', 'trueFalse', 'written', 'numeric'];
 
 export interface ContentRightPanelBodyProps {
   contentId: string;
   onSummary: () => void;
-  onQuiz: () => void;
-  onQuickCheck: () => void;
+  onQuiz: (style?: QuestionStyle) => void;
+  onQuickCheck: (style?: QuestionStyle) => void;
   summaryPending?: boolean;
   quizPending?: boolean;
   quickCheckPending?: boolean;
@@ -22,6 +25,8 @@ export interface ContentRightPanelBodyProps {
   onOpenSummary: (summary: string) => void;
   onAction?: () => void;
   hideGenerateActions?: boolean;
+  /** False when the content has no active section to anchor a quiz to. */
+  canQuiz?: boolean;
 }
 
 export function ContentRightPanelBody({
@@ -40,8 +45,10 @@ export function ContentRightPanelBody({
   onOpenSummary,
   onAction,
   hideGenerateActions = false,
+  canQuiz = true,
 }: ContentRightPanelBodyProps) {
   const t = useTranslations('content');
+  const [quizStyle, setQuizStyle] = useState<QuestionStyle>('mixed');
   const circumference = 2 * Math.PI * 52;
   const progress = Math.min(1, Math.max(0, sectionCoverage / 100));
   const offset = circumference * (1 - progress);
@@ -128,11 +135,32 @@ export function ContentRightPanelBody({
           </Link>
           {!hideGenerateActions && (
             <>
+              <div className="rounded-lg bg-muted/30 p-2.5">
+                <label
+                  htmlFor="quiz-style"
+                  className="mb-1.5 block text-[11px] font-medium text-muted-foreground"
+                >
+                  {t('quizStyleLabel')}
+                </label>
+                <select
+                  id="quiz-style"
+                  value={quizStyle}
+                  onChange={(event) => setQuizStyle(event.target.value as QuestionStyle)}
+                  aria-label={t('quizStyleLabel')}
+                  className="w-full rounded-md border border-border/70 bg-background px-2 py-1.5 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                >
+                  {QUIZ_STYLES.map((style) => (
+                    <option key={style} value={style}>
+                      {t(`quizStyle_${style}`)}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <button
                 type="button"
-                onClick={wrapAction(onQuiz)}
-                disabled={quizPending}
-                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
+                onClick={wrapAction(() => onQuiz(quizStyle))}
+                disabled={quizPending || !canQuiz}
+                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-success-muted text-sm">
                   ❓
@@ -140,15 +168,19 @@ export function ContentRightPanelBody({
                 <div>
                   <div className="font-medium">{t('practiceQuiz')}</div>
                   <div className="text-[11px] text-muted-foreground">
-                    {quizCount > 0 ? t('quizCount', { count: quizCount }) : t('fiveQuestions')}
+                    {!canQuiz
+                      ? t('selectSectionForQuiz')
+                      : quizCount > 0
+                        ? t('quizCount', { count: quizCount })
+                        : t('fiveQuestions')}
                   </div>
                 </div>
               </button>
               <button
                 type="button"
-                onClick={wrapAction(onQuickCheck)}
-                disabled={quickCheckPending}
-                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted"
+                onClick={wrapAction(() => onQuickCheck(quizStyle))}
+                disabled={quickCheckPending || !canQuiz}
+                className="flex w-full items-center gap-2.5 rounded-lg bg-muted/50 p-2.5 text-left text-sm transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-warning-muted text-sm">
                   ⚡
