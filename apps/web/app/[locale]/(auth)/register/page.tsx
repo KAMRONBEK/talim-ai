@@ -55,7 +55,9 @@ export default function RegisterPage() {
           ? t('emailTaken')
           : status === 404
             ? t('invalidJoinCode')
-            : t('registerFailed'),
+            : status === 429
+              ? t('tooManyAttempts')
+              : t('registerFailed'),
       );
     } finally {
       setLoading(false);
