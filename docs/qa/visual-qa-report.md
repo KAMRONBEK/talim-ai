@@ -796,3 +796,27 @@ Both fixes also closed long-standing latent issues: F63 was the Run-2 "non-repro
   - **A-6 (tenant/sub save silent):** `tenants/[id]/page.tsx:180` `updateTenant.mutate(...)` and `users/[id]/page.tsx:496` `updateSubscription.mutate(...)` have no `isError` UI → "Saving…" flickers back with no confirmation/error on a failed save. Fix: try/catch + alert (same as F72) or an inline `isError` line.
 
 **F66 (S4, web) — LOGGED (structural, not fixed): bare default Next.js 404 page.** Navigating to an unmatched route (`/en/this-route-does-not-exist-xyz`) renders the **unstyled English-only Next.js default** ("404 / This page could not be found.") — no app chrome/nav, no brand, no i18n, `<html lang="">` empty. For a localized design-system product this is a polish gap. An invalid locale (`/xx/dashboard`) → next-intl prepends the default locale (`/en/xx/dashboard`) → same default 404 (no crash). A proper branded+localized `not-found` under the `[locale]` App Router needs the next-intl catch-all-segment routing pattern + new translations + a design — **structural**, so logged per HARD RULES, not auto-fixed. Severity low (rarely-hit surface; no functional break, no console crash — only the expected 404 network response). | apps/web app/[locale] routing + (new) not-found
+
+### Run 16 — closing summary
+
+**Method:** preflight → resumed the checklist (15 prior runs, F1–F64) → drove the real browser (Playwright MCP, isolated profile) → ran two adversarial graphify-first code-verification agents (web error/i18n, then admin + mutation feedback) and reproduced/verified every fix live (real failures + Playwright route-mocked 500s). No restart from zero.
+
+**8 findings (F65–F72) — 5 fixed + verified live, 3 logged. Full `pnpm typecheck` (types build + web + admin) green after every fix; all commits on `claude/visual-qa`, none pushed.**
+
+Fixed + verified live:
+1. **F65** (`0fd8359`,`d48c1bd`) — login **and** register showed "server unreachable" on a 429 rate-limit → localized `auth.tooManyAttempts` (uz/en/ru). *Closes run-1's deferred login-rate-limit item.*
+2. **F67** (`e00f3df`) — `/pricing` plan limits weren't ICU-pluralized → ru "1 подкастов / день", en "1 podcasts/day". Pluralized ru (one/few/many) + en; uz invariant.
+3. **F68** (`5a383bf`) — 4 web owner/learner data pages hung on an infinite spinner / blanked when a GET failed (ignored `isError`) → `common.loadError`. Verified live on all 4.
+4. **F70** (`4727475`) — 5 admin detail/dashboard pages hung on an infinite spinner when a GET failed → English error branch. Verified live (dashboard 500).
+5. **F72** (`fb7ade1`) — admin content Retry/Delete, generated Delete, users Reset-password failed **silently** on error → try/catch + alert convention. Verified live (delete 500 → alert, row preserved, no data loss).
+
+Logged (structural / multi-site, per HARD RULES):
+- **F66** (S4) — bare default Next.js 404 (no chrome/i18n; needs next-intl catch-all routing).
+- **F69** (S3) — no React `error.tsx` boundary anywhere in apps/web (render crash → white-screen).
+- **F71** (S3) — admin list pages blank silently on fetch error (A-2, 6 pages) + 2 settings-save buttons fail silently (A-6); precise pointers + recommended fix logged.
+
+**Recurring root cause across F68/F70/F71:** the `isLoading || !data → Loading` idiom + `retry:1` + no error boundary = infinite spinner / silent blank on any GET failure, in both apps. The HIGH-severity hangs are now fixed in both; the remaining items (web `error.tsx`, admin A-2/A-6) are documented for a focused follow-up.
+
+**Test data:** none left — all failures were forced via Playwright route-mocks (no real DB writes); the auth rate-limit probes 409'd before any account was created (no orphans); the mocked admin delete never reached the API (Qur'on content confirmed still present). Test-account passwords unchanged.
+
+**Not run:** prod `next build` (would corrupt the running dev server's `.next` — the F1 wedge; all typechecks pass instead). **Still open for a resumed run:** web `error.tsx` boundary (F69), admin A-2/A-6 (F71), F62 API error-code contract, full WCAG audit, Manim/Desmos chat visuals (AI-triggered), structural auth-staleness (F11/F45/F46), F39 GAME timings, persisted `Quiz.status` (F59) — all need migrations, design, or hot-path/auth changes unsuitable for an unattended run.
