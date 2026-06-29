@@ -11,8 +11,10 @@ function isRecentlyActive(lastActivityAt: string | null): boolean {
 
 export default function TenantProgressPage() {
   const t = useTranslations('tenant');
-  const { data, isLoading } = useTenantProgress();
+  const tc = useTranslations('common');
+  const { data, isLoading, isError } = useTenantProgress();
 
+  if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
   if (isLoading || !data) return <p className="text-muted-foreground">{t('loading')}</p>;
 
   return (

@@ -16,10 +16,14 @@ export default function TenantStudentDetailPage({
 }) {
   const { id } = use(params);
   const t = useTranslations('tenant');
-  const { data, isLoading } = useStudentProgress(id);
+  const tc = useTranslations('common');
+  const { data, isLoading, isError } = useStudentProgress(id);
   const { data: contents } = useTenantContents();
   const assign = useAssignContent();
 
+  if (isError) {
+    return <p className="text-sm text-destructive">{tc('loadError')}</p>;
+  }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">{t('loading')}</p>;
   }

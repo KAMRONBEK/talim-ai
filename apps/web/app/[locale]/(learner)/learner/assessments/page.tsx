@@ -14,7 +14,9 @@ import { LeaderboardTable } from '@/components/learner/leaderboard-table';
 
 function Leaderboard({ assessmentId }: { assessmentId: string }) {
   const t = useTranslations('learner.assessments');
-  const { data, isLoading } = useLearnerLeaderboard(assessmentId);
+  const tc = useTranslations('common');
+  const { data, isLoading, isError } = useLearnerLeaderboard(assessmentId);
+  if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
   if (isLoading) return <p className="text-sm text-muted-foreground">{t('loadingLeaderboard')}</p>;
   if (!data) return null;
   return <LeaderboardTable rows={data.rows} mode={data.mode} />;

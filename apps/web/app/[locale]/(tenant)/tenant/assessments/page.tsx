@@ -25,11 +25,13 @@ function mutErr(e: unknown, fallback: string): string {
 
 function ResultsSection({ assessmentId }: { assessmentId: string }) {
   const t = useTranslations('tenant.assessments');
-  const { data: results } = useAssessmentResults(assessmentId || null);
+  const tc = useTranslations('common');
+  const { data: results, isError } = useAssessmentResults(assessmentId || null);
   const { data: board } = useAssessmentLeaderboard(assessmentId || null);
   if (!assessmentId) {
     return <p className="text-sm text-muted-foreground">{t('chooseToSeeResults')}</p>;
   }
+  if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
   if (!results) return <p className="text-sm text-muted-foreground">{t('loadingResults')}</p>;
   const submitted = results.learners.filter((l) => l.submitted).length;
   return (

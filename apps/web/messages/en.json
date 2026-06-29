@@ -41,7 +41,8 @@
     "theme": "Theme",
     "menu": "Menu",
     "close": "Close",
-    "resizePanels": "Resize panels"
+    "resizePanels": "Resize panels",
+    "loadError": "Couldn't load. Please try again."
   },
   "auth": {
     "welcomeBack": "Welcome back",

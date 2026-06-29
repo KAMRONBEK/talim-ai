@@ -41,7 +41,8 @@
     "theme": "Mavzu",
     "menu": "Menyu",
     "close": "Yopish",
-    "resizePanels": "Panellar o'lchamini o'zgartirish"
+    "resizePanels": "Panellar o'lchamini o'zgartirish",
+    "loadError": "Yuklab bo'lmadi. Qayta urinib ko'ring."
   },
   "auth": {
     "welcomeBack": "Xush kelibsiz",
