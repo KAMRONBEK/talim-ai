@@ -39,7 +39,10 @@
     --muted-foreground: 215 15% 65%;
     --accent: 217 20% 18%;
     --accent-foreground: 210 20% 98%;
-    --destructive: 0 62% 35%;
+    /* Lighter red for dark mode: --destructive is used only as `text-destructive`
+       (error messages) in admin — never as a fill — so the shadcn default 35%
+       fill-red failed WCAG contrast (~2.2:1) on the near-black bg. (F73) */
+    --destructive: 0 84% 65%;
     --destructive-foreground: 210 20% 98%;
     --border: 217 20% 22%;
     --input: 217 20% 22%;
