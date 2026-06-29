@@ -30,8 +30,11 @@ function StatCard({
 }
 
 export default function AdminDashboardPage() {
-  const { data, isLoading } = usePlatformStats();
+  const { data, isLoading, isError } = usePlatformStats();
 
+  if (isError) {
+    return <p className="text-sm text-destructive">Couldn&apos;t load statistics. Please try again.</p>;
+  }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading statistics…</p>;
   }

@@ -37,7 +37,7 @@ function isTenantUsage(
 
 export default function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { data, isLoading } = useAdminUser(id);
+  const { data, isLoading, isError } = useAdminUser(id);
   const updateSubscription = useUpdateUserSubscription();
   const patchUser = usePatchUser();
   const resetPassword = useResetUserPassword();
@@ -63,6 +63,9 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
     }
   }, [data?.user.id, data?.user.adminPasswordNote]);
 
+  if (isError) {
+    return <p className="text-sm text-destructive">Couldn&apos;t load this user. Please try again.</p>;
+  }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading user…</p>;
   }

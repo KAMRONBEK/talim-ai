@@ -17,7 +17,7 @@ function formatLimit(used: number, limit: number | null): string {
 
 export default function TenantDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { data, isLoading } = useAdminTenant(id);
+  const { data, isLoading, isError } = useAdminTenant(id);
   const updateTenant = useUpdateTenant();
 
   const [name, setName] = useState('');
@@ -27,6 +27,9 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
   // null = untouched (show stored value); '' = explicitly cleared (use plan default).
   const [seatLimit, setSeatLimit] = useState<string | null>(null);
 
+  if (isError) {
+    return <p className="text-sm text-destructive">Couldn&apos;t load this organization. Please try again.</p>;
+  }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading organization…</p>;
   }

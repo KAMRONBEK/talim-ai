@@ -19,7 +19,7 @@ function errorMessage(err: unknown, fallback: string): string {
 export default function TutorRequestsPage() {
   const [status, setStatus] = useState<string>('PENDING');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminTutorRequests({ status: status || undefined, page });
+  const { data, isLoading, isError } = useAdminTutorRequests({ status: status || undefined, page });
   const approve = useApproveTutorRequest();
   const reject = useRejectTutorRequest();
   const [seatById, setSeatById] = useState<Record<string, string>>({});
@@ -50,7 +50,9 @@ export default function TutorRequestsPage() {
         ))}
       </div>
 
-      {isLoading || !data ? (
+      {isError ? (
+        <p className="text-sm text-destructive">Couldn&apos;t load tutor requests. Please try again.</p>
+      ) : isLoading || !data ? (
         <p className="text-muted-foreground">Loading…</p>
       ) : data.items.length === 0 ? (
         <Card>

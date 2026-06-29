@@ -6,7 +6,7 @@ import { useAdminAuditLogs } from '@/hooks/useAdmin';
 
 export default function AuditLogPage() {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminAuditLogs({ page });
+  const { data, isLoading, isError } = useAdminAuditLogs({ page });
 
   return (
     <div className="space-y-6">
@@ -15,7 +15,9 @@ export default function AuditLogPage() {
         <p className="text-sm text-muted-foreground">Every admin mutation, newest first.</p>
       </div>
 
-      {isLoading || !data ? (
+      {isError ? (
+        <p className="text-sm text-destructive">Couldn&apos;t load the audit log. Please try again.</p>
+      ) : isLoading || !data ? (
         <p className="text-muted-foreground">Loading…</p>
       ) : data.items.length === 0 ? (
         <Card>
