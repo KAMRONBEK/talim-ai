@@ -51,6 +51,18 @@ export function UpgradeDialog({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  // Close on Escape. This is a hand-rolled `role="dialog"` / `aria-modal` overlay
+  // (not Radix/shadcn), so keyboard dismissal must be wired explicitly — otherwise
+  // keyboard-only users have no way out (X button + backdrop-click are mouse-only). (F74)
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
   if (!open) return null;
 
   const annual = period === 'annual';
