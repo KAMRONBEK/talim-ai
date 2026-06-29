@@ -34,7 +34,7 @@
 - [x] Weak/short password error (native minlength=8) ✓
 - [x] Password mismatch — **N/A: register has no confirm-password field** (logged)
 - [x] Login valid (learner) / wrong password (FIXED F2) / unknown email (same path) ✓
-- [ ] Login rate-limit message (needs 30 failed attempts — deferred)
+- [x] Login rate-limit message — **FIXED F65** (`0fd8359`): 429 now shows `auth.tooManyAttempts` (uz/en/ru), was misleading "server unreachable". Verified live (uz+en) by tripping the limit. Register 429 too (`d48c1bd`).
 - [x] Role-based redirect: individual→/dashboard ✓, learner→/learner/dashboard ✓, owner→/tenant/dashboard ✓ (all three confirmed)
 - [x] Logout clears session + redirect to /login ✓
 - [ ] Locale switch persists across reload
@@ -771,3 +771,12 @@ Two bugs reported directly by the user from real usage (with screenshots), both 
 2. `da1174c` **F64** (S2, api) — AI tutor now conversation-aware (follow-ups answered; recent-20 memory window fixed).
 
 Both fixes also closed long-standing latent issues: F63 was the Run-2 "non-repro overlay"; F64's history-ordering bug silently degraded memory in any long chat.
+
+---
+
+## Run 16 — 2026-06-29 (overnight, unattended) · auth rate-limit UX + frontier
+
+**Env:** preflight green (reusing the running stack; baseline typecheck OK). Branch `claude/visual-qa` == main, clean. Drove the real browser (Playwright MCP, isolated profile).
+
+**🐛→✅ F65 (S2, web i18n/UX) — auth pages showed "server unreachable" on a rate-limit (429).** Closes the run-1 "login rate-limit message — deferred" item. The API caps failed logins (`loginRateLimit`: 30/15min, `skipSuccessfulRequests`) and auth writes (`authWriteRateLimit`: 40/15min) and returns **429**. The **login** page mapped 401→invalidCredentials / 403→accountDeactivated but let **429 fall through to `serverError`** ("Could not reach the server. Please try again.") — misleading, since the server *was* reached (same bug class as F2/F16/F61). The **register** page (F61) mapped 409/404 but let 429 fall to `registerFailed`. **Fix:** added a `status === 429 → t('tooManyAttempts')` branch to both pages + new `auth.tooManyAttempts` string (uz/en/ru). **Verified LIVE:** tripped `loginRateLimit` via 31 failed API logins, then submitted the login form in the browser — uz showed "Juda ko'p urinish bo'ldi. Bir necha daqiqadan so'ng qayta urinib ko'ring.", en "Too many failed attempts. Please wait a few minutes and try again." (no longer the "server unreachable" string); tripped `authWriteRateLimit` via 41 dup-email registers → register form (uz) showed the same localized message. `@talim/web` typecheck passes. **Commits:** `0fd8359` (login), `d48c1bd` (register).
+  - Note: tripping the limiters blocks ALL `/auth/login` + `/auth/register` from localhost for ~15 min (per-IP, in-memory) — the dup-email register probes 409'd before user.create, so **no orphan accounts**.
