@@ -837,15 +837,15 @@
     "needTeamLink": "Тарифы для команд",
     "features": {
       "uploadsUnlimited": "Безлимитные загрузки",
-      "uploadsN": "{n} загрузок / день",
+      "uploadsN": "{n, plural, one {# загрузка} few {# загрузки} many {# загрузок} other {# загрузки}} / день",
       "tutorUnlimited": "Безлимитный AI-репетитор",
-      "tutorN": "{n} сообщений репетитору / день",
+      "tutorN": "{n, plural, one {# сообщение} few {# сообщения} many {# сообщений} other {# сообщения}} репетитору / день",
       "genUnlimited": "Безлимитные тесты и конспекты",
-      "genN": "{n} AI-генераций / день",
-      "podcastsN": "{n} подкастов / день",
+      "genN": "{n, plural, one {# AI-генерация} few {# AI-генерации} many {# AI-генераций} other {# AI-генерации}} / день",
+      "podcastsN": "{n, plural, one {# подкаст} few {# подкаста} many {# подкастов} other {# подкаста}} / день",
       "videosN": "{n} AI-видео / день",
-      "students": "{n} учеников",
-      "materials": "{n} материалов",
+      "students": "{n, plural, one {# ученик} few {# ученика} many {# учеников} other {# ученика}}",
+      "materials": "{n, plural, one {# материал} few {# материала} many {# материалов} other {# материала}}",
       "file": "Файлы до {pages} страниц / {mb} МБ"
     }
   },

@@ -837,15 +837,15 @@
     "needTeamLink": "See team plans",
     "features": {
       "uploadsUnlimited": "Unlimited uploads",
-      "uploadsN": "{n} uploads / day",
+      "uploadsN": "{n, plural, one {# upload} other {# uploads}} / day",
       "tutorUnlimited": "Unlimited AI tutor chat",
-      "tutorN": "{n} AI tutor messages / day",
+      "tutorN": "{n, plural, one {# AI tutor message} other {# AI tutor messages}} / day",
       "genUnlimited": "Unlimited quizzes & summaries",
-      "genN": "{n} AI generations / day",
-      "podcastsN": "{n} podcasts / day",
-      "videosN": "{n} AI videos / day",
-      "students": "{n} students",
-      "materials": "{n} materials",
+      "genN": "{n, plural, one {# AI generation} other {# AI generations}} / day",
+      "podcastsN": "{n, plural, one {# podcast} other {# podcasts}} / day",
+      "videosN": "{n, plural, one {# AI video} other {# AI videos}} / day",
+      "students": "{n, plural, one {# student} other {# students}}",
+      "materials": "{n, plural, one {# material} other {# materials}}",
       "file": "Files up to {pages} pages / {mb} MB each"
     }
   },
