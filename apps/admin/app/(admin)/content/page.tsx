@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { Button, Input } from '@talim/ui';
 import { useAdminContents, useDeleteContent, useRetryContent } from '@/hooks/useAdmin';
 
+function errorMessage(err: unknown, fallback: string): string {
+  return (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
+}
+
 export default function ContentPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -59,7 +63,13 @@ export default function ContentPage() {
                       variant="outline"
                       size="sm"
                       disabled={retryContent.isPending}
-                      onClick={() => retryContent.mutate(item.id)}
+                      onClick={async () => {
+                        try {
+                          await retryContent.mutateAsync(item.id);
+                        } catch (err) {
+                          alert(errorMessage(err, 'Failed to retry this job. Please try again.'));
+                        }
+                      }}
                     >
                       Retry
                     </Button>
@@ -68,8 +78,13 @@ export default function ContentPage() {
                     variant="outline"
                     size="sm"
                     disabled={deleteContent.isPending}
-                    onClick={() => {
-                      if (confirm(`Delete "${item.title}"?`)) deleteContent.mutate(item.id);
+                    onClick={async () => {
+                      if (!confirm(`Delete "${item.title}"?`)) return;
+                      try {
+                        await deleteContent.mutateAsync(item.id);
+                      } catch (err) {
+                        alert(errorMessage(err, 'Failed to delete this content. Please try again.'));
+                      }
                     }}
                   >
                     Delete

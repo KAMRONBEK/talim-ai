@@ -21,8 +21,13 @@ export default function GeneratedPage() {
 
   const handleDelete = async (id: string, kind: string) => {
     if (!confirm('Delete this generated item?')) return;
-    await api.delete(`/admin/generated/${id}`, { params: { kind } });
-    qc.invalidateQueries({ queryKey: ['admin', 'generated'] });
+    try {
+      await api.delete(`/admin/generated/${id}`, { params: { kind } });
+      qc.invalidateQueries({ queryKey: ['admin', 'generated'] });
+    } catch (err) {
+      const res = (err as { response?: { data?: { message?: string } } })?.response;
+      alert(res?.data?.message ?? 'Failed to delete this item. Please try again.');
+    }
   };
 
   return (

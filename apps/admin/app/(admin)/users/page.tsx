@@ -100,7 +100,7 @@ export default function UsersPage() {
                       variant="outline"
                       size="sm"
                       disabled={resetPassword.isPending}
-                      onClick={() => {
+                      onClick={async () => {
                         if (
                           !confirm(
                             `Generate a new password for ${user.email}? The previous password will stop working.`,
@@ -108,7 +108,12 @@ export default function UsersPage() {
                         ) {
                           return;
                         }
-                        resetPassword.mutate({ userId: user.id, generate: true });
+                        try {
+                          await resetPassword.mutateAsync({ userId: user.id, generate: true });
+                        } catch (err) {
+                          const res = (err as { response?: { data?: { message?: string } } })?.response;
+                          alert(res?.data?.message ?? 'Failed to reset password. Please try again.');
+                        }
                       }}
                     >
                       Reset
