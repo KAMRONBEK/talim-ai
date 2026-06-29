@@ -854,4 +854,9 @@ Fixed + verified live:
 Logged (structural):
 - **F75** (S3) — web dark `text-destructive` is sub-AA (~3:1) but the token is shared with `bg-destructive` fills (5.45:1), so a single-token fix can't satisfy both; needs a token split (design call).
 
+**Systematic dark-mode token-contrast audit (both apps, no findings beyond the above).** To make sure F73/F75 weren't isolated lucky catches, programmatically resolved every state/text CSS var and computed WCAG contrast for all realistic text-on-surface pairings in dark mode:
+- **Admin** (`/dashboard`, after F73): `subAA: []` — all 12 pairings pass AA. foreground 17.1–17.8:1, primary 6.8–7.1:1, muted-foreground 5.5–7.4:1, **destructive 5.45–5.66:1** (F73 holds), all `*-foreground`-on-fill 7–13:1.
+- **Web** (`/dashboard/settings`): the **only** sub-AA pairing is **`destructive on card: 2.98`** (= F75). Everything else passes comfortably: foreground 16–17:1, muted-foreground 5.6–7.3:1, primary 5.0–5.3:1, success 8.4–8.9:1, primary-foreground-on-primary 5.18:1, accent-secondary-foreground 10.3:1.
+- **Conclusion:** after F73, both dark themes are AA-clean for normal text except the single structural F75. Run 11/12's dark sweeps (success-state only) correctly found 0 island/overflow issues; this run adds the *error/state-token* contrast dimension they couldn't see, and it's now closed.
+
 **Still open for a resumed run (unchanged):** web `error.tsx` boundary (F69), F62 API error-code contract, F75 destructive-token split, full WCAG audit, Manim/Desmos chat visuals (AI-triggered), structural auth-staleness (F11/F45/F46), F39 GAME timings, persisted `Quiz.status` (F59) — all need migrations, design, or hot-path/auth changes unsuitable for an unattended run.
