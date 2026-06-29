@@ -60,7 +60,9 @@ export default function LoginPage() {
           ? t('invalidCredentials')
           : status === 403
             ? t('accountDeactivated')
-            : t('serverError'),
+            : status === 429
+              ? t('tooManyAttempts')
+              : t('serverError'),
       );
     } finally {
       setLoading(false);
