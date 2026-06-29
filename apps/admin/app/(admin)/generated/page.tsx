@@ -16,7 +16,7 @@ const tabs = [
 
 export default function GeneratedPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]['id']>('all');
-  const { data, isLoading } = useAdminGenerated(tab);
+  const { data, isLoading, isError } = useAdminGenerated(tab);
   const qc = useQueryClient();
 
   const handleDelete = async (id: string, kind: string) => {
@@ -64,6 +64,13 @@ export default function GeneratedPage() {
               <tr>
                 <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load generated media. Please try again.
                 </td>
               </tr>
             )}

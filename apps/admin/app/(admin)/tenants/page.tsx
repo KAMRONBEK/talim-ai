@@ -9,7 +9,7 @@ import { planLabel } from '@/lib/plan';
 export default function TenantsPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminTenants({ page, search: search || undefined });
+  const { data, isLoading, isError } = useAdminTenants({ page, search: search || undefined });
 
   return (
     <div className="space-y-6">
@@ -45,6 +45,13 @@ export default function TenantsPage() {
               <tr>
                 <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load organizations. Please try again.
                 </td>
               </tr>
             )}

@@ -6,7 +6,7 @@ import { useAdminUsage } from '@/hooks/useAdmin';
 
 export default function UsagePage() {
   const [days, setDays] = useState(30);
-  const { data, isLoading } = useAdminUsage(days);
+  const { data, isLoading, isError } = useAdminUsage(days);
 
   return (
     <div className="space-y-6">
@@ -39,6 +39,13 @@ export default function UsagePage() {
               <tr>
                 <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load usage. Please try again.
                 </td>
               </tr>
             )}

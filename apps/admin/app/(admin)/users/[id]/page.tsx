@@ -501,6 +501,12 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                     >
                       {updateSubscription.isPending ? 'Saving…' : 'Save subscription'}
                     </Button>
+                    {updateSubscription.isError && (
+                      <p className="text-sm text-destructive">
+                        {(updateSubscription.error as { response?: { data?: { message?: string } } })
+                          ?.response?.data?.message ?? 'Failed to update subscription'}
+                      </p>
+                    )}
                   </>
                 )}
               </>

@@ -11,7 +11,7 @@ function errorMessage(err: unknown, fallback: string): string {
 export default function ContentPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminContents({ page, search: search || undefined });
+  const { data, isLoading, isError } = useAdminContents({ page, search: search || undefined });
   const deleteContent = useDeleteContent();
   const retryContent = useRetryContent();
 
@@ -48,6 +48,13 @@ export default function ContentPage() {
               <tr>
                 <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load content. Please try again.
                 </td>
               </tr>
             )}

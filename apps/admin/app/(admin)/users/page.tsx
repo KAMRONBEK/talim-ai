@@ -9,7 +9,7 @@ import { planLabel } from '@/lib/plan';
 export default function UsersPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminUsers({ page, search: search || undefined });
+  const { data, isLoading, isError } = useAdminUsers({ page, search: search || undefined });
   const deleteUser = useDeleteUser();
   const resetPassword = useResetUserPassword();
 
@@ -49,6 +49,13 @@ export default function UsersPage() {
               <tr>
                 <td colSpan={8} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={8} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load users. Please try again.
                 </td>
               </tr>
             )}

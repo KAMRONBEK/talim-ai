@@ -22,7 +22,7 @@ export default function SubscriptionsPage() {
   const [plan, setPlan] = useState('');
   const [kind, setKind] = useState<(typeof KIND_OPTIONS)[number]>('all');
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useAdminSubscriptions({
+  const { data, isLoading, isError } = useAdminSubscriptions({
     page,
     search: search || undefined,
     status: status || undefined,
@@ -108,6 +108,13 @@ export default function SubscriptionsPage() {
               <tr>
                 <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
+                </td>
+              </tr>
+            )}
+            {isError && (
+              <tr>
+                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
+                  Couldn&apos;t load subscriptions. Please try again.
                 </td>
               </tr>
             )}

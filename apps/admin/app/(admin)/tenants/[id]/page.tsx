@@ -185,6 +185,12 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
           >
             {updateTenant.isPending ? 'Saving…' : 'Save changes'}
           </Button>
+          {updateTenant.isError && (
+            <p className="mt-3 text-sm text-destructive">
+              {(updateTenant.error as { response?: { data?: { message?: string } } })?.response?.data
+                ?.message ?? 'Failed to save changes. Please try again.'}
+            </p>
+          )}
         </CardContent>
       </Card>
 
