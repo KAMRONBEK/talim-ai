@@ -99,7 +99,9 @@ jobs:
     needs: [changes, build]
     if: needs.changes.outputs.matrix != '[]' && needs.build.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 30m (was 15m): the 2GB VPS pulling all three fresh Next.js images at once can
+    # exceed 15m and get cancelled mid-restart. Combined with the sequential pull below.
+    timeout-minutes: 30
     steps:
       - name: Pull images & restart on the VPS
         uses: appleboy/ssh-action@v1.2.0
@@ -112,7 +114,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
-          command_timeout: 15m
+          command_timeout: 25m
           envs: DOPPLER_TOKEN,GHCR_TOKEN,GHCR_USER
           script: |
             set -euo pipefail
@@ -138,13 +140,18 @@ jobs:
             # Pull :latest for the app tier ONLY (api/web/admin from GHCR). db/redis/nginx
             # are pinned public images already on the host — pulling them from Docker Hub
             # every deploy intermittently fails on TLS timeouts and aborts the whole deploy.
-            # Retry: a single transient GHCR TLS-handshake timeout on one image must not
-            # abort an otherwise-healthy deploy.
-            for attempt in 1 2 3; do
-              if ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull api web admin; then break; fi
-              if [ "${attempt}" = 3 ]; then echo "image pull failed after 3 attempts"; exit 1; fi
-              echo "pull attempt ${attempt} failed (transient registry error); retrying in 10s..."
-              sleep 10
+            # Pull SEQUENTIALLY (one image at a time): the 2GB VPS decompressing three large
+            # Next.js images in parallel pushes it into swap and a deploy can blow past the
+            # job timeout. Each image gets its own retry so a single transient GHCR
+            # TLS-handshake timeout doesn't abort an otherwise-healthy deploy.
+            for img in api web admin; do
+              pulled=0
+              for attempt in 1 2 3; do
+                if ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} pull "${img}"; then pulled=1; break; fi
+                echo "pull ${img} attempt ${attempt} failed (transient registry error); retrying in 10s..."
+                sleep 10
+              done
+              [ "${pulled}" = 1 ] || { echo "image pull for ${img} failed after 3 attempts"; exit 1; }
             done
             # up recreates only containers whose image digest changed.
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --wait db redis api web admin
