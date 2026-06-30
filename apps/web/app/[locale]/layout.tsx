@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { inter } from '@talim/ui/fonts/inter';
 import { display } from '@talim/ui/fonts/display';
+import { newsreader } from '@talim/ui/fonts/newsreader';
+import { jakarta } from '@talim/ui/fonts/jakarta';
+import { grotesk } from '@talim/ui/fonts/grotesk';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -35,7 +38,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} ${display.variable} ${inter.className} font-sans`}>
+      <body
+        className={`${jakarta.variable} ${newsreader.variable} ${grotesk.variable} ${inter.variable} ${display.variable} ${jakarta.className} font-sans`}
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>

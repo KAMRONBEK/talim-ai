@@ -704,97 +704,240 @@
   },
   "landing": {
     "nav": {
-      "features": "Features",
-      "how": "How it works",
+      "product": "Product",
       "forTutors": "For tutors",
-      "preview": "Product",
-      "signIn": "Sign in",
-      "getStarted": "Get started",
-      "pricing": "Pricing"
+      "pricing": "Pricing",
+      "about": "About",
+      "logIn": "Log in",
+      "getStarted": "Get started"
     },
     "hero": {
-      "badge": "Learn with AI",
-      "titleLead": "Learn anything.",
-      "titleEmphasis": "Your way.",
-      "subtitle": "Upload any material — PDF, video, slides or a lecture — and get AI-generated summaries, podcasts, quizzes and a personal tutor.",
-      "primaryCta": "Get started free",
-      "secondaryCta": "See features",
-      "trust": "Works with PDFs, YouTube, slides and lectures",
-      "cardTitle": "The genetic code & translation",
-      "cardSubtitle": "Biology 101 · Chapter 11",
-      "cardSummary": "Summary ready · 3 min read",
-      "cardPodcast": "Podcast ready · 8 min listen",
-      "cardQuiz": "Quiz available · 12 questions",
-      "cardProgressLabel": "Your progress"
-    },
-    "features": {
-      "title": "Everything you need to master any topic",
-      "subtitle": "From upload to mastery — one platform that adapts to the way you learn best.",
-      "summaryTitle": "AI summaries",
-      "summaryDesc": "Pull the key points out of any material. No need to re-read a whole chapter — grasp the core ideas in minutes.",
-      "podcastTitle": "Listen and learn",
-      "podcastDesc": "Turn your content into AI-generated podcasts. Learn while commuting, working out or doing chores.",
-      "quizTitle": "Test your knowledge",
-      "quizDesc": "Generate custom exams and quizzes with detailed answer explanations. Track your progress over time.",
-      "tutorTitle": "AI tutor chat",
-      "tutorDesc": "Select any part of your material and ask precise questions. Answers come with direct references to your content."
+      "badge": "Grounded AI tutor · uz / en / ru",
+      "titleLead": "Turn anything into a lesson you actually",
+      "titleEmphasis": "finish",
+      "titleTrail": ".",
+      "subtitle": "Drop in a PDF, slide deck or YouTube link. Talim gives you a clean summary, a podcast, quizzes, and an AI tutor that answers from your material — not the whole internet.",
+      "primaryCta": "Start learning free",
+      "secondaryCta": "For tutors & schools",
+      "trust": "Trusted by learners & tutors across Uzbekistan",
+      "cardTitle": "Organic Chemistry — Ch.4",
+      "cardMeta": "PDF · 18 pages · 12 min read",
+      "cardStatus": "Ready",
+      "cardSummary": "Summary & key points",
+      "cardPodcast": "Podcast episode · 6:20",
+      "cardQuiz": "Quiz · 10 questions",
+      "cardMasteryLabel": "Mastery",
+      "cardMasteryValue": "72%"
     },
     "how": {
-      "title": "How Talim AI works",
-      "subtitle": "Three simple steps from raw material to deep understanding.",
-      "step1Title": "Upload your content",
-      "step1Text": "Drop in PDFs, paste YouTube links, upload slides or share lectures. We handle the rest.",
-      "step2Title": "AI processes everything",
-      "step2Text": "AI breaks your material into sections, writes summaries, produces podcasts and builds quizzes.",
-      "step3Title": "Learn your way",
-      "step3Text": "Read the summaries, listen to podcasts, take quizzes or chat with your AI tutor."
+      "eyebrow": "How it works",
+      "title": "Three steps, from source to mastery",
+      "steps": {
+        "0": {
+          "num": "01",
+          "title": "Add a source",
+          "desc": "Upload a PDF or slides, or paste a YouTube link. Talim extracts and indexes every page."
+        },
+        "1": {
+          "num": "02",
+          "title": "Let AI shape it",
+          "desc": "Summaries, a narrated podcast, quizzes and visual explainers are generated automatically."
+        },
+        "2": {
+          "num": "03",
+          "title": "Learn & ask",
+          "desc": "Read, listen, test yourself, and ask the tutor anything — grounded in your own content."
+        }
+      }
+    },
+    "features": {
+      "eyebrow": "What's inside",
+      "title": "Every way to understand a topic",
+      "items": {
+        "0": {
+          "title": "Sectioned summaries",
+          "desc": "Key points and reading-time estimates, section by section."
+        },
+        "1": {
+          "title": "Podcasts",
+          "desc": "Listen to any material as a narrated episode in your language."
+        },
+        "2": {
+          "title": "Quizzes",
+          "desc": "Auto-generated questions with explanations and attempt tracking."
+        },
+        "3": {
+          "title": "AI tutor chat",
+          "desc": "RAG-grounded answers with charts, diagrams and animations."
+        },
+        "4": {
+          "title": "Progress",
+          "desc": "See mastery climb across every topic and assessment."
+        },
+        "5": {
+          "title": "Game quizzes",
+          "desc": "Timed, points-based class battles with a live leaderboard."
+        }
+      }
     },
     "tutors": {
-      "badge": "For tutors and schools",
-      "title": "Teaching your own students?",
-      "subtitle": "Talim is not just for solo learning. Tutors can manage their own students, create materials and game-style quizzes, and track progress in one place.",
-      "point1Title": "Assign your materials",
-      "point1Text": "Upload your own textbooks and notes, then assign them to the right students.",
-      "point2Title": "Game-style quizzes",
-      "point2Text": "Build quizzes for every topic and test your students in an engaging way.",
-      "point3Title": "Track progress",
-      "point3Text": "See each student's coverage, quiz scores and activity in a single dashboard.",
-      "cta": "Become a tutor"
+      "eyebrow": "For tutors & schools",
+      "title": "Teach a roster, not a spreadsheet.",
+      "subtitle": "Manage students, assign materials, build AI question banks, and run game assessments with a class leaderboard — no AI plumbing to set up.",
+      "primaryCta": "Become a tutor",
+      "secondaryCta": "See pricing",
+      "cards": {
+        "0": {
+          "value": "28",
+          "title": "Students managed",
+          "desc": "across 3 active classes"
+        },
+        "1": {
+          "value": "AI",
+          "title": "Question bank",
+          "desc": "142 approved questions"
+        },
+        "2": {
+          "title": "Game leaderboard",
+          "desc": "live during class"
+        }
+      }
     },
-    "preview": {
-      "title": "See it in action",
-      "subtitle": "A clean interface built for deep learning — no clutter.",
-      "navContent": "Genetic code",
-      "section1": "Transcription",
-      "section2": "Translation",
-      "section3": "Mutations",
-      "actionQuiz": "Quiz",
-      "actionPodcast": "Podcast",
-      "actionTutor": "AI Tutor",
-      "chapterLabel": "Chapter 11",
-      "contentTitle": "The genetic code & translation",
-      "paragraph1Lead": "The genetic code is the set of rules living cells use to translate information encoded in genetic material into proteins. It is a ",
-      "paragraph1Highlight": "triplet code",
-      "paragraph1Tail": ", where each sequence of three nucleotides is called a codon.",
-      "paragraph2Lead": "During translation, the ribosome reads the mRNA sequence and, with the help of tRNA, assembles amino acids into a polypeptide chain — which happens in the ",
-      "paragraph2Highlight": "cytoplasm",
-      "paragraph2Tail": ".",
-      "chipListen": "Listen",
-      "chipQuiz": "Take a quiz",
-      "chipAsk": "Ask the AI"
+    "pricing": {
+      "eyebrow": "Pricing",
+      "title": "Start free, scale when you teach",
+      "plans": {
+        "0": {
+          "name": "Learner",
+          "price": "Free",
+          "desc": "For solo study.",
+          "bullets": {
+            "0": "Upload PDFs & YouTube",
+            "1": "Summaries & quizzes",
+            "2": "AI tutor chat"
+          },
+          "cta": "Get started"
+        },
+        "1": {
+          "name": "Tutor",
+          "price": "Seats",
+          "priceSuffix": "/ by class",
+          "badge": "Most chosen",
+          "desc": "Activated by our team to fit your roster.",
+          "bullets": {
+            "0": "Everything in Learner",
+            "1": "Students & assignments",
+            "2": "Question banks & assessments",
+            "3": "Game quizzes + leaderboard"
+          },
+          "cta": "Request access"
+        },
+        "2": {
+          "name": "School",
+          "price": "Custom",
+          "desc": "For institutions.",
+          "bullets": {
+            "0": "Multiple tutors & orgs",
+            "1": "Priority onboarding",
+            "2": "Usage reporting"
+          },
+          "cta": "Talk to us"
+        }
+      }
+    },
+    "stats": {
+      "items": {
+        "0": {
+          "value": "12k+",
+          "label": "learners studying"
+        },
+        "1": {
+          "value": "280k",
+          "label": "questions graded"
+        },
+        "2": {
+          "value": "88",
+          "label": "tutors & schools"
+        },
+        "3": {
+          "value": "3",
+          "label": "languages · uz · en · ru"
+        }
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Loved by learners & tutors",
+      "title": "What people say",
+      "items": {
+        "0": {
+          "quote": "I drop a lecture PDF in and walk away with a podcast for the bus and a quiz for the night. My grades moved.",
+          "name": "Madina S.",
+          "role": "University student",
+          "initials": "MS"
+        },
+        "1": {
+          "quote": "I run three classes from one screen — assign material, build a game quiz, watch the leaderboard light up. No setup.",
+          "name": "Aziz Karimov",
+          "role": "Chemistry tutor",
+          "initials": "AK"
+        },
+        "2": {
+          "quote": "The tutor explains in O'zbek and points me to the exact page. It finally feels like it's mine.",
+          "name": "Sevara R.",
+          "role": "School student",
+          "initials": "SR"
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "Good to know",
+      "title": "Frequently asked",
+      "items": {
+        "0": {
+          "q": "Is it really free to learn?",
+          "a": "Yes. Individual learners get summaries, quizzes and the AI tutor for free; Pro & Max unlock unlimited materials, podcasts and the advanced tutor."
+        },
+        "1": {
+          "q": "What can I upload?",
+          "a": "PDFs and slides, or paste a YouTube link. Talim extracts, indexes and turns it into a lesson — grounded answers cite the exact page or timestamp."
+        },
+        "2": {
+          "q": "How do I become a tutor?",
+          "a": "Request access from your account. Our team activates a Team or School plan with a seat limit that fits your roster — then student management unlocks."
+        },
+        "3": {
+          "q": "Which languages are supported?",
+          "a": "Uzbek, English and Russian across the whole product — interface, summaries, podcasts and the tutor."
+        }
+      }
     },
     "cta": {
-      "title": "Ready to learn smarter?",
-      "subtitle": "Upload your material and get AI-powered summaries, podcasts, quizzes and a personal tutor.",
-      "button": "Start learning for free"
+      "title": "Turn your next source into a lesson.",
+      "subtitle": "Free to start — no card needed.",
+      "primaryCta": "Start learning free",
+      "secondaryCta": "For tutors & schools"
     },
     "footer": {
-      "tagline": "Talim AI",
-      "rights": "© {year} Talim AI. All rights reserved.",
-      "app": "App",
-      "signIn": "Sign in",
-      "privacy": "Privacy",
-      "terms": "Terms"
+      "brand": "Talim AI",
+      "tagline": "Learn anything, grounded.",
+      "links": {
+        "0": {
+          "label": "Product"
+        },
+        "1": {
+          "label": "For tutors"
+        },
+        "2": {
+          "label": "Pricing"
+        },
+        "3": {
+          "label": "Privacy"
+        },
+        "4": {
+          "label": "Contact"
+        }
+      },
+      "copyright": "© {year} Talim AI"
     }
   },
   "pricing": {

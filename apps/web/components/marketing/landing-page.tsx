@@ -2,10 +2,13 @@
 
 import { Navbar } from '@/components/marketing/navbar';
 import { Hero } from '@/components/marketing/hero';
-import { Features } from '@/components/marketing/features';
 import { HowItWorks } from '@/components/marketing/how-it-works';
+import { Features } from '@/components/marketing/features';
 import { ForTutors } from '@/components/marketing/for-tutors';
-import { Preview } from '@/components/marketing/preview';
+import { PricingSection } from '@/components/marketing/pricing-section';
+import { Stats } from '@/components/marketing/stats';
+import { Testimonials } from '@/components/marketing/testimonials';
+import { Faq } from '@/components/marketing/faq';
 import { Cta } from '@/components/marketing/cta';
 import { Footer } from '@/components/marketing/footer';
 
@@ -14,10 +17,13 @@ export function LandingPage() {
     <div className="min-h-screen overflow-x-hidden">
       <Navbar />
       <Hero />
-      <Features />
       <HowItWorks />
+      <Features />
       <ForTutors />
-      <Preview />
+      <PricingSection />
+      <Stats />
+      <Testimonials />
+      <Faq />
       <Cta />
       <Footer />
     </div>

@@ -1,37 +1,58 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Upload, Sparkles, Bot, type LucideIcon } from 'lucide-react';
+
+type Step = {
+  key: '0' | '1' | '2';
+  Icon: LucideIcon;
+  accent: boolean;
+};
+
+const STEPS: Step[] = [
+  { key: '0', Icon: Upload, accent: false },
+  { key: '1', Icon: Sparkles, accent: true },
+  { key: '2', Icon: Bot, accent: false },
+];
 
 export function HowItWorks() {
   const t = useTranslations('landing');
 
-  const steps = [
-    { n: 1, title: t('how.step1Title'), text: t('how.step1Text') },
-    { n: 2, title: t('how.step2Title'), text: t('how.step2Text') },
-    { n: 3, title: t('how.step3Title'), text: t('how.step3Text') },
-  ];
-
   return (
-    <section id="how" className="border-t border-border/70 px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            {t('nav.how')}
-          </p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{t('how.title')}</h2>
-          <p className="mt-3 text-muted-foreground">{t('how.subtitle')}</p>
+    <section id="how" className="border-t border-border/60 bg-card py-20 sm:py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {t('how.eyebrow')}
+          </div>
+          <h2 className="mt-2.5 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            {t('how.title')}
+          </h2>
         </div>
-        <div className="relative grid gap-10 md:grid-cols-3">
-          {/* Connecting line — the steps are a real sequence, so the track reads left→right. */}
-          <div className="pointer-events-none absolute left-0 right-0 top-7 hidden border-t-2 border-dashed border-border md:block" />
-          {steps.map((step) => (
-            <div key={step.n} className="relative text-center">
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand font-display text-xl font-bold text-white shadow-glow ring-8 ring-background">
-                {step.n}
+
+        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-3">
+          {STEPS.map(({ key, Icon, accent }) => (
+            <div
+              key={key}
+              className="hover-lift rounded-2xl border border-border bg-background p-6"
+            >
+              <div className="font-display text-base font-semibold text-primary">
+                {t(`how.steps.${key}.num`)}
               </div>
-              <h3 className="text-xl font-semibold">{step.title}</h3>
-              <p className="mx-auto mt-2.5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                {step.text}
+              <div
+                className={`mt-3 flex h-12 w-12 items-center justify-center rounded-xl ${
+                  accent
+                    ? 'bg-accent-secondary/10 text-accent-secondary'
+                    : 'bg-secondary text-primary'
+                }`}
+              >
+                <Icon className="h-5 w-5" aria-hidden="true" strokeWidth={2} />
+              </div>
+              <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
+                {t(`how.steps.${key}.title`)}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {t(`how.steps.${key}.desc`)}
               </p>
             </div>
           ))}
@@ -40,3 +61,5 @@ export function HowItWorks() {
     </section>
   );
 }
+
+export default HowItWorks;

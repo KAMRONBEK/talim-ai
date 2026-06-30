@@ -7,7 +7,10 @@
   "exports": {
     ".": "./index.ts",
     "./fonts/inter": "./fonts/inter.ts",
-    "./fonts/display": "./fonts/display.ts"
+    "./fonts/display": "./fonts/display.ts",
+    "./fonts/newsreader": "./fonts/newsreader.ts",
+    "./fonts/jakarta": "./fonts/jakarta.ts",
+    "./fonts/grotesk": "./fonts/grotesk.ts"
   },
   "scripts": {
     "lint": "eslint .",

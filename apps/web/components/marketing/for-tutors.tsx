@@ -1,52 +1,99 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Trophy } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+
+// Faint cream girih lattice, drawn over the pine band (decorative, theme-neutral).
+const LATTICE =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23F7F2E8' stroke-opacity='0.06' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E\")";
+
+const CARDS: { i: string; squareClass: string; icon?: typeof Trophy }[] = [
+  { i: '0', squareClass: 'bg-accent-secondary text-accent-secondary-foreground text-sm' },
+  { i: '1', squareClass: 'bg-secondary text-primary text-[13px]' },
+  { i: '2', squareClass: 'bg-warning text-warning-foreground', icon: Trophy },
+];
 
 export function ForTutors() {
   const t = useTranslations('landing');
 
-  const points = [
-    { icon: '📚', title: t('tutors.point1Title'), text: t('tutors.point1Text') },
-    { icon: '🎮', title: t('tutors.point2Title'), text: t('tutors.point2Text') },
-    { icon: '📈', title: t('tutors.point3Title'), text: t('tutors.point3Text') },
-  ];
-
   return (
     <section
       id="for-tutors"
-      className="relative overflow-hidden border-t border-border/70 bg-card px-6 py-24"
+      aria-labelledby="for-tutors-heading"
+      className="px-6 py-20 sm:py-24"
     >
-      <div className="pointer-events-none absolute inset-0 bg-girih opacity-60" />
-      <div className="relative mx-auto max-w-6xl">
-        <div className="mb-16 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-accent-secondary/15 px-3.5 py-1.5 text-xs font-semibold text-warning">
-            {t('tutors.badge')}
-          </span>
-          <h2 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl">{t('tutors.title')}</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{t('tutors.subtitle')}</p>
-        </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          {points.map((p) => (
-            <div
-              key={p.title}
-              className="group rounded-3xl border border-border/70 bg-background p-8 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-card"
+      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-primary shadow-elevated">
+        {/* Decorative depth + lattice washes — same in both themes. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent to-black/20"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-50"
+          style={{ backgroundImage: LATTICE, backgroundSize: '72px 72px' }}
+        />
+
+        <div className="relative grid gap-10 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+          {/* Pitch */}
+          <div>
+            <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
+              {t('tutors.eyebrow')}
+            </p>
+            <h2
+              id="for-tutors-heading"
+              className="mt-3 font-display text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-xl transition-transform duration-200 group-hover:scale-110">
-                {p.icon}
-              </div>
-              <h3 className="text-lg font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
+              {t('tutors.title')}
+            </h2>
+            <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-primary-foreground/80">
+              {t('tutors.subtitle')}
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/register"
+                className="inline-flex items-center rounded-xl bg-primary-foreground px-6 py-3 text-sm font-semibold text-primary shadow-sm transition hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+              >
+                {t('tutors.primaryCta')}
+              </Link>
+              <a
+                href="#pricing"
+                className="inline-flex items-center rounded-xl border border-primary-foreground/35 px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary-foreground/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+              >
+                {t('tutors.secondaryCta')}
+              </a>
             </div>
-          ))}
-        </div>
-        <div className="mt-12 text-center">
-          <Link
-            href="/register"
-            className="inline-flex items-center rounded-xl bg-accent-secondary px-7 py-3.5 text-base font-semibold text-accent-secondary-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:brightness-105 hover:shadow-md"
-          >
-            {t('tutors.cta')}
-          </Link>
+          </div>
+
+          {/* Proof cards */}
+          <div className="flex flex-col gap-2.5">
+            {CARDS.map(({ i, squareClass, icon: Icon }) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 rounded-xl border border-primary-foreground/15 bg-primary-foreground/[0.08] px-4 py-3.5"
+              >
+                <span
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg font-bold ${squareClass}`}
+                >
+                  {Icon ? (
+                    <Icon className="h-[18px] w-[18px]" aria-hidden />
+                  ) : (
+                    t(`tutors.cards.${i}.value`)
+                  )}
+                </span>
+                <div className="min-w-0">
+                  <div className="text-sm font-semibold text-primary-foreground">
+                    {t(`tutors.cards.${i}.title`)}
+                  </div>
+                  <div className="text-xs text-primary-foreground/70">
+                    {t(`tutors.cards.${i}.desc`)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

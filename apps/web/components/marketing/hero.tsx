@@ -1,111 +1,144 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { AlignLeft, ArrowRight, HelpCircle, Layers, Mic } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 
 export function Hero() {
   const t = useTranslations('landing');
 
-  const cardRows = [
-    { icon: '📝', text: t('hero.cardSummary'), tint: 'bg-success-muted' },
-    { icon: '🎧', text: t('hero.cardPodcast'), tint: 'bg-info-muted' },
-    { icon: '❓', text: t('hero.cardQuiz'), tint: 'bg-accent-secondary/15' },
+  const avatars = [
+    { label: 'A', className: 'bg-secondary text-primary' },
+    { label: 'M', className: 'bg-accent-secondary/15 text-accent-secondary' },
+    { label: 'N', className: 'bg-foreground text-background' },
   ];
 
   return (
-    <section className="relative overflow-hidden px-6 pb-24 pt-20 sm:pt-28">
-      {/* Layered signature backdrop: brand wash + faint girih lattice. */}
-      <div className="pointer-events-none absolute inset-0 bg-brand-radial" />
-      <div className="pointer-events-none absolute inset-0 bg-girih opacity-70 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)]" />
+    <section id="top" className="relative overflow-hidden px-6 pb-20 pt-16 sm:pb-24 sm:pt-20">
+      {/* decorative backdrop — pine/clay wash + girih lattice, faded toward the top */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent)',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 0%, black, transparent)',
+        }}
+      >
+        <div className="absolute inset-0 bg-brand-radial" />
+        <div className="absolute inset-0 bg-girih opacity-50" />
+      </div>
 
-      <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        {/* left column — headline & CTAs */}
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-3.5 py-1.5 text-xs font-semibold text-muted-foreground shadow-soft backdrop-blur">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-3.5 py-1.5 text-xs font-semibold text-muted-foreground">
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />
             {t('hero.badge')}
           </span>
 
-          <h1 className="mt-6 text-balance text-[2rem] font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-[4rem] lg:leading-[1.05]">
+          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-[3.4rem]">
             {t('hero.titleLead')}{' '}
-            <span className="marker-highlight">{t('hero.titleEmphasis')}</span>
+            <span className="font-display italic text-primary">{t('hero.titleEmphasis')}</span>
+            {t('hero.titleTrail')}
           </h1>
 
-          <p className="mt-6 max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
             {t('hero.subtitle')}
           </p>
 
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/register"
-              className="inline-flex items-center rounded-xl bg-gradient-brand px-7 py-3.5 text-base font-semibold text-white shadow-glow transition-all hover:-translate-y-0.5 hover:opacity-95"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:-translate-y-px hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {t('hero.primaryCta')}
+              <ArrowRight aria-hidden className="h-4 w-4" />
             </Link>
-            <a
-              href="#features"
-              className="inline-flex items-center rounded-xl border border-border bg-card/60 px-7 py-3.5 text-base font-semibold backdrop-blur transition-colors hover:bg-secondary"
+            <Link
+              href="/register"
+              className="inline-flex items-center rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition hover:-translate-y-px hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {t('hero.secondaryCta')}
-            </a>
+            </Link>
           </div>
 
-          <div className="mt-9 flex items-center gap-3 text-sm text-muted-foreground">
-            <div className="flex -space-x-2.5">
-              {['📄', '🎬', '📊'].map((a) => (
+          <div className="mt-7 flex items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex" aria-hidden>
+              {avatars.map((a, i) => (
                 <span
-                  key={a}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-gradient-to-br from-primary to-accent-secondary text-[13px] text-white shadow-soft"
+                  key={a.label}
+                  className={`flex h-9 w-9 items-center justify-center rounded-full border-2 border-background text-[13px] font-bold ${a.className} ${
+                    i > 0 ? '-ml-2.5' : ''
+                  }`}
                 >
-                  {a}
+                  {a.label}
                 </span>
               ))}
             </div>
-            <span>{t('hero.trust')}</span>
+            {t('hero.trust')}
           </div>
         </div>
 
-        {/* Floating product card — tilts subtly upright, marigold "live" accent. */}
+        {/* right column — floating product card */}
         <div className="relative">
-          <div className="absolute -inset-4 rounded-[2rem] bg-gradient-brand-soft blur-2xl" />
-          <div className="relative rounded-3xl border border-border/70 bg-card/95 p-6 shadow-elevated backdrop-blur">
-            <div className="mb-4 flex items-center gap-3 border-b border-border/70 pb-4">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent-secondary text-xl text-white shadow-soft">
-                🧬
+          <div
+            aria-hidden
+            className="absolute -inset-3 rounded-[30px] blur-lg"
+            style={{
+              background:
+                'radial-gradient(circle at 30% 20%, rgba(30,91,79,0.18), transparent 60%), radial-gradient(circle at 80% 90%, rgba(217,102,61,0.16), transparent 60%)',
+            }}
+          />
+          <div className="relative rounded-3xl border border-border bg-card p-5 shadow-card sm:p-6">
+            {/* card header */}
+            <div className="flex items-center gap-3 border-b border-border/60 pb-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground">
+                <Layers aria-hidden className="h-5 w-5" />
               </div>
-              <div className="min-w-0">
-                <p className="truncate font-display font-semibold">{t('hero.cardTitle')}</p>
-                <p className="truncate text-sm text-muted-foreground">{t('hero.cardSubtitle')}</p>
+              <div className="min-w-0 flex-1">
+                <div className="truncate font-display text-base font-semibold text-foreground">
+                  {t('hero.cardTitle')}
+                </div>
+                <div className="truncate text-xs text-muted-foreground">{t('hero.cardMeta')}</div>
               </div>
-              <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-success-muted px-2.5 py-1 text-[11px] font-semibold text-success">
-                <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                AI
+              <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-[11px] font-bold text-primary">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />
+                {t('hero.cardStatus')}
               </span>
             </div>
-            <div className="space-y-2 text-sm">
-              {cardRows.map((row) => (
-                <div
-                  key={row.text}
-                  className="flex items-center gap-3 rounded-xl bg-muted/60 px-3 py-2.5 transition-colors hover:bg-muted"
-                >
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm ${row.tint}`}
-                  >
-                    {row.icon}
-                  </span>
-                  {row.text}
-                </div>
-              ))}
-            </div>
-            <div className="mt-5">
-              <div className="mb-1.5 flex justify-between text-xs text-muted-foreground">
-                <span>{t('hero.cardProgressLabel')}</span>
-                <span className="font-display font-semibold text-foreground">72%</span>
+
+            {/* feature rows */}
+            <div className="mt-3.5 flex flex-col gap-2">
+              <div className="flex items-center gap-3 rounded-xl bg-secondary px-3 py-3 text-sm font-medium text-foreground">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-card text-primary">
+                  <AlignLeft aria-hidden className="h-4 w-4" />
+                </span>
+                {t('hero.cardSummary')}
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-border">
-                <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-primary to-accent-secondary" />
+              <div className="flex items-center gap-3 rounded-xl bg-accent-secondary/10 px-3 py-3 text-sm font-medium text-foreground">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-card text-accent-secondary">
+                  <Mic aria-hidden className="h-4 w-4" />
+                </span>
+                {t('hero.cardPodcast')}
+              </div>
+              <div className="flex items-center gap-3 rounded-xl border border-border/60 bg-card px-3 py-3 text-sm font-medium text-foreground">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground">
+                  <HelpCircle aria-hidden className="h-4 w-4" />
+                </span>
+                {t('hero.cardQuiz')}
+              </div>
+            </div>
+
+            {/* mastery progress */}
+            <div className="mt-4">
+              <div className="mb-1.5 flex items-center justify-between text-[11px] text-muted-foreground">
+                <span>{t('hero.cardMasteryLabel')}</span>
+                <span className="font-display font-semibold text-primary">
+                  {t('hero.cardMasteryValue')}
+                </span>
+              </div>
+              <div className="h-2 overflow-hidden rounded-full bg-muted">
+                <div className="h-full rounded-full bg-gradient-brand" style={{ width: '72%' }} />
               </div>
             </div>
           </div>

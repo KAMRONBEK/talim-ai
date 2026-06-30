@@ -11,6 +11,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // "Scholar" type system — web app only (admin keeps the shared preset fonts).
+      // Cyrillic-less Google faces fall back to Inter/Rubik, which carry Cyrillic.
+      fontFamily: {
+        sans: ['var(--font-jakarta)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-newsreader)', 'var(--font-display)', 'Georgia', 'serif'],
+        label: ['var(--font-grotesk)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+      },
       keyframes: {
         'deck-fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
         'deck-fade-in-up': {

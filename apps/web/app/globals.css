@@ -7,69 +7,72 @@
 
 @layer base {
   :root {
-    /* Talim "spark of learning" — violet brand + marigold accent on warm paper. */
-    --background: 250 40% 99%;
-    --foreground: 250 28% 13%;
-    --card: 0 0% 100%;
-    --card-foreground: 250 28% 13%;
-    --primary: 255 80% 62%;
-    --primary-foreground: 0 0% 100%;
-    --accent-secondary: 38 96% 55%;
-    --accent-secondary-foreground: 250 35% 12%;
-    --secondary: 250 30% 96%;
-    --secondary-foreground: 250 28% 18%;
-    --muted: 250 24% 96%;
-    --muted-foreground: 250 10% 45%;
-    --accent: 255 72% 96%;
-    --accent-foreground: 255 58% 40%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 152 58% 40%;
-    --success-foreground: 0 0% 100%;
-    --success-muted: 152 60% 94%;
-    --warning: 38 92% 44%;
-    --warning-foreground: 0 0% 100%;
-    --warning-muted: 42 96% 90%;
-    --info: 235 84% 62%;
-    --info-foreground: 0 0% 100%;
-    --info-muted: 235 92% 95%;
-    --border: 250 22% 90%;
-    --input: 250 22% 90%;
-    --ring: 255 80% 62%;
-    --radius: 0.85rem;
+    /* Talim "Scholar" system — pine + clay spark on warm paper.
+       Pine #1E5B4F · Clay #D9663D · Sage #E3EDE8 · Paper #F6F1E9 · Ink #201B16. */
+    --background: 37 42% 94%; /* Paper #F6F1E9 */
+    --foreground: 30 18% 11%; /* Ink #201B16 */
+    --card: 38 56% 96%; /* Cream #FBF7F0 */
+    --card-foreground: 30 18% 11%;
+    --primary: 168 50% 24%; /* Pine #1E5B4F */
+    --primary-foreground: 40 48% 95%; /* Cream #F7F2E8 */
+    --accent-secondary: 16 67% 55%; /* Clay #D9663D */
+    --accent-secondary-foreground: 40 50% 97%;
+    --secondary: 151 22% 91%; /* Sage #E3EDE8 */
+    --secondary-foreground: 168 45% 22%;
+    --muted: 40 38% 90%; /* warm sand surface */
+    --muted-foreground: 30 10% 40%; /* AA-safe warm grey #6B6259 */
+    --accent: 151 22% 91%; /* Sage */
+    --accent-foreground: 168 45% 24%;
+    --destructive: 8 68% 45%;
+    --destructive-foreground: 40 50% 97%;
+    --success: 158 52% 30%;
+    --success-foreground: 40 50% 97%;
+    --success-muted: 152 30% 90%;
+    --warning: 32 74% 40%;
+    --warning-foreground: 40 50% 97%;
+    --warning-muted: 38 58% 89%;
+    --info: 196 46% 36%;
+    --info-foreground: 40 50% 97%;
+    --info-muted: 196 38% 91%;
+    --border: 37 31% 84%; /* #E2D8C8 */
+    --input: 37 31% 84%;
+    --ring: 168 50% 24%;
+    --radius: 0.875rem;
     --topbar-height: 3.5rem;
     --sidebar-width: 16rem;
   }
 
   .dark {
-    --background: 250 28% 8%;
-    --foreground: 250 20% 96%;
-    --card: 250 26% 11%;
-    --card-foreground: 250 20% 96%;
-    --primary: 255 85% 70%;
-    --primary-foreground: 250 30% 10%;
-    --accent-secondary: 38 95% 60%;
-    --accent-secondary-foreground: 250 40% 10%;
-    --secondary: 250 18% 18%;
-    --secondary-foreground: 250 20% 96%;
-    --muted: 250 16% 18%;
-    --muted-foreground: 250 12% 66%;
-    --accent: 250 30% 22%;
-    --accent-foreground: 255 70% 86%;
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 250 20% 96%;
-    --success: 152 55% 52%;
-    --success-foreground: 250 28% 8%;
-    --success-muted: 152 35% 16%;
-    --warning: 38 82% 56%;
-    --warning-foreground: 250 28% 8%;
-    --warning-muted: 38 42% 16%;
-    --info: 235 78% 70%;
-    --info-foreground: 250 28% 8%;
-    --info-muted: 235 40% 18%;
-    --border: 250 16% 22%;
-    --input: 250 16% 22%;
-    --ring: 255 85% 70%;
+    /* Scholar after dark — warm charcoal paper, brighter pine, warmed clay.
+       Paper #17130E · Surface #221C15 · Pine #3E9C86 · Clay #E58A63 · Ink #F0E9DD. */
+    --background: 33 24% 7%; /* #17130E */
+    --foreground: 38 39% 90%; /* #F0E9DD */
+    --card: 32 24% 11%; /* #221C15 */
+    --card-foreground: 38 39% 90%;
+    --primary: 166 43% 43%; /* brighter pine #3E9C86 */
+    --primary-foreground: 165 42% 9%; /* deep pine-ink — AA on bright pine */
+    --accent-secondary: 18 71% 64%; /* warmed clay #E58A63 */
+    --accent-secondary-foreground: 20 45% 11%;
+    --secondary: 162 17% 16%;
+    --secondary-foreground: 165 34% 78%;
+    --muted: 34 17% 14%;
+    --muted-foreground: 38 18% 64%;
+    --accent: 162 19% 18%;
+    --accent-foreground: 165 38% 80%;
+    --destructive: 8 56% 53%;
+    --destructive-foreground: 38 39% 93%;
+    --success: 158 44% 46%;
+    --success-foreground: 33 24% 7%;
+    --success-muted: 158 28% 16%;
+    --warning: 32 68% 56%;
+    --warning-foreground: 33 24% 7%;
+    --warning-muted: 32 38% 16%;
+    --info: 196 46% 56%;
+    --info-foreground: 33 24% 7%;
+    --info-muted: 196 34% 18%;
+    --border: 34 19% 18%;
+    --input: 34 19% 18%;
+    --ring: 166 46% 52%;
   }
 
   * {
@@ -80,7 +83,7 @@
     @apply bg-background text-foreground antialiased;
   }
 
-  /* Display-weight headings for the modern/polished look (Inter at tight tracking). */
+  /* Editorial serif headings for the "Scholar" look (Newsreader at tight tracking). */
   h1,
   h2,
   h3 {
@@ -105,13 +108,13 @@
     background-size: 22px 22px;
   }
 
-  /* Signature: marigold highlighter stroke behind key words (studying = highlighting). */
+  /* Signature: clay highlighter stroke behind key words (studying = highlighting). */
   .marker-highlight {
     background-image: linear-gradient(
       180deg,
       transparent 58%,
-      hsl(var(--accent-secondary) / 0.5) 58%,
-      hsl(var(--accent-secondary) / 0.5) 94%,
+      hsl(var(--accent-secondary) / 0.42) 58%,
+      hsl(var(--accent-secondary) / 0.42) 94%,
       transparent 94%
     );
     background-repeat: no-repeat;
@@ -119,17 +122,17 @@
   }
 
   /* Signature: faint girih-inspired 8-point star lattice — a nod to Central Asian
-     tilework. Kept very low opacity so it reads as texture, not decoration. */
+     tilework. Pine stroke at very low opacity so it reads as texture, not decoration. */
   .bg-girih {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%236d5ce7' stroke-opacity='0.06' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231E5B4F' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
     background-size: 72px 72px;
   }
 
-  /* Soft radial brand wash for hero / feature backdrops. */
+  /* Soft radial pine + clay wash for hero / feature backdrops. */
   .bg-brand-radial {
     background-image:
-      radial-gradient(60% 55% at 15% 0%, hsl(var(--primary) / 0.14) 0%, transparent 60%),
-      radial-gradient(50% 50% at 100% 10%, hsl(var(--accent-secondary) / 0.16) 0%, transparent 55%);
+      radial-gradient(58% 60% at 12% 0%, hsl(var(--primary) / 0.1) 0%, transparent 60%),
+      radial-gradient(46% 50% at 100% 8%, hsl(var(--accent-secondary) / 0.12) 0%, transparent 58%);
   }
 }
 
