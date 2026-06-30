@@ -20,8 +20,16 @@ const OPENROUTER_API = 'https://openrouter.ai/api/v1';
 export const hasPrimaryOcrProvider = (): boolean => env.OPENROUTER_API_KEY.length > 0;
 
 async function extractWithPdfParse(buffer: Buffer): Promise<string> {
-  const data = await pdfParse(buffer);
-  return data.text?.trim() ?? '';
+  // pdf-parse bundles an old pdf.js that throws on some real-world PDFs (e.g.
+  // "FormatError: bad XRef entry"). Treat any parse failure as "no text" so
+  // extractPdfText falls through to the OCR ladder instead of failing the whole
+  // ingest job — consistent with the other pdfParse call sites (getPdfPageCount,
+  // rasterizeAndOcrPdf) which are already `.catch`-guarded.
+  const data = await pdfParse(buffer).catch((err) => {
+    console.warn('pdf-parse failed, falling back to OCR ladder:', (err as Error)?.message);
+    return null;
+  });
+  return data?.text?.trim() ?? '';
 }
 
 /** Page count for plan gating. Returns null when the PDF can't be parsed. */

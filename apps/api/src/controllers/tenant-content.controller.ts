@@ -8,6 +8,7 @@ import { storageService } from '../services/storage.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
+import { decodeUploadFilename } from '../lib/filename.js';
 import { extractRegionTextFromImage, extractTextFromPageImages } from '../services/pdf.service.js';
 import { captionAndStoreFigures } from '../services/figure.service.js';
 import { ingestText } from '../services/ingest.service.js';
@@ -74,16 +75,18 @@ export async function uploadContent(req: AuthenticatedRequest, res: Response): P
   const tenantId = requireTenantId(req);
   if (!req.file) throw new AppError(400, 'No file uploaded');
 
-  const isPdf = req.file.mimetype === 'application/pdf' || req.file.originalname.endsWith('.pdf');
+  // multer/busboy decodes the multipart filename as latin1; recover UTF-8 (e.g. Cyrillic names).
+  const originalName = decodeUploadFilename(req.file.originalname);
+  const isPdf = req.file.mimetype === 'application/pdf' || originalName.endsWith('.pdf');
   const type = isPdf ? ContentType.PDF : ContentType.SLIDE;
-  const storagePath = await storageService.save(req.file.buffer, req.file.originalname);
+  const storagePath = await storageService.save(req.file.buffer, originalName);
 
   const content = await prisma.content.create({
     data: {
       userId: req.user.userId,
       tenantId,
       type,
-      title: req.file.originalname,
+      title: originalName,
       storagePath,
       status: 'PENDING',
     },
