@@ -24,12 +24,12 @@ export default function TenantBillingPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.billing')}</p>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">{t('nav.billing')}</p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('billing.title')}</h1>
       </div>
       {!sub || sub.status !== 'ACTIVE' ? (
-        <div className="flex items-start gap-4 rounded-2xl border border-warning/40 bg-warning-muted/30 p-6 shadow-soft">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-warning/15 text-warning">
+        <div className="flex items-start gap-4 rounded-2xl border border-accent-secondary/40 bg-accent-secondary/10 p-6 shadow-soft">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
             <AlertTriangle className="h-5 w-5" />
           </span>
           <div>

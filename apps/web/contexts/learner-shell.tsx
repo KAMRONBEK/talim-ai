@@ -38,7 +38,7 @@ export function LearnerShell({ children }: { children: ReactNode }) {
             <LearnerSidebar />
             <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
               <DashboardHeader />
-              <main className="min-h-0 flex-1 overflow-y-auto px-4 py-8 md:px-6">{children}</main>
+              <main className="min-h-0 flex-1 overflow-y-auto bg-background px-4 py-8 md:px-6">{children}</main>
               <LearnerBottomNav />
             </div>
           </div>

@@ -24,7 +24,7 @@ export default function LearnerSettingsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('accountTitle')}</p>
+        <p className="font-label text-xs font-medium uppercase tracking-[0.2em] text-primary">{t('accountTitle')}</p>
         <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{t('title')}</h1>
         <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>

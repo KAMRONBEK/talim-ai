@@ -2,7 +2,7 @@
 
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { CheckCircle2, Circle } from 'lucide-react';
+import { Check } from 'lucide-react';
 import type { Content, TenantStudent } from '@talim/types';
 
 export function OnboardingChecklist({
@@ -32,13 +32,13 @@ export function OnboardingChecklist({
   const doneCount = steps.filter((step) => step.done).length;
 
   return (
-    <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+    <section className="rounded-2xl border border-border bg-card p-5 shadow-soft">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
-          <h2 className="font-display text-lg font-semibold">{t('title')}</h2>
+          <h2 className="font-display text-lg font-semibold text-foreground">{t('title')}</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">{t('desc')}</p>
         </div>
-        <span className="shrink-0 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold tabular-nums text-primary">
+        <span className="shrink-0 rounded-full bg-secondary px-3 py-1 text-xs font-semibold tabular-nums text-primary">
           {doneCount}/{steps.length}
         </span>
       </div>
@@ -49,14 +49,16 @@ export function OnboardingChecklist({
             href={step.href}
             className={
               step.done
-                ? 'flex items-center gap-3 rounded-xl border border-border/70 px-3.5 py-2.5 text-sm transition-colors hover:bg-secondary/60'
-                : 'flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 px-3.5 py-2.5 text-sm transition-colors hover:bg-primary/10'
+                ? 'flex items-center gap-3 rounded-xl border border-border px-3.5 py-2.5 text-sm transition-colors hover:bg-secondary/50'
+                : 'flex items-center gap-3 rounded-xl border border-accent-secondary/30 bg-accent-secondary/5 px-3.5 py-2.5 text-sm transition-colors hover:bg-accent-secondary/10'
             }
           >
             {step.done ? (
-              <CheckCircle2 className="h-5 w-5 shrink-0 text-success" />
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Check className="h-3 w-3" strokeWidth={3} />
+              </span>
             ) : (
-              <Circle className="h-5 w-5 shrink-0 text-primary" />
+              <span className="h-5 w-5 shrink-0 rounded-full border-2 border-accent-secondary" />
             )}
             <span
               className={

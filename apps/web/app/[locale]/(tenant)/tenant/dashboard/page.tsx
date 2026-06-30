@@ -45,7 +45,7 @@ export default function TenantDashboardPage() {
       <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-7 shadow-soft sm:p-8">
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-girih opacity-50 [mask-image:radial-gradient(ellipse_70%_80%_at_80%_0%,black,transparent)]" />
         <div className="relative">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             {user?.tenantName ?? t('organization')}
           </p>
           <h1 className="mt-3 font-display text-3xl font-bold tracking-tight sm:text-4xl">
@@ -72,7 +72,7 @@ export default function TenantDashboardPage() {
           className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-muted-foreground">{t('stats.materials')}</p>
+            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('stats.materials')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
               <BookOpen className="h-5 w-5" />
             </span>
@@ -84,7 +84,7 @@ export default function TenantDashboardPage() {
           className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-muted-foreground">{t('stats.students')}</p>
+            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('stats.students')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
               <Users className="h-5 w-5" />
             </span>
@@ -98,7 +98,7 @@ export default function TenantDashboardPage() {
           className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
         >
           <div className="flex items-center justify-between">
-            <p className="text-sm font-medium text-muted-foreground">{t('nav.progress')}</p>
+            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('nav.progress')}</p>
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-success">
               <TrendingUp className="h-5 w-5" />
             </span>

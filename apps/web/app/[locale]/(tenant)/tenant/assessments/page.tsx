@@ -2,6 +2,18 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import {
+  BarChart3,
+  Check,
+  ClipboardList,
+  FileText,
+  Library,
+  Sparkles,
+  Trophy,
+  UserCheck,
+  Wand2,
+  X,
+} from 'lucide-react';
 import { Badge, Button, Input, Label } from '@talim/ui';
 import {
   useAssessmentLeaderboard,
@@ -43,31 +55,38 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
           mode: results.mode === 'GAME' ? t('modeGame') : t('modeWritten'),
         })}
       </p>
-      <div className="overflow-hidden rounded-xl border border-border/70">
+      <div className="overflow-hidden rounded-xl border border-border/70 bg-card">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-border/70 bg-muted/40">
-            <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              <th className="px-3 py-2">{t('colStudent')}</th>
-              <th className="px-3 py-2">{t('colStatus')}</th>
-              <th className="px-3 py-2">{t('colBestScore')}</th>
-              {results.mode === 'GAME' && <th className="px-3 py-2">{t('colPoints')}</th>}
-              <th className="px-3 py-2">{t('colAttempts')}</th>
+          <thead className="border-b border-border/70 bg-secondary/40">
+            <tr className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              <th className="px-3 py-2.5">{t('colStudent')}</th>
+              <th className="px-3 py-2.5">{t('colStatus')}</th>
+              <th className="px-3 py-2.5">{t('colBestScore')}</th>
+              {results.mode === 'GAME' && <th className="px-3 py-2.5">{t('colPoints')}</th>}
+              <th className="px-3 py-2.5">{t('colAttempts')}</th>
             </tr>
           </thead>
           <tbody>
             {results.learners.map((l) => (
-              <tr key={l.learnerId} className="border-b border-border/60 last:border-0">
-                <td className="px-3 py-2 font-medium">{l.learnerName}</td>
-                <td className="px-3 py-2">
+              <tr
+                key={l.learnerId}
+                className="border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/30"
+              >
+                <td className="px-3 py-2.5 font-medium text-foreground">{l.learnerName}</td>
+                <td className="px-3 py-2.5">
                   {l.submitted ? (
                     <Badge variant="success">{t('statusSubmitted')}</Badge>
                   ) : (
                     <span className="text-muted-foreground">{t('statusNotYet')}</span>
                   )}
                 </td>
-                <td className="px-3 py-2 tabular-nums">{l.bestScore != null ? `${Math.round(l.bestScore)}%` : '—'}</td>
-                {results.mode === 'GAME' && <td className="px-3 py-2 tabular-nums">{l.bestPoints}</td>}
-                <td className="px-3 py-2 tabular-nums">{l.attempts}</td>
+                <td className="px-3 py-2.5 font-display tabular-nums text-foreground">
+                  {l.bestScore != null ? `${Math.round(l.bestScore)}%` : '—'}
+                </td>
+                {results.mode === 'GAME' && (
+                  <td className="px-3 py-2.5 font-display tabular-nums text-primary">{l.bestPoints}</td>
+                )}
+                <td className="px-3 py-2.5 tabular-nums text-muted-foreground">{l.attempts}</td>
               </tr>
             ))}
             {results.learners.length === 0 && (
@@ -81,8 +100,11 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
         </table>
       </div>
       {board && board.rows.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-sm font-semibold">{t('leaderboard')}</h3>
+        <div className="space-y-2.5">
+          <h3 className="flex items-center gap-2 font-label text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <Trophy className="h-3.5 w-3.5 text-accent-secondary" />
+            {t('leaderboard')}
+          </h3>
           <LeaderboardTable rows={board.rows} mode={board.mode} />
         </div>
       )}
@@ -129,14 +151,21 @@ export default function TenantAssessmentsPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('eyebrow')}</p>
+        <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          {t('eyebrow')}
+        </p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
-        <p className="mt-1 text-muted-foreground">{t('desc')}</p>
+        <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
       </div>
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
         <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <h2 className="font-display text-lg font-semibold">{t('banksTitle')}</h2>
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Library className="h-5 w-5" />
+            </span>
+            <h2 className="font-display text-lg font-semibold">{t('banksTitle')}</h2>
+          </div>
           <form
             className="space-y-3"
             onSubmit={async (event) => {
@@ -166,11 +195,15 @@ export default function TenantAssessmentsPage() {
               {materials.length === 0 ? (
                 <p className="text-xs text-muted-foreground">{t('bankNoMaterials')}</p>
               ) : (
-                <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-border/70 p-2">
+                <div className="max-h-40 space-y-0.5 overflow-y-auto rounded-xl border border-border/70 bg-background p-2">
                   {materials.map((material) => (
-                    <label key={material.id} className="flex items-center gap-2 text-sm">
+                    <label
+                      key={material.id}
+                      className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-secondary/50"
+                    >
                       <input
                         type="checkbox"
+                        className="h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
                         checked={bankContentIds.includes(material.id)}
                         onChange={(event) =>
                           setBankContentIds((prev) =>
@@ -186,7 +219,7 @@ export default function TenantAssessmentsPage() {
                 </div>
               )}
             </div>
-            <Button type="submit" disabled={createBank.isPending}>
+            <Button type="submit" className="w-full" disabled={createBank.isPending}>
               {t('createBank')}
             </Button>
           </form>
@@ -198,17 +231,18 @@ export default function TenantAssessmentsPage() {
                 onClick={() => setSelectedBankId(bank.id)}
                 className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
                   selectedBankId === bank.id
-                    ? 'border-primary/30 bg-primary/10 text-primary'
-                    : 'border-border/70 hover:bg-secondary/50'
+                    ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
+                    : 'border-border/70 hover:border-border hover:bg-secondary/50'
                 }`}
               >
-                <span className="block font-medium">{bank.title}</span>
+                <span className="block font-display font-semibold">{bank.title}</span>
                 <span className="text-xs tabular-nums text-muted-foreground">
                   {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                 </span>
                 {bank.materials.length > 0 && (
-                  <span className="mt-1 block truncate text-[11px] text-muted-foreground">
-                    📄 {bank.materials.map((m) => m.title).join(', ')}
+                  <span className="mt-1 flex items-center gap-1.5 truncate text-[11px] text-muted-foreground">
+                    <FileText className="h-3 w-3 shrink-0" />
+                    <span className="truncate">{bank.materials.map((m) => m.title).join(', ')}</span>
                   </span>
                 )}
               </button>
@@ -218,8 +252,15 @@ export default function TenantAssessmentsPage() {
 
         <main className="space-y-6">
           <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-            <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? t('selectBank')}</h2>
-            <p className="text-sm text-muted-foreground">{t('topicHelp')}</p>
+            <div className="flex items-center gap-3">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+                <Wand2 className="h-5 w-5" />
+              </span>
+              <div>
+                <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? t('selectBank')}</h2>
+                <p className="text-sm text-muted-foreground">{t('topicHelp')}</p>
+              </div>
+            </div>
             {selectedBankId && (
               <form
                 className="mt-4 flex flex-col gap-3 md:flex-row"
@@ -243,7 +284,7 @@ export default function TenantAssessmentsPage() {
                   onChange={(event) =>
                     setDraftStyle(event.target.value as typeof draftStyle)
                   }
-                  className="rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   aria-label={t('questionType')}
                 >
                   <option value="mixed">{t('styleMixed')}</option>
@@ -253,6 +294,7 @@ export default function TenantAssessmentsPage() {
                   <option value="numeric">{t('styleNumeric')}</option>
                 </select>
                 <Button type="submit" disabled={generate.isPending}>
+                  <Sparkles className="h-4 w-4" />
                   {generate.isPending ? t('generating') : t('generateDrafts')}
                 </Button>
               </form>
@@ -264,11 +306,18 @@ export default function TenantAssessmentsPage() {
 
           <section className="grid gap-3">
             {questions.map((question) => (
-              <div key={question.id} className="rounded-xl border border-border/70 bg-card p-4 shadow-soft">
+              <div
+                key={question.id}
+                className={`rounded-xl border bg-card p-4 shadow-soft transition-colors ${
+                  question.status === 'APPROVED'
+                    ? 'border-primary/40 bg-primary/[0.04]'
+                    : 'border-border/70'
+                }`}
+              >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>{question.type}</Badge>
-                    <p className="mt-3 font-medium">{question.prompt}</p>
+                    <p className="mt-3 font-medium text-foreground">{question.prompt}</p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {t('answersLabel', { answers: question.acceptableAnswers.join(', ') })}
                     </p>
@@ -282,13 +331,16 @@ export default function TenantAssessmentsPage() {
                       variant={question.status === 'APPROVED' ? 'default' : 'outline'}
                       onClick={() => patchQuestion.mutate({ id: question.id, status: 'APPROVED' })}
                     >
+                      <Check className="h-3.5 w-3.5" />
                       {t('approve')}
                     </Button>
                     <Button
                       size="sm"
                       variant="ghost"
+                      className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                       onClick={() => patchQuestion.mutate({ id: question.id, status: 'REJECTED' })}
                     >
+                      <X className="h-3.5 w-3.5" />
                       {t('reject')}
                     </Button>
                   </div>
@@ -319,7 +371,12 @@ export default function TenantAssessmentsPage() {
             setSelectedQuestions([]);
           }}
         >
-          <h2 className="font-display text-lg font-semibold">{t('publishTitle')}</h2>
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <ClipboardList className="h-5 w-5" />
+            </span>
+            <h2 className="font-display text-lg font-semibold">{t('publishTitle')}</h2>
+          </div>
           <Input
             value={assessmentTitle}
             onChange={(event) => setAssessmentTitle(event.target.value)}
@@ -328,7 +385,9 @@ export default function TenantAssessmentsPage() {
           />
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1">
-              <Label>{t('modeLabel')}</Label>
+              <Label className="font-label text-[11px] uppercase tracking-wider text-muted-foreground">
+                {t('modeLabel')}
+              </Label>
               <div className="flex gap-2">
                 <Button
                   type="button"
@@ -375,12 +434,15 @@ export default function TenantAssessmentsPage() {
               />
             </div>
           )}
-          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border border-border/70 p-3">
+          <div className="max-h-72 space-y-0.5 overflow-y-auto rounded-xl border border-border/70 bg-background p-2">
             {approvedQuestions.map((question) => (
-              <label key={question.id} className="flex items-start gap-2 text-sm">
+              <label
+                key={question.id}
+                className="flex cursor-pointer items-start gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-secondary/50"
+              >
                 <input
                   type="checkbox"
-                  className="mt-0.5 h-4 w-4 accent-[hsl(var(--primary))]"
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
                   checked={selectedQuestions.includes(question.id)}
                   onChange={() =>
                     setSelectedQuestions((prev) =>
@@ -394,7 +456,11 @@ export default function TenantAssessmentsPage() {
               </label>
             ))}
           </div>
-          <Button type="submit" disabled={selectedQuestions.length === 0 || createAssessment.isPending}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={selectedQuestions.length === 0 || createAssessment.isPending}
+          >
             {t('publishSelected')}
           </Button>
           {createAssessment.isError && (
@@ -410,12 +476,17 @@ export default function TenantAssessmentsPage() {
             setLearnerIds([]);
           }}
         >
-          <h2 className="font-display text-lg font-semibold">{t('assignTitle')}</h2>
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+              <UserCheck className="h-5 w-5" />
+            </span>
+            <h2 className="font-display text-lg font-semibold">{t('assignTitle')}</h2>
+          </div>
           <select
             value={assessmentId}
             onChange={(event) => setAssessmentId(event.target.value)}
             aria-label={t('assignTitle')}
-            className="w-full rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+            className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
             required
           >
             <option value="">{t('chooseAssessment')}</option>
@@ -425,12 +496,15 @@ export default function TenantAssessmentsPage() {
               </option>
             ))}
           </select>
-          <div className="max-h-72 space-y-2 overflow-y-auto rounded-xl border border-border/70 p-3">
+          <div className="max-h-72 space-y-0.5 overflow-y-auto rounded-xl border border-border/70 bg-background p-2">
             {students.filter((s) => s.active).map((student) => (
-              <label key={student.id} className="flex items-center gap-2 text-sm">
+              <label
+                key={student.id}
+                className="flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors hover:bg-secondary/50"
+              >
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-[hsl(var(--primary))]"
+                  className="h-4 w-4 shrink-0 accent-[hsl(var(--primary))]"
                   checked={learnerIds.includes(student.id)}
                   onChange={() =>
                     setLearnerIds((prev) =>
@@ -446,6 +520,7 @@ export default function TenantAssessmentsPage() {
           </div>
           <Button
             type="submit"
+            className="w-full"
             disabled={!assessmentId || learnerIds.length === 0 || assignAssessment.isPending}
           >
             {t('assignButton')}
@@ -457,12 +532,17 @@ export default function TenantAssessmentsPage() {
       </section>
 
       <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-        <h2 className="font-display text-lg font-semibold">{t('resultsTitle')}</h2>
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <BarChart3 className="h-5 w-5" />
+          </span>
+          <h2 className="font-display text-lg font-semibold">{t('resultsTitle')}</h2>
+        </div>
         <select
           value={resultsId}
           onChange={(event) => setResultsId(event.target.value)}
           aria-label={t('resultsTitle')}
-          className="w-full max-w-md rounded-lg border border-border/70 bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="w-full max-w-md rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         >
           <option value="">{t('chooseAssessment')}</option>
           {assessments.map((assessment) => (

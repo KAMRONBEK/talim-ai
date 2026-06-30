@@ -43,7 +43,7 @@ export default function TenantMaterialsPage() {
   return (
     <div className="mx-auto flex max-w-4xl flex-col items-center gap-8">
       <div className="w-full max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.materials')}</p>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">{t('nav.materials')}</p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('allMaterials')}</h1>
       </div>
       <Input

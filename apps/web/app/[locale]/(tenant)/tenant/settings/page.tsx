@@ -32,7 +32,7 @@ export default function TenantSettingsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-8">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.settings')}</p>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">{t('nav.settings')}</p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('settings.title')}</h1>
       </div>
 

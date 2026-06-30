@@ -27,17 +27,33 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   const { data: tenant } = useTenant();
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 items-center gap-2 border-b px-4 py-4">
-        <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2.5 font-display font-bold">
+    <div className="flex h-full min-h-0 flex-col bg-[#211b15] text-[#b8b0a4]">
+      <div className="flex shrink-0 items-center gap-2 border-b border-white/10 px-4 py-4">
+        <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2.5">
           <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="min-w-0">
-            <span className="block truncate">Talim AI</span>
-            <span className="block truncate text-xs font-normal text-muted-foreground">
-              {tenant?.name ?? user?.tenantName ?? t('organization')}
+            <span className="block truncate font-display text-base font-bold text-[#f7f2e8]">Talim AI</span>
+            <span className="block truncate font-label text-[10px] uppercase tracking-wider text-[#8a8076]">
+              {t('organization')}
             </span>
           </span>
         </Link>
+      </div>
+
+      <div className="px-3 pt-3">
+        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <p className="truncate font-display text-sm font-semibold text-[#f7f2e8]">
+            {tenant?.name ?? user?.tenantName ?? t('organization')}
+          </p>
+          {tenant?.seatLimit != null && (
+            <div className="mt-2 flex items-center gap-2">
+              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full w-full rounded-full bg-primary" />
+              </div>
+              <span className="font-label text-[10px] text-[#9dc4b8]">{tenant.seatLimit}</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <nav className="flex-1 space-y-1 p-3">
@@ -51,8 +67,8 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
               className={cn(
                 'flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors',
                 pathname.startsWith(item.href)
-                  ? 'bg-primary/10 font-semibold text-primary'
-                  : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-[#b8b0a4] hover:bg-white/5 hover:text-[#f7f2e8]',
               )}
             >
               <Icon className="h-4 w-4" />
@@ -62,14 +78,14 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      <UserSidebarFooter onNavigate={onNavigate} planFallback={t('subscriptionRequired')} />
+      <UserSidebarFooter onNavigate={onNavigate} planFallback={t('subscriptionRequired')} dark />
     </div>
   );
 }
 
 export function TenantSidebar() {
   return (
-    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r bg-card md:flex">
+    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r border-white/10 bg-[#211b15] md:flex">
       <TenantSidebarBody />
     </aside>
   );

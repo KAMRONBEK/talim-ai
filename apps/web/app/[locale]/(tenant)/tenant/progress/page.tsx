@@ -20,7 +20,7 @@ export default function TenantProgressPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.progress')}</p>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">{t('nav.progress')}</p>
         <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('nav.progress')}</h1>
         <p className="mt-1 text-muted-foreground">{t('progressDesc')}</p>
       </div>
@@ -49,7 +49,7 @@ export default function TenantProgressPage() {
       <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
         <table className="w-full text-sm">
           <thead className="border-b border-border/70 bg-muted/50">
-            <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <tr className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
               <th className="px-4 py-3 text-left">{t('students.name')}</th>
               <th className="px-4 py-3 text-left">{t('students.assigned')}</th>
               <th className="px-4 py-3 text-left">{t('students.lastActive')}</th>
@@ -77,8 +77,8 @@ export default function TenantProgressPage() {
                   <span
                     className={
                       isRecentlyActive(student.lastActivityAt)
-                        ? 'inline-flex items-center rounded-full bg-success-muted px-2.5 py-0.5 text-xs font-semibold text-success'
-                        : 'inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-muted-foreground'
+                        ? 'inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-primary'
+                        : 'inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 font-label text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground'
                     }
                   >
                     {isRecentlyActive(student.lastActivityAt) ? t('activeThisWeek') : t('inactiveLabel')}

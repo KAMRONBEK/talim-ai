@@ -174,24 +174,24 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   });
 
   return (
-    <div>
-      <div className="h-1 w-full overflow-hidden bg-border">
+    <div className="space-y-4">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
         <div
-          className="h-full bg-gradient-to-r from-primary to-accent-secondary transition-all duration-300"
+          className="h-full rounded-full bg-gradient-to-r from-primary to-accent-secondary transition-all duration-300"
           style={{ width: `${progressPct}%` }}
         />
       </div>
-      <Card className="mt-0 overflow-hidden rounded-2xl border shadow-sm">
-        <CardContent className="space-y-6 p-8">
+      <Card className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <CardContent className="space-y-6 p-6 sm:p-8">
           <div className="flex items-center gap-3">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
               {currentIndex + 1}
             </span>
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <span className="font-label text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
               {typeLabel}
             </span>
           </div>
-          <div className="font-display text-lg font-semibold leading-snug">
+          <div className="font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">
             <RichText>{q.question}</RichText>
           </div>
 
@@ -205,7 +205,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                 return (
                   <label
                     key={option}
-                    className={`flex cursor-pointer items-center gap-3 rounded-[10px] border-2 bg-muted/30 p-4 transition-colors ${styles.label}`}
+                    className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 bg-muted/30 p-4 transition-colors ${styles.label}`}
                   >
                     <input
                       type="radio"

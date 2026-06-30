@@ -28,10 +28,10 @@ export function StudentWelcomeBanner() {
   };
 
   return (
-    <section className="flex flex-col gap-4 rounded-2xl border border-primary/30 bg-primary/5 p-5 shadow-soft sm:flex-row sm:items-start">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-secondary/20 text-xl">👋</div>
+    <section className="flex flex-col gap-4 rounded-2xl border border-accent-secondary/40 bg-accent-secondary/10 p-5 shadow-soft sm:flex-row sm:items-start">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-secondary text-xl text-accent-secondary-foreground">👋</div>
       <div className="flex-1">
-        <h2 className="font-display font-semibold">{t('title')}</h2>
+        <h2 className="font-display text-lg font-semibold text-foreground">{t('title')}</h2>
         <p className="mt-1 text-sm text-muted-foreground">{t('desc')}</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href="/learner/settings">

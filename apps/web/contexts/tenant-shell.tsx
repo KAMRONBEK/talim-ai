@@ -31,7 +31,7 @@ export function TenantShell({ children }: { children: ReactNode }) {
           <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
             <DashboardHeader onMenuClick={() => setSidebarOpen(true)} />
             {inactive && (
-              <div className="border-b border-warning/40 bg-warning-muted/30 px-4 py-3 text-sm text-warning-foreground md:px-6">
+              <div className="border-b border-accent-secondary/40 bg-accent-secondary/10 px-4 py-3 text-sm text-foreground md:px-6">
                 Your organization subscription is not active. Uploads, students, and AI generation may be limited.
               </div>
             )}

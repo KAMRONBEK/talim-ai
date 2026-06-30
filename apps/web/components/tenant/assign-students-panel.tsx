@@ -52,8 +52,8 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
   };
 
   return (
-    <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-      <h3 className="font-display text-lg font-semibold">{t('assign.title')}</h3>
+    <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+      <h3 className="font-display text-lg font-semibold text-foreground">{t('assign.title')}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{t('assign.desc')}</p>
       <div className="mt-4 flex gap-2">
         <Input
@@ -73,8 +73,8 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
       </div>
       <div className="mt-4 space-y-1.5">
         {activeStudents.length === 0 ? (
-          <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border/70 py-10 text-center">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border py-10 text-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-primary">
               <Users className="h-6 w-6" />
             </span>
             <p className="text-sm text-muted-foreground">{t('assign.noStudents')}</p>
@@ -87,8 +87,8 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
                 key={student.id}
                 className={
                   isAssigned
-                    ? 'flex items-center gap-3 rounded-xl border border-border/70 bg-secondary/40 px-3 py-2.5 text-sm'
-                    : 'flex cursor-pointer items-center gap-3 rounded-xl border border-border/70 px-3 py-2.5 text-sm transition-colors hover:bg-secondary/60'
+                    ? 'flex items-center gap-3 rounded-xl border border-primary/30 bg-secondary px-3 py-2.5 text-sm'
+                    : 'flex cursor-pointer items-center gap-3 rounded-xl border border-border px-3 py-2.5 text-sm transition-colors hover:border-primary/30 hover:bg-secondary/50'
                 }
               >
                 <input
@@ -98,7 +98,7 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
                   disabled={isAssigned}
                   onChange={() => toggle(student.id)}
                 />
-                <span className="flex-1 font-medium">{student.name ?? student.email}</span>
+                <span className="flex-1 font-medium text-foreground">{student.name ?? student.email}</span>
                 {isAssigned && (
                   <>
                     <Badge variant="success">{t('assign.assigned')}</Badge>

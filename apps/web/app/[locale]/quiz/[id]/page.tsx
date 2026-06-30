@@ -66,7 +66,7 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
           >
             ← {tContent('backToContent')}
           </Link>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary">{quizLabel}</p>
+          <p className="mb-1 font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">{quizLabel}</p>
           <p className="mb-4 text-sm text-muted-foreground">
             {questionCount > 0
               ? t('questionCount', { count: questionCount })

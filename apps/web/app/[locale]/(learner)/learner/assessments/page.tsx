@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Play, Sparkles, Trophy } from 'lucide-react';
 import { Badge, Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
@@ -33,7 +34,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   if (result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
     return (
-      <div className="space-y-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+      <div className="space-y-3 rounded-2xl border border-border/70 bg-background p-5">
         <p className="font-display font-semibold">
           {t('result', { correct: result.correct, total: result.total })}
         </p>
@@ -48,8 +49,10 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
               {i + 1}. {promptById.get(r.questionId)}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              {r.correct ? t('correctMark') : t('incorrectMark')} ·{' '}
-              {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
+              <span className={r.correct ? 'font-semibold text-success' : 'font-semibold text-destructive'}>
+                {r.correct ? t('correctMark') : t('incorrectMark')}
+              </span>{' '}
+              · {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
             </p>
             {!r.correct && r.acceptableAnswers.length > 0 && (
               <p className="text-sm text-muted-foreground">
@@ -65,7 +68,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
 
   return (
     <form
-      className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
+      className="space-y-4 rounded-2xl border border-border/70 bg-background p-5"
       onSubmit={async (event) => {
         event.preventDefault();
         setError(null);
@@ -85,16 +88,20 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
     >
       <div className="space-y-3">
         {assessment.questions.map((question, index) => (
-          <div key={question.id} className="space-y-2 rounded-xl border border-border/70 p-3">
+          <div key={question.id} className="space-y-2 rounded-xl border border-border/70 bg-card p-3">
             <p className="text-sm font-medium">
               {index + 1}. {question.prompt}
             </p>
             {question.type === 'MULTIPLE_CHOICE' && question.options?.length ? (
               <div className="space-y-2">
                 {question.options.map((option) => (
-                  <label key={option} className="flex items-center gap-2 text-sm">
+                  <label
+                    key={option}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-border/70 px-3 py-2 text-sm transition-colors hover:border-primary/40 hover:bg-secondary/40"
+                  >
                     <input
                       type="radio"
+                      className="h-4 w-4 accent-primary"
                       name={`${assessment.id}-${question.id}`}
                       disabled={locked}
                       checked={answers[question.id] === option}
@@ -137,18 +144,22 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
   }
 
   return (
-    <div className="space-y-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-      <div className="flex flex-wrap items-start justify-between gap-2">
+    <div
+      className={`space-y-4 rounded-2xl border border-l-4 bg-card p-5 shadow-soft ${
+        isGame ? 'border-accent-secondary/30 border-l-accent-secondary' : 'border-primary/20 border-l-primary'
+      }`}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
             {isGame && (
-              <Badge className="bg-accent-secondary/15 text-warning hover:bg-accent-secondary/15">
+              <Badge className="bg-accent-secondary text-accent-secondary-foreground hover:bg-accent-secondary">
                 {t('gameBadge')}
               </Badge>
             )}
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-muted-foreground">
             {t('attempts', { used: assessment.attemptCount, max: assessment.maxAttempts })}
             {assessment.latestScore != null
               ? ` · ${t('latest', { score: Math.round(assessment.latestScore) })}`
@@ -164,10 +175,12 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
         <div className="flex gap-2">
           {isGame && (
             <Button variant="spark" disabled={locked} onClick={() => setPlaying(true)}>
+              <Play className="mr-1.5 h-4 w-4" />
               {locked ? t('attemptLimit') : t('play')}
             </Button>
           )}
           <Button variant="outline" onClick={() => setShowBoard((v) => !v)}>
+            <Trophy className="mr-1.5 h-4 w-4" />
             {showBoard ? t('hideLeaderboard') : t('leaderboard')}
           </Button>
         </div>
@@ -188,13 +201,15 @@ export default function LearnerAssessmentsPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('eyebrow')}</p>
+        <p className="font-label text-xs font-medium uppercase tracking-[0.2em] text-primary">{t('eyebrow')}</p>
         <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{t('title')}</h1>
         <p className="mt-1 text-muted-foreground">{t('desc')}</p>
       </div>
       {assessments.length === 0 && (
         <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">🎯</div>
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <Sparkles className="h-7 w-7" />
+          </div>
           <p className="mt-4 text-muted-foreground">{t('empty')}</p>
         </div>
       )}

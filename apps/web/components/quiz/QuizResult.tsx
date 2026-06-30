@@ -14,15 +14,17 @@ export function QuizResult({ score, correct, total, onRetry }: QuizResultProps) 
   const t = useTranslations('quiz');
 
   return (
-    <Card className="rounded-2xl">
-      <CardHeader>
-        <CardTitle>{t('resultsTitle')}</CardTitle>
+    <Card className="rounded-2xl border border-border bg-card shadow-sm">
+      <CardHeader className="items-center pb-2 text-center">
+        <CardTitle className="font-display">{t('resultsTitle')}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="font-display text-5xl font-bold tabular-nums text-primary">{score.toFixed(0)}%</p>
-        <p className="mt-2 text-muted-foreground">{t('scoreLine', { correct, total })}</p>
+      <CardContent className="flex flex-col items-center pt-2 text-center">
+        <p className="font-display text-6xl font-bold leading-none tabular-nums text-primary">
+          {score.toFixed(0)}%
+        </p>
+        <p className="mt-3 text-muted-foreground">{t('scoreLine', { correct, total })}</p>
         {onRetry && (
-          <Button type="button" variant="outline" className="mt-4" onClick={onRetry}>
+          <Button type="button" variant="outline" className="mt-6" onClick={onRetry}>
             {t('retry')}
           </Button>
         )}

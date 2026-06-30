@@ -22,9 +22,17 @@ import {
 } from '@/hooks/useTenant';
 import { useBilling } from '@/hooks/useBilling';
 import { JoinCodeCard } from '@/components/tenant/join-code-card';
+import { cn } from '@/lib/utils';
 
 function apiError(err: unknown, fallback: string): string {
   return (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
+}
+
+function studentInitials(s: { name?: string | null; email?: string | null; username?: string | null }): string {
+  const base = (s.name ?? s.email ?? s.username ?? '?').trim();
+  const parts = base.split(/\s+/).filter(Boolean);
+  if (parts.length >= 2) return `${parts[0]!.charAt(0)}${parts[1]!.charAt(0)}`.toUpperCase();
+  return base.slice(0, 2).toUpperCase();
 }
 
 export default function TenantStudentsPage() {
@@ -93,11 +101,11 @@ export default function TenantStudentsPage() {
     <div className="mx-auto max-w-6xl space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.students')}</p>
+          <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.students')}</p>
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('students.title')}</h1>
           <p className="mt-1 text-muted-foreground">{t('students.desc')}</p>
           {seats && (
-            <p className="mt-2 inline-flex items-center rounded-full bg-secondary px-3 py-1 text-xs font-medium tabular-nums text-muted-foreground">
+            <p className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-secondary px-3 py-1 font-label text-xs font-semibold uppercase tracking-wide tabular-nums text-primary">
               {t('students.seatUsage', { used: seats.used, limit: seats.limit ?? '∞' })}
             </p>
           )}
@@ -129,7 +137,7 @@ export default function TenantStudentsPage() {
       <div className="hidden overflow-x-auto rounded-2xl border border-border/70 bg-card shadow-soft md:block">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border/70 bg-muted/40">
-            <tr className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <tr className="font-label text-[0.7rem] font-semibold uppercase tracking-wider text-muted-foreground">
               <th className="px-4 py-3">{t('students.name')}</th>
               <th className="px-4 py-3">{t('students.email')}</th>
               <th className="px-4 py-3">{t('students.assigned')}</th>
@@ -157,12 +165,34 @@ export default function TenantStudentsPage() {
                 </td>
               </tr>
             ) : (
-              filteredStudents.map((s) => (
+              filteredStudents.map((s, i) => (
                 <tr key={s.id} className="border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/40">
                   <td className="px-4 py-3">
-                    <Link href={`/tenant/students/${s.id}`} className="font-medium text-foreground hover:text-primary hover:underline">
-                      {s.name ?? '—'}
-                    </Link>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={cn(
+                          'flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-label text-xs font-bold',
+                          i % 2 === 0
+                            ? 'bg-gradient-brand text-primary-foreground'
+                            : 'bg-secondary text-primary',
+                        )}
+                      >
+                        {studentInitials(s)}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Link href={`/tenant/students/${s.id}`} className="font-medium text-foreground hover:text-primary hover:underline">
+                          {s.name ?? '—'}
+                        </Link>
+                        <span
+                          className={cn(
+                            'rounded-full px-2 py-0.5 font-label text-[0.62rem] font-semibold uppercase tracking-wide',
+                            s.active ? 'bg-secondary text-primary' : 'bg-muted text-muted-foreground',
+                          )}
+                        >
+                          {s.active ? t('students.active') : t('students.inactive')}
+                        </span>
+                      </span>
+                    </div>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">
                     {s.email ?? (s.username ? `@${s.username}` : '—')}
@@ -171,8 +201,30 @@ export default function TenantStudentsPage() {
                   <td className="px-4 py-3 tabular-nums text-muted-foreground">
                     {s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}
                   </td>
-                  <td className="px-4 py-3 font-medium tabular-nums">
-                    {s.avgQuizScore != null ? `${Math.round(s.avgQuizScore)}%` : '—'}
+                  <td className="px-4 py-3">
+                    {s.avgQuizScore != null ? (
+                      <div className="flex items-center gap-2.5">
+                        <span className="h-1.5 w-20 overflow-hidden rounded-full bg-muted">
+                          <span
+                            className={cn(
+                              'block h-full rounded-full',
+                              s.avgQuizScore < 50 ? 'bg-accent-secondary' : 'bg-primary',
+                            )}
+                            style={{ width: `${Math.max(0, Math.min(100, s.avgQuizScore))}%` }}
+                          />
+                        </span>
+                        <span
+                          className={cn(
+                            'font-label text-xs font-bold tabular-nums',
+                            s.avgQuizScore < 50 ? 'text-accent-secondary' : 'text-primary',
+                          )}
+                        >
+                          {Math.round(s.avgQuizScore)}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">—</span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Button
@@ -208,35 +260,45 @@ export default function TenantStudentsPage() {
       </div>
 
       <div className="grid gap-3 md:hidden">
-        {filteredStudents.map((s) => (
+        {filteredStudents.map((s, i) => (
           <div key={s.id} className="rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
             <div className="flex items-start justify-between gap-3">
-              <div>
-                <Link href={`/tenant/students/${s.id}`} className="font-medium hover:text-primary">
-                  {s.name ?? s.email ?? s.username}
-                </Link>
-                <p className="text-sm text-muted-foreground">
-                  {s.email ?? (s.username ? `@${s.username}` : '')}
-                </p>
+              <div className="flex items-center gap-3">
+                <span
+                  className={cn(
+                    'flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-label text-xs font-bold',
+                    i % 2 === 0 ? 'bg-gradient-brand text-primary-foreground' : 'bg-secondary text-primary',
+                  )}
+                >
+                  {studentInitials(s)}
+                </span>
+                <div className="min-w-0">
+                  <Link href={`/tenant/students/${s.id}`} className="font-medium hover:text-primary">
+                    {s.name ?? s.email ?? s.username}
+                  </Link>
+                  <p className="truncate text-sm text-muted-foreground">
+                    {s.email ?? (s.username ? `@${s.username}` : '')}
+                  </p>
+                </div>
               </div>
               <Badge variant={s.active ? 'success' : 'secondary'}>
                 {s.active ? t('students.active') : t('students.inactive')}
               </Badge>
             </div>
-            <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
+            <div className="mt-4 grid grid-cols-3 gap-2 text-sm">
               <div>
-                <p className="text-muted-foreground">{t('students.assigned')}</p>
-                <p className="font-semibold">{s.assignedCount}</p>
+                <p className="font-label text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">{t('students.assigned')}</p>
+                <p className="mt-0.5 font-display text-lg font-semibold tabular-nums">{s.assignedCount}</p>
               </div>
               <div>
-                <p className="text-muted-foreground">{t('students.avgQuiz')}</p>
-                <p className="font-semibold">
+                <p className="font-label text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">{t('students.avgQuiz')}</p>
+                <p className={cn('mt-0.5 font-display text-lg font-semibold tabular-nums', s.avgQuizScore != null && s.avgQuizScore < 50 ? 'text-accent-secondary' : s.avgQuizScore != null ? 'text-primary' : '')}>
                   {s.avgQuizScore != null ? `${Math.round(s.avgQuizScore)}%` : '—'}
                 </p>
               </div>
               <div>
-                <p className="text-muted-foreground">{t('students.lastActive')}</p>
-                <p className="font-semibold">
+                <p className="font-label text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">{t('students.lastActive')}</p>
+                <p className="mt-0.5 font-medium tabular-nums">
                   {s.lastActivityAt ? new Date(s.lastActivityAt).toLocaleDateString() : '—'}
                 </p>
               </div>

@@ -21,17 +21,22 @@ export function LearnerSidebar() {
   const user = useAuthStore((s) => s.user);
 
   return (
-    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r bg-card md:flex md:flex-col">
-      <div className="border-b px-4 py-4">
-        <Link href="/learner/dashboard" className="flex items-center gap-2.5 font-display font-bold">
+    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 border-r border-border bg-card md:flex md:flex-col">
+      <div className="border-b border-border px-4 py-4">
+        <Link href="/learner/dashboard" className="flex items-center gap-2.5 font-display text-lg font-bold">
           <LogoMark className="h-8 w-8 shadow-soft" />
-          <span className="min-w-0">
-            <span className="block">Talim AI</span>
-            <span className="block truncate text-xs font-normal text-muted-foreground">
-              {user?.tenantName ?? t('settings.schoolTitle')}
-            </span>
-          </span>
+          <span className="truncate">Talim AI</span>
         </Link>
+      </div>
+      <div className="px-3 pt-3">
+        <div className="rounded-xl bg-secondary px-3 py-2.5">
+          <p className="font-label text-[11px] uppercase tracking-wide text-primary/70">
+            {t('schoolFallback')}
+          </p>
+          <p className="mt-0.5 truncate text-sm font-semibold text-primary">
+            {user?.tenantName ?? t('settings.schoolTitle')}
+          </p>
+        </div>
       </div>
       <nav className="flex-1 space-y-1 p-3">
         {learnerNavKeys.map((item) => {
@@ -43,7 +48,7 @@ export function LearnerSidebar() {
               className={cn(
                 'flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors',
                 pathname.startsWith(item.href)
-                  ? 'bg-primary/10 font-semibold text-primary'
+                  ? 'bg-primary font-semibold text-primary-foreground shadow-soft'
                   : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
               )}
             >
@@ -63,7 +68,7 @@ export function LearnerBottomNav() {
   const t = useTranslations('learner');
 
   return (
-    <nav className="grid grid-cols-4 border-t bg-background/95 backdrop-blur md:hidden">
+    <nav className="grid grid-cols-4 border-t border-border bg-background/95 backdrop-blur md:hidden">
       {learnerNavKeys.map((item) => {
         const Icon = item.icon;
         const active = pathname.startsWith(item.href);

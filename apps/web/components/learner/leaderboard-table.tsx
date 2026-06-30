@@ -27,11 +27,11 @@ export function LeaderboardTable({
             <span
               className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
                 r.rank === 1
-                  ? 'bg-amber-400 text-amber-950'
+                  ? 'bg-warning text-warning-foreground'
                   : r.rank === 2
-                    ? 'bg-zinc-300 text-zinc-800'
+                    ? 'bg-secondary text-secondary-foreground'
                     : r.rank === 3
-                      ? 'bg-orange-400 text-orange-950'
+                      ? 'bg-accent-secondary text-accent-secondary-foreground'
                       : 'bg-muted text-muted-foreground'
               }`}
             >
