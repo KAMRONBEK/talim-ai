@@ -58,8 +58,10 @@ export function ContentRightPanelBody({
 
   return (
     <>
-      <div className="border-b p-5 text-center">
-        <h3 className="text-sm font-semibold">{t('yourProgress')}</h3>
+      <div className="border-b border-border/70 p-5 text-center">
+        <h3 className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          {t('yourProgress')}
+        </h3>
         <div className="relative mx-auto my-4 h-[120px] w-[120px]">
           <svg width="120" height="120" viewBox="0 0 120 120" className="-rotate-90">
             <circle cx="60" cy="60" r="52" fill="none" stroke="hsl(var(--border))" strokeWidth="8" />
@@ -111,8 +113,10 @@ export function ContentRightPanelBody({
       />
 
       <div className="p-5">
-        <h3 className="mb-3 text-sm font-semibold">{t('learningStreak')}</h3>
-        <div className="flex items-center gap-3 rounded-xl bg-accent-secondary/10 p-3.5">
+        <h3 className="mb-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          {t('learningStreak')}
+        </h3>
+        <div className="flex items-center gap-3 rounded-2xl border border-border/60 bg-accent-secondary/10 p-3.5">
           <span className="text-3xl">🔥</span>
           <div>
             <div className="font-display text-lg font-bold tabular-nums">

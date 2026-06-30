@@ -43,20 +43,20 @@ export function UserSidebarFooter({
     : planFallback ?? (user.role === 'TENANT_OWNER' ? tTenant('subscriptionRequired') : null);
 
   return (
-    <div className="shrink-0 border-t p-3">
+    <div className="shrink-0 border-t border-border p-3">
       <Link
         href={settingsPath}
         onClick={onNavigate}
         className={cn(
-          'flex items-center gap-2 rounded-lg px-2 py-2 transition-colors hover:bg-secondary/60',
+          'flex items-center gap-2.5 rounded-xl px-2 py-2 transition-colors hover:bg-secondary',
           showSettingsIcon && 'group',
         )}
       >
         <Avatar className="h-9 w-9 shrink-0">
-          <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>
+          <AvatarFallback className="avatar-gradient text-xs font-semibold">{initials}</AvatarFallback>
         </Avatar>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium">{displayName}</p>
+          <p className="truncate text-sm font-semibold text-foreground">{displayName}</p>
           {showEmail && user.email && (
             <p className="truncate text-xs text-muted-foreground">{user.email}</p>
           )}
@@ -71,7 +71,7 @@ export function UserSidebarFooter({
       <Button
         variant="ghost"
         size="sm"
-        className="mt-1 w-full justify-start text-muted-foreground"
+        className="mt-1 w-full justify-start rounded-xl text-muted-foreground hover:bg-secondary hover:text-foreground"
         onClick={() => {
           onNavigate?.();
           logout();

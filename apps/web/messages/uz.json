@@ -72,7 +72,10 @@
     "contactAdmin": "Admin bilan bog'laning",
     "emailOrUsername": "Email yoki foydalanuvchi nomi",
     "classCode": "Sinf kodi (ixtiyoriy)",
-    "classCodeHint": "O'qituvchingizdan sinf kodi bormi? Sinfga qo'shilish uchun kiriting."
+    "classCodeHint": "O'qituvchingizdan sinf kodi bormi? Sinfga qo'shilish uchun kiriting.",
+    "benefitFree": "Individual o'quvchilar uchun bepul",
+    "benefitLangs": "Birinchi kundan uz · en · ru",
+    "benefitJoin": "Bitta kod bilan sinfga qo'shiling"
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",

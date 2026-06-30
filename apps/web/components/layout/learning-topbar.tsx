@@ -2,7 +2,7 @@
 
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronLeft, FileText, MessageCircle } from 'lucide-react';
 import {
   Avatar,
   AvatarFallback,
@@ -37,12 +37,12 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
     : user?.email?.slice(0, 2).toUpperCase() ?? '?';
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b bg-card px-4 md:px-5">
+    <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-card px-4 md:px-5">
       {/* The hidden upload input must also be gated to INDIVIDUAL — otherwise it
           stays in the DOM/a11y tree (as a focusable "Choose File" control wired
           to the B2C upload endpoint) for learners/owners who cannot upload here. */}
       {user?.role === 'INDIVIDUAL' && fileInput}
-      <div className="flex min-w-0 items-center gap-2 md:gap-4">
+      <div className="flex min-w-0 items-center gap-2 md:gap-3">
         {onMenuClick && (
           <Button
             type="button"
@@ -60,20 +60,26 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
           <span className="hidden sm:inline">Talim AI</span>
         </Link>
         <Input
-          className="hidden h-9 w-48 border bg-background text-sm lg:block xl:w-80"
+          className="hidden h-9 w-48 rounded-xl border-border bg-background text-sm lg:block xl:w-80"
           placeholder={t('searchPlaceholder')}
           disabled
           aria-label={t('search')}
         />
         <Link
           href="/dashboard"
-          className="hidden rounded-lg border px-3 py-1.5 text-sm text-muted-foreground hover:bg-secondary sm:inline-flex"
+          className="hidden items-center gap-1 rounded-xl border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground sm:inline-flex"
         >
-          ← {t('back')}
+          <ChevronLeft className="h-4 w-4 shrink-0" />
+          {t('back')}
         </Link>
-        <span className="hidden max-w-[120px] truncate text-sm font-medium sm:inline sm:max-w-[200px] lg:max-w-xs">
-          {title}
-        </span>
+        <div className="hidden min-w-0 items-center gap-2 sm:flex">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
+            <FileText className="h-4 w-4" />
+          </span>
+          <span className="max-w-[120px] truncate font-display text-sm font-semibold sm:max-w-[200px] lg:max-w-xs">
+            {title}
+          </span>
+        </div>
       </div>
       <div className="flex items-center gap-2">
         <LanguageSwitcher compact />
@@ -86,7 +92,7 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
             size="sm"
             variant="outline"
             type="button"
-            className="hidden touch-manipulation sm:inline-flex"
+            className="hidden touch-manipulation rounded-xl sm:inline-flex"
             disabled={isPending}
             onClick={openFilePicker}
           >
@@ -98,9 +104,10 @@ export function LearningTopbar({ contentId, title, onMenuClick }: LearningTopbar
             the Learn panel is a hidden drawer and the chat would otherwise be buried. */}
         <Link
           href={`/content/${contentId}?panel=chat`}
-          className="inline-flex h-9 items-center rounded-md border border-input px-3 text-sm font-medium hover:bg-accent md:hidden"
+          className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-border px-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground md:hidden"
         >
-          💬 {t('aiTutor')}
+          <MessageCircle className="h-4 w-4" />
+          {t('aiTutor')}
         </Link>
         <Avatar className="h-8 w-8">
           <AvatarFallback className="avatar-gradient text-xs">{initials}</AvatarFallback>

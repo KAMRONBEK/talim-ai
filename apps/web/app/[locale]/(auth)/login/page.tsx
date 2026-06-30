@@ -79,15 +79,20 @@ export default function LoginPage() {
 
   return (
     <AuthShell>
-      <Card className="animate-scale-in shadow-elevated">
-        <CardContent className="space-y-6 p-8">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">{t('welcomeBack')}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{t('signInContinue')}</p>
+      <Card className="animate-scale-in border-0 bg-transparent shadow-none">
+        <CardContent className="space-y-6 p-0">
+          <div>
+            <h1 className="font-display text-2xl font-semibold">{t('welcomeBack')}</h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">{t('signInContinue')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">{t('emailOrUsername')}</Label>
+              <Label
+                htmlFor="email"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('emailOrUsername')}
+              </Label>
               <Input
                 id="email"
                 type="text"
@@ -96,20 +101,27 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="h-11 rounded-xl px-4"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t('password')}</Label>
+              <Label
+                htmlFor="password"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('password')}
+              </Label>
               <Input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="h-11 rounded-xl px-4"
               />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" variant="gradient" className="w-full" disabled={loading}>
+            <Button type="submit" variant="gradient" className="h-12 w-full text-base" disabled={loading}>
               {loading ? t('signingIn') : t('signIn')}
             </Button>
           </form>

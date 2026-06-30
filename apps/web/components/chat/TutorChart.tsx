@@ -17,7 +17,12 @@ import {
   Legend,
 } from 'recharts';
 
-const COLORS = ['hsl(var(--primary))', '#f38ba8', '#89b4fa', '#a6e3a1'];
+const COLORS = [
+  'hsl(var(--primary))',
+  'hsl(var(--accent-secondary))',
+  'hsl(var(--info))',
+  'hsl(var(--success))',
+];
 
 function buildRows(payload: ChartPayload) {
   return payload.labels.map((label, i) => {
@@ -36,8 +41,12 @@ export function TutorChart({ payload }: { payload: ChartPayload }) {
     payload.type === 'bar' ? BarChart : payload.type === 'area' ? AreaChart : LineChart;
 
   return (
-    <div className="my-2 rounded-md border bg-card p-2" aria-label={t('chartLabel')}>
-      {payload.title && <p className="mb-2 text-xs font-medium">{payload.title}</p>}
+    <div className="my-2 rounded-xl border border-border bg-card p-3" aria-label={t('chartLabel')}>
+      {payload.title && (
+        <p className="mb-2 font-label text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+          {payload.title}
+        </p>
+      )}
       <div className="h-[240px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <ChartComponent data={rows} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>

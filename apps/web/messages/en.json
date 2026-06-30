@@ -72,7 +72,10 @@
     "contactAdmin": "Contact admin",
     "emailOrUsername": "Email or username",
     "classCode": "Class code (optional)",
-    "classCodeHint": "Have a class code from your tutor? Enter it to join their class."
+    "classCodeHint": "Have a class code from your tutor? Enter it to join their class.",
+    "benefitFree": "Free for individual learners",
+    "benefitLangs": "uz · en · ru from day one",
+    "benefitJoin": "Join a class with one code"
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",

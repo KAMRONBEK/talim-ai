@@ -21,8 +21,8 @@ export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: Ch
     <div className={cn('flex gap-3', isUser ? 'flex-row-reverse' : 'flex-row')}>
       <div
         className={cn(
-          'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm',
-          isUser ? 'avatar-gradient' : 'bg-muted',
+          'flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-sm',
+          isUser ? 'avatar-gradient' : 'bg-secondary text-primary',
         )}
       >
         {isUser ? t('you') : '🎓'}
@@ -31,7 +31,9 @@ export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: Ch
         <div
           className={cn(
             'rounded-2xl px-4 py-3 text-sm leading-relaxed',
-            isUser ? 'bg-primary text-primary-foreground shadow-soft' : 'border border-border/70 bg-card',
+            isUser
+              ? 'rounded-br-sm bg-primary text-primary-foreground shadow-soft'
+              : 'rounded-bl-sm border border-border bg-background',
           )}
         >
           {hasExcerpt && isUser && (

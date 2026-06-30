@@ -3,7 +3,7 @@
 import { Link } from '@/i18n/navigation';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { Play } from 'lucide-react';
+import { Home, Play } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useContents } from '@/hooks/useContent';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
@@ -15,17 +15,18 @@ export interface DashboardSidebarBodyProps {
 
 export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
   const t = useTranslations('sidebar');
+  const tCommon = useTranslations('common');
   const { data: contents } = useContents();
 
   const recents = useMemo(() => (contents ?? []).slice(0, 5), [contents]);
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 items-center gap-2 border-b px-4 py-4">
+    <div className="flex h-full min-h-0 flex-col bg-card">
+      <div className="flex shrink-0 items-center gap-2.5 border-b border-border px-4 py-4">
         <Link
           href="/dashboard"
           onClick={onNavigate}
-          className="flex min-w-0 items-center gap-2.5 font-display font-bold tracking-tight"
+          className="flex min-w-0 items-center gap-2.5 font-display text-lg font-semibold tracking-tight text-foreground"
         >
           <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="truncate">Talim AI</span>
@@ -33,7 +34,16 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
       </div>
 
       <div className="flex-1 overflow-y-auto p-3">
-        <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <Link
+          href="/dashboard"
+          onClick={onNavigate}
+          className="flex items-center gap-2.5 rounded-xl bg-primary px-3 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-shadow hover:shadow-glow"
+        >
+          <Home className="h-4 w-4 shrink-0" />
+          <span className="truncate">{tCommon('home')}</span>
+        </Link>
+
+        <p className="mb-2 mt-6 px-2 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
           {t('recents')}
         </p>
         {recents.length === 0 ? (
@@ -45,7 +55,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
                 <Link
                   href={`/content/${item.id}`}
                   onClick={onNavigate}
-                  className="flex items-center gap-2 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  className="flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 >
                   <Play className="h-3.5 w-3.5 shrink-0 opacity-60" />
                   <span className="truncate">{item.title}</span>
@@ -63,7 +73,7 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
 
 export function DashboardSidebar() {
   return (
-    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 flex-col overflow-hidden border-r bg-card md:flex">
+    <aside className="hidden h-dvh w-[var(--sidebar-width)] shrink-0 flex-col overflow-hidden border-r border-border bg-card md:flex">
       <DashboardSidebarBody />
     </aside>
   );

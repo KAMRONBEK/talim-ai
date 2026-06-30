@@ -19,12 +19,40 @@ interface RecentContentGridProps {
 
 const typeStyles: Record<
   ContentType,
-  { gradient: string; icon: typeof FileText }
+  { gradient: string; icon: typeof FileText; iconClass: string; badgeClass: string }
 > = {
-  PDF: { gradient: 'from-warning-muted to-destructive/10', icon: FileText },
-  YOUTUBE: { gradient: 'from-destructive/15 to-destructive/5', icon: Play },
-  SLIDE: { gradient: 'from-info-muted to-accent', icon: Presentation },
+  PDF: {
+    gradient: 'from-muted to-muted/50',
+    icon: FileText,
+    iconClass: 'text-primary/40',
+    badgeClass: 'text-primary',
+  },
+  YOUTUBE: {
+    gradient: 'from-accent-secondary/15 to-accent-secondary/5',
+    icon: Play,
+    iconClass: 'text-accent-secondary/50',
+    badgeClass: 'text-accent-secondary',
+  },
+  SLIDE: {
+    gradient: 'from-secondary to-secondary/50',
+    icon: Presentation,
+    iconClass: 'text-primary/40',
+    badgeClass: 'text-primary',
+  },
 };
+
+function TypeBadge({ type }: { type: ContentType }) {
+  return (
+    <span
+      className={cn(
+        'absolute left-2 top-2 rounded-md bg-card/95 px-1.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-wide shadow-sm',
+        typeStyles[type].badgeClass,
+      )}
+    >
+      {type}
+    </span>
+  );
+}
 
 function ContentThumbnail({ content }: { content: Content }) {
   const thumb = content.type === 'YOUTUBE' ? getYoutubeThumbnailUrl(content.url) : null;
@@ -33,7 +61,7 @@ function ContentThumbnail({ content }: { content: Content }) {
 
   if (thumb) {
     return (
-      <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-muted">
         <Image
           src={thumb}
           alt=""
@@ -42,6 +70,7 @@ function ContentThumbnail({ content }: { content: Content }) {
           sizes="(max-width: 768px) 100vw, 280px"
           unoptimized
         />
+        <TypeBadge type={content.type} />
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
           <Play className="h-10 w-10 fill-white text-white" />
         </div>
@@ -52,11 +81,12 @@ function ContentThumbnail({ content }: { content: Content }) {
   return (
     <div
       className={cn(
-        'flex aspect-video w-full items-center justify-center rounded-xl bg-gradient-to-br',
+        'relative flex aspect-video w-full items-center justify-center rounded-2xl border border-border bg-gradient-to-br',
         style.gradient,
       )}
     >
-      <Icon className="h-12 w-12 text-muted-foreground/60" />
+      <TypeBadge type={content.type} />
+      <Icon className={cn('h-11 w-11', style.iconClass)} />
     </div>
   );
 }
@@ -69,8 +99,8 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
 
   if (contents.length === 0) {
     return (
-      <div className="rounded-2xl border border-border/70 bg-card p-12 text-center shadow-soft">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-2xl">📚</div>
+      <div className="rounded-2xl border border-border bg-card p-12 text-center shadow-soft">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary text-2xl">📚</div>
         <p className="mt-4 text-muted-foreground">{t('noMaterials')}</p>
       </div>
     );
@@ -86,7 +116,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
                 <ContentThumbnail content={content} />
               </Link>
               {(content.status === 'PENDING' || content.status === 'PROCESSING') && (
-                <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-xl bg-background/70 backdrop-blur-sm">
+                <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 rounded-2xl bg-background/70 backdrop-blur-sm">
                   <Loader2 className="h-6 w-6 animate-spin text-primary" />
                   <span className="text-xs font-medium text-muted-foreground">
                     {tContent('processing')}
@@ -106,27 +136,25 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
                 </Button>
               )}
             </div>
-            <Link href={`/content/${content.id}`} className="mt-2 flex items-start gap-2">
-              {content.status === 'FAILED' ? (
-                <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-destructive" />
-              ) : (
-                <Play className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-              )}
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{content.title}</p>
-                <div className="mt-0.5 flex items-center gap-2">
-                  <p className="text-xs text-muted-foreground">
-                    {formatRelativeTime(content.createdAt, locale)}
-                  </p>
-                  {content.status === 'FAILED' && (
-                    <Badge
-                      variant="outline"
-                      className="h-5 border-destructive/50 px-1.5 text-[10px] text-destructive"
-                    >
-                      {tContent('failedBadge')}
-                    </Badge>
-                  )}
-                </div>
+            <Link href={`/content/${content.id}`} className="mt-3 block">
+              <p className="truncate font-display text-sm font-semibold leading-snug text-foreground">
+                {content.title}
+              </p>
+              <div className="mt-1 flex items-center gap-2">
+                {content.status === 'FAILED' && (
+                  <AlertCircle className="h-3.5 w-3.5 shrink-0 text-destructive" />
+                )}
+                <p className="text-xs text-muted-foreground">
+                  {formatRelativeTime(content.createdAt, locale)}
+                </p>
+                {content.status === 'FAILED' && (
+                  <Badge
+                    variant="outline"
+                    className="h-5 border-destructive/50 px-1.5 text-[10px] text-destructive"
+                  >
+                    {tContent('failedBadge')}
+                  </Badge>
+                )}
               </div>
             </Link>
           </article>

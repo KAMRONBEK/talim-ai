@@ -5,7 +5,7 @@ import { splitSummaryParagraphs } from '@/lib/format-summary';
 
 export function SummaryText({
   text,
-  className = 'text-sm leading-relaxed',
+  className = 'text-[15px] leading-relaxed text-foreground/90',
 }: {
   text: string;
   className?: string;
@@ -18,7 +18,7 @@ export function SummaryText({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="max-w-prose space-y-5">
       {paragraphs.map((paragraph, index) => (
         <p key={index} className={className}>
           {paragraph}

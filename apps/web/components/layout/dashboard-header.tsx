@@ -20,7 +20,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
     : null;
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border/70 bg-background/80 px-4 backdrop-blur-sm md:justify-end md:px-6">
+    <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border/60 bg-card/70 px-4 backdrop-blur-sm md:justify-end md:px-6">
       {onMenuClick && (
         <Button
           type="button"

@@ -180,14 +180,14 @@ export function ContentStage({
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-card">
       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border/70 px-4 py-2.5">
         <h3 className="truncate font-display text-sm font-semibold">{content.title}</h3>
-        <div className="flex shrink-0 items-center gap-1 rounded-lg bg-muted/60 p-0.5">
+        <div className="flex shrink-0 items-center gap-1 rounded-xl bg-muted p-1">
           {(['material', 'summary'] as const).map((v) => (
             <button
               key={v}
               type="button"
               onClick={() => setView(v)}
               className={cn(
-                'rounded-md px-3 py-1 text-xs font-medium transition-colors',
+                'rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors',
                 view === v
                   ? 'bg-card text-primary shadow-soft'
                   : 'text-muted-foreground hover:text-foreground',
@@ -236,7 +236,7 @@ export function ContentStage({
               <button
                 type="button"
                 onClick={() => setPdfReload((k) => k + 1)}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-background px-3 py-1.5 text-sm font-medium transition-colors hover:bg-secondary"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2 text-sm font-semibold transition-colors hover:-translate-y-px hover:bg-secondary"
               >
                 <RefreshCw className="h-4 w-4" />
                 {t('pdfRetry')}

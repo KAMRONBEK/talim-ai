@@ -1,8 +1,9 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Loader2 } from 'lucide-react';
+import { Loader2, FileText, BookOpen, Check } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { cn } from '@talim/ui';
 import type { ContentSection, QuestionStyle, SectionProgress } from '@talim/types';
@@ -46,22 +47,29 @@ export function ContentSidebarBody({
   const t = useTranslations('sidebar');
   const pathname = usePathname();
 
-  const navLink = (href: string, label: string, icon: string, busy = false) => {
+  const navLink = (href: string, label: string, icon: ReactNode, busy = false) => {
     const active = pathname === href;
     return (
       <Link
         href={href}
         onClick={onNavigate}
         className={cn(
-          'flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
+          'flex items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors',
           active
-            ? 'bg-primary/10 font-semibold text-primary'
+            ? 'bg-primary font-semibold text-primary-foreground'
             : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
         )}
       >
-        <span>{icon}</span>
-        <span>{label}</span>
-        {busy && <Loader2 className="ml-auto h-3.5 w-3.5 shrink-0 animate-spin text-primary" />}
+        <span className="shrink-0">{icon}</span>
+        <span className="truncate">{label}</span>
+        {busy && (
+          <Loader2
+            className={cn(
+              'ml-auto h-3.5 w-3.5 shrink-0 animate-spin',
+              active ? 'text-primary-foreground' : 'text-primary',
+            )}
+          />
+        )}
       </Link>
     );
   };
@@ -76,7 +84,7 @@ export function ContentSidebarBody({
       </div>
       <div className="flex-1 overflow-y-auto">
         <div className="p-3">
-        <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <p className="mb-2 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
           {t('sections')}
         </p>
         <div className="space-y-0.5">
@@ -90,26 +98,31 @@ export function ContentSidebarBody({
                 href={`/content/${contentId}?section=${section.id}`}
                 onClick={onNavigate}
                 className={cn(
-                  'flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors',
+                  'flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors',
                   activeSectionId === section.id
-                    ? 'bg-primary/10 font-semibold text-primary'
+                    ? 'bg-primary font-semibold text-primary-foreground'
                     : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
                 )}
               >
-                <span>📄</span>
+                <FileText className="h-4 w-4 shrink-0" />
                 <span className="truncate">{section.title}</span>
                 {complete && (
-                  <span className="ml-auto text-xs text-success">✓</span>
+                  <Check
+                    className={cn(
+                      'ml-auto h-4 w-4 shrink-0',
+                      activeSectionId === section.id ? 'text-primary-foreground' : 'text-success',
+                    )}
+                  />
                 )}
               </Link>
             );
           })}
         </div>
-        <p className="mb-2 mt-6 px-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <p className="mb-2 mt-6 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
           {t('actions')}
         </p>
         <div className="space-y-0.5">
-          {navLink(`/content/${contentId}`, t('read'), '📖')}
+          {navLink(`/content/${contentId}`, t('read'), <BookOpen className="h-4 w-4" />)}
         </div>
         </div>
         {generations && (
@@ -136,7 +149,7 @@ interface ContentSidebarProps extends ContentSidebarBodyProps {}
 
 export function ContentSidebar(props: ContentSidebarProps) {
   return (
-    <aside className="hidden h-full w-64 shrink-0 flex-col overflow-hidden border-r bg-card md:flex">
+    <aside className="hidden h-full w-64 shrink-0 flex-col overflow-hidden border-r border-border bg-card md:flex">
       <ContentSidebarBody {...props} />
     </aside>
   );

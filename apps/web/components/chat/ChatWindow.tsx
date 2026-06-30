@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { ArrowRight, Bot } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { ChatMessage } from './ChatMessage';
 import { useChatSession } from '@/hooks/useChat';
@@ -92,9 +93,18 @@ export function ChatWindow({
 
   return (
     <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
-      <div className="border-b border-border/70 px-4 py-3">
-        <h2 className="font-display font-semibold">{t('title')}</h2>
-        <p className="text-xs text-muted-foreground">{t('subtitle')}</p>
+      <div className="flex items-center gap-3 border-b border-border/70 px-4 py-3">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-brand text-primary-foreground">
+          <Bot className="h-[18px] w-[18px]" aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <h2 className="font-display font-semibold leading-tight">{t('title')}</h2>
+          <p className="truncate text-xs text-muted-foreground">{t('subtitle')}</p>
+        </div>
+        <span className="ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent-secondary/10 px-2.5 py-1 text-[11px] font-semibold text-accent-secondary">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent-secondary" aria-hidden="true" />
+          RAG
+        </span>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto p-4">
@@ -124,7 +134,7 @@ export function ChatWindow({
       <div className="border-t border-border/70 p-4">
         {hasExcerptSelection && (
           <div className="mb-2 flex items-start gap-2">
-            <div className="min-w-0 flex-1 rounded-md border border-primary/20 bg-accent/30 p-1.5">
+            <div className="min-w-0 flex-1 rounded-xl border border-border bg-secondary p-2">
               {selectedExcerptImage && (
                 <img
                   src={selectedExcerptImage}
@@ -153,7 +163,7 @@ export function ChatWindow({
             placeholder={placeholder}
             disabled={isStreaming || isLoading}
             rows={1}
-            className="flex-1 resize-none rounded-lg border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex-1 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -161,8 +171,12 @@ export function ChatWindow({
               }
             }}
           />
-          <Button type="submit" disabled={isStreaming || isLoading || !input.trim()} className="shrink-0">
-            ↑
+          <Button
+            type="submit"
+            disabled={isStreaming || isLoading || !input.trim()}
+            className="shrink-0 self-end rounded-xl"
+          >
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         </form>
         <p className="mt-2 text-center text-[11px] text-muted-foreground">{t('footer')}</p>

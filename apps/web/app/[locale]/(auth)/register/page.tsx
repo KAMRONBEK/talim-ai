@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Shield } from 'lucide-react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
@@ -74,29 +75,51 @@ export default function RegisterPage() {
 
   return (
     <AuthShell>
-      <Card className="animate-scale-in shadow-elevated">
-        <CardContent className="space-y-6 p-8">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">{t('createAccount')}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{t('registerContinue')}</p>
+      <Card className="animate-scale-in border-0 bg-transparent shadow-none">
+        <CardContent className="space-y-6 p-0">
+          <div>
+            <h1 className="font-display text-2xl font-semibold">{t('createAccount')}</h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">{t('registerContinue')}</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">{t('name')}</Label>
-              <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+              <Label
+                htmlFor="name"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('name')}
+              </Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="h-11 rounded-xl px-4"
+              />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">{t('email')}</Label>
+              <Label
+                htmlFor="email"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('email')}
+              </Label>
               <Input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="h-11 rounded-xl px-4"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t('password')}</Label>
+              <Label
+                htmlFor="password"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('password')}
+              </Label>
               <Input
                 id="password"
                 type="password"
@@ -104,21 +127,31 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="h-11 rounded-xl px-4"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="joinCode">{t('classCode')}</Label>
-              <Input
-                id="joinCode"
-                value={joinCode}
-                autoCapitalize="characters"
-                placeholder="ABC123"
-                onChange={(e) => setJoinCode(e.target.value)}
-              />
+              <Label
+                htmlFor="joinCode"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                {t('classCode')}
+              </Label>
+              <div className="relative">
+                <Shield className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-accent-secondary" />
+                <Input
+                  id="joinCode"
+                  value={joinCode}
+                  autoCapitalize="characters"
+                  placeholder="ABC123"
+                  onChange={(e) => setJoinCode(e.target.value)}
+                  className="h-11 rounded-xl border-dashed pl-10 pr-4 tracking-[0.12em]"
+                />
+              </div>
               <p className="text-xs text-muted-foreground">{t('classCodeHint')}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" variant="gradient" className="w-full" disabled={loading}>
+            <Button type="submit" variant="gradient" className="h-12 w-full text-base" disabled={loading}>
               {loading ? t('registering') : t('register')}
             </Button>
           </form>

@@ -37,8 +37,12 @@ export default function DashboardPage() {
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col items-center gap-10">
-      <div className="relative w-full overflow-hidden rounded-3xl border border-border/70 bg-card px-6 py-10 text-center shadow-soft bg-brand-radial">
-        <h1 className="relative font-display text-3xl font-bold tracking-tight sm:text-4xl">
+      <div className="bg-brand-radial relative w-full overflow-hidden rounded-3xl border border-border bg-card px-6 py-12 text-center shadow-soft">
+        <div
+          aria-hidden="true"
+          className="bg-girih pointer-events-none absolute inset-0 opacity-50"
+        />
+        <h1 className="relative font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {t('readyToLearn', { name: firstName })}
         </h1>
       </div>
@@ -49,7 +53,7 @@ export default function DashboardPage() {
 
       <section id="dashboard-recents" className="w-full">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold">{t('recents')}</h2>
+          <h2 className="font-display text-xl font-semibold">{t('recents')}</h2>
           {!isLoading && filtered.length > 0 && (
             <span className="text-sm text-muted-foreground">
               {t('count', { count: filtered.length })}

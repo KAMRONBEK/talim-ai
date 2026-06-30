@@ -49,24 +49,26 @@ export function ContentLearnPanelBody({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-card">
-      <div className="flex shrink-0 border-b border-border/70" role="tablist">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            role="tab"
-            aria-selected={activeTab === tab.id}
-            onClick={() => onTabChange(tab.id)}
-            className={cn(
-              'flex-1 border-b-2 py-3 text-sm font-medium transition-colors',
-              activeTab === tab.id
-                ? 'border-primary text-primary'
-                : 'border-transparent text-muted-foreground hover:text-foreground',
-            )}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="shrink-0 border-b border-border/70 p-3">
+        <div className="flex gap-1 rounded-xl bg-muted p-1" role="tablist">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab.id}
+              onClick={() => onTabChange(tab.id)}
+              className={cn(
+                'flex-1 rounded-lg py-2 text-sm font-semibold transition-colors',
+                activeTab === tab.id
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground',
+              )}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="min-h-0 flex-1 overflow-hidden">

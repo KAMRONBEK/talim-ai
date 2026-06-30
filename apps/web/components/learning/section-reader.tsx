@@ -83,13 +83,15 @@ export function SectionReader({
   return (
     <div>
       <div className="mb-4 flex items-center justify-end gap-2">
-        <div className="inline-flex rounded-lg border bg-card p-0.5">
+        <div className="inline-flex rounded-xl bg-muted p-1">
           <button
             type="button"
             onClick={() => setMode('slides')}
             className={cn(
-              'inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-              mode === 'slides' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
+              'inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-colors',
+              mode === 'slides'
+                ? 'bg-primary text-primary-foreground shadow-soft'
+                : 'text-muted-foreground hover:text-foreground',
             )}
           >
             <Sparkles className="h-4 w-4" />
@@ -99,8 +101,10 @@ export function SectionReader({
             type="button"
             onClick={() => setMode('text')}
             className={cn(
-              'inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-              mode === 'text' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
+              'inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-colors',
+              mode === 'text'
+                ? 'bg-primary text-primary-foreground shadow-soft'
+                : 'text-muted-foreground hover:text-foreground',
             )}
           >
             <FileText className="h-4 w-4" />
@@ -112,7 +116,7 @@ export function SectionReader({
             type="button"
             onClick={() => generate.mutate({})}
             disabled={generate.isPending}
-            className="inline-flex items-center gap-1.5 rounded-lg border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:opacity-50"
           >
             <RefreshCw className={generate.isPending ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
             {t('regenerate')}
@@ -142,7 +146,7 @@ export function SectionReader({
             <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
             <Sparkles className="h-7 w-7 animate-pulse text-primary" />
           </div>
-          <p className="text-base font-semibold">{t('generating')}</p>
+          <p className="font-display text-base font-semibold">{t('generating')}</p>
           <p className="max-w-sm text-sm text-muted-foreground">{t('generatingHint')}</p>
         </CenteredCard>
       ) : isLearner ? (
@@ -151,7 +155,7 @@ export function SectionReader({
       ) : limited ? (
         // Plan/quota limit reached — explain it; offer the text instead of a futile retry.
         <CenteredCard>
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-warning-muted text-warning">
             <Lock className="h-6 w-6" />
           </div>
           <p className="max-w-md text-sm text-muted-foreground">{limitMessage}</p>
@@ -186,7 +190,7 @@ export function SectionReader({
             <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
             <Sparkles className="h-7 w-7 animate-pulse text-primary" />
           </div>
-          <p className="text-base font-semibold">{t('generating')}</p>
+          <p className="font-display text-base font-semibold">{t('generating')}</p>
           <p className="max-w-sm text-sm text-muted-foreground">{t('generatingHint')}</p>
         </CenteredCard>
       ) : (
@@ -199,7 +203,7 @@ export function SectionReader({
 
 function CenteredCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-[clamp(440px,62vh,680px)] w-full flex-col items-center justify-center gap-3 rounded-2xl border bg-card text-center shadow-sm">
+    <div className="flex h-[clamp(440px,62vh,680px)] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card text-center shadow-soft">
       {children}
     </div>
   );

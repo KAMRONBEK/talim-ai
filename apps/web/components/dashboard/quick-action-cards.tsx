@@ -28,16 +28,16 @@ export function QuickActionCards() {
           disabled={isPending}
           onClick={openFilePicker}
           className={cn(
-            'hover-lift group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 text-left shadow-soft',
+            'hover-lift group flex touch-manipulation flex-col items-start gap-4 rounded-2xl border border-border bg-card p-5 text-left shadow-soft',
             'hover:border-primary/30',
             isPending && 'pointer-events-none opacity-60',
           )}
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
             <FileUp className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">
+            <p className="font-display text-lg font-semibold">
               {isPending ? tCommon('uploading') : t('uploadTitle')}
             </p>
             <p className="mt-0.5 text-sm text-muted-foreground">{t('uploadDesc')}</p>
@@ -48,15 +48,15 @@ export function QuickActionCards() {
           type="button"
           onClick={() => setLinkOpen(true)}
           className={cn(
-            'hover-lift group flex touch-manipulation flex-col items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 text-left shadow-soft',
+            'hover-lift group flex touch-manipulation flex-col items-start gap-4 rounded-2xl border border-border bg-card p-5 text-left shadow-soft',
             'hover:border-primary/30',
           )}
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-accent-secondary/15 text-warning">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-secondary/10 text-accent-secondary">
             <Link2 className="h-5 w-5" />
           </div>
           <div>
-            <p className="font-semibold">{t('linkTitle')}</p>
+            <p className="font-display text-lg font-semibold">{t('linkTitle')}</p>
             <p className="mt-0.5 text-sm text-muted-foreground">{t('linkDesc')}</p>
           </div>
         </button>
