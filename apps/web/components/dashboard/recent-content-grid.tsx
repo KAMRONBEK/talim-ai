@@ -19,25 +19,28 @@ interface RecentContentGridProps {
 
 const typeStyles: Record<
   ContentType,
-  { gradient: string; icon: typeof FileText; iconClass: string; badgeClass: string }
+  { gradient: string; icon: typeof FileText; iconClass: string; badgeClass: string; label: string }
 > = {
   PDF: {
     gradient: 'from-muted to-muted/50',
     icon: FileText,
     iconClass: 'text-primary/40',
     badgeClass: 'text-primary',
+    label: 'PDF',
   },
   YOUTUBE: {
     gradient: 'from-accent-secondary/15 to-accent-secondary/5',
     icon: Play,
     iconClass: 'text-accent-secondary/50',
     badgeClass: 'text-accent-secondary',
+    label: 'Video',
   },
   SLIDE: {
     gradient: 'from-secondary to-secondary/50',
     icon: Presentation,
     iconClass: 'text-primary/40',
     badgeClass: 'text-primary',
+    label: 'Slides',
   },
 };
 
@@ -49,7 +52,7 @@ function TypeBadge({ type }: { type: ContentType }) {
         typeStyles[type].badgeClass,
       )}
     >
-      {type}
+      {typeStyles[type].label}
     </span>
   );
 }

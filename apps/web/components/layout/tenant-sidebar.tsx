@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { BarChart3, BookOpen, CreditCard, FileQuestion, GraduationCap, LayoutDashboard, Settings } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useTenant } from '@/hooks/useTenant';
+import { useTenant, useTenantStudents } from '@/hooks/useTenant';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { cn } from '@/lib/utils';
 import { LogoMark } from '@/components/brand/logo';
@@ -25,6 +25,8 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const user = useAuthStore((s) => s.user);
   const { data: tenant } = useTenant();
+  const { data: students } = useTenantStudents();
+  const used = students?.length ?? null;
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-[#211b15] text-[#b8b0a4]">
@@ -48,9 +50,19 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
           {tenant?.seatLimit != null && (
             <div className="mt-2 flex items-center gap-2">
               <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full w-full rounded-full bg-primary" />
+                <div
+                  className="h-full rounded-full bg-primary transition-[width]"
+                  style={{
+                    width:
+                      used != null && tenant.seatLimit > 0
+                        ? `${Math.min(100, Math.round((used / tenant.seatLimit) * 100))}%`
+                        : '100%',
+                  }}
+                />
               </div>
-              <span className="font-label text-[10px] text-[#9dc4b8]">{tenant.seatLimit}</span>
+              <span className="font-label text-[10px] tabular-nums text-[#9dc4b8]">
+                {used != null ? `${used}/${tenant.seatLimit}` : tenant.seatLimit}
+              </span>
             </div>
           )}
         </div>
