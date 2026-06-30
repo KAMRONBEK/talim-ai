@@ -10,6 +10,12 @@ import {
 
 const STATUS_FILTERS = ['PENDING', 'APPROVED', 'REJECTED', ''] as const;
 
+function requestStatusBadge(status: string): string {
+  if (status === 'APPROVED') return 'bg-success-muted text-success';
+  if (status === 'REJECTED') return 'bg-destructive/10 text-destructive';
+  return 'bg-muted text-muted-foreground';
+}
+
 function errorMessage(err: unknown, fallback: string): string {
   return (
     (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback
@@ -27,8 +33,11 @@ export default function TutorRequestsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Tutor requests</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Admin
+        </p>
+        <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight">Tutor requests</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
           Approve learners who asked to become tutors. Approving creates their organization with an
           active subscription; set a seat limit to cap their students.
         </p>
@@ -55,7 +64,7 @@ export default function TutorRequestsPage() {
       ) : isLoading || !data ? (
         <p className="text-muted-foreground">Loading…</p>
       ) : data.items.length === 0 ? (
-        <Card>
+        <Card className="rounded-2xl shadow-soft">
           <CardContent className="p-8 text-center text-muted-foreground">
             No {status ? status.toLowerCase() : ''} requests.
           </CardContent>
@@ -63,18 +72,22 @@ export default function TutorRequestsPage() {
       ) : (
         <div className="space-y-3">
           {data.items.map((r) => (
-            <Card key={r.id}>
+            <Card key={r.id} className="rounded-2xl shadow-soft">
               <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <p className="font-semibold">{r.orgName}</p>
+                  <p className="font-display text-lg font-semibold">{r.orgName}</p>
                   <p className="text-sm text-muted-foreground">
                     {r.userEmail}
                     {r.userName ? ` · ${r.userName}` : ''}
                   </p>
                   {r.note && <p className="mt-1 text-sm">{r.note}</p>}
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {new Date(r.createdAt).toLocaleString()} ·{' '}
-                    <span className="uppercase">{r.status}</span>
+                  <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                    <span>{new Date(r.createdAt).toLocaleString()}</span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 font-medium uppercase ${requestStatusBadge(r.status)}`}
+                    >
+                      {r.status}
+                    </span>
                   </p>
                 </div>
                 {r.status === 'PENDING' && (
@@ -105,6 +118,7 @@ export default function TutorRequestsPage() {
                     <Button
                       size="sm"
                       variant="outline"
+                      className="border-destructive/30 text-destructive hover:bg-destructive/10"
                       disabled={reject.isPending}
                       onClick={async () => {
                         if (!confirm(`Reject ${r.userEmail}'s request?`)) return;

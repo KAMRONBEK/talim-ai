@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
+import { LogoMark } from '@/components/logo';
 import type { AuthResponse } from '@talim/types';
 
 export default function LoginPage() {
@@ -59,22 +60,30 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
-      <div className="mb-8 flex items-center gap-2 text-xl font-bold">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          T
-        </span>
-        Talim Admin
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background p-4">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-brand-radial" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-girih opacity-50 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,black,transparent)]"
+      />
+      <div className="relative z-10 mb-8 flex items-center gap-2.5">
+        <LogoMark className="h-10 w-10 shadow-glow" />
+        <span className="font-display text-xl font-semibold">Talim Admin</span>
       </div>
-      <Card className="w-full max-w-md border shadow-lg">
+      <Card className="relative z-10 w-full max-w-md border-border shadow-elevated">
         <CardContent className="space-y-6 p-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold">Admin sign in</h1>
+            <h1 className="font-display text-2xl font-semibold">Admin sign in</h1>
             <p className="mt-1 text-sm text-muted-foreground">Platform operators only</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label
+                htmlFor="email"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                Email
+              </Label>
               <Input
                 id="email"
                 type="email"
@@ -85,7 +94,12 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label
+                htmlFor="password"
+                className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground"
+              >
+                Password
+              </Label>
               <Input
                 id="password"
                 type="password"

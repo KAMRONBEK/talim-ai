@@ -98,39 +98,44 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
         <Link href="/users" className="text-sm text-primary hover:underline">
           ← Back to users
         </Link>
-        <h1 className="mt-2 text-2xl font-bold">{user.email}</h1>
+        <p className="mt-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Admin · User
+        </p>
+        <h1 className="mt-1 font-display text-2xl font-semibold">{user.email}</h1>
         <p className="text-sm text-muted-foreground">{user.name ?? 'No name'}</p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Role</p>
-            <p className="font-semibold">{user.role}</p>
+            <span className="mt-1 inline-flex items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-primary">
+              {user.role}
+            </span>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Content items</p>
-            <p className="font-semibold">{user.contentCount}</p>
+            <p className="font-display text-2xl font-semibold">{user.contentCount}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Quizzes</p>
-            <p className="font-semibold">{user.quizCount}</p>
+            <p className="font-display text-2xl font-semibold">{user.quizCount}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">API cost (30d)</p>
-            <p className="font-semibold">${user.usageLast30Days.toFixed(4)}</p>
+            <p className="font-display text-2xl font-semibold">${user.usageLast30Days.toFixed(4)}</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Credentials</h2>
+          <h2 className="font-display text-lg font-semibold">Credentials</h2>
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
@@ -156,7 +161,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
             <p className="text-sm text-muted-foreground">Not recorded</p>
           )}
           {generatedPassword && (
-            <div className="space-y-2 rounded-lg border border-primary/30 bg-primary/5 p-4">
+            <div className="space-y-2 rounded-xl border border-primary/30 bg-primary/5 p-4">
               <p className="text-sm font-medium">New password (save it now)</p>
               <code className="block rounded-lg bg-muted px-3 py-2 font-mono text-sm">
                 {generatedPassword}
@@ -257,7 +262,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Role & organization</h2>
+          <h2 className="font-display text-lg font-semibold">Role & organization</h2>
         </CardHeader>
         <CardContent className="space-y-4">
           {user.ownedTenant && (
@@ -283,7 +288,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 id="role"
                 value={targetRole}
                 onChange={(e) => setRole(e.target.value as UserRole)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
               >
                 {ROLE_OPTIONS.map((r) => (
                   <option key={r} value={r}>
@@ -310,7 +315,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   id="tenantId"
                   value={tenantId || user.learnerTenant?.id || user.ownedTenant?.id || ''}
                   onChange={(e) => setTenantId(e.target.value)}
-                  className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                  className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Select organization…</option>
                   {tenantsData?.items.map((t) => (
@@ -328,7 +333,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   id="newOwnerId"
                   value={newOwnerId}
                   onChange={(e) => setNewOwnerId(e.target.value)}
-                  className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                  className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Select new owner…</option>
                   {transferCandidates.map((member) => (
@@ -379,7 +384,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
       {isTenantOwner ? (
         <Card>
           <CardHeader>
-            <h2 className="font-semibold">Subscription</h2>
+            <h2 className="font-display text-lg font-semibold">Subscription</h2>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <p className="text-muted-foreground">
@@ -408,7 +413,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
       ) : (
         <Card>
           <CardHeader>
-            <h2 className="font-semibold">Subscription</h2>
+            <h2 className="font-display text-lg font-semibold">Subscription</h2>
           </CardHeader>
           <CardContent className="space-y-4">
             {isTenantLearner && (
@@ -445,7 +450,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                           id="plan"
                           value={currentPlan}
                           onChange={(e) => setPlanCode(e.target.value as PlanCode)}
-                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                          className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
                         >
                           {INDIVIDUAL_PLANS.map((p) => (
                             <option key={p} value={p}>
@@ -460,7 +465,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                           id="status"
                           value={currentStatus}
                           onChange={(e) => setStatus(e.target.value as SubscriptionStatus)}
-                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                          className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
                         >
                           {STATUS_OPTIONS.map((s) => (
                             <option key={s} value={s}>
@@ -476,7 +481,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                           type="date"
                           value={currentPeriodEnd}
                           onChange={(e) => setPeriodEnd(e.target.value)}
-                          className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                          className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
                         />
                       </div>
                     </div>
@@ -519,7 +524,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Usage vs limits (this month)</h2>
+          <h2 className="font-display text-lg font-semibold">Usage vs limits (this month)</h2>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 text-sm">
@@ -567,7 +572,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Recent content</h2>
+          <h2 className="font-display text-lg font-semibold">Recent content</h2>
         </CardHeader>
         <CardContent>
           {contents.length === 0 ? (
@@ -575,7 +580,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
           ) : (
             <ul className="space-y-2 text-sm">
               {contents.map((c) => (
-                <li key={c.id} className="flex justify-between border-b pb-2 last:border-0">
+                <li key={c.id} className="flex justify-between border-b border-border/60 pb-2 last:border-0">
                   <span>{c.title}</span>
                   <span className="text-muted-foreground">
                     {c.type} · {c.status}

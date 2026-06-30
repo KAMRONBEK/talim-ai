@@ -8,6 +8,15 @@ function errorMessage(err: unknown, fallback: string): string {
   return (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
 }
 
+function statusPillClass(status: string): string {
+  const s = status.toUpperCase();
+  if (s.includes('INACTIVE')) return 'bg-muted text-muted-foreground';
+  if (/FAIL|REJECT|CANCEL|ERROR|EXPIR/.test(s)) return 'bg-destructive/10 text-destructive';
+  if (/PAST.?DUE|OVERDUE|PAUSE|WARN|PENDING|QUEUE/.test(s)) return 'bg-warning-muted text-warning';
+  if (/ACTIVE|READY|DONE|APPROV|COMPLETE|SUCCESS/.test(s)) return 'bg-success-muted text-success';
+  return 'bg-muted text-muted-foreground';
+}
+
 export default function ContentPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -19,7 +28,10 @@ export default function ContentPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Content</h1>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin
+          </p>
+          <h1 className="font-display text-2xl font-semibold">Content</h1>
           <p className="text-sm text-muted-foreground">All uploads across the platform</p>
         </div>
         <Input
@@ -32,15 +44,25 @@ export default function ContentPage() {
           className="max-w-xs"
         />
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
-              <th className="px-4 py-3 text-left font-medium">Title</th>
-              <th className="px-4 py-3 text-left font-medium">Owner</th>
-              <th className="px-4 py-3 text-left font-medium">Type</th>
-              <th className="px-4 py-3 text-left font-medium">Status</th>
-              <th className="px-4 py-3 text-right font-medium">Actions</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Title
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Owner
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Type
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Status
+              </th>
+              <th className="px-4 py-3 text-right font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -59,11 +81,17 @@ export default function ContentPage() {
               </tr>
             )}
             {data?.items.map((item) => (
-              <tr key={item.id} className="border-t">
+              <tr key={item.id} className="border-t border-border/60 hover:bg-secondary/40">
                 <td className="px-4 py-3 font-medium">{item.title}</td>
-                <td className="px-4 py-3">{item.userEmail}</td>
-                <td className="px-4 py-3">{item.type}</td>
-                <td className="px-4 py-3">{item.status}</td>
+                <td className="px-4 py-3 text-muted-foreground">{item.userEmail}</td>
+                <td className="px-4 py-3 text-muted-foreground">{item.type}</td>
+                <td className="px-4 py-3">
+                  <span
+                    className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusPillClass(item.status)}`}
+                  >
+                    {item.status}
+                  </span>
+                </td>
                 <td className="px-4 py-3 text-right space-x-2">
                   {item.status === 'FAILED' && (
                     <Button
@@ -84,6 +112,7 @@ export default function ContentPage() {
                   <Button
                     variant="outline"
                     size="sm"
+                    className="border-destructive/30 text-destructive hover:bg-destructive/10"
                     disabled={deleteContent.isPending}
                     onClick={async () => {
                       if (!confirm(`Delete "${item.title}"?`)) return;

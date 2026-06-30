@@ -12,7 +12,10 @@ export default function UsagePage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Usage & costs</h1>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin
+          </p>
+          <h1 className="font-display text-2xl font-semibold">Usage & costs</h1>
           <p className="text-sm text-muted-foreground">API spend by user</p>
         </div>
         <div className="flex gap-2">
@@ -23,15 +26,15 @@ export default function UsagePage() {
           ))}
         </div>
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
-              <th className="px-4 py-3 text-left font-medium">User</th>
-              <th className="px-4 py-3 text-left font-medium">Events</th>
-              <th className="px-4 py-3 text-left font-medium">Input tokens</th>
-              <th className="px-4 py-3 text-left font-medium">Output tokens</th>
-              <th className="px-4 py-3 text-right font-medium">Est. cost (USD)</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">User</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Events</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Input tokens</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Output tokens</th>
+              <th className="px-4 py-3 text-right font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Est. cost (USD)</th>
             </tr>
           </thead>
           <tbody>
@@ -50,7 +53,7 @@ export default function UsagePage() {
               </tr>
             )}
             {data?.rows.map((row) => (
-              <tr key={row.userId} className="border-t">
+              <tr key={row.userId} className="border-t border-border/60 hover:bg-secondary/40">
                 <td className="px-4 py-3">
                   <div className="font-medium">{row.userEmail}</div>
                   {row.userName && <div className="text-xs text-muted-foreground">{row.userName}</div>}

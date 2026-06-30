@@ -48,7 +48,10 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
         <Link href="/tenants" className="text-sm text-primary hover:underline">
           ← Back to tenants
         </Link>
-        <h1 className="mt-2 text-2xl font-bold">{tenant.name}</h1>
+        <p className="mt-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Admin · Organization
+        </p>
+        <h1 className="mt-1 font-display text-2xl font-semibold">{tenant.name}</h1>
         <p className="text-sm text-muted-foreground">{tenant.slug}</p>
       </div>
 
@@ -67,26 +70,26 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Learners</p>
-            <p className="font-semibold">{tenant.studentCount}</p>
+            <p className="font-display text-2xl font-semibold">{tenant.studentCount}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Content items</p>
-            <p className="font-semibold">{tenant.contentCount}</p>
+            <p className="font-display text-2xl font-semibold">{tenant.contentCount}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground">Subscription</p>
-            <p className="font-semibold">{subscription ? planLabel(subscription.effectivePlanCode) : 'None'}</p>
+            <p className="font-display text-lg font-semibold">{subscription ? planLabel(subscription.effectivePlanCode) : 'None'}</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Organization & subscription</h2>
+          <h2 className="font-display text-lg font-semibold">Organization & subscription</h2>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-1">
@@ -104,7 +107,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
                 id="plan"
                 value={currentPlan}
                 onChange={(e) => setPlanCode(e.target.value as PlanCode)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
               >
                 {TENANT_PLANS.map((p) => (
                   <option key={p} value={p}>
@@ -119,7 +122,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
                 id="status"
                 value={currentStatus}
                 onChange={(e) => setStatus(e.target.value as SubscriptionStatus)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
               >
                 {STATUS_OPTIONS.map((s) => (
                   <option key={s} value={s}>
@@ -135,7 +138,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
                 type="date"
                 value={currentPeriodEnd}
                 onChange={(e) => setPeriodEnd(e.target.value)}
-                className="h-9 w-full rounded-md border bg-background px-3 text-sm"
+                className="h-9 w-full rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
               />
             </div>
           </div>
@@ -196,41 +199,47 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Members</h2>
+          <h2 className="font-display text-lg font-semibold">Members</h2>
           <p className="text-sm text-muted-foreground">Tenant owner and learners in this organization</p>
         </CardHeader>
         <CardContent>
-          <div className="overflow-hidden rounded-lg border">
+          <div className="overflow-hidden rounded-xl border border-border">
             <table className="w-full text-sm">
-              <thead className="bg-muted/50">
+              <thead className="bg-muted/40">
                 <tr>
-                  <th className="px-4 py-3 text-left font-medium">Member role</th>
-                  <th className="px-4 py-3 text-left font-medium">Email</th>
-                  <th className="px-4 py-3 text-left font-medium">Name</th>
-                  <th className="px-4 py-3 text-left font-medium">User role</th>
-                  <th className="px-4 py-3 text-left font-medium">Status</th>
-                  <th className="px-4 py-3 text-left font-medium">Joined</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Member role</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Email</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Name</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">User role</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
+                  <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Joined</th>
                 </tr>
               </thead>
               <tbody>
                 {tenant.members.map((member) => (
-                  <tr key={member.membershipId} className="border-t">
+                  <tr key={member.membershipId} className="border-t border-border/60 hover:bg-secondary/40">
                     <td className="px-4 py-3">
-                      <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          member.memberRole === 'OWNER'
+                            ? 'bg-secondary text-primary'
+                            : 'bg-muted text-muted-foreground'
+                        }`}
+                      >
                         {member.memberRole === 'OWNER' ? 'Tenant owner' : 'Learner'}
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       <Link
                         href={`/users/${member.userId}`}
-                        className="text-primary hover:underline"
+                        className="font-medium text-primary hover:underline"
                       >
                         {member.email}
                       </Link>
                     </td>
                     <td className="px-4 py-3">{member.name ?? '—'}</td>
                     <td className="px-4 py-3">
-                      <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                      <span className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                         {member.userRole}
                       </span>
                     </td>
@@ -238,7 +247,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
                       {member.memberRole === 'OWNER' ? (
                         '—'
                       ) : member.active ? (
-                        <span className="text-emerald-600">Active</span>
+                        <span className="font-medium text-success">Active</span>
                       ) : (
                         <span className="text-muted-foreground">Inactive</span>
                       )}
@@ -264,7 +273,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
       {usageVsLimits && (
         <Card>
           <CardHeader>
-            <h2 className="font-semibold">Usage vs limits (this month)</h2>
+            <h2 className="font-display text-lg font-semibold">Usage vs limits (this month)</h2>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 text-sm">

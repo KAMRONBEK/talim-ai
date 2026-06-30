@@ -4,49 +4,70 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 222 20% 12%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 20% 12%;
-    --primary: 168 55% 40%;
-    --primary-foreground: 0 0% 100%;
-    --accent-secondary: 255 70% 55%;
-    --secondary: 210 25% 96%;
-    --secondary-foreground: 222 20% 12%;
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 14% 45%;
-    --accent: 168 40% 94%;
-    --accent-foreground: 168 55% 28%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 168 55% 40%;
-    --radius: 0.625rem;
+    /* Talim "Scholar" system — pine + clay spark on warm paper (mirrors apps/web). */
+    --background: 37 42% 94%; /* Paper #F6F1E9 */
+    --foreground: 30 18% 11%; /* Ink #201B16 */
+    --card: 38 56% 96%; /* Cream #FBF7F0 */
+    --card-foreground: 30 18% 11%;
+    --primary: 168 50% 24%; /* Pine #1E5B4F */
+    --primary-foreground: 40 48% 95%;
+    --accent-secondary: 16 67% 55%; /* Clay #D9663D */
+    --accent-secondary-foreground: 40 50% 97%;
+    --secondary: 151 22% 91%; /* Sage #E3EDE8 */
+    --secondary-foreground: 168 45% 22%;
+    --muted: 40 38% 90%;
+    --muted-foreground: 30 10% 40%;
+    --accent: 151 22% 91%;
+    --accent-foreground: 168 45% 24%;
+    --destructive: 8 68% 45%;
+    --destructive-foreground: 40 50% 97%;
+    --success: 158 52% 30%;
+    --success-foreground: 40 50% 97%;
+    --success-muted: 152 30% 90%;
+    --warning: 32 74% 40%;
+    --warning-foreground: 40 50% 97%;
+    --warning-muted: 38 58% 89%;
+    --info: 196 46% 36%;
+    --info-foreground: 40 50% 97%;
+    --info-muted: 196 38% 91%;
+    --border: 37 31% 84%;
+    --input: 37 31% 84%;
+    --ring: 168 50% 24%;
+    --radius: 0.875rem;
     --sidebar-width: 16rem;
   }
 
   .dark {
-    --background: 222 20% 8%;
-    --foreground: 210 20% 98%;
-    --card: 222 20% 10%;
-    --card-foreground: 210 20% 98%;
-    --primary: 168 55% 45%;
-    --primary-foreground: 222 20% 8%;
-    --secondary: 217 20% 18%;
-    --secondary-foreground: 210 20% 98%;
-    --muted: 217 20% 18%;
-    --muted-foreground: 215 15% 65%;
-    --accent: 217 20% 18%;
-    --accent-foreground: 210 20% 98%;
-    /* Lighter red for dark mode: --destructive is used only as `text-destructive`
-       (error messages) in admin — never as a fill — so the shadcn default 35%
-       fill-red failed WCAG contrast (~2.2:1) on the near-black bg. (F73) */
-    --destructive: 0 84% 65%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 217 20% 22%;
-    --input: 217 20% 22%;
-    --ring: 168 55% 45%;
+    /* Scholar after dark — warm charcoal paper, brighter pine, warmed clay. */
+    --background: 33 24% 7%;
+    --foreground: 38 39% 90%;
+    --card: 32 24% 11%;
+    --card-foreground: 38 39% 90%;
+    --primary: 166 43% 43%;
+    --primary-foreground: 165 42% 9%;
+    --accent-secondary: 18 71% 64%;
+    --accent-secondary-foreground: 20 45% 11%;
+    --secondary: 162 17% 16%;
+    --secondary-foreground: 165 34% 78%;
+    --muted: 34 17% 14%;
+    --muted-foreground: 38 18% 64%;
+    --accent: 162 19% 18%;
+    --accent-foreground: 165 38% 80%;
+    /* destructive stays a mid-red (used as text-destructive on near-black) — AA-safe (F73). */
+    --destructive: 8 56% 53%;
+    --destructive-foreground: 38 39% 93%;
+    --success: 158 44% 46%;
+    --success-foreground: 33 24% 7%;
+    --success-muted: 158 28% 16%;
+    --warning: 32 68% 56%;
+    --warning-foreground: 33 24% 7%;
+    --warning-muted: 32 38% 16%;
+    --info: 196 46% 56%;
+    --info-foreground: 33 24% 7%;
+    --info-muted: 196 34% 18%;
+    --border: 34 19% 18%;
+    --input: 34 19% 18%;
+    --ring: 166 46% 52%;
   }
 
   * {
@@ -55,5 +76,31 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  /* Editorial serif headings for the "Scholar" look (Newsreader at tight tracking). */
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+
+  /* Signature: faint girih-inspired pine star lattice. */
+  .bg-girih {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231E5B4F' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 72px 72px;
+  }
+
+  /* Soft radial pine + clay wash for hero / login backdrops. */
+  .bg-brand-radial {
+    background-image:
+      radial-gradient(58% 60% at 12% 0%, hsl(var(--primary) / 0.1) 0%, transparent 60%),
+      radial-gradient(46% 50% at 100% 8%, hsl(var(--accent-secondary) / 0.12) 0%, transparent 58%);
   }
 }

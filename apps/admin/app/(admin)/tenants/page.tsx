@@ -6,6 +6,15 @@ import { Button, Input } from '@talim/ui';
 import { useAdminTenants } from '@/hooks/useAdmin';
 import { planLabel } from '@/lib/plan';
 
+function statusPillClass(status: string): string {
+  const s = status.toUpperCase();
+  if (s.includes('INACTIVE')) return 'bg-muted text-muted-foreground';
+  if (/FAIL|REJECT|CANCEL|ERROR|EXPIR/.test(s)) return 'bg-destructive/10 text-destructive';
+  if (/PAST.?DUE|OVERDUE|PAUSE|WARN/.test(s)) return 'bg-warning-muted text-warning';
+  if (/ACTIVE|READY|DONE|APPROV|COMPLETE|SUCCESS/.test(s)) return 'bg-success-muted text-success';
+  return 'bg-muted text-muted-foreground';
+}
+
 export default function TenantsPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -15,7 +24,10 @@ export default function TenantsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Tenants</h1>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin
+          </p>
+          <h1 className="font-display text-2xl font-semibold">Tenants</h1>
           <p className="text-sm text-muted-foreground">Organizations and subscription management</p>
         </div>
         <Input
@@ -28,16 +40,28 @@ export default function TenantsPage() {
           className="max-w-xs"
         />
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
-              <th className="px-4 py-3 text-left font-medium">Organization</th>
-              <th className="px-4 py-3 text-left font-medium">Owner</th>
-              <th className="px-4 py-3 text-left font-medium">Plan</th>
-              <th className="px-4 py-3 text-left font-medium">Status</th>
-              <th className="px-4 py-3 text-left font-medium">Students</th>
-              <th className="px-4 py-3 text-left font-medium">Content</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Organization
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Owner
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Plan
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Status
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Students
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Content
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +80,7 @@ export default function TenantsPage() {
               </tr>
             )}
             {data?.items.map((tenant) => (
-              <tr key={tenant.id} className="border-t">
+              <tr key={tenant.id} className="border-t border-border/60 hover:bg-secondary/40">
                 <td className="px-4 py-3">
                   <Link
                     href={`/tenants/${tenant.id}`}
@@ -78,7 +102,9 @@ export default function TenantsPage() {
                 <td className="px-4 py-3">{planLabel(tenant.planCode)}</td>
                 <td className="px-4 py-3">
                   {tenant.subscriptionStatus ? (
-                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusPillClass(tenant.subscriptionStatus)}`}
+                    >
                       {tenant.subscriptionStatus}
                     </span>
                   ) : (

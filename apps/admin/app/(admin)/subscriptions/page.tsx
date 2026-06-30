@@ -16,6 +16,19 @@ const PLAN_OPTIONS = [
 ] as const;
 const KIND_OPTIONS = ['all', 'user', 'tenant'] as const;
 
+function statusPillClass(status: string) {
+  switch (status) {
+    case 'ACTIVE':
+      return 'bg-success-muted text-success';
+    case 'PAST_DUE':
+      return 'bg-warning-muted text-warning';
+    case 'CANCELED':
+      return 'bg-destructive/10 text-destructive';
+    default:
+      return 'bg-muted text-muted-foreground';
+  }
+}
+
 export default function SubscriptionsPage() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('');
@@ -34,7 +47,10 @@ export default function SubscriptionsPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Subscriptions</h1>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin
+          </p>
+          <h1 className="font-display text-2xl font-semibold">Subscriptions</h1>
           <p className="text-sm text-muted-foreground">Individual and organization plans</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -53,7 +69,7 @@ export default function SubscriptionsPage() {
               setKind(e.target.value as (typeof KIND_OPTIONS)[number]);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-sm"
+            className="h-9 rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
           >
             {KIND_OPTIONS.map((k) => (
               <option key={k} value={k}>
@@ -67,7 +83,7 @@ export default function SubscriptionsPage() {
               setStatus(e.target.value);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-sm"
+            className="h-9 rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
           >
             {STATUS_OPTIONS.map((s) => (
               <option key={s || 'all'} value={s}>
@@ -81,7 +97,7 @@ export default function SubscriptionsPage() {
               setPlan(e.target.value);
               setPage(1);
             }}
-            className="h-9 rounded-md border bg-background px-3 text-sm"
+            className="h-9 rounded-xl border border-border bg-background px-3 text-sm focus:ring-2 focus:ring-ring"
           >
             {PLAN_OPTIONS.map((p) => (
               <option key={p || 'all'} value={p}>
@@ -91,16 +107,16 @@ export default function SubscriptionsPage() {
           </select>
         </div>
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
-              <th className="px-4 py-3 text-left font-medium">Subject</th>
-              <th className="px-4 py-3 text-left font-medium">Type</th>
-              <th className="px-4 py-3 text-left font-medium">Plan</th>
-              <th className="px-4 py-3 text-left font-medium">Status</th>
-              <th className="px-4 py-3 text-left font-medium">Source</th>
-              <th className="px-4 py-3 text-left font-medium">Period end</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Subject</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Type</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Plan</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Source</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Period end</th>
             </tr>
           </thead>
           <tbody>
@@ -119,7 +135,7 @@ export default function SubscriptionsPage() {
               </tr>
             )}
             {data?.items.map((sub) => (
-              <tr key={sub.id} className="border-t">
+              <tr key={sub.id} className="border-t border-border/60 hover:bg-secondary/40">
                 <td className="px-4 py-3">
                   {sub.subjectType === 'tenant' ? (
                     <>
@@ -146,7 +162,13 @@ export default function SubscriptionsPage() {
                   )}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                  <span
+                    className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${
+                      sub.subjectType === 'tenant'
+                        ? 'bg-secondary text-primary'
+                        : 'bg-muted text-muted-foreground'
+                    }`}
+                  >
                     {sub.subjectType === 'tenant' ? 'Organization' : 'Individual'}
                   </span>
                 </td>
@@ -157,7 +179,13 @@ export default function SubscriptionsPage() {
                   )}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{sub.status}</span>
+                  <span
+                    className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${statusPillClass(
+                      sub.status,
+                    )}`}
+                  >
+                    {sub.status}
+                  </span>
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">{sub.source}</td>
                 <td className="px-4 py-3 text-muted-foreground">

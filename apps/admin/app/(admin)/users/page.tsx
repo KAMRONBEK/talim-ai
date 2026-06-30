@@ -6,6 +6,20 @@ import { Button, Input } from '@talim/ui';
 import { useAdminUsers, useDeleteUser, useResetUserPassword } from '@/hooks/useAdmin';
 import { planLabel } from '@/lib/plan';
 
+function roleBadge(role: string): string {
+  if (role === 'ADMIN') return 'bg-accent-secondary/15 text-accent-secondary';
+  if (role === 'TENANT_OWNER') return 'bg-secondary text-primary';
+  return 'bg-muted text-muted-foreground';
+}
+
+function subStatusBadge(status: string): string {
+  if (status === 'ACTIVE') return 'bg-success-muted text-success';
+  if (status === 'PAST_DUE' || status === 'TRIALING') return 'bg-warning-muted text-warning';
+  if (status === 'CANCELED' || status === 'CANCELLED' || status === 'INACTIVE')
+    return 'bg-destructive/10 text-destructive';
+  return 'bg-muted text-muted-foreground';
+}
+
 export default function UsersPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
@@ -17,8 +31,11 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Users</h1>
-          <p className="text-sm text-muted-foreground">All platform accounts</p>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin
+          </p>
+          <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight">Users</h1>
+          <p className="mt-1 text-sm text-muted-foreground">All platform accounts</p>
         </div>
         <Input
           placeholder="Search email or name…"
@@ -30,18 +47,18 @@ export default function UsersPage() {
           className="max-w-xs"
         />
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
-            <tr>
-              <th className="px-4 py-3 text-left font-medium">Email</th>
-              <th className="px-4 py-3 text-left font-medium">Name</th>
-              <th className="px-4 py-3 text-left font-medium">Password</th>
-              <th className="px-4 py-3 text-left font-medium">Role</th>
-              <th className="px-4 py-3 text-left font-medium">Plan</th>
-              <th className="px-4 py-3 text-left font-medium">Status</th>
-              <th className="px-4 py-3 text-left font-medium">Content</th>
-              <th className="px-4 py-3 text-right font-medium">Actions</th>
+          <thead className="bg-muted/40">
+            <tr className="font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <th className="px-4 py-3 text-left">Email</th>
+              <th className="px-4 py-3 text-left">Name</th>
+              <th className="px-4 py-3 text-left">Password</th>
+              <th className="px-4 py-3 text-left">Role</th>
+              <th className="px-4 py-3 text-left">Plan</th>
+              <th className="px-4 py-3 text-left">Status</th>
+              <th className="px-4 py-3 text-left">Content</th>
+              <th className="px-4 py-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +77,7 @@ export default function UsersPage() {
               </tr>
             )}
             {data?.items.map((user) => (
-              <tr key={user.id} className="border-t">
+              <tr key={user.id} className="border-t border-border/60 hover:bg-secondary/40">
                 <td className="px-4 py-3">
                   <Link href={`/users/${user.id}`} className="font-medium text-primary hover:underline">
                     {user.email}
@@ -88,12 +105,16 @@ export default function UsersPage() {
                   )}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{user.role}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${roleBadge(user.role)}`}>
+                    {user.role}
+                  </span>
                 </td>
                 <td className="px-4 py-3">{planLabel(user.planCode)}</td>
                 <td className="px-4 py-3">
                   {user.subscriptionStatus ? (
-                    <span className="rounded-full bg-muted px-2 py-0.5 text-xs">
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${subStatusBadge(user.subscriptionStatus)}`}
+                    >
                       {user.subscriptionStatus}
                     </span>
                   ) : (
@@ -128,6 +149,7 @@ export default function UsersPage() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="border-destructive/30 text-destructive hover:bg-destructive/10"
                       disabled={deleteUser.isPending}
                       onClick={async () => {
                         if (!confirm(`Delete ${user.email}?`)) return;

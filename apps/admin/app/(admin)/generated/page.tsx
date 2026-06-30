@@ -14,6 +14,15 @@ const tabs = [
   { id: 'summary', label: 'Summaries' },
 ] as const;
 
+function statusPillClass(status: string): string {
+  const s = status.toUpperCase();
+  if (s.includes('INACTIVE')) return 'bg-muted text-muted-foreground';
+  if (/FAIL|REJECT|CANCEL|ERROR|EXPIR/.test(s)) return 'bg-destructive/10 text-destructive';
+  if (/PAST.?DUE|OVERDUE|PAUSE|WARN|PENDING|QUEUE|RENDER/.test(s)) return 'bg-warning-muted text-warning';
+  if (/ACTIVE|READY|DONE|APPROV|COMPLETE|SUCCESS/.test(s)) return 'bg-success-muted text-success';
+  return 'bg-muted text-muted-foreground';
+}
+
 export default function GeneratedPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]['id']>('all');
   const { data, isLoading, isError } = useAdminGenerated(tab);
@@ -33,7 +42,10 @@ export default function GeneratedPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Generated media</h1>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Admin
+        </p>
+        <h1 className="font-display text-2xl font-semibold">Generated media</h1>
         <p className="text-sm text-muted-foreground">Podcasts, quizzes, slideshows, summaries</p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -48,15 +60,25 @@ export default function GeneratedPage() {
           </Button>
         ))}
       </div>
-      <div className="overflow-hidden rounded-lg border">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
-          <thead className="bg-muted/50">
+          <thead className="bg-muted/40">
             <tr>
-              <th className="px-4 py-3 text-left font-medium">Kind</th>
-              <th className="px-4 py-3 text-left font-medium">Content</th>
-              <th className="px-4 py-3 text-left font-medium">Owner</th>
-              <th className="px-4 py-3 text-left font-medium">Status</th>
-              <th className="px-4 py-3 text-right font-medium">Actions</th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Kind
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Content
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Owner
+              </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Status
+              </th>
+              <th className="px-4 py-3 text-right font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -75,13 +97,31 @@ export default function GeneratedPage() {
               </tr>
             )}
             {data?.map((item) => (
-              <tr key={`${item.kind}-${item.id}`} className="border-t">
-                <td className="px-4 py-3 capitalize">{item.kind}</td>
+              <tr
+                key={`${item.kind}-${item.id}`}
+                className="border-t border-border/60 hover:bg-secondary/40"
+              >
+                <td className="px-4 py-3 font-medium capitalize">{item.kind}</td>
                 <td className="px-4 py-3">{item.contentTitle}</td>
-                <td className="px-4 py-3">{item.userEmail}</td>
-                <td className="px-4 py-3">{item.status ?? '—'}</td>
+                <td className="px-4 py-3 text-muted-foreground">{item.userEmail}</td>
+                <td className="px-4 py-3">
+                  {item.status ? (
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusPillClass(item.status)}`}
+                    >
+                      {item.status}
+                    </span>
+                  ) : (
+                    '—'
+                  )}
+                </td>
                 <td className="px-4 py-3 text-right">
-                  <Button variant="outline" size="sm" onClick={() => handleDelete(item.id, item.kind)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-destructive/30 text-destructive hover:bg-destructive/10"
+                    onClick={() => handleDelete(item.id, item.kind)}
+                  >
                     Delete
                   </Button>
                 </td>

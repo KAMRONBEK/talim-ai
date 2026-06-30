@@ -16,11 +16,11 @@ function StatCard({
   sub?: string;
 }) {
   return (
-    <Card>
+    <Card className="rounded-2xl shadow-soft">
       <CardContent className="flex items-start justify-between p-5">
         <div>
-          <p className="text-sm text-muted-foreground">{title}</p>
-          <p className="mt-1 text-2xl font-bold">{value}</p>
+          <p className="text-xs text-muted-foreground">{title}</p>
+          <p className="mt-2 font-display text-3xl font-semibold">{value}</p>
           {sub && <p className="mt-1 text-xs text-muted-foreground">{sub}</p>}
         </div>
         <Icon className="h-5 w-5 text-muted-foreground" />
@@ -42,8 +42,11 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Platform statistics</h1>
-        <p className="text-sm text-muted-foreground">Overview of users, content, and API spend</p>
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Admin
+        </p>
+        <h1 className="mt-1 font-display text-2xl font-semibold tracking-tight">Platform statistics</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Overview of users, content, and API spend</p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard title="Total users" value={data.totalUsers} icon={Users} sub={`+${data.signupsLast7Days} last 7 days`} />
@@ -52,9 +55,9 @@ export default function AdminDashboardPage() {
         <StatCard title="Est. API spend" value={`$${data.estimatedApiSpendUsd.toFixed(4)}`} icon={Wallet} />
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <Card>
+        <Card className="rounded-2xl shadow-soft">
           <CardHeader className="pb-2">
-            <h2 className="font-semibold">Signups</h2>
+            <h2 className="font-display text-base font-semibold">Signups</h2>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
@@ -67,9 +70,9 @@ export default function AdminDashboardPage() {
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="rounded-2xl shadow-soft">
           <CardHeader className="pb-2">
-            <h2 className="font-semibold">Generations</h2>
+            <h2 className="font-display text-base font-semibold">Generations</h2>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
