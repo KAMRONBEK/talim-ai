@@ -589,6 +589,8 @@ export interface AdminContentItem {
   createdAt: string;
 }
 
+export type MediaReviewStatus = 'PENDING' | 'APPROVED' | 'FLAGGED';
+
 export interface AdminGeneratedItem {
   id: string;
   kind: 'podcast' | 'quiz' | 'slideshow' | 'summary';
@@ -598,6 +600,31 @@ export interface AdminGeneratedItem {
   userEmail: string;
   status?: string;
   createdAt: string;
+  /** Admin review verdict for this generated item; PENDING when never reviewed. */
+  reviewStatus: MediaReviewStatus;
+}
+
+export interface AdminGeneratedListResponse {
+  items: AdminGeneratedItem[];
+}
+
+/** One generated-media review row (approve/flag), keyed by (kind, mediaId). */
+export interface AdminGeneratedReview {
+  kind: string;
+  mediaId: string;
+  status: MediaReviewStatus;
+  note: string | null;
+  reviewedById: string | null;
+  updatedAt: string;
+}
+
+export interface AdminGeneratedReviewResponse {
+  review: AdminGeneratedReview;
+}
+
+export interface AdminImpersonateResponse {
+  /** Short-lived (30 min) stateless JWT for the impersonated user. */
+  token: string;
 }
 
 export interface UsageFeatureStats {
@@ -640,6 +667,152 @@ export interface AdminPlatformStats {
   totalSummaries: number;
   estimatedApiSpendUsd: number;
   activeUsersLast30Days: number;
+}
+
+// --- Admin analytics dashboard (read-only) ---------------------------------
+
+/** Top-line KPIs for the admin analytics dashboard. */
+export interface AdminAnalyticsSummary {
+  users: number;
+  /** Distinct users with a LearningActivityDay in the last 30 days. */
+  active30d: number;
+  orgs: number;
+  content: number;
+  /** QuizAttempt + AssessmentAttempt rows across the platform. */
+  quizzesTaken: number;
+  mrrUsd: number;
+}
+
+export interface AdminMrrPlanBreakdown {
+  planCode: string;
+  planName: string;
+  planKind: PlanKind;
+  activeSubscriptions: number;
+  priceMonthlyUsd: number;
+  mrrUsd: number;
+}
+
+/** MRR = sum of effective plan price over ACTIVE subscriptions. */
+export interface AdminMrrResponse {
+  mrrUsd: number;
+  activeSubscriptions: number;
+  byPlan: AdminMrrPlanBreakdown[];
+}
+
+export interface AdminUserGrowthPoint {
+  /** Month bucket as YYYY-MM (UTC). */
+  month: string;
+  newUsers: number;
+  /** Cumulative total users through the end of this month. */
+  totalUsers: number;
+}
+
+export interface AdminUserGrowthResponse {
+  points: AdminUserGrowthPoint[];
+}
+
+export interface AdminUsersByRoleRow {
+  role: UserRole;
+  count: number;
+}
+
+export interface AdminUsersByRoleResponse {
+  roles: AdminUsersByRoleRow[];
+}
+
+/** registered → activated (>=1 content) → tutor (TENANT_OWNER) → paid (active non-FREE sub). */
+export interface AdminFunnelResponse {
+  registered: number;
+  activated: number;
+  tutors: number;
+  paid: number;
+}
+
+export interface AdminContentByTypeRow {
+  type: ContentType;
+  count: number;
+}
+
+export interface AdminContentByTypeResponse {
+  types: AdminContentByTypeRow[];
+}
+
+export interface AdminTopOrg {
+  tenantId: string;
+  name: string;
+  slug: string;
+  studentCount: number;
+  contentCount: number;
+  usageCostUsd: number;
+  planCode: string | null;
+}
+
+export interface AdminTopOrgsResponse {
+  orgs: AdminTopOrg[];
+}
+
+export interface AdminSpendByModelRow {
+  model: string;
+  eventCount: number;
+  inputTokens: number;
+  outputTokens: number;
+  costUsd: number;
+  /** True when costUsd was derived from tokens × pricing rather than stored. */
+  approximated: boolean;
+}
+
+export interface AdminSpendByModelResponse {
+  rows: AdminSpendByModelRow[];
+  totalCostUsd: number;
+  /** True when any row's cost was approximated from tokens × the pricing table. */
+  approximated: boolean;
+}
+
+// --- Admin content-control detail (read-only inspector) --------------------
+
+export interface AdminContentDetailContent {
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string | null;
+  tenantId: string | null;
+  type: ContentType;
+  title: string;
+  url: string | null;
+  storagePath: string | null;
+  status: ContentStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminContentDetailPipeline {
+  textExtracted: boolean;
+  chunked: boolean;
+  sectioned: boolean;
+  chunkCount: number;
+  embeddedChunkCount: number;
+  sectionCount: number;
+}
+
+export interface AdminContentDetailGenerated {
+  summary: { present: boolean; count: number };
+  podcast: { present: boolean; status: PodcastStatus | null };
+  video: { present: boolean; status: GeneratedMediaStatus | null };
+  quiz: { present: boolean; count: number };
+}
+
+/** A truncated chunk sample; the pgvector column is never returned, only tested. */
+export interface AdminContentDetailChunk {
+  chunkIndex: number;
+  text: string;
+  hasEmbedding: boolean;
+}
+
+export interface AdminContentDetail {
+  content: AdminContentDetailContent;
+  pipeline: AdminContentDetailPipeline;
+  generated: AdminContentDetailGenerated;
+  chunks: AdminContentDetailChunk[];
 }
 
 export interface PaginatedResponse<T> {

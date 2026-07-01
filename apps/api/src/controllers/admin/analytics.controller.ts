@@ -3,6 +3,16 @@ import { z } from 'zod';
 import { prisma } from '../../lib/prisma.js';
 import type { AuthenticatedRequest } from '../../middleware/auth.middleware.js';
 import { listSubscriptionsForAdmin } from '../../services/subscription.service.js';
+import {
+  computeMrr,
+  getAnalyticsSummary,
+  getContentByType,
+  getFunnel,
+  getSpendByModel,
+  getTopOrgs,
+  getUserGrowth,
+  getUsersByRole,
+} from '../../services/admin/analytics.service.js';
 import { paginationSchema } from './shared.js';
 
 const usageDaysSchema = z.object({
@@ -64,6 +74,48 @@ export async function usageSummary(req: AuthenticatedRequest, res: Response): Pr
     .sort((a, b) => b.estimatedCostUsd - a.estimatedCostUsd);
 
   res.json({ days: query.days, rows });
+}
+
+// ---------------------------------------------------------------------------
+// Analytics dashboard (read-only). Thin handlers over analytics.service.ts.
+// ---------------------------------------------------------------------------
+
+export async function analyticsSummary(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await getAnalyticsSummary());
+}
+
+export async function analyticsMrr(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await computeMrr());
+}
+
+export async function analyticsUserGrowth(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await getUserGrowth());
+}
+
+export async function analyticsByRole(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await getUsersByRole());
+}
+
+export async function analyticsFunnel(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await getFunnel());
+}
+
+export async function analyticsContentByType(
+  _req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
+  res.json(await getContentByType());
+}
+
+export async function analyticsTopOrgs(_req: AuthenticatedRequest, res: Response): Promise<void> {
+  res.json(await getTopOrgs());
+}
+
+export async function analyticsSpendByModel(
+  _req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
+  res.json(await getSpendByModel());
 }
 
 export async function platformStats(_req: AuthenticatedRequest, res: Response): Promise<void> {

@@ -675,6 +675,28 @@ model AttemptAnswer {
   @@index([attemptId])
 }
 
+enum MediaReviewStatus {
+  PENDING
+  APPROVED
+  FLAGGED
+}
+
+// Polymorphic admin review of generated media (podcast/quiz/video/summary), keyed by
+// (kind, mediaId) so one table backs approve/flag across all generated-media types.
+model GeneratedMediaReview {
+  id           String            @id @default(cuid())
+  kind         String
+  mediaId      String
+  status       MediaReviewStatus @default(PENDING)
+  reviewedById String?
+  note         String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([kind, mediaId])
+  @@index([status])
+}
+
 model ContentProgress {
   id               String   @id @default(cuid())
   userId           String
