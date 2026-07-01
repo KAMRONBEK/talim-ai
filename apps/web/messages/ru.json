@@ -625,7 +625,14 @@
       "approveAll": "Одобрить все ({count})",
       "approvingAll": "Одобрение…",
       "dueDateLabel": "Срок сдачи (необязательно)",
-      "dueDateHint": "Показывается ученикам, но не блокирует отправку."
+      "dueDateHint": "Показывается ученикам, но не блокирует отправку.",
+      "gradingLabel": "Оценивание",
+      "strictScoringLabel": "Строгое оценивание (штрафные баллы)",
+      "strictScoringHint": "Неверные ответы снижают баллы; за пропущенные вопросы штраф не начисляется.",
+      "wrongPenaltyLabel": "Штраф за неверный ответ",
+      "wrongPenaltyHint": "Доля баллов вопроса, теряемая за неверный ответ (0–1).",
+      "partialCreditLabel": "Частичный зачёт",
+      "partialCreditHint": "Начислять пропорциональные баллы за частично верные ответы."
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -685,7 +692,11 @@
       "next": "Далее",
       "submitError": "Не удалось отправить ваши ответы.",
       "noScores": "Пока нет результатов.",
-      "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}"
+      "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}",
+      "confirm": "Подтвердить",
+      "selectHint": "Выберите все подходящие",
+      "selectedCount": "Выбрано: {count}",
+      "blankPlaceholder": "Пропуск {index}"
     },
     "welcome": "Добро пожаловать, {name}",
     "dashboardDesc": "Ваши назначенные материалы.",
@@ -771,7 +782,9 @@
       "secondsEach": "по {seconds} с",
       "start": "Начать",
       "due": "Срок: {date}",
-      "overdue": "Просрочено: {date}"
+      "overdue": "Просрочено: {date}",
+      "selectAllHint": "Выберите все подходящие варианты",
+      "blankLabel": "Пропуск {number}"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
     "assignedToYou": "Назначено вам",

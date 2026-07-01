@@ -625,7 +625,14 @@
       "approveAll": "Approve all ({count})",
       "approvingAll": "Approving…",
       "dueDateLabel": "Due date (optional)",
-      "dueDateHint": "Shown to students but does not block submission."
+      "dueDateHint": "Shown to students but does not block submission.",
+      "gradingLabel": "Grading",
+      "strictScoringLabel": "Strict scoring (negative marking)",
+      "strictScoringHint": "Wrong answers deduct points; unanswered questions are never penalized.",
+      "wrongPenaltyLabel": "Wrong-answer penalty",
+      "wrongPenaltyHint": "Share of a question's points lost for a wrong answer (0–1).",
+      "partialCreditLabel": "Partial credit",
+      "partialCreditHint": "Give proportional points for partially correct answers."
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -685,7 +692,11 @@
       "next": "Next",
       "submitError": "Could not submit your answers.",
       "noScores": "No scores yet.",
-      "points": "{count} pts"
+      "points": "{count} pts",
+      "confirm": "Confirm",
+      "selectHint": "Select all that apply",
+      "selectedCount": "{count} selected",
+      "blankPlaceholder": "Blank {index}"
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
@@ -771,7 +782,9 @@
       "secondsEach": "{seconds}s each",
       "start": "Start",
       "due": "Due {date}",
-      "overdue": "Overdue {date}"
+      "overdue": "Overdue {date}",
+      "selectAllHint": "Select all that apply",
+      "blankLabel": "Blank {number}"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",

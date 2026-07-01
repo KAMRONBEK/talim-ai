@@ -113,6 +113,35 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
   );
 }
 
+function GradingToggle({
+  checked,
+  onChange,
+  label,
+}: {
+  checked: boolean;
+  onChange: (value: boolean) => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+        checked ? 'bg-primary' : 'bg-muted-foreground/50'
+      }`}
+    >
+      <span
+        className={`inline-block h-5 w-5 transform rounded-full bg-background shadow-sm transition-transform duration-150 ${
+          checked ? 'translate-x-[1.375rem]' : 'translate-x-0.5'
+        }`}
+      />
+    </button>
+  );
+}
+
 export default function TenantAssessmentsPage() {
   const t = useTranslations('tenant.assessments');
   const { data: banks = [] } = useQuestionBanks();
@@ -135,6 +164,9 @@ export default function TenantAssessmentsPage() {
   const [mode, setMode] = useState<'WRITTEN' | 'GAME'>('WRITTEN');
   const [secondsPerQuestion, setSecondsPerQuestion] = useState(20);
   const [maxAttempts, setMaxAttempts] = useState(1);
+  const [strictScoring, setStrictScoring] = useState(false);
+  const [wrongPenalty, setWrongPenalty] = useState(0.5);
+  const [partialCredit, setPartialCredit] = useState(true);
   const [resultsId, setResultsId] = useState('');
   const createBank = useCreateQuestionBank();
   const generate = useGenerateBankQuestions(selectedBankId);
@@ -428,15 +460,22 @@ export default function TenantAssessmentsPage() {
           className="scroll-mt-24 space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
-            const assessment = await createAssessment.mutateAsync({
+            // Grading fields ride along with the existing create mutation; the
+            // backend createAssessmentSchema accepts strictScoring/wrongPenalty/
+            // partialCredit. Built as a variable so the extra keys pass TS's
+            // excess-property check without changing the shared hook's input type.
+            const payload = {
               bankId: selectedBankId ?? undefined,
               title: assessmentTitle,
               questionIds: selectedQuestions,
               publish: true,
               mode,
               maxAttempts,
+              strictScoring,
+              ...(strictScoring ? { wrongPenalty, partialCredit } : {}),
               ...(mode === 'GAME' ? { secondsPerQuestion } : {}),
-            });
+            };
+            const assessment = await createAssessment.mutateAsync(payload);
             setAssessmentId(assessment.id);
             setResultsId(assessment.id);
             setAssessmentTitle('');
@@ -506,6 +545,50 @@ export default function TenantAssessmentsPage() {
               />
             </div>
           )}
+          <div className="space-y-3 rounded-xl border border-border/70 bg-secondary/30 p-4">
+            <p className="font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {t('gradingLabel')}
+            </p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="text-sm font-medium text-foreground">{t('strictScoringLabel')}</p>
+              <GradingToggle
+                checked={strictScoring}
+                onChange={setStrictScoring}
+                label={t('strictScoringLabel')}
+              />
+            </div>
+            <p className="text-[11px] text-muted-foreground">{t('strictScoringHint')}</p>
+            {strictScoring && (
+              <div className="space-y-3 border-t border-border/60 pt-3">
+                <div className="space-y-1">
+                  <Label htmlFor="wrongPenalty">{t('wrongPenaltyLabel')}</Label>
+                  <Input
+                    id="wrongPenalty"
+                    type="number"
+                    min={0}
+                    max={1}
+                    step={0.05}
+                    value={wrongPenalty}
+                    onChange={(e) =>
+                      setWrongPenalty(Math.max(0, Math.min(1, Number(e.target.value) || 0)))
+                    }
+                  />
+                  <p className="text-[11px] text-muted-foreground">{t('wrongPenaltyHint')}</p>
+                </div>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">{t('partialCreditLabel')}</p>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground">{t('partialCreditHint')}</p>
+                  </div>
+                  <GradingToggle
+                    checked={partialCredit}
+                    onChange={setPartialCredit}
+                    label={t('partialCreditLabel')}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
           <div className="max-h-72 space-y-0.5 overflow-y-auto rounded-xl border border-border/70 bg-background p-2">
             {approvedQuestions.map((question) => (
               <label

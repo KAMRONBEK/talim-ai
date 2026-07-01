@@ -27,10 +27,20 @@ function Leaderboard({ assessmentId }: { assessmentId: string }) {
 function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   const t = useTranslations('learner.assessments');
   const submit = useSubmitLearnerAssessment();
+  // Existing single-string answers (SHORT_ANSWER / NUMERIC / MULTIPLE_CHOICE / TRUE_FALSE).
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  // MULTIPLE_SELECT: selected option values per question.
+  const [multiSelect, setMultiSelect] = useState<Record<string, string[]>>({});
+  // FILL_BLANK: per-blank text values per question (indexed by blank position).
+  const [fillBlanks, setFillBlanks] = useState<Record<string, string[]>>({});
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
+  // FILL_BLANK blank count comes from question.config.blanks (defaults to a single blank).
+  const blankCount = (config: Record<string, unknown> | null) => {
+    const raw = config?.blanks;
+    return typeof raw === 'number' && raw > 0 ? Math.floor(raw) : 1;
+  };
 
   if (result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
@@ -73,11 +83,31 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
       onSubmit={async (event) => {
         event.preventDefault();
         setError(null);
-        const scoped = Object.fromEntries(
-          assessment.questions.map((q) => [q.id, answers[q.id] ?? '']),
+        // Build the per-question payload. Existing types keep their single-string shape;
+        // the new structured types submit arrays (MULTIPLE_SELECT) or a string/string[]
+        // (FILL_BLANK: a bare string for one blank, an array for many). The backend
+        // JSON-parses these structured answers.
+        const scoped: Record<string, string | string[]> = Object.fromEntries(
+          assessment.questions.map((q) => {
+            if (q.type === 'MULTIPLE_SELECT') {
+              return [q.id, multiSelect[q.id] ?? []];
+            }
+            if (q.type === 'FILL_BLANK') {
+              const count = blankCount(q.config);
+              const values = fillBlanks[q.id] ?? [];
+              const filled = Array.from({ length: count }, (_, i) => values[i] ?? '');
+              return [q.id, count <= 1 ? filled[0] ?? '' : filled];
+            }
+            return [q.id, answers[q.id] ?? ''];
+          }),
         );
         try {
-          const data = await submit.mutateAsync({ assessmentId: assessment.id, answers: scoped });
+          const data = await submit.mutateAsync({
+            assessmentId: assessment.id,
+            // The mutation types answers as Record<string,string>; structured values ride
+            // through unchanged and are parsed server-side.
+            answers: scoped as Record<string, string>,
+          });
           setResult(data);
         } catch (err) {
           setError(
@@ -110,6 +140,79 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
                     />
                     {option}
                   </label>
+                ))}
+              </div>
+            ) : question.type === 'TRUE_FALSE' && question.options?.length ? (
+              <div className="space-y-2">
+                {question.options.map((option) => (
+                  <label
+                    key={option}
+                    className="flex cursor-pointer items-center gap-2 rounded-lg border border-border/70 px-3 py-2 text-sm transition-colors hover:border-primary/40 hover:bg-secondary/40"
+                  >
+                    <input
+                      type="radio"
+                      className="h-4 w-4 accent-primary"
+                      name={`${assessment.id}-${question.id}`}
+                      disabled={locked}
+                      checked={answers[question.id] === option}
+                      onChange={() => setAnswers((prev) => ({ ...prev, [question.id]: option }))}
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            ) : question.type === 'MULTIPLE_SELECT' && question.options?.length ? (
+              <div className="space-y-2">
+                <p className="text-xs text-muted-foreground">{t('selectAllHint')}</p>
+                {question.options.map((option) => {
+                  const selected = multiSelect[question.id] ?? [];
+                  return (
+                    <label
+                      key={option}
+                      className="flex cursor-pointer items-center gap-2 rounded-lg border border-border/70 px-3 py-2 text-sm transition-colors hover:border-primary/40 hover:bg-secondary/40"
+                    >
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 accent-primary"
+                        disabled={locked}
+                        checked={selected.includes(option)}
+                        onChange={() =>
+                          setMultiSelect((prev) => {
+                            const cur = prev[question.id] ?? [];
+                            return {
+                              ...prev,
+                              [question.id]: cur.includes(option)
+                                ? cur.filter((v) => v !== option)
+                                : [...cur, option],
+                            };
+                          })
+                        }
+                      />
+                      {option}
+                    </label>
+                  );
+                })}
+              </div>
+            ) : question.type === 'FILL_BLANK' ? (
+              <div className="space-y-2">
+                {Array.from({ length: blankCount(question.config) }).map((_, i) => (
+                  <Input
+                    key={i}
+                    disabled={locked}
+                    value={fillBlanks[question.id]?.[i] ?? ''}
+                    onChange={(event) =>
+                      setFillBlanks((prev) => {
+                        const next = [...(prev[question.id] ?? [])];
+                        next[i] = event.target.value;
+                        return { ...prev, [question.id]: next };
+                      })
+                    }
+                    placeholder={
+                      blankCount(question.config) > 1
+                        ? t('blankLabel', { number: i + 1 })
+                        : t('textPlaceholder')
+                    }
+                  />
                 ))}
               </div>
             ) : (

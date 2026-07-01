@@ -625,7 +625,14 @@
       "approveAll": "Barchasini tasdiqlash ({count})",
       "approvingAll": "Tasdiqlanmoqda…",
       "dueDateLabel": "Topshirish muddati (ixtiyoriy)",
-      "dueDateHint": "Belgilangan sana o'quvchiga ko'rsatiladi, lekin topshirishni bloklamaydi."
+      "dueDateHint": "Belgilangan sana o'quvchiga ko'rsatiladi, lekin topshirishni bloklamaydi.",
+      "gradingLabel": "Baholash",
+      "strictScoringLabel": "Qat'iy baholash (manfiy ball)",
+      "strictScoringHint": "Noto‘g‘ri javoblar ballni kamaytiradi; javob berilmagan savollar uchun jarima yo‘q.",
+      "wrongPenaltyLabel": "Noto‘g‘ri javob jarimasi",
+      "wrongPenaltyHint": "Noto‘g‘ri javob uchun yo‘qotiladigan ball ulushi (0–1).",
+      "partialCreditLabel": "Qisman ball",
+      "partialCreditHint": "Qisman to‘g‘ri javoblar uchun mutanosib ball beriladi."
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -685,7 +692,11 @@
       "next": "Keyingi",
       "submitError": "Javoblaringizni yuborib bo'lmadi.",
       "noScores": "Hali natijalar yo'q.",
-      "points": "{count} ball"
+      "points": "{count} ball",
+      "confirm": "Tasdiqlash",
+      "selectHint": "Mos keladiganlarning barchasini tanlang",
+      "selectedCount": "{count} ta tanlandi",
+      "blankPlaceholder": "{index}-bo'sh joy"
     },
     "welcome": "Xush kelibsiz, {name}",
     "dashboardDesc": "Sizga tayinlangan materiallar.",
@@ -771,7 +782,9 @@
       "secondsEach": "har biriga {seconds}s",
       "start": "Boshlash",
       "due": "Muddat: {date}",
-      "overdue": "Muddati o'tgan: {date}"
+      "overdue": "Muddati o'tgan: {date}",
+      "selectAllHint": "Barcha to'g'ri javoblarni belgilang",
+      "blankLabel": "{number}-bo'shliq"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",
