@@ -102,6 +102,9 @@ enum QuestionType {
   TRUE_FALSE
   MULTIPLE_SELECT
   FILL_BLANK
+  DROPDOWN_CLOZE
+  MATCHING
+  ORDERING
 }
 
 enum BankQuestionStatus {

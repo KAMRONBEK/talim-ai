@@ -25,7 +25,10 @@ export type QuestionType =
   | 'MULTIPLE_CHOICE'
   | 'TRUE_FALSE'
   | 'MULTIPLE_SELECT'
-  | 'FILL_BLANK';
+  | 'FILL_BLANK'
+  | 'DROPDOWN_CLOZE'
+  | 'MATCHING'
+  | 'ORDERING';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';

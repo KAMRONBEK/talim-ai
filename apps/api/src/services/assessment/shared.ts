@@ -18,6 +18,9 @@ export const questionStyleEnum = z.enum([
   'trueFalse',
   'multipleSelect',
   'fillBlank',
+  'dropdownCloze',
+  'matching',
+  'ordering',
   'written',
   'numeric',
 ]);
@@ -344,6 +347,54 @@ function parseArrayAnswer(raw: unknown): string[] {
 }
 
 /**
+ * Coerce a submitted structured answer into a plain array or object (or null). Accepts a
+ * real array/object, or a string that is itself a JSON-encoded array/object (belt-and-braces
+ * for values that were round-tripped through the String answer column). Unlike
+ * `parseArrayAnswer` this preserves object keys, which the MATCHING grader needs to resolve
+ * a `{ leftPrompt: chosenRight }` map.
+ */
+function coerceStructuredAnswer(raw: unknown): unknown[] | Record<string, unknown> | null {
+  if (Array.isArray(raw)) return raw;
+  if (raw && typeof raw === 'object') return raw as Record<string, unknown>;
+  if (typeof raw === 'string') {
+    const s = raw.trim();
+    if (s.startsWith('[') || s.startsWith('{')) {
+      try {
+        const parsed: unknown = JSON.parse(s);
+        if (Array.isArray(parsed)) return parsed;
+        if (parsed && typeof parsed === 'object') return parsed as Record<string, unknown>;
+      } catch {
+        /* not JSON — no structured value */
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Resolve a MATCHING submission into the learner's chosen right-hand value per left prompt
+ * (index-aligned with `left`). Two accepted submit shapes:
+ *  - an ordered array of right values, parallel to `left`; or
+ *  - an object keyed by left prompt text (or by the left index as a string).
+ */
+function parseMatchingChoices(raw: unknown, left: string[], count: number): string[] {
+  const parsed = coerceStructuredAnswer(raw);
+  const out: string[] = [];
+  for (let i = 0; i < count; i++) {
+    let value: unknown;
+    if (Array.isArray(parsed)) {
+      value = parsed[i];
+    } else if (parsed && typeof parsed === 'object') {
+      const obj = parsed as Record<string, unknown>;
+      const key = left[i];
+      value = (key != null ? obj[key] : undefined) ?? obj[String(i)];
+    }
+    out.push(typeof value === 'string' ? value : '');
+  }
+  return out;
+}
+
+/**
  * A MULTIPLE_SELECT question is answerable only if it has at least two options and at
  * least one accepted answer, and every accepted answer exactly matches one option.
  */
@@ -410,7 +461,10 @@ export function gradeQuestion(
     };
   }
 
-  if (question.type === 'FILL_BLANK') {
+  // DROPDOWN_CLOZE grades exactly like FILL_BLANK: one selected value per blank, matched
+  // against the accepted value(s) for that blank. The only difference is presentation — the
+  // learner picks from a per-blank option list (config.blankOptions) rather than typing.
+  if (question.type === 'FILL_BLANK' || question.type === 'DROPDOWN_CLOZE') {
     const perBlank = fillBlankAcceptedPerBlank(parseQuestionConfig(question.config), acceptable);
     const answers = parseArrayAnswer(raw);
     let hit = 0;
@@ -425,6 +479,51 @@ export function gradeQuestion(
       correct: exact,
       creditFraction: partialCredit ? fraction : exact ? 1 : 0,
       answered: answers.some((a) => a.trim() !== ''),
+    };
+  }
+
+  if (question.type === 'MATCHING') {
+    // acceptableAnswers = the correct right-hand value per left prompt, index-aligned with
+    // config.left. creditFraction = (#correctly matched pairs) / (#pairs); correct = all right.
+    const config = parseQuestionConfig(question.config);
+    const left = jsonStringArray(config?.left);
+    const correct = acceptable;
+    const count = correct.length;
+    const chosen = parseMatchingChoices(raw, left, count);
+    let hit = 0;
+    for (let i = 0; i < count; i++) {
+      const got = chosen[i] ?? '';
+      const want = correct[i] ?? '';
+      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
+    }
+    const fraction = count > 0 ? hit / count : 0;
+    const exact = count > 0 && hit === count;
+    return {
+      correct: exact,
+      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
+      answered: chosen.some((c) => c.trim() !== ''),
+    };
+  }
+
+  if (question.type === 'ORDERING') {
+    // acceptableAnswers = the items in their correct order. Absolute-position scoring:
+    // creditFraction = (#items placed in their correct absolute position) / (#items);
+    // correct = the full submitted sequence matches the correct order.
+    const correctOrder = acceptable;
+    const submitted = parseArrayAnswer(raw);
+    const count = correctOrder.length;
+    let hit = 0;
+    for (let i = 0; i < count; i++) {
+      const got = submitted[i] ?? '';
+      const want = correctOrder[i] ?? '';
+      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
+    }
+    const fraction = count > 0 ? hit / count : 0;
+    const exact = count > 0 && hit === count && submitted.length === count;
+    return {
+      correct: exact,
+      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
+      answered: submitted.some((a) => a.trim() !== ''),
     };
   }
 
