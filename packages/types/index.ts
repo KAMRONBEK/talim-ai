@@ -1172,11 +1172,29 @@ export interface ContentVideo {
   createdAt: string;
 }
 
+/** Spaced-repetition grade a learner gives a card after flipping it. */
+export type FlashcardGrade = 'again' | 'hard' | 'good' | 'easy';
+
+/** Per-user SM-2 review state for a single flashcard. */
+export interface FlashcardReviewState {
+  flashcardId: string;
+  intervalDays: number;
+  nextReviewAt: string | null;
+  repetitions: number;
+  easeFactor: number;
+}
+
 export interface Flashcard {
   id: string;
   front: string;
   back: string;
   order: number;
+  // SRS review state for the requesting user (additive; always present on GET responses).
+  due: boolean;
+  intervalDays: number;
+  repetitions: number;
+  easeFactor: number;
+  nextReviewAt: string | null;
 }
 
 export interface FlashcardDeck {
@@ -1187,6 +1205,8 @@ export interface FlashcardDeck {
   scopeKey: string;
   status: GeneratedMediaStatus;
   cards: Flashcard[];
+  /** Number of cards due for review now for the requesting user. */
+  dueCount: number;
   createdAt: string;
 }
 

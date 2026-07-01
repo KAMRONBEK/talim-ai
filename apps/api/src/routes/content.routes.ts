@@ -38,6 +38,10 @@ contentRoutes.post('/:id/video', asyncHandler(videoController.createVideo));
 contentRoutes.get('/:id/video/segments/:index/audio', asyncHandler(videoController.streamVideoSegmentAudio));
 contentRoutes.get('/:id/flashcards', asyncHandler(flashcardsController.getFlashcards));
 contentRoutes.post('/:id/flashcards', asyncHandler(flashcardsController.createFlashcards));
+contentRoutes.post(
+  '/:id/flashcards/:cardId/review',
+  asyncHandler(flashcardsController.reviewFlashcard),
+);
 contentRoutes.get('/:id/slides', asyncHandler(slidesController.getSlides));
 contentRoutes.post('/:id/slides', asyncHandler(slidesController.createSlides));
 contentRoutes.post('/:id/reparse', reparseRateLimit, asyncHandler(contentController.reparseContent));

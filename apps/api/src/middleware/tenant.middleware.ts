@@ -124,7 +124,11 @@ export function blockLearnerMutations(
     // mutations blocked except submit/progress semantics").
     const isQuizSubmit = req.method === 'POST' && req.path.includes('/submit');
     const isProgressPatch = req.method === 'PATCH' && req.path.includes('/progress');
-    if (req.method !== 'GET' && !isQuizSubmit && !isProgressPatch) {
+    // Grading a flashcard (SRS spaced-repetition review) is a learner-permitted mutation,
+    // like submitting a quiz — it only writes the learner's own per-card review state.
+    const isFlashcardReview =
+      req.method === 'POST' && req.path.includes('/flashcards/') && req.path.endsWith('/review');
+    if (req.method !== 'GET' && !isQuizSubmit && !isProgressPatch && !isFlashcardReview) {
       res.status(403).json({ message: 'Learners cannot upload, generate, or modify content' });
       return;
     }

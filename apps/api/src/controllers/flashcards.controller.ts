@@ -8,6 +8,7 @@ import { resolveLocale } from '../lib/locale.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 import { flashcardQueue } from '../services/queue.service.js';
+import { reviewFlashcard as applyFlashcardReview } from '../services/srs.service.js';
 
 const flashcardsBodySchema = z.object({
   sectionId: z.string().optional(),
@@ -15,20 +16,52 @@ const flashcardsBodySchema = z.object({
   regenerate: z.boolean().optional(),
 });
 
+const reviewBodySchema = z.object({
+  grade: z.enum(['again', 'hard', 'good', 'easy']),
+});
+
 function scopeKey(sectionId?: string): string {
   return sectionId ?? 'full';
 }
 
-function formatDeck(deck: {
-  id: string;
-  contentId: string;
-  sectionId: string | null;
-  scopeKey: string;
-  locale: string;
-  status: string;
-  createdAt: Date;
-  cards?: { id: string; front: string; back: string; order: number }[];
-}) {
+type ReviewRow = {
+  flashcardId: string;
+  easeFactor: number;
+  intervalDays: number;
+  repetitions: number;
+  nextReviewAt: Date | null;
+};
+
+function formatDeck(
+  deck: {
+    id: string;
+    contentId: string;
+    sectionId: string | null;
+    scopeKey: string;
+    locale: string;
+    status: string;
+    createdAt: Date;
+    cards?: { id: string; front: string; back: string; order: number }[];
+  },
+  reviews?: Map<string, ReviewRow>,
+  now: Date = new Date(),
+) {
+  const cards = (deck.cards ?? []).map((c) => {
+    const r = reviews?.get(c.id);
+    // Due when the card has never been reviewed or its next review time has passed.
+    const due = !r || !r.nextReviewAt || r.nextReviewAt <= now;
+    return {
+      id: c.id,
+      front: c.front,
+      back: c.back,
+      order: c.order,
+      due,
+      intervalDays: r?.intervalDays ?? 0,
+      repetitions: r?.repetitions ?? 0,
+      easeFactor: r?.easeFactor ?? 2.5,
+      nextReviewAt: r?.nextReviewAt ? r.nextReviewAt.toISOString() : null,
+    };
+  });
   return {
     id: deck.id,
     contentId: deck.contentId,
@@ -36,12 +69,8 @@ function formatDeck(deck: {
     scopeKey: deck.scopeKey,
     locale: deck.locale,
     status: deck.status,
-    cards: (deck.cards ?? []).map((c) => ({
-      id: c.id,
-      front: c.front,
-      back: c.back,
-      order: c.order,
-    })),
+    cards,
+    dueCount: cards.filter((c) => c.due).length,
     createdAt: deck.createdAt.toISOString(),
   };
 }
@@ -58,7 +87,32 @@ export async function getFlashcards(req: AuthenticatedRequest, res: Response): P
     include: { cards: { orderBy: { order: 'asc' } } },
   });
 
-  res.json({ deck: deck ? formatDeck(deck) : null });
+  // Enrich each card with this user's SM-2 review state (nextReviewAt / due) + a deck-level dueCount.
+  let reviews: Map<string, ReviewRow> | undefined;
+  if (deck && deck.cards.length > 0) {
+    const rows = await prisma.flashcardReview.findMany({
+      where: { userId: req.user.userId, flashcardId: { in: deck.cards.map((c) => c.id) } },
+      select: {
+        flashcardId: true,
+        easeFactor: true,
+        intervalDays: true,
+        repetitions: true,
+        nextReviewAt: true,
+      },
+    });
+    reviews = new Map(rows.map((r) => [r.flashcardId, r]));
+  }
+
+  res.json({ deck: deck ? formatDeck(deck, reviews) : null });
+}
+
+export async function reviewFlashcard(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const flashcardId = getParam(req, 'cardId');
+  const { grade } = reviewBodySchema.parse(req.body ?? {});
+
+  const review = await applyFlashcardReview(req.user, flashcardId, grade);
+  res.json({ review });
 }
 
 export async function createFlashcards(req: AuthenticatedRequest, res: Response): Promise<void> {

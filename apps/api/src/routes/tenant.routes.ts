@@ -121,6 +121,10 @@ tenantContent.get(
 );
 tenantContent.get('/:id/flashcards', asyncHandler(flashcardsController.getFlashcards));
 tenantContent.post('/:id/flashcards', asyncHandler(flashcardsController.createFlashcards));
+tenantContent.post(
+  '/:id/flashcards/:cardId/review',
+  asyncHandler(flashcardsController.reviewFlashcard),
+);
 tenantContent.get('/:id/slides', asyncHandler(slidesController.getSlides));
 tenantContent.post('/:id/slides', asyncHandler(slidesController.createSlides));
 // Progress / history / podcast-progress so an owner can read & track their own

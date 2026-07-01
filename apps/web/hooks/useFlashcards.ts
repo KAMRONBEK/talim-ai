@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { AppLocale, FlashcardDeck } from '@talim/types';
+import type { AppLocale, FlashcardDeck, FlashcardGrade, FlashcardReviewState } from '@talim/types';
 import { useLocale } from 'next-intl';
 import { api } from '@/lib/api';
 import { useContentBase } from '@/hooks/useContentBase';
@@ -44,6 +44,23 @@ export function useGenerateFlashcards(contentId: string, sectionId?: string) {
       });
       return data.deck;
     },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['flashcards', contentId] }),
+  });
+}
+
+export function useReviewFlashcard(contentId: string) {
+  const base = useContentBase();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ cardId, grade }: { cardId: string; grade: FlashcardGrade }) => {
+      const { data } = await api.post<{ review: FlashcardReviewState }>(
+        `${base}/${contentId}/flashcards/${cardId}/review`,
+        { grade },
+      );
+      return data.review;
+    },
+    // Refresh due state / dueCount after grading.
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['flashcards', contentId] }),
   });
 }
