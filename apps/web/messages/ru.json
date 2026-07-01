@@ -547,7 +547,8 @@
       "assignDialogTitle": "Назначить материал {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
       "assignDialogDesc": "Выберите материал для назначения выбранным ученикам.",
       "noMaterials": "Пока нет материалов для назначения.",
-      "assignConfirm": "Назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}"
+      "assignConfirm": "Назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
+      "mastery": "Освоение"
     },
     "assign": {
       "title": "Назначить ученикам",
@@ -651,7 +652,18 @@
       "retry": "Повторить",
       "readMin": "{count} мин",
       "noSections": "Разделов пока нет."
-    }
+    },
+    "masteryByTopic": "Освоение по темам · класс",
+    "masteryByTopicEmpty": "Пока нет данных по темам. Назначьте материалы — охват появится по мере учёбы.",
+    "distribution": "Распределение",
+    "distributionEmpty": "Пока нет оценок.",
+    "distLt50": "< 50%",
+    "distB50": "50–69%",
+    "distB70": "70–84%",
+    "distGte85": "85%+",
+    "topOfClass": "Лучшие в классе",
+    "topOfClassEmpty": "Пока нет оценок для ранжирования.",
+    "atRisk": "В зоне риска"
   },
   "learner": {
     "loading": "Загрузка...",
@@ -697,7 +709,16 @@
       "averageQuiz": "Средний балл",
       "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс.",
       "overallMastery": "Общее усвоение",
-      "yourClass": "Ваш класс"
+      "yourClass": "Ваш класс",
+      "masteryByTopic": "Усвоение по темам",
+      "masteryEmpty": "Пока нет усвоения по темам.",
+      "achievements": "Достижения",
+      "badgesEmpty": "Пока нет значков.",
+      "badgeEarned": "Получено",
+      "badgeProgress": "{percent}% до получения",
+      "materialsDone": "Материалы пройдены",
+      "quizzes": "Тесты",
+      "avgAccuracy": "Средняя точность"
     },
     "nav": {
       "materials": "Материалы",
@@ -755,7 +776,13 @@
     "cardStatusNotStarted": "Не начато",
     "cardStatusCompleted": "Завершено",
     "cardStatusProcessing": "Обработка…",
-    "cardStatusFailed": "Не удалось обработать"
+    "cardStatusFailed": "Не удалось обработать",
+    "cardStatusContinuePercent": "{percent}% · продолжить",
+    "badges": {
+      "STREAK_5": "5 дней подряд",
+      "FIRST_PERFECT": "Первый идеальный тест",
+      "TEN_QUIZZES": "10 тестов пройдено"
+    }
   },
   "slides": {
     "subtitle": "Слайды по этому материалу, созданные ИИ",

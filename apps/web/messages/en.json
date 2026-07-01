@@ -547,7 +547,8 @@
       "assignDialogTitle": "Assign a material to {count, plural, one {# student} other {# students}}",
       "assignDialogDesc": "Choose a material to assign to the selected students.",
       "noMaterials": "No materials to assign yet.",
-      "assignConfirm": "Assign to {count, plural, one {# student} other {# students}}"
+      "assignConfirm": "Assign to {count, plural, one {# student} other {# students}}",
+      "mastery": "Mastery"
     },
     "assign": {
       "title": "Assign to students",
@@ -651,7 +652,18 @@
       "retry": "Retry",
       "readMin": "{count} min",
       "noSections": "No sections yet."
-    }
+    },
+    "masteryByTopic": "Mastery by topic · class",
+    "masteryByTopicEmpty": "No topic mastery yet. Assign materials and coverage appears as students study.",
+    "distribution": "Distribution",
+    "distributionEmpty": "No scores yet.",
+    "distLt50": "< 50%",
+    "distB50": "50–69%",
+    "distB70": "70–84%",
+    "distGte85": "85%+",
+    "topOfClass": "Top of the class",
+    "topOfClassEmpty": "No mastery scores to rank yet.",
+    "atRisk": "At risk"
   },
   "learner": {
     "loading": "Loading...",
@@ -697,7 +709,16 @@
       "averageQuiz": "Average quiz",
       "emptyDesc": "Open an assigned material to start tracking progress.",
       "overallMastery": "Overall mastery",
-      "yourClass": "Your class"
+      "yourClass": "Your class",
+      "masteryByTopic": "Mastery by topic",
+      "masteryEmpty": "No topic mastery yet.",
+      "achievements": "Achievements",
+      "badgesEmpty": "No badges yet.",
+      "badgeEarned": "Earned",
+      "badgeProgress": "{percent}% to unlock",
+      "materialsDone": "Materials done",
+      "quizzes": "Quizzes",
+      "avgAccuracy": "Avg accuracy"
     },
     "nav": {
       "materials": "Materials",
@@ -755,7 +776,13 @@
     "cardStatusNotStarted": "Not started",
     "cardStatusCompleted": "Completed",
     "cardStatusProcessing": "Processing…",
-    "cardStatusFailed": "Couldn't process"
+    "cardStatusFailed": "Couldn't process",
+    "cardStatusContinuePercent": "{percent}% · continue",
+    "badges": {
+      "STREAK_5": "5-day streak",
+      "FIRST_PERFECT": "First perfect quiz",
+      "TEN_QUIZZES": "10 quizzes done"
+    }
   },
   "slides": {
     "subtitle": "AI-generated slides from this material",

@@ -547,7 +547,8 @@
       "assignDialogTitle": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} material biriktirish",
       "assignDialogDesc": "Tanlangan o'quvchilarga biriktirish uchun material tanlang.",
       "noMaterials": "Biriktirish uchun hali material yo'q.",
-      "assignConfirm": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} biriktirish"
+      "assignConfirm": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} biriktirish",
+      "mastery": "O'zlashtirish"
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",
@@ -651,7 +652,18 @@
       "retry": "Qayta urinish",
       "readMin": "{count} daq",
       "noSections": "Hozircha bo'limlar yo'q."
-    }
+    },
+    "masteryByTopic": "Mavzular bo'yicha o'zlashtirish · sinf",
+    "masteryByTopicEmpty": "Hozircha mavzu o'zlashtirishi yo'q. Material biriktiring — o'quvchilar o'rgangani sari qamrov paydo bo'ladi.",
+    "distribution": "Taqsimot",
+    "distributionEmpty": "Hozircha ballar yo'q.",
+    "distLt50": "< 50%",
+    "distB50": "50–69%",
+    "distB70": "70–84%",
+    "distGte85": "85%+",
+    "topOfClass": "Sinf peshqadamlari",
+    "topOfClassEmpty": "Saralash uchun o'zlashtirish ballari hali yo'q.",
+    "atRisk": "Xavf ostida"
   },
   "learner": {
     "loading": "Yuklanmoqda...",
@@ -697,7 +709,16 @@
       "averageQuiz": "O'rtacha test",
       "emptyDesc": "Taraqqiyotni kuzatishni boshlash uchun tayinlangan materialni oching.",
       "overallMastery": "Umumiy o'zlashtirish",
-      "yourClass": "Sinfingiz"
+      "yourClass": "Sinfingiz",
+      "masteryByTopic": "Mavzular bo'yicha o'zlashtirish",
+      "masteryEmpty": "Hali mavzu o'zlashtirishi yo'q.",
+      "achievements": "Yutuqlar",
+      "badgesEmpty": "Hali nishonlar yo'q.",
+      "badgeEarned": "Qo'lga kiritildi",
+      "badgeProgress": "Ochish uchun {percent}%",
+      "materialsDone": "Tugatilgan materiallar",
+      "quizzes": "Testlar",
+      "avgAccuracy": "O'rtacha aniqlik"
     },
     "nav": {
       "materials": "Materiallar",
@@ -755,7 +776,13 @@
     "cardStatusNotStarted": "Boshlanmagan",
     "cardStatusCompleted": "Tugallandi",
     "cardStatusProcessing": "Tayyorlanmoqda…",
-    "cardStatusFailed": "Qayta ishlab bo‘lmadi"
+    "cardStatusFailed": "Qayta ishlab bo‘lmadi",
+    "cardStatusContinuePercent": "{percent}% · davom eting",
+    "badges": {
+      "STREAK_5": "5 kunlik seriya",
+      "FIRST_PERFECT": "Birinchi mukammal test",
+      "TEN_QUIZZES": "10 ta test bajarildi"
+    }
   },
   "slides": {
     "subtitle": "Ushbu material asosida AI yaratgan slaydlar",

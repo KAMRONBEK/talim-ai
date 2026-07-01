@@ -14,11 +14,11 @@ import {
 } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useContents } from '@/hooks/useContent';
-import { useLearnerSummary } from '@/hooks/useTenant';
+import { useLearnerMaterials, useLearnerSummary } from '@/hooks/useTenant';
 import { useLearnerAssessments } from '@/hooks/useAssessments';
 import { Link } from '@/i18n/navigation';
-import { Button, cn } from '@talim/ui';
-import type { Content, ContentType } from '@talim/types';
+import { Button, Progress, cn } from '@talim/ui';
+import type { Content, ContentType, LearnerMaterial } from '@talim/types';
 import { StudentWelcomeBanner } from '@/components/learner/student-welcome-banner';
 
 type CardStatus = 'processing' | 'failed' | 'completed' | 'continue' | 'notStarted';
@@ -50,10 +50,23 @@ const typeStyles: Record<
   },
 };
 
-function AssignedMaterialCard({ content, status }: { content: Content; status: CardStatus }) {
+function AssignedMaterialCard({
+  content,
+  status,
+  coverage,
+}: {
+  content: Content;
+  status: CardStatus;
+  coverage: number;
+}) {
   const t = useTranslations('learner');
   const style = typeStyles[content.type];
   const Icon = style.icon;
+
+  // Materials that are ready carry a real per-material % + progress bar; still-
+  // processing / failed items instead show a spinner or error line (no bar).
+  const showBar = status === 'notStarted' || status === 'continue' || status === 'completed';
+  const barValue = status === 'completed' ? 100 : status === 'notStarted' ? 0 : coverage;
 
   const statusLabel =
     status === 'processing'
@@ -63,7 +76,7 @@ function AssignedMaterialCard({ content, status }: { content: Content; status: C
         : status === 'completed'
           ? `${t('cardStatusCompleted')} ✓`
           : status === 'continue'
-            ? t('cardStatusContinue')
+            ? t('cardStatusContinuePercent', { percent: coverage })
             : t('cardStatusNotStarted');
 
   return (
@@ -92,20 +105,34 @@ function AssignedMaterialCard({ content, status }: { content: Content; status: C
         <p className="truncate font-display text-sm font-semibold leading-snug text-foreground">
           {content.title}
         </p>
-        <div
-          className={cn(
-            'mt-2 flex items-center gap-1.5 text-xs',
-            status === 'completed'
-              ? 'font-semibold text-primary'
-              : status === 'failed'
-                ? 'text-destructive'
-                : 'text-muted-foreground',
-          )}
-        >
-          {status === 'processing' && <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />}
-          {status === 'failed' && <AlertCircle className="h-3.5 w-3.5 shrink-0" />}
-          <span>{statusLabel}</span>
-        </div>
+        {showBar ? (
+          <>
+            <Progress
+              value={barValue}
+              aria-hidden
+              className="mt-2 h-1.5"
+            />
+            <p
+              className={cn(
+                'mt-1.5 text-xs',
+                status === 'completed' ? 'font-semibold text-primary' : 'text-muted-foreground',
+              )}
+            >
+              {statusLabel}
+            </p>
+          </>
+        ) : (
+          <div
+            className={cn(
+              'mt-2 flex items-center gap-1.5 text-xs',
+              status === 'failed' ? 'text-destructive' : 'text-muted-foreground',
+            )}
+          >
+            {status === 'processing' && <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" />}
+            {status === 'failed' && <AlertCircle className="h-3.5 w-3.5 shrink-0" />}
+            <span>{statusLabel}</span>
+          </div>
+        )}
       </div>
     </Link>
   );
@@ -116,13 +143,22 @@ export default function LearnerDashboardPage() {
   const user = useAuthStore((s) => s.user);
   const { data: contents, isLoading } = useContents();
   const { data: summary } = useLearnerSummary();
+  const { data: materials } = useLearnerMaterials();
   const { data: assessments } = useLearnerAssessments();
 
   const assigned = useMemo(() => contents ?? [], [contents]);
   const assignedCount = summary?.assignedCount ?? assigned.length;
 
-  // Only the single "continue" material carries progress today (per-material % is a
-  // later wave), so derive its status precisely and default the rest to "not started".
+  // Per-material coverage now comes from useLearnerMaterials(); index it by contentId
+  // so each assigned-material card can render a real progress bar + status.
+  const materialByContentId = useMemo(() => {
+    const map = new Map<string, LearnerMaterial>();
+    (materials ?? []).forEach((material) => map.set(material.contentId, material));
+    return map;
+  }, [materials]);
+
+  // Fallback while materials load: the summary's single "continue" item still carries
+  // a coverage %, so cards degrade gracefully to "not started" for everything else.
   const continueId = summary?.continueContent?.contentId;
   const continueCoverage = summary?.continueContent
     ? Math.round(summary.continueContent.overallCoverage)
@@ -131,8 +167,21 @@ export default function LearnerDashboardPage() {
   const statusForContent = (content: Content): CardStatus => {
     if (content.status === 'PENDING' || content.status === 'PROCESSING') return 'processing';
     if (content.status === 'FAILED') return 'failed';
+    const material = materialByContentId.get(content.id);
+    if (material) {
+      if (material.status === 'completed') return 'completed';
+      if (material.status === 'in_progress') return 'continue';
+      return 'notStarted';
+    }
     if (content.id === continueId) return continueCoverage >= 100 ? 'completed' : 'continue';
     return 'notStarted';
+  };
+
+  const coverageForContent = (content: Content): number => {
+    const material = materialByContentId.get(content.id);
+    if (material) return Math.round(material.coverage);
+    if (content.id === continueId) return continueCoverage;
+    return 0;
   };
 
   return (
@@ -247,6 +296,7 @@ export default function LearnerDashboardPage() {
                 key={content.id}
                 content={content}
                 status={statusForContent(content)}
+                coverage={coverageForContent(content)}
               />
             ))}
           </div>

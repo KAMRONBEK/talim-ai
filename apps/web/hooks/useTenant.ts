@@ -1,7 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
+  ClassMastery,
   ContentAssignment,
   CreateTenantStudentResponse,
+  LearnerMaterial,
+  LearnerProgress,
   LearnerSummary,
   StudentProgressSummary,
   Tenant,
@@ -123,6 +126,36 @@ export function useLearnerSummary() {
     queryFn: async () => {
       const { data } = await api.get<{ summary: LearnerSummary }>('/learner/summary');
       return data.summary;
+    },
+  });
+}
+
+export function useLearnerMaterials() {
+  return useQuery({
+    queryKey: ['learner', 'materials'],
+    queryFn: async () => {
+      const { data } = await api.get<{ materials: LearnerMaterial[] }>('/learner/materials');
+      return data.materials;
+    },
+  });
+}
+
+export function useLearnerProgress() {
+  return useQuery({
+    queryKey: ['learner', 'progress'],
+    queryFn: async () => {
+      const { data } = await api.get<LearnerProgress>('/learner/progress');
+      return data;
+    },
+  });
+}
+
+export function useTenantProgressTopics() {
+  return useQuery({
+    queryKey: ['tenant', 'progress', 'topics'],
+    queryFn: async () => {
+      const { data } = await api.get<ClassMastery>('/tenant/progress/topics');
+      return data;
     },
   });
 }
