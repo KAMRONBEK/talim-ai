@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mic } from 'lucide-react';
 import { Button } from '@talim/ui';
+import type { TranscriptSegment } from '@talim/types';
+import { TranscriptPanel } from '@/components/learning/TranscriptPanel';
 
 function formatTime(sec: number): string {
   if (!Number.isFinite(sec) || sec < 0) return '0:00';
@@ -22,6 +24,15 @@ interface PodcastPlayerProps {
   onPlaybackRateChange: (rate: number) => void;
   initialPositionSec?: number;
   onProgress?: (listenedSec: number, completed: boolean) => void;
+  /**
+   * Transcript segments whose start/end timestamps are aligned to THIS audio
+   * timeline. When provided, a synced transcript is rendered under the
+   * controls: the current segment is highlighted + auto-scrolled as the audio
+   * plays (driven by the <audio> timeupdate event), and clicking a segment
+   * seeks the audio. Omit when no aligned transcript exists — the player then
+   * renders exactly as before.
+   */
+  segments?: TranscriptSegment[];
 }
 
 export function PodcastPlayer({
@@ -30,6 +41,7 @@ export function PodcastPlayer({
   onPlaybackRateChange,
   initialPositionSec = 0,
   onProgress,
+  segments,
 }: PodcastPlayerProps) {
   const t = useTranslations('content');
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -69,6 +81,19 @@ export function PodcastPlayer({
     if (!el) return;
     el.currentTime = Math.max(0, Math.min(el.duration || 0, el.currentTime + delta));
   };
+
+  // Shared seek used by the scrubber and by clicking a transcript segment, so
+  // both keep the displayed time + saved progress in sync with the audio.
+  const seekTo = (seconds: number) => {
+    const el = audioRef.current;
+    const max = el?.duration || duration || 0;
+    const next = max > 0 ? Math.max(0, Math.min(max, seconds)) : Math.max(0, seconds);
+    if (el) el.currentTime = next;
+    setCurrent(next);
+    reportProgress(next, duration);
+  };
+
+  const hasTranscript = Boolean(segments && segments.length > 0);
 
   return (
     <div className="w-full max-w-xl space-y-4">
@@ -122,12 +147,7 @@ export function PodcastPlayer({
         max={duration || 1}
         value={current}
         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary"
-        onChange={(e) => {
-          const t = Number(e.target.value);
-          if (audioRef.current) audioRef.current.currentTime = t;
-          setCurrent(t);
-          reportProgress(t, duration);
-        }}
+        onChange={(e) => seekTo(Number(e.target.value))}
       />
       <div className="flex items-center justify-center gap-4">
         <Button type="button" variant="outline" size="sm" onClick={() => skip(-15)}>
@@ -162,6 +182,15 @@ export function PodcastPlayer({
           </button>
         ))}
       </div>
+      {hasTranscript ? (
+        <div className="flex h-72 w-full flex-col">
+          <TranscriptPanel
+            segments={segments ?? []}
+            currentMs={Math.round(current * 1000)}
+            onSeek={(ms) => seekTo(ms / 1000)}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

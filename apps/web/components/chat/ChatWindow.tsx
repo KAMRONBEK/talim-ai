@@ -35,9 +35,11 @@ export function ChatWindow({
   const [input, setInput] = useState('');
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const hydratedKeyRef = useRef<string | null>(null);
   const { data: sessionData, isLoading } = useChatSession(contentId);
-  const { messages, isStreaming, streamMessage, hydrate, reset } = useChatStore();
+  const { messages, isStreaming, streamMessage, hydrate, reset, seededPrompt, clearSeededPrompt } =
+    useChatStore();
   const handleLimitError = useLimitErrorHandler();
 
   const placeholder = useMemo(() => {
@@ -66,14 +68,32 @@ export function ChatWindow({
     }
   }, [inputSeed, onInputSeedConsumed]);
 
+  // A text selection in the reader ("Ask AI about selection") queues a prompt on
+  // the chat store. Prefill + focus the composer so the user can send/edit it —
+  // consumed here whether the Chat tab was already open or just opened (this
+  // window only mounts on the Chat tab).
+  useEffect(() => {
+    if (!seededPrompt) return;
+    const text = seededPrompt;
+    setInput(text);
+    clearSeededPrompt();
+    requestAnimationFrame(() => {
+      const el = textareaRef.current;
+      if (!el) return;
+      el.focus();
+      el.setSelectionRange(text.length, text.length);
+    });
+  }, [seededPrompt, clearSeededPrompt]);
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isStreaming) return;
-    const message = input.trim();
+  // Single send path shared by the composer and the suggestion chips, so both
+  // go through the exact same streaming + limit-error handling.
+  const sendMessage = async (raw: string) => {
+    const message = raw.trim();
+    if (!message || isStreaming || isLoading) return;
     setInput('');
     setError(null);
     try {
@@ -86,6 +106,11 @@ export function ChatWindow({
       // Nothing was sent — restore the composed text so the user can retry.
       setInput(message);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    void sendMessage(input);
   };
 
   const showGreeting = !isLoading && messages.length === 0;
@@ -132,6 +157,25 @@ export function ChatWindow({
       </div>
 
       <div className="border-t border-border/70 p-4">
+        {quickActions.length > 0 && (
+          <div
+            role="group"
+            aria-label={t('suggestionsLabel')}
+            className="mb-2.5 flex flex-wrap gap-1.5"
+          >
+            {quickActions.map((suggestion) => (
+              <button
+                key={suggestion}
+                type="button"
+                disabled={isStreaming || isLoading}
+                onClick={() => void sendMessage(suggestion)}
+                className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        )}
         {hasExcerptSelection && (
           <div className="mb-2 flex items-start gap-2">
             <div className="min-w-0 flex-1 rounded-xl border border-border bg-secondary p-2">
@@ -158,6 +202,7 @@ export function ChatWindow({
         {error && <p className="mb-2 text-sm text-destructive">{error}</p>}
         <form onSubmit={handleSubmit} className="flex gap-2">
           <textarea
+            ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={placeholder}

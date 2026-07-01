@@ -3,11 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, Input, Label } from '@talim/ui';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { useUpdateProfile } from '@/hooks/useAccount';
 import { useAuthStore } from '@/store/useAuthStore';
 
 export function ProfileCard() {
   const t = useTranslations('account.profile');
+  const tCommon = useTranslations('common');
   const user = useAuthStore((s) => s.user);
   const updateProfile = useUpdateProfile();
   const [name, setName] = useState('');
@@ -52,6 +54,15 @@ export function ProfileCard() {
           <p className="text-sm text-muted-foreground">{user.email}</p>
         </div>
       )}
+      {/* Language preference. The switcher persists preferredLocale server-side (PATCH /auth/me)
+          and reloads into the chosen locale on change, so it acts independently of the name save. */}
+      <div className="space-y-2">
+        <Label>{tCommon('language')}</Label>
+        <div>
+          <LanguageSwitcher />
+        </div>
+        <p className="text-xs text-muted-foreground">{t('languageHint')}</p>
+      </div>
       {message && <p className="text-sm text-muted-foreground">{message}</p>}
       <Button type="submit" disabled={updateProfile.isPending}>
         {updateProfile.isPending ? t('saving') : t('save')}

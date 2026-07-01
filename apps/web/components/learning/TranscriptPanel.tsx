@@ -15,7 +15,12 @@ interface TranscriptPanelProps {
   segments: TranscriptSegment[];
   currentMs: number;
   onSeek: (timeMs: number) => void;
-  onExcerptSelected: (payload: TranscriptExcerptPayload) => void;
+  /**
+   * Enables the "select transcript text → ask the AI tutor" affordance. When
+   * omitted (e.g. the podcast player, which only needs synced highlight +
+   * click-to-seek), text selection is not tracked and the ask-hint is hidden.
+   */
+  onExcerptSelected?: (payload: TranscriptExcerptPayload) => void;
   onSelectionCleared?: () => void;
 }
 
@@ -142,6 +147,7 @@ export function TranscriptPanel({
 }: TranscriptPanelProps) {
   const t = useTranslations('content');
   const activeRef = useRef<HTMLSpanElement | null>(null);
+  const selectionEnabled = Boolean(onExcerptSelected);
   const sentences = useMemo(() => buildSentences(segments), [segments]);
   const paragraphs = useMemo(() => buildParagraphs(sentences), [sentences]);
   const activeSentenceIndex = useMemo(() => {
@@ -177,7 +183,7 @@ export function TranscriptPanel({
     const last = selectedSentences.at(-1);
     if (!first || !last) return;
 
-    onExcerptSelected({
+    onExcerptSelected?.({
       excerpt: selectedText,
       startMs: first.startMs,
       endMs: last.endMs,
@@ -196,11 +202,13 @@ export function TranscriptPanel({
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border bg-card">
       <div className="shrink-0 border-b px-3 py-2">
         <p className="text-xs font-medium">{t('transcript')}</p>
-        <p className="text-[11px] text-muted-foreground">{t('selectTranscriptToAsk')}</p>
+        {selectionEnabled ? (
+          <p className="text-[11px] text-muted-foreground">{t('selectTranscriptToAsk')}</p>
+        ) : null}
       </div>
       <div
         className="min-h-0 flex-1 space-y-4 overflow-y-auto break-words p-4 text-sm leading-7"
-        onPointerUp={handleSelectionEnd}
+        onPointerUp={selectionEnabled ? handleSelectionEnd : undefined}
       >
         {paragraphs.map((paragraph) => (
           <p key={paragraph.index} className="text-foreground">

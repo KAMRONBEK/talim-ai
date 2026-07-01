@@ -18,6 +18,17 @@ interface ChatState {
   sessionId: string | null;
   messages: LocalChatMessage[];
   isStreaming: boolean;
+  /**
+   * A prompt queued from a text selection ("Ask AI about selection") in the
+   * readable content. The tutor and the reader live in different subtrees (the
+   * chat only mounts on the Chat tab), so this store is the cross-component
+   * channel: the reader sets it, ChatWindow consumes it to prefill + focus the
+   * composer. Kept independent of reset()/hydrate() so a seed set just before
+   * the Chat tab opens survives the mount.
+   */
+  seededPrompt: string | null;
+  seedPrompt: (prompt: string) => void;
+  clearSeededPrompt: () => void;
   setSessionId: (id: string | null) => void;
   setMessages: (messages: LocalChatMessage[]) => void;
   addMessage: (message: LocalChatMessage) => void;
@@ -40,6 +51,9 @@ export const useChatStore = create<ChatState>((set, get) => ({
   sessionId: null,
   messages: [],
   isStreaming: false,
+  seededPrompt: null,
+  seedPrompt: (prompt) => set({ seededPrompt: prompt }),
+  clearSeededPrompt: () => set({ seededPrompt: null }),
   setSessionId: (id) => set({ sessionId: id }),
   setMessages: (messages) => set({ messages }),
   addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
