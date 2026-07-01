@@ -726,7 +726,21 @@
     "distGte85": "85%+",
     "topOfClass": "Sinf peshqadamlari",
     "topOfClassEmpty": "Saralash uchun o'zlashtirish ballari hali yo'q.",
-    "atRisk": "Xavf ostida"
+    "atRisk": "Xavf ostida",
+    "messages": {
+      "title": "Xabarlar",
+      "open": "Xabarlar ({count} o'qilmagan)",
+      "loading": "Xabarlar yuklanmoqda…",
+      "error": "Xabarlarni yuklab bo'lmadi.",
+      "empty": "Siz hali xabar yubormagansiz.",
+      "new": "yangi",
+      "you": "Siz",
+      "student": "O'quvchi",
+      "recipients": "{count, plural, one {# o'quvchi} other {# o'quvchi}}",
+      "readStat": "{count} o'qidi",
+      "replies": "{count, plural, one {# javob} other {# javob}}",
+      "noReplies": "Hali javob yo'q."
+    }
   },
   "learner": {
     "loading": "Yuklanmoqda...",
@@ -877,7 +891,12 @@
       "error": "Xabarlaringizni yuklab bo'lmadi.",
       "empty": "Hozircha xabar yo'q.",
       "new": "Yangi",
-      "fromTutor": "O'qituvchingiz"
+      "fromTutor": "O'qituvchingiz",
+      "reply": "Javob yozing…",
+      "send": "Yuborish",
+      "sending": "Yuborilmoqda…",
+      "replyError": "Javobingizni yuborib bo'lmadi.",
+      "you": "Siz"
     }
   },
   "slides": {

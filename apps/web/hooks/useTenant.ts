@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
   ClassMastery,
   ContentAssignment,
+  CreateLearnerReplyResponse,
   CreateTenantStudentResponse,
   LearnerMaterial,
   LearnerMessage,
@@ -16,7 +17,9 @@ import type {
   Tenant,
   TenantProgressSummary,
   TenantSentMessage,
+  TenantSentMessagesResponse,
   TenantStudent,
+  TenantUnreadReplyCountResponse,
 } from '@talim/types';
 import { api } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -94,12 +97,62 @@ export function useImportStudents() {
   });
 }
 
-/** One-way tutor→student message to a set of selected active learners. */
+/** Tutor→student message to a set of selected active learners (starts a two-way thread). */
 export function useSendTenantMessage() {
   return useMutation<TenantSentMessage, unknown, SendTenantMessageInput>({
     mutationFn: async (input) => {
       const { data } = await api.post<SendTenantMessageResponse>('/tenant/messages', input);
       return data.message;
+    },
+  });
+}
+
+/**
+ * The tutor's sent message threads (each root broadcast grouped with its student replies).
+ * Newest root first. Fetched lazily (only while the inbox panel is open).
+ */
+export function useTenantMessages(enabled = true) {
+  return useQuery({
+    queryKey: ['tenant', 'messages'],
+    queryFn: async () => {
+      const { data } = await api.get<TenantSentMessagesResponse>('/tenant/messages');
+      return data.messages;
+    },
+    enabled,
+  });
+}
+
+/**
+ * Unread student-reply count for the tutor's badge. Polled every 60s and gated to
+ * TENANT_OWNER (the endpoint is owner-scoped) so it never fires for learners/B2C users
+ * sharing the same header shell.
+ */
+export function useTenantUnreadCount() {
+  const role = useAuthStore((s) => s.user?.role);
+  return useQuery({
+    queryKey: ['tenant', 'messages', 'unread-count'],
+    queryFn: async () => {
+      const { data } = await api.get<TenantUnreadReplyCountResponse>(
+        '/tenant/messages/unread-count',
+      );
+      return data.count;
+    },
+    enabled: role === 'TENANT_OWNER',
+    refetchInterval: 60_000,
+  });
+}
+
+/** Mark one student reply read (`:id` = a reply id); refreshes thread list + unread badge. */
+export function useMarkTenantMessageRead() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data } = await api.post<MarkMessageReadResponse>(`/tenant/messages/${id}/read`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'messages'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'messages', 'unread-count'] });
     },
   });
 }
@@ -227,6 +280,27 @@ export function useMarkMessageRead() {
     mutationFn: async (id: string) => {
       const { data } = await api.post<MarkMessageReadResponse>(`/learner/messages/${id}/read`);
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['learner', 'messages'] });
+      queryClient.invalidateQueries({ queryKey: ['learner', 'messages', 'unread-count'] });
+    },
+  });
+}
+
+/**
+ * Student's reply to a tutor message (`:id` = the received message id). Refreshes the
+ * thread list + unread badge so the new reply appears and the tutor sees it as unread.
+ */
+export function useReplyToLearnerMessage() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, body }: { id: string; body: string }) => {
+      const { data } = await api.post<CreateLearnerReplyResponse>(
+        `/learner/messages/${id}/reply`,
+        { body },
+      );
+      return data.reply;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['learner', 'messages'] });

@@ -6,6 +6,7 @@ import { Badge, Button } from '@talim/ui';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { LearnerMessagesBell } from '@/components/learner/learner-messages-bell';
+import { TenantMessagesBell } from '@/components/tenant/tenant-messages-bell';
 import { useBilling } from '@/hooks/useBilling';
 import { planMessageKey } from '@/lib/plan';
 
@@ -36,6 +37,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
       )}
       <div className="flex items-center gap-3">
         <LearnerMessagesBell />
+        <TenantMessagesBell />
         <LanguageSwitcher compact />
         <ThemeToggle />
         {planKey && (
