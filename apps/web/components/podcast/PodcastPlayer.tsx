@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mic } from 'lucide-react';
 import { Button } from '@talim/ui';
 import type { TranscriptSegment } from '@talim/types';
 import { TranscriptPanel } from '@/components/learning/TranscriptPanel';
+import { derivePodcastSegments } from '@/lib/podcast-segments';
 
 function formatTime(sec: number): string {
   if (!Number.isFinite(sec) || sec < 0) return '0:00';
@@ -31,8 +32,17 @@ interface PodcastPlayerProps {
    * plays (driven by the <audio> timeupdate event), and clicking a segment
    * seeks the audio. Omit when no aligned transcript exists — the player then
    * renders exactly as before.
+   *
+   * Takes precedence over `script`: pass this when real aligned segments exist.
    */
   segments?: TranscriptSegment[];
+  /**
+   * The episode's TTS script. When `segments` is not supplied, the player
+   * derives an ESTIMATED time-aligned transcript from this once the audio's
+   * duration is known (segment start/end by cumulative character proportion ×
+   * duration). Missing/empty script → no synced transcript (renders as before).
+   */
+  script?: string;
 }
 
 export function PodcastPlayer({
@@ -42,6 +52,7 @@ export function PodcastPlayer({
   initialPositionSec = 0,
   onProgress,
   segments,
+  script,
 }: PodcastPlayerProps) {
   const t = useTranslations('content');
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -93,7 +104,16 @@ export function PodcastPlayer({
     reportProgress(next, duration);
   };
 
-  const hasTranscript = Boolean(segments && segments.length > 0);
+  // Prefer real aligned segments if supplied; otherwise estimate them from the
+  // script once the audio's duration is known. Recomputes when the script or
+  // duration changes (i.e. when the selected episode or its audio changes).
+  const derivedSegments = useMemo(
+    () => (segments && segments.length > 0 ? null : derivePodcastSegments(script, duration)),
+    [segments, script, duration],
+  );
+  const effectiveSegments =
+    segments && segments.length > 0 ? segments : (derivedSegments ?? []);
+  const hasTranscript = effectiveSegments.length > 0;
 
   return (
     <div className="w-full max-w-xl space-y-4">
@@ -185,7 +205,7 @@ export function PodcastPlayer({
       {hasTranscript ? (
         <div className="flex h-72 w-full flex-col">
           <TranscriptPanel
-            segments={segments ?? []}
+            segments={effectiveSegments}
             currentMs={Math.round(current * 1000)}
             onSeek={(ms) => seekTo(ms / 1000)}
           />

@@ -314,6 +314,7 @@ function PodcastPageInner({ id }: { id: string }) {
                 onPlaybackRateChange={setPlaybackRate}
                 initialPositionSec={activeProgress?.listenedSec ?? 0}
                 onProgress={handleProgress}
+                script={activeEpisode.script}
               />
             ) : (
               <p className="text-sm text-muted-foreground">{t('audioNotReady')}</p>

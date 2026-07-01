@@ -1012,6 +1012,14 @@ export interface PodcastEpisode {
   hasAudio: boolean;
   durationSec: number | null;
   sectionId: string | null;
+  /**
+   * The TTS source script for this episode (dialogue lines). The client uses it
+   * to derive an estimated, time-aligned transcript (segment start/end assigned
+   * by cumulative character proportion × the audio's runtime duration) so the
+   * player can highlight the roughly-current line and support click-to-seek.
+   * Not word-accurate — a "following" transcript, not a captions track.
+   */
+  script: string;
 }
 
 export interface Podcast {
