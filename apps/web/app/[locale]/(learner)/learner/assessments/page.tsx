@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { CalendarClock, Play, Sparkles, Trophy } from 'lucide-react';
+import { ArrowDown, ArrowUp, CalendarClock, Play, Sparkles, Trophy } from 'lucide-react';
 import { Badge, Button, Input } from '@talim/ui';
 import type { AppLocale, AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
@@ -33,22 +33,98 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   const [multiSelect, setMultiSelect] = useState<Record<string, string[]>>({});
   // FILL_BLANK: per-blank text values per question (indexed by blank position).
   const [fillBlanks, setFillBlanks] = useState<Record<string, string[]>>({});
+  // DROPDOWN_CLOZE: selected value per blank per question (indexed by blank position).
+  const [cloze, setCloze] = useState<Record<string, string[]>>({});
+  // MATCHING: chosen right-hand value per question, parallel to config.left order.
+  const [matching, setMatching] = useState<Record<string, string[]>>({});
+  // ORDERING: the learner's current ordering of a question's shuffled items.
+  const [ordering, setOrdering] = useState<Record<string, string[]>>({});
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
-  // FILL_BLANK blank count comes from question.config.blanks (defaults to a single blank).
+  // Shared token-styled native <select> for MATCHING / DROPDOWN_CLOZE dropdowns.
+  const selectClass =
+    'rounded-lg border border-border/70 bg-background px-2 py-1.5 text-sm text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-60';
+  // FILL_BLANK / DROPDOWN_CLOZE blank count comes from question.config.blanks (defaults to a single blank).
   const blankCount = (config: Record<string, unknown> | null) => {
     const raw = config?.blanks;
     return typeof raw === 'number' && raw > 0 ? Math.floor(raw) : 1;
   };
+  // MATCHING: config.left holds the ordered left-hand prompts.
+  const matchingLeft = (config: Record<string, unknown> | null): string[] => {
+    const raw = config?.left;
+    return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+  };
+  // DROPDOWN_CLOZE: config.blankOptions holds the choice pool per blank.
+  const clozeOptions = (config: Record<string, unknown> | null): string[][] => {
+    const raw = config?.blankOptions;
+    if (!Array.isArray(raw)) return [];
+    return raw.map((b) => (Array.isArray(b) ? b.filter((v): v is string => typeof v === 'string') : []));
+  };
+  // Move an ORDERING item up (-1) or down (+1); state initialises from the shuffled options.
+  const moveOrder = (qid: string, fallback: string[], index: number, dir: -1 | 1) => {
+    setOrdering((prev) => {
+      const current = [...(prev[qid] ?? fallback)];
+      const target = index + dir;
+      if (target < 0 || target >= current.length) return prev;
+      const a = current[index];
+      const b = current[target];
+      if (a === undefined || b === undefined) return prev;
+      current[index] = b;
+      current[target] = a;
+      return { ...prev, [qid]: current };
+    });
+  };
 
   if (result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
+    // Strict scoring attaches signed points; when present, show a correct/wrong/blank
+    // breakdown with the net points. Absent (legacy percentage scoring) → unchanged view.
+    const strict = result.attempt.pointsEarned != null && result.attempt.maxPoints != null;
+    const isBlankAnswer = (a: string) => {
+      const s = (a ?? '').trim();
+      return s === '' || s === '[]' || s === '{}' || s === '""';
+    };
+    const correctCount = result.results.filter((r) => r.correct).length;
+    const blankCountResult = result.results.filter(
+      (r) => !r.correct && isBlankAnswer(r.submittedAnswer),
+    ).length;
+    const wrongCount = result.results.length - correctCount - blankCountResult;
+    const round1 = (n: number) => Math.round(n * 10) / 10;
     return (
       <div className="space-y-3 rounded-2xl border border-border/70 bg-background p-5">
         <p className="font-display font-semibold">
           {t('result', { correct: result.correct, total: result.total })}
         </p>
+        {strict && (
+          <div className="rounded-xl border border-border/70 bg-card p-4">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <p className="font-label text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                {t('scoreBreakdown')}
+              </p>
+              <p className="font-display text-sm font-semibold">
+                {t('netPoints', {
+                  earned: round1(result.attempt.pointsEarned ?? 0),
+                  max: round1(result.attempt.maxPoints ?? 0),
+                })}
+              </p>
+            </div>
+            <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-lg bg-primary/10 px-2 py-2">
+                <p className="font-display text-lg font-bold text-primary">{correctCount}</p>
+                <p className="text-xs text-muted-foreground">{t('breakdownCorrect')}</p>
+              </div>
+              <div className="rounded-lg bg-destructive/10 px-2 py-2">
+                <p className="font-display text-lg font-bold text-destructive">{wrongCount}</p>
+                <p className="text-xs text-muted-foreground">{t('breakdownWrong')}</p>
+              </div>
+              <div className="rounded-lg bg-muted px-2 py-2">
+                <p className="font-display text-lg font-bold text-muted-foreground">{blankCountResult}</p>
+                <p className="text-xs text-muted-foreground">{t('breakdownBlank')}</p>
+              </div>
+            </div>
+          </div>
+        )}
         {result.results.map((r, i) => (
           <div
             key={r.questionId}
@@ -97,6 +173,22 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
               const values = fillBlanks[q.id] ?? [];
               const filled = Array.from({ length: count }, (_, i) => values[i] ?? '');
               return [q.id, count <= 1 ? filled[0] ?? '' : filled];
+            }
+            if (q.type === 'DROPDOWN_CLOZE') {
+              // One selected value per blank, parallel to config.blanks (server grades like FILL_BLANK).
+              const count = blankCount(q.config);
+              const values = cloze[q.id] ?? [];
+              return [q.id, Array.from({ length: count }, (_, i) => values[i] ?? '')];
+            }
+            if (q.type === 'MATCHING' && matchingLeft(q.config).length) {
+              // A right-value per left prompt, parallel to config.left order.
+              const lefts = matchingLeft(q.config);
+              const values = matching[q.id] ?? [];
+              return [q.id, lefts.map((_, i) => values[i] ?? '')];
+            }
+            if (q.type === 'ORDERING' && q.options?.length) {
+              // The items in the learner's chosen order (defaults to the shuffled options).
+              return [q.id, ordering[q.id] ?? q.options];
             }
             return [q.id, answers[q.id] ?? ''];
           }),
@@ -213,6 +305,148 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
                         : t('textPlaceholder')
                     }
                   />
+                ))}
+              </div>
+            ) : question.type === 'DROPDOWN_CLOZE' ? (
+              (() => {
+                const count = blankCount(question.config);
+                const pools = clozeOptions(question.config);
+                const segments = question.prompt.split(/_{3,}/);
+                const inline = segments.length > 1;
+                const control = (i: number) => {
+                  const pool = pools[i] ?? [];
+                  const value = cloze[question.id]?.[i] ?? '';
+                  const onSet = (v: string) =>
+                    setCloze((prev) => {
+                      const next = [...(prev[question.id] ?? [])];
+                      next[i] = v;
+                      return { ...prev, [question.id]: next };
+                    });
+                  // Empty pool → graceful text-input fallback.
+                  return pool.length ? (
+                    <select
+                      className={selectClass}
+                      disabled={locked}
+                      value={value}
+                      onChange={(event) => onSet(event.target.value)}
+                    >
+                      <option value="">{t('choosePlaceholder')}</option>
+                      {pool.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <Input
+                      className="inline-block h-9 w-40"
+                      disabled={locked}
+                      value={value}
+                      onChange={(event) => onSet(event.target.value)}
+                      placeholder={t('blankLabel', { number: i + 1 })}
+                    />
+                  );
+                };
+                if (inline) {
+                  return (
+                    <p className="flex flex-wrap items-center gap-1.5 text-sm leading-relaxed">
+                      {Array.from({ length: count }).map((_, i) => (
+                        <Fragment key={i}>
+                          {segments[i] ? <span>{segments[i]}</span> : null}
+                          {control(i)}
+                        </Fragment>
+                      ))}
+                      {segments.length > count ? <span>{segments.slice(count).join(' ')}</span> : null}
+                    </p>
+                  );
+                }
+                return (
+                  <div className="space-y-2">
+                    {Array.from({ length: count }).map((_, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground">
+                          {t('blankLabel', { number: i + 1 })}
+                        </span>
+                        {control(i)}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()
+            ) : question.type === 'MATCHING' && matchingLeft(question.config).length ? (
+              <div className="space-y-2">
+                {matchingLeft(question.config).map((leftText, i) => (
+                  <div key={i} className="flex flex-wrap items-center gap-2">
+                    <span className="min-w-[6rem] flex-1 text-sm">{leftText}</span>
+                    {question.options?.length ? (
+                      <select
+                        className={selectClass}
+                        disabled={locked}
+                        value={matching[question.id]?.[i] ?? ''}
+                        onChange={(event) =>
+                          setMatching((prev) => {
+                            const next = [...(prev[question.id] ?? [])];
+                            next[i] = event.target.value;
+                            return { ...prev, [question.id]: next };
+                          })
+                        }
+                      >
+                        <option value="">{t('choosePlaceholder')}</option>
+                        {question.options.map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <Input
+                        className="h-9 w-48"
+                        disabled={locked}
+                        value={matching[question.id]?.[i] ?? ''}
+                        onChange={(event) =>
+                          setMatching((prev) => {
+                            const next = [...(prev[question.id] ?? [])];
+                            next[i] = event.target.value;
+                            return { ...prev, [question.id]: next };
+                          })
+                        }
+                        placeholder={t('textPlaceholder')}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : question.type === 'ORDERING' && question.options?.length ? (
+              <div className="space-y-2">
+                <p className="text-xs text-muted-foreground">{t('orderHint')}</p>
+                {(ordering[question.id] ?? question.options).map((item, i, arr) => (
+                  <div
+                    key={`${item}-${i}`}
+                    className="flex items-center gap-2 rounded-lg border border-border/70 bg-background px-3 py-2 text-sm"
+                  >
+                    <span className="w-5 shrink-0 font-mono text-xs text-muted-foreground">{i + 1}.</span>
+                    <span className="min-w-0 flex-1">{item}</span>
+                    <div className="flex shrink-0 gap-1">
+                      <button
+                        type="button"
+                        disabled={locked || i === 0}
+                        onClick={() => moveOrder(question.id, question.options ?? [], i, -1)}
+                        className="rounded-md border border-border/70 p-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label={t('moveUp')}
+                      >
+                        <ArrowUp className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        disabled={locked || i === arr.length - 1}
+                        onClick={() => moveOrder(question.id, question.options ?? [], i, 1)}
+                        className="rounded-md border border-border/70 p-1 text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label={t('moveDown')}
+                      >
+                        <ArrowDown className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (

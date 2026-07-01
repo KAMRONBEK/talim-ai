@@ -784,7 +784,16 @@
       "due": "Muddat: {date}",
       "overdue": "Muddati o'tgan: {date}",
       "selectAllHint": "Barcha to'g'ri javoblarni belgilang",
-      "blankLabel": "{number}-bo'shliq"
+      "blankLabel": "{number}-bo'shliq",
+      "choosePlaceholder": "Tanlang…",
+      "orderHint": "Elementlarni to'g'ri tartibda joylashtiring",
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga",
+      "scoreBreakdown": "Ball tafsiloti",
+      "netPoints": "Sof: {earned} / {max} ball",
+      "breakdownCorrect": "To'g'ri",
+      "breakdownWrong": "Noto'g'ri",
+      "breakdownBlank": "Bo'sh"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",

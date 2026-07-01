@@ -784,7 +784,16 @@
       "due": "Due {date}",
       "overdue": "Overdue {date}",
       "selectAllHint": "Select all that apply",
-      "blankLabel": "Blank {number}"
+      "blankLabel": "Blank {number}",
+      "choosePlaceholder": "Choose…",
+      "orderHint": "Put the items in the correct order",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "scoreBreakdown": "Score breakdown",
+      "netPoints": "Net: {earned} / {max} pts",
+      "breakdownCorrect": "Correct",
+      "breakdownWrong": "Wrong",
+      "breakdownBlank": "Blank"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",

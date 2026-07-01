@@ -784,7 +784,16 @@
       "due": "Срок: {date}",
       "overdue": "Просрочено: {date}",
       "selectAllHint": "Выберите все подходящие варианты",
-      "blankLabel": "Пропуск {number}"
+      "blankLabel": "Пропуск {number}",
+      "choosePlaceholder": "Выберите…",
+      "orderHint": "Расположите элементы в правильном порядке",
+      "moveUp": "Вверх",
+      "moveDown": "Вниз",
+      "scoreBreakdown": "Разбор баллов",
+      "netPoints": "Итого: {earned} / {max} очк.",
+      "breakdownCorrect": "Верно",
+      "breakdownWrong": "Неверно",
+      "breakdownBlank": "Пусто"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
     "assignedToYou": "Назначено вам",
