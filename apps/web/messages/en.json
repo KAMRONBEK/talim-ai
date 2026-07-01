@@ -607,7 +607,9 @@
       "resultsTitle": "Results & leaderboard",
       "questionType": "Question type",
       "newAssessment": "New assessment",
-      "headerCount": "{count, plural, =0 {No assessments yet} one {# assessment} other {# assessments}}"
+      "headerCount": "{count, plural, =0 {No assessments yet} one {# assessment} other {# assessments}}",
+      "approveAll": "Approve all ({count})",
+      "approvingAll": "Approving…"
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -623,7 +625,12 @@
     "assignSearch": "Search students...",
     "assignSelectAll": "Select all",
     "actionsCol": "Actions",
-    "materialCount": "{count, plural, one {# material} other {# materials}}"
+    "materialCount": "{count, plural, one {# material} other {# materials}}",
+    "filterByType": "Filter by type",
+    "filterAll": "All",
+    "filterPdf": "PDF",
+    "filterVideo": "Video",
+    "filterSlides": "Slides"
   },
   "learner": {
     "loading": "Loading...",
@@ -717,7 +724,8 @@
       "leaderboard": "Leaderboard",
       "writtenBadge": "Written",
       "questionCount": "{count} questions",
-      "secondsEach": "{seconds}s each"
+      "secondsEach": "{seconds}s each",
+      "start": "Start"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",

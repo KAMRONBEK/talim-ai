@@ -607,7 +607,9 @@
       "resultsTitle": "Результаты и таблица лидеров",
       "questionType": "Тип вопроса",
       "newAssessment": "Новое оценивание",
-      "headerCount": "{count, plural, =0 {Пока нет оцениваний} one {# оценивание} few {# оценивания} many {# оцениваний} other {# оцениваний}}"
+      "headerCount": "{count, plural, =0 {Пока нет оцениваний} one {# оценивание} few {# оценивания} many {# оцениваний} other {# оцениваний}}",
+      "approveAll": "Одобрить все ({count})",
+      "approvingAll": "Одобрение…"
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -623,7 +625,12 @@
     "assignSearch": "Поиск учеников...",
     "assignSelectAll": "Выбрать все",
     "actionsCol": "Действия",
-    "materialCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}"
+    "materialCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}",
+    "filterByType": "Фильтр по типу",
+    "filterAll": "Все",
+    "filterPdf": "PDF",
+    "filterVideo": "Видео",
+    "filterSlides": "Слайды"
   },
   "learner": {
     "loading": "Загрузка...",
@@ -717,7 +724,8 @@
       "leaderboard": "Таблица лидеров",
       "writtenBadge": "Письменный",
       "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопросов}}",
-      "secondsEach": "по {seconds} с"
+      "secondsEach": "по {seconds} с",
+      "start": "Начать"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
     "assignedToYou": "Назначено вам",

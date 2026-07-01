@@ -3,7 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
+import type { AdminSubscriptionListItem } from '@talim/types';
 import { useAdminSubscriptions } from '@/hooks/useAdmin';
+import { SubscriptionEditDrawer } from '@/components/subscription-edit-drawer';
 import { planLabel } from '@/lib/plan';
 
 const STATUS_OPTIONS = ['', 'ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'] as const;
@@ -35,6 +37,7 @@ export default function SubscriptionsPage() {
   const [plan, setPlan] = useState('');
   const [kind, setKind] = useState<(typeof KIND_OPTIONS)[number]>('all');
   const [page, setPage] = useState(1);
+  const [editing, setEditing] = useState<AdminSubscriptionListItem | null>(null);
   const { data, isLoading, isError } = useAdminSubscriptions({
     page,
     search: search || undefined,
@@ -117,30 +120,36 @@ export default function SubscriptionsPage() {
               <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
               <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Source</th>
               <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Period end</th>
+              <th className="px-4 py-3 text-right font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Edit</th>
             </tr>
           </thead>
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
+                <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
                 </td>
               </tr>
             )}
             {isError && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
+                <td colSpan={7} className="px-4 py-8 text-center text-destructive">
                   Couldn&apos;t load subscriptions. Please try again.
                 </td>
               </tr>
             )}
             {data?.items.map((sub) => (
-              <tr key={sub.id} className="border-t border-border/60 hover:bg-secondary/40">
+              <tr
+                key={sub.id}
+                onClick={() => setEditing(sub)}
+                className="cursor-pointer border-t border-border/60 hover:bg-secondary/40"
+              >
                 <td className="px-4 py-3">
                   {sub.subjectType === 'tenant' ? (
                     <>
                       <Link
                         href={`/tenants/${sub.tenantId}`}
+                        onClick={(e) => e.stopPropagation()}
                         className="font-medium text-primary hover:underline"
                       >
                         {sub.tenantName}
@@ -151,6 +160,7 @@ export default function SubscriptionsPage() {
                     <>
                       <Link
                         href={`/users/${sub.userId}`}
+                        onClick={(e) => e.stopPropagation()}
                         className="font-medium text-primary hover:underline"
                       >
                         {sub.userEmail}
@@ -193,11 +203,23 @@ export default function SubscriptionsPage() {
                     ? new Date(sub.currentPeriodEnd).toLocaleDateString()
                     : '—'}
                 </td>
+                <td className="px-4 py-3 text-right">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setEditing(sub);
+                    }}
+                  >
+                    Edit
+                  </Button>
+                </td>
               </tr>
             ))}
             {!isLoading && data?.items.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
+                <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
                   No subscriptions found.
                 </td>
               </tr>
@@ -223,6 +245,13 @@ export default function SubscriptionsPage() {
           </Button>
         </div>
       )}
+      <SubscriptionEditDrawer
+        subscription={editing}
+        open={editing !== null}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) setEditing(null);
+        }}
+      />
     </div>
   );
 }

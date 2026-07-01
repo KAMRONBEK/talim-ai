@@ -136,8 +136,12 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
   const t = useTranslations('learner.assessments');
   const [playing, setPlaying] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
+  const [writtenStarted, setWrittenStarted] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
   const isGame = assessment.mode === 'GAME';
+  // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay expanded.
+  const canStartWritten = !isGame && !locked && assessment.attemptCount === 0;
+  const showWrittenForm = !isGame && (!canStartWritten || writtenStarted);
 
   if (playing) {
     return <GameQuizPlayer assessment={assessment} onExit={() => setPlaying(false)} />;
@@ -193,6 +197,12 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
               {locked ? t('attemptLimit') : t('play')}
             </Button>
           )}
+          {canStartWritten && !writtenStarted && (
+            <Button variant="outline" onClick={() => setWrittenStarted(true)}>
+              <Play className="mr-1.5 h-4 w-4" />
+              {t('start')}
+            </Button>
+          )}
           <Button variant="outline" onClick={() => setShowBoard((v) => !v)}>
             <Trophy className="mr-1.5 h-4 w-4" />
             {showBoard ? t('hideLeaderboard') : t('leaderboard')}
@@ -200,7 +210,7 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
         </div>
       </div>
 
-      {!isGame && <WrittenForm assessment={assessment} />}
+      {showWrittenForm && <WrittenForm assessment={assessment} />}
       {showBoard && <Leaderboard assessmentId={assessment.id} />}
     </div>
   );

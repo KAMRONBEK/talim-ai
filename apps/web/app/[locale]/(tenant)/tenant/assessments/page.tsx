@@ -147,6 +147,30 @@ export default function TenantAssessmentsPage() {
     [questions],
   );
 
+  const pendingQuestions = useMemo(
+    () => questions.filter((question) => question.status === 'DRAFT'),
+    [questions],
+  );
+
+  const [approvingAll, setApprovingAll] = useState(false);
+
+  // Bulk-approve: reuse the existing per-question approve mutation for every
+  // still-pending (DRAFT) question; already approved/rejected ones are skipped.
+  // Each mutateAsync runs the existing onSuccess invalidation, refreshing the list.
+  const approveAllPending = async () => {
+    if (approvingAll || pendingQuestions.length === 0) return;
+    setApprovingAll(true);
+    try {
+      await Promise.all(
+        pendingQuestions.map((question) =>
+          patchQuestion.mutateAsync({ id: question.id, status: 'APPROVED' }),
+        ),
+      );
+    } finally {
+      setApprovingAll(false);
+    }
+  };
+
   const selectedBank = banks.find((bank) => bank.id === selectedBankId);
 
   return (
@@ -333,8 +357,24 @@ export default function TenantAssessmentsPage() {
             )}
           </section>
 
-          <section className="grid gap-3">
-            {questions.map((question) => (
+          <section className="space-y-3">
+            {(pendingQuestions.length > 0 || approvingAll) && (
+              <div className="flex justify-end">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={approveAllPending}
+                  disabled={approvingAll || pendingQuestions.length === 0}
+                >
+                  <Check className="h-3.5 w-3.5" />
+                  {approvingAll
+                    ? t('approvingAll')
+                    : t('approveAll', { count: pendingQuestions.length })}
+                </Button>
+              </div>
+            )}
+            <div className="grid gap-3">
+              {questions.map((question) => (
               <div
                 key={question.id}
                 className={`rounded-xl border bg-card p-4 shadow-soft transition-colors ${
@@ -375,7 +415,8 @@ export default function TenantAssessmentsPage() {
                   </div>
                 </div>
               </div>
-            ))}
+              ))}
+            </div>
           </section>
         </main>
       </section>

@@ -18,6 +18,19 @@ import { useTenantSearch } from '@/contexts/tenant-shell';
 import { useTenantContents, useUploadTenantContent, useCreateTenantYoutubeContent } from '@/hooks/useTenantContent';
 import { FILE_UPLOAD_ACCEPT } from '@/hooks/useFileUpload';
 
+// Client-side library filters. `ALL` is a sentinel meaning "no type filter"; the
+// other values map 1:1 to `ContentType`. The "Assigned" chip from the design is
+// intentionally omitted because the tenant content list does not expose an
+// assigned signal per material (see build notes).
+type MaterialFilter = 'ALL' | 'PDF' | 'YOUTUBE' | 'SLIDE';
+
+const FILTER_CHIPS: { value: MaterialFilter; labelKey: string }[] = [
+  { value: 'ALL', labelKey: 'filterAll' },
+  { value: 'PDF', labelKey: 'filterPdf' },
+  { value: 'YOUTUBE', labelKey: 'filterVideo' },
+  { value: 'SLIDE', labelKey: 'filterSlides' },
+];
+
 export default function TenantMaterialsPage() {
   const t = useTranslations('tenant');
   const tDash = useTranslations('dashboard');
@@ -29,13 +42,17 @@ export default function TenantMaterialsPage() {
   const [linkOpen, setLinkOpen] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [typeFilter, setTypeFilter] = useState<MaterialFilter>('ALL');
 
   const filtered = useMemo(() => {
     if (!contents) return [];
     const q = search.toLowerCase().trim();
-    if (!q) return contents;
-    return contents.filter((c) => c.title.toLowerCase().includes(q));
-  }, [contents, search]);
+    return contents.filter((c) => {
+      if (typeFilter !== 'ALL' && c.type !== typeFilter) return false;
+      if (q && !c.title.toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }, [contents, search, typeFilter]);
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -92,6 +109,29 @@ export default function TenantMaterialsPage() {
         placeholder={tDash('searchMaterials')}
         className="max-w-sm"
       />
+
+      <div role="group" aria-label={t('filterByType')} className="flex flex-wrap items-center gap-2">
+        {FILTER_CHIPS.map((chip) => {
+          const active = typeFilter === chip.value;
+          return (
+            <button
+              key={chip.value}
+              type="button"
+              onClick={() => setTypeFilter(chip.value)}
+              aria-pressed={active}
+              className={cn(
+                'rounded-full px-3.5 py-1.5 font-label text-xs font-semibold transition-colors',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                active
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'bg-secondary text-muted-foreground hover:text-foreground',
+              )}
+            >
+              {t(chip.labelKey)}
+            </button>
+          );
+        })}
+      </div>
 
       {isLoading ? (
         <p className="text-muted-foreground">{tCommon('loading')}</p>

@@ -607,7 +607,9 @@
       "resultsTitle": "Natijalar va reyting",
       "questionType": "Savol turi",
       "newAssessment": "Yangi baholash",
-      "headerCount": "{count, plural, =0 {Hali baholash yo'q} other {# ta baholash}}"
+      "headerCount": "{count, plural, =0 {Hali baholash yo'q} other {# ta baholash}}",
+      "approveAll": "Barchasini tasdiqlash ({count})",
+      "approvingAll": "Tasdiqlanmoqda…"
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -623,7 +625,12 @@
     "assignSearch": "O'quvchilarni qidirish...",
     "assignSelectAll": "Barchasini tanlash",
     "actionsCol": "Amallar",
-    "materialCount": "{count} ta material"
+    "materialCount": "{count} ta material",
+    "filterByType": "Turi bo'yicha filtr",
+    "filterAll": "Barchasi",
+    "filterPdf": "PDF",
+    "filterVideo": "Video",
+    "filterSlides": "Slaydlar"
   },
   "learner": {
     "loading": "Yuklanmoqda...",
@@ -717,7 +724,8 @@
       "leaderboard": "Reyting",
       "writtenBadge": "Yozma",
       "questionCount": "{count} ta savol",
-      "secondsEach": "har biriga {seconds}s"
+      "secondsEach": "har biriga {seconds}s",
+      "start": "Boshlash"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",
