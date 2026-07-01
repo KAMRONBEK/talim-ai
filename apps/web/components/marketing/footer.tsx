@@ -29,7 +29,7 @@ export function Footer() {
           <LogoMark className="h-[30px] w-[30px]" />
           <span className="flex flex-col leading-tight">
             <span className="font-display text-lg font-semibold text-background">
-              {t('footer.brand')}
+              Talim<span className="text-primary">&nbsp;AI</span>
             </span>
             <span className="text-xs text-background/60">{t('footer.tagline')}</span>
           </span>

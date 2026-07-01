@@ -1,18 +1,49 @@
 import type { PlanCode } from '@talim/types';
 
 /**
- * Marketing pricing config — the single source of truth for the public pricing
- * page (`/pricing`) and the in-app upgrade modal.
+ * Marketing pricing config. Two models live here for two different surfaces:
  *
- * Limits mirror the runtime plan limits seeded in `apps/api/src/prisma/seed.ts`
- * (keep them in sync). Prices are the canonical marketing prices in Uzbek so'm;
- * billing is **manual** (no payment gateway) — CTAs request activation rather
- * than charging a card.
+ * 1. `MANUAL_TIERS` — the honest, product-accurate story on the PUBLIC pricing
+ *    surfaces: the landing `#pricing` band (`components/marketing/pricing-section.tsx`)
+ *    and the `/pricing` route (`components/marketing/pricing.tsx`). Three tiers,
+ *    activated by our team, NO self-serve checkout / prices. Copy is resolved
+ *    from the shared `landing.pricing.plans.*` i18n keys; the list only carries
+ *    the structural metadata so both surfaces render the exact same tiers.
+ *
+ * 2. The self-serve limit/price model below (`PRICING_PLANS`, `planFeatureSpecs`,
+ *    `getPlan`, …) powers the in-app upgrade modal (`components/account/upgrade-dialog.tsx`),
+ *    which compares concrete per-plan limits. Limits mirror the runtime plan
+ *    limits seeded in `apps/api/src/prisma/seed.ts` (keep them in sync). Billing
+ *    is **manual** (no payment gateway) — CTAs request activation, never charge.
  *
  * Note on file size: paid tiers seed `maxFileSizeMb` 300/500, but the real
  * enforced cap is the 120 MB multer limit (`upload.middleware.ts UPLOAD_MAX_MB`),
  * so we advertise the honest 120 MB here.
  */
+
+/**
+ * One public marketing tier. Copy is resolved from `landing.pricing.plans.<key>`
+ * (`name` / `price` / `priceSuffix` / `badge` / `desc` / `bullets.<i>` / `cta`);
+ * this only carries the structural metadata shared by the landing band and the
+ * `/pricing` route so the two never drift.
+ */
+export interface ManualTier {
+  /** i18n key suffix under `landing.pricing.plans.<key>`. */
+  key: '0' | '1' | '2';
+  /** Number of `bullets.<i>` rows to render. */
+  bullets: number;
+  /** Featured ("Most chosen") card. */
+  highlighted?: boolean;
+  /** Render the italic price suffix (`priceSuffix`, e.g. "/ by class"). */
+  hasSuffix?: boolean;
+}
+
+/** Learner (free) · Tutor (featured — seats, priced by class) · School (custom). */
+export const MANUAL_TIERS: ManualTier[] = [
+  { key: '0', bullets: 3 },
+  { key: '1', bullets: 4, highlighted: true, hasSuffix: true },
+  { key: '2', bullets: 3 },
+];
 
 export type PlanAudience = 'individual' | 'team';
 export type BillingPeriod = 'monthly' | 'annual';

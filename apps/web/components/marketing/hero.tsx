@@ -54,12 +54,12 @@ export function Hero() {
               {t('hero.primaryCta')}
               <ArrowRight aria-hidden className="h-4 w-4" />
             </Link>
-            <Link
-              href="/register"
+            <a
+              href="#for-tutors"
               className="inline-flex items-center rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition hover:-translate-y-px hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {t('hero.secondaryCta')}
-            </Link>
+            </a>
           </div>
 
           <div className="mt-7 flex items-center gap-3 text-sm text-muted-foreground">

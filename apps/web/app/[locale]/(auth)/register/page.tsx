@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Shield } from 'lucide-react';
+import { Eye, EyeOff, Shield } from 'lucide-react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input, Label } from '@talim/ui';
@@ -22,6 +22,7 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -120,15 +121,26 @@ export default function RegisterPage() {
               >
                 {t('password')}
               </Label>
-              <Input
-                id="password"
-                type="password"
-                minLength={8}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="h-11 rounded-xl px-4"
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  minLength={8}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="h-11 rounded-xl px-4 pr-11"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? t('hidePassword') : t('showPassword')}
+                  aria-pressed={showPassword}
+                  className="absolute right-2.5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
             <div className="space-y-2">
               <Label
@@ -151,9 +163,10 @@ export default function RegisterPage() {
               <p className="text-xs text-muted-foreground">{t('classCodeHint')}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" variant="gradient" className="h-12 w-full text-base" disabled={loading}>
+            <Button type="submit" className="h-12 w-full text-base" disabled={loading}>
               {loading ? t('registering') : t('register')}
             </Button>
+            <p className="text-center text-xs text-muted-foreground">{t('termsNotice')}</p>
           </form>
           <p className="text-center text-sm text-muted-foreground">
             {t('haveAccount')}{' '}

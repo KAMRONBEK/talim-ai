@@ -75,7 +75,12 @@
     "classCodeHint": "O'qituvchingizdan sinf kodi bormi? Sinfga qo'shilish uchun kiriting.",
     "benefitFree": "Individual o'quvchilar uchun bepul",
     "benefitLangs": "Birinchi kundan uz · en · ru",
-    "benefitJoin": "Bitta kod bilan sinfga qo'shiling"
+    "benefitJoin": "Bitta kod bilan sinfga qo'shiling",
+    "heroTitle": "Istalgan mavzuni o‘rganing — <em>o‘z materialingiz</em> asosida.",
+    "heroSubtitle": "O‘zbekiston bo‘ylab minglab o‘quvchi va o‘qituvchilarga qo‘shiling — manbalarni konspekt, podkast, testlar va AI repetitorga aylantiring.",
+    "showPassword": "Parolni ko‘rsatish",
+    "hidePassword": "Parolni yashirish",
+    "termsNotice": "Davom etish orqali siz Shartlarimizga rozilik bildirasiz."
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
@@ -846,7 +851,9 @@
           },
           "cta": "Biz bilan bog'laning"
         }
-      }
+      },
+      "subtitle": "Yakka o‘rganuvchilar uchun bepul. Repetitor va maktab tariflari sinfingizga moslab jamoamiz tomonidan faollashtiriladi.",
+      "note": "Karta talab qilinmaydi. Pullik tariflarni qo‘lda faollashtiramiz — shunchaki so‘rov yuboring."
     },
     "stats": {
       "items": {

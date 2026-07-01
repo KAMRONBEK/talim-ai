@@ -75,7 +75,12 @@
     "classCodeHint": "Have a class code from your tutor? Enter it to join their class.",
     "benefitFree": "Free for individual learners",
     "benefitLangs": "uz · en · ru from day one",
-    "benefitJoin": "Join a class with one code"
+    "benefitJoin": "Join a class with one code",
+    "heroTitle": "Learn anything, <em>grounded</em> in your own material.",
+    "heroSubtitle": "Join thousands of learners and tutors across Uzbekistan turning sources into summaries, podcasts, quizzes and an AI tutor.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "termsNotice": "By continuing you agree to our Terms."
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -846,7 +851,9 @@
           },
           "cta": "Talk to us"
         }
-      }
+      },
+      "subtitle": "Free for individual learners. Tutor and school plans are activated by our team to fit your class.",
+      "note": "No credit card. We activate paid plans manually — just request access."
     },
     "stats": {
       "items": {
