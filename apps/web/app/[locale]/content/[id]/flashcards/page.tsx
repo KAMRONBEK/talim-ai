@@ -1,15 +1,23 @@
 'use client';
 
-import { use, useEffect, useMemo, useState } from 'react';
+import { use, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
-import { ArrowLeft, Loader2, RefreshCw, RotateCcw } from 'lucide-react';
-import type { Flashcard } from '@talim/types';
+import { ArrowLeft, Loader2, RefreshCw, RotateCcw, Sparkles } from 'lucide-react';
+import type { Flashcard, FlashcardGrade } from '@talim/types';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useFlashcards, useGenerateFlashcards } from '@/hooks/useFlashcards';
+import { useFlashcards, useGenerateFlashcards, useReviewFlashcard } from '@/hooks/useFlashcards';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
+
+// SRS grade buttons shown after a card is flipped, hardest → easiest.
+const GRADES: { grade: FlashcardGrade; key: 'againBtn' | 'hardBtn' | 'goodBtn' | 'easyBtn' }[] = [
+  { grade: 'again', key: 'againBtn' },
+  { grade: 'hard', key: 'hardBtn' },
+  { grade: 'good', key: 'goodBtn' },
+  { grade: 'easy', key: 'easyBtn' },
+];
 
 export default function FlashcardsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -17,22 +25,60 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
   const { data: content } = useContent(id);
   const { data: deck } = useFlashcards(id);
   const generate = useGenerateFlashcards(id);
+  const review = useReviewFlashcard(id);
   const handleLimitError = useLimitErrorHandler();
   const isLearner = useAuthStore((s) => s.user?.role === 'TENANT_LEARNER');
 
   const [error, setError] = useState<string | null>(null);
   const cards = useMemo<Flashcard[]>(() => deck?.cards ?? [], [deck]);
-  // Study state: a queue of card indices ("Again" re-queues a card to the end), the flip
-  // state, and a count of cards marked "Good".
-  const [queue, setQueue] = useState<number[]>([]);
+  const dueCount = deck?.dueCount ?? 0;
+
+  // Study session: a local queue of card ids ("Again" re-queues to the end), the flip state, a
+  // count of graded cards, whether the session covers all cards (vs. due-only), and the session
+  // size for the progress readout.
+  const [started, setStarted] = useState(false);
+  const [reviewAll, setReviewAll] = useState(false);
+  const [queue, setQueue] = useState<string[]>([]);
   const [flipped, setFlipped] = useState(false);
   const [reviewed, setReviewed] = useState(0);
+  const [sessionTotal, setSessionTotal] = useState(0);
 
+  // Initialize the session ONCE per deck. Keyed on the deck id (not the cards array), so the
+  // background refetch triggered by grading a card does not reset the in-progress queue.
+  const initedDeckRef = useRef<string | null>(null);
   useEffect(() => {
-    setQueue(cards.map((_, i) => i));
-    setFlipped(false);
+    if (!deck || deck.status !== 'READY') {
+      initedDeckRef.current = null;
+      return;
+    }
+    if (initedDeckRef.current === deck.id) return;
+    initedDeckRef.current = deck.id;
+    const due = cards.filter((c) => c.due).map((c) => c.id);
+    setReviewAll(false);
     setReviewed(0);
-  }, [cards]);
+    setFlipped(false);
+    if (due.length > 0) {
+      setStarted(true);
+      setQueue(due);
+      setSessionTotal(due.length);
+    } else {
+      // Nothing due — land on the "all caught up" screen.
+      setStarted(false);
+      setQueue([]);
+      setSessionTotal(0);
+    }
+  }, [deck, cards]);
+
+  const startSession = (all: boolean) => {
+    const ids = (all ? cards : cards.filter((c) => c.due)).map((c) => c.id);
+    setReviewAll(all);
+    setStarted(true);
+    setQueue(ids);
+    setSessionTotal(ids.length);
+    setReviewed(0);
+    setFlipped(false);
+    setError(null);
+  };
 
   const onGenerate = (regenerate = false) => {
     setError(null);
@@ -42,22 +88,21 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
     );
   };
 
-  const currentIndex = queue[0];
-  const currentCard = currentIndex !== undefined ? cards[currentIndex] : undefined;
+  const currentId = queue[0];
+  const currentCard = currentId ? cards.find((c) => c.id === currentId) : undefined;
 
-  const advance = (again: boolean) => {
+  const onGrade = (grade: FlashcardGrade) => {
+    const cardId = queue[0];
+    if (!cardId) return;
+    setError(null);
+    review.mutate({ cardId, grade }, { onError: () => setError(t('reviewFailed')) });
     setQueue((prev) => {
       const [head, ...rest] = prev;
-      return again && head !== undefined ? [...rest, head] : rest;
+      // "Again" re-queues the card to the end of this session.
+      return grade === 'again' && head !== undefined ? [...rest, head] : rest;
     });
     setFlipped(false);
-    if (!again) setReviewed((n) => n + 1);
-  };
-
-  const restart = () => {
-    setQueue(cards.map((_, i) => i));
-    setFlipped(false);
-    setReviewed(0);
+    if (grade !== 'again') setReviewed((n) => n + 1);
   };
 
   const generating =
@@ -116,10 +161,10 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
 
       {deck?.status === 'READY' && cards.length > 0 && (
         <div>
-          {currentCard ? (
+          {started && currentCard ? (
             <>
               <div className="mb-3 flex items-center justify-between text-xs text-muted-foreground">
-                <span>{t('cardProgress', { done: reviewed, total: cards.length })}</span>
+                <span>{t('cardProgress', { done: reviewed, total: sessionTotal })}</span>
                 <span>{t('cardsLeft', { count: queue.length })}</span>
               </div>
               <button
@@ -137,25 +182,53 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
                   <span className="mt-2 text-[11px] text-muted-foreground">{t('tapToFlip')}</span>
                 )}
               </button>
-              {flipped && (
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <Button variant="outline" type="button" onClick={() => advance(true)}>
-                    {t('againBtn')}
-                  </Button>
-                  <Button type="button" onClick={() => advance(false)}>
-                    {t('goodBtn')}
-                  </Button>
+              {flipped ? (
+                <div className="mt-4 grid grid-cols-4 gap-2">
+                  {GRADES.map(({ grade, key }) => (
+                    <Button
+                      key={grade}
+                      variant={grade === 'again' ? 'outline' : grade === 'easy' ? 'default' : 'secondary'}
+                      type="button"
+                      className="text-xs sm:text-sm"
+                      onClick={() => onGrade(grade)}
+                    >
+                      {t(key)}
+                    </Button>
+                  ))}
                 </div>
+              ) : (
+                <p className="mt-4 text-center text-xs text-muted-foreground">
+                  {t('flipToGrade')}
+                </p>
               )}
             </>
-          ) : (
+          ) : started ? (
+            // Queue drained after grading — session complete.
             <div className="rounded-2xl border p-8 text-center">
               <div className="mb-3 text-4xl">🎉</div>
               <p className="mb-4 text-sm text-muted-foreground">{t('deckComplete')}</p>
-              <Button type="button" onClick={restart}>
+              <Button type="button" onClick={() => startSession(true)}>
                 <RotateCcw className="mr-2 h-4 w-4" /> {t('restartDeck')}
               </Button>
             </div>
+          ) : (
+            // Nothing due right now — offer to review the whole deck anyway.
+            <div className="rounded-2xl border border-dashed p-8 text-center">
+              <div className="mb-3 flex justify-center">
+                <Sparkles className="h-9 w-9 text-primary" />
+              </div>
+              <p className="mb-1 font-medium">{t('allCaughtUp')}</p>
+              <p className="mb-4 text-sm text-muted-foreground">{t('allCaughtUpDesc')}</p>
+              <Button type="button" variant="outline" onClick={() => startSession(true)}>
+                {t('reviewAll')}
+              </Button>
+            </div>
+          )}
+
+          {!started && dueCount > 0 && (
+            <p className="mt-4 text-center text-xs text-muted-foreground">
+              {t('flashcardsDue', { count: dueCount })}
+            </p>
           )}
         </div>
       )}

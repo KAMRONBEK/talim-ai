@@ -536,8 +536,26 @@ model Flashcard {
   order     Int           @default(0)
   createdAt DateTime      @default(now())
   deck      FlashcardDeck @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  reviews   FlashcardReview[]
 
   @@index([deckId])
+}
+
+// Per-user spaced-repetition state for a flashcard (SM-2). userId is a plain id (no User
+// back-relation) to stay additive; state cascades when the card is deleted.
+model FlashcardReview {
+  id             String    @id @default(cuid())
+  userId         String
+  flashcardId    String
+  easeFactor     Float     @default(2.5)
+  intervalDays   Int       @default(0)
+  repetitions    Int       @default(0)
+  lastReviewedAt DateTime?
+  nextReviewAt   DateTime?
+  flashcard      Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, flashcardId])
+  @@index([userId, nextReviewAt])
 }
 
 model QuestionBank {
