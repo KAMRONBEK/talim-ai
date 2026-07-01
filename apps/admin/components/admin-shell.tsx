@@ -1,14 +1,14 @@
 'use client';
 
 import { AuthGuard } from '@/components/auth-guard';
-import { AdminSidebar } from '@/components/admin-sidebar';
+import { AdminHeader } from '@/components/admin-header';
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <AuthGuard>
-      <div className="flex min-h-screen">
-        <AdminSidebar />
-        <main className="flex-1 overflow-auto p-6">{children}</main>
+      <div className="min-h-screen">
+        <AdminHeader />
+        <main className="mx-auto max-w-[1320px] px-6 py-8">{children}</main>
       </div>
     </AuthGuard>
   );
