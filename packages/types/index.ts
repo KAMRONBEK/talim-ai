@@ -382,6 +382,8 @@ export interface AssessmentAssignment {
   sectionId: string | null;
   assignedById: string;
   assignedAt: string;
+  /** Soft due date (ISO). Informational only — does not block submission. */
+  dueAt: string | null;
 }
 
 export interface LearnerAssessment {
@@ -391,6 +393,8 @@ export interface LearnerAssessment {
   maxAttempts: number;
   mode: AssessmentMode;
   secondsPerQuestion: number | null;
+  /** Soft due date (ISO) — earliest across the learner's assignments, or null. */
+  dueAt: string | null;
   attemptCount: number;
   latestScore: number | null;
   latestPoints: number | null;
@@ -450,6 +454,8 @@ export interface AssessmentResultLearner {
   bestScore: number | null;
   bestPoints: number;
   maxStreak: number;
+  /** Soft due date (ISO) for this learner's assignment, or null. */
+  dueAt: string | null;
 }
 
 export interface AssessmentResults {

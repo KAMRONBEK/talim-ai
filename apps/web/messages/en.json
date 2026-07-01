@@ -623,7 +623,9 @@
       "newAssessment": "New assessment",
       "headerCount": "{count, plural, =0 {No assessments yet} one {# assessment} other {# assessments}}",
       "approveAll": "Approve all ({count})",
-      "approvingAll": "Approving…"
+      "approvingAll": "Approving…",
+      "dueDateLabel": "Due date (optional)",
+      "dueDateHint": "Shown to students but does not block submission."
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -767,7 +769,9 @@
       "writtenBadge": "Written",
       "questionCount": "{count} questions",
       "secondsEach": "{seconds}s each",
-      "start": "Start"
+      "start": "Start",
+      "due": "Due {date}",
+      "overdue": "Overdue {date}"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",

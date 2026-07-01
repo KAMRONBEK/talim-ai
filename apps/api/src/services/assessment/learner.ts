@@ -26,6 +26,15 @@ export async function listLearnerAssessments(tenantId: string, userId: string) {
     orderBy: { assignedAt: 'desc' },
   });
 
+  // Earliest (soft) due date per assessment — a learner may hold multiple assignment
+  // rows for one assessment (e.g. per content/section); surface the nearest deadline.
+  const dueByAssessment = new Map<string, Date>();
+  for (const a of assignments) {
+    if (!a.dueAt) continue;
+    const current = dueByAssessment.get(a.assessmentId);
+    if (!current || a.dueAt < current) dueByAssessment.set(a.assessmentId, a.dueAt);
+  }
+
   const seen = new Set<string>();
   return assignments
     .map((a) => a.assessment)
@@ -41,6 +50,7 @@ export async function listLearnerAssessments(tenantId: string, userId: string) {
       maxAttempts: a.maxAttempts,
       mode: a.mode,
       secondsPerQuestion: a.secondsPerQuestion,
+      dueAt: dueByAssessment.get(a.id)?.toISOString() ?? null,
       attemptCount: a.attempts.length,
       latestScore: a.attempts[0]?.score ?? null,
       latestPoints: a.attempts[0]?.pointsTotal ?? null,

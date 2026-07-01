@@ -613,6 +613,7 @@ model AssessmentAssignment {
   sectionId    String?
   assignedById String
   assignedAt   DateTime         @default(now())
+  dueAt        DateTime?
   assessment   TenantAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
   learner      User?            @relation("AssessmentLearnerAssignments", fields: [learnerId], references: [id], onDelete: Cascade)
   content      Content?         @relation(fields: [contentId], references: [id], onDelete: Cascade)

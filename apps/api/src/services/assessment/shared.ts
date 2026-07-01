@@ -54,6 +54,9 @@ export const assignAssessmentSchema = z.object({
   learnerIds: z.array(z.string()).min(1),
   contentId: z.string().min(1).optional(),
   sectionId: z.string().min(1).optional(),
+  // Soft due date — informational only (display + overdue styling); does not block submission.
+  // Accepts an ISO date string (e.g. from an <input type="date">) and coerces to a Date.
+  dueAt: z.coerce.date().nullish(),
 });
 
 export const submitAssessmentSchema = z.object({

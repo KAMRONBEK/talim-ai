@@ -95,6 +95,7 @@ export async function assignAssessment(
           contentId: body.contentId ?? null,
           sectionId: body.sectionId ?? null,
           assignedById: userId,
+          dueAt: body.dueAt ?? null,
         },
       }),
     );

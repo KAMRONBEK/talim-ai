@@ -623,7 +623,9 @@
       "newAssessment": "Yangi baholash",
       "headerCount": "{count, plural, =0 {Hali baholash yo'q} other {# ta baholash}}",
       "approveAll": "Barchasini tasdiqlash ({count})",
-      "approvingAll": "Tasdiqlanmoqda…"
+      "approvingAll": "Tasdiqlanmoqda…",
+      "dueDateLabel": "Topshirish muddati (ixtiyoriy)",
+      "dueDateHint": "Belgilangan sana o'quvchiga ko'rsatiladi, lekin topshirishni bloklamaydi."
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -767,7 +769,9 @@
       "writtenBadge": "Yozma",
       "questionCount": "{count} ta savol",
       "secondsEach": "har biriga {seconds}s",
-      "start": "Boshlash"
+      "start": "Boshlash",
+      "due": "Muddat: {date}",
+      "overdue": "Muddati o'tgan: {date}"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",

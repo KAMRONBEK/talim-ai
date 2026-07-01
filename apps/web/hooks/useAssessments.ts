@@ -161,6 +161,8 @@ export function useAssignAssessment() {
       learnerIds?: string[];
       contentId?: string;
       sectionId?: string;
+      /** Soft due date as an ISO date string (e.g. "2026-07-15"); omit for no deadline. */
+      dueAt?: string;
     }) => {
       const { data } = await api.post<{ assignments: AssessmentAssignment[] }>(
         `/tenant/assessments/${assessmentId}/assign`,

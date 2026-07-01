@@ -1,15 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Play, Sparkles, Trophy } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { CalendarClock, Play, Sparkles, Trophy } from 'lucide-react';
 import { Badge, Button, Input } from '@talim/ui';
-import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
+import type { AppLocale, AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
   useLearnerAssessments,
   useLearnerLeaderboard,
   useSubmitLearnerAssessment,
 } from '@/hooks/useAssessments';
+import { formatRelativeTime } from '@/lib/format-relative-time';
 import { GameQuizPlayer } from '@/components/learner/game-quiz-player';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
 
@@ -134,11 +135,17 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
 
 function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
   const t = useTranslations('learner.assessments');
+  const locale = useLocale() as AppLocale;
   const [playing, setPlaying] = useState(false);
   const [showBoard, setShowBoard] = useState(false);
   const [writtenStarted, setWrittenStarted] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
   const isGame = assessment.mode === 'GAME';
+  // Soft due date: display-only. Overdue styling when past due and the learner hasn't
+  // submitted an attempt yet (a completed task is no longer "overdue").
+  const completed = assessment.attemptCount > 0;
+  const overdue =
+    assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now() && !completed;
   // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay expanded.
   const canStartWritten = !isGame && !locked && assessment.attemptCount === 0;
   const showWrittenForm = !isGame && (!canStartWritten || writtenStarted);
@@ -172,6 +179,18 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
               </Badge>
             )}
             <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
+            {assessment.dueAt && (
+              <span
+                className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
+                  overdue ? 'bg-destructive/10 text-destructive' : 'bg-secondary text-muted-foreground'
+                }`}
+              >
+                <CalendarClock className="h-3 w-3" />
+                {overdue
+                  ? t('overdue', { date: formatRelativeTime(assessment.dueAt, locale) })
+                  : t('due', { date: formatRelativeTime(assessment.dueAt, locale) })}
+              </span>
+            )}
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
             {t('questionCount', { count: assessment.questions.length })}

@@ -131,6 +131,7 @@ export default function TenantAssessmentsPage() {
   const [assessmentTitle, setAssessmentTitle] = useState('');
   const [assessmentId, setAssessmentId] = useState('');
   const [learnerIds, setLearnerIds] = useState<string[]>([]);
+  const [dueAt, setDueAt] = useState('');
   const [mode, setMode] = useState<'WRITTEN' | 'GAME'>('WRITTEN');
   const [secondsPerQuestion, setSecondsPerQuestion] = useState(20);
   const [maxAttempts, setMaxAttempts] = useState(1);
@@ -543,8 +544,13 @@ export default function TenantAssessmentsPage() {
           className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
-            await assignAssessment.mutateAsync({ assessmentId, learnerIds });
+            await assignAssessment.mutateAsync({
+              assessmentId,
+              learnerIds,
+              ...(dueAt ? { dueAt } : {}),
+            });
             setLearnerIds([]);
+            setDueAt('');
           }}
         >
           <div className="flex items-center gap-3">
@@ -588,6 +594,16 @@ export default function TenantAssessmentsPage() {
                 {student.name ?? student.email ?? student.username}
               </label>
             ))}
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="dueAt">{t('dueDateLabel')}</Label>
+            <Input
+              id="dueAt"
+              type="date"
+              value={dueAt}
+              onChange={(event) => setDueAt(event.target.value)}
+            />
+            <p className="text-[11px] text-muted-foreground">{t('dueDateHint')}</p>
           </div>
           <Button
             type="submit"

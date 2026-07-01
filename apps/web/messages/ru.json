@@ -623,7 +623,9 @@
       "newAssessment": "Новое оценивание",
       "headerCount": "{count, plural, =0 {Пока нет оцениваний} one {# оценивание} few {# оценивания} many {# оцениваний} other {# оцениваний}}",
       "approveAll": "Одобрить все ({count})",
-      "approvingAll": "Одобрение…"
+      "approvingAll": "Одобрение…",
+      "dueDateLabel": "Срок сдачи (необязательно)",
+      "dueDateHint": "Показывается ученикам, но не блокирует отправку."
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -767,7 +769,9 @@
       "writtenBadge": "Письменный",
       "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопросов}}",
       "secondsEach": "по {seconds} с",
-      "start": "Начать"
+      "start": "Начать",
+      "due": "Срок: {date}",
+      "overdue": "Просрочено: {date}"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
     "assignedToYou": "Назначено вам",
