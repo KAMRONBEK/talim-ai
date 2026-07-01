@@ -458,7 +458,11 @@
     },
     "stats": {
       "materials": "Materials",
-      "students": "Active students"
+      "students": "Active students",
+      "avgMastery": "Avg mastery",
+      "totalStudents": "Total students",
+      "assessments": "Assessments",
+      "readyMaterials": "Ready materials"
     },
     "register": {
       "title": "Create your organization",
@@ -489,7 +493,9 @@
       "adminHint": "Ask your platform admin to assign a tenant subscription.",
       "students": "Students",
       "materials": "Materials",
-      "generations": "Generations this month"
+      "generations": "Generations this month",
+      "seatsUsed": "Seats used",
+      "manualNote": "Payment is handled personally — reach out to your admin to adjust your seat limit."
     },
     "students": {
       "title": "Students",
@@ -538,7 +544,8 @@
       "remove": "Remove",
       "submit": "Assign selected",
       "back": "Back to {title}",
-      "partialError": "Couldn't assign to {count, plural, one {# student} other {# students}}. Please try again."
+      "partialError": "Couldn't assign to {count, plural, one {# student} other {# students}}. Please try again.",
+      "assignedCount": "{assigned} of {total}"
     },
     "joinCode": {
       "title": "Class join code",
@@ -598,7 +605,9 @@
       "chooseAssessment": "Choose assessment",
       "assignButton": "Assign",
       "resultsTitle": "Results & leaderboard",
-      "questionType": "Question type"
+      "questionType": "Question type",
+      "newAssessment": "New assessment",
+      "headerCount": "{count, plural, =0 {No assessments yet} one {# assessment} other {# assessments}}"
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -613,7 +622,8 @@
     "assignAction": "Assign",
     "assignSearch": "Search students...",
     "assignSelectAll": "Select all",
-    "actionsCol": "Actions"
+    "actionsCol": "Actions",
+    "materialCount": "{count, plural, one {# material} other {# materials}}"
   },
   "learner": {
     "loading": "Loading...",

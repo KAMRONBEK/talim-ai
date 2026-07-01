@@ -22,11 +22,16 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
   const [assignError, setAssignError] = useState<string | null>(null);
 
   const assignedIds = new Set(assignments?.map((a) => a.learnerId) ?? []);
-  const activeStudents = (students?.filter((s) => s.active) ?? []).filter((student) => {
+  const activePool = students?.filter((s) => s.active) ?? [];
+  const activeStudents = activePool.filter((student) => {
     const q = search.toLowerCase().trim();
     if (!q) return true;
     return `${student.name ?? ''} ${student.email}`.toLowerCase().includes(q);
   });
+  // Count against the assignable (active) pool, independent of the search box, so the header
+  // stays stable while filtering. Both figures come from data the panel already loads.
+  const totalCount = activePool.length;
+  const assignedCount = activePool.filter((s) => assignedIds.has(s.id)).length;
 
   const toggle = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -53,7 +58,12 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
 
   return (
     <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
-      <h3 className="font-display text-lg font-semibold text-foreground">{t('assign.title')}</h3>
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="font-display text-lg font-semibold text-foreground">{t('assign.title')}</h3>
+        <span className="inline-flex shrink-0 items-center rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-primary">
+          {t('assign.assignedCount', { assigned: assignedCount, total: totalCount })}
+        </span>
+      </div>
       <p className="mt-1 text-sm text-muted-foreground">{t('assign.desc')}</p>
       <div className="mt-4 flex gap-2">
         <Input

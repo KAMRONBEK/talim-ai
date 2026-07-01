@@ -458,7 +458,11 @@
     },
     "stats": {
       "materials": "Материалы",
-      "students": "Активные ученики"
+      "students": "Активные ученики",
+      "avgMastery": "Ср. успеваемость",
+      "totalStudents": "Всего учеников",
+      "assessments": "Задания",
+      "readyMaterials": "Готовые материалы"
     },
     "register": {
       "title": "Создайте организацию",
@@ -489,7 +493,9 @@
       "adminHint": "Попросите администратора назначить подписку организации.",
       "students": "Ученики",
       "materials": "Материалы",
-      "generations": "Генерации за месяц"
+      "generations": "Генерации за месяц",
+      "seatsUsed": "Занято мест",
+      "manualNote": "Оплата производится лично — обратитесь к администратору, чтобы изменить лимит мест."
     },
     "students": {
       "title": "Ученики",
@@ -538,7 +544,8 @@
       "remove": "Убрать",
       "submit": "Назначить",
       "back": "Назад к {title}",
-      "partialError": "Не удалось назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}. Попробуйте снова."
+      "partialError": "Не удалось назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}. Попробуйте снова.",
+      "assignedCount": "{assigned} из {total}"
     },
     "joinCode": {
       "title": "Код класса",
@@ -598,7 +605,9 @@
       "chooseAssessment": "Выберите оценивание",
       "assignButton": "Назначить",
       "resultsTitle": "Результаты и таблица лидеров",
-      "questionType": "Тип вопроса"
+      "questionType": "Тип вопроса",
+      "newAssessment": "Новое оценивание",
+      "headerCount": "{count, plural, =0 {Пока нет оцениваний} one {# оценивание} few {# оценивания} many {# оцениваний} other {# оцениваний}}"
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -613,7 +622,8 @@
     "assignAction": "Назначить",
     "assignSearch": "Поиск учеников...",
     "assignSelectAll": "Выбрать все",
-    "actionsCol": "Действия"
+    "actionsCol": "Действия",
+    "materialCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}"
   },
   "learner": {
     "loading": "Загрузка...",

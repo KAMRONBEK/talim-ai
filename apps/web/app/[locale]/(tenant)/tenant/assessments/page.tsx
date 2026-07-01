@@ -8,6 +8,7 @@ import {
   ClipboardList,
   FileText,
   Library,
+  Plus,
   Sparkles,
   Trophy,
   UserCheck,
@@ -150,12 +151,26 @@ export default function TenantAssessmentsPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-8">
-      <div>
-        <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-          {t('eyebrow')}
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
-        <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {t('eyebrow')}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <h1 className="font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
+            <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 font-label text-xs font-semibold tabular-nums text-muted-foreground">
+              {t('headerCount', { count: assessments.length })}
+            </span>
+          </div>
+          <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
+        </div>
+        <a
+          href="#new-assessment"
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 ease-out hover:-translate-y-px hover:bg-primary/90 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Plus className="h-4 w-4" />
+          {t('newAssessment')}
+        </a>
       </div>
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
@@ -224,29 +239,43 @@ export default function TenantAssessmentsPage() {
             </Button>
           </form>
           <div className="space-y-2">
-            {banks.map((bank) => (
-              <button
-                key={bank.id}
-                type="button"
-                onClick={() => setSelectedBankId(bank.id)}
-                className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
-                  selectedBankId === bank.id
-                    ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
-                    : 'border-border/70 hover:border-border hover:bg-secondary/50'
-                }`}
-              >
-                <span className="block font-display font-semibold">{bank.title}</span>
-                <span className="text-xs tabular-nums text-muted-foreground">
-                  {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
-                </span>
-                {bank.materials.length > 0 && (
-                  <span className="mt-1 flex items-center gap-1.5 truncate text-[11px] text-muted-foreground">
-                    <FileText className="h-3 w-3 shrink-0" />
-                    <span className="truncate">{bank.materials.map((m) => m.title).join(', ')}</span>
+            {banks.map((bank) => {
+              const approvedPct =
+                bank.questionCount > 0
+                  ? Math.round((bank.approvedCount / bank.questionCount) * 100)
+                  : 0;
+              return (
+                <button
+                  key={bank.id}
+                  type="button"
+                  onClick={() => setSelectedBankId(bank.id)}
+                  className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
+                    selectedBankId === bank.id
+                      ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
+                      : 'border-border/70 hover:border-border hover:bg-secondary/50'
+                  }`}
+                >
+                  <span className="block truncate font-display font-semibold">{bank.title}</span>
+                  <span className="mt-1 block text-xs tabular-nums text-muted-foreground">
+                    {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                   </span>
-                )}
-              </button>
-            ))}
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-border/60">
+                    <span
+                      className="block h-full rounded-full bg-primary transition-all duration-300"
+                      style={{ width: `${approvedPct}%` }}
+                    />
+                  </span>
+                  {bank.materials.length > 0 && (
+                    <span className="mt-2 flex items-center gap-1.5 truncate text-[11px] text-muted-foreground">
+                      <FileText className="h-3 w-3 shrink-0" />
+                      <span className="truncate">
+                        {bank.materials.map((m) => m.title).join(', ')}
+                      </span>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </aside>
 
@@ -353,7 +382,8 @@ export default function TenantAssessmentsPage() {
 
       <section className="grid gap-6 lg:grid-cols-2">
         <form
-          className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
+          id="new-assessment"
+          className="scroll-mt-24 space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
             const assessment = await createAssessment.mutateAsync({

@@ -458,7 +458,11 @@
     },
     "stats": {
       "materials": "Materiallar",
-      "students": "Faol o'quvchilar"
+      "students": "Faol o'quvchilar",
+      "avgMastery": "O'rtacha o'zlashtirish",
+      "totalStudents": "Jami o'quvchilar",
+      "assessments": "Topshiriqlar",
+      "readyMaterials": "Tayyor materiallar"
     },
     "register": {
       "title": "Tashkilot yarating",
@@ -489,7 +493,9 @@
       "adminHint": "Admin tenant obunasini tayinlashi kerak.",
       "students": "O'quvchilar",
       "materials": "Materiallar",
-      "generations": "Oy generatsiyalari"
+      "generations": "Oy generatsiyalari",
+      "seatsUsed": "Band o'rinlar",
+      "manualNote": "To'lov shaxsan amalga oshiriladi — o'rinlar sonini o'zgartirish uchun adminingizga murojaat qiling."
     },
     "students": {
       "title": "O'quvchilar",
@@ -538,7 +544,8 @@
       "remove": "Olib tashlash",
       "submit": "Tayinlash",
       "back": "{title} ga qaytish",
-      "partialError": "{count} ta o'quvchiga biriktirib bo'lmadi. Qayta urinib ko'ring."
+      "partialError": "{count} ta o'quvchiga biriktirib bo'lmadi. Qayta urinib ko'ring.",
+      "assignedCount": "{total} tadan {assigned} ta"
     },
     "joinCode": {
       "title": "Sinf kodi",
@@ -598,7 +605,9 @@
       "chooseAssessment": "Baholashni tanlang",
       "assignButton": "Tayinlash",
       "resultsTitle": "Natijalar va reyting",
-      "questionType": "Savol turi"
+      "questionType": "Savol turi",
+      "newAssessment": "Yangi baholash",
+      "headerCount": "{count, plural, =0 {Hali baholash yo'q} other {# ta baholash}}"
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -613,7 +622,8 @@
     "assignAction": "Biriktirish",
     "assignSearch": "O'quvchilarni qidirish...",
     "assignSelectAll": "Barchasini tanlash",
-    "actionsCol": "Amallar"
+    "actionsCol": "Amallar",
+    "materialCount": "{count} ta material"
   },
   "learner": {
     "loading": "Yuklanmoqda...",

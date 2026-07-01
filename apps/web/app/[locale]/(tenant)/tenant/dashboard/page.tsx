@@ -3,7 +3,17 @@
 import { useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { AlertTriangle, BookOpen, TrendingUp, Users, UserX } from 'lucide-react';
+import {
+  AlertTriangle,
+  BookOpen,
+  ClipboardCheck,
+  FileCheck2,
+  GraduationCap,
+  TrendingUp,
+  Users,
+  UserX,
+  type LucideIcon,
+} from 'lucide-react';
 import { Button } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useTenantContents } from '@/hooks/useTenantContent';
@@ -12,6 +22,49 @@ import { useTenantAssessments } from '@/hooks/useAssessments';
 import { useTenantSearch } from '@/contexts/tenant-shell';
 import { RecentContentGrid } from '@/components/dashboard/recent-content-grid';
 import { OnboardingChecklist } from '@/components/tenant/onboarding-checklist';
+
+function StatCard({
+  href,
+  label,
+  value,
+  icon: Icon,
+  tone,
+  valueClassName,
+}: {
+  href: string;
+  label: string;
+  value: string | number;
+  icon: LucideIcon;
+  tone: 'pine' | 'clay';
+  valueClassName?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm font-medium text-muted-foreground">{label}</p>
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+            tone === 'pine'
+              ? 'bg-primary/10 text-primary'
+              : 'bg-accent-secondary/15 text-accent-secondary'
+          }`}
+        >
+          <Icon className="h-[18px] w-[18px]" />
+        </span>
+      </div>
+      <p
+        className={`mt-4 font-display text-4xl font-semibold tabular-nums${
+          valueClassName ? ` ${valueClassName}` : ''
+        }`}
+      >
+        {value}
+      </p>
+    </Link>
+  );
+}
 
 export default function TenantDashboardPage() {
   const t = useTranslations('tenant');
@@ -29,6 +82,15 @@ export default function TenantDashboardPage() {
   }, [contents, search]);
   const failedMaterials = contents?.filter((c) => c.status === 'FAILED') ?? [];
   const inactiveStudents = students?.filter((s) => !s.active) ?? [];
+
+  const readyMaterials = contents?.filter((c) => c.status === 'READY').length ?? 0;
+  const activeStudents = students?.filter((s) => s.active).length ?? 0;
+  const scoredStudents = students?.filter((s) => s.avgQuizScore != null) ?? [];
+  const avgMastery = scoredStudents.length
+    ? Math.round(
+        scoredStudents.reduce((sum, s) => sum + (s.avgQuizScore ?? 0), 0) / scoredStudents.length,
+      )
+    : null;
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
@@ -66,47 +128,50 @@ export default function TenantDashboardPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Link
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <StatCard
           href="/tenant/materials"
-          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
-        >
-          <div className="flex items-center justify-between">
-            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('stats.materials')}</p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <BookOpen className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">{contents?.length ?? 0}</p>
-        </Link>
-        <Link
+          label={t('stats.materials')}
+          value={contents?.length ?? 0}
+          icon={BookOpen}
+          tone="pine"
+        />
+        <StatCard
           href="/tenant/students"
-          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
-        >
-          <div className="flex items-center justify-between">
-            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('stats.students')}</p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
-              <Users className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">
-            {students?.filter((s) => s.active).length ?? 0}
-          </p>
-        </Link>
-        <Link
+          label={t('stats.students')}
+          value={activeStudents}
+          icon={Users}
+          tone="clay"
+        />
+        <StatCard
           href="/tenant/progress"
-          className="group rounded-2xl border border-border/70 bg-card p-5 shadow-soft hover-lift"
-        >
-          <div className="flex items-center justify-between">
-            <p className="font-label text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('nav.progress')}</p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-success">
-              <TrendingUp className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-4 font-display text-4xl font-bold tracking-tight tabular-nums">
-            {students?.filter((s) => s.lastActivityAt).length ?? 0}
-          </p>
-        </Link>
+          label={t('stats.avgMastery')}
+          value={avgMastery == null ? '—' : `${avgMastery}%`}
+          icon={TrendingUp}
+          tone="pine"
+          valueClassName={avgMastery == null ? undefined : 'text-primary'}
+        />
+        <StatCard
+          href="/tenant/students"
+          label={t('stats.totalStudents')}
+          value={students?.length ?? 0}
+          icon={GraduationCap}
+          tone="clay"
+        />
+        <StatCard
+          href="/tenant/assessments"
+          label={t('stats.assessments')}
+          value={assessments?.length ?? 0}
+          icon={ClipboardCheck}
+          tone="pine"
+        />
+        <StatCard
+          href="/tenant/materials"
+          label={t('stats.readyMaterials')}
+          value={readyMaterials}
+          icon={FileCheck2}
+          tone="clay"
+        />
       </div>
 
       <OnboardingChecklist
