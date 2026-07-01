@@ -228,12 +228,17 @@ export interface SendTenantMessageResponse {
   message: TenantSentMessage;
 }
 
-/** A student's reply as seen by the tutor (readAt = the owner's read timestamp). */
+/**
+ * One message inside a tutor's thread, as seen by the tutor. A thread interleaves student
+ * replies (`fromTutor: false`, `readAt` = the owner's read timestamp) with the owner's own
+ * in-thread responses (`fromTutor: true`, `readAt` always null — the owner isn't a recipient).
+ */
 export interface TenantMessageReply {
   id: string;
   threadId: string;
   body: string;
   senderName: string | null;
+  fromTutor: boolean;
   createdAt: string;
   readAt: string | null;
 }
@@ -289,6 +294,20 @@ export interface MarkMessageReadResponse {
 
 export interface CreateLearnerReplyResponse {
   reply: LearnerThreadMessage;
+}
+
+/** A tutor's in-thread response to a specific student reply (POST /tenant/messages/:id/respond). */
+export interface TenantResponseMessage {
+  id: string;
+  threadId: string;
+  body: string;
+  senderName: string | null;
+  fromTutor: true;
+  createdAt: string;
+}
+
+export interface RespondToReplyResponse {
+  reply: TenantResponseMessage;
 }
 
 export type UsageFeature =

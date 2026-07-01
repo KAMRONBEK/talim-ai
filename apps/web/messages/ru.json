@@ -739,7 +739,10 @@
       "recipients": "{count, plural, one {# ученик} few {# ученика} many {# учеников} other {# ученика}}",
       "readStat": "прочитали: {count}",
       "replies": "{count, plural, one {# ответ} few {# ответа} many {# ответов} other {# ответа}}",
-      "noReplies": "Пока нет ответов."
+      "noReplies": "Пока нет ответов.",
+      "respondPlaceholder": "Ответить этому ученику…",
+      "respond": "Отправить",
+      "respondError": "Не удалось отправить ваш ответ."
     }
   },
   "learner": {

@@ -739,7 +739,10 @@
       "recipients": "{count, plural, one {# student} other {# students}}",
       "readStat": "{count} read",
       "replies": "{count, plural, one {# reply} other {# replies}}",
-      "noReplies": "No replies yet."
+      "noReplies": "No replies yet.",
+      "respondPlaceholder": "Reply to this student…",
+      "respond": "Send",
+      "respondError": "Couldn't send your reply."
     }
   },
   "learner": {

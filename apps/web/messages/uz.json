@@ -739,7 +739,10 @@
       "recipients": "{count, plural, one {# o'quvchi} other {# o'quvchi}}",
       "readStat": "{count} o'qidi",
       "replies": "{count, plural, one {# javob} other {# javob}}",
-      "noReplies": "Hali javob yo'q."
+      "noReplies": "Hali javob yo'q.",
+      "respondPlaceholder": "Ushbu o'quvchiga javob yozing…",
+      "respond": "Yuborish",
+      "respondError": "Javobingizni yuborib bo'lmadi."
     }
   },
   "learner": {
