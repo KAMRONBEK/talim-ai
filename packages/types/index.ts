@@ -19,7 +19,13 @@ export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
 export type TenantMemberRole = 'OWNER' | 'LEARNER';
-export type QuestionType = 'SHORT_ANSWER' | 'NUMERIC' | 'MULTIPLE_CHOICE';
+export type QuestionType =
+  | 'SHORT_ANSWER'
+  | 'NUMERIC'
+  | 'MULTIPLE_CHOICE'
+  | 'TRUE_FALSE'
+  | 'MULTIPLE_SELECT'
+  | 'FILL_BLANK';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
@@ -350,6 +356,11 @@ export interface BankQuestion {
   prompt: string;
   options: string[] | null;
   acceptableAnswers: string[];
+  /**
+   * Extra per-type configuration. Present for FILL_BLANK (`{ blanks?: number;
+   * blankAnswers?: string[][] }`); null for types that don't need it.
+   */
+  config: Record<string, unknown> | null;
   explanation: string | null;
   status: BankQuestionStatus;
   sourceContentId: string | null;
@@ -369,6 +380,12 @@ export interface TenantAssessment {
   mode: AssessmentMode;
   secondsPerQuestion: number | null;
   status: TenantAssessmentStatus;
+  /** When true, per-question weighted points with a wrong-answer penalty are used. */
+  strictScoring: boolean;
+  /** Fraction of a question's points deducted for a wrong (answered) response under strict scoring. */
+  wrongPenalty: number;
+  /** When true, MULTIPLE_SELECT / FILL_BLANK award partial credit; otherwise all-or-nothing. */
+  partialCredit: boolean;
   createdAt: string;
   questionCount: number;
   assignmentCount: number;
@@ -403,6 +420,8 @@ export interface LearnerAssessment {
     type: QuestionType;
     prompt: string;
     options: string[] | null;
+    /** Per-type config (e.g. FILL_BLANK blank count); null when not applicable. */
+    config: Record<string, unknown> | null;
   }>;
 }
 
@@ -413,6 +432,10 @@ export interface AssessmentQuestionResult {
   acceptableAnswers: string[];
   explanation: string | null;
   pointsAwarded: number;
+  /** Strict-scoring only: 0..1 credit for this answer (null under legacy percentage scoring). */
+  creditFraction?: number | null;
+  /** Strict-scoring only: signed points earned for this answer (null under legacy scoring). */
+  pointsEarned?: number | null;
 }
 
 export interface AssessmentSubmitResult {
@@ -424,6 +447,10 @@ export interface AssessmentSubmitResult {
     maxStreak: number;
     status: string;
     submittedAt: string;
+    /** Strict-scoring only: signed total points earned (null under legacy scoring). */
+    pointsEarned?: number | null;
+    /** Strict-scoring only: maximum attainable points (null under legacy scoring). */
+    maxPoints?: number | null;
   };
   correct: number;
   total: number;

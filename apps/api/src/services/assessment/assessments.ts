@@ -32,6 +32,9 @@ export async function createAssessment(tenantId: string, userId: string, input: 
       mode: body.mode,
       secondsPerQuestion: body.mode === 'GAME' ? (body.secondsPerQuestion ?? 20) : null,
       status: body.publish ? 'PUBLISHED' : 'DRAFT',
+      strictScoring: body.strictScoring,
+      wrongPenalty: body.wrongPenalty,
+      partialCredit: body.partialCredit,
       createdById: userId,
       questions: {
         create: body.questionIds.map((questionId, index) => ({

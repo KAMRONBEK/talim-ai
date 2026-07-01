@@ -99,6 +99,9 @@ enum QuestionType {
   SHORT_ANSWER
   NUMERIC
   MULTIPLE_CHOICE
+  TRUE_FALSE
+  MULTIPLE_SELECT
+  FILL_BLANK
 }
 
 enum BankQuestionStatus {
@@ -548,6 +551,7 @@ model BankQuestion {
   prompt            String             @db.Text
   options           Json?
   acceptableAnswers Json
+  config            Json?
   explanation       String?            @db.Text
   status            BankQuestionStatus @default(DRAFT)
   createdAt         DateTime           @default(now())
@@ -575,6 +579,9 @@ model TenantAssessment {
   mode         AssessmentMode         @default(WRITTEN)
   secondsPerQuestion Int?
   status       TenantAssessmentStatus @default(DRAFT)
+  strictScoring Boolean               @default(false)
+  wrongPenalty  Float                 @default(0.5)
+  partialCredit Boolean               @default(true)
   createdById  String
   createdAt    DateTime               @default(now())
   updatedAt    DateTime               @updatedAt
@@ -634,6 +641,8 @@ model AssessmentAttempt {
   answers      Json
   score        Float?
   pointsTotal  Int                     @default(0)
+  pointsEarned Float?
+  maxPoints    Float?
   maxStreak    Int                     @default(0)
   durationMs   Int?
   status       AssessmentAttemptStatus @default(SUBMITTED)
@@ -652,10 +661,12 @@ model AttemptAnswer {
   id            String            @id @default(cuid())
   attemptId     String
   questionId    String
-  answer        String
-  correct       Boolean
-  responseMs    Int?
-  pointsAwarded Int               @default(0)
+  answer         String
+  correct        Boolean
+  responseMs     Int?
+  pointsAwarded  Int               @default(0)
+  pointsEarned   Float?
+  creditFraction Float?
   attempt       AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
 
   @@index([attemptId])

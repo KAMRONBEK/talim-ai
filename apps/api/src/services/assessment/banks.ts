@@ -5,7 +5,7 @@ import { generateJsonCompletion } from '../ai.service.js';
 import {
   ASSESSMENT_SYSTEM_PROMPT,
   buildAssessmentPrompt,
-  normalizeQuestionType,
+  normalizeAssessmentQuestionType,
 } from '../../lib/assessment-prompt.js';
 import { dropParrotingQuestions } from '../../lib/question-quality.js';
 import {
@@ -18,7 +18,9 @@ import {
   generateSchema,
   getSectionContext,
   isAnswerableMultipleChoice,
+  isAnswerableMultipleSelect,
   jsonStringArray,
+  parseQuestionConfig,
   patchQuestionSchema,
 } from './shared.js';
 
@@ -118,13 +120,28 @@ export async function generateQuestions(
       skipped++;
       continue;
     }
-    const type = normalizeQuestionType(q.type);
+    const type = normalizeAssessmentQuestionType(q.type);
     const options = Array.isArray(q.options) ? jsonStringArray(q.options) : null;
-    // Never persist an unanswerable multiple-choice question.
-    if (type === 'MULTIPLE_CHOICE' && !isAnswerableMultipleChoice(options, acceptableAnswers)) {
+    // Types that carry a fixed set of options a learner picks from.
+    const hasOptions =
+      type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE' || type === 'MULTIPLE_SELECT';
+    // Never persist an unanswerable option question: the accepted answer(s) must map to options.
+    if (
+      (type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE') &&
+      !isAnswerableMultipleChoice(options, acceptableAnswers)
+    ) {
       skipped++;
       continue;
     }
+    if (type === 'MULTIPLE_SELECT' && !isAnswerableMultipleSelect(options, acceptableAnswers)) {
+      skipped++;
+      continue;
+    }
+    // FILL_BLANK stores blank metadata in config (default single blank).
+    const config =
+      type === 'FILL_BLANK'
+        ? (parseQuestionConfig(q.config) ?? { blanks: 1 })
+        : parseQuestionConfig(q.config);
     created.push(
       await prisma.bankQuestion.create({
         data: {
@@ -134,8 +151,9 @@ export async function generateQuestions(
           sourceSectionId: body.sectionId ?? null,
           type,
           prompt: q.prompt,
-          options: type === 'MULTIPLE_CHOICE' && options ? options : Prisma.JsonNull,
+          options: hasOptions && options ? options : Prisma.JsonNull,
           acceptableAnswers,
+          config: config ? (config as Prisma.InputJsonValue) : Prisma.JsonNull,
           explanation: q.explanation ?? null,
         },
       }),
@@ -173,10 +191,19 @@ export async function patchQuestion(
     body.acceptableAnswers !== undefined
       ? body.acceptableAnswers
       : jsonStringArray(question.acceptableAnswers);
-  if (finalType === 'MULTIPLE_CHOICE' && !isAnswerableMultipleChoice(finalOptions, finalAcceptable)) {
+  if (
+    (finalType === 'MULTIPLE_CHOICE' || finalType === 'TRUE_FALSE') &&
+    !isAnswerableMultipleChoice(finalOptions, finalAcceptable)
+  ) {
     throw new AppError(
       400,
       'Multiple-choice questions need at least 2 options and a correct answer that exactly matches one option.',
+    );
+  }
+  if (finalType === 'MULTIPLE_SELECT' && !isAnswerableMultipleSelect(finalOptions, finalAcceptable)) {
+    throw new AppError(
+      400,
+      'Multiple-select questions need at least 2 options and every correct answer must exactly match an option.',
     );
   }
 
@@ -187,6 +214,9 @@ export async function patchQuestion(
       ...(body.type !== undefined ? { type: body.type } : {}),
       ...(body.options !== undefined ? { options: body.options ?? Prisma.JsonNull } : {}),
       ...(body.acceptableAnswers !== undefined ? { acceptableAnswers: body.acceptableAnswers } : {}),
+      ...(body.config !== undefined
+        ? { config: body.config ? (body.config as Prisma.InputJsonValue) : Prisma.JsonNull }
+        : {}),
       ...(body.explanation !== undefined ? { explanation: body.explanation } : {}),
       ...(body.status !== undefined ? { status: body.status } : {}),
     },
