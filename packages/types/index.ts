@@ -167,6 +167,93 @@ export interface CreateTenantStudentResponse {
   temporaryPassword: string;
 }
 
+// --- Student CSV / bulk import (Wave 3 area D) ------------------------------
+
+export type StudentImportResult =
+  | 'created'
+  | 'reactivated'
+  | 'skipped_duplicate'
+  | 'error_seat_limit'
+  | 'error';
+
+/** One row's outcome from POST /tenant/students/import. */
+export interface StudentImportRow {
+  /** 1-based row number in the submitted CSV / rows list. */
+  row: number;
+  name: string;
+  result: StudentImportResult;
+  /** Failure reason (errors / skips) or an informational note. */
+  message?: string;
+  /** Resolved username (present for created/reactivated username-only students). */
+  username?: string | null;
+  /** Real email for email students; null for username-only students. */
+  email?: string | null;
+  /** Auto-generated temporary password (created/reactivated rows) — shown once to the tutor. */
+  temporaryPassword?: string;
+}
+
+export interface StudentImportSummary {
+  total: number;
+  created: number;
+  reactivated: number;
+  /** Rows skipped because the student is already an active member. */
+  skipped: number;
+  /** Rows rejected because the seat limit was reached (partial import). */
+  seatLimited: number;
+  errors: number;
+}
+
+export interface StudentImportResponse {
+  report: StudentImportRow[];
+  summary: StudentImportSummary;
+}
+
+// --- One-way tenant messaging (tutor → student, Wave 3 area D) --------------
+
+export interface SendTenantMessageInput {
+  studentIds: string[];
+  body: string;
+}
+
+/** A tutor's sent message with delivery/read counts. */
+export interface TenantSentMessage {
+  id: string;
+  body: string;
+  createdAt: string;
+  recipientCount: number;
+  readCount: number;
+}
+
+export interface TenantSentMessagesResponse {
+  messages: TenantSentMessage[];
+}
+
+export interface SendTenantMessageResponse {
+  message: TenantSentMessage;
+}
+
+/** A message as seen by the receiving student. */
+export interface LearnerMessage {
+  id: string;
+  body: string;
+  senderName: string | null;
+  createdAt: string;
+  readAt: string | null;
+}
+
+export interface LearnerMessagesResponse {
+  messages: LearnerMessage[];
+}
+
+export interface LearnerUnreadCountResponse {
+  count: number;
+}
+
+export interface MarkMessageReadResponse {
+  id: string;
+  readAt: string | null;
+}
+
 export type UsageFeature =
   | 'EMBED'
   | 'TUTOR_CHAT'
@@ -389,6 +476,12 @@ export interface TenantAssessment {
   wrongPenalty: number;
   /** When true, MULTIPLE_SELECT / FILL_BLANK award partial credit; otherwise all-or-nothing. */
   partialCredit: boolean;
+  /** Scheduled start (ISO) for a live game — drives the "starts soon" banner. Null if unscheduled. */
+  scheduledAt: string | null;
+  /** True while a live game session is open. */
+  isLive: boolean;
+  /** When the live session auto-closes (ISO); null = open until manually ended. */
+  liveEndsAt: string | null;
   createdAt: string;
   questionCount: number;
   assignmentCount: number;
@@ -413,6 +506,12 @@ export interface LearnerAssessment {
   maxAttempts: number;
   mode: AssessmentMode;
   secondsPerQuestion: number | null;
+  /** Scheduled start (ISO) for a live game — drives the "starts soon" banner. Null if unscheduled. */
+  scheduledAt: string | null;
+  /** True while a live game session is open (frontend polls the leaderboard during it). */
+  isLive: boolean;
+  /** When the live session auto-closes (ISO); null = open until manually ended. */
+  liveEndsAt: string | null;
   /** Soft due date (ISO) — earliest across the learner's assignments, or null. */
   dueAt: string | null;
   attemptCount: number;

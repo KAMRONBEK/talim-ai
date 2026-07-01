@@ -71,6 +71,18 @@ export const createAssessmentSchema = z.object({
   partialCredit: z.boolean().default(true),
 });
 
+export const scheduleAssessmentSchema = z.object({
+  // ISO date/time; null clears the schedule.
+  scheduledAt: z.coerce.date().nullish(),
+});
+
+export const goLiveAssessmentSchema = z.object({
+  // Defaults to going live; pass false to end the live session.
+  live: z.boolean().optional(),
+  // Optional auto-close time for the live window; null = open until manually ended.
+  liveEndsAt: z.coerce.date().nullish(),
+});
+
 export const assignAssessmentSchema = z.object({
   learnerIds: z.array(z.string()).min(1),
   contentId: z.string().min(1).optional(),
@@ -229,6 +241,9 @@ export function formatAssessment(assessment: {
   strictScoring: boolean;
   wrongPenalty: number;
   partialCredit: boolean;
+  scheduledAt?: Date | null;
+  isLive?: boolean;
+  liveEndsAt?: Date | null;
   createdAt: Date;
   questions?: unknown[];
   assignments?: unknown[];
@@ -246,6 +261,9 @@ export function formatAssessment(assessment: {
     strictScoring: assessment.strictScoring,
     wrongPenalty: assessment.wrongPenalty,
     partialCredit: assessment.partialCredit,
+    scheduledAt: assessment.scheduledAt?.toISOString() ?? null,
+    isLive: assessment.isLive ?? false,
+    liveEndsAt: assessment.liveEndsAt?.toISOString() ?? null,
     createdAt: assessment.createdAt.toISOString(),
     questionCount: assessment.questions?.length ?? 0,
     assignmentCount: assessment.assignments?.length ?? 0,

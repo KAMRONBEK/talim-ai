@@ -58,6 +58,27 @@ export async function createStudent(req: AuthenticatedRequest, res: Response): P
   res.status(201).json(result);
 }
 
+export async function importStudents(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const result = await tenantService.importStudents(tenantId, req.user.userId, req.body);
+  res.json(result);
+}
+
+export async function sendMessage(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const message = await tenantService.sendTenantMessage(tenantId, req.user.userId, req.body);
+  res.status(201).json({ message });
+}
+
+export async function listSentMessages(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const messages = await tenantService.listSentMessages(tenantId, req.user.userId);
+  res.json({ messages });
+}
+
 export async function patchStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
   const tenantId = requireOwnerTenant(req);
   const student = await tenantService.patchStudent(tenantId, getParam(req, 'id'), req.body);

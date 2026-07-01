@@ -59,6 +59,26 @@ export async function createAssessment(req: AuthenticatedRequest, res: Response)
   res.status(201).json({ assessment });
 }
 
+export async function scheduleAssessment(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const { tenantId } = requireTenant(req);
+  const assessment = await assessmentService.scheduleAssessment(
+    tenantId,
+    getParam(req, 'assessmentId'),
+    req.body,
+  );
+  res.json({ assessment });
+}
+
+export async function goLiveAssessment(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const { tenantId } = requireTenant(req);
+  const assessment = await assessmentService.setAssessmentLive(
+    tenantId,
+    getParam(req, 'assessmentId'),
+    req.body,
+  );
+  res.json({ assessment });
+}
+
 export async function assignAssessment(req: AuthenticatedRequest, res: Response): Promise<void> {
   const { tenantId, userId } = requireTenant(req);
   const assignments = await assessmentService.assignAssessment(
