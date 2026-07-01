@@ -10,8 +10,8 @@ import { LogoMark } from '@/components/brand/logo';
 
 const learnerNavKeys = [
   { href: '/learner/dashboard', key: 'materials' as const, icon: Home },
-  { href: '/learner/progress', key: 'progress' as const, icon: BarChart3 },
   { href: '/learner/assessments', key: 'tasks' as const, icon: BookOpen },
+  { href: '/learner/progress', key: 'progress' as const, icon: BarChart3 },
   { href: '/learner/settings', key: 'settings' as const, icon: Settings },
 ];
 

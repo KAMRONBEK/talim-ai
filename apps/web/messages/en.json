@@ -657,7 +657,9 @@
       "desc": "Your activity and assigned materials.",
       "learningStreak": "Learning streak",
       "averageQuiz": "Average quiz",
-      "emptyDesc": "Open an assigned material to start tracking progress."
+      "emptyDesc": "Open an assigned material to start tracking progress.",
+      "overallMastery": "Overall mastery",
+      "yourClass": "Your class"
     },
     "nav": {
       "materials": "Materials",
@@ -669,7 +671,9 @@
       "title": "Settings",
       "desc": "Manage your student account.",
       "accountTitle": "My account",
-      "schoolTitle": "School"
+      "schoolTitle": "School",
+      "tempPasswordWarning": "Your tutor set a temporary password — please choose a new one.",
+      "usernameLabel": "Username"
     },
     "onboarding": {
       "title": "Welcome to Talim AI",
@@ -700,8 +704,19 @@
       "points": "{count} pts",
       "play": "Play",
       "hideLeaderboard": "Hide leaderboard",
-      "leaderboard": "Leaderboard"
-    }
+      "leaderboard": "Leaderboard",
+      "writtenBadge": "Written",
+      "questionCount": "{count} questions",
+      "secondsEach": "{seconds}s each"
+    },
+    "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
+    "assignedToYou": "Assigned to you",
+    "materialsCount": "{count, plural, one {# material} other {# materials}}",
+    "cardStatusContinue": "continue",
+    "cardStatusNotStarted": "Not started",
+    "cardStatusCompleted": "Completed",
+    "cardStatusProcessing": "Processing…",
+    "cardStatusFailed": "Couldn't process"
   },
   "slides": {
     "subtitle": "AI-generated slides from this material",

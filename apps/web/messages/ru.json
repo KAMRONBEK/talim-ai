@@ -657,7 +657,9 @@
       "desc": "Ваша активность и назначенные материалы.",
       "learningStreak": "Серия обучения",
       "averageQuiz": "Средний балл",
-      "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс."
+      "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс.",
+      "overallMastery": "Общее усвоение",
+      "yourClass": "Ваш класс"
     },
     "nav": {
       "materials": "Материалы",
@@ -669,7 +671,9 @@
       "title": "Настройки",
       "desc": "Управляйте учётной записью ученика.",
       "accountTitle": "Мой аккаунт",
-      "schoolTitle": "Школа"
+      "schoolTitle": "Школа",
+      "tempPasswordWarning": "Ваш репетитор установил временный пароль — пожалуйста, выберите новый.",
+      "usernameLabel": "Имя пользователя"
     },
     "onboarding": {
       "title": "Добро пожаловать в Talim AI",
@@ -700,8 +704,19 @@
       "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}",
       "play": "Играть",
       "hideLeaderboard": "Скрыть таблицу лидеров",
-      "leaderboard": "Таблица лидеров"
-    }
+      "leaderboard": "Таблица лидеров",
+      "writtenBadge": "Письменный",
+      "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопросов}}",
+      "secondsEach": "по {seconds} с"
+    },
+    "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
+    "assignedToYou": "Назначено вам",
+    "materialsCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}",
+    "cardStatusContinue": "продолжить",
+    "cardStatusNotStarted": "Не начато",
+    "cardStatusCompleted": "Завершено",
+    "cardStatusProcessing": "Обработка…",
+    "cardStatusFailed": "Не удалось обработать"
   },
   "slides": {
     "subtitle": "Слайды по этому материалу, созданные ИИ",

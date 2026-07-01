@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { BookOpen, Flame, TrendingUp } from 'lucide-react';
+import { Flame, GraduationCap, School, TrendingUp } from 'lucide-react';
 import { useContents } from '@/hooks/useContent';
 import { useLearnerSummary } from '@/hooks/useTenant';
 import { ProgressBar } from '@/components/tenant/activity-heatmap';
@@ -24,12 +24,26 @@ export default function LearnerProgressPage() {
         <h1 className="mt-1 font-display text-2xl font-bold tracking-tight">{tp('title')}</h1>
         <p className="mt-1 text-muted-foreground">{tp('desc')}</p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="flex flex-col items-center rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
-          <p className="font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            {tp('averageQuiz')}
+
+      {/* Your class — identity card mirroring the design's sidebar chip. */}
+      <div className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-5 shadow-soft">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+          <School className="h-5 w-5" />
+        </span>
+        <div className="min-w-0">
+          <p className="font-label text-xs font-medium uppercase tracking-wide text-primary/80">
+            {tp('yourClass')}
           </p>
-          <div className="relative mt-3 h-32 w-32">
+          <p className="mt-0.5 truncate font-display font-semibold">
+            {summary?.tenantName ?? t('schoolFallback')}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {/* Overall mastery ring */}
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
+          <div className="relative h-28 w-28">
             <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90">
               <circle cx="60" cy="60" r="52" fill="none" stroke="hsl(var(--border))" strokeWidth="10" />
               <circle
@@ -50,34 +64,38 @@ export default function LearnerProgressPage() {
               </span>
             </div>
           </div>
-        </div>
-        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <div className="flex items-start justify-between">
-            <p className="font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {tp('learningStreak')}
-            </p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
-              <Flame className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
-            {t('streakDays', { count: summary?.streakDays ?? 0 })}
+          <p className="mt-3 font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {tp('overallMastery')}
           </p>
         </div>
-        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <div className="flex items-start justify-between">
-            <p className="font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {t('assignedMaterials')}
-            </p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <BookOpen className="h-5 w-5" />
-            </span>
-          </div>
+
+        {/* Learning streak */}
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-secondary/15 text-accent-secondary">
+            <Flame className="h-6 w-6" />
+          </span>
+          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
+            {summary?.streakDays ?? 0}
+          </p>
+          <p className="mt-1 font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {t('statStreak')}
+          </p>
+        </div>
+
+        {/* Assigned materials */}
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <GraduationCap className="h-6 w-6" />
+          </span>
           <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
             {summary?.assignedCount ?? contents.length}
           </p>
+          <p className="mt-1 font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            {t('assignedMaterials')}
+          </p>
         </div>
       </div>
+
       <div className="space-y-3">
         {summary?.continueContent && (
           <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">

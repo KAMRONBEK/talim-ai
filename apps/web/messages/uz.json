@@ -657,7 +657,9 @@
       "desc": "Faolligingiz va tayinlangan materiallar.",
       "learningStreak": "O'rganish ketma-ketligi",
       "averageQuiz": "O'rtacha test",
-      "emptyDesc": "Taraqqiyotni kuzatishni boshlash uchun tayinlangan materialni oching."
+      "emptyDesc": "Taraqqiyotni kuzatishni boshlash uchun tayinlangan materialni oching.",
+      "overallMastery": "Umumiy o'zlashtirish",
+      "yourClass": "Sinfingiz"
     },
     "nav": {
       "materials": "Materiallar",
@@ -669,7 +671,9 @@
       "title": "Sozlamalar",
       "desc": "O'quvchi hisobingizni boshqaring.",
       "accountTitle": "Mening hisobim",
-      "schoolTitle": "Maktab"
+      "schoolTitle": "Maktab",
+      "tempPasswordWarning": "O'qituvchingiz vaqtinchalik parol o'rnatdi — iltimos, yangi parol tanlang.",
+      "usernameLabel": "Foydalanuvchi nomi"
     },
     "onboarding": {
       "title": "Talim AI ga xush kelibsiz",
@@ -700,8 +704,19 @@
       "points": "{count} ball",
       "play": "O'ynash",
       "hideLeaderboard": "Reytingni yashirish",
-      "leaderboard": "Reyting"
-    }
+      "leaderboard": "Reyting",
+      "writtenBadge": "Yozma",
+      "questionCount": "{count} ta savol",
+      "secondsEach": "har biriga {seconds}s"
+    },
+    "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
+    "assignedToYou": "Sizga biriktirilgan",
+    "materialsCount": "{count, plural, one {# ta material} other {# ta material}}",
+    "cardStatusContinue": "davom eting",
+    "cardStatusNotStarted": "Boshlanmagan",
+    "cardStatusCompleted": "Tugallandi",
+    "cardStatusProcessing": "Tayyorlanmoqda…",
+    "cardStatusFailed": "Qayta ishlab bo‘lmadi"
   },
   "slides": {
     "subtitle": "Ushbu material asosida AI yaratgan slaydlar",

@@ -145,22 +145,36 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
 
   return (
     <div
-      className={`space-y-4 rounded-2xl border border-l-4 bg-card p-5 shadow-soft ${
-        isGame ? 'border-accent-secondary/30 border-l-accent-secondary' : 'border-primary/20 border-l-primary'
+      className={`space-y-4 rounded-2xl border bg-card p-5 shadow-soft ${
+        locked
+          ? 'border-border/70 opacity-80'
+          : `border-l-4 ${
+              isGame
+                ? 'border-accent-secondary/30 border-l-accent-secondary'
+                : 'border-primary/20 border-l-primary'
+            }`
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
-            {isGame && (
+            {isGame ? (
               <Badge className="bg-accent-secondary text-accent-secondary-foreground hover:bg-accent-secondary">
                 {t('gameBadge')}
               </Badge>
+            ) : (
+              <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
+                {t('writtenBadge')}
+              </Badge>
             )}
+            <h2 className="font-display text-lg font-semibold">{assessment.title}</h2>
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            {t('attempts', { used: assessment.attemptCount, max: assessment.maxAttempts })}
+            {t('questionCount', { count: assessment.questions.length })}
+            {isGame && assessment.secondsPerQuestion != null
+              ? ` · ${t('secondsEach', { seconds: assessment.secondsPerQuestion })}`
+              : ''}
+            {` · ${t('attempts', { used: assessment.attemptCount, max: assessment.maxAttempts })}`}
             {assessment.latestScore != null
               ? ` · ${t('latest', { score: Math.round(assessment.latestScore) })}`
               : ''}
