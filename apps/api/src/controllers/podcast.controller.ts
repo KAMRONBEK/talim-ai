@@ -22,6 +22,7 @@ function formatEpisode(episode: {
   podcastId: string;
   title: string;
   order: number;
+  script: string;
   audioPath: string | null;
   durationSec: number | null;
   sectionId: string | null;
@@ -34,6 +35,9 @@ function formatEpisode(episode: {
     hasAudio: !!episode.audioPath,
     durationSec: episode.durationSec,
     sectionId: episode.sectionId,
+    // The client derives an estimated time-aligned transcript from this so the
+    // podcast player can highlight the current line + support click-to-seek.
+    script: episode.script,
   };
 }
 

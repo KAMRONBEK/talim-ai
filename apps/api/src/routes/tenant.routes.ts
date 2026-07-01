@@ -84,6 +84,8 @@ tenantRoutes.get('/messages', asyncHandler(tenantController.listSentMessages));
 tenantRoutes.post('/messages', asyncHandler(tenantController.sendMessage));
 tenantRoutes.get('/messages/unread-count', asyncHandler(tenantController.messagesUnreadCount));
 tenantRoutes.post('/messages/:id/read', asyncHandler(tenantController.markReplyRead));
+// Tutor responds in-thread to a specific student reply (`:id` = that student's reply id).
+tenantRoutes.post('/messages/:id/respond', asyncHandler(tenantController.respondToReply));
 
 const tenantContent = Router({ mergeParams: true });
 tenantContent.use(requireTenantId);

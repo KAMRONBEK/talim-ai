@@ -2,11 +2,16 @@
 
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { Bell } from 'lucide-react';
+import { Bell, Send } from 'lucide-react';
 import type { AppLocale, TenantMessageReply, TenantMessageThread } from '@talim/types';
 import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, cn } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { useMarkTenantMessageRead, useTenantMessages, useTenantUnreadCount } from '@/hooks/useTenant';
+import {
+  useMarkTenantMessageRead,
+  useRespondToReply,
+  useTenantMessages,
+  useTenantUnreadCount,
+} from '@/hooks/useTenant';
 import { formatRelativeTime } from '@/lib/format-relative-time';
 
 /**
@@ -32,9 +37,10 @@ export function TenantMessagesBell() {
     setExpandedId((prev) => {
       const next = prev === thread.id ? null : thread.id;
       if (next === thread.id) {
-        // Opening a thread marks its unread student replies read.
+        // Opening a thread marks its unread student replies read (never the tutor's own
+        // in-thread responses — those carry no owner recipient row to mark).
         for (const r of thread.replies) {
-          if (r.readAt == null) markRead.mutate(r.id);
+          if (!r.fromTutor && r.readAt == null) markRead.mutate(r.id);
         }
       }
       return next;
@@ -132,14 +138,23 @@ export function TenantMessagesBell() {
                             {t('noReplies')}
                           </p>
                         ) : (
-                          thread.replies.map((r) => (
-                            <ReplyBubble
-                              key={r.id}
-                              reply={r}
-                              locale={locale}
-                              fallbackName={t('student')}
-                            />
-                          ))
+                          thread.replies.map((r) =>
+                            r.fromTutor ? (
+                              <ResponseBubble
+                                key={r.id}
+                                reply={r}
+                                locale={locale}
+                                youLabel={t('you')}
+                              />
+                            ) : (
+                              <StudentReplyRow
+                                key={r.id}
+                                reply={r}
+                                locale={locale}
+                                fallbackName={t('student')}
+                              />
+                            ),
+                          )
                         )}
                       </div>
                     )}
@@ -154,7 +169,30 @@ export function TenantMessagesBell() {
   );
 }
 
-function ReplyBubble({
+/** The tutor's own in-thread response, sided right like the root broadcast. */
+function ResponseBubble({
+  reply,
+  locale,
+  youLabel,
+}: {
+  reply: TenantMessageReply;
+  locale: AppLocale;
+  youLabel: string;
+}) {
+  return (
+    <div className="flex flex-col items-end">
+      <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-primary px-3 py-2 text-primary-foreground">
+        <p className="whitespace-pre-wrap text-sm">{reply.body}</p>
+      </div>
+      <span className="mt-0.5 px-1 font-label text-[0.6rem] tabular-nums text-muted-foreground">
+        {reply.senderName ?? youLabel} · {formatRelativeTime(reply.createdAt, locale)}
+      </span>
+    </div>
+  );
+}
+
+/** A student's reply plus an inline box to respond to that specific student. */
+function StudentReplyRow({
   reply,
   locale,
   fallbackName,
@@ -163,14 +201,57 @@ function ReplyBubble({
   locale: AppLocale;
   fallbackName: string;
 }) {
+  const t = useTranslations('tenant.messages');
+  const [draft, setDraft] = useState('');
+  const respond = useRespondToReply();
+
+  function send() {
+    const body = draft.trim();
+    if (!body) return;
+    respond.mutate({ id: reply.id, body }, { onSuccess: () => setDraft('') });
+  }
+
   return (
-    <div className="flex flex-col items-start">
-      <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-secondary px-3 py-2 text-secondary-foreground">
-        <p className="whitespace-pre-wrap text-sm">{reply.body}</p>
+    <div className="space-y-1.5">
+      <div className="flex flex-col items-start">
+        <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-secondary px-3 py-2 text-secondary-foreground">
+          <p className="whitespace-pre-wrap text-sm">{reply.body}</p>
+        </div>
+        <span className="mt-0.5 px-1 font-label text-[0.6rem] tabular-nums text-muted-foreground">
+          {reply.senderName ?? fallbackName} · {formatRelativeTime(reply.createdAt, locale)}
+        </span>
       </div>
-      <span className="mt-0.5 px-1 font-label text-[0.6rem] tabular-nums text-muted-foreground">
-        {reply.senderName ?? fallbackName} · {formatRelativeTime(reply.createdAt, locale)}
-      </span>
+      <div className="flex items-center gap-2 pl-1">
+        <input
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              send();
+            }
+          }}
+          placeholder={t('respondPlaceholder')}
+          maxLength={5000}
+          className="min-w-0 flex-1 rounded-xl border border-border bg-background px-3 py-1.5 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        />
+        <Button
+          type="button"
+          size="icon"
+          className="h-8 w-8 shrink-0"
+          onClick={send}
+          disabled={respond.isPending || !draft.trim()}
+          aria-label={t('respond')}
+        >
+          <Send className="h-4 w-4" />
+        </Button>
+      </div>
+      {respond.isError && (
+        <p className="pl-1 text-xs text-destructive" role="alert">
+          {t('respondError')}
+        </p>
+      )}
     </div>
   );
 }

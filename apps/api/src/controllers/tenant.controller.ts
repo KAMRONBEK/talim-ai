@@ -96,6 +96,18 @@ export async function markReplyRead(req: AuthenticatedRequest, res: Response): P
   res.json(result);
 }
 
+export async function respondToReply(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const reply = await tenantService.respondToStudentReply(
+    tenantId,
+    req.user.userId,
+    getParam(req, 'id'),
+    req.body,
+  );
+  res.status(201).json({ reply });
+}
+
 export async function patchStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
   const tenantId = requireOwnerTenant(req);
   const student = await tenantService.patchStudent(tenantId, getParam(req, 'id'), req.body);

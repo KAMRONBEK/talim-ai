@@ -10,6 +10,7 @@ import type {
   LearnerSummary,
   LearnerUnreadCountResponse,
   MarkMessageReadResponse,
+  RespondToReplyResponse,
   SendTenantMessageInput,
   SendTenantMessageResponse,
   StudentImportResponse,
@@ -139,6 +140,28 @@ export function useTenantUnreadCount() {
     },
     enabled: role === 'TENANT_OWNER',
     refetchInterval: 60_000,
+  });
+}
+
+/**
+ * Tutor's in-thread response to a specific student reply (`id` = that student's reply id). The
+ * response targets only that student (a per-student sub-conversation inside the broadcast thread).
+ * Refreshes the thread list + unread badge so the new response appears in the thread.
+ */
+export function useRespondToReply() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, body }: { id: string; body: string }) => {
+      const { data } = await api.post<RespondToReplyResponse>(
+        `/tenant/messages/${id}/respond`,
+        { body },
+      );
+      return data.reply;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'messages'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'messages', 'unread-count'] });
+    },
   });
 }
 
