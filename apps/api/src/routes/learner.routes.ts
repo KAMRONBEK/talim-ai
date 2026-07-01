@@ -21,6 +21,7 @@ learnerRoutes.get('/progress', asyncHandler(learnerController.getProgress));
 learnerRoutes.get('/messages', asyncHandler(learnerController.listMessages));
 learnerRoutes.get('/messages/unread-count', asyncHandler(learnerController.unreadMessageCount));
 learnerRoutes.post('/messages/:id/read', asyncHandler(learnerController.markMessageRead));
+learnerRoutes.post('/messages/:id/reply', asyncHandler(learnerController.replyToMessage));
 learnerRoutes.get('/assessments', asyncHandler(assessmentController.listLearnerAssessments));
 learnerRoutes.get(
   '/assessments/:assessmentId/leaderboard',

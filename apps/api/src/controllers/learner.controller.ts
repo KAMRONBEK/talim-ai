@@ -48,3 +48,14 @@ export async function markMessageRead(req: AuthenticatedRequest, res: Response):
   const result = await tenantService.markLearnerMessageRead(tenantId, userId, getParam(req, 'id'));
   res.json(result);
 }
+
+export async function replyToMessage(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const { tenantId, userId } = requireTenant(req);
+  const reply = await tenantService.replyToTenantMessage(
+    tenantId,
+    userId,
+    getParam(req, 'id'),
+    req.body,
+  );
+  res.status(201).json({ reply });
+}
