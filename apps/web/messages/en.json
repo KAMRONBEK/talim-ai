@@ -309,7 +309,11 @@
     "manimRendering": "Rendering animation...",
     "manimError": "Animation failed",
     "manimFailed": "Render failed",
-    "error": "Couldn't send your message. Please try again."
+    "error": "Couldn't send your message. Please try again.",
+    "askSelection": "Ask AI",
+    "explainSelection": "Explain",
+    "selectionAskPrompt": "About this part:\n\"{snippet}\"\n\n",
+    "suggestionsLabel": "Suggested prompts"
   },
   "quiz": {
     "loading": "Loading quiz...",
@@ -372,7 +376,8 @@
       "save": "Save profile",
       "saving": "Saving...",
       "success": "Profile updated.",
-      "error": "Could not update profile."
+      "error": "Could not update profile.",
+      "languageHint": "Changes the language across the app. The page reloads to apply it."
     },
     "password": {
       "title": "Password",

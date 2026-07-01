@@ -309,7 +309,11 @@
     "manimRendering": "Animatsiya yaratilmoqda...",
     "manimError": "Animatsiya xatosi",
     "manimFailed": "Yaratish amalga oshmadi",
-    "error": "Xabaringizni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring."
+    "error": "Xabaringizni yuborib bo'lmadi. Iltimos, qayta urinib ko'ring.",
+    "askSelection": "AI dan so'rash",
+    "explainSelection": "Tushuntirish",
+    "selectionAskPrompt": "Ushbu qism haqida:\n\"{snippet}\"\n\n",
+    "suggestionsLabel": "Tavsiya etilgan savollar"
   },
   "quiz": {
     "loading": "Test yuklanmoqda...",
@@ -372,7 +376,8 @@
       "save": "Profilni saqlash",
       "saving": "Saqlanmoqda...",
       "success": "Profil yangilandi.",
-      "error": "Profilni yangilab bo'lmadi."
+      "error": "Profilni yangilab bo'lmadi.",
+      "languageHint": "Ilova bo'ylab tilni o'zgartiradi. Qo'llash uchun sahifa qayta yuklanadi."
     },
     "password": {
       "title": "Parol",

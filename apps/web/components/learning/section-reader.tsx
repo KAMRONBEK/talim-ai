@@ -7,6 +7,7 @@ import { cn } from '@talim/ui';
 import { useSlides, useGenerateSlides } from '@/hooks/useSlides';
 import { classifyGenerationError } from '@/lib/generation-error';
 import { DeckPlayer } from '@/components/deck/DeckPlayer';
+import { SelectionAsk } from '@/components/learning/selection-ask';
 
 type Mode = 'slides' | 'text';
 
@@ -75,9 +76,11 @@ export function SectionReader({
   }, [mode, sectionId, isLearner, deck, isLoading, hasBody]);
 
   const TextView = (
-    <article className="prose prose-sm max-w-3xl whitespace-pre-wrap text-[15px] leading-relaxed text-foreground">
-      {body ?? tContent('selectSection')}
-    </article>
+    <SelectionAsk>
+      <article className="prose prose-sm max-w-3xl whitespace-pre-wrap text-[15px] leading-relaxed text-foreground">
+        {body ?? tContent('selectSection')}
+      </article>
+    </SelectionAsk>
   );
 
   return (

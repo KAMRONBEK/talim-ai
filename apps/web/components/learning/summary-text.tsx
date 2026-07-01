@@ -4,6 +4,7 @@ import { useId, useMemo, useState, type CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@talim/ui';
 import { formatSummaryForDisplay } from '@/lib/format-summary';
+import { SelectionAsk } from '@/components/learning/selection-ask';
 
 // --- Structure derivation ---------------------------------------------------
 // Summaries are stored as deliberately plain text (the generator forbids markdown
@@ -205,11 +206,13 @@ export function SummaryText({
   );
 
   if (!hasToc) {
-    return <div className="mx-auto max-w-prose">{reading}</div>;
+    return (
+      <SelectionAsk className="mx-auto max-w-prose">{reading}</SelectionAsk>
+    );
   }
 
   return (
-    <div style={{ containerType: 'inline-size' } as CSSProperties}>
+    <SelectionAsk style={{ containerType: 'inline-size' } as CSSProperties}>
       <style>{CONTAINER_CSS}</style>
       <div className="summary-doc__grid">
         <aside className="summary-doc__toc">
@@ -247,6 +250,6 @@ export function SummaryText({
         </aside>
         <div>{reading}</div>
       </div>
-    </div>
+    </SelectionAsk>
   );
 }
