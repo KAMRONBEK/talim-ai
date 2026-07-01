@@ -7,6 +7,7 @@ import { ProfileCard } from '@/components/account/profile-card';
 import { PasswordCard } from '@/components/account/password-card';
 import { BillingSummaryCard } from '@/components/account/billing-summary-card';
 import { OnboardingChecklist } from '@/components/tenant/onboarding-checklist';
+import { JoinCodeCard } from '@/components/tenant/join-code-card';
 import { usePatchTenant, useTenant, useTenantStudents } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
 import { useTenantAssessments } from '@/hooks/useAssessments';
@@ -59,6 +60,7 @@ export default function TenantSettingsPage() {
             {t('settings.save')}
           </Button>
         </form>
+        <JoinCodeCard />
       </section>
 
       <OnboardingChecklist

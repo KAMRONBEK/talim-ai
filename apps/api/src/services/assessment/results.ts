@@ -71,6 +71,7 @@ export async function getAssessmentResults(tenantId: string, assessmentId: strin
         bestScore: best?.score ?? null,
         bestPoints: best?.pointsTotal ?? 0,
         maxStreak: best?.maxStreak ?? 0,
+        dueAt: x.dueAt?.toISOString() ?? null,
       };
     });
 

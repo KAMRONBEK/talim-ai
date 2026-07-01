@@ -1,4 +1,5 @@
 import type { Response } from 'express';
+import { z } from 'zod';
 import type { Prisma } from '@prisma/client';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
@@ -8,6 +9,7 @@ import { writeAdminAuditLog } from '../../services/admin/audit.service.js';
 import { contentQueue } from '../../services/queue.service.js';
 import { cancelContentJobs } from '../../services/queue.service.js';
 import { storageService } from '../../services/storage.service.js';
+import { getChunkSample } from '../../services/admin/analytics.service.js';
 import { paginationSchema } from './shared.js';
 
 export async function listContents(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -173,7 +175,148 @@ export async function listGenerated(req: AuthenticatedRequest, res: Response): P
     })),
   ].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
-  res.json({ items });
+  // Left-join review status by (kind, mediaId). One query; default PENDING.
+  const reviews = items.length
+    ? await prisma.generatedMediaReview.findMany({
+        where: { OR: items.map((it) => ({ kind: it.kind, mediaId: it.id })) },
+        select: { kind: true, mediaId: true, status: true },
+      })
+    : [];
+  const reviewByKey = new Map(reviews.map((r) => [`${r.kind}:${r.mediaId}`, r.status]));
+
+  const enriched = items.map((it) => ({
+    ...it,
+    reviewStatus: reviewByKey.get(`${it.kind}:${it.id}`) ?? 'PENDING',
+  }));
+
+  res.json({ items: enriched });
+}
+
+const GENERATED_KINDS = ['podcast', 'quiz', 'slideshow', 'summary'] as const;
+const reviewBodySchema = z.object({
+  status: z.enum(['APPROVED', 'FLAGGED']),
+  note: z.string().max(2000).optional(),
+});
+
+/**
+ * Approve/flag a generated-media item. Upserts GeneratedMediaReview keyed by
+ * (kind, mediaId) — one row backs review across all generated-media types.
+ */
+export async function reviewGenerated(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const kind = getParam(req, 'kind');
+  const mediaId = getParam(req, 'mediaId');
+  if (!(GENERATED_KINDS as readonly string[]).includes(kind)) {
+    throw new AppError(400, 'kind must be one of: podcast|quiz|slideshow|summary');
+  }
+  const body = reviewBodySchema.parse(req.body ?? {});
+
+  const review = await prisma.generatedMediaReview.upsert({
+    where: { kind_mediaId: { kind, mediaId } },
+    create: {
+      kind,
+      mediaId,
+      status: body.status,
+      note: body.note ?? null,
+      reviewedById: req.user.userId,
+    },
+    update: {
+      status: body.status,
+      note: body.note ?? null,
+      reviewedById: req.user.userId,
+    },
+  });
+
+  await writeAdminAuditLog({
+    adminUserId: req.user.userId,
+    action: 'generated.review',
+    targetType: kind,
+    targetId: mediaId,
+    metadata: { status: body.status, note: body.note ?? null },
+  });
+
+  res.json({
+    review: {
+      kind: review.kind,
+      mediaId: review.mediaId,
+      status: review.status,
+      note: review.note,
+      reviewedById: review.reviewedById,
+      updatedAt: review.updatedAt.toISOString(),
+    },
+  });
+}
+
+/**
+ * Read-only content inspector: the content row, pipeline state (text/chunks/
+ * sections), which generated media exist + their status, and a chunk sample.
+ * The pgvector embedding column is NEVER selected — only tested for presence.
+ */
+export async function contentDetail(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const id = getParam(req, 'id');
+  const content = await prisma.content.findUnique({
+    where: { id },
+    include: { user: { select: { email: true, name: true } } },
+  });
+  if (!content) throw new AppError(404, 'Content not found');
+
+  const [
+    chunkCount,
+    sectionCount,
+    summaryCount,
+    podcast,
+    video,
+    quizCount,
+    sample,
+  ] = await Promise.all([
+    prisma.chunk.count({ where: { contentId: id } }),
+    prisma.contentSection.count({ where: { contentId: id } }),
+    prisma.contentSummary.count({ where: { contentId: id } }),
+    prisma.podcast.findFirst({
+      where: { contentId: id },
+      orderBy: { createdAt: 'desc' },
+      select: { status: true },
+    }),
+    prisma.contentVideo.findFirst({
+      where: { contentId: id },
+      orderBy: { createdAt: 'desc' },
+      select: { status: true },
+    }),
+    prisma.quiz.count({ where: { contentId: id } }),
+    getChunkSample(id),
+  ]);
+
+  res.json({
+    content: {
+      id: content.id,
+      userId: content.userId,
+      userEmail: content.user.email,
+      userName: content.user.name,
+      tenantId: content.tenantId,
+      type: content.type,
+      title: content.title,
+      url: content.url,
+      storagePath: content.storagePath,
+      status: content.status,
+      createdAt: content.createdAt.toISOString(),
+      updatedAt: content.updatedAt.toISOString(),
+    },
+    pipeline: {
+      textExtracted: chunkCount > 0,
+      chunked: chunkCount > 0,
+      sectioned: sectionCount > 0,
+      chunkCount,
+      embeddedChunkCount: sample.embeddedChunkCount,
+      sectionCount,
+    },
+    generated: {
+      summary: { present: summaryCount > 0, count: summaryCount },
+      podcast: { present: podcast != null, status: podcast?.status ?? null },
+      video: { present: video != null, status: video?.status ?? null },
+      quiz: { present: quizCount > 0, count: quizCount },
+    },
+    chunks: sample.chunks,
+  });
 }
 
 export async function deleteGenerated(req: AuthenticatedRequest, res: Response): Promise<void> {

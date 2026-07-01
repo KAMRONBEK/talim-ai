@@ -14,6 +14,33 @@ export const TOKEN_PRICING_PER_MILLION: Record<string, { input: number; output: 
   default: { input: 1, output: 3 },
 };
 
+/**
+ * Monthly recurring price per plan code, in USD. Manual billing — no payment
+ * gateway — so this is the canonical price table used to compute MRR. FREE is 0.
+ * Kept here (not in a migration) so pricing can change without a schema change.
+ * A plan's own `limits.priceMonthlyUsd` (when set) takes precedence over this.
+ */
+export const PLAN_MONTHLY_PRICE_USD: Record<string, number> = {
+  FREE: 0,
+  INDIVIDUAL_PRO: 10,
+  TENANT_STARTER: 49,
+  TENANT_GROWTH: 149,
+};
+
+/**
+ * Resolve a plan's effective monthly USD price. Prefers an explicit
+ * `limits.priceMonthlyUsd` when present, otherwise falls back to the
+ * PLAN_MONTHLY_PRICE_USD table, otherwise 0 (unknown plan ⇒ treated as free).
+ */
+export function planMonthlyPriceUsd(
+  planCode: string,
+  limits?: { priceMonthlyUsd?: number | null } | null,
+): number {
+  const fromLimits = limits?.priceMonthlyUsd;
+  if (typeof fromLimits === 'number' && Number.isFinite(fromLimits)) return fromLimits;
+  return PLAN_MONTHLY_PRICE_USD[planCode] ?? 0;
+}
+
 export function estimateTokenCostUsd(
   model: string,
   inputTokens: number,

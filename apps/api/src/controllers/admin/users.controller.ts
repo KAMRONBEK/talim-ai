@@ -16,6 +16,7 @@ import {
 } from '../../services/subscription.service.js';
 import { applyAdminRoleChange } from '../../services/adminUserRole.service.js';
 import { resolveTenantIdForUser } from '../../services/contentAccess.service.js';
+import { signImpersonationToken } from '../../lib/impersonation.js';
 import {
   buildUserWhere,
   formatAdminUser,
@@ -390,4 +391,51 @@ export async function patchUserSubscription(req: AuthenticatedRequest, res: Resp
   });
 
   res.json({ subscription });
+}
+
+/**
+ * Mint a short-lived (30 min) impersonation JWT for the target user so an admin
+ * can view the product as them. Refuses another ADMIN and self. Stateless — the
+ * token carries `imp:true` + `impersonatorId`; nothing is persisted beyond the
+ * audit entry.
+ */
+export async function impersonateUser(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const id = getParam(req, 'id');
+
+  if (id === req.user.userId) {
+    throw new AppError(400, 'Cannot impersonate yourself');
+  }
+
+  const target = await prisma.user.findUnique({
+    where: { id },
+    select: { id: true, email: true, role: true },
+  });
+  if (!target) throw new AppError(404, 'User not found');
+  if (target.role === 'ADMIN') {
+    throw new AppError(403, 'Cannot impersonate another admin');
+  }
+
+  const tenantId =
+    target.role === 'TENANT_OWNER' || target.role === 'TENANT_LEARNER'
+      ? await resolveTenantIdForUser(target.id, target.role)
+      : null;
+
+  const token = signImpersonationToken({
+    userId: target.id,
+    email: target.email,
+    role: target.role,
+    tenantId,
+    impersonatorId: req.user.userId,
+  });
+
+  await writeAdminAuditLog({
+    adminUserId: req.user.userId,
+    action: 'IMPERSONATE',
+    targetType: 'User',
+    targetId: target.id,
+    metadata: { targetEmail: target.email, targetRole: target.role },
+  });
+
+  res.json({ token });
 }

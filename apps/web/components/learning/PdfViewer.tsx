@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Minus, Plus } from 'lucide-react';
 import { cn } from '@talim/ui';
 import { loadPdfJs, type PdfDocumentProxy, type PdfJsModule, type PdfViewport } from '@/lib/pdfjs-cdn';
 import {
@@ -19,6 +20,10 @@ const MIN_PAGE_WIDTH = 280;
 // never triggers a full re-rasterize of every page.
 const WIDTH_EPSILON = 2;
 const RESIZE_DEBOUNCE_MS = 150;
+// Fit-width is 100%; the reader can scale the rendered pages up or down from there.
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 3;
+const ZOOM_STEP = 0.25;
 
 export type PdfSelectionMode = 'area';
 
@@ -141,6 +146,12 @@ export function PdfViewer({
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  // Display scale (1 = fit width) and the page currently at the top of the viewport,
+  // both view-local: they drive the toolbar zoom/page-indicator without touching the
+  // document fetch, RAG sections, or any prop/handler contract.
+  const [zoom, setZoom] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const scrollRafRef = useRef<number | null>(null);
   const dragStartRef = useRef<{ x: number; y: number; pageNumber: number } | null>(null);
 
   // Scroll to an active section's approximate page when it changes (clicking a chapter
@@ -188,6 +199,7 @@ export function PdfViewer({
     setError(false);
     setNumPages(0);
     setPages([]);
+    setCurrentPage(1);
     pageDimsRef.current = new Map();
     viewportByPageRef.current.clear();
     pdfDocRef.current = null;
@@ -231,15 +243,16 @@ export function PdfViewer({
   useEffect(() => {
     if (!numPages || pageWidth <= 0) return;
     const dims = pageDimsRef.current;
+    const displayWidth = Math.round(pageWidth * zoom);
     const next: PageState[] = [];
     for (let i = 1; i <= numPages; i++) {
       const dim = dims.get(i);
       if (!dim) continue;
-      const height = dim.width > 0 ? (pageWidth * dim.height) / dim.width : pageWidth;
-      next.push({ pageNumber: i, width: pageWidth, height });
+      const height = dim.width > 0 ? (displayWidth * dim.height) / dim.width : displayWidth;
+      next.push({ pageNumber: i, width: displayWidth, height });
     }
     setPages(next);
-  }, [numPages, pageWidth]);
+  }, [numPages, pageWidth, zoom]);
 
   // Rasterize each page + its text layer. Depends only on `pages` (which already
   // changes when the width changes), so it runs exactly once per layout change.
@@ -413,17 +426,81 @@ export function PdfViewer({
     };
   }, [isDragging, finishAreaSelection]);
 
+  const zoomOut = useCallback(
+    () => setZoom((z) => Math.max(ZOOM_MIN, Math.round((z - ZOOM_STEP) * 100) / 100)),
+    [],
+  );
+  const zoomIn = useCallback(
+    () => setZoom((z) => Math.min(ZOOM_MAX, Math.round((z + ZOOM_STEP) * 100) / 100)),
+    [],
+  );
+
+  // Track which page sits at the top of the viewport so the toolbar can show "page X of N".
+  // rAF-throttled and reads offsetTop against the (position:relative) scroll container.
+  const handleScroll = useCallback(() => {
+    if (scrollRafRef.current != null) return;
+    scrollRafRef.current = requestAnimationFrame(() => {
+      scrollRafRef.current = null;
+      const el = containerRef.current;
+      if (!el) return;
+      const marker = el.scrollTop + el.clientHeight * 0.25;
+      let current = 1;
+      for (const [pageNumber, pageEl] of pageRefs.current) {
+        if (pageEl.offsetTop <= marker) current = Math.max(current, pageNumber);
+      }
+      setCurrentPage((prev) => (prev === current ? prev : current));
+    });
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (scrollRafRef.current != null) cancelAnimationFrame(scrollRafRef.current);
+    },
+    [],
+  );
+
   const showLoading = !error && (loading || pages.length === 0);
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 items-center border-b bg-muted/40 px-3 py-1.5">
-        <span className="text-[10px] text-muted-foreground">{t('pdfSelectAreaHint')}</span>
+      <div className="flex shrink-0 items-center gap-2 border-b border-border/70 bg-muted/40 px-3 py-1.5">
+        {numPages > 0 && (
+          <span className="shrink-0 text-[11px] font-semibold tabular-nums text-muted-foreground">
+            {t('pdfPageOf', { page: currentPage, total: numPages })}
+          </span>
+        )}
+        <span className="min-w-0 flex-1 truncate text-[10px] text-muted-foreground">
+          {t('pdfSelectAreaHint')}
+        </span>
+        <div className="flex shrink-0 items-center gap-1">
+          <button
+            type="button"
+            onClick={zoomOut}
+            disabled={zoom <= ZOOM_MIN}
+            aria-label={t('pdfZoomOut')}
+            className="flex h-6 w-6 items-center justify-center rounded-md bg-muted text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+          >
+            <Minus className="h-3.5 w-3.5" />
+          </button>
+          <span className="w-10 text-center text-[11px] font-medium tabular-nums text-muted-foreground">
+            {Math.round(zoom * 100)}%
+          </span>
+          <button
+            type="button"
+            onClick={zoomIn}
+            disabled={zoom >= ZOOM_MAX}
+            aria-label={t('pdfZoomIn')}
+            className="flex h-6 w-6 items-center justify-center rounded-md bg-muted text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+          >
+            <Plus className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
 
       <div
         ref={containerRef}
-        className="relative min-h-0 flex-1 cursor-crosshair overflow-y-auto overscroll-contain px-1 py-2"
+        onScroll={handleScroll}
+        className="relative min-h-0 flex-1 cursor-crosshair overflow-auto overscroll-contain px-1 py-2"
       >
         {showLoading && <p className="p-4 text-sm text-muted-foreground">{t('pdfLoading')}</p>}
         {error && <p className="p-4 text-sm text-destructive">{t('pdfLoadError')}</p>}

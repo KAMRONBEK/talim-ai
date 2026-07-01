@@ -1,10 +1,12 @@
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import {
+  answerToString,
   assertLearnerAssignment,
   computeGamePoints,
-  isCorrect,
+  gradeQuestion,
   jsonStringArray,
+  parseQuestionConfig,
   submitAssessmentSchema,
 } from './shared.js';
 import { getAssessmentLeaderboard } from './results.js';
@@ -26,6 +28,15 @@ export async function listLearnerAssessments(tenantId: string, userId: string) {
     orderBy: { assignedAt: 'desc' },
   });
 
+  // Earliest (soft) due date per assessment — a learner may hold multiple assignment
+  // rows for one assessment (e.g. per content/section); surface the nearest deadline.
+  const dueByAssessment = new Map<string, Date>();
+  for (const a of assignments) {
+    if (!a.dueAt) continue;
+    const current = dueByAssessment.get(a.assessmentId);
+    if (!current || a.dueAt < current) dueByAssessment.set(a.assessmentId, a.dueAt);
+  }
+
   const seen = new Set<string>();
   return assignments
     .map((a) => a.assessment)
@@ -41,6 +52,10 @@ export async function listLearnerAssessments(tenantId: string, userId: string) {
       maxAttempts: a.maxAttempts,
       mode: a.mode,
       secondsPerQuestion: a.secondsPerQuestion,
+      scheduledAt: a.scheduledAt?.toISOString() ?? null,
+      isLive: a.isLive,
+      liveEndsAt: a.liveEndsAt?.toISOString() ?? null,
+      dueAt: dueByAssessment.get(a.id)?.toISOString() ?? null,
       attemptCount: a.attempts.length,
       latestScore: a.attempts[0]?.score ?? null,
       latestPoints: a.attempts[0]?.pointsTotal ?? null,
@@ -49,6 +64,7 @@ export async function listLearnerAssessments(tenantId: string, userId: string) {
         type: question.type,
         prompt: question.prompt,
         options: question.options ? jsonStringArray(question.options) : null,
+        config: parseQuestionConfig(question.config),
       })),
     }));
 }
@@ -78,11 +94,17 @@ export async function submitLearnerAssessment(
 
   const isGame = assessment.mode === 'GAME';
   const limitSec = assessment.secondsPerQuestion ?? 30;
+  // Strict scoring is opt-in. When OFF, the percentage/game path below is byte-for-byte
+  // unchanged and the strict-only fields (pointsEarned/maxPoints/creditFraction) stay null.
+  const strict = assessment.strictScoring;
 
   let correct = 0;
   let pointsTotal = 0;
   let streak = 0;
   let maxStreak = 0;
+  // Strict-scoring accumulators — signed points sum and max attainable points.
+  let attemptPointsEarned = 0;
+  let maxPoints = 0;
   const results: Array<{
     questionId: string;
     correct: boolean;
@@ -90,6 +112,8 @@ export async function submitLearnerAssessment(
     acceptableAnswers: string[];
     explanation: string | null;
     pointsAwarded: number;
+    creditFraction?: number | null;
+    pointsEarned?: number | null;
   }> = [];
   const answerDetails: Array<{
     questionId: string;
@@ -97,11 +121,16 @@ export async function submitLearnerAssessment(
     correct: boolean;
     responseMs: number | null;
     pointsAwarded: number;
+    creditFraction?: number | null;
+    pointsEarned?: number | null;
   }> = [];
 
-  for (const { question } of assessment.questions) {
-    const submitted = body.answers[question.id] ?? '';
-    const ok = isCorrect(question, submitted);
+  for (const aq of assessment.questions) {
+    const question = aq.question;
+    const raw = body.answers[question.id];
+    const grade = gradeQuestion(question, raw, assessment.partialCredit);
+    const ok = grade.correct;
+    const submitted = answerToString(raw);
     let points = 0;
     if (ok) {
       correct += 1;
@@ -114,12 +143,32 @@ export async function submitLearnerAssessment(
     } else {
       streak = 0;
     }
+
+    // Strict weighted points: partial credit scales up, a wrong (answered) response is
+    // penalized, and a blank scores 0. Left null entirely when strict scoring is off.
+    let creditFraction: number | null = null;
+    let questionPointsEarned: number | null = null;
+    if (strict) {
+      const qPoints = aq.points ?? 1;
+      maxPoints += qPoints;
+      creditFraction = grade.creditFraction;
+      if (grade.creditFraction > 0) {
+        questionPointsEarned = grade.creditFraction * qPoints;
+      } else if (grade.answered) {
+        questionPointsEarned = -assessment.wrongPenalty * qPoints;
+      } else {
+        questionPointsEarned = 0;
+      }
+      attemptPointsEarned += questionPointsEarned;
+    }
+
     answerDetails.push({
       questionId: question.id,
       answer: submitted,
       correct: ok,
       responseMs: body.timings?.[question.id] ?? null,
       pointsAwarded: points,
+      ...(strict ? { creditFraction, pointsEarned: questionPointsEarned } : {}),
     });
     results.push({
       questionId: question.id,
@@ -128,6 +177,7 @@ export async function submitLearnerAssessment(
       acceptableAnswers: jsonStringArray(question.acceptableAnswers),
       explanation: question.explanation,
       pointsAwarded: points,
+      ...(strict ? { creditFraction, pointsEarned: questionPointsEarned } : {}),
     });
   }
 
@@ -149,6 +199,7 @@ export async function submitLearnerAssessment(
         maxStreak,
         durationMs: body.durationMs ?? null,
         status: 'GRADED',
+        ...(strict ? { pointsEarned: attemptPointsEarned, maxPoints } : {}),
         answerDetails: { create: answerDetails },
       },
     });
@@ -163,6 +214,7 @@ export async function submitLearnerAssessment(
       maxStreak: attempt.maxStreak,
       status: attempt.status,
       submittedAt: attempt.submittedAt.toISOString(),
+      ...(strict ? { pointsEarned: attempt.pointsEarned, maxPoints: attempt.maxPoints } : {}),
     },
     correct,
     total,

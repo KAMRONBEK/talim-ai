@@ -4,6 +4,8 @@ import {
   assignAssessmentSchema,
   createAssessmentSchema,
   formatAssessment,
+  goLiveAssessmentSchema,
+  scheduleAssessmentSchema,
 } from './shared.js';
 
 export async function listAssessments(tenantId: string) {
@@ -32,6 +34,9 @@ export async function createAssessment(tenantId: string, userId: string, input: 
       mode: body.mode,
       secondsPerQuestion: body.mode === 'GAME' ? (body.secondsPerQuestion ?? 20) : null,
       status: body.publish ? 'PUBLISHED' : 'DRAFT',
+      strictScoring: body.strictScoring,
+      wrongPenalty: body.wrongPenalty,
+      partialCredit: body.partialCredit,
       createdById: userId,
       questions: {
         create: body.questionIds.map((questionId, index) => ({
@@ -43,6 +48,49 @@ export async function createAssessment(tenantId: string, userId: string, input: 
     include: { questions: true, assignments: true },
   });
   return formatAssessment(assessment);
+}
+
+/** Set (or clear) the scheduled start of a live game — powers the learner "starts soon" banner. */
+export async function scheduleAssessment(tenantId: string, assessmentId: string, input: unknown) {
+  const body = scheduleAssessmentSchema.parse(input ?? {});
+  const assessment = await prisma.tenantAssessment.findFirst({
+    where: { id: assessmentId, tenantId },
+  });
+  if (!assessment) throw new AppError(404, 'Assessment not found');
+  if (assessment.mode !== 'GAME') {
+    throw new AppError(400, 'Only game assessments can be scheduled');
+  }
+  const updated = await prisma.tenantAssessment.update({
+    where: { id: assessmentId },
+    data: { scheduledAt: body.scheduledAt ?? null },
+    include: { questions: true, assignments: true },
+  });
+  return formatAssessment(updated);
+}
+
+/** Start or end a live game session (isLive + optional auto-close time). */
+export async function setAssessmentLive(tenantId: string, assessmentId: string, input: unknown) {
+  const body = goLiveAssessmentSchema.parse(input ?? {});
+  const assessment = await prisma.tenantAssessment.findFirst({
+    where: { id: assessmentId, tenantId },
+  });
+  if (!assessment) throw new AppError(404, 'Assessment not found');
+  if (assessment.mode !== 'GAME') {
+    throw new AppError(400, 'Only game assessments can go live');
+  }
+  const goingLive = body.live !== false;
+  // A live session must be takeable — learners only see PUBLISHED assessments.
+  if (goingLive && assessment.status !== 'PUBLISHED') {
+    throw new AppError(400, 'Publish the assessment before starting a live session');
+  }
+  const updated = await prisma.tenantAssessment.update({
+    where: { id: assessmentId },
+    data: goingLive
+      ? { isLive: true, liveEndsAt: body.liveEndsAt ?? null }
+      : { isLive: false },
+    include: { questions: true, assignments: true },
+  });
+  return formatAssessment(updated);
 }
 
 export async function assignAssessment(
@@ -95,6 +143,7 @@ export async function assignAssessment(
           contentId: body.contentId ?? null,
           sectionId: body.sectionId ?? null,
           assignedById: userId,
+          dueAt: body.dueAt ?? null,
         },
       }),
     );

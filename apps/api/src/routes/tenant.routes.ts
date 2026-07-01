@@ -27,9 +27,11 @@ tenantRoutes.get('/', asyncHandler(tenantController.getTenant));
 tenantRoutes.patch('/', asyncHandler(tenantController.patchTenant));
 tenantRoutes.post('/join-code/regenerate', asyncHandler(tenantController.regenerateJoinCode));
 tenantRoutes.get('/progress', asyncHandler(tenantController.getProgress));
+tenantRoutes.get('/progress/topics', asyncHandler(tenantController.getProgressTopics));
 
 tenantRoutes.get('/students', asyncHandler(tenantController.listStudents));
 tenantRoutes.post('/students', asyncHandler(tenantController.createStudent));
+tenantRoutes.post('/students/import', asyncHandler(tenantController.importStudents));
 tenantRoutes.patch('/students/:id', asyncHandler(tenantController.patchStudent));
 tenantRoutes.delete('/students/:id', asyncHandler(tenantController.deleteStudent));
 tenantRoutes.post('/students/:id/reset-password', asyncHandler(tenantController.resetStudentPassword));
@@ -68,6 +70,18 @@ tenantRoutes.post(
   '/assessments/:assessmentId/assign',
   asyncHandler(assessmentController.assignAssessment),
 );
+tenantRoutes.patch(
+  '/assessments/:assessmentId/schedule',
+  asyncHandler(assessmentController.scheduleAssessment),
+);
+tenantRoutes.post(
+  '/assessments/:assessmentId/go-live',
+  asyncHandler(assessmentController.goLiveAssessment),
+);
+
+// One-way tutor→student messaging (Wave 3 area D).
+tenantRoutes.get('/messages', asyncHandler(tenantController.listSentMessages));
+tenantRoutes.post('/messages', asyncHandler(tenantController.sendMessage));
 
 const tenantContent = Router({ mergeParams: true });
 tenantContent.use(requireTenantId);

@@ -31,6 +31,13 @@ function GameStage({ children }: { children: ReactNode }) {
   );
 }
 
+// Number of blanks a FILL_BLANK question renders. Config carries `{ blanks }`;
+// anything missing/invalid falls back to a single blank so we never crash.
+function fillBlankCount(config: Record<string, unknown> | null | undefined): number {
+  const n = config?.blanks;
+  return typeof n === 'number' && n > 0 ? Math.floor(n) : 1;
+}
+
 export function GameQuizPlayer({
   assessment,
   onExit,
@@ -47,6 +54,9 @@ export function GameQuizPlayer({
   const [timings, setTimings] = useState<Record<string, number>>({});
   const [timeLeft, setTimeLeft] = useState(limitSec);
   const [textAnswer, setTextAnswer] = useState('');
+  // Draft state for the pick-many / multi-blank types, reset per question.
+  const [selected, setSelected] = useState<string[]>([]);
+  const [blankValues, setBlankValues] = useState<string[]>([]);
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const startRef = useRef(0);
   const startTotalRef = useRef(0);
@@ -60,6 +70,8 @@ export function GameQuizPlayer({
     lockedRef.current = false;
     setTimeLeft(limitSec);
     setTextAnswer('');
+    setSelected([]);
+    setBlankValues([]);
     const id = setInterval(() => {
       const elapsed = (Date.now() - startRef.current) / 1000;
       const left = Math.max(0, limitSec - elapsed);
@@ -86,6 +98,14 @@ export function GameQuizPlayer({
     } else {
       void finish(nextAnswers, nextTimings);
     }
+  }
+
+  // MULTIPLE_SELECT: toggle an option in/out of the pending selection (nothing
+  // locks until the learner confirms or the timer runs out).
+  function toggleSelect(option: string) {
+    setSelected((prev) =>
+      prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option],
+    );
   }
 
   async function finish(finalAnswers: Record<string, string>, finalTimings: Record<string, number>) {
@@ -218,6 +238,7 @@ export function GameQuizPlayer({
 
   const pct = Math.round((timeLeft / limitSec) * 100);
   const ringCircumference = 2 * Math.PI * 37;
+  const blanks = question.type === 'FILL_BLANK' ? fillBlankCount(question.config) : 1;
   return (
     <GameStage>
       <div className="flex flex-col px-5 py-6 sm:px-8 sm:py-8">
@@ -274,6 +295,109 @@ export function GameQuizPlayer({
                 </Button>
               ))}
             </div>
+          ) : question.type === 'TRUE_FALSE' && question.options?.length ? (
+            // Two big colored tiles; picking one locks immediately (submits the
+            // chosen option TEXT, exactly like MULTIPLE_CHOICE).
+            <div className="mt-8 grid w-full max-w-xl gap-3 sm:grid-cols-2">
+              {question.options.map((option, i) => (
+                <Button
+                  key={option}
+                  variant="outline"
+                  className="h-auto min-h-[4.5rem] justify-center gap-3 rounded-2xl border-white/[0.15] bg-white/[0.08] px-4 py-5 text-center text-lg font-semibold text-[#e7edea] hover:border-white/30 hover:bg-white/[0.14] hover:text-[#f7f2e8]"
+                  onClick={() => lockAnswer(option)}
+                >
+                  <span
+                    aria-hidden
+                    className="h-7 w-7 flex-shrink-0 rounded-lg"
+                    style={{ backgroundColor: ANSWER_CHIPS[i % ANSWER_CHIPS.length] }}
+                  />
+                  <RichText className="prose-invert" inline>
+                    {option}
+                  </RichText>
+                </Button>
+              ))}
+            </div>
+          ) : question.type === 'MULTIPLE_SELECT' && question.options?.length ? (
+            // Pick several tiles, then confirm; submits string[] of chosen option
+            // values. Auto-lock on timeout still fires via lockAnswer('').
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('selectHint')}
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {question.options.map((option, i) => {
+                  const isSelected = selected.includes(option);
+                  return (
+                    <Button
+                      key={option}
+                      type="button"
+                      variant="outline"
+                      aria-pressed={isSelected}
+                      className={`h-auto justify-start gap-3 rounded-2xl px-4 py-4 text-left ${
+                        isSelected
+                          ? 'border-[#9DBDB2] bg-[#9DBDB2]/20 text-[#f7f2e8] hover:bg-[#9DBDB2]/25'
+                          : 'border-white/[0.15] bg-white/[0.08] text-[#e7edea] hover:border-white/30 hover:bg-white/[0.14] hover:text-[#f7f2e8]'
+                      }`}
+                      onClick={() => toggleSelect(option)}
+                    >
+                      <span
+                        aria-hidden
+                        className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold text-[#16322b]"
+                        style={{ backgroundColor: ANSWER_CHIPS[i % ANSWER_CHIPS.length] }}
+                      >
+                        {isSelected ? '✓' : ''}
+                      </span>
+                      <RichText className="prose-invert" inline>
+                        {option}
+                      </RichText>
+                    </Button>
+                  );
+                })}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <span className="text-sm text-[#9dc4b8]">
+                  {t('selectedCount', { count: selected.length })}
+                </span>
+                <Button variant="spark" onClick={() => lockAnswer(JSON.stringify(selected))}>
+                  {t('confirm')}
+                </Button>
+              </div>
+            </div>
+          ) : question.type === 'FILL_BLANK' && blanks > 1 ? (
+            // One input per blank; submits string[] (one entry per blank). A
+            // single-blank FILL_BLANK falls through to the default text form and
+            // submits a plain string.
+            <form
+              className="mt-8 flex w-full max-w-md flex-col gap-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                lockAnswer(
+                  JSON.stringify(
+                    Array.from({ length: blanks }, (_, i) => (blankValues[i] ?? '').trim()),
+                  ),
+                );
+              }}
+            >
+              {Array.from({ length: blanks }, (_, i) => (
+                <Input
+                  key={i}
+                  autoFocus={i === 0}
+                  value={blankValues[i] ?? ''}
+                  onChange={(e) =>
+                    setBlankValues((prev) => {
+                      const next = [...prev];
+                      next[i] = e.target.value;
+                      return next;
+                    })
+                  }
+                  placeholder={t('blankPlaceholder', { index: i + 1 })}
+                  className="border-white/15 bg-white/[0.08] text-[#f7f2e8] placeholder:text-[#7fa89b] focus-visible:ring-[#3e9c86]"
+                />
+              ))}
+              <Button type="submit" variant="spark" className="w-full">
+                {t('next')}
+              </Button>
+            </form>
           ) : (
             <form
               className="mt-8 flex w-full max-w-md gap-2"

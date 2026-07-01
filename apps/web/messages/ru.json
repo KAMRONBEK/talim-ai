@@ -75,7 +75,12 @@
     "classCodeHint": "Есть код класса от репетитора? Введите его, чтобы присоединиться к классу.",
     "benefitFree": "Бесплатно для индивидуальных учеников",
     "benefitLangs": "uz · en · ru с первого дня",
-    "benefitJoin": "Присоединяйтесь к классу по одному коду"
+    "benefitJoin": "Присоединяйтесь к классу по одному коду",
+    "heroTitle": "Учитесь чему угодно, <em>опираясь</em> на собственные материалы.",
+    "heroSubtitle": "Присоединяйтесь к тысячам учащихся и преподавателей по всему Узбекистану, превращая источники в конспекты, подкасты, тесты и ИИ-репетитора.",
+    "showPassword": "Показать пароль",
+    "hidePassword": "Скрыть пароль",
+    "termsNotice": "Продолжая, вы соглашаетесь с нашими Условиями."
   },
   "dashboard": {
     "readyToLearn": "Готовы учиться, {name}?",
@@ -92,7 +97,8 @@
       "title": "Настройки аккаунта",
       "desc": "Управляйте профилем, паролем и планом.",
       "languageHint": "Язык можно изменить в переключателе в шапке."
-    }
+    },
+    "readyToLearnSubtitle": "Dobavte istochnik, i Talim prevratit ego v urok."
   },
   "sidebar": {
     "recents": "Недавние",
@@ -102,7 +108,8 @@
     "actions": "Действия",
     "read": "Читать",
     "listenPodcast": "Слушать подкаст",
-    "watchVideo": "Смотреть видео"
+    "watchVideo": "Смотреть видео",
+    "becomeTutorPromo": "Upravlyayte uchenikami i naznachayte materialy."
   },
   "content": {
     "summary": "Конспект",
@@ -247,7 +254,22 @@
     "retryPodcast": "Повторить",
     "podcastRetryError": "Не удалось пересоздать. Попробуйте позже.",
     "generationFailed": "Не удалось сгенерировать. Попробуйте ещё раз.",
-    "pdfRetry": "Повторить"
+    "pdfRetry": "Повторить",
+    "onThisPage": "На этой странице",
+    "keyIdea": "Ключевая идея",
+    "keyPoints": "Ключевые моменты",
+    "sectionN": "Раздел {n}",
+    "sectionsCount": "{count, plural, one {# раздел} few {# раздела} many {# разделов} other {# раздела}}",
+    "typePdf": "PDF",
+    "typeSlide": "Слайды",
+    "typeYoutube": "YouTube",
+    "statusReady": "Готово",
+    "statusProcessing": "Обработка",
+    "statusFailed": "Ошибка",
+    "pdfPageOf": "Стр. {page} / {total}",
+    "pdfZoomIn": "Приблизить",
+    "pdfZoomOut": "Отдалить",
+    "chapters": "Главы"
   },
   "chat": {
     "title": "ИИ-репетитор",
@@ -316,7 +338,20 @@
     "quickLabel": "Быстрая проверка",
     "fullLabel": "Тренировочный тест",
     "defaultTitle": "Тест",
-    "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}"
+    "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}",
+    "resultHeadlineHigh": "Отличная работа!",
+    "resultHeadlineMid": "Хороший результат.",
+    "resultHeadlineLow": "Не останавливайтесь.",
+    "resultEncourageHigh": "Закрепите оставшиеся вопросы — и результат будет превосходным.",
+    "resultEncourageMid": "Повторите то, что не получилось, и пройдите заново, чтобы улучшить результат.",
+    "resultEncourageLow": "Повторите материал и попробуйте снова — у вас всё получится.",
+    "resultBreakdownTitle": "Разбор вопросов",
+    "resultCorrectCount": "{count, plural, one {# правильный} few {# правильных} many {# правильных} other {# правильных}}",
+    "resultCorrectDesc": "Вопросы, на которые вы ответили верно.",
+    "resultReviewCount": "{count} на повторение",
+    "resultReviewDesc": "Пройдите тест заново, чтобы исправить их.",
+    "resultAllCorrect": "Все вопросы верны — безупречно!",
+    "review": "Просмотр"
   },
   "theme": {
     "light": "Светлая",
@@ -423,7 +458,11 @@
     },
     "stats": {
       "materials": "Материалы",
-      "students": "Активные ученики"
+      "students": "Активные ученики",
+      "avgMastery": "Ср. успеваемость",
+      "totalStudents": "Всего учеников",
+      "assessments": "Задания",
+      "readyMaterials": "Готовые материалы"
     },
     "register": {
       "title": "Создайте организацию",
@@ -454,7 +493,9 @@
       "adminHint": "Попросите администратора назначить подписку организации.",
       "students": "Ученики",
       "materials": "Материалы",
-      "generations": "Генерации за месяц"
+      "generations": "Генерации за месяц",
+      "seatsUsed": "Занято мест",
+      "manualNote": "Оплата производится лично — обратитесь к администратору, чтобы изменить лимит мест."
     },
     "students": {
       "title": "Ученики",
@@ -493,7 +534,49 @@
       "deactivate": "Деактивировать",
       "reactivate": "Реактивировать",
       "active": "Активен",
-      "inactive": "Неактивен"
+      "inactive": "Неактивен",
+      "bulkActions": "Массовые действия",
+      "selectedCount": "Выбрано: {count}",
+      "selectRow": "Выбрать ученика",
+      "clearSelection": "Очистить выбор",
+      "status": "Статус",
+      "bulkAssign": "Назначить материал",
+      "bulkMessage": "Сообщение",
+      "bulkMessageSoon": "Отправка сообщений скоро появится",
+      "bulkExport": "Экспорт",
+      "assignDialogTitle": "Назначить материал {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
+      "assignDialogDesc": "Выберите материал для назначения выбранным ученикам.",
+      "noMaterials": "Пока нет материалов для назначения.",
+      "assignConfirm": "Назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
+      "mastery": "Освоение",
+      "import": "Импорт CSV",
+      "importTitle": "Импорт учеников",
+      "importDesc": "Вставьте строки или загрузите CSV-файл с заголовком: name,email,username. В каждой строке нужен email или username.",
+      "importFileLabel": "Загрузить CSV-файл",
+      "importPasteLabel": "Или вставьте CSV",
+      "importPlaceholder": "name,email,username\nAli Valiyev,ali@example.com,\nMadina,,madina",
+      "importSubmit": "Импортировать",
+      "importing": "Импорт…",
+      "importEmpty": "Сначала вставьте строки или выберите CSV-файл.",
+      "importError": "Не удалось импортировать учеников.",
+      "importFileError": "Не удалось прочитать файл.",
+      "importAnother": "Импортировать ещё",
+      "importSummary": "Создано {created} · Восстановлено {reactivated} · Пропущено {skipped} · Лимит мест {seatLimited} · Ошибки {errors}",
+      "importRowLabel": "Строка {row}",
+      "importCreated": "Создан",
+      "importReactivated": "Восстановлен",
+      "importSkipped": "Пропущен",
+      "importSeatLimited": "Лимит мест",
+      "importFailed": "Ошибка",
+      "cancel": "Отмена",
+      "messageTitle": "Сообщение ученикам",
+      "messageDesc": "Отправить сообщение {count, plural, one {# выбранному ученику} few {# выбранным ученикам} many {# выбранным ученикам} other {# выбранным ученикам}}. Неактивные ученики пропускаются.",
+      "messagePlaceholder": "Напишите сообщение…",
+      "messageSend": "Отправить",
+      "messageSending": "Отправка…",
+      "messageEmpty": "Сначала напишите сообщение.",
+      "messageError": "Не удалось отправить сообщение.",
+      "messageSent": "Сообщение отправлено."
     },
     "assign": {
       "title": "Назначить ученикам",
@@ -503,7 +586,8 @@
       "remove": "Убрать",
       "submit": "Назначить",
       "back": "Назад к {title}",
-      "partialError": "Не удалось назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}. Попробуйте снова."
+      "partialError": "Не удалось назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}. Попробуйте снова.",
+      "assignedCount": "{assigned} из {total}"
     },
     "joinCode": {
       "title": "Код класса",
@@ -563,7 +647,35 @@
       "chooseAssessment": "Выберите оценивание",
       "assignButton": "Назначить",
       "resultsTitle": "Результаты и таблица лидеров",
-      "questionType": "Тип вопроса"
+      "questionType": "Тип вопроса",
+      "newAssessment": "Новое оценивание",
+      "headerCount": "{count, plural, =0 {Пока нет оцениваний} one {# оценивание} few {# оценивания} many {# оцениваний} other {# оцениваний}}",
+      "approveAll": "Одобрить все ({count})",
+      "approvingAll": "Одобрение…",
+      "dueDateLabel": "Срок сдачи (необязательно)",
+      "dueDateHint": "Показывается ученикам, но не блокирует отправку.",
+      "gradingLabel": "Оценивание",
+      "strictScoringLabel": "Строгое оценивание (штрафные баллы)",
+      "strictScoringHint": "Неверные ответы снижают баллы; за пропущенные вопросы штраф не начисляется.",
+      "wrongPenaltyLabel": "Штраф за неверный ответ",
+      "wrongPenaltyHint": "Доля баллов вопроса, теряемая за неверный ответ (0–1).",
+      "partialCreditLabel": "Частичный зачёт",
+      "partialCreditHint": "Начислять пропорциональные баллы за частично верные ответы.",
+      "live": {
+        "title": "Живые игровые викторины",
+        "desc": "Задайте время старта и откройте живую сессию — ученики увидят баннер для входа на своей панели.",
+        "liveNow": "В эфире",
+        "scheduled": "Запланировано",
+        "idle": "Не запланировано",
+        "liveHint": "Сессия открыта — ученики могут присоединиться и попасть в живой рейтинг.",
+        "scheduledFor": "Старт {time}",
+        "notScheduled": "Время старта не задано.",
+        "goLive": "В эфир",
+        "endLive": "Завершить эфир",
+        "scheduleLabel": "Запланированный старт",
+        "saveSchedule": "Сохранить расписание",
+        "clearSchedule": "Очистить расписание"
+      }
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -578,7 +690,32 @@
     "assignAction": "Назначить",
     "assignSearch": "Поиск учеников...",
     "assignSelectAll": "Выбрать все",
-    "actionsCol": "Действия"
+    "actionsCol": "Действия",
+    "materialCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}",
+    "filterByType": "Фильтр по типу",
+    "filterAll": "Все",
+    "filterPdf": "PDF",
+    "filterVideo": "Видео",
+    "filterSlides": "Слайды",
+    "material": {
+      "generateMedia": "Генерация медиа",
+      "generate": "Создать",
+      "regenerate": "Пересоздать",
+      "retry": "Повторить",
+      "readMin": "{count} мин",
+      "noSections": "Разделов пока нет."
+    },
+    "masteryByTopic": "Освоение по темам · класс",
+    "masteryByTopicEmpty": "Пока нет данных по темам. Назначьте материалы — охват появится по мере учёбы.",
+    "distribution": "Распределение",
+    "distributionEmpty": "Пока нет оценок.",
+    "distLt50": "< 50%",
+    "distB50": "50–69%",
+    "distB70": "70–84%",
+    "distGte85": "85%+",
+    "topOfClass": "Лучшие в классе",
+    "topOfClassEmpty": "Пока нет оценок для ранжирования.",
+    "atRisk": "В зоне риска"
   },
   "learner": {
     "loading": "Загрузка...",
@@ -598,7 +735,11 @@
       "next": "Далее",
       "submitError": "Не удалось отправить ваши ответы.",
       "noScores": "Пока нет результатов.",
-      "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}"
+      "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}",
+      "confirm": "Подтвердить",
+      "selectHint": "Выберите все подходящие",
+      "selectedCount": "Выбрано: {count}",
+      "blankPlaceholder": "Пропуск {index}"
     },
     "welcome": "Добро пожаловать, {name}",
     "dashboardDesc": "Ваши назначенные материалы.",
@@ -622,7 +763,18 @@
       "desc": "Ваша активность и назначенные материалы.",
       "learningStreak": "Серия обучения",
       "averageQuiz": "Средний балл",
-      "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс."
+      "emptyDesc": "Откройте назначенный материал, чтобы начать отслеживать прогресс.",
+      "overallMastery": "Общее усвоение",
+      "yourClass": "Ваш класс",
+      "masteryByTopic": "Усвоение по темам",
+      "masteryEmpty": "Пока нет усвоения по темам.",
+      "achievements": "Достижения",
+      "badgesEmpty": "Пока нет значков.",
+      "badgeEarned": "Получено",
+      "badgeProgress": "{percent}% до получения",
+      "materialsDone": "Материалы пройдены",
+      "quizzes": "Тесты",
+      "avgAccuracy": "Средняя точность"
     },
     "nav": {
       "materials": "Материалы",
@@ -634,7 +786,9 @@
       "title": "Настройки",
       "desc": "Управляйте учётной записью ученика.",
       "accountTitle": "Мой аккаунт",
-      "schoolTitle": "Школа"
+      "schoolTitle": "Школа",
+      "tempPasswordWarning": "Ваш репетитор установил временный пароль — пожалуйста, выберите новый.",
+      "usernameLabel": "Имя пользователя"
     },
     "onboarding": {
       "title": "Добро пожаловать в Talim AI",
@@ -665,7 +819,54 @@
       "points": "{count, plural, one {# очко} few {# очка} many {# очков} other {# очка}}",
       "play": "Играть",
       "hideLeaderboard": "Скрыть таблицу лидеров",
-      "leaderboard": "Таблица лидеров"
+      "leaderboard": "Таблица лидеров",
+      "writtenBadge": "Письменный",
+      "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопросов}}",
+      "secondsEach": "по {seconds} с",
+      "start": "Начать",
+      "due": "Срок: {date}",
+      "overdue": "Просрочено: {date}",
+      "selectAllHint": "Выберите все подходящие варианты",
+      "blankLabel": "Пропуск {number}",
+      "choosePlaceholder": "Выберите…",
+      "orderHint": "Расположите элементы в правильном порядке",
+      "moveUp": "Вверх",
+      "moveDown": "Вниз",
+      "scoreBreakdown": "Разбор баллов",
+      "netPoints": "Итого: {earned} / {max} очк.",
+      "breakdownCorrect": "Верно",
+      "breakdownWrong": "Неверно",
+      "breakdownBlank": "Пусто"
+    },
+    "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
+    "assignedToYou": "Назначено вам",
+    "materialsCount": "{count, plural, one {# материал} few {# материала} many {# материалов} other {# материалов}}",
+    "cardStatusContinue": "продолжить",
+    "cardStatusNotStarted": "Не начато",
+    "cardStatusCompleted": "Завершено",
+    "cardStatusProcessing": "Обработка…",
+    "cardStatusFailed": "Не удалось обработать",
+    "cardStatusContinuePercent": "{percent}% · продолжить",
+    "badges": {
+      "STREAK_5": "5 дней подряд",
+      "FIRST_PERFECT": "Первый идеальный тест",
+      "TEN_QUIZZES": "10 тестов пройдено"
+    },
+    "liveGame": {
+      "liveNow": "В эфире",
+      "startsSoon": "Скоро начнётся живая игровая викторина",
+      "scheduledFor": "Старт {time}",
+      "join": "Присоединиться",
+      "view": "Открыть"
+    },
+    "messages": {
+      "title": "Сообщения",
+      "open": "Сообщения ({count} непрочитанных)",
+      "loading": "Загрузка сообщений…",
+      "error": "Не удалось загрузить сообщения.",
+      "empty": "Пока нет сообщений.",
+      "new": "Новое",
+      "fromTutor": "Ваш преподаватель"
     }
   },
   "slides": {
@@ -846,7 +1047,9 @@
           },
           "cta": "Связаться с нами"
         }
-      }
+      },
+      "subtitle": "Бесплатно для индивидуальных учащихся. Тарифы для репетиторов и школ активируются нашей командой под ваш класс.",
+      "note": "Без банковской карты. Платные тарифы мы активируем вручную — просто отправьте запрос."
     },
     "stats": {
       "items": {

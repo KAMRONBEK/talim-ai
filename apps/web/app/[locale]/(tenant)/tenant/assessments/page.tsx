@@ -1,13 +1,16 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   BarChart3,
+  CalendarClock,
   Check,
   ClipboardList,
   FileText,
   Library,
+  Plus,
+  Radio,
   Sparkles,
   Trophy,
   UserCheck,
@@ -15,6 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import { Badge, Button, Input, Label } from '@talim/ui';
+import type { AppLocale, TenantAssessment } from '@talim/types';
 import {
   useAssessmentLeaderboard,
   useAssessmentResults,
@@ -25,11 +29,22 @@ import {
   useGenerateBankQuestions,
   usePatchBankQuestion,
   useQuestionBanks,
+  useScheduleAssessment,
+  useSetAssessmentLive,
   useTenantAssessments,
 } from '@/hooks/useAssessments';
 import { useTenantStudents } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
+import { formatRelativeTime } from '@/lib/format-relative-time';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
+
+/** ISO string → `<input type="datetime-local">` value in local time (empty when unset). */
+function toDatetimeLocal(iso: string | null): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 
 function mutErr(e: unknown, fallback: string): string {
   return (e as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
@@ -112,6 +127,124 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
   );
 }
 
+function GradingToggle({
+  checked,
+  onChange,
+  label,
+}: {
+  checked: boolean;
+  onChange: (value: boolean) => void;
+  label: string;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+        checked ? 'bg-primary' : 'bg-muted-foreground/50'
+      }`}
+    >
+      <span
+        className={`inline-block h-5 w-5 transform rounded-full bg-background shadow-sm transition-transform duration-150 ${
+          checked ? 'translate-x-[1.375rem]' : 'translate-x-0.5'
+        }`}
+      />
+    </button>
+  );
+}
+
+// Per-GAME-assessment live controls: set/clear a scheduled start and start/end a live session.
+function LiveGameRow({ assessment }: { assessment: TenantAssessment }) {
+  const t = useTranslations('tenant.assessments');
+  const locale = useLocale() as AppLocale;
+  const schedule = useScheduleAssessment();
+  const setLive = useSetAssessmentLive();
+  const [when, setWhen] = useState(toDatetimeLocal(assessment.scheduledAt));
+
+  const saveSchedule = () =>
+    schedule.mutate({
+      assessmentId: assessment.id,
+      scheduledAt: when ? new Date(when).toISOString() : null,
+    });
+
+  const toggleLive = () =>
+    setLive.mutate({ assessmentId: assessment.id, live: !assessment.isLive });
+
+  const err = schedule.error ?? setLive.error;
+
+  return (
+    <div className="rounded-xl border border-border/70 bg-card p-4 shadow-soft">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="truncate font-display font-semibold text-foreground">{assessment.title}</p>
+            {assessment.isLive ? (
+              <Badge className="bg-accent-secondary text-accent-secondary-foreground hover:bg-accent-secondary">
+                <Radio className="mr-1 h-3 w-3" />
+                {t('live.liveNow')}
+              </Badge>
+            ) : assessment.scheduledAt ? (
+              <Badge variant="secondary">{t('live.scheduled')}</Badge>
+            ) : (
+              <Badge variant="secondary">{t('live.idle')}</Badge>
+            )}
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {assessment.isLive
+              ? t('live.liveHint')
+              : assessment.scheduledAt
+                ? t('live.scheduledFor', {
+                    time: formatRelativeTime(assessment.scheduledAt, locale),
+                  })
+                : t('live.notScheduled')}
+          </p>
+        </div>
+        <Button
+          type="button"
+          size="sm"
+          variant={assessment.isLive ? 'outline' : 'spark'}
+          onClick={toggleLive}
+          disabled={setLive.isPending}
+        >
+          <Radio className="h-4 w-4" />
+          {assessment.isLive ? t('live.endLive') : t('live.goLive')}
+        </Button>
+      </div>
+      <div className="mt-3 flex flex-wrap items-end gap-2">
+        <div className="space-y-1">
+          <Label
+            htmlFor={`sched-${assessment.id}`}
+            className="font-label text-[11px] uppercase tracking-wider text-muted-foreground"
+          >
+            {t('live.scheduleLabel')}
+          </Label>
+          <Input
+            id={`sched-${assessment.id}`}
+            type="datetime-local"
+            value={when}
+            onChange={(e) => setWhen(e.target.value)}
+            className="w-auto"
+          />
+        </div>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={saveSchedule}
+          disabled={schedule.isPending}
+        >
+          <CalendarClock className="h-4 w-4" />
+          {when ? t('live.saveSchedule') : t('live.clearSchedule')}
+        </Button>
+      </div>
+      {err != null && <p className="mt-2 text-sm text-destructive">{mutErr(err, t('genericError'))}</p>}
+    </div>
+  );
+}
+
 export default function TenantAssessmentsPage() {
   const t = useTranslations('tenant.assessments');
   const { data: banks = [] } = useQuestionBanks();
@@ -130,9 +263,13 @@ export default function TenantAssessmentsPage() {
   const [assessmentTitle, setAssessmentTitle] = useState('');
   const [assessmentId, setAssessmentId] = useState('');
   const [learnerIds, setLearnerIds] = useState<string[]>([]);
+  const [dueAt, setDueAt] = useState('');
   const [mode, setMode] = useState<'WRITTEN' | 'GAME'>('WRITTEN');
   const [secondsPerQuestion, setSecondsPerQuestion] = useState(20);
   const [maxAttempts, setMaxAttempts] = useState(1);
+  const [strictScoring, setStrictScoring] = useState(false);
+  const [wrongPenalty, setWrongPenalty] = useState(0.5);
+  const [partialCredit, setPartialCredit] = useState(true);
   const [resultsId, setResultsId] = useState('');
   const createBank = useCreateQuestionBank();
   const generate = useGenerateBankQuestions(selectedBankId);
@@ -146,17 +283,76 @@ export default function TenantAssessmentsPage() {
     [questions],
   );
 
+  const pendingQuestions = useMemo(
+    () => questions.filter((question) => question.status === 'DRAFT'),
+    [questions],
+  );
+
+  const [approvingAll, setApprovingAll] = useState(false);
+
+  // Bulk-approve: reuse the existing per-question approve mutation for every
+  // still-pending (DRAFT) question; already approved/rejected ones are skipped.
+  // Each mutateAsync runs the existing onSuccess invalidation, refreshing the list.
+  const approveAllPending = async () => {
+    if (approvingAll || pendingQuestions.length === 0) return;
+    setApprovingAll(true);
+    try {
+      await Promise.all(
+        pendingQuestions.map((question) =>
+          patchQuestion.mutateAsync({ id: question.id, status: 'APPROVED' }),
+        ),
+      );
+    } finally {
+      setApprovingAll(false);
+    }
+  };
+
   const selectedBank = banks.find((bank) => bank.id === selectedBankId);
 
   return (
     <div className="mx-auto max-w-6xl space-y-8">
-      <div>
-        <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-          {t('eyebrow')}
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
-        <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            {t('eyebrow')}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <h1 className="font-display text-3xl font-bold tracking-tight">{t('title')}</h1>
+            <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 font-label text-xs font-semibold tabular-nums text-muted-foreground">
+              {t('headerCount', { count: assessments.length })}
+            </span>
+          </div>
+          <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
+        </div>
+        <a
+          href="#new-assessment"
+          className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 ease-out hover:-translate-y-px hover:bg-primary/90 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Plus className="h-4 w-4" />
+          {t('newAssessment')}
+        </a>
       </div>
+
+      {assessments.some((a) => a.mode === 'GAME') && (
+        <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+              <Radio className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 className="font-display text-lg font-semibold">{t('live.title')}</h2>
+              <p className="text-sm text-muted-foreground">{t('live.desc')}</p>
+            </div>
+          </div>
+          <div className="grid gap-3">
+            {assessments
+              .filter((a) => a.mode === 'GAME')
+              .map((a) => (
+                <LiveGameRow key={a.id} assessment={a} />
+              ))}
+          </div>
+        </section>
+      )}
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
         <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
@@ -224,29 +420,43 @@ export default function TenantAssessmentsPage() {
             </Button>
           </form>
           <div className="space-y-2">
-            {banks.map((bank) => (
-              <button
-                key={bank.id}
-                type="button"
-                onClick={() => setSelectedBankId(bank.id)}
-                className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
-                  selectedBankId === bank.id
-                    ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
-                    : 'border-border/70 hover:border-border hover:bg-secondary/50'
-                }`}
-              >
-                <span className="block font-display font-semibold">{bank.title}</span>
-                <span className="text-xs tabular-nums text-muted-foreground">
-                  {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
-                </span>
-                {bank.materials.length > 0 && (
-                  <span className="mt-1 flex items-center gap-1.5 truncate text-[11px] text-muted-foreground">
-                    <FileText className="h-3 w-3 shrink-0" />
-                    <span className="truncate">{bank.materials.map((m) => m.title).join(', ')}</span>
+            {banks.map((bank) => {
+              const approvedPct =
+                bank.questionCount > 0
+                  ? Math.round((bank.approvedCount / bank.questionCount) * 100)
+                  : 0;
+              return (
+                <button
+                  key={bank.id}
+                  type="button"
+                  onClick={() => setSelectedBankId(bank.id)}
+                  className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
+                    selectedBankId === bank.id
+                      ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
+                      : 'border-border/70 hover:border-border hover:bg-secondary/50'
+                  }`}
+                >
+                  <span className="block truncate font-display font-semibold">{bank.title}</span>
+                  <span className="mt-1 block text-xs tabular-nums text-muted-foreground">
+                    {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                   </span>
-                )}
-              </button>
-            ))}
+                  <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-border/60">
+                    <span
+                      className="block h-full rounded-full bg-primary transition-all duration-300"
+                      style={{ width: `${approvedPct}%` }}
+                    />
+                  </span>
+                  {bank.materials.length > 0 && (
+                    <span className="mt-2 flex items-center gap-1.5 truncate text-[11px] text-muted-foreground">
+                      <FileText className="h-3 w-3 shrink-0" />
+                      <span className="truncate">
+                        {bank.materials.map((m) => m.title).join(', ')}
+                      </span>
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </aside>
 
@@ -304,8 +514,24 @@ export default function TenantAssessmentsPage() {
             )}
           </section>
 
-          <section className="grid gap-3">
-            {questions.map((question) => (
+          <section className="space-y-3">
+            {(pendingQuestions.length > 0 || approvingAll) && (
+              <div className="flex justify-end">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={approveAllPending}
+                  disabled={approvingAll || pendingQuestions.length === 0}
+                >
+                  <Check className="h-3.5 w-3.5" />
+                  {approvingAll
+                    ? t('approvingAll')
+                    : t('approveAll', { count: pendingQuestions.length })}
+                </Button>
+              </div>
+            )}
+            <div className="grid gap-3">
+              {questions.map((question) => (
               <div
                 key={question.id}
                 className={`rounded-xl border bg-card p-4 shadow-soft transition-colors ${
@@ -346,25 +572,34 @@ export default function TenantAssessmentsPage() {
                   </div>
                 </div>
               </div>
-            ))}
+              ))}
+            </div>
           </section>
         </main>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
         <form
-          className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
+          id="new-assessment"
+          className="scroll-mt-24 space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
-            const assessment = await createAssessment.mutateAsync({
+            // Grading fields ride along with the existing create mutation; the
+            // backend createAssessmentSchema accepts strictScoring/wrongPenalty/
+            // partialCredit. Built as a variable so the extra keys pass TS's
+            // excess-property check without changing the shared hook's input type.
+            const payload = {
               bankId: selectedBankId ?? undefined,
               title: assessmentTitle,
               questionIds: selectedQuestions,
               publish: true,
               mode,
               maxAttempts,
+              strictScoring,
+              ...(strictScoring ? { wrongPenalty, partialCredit } : {}),
               ...(mode === 'GAME' ? { secondsPerQuestion } : {}),
-            });
+            };
+            const assessment = await createAssessment.mutateAsync(payload);
             setAssessmentId(assessment.id);
             setResultsId(assessment.id);
             setAssessmentTitle('');
@@ -434,6 +669,50 @@ export default function TenantAssessmentsPage() {
               />
             </div>
           )}
+          <div className="space-y-3 rounded-xl border border-border/70 bg-secondary/30 p-4">
+            <p className="font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+              {t('gradingLabel')}
+            </p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="text-sm font-medium text-foreground">{t('strictScoringLabel')}</p>
+              <GradingToggle
+                checked={strictScoring}
+                onChange={setStrictScoring}
+                label={t('strictScoringLabel')}
+              />
+            </div>
+            <p className="text-[11px] text-muted-foreground">{t('strictScoringHint')}</p>
+            {strictScoring && (
+              <div className="space-y-3 border-t border-border/60 pt-3">
+                <div className="space-y-1">
+                  <Label htmlFor="wrongPenalty">{t('wrongPenaltyLabel')}</Label>
+                  <Input
+                    id="wrongPenalty"
+                    type="number"
+                    min={0}
+                    max={1}
+                    step={0.05}
+                    value={wrongPenalty}
+                    onChange={(e) =>
+                      setWrongPenalty(Math.max(0, Math.min(1, Number(e.target.value) || 0)))
+                    }
+                  />
+                  <p className="text-[11px] text-muted-foreground">{t('wrongPenaltyHint')}</p>
+                </div>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium text-foreground">{t('partialCreditLabel')}</p>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground">{t('partialCreditHint')}</p>
+                  </div>
+                  <GradingToggle
+                    checked={partialCredit}
+                    onChange={setPartialCredit}
+                    label={t('partialCreditLabel')}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
           <div className="max-h-72 space-y-0.5 overflow-y-auto rounded-xl border border-border/70 bg-background p-2">
             {approvedQuestions.map((question) => (
               <label
@@ -472,8 +751,13 @@ export default function TenantAssessmentsPage() {
           className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
-            await assignAssessment.mutateAsync({ assessmentId, learnerIds });
+            await assignAssessment.mutateAsync({
+              assessmentId,
+              learnerIds,
+              ...(dueAt ? { dueAt } : {}),
+            });
             setLearnerIds([]);
+            setDueAt('');
           }}
         >
           <div className="flex items-center gap-3">
@@ -517,6 +801,16 @@ export default function TenantAssessmentsPage() {
                 {student.name ?? student.email ?? student.username}
               </label>
             ))}
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="dueAt">{t('dueDateLabel')}</Label>
+            <Input
+              id="dueAt"
+              type="date"
+              value={dueAt}
+              onChange={(event) => setDueAt(event.target.value)}
+            />
+            <p className="text-[11px] text-muted-foreground">{t('dueDateHint')}</p>
           </div>
           <Button
             type="submit"

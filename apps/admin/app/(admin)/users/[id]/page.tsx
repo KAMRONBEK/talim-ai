@@ -14,6 +14,7 @@ import {
   useAdminTenants,
   useAdminTenant,
   useAdminUser,
+  useImpersonateUser,
   usePatchUser,
   useResetUserPassword,
   useUpdateUserSubscription,
@@ -41,7 +42,10 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   const updateSubscription = useUpdateUserSubscription();
   const patchUser = usePatchUser();
   const resetPassword = useResetUserPassword();
+  const impersonate = useImpersonateUser();
   const { data: tenantsData } = useAdminTenants({ page: 1, pageSize: 100 });
+
+  const [impersonationToken, setImpersonationToken] = useState<string | null>(null);
 
   const [planCode, setPlanCode] = useState<PlanCode | ''>('');
   const [status, setStatus] = useState<SubscriptionStatus | ''>('');
@@ -94,16 +98,75 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
   return (
     <div className="space-y-6">
-      <div>
-        <Link href="/users" className="text-sm text-primary hover:underline">
-          ← Back to users
-        </Link>
-        <p className="mt-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          Admin · User
-        </p>
-        <h1 className="mt-1 font-display text-2xl font-semibold">{user.email}</h1>
-        <p className="text-sm text-muted-foreground">{user.name ?? 'No name'}</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <Link href="/users" className="text-sm text-primary hover:underline">
+            ← Back to users
+          </Link>
+          <p className="mt-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Admin · User
+          </p>
+          <h1 className="mt-1 font-display text-2xl font-semibold">{user.email}</h1>
+          <p className="text-sm text-muted-foreground">{user.name ?? 'No name'}</p>
+        </div>
+        {user.role !== 'ADMIN' && (
+          <Button
+            variant="outline"
+            disabled={impersonate.isPending}
+            onClick={async () => {
+              try {
+                const token = await impersonate.mutateAsync(id);
+                setImpersonationToken(token);
+              } catch (err) {
+                alert(
+                  (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
+                    'Failed to start impersonation. Please try again.',
+                );
+              }
+            }}
+          >
+            {impersonate.isPending ? 'Preparing…' : 'Impersonate'}
+          </Button>
+        )}
       </div>
+
+      {impersonationToken && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Impersonation token"
+          onClick={() => setImpersonationToken(null)}
+        >
+          <Card
+            className="w-full max-w-lg rounded-2xl shadow-soft"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <CardHeader>
+              <h2 className="font-display text-lg font-semibold">Impersonation token</h2>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Short-lived access token for <span className="font-medium text-foreground">{user.email}</span>.
+                It expires in 30 minutes. Paste it into the learner app&apos;s auth token store
+                (localStorage) to sign in as this user. This action is recorded in the audit log.
+              </p>
+              <code className="block max-h-40 overflow-auto break-all rounded-lg bg-muted px-3 py-2 font-mono text-xs">
+                {impersonationToken}
+              </code>
+              <div className="flex flex-wrap justify-end gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => navigator.clipboard?.writeText(impersonationToken)}
+                >
+                  Copy token
+                </Button>
+                <Button onClick={() => setImpersonationToken(null)}>Done</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardContent className="p-4">

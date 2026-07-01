@@ -99,6 +99,12 @@ enum QuestionType {
   SHORT_ANSWER
   NUMERIC
   MULTIPLE_CHOICE
+  TRUE_FALSE
+  MULTIPLE_SELECT
+  FILL_BLANK
+  DROPDOWN_CLOZE
+  MATCHING
+  ORDERING
 }
 
 enum BankQuestionStatus {
@@ -212,12 +218,38 @@ model TenantMembership {
   role      TenantMemberRole
   active    Boolean          @default(true)
   joinedAt  DateTime         @default(now())
+  tutorNote String?
   tenant    Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([tenantId, userId])
   @@index([tenantId])
   @@index([userId])
+}
+
+// One-way tutor→student message (Wave 3 area D). Plain ids (no User/Tenant relations)
+// to stay additive; delivery/read state lives on TenantMessageRecipient.
+model TenantMessage {
+  id         String                   @id @default(cuid())
+  tenantId   String
+  senderId   String
+  body       String                   @db.Text
+  createdAt  DateTime                 @default(now())
+  recipients TenantMessageRecipient[]
+
+  @@index([tenantId])
+  @@index([senderId])
+}
+
+model TenantMessageRecipient {
+  id          String        @id @default(cuid())
+  messageId   String
+  recipientId String
+  readAt      DateTime?
+  message     TenantMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, recipientId])
+  @@index([recipientId])
 }
 
 model ContentAssignment {
@@ -548,6 +580,7 @@ model BankQuestion {
   prompt            String             @db.Text
   options           Json?
   acceptableAnswers Json
+  config            Json?
   explanation       String?            @db.Text
   status            BankQuestionStatus @default(DRAFT)
   createdAt         DateTime           @default(now())
@@ -575,6 +608,12 @@ model TenantAssessment {
   mode         AssessmentMode         @default(WRITTEN)
   secondsPerQuestion Int?
   status       TenantAssessmentStatus @default(DRAFT)
+  strictScoring Boolean               @default(false)
+  wrongPenalty  Float                 @default(0.5)
+  partialCredit Boolean               @default(true)
+  scheduledAt  DateTime?
+  isLive       Boolean                @default(false)
+  liveEndsAt   DateTime?
   createdById  String
   createdAt    DateTime               @default(now())
   updatedAt    DateTime               @updatedAt
@@ -613,6 +652,7 @@ model AssessmentAssignment {
   sectionId    String?
   assignedById String
   assignedAt   DateTime         @default(now())
+  dueAt        DateTime?
   assessment   TenantAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
   learner      User?            @relation("AssessmentLearnerAssignments", fields: [learnerId], references: [id], onDelete: Cascade)
   content      Content?         @relation(fields: [contentId], references: [id], onDelete: Cascade)
@@ -633,6 +673,8 @@ model AssessmentAttempt {
   answers      Json
   score        Float?
   pointsTotal  Int                     @default(0)
+  pointsEarned Float?
+  maxPoints    Float?
   maxStreak    Int                     @default(0)
   durationMs   Int?
   status       AssessmentAttemptStatus @default(SUBMITTED)
@@ -651,13 +693,37 @@ model AttemptAnswer {
   id            String            @id @default(cuid())
   attemptId     String
   questionId    String
-  answer        String
-  correct       Boolean
-  responseMs    Int?
-  pointsAwarded Int               @default(0)
+  answer         String
+  correct        Boolean
+  responseMs     Int?
+  pointsAwarded  Int               @default(0)
+  pointsEarned   Float?
+  creditFraction Float?
   attempt       AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
 
   @@index([attemptId])
+}
+
+enum MediaReviewStatus {
+  PENDING
+  APPROVED
+  FLAGGED
+}
+
+// Polymorphic admin review of generated media (podcast/quiz/video/summary), keyed by
+// (kind, mediaId) so one table backs approve/flag across all generated-media types.
+model GeneratedMediaReview {
+  id           String            @id @default(cuid())
+  kind         String
+  mediaId      String
+  status       MediaReviewStatus @default(PENDING)
+  reviewedById String?
+  note         String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([kind, mediaId])
+  @@index([status])
 }
 
 model ContentProgress {

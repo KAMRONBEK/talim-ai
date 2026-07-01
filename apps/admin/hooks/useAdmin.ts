@@ -1,13 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import type {
+  AdminAnalyticsSummary,
+  AdminContentByTypeResponse,
+  AdminContentDetail,
   AdminContentItem,
+  AdminFunnelResponse,
   AdminGeneratedItem,
+  AdminGeneratedReview,
+  AdminImpersonateResponse,
+  AdminMrrResponse,
   AdminPatchUserInput,
   AdminPlatformStats,
+  AdminSpendByModelResponse,
   AdminSubscriptionListItem,
   AdminTenantDetail,
   AdminTenantListItem,
+  AdminTopOrgsResponse,
   AdminAuditLogItem,
   AdminTenantUsageVsLimits,
   AdminTutorRequest,
@@ -15,7 +24,9 @@ import type {
   AdminUsageSummaryRow,
   AdminUsageVsLimits,
   AdminUserDetail,
+  AdminUserGrowthResponse,
   AdminUserListItem,
+  AdminUsersByRoleResponse,
   AdminUserSubscription,
   PaginatedResponse,
 } from '@talim/types';
@@ -301,5 +312,139 @@ export function useRejectTutorRequest() {
       await api.post(`/admin/tutor-requests/${id}/reject`, note ? { note } : {});
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'tutor-requests'] }),
+  });
+}
+
+// --- Wave 3 · analytics dashboard (read-only) ------------------------------
+
+export function useAdminAnalyticsSummary() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'summary'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminAnalyticsSummary>('/admin/analytics/summary');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsMrr() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'mrr'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminMrrResponse>('/admin/analytics/mrr');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsUserGrowth() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'user-growth'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminUserGrowthResponse>('/admin/analytics/user-growth');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsByRole() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'by-role'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminUsersByRoleResponse>('/admin/analytics/by-role');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsFunnel() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'funnel'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminFunnelResponse>('/admin/analytics/funnel');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsContentByType() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'content-by-type'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminContentByTypeResponse>('/admin/analytics/content-by-type');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsTopOrgs() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'top-orgs'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminTopOrgsResponse>('/admin/analytics/top-orgs');
+      return data;
+    },
+  });
+}
+
+export function useAdminAnalyticsSpendByModel() {
+  return useQuery({
+    queryKey: ['admin', 'analytics', 'spend-by-model'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminSpendByModelResponse>('/admin/analytics/spend-by-model');
+      return data;
+    },
+  });
+}
+
+// --- Wave 3 · generated-media review ---------------------------------------
+
+export function useReviewGenerated() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      kind,
+      mediaId,
+      status,
+      note,
+    }: {
+      kind: string;
+      mediaId: string;
+      status: 'APPROVED' | 'FLAGGED';
+      note?: string;
+    }): Promise<AdminGeneratedReview> => {
+      const { data } = await api.post<{ review: AdminGeneratedReview }>(
+        `/admin/generated/${kind}/${mediaId}/review`,
+        note ? { status, note } : { status },
+      );
+      return data.review;
+    },
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['admin', 'generated'] }),
+  });
+}
+
+// --- Wave 3 · impersonation -------------------------------------------------
+
+export function useImpersonateUser() {
+  return useMutation({
+    mutationFn: async (userId: string): Promise<string> => {
+      const { data } = await api.post<AdminImpersonateResponse>(
+        `/admin/users/${userId}/impersonate`,
+      );
+      return data.token;
+    },
+  });
+}
+
+// --- Wave 3 · content-control detail (read-only inspector) -----------------
+
+export function useAdminContentDetail(id: string) {
+  return useQuery({
+    queryKey: ['admin', 'content', id, 'detail'],
+    queryFn: async () => {
+      const { data } = await api.get<AdminContentDetail>(`/admin/content/${id}/detail`);
+      return data;
+    },
+    enabled: Boolean(id),
   });
 }

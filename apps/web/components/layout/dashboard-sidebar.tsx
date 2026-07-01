@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useContents } from '@/hooks/useContent';
 import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { LogoMark } from '@/components/brand/logo';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export interface DashboardSidebarBodyProps {
   onNavigate?: () => void;
@@ -66,7 +67,37 @@ export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) 
         )}
       </div>
 
+      <BecomeTutorPromo onNavigate={onNavigate} />
+
       <UserSidebarFooter onNavigate={onNavigate} showEmail showSettingsIcon />
+    </div>
+  );
+}
+
+/**
+ * Compact sidebar promo nudging INDIVIDUAL learners toward the become-a-tutor
+ * flow (the request form lives on /dashboard/settings via BecomeTutorCard).
+ * Mirrors BecomeTutorCard's own guard: nothing renders for non-INDIVIDUAL roles.
+ */
+function BecomeTutorPromo({ onNavigate }: { onNavigate?: () => void }) {
+  const tBecome = useTranslations('becomeTutor');
+  const tSidebar = useTranslations('sidebar');
+  const role = useAuthStore((s) => s.user?.role);
+
+  if (role !== 'INDIVIDUAL') return null;
+
+  return (
+    <div className="shrink-0 px-3 pb-2">
+      <Link
+        href="/dashboard/settings"
+        onClick={onNavigate}
+        className="block rounded-xl border border-border bg-secondary/50 p-3 transition-colors hover:border-accent-secondary/40 hover:bg-secondary"
+      >
+        <p className="font-display text-sm font-semibold text-foreground">{tBecome('title')}</p>
+        <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
+          {tSidebar('becomeTutorPromo')}
+        </p>
+      </Link>
     </div>
   );
 }

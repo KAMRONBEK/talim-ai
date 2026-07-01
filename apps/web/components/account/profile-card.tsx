@@ -44,7 +44,9 @@ export function ProfileCard() {
           minLength={1}
         />
       </div>
-      {user?.email && (
+      {/* Email-less students carry a synthetic username@students.talim.local address; show
+          their username elsewhere instead of this placeholder, not the raw synthetic email. */}
+      {user?.email && !user.email.endsWith('@students.talim.local') && (
         <div className="space-y-1">
           <Label>{t('email')}</Label>
           <p className="text-sm text-muted-foreground">{user.email}</p>

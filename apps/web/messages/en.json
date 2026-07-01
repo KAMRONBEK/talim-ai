@@ -75,7 +75,12 @@
     "classCodeHint": "Have a class code from your tutor? Enter it to join their class.",
     "benefitFree": "Free for individual learners",
     "benefitLangs": "uz · en · ru from day one",
-    "benefitJoin": "Join a class with one code"
+    "benefitJoin": "Join a class with one code",
+    "heroTitle": "Learn anything, <em>grounded</em> in your own material.",
+    "heroSubtitle": "Join thousands of learners and tutors across Uzbekistan turning sources into summaries, podcasts, quizzes and an AI tutor.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "termsNotice": "By continuing you agree to our Terms."
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -92,7 +97,8 @@
       "title": "Account settings",
       "desc": "Manage your profile, password, and plan.",
       "languageHint": "Change your language using the selector in the header."
-    }
+    },
+    "readyToLearnSubtitle": "Add a source and Talim turns it into a lesson."
   },
   "sidebar": {
     "recents": "Recent",
@@ -102,7 +108,8 @@
     "actions": "Actions",
     "read": "Read",
     "listenPodcast": "Listen to podcast",
-    "watchVideo": "Watch video"
+    "watchVideo": "Watch video",
+    "becomeTutorPromo": "Manage students and assign materials."
   },
   "content": {
     "summary": "Summary",
@@ -247,7 +254,22 @@
     "retryPodcast": "Retry",
     "podcastRetryError": "Could not regenerate. Try again later.",
     "generationFailed": "Couldn't generate. Please try again.",
-    "pdfRetry": "Retry"
+    "pdfRetry": "Retry",
+    "onThisPage": "On this page",
+    "keyIdea": "Key idea",
+    "keyPoints": "Key points",
+    "sectionN": "Section {n}",
+    "sectionsCount": "{count, plural, one {# section} other {# sections}}",
+    "typePdf": "PDF",
+    "typeSlide": "Slides",
+    "typeYoutube": "YouTube",
+    "statusReady": "Ready",
+    "statusProcessing": "Processing",
+    "statusFailed": "Failed",
+    "pdfPageOf": "Page {page} / {total}",
+    "pdfZoomIn": "Zoom in",
+    "pdfZoomOut": "Zoom out",
+    "chapters": "Chapters"
   },
   "chat": {
     "title": "AI Tutor",
@@ -316,7 +338,20 @@
     "quickLabel": "Quick check",
     "fullLabel": "Practice quiz",
     "defaultTitle": "Quiz",
-    "questionCount": "{count, plural, one {# question} other {# questions}}"
+    "questionCount": "{count, plural, one {# question} other {# questions}}",
+    "resultHeadlineHigh": "Strong work!",
+    "resultHeadlineMid": "Good progress.",
+    "resultHeadlineLow": "Keep going.",
+    "resultEncourageHigh": "Master the last few and you'll ace it.",
+    "resultEncourageMid": "Review what you missed and retake to climb higher.",
+    "resultEncourageLow": "Go back over the material and try again — you'll get there.",
+    "resultBreakdownTitle": "Question breakdown",
+    "resultCorrectCount": "{count} correct",
+    "resultCorrectDesc": "Questions you answered right.",
+    "resultReviewCount": "{count} to review",
+    "resultReviewDesc": "Retake the quiz to turn these around.",
+    "resultAllCorrect": "Every question correct — flawless!",
+    "review": "Review"
   },
   "theme": {
     "light": "Light",
@@ -423,7 +458,11 @@
     },
     "stats": {
       "materials": "Materials",
-      "students": "Active students"
+      "students": "Active students",
+      "avgMastery": "Avg mastery",
+      "totalStudents": "Total students",
+      "assessments": "Assessments",
+      "readyMaterials": "Ready materials"
     },
     "register": {
       "title": "Create your organization",
@@ -454,7 +493,9 @@
       "adminHint": "Ask your platform admin to assign a tenant subscription.",
       "students": "Students",
       "materials": "Materials",
-      "generations": "Generations this month"
+      "generations": "Generations this month",
+      "seatsUsed": "Seats used",
+      "manualNote": "Payment is handled personally — reach out to your admin to adjust your seat limit."
     },
     "students": {
       "title": "Students",
@@ -493,7 +534,49 @@
       "deactivate": "Deactivate",
       "reactivate": "Reactivate",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "bulkActions": "Bulk actions",
+      "selectedCount": "{count} selected",
+      "selectRow": "Select student",
+      "clearSelection": "Clear selection",
+      "status": "Status",
+      "bulkAssign": "Assign material",
+      "bulkMessage": "Message",
+      "bulkMessageSoon": "Messaging is coming soon",
+      "bulkExport": "Export",
+      "assignDialogTitle": "Assign a material to {count, plural, one {# student} other {# students}}",
+      "assignDialogDesc": "Choose a material to assign to the selected students.",
+      "noMaterials": "No materials to assign yet.",
+      "assignConfirm": "Assign to {count, plural, one {# student} other {# students}}",
+      "mastery": "Mastery",
+      "import": "Import CSV",
+      "importTitle": "Import students",
+      "importDesc": "Paste rows or upload a CSV file with the header: name,email,username. Email or username is required per row.",
+      "importFileLabel": "Upload a CSV file",
+      "importPasteLabel": "Or paste CSV",
+      "importPlaceholder": "name,email,username\nAli Valiyev,ali@example.com,\nMadina,,madina",
+      "importSubmit": "Import",
+      "importing": "Importing…",
+      "importEmpty": "Paste some rows or choose a CSV file first.",
+      "importError": "Couldn't import the students.",
+      "importFileError": "Couldn't read that file.",
+      "importAnother": "Import more",
+      "importSummary": "Created {created} · Reactivated {reactivated} · Skipped {skipped} · Seat-limited {seatLimited} · Errors {errors}",
+      "importRowLabel": "Row {row}",
+      "importCreated": "Created",
+      "importReactivated": "Reactivated",
+      "importSkipped": "Skipped",
+      "importSeatLimited": "Seat limit",
+      "importFailed": "Error",
+      "cancel": "Cancel",
+      "messageTitle": "Message students",
+      "messageDesc": "Send a message to {count, plural, one {# selected student} other {# selected students}}. Inactive students are skipped.",
+      "messagePlaceholder": "Write your message…",
+      "messageSend": "Send",
+      "messageSending": "Sending…",
+      "messageEmpty": "Write a message first.",
+      "messageError": "Couldn't send the message.",
+      "messageSent": "Message sent."
     },
     "assign": {
       "title": "Assign to students",
@@ -503,7 +586,8 @@
       "remove": "Remove",
       "submit": "Assign selected",
       "back": "Back to {title}",
-      "partialError": "Couldn't assign to {count, plural, one {# student} other {# students}}. Please try again."
+      "partialError": "Couldn't assign to {count, plural, one {# student} other {# students}}. Please try again.",
+      "assignedCount": "{assigned} of {total}"
     },
     "joinCode": {
       "title": "Class join code",
@@ -563,7 +647,35 @@
       "chooseAssessment": "Choose assessment",
       "assignButton": "Assign",
       "resultsTitle": "Results & leaderboard",
-      "questionType": "Question type"
+      "questionType": "Question type",
+      "newAssessment": "New assessment",
+      "headerCount": "{count, plural, =0 {No assessments yet} one {# assessment} other {# assessments}}",
+      "approveAll": "Approve all ({count})",
+      "approvingAll": "Approving…",
+      "dueDateLabel": "Due date (optional)",
+      "dueDateHint": "Shown to students but does not block submission.",
+      "gradingLabel": "Grading",
+      "strictScoringLabel": "Strict scoring (negative marking)",
+      "strictScoringHint": "Wrong answers deduct points; unanswered questions are never penalized.",
+      "wrongPenaltyLabel": "Wrong-answer penalty",
+      "wrongPenaltyHint": "Share of a question's points lost for a wrong answer (0–1).",
+      "partialCreditLabel": "Partial credit",
+      "partialCreditHint": "Give proportional points for partially correct answers.",
+      "live": {
+        "title": "Live game quizzes",
+        "desc": "Schedule a start time and open a live session — students get a join banner on their dashboard.",
+        "liveNow": "Live now",
+        "scheduled": "Scheduled",
+        "idle": "Not scheduled",
+        "liveHint": "The session is open — students can join and appear on the live leaderboard.",
+        "scheduledFor": "Starts {time}",
+        "notScheduled": "No start time set.",
+        "goLive": "Go live",
+        "endLive": "End live",
+        "scheduleLabel": "Scheduled start",
+        "saveSchedule": "Save schedule",
+        "clearSchedule": "Clear schedule"
+      }
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -578,7 +690,32 @@
     "assignAction": "Assign",
     "assignSearch": "Search students...",
     "assignSelectAll": "Select all",
-    "actionsCol": "Actions"
+    "actionsCol": "Actions",
+    "materialCount": "{count, plural, one {# material} other {# materials}}",
+    "filterByType": "Filter by type",
+    "filterAll": "All",
+    "filterPdf": "PDF",
+    "filterVideo": "Video",
+    "filterSlides": "Slides",
+    "material": {
+      "generateMedia": "Generate media",
+      "generate": "Generate",
+      "regenerate": "Regenerate",
+      "retry": "Retry",
+      "readMin": "{count} min",
+      "noSections": "No sections yet."
+    },
+    "masteryByTopic": "Mastery by topic · class",
+    "masteryByTopicEmpty": "No topic mastery yet. Assign materials and coverage appears as students study.",
+    "distribution": "Distribution",
+    "distributionEmpty": "No scores yet.",
+    "distLt50": "< 50%",
+    "distB50": "50–69%",
+    "distB70": "70–84%",
+    "distGte85": "85%+",
+    "topOfClass": "Top of the class",
+    "topOfClassEmpty": "No mastery scores to rank yet.",
+    "atRisk": "At risk"
   },
   "learner": {
     "loading": "Loading...",
@@ -598,7 +735,11 @@
       "next": "Next",
       "submitError": "Could not submit your answers.",
       "noScores": "No scores yet.",
-      "points": "{count} pts"
+      "points": "{count} pts",
+      "confirm": "Confirm",
+      "selectHint": "Select all that apply",
+      "selectedCount": "{count} selected",
+      "blankPlaceholder": "Blank {index}"
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
@@ -622,7 +763,18 @@
       "desc": "Your activity and assigned materials.",
       "learningStreak": "Learning streak",
       "averageQuiz": "Average quiz",
-      "emptyDesc": "Open an assigned material to start tracking progress."
+      "emptyDesc": "Open an assigned material to start tracking progress.",
+      "overallMastery": "Overall mastery",
+      "yourClass": "Your class",
+      "masteryByTopic": "Mastery by topic",
+      "masteryEmpty": "No topic mastery yet.",
+      "achievements": "Achievements",
+      "badgesEmpty": "No badges yet.",
+      "badgeEarned": "Earned",
+      "badgeProgress": "{percent}% to unlock",
+      "materialsDone": "Materials done",
+      "quizzes": "Quizzes",
+      "avgAccuracy": "Avg accuracy"
     },
     "nav": {
       "materials": "Materials",
@@ -634,7 +786,9 @@
       "title": "Settings",
       "desc": "Manage your student account.",
       "accountTitle": "My account",
-      "schoolTitle": "School"
+      "schoolTitle": "School",
+      "tempPasswordWarning": "Your tutor set a temporary password — please choose a new one.",
+      "usernameLabel": "Username"
     },
     "onboarding": {
       "title": "Welcome to Talim AI",
@@ -665,7 +819,54 @@
       "points": "{count} pts",
       "play": "Play",
       "hideLeaderboard": "Hide leaderboard",
-      "leaderboard": "Leaderboard"
+      "leaderboard": "Leaderboard",
+      "writtenBadge": "Written",
+      "questionCount": "{count} questions",
+      "secondsEach": "{seconds}s each",
+      "start": "Start",
+      "due": "Due {date}",
+      "overdue": "Overdue {date}",
+      "selectAllHint": "Select all that apply",
+      "blankLabel": "Blank {number}",
+      "choosePlaceholder": "Choose…",
+      "orderHint": "Put the items in the correct order",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "scoreBreakdown": "Score breakdown",
+      "netPoints": "Net: {earned} / {max} pts",
+      "breakdownCorrect": "Correct",
+      "breakdownWrong": "Wrong",
+      "breakdownBlank": "Blank"
+    },
+    "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
+    "assignedToYou": "Assigned to you",
+    "materialsCount": "{count, plural, one {# material} other {# materials}}",
+    "cardStatusContinue": "continue",
+    "cardStatusNotStarted": "Not started",
+    "cardStatusCompleted": "Completed",
+    "cardStatusProcessing": "Processing…",
+    "cardStatusFailed": "Couldn't process",
+    "cardStatusContinuePercent": "{percent}% · continue",
+    "badges": {
+      "STREAK_5": "5-day streak",
+      "FIRST_PERFECT": "First perfect quiz",
+      "TEN_QUIZZES": "10 quizzes done"
+    },
+    "liveGame": {
+      "liveNow": "Live now",
+      "startsSoon": "Live game quiz starts soon",
+      "scheduledFor": "Starts {time}",
+      "join": "Join",
+      "view": "View"
+    },
+    "messages": {
+      "title": "Messages",
+      "open": "Messages ({count} unread)",
+      "loading": "Loading messages…",
+      "error": "Couldn't load your messages.",
+      "empty": "No messages yet.",
+      "new": "New",
+      "fromTutor": "Your tutor"
     }
   },
   "slides": {
@@ -846,7 +1047,9 @@
           },
           "cta": "Talk to us"
         }
-      }
+      },
+      "subtitle": "Free for individual learners. Tutor and school plans are activated by our team to fit your class.",
+      "note": "No credit card. We activate paid plans manually — just request access."
     },
     "stats": {
       "items": {

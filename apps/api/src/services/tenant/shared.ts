@@ -112,7 +112,7 @@ export async function formatStudentRow(
   tenantId: string,
 ) {
   const learnerId = membership.user.id;
-  const [assignedCount, progressRows, quizAttempts] = await Promise.all([
+  const [assignedCount, progressRows, quizAttempts, masteryAgg] = await Promise.all([
     prisma.contentAssignment.count({ where: { learnerId, content: { tenantId } } }),
     prisma.contentProgress.findMany({
       where: { userId: learnerId, content: { tenantId } },
@@ -127,6 +127,10 @@ export async function formatStudentRow(
       },
       select: { score: true },
     }),
+    prisma.contentProgress.aggregate({
+      where: { userId: learnerId, content: { tenantId } },
+      _avg: { overallCoverage: true },
+    }),
   ]);
 
   const lastActivityAt = progressRows[0]?.lastActivityAt?.toISOString() ?? null;
@@ -134,6 +138,8 @@ export async function formatStudentRow(
     quizAttempts.length > 0
       ? quizAttempts.reduce((s, a) => s + a.score, 0) / quizAttempts.length
       : null;
+  const mastery =
+    masteryAgg._avg.overallCoverage == null ? null : Math.round(masteryAgg._avg.overallCoverage);
 
   // Hide synthesized internal emails for username-only students.
   const hasUsername = Boolean(membership.user.username);
@@ -147,5 +153,6 @@ export async function formatStudentRow(
     assignedCount,
     lastActivityAt,
     avgQuizScore,
+    mastery,
   };
 }

@@ -19,7 +19,16 @@ export type QuizKind = 'FULL' | 'QUICK';
 export type TranscriptSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 export type UserRole = 'INDIVIDUAL' | 'TENANT_OWNER' | 'TENANT_LEARNER' | 'ADMIN';
 export type TenantMemberRole = 'OWNER' | 'LEARNER';
-export type QuestionType = 'SHORT_ANSWER' | 'NUMERIC' | 'MULTIPLE_CHOICE';
+export type QuestionType =
+  | 'SHORT_ANSWER'
+  | 'NUMERIC'
+  | 'MULTIPLE_CHOICE'
+  | 'TRUE_FALSE'
+  | 'MULTIPLE_SELECT'
+  | 'FILL_BLANK'
+  | 'DROPDOWN_CLOZE'
+  | 'MATCHING'
+  | 'ORDERING';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
@@ -158,6 +167,93 @@ export interface CreateTenantStudentResponse {
   temporaryPassword: string;
 }
 
+// --- Student CSV / bulk import (Wave 3 area D) ------------------------------
+
+export type StudentImportResult =
+  | 'created'
+  | 'reactivated'
+  | 'skipped_duplicate'
+  | 'error_seat_limit'
+  | 'error';
+
+/** One row's outcome from POST /tenant/students/import. */
+export interface StudentImportRow {
+  /** 1-based row number in the submitted CSV / rows list. */
+  row: number;
+  name: string;
+  result: StudentImportResult;
+  /** Failure reason (errors / skips) or an informational note. */
+  message?: string;
+  /** Resolved username (present for created/reactivated username-only students). */
+  username?: string | null;
+  /** Real email for email students; null for username-only students. */
+  email?: string | null;
+  /** Auto-generated temporary password (created/reactivated rows) — shown once to the tutor. */
+  temporaryPassword?: string;
+}
+
+export interface StudentImportSummary {
+  total: number;
+  created: number;
+  reactivated: number;
+  /** Rows skipped because the student is already an active member. */
+  skipped: number;
+  /** Rows rejected because the seat limit was reached (partial import). */
+  seatLimited: number;
+  errors: number;
+}
+
+export interface StudentImportResponse {
+  report: StudentImportRow[];
+  summary: StudentImportSummary;
+}
+
+// --- One-way tenant messaging (tutor → student, Wave 3 area D) --------------
+
+export interface SendTenantMessageInput {
+  studentIds: string[];
+  body: string;
+}
+
+/** A tutor's sent message with delivery/read counts. */
+export interface TenantSentMessage {
+  id: string;
+  body: string;
+  createdAt: string;
+  recipientCount: number;
+  readCount: number;
+}
+
+export interface TenantSentMessagesResponse {
+  messages: TenantSentMessage[];
+}
+
+export interface SendTenantMessageResponse {
+  message: TenantSentMessage;
+}
+
+/** A message as seen by the receiving student. */
+export interface LearnerMessage {
+  id: string;
+  body: string;
+  senderName: string | null;
+  createdAt: string;
+  readAt: string | null;
+}
+
+export interface LearnerMessagesResponse {
+  messages: LearnerMessage[];
+}
+
+export interface LearnerUnreadCountResponse {
+  count: number;
+}
+
+export interface MarkMessageReadResponse {
+  id: string;
+  readAt: string | null;
+}
+
 export type UsageFeature =
   | 'EMBED'
   | 'TUTOR_CHAT'
@@ -222,6 +318,8 @@ export interface TenantStudent {
   assignedCount: number;
   lastActivityAt: string | null;
   avgQuizScore: number | null;
+  /** Avg overall coverage across the student's tenant content (0-100); null if no progress yet. */
+  mastery: number | null;
 }
 
 export interface StudentContentProgress {
@@ -233,11 +331,42 @@ export interface StudentContentProgress {
   avgQuizScore: number | null;
 }
 
+/** One topic's (= content section's) mastery, 0-100. */
+export interface MasteryTopic {
+  sectionId: string;
+  title: string;
+  coverage: number;
+}
+
+/** An achievement badge; `progress` (0..1) is present only while unearned. */
+export interface Badge {
+  code: string;
+  label: string;
+  emoji: string;
+  earned: boolean;
+  progress?: number;
+}
+
+/** Per-student overall-mastery buckets for a class. */
+export interface ClassMasteryDistribution {
+  lt50: number;
+  b50_69: number;
+  b70_84: number;
+  gte85: number;
+}
+
+export interface ClassMastery {
+  byTopic: MasteryTopic[];
+  distribution: ClassMasteryDistribution;
+}
+
 export interface StudentProgressSummary {
   student: Pick<TenantStudent, 'id' | 'email' | 'name' | 'active'>;
   activityDays: string[];
   streakDays: number;
   contentProgress: StudentContentProgress[];
+  masteryByTopic: MasteryTopic[];
+  badges: Badge[];
 }
 
 export interface TenantProgressSummary {
@@ -247,8 +376,35 @@ export interface TenantProgressSummary {
     materials: number;
     avgCoverage: number;
     avgQuizScore: number | null;
+    /** Active students flagged low-mastery (<50) or stale (no activity in 14 days). */
+    atRisk: number;
   };
   students: TenantStudent[];
+  classMastery: ClassMastery;
+}
+
+export type LearnerMaterialStatus = 'not_started' | 'in_progress' | 'completed';
+
+/** A learner's assigned material with per-material progress. */
+export interface LearnerMaterial {
+  contentId: string;
+  title: string;
+  type: ContentType;
+  coverage: number;
+  status: LearnerMaterialStatus;
+  lastActivityAt: string | null;
+}
+
+/** The learner's own consolidated progress dashboard. */
+export interface LearnerProgress {
+  overallMastery: number;
+  streakDays: number;
+  materialsDone: number;
+  quizzesTaken: number;
+  avgAccuracy: number | null;
+  masteryByTopic: MasteryTopic[];
+  badges: Badge[];
+  activityDays: string[];
 }
 
 export interface LearnerSummary {
@@ -290,6 +446,11 @@ export interface BankQuestion {
   prompt: string;
   options: string[] | null;
   acceptableAnswers: string[];
+  /**
+   * Extra per-type configuration. Present for FILL_BLANK (`{ blanks?: number;
+   * blankAnswers?: string[][] }`); null for types that don't need it.
+   */
+  config: Record<string, unknown> | null;
   explanation: string | null;
   status: BankQuestionStatus;
   sourceContentId: string | null;
@@ -309,6 +470,18 @@ export interface TenantAssessment {
   mode: AssessmentMode;
   secondsPerQuestion: number | null;
   status: TenantAssessmentStatus;
+  /** When true, per-question weighted points with a wrong-answer penalty are used. */
+  strictScoring: boolean;
+  /** Fraction of a question's points deducted for a wrong (answered) response under strict scoring. */
+  wrongPenalty: number;
+  /** When true, MULTIPLE_SELECT / FILL_BLANK award partial credit; otherwise all-or-nothing. */
+  partialCredit: boolean;
+  /** Scheduled start (ISO) for a live game — drives the "starts soon" banner. Null if unscheduled. */
+  scheduledAt: string | null;
+  /** True while a live game session is open. */
+  isLive: boolean;
+  /** When the live session auto-closes (ISO); null = open until manually ended. */
+  liveEndsAt: string | null;
   createdAt: string;
   questionCount: number;
   assignmentCount: number;
@@ -322,6 +495,8 @@ export interface AssessmentAssignment {
   sectionId: string | null;
   assignedById: string;
   assignedAt: string;
+  /** Soft due date (ISO). Informational only — does not block submission. */
+  dueAt: string | null;
 }
 
 export interface LearnerAssessment {
@@ -331,6 +506,14 @@ export interface LearnerAssessment {
   maxAttempts: number;
   mode: AssessmentMode;
   secondsPerQuestion: number | null;
+  /** Scheduled start (ISO) for a live game — drives the "starts soon" banner. Null if unscheduled. */
+  scheduledAt: string | null;
+  /** True while a live game session is open (frontend polls the leaderboard during it). */
+  isLive: boolean;
+  /** When the live session auto-closes (ISO); null = open until manually ended. */
+  liveEndsAt: string | null;
+  /** Soft due date (ISO) — earliest across the learner's assignments, or null. */
+  dueAt: string | null;
   attemptCount: number;
   latestScore: number | null;
   latestPoints: number | null;
@@ -339,6 +522,8 @@ export interface LearnerAssessment {
     type: QuestionType;
     prompt: string;
     options: string[] | null;
+    /** Per-type config (e.g. FILL_BLANK blank count); null when not applicable. */
+    config: Record<string, unknown> | null;
   }>;
 }
 
@@ -349,6 +534,10 @@ export interface AssessmentQuestionResult {
   acceptableAnswers: string[];
   explanation: string | null;
   pointsAwarded: number;
+  /** Strict-scoring only: 0..1 credit for this answer (null under legacy percentage scoring). */
+  creditFraction?: number | null;
+  /** Strict-scoring only: signed points earned for this answer (null under legacy scoring). */
+  pointsEarned?: number | null;
 }
 
 export interface AssessmentSubmitResult {
@@ -360,6 +549,10 @@ export interface AssessmentSubmitResult {
     maxStreak: number;
     status: string;
     submittedAt: string;
+    /** Strict-scoring only: signed total points earned (null under legacy scoring). */
+    pointsEarned?: number | null;
+    /** Strict-scoring only: maximum attainable points (null under legacy scoring). */
+    maxPoints?: number | null;
   };
   correct: number;
   total: number;
@@ -390,6 +583,8 @@ export interface AssessmentResultLearner {
   bestScore: number | null;
   bestPoints: number;
   maxStreak: number;
+  /** Soft due date (ISO) for this learner's assignment, or null. */
+  dueAt: string | null;
 }
 
 export interface AssessmentResults {
@@ -493,6 +688,8 @@ export interface AdminContentItem {
   createdAt: string;
 }
 
+export type MediaReviewStatus = 'PENDING' | 'APPROVED' | 'FLAGGED';
+
 export interface AdminGeneratedItem {
   id: string;
   kind: 'podcast' | 'quiz' | 'slideshow' | 'summary';
@@ -502,6 +699,31 @@ export interface AdminGeneratedItem {
   userEmail: string;
   status?: string;
   createdAt: string;
+  /** Admin review verdict for this generated item; PENDING when never reviewed. */
+  reviewStatus: MediaReviewStatus;
+}
+
+export interface AdminGeneratedListResponse {
+  items: AdminGeneratedItem[];
+}
+
+/** One generated-media review row (approve/flag), keyed by (kind, mediaId). */
+export interface AdminGeneratedReview {
+  kind: string;
+  mediaId: string;
+  status: MediaReviewStatus;
+  note: string | null;
+  reviewedById: string | null;
+  updatedAt: string;
+}
+
+export interface AdminGeneratedReviewResponse {
+  review: AdminGeneratedReview;
+}
+
+export interface AdminImpersonateResponse {
+  /** Short-lived (30 min) stateless JWT for the impersonated user. */
+  token: string;
 }
 
 export interface UsageFeatureStats {
@@ -544,6 +766,152 @@ export interface AdminPlatformStats {
   totalSummaries: number;
   estimatedApiSpendUsd: number;
   activeUsersLast30Days: number;
+}
+
+// --- Admin analytics dashboard (read-only) ---------------------------------
+
+/** Top-line KPIs for the admin analytics dashboard. */
+export interface AdminAnalyticsSummary {
+  users: number;
+  /** Distinct users with a LearningActivityDay in the last 30 days. */
+  active30d: number;
+  orgs: number;
+  content: number;
+  /** QuizAttempt + AssessmentAttempt rows across the platform. */
+  quizzesTaken: number;
+  mrrUsd: number;
+}
+
+export interface AdminMrrPlanBreakdown {
+  planCode: string;
+  planName: string;
+  planKind: PlanKind;
+  activeSubscriptions: number;
+  priceMonthlyUsd: number;
+  mrrUsd: number;
+}
+
+/** MRR = sum of effective plan price over ACTIVE subscriptions. */
+export interface AdminMrrResponse {
+  mrrUsd: number;
+  activeSubscriptions: number;
+  byPlan: AdminMrrPlanBreakdown[];
+}
+
+export interface AdminUserGrowthPoint {
+  /** Month bucket as YYYY-MM (UTC). */
+  month: string;
+  newUsers: number;
+  /** Cumulative total users through the end of this month. */
+  totalUsers: number;
+}
+
+export interface AdminUserGrowthResponse {
+  points: AdminUserGrowthPoint[];
+}
+
+export interface AdminUsersByRoleRow {
+  role: UserRole;
+  count: number;
+}
+
+export interface AdminUsersByRoleResponse {
+  roles: AdminUsersByRoleRow[];
+}
+
+/** registered → activated (>=1 content) → tutor (TENANT_OWNER) → paid (active non-FREE sub). */
+export interface AdminFunnelResponse {
+  registered: number;
+  activated: number;
+  tutors: number;
+  paid: number;
+}
+
+export interface AdminContentByTypeRow {
+  type: ContentType;
+  count: number;
+}
+
+export interface AdminContentByTypeResponse {
+  types: AdminContentByTypeRow[];
+}
+
+export interface AdminTopOrg {
+  tenantId: string;
+  name: string;
+  slug: string;
+  studentCount: number;
+  contentCount: number;
+  usageCostUsd: number;
+  planCode: string | null;
+}
+
+export interface AdminTopOrgsResponse {
+  orgs: AdminTopOrg[];
+}
+
+export interface AdminSpendByModelRow {
+  model: string;
+  eventCount: number;
+  inputTokens: number;
+  outputTokens: number;
+  costUsd: number;
+  /** True when costUsd was derived from tokens × pricing rather than stored. */
+  approximated: boolean;
+}
+
+export interface AdminSpendByModelResponse {
+  rows: AdminSpendByModelRow[];
+  totalCostUsd: number;
+  /** True when any row's cost was approximated from tokens × the pricing table. */
+  approximated: boolean;
+}
+
+// --- Admin content-control detail (read-only inspector) --------------------
+
+export interface AdminContentDetailContent {
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string | null;
+  tenantId: string | null;
+  type: ContentType;
+  title: string;
+  url: string | null;
+  storagePath: string | null;
+  status: ContentStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminContentDetailPipeline {
+  textExtracted: boolean;
+  chunked: boolean;
+  sectioned: boolean;
+  chunkCount: number;
+  embeddedChunkCount: number;
+  sectionCount: number;
+}
+
+export interface AdminContentDetailGenerated {
+  summary: { present: boolean; count: number };
+  podcast: { present: boolean; status: PodcastStatus | null };
+  video: { present: boolean; status: GeneratedMediaStatus | null };
+  quiz: { present: boolean; count: number };
+}
+
+/** A truncated chunk sample; the pgvector column is never returned, only tested. */
+export interface AdminContentDetailChunk {
+  chunkIndex: number;
+  text: string;
+  hasEmbedding: boolean;
+}
+
+export interface AdminContentDetail {
+  content: AdminContentDetailContent;
+  pipeline: AdminContentDetailPipeline;
+  generated: AdminContentDetailGenerated;
+  chunks: AdminContentDetailChunk[];
 }
 
 export interface PaginatedResponse<T> {

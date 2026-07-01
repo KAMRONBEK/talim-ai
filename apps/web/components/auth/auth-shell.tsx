@@ -10,11 +10,11 @@ import { LogoMark } from '@/components/brand/logo';
 
 /**
  * Split-screen auth shell ("Scholar" system): a pine brand panel (reversed
- * cream LogoMark, serif headline with an italic cream emphasis word, the reused
- * landing value-props and a copyright line, all over a faint cream girih
- * texture) beside the cream form panel. The form panel carries a Log in / Sign
- * up segmented toggle above the page's card/form, and collapses to a single
- * centered column on small screens.
+ * cream LogoMark, an auth-specific serif headline with a warm-accent italic
+ * emphasis word, three checkmark value-props and a copyright line, all over a
+ * faint cream girih texture) beside the cream form panel. The form panel carries
+ * a Log in / Sign up segmented toggle above the page's card/form, and collapses
+ * to a single centered column on small screens.
  */
 export function AuthShell({ children }: { children: ReactNode }) {
   const l = useTranslations('landing');
@@ -54,12 +54,13 @@ export function AuthShell({ children }: { children: ReactNode }) {
 
         <div className="relative">
           <h2 className="max-w-md text-balance font-display text-4xl font-semibold leading-[1.15] text-primary-foreground/90">
-            {l('hero.titleLead')}{' '}
-            <span className="font-display italic text-primary-foreground">
-              {l('hero.titleEmphasis')}
-            </span>
+            {t.rich('heroTitle', {
+              em: (chunks) => (
+                <span className="font-display italic text-accent-secondary">{chunks}</span>
+              ),
+            })}
           </h2>
-          <p className="mt-4 max-w-sm text-primary-foreground/70">{l('hero.subtitle')}</p>
+          <p className="mt-4 max-w-sm text-primary-foreground/70">{t('heroSubtitle')}</p>
           <ul className="mt-8 space-y-3.5">
             {points.map((p) => (
               <li key={p} className="flex items-center gap-3 text-sm text-primary-foreground/90">

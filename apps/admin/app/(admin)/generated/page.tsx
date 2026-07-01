@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { Button } from '@talim/ui';
-import { useAdminGenerated } from '@/hooks/useAdmin';
+import type { MediaReviewStatus } from '@talim/types';
+import { useAdminGenerated, useReviewGenerated } from '@/hooks/useAdmin';
 import { api } from '@/lib/api';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -13,6 +14,12 @@ const tabs = [
   { id: 'slideshow', label: 'Slideshows' },
   { id: 'summary', label: 'Summaries' },
 ] as const;
+
+function reviewPillClass(status: MediaReviewStatus): string {
+  if (status === 'APPROVED') return 'bg-success-muted text-success';
+  if (status === 'FLAGGED') return 'bg-destructive/10 text-destructive';
+  return 'bg-warning-muted text-warning';
+}
 
 function statusPillClass(status: string): string {
   const s = status.toUpperCase();
@@ -26,7 +33,21 @@ function statusPillClass(status: string): string {
 export default function GeneratedPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]['id']>('all');
   const { data, isLoading, isError } = useAdminGenerated(tab);
+  const reviewGenerated = useReviewGenerated();
   const qc = useQueryClient();
+
+  const handleReview = async (
+    kind: string,
+    mediaId: string,
+    status: 'APPROVED' | 'FLAGGED',
+  ) => {
+    try {
+      await reviewGenerated.mutateAsync({ kind, mediaId, status });
+    } catch (err) {
+      const res = (err as { response?: { data?: { message?: string } } })?.response;
+      alert(res?.data?.message ?? 'Failed to save the review. Please try again.');
+    }
+  };
 
   const handleDelete = async (id: string, kind: string) => {
     if (!confirm('Delete this generated item?')) return;
@@ -76,6 +97,9 @@ export default function GeneratedPage() {
               <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                 Status
               </th>
+              <th className="px-4 py-3 text-left font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Review
+              </th>
               <th className="px-4 py-3 text-right font-label text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
                 Actions
               </th>
@@ -84,14 +108,14 @@ export default function GeneratedPage() {
           <tbody>
             {isLoading && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground">
+                <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
                   Loading…
                 </td>
               </tr>
             )}
             {isError && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
+                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
                   Couldn&apos;t load generated media. Please try again.
                 </td>
               </tr>
@@ -114,6 +138,41 @@ export default function GeneratedPage() {
                   ) : (
                     '—'
                   )}
+                </td>
+                <td className="px-4 py-3">
+                  {(() => {
+                    const pending =
+                      reviewGenerated.isPending &&
+                      reviewGenerated.variables?.kind === item.kind &&
+                      reviewGenerated.variables?.mediaId === item.id;
+                    return (
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${reviewPillClass(item.reviewStatus)}`}
+                        >
+                          {item.reviewStatus}
+                        </span>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={pending || item.reviewStatus === 'APPROVED'}
+                          className="border-success/30 text-success hover:bg-success/10"
+                          onClick={() => handleReview(item.kind, item.id, 'APPROVED')}
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          disabled={pending || item.reviewStatus === 'FLAGGED'}
+                          className="border-destructive/30 text-destructive hover:bg-destructive/10"
+                          onClick={() => handleReview(item.kind, item.id, 'FLAGGED')}
+                        >
+                          Flag
+                        </Button>
+                      </div>
+                    );
+                  })()}
                 </td>
                 <td className="px-4 py-3 text-right">
                   <Button
