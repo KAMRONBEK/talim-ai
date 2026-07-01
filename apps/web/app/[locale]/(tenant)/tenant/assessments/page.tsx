@@ -1,14 +1,16 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   BarChart3,
+  CalendarClock,
   Check,
   ClipboardList,
   FileText,
   Library,
   Plus,
+  Radio,
   Sparkles,
   Trophy,
   UserCheck,
@@ -16,6 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import { Badge, Button, Input, Label } from '@talim/ui';
+import type { AppLocale, TenantAssessment } from '@talim/types';
 import {
   useAssessmentLeaderboard,
   useAssessmentResults,
@@ -26,11 +29,22 @@ import {
   useGenerateBankQuestions,
   usePatchBankQuestion,
   useQuestionBanks,
+  useScheduleAssessment,
+  useSetAssessmentLive,
   useTenantAssessments,
 } from '@/hooks/useAssessments';
 import { useTenantStudents } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
+import { formatRelativeTime } from '@/lib/format-relative-time';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
+
+/** ISO string → `<input type="datetime-local">` value in local time (empty when unset). */
+function toDatetimeLocal(iso: string | null): string {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 
 function mutErr(e: unknown, fallback: string): string {
   return (e as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
@@ -142,6 +156,95 @@ function GradingToggle({
   );
 }
 
+// Per-GAME-assessment live controls: set/clear a scheduled start and start/end a live session.
+function LiveGameRow({ assessment }: { assessment: TenantAssessment }) {
+  const t = useTranslations('tenant.assessments');
+  const locale = useLocale() as AppLocale;
+  const schedule = useScheduleAssessment();
+  const setLive = useSetAssessmentLive();
+  const [when, setWhen] = useState(toDatetimeLocal(assessment.scheduledAt));
+
+  const saveSchedule = () =>
+    schedule.mutate({
+      assessmentId: assessment.id,
+      scheduledAt: when ? new Date(when).toISOString() : null,
+    });
+
+  const toggleLive = () =>
+    setLive.mutate({ assessmentId: assessment.id, live: !assessment.isLive });
+
+  const err = schedule.error ?? setLive.error;
+
+  return (
+    <div className="rounded-xl border border-border/70 bg-card p-4 shadow-soft">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="truncate font-display font-semibold text-foreground">{assessment.title}</p>
+            {assessment.isLive ? (
+              <Badge className="bg-accent-secondary text-accent-secondary-foreground hover:bg-accent-secondary">
+                <Radio className="mr-1 h-3 w-3" />
+                {t('live.liveNow')}
+              </Badge>
+            ) : assessment.scheduledAt ? (
+              <Badge variant="secondary">{t('live.scheduled')}</Badge>
+            ) : (
+              <Badge variant="secondary">{t('live.idle')}</Badge>
+            )}
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {assessment.isLive
+              ? t('live.liveHint')
+              : assessment.scheduledAt
+                ? t('live.scheduledFor', {
+                    time: formatRelativeTime(assessment.scheduledAt, locale),
+                  })
+                : t('live.notScheduled')}
+          </p>
+        </div>
+        <Button
+          type="button"
+          size="sm"
+          variant={assessment.isLive ? 'outline' : 'spark'}
+          onClick={toggleLive}
+          disabled={setLive.isPending}
+        >
+          <Radio className="h-4 w-4" />
+          {assessment.isLive ? t('live.endLive') : t('live.goLive')}
+        </Button>
+      </div>
+      <div className="mt-3 flex flex-wrap items-end gap-2">
+        <div className="space-y-1">
+          <Label
+            htmlFor={`sched-${assessment.id}`}
+            className="font-label text-[11px] uppercase tracking-wider text-muted-foreground"
+          >
+            {t('live.scheduleLabel')}
+          </Label>
+          <Input
+            id={`sched-${assessment.id}`}
+            type="datetime-local"
+            value={when}
+            onChange={(e) => setWhen(e.target.value)}
+            className="w-auto"
+          />
+        </div>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          onClick={saveSchedule}
+          disabled={schedule.isPending}
+        >
+          <CalendarClock className="h-4 w-4" />
+          {when ? t('live.saveSchedule') : t('live.clearSchedule')}
+        </Button>
+      </div>
+      {err != null && <p className="mt-2 text-sm text-destructive">{mutErr(err, t('genericError'))}</p>}
+    </div>
+  );
+}
+
 export default function TenantAssessmentsPage() {
   const t = useTranslations('tenant.assessments');
   const { data: banks = [] } = useQuestionBanks();
@@ -229,6 +332,27 @@ export default function TenantAssessmentsPage() {
           {t('newAssessment')}
         </a>
       </div>
+
+      {assessments.some((a) => a.mode === 'GAME') && (
+        <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+              <Radio className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 className="font-display text-lg font-semibold">{t('live.title')}</h2>
+              <p className="text-sm text-muted-foreground">{t('live.desc')}</p>
+            </div>
+          </div>
+          <div className="grid gap-3">
+            {assessments
+              .filter((a) => a.mode === 'GAME')
+              .map((a) => (
+                <LiveGameRow key={a.id} assessment={a} />
+              ))}
+          </div>
+        </section>
+      )}
 
       <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
         <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">

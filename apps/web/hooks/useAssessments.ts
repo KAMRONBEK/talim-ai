@@ -112,6 +112,53 @@ export function useCreateAssessment() {
   });
 }
 
+/**
+ * Set (or clear, with `scheduledAt: null`) the scheduled start of a GAME assessment —
+ * powers the learner "starts soon" banner. Refreshes the tenant assessment list.
+ */
+export function useScheduleAssessment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      assessmentId,
+      scheduledAt,
+    }: {
+      assessmentId: string;
+      scheduledAt: string | null;
+    }) => {
+      const { data } = await api.patch<{ assessment: TenantAssessment }>(
+        `/tenant/assessments/${assessmentId}/schedule`,
+        { scheduledAt },
+      );
+      return data.assessment;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'assessments'] }),
+  });
+}
+
+/** Start (`live: true`) or end (`live: false`) a live GAME session. */
+export function useSetAssessmentLive() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      assessmentId,
+      live,
+      liveEndsAt,
+    }: {
+      assessmentId: string;
+      live: boolean;
+      liveEndsAt?: string | null;
+    }) => {
+      const { data } = await api.post<{ assessment: TenantAssessment }>(
+        `/tenant/assessments/${assessmentId}/go-live`,
+        { live, ...(liveEndsAt !== undefined ? { liveEndsAt } : {}) },
+      );
+      return data.assessment;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'assessments'] }),
+  });
+}
+
 export function useAssessmentResults(assessmentId: string | null) {
   return useQuery({
     queryKey: ['tenant', 'assessments', assessmentId, 'results'],

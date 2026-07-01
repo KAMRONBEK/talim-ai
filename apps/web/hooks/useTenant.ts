@@ -4,14 +4,22 @@ import type {
   ContentAssignment,
   CreateTenantStudentResponse,
   LearnerMaterial,
+  LearnerMessage,
   LearnerProgress,
   LearnerSummary,
+  LearnerUnreadCountResponse,
+  MarkMessageReadResponse,
+  SendTenantMessageInput,
+  SendTenantMessageResponse,
+  StudentImportResponse,
   StudentProgressSummary,
   Tenant,
   TenantProgressSummary,
+  TenantSentMessage,
   TenantStudent,
 } from '@talim/types';
 import { api } from '@/lib/api';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export function useTenant() {
   return useQuery({
@@ -60,6 +68,38 @@ export function useCreateTenantStudent() {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
       // Refresh seat usage + the at-cap gate, which read from the billing query.
       queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
+    },
+  });
+}
+
+/**
+ * Bulk-import students from a pasted CSV string (`{ csv }`) or a parsed rows array.
+ * The backend does a partial import (seat-limited rows are reported, not fatal) and
+ * returns a per-row report. Refreshes the roster + seat/billing gate like a create.
+ */
+export function useImportStudents() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (
+      input: { csv: string } | { rows: Array<{ name?: string; email?: string; username?: string }> },
+    ) => {
+      const { data } = await api.post<StudentImportResponse>('/tenant/students/import', input);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      // Imported students consume seats — refresh the seat usage + at-cap gate.
+      queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
+    },
+  });
+}
+
+/** One-way tutor→student message to a set of selected active learners. */
+export function useSendTenantMessage() {
+  return useMutation<TenantSentMessage, unknown, SendTenantMessageInput>({
+    mutationFn: async (input) => {
+      const { data } = await api.post<SendTenantMessageResponse>('/tenant/messages', input);
+      return data.message;
     },
   });
 }
@@ -146,6 +186,51 @@ export function useLearnerProgress() {
     queryFn: async () => {
       const { data } = await api.get<LearnerProgress>('/learner/progress');
       return data;
+    },
+  });
+}
+
+/**
+ * Unread tutor→student message count for the badge. Polled every 60s. Gated to
+ * TENANT_LEARNER (the endpoint is learner-scoped) so it never fires for B2C users
+ * sharing the same header shell.
+ */
+export function useLearnerUnreadCount() {
+  const role = useAuthStore((s) => s.user?.role);
+  return useQuery({
+    queryKey: ['learner', 'messages', 'unread-count'],
+    queryFn: async () => {
+      const { data } = await api.get<LearnerUnreadCountResponse>('/learner/messages/unread-count');
+      return data.count;
+    },
+    enabled: role === 'TENANT_LEARNER',
+    refetchInterval: 60_000,
+  });
+}
+
+/** Received tutor→student messages. Fetched lazily (only while the panel is open). */
+export function useLearnerMessages(enabled = true) {
+  return useQuery({
+    queryKey: ['learner', 'messages'],
+    queryFn: async () => {
+      const { data } = await api.get<{ messages: LearnerMessage[] }>('/learner/messages');
+      return data.messages;
+    },
+    enabled,
+  });
+}
+
+/** Mark one received message read (idempotent); refreshes list + unread badge. */
+export function useMarkMessageRead() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { data } = await api.post<MarkMessageReadResponse>(`/learner/messages/${id}/read`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['learner', 'messages'] });
+      queryClient.invalidateQueries({ queryKey: ['learner', 'messages', 'unread-count'] });
     },
   });
 }

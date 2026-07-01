@@ -548,7 +548,35 @@
       "assignDialogDesc": "Choose a material to assign to the selected students.",
       "noMaterials": "No materials to assign yet.",
       "assignConfirm": "Assign to {count, plural, one {# student} other {# students}}",
-      "mastery": "Mastery"
+      "mastery": "Mastery",
+      "import": "Import CSV",
+      "importTitle": "Import students",
+      "importDesc": "Paste rows or upload a CSV file with the header: name,email,username. Email or username is required per row.",
+      "importFileLabel": "Upload a CSV file",
+      "importPasteLabel": "Or paste CSV",
+      "importPlaceholder": "name,email,username\nAli Valiyev,ali@example.com,\nMadina,,madina",
+      "importSubmit": "Import",
+      "importing": "Importing…",
+      "importEmpty": "Paste some rows or choose a CSV file first.",
+      "importError": "Couldn't import the students.",
+      "importFileError": "Couldn't read that file.",
+      "importAnother": "Import more",
+      "importSummary": "Created {created} · Reactivated {reactivated} · Skipped {skipped} · Seat-limited {seatLimited} · Errors {errors}",
+      "importRowLabel": "Row {row}",
+      "importCreated": "Created",
+      "importReactivated": "Reactivated",
+      "importSkipped": "Skipped",
+      "importSeatLimited": "Seat limit",
+      "importFailed": "Error",
+      "cancel": "Cancel",
+      "messageTitle": "Message students",
+      "messageDesc": "Send a message to {count, plural, one {# selected student} other {# selected students}}. Inactive students are skipped.",
+      "messagePlaceholder": "Write your message…",
+      "messageSend": "Send",
+      "messageSending": "Sending…",
+      "messageEmpty": "Write a message first.",
+      "messageError": "Couldn't send the message.",
+      "messageSent": "Message sent."
     },
     "assign": {
       "title": "Assign to students",
@@ -632,7 +660,22 @@
       "wrongPenaltyLabel": "Wrong-answer penalty",
       "wrongPenaltyHint": "Share of a question's points lost for a wrong answer (0–1).",
       "partialCreditLabel": "Partial credit",
-      "partialCreditHint": "Give proportional points for partially correct answers."
+      "partialCreditHint": "Give proportional points for partially correct answers.",
+      "live": {
+        "title": "Live game quizzes",
+        "desc": "Schedule a start time and open a live session — students get a join banner on their dashboard.",
+        "liveNow": "Live now",
+        "scheduled": "Scheduled",
+        "idle": "Not scheduled",
+        "liveHint": "The session is open — students can join and appear on the live leaderboard.",
+        "scheduledFor": "Starts {time}",
+        "notScheduled": "No start time set.",
+        "goLive": "Go live",
+        "endLive": "End live",
+        "scheduleLabel": "Scheduled start",
+        "saveSchedule": "Save schedule",
+        "clearSchedule": "Clear schedule"
+      }
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -808,6 +851,22 @@
       "STREAK_5": "5-day streak",
       "FIRST_PERFECT": "First perfect quiz",
       "TEN_QUIZZES": "10 quizzes done"
+    },
+    "liveGame": {
+      "liveNow": "Live now",
+      "startsSoon": "Live game quiz starts soon",
+      "scheduledFor": "Starts {time}",
+      "join": "Join",
+      "view": "View"
+    },
+    "messages": {
+      "title": "Messages",
+      "open": "Messages ({count} unread)",
+      "loading": "Loading messages…",
+      "error": "Couldn't load your messages.",
+      "empty": "No messages yet.",
+      "new": "New",
+      "fromTutor": "Your tutor"
     }
   },
   "slides": {

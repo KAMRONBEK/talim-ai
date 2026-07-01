@@ -5,6 +5,7 @@ import { Menu } from 'lucide-react';
 import { Badge, Button } from '@talim/ui';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { LearnerMessagesBell } from '@/components/learner/learner-messages-bell';
 import { useBilling } from '@/hooks/useBilling';
 import { planMessageKey } from '@/lib/plan';
 
@@ -34,6 +35,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
         </Button>
       )}
       <div className="flex items-center gap-3">
+        <LearnerMessagesBell />
         <LanguageSwitcher compact />
         <ThemeToggle />
         {planKey && (

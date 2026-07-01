@@ -1,12 +1,13 @@
 'use client';
 
 import { useMemo } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   AlertCircle,
   BookOpen,
   FileText,
   Flame,
+  Gamepad2,
   Loader2,
   Play,
   Presentation,
@@ -18,7 +19,8 @@ import { useLearnerMaterials, useLearnerSummary } from '@/hooks/useTenant';
 import { useLearnerAssessments } from '@/hooks/useAssessments';
 import { Link } from '@/i18n/navigation';
 import { Button, Progress, cn } from '@talim/ui';
-import type { Content, ContentType, LearnerMaterial } from '@talim/types';
+import type { AppLocale, Content, ContentType, LearnerMaterial } from '@talim/types';
+import { formatRelativeTime } from '@/lib/format-relative-time';
 import { StudentWelcomeBanner } from '@/components/learner/student-welcome-banner';
 
 type CardStatus = 'processing' | 'failed' | 'completed' | 'continue' | 'notStarted';
@@ -140,11 +142,25 @@ function AssignedMaterialCard({
 
 export default function LearnerDashboardPage() {
   const t = useTranslations('learner');
+  const locale = useLocale() as AppLocale;
   const user = useAuthStore((s) => s.user);
   const { data: contents, isLoading } = useContents();
   const { data: summary } = useLearnerSummary();
   const { data: materials } = useLearnerMaterials();
   const { data: assessments } = useLearnerAssessments();
+
+  // Live/scheduled GAME quiz → prominent join banner. Prefer an open live session;
+  // otherwise the soonest upcoming scheduled game. Nothing renders when neither exists.
+  const liveGame = useMemo(() => {
+    const games = (assessments ?? []).filter((a) => a.mode === 'GAME');
+    const live = games.find((a) => a.isLive);
+    if (live) return { assessment: live, isLive: true as const };
+    const now = Date.now();
+    const upcoming = games
+      .filter((a) => a.scheduledAt != null && new Date(a.scheduledAt).getTime() > now)
+      .sort((a, b) => new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime())[0];
+    return upcoming ? { assessment: upcoming, isLive: false as const } : null;
+  }, [assessments]);
 
   const assigned = useMemo(() => contents ?? [], [contents]);
   const assignedCount = summary?.assignedCount ?? assigned.length;
@@ -187,6 +203,52 @@ export default function LearnerDashboardPage() {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
       <StudentWelcomeBanner />
+
+      {liveGame && (
+        <div className="relative flex flex-wrap items-center justify-between gap-4 overflow-hidden rounded-3xl border border-accent-secondary/40 bg-accent-secondary/10 p-5 shadow-soft">
+          {liveGame.isLive && (
+            <span
+              aria-hidden
+              className="absolute right-4 top-4 flex h-2.5 w-2.5"
+            >
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-secondary opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-secondary" />
+            </span>
+          )}
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent-secondary text-accent-secondary-foreground">
+              <Gamepad2 className="h-6 w-6" />
+            </span>
+            <div>
+              <p className="font-label text-xs font-semibold uppercase tracking-[0.18em] text-accent-secondary">
+                {liveGame.isLive ? t('liveGame.liveNow') : t('liveGame.startsSoon')}
+              </p>
+              <p className="mt-0.5 font-display text-lg font-semibold text-foreground">
+                {liveGame.assessment.title}
+              </p>
+              {!liveGame.isLive && liveGame.assessment.scheduledAt && (
+                <p className="text-sm text-muted-foreground">
+                  {t('liveGame.scheduledFor', {
+                    time: formatRelativeTime(liveGame.assessment.scheduledAt, locale),
+                  })}
+                </p>
+              )}
+            </div>
+          </div>
+          <Link
+            href={
+              liveGame.isLive
+                ? `/learner/assessments?play=${liveGame.assessment.id}`
+                : '/learner/assessments'
+            }
+          >
+            <Button variant="spark" className="shrink-0">
+              <Play className="mr-1.5 h-4 w-4" />
+              {liveGame.isLive ? t('liveGame.join') : t('liveGame.view')}
+            </Button>
+          </Link>
+        </div>
+      )}
 
       {/* Pine-gradient welcome hero — theme-independent pine, cream text + faint girih. */}
       <div className="relative overflow-hidden rounded-3xl bg-primary p-8 text-primary-foreground shadow-soft">

@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowDown, ArrowUp, CalendarClock, Play, Sparkles, Trophy } from 'lucide-react';
 import { Badge, Button, Input } from '@talim/ui';
@@ -470,7 +470,13 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   );
 }
 
-function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
+function AssessmentCard({
+  assessment,
+  autoPlay = false,
+}: {
+  assessment: LearnerAssessment;
+  autoPlay?: boolean;
+}) {
   const t = useTranslations('learner.assessments');
   const locale = useLocale() as AppLocale;
   const [playing, setPlaying] = useState(false);
@@ -478,6 +484,10 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
   const [writtenStarted, setWrittenStarted] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
   const isGame = assessment.mode === 'GAME';
+  // Deep-link from the dashboard "Join" banner (?play=<id>) auto-opens the game player.
+  useEffect(() => {
+    if (autoPlay && isGame && !locked) setPlaying(true);
+  }, [autoPlay, isGame, locked]);
   // Soft due date: display-only. Overdue styling when past due and the learner hasn't
   // submitted an attempt yet (a completed task is no longer "overdue").
   const completed = assessment.attemptCount > 0;
@@ -575,6 +585,12 @@ function AssessmentCard({ assessment }: { assessment: LearnerAssessment }) {
 export default function LearnerAssessmentsPage() {
   const t = useTranslations('learner.assessments');
   const { data: assessments = [], isLoading } = useLearnerAssessments();
+  // Read a `?play=<assessmentId>` deep-link (set by the dashboard live-game banner)
+  // client-side to avoid a useSearchParams Suspense boundary on this client page.
+  const [autoPlayId, setAutoPlayId] = useState<string | null>(null);
+  useEffect(() => {
+    setAutoPlayId(new URLSearchParams(window.location.search).get('play'));
+  }, []);
 
   if (isLoading) return <p className="text-muted-foreground">{t('loading')}</p>;
 
@@ -594,7 +610,11 @@ export default function LearnerAssessmentsPage() {
         </div>
       )}
       {assessments.map((assessment) => (
-        <AssessmentCard key={assessment.id} assessment={assessment} />
+        <AssessmentCard
+          key={assessment.id}
+          assessment={assessment}
+          autoPlay={autoPlayId != null && assessment.id === autoPlayId}
+        />
       ))}
     </div>
   );

@@ -548,7 +548,35 @@
       "assignDialogDesc": "Выберите материал для назначения выбранным ученикам.",
       "noMaterials": "Пока нет материалов для назначения.",
       "assignConfirm": "Назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
-      "mastery": "Освоение"
+      "mastery": "Освоение",
+      "import": "Импорт CSV",
+      "importTitle": "Импорт учеников",
+      "importDesc": "Вставьте строки или загрузите CSV-файл с заголовком: name,email,username. В каждой строке нужен email или username.",
+      "importFileLabel": "Загрузить CSV-файл",
+      "importPasteLabel": "Или вставьте CSV",
+      "importPlaceholder": "name,email,username\nAli Valiyev,ali@example.com,\nMadina,,madina",
+      "importSubmit": "Импортировать",
+      "importing": "Импорт…",
+      "importEmpty": "Сначала вставьте строки или выберите CSV-файл.",
+      "importError": "Не удалось импортировать учеников.",
+      "importFileError": "Не удалось прочитать файл.",
+      "importAnother": "Импортировать ещё",
+      "importSummary": "Создано {created} · Восстановлено {reactivated} · Пропущено {skipped} · Лимит мест {seatLimited} · Ошибки {errors}",
+      "importRowLabel": "Строка {row}",
+      "importCreated": "Создан",
+      "importReactivated": "Восстановлен",
+      "importSkipped": "Пропущен",
+      "importSeatLimited": "Лимит мест",
+      "importFailed": "Ошибка",
+      "cancel": "Отмена",
+      "messageTitle": "Сообщение ученикам",
+      "messageDesc": "Отправить сообщение {count, plural, one {# выбранному ученику} few {# выбранным ученикам} many {# выбранным ученикам} other {# выбранным ученикам}}. Неактивные ученики пропускаются.",
+      "messagePlaceholder": "Напишите сообщение…",
+      "messageSend": "Отправить",
+      "messageSending": "Отправка…",
+      "messageEmpty": "Сначала напишите сообщение.",
+      "messageError": "Не удалось отправить сообщение.",
+      "messageSent": "Сообщение отправлено."
     },
     "assign": {
       "title": "Назначить ученикам",
@@ -632,7 +660,22 @@
       "wrongPenaltyLabel": "Штраф за неверный ответ",
       "wrongPenaltyHint": "Доля баллов вопроса, теряемая за неверный ответ (0–1).",
       "partialCreditLabel": "Частичный зачёт",
-      "partialCreditHint": "Начислять пропорциональные баллы за частично верные ответы."
+      "partialCreditHint": "Начислять пропорциональные баллы за частично верные ответы.",
+      "live": {
+        "title": "Живые игровые викторины",
+        "desc": "Задайте время старта и откройте живую сессию — ученики увидят баннер для входа на своей панели.",
+        "liveNow": "В эфире",
+        "scheduled": "Запланировано",
+        "idle": "Не запланировано",
+        "liveHint": "Сессия открыта — ученики могут присоединиться и попасть в живой рейтинг.",
+        "scheduledFor": "Старт {time}",
+        "notScheduled": "Время старта не задано.",
+        "goLive": "В эфир",
+        "endLive": "Завершить эфир",
+        "scheduleLabel": "Запланированный старт",
+        "saveSchedule": "Сохранить расписание",
+        "clearSchedule": "Очистить расписание"
+      }
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",
@@ -808,6 +851,22 @@
       "STREAK_5": "5 дней подряд",
       "FIRST_PERFECT": "Первый идеальный тест",
       "TEN_QUIZZES": "10 тестов пройдено"
+    },
+    "liveGame": {
+      "liveNow": "В эфире",
+      "startsSoon": "Скоро начнётся живая игровая викторина",
+      "scheduledFor": "Старт {time}",
+      "join": "Присоединиться",
+      "view": "Открыть"
+    },
+    "messages": {
+      "title": "Сообщения",
+      "open": "Сообщения ({count} непрочитанных)",
+      "loading": "Загрузка сообщений…",
+      "error": "Не удалось загрузить сообщения.",
+      "empty": "Пока нет сообщений.",
+      "new": "Новое",
+      "fromTutor": "Ваш преподаватель"
     }
   },
   "slides": {

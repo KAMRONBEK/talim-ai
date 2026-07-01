@@ -548,7 +548,35 @@
       "assignDialogDesc": "Tanlangan o'quvchilarga biriktirish uchun material tanlang.",
       "noMaterials": "Biriktirish uchun hali material yo'q.",
       "assignConfirm": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} biriktirish",
-      "mastery": "O'zlashtirish"
+      "mastery": "O'zlashtirish",
+      "import": "CSV import",
+      "importTitle": "O'quvchilarni import qilish",
+      "importDesc": "Qatorlarni joylashtiring yoki sarlavhali CSV fayl yuklang: name,email,username. Har bir qatorda email yoki username bo'lishi shart.",
+      "importFileLabel": "CSV fayl yuklash",
+      "importPasteLabel": "Yoki CSV joylashtiring",
+      "importPlaceholder": "name,email,username\nAli Valiyev,ali@example.com,\nMadina,,madina",
+      "importSubmit": "Import qilish",
+      "importing": "Import qilinmoqda…",
+      "importEmpty": "Avval qatorlarni joylashtiring yoki CSV fayl tanlang.",
+      "importError": "O'quvchilarni import qilib bo'lmadi.",
+      "importFileError": "Faylni o'qib bo'lmadi.",
+      "importAnother": "Yana import qilish",
+      "importSummary": "Yaratildi {created} · Qayta faollashtirildi {reactivated} · O'tkazib yuborildi {skipped} · O'rin cheklovi {seatLimited} · Xatolar {errors}",
+      "importRowLabel": "{row}-qator",
+      "importCreated": "Yaratildi",
+      "importReactivated": "Qayta faollashtirildi",
+      "importSkipped": "O'tkazib yuborildi",
+      "importSeatLimited": "O'rin cheklovi",
+      "importFailed": "Xato",
+      "cancel": "Bekor qilish",
+      "messageTitle": "O'quvchilarga xabar",
+      "messageDesc": "{count, plural, one {# tanlangan o'quvchiga} other {# tanlangan o'quvchiga}} xabar yuboring. Nofaol o'quvchilar o'tkazib yuboriladi.",
+      "messagePlaceholder": "Xabaringizni yozing…",
+      "messageSend": "Yuborish",
+      "messageSending": "Yuborilmoqda…",
+      "messageEmpty": "Avval xabar yozing.",
+      "messageError": "Xabarni yuborib bo'lmadi.",
+      "messageSent": "Xabar yuborildi."
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",
@@ -632,7 +660,22 @@
       "wrongPenaltyLabel": "Noto‘g‘ri javob jarimasi",
       "wrongPenaltyHint": "Noto‘g‘ri javob uchun yo‘qotiladigan ball ulushi (0–1).",
       "partialCreditLabel": "Qisman ball",
-      "partialCreditHint": "Qisman to‘g‘ri javoblar uchun mutanosib ball beriladi."
+      "partialCreditHint": "Qisman to‘g‘ri javoblar uchun mutanosib ball beriladi.",
+      "live": {
+        "title": "Jonli o'yin testlari",
+        "desc": "Boshlanish vaqtini belgilang va jonli sessiyani oching — o'quvchilar boshqaruv panelida qo'shilish bannerini ko'radi.",
+        "liveNow": "Jonli efirda",
+        "scheduled": "Rejalashtirilgan",
+        "idle": "Rejalashtirilmagan",
+        "liveHint": "Sessiya ochiq — o'quvchilar qo'shilib, jonli reytingda paydo bo'ladi.",
+        "scheduledFor": "{time} boshlanadi",
+        "notScheduled": "Boshlanish vaqti belgilanmagan.",
+        "goLive": "Jonli efirga chiqish",
+        "endLive": "Jonli efirni tugatish",
+        "scheduleLabel": "Rejalashtirilgan boshlanish",
+        "saveSchedule": "Jadvalni saqlash",
+        "clearSchedule": "Jadvalni tozalash"
+      }
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",
@@ -808,6 +851,22 @@
       "STREAK_5": "5 kunlik seriya",
       "FIRST_PERFECT": "Birinchi mukammal test",
       "TEN_QUIZZES": "10 ta test bajarildi"
+    },
+    "liveGame": {
+      "liveNow": "Jonli efirda",
+      "startsSoon": "Jonli o'yin testi tez orada boshlanadi",
+      "scheduledFor": "{time} boshlanadi",
+      "join": "Qo'shilish",
+      "view": "Ko'rish"
+    },
+    "messages": {
+      "title": "Xabarlar",
+      "open": "Xabarlar ({count} o'qilmagan)",
+      "loading": "Xabarlar yuklanmoqda…",
+      "error": "Xabarlaringizni yuklab bo'lmadi.",
+      "empty": "Hozircha xabar yo'q.",
+      "new": "Yangi",
+      "fromTutor": "O'qituvchingiz"
     }
   },
   "slides": {
