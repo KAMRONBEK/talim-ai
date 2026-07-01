@@ -534,7 +534,20 @@
       "deactivate": "Деактивировать",
       "reactivate": "Реактивировать",
       "active": "Активен",
-      "inactive": "Неактивен"
+      "inactive": "Неактивен",
+      "bulkActions": "Массовые действия",
+      "selectedCount": "Выбрано: {count}",
+      "selectRow": "Выбрать ученика",
+      "clearSelection": "Очистить выбор",
+      "status": "Статус",
+      "bulkAssign": "Назначить материал",
+      "bulkMessage": "Сообщение",
+      "bulkMessageSoon": "Отправка сообщений скоро появится",
+      "bulkExport": "Экспорт",
+      "assignDialogTitle": "Назначить материал {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}",
+      "assignDialogDesc": "Выберите материал для назначения выбранным ученикам.",
+      "noMaterials": "Пока нет материалов для назначения.",
+      "assignConfirm": "Назначить {count, plural, one {# ученику} few {# ученикам} many {# ученикам} other {# ученикам}}"
     },
     "assign": {
       "title": "Назначить ученикам",
@@ -630,7 +643,15 @@
     "filterAll": "Все",
     "filterPdf": "PDF",
     "filterVideo": "Видео",
-    "filterSlides": "Слайды"
+    "filterSlides": "Слайды",
+    "material": {
+      "generateMedia": "Генерация медиа",
+      "generate": "Создать",
+      "regenerate": "Пересоздать",
+      "retry": "Повторить",
+      "readMin": "{count} мин",
+      "noSections": "Разделов пока нет."
+    }
   },
   "learner": {
     "loading": "Загрузка...",

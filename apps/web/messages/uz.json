@@ -534,7 +534,20 @@
       "deactivate": "Faolsizlantirish",
       "reactivate": "Qayta faollashtirish",
       "active": "Faol",
-      "inactive": "Faolsiz"
+      "inactive": "Faolsiz",
+      "bulkActions": "Ommaviy amallar",
+      "selectedCount": "{count} ta tanlandi",
+      "selectRow": "O'quvchini tanlash",
+      "clearSelection": "Tanlovni tozalash",
+      "status": "Holat",
+      "bulkAssign": "Material biriktirish",
+      "bulkMessage": "Xabar",
+      "bulkMessageSoon": "Xabar yuborish tez orada qo'shiladi",
+      "bulkExport": "Eksport",
+      "assignDialogTitle": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} material biriktirish",
+      "assignDialogDesc": "Tanlangan o'quvchilarga biriktirish uchun material tanlang.",
+      "noMaterials": "Biriktirish uchun hali material yo'q.",
+      "assignConfirm": "{count, plural, one {# o'quvchiga} other {# o'quvchiga}} biriktirish"
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",
@@ -630,7 +643,15 @@
     "filterAll": "Barchasi",
     "filterPdf": "PDF",
     "filterVideo": "Video",
-    "filterSlides": "Slaydlar"
+    "filterSlides": "Slaydlar",
+    "material": {
+      "generateMedia": "Media yaratish",
+      "generate": "Yaratish",
+      "regenerate": "Qayta yaratish",
+      "retry": "Qayta urinish",
+      "readMin": "{count} daq",
+      "noSections": "Hozircha bo'limlar yo'q."
+    }
   },
   "learner": {
     "loading": "Yuklanmoqda...",

@@ -3,7 +3,14 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { Users as UsersIcon } from 'lucide-react';
+import {
+  BookPlus,
+  Download,
+  MessageSquare,
+  Users as UsersIcon,
+  UserX,
+  X,
+} from 'lucide-react';
 import {
   Badge,
   Button,
@@ -15,11 +22,13 @@ import {
   Label,
 } from '@talim/ui';
 import {
+  useAssignContent,
   useCreateTenantStudent,
   usePatchTenantStudent,
   useResetTenantStudentPassword,
   useTenantStudents,
 } from '@/hooks/useTenant';
+import { useTenantContents } from '@/hooks/useTenantContent';
 import { useBilling } from '@/hooks/useBilling';
 import { JoinCodeCard } from '@/components/tenant/join-code-card';
 import { cn } from '@/lib/utils';
@@ -41,6 +50,8 @@ export default function TenantStudentsPage() {
   const createStudent = useCreateTenantStudent();
   const patchStudent = usePatchTenantStudent();
   const resetPassword = useResetTenantStudentPassword();
+  const assignMaterial = useAssignContent();
+  const { data: materials } = useTenantContents();
   const { data: billing } = useBilling();
   const seats = (billing?.usage as { students?: { used: number; limit: number | null } } | undefined)
     ?.students;
@@ -56,6 +67,12 @@ export default function TenantStudentsPage() {
     null,
   );
   const [search, setSearch] = useState('');
+  // Bulk-selection is purely local UI state; it never touches the roster query cache.
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [assignOpen, setAssignOpen] = useState(false);
+  const [assignMaterialId, setAssignMaterialId] = useState<string | null>(null);
+  const [assignError, setAssignError] = useState<string | null>(null);
 
   const filteredStudents = (students ?? []).filter((student) => {
     const q = search.toLowerCase().trim();
@@ -64,6 +81,85 @@ export default function TenantStudentsPage() {
       .toLowerCase()
       .includes(q);
   });
+
+  const filteredIds = filteredStudents.map((s) => s.id);
+  const allFilteredSelected =
+    filteredIds.length > 0 && filteredIds.every((id) => selectedIds.includes(id));
+  const someFilteredSelected = filteredIds.some((id) => selectedIds.includes(id));
+  const selectedStudents = (students ?? []).filter((s) => selectedIds.includes(s.id));
+
+  const toggleOne = (id: string) =>
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+
+  const toggleSelectAll = () => {
+    if (allFilteredSelected) {
+      setSelectedIds((prev) => prev.filter((id) => !filteredIds.includes(id)));
+    } else {
+      setSelectedIds((prev) => Array.from(new Set([...prev, ...filteredIds])));
+    }
+  };
+
+  const clearSelection = () => setSelectedIds([]);
+
+  // Deactivate: loop the existing per-student patch mutation over the selection and await all,
+  // relying on its built-in ['tenant','students'] + billing invalidation.
+  const handleBulkDeactivate = async () => {
+    const targets = selectedStudents.filter((s) => s.active);
+    if (targets.length === 0) {
+      clearSelection();
+      return;
+    }
+    setBulkBusy(true);
+    await Promise.all(
+      targets.map((s) => patchStudent.mutateAsync({ id: s.id, active: false }).catch(() => null)),
+    );
+    setBulkBusy(false);
+    clearSelection();
+  };
+
+  // Export: pure client-side CSV of the selected rows — no backend.
+  const handleExport = () => {
+    const escapeCsv = (value: string) =>
+      /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+    const header = [t('students.name'), t('students.email'), t('students.status')];
+    const rows = selectedStudents.map((s) => [
+      s.name ?? '',
+      s.email ?? (s.username ? `@${s.username}` : ''),
+      s.active ? t('students.active') : t('students.inactive'),
+    ]);
+    const csv = [header, ...rows].map((cols) => cols.map(escapeCsv).join(',')).join('\n');
+    // Prepend a UTF-8 BOM so Excel renders non-ASCII names correctly.
+    const blob = new Blob([`﻿${csv}`], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'students.csv';
+    anchor.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Assign material: reuse the existing per-student assign mutation (POST /tenant/assignments) for
+  // each selected active learner. No new endpoint; existing invalidation applies per call.
+  const assignTargets = selectedStudents.filter((s) => s.active);
+  const handleBulkAssign = async () => {
+    if (!assignMaterialId) return;
+    setAssignError(null);
+    const failed: string[] = [];
+    for (const s of assignTargets) {
+      try {
+        await assignMaterial.mutateAsync({ contentId: assignMaterialId, learnerId: s.id });
+      } catch {
+        failed.push(s.id);
+      }
+    }
+    if (failed.length > 0) {
+      setAssignError(t('assign.partialError', { count: failed.length }));
+    } else {
+      setAssignOpen(false);
+      setAssignMaterialId(null);
+      clearSelection();
+    }
+  };
 
   const resetForm = () => {
     setEmail('');
@@ -134,10 +230,92 @@ export default function TenantStudentsPage() {
         className="max-w-sm"
       />
 
+      {selectedIds.length > 0 && (
+        <div
+          role="region"
+          aria-label={t('students.bulkActions')}
+          className="flex flex-wrap items-center gap-1 rounded-2xl border border-primary/25 bg-secondary px-3 py-2 shadow-soft"
+        >
+          <span className="px-2 font-label text-sm font-bold tabular-nums text-primary">
+            {t('students.selectedCount', { count: selectedIds.length })}
+          </span>
+          <span className="mx-1 h-4 w-px bg-primary/25" aria-hidden="true" />
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            className="text-primary hover:bg-primary/10 hover:text-primary"
+            onClick={() => {
+              setAssignError(null);
+              setAssignMaterialId(null);
+              setAssignOpen(true);
+            }}
+          >
+            <BookPlus className="h-4 w-4" />
+            {t('students.bulkAssign')}
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            disabled
+            title={t('students.bulkMessageSoon')}
+            className="text-primary"
+          >
+            <MessageSquare className="h-4 w-4" />
+            {t('students.bulkMessage')}
+          </Button>
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            className="text-primary hover:bg-primary/10 hover:text-primary"
+            onClick={handleExport}
+          >
+            <Download className="h-4 w-4" />
+            {t('students.bulkExport')}
+          </Button>
+          <span className="mx-1 h-4 w-px bg-primary/25" aria-hidden="true" />
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+            onClick={handleBulkDeactivate}
+            disabled={bulkBusy}
+          >
+            <UserX className="h-4 w-4" />
+            {t('students.deactivate')}
+          </Button>
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            className="ml-auto text-muted-foreground hover:text-foreground"
+            onClick={clearSelection}
+            aria-label={t('students.clearSelection')}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+
       <div className="hidden overflow-x-auto rounded-2xl border border-border/70 bg-card shadow-soft md:block">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border/70 bg-muted/40">
             <tr className="font-label text-[0.7rem] font-semibold uppercase tracking-wider text-muted-foreground">
+              <th className="w-10 px-4 py-3">
+                <input
+                  type="checkbox"
+                  aria-label={t('assignSelectAll')}
+                  checked={allFilteredSelected}
+                  ref={(el) => {
+                    if (el) el.indeterminate = someFilteredSelected && !allFilteredSelected;
+                  }}
+                  onChange={toggleSelectAll}
+                  className="h-4 w-4 cursor-pointer align-middle accent-[hsl(var(--primary))]"
+                />
+              </th>
               <th className="px-4 py-3">{t('students.name')}</th>
               <th className="px-4 py-3">{t('students.email')}</th>
               <th className="px-4 py-3">{t('students.assigned')}</th>
@@ -149,13 +327,13 @@ export default function TenantStudentsPage() {
           <tbody>
             {isLoading ? (
               <tr>
-                <td colSpan={6} className="px-4 py-6 text-muted-foreground">
+                <td colSpan={7} className="px-4 py-6 text-muted-foreground">
                   {t('loading')}
                 </td>
               </tr>
             ) : filteredStudents.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-4 py-12">
+                <td colSpan={7} className="px-4 py-12">
                   <div className="flex flex-col items-center gap-3 text-center">
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                       <UsersIcon className="h-6 w-6" />
@@ -166,7 +344,22 @@ export default function TenantStudentsPage() {
               </tr>
             ) : (
               filteredStudents.map((s, i) => (
-                <tr key={s.id} className="border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/40">
+                <tr
+                  key={s.id}
+                  className={cn(
+                    'border-b border-border/60 transition-colors last:border-0 hover:bg-secondary/40',
+                    selectedIds.includes(s.id) && 'bg-secondary/50',
+                  )}
+                >
+                  <td className="px-4 py-3">
+                    <input
+                      type="checkbox"
+                      aria-label={t('students.selectRow')}
+                      checked={selectedIds.includes(s.id)}
+                      onChange={() => toggleOne(s.id)}
+                      className="h-4 w-4 cursor-pointer align-middle accent-[hsl(var(--primary))]"
+                    />
+                  </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <span
@@ -261,9 +454,22 @@ export default function TenantStudentsPage() {
 
       <div className="grid gap-3 md:hidden">
         {filteredStudents.map((s, i) => (
-          <div key={s.id} className="rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
+          <div
+            key={s.id}
+            className={cn(
+              'rounded-2xl border bg-card p-4 shadow-soft',
+              selectedIds.includes(s.id) ? 'border-primary/40' : 'border-border/70',
+            )}
+          >
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  aria-label={t('students.selectRow')}
+                  checked={selectedIds.includes(s.id)}
+                  onChange={() => toggleOne(s.id)}
+                  className="h-4 w-4 shrink-0 cursor-pointer accent-[hsl(var(--primary))]"
+                />
                 <span
                   className={cn(
                     'flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-label text-xs font-bold',
@@ -330,6 +536,56 @@ export default function TenantStudentsPage() {
           </div>
         ))}
       </div>
+
+      <Dialog open={assignOpen} onOpenChange={setAssignOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {t('students.assignDialogTitle', { count: assignTargets.length })}
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-muted-foreground">{t('students.assignDialogDesc')}</p>
+          <div className="max-h-72 space-y-1.5 overflow-y-auto">
+            {(materials ?? []).length === 0 ? (
+              <p className="rounded-xl border border-dashed border-border py-8 text-center text-sm text-muted-foreground">
+                {t('students.noMaterials')}
+              </p>
+            ) : (
+              (materials ?? []).map((m) => (
+                <label
+                  key={m.id}
+                  className={cn(
+                    'flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2.5 text-sm transition-colors',
+                    assignMaterialId === m.id
+                      ? 'border-primary/40 bg-secondary'
+                      : 'border-border hover:border-primary/30 hover:bg-secondary/50',
+                  )}
+                >
+                  <input
+                    type="radio"
+                    name="bulk-assign-material"
+                    className="h-4 w-4 accent-[hsl(var(--primary))]"
+                    checked={assignMaterialId === m.id}
+                    onChange={() => setAssignMaterialId(m.id)}
+                  />
+                  <span className="flex-1 truncate font-medium text-foreground">{m.title}</span>
+                </label>
+              ))
+            )}
+          </div>
+          {assignError && (
+            <p className="text-sm text-destructive" role="alert">
+              {assignError}
+            </p>
+          )}
+          <Button
+            onClick={handleBulkAssign}
+            disabled={!assignMaterialId || assignMaterial.isPending || assignTargets.length === 0}
+          >
+            {t('students.assignConfirm', { count: assignTargets.length })}
+          </Button>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>

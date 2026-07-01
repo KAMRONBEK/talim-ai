@@ -534,7 +534,20 @@
       "deactivate": "Deactivate",
       "reactivate": "Reactivate",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "bulkActions": "Bulk actions",
+      "selectedCount": "{count} selected",
+      "selectRow": "Select student",
+      "clearSelection": "Clear selection",
+      "status": "Status",
+      "bulkAssign": "Assign material",
+      "bulkMessage": "Message",
+      "bulkMessageSoon": "Messaging is coming soon",
+      "bulkExport": "Export",
+      "assignDialogTitle": "Assign a material to {count, plural, one {# student} other {# students}}",
+      "assignDialogDesc": "Choose a material to assign to the selected students.",
+      "noMaterials": "No materials to assign yet.",
+      "assignConfirm": "Assign to {count, plural, one {# student} other {# students}}"
     },
     "assign": {
       "title": "Assign to students",
@@ -630,7 +643,15 @@
     "filterAll": "All",
     "filterPdf": "PDF",
     "filterVideo": "Video",
-    "filterSlides": "Slides"
+    "filterSlides": "Slides",
+    "material": {
+      "generateMedia": "Generate media",
+      "generate": "Generate",
+      "regenerate": "Regenerate",
+      "retry": "Retry",
+      "readMin": "{count} min",
+      "noSections": "No sections yet."
+    }
   },
   "learner": {
     "loading": "Loading...",
