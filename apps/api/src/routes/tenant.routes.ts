@@ -27,6 +27,7 @@ tenantRoutes.get('/', asyncHandler(tenantController.getTenant));
 tenantRoutes.patch('/', asyncHandler(tenantController.patchTenant));
 tenantRoutes.post('/join-code/regenerate', asyncHandler(tenantController.regenerateJoinCode));
 tenantRoutes.get('/progress', asyncHandler(tenantController.getProgress));
+tenantRoutes.get('/progress/topics', asyncHandler(tenantController.getProgressTopics));
 
 tenantRoutes.get('/students', asyncHandler(tenantController.listStudents));
 tenantRoutes.post('/students', asyncHandler(tenantController.createStudent));

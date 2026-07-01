@@ -222,6 +222,8 @@ export interface TenantStudent {
   assignedCount: number;
   lastActivityAt: string | null;
   avgQuizScore: number | null;
+  /** Avg overall coverage across the student's tenant content (0-100); null if no progress yet. */
+  mastery: number | null;
 }
 
 export interface StudentContentProgress {
@@ -233,11 +235,42 @@ export interface StudentContentProgress {
   avgQuizScore: number | null;
 }
 
+/** One topic's (= content section's) mastery, 0-100. */
+export interface MasteryTopic {
+  sectionId: string;
+  title: string;
+  coverage: number;
+}
+
+/** An achievement badge; `progress` (0..1) is present only while unearned. */
+export interface Badge {
+  code: string;
+  label: string;
+  emoji: string;
+  earned: boolean;
+  progress?: number;
+}
+
+/** Per-student overall-mastery buckets for a class. */
+export interface ClassMasteryDistribution {
+  lt50: number;
+  b50_69: number;
+  b70_84: number;
+  gte85: number;
+}
+
+export interface ClassMastery {
+  byTopic: MasteryTopic[];
+  distribution: ClassMasteryDistribution;
+}
+
 export interface StudentProgressSummary {
   student: Pick<TenantStudent, 'id' | 'email' | 'name' | 'active'>;
   activityDays: string[];
   streakDays: number;
   contentProgress: StudentContentProgress[];
+  masteryByTopic: MasteryTopic[];
+  badges: Badge[];
 }
 
 export interface TenantProgressSummary {
@@ -247,8 +280,35 @@ export interface TenantProgressSummary {
     materials: number;
     avgCoverage: number;
     avgQuizScore: number | null;
+    /** Active students flagged low-mastery (<50) or stale (no activity in 14 days). */
+    atRisk: number;
   };
   students: TenantStudent[];
+  classMastery: ClassMastery;
+}
+
+export type LearnerMaterialStatus = 'not_started' | 'in_progress' | 'completed';
+
+/** A learner's assigned material with per-material progress. */
+export interface LearnerMaterial {
+  contentId: string;
+  title: string;
+  type: ContentType;
+  coverage: number;
+  status: LearnerMaterialStatus;
+  lastActivityAt: string | null;
+}
+
+/** The learner's own consolidated progress dashboard. */
+export interface LearnerProgress {
+  overallMastery: number;
+  streakDays: number;
+  materialsDone: number;
+  quizzesTaken: number;
+  avgAccuracy: number | null;
+  masteryByTopic: MasteryTopic[];
+  badges: Badge[];
+  activityDays: string[];
 }
 
 export interface LearnerSummary {

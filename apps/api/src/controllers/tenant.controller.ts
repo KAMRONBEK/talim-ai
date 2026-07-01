@@ -1,12 +1,18 @@
 import type { Response } from 'express';
+import { parseAppLocale } from '@talim/types';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { getParam } from '../lib/params.js';
 import * as tenantService from '../services/tenant.service.js';
+import * as masteryService from '../services/mastery.service.js';
 
 function requireOwnerTenant(req: AuthenticatedRequest): string {
   if (!req.user?.tenantId) throw new AppError(403, 'Organization context required');
   return req.user.tenantId;
+}
+
+function readLocale(req: AuthenticatedRequest) {
+  return parseAppLocale(typeof req.query.locale === 'string' ? req.query.locale : null);
 }
 
 export async function getTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -35,8 +41,14 @@ export async function listStudents(req: AuthenticatedRequest, res: Response): Pr
 
 export async function getProgress(req: AuthenticatedRequest, res: Response): Promise<void> {
   const tenantId = requireOwnerTenant(req);
-  const progress = await tenantService.getTenantProgress(tenantId);
+  const progress = await tenantService.getTenantProgress(tenantId, readLocale(req));
   res.json(progress);
+}
+
+export async function getProgressTopics(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const tenantId = requireOwnerTenant(req);
+  const topics = await masteryService.getClassMastery(tenantId, { locale: readLocale(req) });
+  res.json(topics);
 }
 
 export async function createStudent(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -66,7 +78,11 @@ export async function resetStudentPassword(req: AuthenticatedRequest, res: Respo
 
 export async function getStudentProgress(req: AuthenticatedRequest, res: Response): Promise<void> {
   const tenantId = requireOwnerTenant(req);
-  const progress = await tenantService.getStudentProgress(tenantId, getParam(req, 'id'));
+  const progress = await tenantService.getStudentProgress(
+    tenantId,
+    getParam(req, 'id'),
+    readLocale(req),
+  );
   res.json(progress);
 }
 

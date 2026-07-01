@@ -18,8 +18,8 @@ export async function listStudents(tenantId: string) {
   const learnerIds = memberships.map((m) => m.user.id);
   if (learnerIds.length === 0) return [];
 
-  // Aggregate in three queries instead of three-per-student (avoids N+1).
-  const [assignCounts, progressRows, quizAgg] = await Promise.all([
+  // Aggregate in a fixed number of queries instead of N-per-student (avoids N+1).
+  const [assignCounts, progressRows, quizAgg, masteryAgg] = await Promise.all([
     prisma.contentAssignment.groupBy({
       by: ['learnerId'],
       where: { learnerId: { in: learnerIds }, content: { tenantId } },
@@ -35,6 +35,11 @@ export async function listStudents(tenantId: string) {
       where: { userId: { in: learnerIds }, quiz: { content: { tenantId } } },
       _avg: { score: true },
     }),
+    prisma.contentProgress.groupBy({
+      by: ['userId'],
+      where: { userId: { in: learnerIds }, content: { tenantId } },
+      _avg: { overallCoverage: true },
+    }),
   ]);
 
   const assignMap = new Map(assignCounts.map((r) => [r.learnerId, r._count._all]));
@@ -43,10 +48,12 @@ export async function listStudents(tenantId: string) {
     if (!lastActivityMap.has(p.userId)) lastActivityMap.set(p.userId, p.lastActivityAt);
   }
   const avgMap = new Map(quizAgg.map((r) => [r.userId, r._avg.score]));
+  const masteryMap = new Map(masteryAgg.map((r) => [r.userId, r._avg.overallCoverage]));
 
   return memberships.map((m) => {
     const uid = m.user.id;
     const hasUsername = Boolean(m.user.username);
+    const rawMastery = masteryMap.get(uid);
     return {
       id: uid,
       email: hasUsername ? null : m.user.email,
@@ -57,6 +64,7 @@ export async function listStudents(tenantId: string) {
       assignedCount: assignMap.get(uid) ?? 0,
       lastActivityAt: lastActivityMap.get(uid)?.toISOString() ?? null,
       avgQuizScore: avgMap.get(uid) ?? null,
+      mastery: rawMastery == null ? null : Math.round(rawMastery),
     };
   });
 }

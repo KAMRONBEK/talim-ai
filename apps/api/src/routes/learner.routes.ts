@@ -14,6 +14,8 @@ export const learnerRoutes = Router();
 learnerRoutes.use(authMiddleware, attachTenantId, requireTenantMember, requireActiveLearner);
 
 learnerRoutes.get('/summary', asyncHandler(learnerController.getSummary));
+learnerRoutes.get('/materials', asyncHandler(learnerController.getMaterials));
+learnerRoutes.get('/progress', asyncHandler(learnerController.getProgress));
 learnerRoutes.get('/assessments', asyncHandler(assessmentController.listLearnerAssessments));
 learnerRoutes.get(
   '/assessments/:assessmentId/leaderboard',
