@@ -218,6 +218,12 @@
     "episodesGenerating": "Generating episodes...",
     "contentTab": "Content",
     "materialTab": "Material",
+    "modeToggleLabel": "Study mode",
+    "modeRead": "Read",
+    "modeWatch": "Watch",
+    "modePodcast": "Podcast",
+    "modeQuiz": "Quiz",
+    "modeCards": "Cards",
     "summaryGenerating": "Generating summary...",
     "summaryNotAvailable": "No summary available.",
     "pdfViewer": "PDF viewer",
@@ -720,7 +726,21 @@
     "distGte85": "85%+",
     "topOfClass": "Top of the class",
     "topOfClassEmpty": "No mastery scores to rank yet.",
-    "atRisk": "At risk"
+    "atRisk": "At risk",
+    "messages": {
+      "title": "Messages",
+      "open": "Messages ({count} unread)",
+      "loading": "Loading messages…",
+      "error": "Couldn't load messages.",
+      "empty": "You haven't sent any messages yet.",
+      "new": "new",
+      "you": "You",
+      "student": "Student",
+      "recipients": "{count, plural, one {# student} other {# students}}",
+      "readStat": "{count} read",
+      "replies": "{count, plural, one {# reply} other {# replies}}",
+      "noReplies": "No replies yet."
+    }
   },
   "learner": {
     "loading": "Loading...",
@@ -871,7 +891,12 @@
       "error": "Couldn't load your messages.",
       "empty": "No messages yet.",
       "new": "New",
-      "fromTutor": "Your tutor"
+      "fromTutor": "Your tutor",
+      "reply": "Write a reply…",
+      "send": "Send",
+      "sending": "Sending…",
+      "replyError": "Couldn't send your reply.",
+      "you": "You"
     }
   },
   "slides": {

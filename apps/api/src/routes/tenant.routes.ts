@@ -79,9 +79,11 @@ tenantRoutes.post(
   asyncHandler(assessmentController.goLiveAssessment),
 );
 
-// One-way tutor→student messaging (Wave 3 area D).
+// Two-way threaded tutor↔student messaging (Wave 3 area D). `/unread-count` before `/:id/read`.
 tenantRoutes.get('/messages', asyncHandler(tenantController.listSentMessages));
 tenantRoutes.post('/messages', asyncHandler(tenantController.sendMessage));
+tenantRoutes.get('/messages/unread-count', asyncHandler(tenantController.messagesUnreadCount));
+tenantRoutes.post('/messages/:id/read', asyncHandler(tenantController.markReplyRead));
 
 const tenantContent = Router({ mergeParams: true });
 tenantContent.use(requireTenantId);

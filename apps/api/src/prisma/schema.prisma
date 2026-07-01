@@ -233,12 +233,14 @@ model TenantMessage {
   id         String                   @id @default(cuid())
   tenantId   String
   senderId   String
+  threadId   String?
   body       String                   @db.Text
   createdAt  DateTime                 @default(now())
   recipients TenantMessageRecipient[]
 
   @@index([tenantId])
   @@index([senderId])
+  @@index([threadId])
 }
 
 model TenantMessageRecipient {

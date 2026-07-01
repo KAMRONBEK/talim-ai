@@ -5,7 +5,10 @@ import { useTranslations } from 'next-intl';
 import { FileText, Loader2, Presentation, RefreshCw, Youtube } from 'lucide-react';
 import { cn } from '@talim/ui';
 import type { Content } from '@talim/types';
-import { useGenerateSummary } from '@/hooks/useQuiz';
+import { useRouter } from '@/i18n/navigation';
+import { useGenerateSummary, useQuizHistory } from '@/hooks/useQuiz';
+import { usePodcast } from '@/hooks/usePodcast';
+import { useFlashcards } from '@/hooks/useFlashcards';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
 import { useAuthStore } from '@/store/useAuthStore';
 import { contentEndpoints } from '@/lib/api/endpoints';
@@ -63,6 +66,7 @@ export function ContentStage({
 }: ContentStageProps) {
   const t = useTranslations('content');
   const tChat = useTranslations('chat');
+  const router = useRouter();
   const generateSummary = useGenerateSummary();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [pdfError, setPdfError] = useState(false);
@@ -199,6 +203,64 @@ export function ContentStage({
   } as const;
   const status = statusMeta[content.status];
 
+  // Which generated modes already exist for this content — drives the unified topbar
+  // mode toggle. Read/Summary are always present (they switch the stage in place); a
+  // Podcast / Quiz / Cards segment only appears once there is something to open, so the
+  // toggle never leads to an empty screen. Generation itself stays in the resources rail;
+  // these segments reuse the rail's existing targets rather than re-implementing them.
+  // Availability is content-level (no per-section media hints in this payload).
+  const { data: podcast } = usePodcast(contentId);
+  const { data: flashcardDeck } = useFlashcards(contentId);
+  const { data: quizzes } = useQuizHistory(contentId);
+  const latestQuizId = quizzes?.[0]?.id;
+
+  type StageMode = { key: string; label: string; active: boolean; onSelect: () => void };
+  const modes: StageMode[] = [
+    {
+      key: 'read',
+      // YouTube source material is a video, so the "read" mode reads as "Watch" (per #study).
+      label: content.type === 'YOUTUBE' ? t('modeWatch') : t('modeRead'),
+      active: view === 'material',
+      onSelect: () => setView('material'),
+    },
+    {
+      key: 'summary',
+      label: t('summary'),
+      active: view === 'summary',
+      onSelect: () => setView('summary'),
+    },
+    ...(podcast
+      ? [
+          {
+            key: 'podcast',
+            label: t('modePodcast'),
+            active: false,
+            onSelect: () => router.push(`/content/${contentId}/podcast`),
+          },
+        ]
+      : []),
+    ...(latestQuizId
+      ? [
+          {
+            key: 'quiz',
+            label: t('modeQuiz'),
+            active: false,
+            onSelect: () => router.push(`/quiz/${latestQuizId}`),
+          },
+        ]
+      : []),
+    ...(flashcardDeck
+      ? [
+          {
+            key: 'cards',
+            label: t('modeCards'),
+            active: false,
+            onSelect: () => router.push(`/content/${contentId}/flashcards`),
+          },
+        ]
+      : []),
+  ];
+
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-card">
       <div className="flex shrink-0 items-center gap-3 border-b border-border/70 px-4 py-2.5">
@@ -214,20 +276,25 @@ export function ContentStage({
           <h3 className="truncate font-display text-sm font-semibold leading-tight">{content.title}</h3>
           <p className="truncate text-[11px] leading-tight text-muted-foreground">{typeLabel}</p>
         </div>
-        <div className="flex shrink-0 items-center gap-1 rounded-xl bg-muted p-1">
-          {(['material', 'summary'] as const).map((v) => (
+        <div
+          role="group"
+          aria-label={t('modeToggleLabel')}
+          className="flex shrink-0 items-center gap-1 rounded-xl bg-muted p-1"
+        >
+          {modes.map((mode) => (
             <button
-              key={v}
+              key={mode.key}
               type="button"
-              onClick={() => setView(v)}
+              aria-pressed={mode.active}
+              onClick={mode.onSelect}
               className={cn(
                 'rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors',
-                view === v
-                  ? 'bg-card text-primary shadow-soft'
+                mode.active
+                  ? 'bg-primary text-primary-foreground shadow-soft'
                   : 'text-muted-foreground hover:text-foreground',
               )}
             >
-              {v === 'material' ? t('materialTab') : t('summary')}
+              {mode.label}
             </button>
           ))}
         </div>

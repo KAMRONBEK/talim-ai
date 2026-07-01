@@ -75,8 +75,25 @@ export async function sendMessage(req: AuthenticatedRequest, res: Response): Pro
 export async function listSentMessages(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const tenantId = requireOwnerTenant(req);
-  const messages = await tenantService.listSentMessages(tenantId, req.user.userId);
+  const messages = await tenantService.listTenantMessageThreads(tenantId, req.user.userId);
   res.json({ messages });
+}
+
+export async function messagesUnreadCount(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  res.json(await tenantService.getOwnerUnreadReplyCount(tenantId, req.user.userId));
+}
+
+export async function markReplyRead(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const tenantId = requireOwnerTenant(req);
+  const result = await tenantService.markOwnerReplyRead(
+    tenantId,
+    req.user.userId,
+    getParam(req, 'id'),
+  );
+  res.json(result);
 }
 
 export async function patchStudent(req: AuthenticatedRequest, res: Response): Promise<void> {

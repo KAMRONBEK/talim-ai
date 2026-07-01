@@ -208,7 +208,7 @@ export interface StudentImportResponse {
   summary: StudentImportSummary;
 }
 
-// --- One-way tenant messaging (tutor → student, Wave 3 area D) --------------
+// --- Tenant messaging (tutor ↔ student, Wave 3 area D) ----------------------
 
 export interface SendTenantMessageInput {
   studentIds: string[];
@@ -224,21 +224,54 @@ export interface TenantSentMessage {
   readCount: number;
 }
 
-export interface TenantSentMessagesResponse {
-  messages: TenantSentMessage[];
-}
-
 export interface SendTenantMessageResponse {
   message: TenantSentMessage;
 }
 
-/** A message as seen by the receiving student. */
+/** A student's reply as seen by the tutor (readAt = the owner's read timestamp). */
+export interface TenantMessageReply {
+  id: string;
+  threadId: string;
+  body: string;
+  senderName: string | null;
+  createdAt: string;
+  readAt: string | null;
+}
+
+/** A tutor's root message grouped with its student replies (superset of TenantSentMessage). */
+export interface TenantMessageThread extends TenantSentMessage {
+  replyCount: number;
+  unreadReplyCount: number;
+  replies: TenantMessageReply[];
+}
+
+export interface TenantSentMessagesResponse {
+  messages: TenantMessageThread[];
+}
+
+/** Unread student-reply count for the tutor (polling badge). */
+export interface TenantUnreadReplyCountResponse {
+  count: number;
+}
+
+/** A single message within a two-way thread, as shown to a student. */
+export interface LearnerThreadMessage {
+  id: string;
+  threadId: string;
+  body: string;
+  senderName: string | null;
+  fromTutor: boolean;
+  createdAt: string;
+}
+
+/** A message as seen by the receiving student, with its full thread (root + replies). */
 export interface LearnerMessage {
   id: string;
   body: string;
   senderName: string | null;
   createdAt: string;
   readAt: string | null;
+  thread: LearnerThreadMessage[];
 }
 
 export interface LearnerMessagesResponse {
@@ -252,6 +285,10 @@ export interface LearnerUnreadCountResponse {
 export interface MarkMessageReadResponse {
   id: string;
   readAt: string | null;
+}
+
+export interface CreateLearnerReplyResponse {
+  reply: LearnerThreadMessage;
 }
 
 export type UsageFeature =

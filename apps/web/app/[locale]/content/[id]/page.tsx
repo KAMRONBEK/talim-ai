@@ -14,6 +14,7 @@ import {
 import type { QuestionStyle } from '@talim/types';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useChatStore } from '@/store/useChatStore';
 import { getHomePathForRole } from '@/lib/auth-routing';
 import { AssignStudentsPanel } from '@/components/tenant/assign-students-panel';
 import { useSections, useSection } from '@/hooks/useSections';
@@ -86,6 +87,11 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const [selectedExcerpt, setSelectedExcerpt] = useState('');
   const [selectedExcerptImage, setSelectedExcerptImage] = useState<string | null>(null);
   const [inputSeed, setInputSeed] = useState<string | null>(null);
+  // The reader's "Ask AI / Explain" tooltip (SelectionAsk) lives in the always-mounted
+  // left stage and seeds the tutor composer through the chat store, but can't reach the
+  // Learn/Chat tab state here. Subscribe to the seed so that flow also flips the panel to
+  // the Chat tab (ChatWindow then prefills + focuses + clears it).
+  const seededPrompt = useChatStore((s) => s.seededPrompt);
 
   // Navigating to ?panel=chat (e.g. the topbar "AI tutor" link) opens the Chat tab.
   // On mobile the Learn panel is a drawer, so also open it — otherwise the tap just
@@ -97,6 +103,17 @@ function ContentWorkspaceInner({ id }: { id: string }) {
       setPanelOpen(true);
     }
   }, [panelParam]);
+
+  // A reader text-selection seed ("Ask AI / Explain") should immediately reveal the
+  // prefilled composer — flip to the Chat tab (and open the mobile drawer, like the
+  // stage-excerpt and ?panel=chat paths). ChatWindow consumes + clears the seed.
+  useEffect(() => {
+    if (!seededPrompt) return;
+    setLearnTab('chat');
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) {
+      setPanelOpen(true);
+    }
+  }, [seededPrompt]);
 
   const handleExcerpt = useCallback((p: StageExcerpt) => {
     setSelectedExcerpt(p.excerpt);
