@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Loader2, RefreshCw } from 'lucide-react';
+import { FileText, Loader2, Presentation, RefreshCw, Youtube } from 'lucide-react';
 import { cn } from '@talim/ui';
 import type { Content } from '@talim/types';
 import { useGenerateSummary } from '@/hooks/useQuiz';
@@ -176,10 +176,44 @@ export function ContentStage({
     onSelectionCleared?.();
   }, [onSelectionCleared]);
 
+  // Content-type identity for the topbar (icon badge + subtitle label). A section/page
+  // count is not part of the Content payload here, so the subtitle shows the type alone.
+  const typeMeta = {
+    PDF: { label: t('typePdf'), Icon: FileText, badge: 'bg-primary/10 text-primary' },
+    SLIDE: { label: t('typeSlide'), Icon: Presentation, badge: 'bg-primary/10 text-primary' },
+    YOUTUBE: {
+      label: t('typeYoutube'),
+      Icon: Youtube,
+      badge: 'bg-accent-secondary/10 text-accent-secondary',
+    },
+  } as const;
+  const { label: typeLabel, Icon: TypeIcon, badge: typeBadgeClass } = typeMeta[content.type];
+
+  // Processing state as a compact status pill. In practice this view only renders once the
+  // content is READY (the status gate handles earlier states), but the mapping stays honest.
+  const statusMeta = {
+    READY: { label: t('statusReady'), pill: 'bg-primary/10 text-primary', dot: 'bg-primary' },
+    PROCESSING: { label: t('statusProcessing'), pill: 'bg-warning-muted text-warning', dot: 'bg-warning' },
+    PENDING: { label: t('statusProcessing'), pill: 'bg-warning-muted text-warning', dot: 'bg-warning' },
+    FAILED: { label: t('statusFailed'), pill: 'bg-destructive/10 text-destructive', dot: 'bg-destructive' },
+  } as const;
+  const status = statusMeta[content.status];
+
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-card">
-      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border/70 px-4 py-2.5">
-        <h3 className="truncate font-display text-sm font-semibold">{content.title}</h3>
+      <div className="flex shrink-0 items-center gap-3 border-b border-border/70 px-4 py-2.5">
+        <div
+          className={cn(
+            'flex h-7 w-7 shrink-0 items-center justify-center rounded-lg',
+            typeBadgeClass,
+          )}
+        >
+          <TypeIcon className="h-4 w-4" />
+        </div>
+        <div className="min-w-0">
+          <h3 className="truncate font-display text-sm font-semibold leading-tight">{content.title}</h3>
+          <p className="truncate text-[11px] leading-tight text-muted-foreground">{typeLabel}</p>
+        </div>
         <div className="flex shrink-0 items-center gap-1 rounded-xl bg-muted p-1">
           {(['material', 'summary'] as const).map((v) => (
             <button
@@ -197,6 +231,15 @@ export function ContentStage({
             </button>
           ))}
         </div>
+        <span
+          className={cn(
+            'ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold',
+            status.pill,
+          )}
+        >
+          <span className={cn('h-1.5 w-1.5 rounded-full', status.dot)} />
+          {status.label}
+        </span>
       </div>
 
       <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">

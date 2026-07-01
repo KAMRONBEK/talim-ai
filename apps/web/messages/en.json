@@ -97,7 +97,8 @@
       "title": "Account settings",
       "desc": "Manage your profile, password, and plan.",
       "languageHint": "Change your language using the selector in the header."
-    }
+    },
+    "readyToLearnSubtitle": "Add a source and Talim turns it into a lesson."
   },
   "sidebar": {
     "recents": "Recent",
@@ -107,7 +108,8 @@
     "actions": "Actions",
     "read": "Read",
     "listenPodcast": "Listen to podcast",
-    "watchVideo": "Watch video"
+    "watchVideo": "Watch video",
+    "becomeTutorPromo": "Manage students and assign materials."
   },
   "content": {
     "summary": "Summary",
@@ -252,7 +254,22 @@
     "retryPodcast": "Retry",
     "podcastRetryError": "Could not regenerate. Try again later.",
     "generationFailed": "Couldn't generate. Please try again.",
-    "pdfRetry": "Retry"
+    "pdfRetry": "Retry",
+    "onThisPage": "On this page",
+    "keyIdea": "Key idea",
+    "keyPoints": "Key points",
+    "sectionN": "Section {n}",
+    "sectionsCount": "{count, plural, one {# section} other {# sections}}",
+    "typePdf": "PDF",
+    "typeSlide": "Slides",
+    "typeYoutube": "YouTube",
+    "statusReady": "Ready",
+    "statusProcessing": "Processing",
+    "statusFailed": "Failed",
+    "pdfPageOf": "Page {page} / {total}",
+    "pdfZoomIn": "Zoom in",
+    "pdfZoomOut": "Zoom out",
+    "chapters": "Chapters"
   },
   "chat": {
     "title": "AI Tutor",
@@ -321,7 +338,20 @@
     "quickLabel": "Quick check",
     "fullLabel": "Practice quiz",
     "defaultTitle": "Quiz",
-    "questionCount": "{count, plural, one {# question} other {# questions}}"
+    "questionCount": "{count, plural, one {# question} other {# questions}}",
+    "resultHeadlineHigh": "Strong work!",
+    "resultHeadlineMid": "Good progress.",
+    "resultHeadlineLow": "Keep going.",
+    "resultEncourageHigh": "Master the last few and you'll ace it.",
+    "resultEncourageMid": "Review what you missed and retake to climb higher.",
+    "resultEncourageLow": "Go back over the material and try again — you'll get there.",
+    "resultBreakdownTitle": "Question breakdown",
+    "resultCorrectCount": "{count} correct",
+    "resultCorrectDesc": "Questions you answered right.",
+    "resultReviewCount": "{count} to review",
+    "resultReviewDesc": "Retake the quiz to turn these around.",
+    "resultAllCorrect": "Every question correct — flawless!",
+    "review": "Review"
   },
   "theme": {
     "light": "Light",

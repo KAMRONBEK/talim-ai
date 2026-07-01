@@ -97,7 +97,8 @@
       "title": "Hisob sozlamalari",
       "desc": "Profil, parol va rejangizni boshqaring.",
       "languageHint": "Tilni sarlavhadagi tanlov orqali o'zgartiring."
-    }
+    },
+    "readyToLearnSubtitle": "Manba qo'shing, Talim uni darsga aylantiradi."
   },
   "sidebar": {
     "recents": "So'nggilar",
@@ -107,7 +108,8 @@
     "actions": "Harakatlar",
     "read": "O'qish",
     "listenPodcast": "Podkastni tinglang",
-    "watchVideo": "Videoni ko'rish"
+    "watchVideo": "Videoni ko'rish",
+    "becomeTutorPromo": "O'quvchilarni boshqaring va materiallar biriktiring."
   },
   "content": {
     "summary": "Xulosa",
@@ -252,7 +254,22 @@
     "retryPodcast": "Qayta urinish",
     "podcastRetryError": "Qayta yaratib boʻlmadi. Keyinroq urinib koʻring.",
     "generationFailed": "Yaratib bo'lmadi. Iltimos, qayta urinib ko'ring.",
-    "pdfRetry": "Qayta urinish"
+    "pdfRetry": "Qayta urinish",
+    "onThisPage": "Ushbu sahifada",
+    "keyIdea": "Asosiy g'oya",
+    "keyPoints": "Asosiy jihatlar",
+    "sectionN": "{n}-bo'lim",
+    "sectionsCount": "{count, plural, other {# ta bo'lim}}",
+    "typePdf": "PDF",
+    "typeSlide": "Slaydlar",
+    "typeYoutube": "YouTube",
+    "statusReady": "Tayyor",
+    "statusProcessing": "Ishlanmoqda",
+    "statusFailed": "Xatolik",
+    "pdfPageOf": "Sahifa {page} / {total}",
+    "pdfZoomIn": "Kattalashtirish",
+    "pdfZoomOut": "Kichiklashtirish",
+    "chapters": "Boblar"
   },
   "chat": {
     "title": "AI O'qituvchi",
@@ -321,7 +338,20 @@
     "quickLabel": "Tez savol",
     "fullLabel": "Mashq testi",
     "defaultTitle": "Test",
-    "questionCount": "{count} ta savol"
+    "questionCount": "{count} ta savol",
+    "resultHeadlineHigh": "Zo'r natija!",
+    "resultHeadlineMid": "Yaxshi natija.",
+    "resultHeadlineLow": "Davom eting.",
+    "resultEncourageHigh": "Qolgan bir nechtasini mustahkamlang — a'lo natijaga erishasiz.",
+    "resultEncourageMid": "Xato qilganlaringizni ko'rib chiqing va qayta ishlang — natijangiz o'sadi.",
+    "resultEncourageLow": "Materialni yana bir bor ko'rib chiqing va qayta urinib ko'ring — albatta uddalaysiz.",
+    "resultBreakdownTitle": "Savollar tahlili",
+    "resultCorrectCount": "{count} ta to'g'ri",
+    "resultCorrectDesc": "Siz to'g'ri javob bergan savollar.",
+    "resultReviewCount": "{count} tasi qayta ko'rishga",
+    "resultReviewDesc": "Ularni to'g'rilash uchun testni qayta ishlang.",
+    "resultAllCorrect": "Barcha savollar to'g'ri — mukammal!",
+    "review": "Ko'rib chiqish"
   },
   "theme": {
     "light": "Yorug'",

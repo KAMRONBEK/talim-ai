@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Mic } from 'lucide-react';
 import { Button } from '@talim/ui';
 
 function formatTime(sec: number): string {
@@ -101,6 +102,16 @@ export function PodcastPlayer({
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
       />
+      {/* Designed cover artwork — pine tile with the girih lattice + clay wash treatment. */}
+      <div
+        aria-hidden
+        className="relative isolate mx-auto flex aspect-square w-40 items-center justify-center overflow-hidden rounded-3xl bg-primary text-primary-foreground shadow-elevated sm:w-44"
+      >
+        <span className="bg-girih pointer-events-none absolute inset-0 opacity-40 mix-blend-screen" />
+        <span className="bg-brand-radial pointer-events-none absolute inset-0 opacity-70" />
+        <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary-foreground/15 via-transparent to-transparent" />
+        <Mic className="relative z-10 h-14 w-14" strokeWidth={1.5} />
+      </div>
       <div className="flex justify-between text-xs tabular-nums text-muted-foreground">
         <span>{formatTime(current)}</span>
         <span>{formatTime(duration)}</span>

@@ -97,7 +97,8 @@
       "title": "Настройки аккаунта",
       "desc": "Управляйте профилем, паролем и планом.",
       "languageHint": "Язык можно изменить в переключателе в шапке."
-    }
+    },
+    "readyToLearnSubtitle": "Dobavte istochnik, i Talim prevratit ego v urok."
   },
   "sidebar": {
     "recents": "Недавние",
@@ -107,7 +108,8 @@
     "actions": "Действия",
     "read": "Читать",
     "listenPodcast": "Слушать подкаст",
-    "watchVideo": "Смотреть видео"
+    "watchVideo": "Смотреть видео",
+    "becomeTutorPromo": "Upravlyayte uchenikami i naznachayte materialy."
   },
   "content": {
     "summary": "Конспект",
@@ -252,7 +254,22 @@
     "retryPodcast": "Повторить",
     "podcastRetryError": "Не удалось пересоздать. Попробуйте позже.",
     "generationFailed": "Не удалось сгенерировать. Попробуйте ещё раз.",
-    "pdfRetry": "Повторить"
+    "pdfRetry": "Повторить",
+    "onThisPage": "На этой странице",
+    "keyIdea": "Ключевая идея",
+    "keyPoints": "Ключевые моменты",
+    "sectionN": "Раздел {n}",
+    "sectionsCount": "{count, plural, one {# раздел} few {# раздела} many {# разделов} other {# раздела}}",
+    "typePdf": "PDF",
+    "typeSlide": "Слайды",
+    "typeYoutube": "YouTube",
+    "statusReady": "Готово",
+    "statusProcessing": "Обработка",
+    "statusFailed": "Ошибка",
+    "pdfPageOf": "Стр. {page} / {total}",
+    "pdfZoomIn": "Приблизить",
+    "pdfZoomOut": "Отдалить",
+    "chapters": "Главы"
   },
   "chat": {
     "title": "ИИ-репетитор",
@@ -321,7 +338,20 @@
     "quickLabel": "Быстрая проверка",
     "fullLabel": "Тренировочный тест",
     "defaultTitle": "Тест",
-    "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}"
+    "questionCount": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}",
+    "resultHeadlineHigh": "Отличная работа!",
+    "resultHeadlineMid": "Хороший результат.",
+    "resultHeadlineLow": "Не останавливайтесь.",
+    "resultEncourageHigh": "Закрепите оставшиеся вопросы — и результат будет превосходным.",
+    "resultEncourageMid": "Повторите то, что не получилось, и пройдите заново, чтобы улучшить результат.",
+    "resultEncourageLow": "Повторите материал и попробуйте снова — у вас всё получится.",
+    "resultBreakdownTitle": "Разбор вопросов",
+    "resultCorrectCount": "{count, plural, one {# правильный} few {# правильных} many {# правильных} other {# правильных}}",
+    "resultCorrectDesc": "Вопросы, на которые вы ответили верно.",
+    "resultReviewCount": "{count} на повторение",
+    "resultReviewDesc": "Пройдите тест заново, чтобы исправить их.",
+    "resultAllCorrect": "Все вопросы верны — безупречно!",
+    "review": "Просмотр"
   },
   "theme": {
     "light": "Светлая",
