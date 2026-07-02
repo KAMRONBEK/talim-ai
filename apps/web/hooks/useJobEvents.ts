@@ -33,6 +33,10 @@ export function useJobEvents(): void {
         qc.invalidateQueries({ queryKey: ['video'] });
         qc.invalidateQueries({ queryKey: ['slides'] });
         qc.invalidateQueries({ queryKey: ['flashcards'] });
+        // Live leaderboards may have advanced while we were disconnected (partial-match
+        // covers both the tenant and learner assessment query trees).
+        qc.invalidateQueries({ queryKey: ['tenant', 'assessments'] });
+        qc.invalidateQueries({ queryKey: ['learner', 'assessments'] });
       }
     });
     jobStream.start(token);
@@ -73,6 +77,12 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
     case 'quiz.status':
       qc.invalidateQueries({ queryKey: ['quiz', ev.quizId] });
       if (ev.contentId) qc.invalidateQueries({ queryKey: ['quiz-history', ev.contentId] });
+      break;
+    case 'leaderboard.update':
+      // Refresh both the tenant-owner board and the learner board for this assessment
+      // (keys mirror useAssessmentLeaderboard / useLearnerLeaderboard in useAssessments).
+      qc.invalidateQueries({ queryKey: ['tenant', 'assessments', ev.assessmentId, 'leaderboard'] });
+      qc.invalidateQueries({ queryKey: ['learner', 'assessments', ev.assessmentId, 'leaderboard'] });
       break;
   }
 }

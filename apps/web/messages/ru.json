@@ -369,7 +369,11 @@
     "resultReviewCount": "{count} на повторение",
     "resultReviewDesc": "Пройдите тест заново, чтобы исправить их.",
     "resultAllCorrect": "Все вопросы верны — безупречно!",
-    "review": "Просмотр"
+    "review": "Просмотр",
+    "reviewTitle": "Разбор ответов",
+    "backToResults": "К результатам",
+    "yourAnswerLabel": "Ваш ответ:",
+    "notAnswered": "Нет ответа"
   },
   "theme": {
     "light": "Светлая",
@@ -775,7 +779,15 @@
       "confirm": "Подтвердить",
       "selectHint": "Выберите все подходящие",
       "selectedCount": "Выбрано: {count}",
-      "blankPlaceholder": "Пропуск {index}"
+      "blankPlaceholder": "Пропуск {index}",
+      "matchingHint": "Сопоставьте каждый элемент с парой",
+      "orderingHint": "Расположите элементы в правильном порядке",
+      "dropdownHint": "Выберите ответ для каждого пропуска",
+      "choosePlaceholder": "Выберите…",
+      "moveUp": "Вверх",
+      "moveDown": "Вниз",
+      "matchedCount": "Сопоставлено: {count}",
+      "filledCount": "Заполнено: {count}"
     },
     "welcome": "Добро пожаловать, {name}",
     "dashboardDesc": "Ваши назначенные материалы.",

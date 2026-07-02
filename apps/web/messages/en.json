@@ -369,7 +369,11 @@
     "resultReviewCount": "{count} to review",
     "resultReviewDesc": "Retake the quiz to turn these around.",
     "resultAllCorrect": "Every question correct — flawless!",
-    "review": "Review"
+    "review": "Review",
+    "reviewTitle": "Answer review",
+    "backToResults": "Back to results",
+    "yourAnswerLabel": "Your answer:",
+    "notAnswered": "Not answered"
   },
   "theme": {
     "light": "Light",
@@ -775,7 +779,15 @@
       "confirm": "Confirm",
       "selectHint": "Select all that apply",
       "selectedCount": "{count} selected",
-      "blankPlaceholder": "Blank {index}"
+      "blankPlaceholder": "Blank {index}",
+      "matchingHint": "Match each item to its pair",
+      "orderingHint": "Put the items in the correct order",
+      "dropdownHint": "Choose an answer for each blank",
+      "choosePlaceholder": "Choose…",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "matchedCount": "{count} matched",
+      "filledCount": "{count} filled"
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",

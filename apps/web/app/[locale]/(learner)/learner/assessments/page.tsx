@@ -13,15 +13,24 @@ import {
 import { formatRelativeTime } from '@/lib/format-relative-time';
 import { GameQuizPlayer } from '@/components/learner/game-quiz-player';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
+import { useAuthStore } from '@/store/useAuthStore';
 
-function Leaderboard({ assessmentId }: { assessmentId: string }) {
+function Leaderboard({
+  assessmentId,
+  live = false,
+}: {
+  assessmentId: string;
+  live?: boolean;
+}) {
   const t = useTranslations('learner.assessments');
   const tc = useTranslations('common');
-  const { data, isLoading, isError } = useLearnerLeaderboard(assessmentId);
+  // Highlight the current learner's own row in the board.
+  const currentUserId = useAuthStore((s) => s.user?.id);
+  const { data, isLoading, isError } = useLearnerLeaderboard(assessmentId, { live });
   if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
   if (isLoading) return <p className="text-sm text-muted-foreground">{t('loadingLeaderboard')}</p>;
   if (!data) return null;
-  return <LeaderboardTable rows={data.rows} mode={data.mode} />;
+  return <LeaderboardTable rows={data.rows} mode={data.mode} highlightId={currentUserId} />;
 }
 
 function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
@@ -577,7 +586,7 @@ function AssessmentCard({
       </div>
 
       {showWrittenForm && <WrittenForm assessment={assessment} />}
-      {showBoard && <Leaderboard assessmentId={assessment.id} />}
+      {showBoard && <Leaderboard assessmentId={assessment.id} live={assessment.isLive} />}
     </div>
   );
 }

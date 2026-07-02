@@ -369,7 +369,11 @@
     "resultReviewCount": "{count} tasi qayta ko'rishga",
     "resultReviewDesc": "Ularni to'g'rilash uchun testni qayta ishlang.",
     "resultAllCorrect": "Barcha savollar to'g'ri — mukammal!",
-    "review": "Ko'rib chiqish"
+    "review": "Ko'rib chiqish",
+    "reviewTitle": "Javoblarni ko'rib chiqish",
+    "backToResults": "Natijalarga qaytish",
+    "yourAnswerLabel": "Sizning javobingiz:",
+    "notAnswered": "Javob berilmagan"
   },
   "theme": {
     "light": "Yorug'",
@@ -775,7 +779,15 @@
       "confirm": "Tasdiqlash",
       "selectHint": "Mos keladiganlarning barchasini tanlang",
       "selectedCount": "{count} ta tanlandi",
-      "blankPlaceholder": "{index}-bo'sh joy"
+      "blankPlaceholder": "{index}-bo'sh joy",
+      "matchingHint": "Har bir elementni juftiga moslang",
+      "orderingHint": "Elementlarni to'g'ri tartibda joylashtiring",
+      "dropdownHint": "Har bir bo'shliq uchun javob tanlang",
+      "choosePlaceholder": "Tanlang…",
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga",
+      "matchedCount": "{count} ta moslandi",
+      "filledCount": "{count} ta to'ldirildi"
     },
     "welcome": "Xush kelibsiz, {name}",
     "dashboardDesc": "Sizga tayinlangan materiallar.",

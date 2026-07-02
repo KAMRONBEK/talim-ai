@@ -1,5 +1,6 @@
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
+import { jobEvents } from '../events/jobEvents.service.js';
 import {
   answerToString,
   assertLearnerAssignment,
@@ -204,6 +205,30 @@ export async function submitLearnerAssessment(
       },
     });
   });
+
+  // Live leaderboard: nudge everyone in this tenant who may be watching (the owner and
+  // every learner assigned to this assessment) to refetch, so the board updates in
+  // real time instead of only for the submitter. The SSE bus is keyed per user, so we
+  // fan out over the recipient set. Event delivery must never break a submission, so any
+  // failure here is swallowed (mirrors the "job success can't depend on delivery" rule).
+  try {
+    const [tenant, assignees] = await Promise.all([
+      prisma.tenant.findUnique({ where: { id: tenantId }, select: { ownerId: true } }),
+      prisma.assessmentAssignment.findMany({
+        where: { assessmentId, learnerId: { not: null } },
+        select: { learnerId: true },
+        distinct: ['learnerId'],
+      }),
+    ]);
+    const recipients = new Set<string>([userId]);
+    if (tenant) recipients.add(tenant.ownerId);
+    for (const a of assignees) if (a.learnerId) recipients.add(a.learnerId);
+    for (const recipient of recipients) {
+      jobEvents.publish(recipient, { type: 'leaderboard.update', assessmentId, tenantId });
+    }
+  } catch (err) {
+    console.error('submitLearnerAssessment: leaderboard event publish failed', err);
+  }
 
   return {
     attempt: {

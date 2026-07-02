@@ -17,7 +17,8 @@ export type JobEvent =
       sectionId?: string;
       status: 'READY' | 'FAILED' | 'GENERATING';
     }
-  | { type: 'quiz.status'; quizId: string; contentId?: string; status: 'READY' | 'FAILED' };
+  | { type: 'quiz.status'; quizId: string; contentId?: string; status: 'READY' | 'FAILED' }
+  | { type: 'leaderboard.update'; assessmentId: string; tenantId: string };
 
 /** Wire frame: carries a monotonic per-user sequence id for Last-Event-ID replay. */
 export interface SeqJobEvent {

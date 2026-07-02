@@ -172,7 +172,14 @@ export function useAssessmentResults(assessmentId: string | null) {
   });
 }
 
-export function useAssessmentLeaderboard(assessmentId: string | null) {
+// Live-leaderboard SSE (leaderboard.update) is the primary refresh path; while a game is
+// live we also poll on a slow interval as a fallback for when the SSE stream is down.
+const LIVE_LEADERBOARD_POLL_MS = 5_000;
+
+export function useAssessmentLeaderboard(
+  assessmentId: string | null,
+  { live = false }: { live?: boolean } = {},
+) {
   return useQuery({
     queryKey: ['tenant', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -182,10 +189,14 @@ export function useAssessmentLeaderboard(assessmentId: string | null) {
       return data;
     },
     enabled: Boolean(assessmentId),
+    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
   });
 }
 
-export function useLearnerLeaderboard(assessmentId: string | null) {
+export function useLearnerLeaderboard(
+  assessmentId: string | null,
+  { live = false }: { live?: boolean } = {},
+) {
   return useQuery({
     queryKey: ['learner', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -195,6 +206,7 @@ export function useLearnerLeaderboard(assessmentId: string | null) {
       return data;
     },
     enabled: Boolean(assessmentId),
+    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
   });
 }
 

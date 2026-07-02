@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
+import { ArrowDown, ArrowUp } from 'lucide-react';
 import { Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import { useSubmitLearnerAssessment } from '@/hooks/useAssessments';
@@ -17,6 +18,10 @@ const GIRIH_OVERLAY =
 
 // Colored answer chips cycle through the Scholar accents on the dark stage.
 const ANSWER_CHIPS = ['#F7F2E8', '#E0A93D', '#D9663D', '#9DBDB2'];
+
+// Native <select> styled for the immersive dark stage (MATCHING / DROPDOWN_CLOZE).
+const GAME_SELECT_CLASS =
+  'rounded-lg border border-white/15 bg-white/[0.08] px-3 py-2 text-sm text-[#f7f2e8] focus:border-[#3e9c86] focus:outline-none focus:ring-1 focus:ring-[#3e9c86]';
 
 function GameStage({ children }: { children: ReactNode }) {
   return (
@@ -38,6 +43,19 @@ function fillBlankCount(config: Record<string, unknown> | null | undefined): num
   return typeof n === 'number' && n > 0 ? Math.floor(n) : 1;
 }
 
+// MATCHING: config.left holds the ordered left-hand prompts.
+function matchingLeft(config: Record<string, unknown> | null | undefined): string[] {
+  const raw = config?.left;
+  return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+}
+
+// DROPDOWN_CLOZE: config.blankOptions holds the choice pool per blank.
+function clozeOptions(config: Record<string, unknown> | null | undefined): string[][] {
+  const raw = config?.blankOptions;
+  if (!Array.isArray(raw)) return [];
+  return raw.map((b) => (Array.isArray(b) ? b.filter((v): v is string => typeof v === 'string') : []));
+}
+
 export function GameQuizPlayer({
   assessment,
   onExit,
@@ -54,9 +72,14 @@ export function GameQuizPlayer({
   const [timings, setTimings] = useState<Record<string, number>>({});
   const [timeLeft, setTimeLeft] = useState(limitSec);
   const [textAnswer, setTextAnswer] = useState('');
-  // Draft state for the pick-many / multi-blank types, reset per question.
+  // Draft state for the structured types, reset per question. `blankValues` backs
+  // FILL_BLANK and DROPDOWN_CLOZE (one entry per blank); `matchValues` holds the
+  // chosen right value per MATCHING left prompt; `orderValues` is the working
+  // ORDERING sequence (seeded from the shuffled options).
   const [selected, setSelected] = useState<string[]>([]);
   const [blankValues, setBlankValues] = useState<string[]>([]);
+  const [matchValues, setMatchValues] = useState<string[]>([]);
+  const [orderValues, setOrderValues] = useState<string[]>([]);
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const startRef = useRef(0);
   const startTotalRef = useRef(0);
@@ -72,6 +95,9 @@ export function GameQuizPlayer({
     setTextAnswer('');
     setSelected([]);
     setBlankValues([]);
+    setMatchValues([]);
+    // ORDERING starts from the (already shuffled) options; the learner reorders from there.
+    setOrderValues(question.options ?? []);
     const id = setInterval(() => {
       const elapsed = (Date.now() - startRef.current) / 1000;
       const left = Math.max(0, limitSec - elapsed);
@@ -106,6 +132,21 @@ export function GameQuizPlayer({
     setSelected((prev) =>
       prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option],
     );
+  }
+
+  // ORDERING: swap an item up (-1) or down (+1) within the working sequence.
+  function moveOrder(from: number, dir: -1 | 1) {
+    setOrderValues((prev) => {
+      const cur = [...prev];
+      const target = from + dir;
+      if (target < 0 || target >= cur.length) return prev;
+      const a = cur[from];
+      const b = cur[target];
+      if (a === undefined || b === undefined) return prev;
+      cur[from] = b;
+      cur[target] = a;
+      return cur;
+    });
   }
 
   async function finish(finalAnswers: Record<string, string>, finalTimings: Record<string, number>) {
@@ -238,7 +279,10 @@ export function GameQuizPlayer({
 
   const pct = Math.round((timeLeft / limitSec) * 100);
   const ringCircumference = 2 * Math.PI * 37;
-  const blanks = question.type === 'FILL_BLANK' ? fillBlankCount(question.config) : 1;
+  const blanks =
+    question.type === 'FILL_BLANK' || question.type === 'DROPDOWN_CLOZE'
+      ? fillBlankCount(question.config)
+      : 1;
   return (
     <GameStage>
       <div className="flex flex-col px-5 py-6 sm:px-8 sm:py-8">
@@ -363,19 +407,16 @@ export function GameQuizPlayer({
                 </Button>
               </div>
             </div>
-          ) : question.type === 'FILL_BLANK' && blanks > 1 ? (
-            // One input per blank; submits string[] (one entry per blank). A
-            // single-blank FILL_BLANK falls through to the default text form and
-            // submits a plain string.
+          ) : question.type === 'FILL_BLANK' ? (
+            // One input per blank; submits a plain string for a single blank or a
+            // string[] for many — exactly the shapes the grader accepts. Auto-lock
+            // on timeout still fires via lockAnswer('').
             <form
               className="mt-8 flex w-full max-w-md flex-col gap-3"
               onSubmit={(e) => {
                 e.preventDefault();
-                lockAnswer(
-                  JSON.stringify(
-                    Array.from({ length: blanks }, (_, i) => (blankValues[i] ?? '').trim()),
-                  ),
-                );
+                const vals = Array.from({ length: blanks }, (_, i) => (blankValues[i] ?? '').trim());
+                lockAnswer(blanks <= 1 ? vals[0] ?? '' : JSON.stringify(vals));
               }}
             >
               {Array.from({ length: blanks }, (_, i) => (
@@ -390,7 +431,7 @@ export function GameQuizPlayer({
                       return next;
                     })
                   }
-                  placeholder={t('blankPlaceholder', { index: i + 1 })}
+                  placeholder={blanks > 1 ? t('blankPlaceholder', { index: i + 1 }) : t('answerPlaceholder')}
                   className="border-white/15 bg-white/[0.08] text-[#f7f2e8] placeholder:text-[#7fa89b] focus-visible:ring-[#3e9c86]"
                 />
               ))}
@@ -398,6 +439,179 @@ export function GameQuizPlayer({
                 {t('next')}
               </Button>
             </form>
+          ) : question.type === 'DROPDOWN_CLOZE' ? (
+            // Pick a value per blank from its option pool, then confirm; submits a
+            // string[] indexed by blank (server grades it like FILL_BLANK). Empty
+            // pools fall back to a text input. Auto-lock on timeout fires via lockAnswer('').
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('dropdownHint')}
+              </p>
+              <div className="space-y-3">
+                {Array.from({ length: blanks }, (_, i) => {
+                  const pool = clozeOptions(question.config)[i] ?? [];
+                  const value = blankValues[i] ?? '';
+                  const onSet = (v: string) =>
+                    setBlankValues((prev) => {
+                      const next = [...prev];
+                      next[i] = v;
+                      return next;
+                    });
+                  return (
+                    <div key={i} className="flex items-center gap-3">
+                      <span className="w-20 shrink-0 text-left text-sm text-[#9dc4b8]">
+                        {t('blankPlaceholder', { index: i + 1 })}
+                      </span>
+                      {pool.length ? (
+                        <select
+                          className={GAME_SELECT_CLASS}
+                          value={value}
+                          onChange={(e) => onSet(e.target.value)}
+                        >
+                          <option value="" className="bg-[#16322b] text-[#f7f2e8]">
+                            {t('choosePlaceholder')}
+                          </option>
+                          {pool.map((opt) => (
+                            <option key={opt} value={opt} className="bg-[#16322b] text-[#f7f2e8]">
+                              {opt}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <Input
+                          value={value}
+                          onChange={(e) => onSet(e.target.value)}
+                          placeholder={t('blankPlaceholder', { index: i + 1 })}
+                          className="border-white/15 bg-white/[0.08] text-[#f7f2e8] placeholder:text-[#7fa89b] focus-visible:ring-[#3e9c86]"
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <span className="text-sm text-[#9dc4b8]">
+                  {t('filledCount', {
+                    count: blankValues.filter((v) => (v ?? '').trim() !== '').length,
+                  })}
+                </span>
+                <Button
+                  variant="spark"
+                  onClick={() =>
+                    lockAnswer(
+                      JSON.stringify(
+                        Array.from({ length: blanks }, (_, i) => (blankValues[i] ?? '').trim()),
+                      ),
+                    )
+                  }
+                >
+                  {t('confirm')}
+                </Button>
+              </div>
+            </div>
+          ) : question.type === 'MATCHING' && matchingLeft(question.config).length ? (
+            // Choose a right value per left prompt, then confirm; submits a string[]
+            // parallel to config.left (the ordered-array shape the grader accepts).
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('matchingHint')}
+              </p>
+              <div className="space-y-3">
+                {matchingLeft(question.config).map((leftText, i) => (
+                  <div key={i} className="flex flex-wrap items-center gap-3">
+                    <span className="min-w-[6rem] flex-1 text-left text-sm text-[#e7edea]">
+                      {leftText}
+                    </span>
+                    <select
+                      className={GAME_SELECT_CLASS}
+                      value={matchValues[i] ?? ''}
+                      onChange={(e) =>
+                        setMatchValues((prev) => {
+                          const next = [...prev];
+                          next[i] = e.target.value;
+                          return next;
+                        })
+                      }
+                    >
+                      <option value="" className="bg-[#16322b] text-[#f7f2e8]">
+                        {t('choosePlaceholder')}
+                      </option>
+                      {(question.options ?? []).map((opt) => (
+                        <option key={opt} value={opt} className="bg-[#16322b] text-[#f7f2e8]">
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <span className="text-sm text-[#9dc4b8]">
+                  {t('matchedCount', {
+                    count: matchValues.filter((v) => (v ?? '').trim() !== '').length,
+                  })}
+                </span>
+                <Button
+                  variant="spark"
+                  onClick={() => {
+                    const lefts = matchingLeft(question.config);
+                    lockAnswer(JSON.stringify(lefts.map((_, i) => matchValues[i] ?? '')));
+                  }}
+                >
+                  {t('confirm')}
+                </Button>
+              </div>
+            </div>
+          ) : question.type === 'ORDERING' && question.options?.length ? (
+            // Reorder the items with the up/down controls, then confirm; submits the
+            // items in the chosen order as a string[] (what the ORDERING grader expects).
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('orderingHint')}
+              </p>
+              <div className="space-y-2">
+                {orderValues.map((item, i, arr) => (
+                  <div
+                    key={`${item}-${i}`}
+                    className="flex items-center gap-3 rounded-2xl border border-white/[0.15] bg-white/[0.08] px-4 py-3 text-left"
+                  >
+                    <span className="w-5 shrink-0 font-mono text-xs text-[#9dc4b8]">{i + 1}.</span>
+                    <div className="min-w-0 flex-1 text-[#e7edea]">
+                      <RichText className="prose-invert" inline>
+                        {item}
+                      </RichText>
+                    </div>
+                    <div className="flex shrink-0 gap-1">
+                      <button
+                        type="button"
+                        disabled={i === 0}
+                        onClick={() => moveOrder(i, -1)}
+                        className="rounded-md border border-white/15 p-1.5 text-[#9dc4b8] transition-colors hover:border-white/30 hover:text-[#f7f2e8] disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label={t('moveUp')}
+                      >
+                        <ArrowUp className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        disabled={i === arr.length - 1}
+                        onClick={() => moveOrder(i, 1)}
+                        className="rounded-md border border-white/15 p-1.5 text-[#9dc4b8] transition-colors hover:border-white/30 hover:text-[#f7f2e8] disabled:cursor-not-allowed disabled:opacity-40"
+                        aria-label={t('moveDown')}
+                      >
+                        <ArrowDown className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button
+                variant="spark"
+                className="mt-4 w-full"
+                onClick={() => lockAnswer(JSON.stringify(orderValues))}
+              >
+                {t('confirm')}
+              </Button>
+            </div>
           ) : (
             <form
               className="mt-8 flex w-full max-w-md gap-2"
