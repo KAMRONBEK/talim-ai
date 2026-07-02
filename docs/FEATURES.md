@@ -32,11 +32,11 @@ The original B2C learning loop, reused by tutors for their own materials. Tutors
 - **API:** `services/youtube.service.ts` (`extractYoutubeVideoId`, `extractYoutubeTranscript`, transcript-source handling), `controllers/content.controller.ts` (`createYoutubeContent`), tenant variant in `controllers/tenant-content.controller.ts`. Routes: `POST /content/youtube`, `POST /tenant/content/youtube`. Transcript segments persist via `ContentTranscriptSegment` (Prisma).
 - **Web:** transcript viewing through `hooks/useTranscript.ts`; content pages under `app/[locale]/content/[id]/`.
 
-### 1.3 Sectioning
-- **What:** Splits content into ordered sections with AI-generated titles, used for navigation, assignment scoping, and progress tracking.
+### 1.3 Sectioning (hierarchical)
+- **What:** Splits content into ordered sections with AI-generated titles, used for navigation, assignment scoping, and progress tracking. Sections can be **2-level hierarchical** (chapter → subsection): section generation optionally emits a nested chapter/subsection outline and the section rail renders it nested.
 - **Who:** INDIVIDUAL, TENANT_OWNER (generation); TENANT_LEARNER (read).
-- **API:** `services/section.service.ts`, `controllers/section.controller.ts`. Routes expose `GET /content/:id/sections` and `:sectionId` (also under `/tenant/content/...`). Models `ContentSection`, `ContentSectionTitle`, `SectionProgress` (Prisma).
-- **Web:** `hooks/useSections.ts`, `components/content/*`, `components/learning/*`.
+- **API:** `services/section.service.ts`, `controllers/section.controller.ts`. Routes expose `GET /content/:id/sections` and `:sectionId` (also under `/tenant/content/...`). Models `ContentSection` (self-relation `parentId` + `depth`), `ContentSectionTitle`, `SectionProgress` (Prisma). Migration `20260702010000_section_hierarchy`.
+- **Web:** `hooks/useSections.ts`, the nested rail in `components/layout/content-sidebar.tsx`, `components/content/*`, `components/learning/*`.
 
 ### 1.4 AI summaries
 - **What:** Generate a structured AI summary of a piece of content.
@@ -44,17 +44,17 @@ The original B2C learning loop, reused by tutors for their own materials. Tutors
 - **API:** `controllers/summary.controller.ts` (`getSummary`, `generateSummary`); `routes/summary.routes.ts` (`GET/POST /summary/:contentId`). Model `ContentSummary`; usage feature `SUMMARY_GEN`.
 - **Web:** surfaced on content pages; AI calls flow through `services/ai.service.ts`.
 
-### 1.5 Podcasts (TTS)
-- **What:** Generate a multi-episode audio "podcast" from content using text-to-speech; tracks per-episode listening progress and streams audio.
+### 1.5 Podcasts (TTS + synced transcript)
+- **What:** Generate a multi-episode audio "podcast" from content using text-to-speech; tracks per-episode listening progress, streams audio, and shows a **transcript that follows the audio**. Segment timings are derived from the **real per-segment TTS audio byte-lengths** (Azure CBR) and rescaled to the true audio duration in the player; legacy episodes without stored segments fall back to character-length estimation.
 - **Who:** INDIVIDUAL, TENANT_OWNER (generate); TENANT_LEARNER (listen to assigned content).
-- **API:** `services/tts.service.ts` (`synthesizeSpeech`), `controllers/podcast.controller.ts` (`getPodcast`, `createPodcast`, `streamEpisodeAudio`), background job `jobs/generatePodcast.job.ts`. Routes: `GET/POST /content/:id/podcast`, `GET /content/:id/podcast/episodes/:episodeId/audio`, progress at `PATCH /content/:id/podcast/episodes/:episodeId/progress`. Models `Podcast`, `PodcastEpisode`, `PodcastEpisodeProgress`; usage feature `PODCAST_GEN`.
-- **Web:** `app/[locale]/content/[id]/podcast/page.tsx`, `components/podcast/*`, `hooks/usePodcast.ts`.
+- **API:** `services/tts.service.ts` (`synthesizeSpeech`, `synthesizeDialogueWithSegments` returning per-turn byte lengths), `controllers/podcast.controller.ts` (`getPodcast`, `createPodcast`, `streamEpisodeAudio`), background job `jobs/generatePodcast.job.ts`. Routes: `GET/POST /content/:id/podcast`, `GET /content/:id/podcast/episodes/:episodeId/audio`, progress at `PATCH /content/:id/podcast/episodes/:episodeId/progress`. Models `Podcast`, `PodcastEpisode` (now carries `segments`), `PodcastEpisodeProgress`; usage feature `PODCAST_GEN`. Migration `20260702020000_podcast_segments`.
+- **Web:** `app/[locale]/content/[id]/podcast/page.tsx`, `components/podcast/PodcastPlayer.tsx` (transcript sync), `components/podcast/*`, `hooks/usePodcast.ts`.
 
 ### 1.6 Auto quizzes (per-content)
-- **What:** Auto-generate quizzes from a piece of content, take attempts, and review the latest attempt. (Distinct from tenant assessments in §4.)
+- **What:** Auto-generate quizzes from a piece of content, take attempts, and review the latest attempt. After submitting, the learner gets a **per-question review screen** (their answer vs. the correct answer, question by question). (Distinct from tenant assessments in §4.)
 - **Who:** INDIVIDUAL, TENANT_OWNER (create); TENANT_LEARNER (take, via assigned content).
 - **API:** `controllers/quiz.controller.ts` (`listQuizzesByContent`, `createQuiz`, `getQuiz`, `submitQuiz`, `getLatestAttempt`, `listAttempts`), job `jobs/generateQuiz.job.ts`. Routes: `routes/quiz.routes.ts` (`/quiz/content/:contentId`, `/quiz/:id`, `/quiz/:id/submit`). Models `Quiz`, `QuizQuestion`, `QuizAttempt`; usage feature `QUIZ_GEN`.
-- **Web:** `app/[locale]/quiz/[id]/page.tsx`, `components/quiz/*`, `hooks/useQuiz.ts`.
+- **Web:** `app/[locale]/quiz/[id]/page.tsx` (wires the post-submit review), `components/quiz/QuizReview.tsx`, `components/quiz/*`, `hooks/useQuiz.ts`.
 
 ### 1.7 RAG AI tutor chat
 - **What:** Streaming AI tutor grounded in the content's embedded chunks (retrieval-augmented). Persists chat sessions and messages; supports tool calls (see §1.8).
@@ -81,7 +81,7 @@ The original B2C learning loop, reused by tutors for their own materials. Tutors
 - **What:** Register and log in. Login accepts an **email or a student username** as the identifier. Individual self-registration and tenant registration are separate endpoints.
 - **Who:** all roles (sign-up creates a learner; admins/tenant-owners are provisioned differently — see §2.5).
 - **API:** `controllers/auth.controller.ts` (`register`, `registerTenant`, `login` — `identifier.includes('@')` chooses `email` vs `username` lookup, `me`, `updateMe`, `changePassword`). Routes: `routes/auth.routes.ts` (`POST /auth/register`, `POST /auth/register-tenant`, `POST /auth/login`, `GET/PATCH /auth/me`, `PATCH /auth/me/password`). Login is rate-limited (`loginRateLimit`); writes use `authWriteRateLimit`.
-- **Web:** `app/[locale]/(auth)/login/page.tsx`, `app/[locale]/(auth)/register/page.tsx`.
+- **Web:** `app/[locale]/(auth)/login/page.tsx`, `app/[locale]/(auth)/register/page.tsx` (registration gates submit behind an interactive **terms-acceptance** checkbox), and the standalone **terms page** `app/[locale]/terms/page.tsx`.
 
 ### 2.2 JWT sessions
 - **What:** Stateless JWT auth; protected routes pass through `authMiddleware`, role gates through `requireRole`.
@@ -122,7 +122,7 @@ All endpoints below sit under `/tenant/*` and are gated by `authMiddleware, atta
 - **What:** Upload/import materials (reuses the content pipeline) and assign them to specific learners, content, or sections.
 - **Who:** TENANT_OWNER (assign); TENANT_LEARNER (consume assigned).
 - **API:** `controllers/tenant-content.controller.ts` (content CRUD, `getContentFile`, `ocrPdfRegion`, transcript), assignment in `controllers/tenant.controller.ts` (`assignContent`, `unassignContent`, `listContentAssignments`) backed by `services/tenant/assignments.ts`. Routes: `POST/DELETE /tenant/assignments`, `GET /tenant/content/:contentId/assignments`, plus `/tenant/content/*`. Model `ContentAssignment`.
-- **Web:** `app/[locale]/(tenant)/tenant/materials/page.tsx`, `.../materials/[id]/assign/page.tsx`, `hooks/useTenantContent.ts`.
+- **Web:** `app/[locale]/(tenant)/tenant/materials/page.tsx`, a dedicated material **detail page** `.../materials/[id]/page.tsx`, `.../materials/[id]/assign/page.tsx`, `hooks/useTenantContent.ts`.
 
 ### 3.3 Students management (email + email-less username students)
 - **What:** Create student accounts with a name and **optional** email. Email-less students get a username + password and a synthesized internal email (`<username>@students.talim.local`) plus `mustChangePassword`. List, edit, delete, reset passwords, and view per-student progress.
@@ -153,10 +153,11 @@ All endpoints below sit under `/tenant/*` and are gated by `authMiddleware, atta
 
 Tenant assessments are distinct from per-content auto-quizzes (§1.6). Owner-side routes live under `/tenant/*`; learner-side under `/learner/*`. Service split: `services/assessment/{banks,assessments,learner,results,shared}.ts` (barrel: `services/assessment.service.ts`); controller `controllers/assessment.controller.ts`.
 
-### 4.1 Question banks (AI-generated, approve flow)
-- **What:** Create question banks, AI-generate draft questions, and approve/reject/edit them. Question types: `SHORT_ANSWER`, `NUMERIC`, `MULTIPLE_CHOICE`. Drafts move `DRAFT → APPROVED/REJECTED`.
+### 4.1 Question banks (AI-generated + manual authoring, approve flow)
+- **What:** Create question banks, AI-generate draft questions (10 generation styles), and approve/reject/edit them — or author questions by hand for **any** type. Drafts move `DRAFT → APPROVED/REJECTED`. The engine supports **11 question types** (see §4.7).
 - **Who:** TENANT_OWNER.
-- **API:** `services/assessment/banks.ts`, controller `listBanks`, `createBank`, `listQuestions`, `generateQuestions` (behind `enforceQuota('GENERATION')`), `patchQuestion`. Routes: `/tenant/question-banks`, `.../:bankId/questions`, `.../:bankId/generate`, `.../:bankId/questions/:questionId`. Models `QuestionBank`, `BankQuestion` (`BankQuestionStatus`); usage feature `QUESTION_DRAFT`.
+- **API:** `services/assessment/banks.ts`, controller `listBanks`, `createBank`, `listQuestions`, `generateQuestions` (behind `enforceQuota('GENERATION')`), `patchQuestion`, and manual create `createBankQuestion`. Routes: `/tenant/question-banks`, `.../:bankId/questions` (GET list + **POST** manual create), `.../:bankId/generate`, `.../:bankId/questions/:questionId`. Models `QuestionBank`, `BankQuestion` (`BankQuestionStatus`); usage feature `QUESTION_DRAFT`.
+- **Web:** the tutor builder is a **5-step wizard** — Bank → Generate → Review → Publish → Assign — at `app/[locale]/(tenant)/tenant/assessments/page.tsx`: all 10 AI generation styles, a Review step with filter chips + a multi-action bulk-select bar, and manual question authoring/editing for every type via `components/tenant/question-editor.tsx`. Hooks in `hooks/useAssessments.ts`.
 
 ### 4.2 Written assessments
 - **What:** Compose an assessment from approved bank questions (`mode: WRITTEN`), with per-assessment `maxAttempts` and per-question points.
@@ -167,24 +168,30 @@ Tenant assessments are distinct from per-content auto-quizzes (§1.6). Owner-sid
 - **What:** Live game quiz: `mode: GAME` with `secondsPerQuestion` (default 20 on create, 30 fallback at play). Correct answers earn **speed-weighted, streak-multiplied** points; streaks reset on a wrong answer; attempt stores `pointsTotal` and `maxStreak`.
 - **Who:** TENANT_OWNER (author); TENANT_LEARNER (play).
 - **API:** scoring in `services/assessment/learner.ts` (`isGame`, `streak`/`maxStreak`, `computeGamePoints`) and `services/assessment/shared.ts` (`GAME_BASE_POINTS = 1000`, `computeGamePoints` with `speedFactor` 0.5–1.0, payload schema accepting per-question `timings`). Models `AssessmentAttempt` (`pointsTotal`, `maxStreak`, `durationMs`), `AttemptAnswer` (`responseMs`, `pointsAwarded`).
-- **Web:** `components/learner/game-quiz-player.tsx` (per-question timer, points, best-streak summary, per-answer `+points` feedback).
+- **Web:** `components/learner/game-quiz-player.tsx` (per-question timer, points, best-streak summary, per-answer `+points` feedback). The player now **renders and correctly grades every structured type** — MULTIPLE_SELECT, FILL_BLANK, DROPDOWN_CLOZE, MATCHING, ORDERING, etc. (previously several of these fell through to a plain text box and scored ~0).
 
-### 4.4 Assignment, attempts & max attempts
-- **What:** Assign an assessment to learners / content / section; learners submit attempts bounded by `maxAttempts`.
+### 4.4 Assignment, attempts, max attempts & due dates
+- **What:** Assign an assessment to learners / content / section, optionally with a **due date**; learners submit attempts bounded by `maxAttempts`. **Due dates are enforced** — late submissions are rejected.
 - **Who:** TENANT_OWNER (assign); TENANT_LEARNER (attempt).
-- **API:** owner `assignAssessment` (`POST /tenant/assessments/:assessmentId/assign`); learner `listLearnerAssessments`, `submitLearnerAssessment` (`POST /learner/assessments/:assessmentId/attempts`). Learner routes gated by `requireTenantMember, requireActiveLearner` (`routes/learner.routes.ts`). Model `AssessmentAssignment` (learner/content/section targets).
-- **Web:** `app/[locale]/(learner)/learner/assessments/page.tsx`, `app/[locale]/(tenant)/tenant/assessments/page.tsx`, `hooks/useAssessments.ts`.
+- **API:** owner `assignAssessment` (`POST /tenant/assessments/:assessmentId/assign`); learner `listLearnerAssessments`, `submitLearnerAssessment` (`POST /learner/assessments/:assessmentId/attempts`). `submitLearnerAssessment` (`services/assessment/learner.ts`) resolves the **earliest applicable `dueAt`** across a learner's assignments and **rejects late submissions with 403** (both WRITTEN and GAME; a null `dueAt` never blocks). Learner routes gated by `requireTenantMember, requireActiveLearner` (`routes/learner.routes.ts`). Model `AssessmentAssignment` (learner/content/section targets, `dueAt`).
+- **Web:** `app/[locale]/(learner)/learner/assessments/page.tsx` shows a **"submissions closed" locked state** past the deadline; `app/[locale]/(tenant)/tenant/assessments/page.tsx`, `hooks/useAssessments.ts`.
 
 ### 4.5 Per-question results & feedback
 - **What:** Owner sees per-assessment results; learners see per-question correctness and awarded points.
 - **Who:** TENANT_OWNER (aggregate results); TENANT_LEARNER (own feedback).
 - **API:** `services/assessment/results.ts`, controller `assessmentResults` (`GET /tenant/assessments/:assessmentId/results`). `AttemptAnswer` carries `correct` + `pointsAwarded`.
 
-### 4.6 Class leaderboard
-- **What:** Ranked leaderboard for an assessment (by total points), visible to owner and to participating learners.
+### 4.6 Class leaderboard (real-time)
+- **What:** Ranked leaderboard for an assessment (by total points), visible to owner and to participating learners, and **updated live** as classmates submit.
 - **Who:** TENANT_OWNER, TENANT_LEARNER.
-- **API:** `assessmentLeaderboard` (`GET /tenant/assessments/:assessmentId/leaderboard`) and `learnerAssessmentLeaderboard` (`GET /learner/assessments/:assessmentId/leaderboard`). Indexed by `@@index([assessmentId, pointsTotal])` on `AssessmentAttempt`.
-- **Web:** `components/learner/leaderboard-table.tsx`.
+- **API:** `assessmentLeaderboard` (`GET /tenant/assessments/:assessmentId/leaderboard`) and `learnerAssessmentLeaderboard` (`GET /learner/assessments/:assessmentId/leaderboard`). Indexed by `@@index([assessmentId, pointsTotal])` on `AssessmentAttempt`. On submit the API publishes a `leaderboard.update` job event (`packages/types/jobEvents.ts`, payload `{assessmentId, tenantId}`).
+- **Web:** `components/learner/leaderboard-table.tsx`; the `leaderboard.update` event arrives over **SSE** via `hooks/useJobEvents.ts`, which invalidates the tenant/learner leaderboard queries so the table refreshes live. The current learner's own row is highlighted.
+
+### 4.7 Question types & grading engine (11 types)
+- **What:** The assessment engine supports **11 question types**: `SHORT_ANSWER`, `NUMERIC`, `MULTIPLE_CHOICE`, `TRUE_FALSE`, `MULTIPLE_SELECT`, `FILL_BLANK`, `DROPDOWN_CLOZE`, `MATCHING`, `ORDERING`, `HOTSPOT`, and `DRAG_DROP`. **HOTSPOT** = click a spot on an image (config `{imageUrl, regions:[{x,y,w,h}]}` normalized 0..1; point-in-region binary grading). **DRAG_DROP** = drag items into target buckets (config `{items, targets}`; `acceptableAnswers` = correct target per item; index-wise categorization grading). `HOTSPOT` and `DRAG_DROP` are **manual-authoring only** (not AI-generated); the other 9 can be AI-generated or hand-authored.
+- **Who:** TENANT_OWNER (author); TENANT_LEARNER (answer).
+- **API:** grading for every type lives in `services/assessment/shared.ts` (`gradeQuestion`; HOTSPOT's answer is the spatial `config.regions` geometry, so it stores an empty `acceptableAnswers`). Enum `QuestionType` in `apps/api/src/prisma/schema.prisma` + `packages/types/index.ts`. Migration `20260702000000_hotspot_dragdrop_question_types`.
+- **Web:** per-type authoring/editing in `components/tenant/question-editor.tsx` (§4.1); the GAME player renders all structured types (§4.3).
 
 ---
 
@@ -226,6 +233,13 @@ No i18n. Login at `/login`; everything else under `app/(admin)/*`. Backend gated
 - **What:** Immutable record of admin actions.
 - **API:** `controllers/admin-audit.controller.ts` (`listAuditLogs`, `GET /admin/audit-logs`) → `services/admin/audit.service.ts`. Model `AdminAuditLog`.
 - **Admin:** `app/(admin)/audit/`.
+
+### 5.8 User impersonation (one-click)
+- **What:** An admin mints a short-lived (30 min) impersonation token for a target user and opens a real learner/tenant session as them from one button. Admins cannot impersonate themselves or another admin.
+- **Who:** ADMIN (mint); the token then authenticates as the target user in `apps/web`.
+- **API:** `controllers/admin/users.controller.ts` (`impersonateUser`, `POST /admin/users/:id/impersonate`) → `lib/impersonation.ts` (`signImpersonationToken`); the JWT carries `imp:true` + `impersonatorId` and nothing is persisted.
+- **Admin:** `app/(admin)/users/[id]/page.tsx` (Impersonate → "Open impersonated session" button), hook `useImpersonateUser` in `hooks/useAdmin.ts`.
+- **Web:** the accept route `app/[locale]/impersonate/page.tsx` consumes the `token` query param once, stores it, and confirms via `GET /auth/me`.
 
 ---
 
