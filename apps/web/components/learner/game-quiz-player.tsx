@@ -56,6 +56,23 @@ function clozeOptions(config: Record<string, unknown> | null | undefined): strin
   return raw.map((b) => (Array.isArray(b) ? b.filter((v): v is string => typeof v === 'string') : []));
 }
 
+// HOTSPOT: config.imageUrl is the backdrop the learner taps (the accept regions
+// live in config.regions but the player only needs the image to render).
+function hotspotImageUrl(config: Record<string, unknown> | null | undefined): string {
+  const raw = config?.imageUrl;
+  return typeof raw === 'string' ? raw : '';
+}
+
+// DRAG_DROP: config.items are the draggable chips; config.targets are the buckets.
+function dragItems(config: Record<string, unknown> | null | undefined): string[] {
+  const raw = config?.items;
+  return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+}
+function dragTargets(config: Record<string, unknown> | null | undefined): string[] {
+  const raw = config?.targets;
+  return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+}
+
 export function GameQuizPlayer({
   assessment,
   onExit,
@@ -80,6 +97,12 @@ export function GameQuizPlayer({
   const [blankValues, setBlankValues] = useState<string[]>([]);
   const [matchValues, setMatchValues] = useState<string[]>([]);
   const [orderValues, setOrderValues] = useState<string[]>([]);
+  // DRAG_DROP: `dragValues` holds the chosen target label per config.items entry
+  // ('' = still in the pool); `dragActive` is the item picked in the tap fallback.
+  // HOTSPOT: `hotspotPoint` marks the last normalized 0..1 tap.
+  const [dragValues, setDragValues] = useState<string[]>([]);
+  const [dragActive, setDragActive] = useState<number | null>(null);
+  const [hotspotPoint, setHotspotPoint] = useState<{ x: number; y: number } | null>(null);
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const startRef = useRef(0);
   const startTotalRef = useRef(0);
@@ -96,6 +119,9 @@ export function GameQuizPlayer({
     setSelected([]);
     setBlankValues([]);
     setMatchValues([]);
+    setDragValues([]);
+    setDragActive(null);
+    setHotspotPoint(null);
     // ORDERING starts from the (already shuffled) options; the learner reorders from there.
     setOrderValues(question.options ?? []);
     const id = setInterval(() => {
@@ -132,6 +158,16 @@ export function GameQuizPlayer({
     setSelected((prev) =>
       prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option],
     );
+  }
+
+  // DRAG_DROP: assign item `itemIndex` to a target bucket (or '' to send it back
+  // to the pool). Keeps `dragValues` parallel to config.items.
+  function placeDrag(itemIndex: number, target: string) {
+    setDragValues((prev) => {
+      const next = [...prev];
+      next[itemIndex] = target;
+      return next;
+    });
   }
 
   // ORDERING: swap an item up (-1) or down (+1) within the working sequence.
@@ -611,6 +647,141 @@ export function GameQuizPlayer({
               >
                 {t('confirm')}
               </Button>
+            </div>
+          ) : question.type === 'HOTSPOT' && hotspotImageUrl(question.config) ? (
+            // Tap the spot on the image; the tap is a natural lock (like
+            // MULTIPLE_CHOICE) — we submit the normalized 0..1 point as
+            // JSON.stringify({ x, y }). Auto-lock on timeout still fires via lockAnswer('').
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('hotspotHint')}
+              </p>
+              <button
+                type="button"
+                className="relative block w-full overflow-hidden rounded-2xl border border-white/[0.15] bg-white/[0.04]"
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  if (!rect.width || !rect.height) return;
+                  const x = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+                  const y = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
+                  setHotspotPoint({ x, y });
+                  lockAnswer(JSON.stringify({ x, y }));
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={hotspotImageUrl(question.config)}
+                  alt=""
+                  draggable={false}
+                  className="pointer-events-none block w-full select-none"
+                />
+                {hotspotPoint && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#16322b] bg-[#E0A93D] shadow-[0_0_0_3px_rgba(224,169,61,0.4)]"
+                    style={{ left: `${hotspotPoint.x * 100}%`, top: `${hotspotPoint.y * 100}%` }}
+                  />
+                )}
+              </button>
+            </div>
+          ) : question.type === 'DRAG_DROP' &&
+            dragItems(question.config).length >= 2 &&
+            dragTargets(question.config).length >= 2 ? (
+            // Drag each chip into a target bucket (HTML5 DnD) or tap a chip then a
+            // bucket (fallback); Confirm submits a string[] of chosen target per item,
+            // parallel to config.items (the ordered-array shape the grader compares
+            // index-wise). Auto-lock on timeout still fires via lockAnswer('').
+            <div className="mt-8 w-full max-w-2xl">
+              <p className="mb-3 font-label text-xs font-semibold uppercase tracking-[0.14em] text-[#9dc4b8]">
+                {t('dragDropHint')}
+              </p>
+              <div className="flex min-h-[3.5rem] flex-wrap gap-2 rounded-2xl border border-dashed border-white/15 bg-white/[0.04] p-3">
+                {dragItems(question.config).some((_, i) => !(dragValues[i] ?? '')) ? (
+                  dragItems(question.config).map((item, i) =>
+                    (dragValues[i] ?? '') ? null : (
+                      <button
+                        key={`${item}-${i}`}
+                        type="button"
+                        draggable
+                        aria-pressed={dragActive === i}
+                        onDragStart={(e) => e.dataTransfer.setData('text/plain', String(i))}
+                        onClick={() => setDragActive((cur) => (cur === i ? null : i))}
+                        className={`cursor-grab rounded-xl border px-3 py-2 text-sm active:cursor-grabbing ${
+                          dragActive === i
+                            ? 'border-[#E0A93D] bg-[#E0A93D]/20 text-[#f7f2e8]'
+                            : 'border-white/[0.15] bg-white/[0.08] text-[#e7edea] hover:border-white/30 hover:bg-white/[0.14] hover:text-[#f7f2e8]'
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    ),
+                  )
+                ) : (
+                  <span className="px-1 py-1 text-sm text-[#7fa89b]">{t('dragDropAllPlaced')}</span>
+                )}
+              </div>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {dragTargets(question.config).map((target) => (
+                  <div
+                    key={target}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const i = Number(e.dataTransfer.getData('text/plain'));
+                      if (Number.isInteger(i)) placeDrag(i, target);
+                    }}
+                    onClick={() => {
+                      if (dragActive !== null) {
+                        placeDrag(dragActive, target);
+                        setDragActive(null);
+                      }
+                    }}
+                    className="min-h-[5rem] rounded-2xl border border-white/[0.15] bg-white/[0.05] p-3"
+                  >
+                    <p className="mb-2 font-label text-xs font-semibold uppercase tracking-[0.12em] text-[#9dc4b8]">
+                      {target}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {dragItems(question.config).map((item, i) =>
+                        (dragValues[i] ?? '') === target ? (
+                          <button
+                            key={`${item}-${i}`}
+                            type="button"
+                            draggable
+                            onDragStart={(e) => e.dataTransfer.setData('text/plain', String(i))}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              placeDrag(i, '');
+                            }}
+                            className="cursor-grab rounded-xl border border-[#9DBDB2]/50 bg-[#9DBDB2]/20 px-3 py-1.5 text-sm text-[#f7f2e8] active:cursor-grabbing"
+                          >
+                            {item}
+                          </button>
+                        ) : null,
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <span className="text-sm text-[#9dc4b8]">
+                  {t('placedCount', {
+                    count: dragItems(question.config).filter((_, i) => (dragValues[i] ?? '') !== '')
+                      .length,
+                    total: dragItems(question.config).length,
+                  })}
+                </span>
+                <Button
+                  variant="spark"
+                  onClick={() =>
+                    lockAnswer(
+                      JSON.stringify(dragItems(question.config).map((_, i) => dragValues[i] ?? '')),
+                    )
+                  }
+                >
+                  {t('confirm')}
+                </Button>
+              </div>
             </div>
           ) : (
             <form

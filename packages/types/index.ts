@@ -28,7 +28,9 @@ export type QuestionType =
   | 'FILL_BLANK'
   | 'DROPDOWN_CLOZE'
   | 'MATCHING'
-  | 'ORDERING';
+  | 'ORDERING'
+  | 'HOTSPOT'
+  | 'DRAG_DROP';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';

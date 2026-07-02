@@ -105,6 +105,8 @@ enum QuestionType {
   DROPDOWN_CLOZE
   MATCHING
   ORDERING
+  HOTSPOT
+  DRAG_DROP
 }
 
 enum BankQuestionStatus {

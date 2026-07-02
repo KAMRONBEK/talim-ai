@@ -26,6 +26,8 @@ export const QUESTION_TYPES: QuestionType[] = [
   'DROPDOWN_CLOZE',
   'MATCHING',
   'ORDERING',
+  'HOTSPOT',
+  'DRAG_DROP',
 ];
 
 /** QuestionType → i18n key (under `tenant.assessments`) for a friendly, translated label. */
@@ -39,6 +41,8 @@ export const QUESTION_TYPE_LABEL_KEYS: Record<QuestionType, string> = {
   DROPDOWN_CLOZE: 'typeDropdownCloze',
   MATCHING: 'typeMatching',
   ORDERING: 'typeOrdering',
+  HOTSPOT: 'typeHotspot',
+  DRAG_DROP: 'typeDragDrop',
 };
 
 const CHOICE_TYPES: QuestionType[] = ['MULTIPLE_CHOICE', 'TRUE_FALSE', 'MULTIPLE_SELECT'];
@@ -218,6 +222,68 @@ export function QuestionEditor({
     return [{ options: ['', ''], correctIndex: 0 }];
   });
 
+  // HOTSPOT: background image + normalized correct regions ({x,y,w,h}, all 0..1).
+  const [hotspotImageUrl, setHotspotImageUrl] = useState<string>(() => {
+    const url = question?.type === 'HOTSPOT' ? (question.config as { imageUrl?: unknown } | null)?.imageUrl : undefined;
+    return typeof url === 'string' ? url : '';
+  });
+  const [regions, setRegions] = useState<{ x: number; y: number; w: number; h: number }[]>(() => {
+    const raw = question?.type === 'HOTSPOT' ? (question.config as { regions?: unknown } | null)?.regions : undefined;
+    if (!Array.isArray(raw)) return [];
+    return raw
+      .filter(
+        (r): r is { x: number; y: number; w: number; h: number } =>
+          !!r &&
+          typeof r === 'object' &&
+          typeof (r as { x?: unknown }).x === 'number' &&
+          typeof (r as { y?: unknown }).y === 'number' &&
+          typeof (r as { w?: unknown }).w === 'number' &&
+          typeof (r as { h?: unknown }).h === 'number',
+      )
+      .map((r) => ({ x: r.x, y: r.y, w: r.w, h: r.h }));
+  });
+
+  // DRAG_DROP: items to place (with the correct target label per item) + the labeled target buckets.
+  const [dragItems, setDragItems] = useState<{ item: string; target: string }[]>(() => {
+    if (question?.type === 'DRAG_DROP') {
+      const items = asStringArray((question.config as { items?: unknown } | null)?.items);
+      if (items.length) {
+        return items.map((item, i) => ({ item, target: question.acceptableAnswers[i] ?? '' }));
+      }
+    }
+    return [
+      { item: '', target: '' },
+      { item: '', target: '' },
+    ];
+  });
+  const [dragTargets, setDragTargets] = useState<string[]>(() => {
+    if (question?.type === 'DRAG_DROP') {
+      const targets = asStringArray((question.config as { targets?: unknown } | null)?.targets);
+      if (targets.length) return targets;
+    }
+    return ['', ''];
+  });
+
+  const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+
+  const updateRegion = (index: number, key: 'x' | 'y' | 'w' | 'h', value: number) =>
+    setRegions((prev) =>
+      prev.map((region, idx) =>
+        idx === index ? { ...region, [key]: clamp01(Number.isFinite(value) ? value : 0) } : region,
+      ),
+    );
+
+  const addRegionAtClick = (event: React.MouseEvent<HTMLImageElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const size = 0.12;
+    const cx = (event.clientX - rect.left) / rect.width;
+    const cy = (event.clientY - rect.top) / rect.height;
+    const x = clamp01(cx - size / 2);
+    const y = clamp01(cy - size / 2);
+    setRegions((prev) => [...prev, { x, y, w: Math.min(size, 1 - x), h: Math.min(size, 1 - y) }]);
+  };
+
   const handleTypeChange = (next: QuestionType) => {
     setType(next);
     if (next === 'TRUE_FALSE') {
@@ -278,14 +344,44 @@ export function QuestionEditor({
           config: { blanks: blanks.length, blankOptions: blanks.map((b) => nonEmpty(b.options)) },
           acceptableAnswers: blanks.map((b) => (b.options[b.correctIndex] ?? '').trim()),
         };
+      case 'HOTSPOT':
+        return {
+          ...base,
+          options: null,
+          config: { imageUrl: hotspotImageUrl.trim(), regions },
+          acceptableAnswers: [],
+        };
+      case 'DRAG_DROP': {
+        const targets = nonEmpty(dragTargets);
+        const valid = dragItems.filter(
+          (it) => it.item.trim() && it.target.trim() && targets.includes(it.target.trim()),
+        );
+        return {
+          ...base,
+          options: null,
+          config: { items: valid.map((it) => it.item.trim()), targets },
+          acceptableAnswers: valid.map((it) => it.target.trim()),
+        };
+      }
     }
   };
 
   const body = buildBody();
   const matchingPairCount = pairs.filter((p) => p.left.trim() && p.right.trim()).length;
+  const hotspotValid = hotspotImageUrl.trim().length > 0 && regions.length >= 1;
+  const dragTargetsClean = nonEmpty(dragTargets);
+  const dragNamedItems = dragItems.filter((it) => it.item.trim());
+  const dragDropValid =
+    dragNamedItems.length >= 2 &&
+    dragTargetsClean.length >= 2 &&
+    dragNamedItems.every((it) => dragTargetsClean.includes(it.target.trim()));
   const valid =
     body.prompt.length > 0 &&
-    body.acceptableAnswers.length > 0 &&
+    (type === 'HOTSPOT'
+      ? hotspotValid
+      : type === 'DRAG_DROP'
+        ? dragDropValid
+        : body.acceptableAnswers.length > 0) &&
     (CHOICE_TYPES.includes(type) ? (body.options?.length ?? 0) >= 2 : true) &&
     (type === 'MATCHING' ? matchingPairCount >= 2 : true);
 
@@ -622,6 +718,160 @@ export function QuestionEditor({
                 <Plus className="h-3.5 w-3.5" />
                 {t('editorAddBlank')}
               </Button>
+            </div>
+          )}
+
+          {type === 'HOTSPOT' && (
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <Label htmlFor="editor-hotspot-url">{t('editorHotspotImageLabel')}</Label>
+                <Input
+                  id="editor-hotspot-url"
+                  value={hotspotImageUrl}
+                  placeholder={t('editorHotspotImagePlaceholder')}
+                  onChange={(event) => setHotspotImageUrl(event.target.value)}
+                />
+              </div>
+              {hotspotImageUrl.trim() ? (
+                <div className="space-y-2">
+                  <p className="text-[11px] text-muted-foreground">{t('editorHotspotHint')}</p>
+                  <div className="relative inline-block max-w-full overflow-hidden rounded-xl border border-border">
+                    <img
+                      src={hotspotImageUrl}
+                      alt=""
+                      draggable={false}
+                      onClick={addRegionAtClick}
+                      className="block max-h-72 w-auto max-w-full cursor-crosshair select-none"
+                    />
+                    {regions.map((region, index) => (
+                      <div
+                        key={index}
+                        className="pointer-events-none absolute border-2 border-primary bg-primary/20"
+                        style={{
+                          left: `${region.x * 100}%`,
+                          top: `${region.y * 100}%`,
+                          width: `${region.w * 100}%`,
+                          height: `${region.h * 100}%`,
+                        }}
+                      >
+                        <button
+                          type="button"
+                          aria-label={t('editorRemove')}
+                          onClick={() => setRegions(regions.filter((_, idx) => idx !== index))}
+                          className="pointer-events-auto absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow"
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  {regions.length > 0 && (
+                    <div className="space-y-2">
+                      {regions.map((region, index) => (
+                        <div key={index} className="flex flex-wrap items-center gap-2">
+                          <span className="w-5 shrink-0 text-center text-[11px] text-muted-foreground">
+                            {index + 1}
+                          </span>
+                          {(['x', 'y', 'w', 'h'] as const).map((key) => (
+                            <label
+                              key={key}
+                              className="flex items-center gap-1 text-[11px] uppercase text-muted-foreground"
+                            >
+                              {key}
+                              <Input
+                                type="number"
+                                min={0}
+                                max={1}
+                                step={0.01}
+                                value={region[key]}
+                                onChange={(event) => updateRegion(index, key, Number(event.target.value))}
+                                className="w-16"
+                              />
+                            </label>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-[11px] text-muted-foreground">{t('editorHotspotNoImage')}</p>
+              )}
+            </div>
+          )}
+
+          {type === 'DRAG_DROP' && (
+            <div className="space-y-3">
+              <StringListField
+                label={t('editorDragTargetsLabel')}
+                hint={t('editorDragTargetsHint')}
+                values={dragTargets}
+                onChange={setDragTargets}
+                addLabel={t('editorAddTarget')}
+                placeholder={t('editorDragTargetPlaceholder')}
+              />
+              <div className="space-y-2">
+                <Label>{t('editorDragItemsLabel')}</Label>
+                <p className="text-[11px] text-muted-foreground">{t('editorDragItemsHint')}</p>
+                <div className="space-y-2">
+                  {dragItems.map((row, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <Input
+                        value={row.item}
+                        placeholder={t('editorDragItemPlaceholder')}
+                        onChange={(event) =>
+                          setDragItems(
+                            dragItems.map((r, idx) =>
+                              idx === index ? { ...r, item: event.target.value } : r,
+                            ),
+                          )
+                        }
+                      />
+                      <span className="shrink-0 text-muted-foreground" aria-hidden="true">
+                        →
+                      </span>
+                      <select
+                        value={row.target}
+                        aria-label={t('editorDragTargetSelect')}
+                        onChange={(event) =>
+                          setDragItems(
+                            dragItems.map((r, idx) =>
+                              idx === index ? { ...r, target: event.target.value } : r,
+                            ),
+                          )
+                        }
+                        className={controlClass}
+                      >
+                        <option value="">{t('editorDragTargetSelect')}</option>
+                        {nonEmpty(dragTargets).map((target) => (
+                          <option key={target} value={target}>
+                            {target}
+                          </option>
+                        ))}
+                      </select>
+                      <Button
+                        type="button"
+                        size="icon"
+                        variant="ghost"
+                        className="shrink-0 text-muted-foreground hover:text-destructive"
+                        aria-label={t('editorRemove')}
+                        onClick={() => setDragItems(dragItems.filter((_, idx) => idx !== index))}
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setDragItems([...dragItems, { item: '', target: '' }])}
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  {t('editorAddItem')}
+                </Button>
+              </div>
             </div>
           )}
 

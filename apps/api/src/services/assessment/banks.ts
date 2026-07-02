@@ -22,6 +22,7 @@ import {
   isAnswerableMultipleSelect,
   jsonStringArray,
   normalizeAnswer,
+  parseHotspotRegions,
   parseQuestionConfig,
   patchQuestionSchema,
 } from './shared.js';
@@ -125,14 +126,63 @@ function buildStructuredQuestion(
   }
 }
 
+/**
+ * HOTSPOT storage (manual-authoring only): config = { imageUrl, regions } with regions normalized
+ * to 0..1 (top-left origin, w/h fractions). options is null and acceptableAnswers is empty — the
+ * answer is spatial (a click inside any region). Returns null when the image is missing or there is
+ * not at least one region whose normalized box stays within the image bounds.
+ */
+function buildHotspotQuestion(source: {
+  config: Record<string, unknown> | null;
+}): StructuredStorage | null {
+  const config = source.config ?? {};
+  const imageUrl = typeof config.imageUrl === 'string' ? config.imageUrl.trim() : '';
+  if (!imageUrl) return null;
+  const regions = parseHotspotRegions(config);
+  if (regions.length < 1) return null;
+  const valid = regions.every(
+    (r) => r.w > 0 && r.h > 0 && r.x >= 0 && r.y >= 0 && r.x + r.w <= 1 && r.y + r.h <= 1,
+  );
+  if (!valid) return null;
+  return { options: null, acceptableAnswers: [], config: { imageUrl, regions } };
+}
+
+/**
+ * DRAG_DROP storage (manual-authoring only): config = { items, targets }; acceptableAnswers = the
+ * correct target label per item (parallel to config.items, each ∈ config.targets). options is null.
+ * Returns null with fewer than 2 items or 2 targets, when the correct-target list isn't parallel to
+ * the items, or when a correct target isn't one of the targets.
+ */
+function buildDragDropQuestion(source: {
+  acceptableAnswers: string[];
+  config: Record<string, unknown> | null;
+}): StructuredStorage | null {
+  const config = source.config ?? {};
+  const items = jsonStringArray(config.items).map((s) => s.trim()).filter(Boolean);
+  const targets = jsonStringArray(config.targets).map((s) => s.trim()).filter(Boolean);
+  const correct = source.acceptableAnswers.map((s) => s.trim());
+  if (items.length < 2 || targets.length < 2) return null;
+  if (correct.length !== items.length) return null;
+  const targetSet = new Set(targets.map(normalizeAnswer));
+  if (correct.some((c) => !c || !targetSet.has(normalizeAnswer(c)))) return null;
+  return { options: null, acceptableAnswers: correct, config: { items, targets } };
+}
+
 /** Rejection messages when a manually authored/edited structured question is malformed
  *  or unanswerable (the matching builder above returned null). */
-const STRUCTURED_QUESTION_ERROR: Record<'MATCHING' | 'ORDERING' | 'DROPDOWN_CLOZE', string> = {
+const STRUCTURED_QUESTION_ERROR: Record<
+  'MATCHING' | 'ORDERING' | 'DROPDOWN_CLOZE' | 'HOTSPOT' | 'DRAG_DROP',
+  string
+> = {
   MATCHING:
     'Matching questions need at least 2 distinct left prompts (config.left), one correct right value per prompt, and a right-hand pool of at least 2 options.',
   ORDERING: 'Ordering questions need at least 2 distinct items given in their correct order.',
   DROPDOWN_CLOZE:
     'Cloze questions need one "___" marker per blank and, for each blank, at least 2 options (config.blankOptions) including the correct choice.',
+  HOTSPOT:
+    'Hotspot questions need an image (config.imageUrl) and at least 1 region with normalized 0..1 coordinates (config.regions).',
+  DRAG_DROP:
+    'Drag-and-drop questions need at least 2 items and 2 targets (config.items, config.targets), and one correct target per item (acceptableAnswers, parallel to items) that is one of the targets.',
 };
 
 export async function listBanks(tenantId: string) {
@@ -336,6 +386,21 @@ function buildManualStorage(
     if (!built) throw new AppError(400, STRUCTURED_QUESTION_ERROR[type]);
     return built;
   }
+  // HOTSPOT / DRAG_DROP are manual-authoring-only structured types (never AI-generated), so they
+  // build directly here rather than through buildStructuredQuestion (the generator switch).
+  if (type === 'HOTSPOT') {
+    const built = buildHotspotQuestion({ config: source.config });
+    if (!built) throw new AppError(400, STRUCTURED_QUESTION_ERROR.HOTSPOT);
+    return built;
+  }
+  if (type === 'DRAG_DROP') {
+    const built = buildDragDropQuestion({
+      acceptableAnswers: source.acceptableAnswers,
+      config: source.config,
+    });
+    if (!built) throw new AppError(400, STRUCTURED_QUESTION_ERROR.DRAG_DROP);
+    return built;
+  }
   // Never persist an unanswerable option question: the accepted answer(s) must map to options.
   if (
     (type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE') &&
@@ -428,10 +493,10 @@ export async function patchQuestion(
   const finalConfig =
     body.config !== undefined ? body.config : parseQuestionConfig(question.config);
 
-  // Structured types (MATCHING / ORDERING / DROPDOWN_CLOZE): when their content changes,
-  // re-run the generator builders so the edited question is normalized/shuffled/validated
-  // into the same canonical storage shape a generated one has. A status-only change
-  // (e.g. approve/reject) leaves the stored storage untouched.
+  // Structured types (MATCHING / ORDERING / DROPDOWN_CLOZE / HOTSPOT / DRAG_DROP): when their
+  // content changes, re-run the manual-storage builders so the edited question is
+  // normalized/shuffled/validated into the same canonical storage shape a generated one has. A
+  // status-only change (e.g. approve/reject) leaves the stored storage untouched.
   const editingContent =
     body.prompt !== undefined ||
     body.type !== undefined ||
@@ -439,7 +504,11 @@ export async function patchQuestion(
     body.acceptableAnswers !== undefined ||
     body.config !== undefined;
   if (
-    (finalType === 'MATCHING' || finalType === 'ORDERING' || finalType === 'DROPDOWN_CLOZE') &&
+    (finalType === 'MATCHING' ||
+      finalType === 'ORDERING' ||
+      finalType === 'DROPDOWN_CLOZE' ||
+      finalType === 'HOTSPOT' ||
+      finalType === 'DRAG_DROP') &&
     editingContent
   ) {
     const storage = buildManualStorage(finalType, {
