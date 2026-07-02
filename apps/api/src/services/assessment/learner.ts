@@ -79,6 +79,23 @@ export async function submitLearnerAssessment(
   const body = submitAssessmentSchema.parse(input ?? {});
   await assertLearnerAssignment(tenantId, userId, assessmentId);
 
+  // Enforce the due date. A learner may hold multiple assignment rows for one assessment
+  // (per content/section), so the effective deadline is the earliest non-null dueAt —
+  // exactly the value listLearnerAssessments surfaces to the UI. Past that instant we
+  // block late submissions for both WRITTEN and GAME modes; a null dueAt never blocks.
+  const dueAssignments = await prisma.assessmentAssignment.findMany({
+    where: { assessmentId, learnerId: userId, assessment: { tenantId } },
+    select: { dueAt: true },
+  });
+  let dueAt: Date | null = null;
+  for (const a of dueAssignments) {
+    if (!a.dueAt) continue;
+    if (!dueAt || a.dueAt < dueAt) dueAt = a.dueAt;
+  }
+  if (dueAt && Date.now() > dueAt.getTime()) {
+    throw new AppError(403, 'This assessment is past its due date and no longer accepts submissions');
+  }
+
   const assessment = await prisma.tenantAssessment.findFirst({
     where: { id: assessmentId, tenantId, status: 'PUBLISHED' },
     include: {

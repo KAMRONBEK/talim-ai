@@ -24,6 +24,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [joinCode, setJoinCode] = useState('');
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -163,10 +164,35 @@ export default function RegisterPage() {
               <p className="text-xs text-muted-foreground">{t('classCodeHint')}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" className="h-12 w-full text-base" disabled={loading}>
+            <label className="flex items-start gap-2.5 text-xs text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-primary accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              />
+              <span>
+                {t.rich('acceptTerms', {
+                  terms: (chunks) => (
+                    <Link
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-primary hover:underline"
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </span>
+            </label>
+            <Button
+              type="submit"
+              className="h-12 w-full text-base"
+              disabled={loading || !acceptTerms}
+            >
               {loading ? t('registering') : t('register')}
             </Button>
-            <p className="text-center text-xs text-muted-foreground">{t('termsNotice')}</p>
           </form>
           <p className="text-center text-sm text-muted-foreground">
             {t('haveAccount')}{' '}

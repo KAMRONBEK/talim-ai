@@ -25,6 +25,10 @@ const INDIVIDUAL_PLANS: PlanCode[] = ['FREE', 'INDIVIDUAL_PRO'];
 const STATUS_OPTIONS: SubscriptionStatus[] = ['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'];
 const ROLE_OPTIONS: UserRole[] = ['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN'];
 
+// Base URL of the learner/tenant web app; the /impersonate route consumes the
+// minted token. Set NEXT_PUBLIC_WEB_URL in prod; defaults to the dev port.
+const WEB_APP_URL = process.env.NEXT_PUBLIC_WEB_URL ?? 'http://localhost:3000';
+
 function formatLimit(used: number, limit: number | null): string {
   if (limit === null) return `${used} / ∞`;
   return `${used} / ${limit}`;
@@ -148,8 +152,9 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
             <CardContent className="space-y-4">
               <p className="text-sm text-muted-foreground">
                 Short-lived access token for <span className="font-medium text-foreground">{user.email}</span>.
-                It expires in 30 minutes. Paste it into the learner app&apos;s auth token store
-                (localStorage) to sign in as this user. This action is recorded in the audit log.
+                It expires in 30 minutes. Use &ldquo;Open impersonated session&rdquo; to sign in as
+                this user in a new tab, or copy the token to paste into the learner app&apos;s auth
+                store (localStorage) manually. This action is recorded in the audit log.
               </p>
               <code className="block max-h-40 overflow-auto break-all rounded-lg bg-muted px-3 py-2 font-mono text-xs">
                 {impersonationToken}
@@ -161,7 +166,20 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 >
                   Copy token
                 </Button>
-                <Button onClick={() => setImpersonationToken(null)}>Done</Button>
+                <Button
+                  onClick={() =>
+                    window.open(
+                      `${WEB_APP_URL}/impersonate?token=${encodeURIComponent(impersonationToken)}`,
+                      '_blank',
+                      'noopener,noreferrer',
+                    )
+                  }
+                >
+                  Open impersonated session
+                </Button>
+                <Button variant="outline" onClick={() => setImpersonationToken(null)}>
+                  Done
+                </Button>
               </div>
             </CardContent>
           </Card>

@@ -750,18 +750,21 @@ function AssessmentCard({
   const [writtenStarted, setWrittenStarted] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
   const isGame = assessment.mode === 'GAME';
+  // Enforced due date: once the deadline passes, submissions are closed — the server also
+  // rejects late attempts with a 403, so the start/play controls and form are hidden here.
+  const pastDue = assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now();
   // Deep-link from the dashboard "Join" banner (?play=<id>) auto-opens the game player.
   useEffect(() => {
-    if (autoPlay && isGame && !locked) setPlaying(true);
-  }, [autoPlay, isGame, locked]);
-  // Soft due date: display-only. Overdue styling when past due and the learner hasn't
-  // submitted an attempt yet (a completed task is no longer "overdue").
+    if (autoPlay && isGame && !locked && !pastDue) setPlaying(true);
+  }, [autoPlay, isGame, locked, pastDue]);
+  // Overdue styling on the badge when past due and the learner hasn't submitted an attempt
+  // yet (a completed task is no longer "overdue").
   const completed = assessment.attemptCount > 0;
-  const overdue =
-    assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now() && !completed;
-  // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay expanded.
-  const canStartWritten = !isGame && !locked && assessment.attemptCount === 0;
-  const showWrittenForm = !isGame && (!canStartWritten || writtenStarted);
+  const overdue = pastDue && !completed;
+  // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay
+  // expanded. Past the deadline nothing can be started or submitted.
+  const canStartWritten = !isGame && !locked && assessment.attemptCount === 0 && !pastDue;
+  const showWrittenForm = !isGame && !pastDue && (!canStartWritten || writtenStarted);
 
   if (playing) {
     return <GameQuizPlayer assessment={assessment} onExit={() => setPlaying(false)} />;
@@ -823,7 +826,7 @@ function AssessmentCard({
           )}
         </div>
         <div className="flex gap-2">
-          {isGame && (
+          {isGame && !pastDue && (
             <Button variant="spark" disabled={locked} onClick={() => setPlaying(true)}>
               <Play className="mr-1.5 h-4 w-4" />
               {locked ? t('attemptLimit') : t('play')}
@@ -842,6 +845,15 @@ function AssessmentCard({
         </div>
       </div>
 
+      {pastDue && (
+        <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4">
+          <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
+            <CalendarClock className="h-4 w-4" />
+            {t('submissionsClosed')}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{t('dueEnforcedHint')}</p>
+        </div>
+      )}
       {showWrittenForm && <WrittenForm assessment={assessment} />}
       {showBoard && <Leaderboard assessmentId={assessment.id} live={assessment.isLive} />}
     </div>

@@ -80,7 +80,8 @@
     "heroSubtitle": "Join thousands of learners and tutors across Uzbekistan turning sources into summaries, podcasts, quizzes and an AI tutor.",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "termsNotice": "By continuing you agree to our Terms."
+    "termsNotice": "By continuing you agree to our Terms.",
+    "acceptTerms": "I agree to the <terms>Terms of Service</terms>."
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -989,7 +990,9 @@
       "dragItemsHint": "Drag each item into the correct group, or tap an item then a group.",
       "dragAllPlaced": "All items placed.",
       "dropHere": "Drop here",
-      "placedCount": "Placed {count} of {total}"
+      "placedCount": "Placed {count} of {total}",
+      "submissionsClosed": "Submissions closed",
+      "dueEnforcedHint": "The due date has passed, so late submissions are no longer accepted."
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",
@@ -1367,5 +1370,52 @@
     "enterFullscreen": "Enter fullscreen",
     "exitFullscreen": "Exit fullscreen",
     "slideProgress": "Slide {index} of {total}"
+  },
+  "impersonate": {
+    "signingIn": "Signing in...",
+    "missingToken": "No impersonation token was provided.",
+    "invalidToken": "This impersonation link is invalid or has expired.",
+    "serverError": "Could not reach the server. Please try again.",
+    "backToLogin": "Back to sign in"
+  },
+  "terms": {
+    "eyebrow": "Legal",
+    "title": "Terms of Service",
+    "intro": "These Terms of Service govern your access to and use of Talim AI. By creating an account or using the platform, you agree to the terms below.",
+    "updated": "Last updated: July 2, 2026",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of terms",
+        "body": "By registering for or using Talim AI, you confirm that you have read, understood, and agree to be bound by these terms. If you do not agree, please do not use the platform. If you use Talim AI on behalf of an organization, you represent that you are authorized to accept these terms for that organization."
+      },
+      "accounts": {
+        "title": "Accounts and eligibility",
+        "body": "You must provide accurate information when creating an account and keep your login credentials secure. You are responsible for all activity under your account. Students may be added to a class by a tutor and can join using a class code. You must be old enough to use the platform under the laws of your country, or use it under the supervision of a parent, guardian, or tutor."
+      },
+      "use": {
+        "title": "Acceptable use",
+        "body": "You agree to use Talim AI only for lawful, educational purposes. You may not upload unlawful, harmful, or infringing material, attempt to disrupt or reverse-engineer the service, abuse the AI features to generate prohibited content, or access data that does not belong to you. We may suspend or remove access to accounts that violate these rules."
+      },
+      "content": {
+        "title": "Content and ownership",
+        "body": "You retain ownership of the materials you upload. By uploading content, you grant Talim AI a limited license to process it in order to generate summaries, podcasts, quizzes, and tutor responses for you and your class. AI-generated output is provided to support your learning and may contain errors; you are responsible for reviewing it before relying on it. You must have the right to upload any material you share with the platform."
+      },
+      "orgs": {
+        "title": "Tutors and student organizations",
+        "body": "Tutors and schools operate as organizations with a set number of seats. A tutor administers their organization, creates and manages student accounts, assigns materials, and runs assessments. Organizations are activated manually by a Talim AI administrator, who sets the seat limit; there is no automated payment. Tutors are responsible for the students they add and for using student data only for legitimate educational purposes. Deactivating a student immediately removes their access to assigned content."
+      },
+      "disclaimers": {
+        "title": "Disclaimers and liability",
+        "body": "Talim AI is provided \"as is\" without warranties of any kind. We do not guarantee that AI-generated summaries, answers, or assessments are complete or accurate, and they are not a substitute for professional or certified instruction. To the fullest extent permitted by law, Talim AI is not liable for any indirect or consequential damages arising from your use of the platform."
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "body": "We may update these terms from time to time as the platform evolves. When we make material changes, we will update the date at the top of this page. Your continued use of Talim AI after changes take effect means you accept the revised terms."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "If you have questions about these terms, contact us at support@talim.ai."
+      }
+    }
   }
 }

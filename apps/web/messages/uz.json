@@ -80,7 +80,8 @@
     "heroSubtitle": "O‘zbekiston bo‘ylab minglab o‘quvchi va o‘qituvchilarga qo‘shiling — manbalarni konspekt, podkast, testlar va AI repetitorga aylantiring.",
     "showPassword": "Parolni ko‘rsatish",
     "hidePassword": "Parolni yashirish",
-    "termsNotice": "Davom etish orqali siz Shartlarimizga rozilik bildirasiz."
+    "termsNotice": "Davom etish orqali siz Shartlarimizga rozilik bildirasiz.",
+    "acceptTerms": "Men <terms>Foydalanish shartlari</terms>ga roziman."
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
@@ -989,7 +990,9 @@
       "dragItemsHint": "Har bir elementni to'g'ri guruhga torting yoki elementni, so'ng guruhni bosing.",
       "dragAllPlaced": "Barcha elementlar joylashtirildi.",
       "dropHere": "Shu yerga tashlang",
-      "placedCount": "{count}/{total} joylashtirildi"
+      "placedCount": "{count}/{total} joylashtirildi",
+      "submissionsClosed": "Topshirish yopilgan",
+      "dueEnforcedHint": "Muddat tugagani uchun kechiktirilgan javoblar qabul qilinmaydi."
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",
@@ -1367,5 +1370,52 @@
     "enterFullscreen": "To'liq ekran",
     "exitFullscreen": "To'liq ekrandan chiqish",
     "slideProgress": "{total} dan {index}-slayd"
+  },
+  "impersonate": {
+    "signingIn": "Kirish...",
+    "missingToken": "Kirish havolasida token topilmadi.",
+    "invalidToken": "Ushbu kirish havolasi yaroqsiz yoki muddati tugagan.",
+    "serverError": "Serverga ulanib bo'lmadi. Qayta urinib ko'ring.",
+    "backToLogin": "Kirish sahifasiga qaytish"
+  },
+  "terms": {
+    "eyebrow": "Huquqiy",
+    "title": "Foydalanish shartlari",
+    "intro": "Ushbu Foydalanish shartlari Talim AI platformasidan foydalanishingizni tartibga soladi. Hisob yaratish yoki platformadan foydalanish orqali siz quyidagi shartlarga rozilik bildirasiz.",
+    "updated": "Oxirgi yangilanish: 2026-yil 2-iyul",
+    "sections": {
+      "acceptance": {
+        "title": "Shartlarni qabul qilish",
+        "body": "Talim AI'da ro'yxatdan o'tish yoki undan foydalanish orqali siz ushbu shartlarni o'qib chiqqaningizni, tushunganingizni va ularga rioya qilishga rozi ekaningizni tasdiqlaysiz. Agar rozi bo'lmasangiz, platformadan foydalanmang. Agar Talim AI'dan tashkilot nomidan foydalansangiz, siz o'sha tashkilot uchun ushbu shartlarni qabul qilishga vakolatli ekaningizni tasdiqlaysiz."
+      },
+      "accounts": {
+        "title": "Hisoblar va foydalanish huquqi",
+        "body": "Hisob yaratishda aniq ma'lumot berishingiz va kirish ma'lumotlaringizni xavfsiz saqlashingiz kerak. Hisobingiz ostidagi barcha harakatlar uchun siz javobgarsiz. O'quvchilar o'qituvchi tomonidan sinfga qo'shilishi va sinf kodi orqali qo'shila olishi mumkin. Platformadan foydalanish uchun mamlakatingiz qonunlariga ko'ra yetarli yoshda bo'lishingiz yoki ota-ona, vasiy yoxud o'qituvchi nazorati ostida foydalanishingiz kerak."
+      },
+      "use": {
+        "title": "Maqbul foydalanish",
+        "body": "Siz Talim AI'dan faqat qonuniy va ta'lim maqsadlarida foydalanishga rozilik bildirasiz. Qonunga zid, zararli yoki huquqni buzuvchi materiallarni yuklash, xizmat ishini buzish yoki uni teskari muhandislik qilishga urinish, AI imkoniyatlarini taqiqlangan kontent yaratish uchun suiiste'mol qilish yoki sizga tegishli bo'lmagan ma'lumotlarga kirish taqiqlanadi. Biz ushbu qoidalarni buzgan hisoblarni to'xtatib qo'yishimiz yoki o'chirishimiz mumkin."
+      },
+      "content": {
+        "title": "Kontent va egalik",
+        "body": "Siz yuklagan materiallarga egalik huquqi sizda saqlanib qoladi. Kontent yuklash orqali siz Talim AI'ga o'zingiz va sinfingiz uchun konspektlar, podkastlar, testlar va tyutor javoblarini yaratish maqsadida uni qayta ishlash uchun cheklangan litsenziya berasiz. AI tomonidan yaratilgan natijalar ta'limingizni qo'llab-quvvatlash uchun taqdim etiladi va xatolarga yo'l qo'yishi mumkin; ularga tayanishdan oldin tekshirish sizning zimmangizda. Platformaga ulashadigan har qanday materialni yuklash huquqiga ega bo'lishingiz shart."
+      },
+      "orgs": {
+        "title": "O'qituvchilar va o'quvchi tashkilotlari",
+        "body": "O'qituvchilar va maktablar belgilangan sondagi joylarga ega tashkilot sifatida ishlaydi. O'qituvchi o'z tashkilotini boshqaradi, o'quvchi hisoblarini yaratadi va boshqaradi, materiallar biriktiradi hamda baholashlarni o'tkazadi. Tashkilotlar Talim AI administratori tomonidan qo'lda faollashtiriladi va joylar chegarasini u belgilaydi; avtomatik to'lov mavjud emas. O'qituvchilar o'zlari qo'shgan o'quvchilar uchun va o'quvchi ma'lumotlaridan faqat qonuniy ta'lim maqsadlarida foydalanish uchun javobgardir. O'quvchini nofaollashtirish uning biriktirilgan kontentga kirishini darhol to'xtatadi."
+      },
+      "disclaimers": {
+        "title": "Ogohlantirishlar va javobgarlik",
+        "body": "Talim AI hech qanday kafolatlarsiz \"boricha\" taqdim etiladi. Biz AI tomonidan yaratilgan konspektlar, javoblar yoki baholashlarning to'liq yoki aniq ekanligini kafolatlamaymiz va ular professional yoki sertifikatlangan ta'lim o'rnini bosmaydi. Qonun ruxsat bergan eng to'liq darajada, Talim AI platformadan foydalanish natijasida yuzaga keladigan bilvosita yoki oqibatli zararlar uchun javobgar emas."
+      },
+      "changes": {
+        "title": "Shartlardagi o'zgarishlar",
+        "body": "Platforma rivojlanib borgani sari biz ushbu shartlarni vaqti-vaqti bilan yangilashimiz mumkin. Muhim o'zgarishlar kiritganimizda, ushbu sahifa yuqorisidagi sanani yangilaymiz. O'zgarishlar kuchga kirgandan so'ng Talim AI'dan foydalanishni davom ettirishingiz yangilangan shartlarni qabul qilganingizni bildiradi."
+      },
+      "contact": {
+        "title": "Bog'lanish",
+        "body": "Ushbu shartlar bo'yicha savollaringiz bo'lsa, support@talim.ai manzili orqali biz bilan bog'laning."
+      }
+    }
   }
 }
