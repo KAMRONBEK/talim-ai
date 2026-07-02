@@ -1,4 +1,4 @@
-import type { TranscriptSegment } from '@talim/types';
+import type { PodcastSegment, TranscriptSegment } from '@talim/types';
 
 // Speaker label at the start of a dialogue line, e.g. "A:", "B -", "А)", "Б —"
 // (Latin A/B + Cyrillic А/Б, mirroring the API's parsePodcastDialogue). We keep
@@ -58,4 +58,46 @@ export function derivePodcastSegments(
       source: 'AI_TRANSCRIPTION',
     } satisfies TranscriptSegment;
   });
+}
+
+/**
+ * Map the server's REAL, synthesis-time podcast segments into the timed-segment
+ * shape TranscriptPanel/PodcastPlayer consume, RESCALING their timings to the
+ * audio element's true runtime duration.
+ *
+ * The persisted `startMs`/`endMs` are proportional / CBR-derived (each dialogue
+ * turn's synthesized audio BYTE length ÷ a constant mp3 bitrate), so they track
+ * the true relative durations closely, but the absolute total can drift slightly
+ * from the real file. We rescale by `scale = realDurationMs / lastSegment.endMs`
+ * so the highlight + click-to-seek stay exact and provider-agnostic (Azure CBR /
+ * OpenAI near-CBR). When the duration isn't known yet (metadata not loaded) or the
+ * segments carry no usable timeline, we pass the raw timings through (scale 1)
+ * rather than divide by zero.
+ *
+ * Returns [] for missing/empty segments, so callers can fall back to
+ * derivePodcastSegments for legacy episodes that persist no timings.
+ */
+export function rescalePodcastSegments(
+  segments: PodcastSegment[] | null | undefined,
+  durationSec: number,
+): TranscriptSegment[] {
+  if (!segments || segments.length === 0) return [];
+
+  const lastEndMs = segments[segments.length - 1]?.endMs ?? 0;
+  const durationMs = durationSec * 1000;
+  const scale =
+    Number.isFinite(durationMs) && durationMs > 0 && lastEndMs > 0 ? durationMs / lastEndMs : 1;
+
+  return segments.map(
+    (segment, i) =>
+      ({
+        id: `podcast-seg-${i}`,
+        contentId: '',
+        order: i,
+        startMs: Math.round(segment.startMs * scale),
+        endMs: Math.round(segment.endMs * scale),
+        text: segment.text,
+        source: 'AI_TRANSCRIPTION',
+      }) satisfies TranscriptSegment,
+  );
 }

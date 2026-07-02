@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mic } from 'lucide-react';
 import { Button } from '@talim/ui';
-import type { TranscriptSegment } from '@talim/types';
+import type { PodcastSegment, TranscriptSegment } from '@talim/types';
 import { TranscriptPanel } from '@/components/learning/TranscriptPanel';
-import { derivePodcastSegments } from '@/lib/podcast-segments';
+import { derivePodcastSegments, rescalePodcastSegments } from '@/lib/podcast-segments';
 
 function formatTime(sec: number): string {
   if (!Number.isFinite(sec) || sec < 0) return '0:00';
@@ -26,16 +26,19 @@ interface PodcastPlayerProps {
   initialPositionSec?: number;
   onProgress?: (listenedSec: number, completed: boolean) => void;
   /**
-   * Transcript segments whose start/end timestamps are aligned to THIS audio
-   * timeline. When provided, a synced transcript is rendered under the
+   * The server's REAL, synthesis-time podcast segments for THIS episode. When a
+   * non-empty array is supplied, a synced transcript is rendered under the
    * controls: the current segment is highlighted + auto-scrolled as the audio
    * plays (driven by the <audio> timeupdate event), and clicking a segment
-   * seeks the audio. Omit when no aligned transcript exists — the player then
-   * renders exactly as before.
+   * seeks the audio. Their proportional / CBR-derived timings are RESCALED to
+   * the true <audio> duration once metadata loads, so highlighting stays exact
+   * and provider-agnostic (see rescalePodcastSegments).
    *
-   * Takes precedence over `script`: pass this when real aligned segments exist.
+   * Takes precedence over `script`. Null/empty (legacy episodes, or single-voice
+   * narration where turns.length < 2) → the player falls back to estimating from
+   * `script`, rendering exactly as before.
    */
-  segments?: TranscriptSegment[];
+  segments?: PodcastSegment[] | null;
   /**
    * The episode's TTS script. When `segments` is not supplied, the player
    * derives an ESTIMATED time-aligned transcript from this once the audio's
@@ -104,15 +107,18 @@ export function PodcastPlayer({
     reportProgress(next, duration);
   };
 
-  // Prefer real aligned segments if supplied; otherwise estimate them from the
-  // script once the audio's duration is known. Recomputes when the script or
-  // duration changes (i.e. when the selected episode or its audio changes).
-  const derivedSegments = useMemo(
-    () => (segments && segments.length > 0 ? null : derivePodcastSegments(script, duration)),
+  // Prefer the server's real per-turn segments, RESCALED to the true audio
+  // duration once <audio> metadata loads (proportional/CBR timings → exact,
+  // provider-agnostic). For legacy episodes with no persisted segments, fall back
+  // to estimating from the script by character proportion. Recomputes when the
+  // episode's segments/script or the measured duration changes.
+  const effectiveSegments = useMemo<TranscriptSegment[]>(
+    () =>
+      segments && segments.length > 0
+        ? rescalePodcastSegments(segments, duration)
+        : derivePodcastSegments(script, duration),
     [segments, script, duration],
   );
-  const effectiveSegments =
-    segments && segments.length > 0 ? segments : (derivedSegments ?? []);
   const hasTranscript = effectiveSegments.length > 0;
 
   return (

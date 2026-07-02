@@ -1030,6 +1030,20 @@ export interface ContentTranscriptResponse {
   };
 }
 
+/**
+ * One dialogue turn of a podcast episode with real, synthesis-time timings.
+ * `startMs`/`endMs` are proportional/CBR-derived (each turn's audio byte length ÷
+ * the constant mp3 bitrate), so the player should RESCALE them to the true <audio>
+ * duration for provider-agnostic accuracy.
+ */
+export interface PodcastSegment {
+  /** Host index in the two-speaker podcast (0 = host A, 1 = host B). */
+  speaker: number;
+  text: string;
+  startMs: number;
+  endMs: number;
+}
+
 export interface PodcastEpisode {
   id: string;
   podcastId: string;
@@ -1046,6 +1060,13 @@ export interface PodcastEpisode {
    * Not word-accurate — a "following" transcript, not a captions track.
    */
   script: string;
+  /**
+   * Real per-turn timings captured at synthesis from each turn's audio byte length
+   * (constant-bitrate mp3 ⇒ bytes ≈ duration). Provider-agnostic once RESCALED to
+   * the true <audio> duration. Absent (null) on legacy episodes generated before
+   * this was persisted — those fall back to the char-proportion estimate above.
+   */
+  segments?: PodcastSegment[] | null;
 }
 
 export interface Podcast {

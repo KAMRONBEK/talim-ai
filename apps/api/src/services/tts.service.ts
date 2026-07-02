@@ -194,6 +194,57 @@ export interface DialogueTurn {
   text: string;
 }
 
+/** Synthesized audio byte length for a single dialogue turn, aligned 1:1 to input turns. */
+export interface DialogueSegmentBytes {
+  speaker: Speaker;
+  bytes: number;
+}
+
+/**
+ * Like {@link synthesizeDialogue}, but also returns each turn's synthesized audio
+ * BYTE length aligned 1:1 to the input turns. Our TTS output is (near-)constant
+ * bitrate — Azure emits `audio-24khz-48kbitrate-mono-mp3` (48 kbit/s = 6000 bytes/s)
+ * and OpenAI's mp3 is near-CBR — so a turn's byte length is an accurate proxy for
+ * its duration (bytes / 6 ≈ ms), letting callers build a real time-aligned
+ * transcript instead of a character-proportion estimate.
+ */
+export async function synthesizeDialogueWithSegments(
+  turns: DialogueTurn[],
+  locale: AppLocale = 'uz',
+  usage?: UsageContext,
+): Promise<{ audio: Buffer; segments: DialogueSegmentBytes[] }> {
+  if (!azureConfigured && !env.OPENAI_API_KEY) {
+    throw new Error(
+      'No TTS provider configured. Set AZURE_SPEECH_KEY + AZURE_SPEECH_REGION (native voices) or OPENAI_API_KEY.',
+    );
+  }
+
+  // Flatten turns into chunk tasks (long turns still split), preserving order +
+  // speaker + the originating turn so byte lengths can be re-aggregated per turn.
+  const tasks: { text: string; speaker: Speaker; turnIndex: number }[] = [];
+  for (let i = 0; i < turns.length; i++) {
+    const turn = turns[i]!;
+    const normalized = normalizeScriptForTts(turn.text, locale);
+    for (const chunk of splitScriptIntoChunks(normalized)) {
+      tasks.push({ text: chunk, speaker: turn.speaker, turnIndex: i });
+    }
+  }
+  if (tasks.length === 0) return { audio: Buffer.alloc(0), segments: [] };
+
+  const buffers = await mapLimit(tasks, TTS_CONCURRENCY, (t) =>
+    synthesizeChunk(t.text, locale, usage, t.speaker),
+  );
+
+  // Sum each turn's chunk byte lengths back onto its turn (1:1 with input turns;
+  // a turn that normalized to nothing keeps a 0-byte entry so alignment holds).
+  const segments: DialogueSegmentBytes[] = turns.map((t) => ({ speaker: t.speaker, bytes: 0 }));
+  for (let i = 0; i < tasks.length; i++) {
+    segments[tasks[i]!.turnIndex]!.bytes += buffers[i]!.length;
+  }
+
+  return { audio: Buffer.concat(buffers), segments };
+}
+
 /**
  * Synthesize a two-host conversation: each turn is voiced by its speaker's voice
  * (host A vs host B), then concatenated in order — a 2-person podcast.
@@ -203,24 +254,6 @@ export async function synthesizeDialogue(
   locale: AppLocale = 'uz',
   usage?: UsageContext,
 ): Promise<Buffer> {
-  if (!azureConfigured && !env.OPENAI_API_KEY) {
-    throw new Error(
-      'No TTS provider configured. Set AZURE_SPEECH_KEY + AZURE_SPEECH_REGION (native voices) or OPENAI_API_KEY.',
-    );
-  }
-
-  // Flatten turns into chunk tasks (long turns still split), preserving order + speaker.
-  const tasks: { text: string; speaker: Speaker }[] = [];
-  for (const turn of turns) {
-    const normalized = normalizeScriptForTts(turn.text, locale);
-    for (const chunk of splitScriptIntoChunks(normalized)) {
-      tasks.push({ text: chunk, speaker: turn.speaker });
-    }
-  }
-  if (tasks.length === 0) return Buffer.alloc(0);
-
-  const buffers = await mapLimit(tasks, TTS_CONCURRENCY, (t) =>
-    synthesizeChunk(t.text, locale, usage, t.speaker),
-  );
-  return Buffer.concat(buffers);
+  const { audio } = await synthesizeDialogueWithSegments(turns, locale, usage);
+  return audio;
 }

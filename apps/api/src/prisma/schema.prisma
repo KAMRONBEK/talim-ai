@@ -364,6 +364,10 @@ model PodcastEpisode {
   audioPath   String?
   durationSec Int?
   sectionId   String?
+  // Real per-turn transcript timings [{ speaker, text, startMs, endMs }] captured at
+  // synthesis from each dialogue turn's audio byte length (CBR mp3 ⇒ bytes ≈ ms).
+  // Null on legacy episodes → the client falls back to char-proportion estimation.
+  segments    Json?
   podcast     Podcast                  @relation(fields: [podcastId], references: [id], onDelete: Cascade)
   progress    PodcastEpisodeProgress[]
 

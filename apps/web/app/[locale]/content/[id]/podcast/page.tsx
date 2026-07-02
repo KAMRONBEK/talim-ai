@@ -314,6 +314,7 @@ function PodcastPageInner({ id }: { id: string }) {
                 onPlaybackRateChange={setPlaybackRate}
                 initialPositionSec={activeProgress?.listenedSec ?? 0}
                 onProgress={handleProgress}
+                segments={activeEpisode.segments}
                 script={activeEpisode.script}
               />
             ) : (
