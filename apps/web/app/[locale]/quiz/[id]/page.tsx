@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { QuizResult } from '@/components/quiz/QuizResult';
+import { QuizReview } from '@/components/quiz/QuizReview';
 import {
   useQuiz,
   useSubmitQuiz,
@@ -23,12 +24,14 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
   const { data: latestAttemptData, isLoading: attemptLoading } = useLatestQuizAttempt(id);
   const submitQuiz = useSubmitQuiz();
   const [retaking, setRetaking] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
   const [retakeKey, setRetakeKey] = useState(0);
   const contentId = quiz?.contentId ?? '';
   const { data: content } = useContent(contentId);
 
   const handleSubmit = async (answers: Record<string, string>) => {
     await submitQuiz.mutateAsync({ quizId: id, answers, contentId });
+    setReviewing(false);
     setRetaking(false);
   };
 
@@ -75,15 +78,25 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
                 : t('generatingQuestions')}
           </p>
           {showResult && resultData.attempt ? (
-            <QuizResult
-              score={resultData.attempt.score}
-              correct={resultData.correct ?? 0}
-              total={resultData.total ?? questionCount}
-              onRetry={() => {
-                setRetaking(true);
-                setRetakeKey((k) => k + 1);
-              }}
-            />
+            reviewing ? (
+              <QuizReview
+                quiz={quiz}
+                answers={resultData.attempt.answers}
+                onBack={() => setReviewing(false)}
+              />
+            ) : (
+              <QuizResult
+                score={resultData.attempt.score}
+                correct={resultData.correct ?? 0}
+                total={resultData.total ?? questionCount}
+                onRetry={() => {
+                  setReviewing(false);
+                  setRetaking(true);
+                  setRetakeKey((k) => k + 1);
+                }}
+                onReview={() => setReviewing(true)}
+              />
+            )
           ) : (
             <QuizCard
               key={`${id}-${retakeKey}`}

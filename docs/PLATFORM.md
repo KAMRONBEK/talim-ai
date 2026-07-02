@@ -108,7 +108,7 @@ The original B2C experience: uploads PDFs / YouTube links / slides, and gets sum
 1. Learner signs up (`POST /auth/register`) — defaults to `INDIVIDUAL`.
 2. Uploads a PDF or pastes a YouTube URL via `apps/web`.
 3. The API enqueues a `processContent` job. Content status moves `PENDING → PROCESSING → READY` (or `FAILED`). See the pipeline in §5.
-4. Once `READY`, the learner reads the AI-generated **summary**, generates a **podcast** (TTS), generates a **quiz**, and chats with the **AI tutor** — which retrieves the most relevant chunks of *their own content* via pgvector and answers grounded in them, optionally rendering visuals (graphs, charts, diagrams, Manim animations).
+4. Once `READY`, the learner reads the AI-generated **summary**, generates a **podcast** (TTS, with a transcript that follows the audio), takes a **quiz** (with a per-question review screen after submitting), and chats with the **AI tutor** — which retrieves the most relevant chunks of *their own content* via pgvector and answers grounded in them, optionally rendering visuals (graphs, charts, diagrams, Manim animations).
 
 ### (b) Learner becomes a tutor: request → admin approval → org + subscription
 1. A signed-in learner submits **"Become a tutor"** → `POST /auth/upgrade-to-tenant`, which creates a `TutorRequest` (status `PENDING`).
@@ -121,18 +121,18 @@ The original B2C experience: uploads PDFs / YouTube links / slides, and gets sum
    - **Manually:** `POST /tenant/students` with a name and an **optional** email. Email-less students (kids) get a username + password and a **synthetic email** (`username@students.talim.local`) plus a `mustChangePassword` flag.
    - **Join code:** the tutor shares a class **join code**; learners self-enroll at registration (`joinCode` accepted on `POST /auth/register`, or `POST /auth/join-class` for an existing user). The tutor can rotate it via `POST /tenant/join-code/regenerate`.
 2. **Upload & assign materials:** tutor uploads content (`/tenant/content`), then assigns it to students via `POST /tenant/assignments` (and removes with `DELETE /tenant/assignments`).
-3. **Question banks:** tutor creates banks (`/tenant/question-banks`), generates AI questions from content, and reviews/approves them (`BankQuestionStatus`).
-4. **Assessments:** `POST /tenant/assessments` with `AssessmentMode` of `WRITTEN` or **`GAME`**. Game mode supports a per-question timer (`secondsPerQuestion`), speed-based points (`pointsAwarded`, `pointsTotal`), streaks (`maxStreak`), and a class **leaderboard** (indexed by `assessmentId, pointsTotal`).
+3. **Question banks:** the tutor works through a **5-step wizard** (Bank → Generate → Review → Publish → Assign): AI-generate questions from content (10 generation styles) *or* author them by hand, then review/approve (`BankQuestionStatus`). The engine supports **11 question types** — from short-answer / multiple-choice through MATCHING and ORDERING to the image-based **HOTSPOT** and bucket-based **DRAG_DROP** (those last two are manual-authoring only); grading for every type lives in `services/assessment/shared.ts`.
+4. **Assessments:** `POST /tenant/assessments` with `AssessmentMode` of `WRITTEN` or **`GAME`**. Game mode supports a per-question timer (`secondsPerQuestion`), speed-based points (`pointsAwarded`, `pointsTotal`), streaks (`maxStreak`), and a class **leaderboard** (indexed by `assessmentId, pointsTotal`) that updates in real time via a `leaderboard.update` SSE event. Assignments can carry a **due date**; late submissions are rejected (403).
 5. **Track progress:** `GET /tenant/progress` (class), `GET /tenant/students/:id/progress` (per student).
 
 ### (d) Student logs in → assigned materials → game quiz → leaderboard
 1. Student logs in (`POST /auth/login`); if `mustChangePassword`, they set a new one.
 2. Sees **only assigned** materials (`GET /learner/...`, scoped by active membership).
-3. Opens an assigned **GAME** quiz, answers under the per-question timer, and earns speed points + streak bonuses.
-4. Their score posts to the class leaderboard for that assessment.
+3. Opens an assigned **GAME** quiz, answers under the per-question timer (every question type renders and grades natively in the player), and earns speed points + streak bonuses — as long as the assignment's due date hasn't passed (otherwise the quiz shows a "submissions closed" locked state).
+4. Their score posts to the class leaderboard for that assessment, which updates **live** for everyone watching.
 
 ### (e) Admin operations
-From apps/admin: approve/reject tutor requests; create / edit / delete users (`/admin/users`, `/admin/users/:id`), reset passwords, edit a user's subscription (`/admin/users/:id/subscription`); manage tenants (`/admin/tenants`); inspect & retry content jobs (`/admin/contents`); manage generated media (`/admin/generated`); review subscriptions (`/admin/subscriptions`), usage summary (`/admin/usage/summary`), platform stats (`/admin/stats/platform`), and the **audit log** (`/admin/audit-logs`). All admin routes require `authMiddleware + requireRole('ADMIN')` and are rate-limited.
+From apps/admin: approve/reject tutor requests; create / edit / delete users (`/admin/users`, `/admin/users/:id`), reset passwords, edit a user's subscription (`/admin/users/:id/subscription`), and **impersonate** a user for support via a short-lived (30 min) token (`/admin/users/:id/impersonate`, opened at the web `/impersonate` route); manage tenants (`/admin/tenants`); inspect & retry content jobs (`/admin/contents`); manage generated media (`/admin/generated`); review subscriptions (`/admin/subscriptions`), usage summary (`/admin/usage/summary`), platform stats (`/admin/stats/platform`), and the **audit log** (`/admin/audit-logs`). All admin routes require `authMiddleware + requireRole('ADMIN')` and are rate-limited.
 
 ---
 
@@ -149,12 +149,12 @@ From `apps/api/src/jobs/processContent.job.ts`:
    - PDF → `extractPdfText`.
 3. **Chunk** the text (`chunkText`).
 4. **Embed & store:** `storeChunksWithEmbeddings` calls OpenAI `text-embedding-3-small` (1536 dims) and inserts each chunk + vector into the `Chunk` table as a pgvector `vector` column.
-5. **Sections:** `generateContentSections` builds structured sections/summary (when there are enough chunks).
+5. **Sections:** `generateContentSections` builds structured sections/summary (when there are enough chunks), optionally as a **2-level chapter → subsection outline** (`ContentSection.parentId` / `depth`) that renders as a nested navigation rail.
 6. Mark content `READY` (or `FAILED` on error).
 
 ### Other jobs
 - **`generateQuiz`** — generates quiz questions from content.
-- **`generatePodcast`** — turns a script into audio via TTS (`tts.service.ts`, OpenAI speech, locale-aware voice).
+- **`generatePodcast`** — turns a script into audio via TTS (`tts.service.ts`, locale-aware voice), recording **per-segment audio byte-lengths** so the player can keep the transcript in sync with playback.
 - **`renderManim`** — renders Manim animations requested by the AI tutor's `RENDER_MANIM` tool.
 
 ### RAG tutor chat
@@ -224,5 +224,5 @@ Because all of this is concentrated in one service, every content/assessment que
 | `/content`, `/chat`, `/quiz`, `/summary` | B2C content, RAG tutor chat, quizzes, summaries |
 | `/tenant` | tenant info, `join-code/regenerate`, `students` (CRUD + reset-password + progress), `assignments`, `question-banks`, `assessments`, tenant `content` sub-router (upload, retry, podcast, video, sections, transcript, OCR) |
 | `/learner` | `summary`, `assessments` (assigned), attempts |
-| `/admin` | `audit-logs`, `tutor-requests` (+approve/reject), `users`, `tenants`, `contents`, `generated`, `subscriptions`, `usage/summary`, `stats/platform` — all `ADMIN`-only |
+| `/admin` | `audit-logs`, `tutor-requests` (+approve/reject), `users` (+`:id/impersonate`), `tenants`, `contents`, `generated`, `subscriptions`, `usage/summary`, `stats/platform` — all `ADMIN`-only |
 | `/usage`, `/billing` | usage metering, billing/subscription info |

@@ -48,6 +48,10 @@ tenantRoutes.get('/question-banks', asyncHandler(assessmentController.listBanks)
 tenantRoutes.post('/question-banks', asyncHandler(assessmentController.createBank));
 tenantRoutes.get('/question-banks/:bankId/questions', asyncHandler(assessmentController.listQuestions));
 tenantRoutes.post(
+  '/question-banks/:bankId/questions',
+  asyncHandler(assessmentController.createBankQuestion),
+);
+tenantRoutes.post(
   '/question-banks/:bankId/generate',
   enforceQuota('GENERATION'),
   asyncHandler(assessmentController.generateQuestions),

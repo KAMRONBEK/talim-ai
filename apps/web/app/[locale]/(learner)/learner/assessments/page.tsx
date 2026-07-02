@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { ArrowDown, ArrowUp, CalendarClock, Play, Sparkles, Trophy } from 'lucide-react';
+import { ArrowDown, ArrowUp, CalendarClock, GripVertical, Play, Sparkles, Trophy } from 'lucide-react';
 import { Badge, Button, Input } from '@talim/ui';
 import type { AppLocale, AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import {
@@ -13,15 +13,24 @@ import {
 import { formatRelativeTime } from '@/lib/format-relative-time';
 import { GameQuizPlayer } from '@/components/learner/game-quiz-player';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
+import { useAuthStore } from '@/store/useAuthStore';
 
-function Leaderboard({ assessmentId }: { assessmentId: string }) {
+function Leaderboard({
+  assessmentId,
+  live = false,
+}: {
+  assessmentId: string;
+  live?: boolean;
+}) {
   const t = useTranslations('learner.assessments');
   const tc = useTranslations('common');
-  const { data, isLoading, isError } = useLearnerLeaderboard(assessmentId);
+  // Highlight the current learner's own row in the board.
+  const currentUserId = useAuthStore((s) => s.user?.id);
+  const { data, isLoading, isError } = useLearnerLeaderboard(assessmentId, { live });
   if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
   if (isLoading) return <p className="text-sm text-muted-foreground">{t('loadingLeaderboard')}</p>;
   if (!data) return null;
-  return <LeaderboardTable rows={data.rows} mode={data.mode} />;
+  return <LeaderboardTable rows={data.rows} mode={data.mode} highlightId={currentUserId} />;
 }
 
 function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
@@ -39,6 +48,10 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   const [matching, setMatching] = useState<Record<string, string[]>>({});
   // ORDERING: the learner's current ordering of a question's shuffled items.
   const [ordering, setOrdering] = useState<Record<string, string[]>>({});
+  // DRAG_DROP: chosen target label per item, parallel to config.items ('' = still in the pool).
+  const [dragDrop, setDragDrop] = useState<Record<string, string[]>>({});
+  // DRAG_DROP: the item index currently picked in the tap/click fallback (per question).
+  const [dragPick, setDragPick] = useState<Record<string, number | null>>({});
   const [result, setResult] = useState<AssessmentSubmitResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
@@ -61,6 +74,67 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
     if (!Array.isArray(raw)) return [];
     return raw.map((b) => (Array.isArray(b) ? b.filter((v): v is string => typeof v === 'string') : []));
   };
+  // HOTSPOT: config.imageUrl is the backdrop the learner clicks (accept regions live in
+  // config.regions, but the player only needs the image to render the click surface).
+  const hotspotImageUrl = (config: Record<string, unknown> | null): string => {
+    const raw = config?.imageUrl;
+    return typeof raw === 'string' ? raw : '';
+  };
+  // HOTSPOT: the learner's stored click point ({ x, y } in 0..1) for marker rendering, or null.
+  const hotspotPoint = (qid: string): { x: number; y: number } | null => {
+    const raw = answers[qid];
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw) as { x?: unknown; y?: unknown };
+      if (typeof parsed.x === 'number' && typeof parsed.y === 'number') {
+        return { x: parsed.x, y: parsed.y };
+      }
+    } catch {
+      /* not a stored point */
+    }
+    return null;
+  };
+  // DRAG_DROP: config.items are the draggable chips; config.targets are the labelled buckets.
+  const dragItems = (config: Record<string, unknown> | null): string[] => {
+    const raw = config?.items;
+    return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+  };
+  const dragTargets = (config: Record<string, unknown> | null): string[] => {
+    const raw = config?.targets;
+    return Array.isArray(raw) ? raw.filter((v): v is string => typeof v === 'string') : [];
+  };
+  // DRAG_DROP: assign item `index` to a target bucket (or '' to send it back to the pool),
+  // keeping the per-question array parallel to config.items.
+  const placeDrag = (qid: string, itemCount: number, index: number, target: string) => {
+    setDragDrop((prev) => {
+      const current = Array.from({ length: itemCount }, (_, i) => prev[qid]?.[i] ?? '');
+      current[index] = target;
+      return { ...prev, [qid]: current };
+    });
+  };
+  // DRAG_DROP results view: parse a JSON string[] submission ([] when absent/invalid).
+  const parseStringArray = (raw: string): string[] => {
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === 'string') : [];
+    } catch {
+      return [];
+    }
+  };
+  // HOTSPOT results view: format a stored click point as percentage coords (or a dash when blank).
+  const formatHotspotAnswer = (raw: string): string => {
+    if (!raw) return '—';
+    try {
+      const parsed = JSON.parse(raw) as { x?: unknown; y?: unknown };
+      if (typeof parsed.x === 'number' && typeof parsed.y === 'number') {
+        return `${Math.round(parsed.x * 100)}%, ${Math.round(parsed.y * 100)}%`;
+      }
+    } catch {
+      /* not a point */
+    }
+    return '—';
+  };
   // Move an ORDERING item up (-1) or down (+1); state initialises from the shuffled options.
   const moveOrder = (qid: string, fallback: string[], index: number, dir: -1 | 1) => {
     setOrdering((prev) => {
@@ -77,7 +151,7 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
   };
 
   if (result) {
-    const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
+    const questionById = new Map(assessment.questions.map((q) => [q.id, q]));
     // Strict scoring attaches signed points; when present, show a correct/wrong/blank
     // breakdown with the net points. Absent (legacy percentage scoring) → unchanged view.
     const strict = result.attempt.pointsEarned != null && result.attempt.maxPoints != null;
@@ -125,30 +199,70 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
             </div>
           </div>
         )}
-        {result.results.map((r, i) => (
-          <div
-            key={r.questionId}
-            className={`rounded-xl border p-3 ${
-              r.correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5'
-            }`}
-          >
-            <p className="text-sm font-medium">
-              {i + 1}. {promptById.get(r.questionId)}
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              <span className={r.correct ? 'font-semibold text-success' : 'font-semibold text-destructive'}>
-                {r.correct ? t('correctMark') : t('incorrectMark')}
-              </span>{' '}
-              · {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
-            </p>
-            {!r.correct && r.acceptableAnswers.length > 0 && (
-              <p className="text-sm text-muted-foreground">
-                {t('acceptable', { answers: r.acceptableAnswers.join(', ') })}
+        {result.results.map((r, i) => {
+          const q = questionById.get(r.questionId);
+          const isDragDrop = q?.type === 'DRAG_DROP';
+          const isHotspot = q?.type === 'HOTSPOT';
+          return (
+            <div
+              key={r.questionId}
+              className={`rounded-xl border p-3 ${
+                r.correct ? 'border-success/40 bg-success/5' : 'border-destructive/40 bg-destructive/5'
+              }`}
+            >
+              <p className="text-sm font-medium">
+                {i + 1}. {q?.prompt}
               </p>
-            )}
-            {r.explanation && <p className="mt-1 text-xs text-muted-foreground">{r.explanation}</p>}
-          </div>
-        ))}
+              <p className="mt-1 text-sm text-muted-foreground">
+                <span className={r.correct ? 'font-semibold text-success' : 'font-semibold text-destructive'}>
+                  {r.correct ? t('correctMark') : t('incorrectMark')}
+                </span>
+                {!isDragDrop && (
+                  <>
+                    {' · '}
+                    {t('yourAnswer', {
+                      answer: isHotspot
+                        ? formatHotspotAnswer(r.submittedAnswer)
+                        : r.submittedAnswer || '—',
+                    })}
+                  </>
+                )}
+              </p>
+              {isDragDrop ? (
+                // Chosen-vs-correct mapping per item (parallel to config.items).
+                <div className="mt-1 space-y-1">
+                  {dragItems(q?.config ?? null).map((item, idx) => {
+                    const chosen = parseStringArray(r.submittedAnswer);
+                    const got = chosen[idx] ?? '';
+                    const want = r.acceptableAnswers[idx] ?? '';
+                    const ok = got !== '' && got.trim().toLowerCase() === want.trim().toLowerCase();
+                    return (
+                      <p key={idx} className="text-sm text-muted-foreground">
+                        <span className="font-medium text-foreground">{item}</span>
+                        {' → '}
+                        <span className={ok ? 'font-semibold text-success' : 'font-semibold text-destructive'}>
+                          {got || '—'}
+                        </span>
+                        {!ok && want ? (
+                          <span> ({t('acceptable', { answers: want })})</span>
+                        ) : null}
+                      </p>
+                    );
+                  })}
+                </div>
+              ) : (
+                !r.correct &&
+                !isHotspot &&
+                r.acceptableAnswers.length > 0 && (
+                  <p className="text-sm text-muted-foreground">
+                    {t('acceptable', { answers: r.acceptableAnswers.join(', ') })}
+                  </p>
+                )
+              )}
+              {r.explanation && <p className="mt-1 text-xs text-muted-foreground">{r.explanation}</p>}
+            </div>
+          );
+        })}
       </div>
     );
   }
@@ -190,6 +304,15 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
               // The items in the learner's chosen order (defaults to the shuffled options).
               return [q.id, ordering[q.id] ?? q.options];
             }
+            if (q.type === 'DRAG_DROP' && dragItems(q.config).length) {
+              // A chosen target per item, parallel to config.items, JSON-encoded — the
+              // ordered-array shape the grader compares index-wise.
+              const items = dragItems(q.config);
+              const chosen = dragDrop[q.id] ?? [];
+              return [q.id, JSON.stringify(items.map((_, i) => chosen[i] ?? ''))];
+            }
+            // HOTSPOT rides through the default single-string path: answers[q.id] already
+            // holds JSON.stringify({ x, y }) (the normalized click point) written on click.
             return [q.id, answers[q.id] ?? ''];
           }),
         );
@@ -449,6 +572,149 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
                   </div>
                 ))}
               </div>
+            ) : question.type === 'HOTSPOT' && hotspotImageUrl(question.config) ? (
+              // Click the correct spot on the image; store the normalized 0..1 point as
+              // JSON.stringify({ x, y }) in the answers map and drop a marker at the click.
+              <div className="space-y-2">
+                <p className="text-xs text-muted-foreground">{t('hotspotHint')}</p>
+                <button
+                  type="button"
+                  disabled={locked}
+                  onClick={(event) => {
+                    const rect = event.currentTarget.getBoundingClientRect();
+                    if (!rect.width || !rect.height) return;
+                    const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+                    const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+                    setAnswers((prev) => ({ ...prev, [question.id]: JSON.stringify({ x, y }) }));
+                  }}
+                  className={`relative block w-full max-w-lg overflow-hidden rounded-lg border border-border/70 ${
+                    locked ? 'cursor-not-allowed' : 'cursor-crosshair'
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={hotspotImageUrl(question.config)}
+                    alt=""
+                    draggable={false}
+                    className="pointer-events-none block w-full select-none"
+                  />
+                  {(() => {
+                    const point = hotspotPoint(question.id);
+                    return point ? (
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background bg-primary shadow-[0_0_0_3px_rgba(0,0,0,0.15)] ring-2 ring-primary/40"
+                        style={{ left: `${point.x * 100}%`, top: `${point.y * 100}%` }}
+                      />
+                    ) : null;
+                  })()}
+                </button>
+              </div>
+            ) : question.type === 'DRAG_DROP' &&
+              dragItems(question.config).length >= 2 &&
+              dragTargets(question.config).length >= 2 ? (
+              // Drag each chip into a target bucket (HTML5 DnD) or tap a chip then a bucket
+              // (click/tap fallback); the answer is a chosen-target-per-item array.
+              (() => {
+                const items = dragItems(question.config);
+                const targets = dragTargets(question.config);
+                const values = dragDrop[question.id] ?? [];
+                const picked = dragPick[question.id] ?? null;
+                const placedCount = items.filter((_, i) => (values[i] ?? '') !== '').length;
+                return (
+                  <div className="space-y-3">
+                    <p className="text-xs text-muted-foreground">{t('dragItemsHint')}</p>
+                    {/* Pool of unplaced chips (draggable + tap-to-pick). */}
+                    <div className="flex min-h-[3rem] flex-wrap gap-2 rounded-lg border border-dashed border-border/70 bg-background p-2">
+                      {items.some((_, i) => !(values[i] ?? '')) ? (
+                        items.map((item, i) =>
+                          (values[i] ?? '') ? null : (
+                            <button
+                              key={`${item}-${i}`}
+                              type="button"
+                              disabled={locked}
+                              draggable={!locked}
+                              aria-pressed={picked === i}
+                              onDragStart={(event) =>
+                                event.dataTransfer.setData('text/plain', String(i))
+                              }
+                              onClick={() =>
+                                setDragPick((prev) => ({
+                                  ...prev,
+                                  [question.id]: prev[question.id] === i ? null : i,
+                                }))
+                              }
+                              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
+                                picked === i
+                                  ? 'border-primary bg-primary/10 text-primary'
+                                  : 'cursor-grab border-border/70 bg-card hover:border-primary/40 hover:bg-secondary/40 active:cursor-grabbing'
+                              }`}
+                            >
+                              <GripVertical className="h-3.5 w-3.5 text-muted-foreground" />
+                              {item}
+                            </button>
+                          ),
+                        )
+                      ) : (
+                        <span className="px-1 py-1 text-sm text-muted-foreground">
+                          {t('dragAllPlaced')}
+                        </span>
+                      )}
+                    </div>
+                    {/* Target buckets (drop zone + tap-to-place). */}
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {targets.map((target) => (
+                        <div
+                          key={target}
+                          onDragOver={(event) => event.preventDefault()}
+                          onDrop={(event) => {
+                            event.preventDefault();
+                            if (locked) return;
+                            const i = Number(event.dataTransfer.getData('text/plain'));
+                            if (Number.isInteger(i)) placeDrag(question.id, items.length, i, target);
+                          }}
+                          onClick={() => {
+                            if (locked || picked === null) return;
+                            placeDrag(question.id, items.length, picked, target);
+                            setDragPick((prev) => ({ ...prev, [question.id]: null }));
+                          }}
+                          className="min-h-[4.5rem] rounded-lg border border-border/70 bg-card p-3"
+                        >
+                          <p className="mb-2 text-xs font-medium text-muted-foreground">{target}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {items.map((item, i) =>
+                              (values[i] ?? '') === target ? (
+                                <button
+                                  key={`${item}-${i}`}
+                                  type="button"
+                                  disabled={locked}
+                                  draggable={!locked}
+                                  onDragStart={(event) =>
+                                    event.dataTransfer.setData('text/plain', String(i))
+                                  }
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    if (!locked) placeDrag(question.id, items.length, i, '');
+                                  }}
+                                  className="rounded-lg border border-primary/40 bg-primary/10 px-3 py-1.5 text-sm text-primary disabled:cursor-not-allowed disabled:opacity-60"
+                                >
+                                  {item}
+                                </button>
+                              ) : null,
+                            )}
+                            {items.every((_, i) => (values[i] ?? '') !== target) && (
+                              <span className="text-xs text-muted-foreground/70">{t('dropHere')}</span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {t('placedCount', { count: placedCount, total: items.length })}
+                    </p>
+                  </div>
+                );
+              })()
             ) : (
               <Input
                 disabled={locked}
@@ -484,18 +750,21 @@ function AssessmentCard({
   const [writtenStarted, setWrittenStarted] = useState(false);
   const locked = assessment.attemptCount >= assessment.maxAttempts;
   const isGame = assessment.mode === 'GAME';
+  // Enforced due date: once the deadline passes, submissions are closed — the server also
+  // rejects late attempts with a 403, so the start/play controls and form are hidden here.
+  const pastDue = assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now();
   // Deep-link from the dashboard "Join" banner (?play=<id>) auto-opens the game player.
   useEffect(() => {
-    if (autoPlay && isGame && !locked) setPlaying(true);
-  }, [autoPlay, isGame, locked]);
-  // Soft due date: display-only. Overdue styling when past due and the learner hasn't
-  // submitted an attempt yet (a completed task is no longer "overdue").
+    if (autoPlay && isGame && !locked && !pastDue) setPlaying(true);
+  }, [autoPlay, isGame, locked, pastDue]);
+  // Overdue styling on the badge when past due and the learner hasn't submitted an attempt
+  // yet (a completed task is no longer "overdue").
   const completed = assessment.attemptCount > 0;
-  const overdue =
-    assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now() && !completed;
-  // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay expanded.
-  const canStartWritten = !isGame && !locked && assessment.attemptCount === 0;
-  const showWrittenForm = !isGame && (!canStartWritten || writtenStarted);
+  const overdue = pastDue && !completed;
+  // Not-yet-started written tasks collapse behind a Start button; completed/locked ones stay
+  // expanded. Past the deadline nothing can be started or submitted.
+  const canStartWritten = !isGame && !locked && assessment.attemptCount === 0 && !pastDue;
+  const showWrittenForm = !isGame && !pastDue && (!canStartWritten || writtenStarted);
 
   if (playing) {
     return <GameQuizPlayer assessment={assessment} onExit={() => setPlaying(false)} />;
@@ -557,7 +826,7 @@ function AssessmentCard({
           )}
         </div>
         <div className="flex gap-2">
-          {isGame && (
+          {isGame && !pastDue && (
             <Button variant="spark" disabled={locked} onClick={() => setPlaying(true)}>
               <Play className="mr-1.5 h-4 w-4" />
               {locked ? t('attemptLimit') : t('play')}
@@ -576,8 +845,17 @@ function AssessmentCard({
         </div>
       </div>
 
+      {pastDue && (
+        <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4">
+          <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
+            <CalendarClock className="h-4 w-4" />
+            {t('submissionsClosed')}
+          </p>
+          <p className="mt-1 text-sm text-muted-foreground">{t('dueEnforcedHint')}</p>
+        </div>
+      )}
       {showWrittenForm && <WrittenForm assessment={assessment} />}
-      {showBoard && <Leaderboard assessmentId={assessment.id} />}
+      {showBoard && <Leaderboard assessmentId={assessment.id} live={assessment.isLive} />}
     </div>
   );
 }

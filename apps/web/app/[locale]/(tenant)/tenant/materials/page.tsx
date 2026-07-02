@@ -136,7 +136,10 @@ export default function TenantMaterialsPage() {
       {isLoading ? (
         <p className="text-muted-foreground">{tCommon('loading')}</p>
       ) : (
-        <RecentContentGrid contents={filtered} />
+        <RecentContentGrid
+          contents={filtered}
+          hrefFor={(content) => `/tenant/materials/${content.id}`}
+        />
       )}
 
       <Dialog open={linkOpen} onOpenChange={setLinkOpen}>

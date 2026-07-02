@@ -6,11 +6,44 @@ import type {
   AssessmentResults,
   AssessmentSubmitResult,
   BankQuestion,
+  BankQuestionStatus,
   LearnerAssessment,
   QuestionBank,
+  QuestionType,
   TenantAssessment,
 } from '@talim/types';
 import { api } from '@/lib/api';
+
+/**
+ * Every backend generation style (mirrors `questionStyleEnum` in
+ * apps/api/src/services/assessment/shared.ts): a balanced mix, or all of one type.
+ */
+export type BankQuestionStyle =
+  | 'mixed'
+  | 'multipleChoice'
+  | 'trueFalse'
+  | 'multipleSelect'
+  | 'fillBlank'
+  | 'dropdownCloze'
+  | 'matching'
+  | 'ordering'
+  | 'written'
+  | 'numeric';
+
+/**
+ * The fields a tutor can author/edit on a bank question. The structured types
+ * (MATCHING / ORDERING / DROPDOWN_CLOZE) carry their left/right/blanks/blankOptions in
+ * `config` — the server normalizes them into the same storage shape a generated question has.
+ */
+export type BankQuestionEditableFields = {
+  prompt?: string;
+  type?: QuestionType;
+  options?: string[] | null;
+  acceptableAnswers?: string[];
+  config?: Record<string, unknown> | null;
+  explanation?: string | null;
+  status?: BankQuestionStatus;
+};
 
 export function useQuestionBanks() {
   return useQuery({
@@ -54,7 +87,7 @@ export function useGenerateBankQuestions(bankId: string | null) {
       contentId?: string;
       sectionId?: string;
       count?: number;
-      style?: 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
+      style?: BankQuestionStyle;
     }) => {
       const { data } = await api.post<{ questions: BankQuestion[] }>(
         `/tenant/question-banks/${bankId}/generate`,
@@ -70,10 +103,36 @@ export function useGenerateBankQuestions(bankId: string | null) {
 export function usePatchBankQuestion(bankId: string | null) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, ...body }: Partial<BankQuestion> & { id: string }) => {
+    mutationFn: async ({ id, ...body }: BankQuestionEditableFields & { id: string }) => {
       const { data } = await api.patch<{ question: BankQuestion }>(
         `/tenant/question-banks/${bankId}/questions/${id}`,
         body,
+      );
+      return data.question;
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'question-banks', bankId, 'questions'] }),
+  });
+}
+
+/**
+ * Manually author a bank question from scratch (the non-AI path). `prompt`, `type`, and at
+ * least one `acceptableAnswers` are required; the server stores it APPROVED. Invalidates the
+ * same bank/questions key the generate + patch mutations use.
+ */
+export function useCreateBankQuestion(bankId: string | null) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (
+      input: {
+        prompt: string;
+        type: QuestionType;
+        acceptableAnswers: string[];
+      } & Pick<BankQuestionEditableFields, 'options' | 'config' | 'explanation'>,
+    ) => {
+      const { data } = await api.post<{ question: BankQuestion }>(
+        `/tenant/question-banks/${bankId}/questions`,
+        input,
       );
       return data.question;
     },
@@ -172,7 +231,14 @@ export function useAssessmentResults(assessmentId: string | null) {
   });
 }
 
-export function useAssessmentLeaderboard(assessmentId: string | null) {
+// Live-leaderboard SSE (leaderboard.update) is the primary refresh path; while a game is
+// live we also poll on a slow interval as a fallback for when the SSE stream is down.
+const LIVE_LEADERBOARD_POLL_MS = 5_000;
+
+export function useAssessmentLeaderboard(
+  assessmentId: string | null,
+  { live = false }: { live?: boolean } = {},
+) {
   return useQuery({
     queryKey: ['tenant', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -182,10 +248,14 @@ export function useAssessmentLeaderboard(assessmentId: string | null) {
       return data;
     },
     enabled: Boolean(assessmentId),
+    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
   });
 }
 
-export function useLearnerLeaderboard(assessmentId: string | null) {
+export function useLearnerLeaderboard(
+  assessmentId: string | null,
+  { live = false }: { live?: boolean } = {},
+) {
   return useQuery({
     queryKey: ['learner', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -195,6 +265,7 @@ export function useLearnerLeaderboard(assessmentId: string | null) {
       return data;
     },
     enabled: Boolean(assessmentId),
+    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
   });
 }
 

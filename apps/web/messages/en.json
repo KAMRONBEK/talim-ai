@@ -80,7 +80,8 @@
     "heroSubtitle": "Join thousands of learners and tutors across Uzbekistan turning sources into summaries, podcasts, quizzes and an AI tutor.",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "termsNotice": "By continuing you agree to our Terms."
+    "termsNotice": "By continuing you agree to our Terms.",
+    "acceptTerms": "I agree to the <terms>Terms of Service</terms>."
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",
@@ -369,7 +370,11 @@
     "resultReviewCount": "{count} to review",
     "resultReviewDesc": "Retake the quiz to turn these around.",
     "resultAllCorrect": "Every question correct — flawless!",
-    "review": "Review"
+    "review": "Review",
+    "reviewTitle": "Answer review",
+    "backToResults": "Back to results",
+    "yourAnswerLabel": "Your answer:",
+    "notAnswered": "Not answered"
   },
   "theme": {
     "light": "Light",
@@ -694,7 +699,103 @@
         "scheduleLabel": "Scheduled start",
         "saveSchedule": "Save schedule",
         "clearSchedule": "Clear schedule"
-      }
+      },
+      "wizardNav": "Assessment builder steps",
+      "stepBankLabel": "Bank",
+      "stepGenerateLabel": "Generate",
+      "stepReviewLabel": "Review",
+      "stepPublishLabel": "Publish",
+      "stepAssignLabel": "Assign",
+      "stepBack": "Back",
+      "stepNext": "Next",
+      "selectBankFirst": "Select a bank to continue",
+      "reviewDesc": "Review, edit and approve questions",
+      "addQuestion": "Add question",
+      "filterByStatus": "Filter by status",
+      "filterAll": "All",
+      "filterPending": "Pending",
+      "filterApproved": "Approved",
+      "filterRejected": "Rejected",
+      "filterByType": "Filter by type",
+      "filterAllTypes": "All types",
+      "bulkActions": "Bulk actions",
+      "selectedCount": "{count} selected",
+      "approveSelected": "Approve selected",
+      "rejectSelected": "Reject selected",
+      "clearSelection": "Clear",
+      "selectAll": "Select all",
+      "selectRow": "Select question",
+      "reviewEmpty": "No questions yet. Generate them or add one manually.",
+      "reviewNoMatch": "No questions match this filter",
+      "editQuestion": "Edit question",
+      "newQuestion": "New question",
+      "styleMultipleSelect": "Multiple select",
+      "styleFillBlank": "Fill in the blank",
+      "styleDropdownCloze": "Dropdown cloze",
+      "styleMatching": "Matching",
+      "styleOrdering": "Ordering",
+      "typeShortAnswer": "Short answer",
+      "typeNumeric": "Numeric",
+      "typeMultipleChoice": "Multiple choice",
+      "typeTrueFalse": "True / False",
+      "typeMultipleSelect": "Multiple select",
+      "typeFillBlank": "Fill in the blank",
+      "typeDropdownCloze": "Dropdown cloze",
+      "typeMatching": "Matching",
+      "typeOrdering": "Ordering",
+      "editorRemove": "Remove",
+      "editorTypeLabel": "Question type",
+      "editorPromptLabel": "Question prompt",
+      "editorPromptPlaceholder": "Enter the question",
+      "editorClozeHint": "Use ___ in the prompt for each blank",
+      "editorAnswersLabel": "Acceptable answers",
+      "editorBlankAnswersLabel": "Answers (one per blank)",
+      "editorAnswersHint": "Each one is accepted as correct",
+      "editorNumericHint": "Answers are compared numerically",
+      "editorFillBlankHint": "One answer per blank, in order",
+      "editorAddAnswer": "Add answer",
+      "editorAnswerPlaceholder": "Answer",
+      "editorOptionsLabel": "Options",
+      "editorCorrectHint": "Mark the correct option",
+      "editorCorrectHintMulti": "Mark all correct options",
+      "editorMarkCorrect": "Mark correct",
+      "editorOptionPlaceholder": "Option",
+      "editorAddOption": "Add option",
+      "editorMatchingLabel": "Pairs",
+      "editorMatchingHint": "Enter the correct match for each prompt",
+      "editorMatchingLeft": "Prompt",
+      "editorMatchingRight": "Match",
+      "editorAddPair": "Add pair",
+      "editorDistractorsLabel": "Extra wrong matches",
+      "editorDistractorsHint": "Optional distractor options",
+      "editorAddDistractor": "Add distractor",
+      "editorOrderingLabel": "Items in correct order",
+      "editorOrderingHint": "Enter them in the correct sequence",
+      "editorAddItem": "Add item",
+      "editorItemPlaceholder": "Item",
+      "editorBlankLabel": "Blank {n}",
+      "editorAddBlank": "Add blank",
+      "editorExplanationLabel": "Explanation",
+      "editorExplanationPlaceholder": "Optional explanation",
+      "editorCancel": "Cancel",
+      "editorSave": "Save question",
+      "editorCreate": "Add question",
+      "editorTrue": "True",
+      "editorFalse": "False",
+      "typeHotspot": "Hotspot",
+      "typeDragDrop": "Drag & drop",
+      "editorHotspotImageLabel": "Image URL",
+      "editorHotspotImagePlaceholder": "https://... image address",
+      "editorHotspotHint": "Click the image to mark a correct area. Each click adds a small region.",
+      "editorHotspotNoImage": "Enter an image URL first to start marking areas.",
+      "editorDragTargetsLabel": "Categories (buckets)",
+      "editorDragTargetsHint": "The buckets that items are sorted into",
+      "editorAddTarget": "Add category",
+      "editorDragTargetPlaceholder": "Category name",
+      "editorDragItemsLabel": "Items",
+      "editorDragItemsHint": "Pick the correct category for each item",
+      "editorDragItemPlaceholder": "Item",
+      "editorDragTargetSelect": "Select category"
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",
@@ -722,7 +823,11 @@
       "regenerate": "Regenerate",
       "retry": "Retry",
       "readMin": "{count} min",
-      "noSections": "No sections yet."
+      "noSections": "No sections yet.",
+      "back": "Back to materials",
+      "created": "Created",
+      "notFound": "Material not found.",
+      "openStudyView": "Open study view"
     },
     "masteryByTopic": "Mastery by topic · class",
     "masteryByTopicEmpty": "No topic mastery yet. Assign materials and coverage appears as students study.",
@@ -775,7 +880,23 @@
       "confirm": "Confirm",
       "selectHint": "Select all that apply",
       "selectedCount": "{count} selected",
-      "blankPlaceholder": "Blank {index}"
+      "blankPlaceholder": "Blank {index}",
+      "matchingHint": "Match each item to its pair",
+      "orderingHint": "Put the items in the correct order",
+      "dropdownHint": "Choose an answer for each blank",
+      "choosePlaceholder": "Choose…",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "matchedCount": "{count} matched",
+      "filledCount": "{count} filled",
+      "hotspotHint": "Tap the correct spot on the image",
+      "dragDropHint": "Drag each item into the correct group",
+      "dragDropAllPlaced": "All items placed",
+      "placedCount": "{count} of {total} placed",
+      "answeredCount": "{count} / {total} answered",
+      "speedBonus": "Speed bonus",
+      "potentialPoints": "up to {points} pts",
+      "speedBonusHint": "Points you'd earn by answering correctly now — it drops as time runs out. Your final score is shown on the results screen."
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
@@ -872,7 +993,14 @@
       "netPoints": "Net: {earned} / {max} pts",
       "breakdownCorrect": "Correct",
       "breakdownWrong": "Wrong",
-      "breakdownBlank": "Blank"
+      "breakdownBlank": "Blank",
+      "hotspotHint": "Click the correct spot on the image.",
+      "dragItemsHint": "Drag each item into the correct group, or tap an item then a group.",
+      "dragAllPlaced": "All items placed.",
+      "dropHere": "Drop here",
+      "placedCount": "Placed {count} of {total}",
+      "submissionsClosed": "Submissions closed",
+      "dueEnforcedHint": "The due date has passed, so late submissions are no longer accepted."
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",
@@ -1250,5 +1378,52 @@
     "enterFullscreen": "Enter fullscreen",
     "exitFullscreen": "Exit fullscreen",
     "slideProgress": "Slide {index} of {total}"
+  },
+  "impersonate": {
+    "signingIn": "Signing in...",
+    "missingToken": "No impersonation token was provided.",
+    "invalidToken": "This impersonation link is invalid or has expired.",
+    "serverError": "Could not reach the server. Please try again.",
+    "backToLogin": "Back to sign in"
+  },
+  "terms": {
+    "eyebrow": "Legal",
+    "title": "Terms of Service",
+    "intro": "These Terms of Service govern your access to and use of Talim AI. By creating an account or using the platform, you agree to the terms below.",
+    "updated": "Last updated: July 2, 2026",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of terms",
+        "body": "By registering for or using Talim AI, you confirm that you have read, understood, and agree to be bound by these terms. If you do not agree, please do not use the platform. If you use Talim AI on behalf of an organization, you represent that you are authorized to accept these terms for that organization."
+      },
+      "accounts": {
+        "title": "Accounts and eligibility",
+        "body": "You must provide accurate information when creating an account and keep your login credentials secure. You are responsible for all activity under your account. Students may be added to a class by a tutor and can join using a class code. You must be old enough to use the platform under the laws of your country, or use it under the supervision of a parent, guardian, or tutor."
+      },
+      "use": {
+        "title": "Acceptable use",
+        "body": "You agree to use Talim AI only for lawful, educational purposes. You may not upload unlawful, harmful, or infringing material, attempt to disrupt or reverse-engineer the service, abuse the AI features to generate prohibited content, or access data that does not belong to you. We may suspend or remove access to accounts that violate these rules."
+      },
+      "content": {
+        "title": "Content and ownership",
+        "body": "You retain ownership of the materials you upload. By uploading content, you grant Talim AI a limited license to process it in order to generate summaries, podcasts, quizzes, and tutor responses for you and your class. AI-generated output is provided to support your learning and may contain errors; you are responsible for reviewing it before relying on it. You must have the right to upload any material you share with the platform."
+      },
+      "orgs": {
+        "title": "Tutors and student organizations",
+        "body": "Tutors and schools operate as organizations with a set number of seats. A tutor administers their organization, creates and manages student accounts, assigns materials, and runs assessments. Organizations are activated manually by a Talim AI administrator, who sets the seat limit; there is no automated payment. Tutors are responsible for the students they add and for using student data only for legitimate educational purposes. Deactivating a student immediately removes their access to assigned content."
+      },
+      "disclaimers": {
+        "title": "Disclaimers and liability",
+        "body": "Talim AI is provided \"as is\" without warranties of any kind. We do not guarantee that AI-generated summaries, answers, or assessments are complete or accurate, and they are not a substitute for professional or certified instruction. To the fullest extent permitted by law, Talim AI is not liable for any indirect or consequential damages arising from your use of the platform."
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "body": "We may update these terms from time to time as the platform evolves. When we make material changes, we will update the date at the top of this page. Your continued use of Talim AI after changes take effect means you accept the revised terms."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "If you have questions about these terms, contact us at support@talim.ai."
+      }
+    }
   }
 }

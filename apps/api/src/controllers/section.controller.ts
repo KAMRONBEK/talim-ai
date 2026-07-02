@@ -16,6 +16,8 @@ function formatSection(
   section: {
     id: string;
     contentId: string;
+    parentId: string | null;
+    depth: number;
     title: string;
     order: number;
     startChunk: number;
@@ -27,6 +29,8 @@ function formatSection(
   return {
     id: section.id,
     contentId: section.contentId,
+    parentId: section.parentId,
+    depth: section.depth,
     title,
     order: section.order,
     startChunk: section.startChunk,

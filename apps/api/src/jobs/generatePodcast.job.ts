@@ -1,16 +1,49 @@
-import { parseAppLocale } from '@talim/types';
+import { Prisma } from '@prisma/client';
+import { parseAppLocale, type PodcastSegment } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { jobEvents } from '../services/events/jobEvents.service.js';
 import { generateChatCompletion } from '../services/ai.service.js';
 import { buildRagContext, boundContextByTokens } from '../services/rag.service.js';
 import { podcastQueue, type GeneratePodcastJobData } from '../services/queue.service.js';
-import { synthesizeSpeech, synthesizeDialogue } from '../services/tts.service.js';
+import {
+  synthesizeSpeech,
+  synthesizeDialogueWithSegments,
+  type DialogueTurn,
+  type DialogueSegmentBytes,
+} from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
 import {
   getPodcastSystemPrompt,
   buildPodcastUserPrompt,
   parsePodcastDialogue,
 } from '../lib/locale-prompts.js';
+
+// Azure emits audio-24khz-48kbitrate-mono-mp3 (48 kbit/s = 6000 bytes/s) and
+// OpenAI's mp3 is near-CBR, so each turn's audio byte length is an accurate proxy
+// for its duration: 48000 bits/s ÷ 8 = 6000 bytes/s ⇒ 6 bytes per millisecond.
+const TTS_BYTES_PER_MS = 6;
+
+/**
+ * Build a time-aligned transcript from the dialogue turns + their per-turn audio
+ * byte lengths (aligned 1:1). Timings are proportional/CBR-derived — the web player
+ * rescales them to the true <audio> duration for provider-agnostic accuracy.
+ */
+function buildPodcastSegments(
+  turns: DialogueTurn[],
+  byteSegments: DialogueSegmentBytes[],
+): PodcastSegment[] {
+  const segments: PodcastSegment[] = [];
+  let cursorMs = 0;
+  for (let i = 0; i < turns.length; i++) {
+    const turn = turns[i]!;
+    const bytes = byteSegments[i]?.bytes ?? 0;
+    const startMs = cursorMs;
+    const endMs = startMs + Math.round(bytes / TTS_BYTES_PER_MS);
+    segments.push({ speaker: turn.speaker, text: turn.text, startMs, endMs });
+    cursorMs = endMs;
+  }
+  return segments;
+}
 
 export function registerGeneratePodcastJob(): void {
   podcastQueue.process(async (job) => {
@@ -43,6 +76,8 @@ export function registerGeneratePodcastJob(): void {
         section = {
           id: 'full',
           contentId,
+          parentId: null,
+          depth: 0,
           title: content.title,
           order: episode.order,
           startChunk: 0,
@@ -74,7 +109,7 @@ export function registerGeneratePodcastJob(): void {
       if (episode.audioPath) await storageService.delete(episode.audioPath).catch(() => undefined);
       await prisma.podcastEpisode.update({
         where: { id: episode.id },
-        data: { script, audioPath: null, durationSec: null },
+        data: { script, audioPath: null, durationSec: null, segments: Prisma.DbNull },
       });
       try {
         const ttsUsage = {
@@ -82,15 +117,24 @@ export function registerGeneratePodcastJob(): void {
           metadata: { contentId, podcastId, episodeId: episode.id },
         };
         const turns = parsePodcastDialogue(script);
-        const audio =
-          turns.length >= 2
-            ? await synthesizeDialogue(turns, locale, ttsUsage)
-            : await synthesizeSpeech(script, locale, ttsUsage);
+        let segments: PodcastSegment[] | null = null;
+        let audio: Buffer;
+        if (turns.length >= 2) {
+          const result = await synthesizeDialogueWithSegments(turns, locale, ttsUsage);
+          audio = result.audio;
+          segments = buildPodcastSegments(turns, result.segments);
+        } else {
+          audio = await synthesizeSpeech(script, locale, ttsUsage);
+        }
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
         const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({
           where: { id: episode.id },
-          data: { audioPath, durationSec: Math.max(60, Math.round((wordCount / 150) * 60)) },
+          data: {
+            audioPath,
+            durationSec: Math.max(60, Math.round((wordCount / 150) * 60)),
+            segments: segments ? (segments as unknown as object) : Prisma.DbNull,
+          },
         });
       } catch (err) {
         console.error(`TTS failed for episode ${episode.id}:`, err);
@@ -132,6 +176,8 @@ export function registerGeneratePodcastJob(): void {
         {
           id: 'full',
           contentId,
+          parentId: null,
+          depth: 0,
           title: content.title,
           order: 0,
           startChunk: 0,
@@ -198,10 +244,15 @@ export function registerGeneratePodcastJob(): void {
           metadata: { contentId, podcastId, episodeId: episode.id },
         };
         const turns = parsePodcastDialogue(script);
-        const audio =
-          turns.length >= 2
-            ? await synthesizeDialogue(turns, locale, ttsUsage)
-            : await synthesizeSpeech(script, locale, ttsUsage);
+        let segments: PodcastSegment[] | null = null;
+        let audio: Buffer;
+        if (turns.length >= 2) {
+          const result = await synthesizeDialogueWithSegments(turns, locale, ttsUsage);
+          audio = result.audio;
+          segments = buildPodcastSegments(turns, result.segments);
+        } else {
+          audio = await synthesizeSpeech(script, locale, ttsUsage);
+        }
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
         const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({
@@ -209,6 +260,7 @@ export function registerGeneratePodcastJob(): void {
           data: {
             audioPath,
             durationSec: Math.max(60, Math.round((wordCount / 150) * 60)),
+            segments: segments ? (segments as unknown as object) : Prisma.DbNull,
           },
         });
         audioCount++;

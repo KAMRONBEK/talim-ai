@@ -1,5 +1,6 @@
 import type { Response } from 'express';
 import { z } from 'zod';
+import type { PodcastSegment } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
@@ -17,6 +18,11 @@ const createPodcastSchema = z.object({
   regenerate: z.boolean().optional(),
 });
 
+/** Persisted segments are already client-safe ({ speaker, text, startMs, endMs }). */
+function publicSegments(raw: unknown): PodcastSegment[] | null {
+  return Array.isArray(raw) ? (raw as PodcastSegment[]) : null;
+}
+
 function formatEpisode(episode: {
   id: string;
   podcastId: string;
@@ -26,6 +32,7 @@ function formatEpisode(episode: {
   audioPath: string | null;
   durationSec: number | null;
   sectionId: string | null;
+  segments: unknown;
 }) {
   return {
     id: episode.id,
@@ -38,6 +45,9 @@ function formatEpisode(episode: {
     // The client derives an estimated time-aligned transcript from this so the
     // podcast player can highlight the current line + support click-to-seek.
     script: episode.script,
+    // Real per-turn timings when present (rescaled client-side to the true audio
+    // duration); null on legacy episodes so the client falls back to `script`.
+    segments: publicSegments(episode.segments),
   };
 }
 

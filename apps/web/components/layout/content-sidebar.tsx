@@ -74,6 +74,54 @@ export function ContentSidebarBody({
     );
   };
 
+  const sectionLink = (section: ContentSection) => {
+    const progress = sectionProgressMap[section.id];
+    const complete =
+      progress != null && progress.coverageScore >= SECTION_COMPLETE_THRESHOLD;
+    const active = activeSectionId === section.id;
+    return (
+      <Link
+        key={section.id}
+        href={`/content/${contentId}?section=${section.id}`}
+        onClick={onNavigate}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors',
+          active
+            ? 'bg-primary font-semibold text-primary-foreground'
+            : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
+        )}
+      >
+        <FileText className="h-4 w-4 shrink-0" />
+        <span className="truncate">{section.title}</span>
+        {complete && (
+          <Check
+            className={cn(
+              'ml-auto h-4 w-4 shrink-0',
+              active ? 'text-primary-foreground' : 'text-success',
+            )}
+          />
+        )}
+      </Link>
+    );
+  };
+
+  // Group subsections (depth 1) under their parent chapter (depth 0). Legacy/flat
+  // content is entirely depth 0 with parentId null, so every row is top-level and
+  // renders as a flat list identical to before. `sections` already arrives in
+  // reading order, so both the top-level list and each child group stay ordered.
+  const sectionIds = new Set(sections.map((s) => s.id));
+  const topLevelSections = sections.filter(
+    (s) => s.parentId == null || !sectionIds.has(s.parentId),
+  );
+  const childrenByParent = new Map<string, ContentSection[]>();
+  for (const s of sections) {
+    if (s.parentId != null && sectionIds.has(s.parentId)) {
+      const group = childrenByParent.get(s.parentId);
+      if (group) group.push(s);
+      else childrenByParent.set(s.parentId, [s]);
+    }
+  }
+
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="shrink-0 border-b border-border/70 p-4">
@@ -88,33 +136,18 @@ export function ContentSidebarBody({
           {t('sections')}
         </p>
         <div className="space-y-0.5">
-          {sections.map((section) => {
-            const progress = sectionProgressMap[section.id];
-            const complete =
-              progress != null && progress.coverageScore >= SECTION_COMPLETE_THRESHOLD;
+          {topLevelSections.map((section) => {
+            const children = childrenByParent.get(section.id);
+            if (!children || children.length === 0) {
+              return sectionLink(section);
+            }
             return (
-              <Link
-                key={section.id}
-                href={`/content/${contentId}?section=${section.id}`}
-                onClick={onNavigate}
-                className={cn(
-                  'flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm transition-colors',
-                  activeSectionId === section.id
-                    ? 'bg-primary font-semibold text-primary-foreground'
-                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
-                )}
-              >
-                <FileText className="h-4 w-4 shrink-0" />
-                <span className="truncate">{section.title}</span>
-                {complete && (
-                  <Check
-                    className={cn(
-                      'ml-auto h-4 w-4 shrink-0',
-                      activeSectionId === section.id ? 'text-primary-foreground' : 'text-success',
-                    )}
-                  />
-                )}
-              </Link>
+              <div key={section.id} className="space-y-0.5">
+                {sectionLink(section)}
+                <div className="ml-3 space-y-0.5 border-l border-border/70 pl-2">
+                  {children.map((child) => sectionLink(child))}
+                </div>
+              </div>
             );
           })}
         </div>

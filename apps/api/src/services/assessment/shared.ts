@@ -35,24 +35,60 @@ export const generateSchema = z.object({
   style: questionStyleEnum.default('mixed'),
 });
 
-export const patchQuestionSchema = z.object({
-  prompt: z.string().min(1).optional(),
-  type: z
-    .enum([
-      'SHORT_ANSWER',
-      'NUMERIC',
-      'MULTIPLE_CHOICE',
-      'TRUE_FALSE',
-      'MULTIPLE_SELECT',
-      'FILL_BLANK',
-    ])
-    .optional(),
-  options: z.array(z.string()).nullable().optional(),
-  acceptableAnswers: z.array(z.string()).min(1).optional(),
-  config: z.record(z.string(), z.unknown()).nullable().optional(),
-  explanation: z.string().nullable().optional(),
-  status: z.enum(['DRAFT', 'APPROVED', 'REJECTED']).optional(),
-});
+// Every question type the storage + scoring engine supports. Shared by the patch
+// (edit/approve) and create (manual authoring) schemas so a tutor can hand-author or
+// edit any type the AI generator can produce.
+export const questionTypeEnum = z.enum([
+  'SHORT_ANSWER',
+  'NUMERIC',
+  'MULTIPLE_CHOICE',
+  'TRUE_FALSE',
+  'MULTIPLE_SELECT',
+  'FILL_BLANK',
+  'DROPDOWN_CLOZE',
+  'MATCHING',
+  'ORDERING',
+  'HOTSPOT',
+  'DRAG_DROP',
+]);
+
+export const patchQuestionSchema = z
+  .object({
+    prompt: z.string().min(1).optional(),
+    type: questionTypeEnum.optional(),
+    options: z.array(z.string()).nullable().optional(),
+    // HOTSPOT stores an empty list (its answer is the spatial config.regions), so we can't
+    // require min(1) here as it would reject HOTSPOT content edits; the builders re-validate.
+    acceptableAnswers: z.array(z.string()).optional(),
+    config: z.record(z.string(), z.unknown()).nullable().optional(),
+    explanation: z.string().nullable().optional(),
+    status: z.enum(['DRAFT', 'APPROVED', 'REJECTED']).optional(),
+  })
+  .refine((v) => v.type === 'HOTSPOT' || v.acceptableAnswers === undefined || v.acceptableAnswers.length >= 1, {
+    message: 'At least one acceptable answer is required.',
+    path: ['acceptableAnswers'],
+  });
+
+/**
+ * Manual authoring of a bank question from scratch (not AI-generated). `prompt` and `type`
+ * are always required; the structured types carry their left/right/blanks/blankOptions in
+ * `config` (same shape the generator builders consume). Every type requires at least one
+ * `acceptableAnswers` EXCEPT HOTSPOT, whose answer is spatial (the config.regions geometry)
+ * so it stores an empty acceptableAnswers list.
+ */
+export const createQuestionSchema = z
+  .object({
+    prompt: z.string().min(1),
+    type: questionTypeEnum,
+    options: z.array(z.string()).nullable().optional(),
+    acceptableAnswers: z.array(z.string()).default([]),
+    config: z.record(z.string(), z.unknown()).nullable().optional(),
+    explanation: z.string().nullable().optional(),
+  })
+  .refine((v) => v.type === 'HOTSPOT' || v.acceptableAnswers.length >= 1, {
+    message: 'At least one acceptable answer is required.',
+    path: ['acceptableAnswers'],
+  });
 
 export const createAssessmentSchema = z.object({
   bankId: z.string().min(1).optional(),
@@ -412,6 +448,52 @@ function parseMatchingChoices(raw: unknown, left: string[], count: number): stri
   return out;
 }
 
+/** A single hotspot region as normalized (0..1, top-left origin) x/y offset + w/h fractions. */
+export interface HotspotRegion {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** Extract the well-formed hotspot regions from a question `config` blob (drops malformed ones). */
+export function parseHotspotRegions(config: Record<string, unknown> | null): HotspotRegion[] {
+  const raw = config?.regions;
+  if (!Array.isArray(raw)) return [];
+  const regions: HotspotRegion[] = [];
+  for (const r of raw) {
+    if (r && typeof r === 'object' && !Array.isArray(r)) {
+      const { x, y, w, h } = r as Record<string, unknown>;
+      if (
+        typeof x === 'number' &&
+        typeof y === 'number' &&
+        typeof w === 'number' &&
+        typeof h === 'number'
+      ) {
+        regions.push({ x, y, w, h });
+      }
+    }
+  }
+  return regions;
+}
+
+/** Parse a HOTSPOT submission ({ x, y } normalized click point) into a point, or null. */
+function parseHotspotPoint(raw: unknown): { x: number; y: number } | null {
+  const parsed = coerceStructuredAnswer(raw);
+  if (parsed && !Array.isArray(parsed)) {
+    const { x, y } = parsed as Record<string, unknown>;
+    if (typeof x === 'number' && typeof y === 'number') return { x, y };
+  }
+  return null;
+}
+
+/** True when a normalized click point lies inside ANY region (binary hit-test, inclusive edges). */
+export function pointInAnyRegion(regions: HotspotRegion[], point: { x: number; y: number }): boolean {
+  return regions.some(
+    (r) => point.x >= r.x && point.x <= r.x + r.w && point.y >= r.y && point.y <= r.y + r.h,
+  );
+}
+
 /**
  * A MULTIPLE_SELECT question is answerable only if it has at least two options and at
  * least one accepted answer, and every accepted answer exactly matches one option.
@@ -542,6 +624,38 @@ export function gradeQuestion(
       correct: exact,
       creditFraction: partialCredit ? fraction : exact ? 1 : 0,
       answered: submitted.some((a) => a.trim() !== ''),
+    };
+  }
+
+  if (question.type === 'HOTSPOT') {
+    // Binary spatial grading: correct iff the clicked point lies inside any region.
+    // acceptableAnswers is unused — the answer is the config.regions geometry. Empty/absent
+    // click => not answered and incorrect (no partial credit).
+    const regions = parseHotspotRegions(parseQuestionConfig(question.config));
+    const point = parseHotspotPoint(raw);
+    const correct = point != null && pointInAnyRegion(regions, point);
+    return { correct, creditFraction: correct ? 1 : 0, answered: point != null };
+  }
+
+  if (question.type === 'DRAG_DROP') {
+    // acceptableAnswers = the correct target label per item, index-aligned with config.items.
+    // Absolute-position scoring like ORDERING: creditFraction = (#items dropped in their correct
+    // target) / (#items); correct = every item placed correctly.
+    const correctTargets = acceptable;
+    const chosen = parseArrayAnswer(raw);
+    const count = correctTargets.length;
+    let hit = 0;
+    for (let i = 0; i < count; i++) {
+      const got = chosen[i] ?? '';
+      const want = correctTargets[i] ?? '';
+      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
+    }
+    const fraction = count > 0 ? hit / count : 0;
+    const exact = count > 0 && hit === count && chosen.length === count;
+    return {
+      correct: exact,
+      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
+      answered: chosen.some((a) => a.trim() !== ''),
     };
   }
 
