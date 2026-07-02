@@ -823,7 +823,11 @@
       "regenerate": "Qayta yaratish",
       "retry": "Qayta urinish",
       "readMin": "{count} daq",
-      "noSections": "Hozircha bo'limlar yo'q."
+      "noSections": "Hozircha bo'limlar yo'q.",
+      "back": "Materiallarga qaytish",
+      "created": "Yaratilgan",
+      "notFound": "Material topilmadi.",
+      "openStudyView": "O'quv ko'rinishini ochish"
     },
     "masteryByTopic": "Mavzular bo'yicha o'zlashtirish · sinf",
     "masteryByTopicEmpty": "Hozircha mavzu o'zlashtirishi yo'q. Material biriktiring — o'quvchilar o'rgangani sari qamrov paydo bo'ladi.",
@@ -888,7 +892,11 @@
       "hotspotHint": "Rasmda kerakli joyni bosing",
       "dragDropHint": "Har bir elementni to'g'ri guruhga torting",
       "dragDropAllPlaced": "Barcha elementlar joylashtirildi",
-      "placedCount": "{total} tadan {count} tasi joylashtirildi"
+      "placedCount": "{total} tadan {count} tasi joylashtirildi",
+      "answeredCount": "{count} / {total} javob berildi",
+      "speedBonus": "Tezlik bonusi",
+      "potentialPoints": "{points} ballgacha",
+      "speedBonusHint": "Hozir to'g'ri javob bersangiz oladigan ball — vaqt tugab borgani sari kamayadi. Yakuniy ball natijalar sahifasida ko'rsatiladi."
     },
     "welcome": "Xush kelibsiz, {name}",
     "dashboardDesc": "Sizga tayinlangan materiallar.",

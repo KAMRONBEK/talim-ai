@@ -15,36 +15,42 @@ import { DeleteContentDialog } from '@/components/content/delete-content-dialog'
 interface RecentContentGridProps {
   contents: Content[];
   showDelete?: boolean;
+  /** Where a card links to. Defaults to the B2C content reader (`/content/{id}`). */
+  hrefFor?: (content: Content) => string;
 }
 
 const typeStyles: Record<
   ContentType,
-  { gradient: string; icon: typeof FileText; iconClass: string; badgeClass: string; label: string }
+  { gradient: string; icon: typeof FileText; iconClass: string; badgeClass: string }
 > = {
   PDF: {
     gradient: 'from-muted to-muted/50',
     icon: FileText,
     iconClass: 'text-primary/40',
     badgeClass: 'text-primary',
-    label: 'PDF',
   },
   YOUTUBE: {
     gradient: 'from-accent-secondary/15 to-accent-secondary/5',
     icon: Play,
     iconClass: 'text-accent-secondary/50',
     badgeClass: 'text-accent-secondary',
-    label: 'Video',
   },
   SLIDE: {
     gradient: 'from-secondary to-secondary/50',
     icon: Presentation,
     iconClass: 'text-primary/40',
     badgeClass: 'text-primary',
-    label: 'Slides',
   },
 };
 
+const typeLabelKey: Record<ContentType, string> = {
+  PDF: 'filterPdf',
+  YOUTUBE: 'filterVideo',
+  SLIDE: 'filterSlides',
+};
+
 function TypeBadge({ type }: { type: ContentType }) {
+  const t = useTranslations('tenant');
   return (
     <span
       className={cn(
@@ -52,7 +58,7 @@ function TypeBadge({ type }: { type: ContentType }) {
         typeStyles[type].badgeClass,
       )}
     >
-      {typeStyles[type].label}
+      {t(typeLabelKey[type])}
     </span>
   );
 }
@@ -94,7 +100,11 @@ function ContentThumbnail({ content }: { content: Content }) {
   );
 }
 
-export function RecentContentGrid({ contents, showDelete = true }: RecentContentGridProps) {
+export function RecentContentGrid({
+  contents,
+  showDelete = true,
+  hrefFor = (content) => `/content/${content.id}`,
+}: RecentContentGridProps) {
   const t = useTranslations('common');
   const tContent = useTranslations('content');
   const locale = useLocale() as AppLocale;
@@ -115,7 +125,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
         {contents.map((content) => (
           <article key={content.id} className="hover-lift group relative">
             <div className="relative">
-              <Link href={`/content/${content.id}`} aria-label={content.title} className="block">
+              <Link href={hrefFor(content)} aria-label={content.title} className="block">
                 <ContentThumbnail content={content} />
               </Link>
               {(content.status === 'PENDING' || content.status === 'PROCESSING') && (
@@ -139,7 +149,7 @@ export function RecentContentGrid({ contents, showDelete = true }: RecentContent
                 </Button>
               )}
             </div>
-            <Link href={`/content/${content.id}`} className="mt-3 block">
+            <Link href={hrefFor(content)} className="mt-3 block">
               <p className="truncate font-display text-sm font-semibold leading-snug text-foreground">
                 {content.title}
               </p>

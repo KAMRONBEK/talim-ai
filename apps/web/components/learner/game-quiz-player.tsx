@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
-import { ArrowDown, ArrowUp } from 'lucide-react';
+import { ArrowDown, ArrowUp, Zap } from 'lucide-react';
 import { Button, Input } from '@talim/ui';
 import type { AssessmentSubmitResult, LearnerAssessment } from '@talim/types';
 import { useSubmitLearnerAssessment } from '@/hooks/useAssessments';
@@ -18,6 +18,11 @@ const GIRIH_OVERLAY =
 
 // Colored answer chips cycle through the Scholar accents on the dark stage.
 const ANSWER_CHIPS = ['#F7F2E8', '#E0A93D', '#D9663D', '#9DBDB2'];
+
+// Base points for a correct game answer — mirrors GAME_BASE_POINTS in the server scorer
+// (apps/api/src/services/assessment/shared.ts) so the live "speed bonus" preview matches
+// the points the server will actually award for answering correctly at this instant.
+const GAME_BASE_POINTS = 1000;
 
 // Native <select> styled for the immersive dark stage (MATCHING / DROPDOWN_CLOZE).
 const GAME_SELECT_CLASS =
@@ -315,6 +320,17 @@ export function GameQuizPlayer({
 
   const pct = Math.round((timeLeft / limitSec) * 100);
   const ringCircumference = 2 * Math.PI * 37;
+  // Live HUD, built only from client-known signals (the client has no answer key and there
+  // is no per-question grading endpoint, so real correctness-based points can't be shown mid-game):
+  //  - answeredCount = questions locked so far (the honest locked-answers count).
+  //  - potentialPoints = the points this question would award if answered correctly RIGHT NOW.
+  //    It mirrors the server speed curve in computeGamePoints (assessment/shared.ts):
+  //    base × (0.5 + 0.5 × timeFraction), decaying with the countdown to create urgency.
+  //    Streak is unknown client-side (it depends on correctness), so we quote the base-streak
+  //    potential and never present it as earned — the authoritative total is the server-graded
+  //    pointsTotal shown on the results screen.
+  const answeredCount = Object.keys(answers).length;
+  const potentialPoints = Math.round(GAME_BASE_POINTS * (0.5 + 0.5 * (timeLeft / limitSec)));
   const blanks =
     question.type === 'FILL_BLANK' || question.type === 'DROPDOWN_CLOZE'
       ? fillBlankCount(question.config)
@@ -322,10 +338,15 @@ export function GameQuizPlayer({
   return (
     <GameStage>
       <div className="flex flex-col px-5 py-6 sm:px-8 sm:py-8">
-        <div className="flex items-center gap-2.5">
-          <LogoMark className="h-7 w-7" />
-          <span className="font-label text-xs font-semibold uppercase tracking-[0.12em] text-[#9dc4b8]">
-            {t('questionProgress', { current: index + 1, total: assessment.questions.length })}
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <LogoMark className="h-7 w-7" />
+            <span className="font-label text-xs font-semibold uppercase tracking-[0.12em] text-[#9dc4b8]">
+              {t('questionProgress', { current: index + 1, total: assessment.questions.length })}
+            </span>
+          </div>
+          <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 font-label text-xs font-semibold uppercase tracking-[0.12em] text-[#9dc4b8]">
+            {t('answeredCount', { count: answeredCount, total: assessment.questions.length })}
           </span>
         </div>
 
@@ -349,6 +370,22 @@ export function GameQuizPlayer({
             <div className="absolute inset-0 flex items-center justify-center font-display text-2xl font-semibold tabular-nums text-[#f7f2e8]">
               {Math.ceil(timeLeft)}
             </div>
+          </div>
+
+          {/* Honest live "speed bonus": the points you'd earn if you answer THIS question
+              correctly right now (base × the same speed factor the server uses), decaying with
+              the countdown. Not earned points — the authoritative total appears on results. */}
+          <div
+            className="mb-6 flex items-center gap-2 rounded-full border border-[#E0A93D]/30 bg-[#E0A93D]/10 px-3.5 py-1.5"
+            title={t('speedBonusHint')}
+          >
+            <Zap className="h-4 w-4 text-[#E0A93D]" aria-hidden />
+            <span className="font-label text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e0b968]">
+              {t('speedBonus')}
+            </span>
+            <span className="font-display text-base font-semibold tabular-nums text-[#f7f2e8]">
+              {t('potentialPoints', { points: potentialPoints })}
+            </span>
           </div>
 
           <div className="mx-auto max-w-2xl font-display text-2xl font-semibold leading-snug text-[#f7f2e8] sm:text-3xl">

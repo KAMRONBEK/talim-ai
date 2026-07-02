@@ -823,7 +823,11 @@
       "regenerate": "Regenerate",
       "retry": "Retry",
       "readMin": "{count} min",
-      "noSections": "No sections yet."
+      "noSections": "No sections yet.",
+      "back": "Back to materials",
+      "created": "Created",
+      "notFound": "Material not found.",
+      "openStudyView": "Open study view"
     },
     "masteryByTopic": "Mastery by topic · class",
     "masteryByTopicEmpty": "No topic mastery yet. Assign materials and coverage appears as students study.",
@@ -888,7 +892,11 @@
       "hotspotHint": "Tap the correct spot on the image",
       "dragDropHint": "Drag each item into the correct group",
       "dragDropAllPlaced": "All items placed",
-      "placedCount": "{count} of {total} placed"
+      "placedCount": "{count} of {total} placed",
+      "answeredCount": "{count} / {total} answered",
+      "speedBonus": "Speed bonus",
+      "potentialPoints": "up to {points} pts",
+      "speedBonusHint": "Points you'd earn by answering correctly now — it drops as time runs out. Your final score is shown on the results screen."
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
