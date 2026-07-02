@@ -309,12 +309,16 @@ model Content {
 model ContentSection {
   id              String                 @id @default(cuid())
   contentId       String
+  parentId        String?
+  depth           Int                    @default(0)
   title           String
   order           Int
   startChunk      Int
   endChunk        Int
   readMinutes     Int?
   content         Content                @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  parent          ContentSection?        @relation("SectionHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children        ContentSection[]       @relation("SectionHierarchy")
   quizzes         Quiz[]
   sectionProgress SectionProgress[]
   localizedTitles ContentSectionTitle[]
@@ -323,6 +327,7 @@ model ContentSection {
 
   @@index([contentId])
   @@index([contentId, order])
+  @@index([parentId])
 }
 
 model ContentSectionTitle {

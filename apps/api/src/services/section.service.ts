@@ -15,11 +15,20 @@ interface SectionTitleInput {
   order: number;
 }
 
+interface GeneratedSubsection {
+  title: string;
+  startChunk: number;
+  endChunk: number;
+  readMinutes?: number;
+}
+
 interface GeneratedSection {
   title: string;
   startChunk: number;
   endChunk: number;
   readMinutes?: number;
+  /** Optional shallow (2-level) outline: children of this chapter. */
+  subsections?: GeneratedSubsection[];
 }
 
 export async function generateContentSections(contentId: string, chunkCount: number): Promise<void> {
@@ -78,21 +87,47 @@ export async function generateContentSections(contentId: string, chunkCount: num
     const sections = (result.sections ?? []).slice(0, 12);
     if (sections.length === 0) throw new Error('No sections');
 
-    for (let i = 0; i < sections.length; i++) {
-      const s = sections[i];
+    // Single global order that increments in traversal order (parent, then its
+    // children, then the next parent…) so a flat sort by `order` still yields the
+    // correct reading order. Chapters without subsections behave exactly as before
+    // (depth 0, parentId null).
+    let order = 0;
+    for (const s of sections) {
       if (!s) continue;
       const start = Math.max(0, Math.min(s.startChunk, chunkCount - 1));
       const end = Math.max(start, Math.min(s.endChunk, chunkCount - 1));
-      await prisma.contentSection.create({
+      const parent = await prisma.contentSection.create({
         data: {
           contentId,
+          parentId: null,
+          depth: 0,
           title: s.title,
-          order: i,
+          order,
           startChunk: start,
           endChunk: end,
           readMinutes: s.readMinutes ?? Math.max(3, end - start + 2),
         },
       });
+      order++;
+
+      for (const sub of s.subsections ?? []) {
+        if (!sub) continue;
+        const subStart = Math.max(0, Math.min(sub.startChunk, chunkCount - 1));
+        const subEnd = Math.max(subStart, Math.min(sub.endChunk, chunkCount - 1));
+        await prisma.contentSection.create({
+          data: {
+            contentId,
+            parentId: parent.id,
+            depth: 1,
+            title: sub.title,
+            order,
+            startChunk: subStart,
+            endChunk: subEnd,
+            readMinutes: sub.readMinutes ?? Math.max(3, subEnd - subStart + 2),
+          },
+        });
+        order++;
+      }
     }
   } catch {
     const perSection = Math.max(2, Math.ceil(chunkCount / 6));

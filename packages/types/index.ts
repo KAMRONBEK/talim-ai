@@ -999,7 +999,12 @@ export interface Content {
 export interface ContentSection {
   id: string;
   contentId: string;
+  /** Parent chapter's id when this is a subsection; null for top-level (flat = depth 0). */
+  parentId: string | null;
+  /** 0 = top-level chapter, 1 = subsection. Flat/legacy content is all depth 0. */
+  depth: number;
   title: string;
+  /** Global traversal order (parent, then its children, then next parent…) — a flat sort by order yields correct reading order. */
   order: number;
   startChunk: number;
   endChunk: number;

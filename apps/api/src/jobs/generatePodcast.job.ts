@@ -43,6 +43,8 @@ export function registerGeneratePodcastJob(): void {
         section = {
           id: 'full',
           contentId,
+          parentId: null,
+          depth: 0,
           title: content.title,
           order: episode.order,
           startChunk: 0,
@@ -132,6 +134,8 @@ export function registerGeneratePodcastJob(): void {
         {
           id: 'full',
           contentId,
+          parentId: null,
+          depth: 0,
           title: content.title,
           order: 0,
           startChunk: 0,
