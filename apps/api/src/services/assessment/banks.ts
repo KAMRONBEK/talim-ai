@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, type QuestionType } from '@prisma/client';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import { generateJsonCompletion } from '../ai.service.js';
@@ -13,6 +13,7 @@ import {
   assertBank,
   assertTenantContentIds,
   createBankSchema,
+  createQuestionSchema,
   formatBank,
   formatQuestion,
   generateSchema,
@@ -123,6 +124,16 @@ function buildStructuredQuestion(
       return buildDropdownClozeQuestion(q, correct);
   }
 }
+
+/** Rejection messages when a manually authored/edited structured question is malformed
+ *  or unanswerable (the matching builder above returned null). */
+const STRUCTURED_QUESTION_ERROR: Record<'MATCHING' | 'ORDERING' | 'DROPDOWN_CLOZE', string> = {
+  MATCHING:
+    'Matching questions need at least 2 distinct left prompts (config.left), one correct right value per prompt, and a right-hand pool of at least 2 options.',
+  ORDERING: 'Ordering questions need at least 2 distinct items given in their correct order.',
+  DROPDOWN_CLOZE:
+    'Cloze questions need one "___" marker per blank and, for each blank, at least 2 options (config.blankOptions) including the correct choice.',
+};
 
 export async function listBanks(tenantId: string) {
   const banks = await prisma.questionBank.findMany({
@@ -296,6 +307,101 @@ export async function generateQuestions(
   return created.map(formatQuestion);
 }
 
+/**
+ * Validate + normalize a manually authored/edited question into its storage shape,
+ * mirroring what the generator builders produce so a hand-made question is stored (and,
+ * for the structured types, shuffled/validated) exactly like a generated one. Throws
+ * AppError(400) when the question would be unanswerable/malformed.
+ */
+function buildManualStorage(
+  type: QuestionType,
+  source: {
+    prompt: string;
+    options: string[] | null;
+    acceptableAnswers: string[];
+    config: Record<string, unknown> | null;
+  },
+): StructuredStorage {
+  if (type === 'MATCHING' || type === 'ORDERING' || type === 'DROPDOWN_CLOZE') {
+    const built = buildStructuredQuestion(
+      type,
+      {
+        prompt: source.prompt,
+        options: source.options,
+        acceptableAnswers: source.acceptableAnswers,
+        config: source.config,
+      },
+      source.acceptableAnswers,
+    );
+    if (!built) throw new AppError(400, STRUCTURED_QUESTION_ERROR[type]);
+    return built;
+  }
+  // Never persist an unanswerable option question: the accepted answer(s) must map to options.
+  if (
+    (type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE') &&
+    !isAnswerableMultipleChoice(source.options, source.acceptableAnswers)
+  ) {
+    throw new AppError(
+      400,
+      'Multiple-choice questions need at least 2 options and a correct answer that exactly matches one option.',
+    );
+  }
+  if (
+    type === 'MULTIPLE_SELECT' &&
+    !isAnswerableMultipleSelect(source.options, source.acceptableAnswers)
+  ) {
+    throw new AppError(
+      400,
+      'Multiple-select questions need at least 2 options and every correct answer must exactly match an option.',
+    );
+  }
+  const hasOptions =
+    type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE' || type === 'MULTIPLE_SELECT';
+  // FILL_BLANK stores blank metadata in config (default single blank), like the generator.
+  const config = type === 'FILL_BLANK' ? (source.config ?? { blanks: 1 }) : source.config;
+  return {
+    options: hasOptions && source.options ? source.options : null,
+    acceptableAnswers: source.acceptableAnswers,
+    config,
+  };
+}
+
+/**
+ * Manually author a bank question from scratch (the non-AI path). Scoped to the tenant/owner
+ * like the other bank ops. Validates answerability via the same guards/builders the generator
+ * uses, then persists the question as APPROVED (manually authored = trusted).
+ */
+export async function createBankQuestion(
+  tenantId: string,
+  userId: string,
+  bankId: string,
+  input: unknown,
+) {
+  await assertBank(tenantId, bankId);
+  const body = createQuestionSchema.parse(input ?? {});
+  const storage = buildManualStorage(body.type, {
+    prompt: body.prompt,
+    options: body.options ?? null,
+    acceptableAnswers: body.acceptableAnswers,
+    config: parseQuestionConfig(body.config),
+  });
+
+  const created = await prisma.bankQuestion.create({
+    data: {
+      bankId,
+      createdById: userId,
+      type: body.type,
+      prompt: body.prompt,
+      options: storage.options ? storage.options : Prisma.JsonNull,
+      acceptableAnswers: storage.acceptableAnswers,
+      config: storage.config ? (storage.config as Prisma.InputJsonValue) : Prisma.JsonNull,
+      explanation: body.explanation ?? null,
+      status: 'APPROVED',
+    },
+  });
+  return formatQuestion(created);
+}
+
 export async function patchQuestion(
   tenantId: string,
   bankId: string,
@@ -307,9 +413,8 @@ export async function patchQuestion(
   const question = await prisma.bankQuestion.findFirst({ where: { id: questionId, bankId } });
   if (!question) throw new AppError(404, 'Question not found');
 
-  // Guard the multiple-choice invariant on edits/approval so a tutor can never
-  // approve an unanswerable question.
   const finalType = body.type ?? question.type;
+  const finalPrompt = body.prompt ?? question.prompt;
   const finalOptions =
     body.options !== undefined
       ? body.options
@@ -320,6 +425,46 @@ export async function patchQuestion(
     body.acceptableAnswers !== undefined
       ? body.acceptableAnswers
       : jsonStringArray(question.acceptableAnswers);
+  const finalConfig =
+    body.config !== undefined ? body.config : parseQuestionConfig(question.config);
+
+  // Structured types (MATCHING / ORDERING / DROPDOWN_CLOZE): when their content changes,
+  // re-run the generator builders so the edited question is normalized/shuffled/validated
+  // into the same canonical storage shape a generated one has. A status-only change
+  // (e.g. approve/reject) leaves the stored storage untouched.
+  const editingContent =
+    body.prompt !== undefined ||
+    body.type !== undefined ||
+    body.options !== undefined ||
+    body.acceptableAnswers !== undefined ||
+    body.config !== undefined;
+  if (
+    (finalType === 'MATCHING' || finalType === 'ORDERING' || finalType === 'DROPDOWN_CLOZE') &&
+    editingContent
+  ) {
+    const storage = buildManualStorage(finalType, {
+      prompt: finalPrompt,
+      options: finalOptions,
+      acceptableAnswers: finalAcceptable,
+      config: finalConfig,
+    });
+    const updated = await prisma.bankQuestion.update({
+      where: { id: questionId },
+      data: {
+        type: finalType,
+        prompt: finalPrompt,
+        options: storage.options ? storage.options : Prisma.JsonNull,
+        acceptableAnswers: storage.acceptableAnswers,
+        config: storage.config ? (storage.config as Prisma.InputJsonValue) : Prisma.JsonNull,
+        ...(body.explanation !== undefined ? { explanation: body.explanation } : {}),
+        ...(body.status !== undefined ? { status: body.status } : {}),
+      },
+    });
+    return formatQuestion(updated);
+  }
+
+  // Guard the multiple-choice / multiple-select invariant on edits/approval so a tutor can
+  // never approve an unanswerable question.
   if (
     (finalType === 'MULTIPLE_CHOICE' || finalType === 'TRUE_FALSE') &&
     !isAnswerableMultipleChoice(finalOptions, finalAcceptable)

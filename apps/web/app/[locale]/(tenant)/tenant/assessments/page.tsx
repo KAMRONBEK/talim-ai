@@ -6,9 +6,12 @@ import {
   BarChart3,
   CalendarClock,
   Check,
+  ChevronLeft,
+  ChevronRight,
   ClipboardList,
   FileText,
   Library,
+  Pencil,
   Plus,
   Radio,
   Sparkles,
@@ -17,8 +20,8 @@ import {
   Wand2,
   X,
 } from 'lucide-react';
-import { Badge, Button, Input, Label } from '@talim/ui';
-import type { AppLocale, TenantAssessment } from '@talim/types';
+import { Badge, Button, cn, Input, Label } from '@talim/ui';
+import type { AppLocale, BankQuestion, QuestionType, TenantAssessment } from '@talim/types';
 import {
   useAssessmentLeaderboard,
   useAssessmentResults,
@@ -32,11 +35,49 @@ import {
   useScheduleAssessment,
   useSetAssessmentLive,
   useTenantAssessments,
+  type BankQuestionStyle,
 } from '@/hooks/useAssessments';
 import { useTenantStudents } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
 import { formatRelativeTime } from '@/lib/format-relative-time';
 import { LeaderboardTable } from '@/components/learner/leaderboard-table';
+import {
+  QUESTION_TYPE_LABEL_KEYS,
+  QuestionEditor,
+} from '@/components/tenant/question-editor';
+
+/** Linear builder steps, in order. Results live in their own section below the wizard. */
+const WIZARD_STEPS = ['bank', 'generate', 'review', 'publish', 'assign'] as const;
+type WizardStep = (typeof WIZARD_STEPS)[number];
+
+const STEP_LABEL_KEYS: Record<WizardStep, string> = {
+  bank: 'stepBankLabel',
+  generate: 'stepGenerateLabel',
+  review: 'stepReviewLabel',
+  publish: 'stepPublishLabel',
+  assign: 'stepAssignLabel',
+};
+
+/** Every backend generation style (mirrors `BankQuestionStyle`), with its option label key. */
+const STYLE_OPTIONS: { value: BankQuestionStyle; labelKey: string }[] = [
+  { value: 'mixed', labelKey: 'styleMixed' },
+  { value: 'multipleChoice', labelKey: 'styleMultipleChoice' },
+  { value: 'multipleSelect', labelKey: 'styleMultipleSelect' },
+  { value: 'trueFalse', labelKey: 'styleTrueFalse' },
+  { value: 'written', labelKey: 'styleWritten' },
+  { value: 'numeric', labelKey: 'styleNumeric' },
+  { value: 'fillBlank', labelKey: 'styleFillBlank' },
+  { value: 'dropdownCloze', labelKey: 'styleDropdownCloze' },
+  { value: 'matching', labelKey: 'styleMatching' },
+  { value: 'ordering', labelKey: 'styleOrdering' },
+];
+
+const STATUS_FILTERS: { value: 'ALL' | BankQuestion['status']; labelKey: string }[] = [
+  { value: 'ALL', labelKey: 'filterAll' },
+  { value: 'DRAFT', labelKey: 'filterPending' },
+  { value: 'APPROVED', labelKey: 'filterApproved' },
+  { value: 'REJECTED', labelKey: 'filterRejected' },
+];
 
 /** ISO string → `<input type="datetime-local">` value in local time (empty when unset). */
 function toDatetimeLocal(iso: string | null): string {
@@ -256,9 +297,7 @@ export default function TenantAssessmentsPage() {
   const [topic, setTopic] = useState('');
   const [bankContentIds, setBankContentIds] = useState<string[]>([]);
   const [draftTopic, setDraftTopic] = useState('');
-  const [draftStyle, setDraftStyle] = useState<
-    'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric'
-  >('mixed');
+  const [draftStyle, setDraftStyle] = useState<BankQuestionStyle>('mixed');
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [assessmentTitle, setAssessmentTitle] = useState('');
   const [assessmentId, setAssessmentId] = useState('');
@@ -309,6 +348,71 @@ export default function TenantAssessmentsPage() {
 
   const selectedBank = banks.find((bank) => bank.id === selectedBankId);
 
+  // --- Wizard chrome: one step visible at a time; Next is gated where a prerequisite is missing.
+  const [step, setStep] = useState<WizardStep>('bank');
+  const stepIndex = WIZARD_STEPS.indexOf(step);
+  // Bank + Assign work with existing data; the bank-scoped steps need a selected bank first.
+  const canAccess = (target: WizardStep) =>
+    target === 'bank' || target === 'assign' || Boolean(selectedBankId);
+  const prevStep = stepIndex > 0 ? WIZARD_STEPS[stepIndex - 1] : null;
+  const nextStep = stepIndex < WIZARD_STEPS.length - 1 ? WIZARD_STEPS[stepIndex + 1] : null;
+  const nextBlocked = !nextStep || !canAccess(nextStep);
+
+  // --- Review step: client-side filtering + bulk selection over the already-loaded questions.
+  const [statusFilter, setStatusFilter] = useState<'ALL' | BankQuestion['status']>('ALL');
+  const [typeFilter, setTypeFilter] = useState<'ALL' | QuestionType>('ALL');
+  const [selectedReview, setSelectedReview] = useState<string[]>([]);
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [editing, setEditing] = useState<BankQuestion | 'new' | null>(null);
+
+  const presentTypes = useMemo(
+    () => Array.from(new Set(questions.map((question) => question.type))),
+    [questions],
+  );
+
+  const reviewQuestions = useMemo(
+    () =>
+      questions.filter((question) => {
+        if (statusFilter !== 'ALL' && question.status !== statusFilter) return false;
+        if (typeFilter !== 'ALL' && question.type !== typeFilter) return false;
+        return true;
+      }),
+    [questions, statusFilter, typeFilter],
+  );
+
+  const filteredReviewIds = reviewQuestions.map((question) => question.id);
+  const allReviewSelected =
+    filteredReviewIds.length > 0 && filteredReviewIds.every((id) => selectedReview.includes(id));
+  const someReviewSelected = filteredReviewIds.some((id) => selectedReview.includes(id));
+
+  const toggleReviewOne = (id: string) =>
+    setSelectedReview((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+  const clearReview = () => setSelectedReview([]);
+  const toggleSelectAllReview = () => {
+    if (allReviewSelected) {
+      setSelectedReview((prev) => prev.filter((id) => !filteredReviewIds.includes(id)));
+    } else {
+      setSelectedReview((prev) => Array.from(new Set([...prev, ...filteredReviewIds])));
+    }
+  };
+
+  // Bulk approve/reject: loop the existing per-question patch mutation over the selection and await
+  // all, relying on its built-in invalidation of the bank/questions key to refresh the list.
+  const bulkSetStatus = async (status: BankQuestion['status']) => {
+    if (bulkBusy || selectedReview.length === 0) return;
+    setBulkBusy(true);
+    try {
+      await Promise.all(
+        selectedReview.map((id) => patchQuestion.mutateAsync({ id, status }).catch(() => null)),
+      );
+    } finally {
+      setBulkBusy(false);
+      clearReview();
+    }
+  };
+
+  const editorKey = editing === 'new' ? 'new' : editing?.id ?? 'closed';
+
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -324,14 +428,65 @@ export default function TenantAssessmentsPage() {
           </div>
           <p className="mt-1 max-w-2xl text-muted-foreground">{t('desc')}</p>
         </div>
-        <a
-          href="#new-assessment"
+        <button
+          type="button"
+          onClick={() => setStep('publish')}
           className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-150 ease-out hover:-translate-y-px hover:bg-primary/90 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <Plus className="h-4 w-4" />
           {t('newAssessment')}
-        </a>
+        </button>
       </div>
+
+      <nav
+        aria-label={t('wizardNav')}
+        className="flex flex-wrap items-center gap-1.5 rounded-2xl border border-border/70 bg-card p-3 shadow-soft"
+      >
+        {WIZARD_STEPS.map((wizardStep, index) => {
+          const active = wizardStep === step;
+          const complete = index < stepIndex;
+          const accessible = canAccess(wizardStep);
+          return (
+            <button
+              key={wizardStep}
+              type="button"
+              disabled={!accessible}
+              aria-current={active ? 'step' : undefined}
+              onClick={() => accessible && setStep(wizardStep)}
+              className={cn(
+                'flex items-center gap-2 rounded-full px-3 py-1.5 transition-colors',
+                active ? 'bg-primary/10' : 'hover:bg-secondary/60',
+                !accessible && 'cursor-not-allowed opacity-50',
+              )}
+            >
+              <span
+                className={cn(
+                  'flex h-7 w-7 items-center justify-center rounded-full font-label text-xs font-bold tabular-nums transition-colors',
+                  active
+                    ? 'bg-primary text-primary-foreground'
+                    : complete
+                      ? 'bg-primary/20 text-primary'
+                      : 'bg-secondary text-muted-foreground',
+                )}
+              >
+                {complete ? <Check className="h-3.5 w-3.5" /> : index + 1}
+              </span>
+              <span
+                className={cn(
+                  'font-label text-xs font-semibold uppercase tracking-[0.12em]',
+                  active
+                    ? 'text-primary'
+                    : complete
+                      ? 'text-foreground'
+                      : 'text-muted-foreground',
+                )}
+              >
+                {t(STEP_LABEL_KEYS[wizardStep])}
+              </span>
+            </button>
+          );
+        })}
+      </nav>
 
       {assessments.some((a) => a.mode === 'GAME') && (
         <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
@@ -354,8 +509,8 @@ export default function TenantAssessmentsPage() {
         </section>
       )}
 
-      <section className="grid gap-6 lg:grid-cols-[20rem_1fr]">
-        <aside className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+      {step === 'bank' && (
+        <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
           <div className="flex items-center gap-3">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Library className="h-5 w-5" />
@@ -429,7 +584,10 @@ export default function TenantAssessmentsPage() {
                 <button
                   key={bank.id}
                   type="button"
-                  onClick={() => setSelectedBankId(bank.id)}
+                  onClick={() => {
+                    setSelectedBankId(bank.id);
+                    clearReview();
+                  }}
                   className={`w-full rounded-xl border p-3 text-left text-sm transition-colors ${
                     selectedBankId === bank.id
                       ? 'border-primary/40 bg-primary/10 text-primary shadow-soft'
@@ -458,65 +616,73 @@ export default function TenantAssessmentsPage() {
               );
             })}
           </div>
-        </aside>
+        </section>
+      )}
 
-        <main className="space-y-6">
-          <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
-                <Wand2 className="h-5 w-5" />
-              </span>
-              <div>
-                <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? t('selectBank')}</h2>
-                <p className="text-sm text-muted-foreground">{t('topicHelp')}</p>
-              </div>
+      {step === 'generate' && (
+        <section className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+              <Wand2 className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 className="font-display text-lg font-semibold">{selectedBank?.title ?? t('selectBank')}</h2>
+              <p className="text-sm text-muted-foreground">{t('topicHelp')}</p>
             </div>
-            {selectedBankId && (
-              <form
-                className="mt-4 flex flex-col gap-3 md:flex-row"
-                onSubmit={async (event) => {
-                  event.preventDefault();
-                  await generate.mutateAsync({
-                    topic: draftTopic || undefined,
-                    count: 12,
-                    style: draftStyle,
-                  });
-                  setDraftTopic('');
-                }}
+          </div>
+          {selectedBankId && (
+            <form
+              className="mt-4 flex flex-col gap-3 md:flex-row"
+              onSubmit={async (event) => {
+                event.preventDefault();
+                await generate.mutateAsync({
+                  topic: draftTopic || undefined,
+                  count: 12,
+                  style: draftStyle,
+                });
+                setDraftTopic('');
+              }}
+            >
+              <Input
+                value={draftTopic}
+                onChange={(event) => setDraftTopic(event.target.value)}
+                placeholder={t('topicPlaceholder')}
+              />
+              <select
+                value={draftStyle}
+                onChange={(event) => setDraftStyle(event.target.value as BankQuestionStyle)}
+                className="rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                aria-label={t('questionType')}
               >
-                <Input
-                  value={draftTopic}
-                  onChange={(event) => setDraftTopic(event.target.value)}
-                  placeholder={t('topicPlaceholder')}
-                />
-                <select
-                  value={draftStyle}
-                  onChange={(event) =>
-                    setDraftStyle(event.target.value as typeof draftStyle)
-                  }
-                  className="rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  aria-label={t('questionType')}
-                >
-                  <option value="mixed">{t('styleMixed')}</option>
-                  <option value="multipleChoice">{t('styleMultipleChoice')}</option>
-                  <option value="trueFalse">{t('styleTrueFalse')}</option>
-                  <option value="written">{t('styleWritten')}</option>
-                  <option value="numeric">{t('styleNumeric')}</option>
-                </select>
-                <Button type="submit" disabled={generate.isPending}>
-                  <Sparkles className="h-4 w-4" />
-                  {generate.isPending ? t('generating') : t('generateDrafts')}
-                </Button>
-              </form>
-            )}
-            {generate.isError && (
-              <p className="mt-2 text-sm text-destructive">{mutErr(generate.error, t('genericError'))}</p>
-            )}
-          </section>
+                {STYLE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {t(option.labelKey)}
+                  </option>
+                ))}
+              </select>
+              <Button type="submit" disabled={generate.isPending}>
+                <Sparkles className="h-4 w-4" />
+                {generate.isPending ? t('generating') : t('generateDrafts')}
+              </Button>
+            </form>
+          )}
+          {generate.isError && (
+            <p className="mt-2 text-sm text-destructive">{mutErr(generate.error, t('genericError'))}</p>
+          )}
+        </section>
+      )}
 
-          <section className="space-y-3">
-            {(pendingQuestions.length > 0 || approvingAll) && (
-              <div className="flex justify-end">
+      {step === 'review' && (
+        <section className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="font-display text-lg font-semibold">
+                {selectedBank?.title ?? t('selectBank')}
+              </h2>
+              <p className="text-sm text-muted-foreground">{t('reviewDesc')}</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {(pendingQuestions.length > 0 || approvingAll) && (
                 <Button
                   size="sm"
                   variant="outline"
@@ -528,30 +694,196 @@ export default function TenantAssessmentsPage() {
                     ? t('approvingAll')
                     : t('approveAll', { count: pendingQuestions.length })}
                 </Button>
+              )}
+              <Button
+                size="sm"
+                variant="gradient"
+                disabled={!selectedBankId}
+                onClick={() => setEditing('new')}
+              >
+                <Plus className="h-3.5 w-3.5" />
+                {t('addQuestion')}
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div role="group" aria-label={t('filterByStatus')} className="flex flex-wrap items-center gap-2">
+              {STATUS_FILTERS.map((chip) => {
+                const active = statusFilter === chip.value;
+                return (
+                  <button
+                    key={chip.value}
+                    type="button"
+                    onClick={() => setStatusFilter(chip.value)}
+                    aria-pressed={active}
+                    className={cn(
+                      'rounded-full px-3.5 py-1.5 font-label text-xs font-semibold transition-colors',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                      active
+                        ? 'bg-primary text-primary-foreground shadow-sm'
+                        : 'bg-secondary text-muted-foreground hover:text-foreground',
+                    )}
+                  >
+                    {t(chip.labelKey)}
+                  </button>
+                );
+              })}
+            </div>
+            {presentTypes.length > 1 && (
+              <div role="group" aria-label={t('filterByType')} className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setTypeFilter('ALL')}
+                  aria-pressed={typeFilter === 'ALL'}
+                  className={cn(
+                    'rounded-full px-3 py-1 font-label text-[11px] font-semibold transition-colors',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                    typeFilter === 'ALL'
+                      ? 'bg-primary/15 text-primary'
+                      : 'bg-secondary/60 text-muted-foreground hover:text-foreground',
+                  )}
+                >
+                  {t('filterAllTypes')}
+                </button>
+                {presentTypes.map((questionType) => {
+                  const active = typeFilter === questionType;
+                  return (
+                    <button
+                      key={questionType}
+                      type="button"
+                      onClick={() => setTypeFilter(questionType)}
+                      aria-pressed={active}
+                      className={cn(
+                        'rounded-full px-3 py-1 font-label text-[11px] font-semibold transition-colors',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                        active
+                          ? 'bg-primary/15 text-primary'
+                          : 'bg-secondary/60 text-muted-foreground hover:text-foreground',
+                      )}
+                    >
+                      {t(QUESTION_TYPE_LABEL_KEYS[questionType])}
+                    </button>
+                  );
+                })}
               </div>
             )}
-            <div className="grid gap-3">
-              {questions.map((question) => (
+          </div>
+
+          {selectedReview.length > 0 && (
+            <div
+              role="region"
+              aria-label={t('bulkActions')}
+              className="sticky top-2 z-10 flex flex-wrap items-center gap-1 rounded-2xl border border-primary/25 bg-secondary px-3 py-2 shadow-soft"
+            >
+              <span className="px-2 font-label text-sm font-bold tabular-nums text-primary">
+                {t('selectedCount', { count: selectedReview.length })}
+              </span>
+              <span className="mx-1 h-4 w-px bg-primary/25" aria-hidden="true" />
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="text-primary hover:bg-primary/10 hover:text-primary"
+                disabled={bulkBusy}
+                onClick={() => bulkSetStatus('APPROVED')}
+              >
+                <Check className="h-4 w-4" />
+                {t('approveSelected')}
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+                disabled={bulkBusy}
+                onClick={() => bulkSetStatus('REJECTED')}
+              >
+                <X className="h-4 w-4" />
+                {t('rejectSelected')}
+              </Button>
+              <Button
+                type="button"
+                size="icon"
+                variant="ghost"
+                className="ml-auto text-muted-foreground hover:text-foreground"
+                onClick={clearReview}
+                aria-label={t('clearSelection')}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
+
+          {reviewQuestions.length > 0 && (
+            <label className="flex cursor-pointer items-center gap-2 px-1 text-sm text-muted-foreground">
+              <input
+                type="checkbox"
+                className="h-4 w-4 cursor-pointer accent-[hsl(var(--primary))]"
+                aria-label={t('selectAll')}
+                checked={allReviewSelected}
+                ref={(el) => {
+                  if (el) el.indeterminate = someReviewSelected && !allReviewSelected;
+                }}
+                onChange={toggleSelectAllReview}
+              />
+              {t('selectAll')}
+            </label>
+          )}
+
+          <div className="grid gap-3">
+            {reviewQuestions.map((question) => (
               <div
                 key={question.id}
-                className={`rounded-xl border bg-card p-4 shadow-soft transition-colors ${
-                  question.status === 'APPROVED'
-                    ? 'border-primary/40 bg-primary/[0.04]'
-                    : 'border-border/70'
-                }`}
+                className={cn(
+                  'rounded-xl border bg-card p-4 shadow-soft transition-colors',
+                  selectedReview.includes(question.id)
+                    ? 'border-primary/50 bg-primary/[0.06]'
+                    : question.status === 'APPROVED'
+                      ? 'border-primary/40 bg-primary/[0.04]'
+                      : question.status === 'REJECTED'
+                        ? 'border-destructive/30'
+                        : 'border-border/70',
+                )}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>{question.type}</Badge>
-                    <p className="mt-3 font-medium text-foreground">{question.prompt}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {t('answersLabel', { answers: question.acceptableAnswers.join(', ') })}
-                    </p>
-                    {question.explanation && (
-                      <p className="mt-1 text-sm text-muted-foreground">{question.explanation}</p>
-                    )}
+                  <div className="flex min-w-0 items-start gap-3">
+                    <input
+                      type="checkbox"
+                      className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-[hsl(var(--primary))]"
+                      aria-label={t('selectRow')}
+                      checked={selectedReview.includes(question.id)}
+                      onChange={() => toggleReviewOne(question.id)}
+                    />
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>
+                          {t(QUESTION_TYPE_LABEL_KEYS[question.type])}
+                        </Badge>
+                        {question.status === 'REJECTED' && (
+                          <span className="font-label text-[10px] font-semibold uppercase tracking-wide text-destructive">
+                            {t('filterRejected')}
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-3 font-medium text-foreground">{question.prompt}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {t('answersLabel', { answers: question.acceptableAnswers.join(', ') })}
+                      </p>
+                      {question.explanation && (
+                        <p className="mt-1 text-sm text-muted-foreground">{question.explanation}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex shrink-0 gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setEditing(question)}
+                    >
+                      <Pencil className="h-3.5 w-3.5" />
+                      {t('editQuestion')}
+                    </Button>
                     <Button
                       size="sm"
                       variant={question.status === 'APPROVED' ? 'default' : 'outline'}
@@ -572,16 +904,20 @@ export default function TenantAssessmentsPage() {
                   </div>
                 </div>
               </div>
-              ))}
-            </div>
-          </section>
-        </main>
-      </section>
+            ))}
+            {reviewQuestions.length === 0 && (
+              <p className="rounded-xl border border-dashed border-border py-10 text-center text-sm text-muted-foreground">
+                {questions.length === 0 ? t('reviewEmpty') : t('reviewNoMatch')}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      {step === 'publish' && (
+        <section className="mx-auto w-full max-w-2xl">
         <form
-          id="new-assessment"
-          className="scroll-mt-24 space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
+          className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
             event.preventDefault();
             // Grading fields ride along with the existing create mutation; the
@@ -746,7 +1082,11 @@ export default function TenantAssessmentsPage() {
             <p className="text-sm text-destructive">{mutErr(createAssessment.error, t('genericError'))}</p>
           )}
         </form>
+        </section>
+      )}
 
+      {step === 'assign' && (
+        <section className="mx-auto w-full max-w-2xl">
         <form
           className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft"
           onSubmit={async (event) => {
@@ -823,7 +1163,45 @@ export default function TenantAssessmentsPage() {
             <p className="text-sm text-destructive">{mutErr(assignAssessment.error, t('genericError'))}</p>
           )}
         </form>
-      </section>
+        </section>
+      )}
+
+      <div className="flex items-center justify-between gap-3 border-t border-border/60 pt-4">
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          disabled={!prevStep}
+          onClick={() => prevStep && setStep(prevStep)}
+        >
+          <ChevronLeft className="h-4 w-4" />
+          {t('stepBack')}
+        </Button>
+        {nextStep && (
+          <div className="flex items-center gap-3">
+            {nextBlocked && step === 'bank' && (
+              <span className="text-xs text-muted-foreground">{t('selectBankFirst')}</span>
+            )}
+            <Button
+              type="button"
+              size="sm"
+              disabled={nextBlocked}
+              onClick={() => !nextBlocked && nextStep && setStep(nextStep)}
+            >
+              {t('stepNext')}
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <QuestionEditor
+        key={editorKey}
+        open={editing !== null}
+        onClose={() => setEditing(null)}
+        bankId={selectedBankId}
+        question={editing && editing !== 'new' ? editing : undefined}
+      />
 
       <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
         <div className="flex items-center gap-3">

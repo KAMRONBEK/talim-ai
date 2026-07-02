@@ -35,23 +35,43 @@ export const generateSchema = z.object({
   style: questionStyleEnum.default('mixed'),
 });
 
+// Every question type the storage + scoring engine supports. Shared by the patch
+// (edit/approve) and create (manual authoring) schemas so a tutor can hand-author or
+// edit any type the AI generator can produce.
+export const questionTypeEnum = z.enum([
+  'SHORT_ANSWER',
+  'NUMERIC',
+  'MULTIPLE_CHOICE',
+  'TRUE_FALSE',
+  'MULTIPLE_SELECT',
+  'FILL_BLANK',
+  'DROPDOWN_CLOZE',
+  'MATCHING',
+  'ORDERING',
+]);
+
 export const patchQuestionSchema = z.object({
   prompt: z.string().min(1).optional(),
-  type: z
-    .enum([
-      'SHORT_ANSWER',
-      'NUMERIC',
-      'MULTIPLE_CHOICE',
-      'TRUE_FALSE',
-      'MULTIPLE_SELECT',
-      'FILL_BLANK',
-    ])
-    .optional(),
+  type: questionTypeEnum.optional(),
   options: z.array(z.string()).nullable().optional(),
   acceptableAnswers: z.array(z.string()).min(1).optional(),
   config: z.record(z.string(), z.unknown()).nullable().optional(),
   explanation: z.string().nullable().optional(),
   status: z.enum(['DRAFT', 'APPROVED', 'REJECTED']).optional(),
+});
+
+/**
+ * Manual authoring of a bank question from scratch (not AI-generated). `prompt`, `type`,
+ * and at least one `acceptableAnswers` are required; the structured types carry their
+ * left/right/blanks/blankOptions in `config` (same shape the generator builders consume).
+ */
+export const createQuestionSchema = z.object({
+  prompt: z.string().min(1),
+  type: questionTypeEnum,
+  options: z.array(z.string()).nullable().optional(),
+  acceptableAnswers: z.array(z.string()).min(1),
+  config: z.record(z.string(), z.unknown()).nullable().optional(),
+  explanation: z.string().nullable().optional(),
 });
 
 export const createAssessmentSchema = z.object({

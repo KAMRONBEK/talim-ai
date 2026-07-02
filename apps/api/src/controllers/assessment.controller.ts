@@ -37,6 +37,17 @@ export async function generateQuestions(req: AuthenticatedRequest, res: Response
   res.status(201).json({ questions });
 }
 
+export async function createBankQuestion(req: AuthenticatedRequest, res: Response): Promise<void> {
+  const { tenantId, userId } = requireTenant(req);
+  const question = await assessmentService.createBankQuestion(
+    tenantId,
+    userId,
+    getParam(req, 'bankId'),
+    req.body,
+  );
+  res.status(201).json({ question });
+}
+
 export async function patchQuestion(req: AuthenticatedRequest, res: Response): Promise<void> {
   const { tenantId } = requireTenant(req);
   const question = await assessmentService.patchQuestion(
