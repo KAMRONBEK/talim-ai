@@ -7,6 +7,7 @@ import * as quizController from '../controllers/quiz.controller.js';
 export const quizRoutes = Router();
 
 quizRoutes.use(authMiddleware, attachTenantId, blockLearnerMutations);
+quizRoutes.get('/content/:contentId/mastery', asyncHandler(quizController.getContentMastery));
 quizRoutes.get('/content/:contentId', asyncHandler(quizController.listQuizzesByContent));
 quizRoutes.post('/content/:contentId', asyncHandler(quizController.createQuiz));
 quizRoutes.get('/:id/attempts/latest', asyncHandler(quizController.getLatestAttempt));

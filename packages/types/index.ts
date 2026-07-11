@@ -1,4 +1,5 @@
 import type { AppLocale } from './locale';
+import type { MasteryBand } from './mastery';
 
 export type { JobEvent, SeqJobEvent, JobEventStatus } from './jobEvents';
 
@@ -33,6 +34,34 @@ export type QuestionType =
   | 'DRAG_DROP';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
+
+/** Cognitive depth requested for question generation (Bloom bands; `mixed` = balanced). */
+export type QuestionDepth = 'recall' | 'understanding' | 'application' | 'mixed';
+
+/** LLM-declared difficulty of a generated question (seeds the mastery item prior). */
+export type QuestionDifficulty = 'easy' | 'medium' | 'hard';
+
+/** Question types an INDIVIDUAL learner can request in the unified Practice generator.
+ * HOTSPOT / DRAG_DROP stay tenant/manual-author only. */
+export const PRACTICE_QUESTION_TYPES = [
+  'MULTIPLE_CHOICE',
+  'TRUE_FALSE',
+  'MULTIPLE_SELECT',
+  'FILL_BLANK',
+  'DROPDOWN_CLOZE',
+  'MATCHING',
+  'ORDERING',
+  'SHORT_ANSWER',
+  'NUMERIC',
+] as const satisfies readonly QuestionType[];
+
+/** Default type mix when the learner doesn't customize the Practice generator. */
+export const DEFAULT_PRACTICE_TYPES: QuestionType[] = [
+  'MULTIPLE_CHOICE',
+  'TRUE_FALSE',
+  'FILL_BLANK',
+  'SHORT_ANSWER',
+];
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
 export type TenantAssessmentStatus = 'DRAFT' | 'PUBLISHED';
 export type AssessmentAttemptStatus = 'SUBMITTED' | 'GRADED';
@@ -510,6 +539,14 @@ export interface BankQuestion {
    */
   config: Record<string, unknown> | null;
   explanation: string | null;
+  /** LLM-declared difficulty; seeds the mastery item prior. */
+  difficulty?: QuestionDifficulty | null;
+  /** Cognitive depth this item targets. */
+  bloom?: Exclude<QuestionDepth, 'mixed'> | null;
+  /** Verbatim source span proving the correct answer (tutor-auditable provenance). */
+  sourceQuote?: string | null;
+  /** Misconception rationale per option (index-aligned with options; null for the key). */
+  optionRationales?: (string | null)[] | null;
   status: BankQuestionStatus;
   sourceContentId: string | null;
   sourceSectionId: string | null;
@@ -1110,11 +1147,23 @@ export interface QuizQuestion {
   quizId: string;
   question: string;
   type: QuestionType;
-  /** Present only for MULTIPLE_CHOICE; null for SHORT_ANSWER / NUMERIC. */
+  /** Present for option-based types (MULTIPLE_CHOICE / MULTIPLE_SELECT / ...); null otherwise. */
   options: string[] | null;
   correctAnswer: string;
   acceptableAnswers: string[];
   explanation: string | null;
+  /** Per-type structured config (FILL_BLANK blanks, MATCHING pairs, ORDERING items). */
+  config?: Record<string, unknown> | null;
+  /** LLM-declared difficulty; seeds the mastery item prior. */
+  difficulty?: QuestionDifficulty | null;
+  /** Cognitive depth this item targets. */
+  bloom?: Exclude<QuestionDepth, 'mixed'> | null;
+  /** Verbatim source span proving the correct answer (shown in review as provenance). */
+  sourceQuote?: string | null;
+  /** Misconception rationale per option (index-aligned with options; null for the key). */
+  optionRationales?: (string | null)[] | null;
+  /** Section this question was sourced from (resolved from chunk provenance). */
+  sourceSectionId?: string | null;
 }
 
 export interface Quiz {
@@ -1125,6 +1174,10 @@ export interface Quiz {
   kind: QuizKind;
   style: QuestionStyle;
   count: number | null;
+  /** Requested cognitive depth (defaults to 'mixed' on legacy rows). */
+  depth?: QuestionDepth;
+  /** Requested question types; null on legacy rows (derive from `style`). */
+  types?: QuestionType[] | null;
   locale: AppLocale;
   createdAt: string;
   questions?: QuizQuestion[];
@@ -1137,6 +1190,37 @@ export interface QuizAttempt {
   score: number;
   answers: Record<string, string>;
   createdAt: string;
+  /** Per-section mastery movement caused by this attempt (returned on submit). */
+  masteryDeltas?: MasteryDelta[];
+}
+
+/** One section's mastery state for the requesting user. */
+export interface SectionMasteryInfo {
+  sectionId: string | null;
+  scopeKey: string;
+  /** 0–100 displayed mastery (decayed). Can go DOWN — wrong answers and long inactivity lower it. */
+  score: number;
+  band: MasteryBand;
+  attempts: number;
+  correct: number;
+  lastAnswerAt: string | null;
+  /** True when inactivity decay has pulled the effective score notably below the earned one. */
+  needsReview: boolean;
+}
+
+export interface ContentMasteryResponse {
+  contentId: string;
+  sections: SectionMasteryInfo[];
+}
+
+/** Mastery movement for one section caused by a submitted attempt/review. */
+export interface MasteryDelta {
+  sectionId: string | null;
+  scopeKey: string;
+  before: number;
+  after: number;
+  bandBefore: MasteryBand;
+  band: MasteryBand;
 }
 
 export interface QuizWithLatestAttempt extends Quiz {
@@ -1251,6 +1335,8 @@ export interface ApiError {
 }
 
 export { isSelectedAnswerCorrect, resolveCorrectAnswer } from './quiz-answer';
+export * from './grading';
+export * from './mastery';
 
 export {
   GRAPH_FENCE_LANG,

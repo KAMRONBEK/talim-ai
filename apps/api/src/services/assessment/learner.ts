@@ -1,3 +1,4 @@
+import type { MasteryDelta } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import { jobEvents } from '../events/jobEvents.service.js';
@@ -10,6 +11,7 @@ import {
   parseQuestionConfig,
   submitAssessmentSchema,
 } from './shared.js';
+import { recordAnswers, type AnswerEvidence } from '../sectionMastery.service.js';
 import { getAssessmentLeaderboard } from './results.js';
 
 export async function listLearnerAssessments(tenantId: string, userId: string) {
@@ -142,6 +144,9 @@ export async function submitLearnerAssessment(
     creditFraction?: number | null;
     pointsEarned?: number | null;
   }> = [];
+  // Elo-KT mastery evidence, grouped by the source material each question came from.
+  // (Speed points and streaks stay out of mastery — correctness only.)
+  const masteryByContent = new Map<string, AnswerEvidence[]>();
 
   for (const aq of assessment.questions) {
     const question = aq.question;
@@ -197,6 +202,19 @@ export async function submitLearnerAssessment(
       pointsAwarded: points,
       ...(strict ? { creditFraction, pointsEarned: questionPointsEarned } : {}),
     });
+
+    if (question.sourceContentId) {
+      const list = masteryByContent.get(question.sourceContentId) ?? [];
+      list.push({
+        itemKey: `bank:${question.id}`,
+        sectionId: question.sourceSectionId,
+        questionType: question.type,
+        options: question.options,
+        credit: grade.creditFraction,
+        declaredDifficulty: question.difficulty,
+      });
+      masteryByContent.set(question.sourceContentId, list);
+    }
   }
 
   const total = assessment.questions.length;
@@ -222,6 +240,16 @@ export async function submitLearnerAssessment(
       },
     });
   });
+
+  // Elo-KT mastery update — must never break a submission, so failures are swallowed.
+  let masteryDeltas: MasteryDelta[] = [];
+  try {
+    for (const [contentId, evidence] of masteryByContent) {
+      masteryDeltas = masteryDeltas.concat(await recordAnswers(userId, contentId, evidence));
+    }
+  } catch (err) {
+    console.error('submitLearnerAssessment: mastery update failed', err);
+  }
 
   // Live leaderboard: nudge everyone in this tenant who may be watching (the owner and
   // every learner assigned to this assessment) to refetch, so the board updates in
@@ -261,6 +289,7 @@ export async function submitLearnerAssessment(
     correct,
     total,
     results,
+    masteryDeltas,
   };
 }
 

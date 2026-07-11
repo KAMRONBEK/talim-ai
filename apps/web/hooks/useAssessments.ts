@@ -9,6 +9,7 @@ import type {
   BankQuestionStatus,
   LearnerAssessment,
   QuestionBank,
+  QuestionDepth,
   QuestionType,
   TenantAssessment,
 } from '@talim/types';
@@ -86,8 +87,13 @@ export function useGenerateBankQuestions(bankId: string | null) {
       topic?: string;
       contentId?: string;
       sectionId?: string;
+      /** 1..30; server default 10. */
       count?: number;
+      /** Legacy single-style knob — omit whenever `types` is provided. */
       style?: BankQuestionStyle;
+      /** Generatable type subset; omit for a balanced mix. */
+      types?: QuestionType[];
+      depth?: QuestionDepth;
     }) => {
       const { data } = await api.post<{ questions: BankQuestion[] }>(
         `/tenant/question-banks/${bankId}/generate`,

@@ -4,10 +4,11 @@ import { useLocale } from 'next-intl';
 import type {
   Quiz,
   QuizAttempt,
-  QuizKind,
-  QuestionStyle,
+  QuestionDepth,
+  QuestionType,
   QuizWithLatestAttempt,
   AppLocale,
+  MasteryDelta,
 } from '@talim/types';
 import { api } from '@/lib/api';
 import { useJobStreamStore } from '@/store/useJobStreamStore';
@@ -78,23 +79,26 @@ export function useCreateQuiz() {
   const locale = useLocale() as AppLocale;
 
   return useMutation({
+    // QUICK is retired server-side — always FULL. Omitting sectionId scopes the quiz to
+    // the whole material; `types`/`depth`/`count` drive the unified Practice generator.
     mutationFn: async ({
       contentId,
       sectionId,
-      kind = 'FULL' as QuizKind,
-      style,
+      types,
+      depth,
       count,
     }: {
       contentId: string;
-      sectionId: string;
-      kind?: QuizKind;
-      style?: QuestionStyle;
+      sectionId?: string;
+      types?: QuestionType[];
+      depth?: QuestionDepth;
       count?: number;
     }) => {
       const { data } = await api.post<{ quiz: Quiz }>(`/quiz/content/${contentId}`, {
-        sectionId,
-        kind,
-        ...(style ? { style } : {}),
+        ...(sectionId ? { sectionId } : {}),
+        kind: 'FULL',
+        ...(types && types.length > 0 ? { types } : {}),
+        ...(depth ? { depth } : {}),
         ...(count ? { count } : {}),
         locale,
       });
@@ -118,13 +122,15 @@ export function useSubmitQuiz() {
       contentId,
     }: {
       quizId: string;
-      answers: Record<string, string>;
+      /** Structured per-type shapes (arrays / per-blank arrays / matching maps) — must match server grading. */
+      answers: Record<string, string | string[] | Record<string, string>>;
       contentId?: string;
     }) => {
       const { data } = await api.post<{
         attempt: QuizAttempt;
         correct: number;
         total: number;
+        masteryDeltas: MasteryDelta[];
       }>(`/quiz/${quizId}/submit`, { answers });
       return data;
     },
@@ -134,6 +140,7 @@ export function useSubmitQuiz() {
         void queryClient.invalidateQueries({ queryKey: ['progress', vars.contentId] });
         void queryClient.invalidateQueries({ queryKey: ['quiz-history', vars.contentId, locale] });
         void queryClient.invalidateQueries({ queryKey: ['learning-history', vars.contentId, locale] });
+        void queryClient.invalidateQueries({ queryKey: ['mastery', vars.contentId] });
       }
     },
   });

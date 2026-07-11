@@ -21,7 +21,15 @@ import {
   X,
 } from 'lucide-react';
 import { Badge, Button, cn, Input, Label } from '@talim/ui';
-import type { AppLocale, BankQuestion, QuestionType, TenantAssessment } from '@talim/types';
+import { PRACTICE_QUESTION_TYPES } from '@talim/types';
+import type {
+  AppLocale,
+  BankQuestion,
+  QuestionDepth,
+  QuestionDifficulty,
+  QuestionType,
+  TenantAssessment,
+} from '@talim/types';
 import {
   useAssessmentLeaderboard,
   useAssessmentResults,
@@ -35,7 +43,6 @@ import {
   useScheduleAssessment,
   useSetAssessmentLive,
   useTenantAssessments,
-  type BankQuestionStyle,
 } from '@/hooks/useAssessments';
 import { useTenantStudents } from '@/hooks/useTenant';
 import { useTenantContents } from '@/hooks/useTenantContent';
@@ -58,19 +65,33 @@ const STEP_LABEL_KEYS: Record<WizardStep, string> = {
   assign: 'stepAssignLabel',
 };
 
-/** Every backend generation style (mirrors `BankQuestionStyle`), with its option label key. */
-const STYLE_OPTIONS: { value: BankQuestionStyle; labelKey: string }[] = [
-  { value: 'mixed', labelKey: 'styleMixed' },
-  { value: 'multipleChoice', labelKey: 'styleMultipleChoice' },
-  { value: 'multipleSelect', labelKey: 'styleMultipleSelect' },
-  { value: 'trueFalse', labelKey: 'styleTrueFalse' },
-  { value: 'written', labelKey: 'styleWritten' },
-  { value: 'numeric', labelKey: 'styleNumeric' },
-  { value: 'fillBlank', labelKey: 'styleFillBlank' },
-  { value: 'dropdownCloze', labelKey: 'styleDropdownCloze' },
-  { value: 'matching', labelKey: 'styleMatching' },
-  { value: 'ordering', labelKey: 'styleOrdering' },
+/** Cognitive-depth choices for generation; each depth also has a one-line hint key. */
+const DEPTH_OPTIONS: { value: QuestionDepth; labelKey: string }[] = [
+  { value: 'mixed', labelKey: 'depthMixed' },
+  { value: 'recall', labelKey: 'depthRecall' },
+  { value: 'understanding', labelKey: 'depthUnderstanding' },
+  { value: 'application', labelKey: 'depthApplication' },
 ];
+
+const DEPTH_HINT_KEYS: Record<QuestionDepth, string> = {
+  mixed: 'depthMixedHint',
+  recall: 'depthRecallHint',
+  understanding: 'depthUnderstandingHint',
+  application: 'depthApplicationHint',
+};
+
+/** Bloom badges on generated questions reuse the depth option labels. */
+const BLOOM_LABEL_KEYS: Record<Exclude<QuestionDepth, 'mixed'>, string> = {
+  recall: 'depthRecall',
+  understanding: 'depthUnderstanding',
+  application: 'depthApplication',
+};
+
+const DIFFICULTY_BADGES: Record<QuestionDifficulty, { labelKey: string; className: string }> = {
+  easy: { labelKey: 'difficultyEasy', className: 'bg-success-muted text-success' },
+  medium: { labelKey: 'difficultyMedium', className: 'bg-warning-muted text-warning' },
+  hard: { labelKey: 'difficultyHard', className: 'bg-destructive/10 text-destructive' },
+};
 
 const STATUS_FILTERS: { value: 'ALL' | BankQuestion['status']; labelKey: string }[] = [
   { value: 'ALL', labelKey: 'filterAll' },
@@ -297,7 +318,10 @@ export default function TenantAssessmentsPage() {
   const [topic, setTopic] = useState('');
   const [bankContentIds, setBankContentIds] = useState<string[]>([]);
   const [draftTopic, setDraftTopic] = useState('');
-  const [draftStyle, setDraftStyle] = useState<BankQuestionStyle>('mixed');
+  const [draftCount, setDraftCount] = useState(10);
+  const [draftDepth, setDraftDepth] = useState<QuestionDepth>('mixed');
+  // Selected generatable types; empty = balanced mix (the `types` param is omitted).
+  const [draftTypes, setDraftTypes] = useState<QuestionType[]>([]);
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [assessmentTitle, setAssessmentTitle] = useState('');
   const [assessmentId, setAssessmentId] = useState('');
@@ -632,13 +656,15 @@ export default function TenantAssessmentsPage() {
           </div>
           {selectedBankId && (
             <form
-              className="mt-4 flex flex-col gap-3 md:flex-row"
+              className="mt-4 space-y-4"
               onSubmit={async (event) => {
                 event.preventDefault();
                 await generate.mutateAsync({
                   topic: draftTopic || undefined,
-                  count: 12,
-                  style: draftStyle,
+                  count: draftCount,
+                  depth: draftDepth,
+                  // Chosen types replace the legacy `style` knob; empty = balanced mix.
+                  ...(draftTypes.length > 0 ? { types: draftTypes } : {}),
                 });
                 setDraftTopic('');
               }}
@@ -648,18 +674,71 @@ export default function TenantAssessmentsPage() {
                 onChange={(event) => setDraftTopic(event.target.value)}
                 placeholder={t('topicPlaceholder')}
               />
-              <select
-                value={draftStyle}
-                onChange={(event) => setDraftStyle(event.target.value as BankQuestionStyle)}
-                className="rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                aria-label={t('questionType')}
-              >
-                {STYLE_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {t(option.labelKey)}
-                  </option>
-                ))}
-              </select>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="space-y-1">
+                  <Label htmlFor="genCount">{t('countLabel')}</Label>
+                  <Input
+                    id="genCount"
+                    type="number"
+                    min={1}
+                    max={30}
+                    value={draftCount}
+                    onChange={(event) =>
+                      setDraftCount(Math.max(1, Math.min(30, Number(event.target.value) || 10)))
+                    }
+                  />
+                </div>
+                <div className="space-y-1">
+                  <Label htmlFor="genDepth">{t('depthLabel')}</Label>
+                  <select
+                    id="genDepth"
+                    value={draftDepth}
+                    onChange={(event) => setDraftDepth(event.target.value as QuestionDepth)}
+                    className="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  >
+                    {DEPTH_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {t(option.labelKey)}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="text-[11px] text-muted-foreground">
+                    {t(DEPTH_HINT_KEYS[draftDepth])}
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <Label>{t('typesLabel')}</Label>
+                <p className="text-[11px] text-muted-foreground">{t('typesHint')}</p>
+                <div role="group" aria-label={t('typesLabel')} className="flex flex-wrap gap-2">
+                  {PRACTICE_QUESTION_TYPES.map((questionType) => {
+                    const active = draftTypes.includes(questionType);
+                    return (
+                      <button
+                        key={questionType}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() =>
+                          setDraftTypes((prev) =>
+                            prev.includes(questionType)
+                              ? prev.filter((value) => value !== questionType)
+                              : [...prev, questionType],
+                          )
+                        }
+                        className={cn(
+                          'rounded-full px-3 py-1 font-label text-[11px] font-semibold transition-colors',
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                          active
+                            ? 'bg-primary/15 text-primary'
+                            : 'bg-secondary/60 text-muted-foreground hover:text-foreground',
+                        )}
+                      >
+                        {t(QUESTION_TYPE_LABEL_KEYS[questionType])}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
               <Button type="submit" disabled={generate.isPending}>
                 <Sparkles className="h-4 w-4" />
                 {generate.isPending ? t('generating') : t('generateDrafts')}
@@ -860,6 +939,19 @@ export default function TenantAssessmentsPage() {
                         <Badge variant={question.status === 'APPROVED' ? 'success' : 'secondary'}>
                           {t(QUESTION_TYPE_LABEL_KEYS[question.type])}
                         </Badge>
+                        {question.difficulty && (
+                          <Badge
+                            variant="secondary"
+                            className={cn('text-[10px]', DIFFICULTY_BADGES[question.difficulty].className)}
+                          >
+                            {t(DIFFICULTY_BADGES[question.difficulty].labelKey)}
+                          </Badge>
+                        )}
+                        {question.bloom && (
+                          <Badge variant="secondary" className="text-[10px]">
+                            {t(BLOOM_LABEL_KEYS[question.bloom])}
+                          </Badge>
+                        )}
                         {question.status === 'REJECTED' && (
                           <span className="font-label text-[10px] font-semibold uppercase tracking-wide text-destructive">
                             {t('filterRejected')}
@@ -872,6 +964,16 @@ export default function TenantAssessmentsPage() {
                       </p>
                       {question.explanation && (
                         <p className="mt-1 text-sm text-muted-foreground">{question.explanation}</p>
+                      )}
+                      {question.sourceQuote && (
+                        <details className="mt-2">
+                          <summary className="cursor-pointer font-label text-[11px] font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground">
+                            {t('sourceQuoteLabel')}
+                          </summary>
+                          <blockquote className="mt-1.5 border-l-2 border-border pl-3 text-xs italic text-muted-foreground">
+                            &ldquo;{question.sourceQuote}&rdquo;
+                          </blockquote>
+                        </details>
                       )}
                     </div>
                   </div>

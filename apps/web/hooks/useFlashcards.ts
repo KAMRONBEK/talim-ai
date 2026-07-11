@@ -1,5 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { AppLocale, FlashcardDeck, FlashcardGrade, FlashcardReviewState } from '@talim/types';
+import type {
+  AppLocale,
+  FlashcardDeck,
+  FlashcardGrade,
+  FlashcardReviewState,
+  MasteryDelta,
+} from '@talim/types';
 import { useLocale } from 'next-intl';
 import { api } from '@/lib/api';
 import { useContentBase } from '@/hooks/useContentBase';
@@ -36,11 +42,12 @@ export function useGenerateFlashcards(contentId: string, sectionId?: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (input?: { regenerate?: boolean }) => {
+    mutationFn: async (input?: { regenerate?: boolean; count?: number }) => {
       const { data } = await api.post<{ deck: FlashcardDeck }>(`${base}/${contentId}/flashcards`, {
         locale,
         ...(sectionId ? { sectionId } : {}),
         ...(input?.regenerate ? { regenerate: true } : {}),
+        ...(input?.count ? { count: input.count } : {}),
       });
       return data.deck;
     },
@@ -54,13 +61,19 @@ export function useReviewFlashcard(contentId: string) {
 
   return useMutation({
     mutationFn: async ({ cardId, grade }: { cardId: string; grade: FlashcardGrade }) => {
-      const { data } = await api.post<{ review: FlashcardReviewState }>(
-        `${base}/${contentId}/flashcards/${cardId}/review`,
-        { grade },
-      );
-      return data.review;
+      const { data } = await api.post<{
+        review: FlashcardReviewState;
+        masteryDeltas?: MasteryDelta[];
+      }>(`${base}/${contentId}/flashcards/${cardId}/review`, { grade });
+      return data;
     },
-    // Refresh due state / dueCount after grading.
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['flashcards', contentId] }),
+    // Refresh due state / dueCount after grading; reviews also feed the mastery engine,
+    // so refresh the Learn-panel mastery list whenever the server reports movement.
+    onSuccess: (data) => {
+      void queryClient.invalidateQueries({ queryKey: ['flashcards', contentId] });
+      if (data.masteryDeltas?.length) {
+        void queryClient.invalidateQueries({ queryKey: ['mastery', contentId] });
+      }
+    },
   });
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import { use, useEffect, useMemo, useRef, useState } from 'react';
+import { use, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from '@/i18n/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { ArrowLeft, Loader2, RefreshCw, RotateCcw, Sparkles } from 'lucide-react';
@@ -19,12 +20,15 @@ const GRADES: { grade: FlashcardGrade; key: 'againBtn' | 'hardBtn' | 'goodBtn' |
   { grade: 'easy', key: 'easyBtn' },
 ];
 
-export default function FlashcardsPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+function FlashcardsInner({ id }: { id: string }) {
   const t = useTranslations('content');
+  // Decks are scope-keyed server-side: ?section=<id> shows/generates that section's deck
+  // (the Practice generator links here after a section-scoped generation).
+  const searchParams = useSearchParams();
+  const sectionId = searchParams.get('section') ?? undefined;
   const { data: content } = useContent(id);
-  const { data: deck } = useFlashcards(id);
-  const generate = useGenerateFlashcards(id);
+  const { data: deck } = useFlashcards(id, sectionId);
+  const generate = useGenerateFlashcards(id, sectionId);
   const review = useReviewFlashcard(id);
   const handleLimitError = useLimitErrorHandler();
   const isLearner = useAuthStore((s) => s.user?.role === 'TENANT_LEARNER');
@@ -112,7 +116,7 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between gap-3">
         <Link
-          href={`/content/${id}`}
+          href={sectionId ? `/content/${id}?section=${sectionId}` : `/content/${id}`}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" /> {t('backToContent')}
@@ -233,5 +237,15 @@ export default function FlashcardsPage({ params }: { params: Promise<{ id: strin
         </div>
       )}
     </div>
+  );
+}
+
+export default function FlashcardsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  // useSearchParams needs a Suspense boundary during prerender.
+  return (
+    <Suspense fallback={null}>
+      <FlashcardsInner id={id} />
+    </Suspense>
   );
 }

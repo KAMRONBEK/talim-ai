@@ -60,9 +60,7 @@ function ContentLayoutInner({
   const isLearner = role === 'TENANT_LEARNER';
   const {
     handleSummary,
-    handleCreateQuiz,
     generateSummary,
-    createQuiz,
     summary,
     summaryOpen,
     setSummaryOpen,
@@ -102,13 +100,8 @@ function ContentLayoutInner({
 
   const generations: SidebarGenerationProps = {
     onSummary: handleSummary,
-    onQuiz: (style) => handleCreateQuiz('FULL', style ? { style } : undefined),
-    onQuickCheck: (style) => handleCreateQuiz('QUICK', style ? { style } : undefined),
     summaryPending: generateSummary.isPending,
-    quizPending: createQuiz.isPending,
-    quickCheckPending: createQuiz.isPending,
     quizCount: history?.quizzes.length ?? 0,
-    canQuiz: !!activeId,
     hideGenerateActions: isLearner,
   };
 

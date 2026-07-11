@@ -1,21 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import type { QuizKind, QuestionStyle } from '@talim/types';
-import { useRouter } from '@/i18n/navigation';
 import { useRetryContent } from '@/hooks/useContent';
-import { useCreateQuiz, useGenerateSummary, useSavedSummary } from '@/hooks/useQuiz';
+import { useGenerateSummary, useSavedSummary } from '@/hooks/useQuiz';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 /**
- * Encapsulates the quiz / summary / retry / delete interactions for a content
- * detail page, plus the summary-dialog and delete-dialog open state.
- *
- * Behaviour is intentionally identical to the inline logic previously held in
- * `app/[locale]/content/[id]/page.tsx`.
+ * Encapsulates the summary / retry / delete interactions for a content detail
+ * page, plus the summary-dialog and delete-dialog open state. Quiz generation
+ * moved into the self-contained Practice generator
+ * (`components/practice/practice-generator.tsx`).
  */
 export function useContentActions(id: string, activeSectionId: string | undefined) {
-  const router = useRouter();
-  const createQuiz = useCreateQuiz();
   const generateSummary = useGenerateSummary();
   const { data: savedSummary } = useSavedSummary(id, activeSectionId);
   const retryContent = useRetryContent();
@@ -32,31 +27,6 @@ export function useContentActions(id: string, activeSectionId: string | undefine
   useEffect(() => {
     if (savedSummary) setSummary(savedSummary);
   }, [savedSummary]);
-
-  const handleCreateQuiz = async (
-    kind: QuizKind,
-    opts?: { style?: QuestionStyle; count?: number },
-  ) => {
-    if (!activeSectionId) {
-      // No section to anchor the quiz to (e.g. a content that produced zero sections).
-      // Surface a hint instead of silently doing nothing.
-      setActionError(t('selectSectionForQuiz'));
-      return;
-    }
-    setActionError(null);
-    try {
-      const quiz = await createQuiz.mutateAsync({
-        contentId: id,
-        sectionId: activeSectionId,
-        kind,
-        ...(opts?.style ? { style: opts.style } : {}),
-        ...(opts?.count ? { count: opts.count } : {}),
-      });
-      router.push(`/quiz/${quiz.id}`);
-    } catch (err) {
-      setActionError(handleLimitError(err, t('generationFailed')));
-    }
-  };
 
   const handleSummary = async () => {
     if (savedSummary) {
@@ -84,7 +54,6 @@ export function useContentActions(id: string, activeSectionId: string | undefine
 
   return {
     // mutations
-    createQuiz,
     generateSummary,
     retryContent,
     // summary state
@@ -98,7 +67,6 @@ export function useContentActions(id: string, activeSectionId: string | undefine
     actionError,
     clearActionError: () => setActionError(null),
     // handlers
-    handleCreateQuiz,
     handleSummary,
     handleOpenSummary,
   };
