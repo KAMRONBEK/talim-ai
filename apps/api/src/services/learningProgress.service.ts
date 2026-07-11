@@ -1,9 +1,9 @@
-import type { Quiz, QuizAttempt } from '@prisma/client';
+import type { Quiz, QuizAttempt, QuestionType } from '@prisma/client';
 import { AppError } from '../middleware/error.middleware.js';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from './ai.service.js';
 import { getSectionBody } from './section.service.js';
-import { isSelectedAnswerCorrect } from '@talim/types';
+import { gradeQuestion, jsonStringArray } from '@talim/types';
 import {
   LEARNING_COVERAGE_SYSTEM_PROMPT,
   buildLearningCoverageUserPrompt,
@@ -157,15 +157,20 @@ function blendCoverageScore(params: {
   aiEstimate: number | null;
 }): number {
   const quizComponent = params.quizBestScore ?? 0;
-  const quickComponent = params.quickCheckAccuracy ?? 0;
   const viewedBonus = params.viewedAt ? 100 : 0;
   const aiEstimate = params.aiEstimate ?? quizComponent;
 
+  // Quick-check (QUICK) quizzes are retired from the product surface. A learner with no
+  // legacy quick-check history would otherwise leave 30% of the blend permanently at 0,
+  // capping coverage at exactly the 70% completion threshold — so the weight is
+  // redistributed to the quiz and AI components when there is no quick-check signal.
   const blended =
-    0.4 * quizComponent +
-    0.3 * quickComponent +
-    0.1 * viewedBonus +
-    0.2 * aiEstimate;
+    params.quickCheckAccuracy == null
+      ? 0.6 * quizComponent + 0.1 * viewedBonus + 0.3 * aiEstimate
+      : 0.4 * quizComponent +
+        0.3 * params.quickCheckAccuracy +
+        0.1 * viewedBonus +
+        0.2 * aiEstimate;
 
   return Math.round(Math.max(0, Math.min(100, blended)) * 10) / 10;
 }
@@ -210,8 +215,11 @@ type QuizWithQuestions = Quiz & {
   questions: {
     id: string;
     question: string;
+    type: QuestionType;
     options: unknown;
     correctAnswer: string;
+    acceptableAnswers: unknown;
+    config?: unknown;
     explanation: string | null;
   }[];
 };
@@ -221,12 +229,26 @@ function buildCoverageResults(
   answers: Record<string, string>,
 ): CoverageQuestionResult[] {
   return questions.map((q) => {
-    const options = Array.isArray(q.options) ? (q.options as string[]) : [];
+    // Stored answers are canonical strings (structured values JSON-stringified); the shared
+    // grading engine parses and grades every question type, so the correctness flags fed to
+    // the AI coverage estimate stay accurate for the full type set.
     const selected = answers[q.id] ?? '';
+    const acceptable = jsonStringArray(q.acceptableAnswers);
+    const graded = gradeQuestion(
+      {
+        type: q.type,
+        options: q.options,
+        acceptableAnswers:
+          acceptable.length > 0 ? acceptable : q.correctAnswer ? [q.correctAnswer] : [],
+        config: q.config,
+      },
+      selected,
+      /* partialCredit */ true,
+    );
     return {
       question: q.question,
       selectedAnswer: selected,
-      correct: isSelectedAnswerCorrect(options, selected, q.correctAnswer),
+      correct: graded.correct,
       explanation: q.explanation,
     };
   });
@@ -343,6 +365,9 @@ export async function updateProgressAfterQuizSubmit(
   attempt: QuizAttempt,
   answers: Record<string, string>,
 ): Promise<void> {
+  // Whole-material quizzes (sectionId null) have no section-coverage row to update, but
+  // they still count as learning activity for the streak.
+  await recordLearningActivity(userId);
   if (!quiz.sectionId) return;
 
   const section = await prisma.contentSection.findUnique({
