@@ -352,6 +352,13 @@ export async function assertBank(tenantId: string, bankId: string) {
   return bank;
 }
 
+/**
+ * Below this many characters of section text there is nothing to ground questions in —
+ * the sourceQuote firewall would reject everything the model invents, failing the whole
+ * generation. Thin (heading-only) sections widen to the full material instead.
+ */
+const MIN_SECTION_CONTEXT_CHARS = 500;
+
 export async function getSectionContext(tenantId: string, contentId?: string, sectionId?: string) {
   if (!contentId) return null;
   const content = await prisma.content.findFirst({ where: { id: contentId, tenantId } });
@@ -362,7 +369,7 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
     : null;
   if (sectionId && !section) throw new AppError(404, 'Section not found');
 
-  const chunks = await prisma.chunk.findMany({
+  let chunks = await prisma.chunk.findMany({
     where: {
       contentId,
       ...(section ? { chunkIndex: { gte: section.startChunk, lte: section.endChunk } } : {}),
@@ -370,6 +377,13 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
     orderBy: { chunkIndex: 'asc' },
     take: 20,
   });
+  if (section && chunks.reduce((sum, c) => sum + c.text.length, 0) < MIN_SECTION_CONTEXT_CHARS) {
+    chunks = await prisma.chunk.findMany({
+      where: { contentId },
+      orderBy: { chunkIndex: 'asc' },
+      take: 20,
+    });
+  }
   return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
 }
 

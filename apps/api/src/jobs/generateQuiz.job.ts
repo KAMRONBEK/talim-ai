@@ -26,7 +26,18 @@ interface ContextChunk {
   chunkIndex: number;
 }
 
-async function getSectionChunks(contentId: string, sectionId: string): Promise<ContextChunk[]> {
+/**
+ * Below this many characters of section text there is nothing to ground questions in —
+ * the model pads from its own knowledge and the sourceQuote firewall then rejects every
+ * item (observed live: a heading-only 42-char section failed 9/9). Such sections widen
+ * their context to the whole material instead.
+ */
+const MIN_SECTION_CONTEXT_CHARS = 500;
+
+async function getSectionChunks(
+  contentId: string,
+  sectionId: string,
+): Promise<{ sectionTitle: string; chunks: ContextChunk[] }> {
   const section = await prisma.contentSection.findFirst({
     where: { id: sectionId, contentId },
   });
@@ -40,7 +51,10 @@ async function getSectionChunks(contentId: string, sectionId: string): Promise<C
     orderBy: { chunkIndex: 'asc' },
     take: 15,
   });
-  return chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex }));
+  return {
+    sectionTitle: section.title,
+    chunks: chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })),
+  };
 }
 
 /** Loose containment normalization shared with the postprocess quote check. */
@@ -119,8 +133,23 @@ export function registerGenerateQuizJob(): void {
     const requestedTypes = resolveRequestedTypes(jobTypes, quiz?.types, style);
 
     let chunks: ContextChunk[];
+    let topicTitle = content.title;
     if (sectionId) {
-      chunks = await getSectionChunks(contentId, sectionId);
+      const sectionCtx = await getSectionChunks(contentId, sectionId);
+      chunks = sectionCtx.chunks;
+      const sectionChars = chunks.reduce((sum, c) => sum + c.text.length, 0);
+      if (sectionChars < MIN_SECTION_CONTEXT_CHARS) {
+        // Thin (heading-only) section: pull topically similar chunks from the whole
+        // material so quotes can anchor to real text, and keep the section title as the
+        // topic focus so questions stay on the section's theme.
+        topicTitle = `${content.title} — ${sectionCtx.sectionTitle}`;
+        const widened = await searchSimilarChunks(contentId, sectionCtx.sectionTitle, 10, {
+          userId: content.userId,
+          metadata: { contentId, quizId },
+        });
+        const widenedChars = widened.reduce((sum, c) => sum + c.text.length, 0);
+        if (widenedChars > sectionChars) chunks = widened;
+      }
     } else {
       chunks = await searchSimilarChunks(contentId, content.title, 10, {
         userId: content.userId,
@@ -135,7 +164,7 @@ export function registerGenerateQuizJob(): void {
         {
           role: 'user',
           content: buildQuestionGenPrompt(locale, {
-            title: content.title,
+            title: topicTitle,
             context,
             count: overgenerateCount(count),
             types: requestedTypes,
