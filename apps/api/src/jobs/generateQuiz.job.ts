@@ -1,11 +1,10 @@
-import { Prisma, type QuizKind, type QuestionType } from '@prisma/client';
+import { Prisma, type QuestionType } from '@prisma/client';
 import { parseAppLocale, type QuestionDepth } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
 import { jobEvents } from '../services/events/jobEvents.service.js';
-import { getQuestionCount } from '../lib/quiz-prompt.js';
 import { type QuestionStyle } from '../lib/assessment-prompt.js';
 import {
   getQuestionGenSystemPrompt,
@@ -110,7 +109,6 @@ export function registerGenerateQuizJob(): void {
       contentId,
       quizId,
       sectionId,
-      kind,
       style: jobStyle,
       count: jobCount,
       types: jobTypes,
@@ -126,9 +124,8 @@ export function registerGenerateQuizJob(): void {
     const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
     const locale = parseAppLocale(jobLocale ?? quiz?.locale);
 
-    const quizKind: QuizKind = kind ?? 'FULL';
     const style: QuestionStyle = jobStyle ?? (quiz?.style as QuestionStyle) ?? 'mixed';
-    const count = jobCount ?? quiz?.count ?? getQuestionCount(quizKind);
+    const count = jobCount ?? quiz?.count ?? 5;
     const depth: QuestionDepth = jobDepth ?? ((quiz?.depth as QuestionDepth) ?? 'mixed');
     const requestedTypes = resolveRequestedTypes(jobTypes, quiz?.types, style);
 

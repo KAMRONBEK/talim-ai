@@ -11,7 +11,6 @@ import {
 } from '../lib/learning-coverage-prompt.js';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
-const QUICK_CHECK_LOOKBACK = 10;
 
 function todayUtcDate(): Date {
   const now = new Date();
@@ -117,24 +116,6 @@ async function estimateAiCoverage(
   }
 }
 
-async function computeQuickCheckAccuracy(
-  userId: string,
-  sectionId: string,
-): Promise<number | null> {
-  const attempts = await prisma.quizAttempt.findMany({
-    where: {
-      userId,
-      quiz: { sectionId, kind: 'QUICK' },
-    },
-    orderBy: { createdAt: 'desc' },
-    take: QUICK_CHECK_LOOKBACK,
-  });
-
-  if (attempts.length === 0) return null;
-  const avg = attempts.reduce((sum, a) => sum + a.score, 0) / attempts.length;
-  return Math.round(avg * 10) / 10;
-}
-
 async function computeBestFullQuizScore(
   userId: string,
   sectionId: string,
@@ -152,7 +133,6 @@ async function computeBestFullQuizScore(
 
 function blendCoverageScore(params: {
   quizBestScore: number | null;
-  quickCheckAccuracy: number | null;
   viewedAt: Date | null;
   aiEstimate: number | null;
 }): number {
@@ -160,17 +140,10 @@ function blendCoverageScore(params: {
   const viewedBonus = params.viewedAt ? 100 : 0;
   const aiEstimate = params.aiEstimate ?? quizComponent;
 
-  // Quick-check (QUICK) quizzes are retired from the product surface. A learner with no
-  // legacy quick-check history would otherwise leave 30% of the blend permanently at 0,
-  // capping coverage at exactly the 70% completion threshold — so the weight is
-  // redistributed to the quiz and AI components when there is no quick-check signal.
-  const blended =
-    params.quickCheckAccuracy == null
-      ? 0.6 * quizComponent + 0.1 * viewedBonus + 0.3 * aiEstimate
-      : 0.4 * quizComponent +
-        0.3 * params.quickCheckAccuracy +
-        0.1 * viewedBonus +
-        0.2 * aiEstimate;
+  // QUICK quizzes are fully retired (legacy rows were relabeled FULL by the
+  // 20260712000000_retire_quick_quizzes migration), so the old 30% quick-check
+  // weight is permanently folded into the quiz and AI components.
+  const blended = 0.6 * quizComponent + 0.1 * viewedBonus + 0.3 * aiEstimate;
 
   return Math.round(Math.max(0, Math.min(100, blended)) * 10) / 10;
 }
@@ -281,11 +254,9 @@ async function persistSectionProgress(
   });
 
   const quizBestScore = await computeBestFullQuizScore(userId, quiz.sectionId);
-  const quickCheckAccuracy = await computeQuickCheckAccuracy(userId, quiz.sectionId);
 
   let coverageScore = blendCoverageScore({
     quizBestScore,
-    quickCheckAccuracy,
     viewedAt: existing?.viewedAt ?? null,
     aiEstimate,
   });
@@ -302,13 +273,11 @@ async function persistSectionProgress(
       contentId: quiz.contentId,
       coverageScore,
       quizBestScore,
-      quickCheckAccuracy,
       aiFeedback,
     },
     update: {
       coverageScore,
       quizBestScore,
-      quickCheckAccuracy,
       aiFeedback: aiFeedback ?? existing?.aiFeedback ?? null,
     },
   });
