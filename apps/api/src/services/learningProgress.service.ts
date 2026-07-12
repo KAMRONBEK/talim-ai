@@ -3,7 +3,8 @@ import { AppError } from '../middleware/error.middleware.js';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from './ai.service.js';
 import { getSectionBody } from './section.service.js';
-import { gradeQuestion, jsonStringArray } from '@talim/types';
+import { gradeQuestion, jsonStringArray, resolveAcceptedAnswers } from '@talim/types';
+import { applyAiJudgeToGrades, quizQuestionKey } from './answerJudge.service.js';
 import {
   LEARNING_COVERAGE_SYSTEM_PROMPT,
   buildLearningCoverageUserPrompt,
@@ -197,34 +198,46 @@ type QuizWithQuestions = Quiz & {
   }[];
 };
 
-function buildCoverageResults(
+async function buildCoverageResults(
   questions: QuizWithQuestions['questions'],
   answers: Record<string, string>,
-): CoverageQuestionResult[] {
-  return questions.map((q) => {
+): Promise<CoverageQuestionResult[]> {
+  const graded = questions.map((q) => {
     // Stored answers are canonical strings (structured values JSON-stringified); the shared
     // grading engine parses and grades every question type, so the correctness flags fed to
     // the AI coverage estimate stay accurate for the full type set.
     const selected = answers[q.id] ?? '';
-    const acceptable = jsonStringArray(q.acceptableAnswers);
-    const graded = gradeQuestion(
-      {
-        type: q.type,
-        options: q.options,
-        acceptableAnswers:
-          acceptable.length > 0 ? acceptable : q.correctAnswer ? [q.correctAnswer] : [],
-        config: q.config,
-      },
+    const accepted = resolveAcceptedAnswers(q.acceptableAnswers, q.correctAnswer);
+    const grade = gradeQuestion(
+      { type: q.type, options: q.options, acceptableAnswers: accepted, config: q.config },
       selected,
       /* partialCredit */ true,
     );
-    return {
-      question: q.question,
-      selectedAnswer: selected,
-      correct: graded.correct,
-      explanation: q.explanation,
-    };
+    return { q, selected, accepted, grade };
   });
+
+  // Cached AI verdicts only — this runs right after submit populated the cache, so a
+  // written answer the judge accepted must count as correct here too (coverage and the
+  // score the learner saw have to agree).
+  await applyAiJudgeToGrades(
+    graded.map(({ q, selected, accepted, grade }) => ({
+      key: quizQuestionKey(q.id),
+      type: q.type,
+      prompt: q.question,
+      referenceAnswers: accepted,
+      explanation: q.explanation,
+      answer: selected,
+      grade,
+    })),
+    { cachedOnly: true },
+  );
+
+  return graded.map(({ q, selected, grade }) => ({
+    question: q.question,
+    selectedAnswer: selected,
+    correct: grade.correct,
+    explanation: q.explanation,
+  }));
 }
 
 async function isLatestSectionAttempt(
@@ -309,7 +322,7 @@ async function refineSectionProgressWithAi(
   });
   if (!section) return;
 
-  const results = buildCoverageResults(quiz.questions, answers);
+  const results = await buildCoverageResults(quiz.questions, answers);
 
   let sectionExcerpt = '';
   try {

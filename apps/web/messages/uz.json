@@ -384,6 +384,8 @@
     "shortAnswer": "Qisqa javob",
     "numeric": "Raqamli",
     "check": "Tekshirish",
+    "checking": "Tekshirilmoqda…",
+    "checkFailed": "AI tekshiruvi ishlamadi — javob aynan moslik bo'yicha baholandi. Yakuniy natijada bu javob qayta tekshiriladi.",
     "answerPlaceholder": "Javobingiz",
     "correctAnswerLabel": "To'g'ri javob:",
     "correct": "To'g'ri!",

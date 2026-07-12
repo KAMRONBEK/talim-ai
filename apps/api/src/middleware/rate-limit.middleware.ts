@@ -1,4 +1,5 @@
 import rateLimit from 'express-rate-limit';
+import type { AuthenticatedRequest } from './auth.middleware.js';
 
 /**
  * Login limiter. `skipSuccessfulRequests` means only FAILED logins count, so a
@@ -21,6 +22,20 @@ export const authWriteRateLimit = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { message: 'Too many requests. Please wait a few minutes and try again.' },
+});
+
+/**
+ * Written-answer AI check limiter. Each check may trigger one small judge call, so cap
+ * per-user bursts to bound AI spend. Keyed by user id (runs after authMiddleware) — a
+ * classroom behind one NAT IP must not share a bucket.
+ */
+export const answerCheckRateLimit = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  limit: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => (req as AuthenticatedRequest).user?.userId ?? req.ip ?? 'unknown',
+  message: { message: 'Too many answer checks. Please wait a few minutes and try again.' },
 });
 
 /**

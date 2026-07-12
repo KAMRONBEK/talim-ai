@@ -11,7 +11,10 @@ import {
   answerToString,
   evidenceWeightForQuestion,
   gradeQuestion,
+  isAiJudgedQuestionType,
   jsonStringArray,
+  resolveAcceptedAnswers,
+  type GradeResult,
   type MasteryDelta,
 } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
@@ -23,6 +26,12 @@ import {
   getContentMastery as getContentMasteryState,
   type AnswerEvidence,
 } from '../services/sectionMastery.service.js';
+import {
+  applyAiJudgeToGrades,
+  judgeWrittenAnswers,
+  quizQuestionKey,
+  type JudgeOptions,
+} from '../services/answerJudge.service.js';
 
 const practiceTypeEnum = z.enum([
   'SHORT_ANSWER',
@@ -152,11 +161,13 @@ function formatAttempt(
 
 type QuizQuestionForEvaluation = {
   id: string;
+  question: string;
   type: QuestionType;
   options: unknown;
   correctAnswer: string;
   acceptableAnswers: unknown;
   config?: unknown;
+  explanation?: string | null;
 };
 
 function normalizeForOptionMatch(value: string): string {
@@ -210,18 +221,17 @@ interface QuizEvaluation {
 /**
  * Grade a submission with the shared grading engine (same one the tenant assessments and
  * the web instant feedback use). The score awards partial credit for structured types;
- * `correct` counts only fully-correct answers.
+ * `correct` counts only fully-correct answers. Written (SHORT_ANSWER) answers the engine
+ * rejects get a second pass through the AI judge — semantic correctness over exact
+ * wording — with verdicts cached so `cachedOnly` read paths re-grade consistently.
  */
-function evaluateQuizAnswers(
+async function evaluateQuizAnswers(
   questions: QuizQuestionForEvaluation[],
   submittedAnswers: Record<string, unknown>,
-): QuizEvaluation {
+  judge?: JudgeOptions,
+): Promise<QuizEvaluation> {
   const answers: Record<string, string> = {};
-  const credits: Record<string, number> = {};
-  let correct = 0;
-  let creditSum = 0;
-
-  for (const question of questions) {
+  const graded = questions.map((question) => {
     let raw = submittedAnswers[question.id];
 
     if (question.type === 'MULTIPLE_CHOICE') {
@@ -230,21 +240,41 @@ function evaluateQuizAnswers(
     }
 
     answers[question.id] = answerToString(raw);
-    const acceptable = jsonStringArray(question.acceptableAnswers);
-    const graded = gradeQuestion(
+    const accepted = resolveAcceptedAnswers(question.acceptableAnswers, question.correctAnswer);
+    const grade: GradeResult = gradeQuestion(
       {
         type: question.type,
         options: question.options,
-        acceptableAnswers:
-          acceptable.length > 0 ? acceptable : question.correctAnswer ? [question.correctAnswer] : [],
+        acceptableAnswers: accepted,
         config: question.config,
       },
       raw,
       /* partialCredit */ true,
     );
-    credits[question.id] = graded.creditFraction;
-    creditSum += graded.creditFraction;
-    if (graded.correct) correct++;
+    return { question, accepted, grade };
+  });
+
+  // AI second pass for answered-but-rejected written answers (upgrades grades in place).
+  await applyAiJudgeToGrades(
+    graded.map(({ question, accepted, grade }) => ({
+      key: quizQuestionKey(question.id),
+      type: question.type,
+      prompt: question.question,
+      referenceAnswers: accepted,
+      explanation: question.explanation ?? null,
+      answer: answers[question.id] ?? '',
+      grade,
+    })),
+    judge,
+  );
+
+  const credits: Record<string, number> = {};
+  let correct = 0;
+  let creditSum = 0;
+  for (const { question, grade } of graded) {
+    credits[question.id] = grade.creditFraction;
+    creditSum += grade.creditFraction;
+    if (grade.correct) correct++;
   }
 
   const total = questions.length;
@@ -427,7 +457,12 @@ export async function getLatestAttempt(req: AuthenticatedRequest, res: Response)
   }
 
   const questions = await prisma.quizQuestion.findMany({ where: { quizId } });
-  const evaluation = evaluateQuizAnswers(questions, attempt.answers as Record<string, string>);
+  // Read path: reuse cached AI verdicts only (no new judge calls on a GET). Best-effort
+  // consistency — attempts that predate an engine improvement re-grade slightly better
+  // than their stored score, which is this endpoint's long-standing intent.
+  const evaluation = await evaluateQuizAnswers(questions, attempt.answers as Record<string, string>, {
+    cachedOnly: true,
+  });
 
   res.json({
     attempt: formatAttempt({
@@ -454,7 +489,9 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
     throw new AppError(400, 'Quiz is still being generated');
   }
 
-  const evaluation = evaluateQuizAnswers(fullQuiz.questions, body.answers);
+  const evaluation = await evaluateQuizAnswers(fullQuiz.questions, body.answers, {
+    usage: { userId: req.user.userId, tenantId: req.user.tenantId },
+  });
 
   const attempt = await prisma.quizAttempt.create({
     data: {
@@ -487,6 +524,62 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
     correct: evaluation.correct,
     total: evaluation.total,
     masteryDeltas,
+  });
+}
+
+const checkAnswerSchema = z.object({
+  questionId: z.string().min(1),
+  answer: z.string().min(1).max(2000),
+});
+
+/**
+ * Instant server check for one written answer (the quiz player's "Check" button).
+ * Deterministic grading first (exact + typo tolerance); a rejected SHORT_ANSWER goes to
+ * the AI judge, whose cached verdict guarantees the final submit grades it the same way.
+ */
+export async function checkAnswer(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const body = checkAnswerSchema.parse(req.body);
+  const quizId = getParam(req, 'id');
+  const [, question] = await Promise.all([
+    assertQuizAccess(req, quizId),
+    prisma.quizQuestion.findFirst({ where: { id: body.questionId, quizId } }),
+  ]);
+  if (!question) throw new AppError(404, 'Question not found');
+
+  const referenceAnswers = resolveAcceptedAnswers(question.acceptableAnswers, question.correctAnswer);
+  const grade = gradeQuestion(
+    {
+      type: question.type,
+      options: question.options,
+      acceptableAnswers: referenceAnswers,
+      config: question.config,
+    },
+    body.answer,
+    /* partialCredit */ true,
+  );
+  if (grade.correct || !isAiJudgedQuestionType(question.type)) {
+    res.json({ correct: grade.correct, feedback: null });
+    return;
+  }
+
+  const key = quizQuestionKey(question.id);
+  const verdicts = await judgeWrittenAnswers(
+    [
+      {
+        key,
+        prompt: question.question,
+        referenceAnswers,
+        explanation: question.explanation,
+        answer: body.answer,
+      },
+    ],
+    { usage: { userId: req.user.userId, tenantId: req.user.tenantId }, timeoutMs: 15_000 },
+  );
+  const verdict = verdicts.get(key);
+  res.json({
+    correct: verdict?.correct ?? false,
+    feedback: verdict?.feedback ?? null,
   });
 }
 

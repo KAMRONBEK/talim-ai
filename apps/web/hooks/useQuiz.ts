@@ -9,6 +9,7 @@ import type {
   QuizWithLatestAttempt,
   AppLocale,
   MasteryDelta,
+  WrittenCheckResult,
 } from '@talim/types';
 import { api } from '@/lib/api';
 import { useJobStreamStore } from '@/store/useJobStreamStore';
@@ -142,6 +143,32 @@ export function useSubmitQuiz() {
         void queryClient.invalidateQueries({ queryKey: ['learning-history', vars.contentId, locale] });
         void queryClient.invalidateQueries({ queryKey: ['mastery', vars.contentId] });
       }
+    },
+  });
+}
+
+/**
+ * Server check for one written answer (the quiz player's Check button). Deterministic
+ * grading first; a rejected SHORT_ANSWER is judged semantically by AI, so grammar or
+ * spelling slips don't mark a right answer wrong. The verdict is cached server-side —
+ * the final submit grades the same answer identically.
+ */
+export function useCheckQuizAnswer() {
+  return useMutation({
+    mutationFn: async ({
+      quizId,
+      questionId,
+      answer,
+    }: {
+      quizId: string;
+      questionId: string;
+      answer: string;
+    }) => {
+      const { data } = await api.post<WrittenCheckResult>(`/quiz/${quizId}/check-answer`, {
+        questionId,
+        answer,
+      });
+      return data;
     },
   });
 }

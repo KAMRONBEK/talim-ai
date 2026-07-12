@@ -384,6 +384,8 @@
     "shortAnswer": "Short answer",
     "numeric": "Numeric",
     "check": "Check",
+    "checking": "Checking…",
+    "checkFailed": "AI check unavailable — graded by exact match. The final score will re-check this answer.",
     "answerPlaceholder": "Your answer",
     "correctAnswerLabel": "Correct answer:",
     "correct": "Correct!",

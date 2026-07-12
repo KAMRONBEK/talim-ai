@@ -8,15 +8,17 @@ import {
   resolveCorrectAnswer,
   type Quiz,
   type QuizQuestion,
+  type WrittenCheckResult,
 } from '@talim/types';
 import { RichText } from '@/components/learning/rich-text';
-import { isQuizGenerationStale, QUIZ_GENERATION_TIMEOUT_MS } from '@/hooks/useQuiz';
+import { isQuizGenerationStale, QUIZ_GENERATION_TIMEOUT_MS, useCheckQuizAnswer } from '@/hooks/useQuiz';
 import {
   blankCount,
   DropdownClozeInput,
   FillBlankInput,
   FlashcardInput,
   gradableQuestion,
+  isAiCheckable,
   isAnswerProvided,
   MatchingInput,
   MultipleSelectInput,
@@ -80,6 +82,9 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const t = useTranslations('quiz');
   const [answers, setAnswers] = useState<Record<string, QuizAnswerValue>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
+  // AI verdicts for written answers the local engine rejected (keyed by question id).
+  const [aiVerdicts, setAiVerdicts] = useState<Record<string, WrittenCheckResult>>({});
+  const checkAnswerMutation = useCheckQuizAnswer();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [, setTick] = useState(0);
   const questions = quiz.questions ?? [];
@@ -135,10 +140,17 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
     setRevealed((prev) => ({ ...prev, [questionId]: true }));
   };
 
-  // Check-based editors stay editable; editing after a check hides the verdict again.
+  // Check-based editors stay editable; editing after a check hides the verdict again
+  // (including a stale AI verdict for the previous text).
   const handleValue = (questionId: string, value: QuizAnswerValue) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
     setRevealed((prev) => (prev[questionId] ? { ...prev, [questionId]: false } : prev));
+    setAiVerdicts((prev) => {
+      if (!(questionId in prev)) return prev;
+      const next = { ...prev };
+      delete next[questionId];
+      return next;
+    });
   };
 
   const reveal = (questionId: string) => setRevealed((prev) => ({ ...prev, [questionId]: true }));
@@ -165,10 +177,16 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const answer = valueFor(q);
   const hasAnswer = isAnswerProvided(q, answer);
   const isRevealed = revealed[q.id] ?? false;
-  // Single grading engine — identical to the server's submit grading.
+  // Single grading engine — identical to the server's submit grading. A written answer
+  // the local engine rejects may still be accepted by the server's AI judge; the same
+  // cached verdict applies at submit, so this display never disagrees with the score.
   const grade = gradeQuestion(gradableQuestion(q), answer ?? '', true);
-  const isCorrect = grade.correct;
+  const aiVerdict = aiVerdicts[q.id];
+  const isCorrect = grade.correct || (aiVerdict?.correct ?? false);
   const isPartial = !isCorrect && grade.creditFraction > 0 && grade.creditFraction < 1;
+  // One check runs at a time (the pending state gates the button AND the input, so a
+  // second mutate can never drop the first one's callbacks or race an edited answer).
+  const isAiChecking = checkAnswerMutation.isPending;
   const typeLabel = t(questionTypeLabelKey(q.type));
   const allQuestionsAnswered = questions.every((question) =>
     isAnswerProvided(question, valueFor(question)),
@@ -194,6 +212,30 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
     const count = blankCount(q);
     const next = Array.from({ length: count }, (_, i) => (i === index ? text : arrayAnswer[i] ?? ''));
     handleValue(q.id, next);
+  };
+
+  // Open-answer check: a written answer the local engine rejects goes to the server's
+  // AI judge (semantic correctness) before revealing; everything else reveals
+  // immediately. A failed check still reveals the deterministic verdict — with a note
+  // that AI was unavailable — and the final submit re-judges server-side regardless.
+  const checkOpenAnswer = () => {
+    if (!hasAnswer || isRevealed || isAiChecking) return;
+    if (!isAiCheckable(q) || grade.correct) {
+      reveal(q.id);
+      return;
+    }
+    checkAnswerMutation.mutate(
+      { quizId: quiz.id, questionId: q.id, answer: stringAnswer },
+      {
+        onSuccess: (result) => setAiVerdicts((prev) => ({ ...prev, [q.id]: result })),
+        onError: () =>
+          setAiVerdicts((prev) => ({
+            ...prev,
+            [q.id]: { correct: false, feedback: t('checkFailed') },
+          })),
+        onSettled: () => reveal(q.id),
+      },
+    );
   };
 
   return (
@@ -319,11 +361,14 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                 inputMode={q.type === 'NUMERIC' ? 'decimal' : 'text'}
                 placeholder={t('answerPlaceholder')}
                 value={stringAnswer}
+                // Locked during the AI check — editing mid-flight would reveal the old
+                // text's verdict against the new text.
+                disabled={isAiChecking}
                 onChange={(e) => handleValue(q.id, e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && hasAnswer) {
                     e.preventDefault();
-                    reveal(q.id);
+                    checkOpenAnswer();
                   }
                 }}
                 aria-invalid={isRevealed && !isCorrect}
@@ -337,11 +382,11 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               />
               <Button
                 variant="outline"
-                onClick={() => reveal(q.id)}
-                disabled={!hasAnswer || isRevealed}
+                onClick={checkOpenAnswer}
+                disabled={!hasAnswer || isRevealed || isAiChecking}
                 className="shrink-0"
               >
-                {t('check')}
+                {isAiChecking ? t('checking') : t('check')}
               </Button>
             </div>
           )}
@@ -362,6 +407,10 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
             >
               {isCorrect ? t('correct') : isPartial ? partialLabel : t('incorrect')}
             </p>
+          )}
+          {/* AI judge note: e.g. "meaning is right — watch the spelling of maxraj". */}
+          {isRevealed && aiVerdict?.feedback && (
+            <p className="text-sm text-muted-foreground">{aiVerdict.feedback}</p>
           )}
           {isRevealed &&
             kind === 'multipleChoice' &&

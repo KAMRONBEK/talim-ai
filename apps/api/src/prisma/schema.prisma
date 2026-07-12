@@ -71,6 +71,7 @@ enum UsageFeature {
   TRANSCRIBE
   PDF_PARSE
   TENANT_ASSISTANT
+  ANSWER_JUDGE
 }
 
 enum PlanKind {
@@ -993,4 +994,23 @@ model Subscription {
 
   @@index([planId])
   @@index([status])
+}
+
+// Cached AI judge verdicts for written (SHORT_ANSWER) answers. Keyed by the question
+// (`quiz:<quizQuestionId>` / `bank:<bankQuestionId>`) + a hash of the normalized answer,
+// so the instant "Check" verdict, the submit grade, and any later re-grade of the same
+// answer always agree — and each unique answer is judged (and billed) at most once.
+model WrittenAnswerVerdict {
+  id          String   @id @default(cuid())
+  questionKey String
+  answerHash  String
+  // The normalized answer text the hash was computed from (debugging / audit).
+  answer      String   @db.Text
+  correct     Boolean
+  // Short judge note in the question's language (surfaced to the learner).
+  feedback    String?  @db.Text
+  model       String
+  createdAt   DateTime @default(now())
+
+  @@unique([questionKey, answerHash])
 }

@@ -12,6 +12,7 @@ import {
   submitAssessmentSchema,
 } from './shared.js';
 import { recordAnswers, type AnswerEvidence } from '../sectionMastery.service.js';
+import { applyAiJudgeToGrades, bankQuestionKey } from '../answerJudge.service.js';
 import { getAssessmentLeaderboard } from './results.js';
 
 export async function listLearnerAssessments(tenantId: string, userId: string) {
@@ -148,12 +149,35 @@ export async function submitLearnerAssessment(
   // (Speed points and streaks stay out of mastery — correctness only.)
   const masteryByContent = new Map<string, AnswerEvidence[]>();
 
-  for (const aq of assessment.questions) {
+  // Pass 1: deterministic grading (exact + typo tolerance). Written answers the engine
+  // rejects get a second, semantic pass through the AI judge; its verdicts must land
+  // BEFORE the scoring loop because streaks and game points depend on question order.
+  // The judge fails open — grading never breaks on an AI failure.
+  const graded = assessment.questions.map((aq) => {
+    const raw = body.answers[aq.question.id];
+    return {
+      aq,
+      submitted: answerToString(raw),
+      acceptable: jsonStringArray(aq.question.acceptableAnswers),
+      grade: gradeQuestion(aq.question, raw, assessment.partialCredit),
+    };
+  });
+  await applyAiJudgeToGrades(
+    graded.map(({ aq, submitted, acceptable, grade }) => ({
+      key: bankQuestionKey(aq.question.id),
+      type: aq.question.type,
+      prompt: aq.question.prompt,
+      referenceAnswers: acceptable,
+      explanation: aq.question.explanation,
+      answer: submitted,
+      grade,
+    })),
+    { usage: { userId, tenantId } },
+  );
+
+  for (const { aq, submitted, acceptable, grade } of graded) {
     const question = aq.question;
-    const raw = body.answers[question.id];
-    const grade = gradeQuestion(question, raw, assessment.partialCredit);
     const ok = grade.correct;
-    const submitted = answerToString(raw);
     let points = 0;
     if (ok) {
       correct += 1;
@@ -197,7 +221,7 @@ export async function submitLearnerAssessment(
       questionId: question.id,
       correct: ok,
       submittedAnswer: submitted,
-      acceptableAnswers: jsonStringArray(question.acceptableAnswers),
+      acceptableAnswers: acceptable,
       explanation: question.explanation,
       pointsAwarded: points,
       ...(strict ? { creditFraction, pointsEarned: questionPointsEarned } : {}),

@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { authMiddleware } from '../middleware/auth.middleware.js';
 import { attachTenantId, blockLearnerMutations } from '../middleware/tenant.middleware.js';
+import { answerCheckRateLimit } from '../middleware/rate-limit.middleware.js';
 import * as quizController from '../controllers/quiz.controller.js';
 
 export const quizRoutes = Router();
@@ -14,3 +15,4 @@ quizRoutes.get('/:id/attempts/latest', asyncHandler(quizController.getLatestAtte
 quizRoutes.get('/:id/attempts', asyncHandler(quizController.listAttempts));
 quizRoutes.get('/:id', asyncHandler(quizController.getQuiz));
 quizRoutes.post('/:id/submit', asyncHandler(quizController.submitQuiz));
+quizRoutes.post('/:id/check-answer', answerCheckRateLimit, asyncHandler(quizController.checkAnswer));

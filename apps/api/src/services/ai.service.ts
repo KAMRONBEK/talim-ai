@@ -79,18 +79,22 @@ function recordCompletionUsage(
 
 function createDeepSeekChatCompletion(
   messages: ChatMessageInput[],
-  options?: { temperature?: number },
+  options?: { temperature?: number; timeoutMs?: number },
 ) {
-  return deepseek.chat.completions.create({
-    model: env.DEEPSEEK_MODEL,
-    messages: toTextOnlyMessages(messages),
-    ...(options?.temperature !== undefined ? { temperature: options.temperature } : {}),
-    extra_body: {
-      thinking: {
-        type: env.DEEPSEEK_THINKING,
+  return deepseek.chat.completions.create(
+    {
+      model: env.DEEPSEEK_MODEL,
+      messages: toTextOnlyMessages(messages),
+      ...(options?.temperature !== undefined ? { temperature: options.temperature } : {}),
+      extra_body: {
+        thinking: {
+          type: env.DEEPSEEK_THINKING,
+        },
       },
-    },
-  } as any);
+    } as any,
+    // SDK-level timeout aborts the HTTP request itself (no detached promise races).
+    options?.timeoutMs !== undefined ? { timeout: options.timeoutMs } : undefined,
+  );
 }
 
 function createDeepSeekChatStream(messages: ChatMessageInput[]) {
@@ -278,7 +282,7 @@ export async function* streamTutorWithTools(
 
 export async function generateJsonCompletion<T>(
   messages: ChatMessageInput[],
-  options?: { temperature?: number; usage?: AiUsageContext },
+  options?: { temperature?: number; timeoutMs?: number; usage?: AiUsageContext },
 ): Promise<T> {
   const response = await createDeepSeekChatCompletion(messages, options);
   // Await so usage is persisted before any subsequent quota check (sequential

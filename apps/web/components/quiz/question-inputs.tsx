@@ -7,9 +7,12 @@ import { Input } from '@talim/ui';
 import {
   FLASHCARD_KNOWN,
   FLASHCARD_UNKNOWN,
+  isAiJudgedQuestionType,
   jsonStringArray,
+  matchesAcceptedAnswer,
   normalizeAnswer,
   parseQuestionConfig,
+  resolveAcceptedAnswers,
   type QuestionType,
   type QuizQuestion,
 } from '@talim/types';
@@ -55,8 +58,15 @@ export function matchingLeft(question: QuizQuestion): string[] {
 
 /** Legacy rows can have an empty acceptableAnswers list — fall back to correctAnswer. */
 export function acceptedAnswers(question: QuizQuestion): string[] {
-  if (question.acceptableAnswers?.length) return question.acceptableAnswers;
-  return question.correctAnswer ? [question.correctAnswer] : [];
+  return resolveAcceptedAnswers(question.acceptableAnswers, question.correctAnswer);
+}
+
+/**
+ * Whether the Check button should ask the server for an AI verdict when the local
+ * engine rejects the answer — mirrors the API's judge candidate selection exactly.
+ */
+export function isAiCheckable(question: QuizQuestion): boolean {
+  return isAiJudgedQuestionType(question.type);
 }
 
 /** Question shape safe to pass to gradeQuestion (applies the legacy acceptableAnswers fallback). */
@@ -260,8 +270,9 @@ export function FillBlankInput({
       {Array.from({ length: count }).map((_, i) => {
         const text = value[i] ?? '';
         const accepted = acceptedForBlank(question, i);
-        const correct =
-          text.trim() !== '' && accepted.some((a) => normalizeAnswer(a) === normalizeAnswer(text));
+        // The engine's own typed-blank matcher (exact + typo tolerance) — display and
+        // grade share one implementation, so they can never drift.
+        const correct = matchesAcceptedAnswer(text, accepted);
         return (
           <div key={i} className="space-y-1">
             <Input

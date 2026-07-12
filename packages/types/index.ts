@@ -1203,6 +1203,13 @@ export interface QuizAttempt {
   masteryDeltas?: MasteryDelta[];
 }
 
+/** Verdict from POST /quiz/:id/check-answer — the AI-backed written-answer check. */
+export interface WrittenCheckResult {
+  correct: boolean;
+  /** Short judge note in the question's language (e.g. "typos, but the meaning is right"). */
+  feedback: string | null;
+}
+
 /** One section's mastery state for the requesting user. */
 export interface SectionMasteryInfo {
   sectionId: string | null;

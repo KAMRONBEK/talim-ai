@@ -128,7 +128,16 @@ export function blockLearnerMutations(
     // like submitting a quiz — it only writes the learner's own per-card review state.
     const isFlashcardReview =
       req.method === 'POST' && req.path.includes('/flashcards/') && req.path.endsWith('/review');
-    if (req.method !== 'GET' && !isQuizSubmit && !isProgressPatch && !isFlashcardReview) {
+    // Checking one written answer (AI-backed instant feedback) is part of taking a quiz,
+    // like submitting — it never mutates content.
+    const isAnswerCheck = req.method === 'POST' && req.path.endsWith('/check-answer');
+    if (
+      req.method !== 'GET' &&
+      !isQuizSubmit &&
+      !isProgressPatch &&
+      !isFlashcardReview &&
+      !isAnswerCheck
+    ) {
       res.status(403).json({ message: 'Learners cannot upload, generate, or modify content' });
       return;
     }

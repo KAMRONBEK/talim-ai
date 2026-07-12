@@ -35,6 +35,29 @@ export function jsonStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string') : [];
 }
 
+/**
+ * Accepted answers with the legacy fallback: pre-migration rows have no acceptableAnswers
+ * and grade against correctAnswer. The single implementation of this rule — the API
+ * graders and the web UI must resolve reference answers identically.
+ */
+export function resolveAcceptedAnswers(
+  acceptableAnswers: unknown,
+  correctAnswer?: string | null,
+): string[] {
+  const acceptable = jsonStringArray(acceptableAnswers);
+  if (acceptable.length > 0) return acceptable;
+  return correctAnswer ? [correctAnswer] : [];
+}
+
+/**
+ * Which question types get an AI semantic verdict when the deterministic engine rejects
+ * an answered submission. Shared by the API's judge candidate selection and the web's
+ * Check button, so the client never skips (or pointlessly issues) a server check.
+ */
+export function isAiJudgedQuestionType(type: QuestionType): boolean {
+  return type === 'SHORT_ANSWER';
+}
+
 /** Parse a Json question `config` blob into a plain object (or null). */
 export function parseQuestionConfig(config: unknown): Record<string, unknown> | null {
   if (config && typeof config === 'object' && !Array.isArray(config)) {
@@ -64,6 +87,85 @@ export function isNumericMatch(submitted: number, accepted: number): boolean {
 }
 
 /**
+ * Optimal-string-alignment (Damerau-Levenshtein with adjacent transpositions) distance,
+ * capped at `max` — returns max+1 as soon as the distance provably exceeds the cap.
+ * Answers are short (words/phrases), so the plain O(n·m) DP is plenty.
+ */
+function boundedEditDistance(a: string, b: string, max: number): number {
+  if (a === b) return 0;
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev2: number[] = [];
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const curr: number[] = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let best = Math.min((prev[j] ?? 0) + 1, (curr[j - 1] ?? 0) + 1, (prev[j - 1] ?? 0) + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+        best = Math.min(best, (prev2[j - 2] ?? 0) + 1);
+      }
+      curr[j] = best;
+      if (best < rowMin) rowMin = best;
+    }
+    if (rowMin > max) return max + 1;
+    prev2 = prev;
+    prev = curr;
+  }
+  return Math.min(prev[b.length] ?? max + 1, max + 1);
+}
+
+/**
+ * One word of a typed answer against the expected word, tolerating a single spelling
+ * slip. Deliberately conservative — an over-accept here awards authoritative credit
+ * with no AI second look (the judge only reviews REJECTED answers), so:
+ * - words of ≤4 letters get no tolerance (one edit lands on a different word: ot/o't);
+ * - digit-bearing words must match exactly (1945 vs 1946 is a wrong answer);
+ * - the first two characters must agree — negation/antonym pairs differ at the word's
+ *   start (noto'g'ri/to'g'ri, независимый/зависимый, in-/de-creases, billion/million)
+ *   while real typos cluster mid-word;
+ * - exactly ONE edit, never two: hyper-/hypo- style pairs survive every other guard.
+ * Anything this rejects still reaches the AI judge for a semantic verdict.
+ */
+function isWordTypo(word: string, want: string): boolean {
+  if (word === want) return true;
+  if (/\d/.test(word) || /\d/.test(want)) return false;
+  if (Math.min(word.length, want.length) < 5) return false;
+  if (word.slice(0, 2) !== want.slice(0, 2)) return false;
+  return boundedEditDistance(word, want, 1) <= 1;
+}
+
+/** Apostrophes are dropped for fuzzy comparison: Uzbek keyboards often lack the tutuq
+ * belgisi, so "togri" for "to'g'ri" is the most common way a correct answer is typed. */
+function fuzzyForm(normalized: string): string {
+  return normalized.replace(/'/g, '');
+}
+
+/**
+ * Free-text answer match: exact on the normalized form, else word-by-word typo
+ * tolerance (see isWordTypo). Same word count required — a missing word is a content
+ * difference, not a typo; that case escalates to the AI judge server-side. This is THE
+ * matcher for typed answers: the grading engine (SHORT_ANSWER + FILL_BLANK) and the
+ * web's per-blank feedback both call it, so display and grade can never drift.
+ */
+export function matchesAcceptedAnswer(submitted: string, accepted: string[]): boolean {
+  const normalized = normalizeAnswer(submitted);
+  if (!normalized) return false;
+  const fuzzy = fuzzyForm(normalized);
+  const words = fuzzy.split(' ');
+  return accepted.some((value) => {
+    const acceptedNormalized = normalizeAnswer(value);
+    if (acceptedNormalized === normalized) return true;
+    const acceptedFuzzy = fuzzyForm(acceptedNormalized);
+    if (!fuzzy || !acceptedFuzzy) return false;
+    if (acceptedFuzzy === fuzzy) return true;
+    const acceptedWords = acceptedFuzzy.split(' ');
+    if (words.length !== acceptedWords.length) return false;
+    return words.every((word, i) => isWordTypo(word, acceptedWords[i] ?? ''));
+  });
+}
+
+/**
  * Grade a single-string answer (SHORT_ANSWER / NUMERIC / MULTIPLE_CHOICE / TRUE_FALSE)
  * against the accepted list. A blank/whitespace answer (including a game-quiz timer
  * expiry, which submits '') is never correct — without this guard NUMERIC grading treats
@@ -83,8 +185,14 @@ export function isCorrect(
       return accepted != null && isNumericMatch(answerNumber, accepted);
     });
   }
-  const normalized = normalizeAnswer(answer);
-  if (acceptable.some((value) => normalizeAnswer(value) === normalized)) return true;
+  // SHORT_ANSWER is typed free text — tolerate spelling slips (option-based types stay
+  // exact: their answers are picked, not typed, so any difference is a wrong pick).
+  if (question.type === 'SHORT_ANSWER') {
+    if (matchesAcceptedAnswer(answer, acceptable)) return true;
+  } else {
+    const normalized = normalizeAnswer(answer);
+    if (acceptable.some((value) => normalizeAnswer(value) === normalized)) return true;
+  }
   // MULTIPLE_CHOICE: also resolve option-label answers ("B" / "B) text") against options.
   if (question.type === 'MULTIPLE_CHOICE') {
     const options = jsonStringArray(question.options);
@@ -362,11 +470,16 @@ export function gradeQuestion(
   if (question.type === 'FILL_BLANK' || question.type === 'DROPDOWN_CLOZE') {
     const perBlank = fillBlankAcceptedPerBlank(parseQuestionConfig(question.config), acceptable);
     const answers = parseArrayAnswer(raw);
+    // FILL_BLANK blanks are typed → typo-tolerant; DROPDOWN_CLOZE values are picked → exact.
+    const typed = question.type === 'FILL_BLANK';
     let hit = 0;
     for (let i = 0; i < perBlank.length; i++) {
-      const accepted = (perBlank[i] ?? []).map(normalizeAnswer);
+      const accepted = perBlank[i] ?? [];
       const got = normalizeAnswer(answers[i] ?? '');
-      if (got && accepted.includes(got)) hit += 1;
+      const ok = typed
+        ? matchesAcceptedAnswer(answers[i] ?? '', accepted)
+        : got !== '' && accepted.some((a) => normalizeAnswer(a) === got);
+      if (ok) hit += 1;
     }
     const fraction = perBlank.length > 0 ? hit / perBlank.length : 0;
     const exact = fraction >= 1;
