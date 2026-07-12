@@ -139,8 +139,14 @@ export default function TenantStudentsPage() {
 
   // Export: pure client-side CSV of the selected rows — no backend.
   const handleExport = () => {
-    const escapeCsv = (value: string) =>
-      /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+    const escapeCsv = (value: string) => {
+      // Neutralize spreadsheet formula injection (CWE-1236): a cell starting with
+      // =, +, -, @, TAB, or CR is executed as a formula by Excel/Sheets/LibreOffice.
+      // Student names are user-controlled (self-enroll display name, owner create, CSV
+      // import), so prefix a leading formula char with a single quote to force text.
+      const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+      return /[",\n]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
+    };
     const header = [t('students.name'), t('students.email'), t('students.status')];
     const rows = selectedStudents.map((s) => [
       s.name ?? '',
