@@ -314,7 +314,8 @@
       "depth_application": "Application",
       "depthDesc_application": "Apply what you learned to new situations",
       "generate": "Generate",
-      "generating": "Generating…"
+      "generating": "Generating…",
+      "type_FLASHCARD": "Flashcards"
     },
     "mastery": {
       "title": "Mastery",
@@ -452,7 +453,11 @@
       "familiar": "Familiar",
       "proficient": "Proficient",
       "mastered": "Mastered"
-    }
+    },
+    "flashcard": "Flashcard",
+    "showAnswer": "Show answer",
+    "selfKnown": "I knew it",
+    "selfUnknown": "Didn't know"
   },
   "theme": {
     "light": "Light",
@@ -889,7 +894,8 @@
       "difficultyEasy": "Easy",
       "difficultyMedium": "Medium",
       "difficultyHard": "Hard",
-      "sourceQuoteLabel": "Source"
+      "sourceQuoteLabel": "Source",
+      "typeFlashcard": "Flashcard"
     },
     "progressDesc": "Track learning activity across your organization.",
     "avgCoverage": "Avg coverage",

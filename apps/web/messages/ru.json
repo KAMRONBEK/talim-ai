@@ -314,7 +314,8 @@
       "depth_application": "Применение",
       "depthDesc_application": "Применение изученного в новых ситуациях",
       "generate": "Создать",
-      "generating": "Создание…"
+      "generating": "Создание…",
+      "type_FLASHCARD": "Флеш-карты"
     },
     "mastery": {
       "title": "Освоение",
@@ -452,7 +453,11 @@
       "familiar": "Знакомо",
       "proficient": "Уверенно",
       "mastered": "Освоено"
-    }
+    },
+    "flashcard": "Флеш-карта",
+    "showAnswer": "Показать ответ",
+    "selfKnown": "Знал(а)",
+    "selfUnknown": "Не знал(а)"
   },
   "theme": {
     "light": "Светлая",
@@ -889,7 +894,8 @@
       "difficultyEasy": "Лёгкий",
       "difficultyMedium": "Средний",
       "difficultyHard": "Сложный",
-      "sourceQuoteLabel": "Источник"
+      "sourceQuoteLabel": "Источник",
+      "typeFlashcard": "Флеш-карта"
     },
     "progressDesc": "Отслеживайте учебную активность по всей организации.",
     "avgCoverage": "Ср. охват",

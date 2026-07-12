@@ -31,7 +31,8 @@ export type QuestionType =
   | 'MATCHING'
   | 'ORDERING'
   | 'HOTSPOT'
-  | 'DRAG_DROP';
+  | 'DRAG_DROP'
+  | 'FLASHCARD';
 
 export type QuestionStyle = 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
 
@@ -41,7 +42,7 @@ export type QuestionDepth = 'recall' | 'understanding' | 'application' | 'mixed'
 /** LLM-declared difficulty of a generated question (seeds the mastery item prior). */
 export type QuestionDifficulty = 'easy' | 'medium' | 'hard';
 
-/** Question types an INDIVIDUAL learner can request in the unified Practice generator.
+/** Auto-graded question types shared by the Practice generator and tenant banks.
  * HOTSPOT / DRAG_DROP stay tenant/manual-author only. */
 export const PRACTICE_QUESTION_TYPES = [
   'MULTIPLE_CHOICE',
@@ -53,6 +54,14 @@ export const PRACTICE_QUESTION_TYPES = [
   'ORDERING',
   'SHORT_ANSWER',
   'NUMERIC',
+] as const satisfies readonly QuestionType[];
+
+/** B2C Practice generator type chips: the auto-graded set plus self-graded flashcards.
+ * FLASHCARD stays out of PRACTICE_QUESTION_TYPES because tenant banks / assessment
+ * players don't support self-graded items. */
+export const PRACTICE_GENERATOR_TYPES = [
+  ...PRACTICE_QUESTION_TYPES,
+  'FLASHCARD',
 ] as const satisfies readonly QuestionType[];
 
 /** Default type mix when the learner doesn't customize the Practice generator. */

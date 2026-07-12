@@ -107,6 +107,7 @@ enum QuestionType {
   ORDERING
   HOTSPOT
   DRAG_DROP
+  FLASHCARD
 }
 
 enum BankQuestionStatus {

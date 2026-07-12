@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { Input } from '@talim/ui';
@@ -26,6 +27,7 @@ const TYPE_LABEL_KEYS: Partial<Record<QuestionType, string>> = {
   ORDERING: 'ordering',
   NUMERIC: 'numeric',
   SHORT_ANSWER: 'shortAnswer',
+  FLASHCARD: 'flashcard',
 };
 
 export function questionTypeLabelKey(type: QuestionType): string {
@@ -82,6 +84,7 @@ export type QuestionRenderKind =
   | 'dropdownCloze'
   | 'matching'
   | 'ordering'
+  | 'flashcard'
   | 'open';
 
 export function questionRenderKind(question: QuizQuestion): QuestionRenderKind {
@@ -93,6 +96,7 @@ export function questionRenderKind(question: QuizQuestion): QuestionRenderKind {
   if (question.type === 'DROPDOWN_CLOZE') return 'dropdownCloze';
   if (question.type === 'MATCHING' && matchingLeft(question).length > 0) return 'matching';
   if (question.type === 'ORDERING' && optionCount > 0) return 'ordering';
+  if (question.type === 'FLASHCARD') return 'flashcard';
   return 'open';
 }
 
@@ -477,6 +481,82 @@ export function OrderingInput({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+/** Sentinel answer values for self-graded FLASHCARD items (mirrors @talim/types grading). */
+export const FLASHCARD_KNOWN = 'known';
+export const FLASHCARD_UNKNOWN = 'unknown';
+
+/**
+ * Self-graded study card inside a practice session: the front is the question stem
+ * (rendered by the caller); this input reveals the back, then asks the learner to
+ * self-report. The report is the submitted answer and feeds mastery at half weight.
+ */
+export function FlashcardInput({
+  question,
+  value,
+  revealed,
+  onReport,
+}: {
+  question: QuizQuestion;
+  value: string | undefined;
+  /** True once the learner self-reported (locks the buttons). */
+  revealed: boolean;
+  onReport: (report: string) => void;
+}) {
+  const t = useTranslations('quiz');
+  const [showBack, setShowBack] = useState(revealed);
+  const back = acceptedAnswers(question)[0] ?? '';
+
+  if (!showBack && !revealed) {
+    return (
+      <button
+        type="button"
+        onClick={() => setShowBack(true)}
+        className="w-full rounded-xl border-2 border-dashed border-border bg-muted/30 p-6 text-center text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+      >
+        {t('showAnswer')}
+      </button>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="rounded-xl border-2 border-border bg-muted/30 p-4 text-[15px]">
+        <RichText>{back}</RichText>
+      </div>
+      <div className="grid grid-cols-2 gap-2.5">
+        <button
+          type="button"
+          disabled={revealed}
+          onClick={() => onReport(FLASHCARD_UNKNOWN)}
+          className={`rounded-xl border-2 p-3.5 text-center text-[15px] font-medium transition-colors disabled:cursor-default ${
+            revealed && value === FLASHCARD_UNKNOWN
+              ? 'border-destructive bg-destructive/10'
+              : revealed
+                ? 'border-border bg-muted/20 opacity-60'
+                : 'border-border bg-muted/30 hover:border-destructive/50 hover:bg-destructive/5'
+          }`}
+        >
+          {t('selfUnknown')}
+        </button>
+        <button
+          type="button"
+          disabled={revealed}
+          onClick={() => onReport(FLASHCARD_KNOWN)}
+          className={`rounded-xl border-2 p-3.5 text-center text-[15px] font-medium transition-colors disabled:cursor-default ${
+            revealed && value === FLASHCARD_KNOWN
+              ? 'border-success bg-success-muted'
+              : revealed
+                ? 'border-border bg-muted/20 opacity-60'
+                : 'border-border bg-muted/30 hover:border-success/50 hover:bg-success-muted/40'
+          }`}
+        >
+          {t('selfKnown')}
+        </button>
+      </div>
     </div>
   );
 }

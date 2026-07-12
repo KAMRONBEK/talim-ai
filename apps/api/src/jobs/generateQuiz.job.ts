@@ -1,24 +1,17 @@
-import { Prisma, type QuestionType } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { parseAppLocale, type QuestionDepth } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
-import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
 import { jobEvents } from '../services/events/jobEvents.service.js';
 import { type QuestionStyle } from '../lib/assessment-prompt.js';
 import {
-  getQuestionGenSystemPrompt,
-  buildQuestionGenPrompt,
   normalizePracticeQuestionType,
   typesFromStyle,
   GENERATABLE_TYPES,
   type GeneratableQuestionType,
 } from '../lib/question-gen-prompt.js';
-import {
-  postprocessGeneratedQuestions,
-  overgenerateCount,
-} from '../lib/question-postprocess.js';
-import { type GeneratedQuestion } from '../services/assessment/shared.js';
+import { generateQuestionSet } from '../lib/question-gen.js';
 
 interface ContextChunk {
   text: string;
@@ -32,6 +25,24 @@ interface ContextChunk {
  * their context to the whole material instead.
  */
 const MIN_SECTION_CONTEXT_CHARS = 500;
+
+/**
+ * Whole-material context: an even spread of chunks across the document, sized to the
+ * requested question count. Title-similarity retrieval clustered around the intro and
+ * starved later sections — an even spread grounds questions (and their sourceQuote
+ * anchors) across the whole material.
+ */
+async function getWholeMaterialChunks(contentId: string, count: number): Promise<ContextChunk[]> {
+  const target = Math.min(30, Math.max(12, Math.ceil(count * 1.6)));
+  const all = await prisma.chunk.findMany({
+    where: { contentId },
+    orderBy: { chunkIndex: 'asc' },
+    select: { text: true, chunkIndex: true },
+  });
+  if (all.length <= target) return all;
+  const step = all.length / target;
+  return Array.from({ length: target }, (_, i) => all[Math.floor(i * step)]!);
+}
 
 async function getSectionChunks(
   contentId: string,
@@ -148,51 +159,33 @@ export function registerGenerateQuizJob(): void {
         if (widenedChars > sectionChars) chunks = widened;
       }
     } else {
-      chunks = await searchSimilarChunks(contentId, content.title, 10, {
-        userId: content.userId,
-        metadata: { contentId, quizId },
-      });
+      chunks = await getWholeMaterialChunks(contentId, count);
     }
     const context = buildRagContext(chunks);
 
-    const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>(
-      [
-        { role: 'system', content: getQuestionGenSystemPrompt(locale) },
-        {
-          role: 'user',
-          content: buildQuestionGenPrompt(locale, {
-            title: topicTitle,
-            context,
-            count: overgenerateCount(count),
-            types: requestedTypes,
-            depth,
-          }),
-        },
-      ],
-      {
-        usage: {
-          userId: content.userId,
-          feature: 'QUIZ_GEN',
-          metadata: { contentId, quizId },
-        },
-      },
-    );
+    // B2C mixed practice draws from the full generatable set — including self-graded
+    // FLASHCARD items (tenant banks pass their own flashcard-free type set).
+    const effectiveTypes = requestedTypes ?? [...GENERATABLE_TYPES];
 
-    const generated = result.questions ?? [];
-    if (generated.length === 0) {
-      throw new Error('No quiz questions generated');
-    }
-
-    const { questions, skipped } = postprocessGeneratedQuestions({
-      generated,
+    const { questions, skipped, breakdown, passes } = await generateQuestionSet({
+      locale,
+      title: topicTitle,
       context,
       count,
-      allowedTypes: requestedTypes as QuestionType[] | null,
+      types: effectiveTypes,
+      depth,
       normalizeType: normalizePracticeQuestionType,
+      usage: {
+        userId: content.userId,
+        feature: 'QUIZ_GEN',
+        metadata: { contentId, quizId },
+      },
     });
 
     if (questions.length === 0) {
-      throw new Error(`No valid quiz questions generated (skipped ${skipped})`);
+      throw new Error(
+        `No valid quiz questions generated (skipped ${skipped}: ${JSON.stringify(breakdown)})`,
+      );
     }
 
     // Section provenance for per-section mastery (full-content quizzes resolve per item).
@@ -227,9 +220,9 @@ export function registerGenerateQuizJob(): void {
       });
     }
 
-    if (skipped > 0) {
+    if (skipped > 0 || questions.length < count) {
       console.warn(
-        `generateQuiz: skipped ${skipped} invalid question(s) for quiz ${quizId} (created ${questions.length})`,
+        `generateQuiz: quiz ${quizId} delivered ${questions.length}/${count} in ${passes} pass(es), skipped ${skipped} ${JSON.stringify(breakdown)}`,
       );
     }
     jobEvents.publish(content.userId, { type: 'quiz.status', quizId, contentId, status: 'READY' });

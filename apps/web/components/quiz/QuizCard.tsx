@@ -15,6 +15,7 @@ import {
   blankCount,
   DropdownClozeInput,
   FillBlankInput,
+  FlashcardInput,
   gradableQuestion,
   isAnswerProvided,
   MatchingInput,
@@ -290,6 +291,13 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               value={arrayAnswer.length ? arrayAnswer : (q.options ?? [])}
               revealed={isRevealed}
               onReorder={(next) => handleValue(q.id, next)}
+            />
+          ) : kind === 'flashcard' ? (
+            <FlashcardInput
+              question={q}
+              value={typeof answer === 'string' ? answer : undefined}
+              revealed={isRevealed}
+              onReport={(report) => handleSelect(q.id, report)}
             />
           ) : (
             <div className="flex flex-col gap-3 sm:flex-row">

@@ -860,3 +860,23 @@ Logged (structural):
 - **Conclusion:** after F73, both dark themes are AA-clean for normal text except the single structural F75. Run 11/12's dark sweeps (success-state only) correctly found 0 island/overflow issues; this run adds the *error/state-token* contrast dimension they couldn't see, and it's now closed.
 
 **Still open for a resumed run (unchanged):** web `error.tsx` boundary (F69), F62 API error-code contract, F75 destructive-token split, full WCAG audit, Manim/Desmos chat visuals (AI-triggered), structural auth-staleness (F11/F45/F46), F39 GAME timings, persisted `Quiz.status` (F59) — all need migrations, design, or hot-path/auth changes unsuitable for an unattended run.
+
+## Practice generator v2 checks (2026-07-12)
+
+Verified live against local dev (qa-individual / Ven diagrammasi PDF):
+
+- [x] Practice dialog: count 15 + types (TF, dropdown-cloze, numeric, flashcards) + whole
+      material → quiz delivers **15/15** questions of only the requested types (fill-to-count
+      retry; was 5/15 pre-fix). API log line carries the per-reason skip breakdown.
+- [x] FLASHCARD items appear inline in the session: "Javobni ko'rish" reveals the back,
+      Bildim/Bilmadim locks + shows verdict/explanation; review view shows the self-report
+      label (not the raw sentinel); mastery deltas move down on "Bilmadim".
+- [x] Practice dialog shows Fleshkartalar as a type chip (no separate mode, no redirect to
+      the deck page); depth picker always visible.
+- [x] Whole-material quiz attributes questions to 4 different sections in masteryDeltas
+      (stratified chunk spread + sourceQuote provenance).
+- [x] Thin (heading-only) section generation no longer hard-fails (widened context).
+- [x] Multi-line stems render with hard line breaks; `\( \)` LaTeX normalizes to `$ $` and
+      renders via KaTeX (RichText normalization).
+- [ ] Regression watch: requested-type balance is best-effort — a type can come back with 0
+      items if the model/filters starve it (observed: NUMERIC 0/15 in one run).

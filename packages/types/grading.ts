@@ -307,6 +307,14 @@ function orderingPairwiseCredit(correctOrder: string[], submitted: string[]): nu
   return correctPairs / ((n * (n - 1)) / 2);
 }
 
+/** Canonical self-report answer values for FLASHCARD practice items. */
+export const FLASHCARD_KNOWN = 'known';
+export const FLASHCARD_UNKNOWN = 'unknown';
+/** Self-reported flashcard evidence counts at half the weight of auto-graded answers. */
+export const FLASHCARD_SELF_REPORT_WEIGHT = 0.5;
+/** Guess floor for self-reported flashcards (mirrors deck-review evidence). */
+export const FLASHCARD_GUESS_FLOOR = 0.2;
+
 /**
  * Grade one question against a (possibly structured) submitted answer, computing
  * both full correctness and a 0..1 credit fraction. The string-answer types
@@ -318,6 +326,14 @@ export function gradeQuestion(
   partialCredit: boolean,
 ): GradeResult {
   const acceptable = jsonStringArray(question.acceptableAnswers);
+
+  if (question.type === 'FLASHCARD') {
+    // Self-graded study card: the learner reveals the back and reports whether they knew
+    // it. The submitted value is the FLASHCARD_KNOWN / FLASHCARD_UNKNOWN sentinel.
+    const report = normalizeAnswer(answerToString(raw));
+    const known = report === FLASHCARD_KNOWN;
+    return { correct: known, creditFraction: known ? 1 : 0, answered: report.length > 0 };
+  }
 
   if (question.type === 'MULTIPLE_SELECT') {
     // Clamped +/- ratio (Moodle-style): each correct selection earns 1/totalCorrect, each
@@ -466,6 +482,9 @@ export function guessFloorForQuestion(question: {
       return 0.05;
     case 'HOTSPOT':
       return 0.1;
+    case 'FLASHCARD':
+      // Self-report has no options to derive a floor from; mirrors deck-review evidence.
+      return FLASHCARD_GUESS_FLOOR;
     default:
       // SHORT_ANSWER / NUMERIC / FILL_BLANK free recall.
       return 0;

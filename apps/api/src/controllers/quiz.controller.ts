@@ -11,6 +11,8 @@ import {
   answerToString,
   gradeQuestion,
   jsonStringArray,
+  FLASHCARD_GUESS_FLOOR,
+  FLASHCARD_SELF_REPORT_WEIGHT,
   type MasteryDelta,
 } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
@@ -33,6 +35,8 @@ const practiceTypeEnum = z.enum([
   'DROPDOWN_CLOZE',
   'MATCHING',
   'ORDERING',
+  // Self-graded study cards mixed into the same practice session (B2C only).
+  'FLASHCARD',
 ]);
 
 const createQuizSchema = z.object({
@@ -471,6 +475,10 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
     options: q.options,
     credit: evaluation.credits[q.id] ?? 0,
     declaredDifficulty: q.difficulty,
+    // Self-reported flashcard answers carry less evidence than auto-graded ones.
+    ...(q.type === 'FLASHCARD'
+      ? { weight: FLASHCARD_SELF_REPORT_WEIGHT, guessFloorOverride: FLASHCARD_GUESS_FLOOR }
+      : {}),
   }));
   const masteryDeltas = await recordAnswers(req.user.userId, fullQuiz.contentId, evidence);
 

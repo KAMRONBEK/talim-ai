@@ -16,6 +16,7 @@ import { Link } from '@/i18n/navigation';
 import { QuizCard } from '@/components/quiz/QuizCard';
 import { QuizResult } from '@/components/quiz/QuizResult';
 import {
+  FLASHCARD_KNOWN,
   formatAnswerDisplay,
   gradableQuestion,
   questionTypeLabelKey,
@@ -95,7 +96,13 @@ function QuizReviewList({
         const isPartial = !grade.correct && grade.creditFraction > 0 && grade.creditFraction < 1;
         const isOptionList =
           (q.type === 'MULTIPLE_CHOICE' || q.type === 'TRUE_FALSE') && (q.options?.length ?? 0) > 0;
-        const answerText = formatAnswerDisplay(raw);
+        // A flashcard's stored answer is the self-report sentinel — show its label instead.
+        const isFlashcard = q.type === 'FLASHCARD';
+        const answerText = isFlashcard
+          ? raw
+            ? t(raw === FLASHCARD_KNOWN ? 'selfKnown' : 'selfUnknown')
+            : ''
+          : formatAnswerDisplay(raw);
         const correctText = q.acceptableAnswers?.length
           ? q.acceptableAnswers.join(', ')
           : q.correctAnswer;

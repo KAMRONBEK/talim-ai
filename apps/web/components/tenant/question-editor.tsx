@@ -43,6 +43,7 @@ export const QUESTION_TYPE_LABEL_KEYS: Record<QuestionType, string> = {
   ORDERING: 'typeOrdering',
   HOTSPOT: 'typeHotspot',
   DRAG_DROP: 'typeDragDrop',
+  FLASHCARD: 'typeFlashcard',
 };
 
 const CHOICE_TYPES: QuestionType[] = ['MULTIPLE_CHOICE', 'TRUE_FALSE', 'MULTIPLE_SELECT'];
@@ -363,6 +364,10 @@ export function QuestionEditor({
           acceptableAnswers: valid.map((it) => it.target.trim()),
         };
       }
+      // FLASHCARD is a B2C practice-only type — the tenant editor never offers it
+      // (EDITOR_TYPES excludes it), but the QuestionType switch must stay exhaustive.
+      case 'FLASHCARD':
+        return { ...base, options: null, config: null, acceptableAnswers: nonEmpty(answers) };
     }
   };
 

@@ -8,6 +8,25 @@ import { cn } from '@talim/ui';
 import { SelectionAsk } from '@/components/learning/selection-ask';
 
 /**
+ * Model output doesn't reliably arrive in remark-math's dialect: formulas often come as
+ * \( ... \) / \[ ... \] instead of $ ... $ / $$ ... $$, and stems use bare newlines that
+ * markdown collapses into spaces (mashing an expression into the question line). Normalize
+ * both before parsing. Math segments are left untouched (the split keeps $$ blocks intact).
+ */
+function normalizeGeneratedText(text: string): string {
+  return text
+    .split(/(\$\$[\s\S]*?\$\$)/)
+    .map((part, i) => {
+      if (i % 2 === 1) return part; // inside a $$...$$ block
+      return part
+        .replace(/\\\[([\s\S]*?)\\\]/g, (_, expr: string) => `$$${expr}$$`)
+        .replace(/\\\(([\s\S]*?)\\\)/g, (_, expr: string) => `$${expr}$`)
+        .replace(/\n/g, '  \n'); // single newline → markdown hard break
+    })
+    .join('');
+}
+
+/**
  * Shared rich-text renderer: GFM markdown + LaTeX math (KaTeX). Used wherever
  * generated content can contain formulas — quiz questions/options/explanations,
  * etc. `inline` strips paragraph wrapping for use inside a line (e.g. an option).
@@ -44,7 +63,7 @@ export function RichText({
         rehypePlugins={[[rehypeKatex, { output: 'html', throwOnError: false, strict: false }]]}
         components={inline ? { p: ({ children: c }) => <>{c}</> } : undefined}
       >
-        {children}
+        {normalizeGeneratedText(children)}
       </ReactMarkdown>
     </Wrapper>
   );

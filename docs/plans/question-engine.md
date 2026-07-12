@@ -170,3 +170,32 @@ unchanged except grading now flows through the shared module and feeds mastery.
 1. Schema + types → 2. grading module → 3. question-gen service + prompts → 4. mastery
 service + wiring → 5. API surface → 6. web B2C → 7. web tenant → 8. i18n → 9. verify
 (typecheck/build/migrate), docs, memory.
+
+## 7. v2 follow-ups (2026-07-12) — count reliability, flashcards-in-session, math rendering
+
+Shipped after live VPS feedback (15 requested → 5 delivered, of assorted types; flashcards
+felt bolted-on; formulas rendered raw):
+
+- **Fill-to-count retry** (`apps/api/src/lib/question-gen.ts` — `generateQuestionSet`, used
+  by BOTH pipelines): pass 1 overgenerates 1.5×; if the quality filters leave a shortfall, a
+  second pass re-prompts for the missing items with every kept stem listed as a forbidden
+  repeat (`avoidStems` block in the prompt) and a shared stem-dedupe set. Postprocess now
+  returns a per-reason skip `breakdown` (parroting / missingAnswer / typeNotAllowed /
+  duplicateStem / quoteNotFound / bannedOption / malformedStructured / unanswerable), logged
+  by both callers. Verified live: the failing request now delivers 15/15.
+- **Whole-material context = stratified chunk spread**, sized to the requested count
+  (`getWholeMaterialChunks`, ~1.6×count chunks, 12–30): title-similarity retrieval clustered
+  at the intro and starved later sections; the bank path's take-20-first had the same bias
+  (`getSectionContext` now samples the same even spread).
+- **FLASHCARD as a first-class practice question type** (Prisma enum + `@talim/types`,
+  migration `20260712010000_flashcard_question_type`): generated in the SAME session as
+  other types (B2C only — tenant banks/assessment players exclude it), rendered as
+  reveal-back + self-grade (Bildim/Bilmadim), graded via the `known`/`unknown` sentinel in
+  the shared engine (`gradeQuestion` FLASHCARD case), and fed to mastery at half weight with
+  a 0.2 guess floor (constants in `packages/types/grading.ts`). The Practice dialog's
+  Flashcards chip is now a type chip, multi-selectable with the rest; the standalone
+  SRS deck page stays for spaced review.
+- **Math rendering**: prompts mandate `$...$`/`$$...$$` LaTeX for every formula (typeRules
+  MATH NOTATION block, all locales); the shared `RichText` renderer normalizes `\(..\)` /
+  `\[..\]` delimiters to dollars and converts bare newlines to markdown hard breaks so
+  multi-line stems (e.g. an expression under the question line) don't collapse.

@@ -2,18 +2,13 @@ import { Prisma, type QuestionType } from '@prisma/client';
 import { parseAppLocale } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
-import { generateJsonCompletion } from '../ai.service.js';
 import { normalizeAssessmentQuestionType } from '../../lib/assessment-prompt.js';
 import {
-  getQuestionGenSystemPrompt,
-  buildQuestionGenPrompt,
   typesFromStyle,
+  GENERATABLE_TYPES,
   type GeneratableQuestionType,
 } from '../../lib/question-gen-prompt.js';
-import {
-  postprocessGeneratedQuestions,
-  overgenerateCount,
-} from '../../lib/question-postprocess.js';
+import { generateQuestionSet } from '../../lib/question-gen.js';
 import {
   buildStructuredQuestion,
   buildHotspotQuestion,
@@ -22,7 +17,6 @@ import {
   type StructuredStorage,
 } from '../../lib/question-builders.js';
 import {
-  type GeneratedQuestion,
   assertBank,
   assertTenantContentIds,
   createBankSchema,
@@ -108,43 +102,29 @@ export async function generateQuestions(
     select: { preferredLocale: true },
   });
   const locale = parseAppLocale(owner?.preferredLocale);
+  // Tenant banks feed assessment players that only handle auto-graded types — the
+  // self-graded FLASHCARD type is excluded even from the default mix.
   const requestedTypes =
     body.types && body.types.length > 0
       ? (body.types as GeneratableQuestionType[])
-      : typesFromStyle(body.style);
+      : (typesFromStyle(body.style) ?? GENERATABLE_TYPES.filter((t) => t !== 'FLASHCARD'));
 
-  const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>(
-    [
-      { role: 'system', content: getQuestionGenSystemPrompt(locale) },
-      {
-        role: 'user',
-        content: buildQuestionGenPrompt(locale, {
-          title: bank.title,
-          topic: body.topic ?? bank.topic,
-          context,
-          count: overgenerateCount(body.count),
-          types: requestedTypes,
-          depth: body.depth,
-        }),
-      },
-    ],
-    {
-      usage: {
-        userId,
-        tenantId,
-        feature: 'QUESTION_DRAFT',
-        metadata: { bankId, contentId: sourceContentId, sectionId: body.sectionId },
-      },
-      temperature: 0.7,
-    },
-  );
-
-  const { questions, skipped } = postprocessGeneratedQuestions({
-    generated: result.questions ?? [],
-    context: context ?? '',
+  const { questions, skipped, breakdown, passes } = await generateQuestionSet({
+    locale,
+    title: bank.title,
+    topic: body.topic ?? bank.topic,
+    context,
     count: body.count,
-    allowedTypes: requestedTypes as QuestionType[] | null,
+    types: requestedTypes,
+    depth: body.depth,
     normalizeType: normalizeAssessmentQuestionType,
+    usage: {
+      userId,
+      tenantId,
+      feature: 'QUESTION_DRAFT',
+      metadata: { bankId, contentId: sourceContentId, sectionId: body.sectionId },
+    },
+    temperature: 0.7,
   });
 
   const created = [];
@@ -172,9 +152,9 @@ export async function generateQuestions(
       }),
     );
   }
-  if (skipped > 0) {
+  if (skipped > 0 || created.length < body.count) {
     console.warn(
-      `generateQuestions: skipped ${skipped} invalid/unanswerable question(s) for bank ${bankId} (created ${created.length}/${body.count})`,
+      `generateQuestions: bank ${bankId} delivered ${created.length}/${body.count} in ${passes} pass(es), skipped ${skipped} ${JSON.stringify(breakdown)}`,
     );
   }
   return created.map(formatQuestion);

@@ -369,20 +369,30 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
     : null;
   if (sectionId && !section) throw new AppError(404, 'Section not found');
 
-  let chunks = await prisma.chunk.findMany({
-    where: {
-      contentId,
-      ...(section ? { chunkIndex: { gte: section.startChunk, lte: section.endChunk } } : {}),
-    },
-    orderBy: { chunkIndex: 'asc' },
-    take: 20,
-  });
-  if (section && chunks.reduce((sum, c) => sum + c.text.length, 0) < MIN_SECTION_CONTEXT_CHARS) {
-    chunks = await prisma.chunk.findMany({
+  // Whole-material scope samples an even spread of chunks across the document (a plain
+  // take-20 only ever saw the document's start, starving later sections of coverage).
+  const wholeMaterialSpread = async () => {
+    const all = await prisma.chunk.findMany({
       where: { contentId },
       orderBy: { chunkIndex: 'asc' },
-      take: 20,
+      select: { text: true, chunkIndex: true },
     });
+    const target = 20;
+    if (all.length <= target) return all;
+    const step = all.length / target;
+    return Array.from({ length: target }, (_, i) => all[Math.floor(i * step)]!);
+  };
+
+  let chunks = section
+    ? await prisma.chunk.findMany({
+        where: { contentId, chunkIndex: { gte: section.startChunk, lte: section.endChunk } },
+        orderBy: { chunkIndex: 'asc' },
+        take: 20,
+        select: { text: true, chunkIndex: true },
+      })
+    : await wholeMaterialSpread();
+  if (section && chunks.reduce((sum, c) => sum + c.text.length, 0) < MIN_SECTION_CONTEXT_CHARS) {
+    chunks = await wholeMaterialSpread();
   }
   return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
 }

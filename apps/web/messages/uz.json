@@ -314,7 +314,8 @@
       "depth_application": "Qo'llash",
       "depthDesc_application": "O'rganganlarni yangi vaziyatlarga qo'llash",
       "generate": "Yaratish",
-      "generating": "Yaratilmoqda…"
+      "generating": "Yaratilmoqda…",
+      "type_FLASHCARD": "Fleshkartalar"
     },
     "mastery": {
       "title": "O'zlashtirish",
@@ -452,7 +453,11 @@
       "familiar": "Tanish",
       "proficient": "Malakali",
       "mastered": "O'zlashtirilgan"
-    }
+    },
+    "flashcard": "Fleshkarta",
+    "showAnswer": "Javobni ko'rish",
+    "selfKnown": "Bildim",
+    "selfUnknown": "Bilmadim"
   },
   "theme": {
     "light": "Yorug'",
@@ -889,7 +894,8 @@
       "difficultyEasy": "Oson",
       "difficultyMedium": "O'rtacha",
       "difficultyHard": "Qiyin",
-      "sourceQuoteLabel": "Manba"
+      "sourceQuoteLabel": "Manba",
+      "typeFlashcard": "Fleshkarta"
     },
     "progressDesc": "Tashkilotingiz bo'ylab o'quv faolligini kuzating.",
     "avgCoverage": "O'rtacha qamrov",

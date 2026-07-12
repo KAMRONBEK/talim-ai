@@ -14,16 +14,16 @@ import {
 } from '@talim/ui';
 import { Loader2 } from 'lucide-react';
 import type { QuestionDepth, QuestionType } from '@talim/types';
-import { PRACTICE_QUESTION_TYPES } from '@talim/types';
+import { PRACTICE_GENERATOR_TYPES } from '@talim/types';
 import { useCreateQuiz } from '@/hooks/useQuiz';
-import { useGenerateFlashcards } from '@/hooks/useFlashcards';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 const COUNT_PRESETS = [5, 10, 15, 20];
 const DEPTHS: QuestionDepth[] = ['mixed', 'recall', 'understanding', 'application'];
 
-/** What gets generated: the server's default type blend, a custom type set, or a flashcard deck. */
-type PracticeMode = 'mixed' | 'types' | 'flashcards';
+/** What gets generated: the server's default type blend or a custom type set. Flashcards
+ * are one of the selectable types — they land in the same practice session. */
+type PracticeMode = 'mixed' | 'types';
 
 export interface PracticeGeneratorProps {
   contentId: string;
@@ -36,9 +36,9 @@ export interface PracticeGeneratorProps {
 }
 
 /**
- * The unified Practice generator dialog: count presets, question-type chips (Mixed default,
- * plus a Flashcards mode), cognitive-depth picker, and section vs whole-material scope.
- * Owns its own mutations — quizzes route to /quiz/{id}, flashcards to the flashcards page.
+ * The unified Practice generator dialog: count presets, question-type chips (Mixed default;
+ * Flashcards is one of the types and lands in the same session), cognitive-depth picker,
+ * and section vs whole-material scope. Routes to /quiz/{id}.
  */
 export function PracticeGenerator({
   contentId,
@@ -68,12 +68,10 @@ export function PracticeGenerator({
 
   const scopeSectionId = scope === 'section' && activeSectionId ? activeSectionId : undefined;
   const createQuiz = useCreateQuiz();
-  const generateFlashcards = useGenerateFlashcards(contentId, scopeSectionId);
-  const pending = createQuiz.isPending || generateFlashcards.isPending;
+  const pending = createQuiz.isPending;
 
   const toggleType = (type: QuestionType) => {
-    const base = mode === 'types' ? types : [];
-    const next = base.includes(type) ? base.filter((v) => v !== type) : [...base, type];
+    const next = types.includes(type) ? types.filter((v) => v !== type) : [...types, type];
     setTypes(next);
     // Deselecting the last type falls back to the server's default Mixed blend.
     setMode(next.length === 0 ? 'mixed' : 'types');
@@ -82,27 +80,16 @@ export function PracticeGenerator({
   const handleGenerate = async () => {
     setError(null);
     try {
-      if (mode === 'flashcards') {
-        await generateFlashcards.mutateAsync({ count });
-        onOpenChange(false);
-        onGenerated?.();
-        router.push(
-          scopeSectionId
-            ? `/content/${contentId}/flashcards?section=${scopeSectionId}`
-            : `/content/${contentId}/flashcards`,
-        );
-      } else {
-        const quiz = await createQuiz.mutateAsync({
-          contentId,
-          ...(scopeSectionId ? { sectionId: scopeSectionId } : {}),
-          ...(mode === 'types' && types.length > 0 ? { types } : {}),
-          depth,
-          count,
-        });
-        onOpenChange(false);
-        onGenerated?.();
-        router.push(`/quiz/${quiz.id}`);
-      }
+      const quiz = await createQuiz.mutateAsync({
+        contentId,
+        ...(scopeSectionId ? { sectionId: scopeSectionId } : {}),
+        ...(mode === 'types' && types.length > 0 ? { types } : {}),
+        depth,
+        count,
+      });
+      onOpenChange(false);
+      onGenerated?.();
+      router.push(`/quiz/${quiz.id}`);
     } catch (err) {
       setError(handleLimitError(err, t('generationFailed')));
     }
@@ -190,7 +177,7 @@ export function PracticeGenerator({
               >
                 {t('practice.typeMixed')}
               </button>
-              {PRACTICE_QUESTION_TYPES.map((type) => (
+              {PRACTICE_GENERATOR_TYPES.map((type) => (
                 <button
                   key={type}
                   type="button"
@@ -201,50 +188,40 @@ export function PracticeGenerator({
                   {t(`practice.type_${type}`)}
                 </button>
               ))}
-              <button
-                type="button"
-                aria-pressed={mode === 'flashcards'}
-                onClick={() => setMode('flashcards')}
-                className={chip(mode === 'flashcards')}
-              >
-                {t('flashcards')}
-              </button>
             </div>
           </div>
 
-          {mode !== 'flashcards' && (
-            <div>
-              {sectionLabel(t('practice.depthLabel'))}
-              <div
-                className="space-y-1.5"
-                role="radiogroup"
-                aria-label={t('practice.depthLabel')}
-              >
-                {DEPTHS.map((value) => (
-                  <button
-                    key={value}
-                    type="button"
-                    role="radio"
-                    aria-checked={depth === value}
-                    onClick={() => setDepth(value)}
-                    className={cn(
-                      'w-full rounded-xl border p-2.5 text-left transition-colors',
-                      depth === value
-                        ? 'border-primary bg-secondary'
-                        : 'border-border bg-muted/30 hover:bg-muted/60',
-                    )}
-                  >
-                    <span className="block text-sm font-medium">
-                      {t(`practice.depth_${value}`)}
-                    </span>
-                    <span className="block text-[11px] text-muted-foreground">
-                      {t(`practice.depthDesc_${value}`)}
-                    </span>
-                  </button>
-                ))}
-              </div>
+          <div>
+            {sectionLabel(t('practice.depthLabel'))}
+            <div
+              className="space-y-1.5"
+              role="radiogroup"
+              aria-label={t('practice.depthLabel')}
+            >
+              {DEPTHS.map((value) => (
+                <button
+                  key={value}
+                  type="button"
+                  role="radio"
+                  aria-checked={depth === value}
+                  onClick={() => setDepth(value)}
+                  className={cn(
+                    'w-full rounded-xl border p-2.5 text-left transition-colors',
+                    depth === value
+                      ? 'border-primary bg-secondary'
+                      : 'border-border bg-muted/30 hover:bg-muted/60',
+                  )}
+                >
+                  <span className="block text-sm font-medium">
+                    {t(`practice.depth_${value}`)}
+                  </span>
+                  <span className="block text-[11px] text-muted-foreground">
+                    {t(`practice.depthDesc_${value}`)}
+                  </span>
+                </button>
+              ))}
             </div>
-          )}
+          </div>
 
           {error && (
             <p className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive">{error}</p>

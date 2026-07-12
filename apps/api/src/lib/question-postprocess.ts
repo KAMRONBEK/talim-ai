@@ -143,50 +143,69 @@ export interface PostprocessInput {
   allowedTypes?: QuestionType[] | null;
   /** Type normalizer for this pipeline (B2C practice vs B2B assessment). */
   normalizeType: (type: string | undefined) => QuestionType;
+  /** Stems kept by previous passes (fill-to-count retry) — mutated with newly kept stems. */
+  seenStems?: Set<string>;
 }
+
+/** Per-filter rejection counts — logged by callers so a heavy-filter run is diagnosable. */
+export type SkipReason =
+  | 'parroting'
+  | 'missingAnswer'
+  | 'typeNotAllowed'
+  | 'duplicateStem'
+  | 'quoteNotFound'
+  | 'bannedOption'
+  | 'malformedStructured'
+  | 'unanswerable';
 
 export interface PostprocessResult {
   questions: ProcessedQuestion[];
   skipped: number;
+  breakdown: Partial<Record<SkipReason, number>>;
 }
 
 export function postprocessGeneratedQuestions(input: PostprocessInput): PostprocessResult {
   const { context, count, allowedTypes, normalizeType } = input;
   let skipped = 0;
+  const breakdown: Partial<Record<SkipReason, number>> = {};
+  const skip = (reason: SkipReason) => {
+    skipped++;
+    breakdown[reason] = (breakdown[reason] ?? 0) + 1;
+  };
 
   // Drop questions copied near-verbatim from the material (no parroting).
   const notParroting = dropParrotingQuestions(input.generated, context);
-  skipped += input.generated.length - notParroting.length;
+  for (let i = 0; i < input.generated.length - notParroting.length; i++) skip('parroting');
 
-  const seenStems = new Set<string>();
+  const seenStems = input.seenStems ?? new Set<string>();
   const kept: ProcessedQuestion[] = [];
 
   for (const q of notParroting) {
     const acceptableAnswers = jsonStringArray(q.acceptableAnswers);
     if (!q.prompt?.trim() || acceptableAnswers.length === 0) {
-      skipped++;
+      skip('missingAnswer');
       continue;
     }
     const type = normalizeType(q.type);
     if (allowedTypes && allowedTypes.length > 0 && !allowedTypes.includes(type)) {
-      skipped++;
+      skip('typeNotAllowed');
       continue;
     }
     const stemKey = normalizeAnswer(q.prompt);
     if (seenStems.has(stemKey)) {
-      skipped++;
+      skip('duplicateStem');
       continue;
     }
 
     const quoteCheck = verifySourceQuote(q.sourceQuote, context);
     if (!quoteCheck.ok) {
-      skipped++;
+      skip('quoteNotFound');
       continue;
     }
 
     const rawOptions = Array.isArray(q.options) ? jsonStringArray(q.options) : null;
     if (rawOptions && hasBannedOption(rawOptions)) {
-      skipped++;
+      skip('bannedOption');
       continue;
     }
 
@@ -203,7 +222,7 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
     if (type === 'MATCHING' || type === 'ORDERING' || type === 'DROPDOWN_CLOZE') {
       const built = buildStructuredQuestion(type, q, acceptableAnswers);
       if (!built) {
-        skipped++;
+        skip('malformedStructured');
         continue;
       }
       seenStems.add(stemKey);
@@ -223,11 +242,11 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
       (type === 'MULTIPLE_CHOICE' || type === 'TRUE_FALSE') &&
       !isAnswerableMultipleChoice(rawOptions, acceptableAnswers)
     ) {
-      skipped++;
+      skip('unanswerable');
       continue;
     }
     if (type === 'MULTIPLE_SELECT' && !isAnswerableMultipleSelect(rawOptions, acceptableAnswers)) {
-      skipped++;
+      skip('unanswerable');
       continue;
     }
 
@@ -296,10 +315,10 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
     }
     // Restore original relative order for a natural quiz flow.
     const pickedSet = new Set(picked);
-    return { questions: kept.filter((k) => pickedSet.has(k)), skipped };
+    return { questions: kept.filter((k) => pickedSet.has(k)), skipped, breakdown };
   }
 
-  return { questions: kept, skipped };
+  return { questions: kept, skipped, breakdown };
 }
 
 /** How many items to request from the model so post-filter output still meets `count`. */

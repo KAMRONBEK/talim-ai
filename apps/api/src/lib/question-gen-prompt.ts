@@ -11,7 +11,8 @@ import type { AssessmentQuestionStyle } from './assessment-prompt.js';
  * always/never, all/none-of-the-above).
  */
 
-/** Question types the AI generator may produce (HOTSPOT / DRAG_DROP are manual-only). */
+/** Question types the AI generator may produce (HOTSPOT / DRAG_DROP are manual-only).
+ * FLASHCARD is B2C-practice-only — tenant banks pass an allowedTypes set without it. */
 export type GeneratableQuestionType =
   | 'MULTIPLE_CHOICE'
   | 'TRUE_FALSE'
@@ -21,7 +22,8 @@ export type GeneratableQuestionType =
   | 'MATCHING'
   | 'ORDERING'
   | 'SHORT_ANSWER'
-  | 'NUMERIC';
+  | 'NUMERIC'
+  | 'FLASHCARD';
 
 export const GENERATABLE_TYPES: GeneratableQuestionType[] = [
   'MULTIPLE_CHOICE',
@@ -33,6 +35,7 @@ export const GENERATABLE_TYPES: GeneratableQuestionType[] = [
   'ORDERING',
   'SHORT_ANSWER',
   'NUMERIC',
+  'FLASHCARD',
 ];
 
 /** Legacy single-style knob → explicit type set (null = balanced default mix). */
@@ -76,6 +79,7 @@ export function normalizePracticeQuestionType(type: string | undefined): Questio
     case 'DROPDOWN_CLOZE':
     case 'MATCHING':
     case 'ORDERING':
+    case 'FLASHCARD':
       return type;
     default:
       return 'SHORT_ANSWER';
@@ -100,6 +104,7 @@ const TYPE_NAMES: Record<AppLocale, Record<GeneratableQuestionType, string>> = {
     ORDERING: 'tartiblash (ORDERING)',
     SHORT_ANSWER: 'qisqa yozma (SHORT_ANSWER)',
     NUMERIC: 'raqamli (NUMERIC)',
+    FLASHCARD: 'fleshkarta (FLASHCARD)',
   },
   en: {
     MULTIPLE_CHOICE: 'multiple choice (MULTIPLE_CHOICE)',
@@ -111,6 +116,7 @@ const TYPE_NAMES: Record<AppLocale, Record<GeneratableQuestionType, string>> = {
     ORDERING: 'ordering (ORDERING)',
     SHORT_ANSWER: 'short written answer (SHORT_ANSWER)',
     NUMERIC: 'numeric (NUMERIC)',
+    FLASHCARD: 'flashcard (FLASHCARD)',
   },
   ru: {
     MULTIPLE_CHOICE: 'с выбором ответа (MULTIPLE_CHOICE)',
@@ -122,6 +128,7 @@ const TYPE_NAMES: Record<AppLocale, Record<GeneratableQuestionType, string>> = {
     ORDERING: 'упорядочивание (ORDERING)',
     SHORT_ANSWER: 'краткий письменный ответ (SHORT_ANSWER)',
     NUMERIC: 'числовой (NUMERIC)',
+    FLASHCARD: 'флеш-карта (FLASHCARD)',
   },
 };
 
@@ -141,7 +148,10 @@ function typeRules(locale: AppLocale): string {
 - FILL_BLANK: mark the blank with "___" (options: null); acceptableAnswers = accepted value(s) for that ONE blank; config: {"blanks": 1}. Exactly one blank per item — never delete a trivial word, never blank the first word.
 - DROPDOWN_CLOZE: like FILL_BLANK but each "___" has a dropdown; config: {"blanks": N, "blankOptions": [[...], ...]} (length N); acceptableAnswers = one correct choice per blank IN ORDER, each present in its blank's options. options: null.
 - MATCHING: config: {"left": [...], "right": [correct answers + extra distractors]}; acceptableAnswers = the correct right value per left item IN ORDER (parallel to left). At least 2 pairs; include 1-2 extra right-side distractors so the last pair can't be won by elimination. options: null.
-- ORDERING: acceptableAnswers = the items in CORRECT order (first to last), at least 3 distinct items. config and options: null (the system shuffles the display order).`;
+- ORDERING: acceptableAnswers = the items in CORRECT order (first to last), at least 3 distinct items. config and options: null (the system shuffles the display order).
+- FLASHCARD: a two-sided study card. "prompt" = the FRONT (one focused term, concept, or question); "acceptableAnswers" = [the BACK: a concise, complete answer or definition]. options and config: null.
+
+MATH NOTATION: write every mathematical expression, formula, or equation in LaTeX inside dollar delimiters — inline as $...$ (e.g. $S = 2\\pi r$), display as $$...$$. Never emit raw LaTeX without the delimiters and never use unicode superscripts; plain numbers in running text stay plain.`;
 }
 
 const SYSTEM_PROMPTS: Record<AppLocale, (rules: string) => string> = {
@@ -292,6 +302,12 @@ const CONTEXT_LABELS: Record<
   },
 };
 
+const AVOID_STEMS_LABEL: Record<AppLocale, string> = {
+  uz: "Quyidagi savollar ALLAQACHON tuzilgan — ularni TAKRORLAMANG va yaqin ma'noda qayta ifodalamang; BOSHQA fakt va tushunchalarni sinang:",
+  en: 'These questions ALREADY exist — do NOT repeat or closely paraphrase any of them; test DIFFERENT facts and concepts:',
+  ru: 'Эти вопросы УЖЕ составлены — НЕ повторяйте и не перефразируйте их; проверяйте ДРУГИЕ факты и понятия:',
+};
+
 export interface QuestionGenPromptInput {
   title: string;
   topic?: string | null;
@@ -300,6 +316,8 @@ export interface QuestionGenPromptInput {
   count: number;
   types?: GeneratableQuestionType[] | null;
   depth: QuestionDepth;
+  /** Stems already kept from a previous pass — the fill-to-count retry must not repeat them. */
+  avoidStems?: string[];
 }
 
 export function buildQuestionGenPrompt(locale: AppLocale, input: QuestionGenPromptInput): string {
@@ -307,11 +325,15 @@ export function buildQuestionGenPrompt(locale: AppLocale, input: QuestionGenProm
   const names = TYPE_NAMES[locale];
   const types = input.types && input.types.length > 0 ? input.types : DEFAULT_MIX_TYPES;
   const typeLine = TYPES_REQUIREMENT[locale](types.map((t) => names[t]).join(', '));
+  const avoidBlock =
+    input.avoidStems && input.avoidStems.length > 0
+      ? `\n${AVOID_STEMS_LABEL[locale]}\n${input.avoidStems.map((s) => `- ${s}`).join('\n')}\n`
+      : '';
 
   return `${labels.topic}: ${input.topic ?? labels.fromMaterial}
 ${labels.source} — ${input.title}:
 ${input.context ?? labels.noContext}
-
+${avoidBlock}
 ${labels.makeCount(input.count)}
 ${typeLine}
 ${depthInstruction(locale, input.depth)}
