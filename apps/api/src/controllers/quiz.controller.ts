@@ -9,10 +9,9 @@ import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import {
   answerToString,
+  evidenceWeightForQuestion,
   gradeQuestion,
   jsonStringArray,
-  FLASHCARD_GUESS_FLOOR,
-  FLASHCARD_SELF_REPORT_WEIGHT,
   type MasteryDelta,
 } from '@talim/types';
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
@@ -468,6 +467,8 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
 
   // Elo-KT mastery: every answer moves per-section mastery up or down. Questions carry
   // their own section provenance; unresolved ones fall back to the quiz's scope.
+  // Self-reported flashcard answers carry half the evidence weight of auto-graded ones
+  // (rule lives in @talim/types); their guess floor comes from guessFloorForQuestion.
   const evidence: AnswerEvidence[] = fullQuiz.questions.map((q) => ({
     itemKey: `quiz:${q.id}`,
     sectionId: q.sourceSectionId ?? fullQuiz.sectionId,
@@ -475,10 +476,7 @@ export async function submitQuiz(req: AuthenticatedRequest, res: Response): Prom
     options: q.options,
     credit: evaluation.credits[q.id] ?? 0,
     declaredDifficulty: q.difficulty,
-    // Self-reported flashcard answers carry less evidence than auto-graded ones.
-    ...(q.type === 'FLASHCARD'
-      ? { weight: FLASHCARD_SELF_REPORT_WEIGHT, guessFloorOverride: FLASHCARD_GUESS_FLOOR }
-      : {}),
+    weight: evidenceWeightForQuestion(q.type),
   }));
   const masteryDeltas = await recordAnswers(req.user.userId, fullQuiz.contentId, evidence);
 

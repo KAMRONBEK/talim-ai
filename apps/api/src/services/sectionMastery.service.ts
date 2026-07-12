@@ -181,10 +181,11 @@ export async function recordFlashcardReview(
     {
       itemKey: `card:${flashcardId}`,
       sectionId,
-      questionType: 'SHORT_ANSWER',
+      // Deck cards predate the FLASHCARD question type; typing the evidence as FLASHCARD
+      // derives the same guess floor the in-quiz flashcards use (single source of truth).
+      questionType: 'FLASHCARD',
       credit,
       weight,
-      guessFloorOverride: 0.2,
     },
   ]);
 }

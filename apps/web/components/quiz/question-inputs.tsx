@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { Input } from '@talim/ui';
 import {
+  FLASHCARD_KNOWN,
+  FLASHCARD_UNKNOWN,
   jsonStringArray,
   normalizeAnswer,
   parseQuestionConfig,
@@ -485,14 +487,15 @@ export function OrderingInput({
   );
 }
 
-/** Sentinel answer values for self-graded FLASHCARD items (mirrors @talim/types grading). */
-export const FLASHCARD_KNOWN = 'known';
-export const FLASHCARD_UNKNOWN = 'unknown';
+/** Sentinel answer values for self-graded FLASHCARD items — the single source is the
+ * shared grading engine (@talim/types), re-exported here for the quiz UI. */
+export { FLASHCARD_KNOWN, FLASHCARD_UNKNOWN };
 
 /**
  * Self-graded study card inside a practice session: the front is the question stem
  * (rendered by the caller); this input reveals the back, then asks the learner to
  * self-report. The report is the submitted answer and feeds mastery at half weight.
+ * Callers must key this component by question id — it holds local reveal state.
  */
 export function FlashcardInput({
   question,
@@ -507,7 +510,7 @@ export function FlashcardInput({
   onReport: (report: string) => void;
 }) {
   const t = useTranslations('quiz');
-  const [showBack, setShowBack] = useState(revealed);
+  const [showBack, setShowBack] = useState(false);
   const back = acceptedAnswers(question)[0] ?? '';
 
   if (!showBack && !revealed) {

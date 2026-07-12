@@ -293,7 +293,11 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               onReorder={(next) => handleValue(q.id, next)}
             />
           ) : kind === 'flashcard' ? (
+            // Keyed by question id: FlashcardInput holds local reveal state, and without a
+            // key React reuses the instance across consecutive flashcards (same tree
+            // position), leaking card A's revealed back into card B.
             <FlashcardInput
+              key={q.id}
               question={q}
               value={typeof answer === 'string' ? answer : undefined}
               revealed={isRevealed}

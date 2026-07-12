@@ -3,6 +3,7 @@ import { type BankQuestionStatus, type QuestionType } from '@prisma/client';
 import { jsonStringArray, parseQuestionConfig } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
+import { sampleChunksEvenly, MIN_SECTION_CONTEXT_CHARS } from '../../lib/chunk-sampling.js';
 import { buildRagContext } from '../rag.service.js';
 
 // The grading engine lives in @talim/types (shared with the web app for instant practice
@@ -352,13 +353,6 @@ export async function assertBank(tenantId: string, bankId: string) {
   return bank;
 }
 
-/**
- * Below this many characters of section text there is nothing to ground questions in —
- * the sourceQuote firewall would reject everything the model invents, failing the whole
- * generation. Thin (heading-only) sections widen to the full material instead.
- */
-const MIN_SECTION_CONTEXT_CHARS = 500;
-
 export async function getSectionContext(tenantId: string, contentId?: string, sectionId?: string) {
   if (!contentId) return null;
   const content = await prisma.content.findFirst({ where: { id: contentId, tenantId } });
@@ -371,18 +365,8 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
 
   // Whole-material scope samples an even spread of chunks across the document (a plain
   // take-20 only ever saw the document's start, starving later sections of coverage).
-  const wholeMaterialSpread = async () => {
-    const all = await prisma.chunk.findMany({
-      where: { contentId },
-      orderBy: { chunkIndex: 'asc' },
-      select: { text: true, chunkIndex: true },
-    });
-    const target = 20;
-    if (all.length <= target) return all;
-    const step = all.length / target;
-    return Array.from({ length: target }, (_, i) => all[Math.floor(i * step)]!);
-  };
-
+  // Thin (heading-only) sections widen to the same spread — the sourceQuote firewall
+  // would reject everything the model invents from a near-empty section context.
   let chunks = section
     ? await prisma.chunk.findMany({
         where: { contentId, chunkIndex: { gte: section.startChunk, lte: section.endChunk } },
@@ -390,9 +374,9 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
         take: 20,
         select: { text: true, chunkIndex: true },
       })
-    : await wholeMaterialSpread();
+    : await sampleChunksEvenly(contentId, 20);
   if (section && chunks.reduce((sum, c) => sum + c.text.length, 0) < MIN_SECTION_CONTEXT_CHARS) {
-    chunks = await wholeMaterialSpread();
+    chunks = await sampleChunksEvenly(contentId, 20);
   }
   return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
 }

@@ -490,3 +490,12 @@ export function guessFloorForQuestion(question: {
       return 0;
   }
 }
+
+/**
+ * How much a graded answer counts as mastery evidence. Auto-graded answers count fully;
+ * self-reported flashcard answers count at half weight — the single place this rule
+ * lives, so every submission path (quizzes, assessments, deck reviews) agrees.
+ */
+export function evidenceWeightForQuestion(type: QuestionType): number {
+  return type === 'FLASHCARD' ? FLASHCARD_SELF_REPORT_WEIGHT : 1;
+}

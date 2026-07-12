@@ -2,10 +2,10 @@ import { Prisma, type QuestionType } from '@prisma/client';
 import { parseAppLocale } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
+import { PRACTICE_QUESTION_TYPES } from '@talim/types';
 import { normalizeAssessmentQuestionType } from '../../lib/assessment-prompt.js';
 import {
   typesFromStyle,
-  GENERATABLE_TYPES,
   type GeneratableQuestionType,
 } from '../../lib/question-gen-prompt.js';
 import { generateQuestionSet } from '../../lib/question-gen.js';
@@ -103,11 +103,12 @@ export async function generateQuestions(
   });
   const locale = parseAppLocale(owner?.preferredLocale);
   // Tenant banks feed assessment players that only handle auto-graded types — the
-  // self-graded FLASHCARD type is excluded even from the default mix.
+  // default mix is the shared auto-graded set (PRACTICE_QUESTION_TYPES excludes the
+  // self-graded FLASHCARD by definition).
   const requestedTypes =
     body.types && body.types.length > 0
       ? (body.types as GeneratableQuestionType[])
-      : (typesFromStyle(body.style) ?? GENERATABLE_TYPES.filter((t) => t !== 'FLASHCARD'));
+      : (typesFromStyle(body.style) ?? ([...PRACTICE_QUESTION_TYPES] as GeneratableQuestionType[]));
 
   const { questions, skipped, breakdown, passes } = await generateQuestionSet({
     locale,

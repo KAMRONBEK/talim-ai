@@ -180,6 +180,12 @@ export function normalizeAssessmentQuestionType(type: string | undefined): Quest
     case 'ORDERING':
     case 'HOTSPOT':
     case 'DRAG_DROP':
+    // FLASHCARD must pass through as itself, NOT collapse to SHORT_ANSWER: the shared
+    // system prompt teaches the flashcard shape, and the bank pipeline's allowedTypes
+    // filter is what keeps tenant banks flashcard-free — a collapsed card would slip
+    // past it as an unanswerable written question (its only accepted answer being a
+    // definition-length card back).
+    case 'FLASHCARD':
       return type;
     default:
       return 'SHORT_ANSWER';

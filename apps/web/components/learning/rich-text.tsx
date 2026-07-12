@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -11,13 +12,15 @@ import { SelectionAsk } from '@/components/learning/selection-ask';
  * Model output doesn't reliably arrive in remark-math's dialect: formulas often come as
  * \( ... \) / \[ ... \] instead of $ ... $ / $$ ... $$, and stems use bare newlines that
  * markdown collapses into spaces (mashing an expression into the question line). Normalize
- * both before parsing. Math segments are left untouched (the split keeps $$ blocks intact).
+ * both before parsing. Protected segments — fenced code blocks, inline code spans, and
+ * $$ math blocks — pass through untouched, so literal \( in a code sample isn't rewritten
+ * into a math delimiter and code lines don't grow trailing hard-break spaces.
  */
 function normalizeGeneratedText(text: string): string {
   return text
-    .split(/(\$\$[\s\S]*?\$\$)/)
+    .split(/(```[\s\S]*?(?:```|$)|`[^`\n]*`|\$\$[\s\S]*?\$\$)/)
     .map((part, i) => {
-      if (i % 2 === 1) return part; // inside a $$...$$ block
+      if (i % 2 === 1) return part; // protected segment
       return part
         .replace(/\\\[([\s\S]*?)\\\]/g, (_, expr: string) => `$$${expr}$$`)
         .replace(/\\\(([\s\S]*?)\\\)/g, (_, expr: string) => `$${expr}$`)
@@ -50,6 +53,9 @@ export function RichText({
   // (e.g. inside a quiz explanation <p>/<span>), so the wrapper must be a
   // <span> — a <div> there is invalid HTML and triggers a hydration error.
   const Wrapper = inline ? 'span' : 'div';
+  // Review pages render hundreds of RichText instances — don't re-run the regex passes
+  // on every parent re-render.
+  const normalized = useMemo(() => normalizeGeneratedText(children), [children]);
   const rendered = (
     <Wrapper
       className={cn(
@@ -63,7 +69,7 @@ export function RichText({
         rehypePlugins={[[rehypeKatex, { output: 'html', throwOnError: false, strict: false }]]}
         components={inline ? { p: ({ children: c }) => <>{c}</> } : undefined}
       >
-        {normalizeGeneratedText(children)}
+        {normalized}
       </ReactMarkdown>
     </Wrapper>
   );

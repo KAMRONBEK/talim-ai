@@ -56,6 +56,22 @@ function hasBannedOption(options: string[]): boolean {
   });
 }
 
+/**
+ * Canonicalize math delimiters at STORAGE time: the prompt mandates $...$ / $$...$$, but
+ * models still emit \( ... \) / \[ ... \] — store the canonical form so every consumer
+ * (web KaTeX, tenant editor textareas, exports) sees one dialect. The web renderer keeps
+ * its own normalization only as a legacy fallback for rows stored before this existed.
+ */
+function canonicalizeMathDelimiters(value: string): string {
+  return value
+    .replace(/\\\[([\s\S]*?)\\\]/g, (_, expr: string) => `$$${expr}$$`)
+    .replace(/\\\(([\s\S]*?)\\\)/g, (_, expr: string) => `$${expr}$`);
+}
+
+function canonicalizeNullable(value: string | null | undefined): string | null {
+  return typeof value === 'string' ? canonicalizeMathDelimiters(value) : null;
+}
+
 /** Loose text normalization for containment checks (drops punctuation/scripts noise). */
 function containmentNormalize(value: string): string {
   return value
@@ -168,14 +184,15 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
   const { context, count, allowedTypes, normalizeType } = input;
   let skipped = 0;
   const breakdown: Partial<Record<SkipReason, number>> = {};
-  const skip = (reason: SkipReason) => {
-    skipped++;
-    breakdown[reason] = (breakdown[reason] ?? 0) + 1;
+  const skip = (reason: SkipReason, n = 1) => {
+    if (n <= 0) return;
+    skipped += n;
+    breakdown[reason] = (breakdown[reason] ?? 0) + n;
   };
 
   // Drop questions copied near-verbatim from the material (no parroting).
   const notParroting = dropParrotingQuestions(input.generated, context);
-  for (let i = 0; i < input.generated.length - notParroting.length; i++) skip('parroting');
+  skip('parroting', input.generated.length - notParroting.length);
 
   const seenStems = input.seenStems ?? new Set<string>();
   const kept: ProcessedQuestion[] = [];
@@ -210,10 +227,11 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
     }
 
     const base = {
-      prompt: q.prompt.trim(),
-      explanation: q.explanation ?? null,
+      prompt: canonicalizeMathDelimiters(q.prompt.trim()),
+      explanation: canonicalizeNullable(q.explanation),
       difficulty: sanitizeDifficulty(q.difficulty),
       bloom: sanitizeBloom(q.bloom),
+      // sourceQuote stays verbatim — it must remain re-verifiable against the material.
       sourceQuote: quoteCheck.quote,
     };
 
@@ -256,15 +274,18 @@ export function postprocessGeneratedQuestions(input: PostprocessInput): Postproc
         ? (parseQuestionConfig(q.config) ?? { blanks: 1 })
         : parseQuestionConfig(q.config);
 
-    const options = hasOptions && rawOptions ? rawOptions : null;
+    // Options and acceptableAnswers must stay character-identical for grading, so the
+    // same canonicalization applies to both.
+    const options = hasOptions && rawOptions ? rawOptions.map(canonicalizeMathDelimiters) : null;
+    const rationales = options ? sanitizeRationales(q.optionRationales, options.length) : null;
     seenStems.add(stemKey);
     kept.push({
       ...base,
       type,
       options,
-      acceptableAnswers,
+      acceptableAnswers: acceptableAnswers.map(canonicalizeMathDelimiters),
       config,
-      optionRationales: options ? sanitizeRationales(q.optionRationales, options.length) : null,
+      optionRationales: rationales ? rationales.map(canonicalizeNullable) : null,
     });
   }
 

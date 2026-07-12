@@ -55,9 +55,14 @@ export async function generateQuestionSet(req: QuestionSetRequest): Promise<Ques
   const breakdown: Partial<Record<SkipReason, number>> = {};
   let passes = 0;
 
+  // A fill pass re-sends the full context (the dominant token cost) and roughly doubles
+  // latency — not worth it for a marginal shortfall (19/20 delivered), only for a real one.
+  const tolerableShortfall = Math.max(1, Math.floor(req.count * 0.1));
+
   for (let pass = 1; pass <= MAX_GENERATION_PASSES && questions.length < req.count; pass++) {
-    passes = pass;
     const need = req.count - questions.length;
+    if (pass > 1 && need <= tolerableShortfall) break;
+    passes = pass;
     // The fill pass overgenerates harder — the model already spent its most obvious items.
     const ask = pass === 1 ? overgenerateCount(need) : Math.min(30, need * 2 + 2);
 

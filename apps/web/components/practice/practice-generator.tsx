@@ -21,10 +21,6 @@ import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 const COUNT_PRESETS = [5, 10, 15, 20];
 const DEPTHS: QuestionDepth[] = ['mixed', 'recall', 'understanding', 'application'];
 
-/** What gets generated: the server's default type blend or a custom type set. Flashcards
- * are one of the selectable types — they land in the same practice session. */
-type PracticeMode = 'mixed' | 'types';
-
 export interface PracticeGeneratorProps {
   contentId: string;
   /** Anchors the "current section" scope; when absent only whole-material practice is offered. */
@@ -51,7 +47,8 @@ export function PracticeGenerator({
   const router = useRouter();
   const handleLimitError = useLimitErrorHandler();
 
-  const [mode, setMode] = useState<PracticeMode>('mixed');
+  // No selected types = the server's default Mixed blend; flashcards are one of the
+  // selectable types and land in the same practice session.
   const [types, setTypes] = useState<QuestionType[]>([]);
   const [depth, setDepth] = useState<QuestionDepth>('mixed');
   const [count, setCount] = useState(10);
@@ -71,10 +68,7 @@ export function PracticeGenerator({
   const pending = createQuiz.isPending;
 
   const toggleType = (type: QuestionType) => {
-    const next = types.includes(type) ? types.filter((v) => v !== type) : [...types, type];
-    setTypes(next);
-    // Deselecting the last type falls back to the server's default Mixed blend.
-    setMode(next.length === 0 ? 'mixed' : 'types');
+    setTypes((prev) => (prev.includes(type) ? prev.filter((v) => v !== type) : [...prev, type]));
   };
 
   const handleGenerate = async () => {
@@ -83,7 +77,7 @@ export function PracticeGenerator({
       const quiz = await createQuiz.mutateAsync({
         contentId,
         ...(scopeSectionId ? { sectionId: scopeSectionId } : {}),
-        ...(mode === 'types' && types.length > 0 ? { types } : {}),
+        ...(types.length > 0 ? { types } : {}),
         depth,
         count,
       });
@@ -168,12 +162,9 @@ export function PracticeGenerator({
             <div className="flex flex-wrap gap-1.5">
               <button
                 type="button"
-                aria-pressed={mode === 'mixed'}
-                onClick={() => {
-                  setMode('mixed');
-                  setTypes([]);
-                }}
-                className={chip(mode === 'mixed')}
+                aria-pressed={types.length === 0}
+                onClick={() => setTypes([])}
+                className={chip(types.length === 0)}
               >
                 {t('practice.typeMixed')}
               </button>
@@ -181,9 +172,9 @@ export function PracticeGenerator({
                 <button
                   key={type}
                   type="button"
-                  aria-pressed={mode === 'types' && types.includes(type)}
+                  aria-pressed={types.includes(type)}
                   onClick={() => toggleType(type)}
-                  className={chip(mode === 'types' && types.includes(type))}
+                  className={chip(types.includes(type))}
                 >
                   {t(`practice.type_${type}`)}
                 </button>

@@ -12,6 +12,7 @@ import {
   type GeneratableQuestionType,
 } from '../lib/question-gen-prompt.js';
 import { generateQuestionSet } from '../lib/question-gen.js';
+import { sampleChunksEvenly, MIN_SECTION_CONTEXT_CHARS } from '../lib/chunk-sampling.js';
 
 interface ContextChunk {
   text: string;
@@ -19,29 +20,13 @@ interface ContextChunk {
 }
 
 /**
- * Below this many characters of section text there is nothing to ground questions in —
- * the model pads from its own knowledge and the sourceQuote firewall then rejects every
- * item (observed live: a heading-only 42-char section failed 9/9). Such sections widen
- * their context to the whole material instead.
- */
-const MIN_SECTION_CONTEXT_CHARS = 500;
-
-/**
  * Whole-material context: an even spread of chunks across the document, sized to the
  * requested question count. Title-similarity retrieval clustered around the intro and
  * starved later sections — an even spread grounds questions (and their sourceQuote
  * anchors) across the whole material.
  */
-async function getWholeMaterialChunks(contentId: string, count: number): Promise<ContextChunk[]> {
-  const target = Math.min(30, Math.max(12, Math.ceil(count * 1.6)));
-  const all = await prisma.chunk.findMany({
-    where: { contentId },
-    orderBy: { chunkIndex: 'asc' },
-    select: { text: true, chunkIndex: true },
-  });
-  if (all.length <= target) return all;
-  const step = all.length / target;
-  return Array.from({ length: target }, (_, i) => all[Math.floor(i * step)]!);
+function wholeMaterialTarget(count: number): number {
+  return Math.min(30, Math.max(12, Math.ceil(count * 1.6)));
 }
 
 async function getSectionChunks(
@@ -159,7 +144,7 @@ export function registerGenerateQuizJob(): void {
         if (widenedChars > sectionChars) chunks = widened;
       }
     } else {
-      chunks = await getWholeMaterialChunks(contentId, count);
+      chunks = await sampleChunksEvenly(contentId, wholeMaterialTarget(count));
     }
     const context = buildRagContext(chunks);
 
