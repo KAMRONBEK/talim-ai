@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "src controllers · chat.controller.ts"
+community: "AI Tutor Chat API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__chatcontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # chat.controller.ts
@@ -35,6 +35,7 @@ tags:
 - [[getOutOfScopeResponse()]] - `imports` [EXTRACTED]
 - [[getParam()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[isTutorClarification()]] - `imports` [EXTRACTED]
 - [[isTutorScopeRefusal()]] - `imports` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
@@ -60,4 +61,4 @@ tags:
 - [[tutor-scope.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

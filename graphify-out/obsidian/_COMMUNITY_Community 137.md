@@ -1,17 +1,18 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 3
 ---
 
 # Community 137
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 3 nodes
 
 ## Members
-- [[qa-overnight.sh]] - code - scripts/qa-overnight.sh
-- [[qa-overnight.sh script]] - code - scripts/qa-overnight.sh
+- [[buildTutorContextBlock()]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[buildTutorSystemMessage()_1]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[tutor-prompt.ts]] - code - apps/api/src/lib/tutor-prompt.ts
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/rasterize-pdf.ts"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
+community: "Community 37"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_37
 ---
 
 # rasterize-pdf.ts
@@ -17,4 +17,4 @@ tags:
 - [[rasterizePdfToImages()]] - `contains` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_37

@@ -1,22 +1,25 @@
 ---
 type: community
-cohesion: 0.29
-members: 7
+cohesion: 0.20
+members: 10
 ---
 
 # Community 94
 
-**Cohesion:** 0.29 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[F14 Return-after-login not preserved (no redirect= param)]] - document - docs/qa/visual-qa-report.md
-- [[F16 Deactivated login showed 'server unreachable' not 'deactivated']] - document - docs/qa/user-stories.md
-- [[F17 Emailusername login was case-sensitive]] - document - docs/qa/user-stories.md
-- [[F2 Wrong password → 401 but no error shown (interceptor wiped it)]] - document - docs/qa/visual-qa-report.md
-- [[Rate limiting]] - concept - docs/FEATURES.md
-- [[Signup  login by email OR username]] - concept - docs/FEATURES.md
-- [[US-AUTH-01 Emailpassword login]] - document - docs/qa/user-stories.md
+- [[Citations (Manba Pills)]] - concept - docs/plans/youlearn-redesign.md
+- [[Flashcards & Notes Generators]] - concept - docs/plans/youlearn-redesign.md
+- [[Generate Grid (Yaratish)]] - concept - docs/plans/youlearn-redesign.md
+- [[Learn Hub Panel (ContentLearnPanel)]] - concept - docs/plans/youlearn-redesign.md
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - document - docs/plans/youlearn-redesign.md
+- [[Multi-tenant Isolation Guard (contentAccess.service)]] - concept - docs/FEATURES.md
+- [[Persistent Study Workspace (3-pane)]] - rationale - docs/plans/youlearn-redesign.md
+- [[Role Adaptations (server-side security)]] - rationale - docs/plans/youlearn-redesign.md
+- [[US-LEARNER-01 Sees Only Assigned Materials (S1 isolation story)]] - concept - docs/qa/user-stories.md
+- [[Visual Direction (girih, marker-highlight)]] - concept - docs/plans/youlearn-redesign.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,7 +29,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 82]]
+- 3 edges to [[_COMMUNITY_Community 77]]
+- 2 edges to [[_COMMUNITY_Community 72]]
+- 1 edge to [[_COMMUNITY_Community 120]]
 
 ## Top bridge nodes
-- [[Signup  login by email OR username]] - degree 4, connects to 1 community
+- [[Multi-tenant Isolation Guard (contentAccess.service)]] - degree 5, connects to 3 communities
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - degree 6, connects to 1 community
+- [[Citations (Manba Pills)]] - degree 2, connects to 1 community
+- [[US-LEARNER-01 Sees Only Assigned Materials (S1 isolation story)]] - degree 2, connects to 1 community

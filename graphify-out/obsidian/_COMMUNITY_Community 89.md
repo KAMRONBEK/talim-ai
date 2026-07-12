@@ -1,23 +1,26 @@
 ---
 type: community
-cohesion: 0.32
-members: 8
+cohesion: 0.27
+members: 11
 ---
 
 # Community 89
 
-**Cohesion:** 0.32 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.27 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[ContentSection]] - code - packages/types/index.ts
-- [[ContentSidebar()]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[ContentSidebarBodyProps]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[ContentSidebarProps]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[ContentSidebarSheet()]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[ContentSidebarSheetProps]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[SectionProgress]] - code - packages/types/index.ts
-- [[content-sidebar.tsx]] - code - apps/web/components/layout/content-sidebar.tsx
+- [[Hero CTAs gradient primary 'Bepul boshlash' and outlined secondary 'Xususiyatlarni ko'rish', plus trust row 'PDF, YouTube, slaydlar va ma'ruzalar bilan ishlaydi' with source-type avatars]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Hero badge 'AI bilan o'rganish', headline 'Har qanday narsani. O'zingizning yo'lingiz bilan.' with warm highlight bar, subcopy about uploading PDFvideoslideslectures for AI summaries, podcast_c21f2a05]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Learner progress indicator inside mock card 'Sizning taraqqiyotingiz' gradient bar at 72%]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Marketing message upload any material (PDFvideoslideslecture) and get AI summaries, podcasts, quizzes, and a personal AI tutor]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Navbar fix verification filename marks this as the fixed state of the tablet-width navbar (elements fit one row without overflow)]] - rationale - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Navbar Talim AI logo, theme-toggle icon, 'Kirish' link, gradient 'Boshlash' CTA in a single compact row]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Product mock card 'Genetik kod va tarjima' (Biologiya 101 · 11-bob) with AI badge and rows for generated summary (3 daqiqa o'qish), ready podcast (8 daqiqa tinglash), quiz (12 ta savol)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - image - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Tablet 768px responsive breakpoint single-column hero layout with full-width mock card]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Uzbek (uz locale) localization all landing copy rendered in Uzbek via next-intl locale routing]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Visual design language lavenderviolet backdrop, purple-to-orange gradient CTAs and progress bar, rounded cards on light surface (relation to committed 'Scholar' pine+clay system uncertain)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
 
 ## Live Query (requires Dataview plugin)
 
@@ -25,20 +28,3 @@ members: 8
 TABLE source_file, type FROM #community/Community_89
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 6 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 4 edges to [[_COMMUNITY_Sheet UI Component]]
-- 3 edges to [[_COMMUNITY_Community 41]]
-- 3 edges to [[_COMMUNITY_Slide Deck Types]]
-- 1 edge to [[_COMMUNITY_App Layout & Guards]]
-- 1 edge to [[_COMMUNITY_Shared UI Components]]
-- 1 edge to [[_COMMUNITY_Community 31]]
-- 1 edge to [[_COMMUNITY_Content Detail Page]]
-
-## Top bridge nodes
-- [[content-sidebar.tsx]] - degree 21, connects to 7 communities
-- [[ContentSection]] - degree 4, connects to 2 communities
-- [[ContentSidebarSheet()]] - degree 3, connects to 2 communities
-- [[SectionProgress]] - degree 3, connects to 1 community
-- [[ContentSidebar()]] - degree 2, connects to 1 community

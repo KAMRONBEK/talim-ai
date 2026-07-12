@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "packages types"
+community: "Community 45"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types
+  - community/Community_45
 ---
 
 # MermaidPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-mermaid.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types
+#graphify/code #graphify/EXTRACTED #community/Community_45

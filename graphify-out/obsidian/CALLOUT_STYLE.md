@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "components deck"
+community: "Shared UI Primitives"
 location: "L341"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck
+  - community/Shared_UI_Primitives
 ---
 
 # CALLOUT_STYLE
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

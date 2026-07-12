@@ -1,26 +1,31 @@
 ---
 type: community
-cohesion: 0.18
-members: 11
+cohesion: 0.12
+members: 16
 ---
 
 # Community 74
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 11 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 16 nodes
 
 ## Members
-- [[API routes mounted at root; health is GET health]] - rationale - CLAUDE.md
-- [[Email-less kid synthetic email (username@students.talim.local)]] - rationale - docs/test-accounts.md
-- [[Manual activation — no payment integration]] - rationale - CLAUDE.md
-- [[Multi-tenant isolation enforced centrally (assertCanAccessContent)]] - rationale - CLAUDE.md
-- [[Post-login landing by role (dashboard routes)]] - concept - docs/test-accounts.md
-- [[Roles & product model (ADMINTENANT_OWNERTENANT_LEARNERINDIVIDUAL)]] - concept - CLAUDE.md
-- [[Talim AI project guide (CLAUDE.md)]] - document - CLAUDE.md
-- [[Test accounts (shared dev+prod credentials)]] - document - docs/test-accounts.md
-- [[Use dbmigratedeploy locally (checksum drift)]] - rationale - CLAUDE.md
-- [[api healthcheck hits health (no api prefix)]] - concept - docker-compose.yml
-- [[i18n lives only in appsweb (next-intl + locale)]] - rationale - CLAUDE.md
+- [[$schema_1]] - code - packages/config/tsconfig/base.json
+- [[base.json]] - code - packages/config/tsconfig/base.json
+- [[compilerOptions_3]] - code - packages/config/tsconfig/base.json
+- [[declaration_1]] - code - packages/config/tsconfig/base.json
+- [[declarationMap_1]] - code - packages/config/tsconfig/base.json
+- [[esModuleInterop]] - code - packages/config/tsconfig/base.json
+- [[exclude_2]] - code - packages/config/tsconfig/base.json
+- [[forceConsistentCasingInFileNames]] - code - packages/config/tsconfig/base.json
+- [[isolatedModules]] - code - packages/config/tsconfig/base.json
+- [[module]] - code - packages/config/tsconfig/base.json
+- [[moduleResolution]] - code - packages/config/tsconfig/base.json
+- [[noUncheckedIndexedAccess]] - code - packages/config/tsconfig/base.json
+- [[resolveJsonModule]] - code - packages/config/tsconfig/base.json
+- [[skipLibCheck]] - code - packages/config/tsconfig/base.json
+- [[strict]] - code - packages/config/tsconfig/base.json
+- [[target]] - code - packages/config/tsconfig/base.json
 
 ## Live Query (requires Dataview plugin)
 

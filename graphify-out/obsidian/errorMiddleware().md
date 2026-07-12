@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "src jobs"
+community: "Env Config & Job Events"
 location: "L55"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Env_Config__Job_Events
 ---
 
 # errorMiddleware()
@@ -15,4 +15,4 @@ tags:
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

@@ -1,21 +1,24 @@
 ---
 type: community
-cohesion: 0.33
-members: 6
+cohesion: 0.22
+members: 9
 ---
 
 # Community 102
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 6 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[.mcp.json]] - code - .mcp.json
-- [[@playwrightmcp_1]] - code - .mcp.json
-- [[bash_1]] - code - .mcp.json
-- [[npx_1]] - code - .mcp.json
-- [[playwright_1]] - code - .mcp.json
-- [[talim-vps_1]] - code - .mcp.json
+- [[$schema_3]] - code - packages/config/tsconfig/node.json
+- [[compilerOptions_5]] - code - packages/config/tsconfig/node.json
+- [[extends_4]] - code - packages/config/tsconfig/node.json
+- [[lib_2]] - code - packages/config/tsconfig/node.json
+- [[module_2]] - code - packages/config/tsconfig/node.json
+- [[moduleResolution_2]] - code - packages/config/tsconfig/node.json
+- [[node.json]] - code - packages/config/tsconfig/node.json
+- [[outDir_1]] - code - packages/config/tsconfig/node.json
+- [[rootDir_1]] - code - packages/config/tsconfig/node.json
 
 ## Live Query (requires Dataview plugin)
 

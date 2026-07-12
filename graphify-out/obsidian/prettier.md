@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "package.json"
-location: "L31"
+community: "Community 115"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_115
 ---
 
 # prettier
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_115

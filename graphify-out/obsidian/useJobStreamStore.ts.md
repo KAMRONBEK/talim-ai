@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useJobStreamStore.ts"
 type: "code"
-community: "web hooks"
+community: "Community 35"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Community_35
 ---
 
 # useJobStreamStore.ts
@@ -22,4 +22,4 @@ tags:
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_35

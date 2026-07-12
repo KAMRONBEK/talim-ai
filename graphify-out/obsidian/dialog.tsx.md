@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "ui components"
+community: "Community 39"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Community_39
 ---
 
 # dialog.tsx
@@ -24,4 +24,4 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Community_39

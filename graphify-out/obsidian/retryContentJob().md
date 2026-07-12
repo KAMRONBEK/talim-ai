@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/content.controller.ts"
 type: "code"
-community: "controllers admin"
-location: "L71"
+community: "Admin Content & Audit"
+location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Content__Audit
 ---
 
 # retryContentJob()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

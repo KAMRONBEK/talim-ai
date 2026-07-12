@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/authenticatedBlob.ts"
 type: "code"
-community: "components learning"
+community: "Community 37"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_37
 ---
 
 # fetchAuthenticatedBlob()
@@ -15,8 +15,8 @@ tags:
 - [[authenticatedBlob.ts]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[getApiBaseUrl()]] - `calls` [EXTRACTED]
-- [[page.tsx_31]] - `imports` [EXTRACTED]
-- [[page.tsx_33]] - `imports` [EXTRACTED]
+- [[page.tsx_32]] - `imports` [EXTRACTED]
+- [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_37

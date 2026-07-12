@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "admin hooks"
-location: "L32"
+community: "Community 34"
+location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_34
 ---
 
 # isTenantUsage()
@@ -15,4 +15,4 @@ tags:
 - [[UserDetailPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_9]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_34

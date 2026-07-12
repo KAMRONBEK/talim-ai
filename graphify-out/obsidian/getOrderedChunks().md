@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "src controllers · summary.controller.ts"
+community: "AI Tutor Chat API"
 location: "L302"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__summarycontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # getOrderedChunks()
@@ -20,4 +20,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

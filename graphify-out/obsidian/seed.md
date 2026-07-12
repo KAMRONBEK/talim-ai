@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "api · package.json"
+community: "Community 109"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/api__packagejson
+  - community/Community_109
 ---
 
 # seed
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[prisma_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/api__packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_109

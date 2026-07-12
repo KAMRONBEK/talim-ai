@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "src services · TutorGraphIntent"
+community: "Community 64"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__TutorGraphIntent
+  - community/Community_64
 ---
 
 # ai.service.ts
@@ -20,7 +20,6 @@ tags:
 - [[TutorStreamEvent]] - `contains` [EXTRACTED]
 - [[TutorToolOptions]] - `contains` [EXTRACTED]
 - [[VisualBlock]] - `imports` [EXTRACTED]
-- [[banks.ts]] - `imports_from` [EXTRACTED]
 - [[buildGraphIntentInstruction()]] - `contains` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[createDeepSeekChatCompletion()]] - `contains` [EXTRACTED]
@@ -31,13 +30,13 @@ tags:
 - [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateJsonCompletion()]] - `contains` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[getTutorTools()]] - `imports` [EXTRACTED]
 - [[handleTutorToolCall()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 - [[openai_1]] - `contains` [EXTRACTED]
+- [[question-gen.ts]] - `imports_from` [EXTRACTED]
 - [[recordCompletionUsage()]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
@@ -50,4 +49,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[withTutorToolInstructions()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__TutorGraphIntent
+#graphify/code #graphify/EXTRACTED #community/Community_64

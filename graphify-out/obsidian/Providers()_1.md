@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "web lib · providers.tsx"
+community: "Community 52"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Community_52
 ---
 
 # Providers()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[providers.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Community_52

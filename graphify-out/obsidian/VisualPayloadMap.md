@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "packages types · useChatStore.ts"
+community: "Community 55"
 location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__useChatStorets
+  - community/Community_55
 ---
 
 # VisualPayloadMap
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets
+#graphify/code #graphify/EXTRACTED #community/Community_55

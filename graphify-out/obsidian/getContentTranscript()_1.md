@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant-content.controller.ts"
 type: "code"
-community: "src controllers · sendContentFile()"
-location: "L234"
+community: "Content Upload & Ingest"
+location: "L237"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__sendContentFile
+  - community/Content_Upload__Ingest
 ---
 
 # getContentTranscript()
@@ -18,4 +18,4 @@ tags:
 - [[requireTenantId()]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__sendContentFile
+#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest

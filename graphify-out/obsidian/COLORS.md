@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/TutorChart.tsx"
 type: "code"
-community: "components chat"
+community: "Community 67"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat
+  - community/Community_67
 ---
 
 # COLORS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[TutorChart.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat
+#graphify/code #graphify/EXTRACTED #community/Community_67

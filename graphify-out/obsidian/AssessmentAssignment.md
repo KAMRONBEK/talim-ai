@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L317"
+community: "Assessment Pages & Wizard"
+location: "L594"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Assessment_Pages__Wizard
 ---
 
 # AssessmentAssignment
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

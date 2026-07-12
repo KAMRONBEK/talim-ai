@@ -1,22 +1,20 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx"
 type: "code"
-community: "components layout · plan.ts"
+community: "Billing UI & Plans"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Billing_UI__Plans
 ---
 
 # page.tsx
 
 ## Connections
-- [[Badge()]] - `imports` [EXTRACTED]
 - [[TenantBillingPage()]] - `contains` [EXTRACTED]
-- [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[planMessageKey]] - `imports` [EXTRACTED]
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

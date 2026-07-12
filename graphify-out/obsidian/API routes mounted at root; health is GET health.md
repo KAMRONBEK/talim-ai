@@ -1,12 +1,12 @@
 ---
 source_file: "CLAUDE.md"
 type: "rationale"
-community: "docs · Multi-tenant isolation enforced central"
+community: "Community 86"
 location: "Architecture conventions & invariants"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/docs__Multi-tenant_isolation_enforced_central
+  - community/Community_86
 ---
 
 # API routes mounted at root; health is GET /health
@@ -15,4 +15,4 @@ tags:
 - [[Talim AI project guide (CLAUDE.md)]] - `references` [EXTRACTED]
 - [[api healthcheck hits health (no api prefix)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/docs__Multi-tenant_isolation_enforced_central
+#graphify/rationale #graphify/EXTRACTED #community/Community_86

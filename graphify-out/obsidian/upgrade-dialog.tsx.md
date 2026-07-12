@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/upgrade-dialog.tsx"
 type: "code"
-community: "web lib · upgrade-dialog.tsx"
+community: "Community 49"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__upgrade-dialogtsx
+  - community/Community_49
 ---
 
 # upgrade-dialog.tsx
@@ -27,4 +27,4 @@ tags:
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[useRequestUpgrade()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx
+#graphify/code #graphify/EXTRACTED #community/Community_49

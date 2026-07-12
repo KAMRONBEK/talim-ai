@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/theme-toggle.tsx"
 type: "code"
-community: "admin components"
+community: "Admin App UI"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Admin_App_UI
 ---
 
 # ThemeToggle()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-toggle.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

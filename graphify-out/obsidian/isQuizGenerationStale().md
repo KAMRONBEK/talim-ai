@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L21"
+community: "Quiz Player & Hooks"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Quiz_Player__Hooks
 ---
 
 # isQuizGenerationStale()
@@ -15,7 +15,7 @@ tags:
 - [[QuizCard()]] - `calls` [EXTRACTED]
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[QuizPage()]] - `calls` [INFERRED]
-- [[page.tsx_38]] - `imports` [EXTRACTED]
+- [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks

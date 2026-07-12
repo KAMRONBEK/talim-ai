@@ -1,21 +1,24 @@
 ---
 type: community
-cohesion: 0.53
-members: 6
+cohesion: 0.25
+members: 9
 ---
 
 # Community 100
 
-**Cohesion:** 0.53 - moderately connected
-**Members:** 6 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[F12 'Create podcast' generate button shown to learners]] - document - docs/qa/visual-qa-report.md
-- [[F21 Podcast playback broken + blob-404 spam]] - document - docs/qa/user-stories.md
-- [[F22 Podcast player 'Speed' label hardcoded Uzbek]] - document - docs/qa/user-stories.md
-- [[F30 Podcast per-episode regenerate gave no error feedback]] - document - docs/qa/user-stories.md
-- [[Podcasts (TTS)]] - concept - docs/FEATURES.md
-- [[US-IND-05 Podcast — generate + player]] - document - docs/qa/user-stories.md
+- [[ACCENT_HEX]] - code - apps/web/lib/deck-theme.ts
+- [[ACCENT_TO_PALETTE]] - code - apps/web/lib/deck-theme.ts
+- [[DeckAccent]] - code - packages/types/deck.ts
+- [[DeckIcon]] - code - packages/types/deck.ts
+- [[DeckPalette]] - code - apps/web/lib/deck-theme.ts
+- [[DeckSlide]] - code - packages/types/deck.ts
+- [[ICONS]] - code - apps/web/lib/deck-theme.ts
+- [[PaletteName]] - code - apps/web/lib/deck-theme.ts
+- [[deck-theme.ts]] - code - apps/web/lib/deck-theme.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -25,8 +28,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 92]]
-- 1 edge to [[_COMMUNITY_Community 77]]
+- 6 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 4 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 3 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 3 edges to [[_COMMUNITY_Community 45]]
+- 1 edge to [[_COMMUNITY_Community 33]]
 
 ## Top bridge nodes
-- [[Podcasts (TTS)]] - degree 6, connects to 2 communities
+- [[DeckAccent]] - degree 6, connects to 4 communities
+- [[DeckSlide]] - degree 6, connects to 4 communities
+- [[deck-theme.ts]] - degree 14, connects to 3 communities
+- [[DeckIcon]] - degree 3, connects to 2 communities

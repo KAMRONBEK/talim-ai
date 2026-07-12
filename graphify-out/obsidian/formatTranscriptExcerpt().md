@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "components learning · ContentThumbnail()"
-location: "L132"
+community: "Transcript Panel"
+location: "L137"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # formatTranscriptExcerpt()
@@ -16,4 +16,4 @@ tags:
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 - [[formatTimestamp()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

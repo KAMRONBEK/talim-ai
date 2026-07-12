@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.23
-members: 15
+cohesion: 0.11
+members: 18
 ---
 
 # Community 65
 
-**Cohesion:** 0.23 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.11 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[OpenRouterFileAnnotation]] - code - apps/api/src/services/pdf.service.ts
-- [[extractPdfPageRange()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractPdfText()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractRegionTextFromImage()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractWithOpenAI()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractWithPdfParse()]] - code - apps/api/src/services/pdf.service.ts
-- [[getPdfPageCount()]] - code - apps/api/src/services/pdf.service.ts
-- [[hasPrimaryOcrProvider()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrImageDataUrl()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrRequestOnce()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrViaOpenRouter()]] - code - apps/api/src/services/pdf.service.ts
-- [[pdf.service.ts]] - code - apps/api/src/services/pdf.service.ts
-- [[rasterizeAndOcrPdf()]] - code - apps/api/src/services/pdf.service.ts
-- [[runCli()]] - code - apps/api/src/services/pdf.service.ts
-- [[runPdftoppm()]] - code - apps/api/src/services/pdf.service.ts
+- [[$schema]] - code - apps/web/components.json
+- [[aliases]] - code - apps/web/components.json
+- [[baseColor]] - code - apps/web/components.json
+- [[components]] - code - apps/web/components.json
+- [[components.json]] - code - apps/web/components.json
+- [[config_3]] - code - apps/web/components.json
+- [[css]] - code - apps/web/components.json
+- [[cssVariables]] - code - apps/web/components.json
+- [[hooks]] - code - apps/web/components.json
+- [[iconLibrary]] - code - apps/web/components.json
+- [[lib]] - code - apps/web/components.json
+- [[prefix]] - code - apps/web/components.json
+- [[rsc]] - code - apps/web/components.json
+- [[style]] - code - apps/web/components.json
+- [[tailwind]] - code - apps/web/components.json
+- [[tsx_1]] - code - apps/web/components.json
+- [[ui]] - code - apps/web/components.json
+- [[utils]] - code - apps/web/components.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,16 +35,3 @@ members: 15
 TABLE source_file, type FROM #community/Community_65
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 8 edges to [[_COMMUNITY_Content Controller]]
-- 6 edges to [[_COMMUNITY_Usage Pricing & Chunk Tools]]
-- 4 edges to [[_COMMUNITY_Env Config & Jobs]]
-- 1 edge to [[_COMMUNITY_Content & Podcast API]]
-
-## Top bridge nodes
-- [[pdf.service.ts]] - degree 23, connects to 3 communities
-- [[extractRegionTextFromImage()]] - degree 6, connects to 2 communities
-- [[extractPdfText()]] - degree 6, connects to 1 community
-- [[getPdfPageCount()]] - degree 4, connects to 1 community
-- [[extractWithOpenAI()]] - degree 3, connects to 1 community

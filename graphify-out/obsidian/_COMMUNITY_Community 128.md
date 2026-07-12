@@ -1,17 +1,20 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.40
+members: 5
 ---
 
 # Community 128
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[RootLayout()_1]] - code - apps/web/app/layout.tsx
-- [[layout.tsx_7]] - code - apps/web/app/layout.tsx
+- [[main]] - code - packages/config/eslint/package.json
+- [[name_4]] - code - packages/config/eslint/package.json
+- [[package.json_4]] - code - packages/config/eslint/package.json
+- [[private_4]] - code - packages/config/eslint/package.json
+- [[version_3]] - code - packages/config/eslint/package.json
 
 ## Live Query (requires Dataview plugin)
 

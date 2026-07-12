@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/create-tenant-owner.ts"
 type: "code"
-community: "services tenant"
+community: "Admin Tenants & Prisma Core"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # parseArgs()
@@ -15,4 +15,4 @@ tags:
 - [[create-tenant-owner.ts]] - `contains` [EXTRACTED]
 - [[main()_2]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

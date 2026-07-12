@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "[locale] dashboard"
-location: "L165"
+community: "Community 33"
+location: "L158"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Community_33
 ---
 
 # ContentAccessRedirect()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[layout.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_33

@@ -1,20 +1,22 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.29
+members: 7
 ---
 
 # Community 109
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.29 - loosely connected
+**Members:** 7 nodes
 
 ## Members
-- [[Admin audit log]] - concept - docs/FEATURES.md
-- [[F25 Admin user-detail credential fields silently browser-autofilled]] - document - docs/qa/user-stories.md
-- [[Tenant management + subscriptions]] - concept - docs/FEATURES.md
-- [[US-ADMIN-02 Users  tenants  content  generated  subscriptions  usage  audit]] - document - docs/qa/user-stories.md
-- [[User management (role, resetshow password, delete)]] - concept - docs/FEATURES.md
+- [[name_1]] - code - apps/api/package.json
+- [[package.json_1]] - code - apps/api/package.json
+- [[prisma_1]] - code - apps/api/package.json
+- [[private_1]] - code - apps/api/package.json
+- [[schema]] - code - apps/api/package.json
+- [[seed]] - code - apps/api/package.json
+- [[version_1]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,7 +26,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 82]]
+- 1 edge to [[_COMMUNITY_Community 60]]
+- 1 edge to [[_COMMUNITY_Community 76]]
+- 1 edge to [[_COMMUNITY_Community 66]]
 
 ## Top bridge nodes
-- [[Tenant management + subscriptions]] - degree 2, connects to 1 community
+- [[package.json_1]] - degree 7, connects to 3 communities

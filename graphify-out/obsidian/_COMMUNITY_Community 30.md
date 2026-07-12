@@ -1,42 +1,45 @@
 ---
 type: community
-cohesion: 0.14
-members: 27
+cohesion: 0.09
+members: 30
 ---
 
 # Community 30
 
-**Cohesion:** 0.14 - loosely connected
-**Members:** 27 nodes
+**Cohesion:** 0.09 - loosely connected
+**Members:** 30 nodes
 
 ## Members
-- [[AssignContentPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[Content]] - code - packages/types/index.ts
-- [[ContentState]] - code - apps/web/store/useContentStore.ts
-- [[ContentStatusGateProps]] - code - apps/web/components/content/content-status-gate.tsx
-- [[DeleteContentDialog()]] - code - apps/web/components/content/delete-content-dialog.tsx
-- [[LIST_KEYS]] - code - apps/web/lib/content-cache.ts
-- [[ListSnapshot]] - code - apps/web/lib/content-cache.ts
-- [[ProcessingCard()]] - code - apps/web/components/content/content-status-gate.tsx
-- [[content-cache.ts]] - code - apps/web/lib/content-cache.ts
-- [[content-status-gate.tsx]] - code - apps/web/components/content/content-status-gate.tsx
-- [[contentApiBase()]] - code - apps/web/hooks/useContent.ts
-- [[invalidateContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[listHasProcessing()]] - code - apps/web/lib/content-cache.ts
-- [[page.tsx_22]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[prependContentToLists()]] - code - apps/web/lib/content-cache.ts
-- [[removeContentFromLists()]] - code - apps/web/lib/content-cache.ts
-- [[restoreContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[snapshotContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[useContent.ts]] - code - apps/web/hooks/useContent.ts
-- [[useContentStore]] - code - apps/web/store/useContentStore.ts
-- [[useContentStore.ts]] - code - apps/web/store/useContentStore.ts
-- [[useDeleteContent()_1]] - code - apps/web/hooks/useContent.ts
-- [[useDeleteTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useRetryContent()_1]] - code - apps/web/hooks/useContent.ts
-- [[useRetryTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useTenantContent.ts]] - code - apps/web/hooks/useTenantContent.ts
+- [[CARDS]] - code - apps/web/components/marketing/for-tutors.tsx
+- [[Cta()]] - code - apps/web/components/marketing/cta.tsx
+- [[FEATURES]] - code - apps/web/components/marketing/features.tsx
+- [[Faq()]] - code - apps/web/components/marketing/faq.tsx
+- [[ForTutors()]] - code - apps/web/components/marketing/for-tutors.tsx
+- [[Hero()]] - code - apps/web/components/marketing/hero.tsx
+- [[HomePage()]] - code - apps/web/app/[locale]/page.tsx
+- [[HowItWorks()]] - code - apps/web/components/marketing/how-it-works.tsx
+- [[ITEMS]] - code - apps/web/components/marketing/faq.tsx
+- [[ITEM_KEYS]] - code - apps/web/components/marketing/testimonials.tsx
+- [[LandingPage()]] - code - apps/web/components/marketing/landing-page.tsx
+- [[PLANS_1]] - code - apps/web/components/marketing/pricing-section.tsx
+- [[Plan]] - code - apps/web/components/marketing/pricing-section.tsx
+- [[PricingSection()]] - code - apps/web/components/marketing/pricing-section.tsx
+- [[STAT_INDEXES]] - code - apps/web/components/marketing/stats.tsx
+- [[STEPS]] - code - apps/web/components/marketing/how-it-works.tsx
+- [[Stats()]] - code - apps/web/components/marketing/stats.tsx
+- [[Step]] - code - apps/web/components/marketing/how-it-works.tsx
+- [[Testimonials()]] - code - apps/web/components/marketing/testimonials.tsx
+- [[cta.tsx]] - code - apps/web/components/marketing/cta.tsx
+- [[faq.tsx]] - code - apps/web/components/marketing/faq.tsx
+- [[features.tsx]] - code - apps/web/components/marketing/features.tsx
+- [[for-tutors.tsx]] - code - apps/web/components/marketing/for-tutors.tsx
+- [[hero.tsx]] - code - apps/web/components/marketing/hero.tsx
+- [[how-it-works.tsx]] - code - apps/web/components/marketing/how-it-works.tsx
+- [[landing-page.tsx]] - code - apps/web/components/marketing/landing-page.tsx
+- [[page.tsx_38]] - code - apps/web/app/[locale]/page.tsx
+- [[pricing-section.tsx]] - code - apps/web/components/marketing/pricing-section.tsx
+- [[stats.tsx]] - code - apps/web/components/marketing/stats.tsx
+- [[testimonials.tsx]] - code - apps/web/components/marketing/testimonials.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -46,26 +49,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Content Detail Page]]
-- 8 edges to [[_COMMUNITY_Community 31]]
-- 7 edges to [[_COMMUNITY_Tenant Web Pages]]
-- 6 edges to [[_COMMUNITY_Community 36]]
-- 6 edges to [[_COMMUNITY_Slide Deck Types]]
-- 5 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 4 edges to [[_COMMUNITY_Community 49]]
-- 4 edges to [[_COMMUNITY_Community 66]]
-- 2 edges to [[_COMMUNITY_App Layout & Guards]]
-- 2 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 2 edges to [[_COMMUNITY_Community 70]]
-- 1 edge to [[_COMMUNITY_Community 41]]
-- 1 edge to [[_COMMUNITY_Community 44]]
-- 1 edge to [[_COMMUNITY_Shared UI Components]]
-- 1 edge to [[_COMMUNITY_Community 42]]
-- 1 edge to [[_COMMUNITY_Community 56]]
+- 9 edges to [[_COMMUNITY_Community 46]]
+- 8 edges to [[_COMMUNITY_Community 33]]
+- 2 edges to [[_COMMUNITY_Billing UI & Plans]]
 
 ## Top bridge nodes
-- [[useContent.ts]] - degree 32, connects to 13 communities
-- [[content-status-gate.tsx]] - degree 14, connects to 6 communities
-- [[Content]] - degree 15, connects to 5 communities
-- [[useTenantContent.ts]] - degree 20, connects to 3 communities
-- [[DeleteContentDialog()]] - degree 6, connects to 3 communities
+- [[page.tsx_38]] - degree 6, connects to 2 communities
+- [[landing-page.tsx]] - degree 24, connects to 1 community
+- [[pricing-section.tsx]] - degree 5, connects to 1 community
+- [[for-tutors.tsx]] - degree 4, connects to 1 community
+- [[cta.tsx]] - degree 3, connects to 1 community

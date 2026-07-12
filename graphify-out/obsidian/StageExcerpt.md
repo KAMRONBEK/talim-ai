@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "components learning"
-location: "L22"
+community: "Community 37"
+location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_37
 ---
 
 # StageExcerpt
 
 ## Connections
 - [[content-stage.tsx]] - `contains` [EXTRACTED]
-- [[page.tsx_30]] - `imports` [EXTRACTED]
+- [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_37

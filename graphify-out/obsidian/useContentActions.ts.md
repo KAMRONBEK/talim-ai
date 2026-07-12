@@ -1,26 +1,21 @@
 ---
 source_file: "apps/web/hooks/useContentActions.ts"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Community 38"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Community_38
 ---
 
 # useContentActions.ts
 
 ## Connections
-- [[QuestionStyle_2]] - `imports` [EXTRACTED]
-- [[QuizKind]] - `imports` [EXTRACTED]
-- [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
-- [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useContentActions()]] - `contains` [EXTRACTED]
-- [[useCreateQuiz()]] - `imports` [EXTRACTED]
 - [[useGenerateSummary()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
@@ -28,4 +23,4 @@ tags:
 - [[useRetryContent()_1]] - `imports` [EXTRACTED]
 - [[useSavedSummary()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_38

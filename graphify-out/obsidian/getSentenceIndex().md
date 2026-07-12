@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "components learning · ContentThumbnail()"
-location: "L53"
+community: "Transcript Panel"
+location: "L58"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # getSentenceIndex()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

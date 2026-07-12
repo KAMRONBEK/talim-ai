@@ -1,17 +1,16 @@
 ---
 source_file: "docs/PLANS.md"
 type: "concept"
-community: "docs · User Types Model"
+community: "Community 57"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/docs__User_Types_Model
+  - community/Community_57
 ---
 
 # User Types Model
 
 ## Connections
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
-- [[Roles & Personas]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/docs__User_Types_Model
+#graphify/concept #graphify/EXTRACTED #community/Community_57

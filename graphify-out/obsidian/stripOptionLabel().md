@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "src services · learning-coverage-prompt.ts"
+community: "Community 118"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__learning-coverage-promptts
+  - community/Community_118
 ---
 
 # stripOptionLabel()
@@ -15,4 +15,4 @@ tags:
 - [[isSelectedAnswerCorrect()]] - `calls` [EXTRACTED]
 - [[quiz-answer.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts
+#graphify/code #graphify/EXTRACTED #community/Community_118

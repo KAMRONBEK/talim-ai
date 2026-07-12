@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "web lib · upgrade-dialog.tsx"
-location: "L21"
+community: "Community 49"
+location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__upgrade-dialogtsx
+  - community/Community_49
 ---
 
 # PlanLimitsView
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx
+#graphify/code #graphify/EXTRACTED #community/Community_49

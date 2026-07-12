@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "web lib · providers.tsx"
+community: "Community 52"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Community_52
 ---
 
 # JobStream()
@@ -15,4 +15,4 @@ tags:
 - [[providers.tsx_1]] - `contains` [EXTRACTED]
 - [[useJobEvents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Community_52

@@ -1,24 +1,28 @@
 ---
 type: community
-cohesion: 0.33
-members: 9
+cohesion: 0.22
+members: 13
 ---
 
 # Community 82
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[Class JOIN CODE self-enroll]] - concept - docs/FEATURES.md
-- [[Custom seat limit]] - concept - docs/FEATURES.md
-- [[F26 Seat-limit-full reported as 'Upload limit reached']] - document - docs/qa/user-stories.md
-- [[F27 Orphaned account when register-with-join-code hits a full class]] - document - docs/qa/user-stories.md
-- [[F6 Deactivate no confirm + native regenerate confirm]] - document - docs/qa/visual-qa-report.md
-- [[Students management (email + email-less username students)]] - concept - docs/FEATURES.md
-- [[Tenant dashboard & org settings]] - concept - docs/FEATURES.md
-- [[US-AUTH-03 Join-code enrolment + seat limits]] - document - docs/qa/user-stories.md
-- [[mustChangePassword & password reset]] - concept - docs/FEATURES.md
+- [[DesmosCalculator]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[DesmosGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[DesmosGraph.tsx]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[FallbackGraph]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[FallbackPoint]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[FallbackSvgGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[Window]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[axisLine()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[buildFallbackGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[evaluateFallbackExpression()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[fallbackPath()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[loadDesmosScript()]] - code - apps/web/components/chat/DesmosGraph.tsx
+- [[toFallbackExpression()]] - code - apps/web/components/chat/DesmosGraph.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,10 +32,11 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 94]]
-- 1 edge to [[_COMMUNITY_Community 93]]
-- 1 edge to [[_COMMUNITY_Community 109]]
+- 2 edges to [[_COMMUNITY_Community 67]]
+- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 1 edge to [[_COMMUNITY_Community 55]]
+- 1 edge to [[_COMMUNITY_Community 33]]
 
 ## Top bridge nodes
-- [[Custom seat limit]] - degree 6, connects to 2 communities
-- [[mustChangePassword & password reset]] - degree 2, connects to 1 community
+- [[DesmosGraph.tsx]] - degree 15, connects to 3 communities
+- [[DesmosGraph()]] - degree 4, connects to 2 communities

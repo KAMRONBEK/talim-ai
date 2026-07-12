@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "api"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/api
+  - community/Admin_Panel_Docs
 ---
 
 # Talim Tech Stack (Next.js/Express/Prisma/Bull/Postgres+pgvector)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI README]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/api
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

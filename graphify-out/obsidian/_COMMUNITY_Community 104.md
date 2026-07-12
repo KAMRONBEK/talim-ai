@@ -1,21 +1,23 @@
 ---
 type: community
-cohesion: 0.33
-members: 6
+cohesion: 0.32
+members: 8
 ---
 
 # Community 104
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 6 nodes
+**Cohesion:** 0.32 - loosely connected
+**Members:** 8 nodes
 
 ## Members
-- [[compilerOptions_6]] - code - packages/types/tsconfig.json
-- [[extends_5]] - code - packages/types/tsconfig.json
-- [[include_3]] - code - packages/types/tsconfig.json
-- [[outDir_2]] - code - packages/types/tsconfig.json
-- [[rootDir_2]] - code - packages/types/tsconfig.json
-- [[tsconfig.json_3]] - code - packages/types/tsconfig.json
+- [[GeneratedPage()]] - code - apps/admin/app/(admin)/generated/page.tsx
+- [[MediaReviewStatus]] - code - packages/types/index.ts
+- [[page.tsx_3]] - code - apps/admin/app/(admin)/generated/page.tsx
+- [[reviewPillClass()]] - code - apps/admin/app/(admin)/generated/page.tsx
+- [[statusPillClass()_1]] - code - apps/admin/app/(admin)/generated/page.tsx
+- [[tabs]] - code - apps/admin/app/(admin)/generated/page.tsx
+- [[useAdminGenerated()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useReviewGenerated()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -23,3 +25,14 @@ members: 6
 TABLE source_file, type FROM #community/Community_104
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 3 edges to [[_COMMUNITY_Community 79]]
+- 2 edges to [[_COMMUNITY_Admin App UI]]
+- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+
+## Top bridge nodes
+- [[page.tsx_3]] - degree 11, connects to 3 communities
+- [[useAdminGenerated()]] - degree 3, connects to 1 community
+- [[useReviewGenerated()]] - degree 3, connects to 1 community
+- [[MediaReviewStatus]] - degree 2, connects to 1 community

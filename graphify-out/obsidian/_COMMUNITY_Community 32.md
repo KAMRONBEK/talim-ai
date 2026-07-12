@@ -1,41 +1,43 @@
 ---
 type: community
-cohesion: 0.12
-members: 26
+cohesion: 0.10
+members: 28
 ---
 
 # Community 32
 
-**Cohesion:** 0.12 - loosely connected
-**Members:** 26 nodes
+**Cohesion:** 0.10 - loosely connected
+**Members:** 28 nodes
 
 ## Members
-- [[PageDimensions]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PageState]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfDocumentProxy]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfJsModule]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfPageProxy]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfSelectionMode]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfTextContentItem]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[PdfTextItem]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[PdfViewer()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewer.tsx]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewerProps]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewport]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[Rect]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[clientRectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[cropPageCanvasRegion()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[ensureEndOfContent()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[estimateTextWidth()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[extractTextFromTextLayerMarquee()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[extractTextInDomRect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[getViewportTextBounds()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[isTextItem()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[pdf-area-selection.ts]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[pdfjs-cdn.ts]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[rectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[renderManualTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[renderTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[BAND_BAR]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[BecomeTutorPromo()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[ContentLearnPanelProps]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[ContentRightPanel()]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[ContentRightPanelBody()]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[ContentRightPanelBodyProps]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[ContentRightPanelProps]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[ContentRightPanelSheet()]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[ContentRightPanelSheetProps]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[DashboardSidebarBody()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[DashboardSidebarBodyProps]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[DashboardSidebarSheet()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[DashboardSidebarSheetProps]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[LearningHistory]] - code - packages/types/index.ts
+- [[LearningHistoryPanel()]] - code - apps/web/components/learning/learning-history-panel.tsx
+- [[LearningHistoryPanelProps]] - code - apps/web/components/learning/learning-history-panel.tsx
+- [[Sheet()]] - code - packages/ui/components/sheet.tsx
+- [[SheetContent()]] - code - packages/ui/components/sheet.tsx
+- [[SheetContext]] - code - packages/ui/components/sheet.tsx
+- [[SheetContextValue]] - code - packages/ui/components/sheet.tsx
+- [[SheetHeader()]] - code - packages/ui/components/sheet.tsx
+- [[SheetTitle()]] - code - packages/ui/components/sheet.tsx
+- [[SheetTrigger()]] - code - packages/ui/components/sheet.tsx
+- [[content-right-panel.tsx]] - code - apps/web/components/layout/content-right-panel.tsx
+- [[dashboard-sidebar.tsx]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[learning-history-panel.tsx]] - code - apps/web/components/learning/learning-history-panel.tsx
+- [[sheet.tsx]] - code - packages/ui/components/sheet.tsx
+- [[useContentMastery()]] - code - apps/web/hooks/useMastery.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -45,12 +47,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Content Detail Page]]
-- 3 edges to [[_COMMUNITY_Community 73]]
-- 1 edge to [[_COMMUNITY_Shared UI Components]]
-- 1 edge to [[_COMMUNITY_Community 31]]
+- 11 edges to [[_COMMUNITY_Community 33]]
+- 8 edges to [[_COMMUNITY_Community 46]]
+- 8 edges to [[_COMMUNITY_Community 38]]
+- 8 edges to [[_COMMUNITY_Admin App UI]]
+- 5 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 5 edges to [[_COMMUNITY_Community 71]]
+- 4 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 4 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 2 edges to [[_COMMUNITY_Community 54]]
+- 2 edges to [[_COMMUNITY_Community 37]]
+- 2 edges to [[_COMMUNITY_Flashcards Study Page]]
+- 2 edges to [[_COMMUNITY_Community 40]]
+- 2 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 2 edges to [[_COMMUNITY_Tenant Materials UI]]
+- 1 edge to [[_COMMUNITY_Community 43]]
+- 1 edge to [[_COMMUNITY_Community 35]]
 
 ## Top bridge nodes
-- [[PdfViewer.tsx]] - degree 22, connects to 4 communities
-- [[pdfjs-cdn.ts]] - degree 7, connects to 1 community
-- [[PdfViewer()]] - degree 2, connects to 1 community
+- [[content-right-panel.tsx]] - degree 25, connects to 9 communities
+- [[SheetContent()]] - degree 10, connects to 7 communities
+- [[Sheet()]] - degree 9, connects to 6 communities
+- [[SheetHeader()]] - degree 9, connects to 6 communities
+- [[SheetTitle()]] - degree 9, connects to 6 communities

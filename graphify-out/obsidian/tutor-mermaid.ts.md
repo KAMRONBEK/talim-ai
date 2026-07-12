@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-mermaid.ts"
 type: "code"
-community: "src lib"
+community: "Tutor Visual Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib
+  - community/Tutor_Visual_Tools
 ---
 
 # tutor-mermaid.ts
@@ -19,4 +19,4 @@ tags:
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 - [[validateMermaidPayload()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

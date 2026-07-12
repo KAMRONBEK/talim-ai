@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/transcribe.md"
 type: "concept"
-community: "references"
+community: "Graphify Skill Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/references
+  - community/Graphify_Skill_Docs
 ---
 
 # Video/Audio Transcription
@@ -15,4 +15,4 @@ tags:
 - [[Whisper Domain-Hint Prompt]] - `references` [EXTRACTED]
 - [[graphify skill]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/references
+#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs

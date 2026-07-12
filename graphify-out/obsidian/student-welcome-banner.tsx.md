@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/student-welcome-banner.tsx"
 type: "code"
-community: "[locale] dashboard"
+community: "Account & Settings UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Account__Settings_UI
 ---
 
 # student-welcome-banner.tsx
@@ -21,4 +21,4 @@ tags:
 - [[onboarding.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

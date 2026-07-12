@@ -1,25 +1,30 @@
 ---
 type: community
-cohesion: 0.20
-members: 10
+cohesion: 0.13
+members: 15
 ---
 
 # Community 76
 
-**Cohesion:** 0.20 - loosely connected
-**Members:** 10 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 15 nodes
 
 ## Members
-- [[unnamed]] - code - apps/admin/tsconfig.json
-- [[allowJs]] - code - apps/admin/tsconfig.json
-- [[compilerOptions]] - code - apps/admin/tsconfig.json
-- [[exclude]] - code - apps/admin/tsconfig.json
-- [[extends]] - code - apps/admin/tsconfig.json
-- [[include]] - code - apps/admin/tsconfig.json
-- [[incremental]] - code - apps/admin/tsconfig.json
-- [[paths]] - code - apps/admin/tsconfig.json
-- [[plugins]] - code - apps/admin/tsconfig.json
-- [[tsconfig.json]] - code - apps/admin/tsconfig.json
+- [[@talimeslint-config_1]] - code - apps/api/package.json
+- [[@talimtsconfig_1]] - code - apps/api/package.json
+- [[@typesbcrypt]] - code - apps/api/package.json
+- [[@typesbull]] - code - apps/api/package.json
+- [[@typescors]] - code - apps/api/package.json
+- [[@typesexpress]] - code - apps/api/package.json
+- [[@typesjsonwebtoken]] - code - apps/api/package.json
+- [[@typesmulter]] - code - apps/api/package.json
+- [[@typesnode_1]] - code - apps/api/package.json
+- [[@typespdf-parse]] - code - apps/api/package.json
+- [[devDependencies_1]] - code - apps/api/package.json
+- [[eslint_1]] - code - apps/api/package.json
+- [[prisma]] - code - apps/api/package.json
+- [[tsx]] - code - apps/api/package.json
+- [[typescript_1]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,3 +32,9 @@ members: 10
 TABLE source_file, type FROM #community/Community_76
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_Community 109]]
+
+## Top bridge nodes
+- [[devDependencies_1]] - degree 15, connects to 1 community

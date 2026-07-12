@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "src controllers · quiz.controller.ts"
-location: "L74"
+community: "Community 58"
+location: "L131"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__quizcontrollerts
+  - community/Community_58
 ---
 
 # formatAttempt()
@@ -16,4 +16,4 @@ tags:
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 - [[submitQuiz()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_58

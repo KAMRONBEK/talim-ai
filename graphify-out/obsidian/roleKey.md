@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/account-summary.tsx"
 type: "code"
-community: "[locale] dashboard"
+community: "Account & Settings UI"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Account__Settings_UI
 ---
 
 # roleKey
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[account-summary.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

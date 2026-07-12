@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "ui components"
+community: "Community 39"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Community_39
 ---
 
 # DialogContextValue
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dialog.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Community_39

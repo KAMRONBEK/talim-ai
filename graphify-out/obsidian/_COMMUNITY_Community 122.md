@@ -1,17 +1,21 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.33
+members: 6
 ---
 
 # Community 122
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
-- [[index.js]] - code - packages/config/eslint/index.js
+- [[engines]] - code - package.json
+- [[name_3]] - code - package.json
+- [[node]] - code - package.json
+- [[package.json_3]] - code - package.json
+- [[packageManager]] - code - package.json
+- [[private_3]] - code - package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -19,3 +23,10 @@ members: 2
 TABLE source_file, type FROM #community/Community_122
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_Community 115]]
+- 1 edge to [[_COMMUNITY_Community 42]]
+
+## Top bridge nodes
+- [[package.json_3]] - degree 6, connects to 2 communities

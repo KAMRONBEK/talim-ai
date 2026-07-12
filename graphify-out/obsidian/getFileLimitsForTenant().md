@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # getFileLimitsForTenant()
@@ -18,4 +18,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

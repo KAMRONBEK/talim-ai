@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # getParam()
@@ -21,6 +21,8 @@ tags:
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
+- [[contentDetail()]] - `calls` [EXTRACTED]
+- [[createBankQuestion()]] - `calls` [EXTRACTED]
 - [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
 - [[createQuiz()]] - `calls` [EXTRACTED]
@@ -40,6 +42,7 @@ tags:
 - [[getContentChat()]] - `calls` [EXTRACTED]
 - [[getContentFile()]] - `calls` [EXTRACTED]
 - [[getContentFile()_1]] - `calls` [EXTRACTED]
+- [[getContentMastery()]] - `calls` [EXTRACTED]
 - [[getContentProgress()]] - `calls` [EXTRACTED]
 - [[getContentTranscript()]] - `calls` [EXTRACTED]
 - [[getContentTranscript()_1]] - `calls` [EXTRACTED]
@@ -58,12 +61,17 @@ tags:
 - [[getTenant()]] - `calls` [EXTRACTED]
 - [[getUser()]] - `calls` [EXTRACTED]
 - [[getVideo()]] - `calls` [EXTRACTED]
+- [[goLiveAssessment()]] - `calls` [EXTRACTED]
+- [[impersonateUser()]] - `calls` [EXTRACTED]
+- [[learner.controller.ts]] - `imports` [EXTRACTED]
 - [[learnerAssessmentLeaderboard()]] - `calls` [EXTRACTED]
 - [[listAttempts()]] - `calls` [EXTRACTED]
 - [[listContentAssignments()]] - `calls` [EXTRACTED]
 - [[listQuestions()]] - `calls` [EXTRACTED]
 - [[listQuizzesByContent()]] - `calls` [EXTRACTED]
 - [[listSections()]] - `calls` [EXTRACTED]
+- [[markMessageRead()]] - `calls` [EXTRACTED]
+- [[markReplyRead()]] - `calls` [EXTRACTED]
 - [[ocrPdfRegion()]] - `calls` [EXTRACTED]
 - [[ocrPdfRegion()_1]] - `calls` [EXTRACTED]
 - [[params.ts]] - `contains` [EXTRACTED]
@@ -81,11 +89,16 @@ tags:
 - [[rejectTutorRequest()]] - `calls` [EXTRACTED]
 - [[reparseContent()]] - `calls` [EXTRACTED]
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
+- [[replyToMessage()]] - `calls` [EXTRACTED]
 - [[resetStudentPassword()]] - `calls` [EXTRACTED]
 - [[resetUserPassword()]] - `calls` [EXTRACTED]
+- [[respondToReply()]] - `calls` [EXTRACTED]
 - [[retryContent()]] - `calls` [EXTRACTED]
 - [[retryContent()_1]] - `calls` [EXTRACTED]
 - [[retryContentJob()]] - `calls` [EXTRACTED]
+- [[reviewFlashcard()]] - `calls` [EXTRACTED]
+- [[reviewGenerated()]] - `calls` [EXTRACTED]
+- [[scheduleAssessment()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `calls` [EXTRACTED]
@@ -99,4 +112,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

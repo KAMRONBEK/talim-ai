@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "package.json"
+community: "Community 115"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_115
 ---
 
 # $schema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[turbo.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_115

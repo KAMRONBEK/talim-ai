@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
+community: "Billing UI & Plans"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Billing_UI__Plans
 ---
 
 # auth-routing.ts
@@ -20,9 +20,10 @@ tags:
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[page.tsx_13]] - `imports_from` [EXTRACTED]
 - [[page.tsx_14]] - `imports_from` [EXTRACTED]
-- [[page.tsx_30]] - `imports_from` [EXTRACTED]
-- [[page.tsx_36]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
+- [[page.tsx_37]] - `imports_from` [EXTRACTED]
+- [[page.tsx_38]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

@@ -1,25 +1,30 @@
 ---
 type: community
 cohesion: 0.20
-members: 10
+members: 15
 ---
 
 # Community 77
 
 **Cohesion:** 0.20 - loosely connected
-**Members:** 10 nodes
+**Members:** 15 nodes
 
 ## Members
-- [[AI tutor visuals (Manim)]] - concept - docs/FEATURES.md
-- [[Background jobs (Bull  Redis)]] - concept - docs/FEATURES.md
-- [[Content & generated media (admin)]] - concept - docs/FEATURES.md
-- [[Content Pipeline & Job Model]] - concept - docs/PLATFORM.md
-- [[Content viewing extras (download, OCR region, transcript, history)]] - concept - docs/FEATURES.md
-- [[F15 Material delete dialog + aria-label hardcoded Uzbek]] - document - docs/qa/user-stories.md
-- [[Materials + assignment]] - concept - docs/FEATURES.md
-- [[US-OWNER-12 Delete a material]] - document - docs/qa/user-stories.md
-- [[Upload PDFs  slides]] - concept - docs/FEATURES.md
-- [[processContent Job (ingest→RAG)]] - concept - docs/PLATFORM.md
+- [[BullRedis Background Jobs]] - concept - docs/FEATURES.md
+- [[Class Join-Code Self-Enroll]] - concept - docs/FEATURES.md
+- [[Content Upload & Ingestion Pipeline]] - concept - docs/FEATURES.md
+- [[GAME Assessment Mode]] - concept - docs/FEATURES.md
+- [[Global UpgradePromotion Modal]] - concept - docs/FEATURES.md
+- [[Hierarchical Content Sectioning]] - concept - docs/FEATURES.md
+- [[Interactive Quiz Learn Player]] - concept - docs/plans/youlearn-redesign.md
+- [[Manim Tutor Visuals]] - concept - docs/FEATURES.md
+- [[Podcast Generation with Synced Transcript]] - concept - docs/FEATURES.md
+- [[RAG AI Tutor Chat]] - concept - docs/FEATURES.md
+- [[Real-time Class Leaderboard]] - concept - docs/FEATURES.md
+- [[Talim AI Feature Catalog]] - document - docs/FEATURES.md
+- [[Usage Metering & Quotas]] - concept - docs/FEATURES.md
+- [[Uzbek-first i18n (uzenru)]] - concept - docs/FEATURES.md
+- [[processContent Ingestion Job]] - concept - docs/PLATFORM.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,12 +34,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Deployment & Infra Docs]]
-- 1 edge to [[_COMMUNITY_Community 100]]
-- 1 edge to [[_COMMUNITY_Community 108]]
-- 1 edge to [[_COMMUNITY_Community 92]]
+- 4 edges to [[_COMMUNITY_Community 78]]
+- 3 edges to [[_COMMUNITY_Community 94]]
+- 3 edges to [[_COMMUNITY_Community 120]]
+- 2 edges to [[_COMMUNITY_Community 72]]
 
 ## Top bridge nodes
-- [[Background jobs (Bull  Redis)]] - degree 6, connects to 2 communities
-- [[AI tutor visuals (Manim)]] - degree 2, connects to 1 community
-- [[Content Pipeline & Job Model]] - degree 2, connects to 1 community
+- [[Talim AI Feature Catalog]] - degree 20, connects to 4 communities
+- [[RAG AI Tutor Chat]] - degree 3, connects to 1 community
+- [[Global UpgradePromotion Modal]] - degree 3, connects to 1 community
+- [[processContent Ingestion Job]] - degree 3, connects to 1 community
+- [[Interactive Quiz Learn Player]] - degree 2, connects to 1 community

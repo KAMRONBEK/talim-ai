@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin Tenants & Prisma Core"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # PlanFileLimitError
@@ -17,4 +17,4 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

@@ -1,13 +1,13 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "qa · US-IND-18: AI Video — per-section narrate"
+community: "Community 173"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/qa__US-IND-18_AI_Video__per-section_narrate
+  - community/Community_173
 ---
 
 # US-IND-18: AI Video — per-section narrated slideshow (parts)
 
-#graphify/document #graphify/EXTRACTED #community/qa__US-IND-18_AI_Video__per-section_narrate
+#graphify/document #graphify/EXTRACTED #community/Community_173

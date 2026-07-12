@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "src jobs"
+community: "Env Config & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Env_Config__Job_Events
 ---
 
 # queue.service.ts
@@ -44,4 +44,4 @@ tags:
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

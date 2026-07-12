@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewerLazy.tsx"
 type: "code"
-community: "components learning"
+community: "Community 37"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_37
 ---
 
 # PdfViewerLazy.tsx
@@ -16,4 +16,4 @@ tags:
 - [[PdfViewerLoading()]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_37

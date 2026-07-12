@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "components layout · content-generations.tsx"
+community: "Community 33"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__content-generationstsx
+  - community/Community_33
 ---
 
 # content-generations.tsx
@@ -14,11 +14,10 @@ tags:
 ## Connections
 - [[ContentGenerationsBlock()]] - `contains` [EXTRACTED]
 - [[ContentGenerationsBlockProps]] - `contains` [EXTRACTED]
-- [[QUIZ_STYLES]] - `contains` [EXTRACTED]
-- [[QuestionStyle_2]] - `imports` [EXTRACTED]
+- [[PracticeGenerator()]] - `imports` [EXTRACTED]
 - [[content-right-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports_from` [EXTRACTED]
-- [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx
+#graphify/code #graphify/EXTRACTED #community/Community_33

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "src services · slides.controller.ts"
+community: "Slide Deck Prompts"
 location: "L207"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__slidescontrollerts
+  - community/Slide_Deck_Prompts
 ---
 
 # DeckAudience
@@ -19,4 +19,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

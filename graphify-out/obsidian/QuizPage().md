@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L18"
+community: "Quiz Player & Hooks"
+location: "L280"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/web_hooks__pagetsx
+  - community/Quiz_Player__Hooks
 ---
 
 # QuizPage()
@@ -14,10 +14,10 @@ tags:
 ## Connections
 - [[T]] - `calls` [INFERRED]
 - [[isQuizGenerationStale()]] - `calls` [INFERRED]
-- [[page.tsx_38]] - `contains` [EXTRACTED]
+- [[page.tsx_40]] - `contains` [EXTRACTED]
 - [[useContent()]] - `calls` [INFERRED]
 - [[useLatestQuizAttempt()]] - `calls` [INFERRED]
 - [[useQuiz()]] - `calls` [INFERRED]
 - [[useSubmitQuiz()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/web_hooks__pagetsx
+#graphify/code #graphify/INFERRED #community/Quiz_Player__Hooks

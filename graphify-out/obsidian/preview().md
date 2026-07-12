@@ -1,19 +1,18 @@
 ---
-source_file: "apps/web/components/marketing/preview.tsx"
+source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "components marketing"
-location: "L5"
+community: "AI Tutor Chat API"
+location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_marketing
+  - community/AI_Tutor_Chat_API
 ---
 
-# Preview()
+# preview()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[landing-page.tsx]] - `imports` [EXTRACTED]
-- [[preview.tsx]] - `contains` [EXTRACTED]
+- [[inspect-chunks.ts]] - `contains` [EXTRACTED]
+- [[main()_3]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_marketing
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

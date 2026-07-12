@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "admin hooks"
-location: "L89"
+community: "Community 34"
+location: "L100"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_34
 ---
 
 # useAdminTenant()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_34

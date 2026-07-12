@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "i18n"
+community: "Community 46"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/i18n
+  - community/Community_46
 ---
 
 # language-switcher.tsx
@@ -19,8 +19,10 @@ tags:
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
 - [[locale-api.ts]] - `imports_from` [EXTRACTED]
 - [[locales]] - `imports` [EXTRACTED]
+- [[navbar.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[setApiLocale()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/i18n
+#graphify/code #graphify/EXTRACTED #community/Community_46

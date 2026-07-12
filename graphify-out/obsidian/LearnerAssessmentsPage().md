@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "[locale] dashboard"
-location: "L180"
+community: "Assessment Pages & Wizard"
+location: "L863"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/locale_dashboard
+  - community/Assessment_Pages__Wizard
 ---
 
 # LearnerAssessmentsPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 - [[useLearnerAssessments()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/locale_dashboard
+#graphify/code #graphify/INFERRED #community/Assessment_Pages__Wizard

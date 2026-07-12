@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "components chat · DesmosGraph.tsx"
+community: "Community 82"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__DesmosGraphtsx
+  - community/Community_82
 ---
 
 # Window
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[DesmosGraph.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__DesmosGraphtsx
+#graphify/code #graphify/EXTRACTED #community/Community_82

@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.22
-members: 15
+cohesion: 0.19
+members: 18
 ---
 
 # Community 61
 
-**Cohesion:** 0.22 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.19 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[LearnerBottomNav()]] - code - apps/web/components/layout/learner-navigation.tsx
-- [[LearnerLayout()]] - code - apps/web/app/[locale]/(learner)/layout.tsx
-- [[LearnerShell()]] - code - apps/web/contexts/learner-shell.tsx
-- [[LearnerSidebar()]] - code - apps/web/components/layout/learner-navigation.tsx
-- [[UserSidebarFooter()]] - code - apps/web/components/layout/user-sidebar-footer.tsx
-- [[UserSidebarFooterProps]] - code - apps/web/components/layout/user-sidebar-footer.tsx
-- [[getSettingsPathForRole()]] - code - apps/web/lib/auth-routing.ts
-- [[getUserDisplayName()]] - code - apps/web/lib/user-display.ts
-- [[getUserInitials()]] - code - apps/web/lib/user-display.ts
-- [[layout.tsx_2]] - code - apps/web/app/[locale]/(learner)/layout.tsx
-- [[learner-navigation.tsx]] - code - apps/web/components/layout/learner-navigation.tsx
-- [[learner-shell.tsx]] - code - apps/web/contexts/learner-shell.tsx
-- [[learnerNavKeys]] - code - apps/web/components/layout/learner-navigation.tsx
-- [[user-display.ts]] - code - apps/web/lib/user-display.ts
-- [[user-sidebar-footer.tsx]] - code - apps/web/components/layout/user-sidebar-footer.tsx
+- [[LocaleLayout()]] - code - apps/web/app/[locale]/layout.tsx
+- [[RootLayout()]] - code - apps/admin/app/layout.tsx
+- [[display]] - code - packages/ui/fonts/display.ts
+- [[display.ts]] - code - packages/ui/fonts/display.ts
+- [[generateStaticParams()]] - code - apps/web/app/[locale]/layout.tsx
+- [[getMessages()]] - code - apps/api/src/controllers/chat.controller.ts
+- [[grotesk]] - code - packages/ui/fonts/grotesk.ts
+- [[grotesk.ts]] - code - packages/ui/fonts/grotesk.ts
+- [[inter]] - code - packages/ui/fonts/inter.ts
+- [[inter.ts]] - code - packages/ui/fonts/inter.ts
+- [[jakarta]] - code - packages/ui/fonts/jakarta.ts
+- [[jakarta.ts]] - code - packages/ui/fonts/jakarta.ts
+- [[layout.tsx_1]] - code - apps/admin/app/layout.tsx
+- [[layout.tsx_6]] - code - apps/web/app/[locale]/layout.tsx
+- [[metadata]] - code - apps/admin/app/layout.tsx
+- [[metadata_1]] - code - apps/web/app/[locale]/layout.tsx
+- [[newsreader]] - code - packages/ui/fonts/newsreader.ts
+- [[newsreader.ts]] - code - packages/ui/fonts/newsreader.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -34,21 +37,10 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Community 38]]
-- 4 edges to [[_COMMUNITY_Community 42]]
-- 4 edges to [[_COMMUNITY_Community 56]]
-- 3 edges to [[_COMMUNITY_Shared UI Components]]
-- 3 edges to [[_COMMUNITY_Community 31]]
-- 2 edges to [[_COMMUNITY_Community 40]]
-- 2 edges to [[_COMMUNITY_App Layout & Guards]]
-- 1 edge to [[_COMMUNITY_Content Detail Page]]
-- 1 edge to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 1 edge to [[_COMMUNITY_Slide Deck Types]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 3 edges to [[_COMMUNITY_Community 106]]
+- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
+- 1 edge to [[_COMMUNITY_Content API Controllers]]
 
 ## Top bridge nodes
-- [[user-sidebar-footer.tsx]] - degree 19, connects to 7 communities
-- [[learner-navigation.tsx]] - degree 10, connects to 3 communities
-- [[UserSidebarFooter()]] - degree 9, connects to 3 communities
-- [[learner-shell.tsx]] - degree 9, connects to 2 communities
-- [[user-display.ts]] - degree 5, connects to 2 communities
+- [[getMessages()]] - degree 3, connects to 2 communities
+- [[layout.tsx_6]] - degree 16, connects to 1 community

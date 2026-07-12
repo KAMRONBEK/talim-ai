@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/assignments.ts"
 type: "code"
-community: "services tenant"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # assignments.ts
@@ -23,4 +23,4 @@ tags:
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[unassignContent()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

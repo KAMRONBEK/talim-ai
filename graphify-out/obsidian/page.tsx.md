@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/audit/page.tsx"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
+community: "Admin App UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Admin_App_UI
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminAuditLogs()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

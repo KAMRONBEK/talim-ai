@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/subscriptions/page.tsx"
 type: "code"
-community: "admin hooks"
-location: "L17"
+community: "Community 54"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_54
 ---
 
 # KIND_OPTIONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_54

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx"
 type: "code"
-community: "web lib"
-location: "L10"
+community: "Community 35"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib
+  - community/Community_35
 ---
 
 # AssignContentPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_22]] - `contains` [EXTRACTED]
 - [[useTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib
+#graphify/code #graphify/EXTRACTED #community/Community_35

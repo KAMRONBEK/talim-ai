@@ -1,26 +1,31 @@
 ---
 type: community
-cohesion: 0.18
-members: 11
+cohesion: 0.13
+members: 16
 ---
 
 # Community 75
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 11 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 16 nodes
 
 ## Members
-- [[Deep Flow Tests Per Role]] - concept - docs/qa/overnight-visual-qa.md
-- [[F1 Web dev server wedged (stale .next  axios chunk) → all web routes 500]] - document - docs/qa/visual-qa-report.md
-- [[Overnight Deep QA Runbook]] - document - docs/qa/overnight-visual-qa.md
-- [[Overnight Visual QA Report — Talim AI]] - document - docs/qa/visual-qa-report.md
-- [[Pythagoras QA fixture text]] - document - docs/qa/screenshots/qa-pythagoras.txt
-- [[Pythagorean Theorem QA test PDF]] - paper - docs/qa/screenshots/qa-pythagoras.pdf
-- [[QA Cross-Cutting Matrix]] - concept - docs/qa/overnight-visual-qa.md
-- [[QA Hard Rules (branch-only, local-only, fix-discipline)]] - rationale - docs/qa/overnight-visual-qa.md
-- [[QA Test Depth Matrix]] - concept - docs/qa/overnight-visual-qa.md
-- [[Talim AI Feature Catalog]] - document - docs/FEATURES.md
-- [[User Stories & QA Traceability]] - document - docs/qa/user-stories.md
+- [[@talimtsconfig_3]] - code - packages/types/package.json
+- [[build_4]] - code - packages/types/package.json
+- [[default]] - code - packages/types/package.json
+- [[devDependencies_5]] - code - packages/types/package.json
+- [[exports_1]] - code - packages/types/package.json
+- [[import]] - code - packages/types/package.json
+- [[main_2]] - code - packages/types/package.json
+- [[name_8]] - code - packages/types/package.json
+- [[package.json_8]] - code - packages/types/package.json
+- [[private_8]] - code - packages/types/package.json
+- [[require]] - code - packages/types/package.json
+- [[scripts_4]] - code - packages/types/package.json
+- [[typecheck_4]] - code - packages/types/package.json
+- [[types]] - code - packages/types/package.json
+- [[typescript_4]] - code - packages/types/package.json
+- [[version_7]] - code - packages/types/package.json
 
 ## Live Query (requires Dataview plugin)
 

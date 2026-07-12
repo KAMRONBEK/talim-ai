@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "src jobs"
+community: "Env Config & Job Events"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Env_Config__Job_Events
 ---
 
 # StoredSegment
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generateVideo.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

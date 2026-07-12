@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "web hooks"
+community: "Flashcards Study Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # usePodcast.ts
@@ -14,8 +14,10 @@ tags:
 ## Connections
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[Podcast]] - `imports` [EXTRACTED]
+- [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[page.tsx_31]] - `imports_from` [EXTRACTED]
+- [[material-media-panel.tsx]] - `imports_from` [EXTRACTED]
+- [[page.tsx_32]] - `imports_from` [EXTRACTED]
 - [[useContentBase()]] - `imports` [EXTRACTED]
 - [[useContentBase.ts]] - `imports_from` [EXTRACTED]
 - [[useCreatePodcast()]] - `contains` [EXTRACTED]
@@ -25,4 +27,4 @@ tags:
 - [[usePodcast()]] - `contains` [EXTRACTED]
 - [[useRegenerateEpisode()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

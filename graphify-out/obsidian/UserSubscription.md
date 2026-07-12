@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "packages types"
-location: "L133"
+community: "Shared Types & Chat Hooks"
+location: "L182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types
+  - community/Shared_Types__Chat_Hooks
 ---
 
 # UserSubscription
@@ -15,4 +15,4 @@ tags:
 - [[billing.controller.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks

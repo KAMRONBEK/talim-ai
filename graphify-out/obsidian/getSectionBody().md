@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "src controllers"
-location: "L179"
+community: "Community 59"
+location: "L214"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Community_59
 ---
 
 # getSectionBody()
@@ -22,4 +22,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Community_59

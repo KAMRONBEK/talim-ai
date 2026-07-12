@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "components deck"
+community: "Community 100"
 location: "L76"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck
+  - community/Community_100
 ---
 
 # ACCENT_TO_PALETTE
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck
+#graphify/code #graphify/EXTRACTED #community/Community_100

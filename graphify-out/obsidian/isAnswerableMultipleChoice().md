@@ -1,21 +1,22 @@
 ---
-source_file: "apps/api/src/services/assessment/shared.ts"
+source_file: "packages/types/grading.ts"
 type: "code"
-community: "assessment"
-location: "L99"
+community: "Community 29"
+location: "L234"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment
+  - community/Community_29
 ---
 
 # isAnswerableMultipleChoice()
 
 ## Connections
 - [[banks.ts]] - `imports` [EXTRACTED]
-- [[generateQuestions()_1]] - `calls` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
+- [[buildManualStorage()]] - `calls` [EXTRACTED]
+- [[grading.ts]] - `contains` [EXTRACTED]
 - [[patchQuestion()_1]] - `calls` [EXTRACTED]
-- [[shared.ts_1]] - `contains` [EXTRACTED]
+- [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
+- [[question-postprocess.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment
+#graphify/code #graphify/EXTRACTED #community/Community_29

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "src services · learning-coverage-prompt.ts"
+community: "Community 80"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__learning-coverage-promptts
+  - community/Community_80
 ---
 
 # listStudents()
@@ -16,4 +16,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts
+#graphify/code #graphify/EXTRACTED #community/Community_80

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/index.ts"
 type: "code"
-community: "ui components"
+community: "Admin App UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Admin_App_UI
 ---
 
 # index.ts
@@ -50,8 +50,8 @@ tags:
 - [[Slide.tsx]] - `imports_from` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `imports_from` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports_from` [EXTRACTED]
+- [[VideoTutorialViewer.tsx]] - `imports_from` [EXTRACTED]
 - [[account-summary.tsx]] - `imports_from` [EXTRACTED]
-- [[admin-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[assign-students-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[avatar.tsx]] - `re_exports` [EXTRACTED]
 - [[badge.tsx]] - `re_exports` [EXTRACTED]
@@ -77,8 +77,11 @@ tags:
 - [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
 - [[label.tsx]] - `re_exports` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
+- [[learner-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
 - [[logo.tsx]] - `imports_from` [EXTRACTED]
+- [[logo.tsx_1]] - `imports_from` [EXTRACTED]
+- [[navbar.tsx]] - `imports_from` [EXTRACTED]
 - [[page.tsx]] - `imports_from` [EXTRACTED]
 - [[page.tsx_1]] - `imports_from` [EXTRACTED]
 - [[page.tsx_2]] - `imports_from` [EXTRACTED]
@@ -96,28 +99,35 @@ tags:
 - [[page.tsx_15]] - `imports_from` [EXTRACTED]
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
 - [[page.tsx_19]] - `imports_from` [EXTRACTED]
-- [[page.tsx_20]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
 - [[page.tsx_23]] - `imports_from` [EXTRACTED]
-- [[page.tsx_25]] - `imports_from` [EXTRACTED]
+- [[page.tsx_24]] - `imports_from` [EXTRACTED]
 - [[page.tsx_26]] - `imports_from` [EXTRACTED]
 - [[page.tsx_27]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
+- [[page.tsx_28]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
 - [[page.tsx_33]] - `imports_from` [EXTRACTED]
-- [[pricing.tsx]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_40]] - `imports_from` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[progress.tsx]] - `re_exports` [EXTRACTED]
+- [[question-editor.tsx]] - `imports_from` [EXTRACTED]
+- [[question-inputs.tsx]] - `imports_from` [EXTRACTED]
 - [[quick-action-cards.tsx]] - `imports_from` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[resizable-split.tsx]] - `imports_from` [EXTRACTED]
 - [[rich-text.tsx]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
+- [[selection-ask.tsx]] - `imports_from` [EXTRACTED]
 - [[separator.tsx]] - `re_exports` [EXTRACTED]
 - [[sheet.tsx]] - `re_exports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports_from` [EXTRACTED]
+- [[subscription-edit-drawer.tsx]] - `imports_from` [EXTRACTED]
+- [[summary-text.tsx]] - `imports_from` [EXTRACTED]
+- [[tenant-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[theme-toggle.tsx]] - `imports_from` [EXTRACTED]
 - [[theme-toggle.tsx_1]] - `imports_from` [EXTRACTED]
@@ -125,4 +135,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[utils.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

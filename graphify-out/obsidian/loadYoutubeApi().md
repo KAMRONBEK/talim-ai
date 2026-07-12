@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/YoutubeVideoPlayer.tsx"
 type: "code"
-community: "components learning · ContentThumbnail()"
+community: "Transcript Panel"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # loadYoutubeApi()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[YoutubeVideoPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

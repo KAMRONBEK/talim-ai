@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/generation-error.ts"
 type: "code"
-community: "components learning"
+community: "Community 44"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_44
 ---
 
 # GenerationErrorKind
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generation-error.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_44

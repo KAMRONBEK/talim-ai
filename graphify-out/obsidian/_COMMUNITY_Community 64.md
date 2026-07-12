@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.18
-members: 15
+cohesion: 0.16
+members: 18
 ---
 
 # Community 64
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.16 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[CI runner builds images; 2GB VPS only pulls]] - rationale - .github/workflows/deploy.yml
-- [[Changed-app fan-out rule (shared dep rebuilds all)]] - rationale - .github/workflows/deploy.yml
-- [[Compose service admin (Next.js platform-admin panel)]] - concept - docker-compose.yml
-- [[Compose service api (Express + Prisma + Bull)]] - concept - docker-compose.yml
-- [[Compose service db (pgvectorpgvectorpg16)]] - concept - docker-compose.yml
-- [[Compose service nginx (reverse proxy + TLS)]] - concept - docker-compose.yml
-- [[Compose service redis (redis7-alpine)]] - concept - docker-compose.yml
-- [[Compose service web (Next.js learnertenant app)]] - concept - docker-compose.yml
-- [[Deploy Build & push images job]] - concept - .github/workflows/deploy.yml
-- [[Deploy Deploy to VPS job]] - concept - .github/workflows/deploy.yml
-- [[Deploy Detect changed apps job]] - concept - .github/workflows/deploy.yml
-- [[Doppler-injected Compose secrets]] - rationale - docker-compose.yml
-- [[GHCR image registry (ghcr.iokamronbektalim-)]] - concept - .github/workflows/deploy.yml
-- [[NEXT_PUBLIC_API_URL inlined into webadmin at build]] - rationale - .github/workflows/deploy.yml
-- [[Pull latest for app tier only; dbredisnginx pinned]] - rationale - .github/workflows/deploy.yml
+- [[AiUsageContext]] - code - apps/api/src/services/ai.service.ts
+- [[ChatMessageContent]] - code - apps/api/src/services/ai.service.ts
+- [[ChatMessageInput]] - code - apps/api/src/services/ai.service.ts
+- [[TutorGraphIntent]] - code - apps/api/src/lib/tutor-graph-intent.ts
+- [[TutorStreamEvent]] - code - apps/api/src/services/ai.service.ts
+- [[TutorToolOptions]] - code - apps/api/src/services/ai.service.ts
+- [[ai.service.ts]] - code - apps/api/src/services/ai.service.ts
+- [[buildGraphIntentInstruction()]] - code - apps/api/src/services/ai.service.ts
+- [[createDeepSeekChatCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[createDeepSeekChatStream()]] - code - apps/api/src/services/ai.service.ts
+- [[deepseek]] - code - apps/api/src/services/ai.service.ts
+- [[generateChatCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[generateJsonCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[getTutorTools()]] - code - apps/api/src/lib/tutor-tools.ts
+- [[openai_1]] - code - apps/api/src/services/ai.service.ts
+- [[recordCompletionUsage()]] - code - apps/api/src/services/ai.service.ts
+- [[toTextOnlyMessages()]] - code - apps/api/src/services/ai.service.ts
+- [[withTutorToolInstructions()]] - code - apps/api/src/services/ai.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,3 +35,26 @@ members: 15
 TABLE source_file, type FROM #community/Community_64
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
+- 5 edges to [[_COMMUNITY_Tutor Visual Tools]]
+- 3 edges to [[_COMMUNITY_Community 50]]
+- 2 edges to [[_COMMUNITY_Content API Controllers]]
+- 2 edges to [[_COMMUNITY_Podcast Generation & TTS]]
+- 2 edges to [[_COMMUNITY_Question Generation Engine]]
+- 2 edges to [[_COMMUNITY_Community 41]]
+- 2 edges to [[_COMMUNITY_Community 59]]
+- 2 edges to [[_COMMUNITY_Community 107]]
+- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
+- 1 edge to [[_COMMUNITY_Community 31]]
+- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 1 edge to [[_COMMUNITY_Community 55]]
+
+## Top bridge nodes
+- [[ai.service.ts]] - degree 36, connects to 13 communities
+- [[generateJsonCompletion()]] - degree 10, connects to 6 communities
+- [[generateChatCompletion()]] - degree 6, connects to 3 communities
+- [[recordCompletionUsage()]] - degree 4, connects to 1 community
+- [[TutorGraphIntent]] - degree 3, connects to 1 community

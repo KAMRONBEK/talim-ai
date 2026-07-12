@@ -1,18 +1,22 @@
 ---
 type: community
-cohesion: 1.00
-members: 3
+cohesion: 0.48
+members: 7
 ---
 
 # Community 116
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Cohesion:** 0.48 - moderately connected
+**Members:** 7 nodes
 
 ## Members
-- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
-- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
-- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
+- [[fail()]] - code - scripts/qa-preflight.sh
+- [[healthy()]] - code - scripts/qa-preflight.sh
+- [[http()]] - code - scripts/qa-preflight.sh
+- [[log()]] - code - scripts/qa-preflight.sh
+- [[poll()]] - code - scripts/qa-preflight.sh
+- [[qa-preflight.sh]] - code - scripts/qa-preflight.sh
+- [[qa-preflight.sh script]] - code - scripts/qa-preflight.sh
 
 ## Live Query (requires Dataview plugin)
 

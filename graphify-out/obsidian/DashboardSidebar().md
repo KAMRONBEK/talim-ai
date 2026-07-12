@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "components layout · dashboard-search.tsx"
-location: "L64"
+community: "Community 71"
+location: "L105"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__dashboard-searchtsx
+  - community/Community_71
 ---
 
 # DashboardSidebar()
@@ -15,4 +15,4 @@ tags:
 - [[dashboard-search.tsx]] - `imports` [EXTRACTED]
 - [[dashboard-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__dashboard-searchtsx
+#graphify/code #graphify/EXTRACTED #community/Community_71

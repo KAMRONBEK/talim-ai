@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/rich-text.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Quiz Player & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Quiz_Player__Hooks
 ---
 
 # rich-text.tsx
@@ -14,8 +14,13 @@ tags:
 ## Connections
 - [[QuizCard.tsx]] - `imports_from` [EXTRACTED]
 - [[RichText()]] - `contains` [EXTRACTED]
+- [[SelectionAsk()]] - `imports` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[normalizeGeneratedText()]] - `contains` [EXTRACTED]
+- [[page.tsx_40]] - `imports_from` [EXTRACTED]
+- [[question-inputs.tsx]] - `imports_from` [EXTRACTED]
+- [[selection-ask.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks

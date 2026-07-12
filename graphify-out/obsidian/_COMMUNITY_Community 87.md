@@ -1,23 +1,26 @@
 ---
 type: community
-cohesion: 0.29
-members: 8
+cohesion: 0.25
+members: 11
 ---
 
 # Community 87
 
-**Cohesion:** 0.29 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[assessment.service.ts]] - code - apps/api/src/services/assessment.service.ts
-- [[assessments.ts]] - code - apps/api/src/services/assessment/assessments.ts
-- [[assignAssessment()_1]] - code - apps/api/src/services/assessment/assessments.ts
-- [[assignAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[createAssessment()_1]] - code - apps/api/src/services/assessment/assessments.ts
-- [[createAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[formatAssessment()]] - code - apps/api/src/services/assessment/shared.ts
-- [[listAssessments()_1]] - code - apps/api/src/services/assessment/assessments.ts
+- [[BoolBadge()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[ContentDetailModal()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[ContentPage()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[DetailStat()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[errorMessage()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[page.tsx_1]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[statusPillClass()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[useAdminContentDetail()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminContents()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useDeleteContent()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useRetryContent()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,15 +30,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Community 51]]
-- 3 edges to [[_COMMUNITY_Tenant Admin & Prisma]]
-- 1 edge to [[_COMMUNITY_Community 62]]
-- 1 edge to [[_COMMUNITY_Billing & Usage API]]
-- 1 edge to [[_COMMUNITY_Community 46]]
+- 5 edges to [[_COMMUNITY_Admin App UI]]
+- 5 edges to [[_COMMUNITY_Community 79]]
+- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
 
 ## Top bridge nodes
-- [[assessments.ts]] - degree 12, connects to 3 communities
-- [[assessment.service.ts]] - degree 5, connects to 3 communities
-- [[formatAssessment()]] - degree 3, connects to 1 community
-- [[assignAssessmentSchema]] - degree 2, connects to 1 community
-- [[createAssessmentSchema]] - degree 2, connects to 1 community
+- [[page.tsx_1]] - degree 17, connects to 3 communities
+- [[useAdminContentDetail()]] - degree 3, connects to 1 community
+- [[useAdminContents()]] - degree 3, connects to 1 community
+- [[useDeleteContent()]] - degree 3, connects to 1 community
+- [[useRetryContent()]] - degree 3, connects to 1 community

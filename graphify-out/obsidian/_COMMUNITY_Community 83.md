@@ -1,24 +1,28 @@
 ---
 type: community
-cohesion: 0.31
-members: 9
+cohesion: 0.21
+members: 13
 ---
 
 # Community 83
 
-**Cohesion:** 0.31 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.21 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[LETTERS]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[QuizCard()]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[QuizCard.tsx]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[RichText()]] - code - apps/web/components/learning/rich-text.tsx
-- [[getOptionStyles()]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[isOpenAnswerCorrect()_1]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[isQuestionCorrect()]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[normalize()]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[rich-text.tsx]] - code - apps/web/components/learning/rich-text.tsx
+- [[Advertised platform features AI summaries (конспекты), podcasts, quizzes, personal AI tutor from uploaded material]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[CTA pair primary gradient 'Начать бесплатно', secondary outlined 'Смотреть возможности']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Dark theme variant of the landing page (near-black background, light text, user-switchable via toggle)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Headline 'Изучайте что угодно. По-своему.' with gold highlight marker on 'По-своему.']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Hero section badge 'Учитесь с ИИ', stacked headline, value-prop copy, CTA pair]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Mobile viewport responsive layout (single-column, stacked hero)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Post-fix QA evidence mobile hero renders correctly in Russian after a layouttext fix ('fixed' state)]] - rationale - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Product demo card 'Генетический код и тр…'  Биология 101 · Глава 11, AI badge, 'Конспект готов · 3 мин чтения']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[QA screenshot Russian landing page mobile hero (post-fix, dark theme)]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Russian (ru) locale rendering of the marketing landing page]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Sticky mobile header Talim AI logo, theme-toggle (moon) icon, gradient 'Начать' CTA]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Supported-formats strip avatar icon cluster + 'Работает с PDF, YouTube, слайдами и лекциями']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Value-prop paragraph upload any material (PDF, video, slides, lecture) → get конспекты, подкасты, тесты, личный ИИ-репетитор]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,22 +30,3 @@ members: 9
 TABLE source_file, type FROM #community/Community_83
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 3 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 3 edges to [[_COMMUNITY_Community 97]]
-- 2 edges to [[_COMMUNITY_Community 36]]
-- 2 edges to [[_COMMUNITY_Learner Assessment Pages]]
-- 2 edges to [[_COMMUNITY_Shared UI Components]]
-- 2 edges to [[_COMMUNITY_Community 31]]
-- 2 edges to [[_COMMUNITY_Community 35]]
-- 2 edges to [[_COMMUNITY_Slide Deck Types]]
-- 1 edge to [[_COMMUNITY_Admin PlanStatus UI]]
-- 1 edge to [[_COMMUNITY_Content Detail Page]]
-
-## Top bridge nodes
-- [[QuizCard.tsx]] - degree 20, connects to 7 communities
-- [[rich-text.tsx]] - degree 5, connects to 3 communities
-- [[RichText()]] - degree 4, connects to 2 communities
-- [[QuizCard()]] - degree 4, connects to 2 communities
-- [[isQuestionCorrect()]] - degree 4, connects to 1 community

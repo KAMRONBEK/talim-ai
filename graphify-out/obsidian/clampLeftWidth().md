@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/resizable-split.tsx"
 type: "code"
-community: "components layout · resizable-split.tsx"
+community: "Shared UI Primitives"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__resizable-splittsx
+  - community/Shared_UI_Primitives
 ---
 
 # clampLeftWidth()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[resizable-split.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__resizable-splittsx
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

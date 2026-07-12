@@ -1,11 +1,11 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "concept"
-community: "api"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/api
+  - community/Admin_Panel_Docs
 ---
 
 # pgvector RAG raw-query embeddings (rag.service.ts)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Prisma schema (Postgres + pgvector models)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/api
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

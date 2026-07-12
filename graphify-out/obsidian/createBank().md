@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "src controllers · assessment.controller.ts"
+community: "Community 63"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__assessmentcontrollerts
+  - community/Community_63
 ---
 
 # createBank()
@@ -15,4 +15,4 @@ tags:
 - [[assessment.controller.ts]] - `contains` [EXTRACTED]
 - [[requireTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__assessmentcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_63

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/login/page.tsx"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
-location: "L10"
+community: "Admin App UI"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Admin_App_UI
 ---
 
 # LoginPage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_11]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

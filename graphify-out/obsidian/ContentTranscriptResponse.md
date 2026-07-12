@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "components learning · ContentThumbnail()"
-location: "L593"
+community: "Transcript Panel"
+location: "L1070"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # ContentTranscriptResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTranscript.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

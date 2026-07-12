@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
+source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "ui components"
-location: "L20"
+community: "Account & Settings UI"
+location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Account__Settings_UI
 ---
 
 # typeStyles
 
 ## Connections
-- [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
+- [[page.tsx_16]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

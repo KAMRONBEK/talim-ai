@@ -1,22 +1,23 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "components learning"
-location: "L6"
+community: "Community 44"
+location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_44
 ---
 
 # SummaryText()
 
 ## Connections
 - [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
+- [[countWords()]] - `calls` [EXTRACTED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
-- [[page.tsx_30]] - `imports` [EXTRACTED]
-- [[splitSummaryParagraphs()]] - `calls` [EXTRACTED]
+- [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_44

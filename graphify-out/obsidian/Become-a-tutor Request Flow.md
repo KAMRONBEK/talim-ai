@@ -1,17 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "docs · Become-a-tutor request flow"
-location: "§2.4"
+community: "Community 120"
+location: "§2.4, §5.2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/docs__Become-a-tutor_request_flow
+  - community/Community_120
 ---
 
-# Become-a-tutor request flow
+# Become-a-Tutor Request Flow
 
 ## Connections
-- [[Tutor-request approvals (org + subscription + seat limit)]] - `references` [EXTRACTED]
+- [[Manual PaymentActivation Model]] - `conceptually_related_to` [INFERRED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/docs__Become-a-tutor_request_flow
+#graphify/concept #graphify/EXTRACTED #community/Community_120

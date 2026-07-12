@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 141
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[Token Reduction Benchmark]] - concept - .claude/skills/graphify/references/exports.md
+- [[config_1]] - code - apps/admin/postcss.config.mjs
+- [[postcss.config.mjs]] - code - apps/admin/postcss.config.mjs
 
 ## Live Query (requires Dataview plugin)
 

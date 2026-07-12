@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 143
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[docker-compose.registry.yml (GHCR prebuilt images)]] - document - docker-compose.registry.yml
+- [[RootPage()]] - code - apps/admin/app/page.tsx
+- [[page.tsx_12]] - code - apps/admin/app/page.tsx
 
 ## Live Query (requires Dataview plugin)
 

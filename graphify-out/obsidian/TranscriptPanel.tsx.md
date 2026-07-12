@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "components learning · ContentThumbnail()"
+community: "Transcript Panel"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # TranscriptPanel.tsx
 
 ## Connections
+- [[PodcastPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[TranscriptExcerptPayload]] - `contains` [EXTRACTED]
 - [[TranscriptPanel()]] - `contains` [EXTRACTED]
 - [[TranscriptPanelProps]] - `contains` [EXTRACTED]
@@ -29,4 +30,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "components chat · ChatMessage.tsx"
-location: "L39"
+community: "Community 38"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__ChatMessagetsx
+  - community/Community_38
 ---
 
 # useChatStore
@@ -14,6 +14,9 @@ tags:
 ## Connections
 - [[ChatWindow()]] - `calls` [EXTRACTED]
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
+- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[page.tsx_31]] - `imports` [EXTRACTED]
+- [[selection-ask.tsx]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_38

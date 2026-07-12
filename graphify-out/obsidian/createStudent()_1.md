@@ -1,19 +1,19 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "services tenant"
-location: "L64"
+community: "Community 69"
+location: "L193"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Community_69
 ---
 
 # createStudent()
 
 ## Connections
 - [[assertTenantQuota()]] - `calls` [EXTRACTED]
-- [[formatStudentRow()]] - `calls` [EXTRACTED]
+- [[provisionStudent()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Community_69

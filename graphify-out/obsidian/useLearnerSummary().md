@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "[locale] dashboard"
-location: "L120"
+community: "Account & Settings UI"
+location: "L239"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Account__Settings_UI
 ---
 
 # useLearnerSummary()
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_18]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

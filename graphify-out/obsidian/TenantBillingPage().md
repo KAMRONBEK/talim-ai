@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx"
 type: "code"
-community: "components layout · plan.ts"
-location: "L9"
+community: "Billing UI & Plans"
+location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Billing_UI__Plans
 ---
 
 # TenantBillingPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_20]] - `contains` [EXTRACTED]
 - [[useBilling()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

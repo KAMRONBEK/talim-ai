@@ -1,20 +1,22 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.38
+members: 7
 ---
 
 # Community 111
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.38 - loosely connected
+**Members:** 7 nodes
 
 ## Members
-- [[_genpdf.js]] - code - docs/qa/screenshots/_genpdf.js
-- [[esc()]] - code - docs/qa/screenshots/_genpdf.js
-- [[fs]] - code - docs/qa/screenshots/_genpdf.js
-- [[lines]] - code - docs/qa/screenshots/_genpdf.js
-- [[objs]] - code - docs/qa/screenshots/_genpdf.js
+- [[Compose service admin (Next.js platform-admin panel)]] - concept - docker-compose.yml
+- [[Compose service api (Express + Prisma + Bull)]] - concept - docker-compose.yml
+- [[Compose service db (pgvectorpgvectorpg16)]] - concept - docker-compose.yml
+- [[Compose service nginx (reverse proxy + TLS)]] - concept - docker-compose.yml
+- [[Compose service redis (redis7-alpine)]] - concept - docker-compose.yml
+- [[Compose service web (Next.js learnertenant app)]] - concept - docker-compose.yml
+- [[Doppler-injected Compose secrets]] - rationale - docker-compose.yml
 
 ## Live Query (requires Dataview plugin)
 

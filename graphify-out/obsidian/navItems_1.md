@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "components layout"
+community: "Tenant Dashboard & Shell"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout
+  - community/Tenant_Dashboard__Shell
 ---
 
 # navItems
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

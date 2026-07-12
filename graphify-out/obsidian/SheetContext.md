@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "components layout"
+community: "Community 32"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout
+  - community/Community_32
 ---
 
 # SheetContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout
+#graphify/code #graphify/EXTRACTED #community/Community_32

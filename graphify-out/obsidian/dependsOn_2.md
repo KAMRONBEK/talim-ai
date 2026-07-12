@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "package.json"
+community: "Community 90"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_90
 ---
 
 # dependsOn
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[typecheck_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_90

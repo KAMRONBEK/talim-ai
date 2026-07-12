@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "src services · learning-coverage-prompt.ts"
-location: "L16"
+community: "Community 59"
+location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__learning-coverage-promptts
+  - community/Community_59
 ---
 
 # todayUtcDate()
@@ -16,4 +16,4 @@ tags:
 - [[learningProgress.service.ts]] - `contains` [EXTRACTED]
 - [[recordLearningActivity()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts
+#graphify/code #graphify/EXTRACTED #community/Community_59

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "packages types · useChatStore.ts"
-location: "L633"
+community: "Community 55"
+location: "L1139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__useChatStorets
+  - community/Community_55
 ---
 
 # ChatMessage
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets
+#graphify/code #graphify/EXTRACTED #community/Community_55

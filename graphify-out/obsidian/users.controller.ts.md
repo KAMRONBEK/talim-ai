@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/users.controller.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin Content & Audit"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Content__Audit
 ---
 
 # users.controller.ts
@@ -36,6 +36,8 @@ tags:
 - [[getUsageForPeriod()]] - `imports` [EXTRACTED]
 - [[getUsageVsLimits()]] - `imports` [EXTRACTED]
 - [[getUser()]] - `contains` [EXTRACTED]
+- [[impersonateUser()]] - `contains` [EXTRACTED]
+- [[impersonation.ts]] - `imports_from` [EXTRACTED]
 - [[listUsers()]] - `contains` [EXTRACTED]
 - [[paginationSchema]] - `imports` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
@@ -49,8 +51,9 @@ tags:
 - [[resetUserPassword()]] - `contains` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `imports` [EXTRACTED]
 - [[shared.ts]] - `imports_from` [EXTRACTED]
+- [[signImpersonationToken()]] - `imports` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

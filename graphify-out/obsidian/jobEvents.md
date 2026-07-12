@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "src jobs"
+community: "Env Config & Job Events"
 location: "L65"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Env_Config__Job_Events
 ---
 
 # jobEvents
@@ -18,6 +18,7 @@ tags:
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[jobEvents.service.ts]] - `contains` [EXTRACTED]
+- [[learner.ts]] - `imports` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

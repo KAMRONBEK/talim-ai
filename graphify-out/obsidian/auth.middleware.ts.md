@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "src routes"
+community: "Admin & Usage Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_routes
+  - community/Admin__Usage_Controllers
 ---
 
 # auth.middleware.ts
@@ -49,6 +49,7 @@ tags:
 - [[resolveTenantIdForUser()]] - `imports` [EXTRACTED]
 - [[section.controller.ts]] - `imports_from` [EXTRACTED]
 - [[slides.controller.ts]] - `imports_from` [EXTRACTED]
+- [[srs.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[summary.routes.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
@@ -61,4 +62,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_routes
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

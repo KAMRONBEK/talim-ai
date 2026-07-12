@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # main()
@@ -19,4 +19,4 @@ tags:
 - [[parseArgs()_3]] - `calls` [EXTRACTED]
 - [[smoke-quota.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "components learning · ContentThumbnail()"
+community: "Transcript Panel"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # youtube.ts
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeVideoId()]] - `contains` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

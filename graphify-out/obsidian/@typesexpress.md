@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "api · devDependencies"
+community: "Community 76"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/api__devDependencies
+  - community/Community_76
 ---
 
 # @types/express
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/api__devDependencies
+#graphify/code #graphify/EXTRACTED #community/Community_76

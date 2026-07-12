@@ -1,11 +1,11 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "concept"
-community: "api"
+community: "Admin Panel Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/api
+  - community/Admin_Panel_Docs
 ---
 
 # apps/api — Express+Prisma+Bull backend (port 4000)
@@ -20,4 +20,4 @@ tags:
 - [[appsapi Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 - [[contentAccess.service.ts (isolation guard)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/api
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Docs

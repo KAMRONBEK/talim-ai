@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web lib"
-location: "L561"
+community: "Community 35"
+location: "L1033"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib
+  - community/Community_35
 ---
 
 # Content
@@ -23,9 +23,10 @@ tags:
 - [[content-status-gate.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[onboarding-checklist.tsx]] - `imports` [EXTRACTED]
+- [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
 - [[useContentStore.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib
+#graphify/code #graphify/EXTRACTED #community/Community_35

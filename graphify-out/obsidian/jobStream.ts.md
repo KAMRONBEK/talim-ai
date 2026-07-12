@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/jobStream.ts"
 type: "code"
-community: "web lib · providers.tsx"
+community: "Community 52"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Community_52
 ---
 
 # jobStream.ts
@@ -19,4 +19,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Community_52

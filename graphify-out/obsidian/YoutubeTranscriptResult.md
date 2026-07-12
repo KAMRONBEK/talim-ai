@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "src services · env.ts"
+community: "Community 68"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__envts
+  - community/Community_68
 ---
 
 # YoutubeTranscriptResult
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[youtube.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__envts
+#graphify/code #graphify/EXTRACTED #community/Community_68

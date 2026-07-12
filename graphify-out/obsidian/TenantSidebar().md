@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "components layout · plan.ts"
-location: "L70"
+community: "Tenant Dashboard & Shell"
+location: "L98"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Tenant_Dashboard__Shell
 ---
 
 # TenantSidebar()
@@ -15,4 +15,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

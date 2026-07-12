@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # formatSubscription()
@@ -23,4 +23,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

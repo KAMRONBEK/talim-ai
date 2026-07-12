@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "services tenant"
+community: "Community 47"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Community_47
 ---
 
 # joinTenantByCode()
@@ -18,4 +18,4 @@ tags:
 - [[organization.ts]] - `contains` [EXTRACTED]
 - [[register()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Community_47

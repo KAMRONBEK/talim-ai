@@ -1,31 +1,34 @@
 ---
 type: community
-cohesion: 0.21
-members: 16
+cohesion: 0.15
+members: 19
 ---
 
 # Community 56
 
-**Cohesion:** 0.21 - loosely connected
-**Members:** 16 nodes
+**Cohesion:** 0.15 - loosely connected
+**Members:** 19 nodes
 
 ## Members
-- [[AuthResponse]] - code - packages/types/index.ts
-- [[AuthShell()]] - code - apps/web/components/auth/auth-shell.tsx
-- [[HomePage()]] - code - apps/web/app/[locale]/page.tsx
-- [[LandingPage()]] - code - apps/web/components/marketing/landing-page.tsx
-- [[LoginPage()_1]] - code - apps/web/app/[locale]/(auth)/login/page.tsx
-- [[RegisterPage()]] - code - apps/web/app/[locale]/(auth)/register/page.tsx
-- [[RoleGuard()]] - code - apps/web/components/role-guard.tsx
-- [[UserRole]] - code - packages/types/index.ts
-- [[auth-routing.ts]] - code - apps/web/lib/auth-routing.ts
-- [[auth-shell.tsx]] - code - apps/web/components/auth/auth-shell.tsx
-- [[getPostLoginPath()]] - code - apps/web/lib/auth-routing.ts
-- [[page.tsx_13]] - code - apps/web/app/[locale]/(auth)/login/page.tsx
-- [[page.tsx_35]] - code - apps/web/app/[locale]/page.tsx
-- [[page.tsx_14]] - code - apps/web/app/[locale]/(auth)/register/page.tsx
-- [[role-guard.tsx]] - code - apps/web/components/role-guard.tsx
-- [[useAuthHydrated()_1]] - code - apps/web/components/role-guard.tsx
+- [[analytics.controller.ts]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsByRole()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsContentByType()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsFunnel()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsSpendByModel()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsTopOrgs()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[analyticsUserGrowth()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[getContentByType()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[getFunnel()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[getSpendByModel()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[getTopOrgs()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[getUserGrowth()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[getUsersByRole()]] - code - apps/api/src/services/admin/analytics.service.ts
+- [[listSubscriptions()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[listSubscriptionsForAdmin()]] - code - apps/api/src/services/subscription/admin.ts
+- [[platformStats()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[subscriptionListSchema]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[usageDaysSchema]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[usageSummary()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -35,24 +38,15 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 7 edges to [[_COMMUNITY_App Layout & Guards]]
-- 6 edges to [[_COMMUNITY_Slide Deck Types]]
-- 5 edges to [[_COMMUNITY_Content Detail Page]]
-- 4 edges to [[_COMMUNITY_Community 40]]
-- 4 edges to [[_COMMUNITY_Community 61]]
-- 4 edges to [[_COMMUNITY_Community 42]]
-- 3 edges to [[_COMMUNITY_Admin PlanStatus UI]]
-- 2 edges to [[_COMMUNITY_Community 68]]
-- 2 edges to [[_COMMUNITY_Community 31]]
-- 2 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 2 edges to [[_COMMUNITY_Community 70]]
-- 1 edge to [[_COMMUNITY_Community 49]]
-- 1 edge to [[_COMMUNITY_Community 30]]
+- 11 edges to [[_COMMUNITY_Community 51]]
+- 3 edges to [[_COMMUNITY_Admin & Usage Controllers]]
+- 2 edges to [[_COMMUNITY_Admin Content & Audit]]
+- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
+- 2 edges to [[_COMMUNITY_Billing & Quota]]
 
 ## Top bridge nodes
-- [[page.tsx_13]] - degree 14, connects to 6 communities
-- [[page.tsx_14]] - degree 14, connects to 6 communities
-- [[UserRole]] - degree 7, connects to 5 communities
-- [[auth-routing.ts]] - degree 12, connects to 4 communities
-- [[role-guard.tsx]] - degree 10, connects to 4 communities
+- [[analytics.controller.ts]] - degree 31, connects to 5 communities
+- [[getContentByType()]] - degree 3, connects to 1 community
+- [[getFunnel()]] - degree 3, connects to 1 community
+- [[getSpendByModel()]] - degree 3, connects to 1 community
+- [[getTopOrgs()]] - degree 3, connects to 1 community

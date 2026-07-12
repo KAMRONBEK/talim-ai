@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "web hooks"
+community: "Flashcards Study Page"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # useContentBase()
 
 ## Connections
 - [[VideoInner()]] - `calls` [EXTRACTED]
-- [[page.tsx_33]] - `imports` [EXTRACTED]
+- [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useContentBase.ts]] - `contains` [EXTRACTED]
 - [[useContentProgress()]] - `calls` [EXTRACTED]
@@ -30,6 +30,7 @@ tags:
 - [[usePodcastProgress()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 - [[useRegenerateEpisode()]] - `calls` [EXTRACTED]
+- [[useReviewFlashcard()]] - `calls` [EXTRACTED]
 - [[useSection()]] - `calls` [EXTRACTED]
 - [[useSections()]] - `calls` [EXTRACTED]
 - [[useSections.ts]] - `imports` [EXTRACTED]
@@ -39,4 +40,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

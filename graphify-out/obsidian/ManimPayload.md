@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "src lib"
+community: "Community 52"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib
+  - community/Community_52
 ---
 
 # ManimPayload
@@ -18,4 +18,4 @@ tags:
 - [[tutor-manim.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib
+#graphify/code #graphify/EXTRACTED #community/Community_52

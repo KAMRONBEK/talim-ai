@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "services tenant"
+community: "Admin Tenants & Prisma Core"
 location: "L84"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # randomJoinCode()
@@ -15,4 +15,4 @@ tags:
 - [[generateUniqueJoinCode()]] - `calls` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

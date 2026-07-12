@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/billing.controller.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # billing.controller.ts
@@ -28,4 +28,4 @@ tags:
 - [[requestUpgrade()]] - `contains` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

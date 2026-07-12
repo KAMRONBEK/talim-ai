@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/update.md"
 type: "concept"
-community: "references"
+community: "Graphify Skill Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/references
+  - community/Graphify_Skill_Docs
 ---
 
 # Incremental Update (--update)
@@ -18,4 +18,4 @@ tags:
 - [[graphify skill]] - `references` [EXTRACTED]
 - [[prune_sources (deleted-file pruning)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/references
+#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs

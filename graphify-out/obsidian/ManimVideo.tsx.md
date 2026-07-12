@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ManimVideo.tsx"
 type: "code"
-community: "components chat"
+community: "Community 52"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat
+  - community/Community_52
 ---
 
 # ManimVideo.tsx
@@ -18,4 +18,4 @@ tags:
 - [[getApiBaseUrl()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat
+#graphify/code #graphify/EXTRACTED #community/Community_52

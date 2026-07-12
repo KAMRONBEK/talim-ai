@@ -1,28 +1,37 @@
 ---
-source_file: "apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx"
+source_file: "apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # page.tsx
 
 ## Connections
-- [[ActivityHeatmap()]] - `imports` [EXTRACTED]
+- [[BillingSummaryCard()]] - `imports` [EXTRACTED]
 - [[Button]] - `imports` [EXTRACTED]
-- [[ProgressBar()]] - `imports` [EXTRACTED]
-- [[TenantStudentDetailPage()]] - `contains` [EXTRACTED]
-- [[activity-heatmap.tsx]] - `imports_from` [EXTRACTED]
+- [[Input]] - `imports` [EXTRACTED]
+- [[JoinCodeCard()]] - `imports` [EXTRACTED]
+- [[Label()]] - `imports` [EXTRACTED]
+- [[OnboardingChecklist()]] - `imports` [EXTRACTED]
+- [[ProfileCard()]] - `imports` [EXTRACTED]
+- [[TenantSettingsPage()]] - `contains` [EXTRACTED]
+- [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[useAssignContent()]] - `imports` [EXTRACTED]
-- [[useStudentProgress()]] - `imports` [EXTRACTED]
+- [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
+- [[onboarding-checklist.tsx]] - `imports_from` [EXTRACTED]
+- [[profile-card.tsx]] - `imports_from` [EXTRACTED]
+- [[useAssessments.ts]] - `imports_from` [EXTRACTED]
+- [[usePatchTenant()]] - `imports` [EXTRACTED]
+- [[useTenant()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
+- [[useTenantAssessments()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantContents()]] - `imports` [EXTRACTED]
+- [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

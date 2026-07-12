@@ -1,18 +1,18 @@
 ---
-source_file: "apps/api/src/controllers/tenant.controller.ts"
+source_file: "apps/api/src/controllers/learner.controller.ts"
 type: "code"
-community: "src controllers · tenant.controller.ts"
-location: "L36"
+community: "Community 93"
+location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__tenantcontrollerts
+  - community/Community_93
 ---
 
 # getProgress()
 
 ## Connections
-- [[requireOwnerTenant()]] - `calls` [EXTRACTED]
-- [[tenant.controller.ts]] - `contains` [EXTRACTED]
+- [[learner.controller.ts]] - `contains` [EXTRACTED]
+- [[readLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__tenantcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_93

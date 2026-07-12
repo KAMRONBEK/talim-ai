@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "web hooks"
+community: "Flashcards Study Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # useContentBase.ts
 
 ## Connections
-- [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[useContentBase()]] - `contains` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports_from` [EXTRACTED]
@@ -22,4 +22,4 @@ tags:
 - [[useTranscript.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

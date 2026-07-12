@@ -1,27 +1,31 @@
 ---
 type: community
-cohesion: 0.18
-members: 12
+cohesion: 0.22
+members: 16
 ---
 
 # Community 71
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 12 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 16 nodes
 
 ## Members
-- [[Assignment, attempts & max attempts]] - concept - docs/FEATURES.md
-- [[Barrel-split module pattern]] - rationale - docs/FEATURES.md
-- [[Class leaderboard]] - concept - docs/FEATURES.md
-- [[F23 GAME quiz player + leaderboard hardcoded English]] - document - docs/qa/user-stories.md
-- [[F5 Assessment mutations don't refresh related views (stale cache)]] - document - docs/qa/visual-qa-report.md
-- [[GAME mode (per-question timer, speed points, streaks)]] - concept - docs/FEATURES.md
-- [[Interactive Quiz Learn Player]] - concept - docs/plans/youlearn-redesign.md
-- [[Per-question results & feedback]] - concept - docs/FEATURES.md
-- [[Progress (per-student + class)]] - concept - docs/FEATURES.md
-- [[Question banks (AI-generated, approve flow)]] - concept - docs/FEATURES.md
-- [[US-LEARNER-02 Take quiz  game, see own progress]] - document - docs/qa/user-stories.md
-- [[Written assessments]] - concept - docs/FEATURES.md
+- [[DashboardLayout()]] - code - apps/web/app/[locale]/dashboard/layout.tsx
+- [[DashboardPage()]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[DashboardSearchBar()]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
+- [[DashboardSearchContext]] - code - apps/web/contexts/dashboard-search.tsx
+- [[DashboardShell()]] - code - apps/web/contexts/dashboard-search.tsx
+- [[DashboardSidebar()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[RecentContentGrid()]] - code - apps/web/components/dashboard/recent-content-grid.tsx
+- [[dashboard-search-bar.tsx]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
+- [[dashboard-search.tsx]] - code - apps/web/contexts/dashboard-search.tsx
+- [[getFirstName()]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[layout.tsx_5]] - code - apps/web/app/[locale]/dashboard/layout.tsx
+- [[page.tsx_35]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[useContents()]] - code - apps/web/hooks/useContent.ts
+- [[useDashboardSearch()]] - code - apps/web/contexts/dashboard-search.tsx
+- [[useSidebarSheet()]] - code - apps/web/hooks/useSidebarSheet.ts
+- [[useSidebarSheet.ts]] - code - apps/web/hooks/useSidebarSheet.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -31,9 +35,21 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 95]]
-- 1 edge to [[_COMMUNITY_Community 108]]
+- 6 edges to [[_COMMUNITY_Community 33]]
+- 5 edges to [[_COMMUNITY_Community 32]]
+- 4 edges to [[_COMMUNITY_Account & Settings UI]]
+- 4 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 4 edges to [[_COMMUNITY_Community 35]]
+- 4 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 3 edges to [[_COMMUNITY_Community 53]]
+- 2 edges to [[_COMMUNITY_Tenant Materials UI]]
+- 2 edges to [[_COMMUNITY_Admin App UI]]
+- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
+- 1 edge to [[_COMMUNITY_Community 46]]
 
 ## Top bridge nodes
-- [[Written assessments]] - degree 5, connects to 1 community
-- [[Interactive Quiz Learn Player]] - degree 2, connects to 1 community
+- [[RecentContentGrid()]] - degree 5, connects to 4 communities
+- [[page.tsx_35]] - degree 12, connects to 3 communities
+- [[useContents()]] - degree 11, connects to 3 communities
+- [[useSidebarSheet.ts]] - degree 5, connects to 3 communities
+- [[dashboard-search.tsx]] - degree 15, connects to 2 communities

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/dashboard-search-bar.tsx"
 type: "code"
-community: "[locale] dashboard"
+community: "Community 71"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Community_71
 ---
 
 # dashboard-search-bar.tsx
@@ -17,7 +17,7 @@ tags:
 - [[Input]] - `imports` [EXTRACTED]
 - [[dashboard-search.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_35]] - `imports_from` [EXTRACTED]
 - [[useDashboardSearch()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_71

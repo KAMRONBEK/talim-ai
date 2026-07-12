@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "packages types · api.ts"
-location: "L709"
+community: "Shared Types & Chat Hooks"
+location: "L1262"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__apits
+  - community/Shared_Types__Chat_Hooks
 ---
 
 # ContentSummary
@@ -15,4 +15,4 @@ tags:
 - [[AppLocale]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__apits
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks

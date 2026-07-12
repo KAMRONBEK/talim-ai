@@ -1,13 +1,13 @@
 ---
 source_file: "pnpm-workspace.yaml"
 type: "document"
-community: "pnpm-workspace.yaml"
+community: "Community 194"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/pnpm-workspaceyaml
+  - community/Community_194
 ---
 
 # pnpm-workspace.yaml
 
-#graphify/document #graphify/EXTRACTED #community/pnpm-workspaceyaml
+#graphify/document #graphify/EXTRACTED #community/Community_194

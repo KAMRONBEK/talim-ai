@@ -1,16 +1,13 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "qa · US-IND-25: Podcast DEEPEN (fine controls,"
+community: "Community 177"
 tags:
   - graphify/document
-  - graphify/INFERRED
-  - community/qa__US-IND-25_Podcast_DEEPEN_fine_controls
+  - graphify/EXTRACTED
+  - community/Community_177
 ---
 
 # US-IND-25: Podcast DEEPEN (fine controls, multi-episode, per-episode regen)
 
-## Connections
-- [[US-IND-05 Podcast — generate + player]] - `conceptually_related_to` [INFERRED]
-
-#graphify/document #graphify/INFERRED #community/qa__US-IND-25_Podcast_DEEPEN_fine_controls
+#graphify/document #graphify/EXTRACTED #community/Community_177

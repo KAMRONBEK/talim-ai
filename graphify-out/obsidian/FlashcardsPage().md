@@ -1,22 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/flashcards/page.tsx"
 type: "code"
-community: "web hooks"
-location: "L14"
+community: "Flashcards Study Page"
+location: "L243"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # FlashcardsPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[page.tsx_29]] - `contains` [EXTRACTED]
-- [[useContent()]] - `calls` [EXTRACTED]
-- [[useFlashcards()]] - `calls` [EXTRACTED]
-- [[useGenerateFlashcards()]] - `calls` [EXTRACTED]
-- [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
+- [[page.tsx_30]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

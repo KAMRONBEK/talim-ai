@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
-location: "L45"
+community: "Community 36"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_36
 ---
 
 # PageDimensions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[PdfViewer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_36

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "components layout · content-generations.tsx"
+community: "Community 33"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__content-generationstsx
+  - community/Community_33
 ---
 
 # content-sidebar.tsx
@@ -20,7 +20,6 @@ tags:
 - [[ContentSidebarProps]] - `contains` [EXTRACTED]
 - [[ContentSidebarSheet()]] - `contains` [EXTRACTED]
 - [[ContentSidebarSheetProps]] - `contains` [EXTRACTED]
-- [[QuestionStyle_2]] - `imports` [EXTRACTED]
 - [[SectionProgress]] - `imports` [EXTRACTED]
 - [[Sheet()]] - `imports` [EXTRACTED]
 - [[SheetContent()]] - `imports` [EXTRACTED]
@@ -34,4 +33,4 @@ tags:
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx
+#graphify/code #graphify/EXTRACTED #community/Community_33

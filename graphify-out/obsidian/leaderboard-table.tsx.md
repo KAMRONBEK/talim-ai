@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/leaderboard-table.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Assessment Pages & Wizard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Assessment_Pages__Wizard
 ---
 
 # leaderboard-table.tsx
@@ -19,4 +19,4 @@ tags:
 - [[page.tsx_15]] - `imports_from` [EXTRACTED]
 - [[page.tsx_19]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

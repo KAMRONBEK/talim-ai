@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "references"
+community: "Graphify Skill Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/references
+  - community/Graphify_Skill_Docs
 ---
 
 # Shrink Guard (refuse to clobber larger graph)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[graph.json]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/references
+#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs

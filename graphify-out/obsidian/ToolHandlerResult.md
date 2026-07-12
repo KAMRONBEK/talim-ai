@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "src lib"
+community: "Tutor Visual Tools"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib
+  - community/Tutor_Visual_Tools
 ---
 
 # ToolHandlerResult
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-tools.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

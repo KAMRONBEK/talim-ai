@@ -1,17 +1,18 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "components deck"
+community: "Shared UI Primitives"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck
+  - community/Shared_UI_Primitives
 ---
 
 # cn()
 
 ## Connections
+- [[AssignedMaterialCard()]] - `calls` [INFERRED]
 - [[AvatarFallback()]] - `calls` [EXTRACTED]
 - [[Badge()]] - `calls` [EXTRACTED]
 - [[BigStat()]] - `calls` [EXTRACTED]
@@ -21,6 +22,7 @@ tags:
 - [[ChatMessage()]] - `calls` [EXTRACTED]
 - [[ChatMessage.tsx]] - `imports` [EXTRACTED]
 - [[Concept()]] - `calls` [EXTRACTED]
+- [[ContentStage()]] - `calls` [EXTRACTED]
 - [[ContentThumbnail()]] - `calls` [EXTRACTED]
 - [[Cover()]] - `calls` [EXTRACTED]
 - [[DeckMarkdown()]] - `calls` [EXTRACTED]
@@ -37,6 +39,8 @@ tags:
 - [[FileUploadField()]] - `calls` [EXTRACTED]
 - [[Label()]] - `calls` [EXTRACTED]
 - [[LogoMark()]] - `calls` [EXTRACTED]
+- [[LogoMark()_1]] - `calls` [EXTRACTED]
+- [[MediaTile()]] - `calls` [EXTRACTED]
 - [[PdfViewer.tsx]] - `imports` [EXTRACTED]
 - [[Progress()]] - `calls` [EXTRACTED]
 - [[QuickActionCards()]] - `calls` [EXTRACTED]
@@ -46,6 +50,7 @@ tags:
 - [[RichText()]] - `calls` [EXTRACTED]
 - [[Section()]] - `calls` [EXTRACTED]
 - [[SectionReader()]] - `calls` [EXTRACTED]
+- [[SelectionAsk()]] - `calls` [EXTRACTED]
 - [[Separator()]] - `calls` [EXTRACTED]
 - [[SheetContent()]] - `calls` [EXTRACTED]
 - [[SheetHeader()]] - `calls` [EXTRACTED]
@@ -54,17 +59,25 @@ tags:
 - [[Slide.tsx]] - `imports` [EXTRACTED]
 - [[SlideTitle()]] - `calls` [EXTRACTED]
 - [[StatTrio()]] - `calls` [EXTRACTED]
+- [[SummaryText()]] - `calls` [EXTRACTED]
+- [[TenantAssessmentsPage()]] - `calls` [INFERRED]
+- [[TenantMaterialDetailPage()]] - `calls` [INFERRED]
 - [[TenantMaterialsPage()]] - `calls` [EXTRACTED]
+- [[TenantStudentsPage()]] - `calls` [EXTRACTED]
+- [[ThreadBubble()]] - `calls` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `imports` [EXTRACTED]
 - [[TwoColumn()]] - `calls` [EXTRACTED]
+- [[TypeBadge()]] - `calls` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
 - [[UserSidebarFooter()]] - `calls` [EXTRACTED]
+- [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 - [[activity-heatmap.tsx]] - `imports` [EXTRACTED]
 - [[avatar.tsx]] - `imports` [EXTRACTED]
 - [[badge.tsx]] - `imports` [EXTRACTED]
 - [[button.tsx]] - `imports` [EXTRACTED]
 - [[card.tsx]] - `imports` [EXTRACTED]
 - [[content-learn-panel.tsx]] - `imports` [EXTRACTED]
+- [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports` [EXTRACTED]
@@ -72,22 +85,32 @@ tags:
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[input.tsx]] - `imports` [EXTRACTED]
 - [[label.tsx]] - `imports` [EXTRACTED]
+- [[learner-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[learner-navigation.tsx]] - `imports` [EXTRACTED]
 - [[logo.tsx]] - `imports` [EXTRACTED]
+- [[logo.tsx_1]] - `imports` [EXTRACTED]
+- [[material-media-panel.tsx]] - `imports` [EXTRACTED]
+- [[page.tsx_16]] - `imports` [EXTRACTED]
+- [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
-- [[page.tsx_33]] - `imports` [EXTRACTED]
-- [[pricing.tsx]] - `imports` [EXTRACTED]
+- [[page.tsx_24]] - `imports` [EXTRACTED]
+- [[page.tsx_28]] - `imports` [EXTRACTED]
+- [[page.tsx_34]] - `imports` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports` [EXTRACTED]
 - [[progress.tsx]] - `imports` [EXTRACTED]
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[resizable-split.tsx]] - `imports` [EXTRACTED]
 - [[rich-text.tsx]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
+- [[selection-ask.tsx]] - `imports` [EXTRACTED]
 - [[separator.tsx]] - `imports` [EXTRACTED]
 - [[sheet.tsx]] - `imports` [EXTRACTED]
+- [[summary-text.tsx]] - `imports` [EXTRACTED]
+- [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

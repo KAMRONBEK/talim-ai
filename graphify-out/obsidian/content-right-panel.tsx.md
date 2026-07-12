@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "components layout"
+community: "Community 32"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout
+  - community/Community_32
 ---
 
 # content-right-panel.tsx
 
 ## Connections
+- [[BAND_BAR]] - `contains` [EXTRACTED]
 - [[ContentGenerationsBlock()]] - `imports` [EXTRACTED]
 - [[ContentRightPanel()]] - `contains` [EXTRACTED]
 - [[ContentRightPanelBody()]] - `contains` [EXTRACTED]
@@ -21,15 +22,20 @@ tags:
 - [[ContentRightPanelSheetProps]] - `contains` [EXTRACTED]
 - [[LearningHistory]] - `imports` [EXTRACTED]
 - [[LearningHistoryPanel()]] - `imports` [EXTRACTED]
-- [[QuestionStyle_2]] - `imports` [EXTRACTED]
+- [[MasteryBand]] - `imports` [EXTRACTED]
 - [[Sheet()]] - `imports` [EXTRACTED]
 - [[SheetContent()]] - `imports` [EXTRACTED]
 - [[SheetHeader()]] - `imports` [EXTRACTED]
 - [[SheetTitle()]] - `imports` [EXTRACTED]
+- [[cn()]] - `imports` [EXTRACTED]
 - [[content-generations.tsx]] - `imports_from` [EXTRACTED]
 - [[content-learn-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `imports_from` [EXTRACTED]
+- [[useContentMastery()]] - `imports` [EXTRACTED]
+- [[useMastery.ts]] - `imports_from` [EXTRACTED]
+- [[useSections()]] - `imports` [EXTRACTED]
+- [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout
+#graphify/code #graphify/EXTRACTED #community/Community_32

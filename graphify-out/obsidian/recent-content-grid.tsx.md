@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "ui components"
+community: "Tenant Materials UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Tenant_Materials_UI
 ---
 
 # recent-content-grid.tsx
@@ -21,6 +21,7 @@ tags:
 - [[DeleteContentDialog()]] - `imports` [EXTRACTED]
 - [[RecentContentGrid()]] - `contains` [EXTRACTED]
 - [[RecentContentGridProps]] - `contains` [EXTRACTED]
+- [[TypeBadge()]] - `contains` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[delete-content-dialog.tsx]] - `imports_from` [EXTRACTED]
 - [[format-relative-time.ts]] - `imports_from` [EXTRACTED]
@@ -29,11 +30,11 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_16]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
-- [[page.tsx_23]] - `imports_from` [EXTRACTED]
-- [[page.tsx_34]] - `imports_from` [EXTRACTED]
-- [[typeStyles]] - `contains` [EXTRACTED]
+- [[page.tsx_24]] - `imports_from` [EXTRACTED]
+- [[page.tsx_35]] - `imports_from` [EXTRACTED]
+- [[typeLabelKey]] - `contains` [EXTRACTED]
+- [[typeStyles_1]] - `contains` [EXTRACTED]
 - [[youtube.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI

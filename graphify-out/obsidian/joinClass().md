@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
-community: "services tenant"
+community: "Community 47"
 location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Community_47
 ---
 
 # joinClass()
@@ -17,4 +17,4 @@ tags:
 - [[joinTenantByCode()]] - `calls` [EXTRACTED]
 - [[signToken()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Community_47

@@ -1,17 +1,19 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.67
+members: 4
 ---
 
 # Community 135
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[doppler-docker.sh]] - code - scripts/doppler-docker.sh
-- [[doppler-docker.sh script]] - code - scripts/doppler-docker.sh
+- [[qa-overnight.sh]] - code - scripts/qa-overnight.sh
+- [[qa-overnight.sh script]] - code - scripts/qa-overnight.sh
+- [[qa_http()]] - code - scripts/qa-overnight.sh
+- [[qa_stack_healthy()]] - code - scripts/qa-overnight.sh
 
 ## Live Query (requires Dataview plugin)
 

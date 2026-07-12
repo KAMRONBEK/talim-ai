@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L91"
+community: "Assessment Pages & Wizard"
+location: "L310"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/web_hooks__pagetsx
+  - community/Assessment_Pages__Wizard
 ---
 
 # TenantAssessmentsPage()
 
 ## Connections
 - [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [INFERRED]
 - [[mutErr()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
 - [[useAssignAssessment()]] - `calls` [INFERRED]
@@ -26,4 +27,4 @@ tags:
 - [[useTenantContents()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/web_hooks__pagetsx
+#graphify/code #graphify/INFERRED #community/Assessment_Pages__Wizard

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "components learning · ContentThumbnail()"
+community: "Transcript Panel"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # useTranscript()
@@ -17,4 +17,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useTranscript.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

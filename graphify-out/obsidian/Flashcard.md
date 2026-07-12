@@ -1,18 +1,18 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "packages types"
-location: "L743"
+community: "Flashcards Study Page"
+location: "L1308"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types
+  - community/Flashcards_Study_Page
 ---
 
 # Flashcard
 
 ## Connections
 - [[index.ts_2]] - `contains` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/admin.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # admin.ts
@@ -19,4 +19,4 @@ tags:
 - [[shared.ts_2]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

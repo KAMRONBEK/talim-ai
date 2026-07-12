@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "components deck"
+community: "Community 100"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck
+  - community/Community_100
 ---
 
 # deck-theme.ts
@@ -27,4 +27,4 @@ tags:
 - [[paletteFor()]] - `contains` [EXTRACTED]
 - [[resolveSlideAccentHex()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck
+#graphify/code #graphify/EXTRACTED #community/Community_100

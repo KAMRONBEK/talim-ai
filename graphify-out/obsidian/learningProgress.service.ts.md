@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "src services · learning-coverage-prompt.ts"
+community: "Community 59"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__learning-coverage-promptts
+  - community/Community_59
 ---
 
 # learningProgress.service.ts
@@ -16,22 +16,24 @@ tags:
 - [[CoverageQuestionResult]] - `imports` [EXTRACTED]
 - [[QuizWithQuestions]] - `contains` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
+- [[badges.service.ts]] - `imports_from` [EXTRACTED]
 - [[blendCoverageScore()]] - `contains` [EXTRACTED]
 - [[buildCoverageResults()]] - `contains` [EXTRACTED]
 - [[buildLearningCoverageUserPrompt()]] - `imports` [EXTRACTED]
 - [[computeBestFullQuizScore()]] - `contains` [EXTRACTED]
-- [[computeQuickCheckAccuracy()]] - `contains` [EXTRACTED]
 - [[computeStreakDays()]] - `contains` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[estimateAiCoverage()]] - `contains` [EXTRACTED]
 - [[generateJsonCompletion()]] - `imports` [EXTRACTED]
 - [[getSectionBody()]] - `imports` [EXTRACTED]
+- [[gradeQuestion()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isLatestSectionAttempt()]] - `contains` [EXTRACTED]
 - [[isSectionComplete()]] - `contains` [EXTRACTED]
-- [[isSelectedAnswerCorrect()]] - `imports` [EXTRACTED]
+- [[jsonStringArray()]] - `imports` [EXTRACTED]
 - [[learning-coverage-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[markSectionViewed()]] - `contains` [EXTRACTED]
+- [[mastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[persistSectionProgress()]] - `contains` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
@@ -46,4 +48,4 @@ tags:
 - [[todayUtcDate()]] - `contains` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts
+#graphify/code #graphify/EXTRACTED #community/Community_59

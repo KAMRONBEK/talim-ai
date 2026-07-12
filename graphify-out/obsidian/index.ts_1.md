@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/index.ts"
 type: "code"
-community: "src routes"
+community: "Admin & Usage Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_routes
+  - community/Admin__Usage_Controllers
 ---
 
 # index.ts
@@ -37,4 +37,4 @@ tags:
 - [[usage.routes.ts]] - `imports_from` [EXTRACTED]
 - [[usageRoutes]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_routes
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

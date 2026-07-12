@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "components chat · ChatMessage.tsx"
+community: "Community 85"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__ChatMessagetsx
+  - community/Community_85
 ---
 
 # normalizeSegment()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[preprocess-latex.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_85

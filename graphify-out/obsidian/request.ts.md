@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/request.ts"
 type: "code"
-community: "i18n"
+community: "Community 106"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/i18n
+  - community/Community_106
 ---
 
 # request.ts
@@ -17,4 +17,4 @@ tags:
 - [[routing]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/i18n
+#graphify/code #graphify/EXTRACTED #community/Community_106

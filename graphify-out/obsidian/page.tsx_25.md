@@ -1,35 +1,25 @@
 ---
-source_file: "apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx"
+source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Community 110"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Community_110
 ---
 
 # page.tsx
 
 ## Connections
-- [[BillingSummaryCard()]] - `imports` [EXTRACTED]
-- [[Button]] - `imports` [EXTRACTED]
-- [[Input]] - `imports` [EXTRACTED]
-- [[Label()]] - `imports` [EXTRACTED]
-- [[OnboardingChecklist()]] - `imports` [EXTRACTED]
-- [[ProfileCard()]] - `imports` [EXTRACTED]
-- [[TenantSettingsPage()]] - `contains` [EXTRACTED]
-- [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
-- [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[onboarding-checklist.tsx]] - `imports_from` [EXTRACTED]
-- [[profile-card.tsx]] - `imports_from` [EXTRACTED]
-- [[useAssessments.ts]] - `imports_from` [EXTRACTED]
-- [[usePatchTenant()]] - `imports` [EXTRACTED]
-- [[useTenant()]] - `imports` [EXTRACTED]
+- [[ClassMastery]] - `imports` [EXTRACTED]
+- [[TenantProgressPage()]] - `contains` [EXTRACTED]
+- [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[isRecentlyActive()]] - `contains` [EXTRACTED]
+- [[masteryTone()]] - `contains` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
-- [[useTenantAssessments()]] - `imports` [EXTRACTED]
-- [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
-- [[useTenantContents()]] - `imports` [EXTRACTED]
-- [[useTenantStudents()]] - `imports` [EXTRACTED]
+- [[useTenantProgress()]] - `imports` [EXTRACTED]
+- [[useTenantProgressTopics()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_110

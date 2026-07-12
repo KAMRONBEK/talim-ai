@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-quality.ts"
 type: "code"
-community: "src lib · GeneratedQuestion"
+community: "Question Generation Engine"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__GeneratedQuestion
+  - community/Question_Generation_Engine
 ---
 
 # isParroting()
@@ -15,4 +15,4 @@ tags:
 - [[normalizeText()]] - `calls` [EXTRACTED]
 - [[question-quality.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion
+#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine

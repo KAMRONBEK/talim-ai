@@ -1,17 +1,20 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.50
+members: 5
 ---
 
 # Community 126
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[api]] - code - apps/admin/lib/api.ts
-- [[api.ts]] - code - apps/admin/lib/api.ts
+- [[AI Sparkle Star]] - concept - apps/web/app/icon.svg
+- [[Letter T Monogram]] - concept - apps/web/app/icon.svg
+- [[Talim AI App Icon]] - image - apps/web/app/icon.svg
+- [[Violet-to-Marigold Gradient]] - concept - apps/web/app/icon.svg
+- [[Web App Brand Favicon]] - concept - apps/web/app/icon.svg
 
 ## Live Query (requires Dataview plugin)
 

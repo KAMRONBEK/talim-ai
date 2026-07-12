@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "web lib"
+community: "Community 35"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib
+  - community/Community_35
 ---
 
 # content-cache.ts
@@ -25,4 +25,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib
+#graphify/code #graphify/EXTRACTED #community/Community_35

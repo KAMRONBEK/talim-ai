@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/TutorChart.tsx"
 type: "code"
-community: "components chat"
-location: "L22"
+community: "Community 67"
+location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat
+  - community/Community_67
 ---
 
 # buildRows()
@@ -15,4 +15,4 @@ tags:
 - [[TutorChart()]] - `calls` [EXTRACTED]
 - [[TutorChart.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat
+#graphify/code #graphify/EXTRACTED #community/Community_67

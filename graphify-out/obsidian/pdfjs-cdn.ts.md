@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
+community: "Community 36"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_36
 ---
 
 # pdfjs-cdn.ts
@@ -20,4 +20,4 @@ tags:
 - [[loadPdfJs()]] - `contains` [EXTRACTED]
 - [[rasterize-pdf.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_36

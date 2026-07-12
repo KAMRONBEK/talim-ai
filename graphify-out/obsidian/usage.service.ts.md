@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "src services · usage-pricing.ts"
+community: "Community 50"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__usage-pricingts
+  - community/Community_50
 ---
 
 # usage.service.ts
@@ -35,4 +35,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts
+#graphify/code #graphify/EXTRACTED #community/Community_50

@@ -1,23 +1,25 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L142"
+community: "Community 38"
+location: "L149"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Community_38
 ---
 
 # useGenerateSummary()
 
 ## Connections
 - [[ContentStage()]] - `calls` [EXTRACTED]
+- [[MaterialMediaPanel()]] - `calls` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
+- [[material-media-panel.tsx]] - `imports` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useContentActions()]] - `calls` [EXTRACTED]
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_38

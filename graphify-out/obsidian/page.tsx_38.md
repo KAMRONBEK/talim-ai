@@ -1,31 +1,22 @@
 ---
-source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
+source_file: "apps/web/app/[locale]/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Community 30"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Community_30
 ---
 
 # page.tsx
 
 ## Connections
-- [[LearningTopbar()]] - `imports` [EXTRACTED]
-- [[QuizCard()]] - `imports` [EXTRACTED]
-- [[QuizCard.tsx]] - `imports_from` [EXTRACTED]
-- [[QuizPage()]] - `contains` [EXTRACTED]
-- [[QuizResult()]] - `imports` [EXTRACTED]
-- [[QuizResult.tsx]] - `imports_from` [EXTRACTED]
-- [[isQuizGenerationStale()]] - `imports` [EXTRACTED]
-- [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
+- [[HomePage()]] - `contains` [EXTRACTED]
+- [[LandingPage()]] - `imports` [EXTRACTED]
+- [[auth-routing.ts]] - `imports_from` [EXTRACTED]
+- [[getPostLoginPath()]] - `imports` [EXTRACTED]
+- [[landing-page.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[useContent()]] - `imports` [EXTRACTED]
-- [[useContent.ts]] - `imports_from` [EXTRACTED]
-- [[useLatestQuizAttempt()]] - `imports` [EXTRACTED]
-- [[useQuiz()]] - `imports` [EXTRACTED]
-- [[useQuiz.ts]] - `imports_from` [EXTRACTED]
-- [[useSubmitQuiz()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_30

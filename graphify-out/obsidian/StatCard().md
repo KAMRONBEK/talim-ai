@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
-location: "L7"
+community: "Community 62"
+location: "L64"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Community_62
 ---
 
 # StatCard()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Community_62

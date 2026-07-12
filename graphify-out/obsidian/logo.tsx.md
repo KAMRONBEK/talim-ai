@@ -1,26 +1,21 @@
 ---
-source_file: "apps/web/components/brand/logo.tsx"
+source_file: "apps/admin/components/logo.tsx"
 type: "code"
-community: "components marketing"
+community: "Admin App UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_marketing
+  - community/Admin_App_UI
 ---
 
 # logo.tsx
 
 ## Connections
 - [[LogoMark()]] - `contains` [EXTRACTED]
-- [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
+- [[admin-header.tsx]] - `imports_from` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
-- [[dashboard-sidebar.tsx]] - `imports_from` [EXTRACTED]
-- [[footer.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[learner-navigation.tsx]] - `imports_from` [EXTRACTED]
-- [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
-- [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
+- [[page.tsx_11]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_marketing
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "admin components"
+community: "Assessment Pages & Wizard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Assessment_Pages__Wizard
 ---
 
 # page.tsx
 
 ## Connections
+- [[AppLocale]] - `imports` [EXTRACTED]
 - [[AssessmentCard()]] - `contains` [EXTRACTED]
 - [[AssessmentSubmitResult]] - `imports` [EXTRACTED]
 - [[Badge()]] - `imports` [EXTRACTED]
@@ -23,6 +24,8 @@ tags:
 - [[LearnerAssessment]] - `imports` [EXTRACTED]
 - [[LearnerAssessmentsPage()]] - `contains` [EXTRACTED]
 - [[WrittenForm()]] - `contains` [EXTRACTED]
+- [[format-relative-time.ts]] - `imports_from` [EXTRACTED]
+- [[formatRelativeTime()]] - `imports` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
@@ -32,4 +35,4 @@ tags:
 - [[useLearnerLeaderboard()]] - `imports` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

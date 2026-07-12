@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "src services"
+community: "AI Tutor Chat API"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services
+  - community/AI_Tutor_Chat_API
 ---
 
 # splitByTokens()
@@ -15,4 +15,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[toBlocks()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

@@ -1,28 +1,32 @@
 ---
 type: community
-cohesion: 0.27
-members: 13
+cohesion: 0.20
+members: 17
 ---
 
 # Community 68
 
-**Cohesion:** 0.27 - loosely connected
-**Members:** 13 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 17 nodes
 
 ## Members
-- [[BecomeTutorCard()]] - code - apps/web/components/account/become-tutor-card.tsx
-- [[Label()]] - code - packages/ui/components/label.tsx
-- [[ProfileCard()]] - code - apps/web/components/account/profile-card.tsx
-- [[become-tutor-card.tsx]] - code - apps/web/components/account/become-tutor-card.tsx
-- [[label.tsx]] - code - packages/ui/components/label.tsx
-- [[page.tsx_34]] - code - apps/web/app/[locale]/dashboard/settings/page.tsx
-- [[profile-card.tsx]] - code - apps/web/components/account/profile-card.tsx
-- [[useAccount.ts]] - code - apps/web/hooks/useAccount.ts
-- [[useChangePassword()]] - code - apps/web/hooks/useAccount.ts
-- [[useMyTutorRequest()]] - code - apps/web/hooks/useTutorRequest.ts
-- [[useRequestTutor()]] - code - apps/web/hooks/useTutorRequest.ts
-- [[useTutorRequest.ts]] - code - apps/web/hooks/useTutorRequest.ts
-- [[useUpdateProfile()]] - code - apps/web/hooks/useAccount.ts
+- [[OpenAITranscriptionSegment]] - code - apps/api/src/services/youtube.service.ts
+- [[OpenAIVerboseTranscription]] - code - apps/api/src/services/youtube.service.ts
+- [[TranscriptSegmentInput]] - code - apps/api/src/services/youtube.service.ts
+- [[TranscriptSegmentSource]] - code - apps/api/src/services/youtube.service.ts
+- [[YoutubeTranscriptItem]] - code - apps/api/src/services/youtube.service.ts
+- [[YoutubeTranscriptResult]] - code - apps/api/src/services/youtube.service.ts
+- [[buildTranscriptionPrompt()]] - code - apps/api/src/services/youtube.service.ts
+- [[cleanTranscriptText()]] - code - apps/api/src/services/youtube.service.ts
+- [[extractYoutubeAudio()]] - code - apps/api/src/services/youtube.service.ts
+- [[extractYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
+- [[extractYoutubeVideoId()]] - code - apps/api/src/services/youtube.service.ts
+- [[fallbackTextSegments()]] - code - apps/api/src/services/youtube.service.ts
+- [[generateYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
+- [[normalizeCaptionSegments()]] - code - apps/api/src/services/youtube.service.ts
+- [[normalizeTranscriptionSegments()]] - code - apps/api/src/services/youtube.service.ts
+- [[streamToBuffer()]] - code - apps/api/src/services/youtube.service.ts
+- [[youtube.service.ts]] - code - apps/api/src/services/youtube.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,22 +36,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 4 edges to [[_COMMUNITY_Admin PlanStatus UI]]
-- 4 edges to [[_COMMUNITY_Tenant Web Pages]]
-- 4 edges to [[_COMMUNITY_Community 31]]
-- 3 edges to [[_COMMUNITY_Content Detail Page]]
-- 3 edges to [[_COMMUNITY_Slide Deck Types]]
-- 2 edges to [[_COMMUNITY_Community 56]]
-- 2 edges to [[_COMMUNITY_Community 49]]
-- 2 edges to [[_COMMUNITY_Community 38]]
-- 2 edges to [[_COMMUNITY_Shared UI Components]]
-- 1 edge to [[_COMMUNITY_Learner Assessment Pages]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 9 edges to [[_COMMUNITY_Content Upload & Ingest]]
+- 4 edges to [[_COMMUNITY_Env Config & Job Events]]
+- 4 edges to [[_COMMUNITY_Community 50]]
 
 ## Top bridge nodes
-- [[Label()]] - degree 13, connects to 7 communities
-- [[profile-card.tsx]] - degree 10, connects to 5 communities
-- [[become-tutor-card.tsx]] - degree 12, connects to 3 communities
-- [[ProfileCard()]] - degree 6, connects to 3 communities
-- [[page.tsx_34]] - degree 7, connects to 2 communities
+- [[youtube.service.ts]] - degree 25, connects to 3 communities
+- [[extractYoutubeTranscript()]] - degree 8, connects to 2 communities
+- [[generateYoutubeTranscript()]] - degree 8, connects to 1 community
+- [[extractYoutubeVideoId()]] - degree 6, connects to 1 community

@@ -1,17 +1,20 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.40
+members: 5
 ---
 
 # Community 130
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[makeQueryClient()_1]] - code - apps/web/lib/queryClient.ts
-- [[queryClient.ts_1]] - code - apps/web/lib/queryClient.ts
+- [[_genpdf.js]] - code - docs/qa/screenshots/_genpdf.js
+- [[esc()]] - code - docs/qa/screenshots/_genpdf.js
+- [[fs]] - code - docs/qa/screenshots/_genpdf.js
+- [[lines]] - code - docs/qa/screenshots/_genpdf.js
+- [[objs]] - code - docs/qa/screenshots/_genpdf.js
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "api · scripts"
+community: "Community 66"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/api__scripts
+  - community/Community_66
 ---
 
 # scripts
@@ -30,4 +30,4 @@ tags:
 - [[start_1]] - `contains` [EXTRACTED]
 - [[typecheck_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/api__scripts
+#graphify/code #graphify/EXTRACTED #community/Community_66

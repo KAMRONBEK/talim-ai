@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "components layout · content-generations.tsx"
-location: "L26"
+community: "Community 33"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__content-generationstsx
+  - community/Community_33
 ---
 
 # ContentSidebarBodyProps
@@ -16,4 +16,4 @@ tags:
 - [[SectionProgress]] - `references` [EXTRACTED]
 - [[content-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__content-generationstsx
+#graphify/code #graphify/EXTRACTED #community/Community_33

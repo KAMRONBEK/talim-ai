@@ -1,17 +1,17 @@
 ---
-source_file: "apps/admin/components/admin-sidebar.tsx"
+source_file: "apps/admin/components/admin-header.tsx"
 type: "code"
-community: "admin components · layout.tsx"
-location: "L23"
+community: "Community 108"
+location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components__layouttsx
+  - community/Community_108
 ---
 
 # navItems
 
 ## Connections
-- [[admin-sidebar.tsx]] - `contains` [EXTRACTED]
+- [[admin-header.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components__layouttsx
+#graphify/code #graphify/EXTRACTED #community/Community_108

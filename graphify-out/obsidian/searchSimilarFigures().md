@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "src services"
+community: "AI Tutor Chat API"
 location: "L249"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services
+  - community/AI_Tutor_Chat_API
 ---
 
 # searchSimilarFigures()
@@ -18,4 +18,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

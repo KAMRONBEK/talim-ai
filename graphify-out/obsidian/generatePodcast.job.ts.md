@@ -1,21 +1,25 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "src jobs"
+community: "Podcast Generation & TTS"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Podcast_Generation__TTS
 ---
 
 # generatePodcast.job.ts
 
 ## Connections
+- [[DialogueSegmentBytes]] - `imports` [EXTRACTED]
+- [[DialogueTurn]] - `imports` [EXTRACTED]
 - [[GeneratePodcastJobData]] - `imports` [EXTRACTED]
+- [[PodcastSegment]] - `imports` [EXTRACTED]
 - [[StorageService]] - `imports` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
 - [[boundContextByTokens()]] - `imports` [EXTRACTED]
+- [[buildPodcastSegments()]] - `contains` [EXTRACTED]
 - [[buildPodcastUserPrompt()]] - `imports` [EXTRACTED]
 - [[buildRagContext()]] - `imports` [EXTRACTED]
 - [[generateChatCompletion()]] - `imports` [EXTRACTED]
@@ -34,8 +38,8 @@ tags:
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[registerGeneratePodcastJob()]] - `contains` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
-- [[synthesizeDialogue()]] - `imports` [EXTRACTED]
+- [[synthesizeDialogueWithSegments()]] - `imports` [EXTRACTED]
 - [[synthesizeSpeech()]] - `imports` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS

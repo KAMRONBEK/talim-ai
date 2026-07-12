@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "src services · env.ts"
+community: "Content Upload & Ingest"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__envts
+  - community/Content_Upload__Ingest
 ---
 
 # StorageService
@@ -27,4 +27,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__envts
+#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest

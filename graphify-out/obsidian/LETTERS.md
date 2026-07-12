@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/components/quiz/QuizCard.tsx"
+source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L21"
+community: "Quiz Player & Hooks"
+location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Quiz_Player__Hooks
 ---
 
 # LETTERS
 
 ## Connections
-- [[QuizCard.tsx]] - `contains` [EXTRACTED]
+- [[page.tsx_40]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks

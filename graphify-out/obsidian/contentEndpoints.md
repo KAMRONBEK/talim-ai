@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api/endpoints.ts"
 type: "code"
-community: "components learning"
+community: "Community 37"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_37
 ---
 
 # contentEndpoints
@@ -17,4 +17,4 @@ tags:
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_37

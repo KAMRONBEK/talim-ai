@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "src routes"
+community: "Admin & Usage Controllers"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_routes
+  - community/Admin__Usage_Controllers
 ---
 
 # resolveTenantIdForUser()
@@ -18,9 +18,14 @@ tags:
 - [[authMiddleware()]] - `calls` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
 - [[formatUser()]] - `calls` [EXTRACTED]
+- [[getLearnerMastery()]] - `calls` [EXTRACTED]
+- [[getLearnerMaterials()]] - `calls` [EXTRACTED]
 - [[getUser()]] - `calls` [EXTRACTED]
+- [[impersonateUser()]] - `calls` [EXTRACTED]
+- [[mastery.service.ts]] - `imports` [EXTRACTED]
 - [[patchUser()]] - `calls` [EXTRACTED]
+- [[progress.ts]] - `imports` [EXTRACTED]
 - [[tenant.middleware.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_routes
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L95"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # getUploadCount()
@@ -16,4 +16,4 @@ tags:
 - [[getUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

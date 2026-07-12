@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "i18n"
-location: "L10"
+community: "Community 61"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/i18n
+  - community/Community_61
 ---
 
 # metadata
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/i18n
+#graphify/code #graphify/EXTRACTED #community/Community_61

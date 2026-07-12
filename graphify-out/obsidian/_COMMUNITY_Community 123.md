@@ -1,17 +1,21 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.33
+members: 6
 ---
 
 # Community 123
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[RootPage()]] - code - apps/admin/app/page.tsx
-- [[page.tsx_12]] - code - apps/admin/app/page.tsx
+- [[compilerOptions_6]] - code - packages/types/tsconfig.json
+- [[extends_5]] - code - packages/types/tsconfig.json
+- [[include_3]] - code - packages/types/tsconfig.json
+- [[outDir_2]] - code - packages/types/tsconfig.json
+- [[rootDir_2]] - code - packages/types/tsconfig.json
+- [[tsconfig.json_3]] - code - packages/types/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 

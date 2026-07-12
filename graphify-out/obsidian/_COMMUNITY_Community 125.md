@@ -1,17 +1,20 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.40
+members: 5
 ---
 
 # Community 125
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[ThemeProvider()]] - code - apps/admin/components/theme-provider.tsx
-- [[theme-provider.tsx]] - code - apps/admin/components/theme-provider.tsx
+- [[config_2]] - code - apps/admin/tailwind.config.ts
+- [[config_6]] - code - apps/web/tailwind.config.ts
+- [[tailwind.config.ts]] - code - apps/admin/tailwind.config.ts
+- [[tailwind.config.ts_2]] - code - packages/config/tailwind/tailwind.config.ts
+- [[tailwind.config.ts_1]] - code - apps/web/tailwind.config.ts
 
 ## Live Query (requires Dataview plugin)
 

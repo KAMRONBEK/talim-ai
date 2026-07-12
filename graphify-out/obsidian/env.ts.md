@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "src services · env.ts"
+community: "Env Config & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__envts
+  - community/Env_Config__Job_Events
 ---
 
 # env.ts
@@ -21,6 +21,7 @@ tags:
 - [[embed.service.ts]] - `imports_from` [EXTRACTED]
 - [[envSchema]] - `contains` [EXTRACTED]
 - [[figure.service.ts]] - `imports_from` [EXTRACTED]
+- [[impersonation.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[loadEnv()]] - `contains` [EXTRACTED]
 - [[pdf.service.ts]] - `imports_from` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__envts
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

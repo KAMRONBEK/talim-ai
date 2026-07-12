@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "src services · env.ts"
+community: "Env Config & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__envts
+  - community/Env_Config__Job_Events
 ---
 
 # storage.service.ts
@@ -29,4 +29,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__envts
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

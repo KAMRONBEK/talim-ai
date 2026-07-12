@@ -1,37 +1,41 @@
 ---
 type: community
 cohesion: 0.15
-members: 22
+members: 26
 ---
 
 # Community 38
 
 **Cohesion:** 0.15 - loosely connected
-**Members:** 22 nodes
+**Members:** 26 nodes
 
 ## Members
-- [[BillingMeResponse]] - code - packages/types/index.ts
-- [[BillingSummaryCard()]] - code - apps/web/components/account/billing-summary-card.tsx
-- [[DashboardHeader()]] - code - apps/web/components/layout/dashboard-header.tsx
-- [[DashboardHeaderProps]] - code - apps/web/components/layout/dashboard-header.tsx
-- [[GlobalUpgradeModal()]] - code - apps/web/components/account/global-upgrade-modal.tsx
-- [[Providers()_1]] - code - apps/web/components/providers.tsx
-- [[SessionSync()]] - code - apps/web/components/session-sync.tsx
-- [[TenantBillingPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx
-- [[UpgradeModalState]] - code - apps/web/store/useUpgradeModal.ts
-- [[UsageMeter()]] - code - apps/web/components/account/billing-summary-card.tsx
-- [[billing-summary-card.tsx]] - code - apps/web/components/account/billing-summary-card.tsx
-- [[dashboard-header.tsx]] - code - apps/web/components/layout/dashboard-header.tsx
-- [[global-upgrade-modal.tsx]] - code - apps/web/components/account/global-upgrade-modal.tsx
-- [[page.tsx_20]] - code - apps/web/app/[locale]/(tenant)/tenant/billing/page.tsx
-- [[plan.ts_1]] - code - apps/web/lib/plan.ts
-- [[planMessageKey]] - code - apps/web/lib/plan.ts
-- [[providers.tsx_1]] - code - apps/web/components/providers.tsx
-- [[session-sync.tsx]] - code - apps/web/components/session-sync.tsx
-- [[useBilling()]] - code - apps/web/hooks/useBilling.ts
-- [[useBilling.ts]] - code - apps/web/hooks/useBilling.ts
-- [[useUpgradeModal]] - code - apps/web/store/useUpgradeModal.ts
-- [[useUpgradeModal.ts]] - code - apps/web/store/useUpgradeModal.ts
+- [[ChatMessage()]] - code - apps/web/components/chat/ChatMessage.tsx
+- [[ChatWindow()]] - code - apps/web/components/chat/ChatWindow.tsx
+- [[ChatWindow.tsx]] - code - apps/web/components/chat/ChatWindow.tsx
+- [[ChatWindowProps]] - code - apps/web/components/chat/ChatWindow.tsx
+- [[ContentDetailPage()]] - code - apps/web/app/[locale]/content/[id]/page.tsx
+- [[ContentLearnPanel()]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[ContentLearnPanelSheet()]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[ContentLearnPanelSheetProps]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[ContentWorkspaceInner()]] - code - apps/web/app/[locale]/content/[id]/page.tsx
+- [[INDIVIDUAL_QUOTA_FEATURES]] - code - apps/web/lib/limit-error.ts
+- [[LearnTab]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[LimitError]] - code - apps/web/lib/limit-error.ts
+- [[classifyLimitError()]] - code - apps/web/lib/limit-error.ts
+- [[content-learn-panel.tsx]] - code - apps/web/components/layout/content-learn-panel.tsx
+- [[limit-error.ts]] - code - apps/web/lib/limit-error.ts
+- [[page.tsx_31]] - code - apps/web/app/[locale]/content/[id]/page.tsx
+- [[useChatSession()]] - code - apps/web/hooks/useChat.ts
+- [[useChatStore]] - code - apps/web/store/useChatStore.ts
+- [[useContentActions()]] - code - apps/web/hooks/useContentActions.ts
+- [[useContentActions.ts]] - code - apps/web/hooks/useContentActions.ts
+- [[useContentProgress()]] - code - apps/web/hooks/useProgress.ts
+- [[useGenerateSummary()]] - code - apps/web/hooks/useQuiz.ts
+- [[useLimitErrorHandler()]] - code - apps/web/hooks/useLimitErrorHandler.ts
+- [[useLimitErrorHandler.ts]] - code - apps/web/hooks/useLimitErrorHandler.ts
+- [[useReparseContent()]] - code - apps/web/hooks/useReparseContent.ts
+- [[useSavedSummary()]] - code - apps/web/hooks/useQuiz.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -41,24 +45,30 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Community 42]]
-- 6 edges to [[_COMMUNITY_Community 61]]
-- 5 edges to [[_COMMUNITY_Community 31]]
-- 5 edges to [[_COMMUNITY_Tenant Web Pages]]
-- 5 edges to [[_COMMUNITY_Slide Deck Types]]
-- 4 edges to [[_COMMUNITY_Community 53]]
-- 3 edges to [[_COMMUNITY_Content Detail Page]]
-- 3 edges to [[_COMMUNITY_App Layout & Guards]]
-- 3 edges to [[_COMMUNITY_Community 36]]
-- 2 edges to [[_COMMUNITY_Community 68]]
-- 2 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 2 edges to [[_COMMUNITY_Community 70]]
-- 2 edges to [[_COMMUNITY_Community 41]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 15 edges to [[_COMMUNITY_Community 33]]
+- 14 edges to [[_COMMUNITY_Flashcards Study Page]]
+- 12 edges to [[_COMMUNITY_Community 40]]
+- 9 edges to [[_COMMUNITY_Community 39]]
+- 8 edges to [[_COMMUNITY_Community 32]]
+- 7 edges to [[_COMMUNITY_Community 37]]
+- 6 edges to [[_COMMUNITY_Community 35]]
+- 6 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 6 edges to [[_COMMUNITY_Community 53]]
+- 5 edges to [[_COMMUNITY_Admin App UI]]
+- 4 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 3 edges to [[_COMMUNITY_Community 44]]
+- 3 edges to [[_COMMUNITY_Community 55]]
+- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 3 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 2 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 2 edges to [[_COMMUNITY_Community 85]]
+- 2 edges to [[_COMMUNITY_Community 49]]
+- 1 edge to [[_COMMUNITY_Community 46]]
+- 1 edge to [[_COMMUNITY_Billing & Quota]]
 
 ## Top bridge nodes
-- [[dashboard-header.tsx]] - degree 15, connects to 6 communities
-- [[billing-summary-card.tsx]] - degree 14, connects to 6 communities
-- [[useBilling.ts]] - degree 11, connects to 5 communities
-- [[useBilling()]] - degree 13, connects to 3 communities
-- [[BillingSummaryCard()]] - degree 6, connects to 3 communities
+- [[page.tsx_31]] - degree 45, connects to 13 communities
+- [[useLimitErrorHandler()]] - degree 22, connects to 6 communities
+- [[useLimitErrorHandler.ts]] - degree 16, connects to 5 communities
+- [[ContentWorkspaceInner()]] - degree 12, connects to 5 communities
+- [[content-learn-panel.tsx]] - degree 18, connects to 4 communities

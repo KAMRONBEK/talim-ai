@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "packages ui"
-location: "L16"
+community: "Community 28"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_ui
+  - community/Community_28
 ---
 
 # peerDependencies
@@ -17,4 +17,4 @@ tags:
 - [[react_2]] - `contains` [EXTRACTED]
 - [[react-dom_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_ui
+#graphify/code #graphify/EXTRACTED #community/Community_28

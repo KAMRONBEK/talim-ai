@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 144
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[doppler.yaml (project talim-ai  config dev)]] - document - doppler.yaml
+- [[Providers()]] - code - apps/admin/components/providers.tsx
+- [[providers.tsx]] - code - apps/admin/components/providers.tsx
 
 ## Live Query (requires Dataview plugin)
 

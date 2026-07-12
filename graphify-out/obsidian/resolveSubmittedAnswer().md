@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "src controllers · quiz.controller.ts"
-location: "L131"
+community: "Community 58"
+location: "L176"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__quizcontrollerts
+  - community/Community_58
 ---
 
 # resolveSubmittedAnswer()
@@ -17,4 +17,4 @@ tags:
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 - [[stripSubmittedOptionLabel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_58

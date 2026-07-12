@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.13
-members: 15
+cohesion: 0.11
+members: 18
 ---
 
 # Community 60
 
-**Cohesion:** 0.13 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.11 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[@talimeslint-config_1]] - code - apps/api/package.json
-- [[@talimtsconfig_1]] - code - apps/api/package.json
-- [[@typesbcrypt]] - code - apps/api/package.json
-- [[@typesbull]] - code - apps/api/package.json
-- [[@typescors]] - code - apps/api/package.json
-- [[@typesexpress]] - code - apps/api/package.json
-- [[@typesjsonwebtoken]] - code - apps/api/package.json
-- [[@typesmulter]] - code - apps/api/package.json
-- [[@typesnode_1]] - code - apps/api/package.json
-- [[@typespdf-parse]] - code - apps/api/package.json
-- [[devDependencies_1]] - code - apps/api/package.json
-- [[eslint_1]] - code - apps/api/package.json
-- [[prisma]] - code - apps/api/package.json
-- [[tsx]] - code - apps/api/package.json
-- [[typescript_1]] - code - apps/api/package.json
+- [[@distubeytdl-core]] - code - apps/api/package.json
+- [[@langchaintextsplitters]] - code - apps/api/package.json
+- [[@prismaclient]] - code - apps/api/package.json
+- [[@talimtypes_1]] - code - apps/api/package.json
+- [[bcrypt]] - code - apps/api/package.json
+- [[bull]] - code - apps/api/package.json
+- [[cors]] - code - apps/api/package.json
+- [[dependencies_1]] - code - apps/api/package.json
+- [[express]] - code - apps/api/package.json
+- [[express-rate-limit]] - code - apps/api/package.json
+- [[gpt-tokenizer]] - code - apps/api/package.json
+- [[helmet]] - code - apps/api/package.json
+- [[jsonwebtoken]] - code - apps/api/package.json
+- [[multer]] - code - apps/api/package.json
+- [[openai]] - code - apps/api/package.json
+- [[pdf-parse]] - code - apps/api/package.json
+- [[youtube-transcript]] - code - apps/api/package.json
+- [[zod]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -34,7 +37,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 91]]
+- 1 edge to [[_COMMUNITY_Community 109]]
 
 ## Top bridge nodes
-- [[devDependencies_1]] - degree 15, connects to 1 community
+- [[dependencies_1]] - degree 18, connects to 1 community

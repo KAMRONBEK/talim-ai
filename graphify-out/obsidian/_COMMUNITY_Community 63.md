@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.23
-members: 15
+cohesion: 0.22
+members: 18
 ---
 
 # Community 63
 
-**Cohesion:** 0.23 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[assignContent()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[createStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[deleteStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[getProgress()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[getStudentProgress()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[getTenant()_1]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[listContentAssignments()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[listStudents()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[patchStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[patchTenant()_1]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[regenerateJoinCode()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[requireOwnerTenant()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[resetStudentPassword()]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[tenant.controller.ts]] - code - apps/api/src/controllers/tenant.controller.ts
-- [[unassignContent()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[assessment.controller.ts]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[assessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[assessmentResults()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[assignAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[createAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[createBank()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[createBankQuestion()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[generateQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[goLiveAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[learnerAssessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[listAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[listBanks()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[listLearnerAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[listQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[patchQuestion()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[requireTenant()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[scheduleAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[submitLearnerAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -34,15 +37,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Content & Podcast API]]
-- 2 edges to [[_COMMUNITY_Admin Audit & Auth]]
-- 2 edges to [[_COMMUNITY_Tenant Admin & Prisma]]
-- 1 edge to [[_COMMUNITY_Admin Analytics & Subscriptions]]
-- 1 edge to [[_COMMUNITY_Billing & Usage API]]
+- 13 edges to [[_COMMUNITY_Content API Controllers]]
+- 4 edges to [[_COMMUNITY_Admin & Usage Controllers]]
+- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
+- 1 edge to [[_COMMUNITY_Assessments Service]]
 
 ## Top bridge nodes
-- [[tenant.controller.ts]] - degree 22, connects to 5 communities
-- [[deleteStudent()]] - degree 3, connects to 1 community
-- [[getStudentProgress()]] - degree 3, connects to 1 community
-- [[listContentAssignments()]] - degree 3, connects to 1 community
-- [[patchStudent()]] - degree 3, connects to 1 community
+- [[assessment.controller.ts]] - degree 26, connects to 4 communities
+- [[assessmentLeaderboard()]] - degree 3, connects to 1 community
+- [[assessmentResults()]] - degree 3, connects to 1 community
+- [[assignAssessment()]] - degree 3, connects to 1 community
+- [[createBankQuestion()]] - degree 3, connects to 1 community

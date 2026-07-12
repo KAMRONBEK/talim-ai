@@ -1,32 +1,35 @@
 ---
 type: community
-cohesion: 0.20
-members: 17
+cohesion: 0.15
+members: 20
 ---
 
 # Community 55
 
-**Cohesion:** 0.20 - loosely connected
-**Members:** 17 nodes
+**Cohesion:** 0.15 - loosely connected
+**Members:** 20 nodes
 
 ## Members
-- [[OpenAITranscriptionSegment]] - code - apps/api/src/services/youtube.service.ts
-- [[OpenAIVerboseTranscription]] - code - apps/api/src/services/youtube.service.ts
-- [[TranscriptSegmentInput]] - code - apps/api/src/services/youtube.service.ts
-- [[TranscriptSegmentSource]] - code - apps/api/src/services/youtube.service.ts
-- [[YoutubeTranscriptItem]] - code - apps/api/src/services/youtube.service.ts
-- [[YoutubeTranscriptResult]] - code - apps/api/src/services/youtube.service.ts
-- [[buildTranscriptionPrompt()]] - code - apps/api/src/services/youtube.service.ts
-- [[cleanTranscriptText()]] - code - apps/api/src/services/youtube.service.ts
-- [[extractYoutubeAudio()]] - code - apps/api/src/services/youtube.service.ts
-- [[extractYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
-- [[extractYoutubeVideoId()]] - code - apps/api/src/services/youtube.service.ts
-- [[fallbackTextSegments()]] - code - apps/api/src/services/youtube.service.ts
-- [[generateYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
-- [[normalizeCaptionSegments()]] - code - apps/api/src/services/youtube.service.ts
-- [[normalizeTranscriptionSegments()]] - code - apps/api/src/services/youtube.service.ts
-- [[streamToBuffer()]] - code - apps/api/src/services/youtube.service.ts
-- [[youtube.service.ts]] - code - apps/api/src/services/youtube.service.ts
+- [[ChartSeries]] - code - packages/types/tutor-visual.ts
+- [[ChatMessage]] - code - packages/types/index.ts
+- [[ChatState]] - code - apps/web/store/useChatStore.ts
+- [[DesmosExpression]] - code - packages/types/tutor-graph.ts
+- [[DesmosGraphPayload]] - code - packages/types/tutor-graph.ts
+- [[DesmosSlider]] - code - packages/types/tutor-graph.ts
+- [[DesmosViewport]] - code - packages/types/tutor-graph.ts
+- [[VisualBlock]] - code - packages/types/tutor-visual.ts
+- [[VisualKind]] - code - packages/types/tutor-visual.ts
+- [[VisualPayloadMap]] - code - packages/types/tutor-visual.ts
+- [[appendVisualToText()]] - code - apps/web/store/useChatStore.ts
+- [[parseFenceBlock()]] - code - packages/types/tutor-visual.ts
+- [[parseGraphBlock()]] - code - packages/types/tutor-graph.ts
+- [[parseVisualBlock()]] - code - packages/types/tutor-visual.ts
+- [[serializeDesmosAsVisual()]] - code - packages/types/tutor-visual.ts
+- [[serializeGraphBlock()_1]] - code - packages/types/tutor-graph.ts
+- [[serializeVisualBlock()]] - code - packages/types/tutor-visual.ts
+- [[tutor-graph.ts_1]] - code - packages/types/tutor-graph.ts
+- [[tutor-visual.ts]] - code - packages/types/tutor-visual.ts
+- [[useChatStore.ts]] - code - apps/web/store/useChatStore.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -36,12 +39,22 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Content Controller]]
-- 4 edges to [[_COMMUNITY_Env Config & Jobs]]
-- 4 edges to [[_COMMUNITY_Usage Pricing & Chunk Tools]]
+- 18 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 6 edges to [[_COMMUNITY_Tutor Visual Tools]]
+- 3 edges to [[_COMMUNITY_Community 38]]
+- 3 edges to [[_COMMUNITY_Community 85]]
+- 3 edges to [[_COMMUNITY_Community 67]]
+- 3 edges to [[_COMMUNITY_Community 45]]
+- 2 edges to [[_COMMUNITY_Community 52]]
+- 2 edges to [[_COMMUNITY_Community 98]]
+- 1 edge to [[_COMMUNITY_Env Config & Job Events]]
+- 1 edge to [[_COMMUNITY_Community 64]]
+- 1 edge to [[_COMMUNITY_Community 82]]
+- 1 edge to [[_COMMUNITY_Community 44]]
 
 ## Top bridge nodes
-- [[youtube.service.ts]] - degree 25, connects to 3 communities
-- [[extractYoutubeTranscript()]] - degree 8, connects to 2 communities
-- [[generateYoutubeTranscript()]] - degree 8, connects to 1 community
-- [[extractYoutubeVideoId()]] - degree 6, connects to 1 community
+- [[useChatStore.ts]] - degree 17, connects to 6 communities
+- [[VisualBlock]] - degree 7, connects to 5 communities
+- [[tutor-visual.ts]] - degree 18, connects to 4 communities
+- [[parseFenceBlock()]] - degree 7, connects to 3 communities
+- [[DesmosGraphPayload]] - degree 6, connects to 3 communities

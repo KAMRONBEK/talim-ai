@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "src controllers · sendContentFile()"
+community: "Community 68"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__sendContentFile
+  - community/Community_68
 ---
 
 # extractYoutubeVideoId()
@@ -19,4 +19,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[youtube.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__sendContentFile
+#graphify/code #graphify/EXTRACTED #community/Community_68

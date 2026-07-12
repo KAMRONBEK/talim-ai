@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "src lib · locale-prompts.ts"
+community: "Community 31"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__locale-promptsts
+  - community/Community_31
 ---
 
 # locale-prompts.ts
@@ -36,7 +36,6 @@ tags:
 - [[buildTutorSystemMessage()]] - `contains` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[getPodcastSystemPrompt()]] - `contains` [EXTRACTED]
 - [[getQuizSystemPrompt()]] - `contains` [EXTRACTED]
 - [[getRagChunkLabel()]] - `contains` [EXTRACTED]
@@ -50,4 +49,4 @@ tags:
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__locale-promptsts
+#graphify/code #graphify/EXTRACTED #community/Community_31

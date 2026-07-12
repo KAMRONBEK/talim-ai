@@ -1,22 +1,25 @@
 ---
 type: community
-cohesion: 0.48
-members: 7
+cohesion: 0.20
+members: 10
 ---
 
 # Community 96
 
-**Cohesion:** 0.48 - moderately connected
-**Members:** 7 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[.constructor()_3]] - code - apps/api/src/services/storage.service.ts
-- [[.delete()]] - code - apps/api/src/services/storage.service.ts
-- [[.ensureDir()]] - code - apps/api/src/services/storage.service.ts
-- [[.get()]] - code - apps/api/src/services/storage.service.ts
-- [[.resolvePath()]] - code - apps/api/src/services/storage.service.ts
-- [[.save()]] - code - apps/api/src/services/storage.service.ts
-- [[LocalStorageService]] - code - apps/api/src/services/storage.service.ts
+- [[$schema_2]] - code - packages/config/tsconfig/nextjs.json
+- [[compilerOptions_4]] - code - packages/config/tsconfig/nextjs.json
+- [[extends_3]] - code - packages/config/tsconfig/nextjs.json
+- [[jsx]] - code - packages/config/tsconfig/nextjs.json
+- [[lib_1]] - code - packages/config/tsconfig/nextjs.json
+- [[module_1]] - code - packages/config/tsconfig/nextjs.json
+- [[moduleResolution_1]] - code - packages/config/tsconfig/nextjs.json
+- [[nextjs.json]] - code - packages/config/tsconfig/nextjs.json
+- [[noEmit]] - code - packages/config/tsconfig/nextjs.json
+- [[plugins_2]] - code - packages/config/tsconfig/nextjs.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,9 +27,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_96
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 3 edges to [[_COMMUNITY_Env Config & Jobs]]
-
-## Top bridge nodes
-- [[LocalStorageService]] - degree 9, connects to 1 community

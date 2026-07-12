@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "admin components"
+community: "Admin App UI"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Admin_App_UI
 ---
 
 # Button
@@ -17,7 +17,6 @@ tags:
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[QuizResult.tsx]] - `imports` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
-- [[admin-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[assign-students-panel.tsx]] - `imports` [EXTRACTED]
 - [[become-tutor-card.tsx]] - `imports` [EXTRACTED]
 - [[billing-summary-card.tsx]] - `imports` [EXTRACTED]
@@ -29,6 +28,7 @@ tags:
 - [[game-quiz-player.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[join-code-card.tsx]] - `imports` [EXTRACTED]
+- [[learner-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_1]] - `imports` [EXTRACTED]
@@ -47,21 +47,26 @@ tags:
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[page.tsx_21]] - `imports` [EXTRACTED]
-- [[page.tsx_23]] - `imports` [EXTRACTED]
-- [[page.tsx_25]] - `imports` [EXTRACTED]
+- [[page.tsx_24]] - `imports` [EXTRACTED]
 - [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[page.tsx_27]] - `imports` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[page.tsx_28]] - `imports` [EXTRACTED]
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
 - [[page.tsx_33]] - `imports` [EXTRACTED]
+- [[page.tsx_34]] - `imports` [EXTRACTED]
+- [[page.tsx_40]] - `imports` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
+- [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports` [EXTRACTED]
+- [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
+- [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[theme-toggle.tsx]] - `imports` [EXTRACTED]
 - [[theme-toggle.tsx_1]] - `imports` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

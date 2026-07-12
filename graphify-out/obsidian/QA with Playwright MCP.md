@@ -1,16 +1,13 @@
 ---
 source_file: "docs/QA.md"
 type: "document"
-community: "docs · User Types Model"
+community: "Community 160"
 tags:
   - graphify/document
-  - graphify/INFERRED
-  - community/docs__User_Types_Model
+  - graphify/EXTRACTED
+  - community/Community_160
 ---
 
 # QA with Playwright MCP
 
-## Connections
-- [[Three Apps Architecture]] - `conceptually_related_to` [INFERRED]
-
-#graphify/document #graphify/INFERRED #community/docs__User_Types_Model
+#graphify/document #graphify/EXTRACTED #community/Community_160

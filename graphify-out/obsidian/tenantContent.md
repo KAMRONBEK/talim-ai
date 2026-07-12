@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "src routes"
-location: "L72"
+community: "Admin & Usage Controllers"
+location: "L94"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_routes
+  - community/Admin__Usage_Controllers
 ---
 
 # tenantContent
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_routes
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

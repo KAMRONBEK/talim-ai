@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "i18n"
-location: "L122"
+community: "Community 61"
+location: "L123"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/i18n
+  - community/Community_61
 ---
 
 # getMessages()
@@ -16,4 +16,4 @@ tags:
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/i18n
+#graphify/code #graphify/EXTRACTED #community/Community_61

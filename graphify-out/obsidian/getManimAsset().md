@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "src controllers · chat.controller.ts"
-location: "L136"
+community: "AI Tutor Chat API"
+location: "L137"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__chatcontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # getManimAsset()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[resolveManimAsset()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/avatar.tsx"
 type: "code"
-community: "ui components"
+community: "Admin App UI"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Admin_App_UI
 ---
 
 # AvatarFallback()
@@ -18,4 +18,4 @@ tags:
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

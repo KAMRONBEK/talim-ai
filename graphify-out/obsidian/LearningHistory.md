@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web lib · learning-history-panel.tsx"
-location: "L761"
+community: "Community 32"
+location: "L1334"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__learning-history-paneltsx
+  - community/Community_32
 ---
 
 # LearningHistory
@@ -19,4 +19,4 @@ tags:
 - [[learning-history-panel.tsx]] - `imports` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__learning-history-paneltsx
+#graphify/code #graphify/EXTRACTED #community/Community_32

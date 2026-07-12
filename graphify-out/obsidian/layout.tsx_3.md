@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/layout.tsx"
 type: "code"
-community: "components layout · plan.ts"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Tenant_Dashboard__Shell
 ---
 
 # layout.tsx
@@ -16,4 +16,4 @@ tags:
 - [[TenantShell()]] - `imports` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

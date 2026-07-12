@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # assertTenantQuota()
@@ -23,10 +23,11 @@ tags:
 - [[joinTenantByCode()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[patchStudent()_1]] - `calls` [EXTRACTED]
+- [[provisionStudent()]] - `calls` [EXTRACTED]
 - [[requireActiveTenantSubscription()]] - `calls` [EXTRACTED]
 - [[resolveTenantUpgradePlanCode()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `imports` [EXTRACTED]
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

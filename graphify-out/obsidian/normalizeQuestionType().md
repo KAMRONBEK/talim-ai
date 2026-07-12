@@ -1,20 +1,17 @@
 ---
 source_file: "apps/api/src/lib/assessment-prompt.ts"
 type: "code"
-community: "assessment"
-location: "L75"
+community: "Community 114"
+location: "L157"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment
+  - community/Community_114
 ---
 
 # normalizeQuestionType()
 
 ## Connections
 - [[assessment-prompt.ts]] - `contains` [EXTRACTED]
-- [[banks.ts]] - `imports` [EXTRACTED]
-- [[generateQuestions()_1]] - `calls` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment
+#graphify/code #graphify/EXTRACTED #community/Community_114

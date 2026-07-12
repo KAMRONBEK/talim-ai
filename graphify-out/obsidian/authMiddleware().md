@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "src routes"
+community: "Admin & Usage Controllers"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_routes
+  - community/Admin__Usage_Controllers
 ---
 
 # authMiddleware()
@@ -26,4 +26,4 @@ tags:
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 - [[usage.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_routes
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

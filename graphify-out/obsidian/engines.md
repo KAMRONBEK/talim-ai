@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "package.json"
-location: "L36"
+community: "Community 122"
+location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_122
 ---
 
 # engines
@@ -15,4 +15,4 @@ tags:
 - [[node]] - `contains` [EXTRACTED]
 - [[package.json_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_122

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "components layout · plan.ts"
-location: "L15"
+community: "Billing UI & Plans"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Billing_UI__Plans
 ---
 
 # DashboardHeader()
@@ -19,4 +19,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useBilling()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

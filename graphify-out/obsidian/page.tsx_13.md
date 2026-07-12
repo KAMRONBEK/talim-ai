@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/login/page.tsx"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
+community: "Admin App UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Admin_App_UI
 ---
 
 # page.tsx
@@ -27,4 +27,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

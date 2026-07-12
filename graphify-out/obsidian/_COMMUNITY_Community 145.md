@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 145
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[pnpm-workspace.yaml]] - document - pnpm-workspace.yaml
+- [[ThemeProvider()]] - code - apps/admin/components/theme-provider.tsx
+- [[theme-provider.tsx]] - code - apps/admin/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

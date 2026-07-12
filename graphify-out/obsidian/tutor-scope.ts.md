@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "src lib · tutor-scope.ts"
+community: "Community 41"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__tutor-scopets
+  - community/Community_41
 ---
 
 # tutor-scope.ts
@@ -24,16 +24,19 @@ tags:
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[classifyTutorScope()]] - `contains` [EXTRACTED]
 - [[decisionSchema]] - `contains` [EXTRACTED]
+- [[formatRecentTurns()]] - `contains` [EXTRACTED]
 - [[generateJsonCompletion()]] - `imports` [EXTRACTED]
 - [[getClarificationResponse()]] - `contains` [EXTRACTED]
 - [[getOutOfScopeResponse()]] - `contains` [EXTRACTED]
 - [[guessScopeHeuristically()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[isTutorClarification()]] - `contains` [EXTRACTED]
 - [[isTutorScopeRefusal()]] - `contains` [EXTRACTED]
+- [[looksLikeFollowUp()]] - `contains` [EXTRACTED]
 - [[overlapCount()]] - `contains` [EXTRACTED]
 - [[scriptVariants()]] - `imports` [EXTRACTED]
 - [[tokenize()]] - `contains` [EXTRACTED]
 - [[tutor-scope-smoke.ts]] - `imports_from` [EXTRACTED]
 - [[uzbek-translit.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__tutor-scopets
+#graphify/code #graphify/EXTRACTED #community/Community_41

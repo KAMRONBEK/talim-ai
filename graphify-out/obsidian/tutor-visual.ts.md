@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "packages types · useChatStore.ts"
+community: "Community 55"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__useChatStorets
+  - community/Community_55
 ---
 
 # tutor-visual.ts
@@ -31,4 +31,4 @@ tags:
 - [[serializeVisualBlock()]] - `contains` [EXTRACTED]
 - [[tutor-graph.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets
+#graphify/code #graphify/EXTRACTED #community/Community_55

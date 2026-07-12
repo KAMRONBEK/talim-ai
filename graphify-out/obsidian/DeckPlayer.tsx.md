@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "components deck · DeckPlayer.tsx"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck__DeckPlayertsx
+  - community/Shared_UI_Primitives
 ---
 
 # DeckPlayer.tsx
@@ -21,7 +21,7 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_32]] - `imports_from` [EXTRACTED]
+- [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck__DeckPlayertsx
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

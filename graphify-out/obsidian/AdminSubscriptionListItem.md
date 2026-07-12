@@ -1,18 +1,21 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "admin hooks"
-location: "L79"
+community: "Community 54"
+location: "L128"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_54
 ---
 
 # AdminSubscriptionListItem
 
 ## Connections
+- [[DrawerBodyProps]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
+- [[page.tsx_4]] - `imports` [EXTRACTED]
+- [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_54

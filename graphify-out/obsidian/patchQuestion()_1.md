@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "assessment"
-location: "L152"
+community: "Community 29"
+location: "L274"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment
+  - community/Community_29
 ---
 
 # patchQuestion()
@@ -14,8 +14,11 @@ tags:
 ## Connections
 - [[assertBank()]] - `calls` [EXTRACTED]
 - [[banks.ts]] - `contains` [EXTRACTED]
+- [[buildManualStorage()]] - `calls` [EXTRACTED]
 - [[formatQuestion()]] - `calls` [EXTRACTED]
 - [[isAnswerableMultipleChoice()]] - `calls` [EXTRACTED]
+- [[isAnswerableMultipleSelect()]] - `calls` [EXTRACTED]
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
+- [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment
+#graphify/code #graphify/EXTRACTED #community/Community_29

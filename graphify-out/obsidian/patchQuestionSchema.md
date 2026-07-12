@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "assessment"
-location: "L33"
+community: "Assessments Service"
+location: "L97"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment
+  - community/Assessments_Service
 ---
 
 # patchQuestionSchema
@@ -15,4 +15,4 @@ tags:
 - [[banks.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

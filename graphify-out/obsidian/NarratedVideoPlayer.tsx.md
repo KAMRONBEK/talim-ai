@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/NarratedVideoPlayer.tsx"
 type: "code"
-community: "components deck · DeckPlayer.tsx"
+community: "Community 99"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck__DeckPlayertsx
+  - community/Community_99
 ---
 
 # NarratedVideoPlayer.tsx
@@ -24,6 +24,6 @@ tags:
 - [[VideoSegment]] - `imports` [EXTRACTED]
 - [[formatTime()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck__DeckPlayertsx
+#graphify/code #graphify/EXTRACTED #community/Community_99

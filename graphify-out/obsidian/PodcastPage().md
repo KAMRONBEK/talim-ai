@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/podcast/page.tsx"
 type: "code"
-community: "web hooks"
-location: "L333"
+community: "Flashcards Study Page"
+location: "L335"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # PodcastPage()
 
 ## Connections
-- [[page.tsx_31]] - `contains` [EXTRACTED]
+- [[page.tsx_32]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

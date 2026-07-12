@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/jobEvents.ts"
 type: "code"
-community: "src jobs"
-location: "L23"
+community: "Community 95"
+location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Community_95
 ---
 
 # SeqJobEvent
@@ -20,4 +20,4 @@ tags:
 - [[jobEvents.service.ts]] - `imports` [EXTRACTED]
 - [[jobEvents.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Community_95

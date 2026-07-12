@@ -1,24 +1,23 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "src controllers · quiz.controller.ts"
-location: "L151"
+community: "Community 58"
+location: "L215"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__quizcontrollerts
+  - community/Community_58
 ---
 
 # evaluateQuizAnswers()
 
 ## Connections
+- [[answerToString()]] - `calls` [EXTRACTED]
 - [[getLatestAttempt()]] - `calls` [EXTRACTED]
-- [[isOpenAnswerCorrect()]] - `calls` [EXTRACTED]
-- [[isSelectedAnswerCorrect()]] - `calls` [EXTRACTED]
+- [[gradeQuestion()]] - `calls` [EXTRACTED]
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
-- [[resolveCorrectAnswer()]] - `calls` [EXTRACTED]
 - [[resolveSubmittedAnswer()]] - `calls` [EXTRACTED]
 - [[submitQuiz()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_58

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-manim.ts"
 type: "code"
-community: "src lib"
+community: "Tutor Visual Tools"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib
+  - community/Tutor_Visual_Tools
 ---
 
 # validateManimScript()
@@ -16,4 +16,4 @@ tags:
 - [[tutor-manim.ts]] - `contains` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

@@ -1,21 +1,20 @@
 ---
 source_file: "apps/api/src/lib/question-quality.ts"
 type: "code"
-community: "src lib · GeneratedQuestion"
+community: "Question Generation Engine"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__GeneratedQuestion
+  - community/Question_Generation_Engine
 ---
 
 # question-quality.ts
 
 ## Connections
-- [[banks.ts]] - `imports_from` [EXTRACTED]
 - [[dropParrotingQuestions()]] - `contains` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
 - [[isParroting()]] - `contains` [EXTRACTED]
 - [[normalizeText()]] - `contains` [EXTRACTED]
+- [[question-postprocess.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__GeneratedQuestion
+#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine

@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 142
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[docker-compose.prod.yml (production override)]] - document - docker-compose.prod.yml
+- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
+- [[index.js]] - code - packages/config/eslint/index.js
 
 ## Live Query (requires Dataview plugin)
 

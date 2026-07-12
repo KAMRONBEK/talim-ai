@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/onboarding-checklist.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # onboarding-checklist.tsx
@@ -18,6 +18,6 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
-- [[page.tsx_25]] - `imports_from` [EXTRACTED]
+- [[page.tsx_26]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

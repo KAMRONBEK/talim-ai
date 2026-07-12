@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "services tenant"
-location: "L184"
+community: "Community 69"
+location: "L424"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Community_69
 ---
 
 # deleteStudent()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Community_69

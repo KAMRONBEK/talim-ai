@@ -1,19 +1,21 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "document"
-community: "qa · QA Cross-Cutting Matrix"
+community: "Community 72"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/qa__QA_Cross-Cutting_Matrix
+  - community/Community_72
 ---
 
 # Overnight Deep QA Runbook
 
 ## Connections
-- [[Deep Flow Tests Per Role]] - `references` [EXTRACTED]
-- [[QA Cross-Cutting Matrix]] - `references` [EXTRACTED]
-- [[QA Hard Rules (branch-only, local-only, fix-discipline)]] - `references` [EXTRACTED]
-- [[QA Test Depth Matrix]] - `references` [EXTRACTED]
+- [[Cross-cutting Matrix (locales, themes, breakpoints, console, a11y)]] - `references` [EXTRACTED]
+- [[Interactive-element Test Depth Matrix]] - `references` [EXTRACTED]
+- [[Overnight Visual QA Report (Run Journal)]] - `references` [EXTRACTED]
+- [[QA Test Accounts]] - `shares_data_with` [INFERRED]
+- [[Unattended Preflight & Auto-recovery Protocol]] - `references` [EXTRACTED]
+- [[qa-run Skill — Resumable Visual QA Run]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/qa__QA_Cross-Cutting_Matrix
+#graphify/document #graphify/EXTRACTED #community/Community_72

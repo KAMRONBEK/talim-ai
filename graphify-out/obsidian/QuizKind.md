@@ -1,19 +1,17 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L18"
+community: "Shared Types & Chat Hooks"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Shared_Types__Chat_Hooks
 ---
 
 # QuizKind
 
 ## Connections
 - [[index.ts_2]] - `contains` [EXTRACTED]
-- [[useContentActions.ts]] - `imports` [EXTRACTED]
-- [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks

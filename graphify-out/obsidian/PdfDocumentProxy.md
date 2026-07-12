@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
+community: "Community 36"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_36
 ---
 
 # PdfDocumentProxy
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewer.tsx]] - `imports` [EXTRACTED]
 - [[pdfjs-cdn.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_36

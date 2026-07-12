@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "package.json"
-location: "L18"
+community: "Community 42"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_42
 ---
 
 # db:seed
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_42

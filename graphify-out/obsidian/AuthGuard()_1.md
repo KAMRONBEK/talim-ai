@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/auth-guard.tsx"
 type: "code"
-community: "[locale] dashboard"
+community: "Community 46"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Community_46
 ---
 
 # AuthGuard()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[auth-guard.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_46

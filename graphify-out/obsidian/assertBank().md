@@ -1,21 +1,22 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "assessment"
-location: "L208"
+community: "Community 29"
+location: "L350"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment
+  - community/Community_29
 ---
 
 # assertBank()
 
 ## Connections
 - [[banks.ts]] - `imports` [EXTRACTED]
+- [[createBankQuestion()_1]] - `calls` [EXTRACTED]
 - [[generateQuestions()_1]] - `calls` [EXTRACTED]
 - [[listQuestions()_1]] - `calls` [EXTRACTED]
 - [[patchQuestion()_1]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment
+#graphify/code #graphify/EXTRACTED #community/Community_29

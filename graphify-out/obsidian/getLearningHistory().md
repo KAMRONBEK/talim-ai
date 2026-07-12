@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/progress.controller.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # getLearningHistory()
@@ -18,4 +18,4 @@ tags:
 - [[progress.controller.ts]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # page.tsx
@@ -15,6 +15,7 @@ tags:
 - [[Button]] - `imports` [EXTRACTED]
 - [[OnboardingChecklist()]] - `imports` [EXTRACTED]
 - [[RecentContentGrid()]] - `imports` [EXTRACTED]
+- [[StatCard()_2]] - `contains` [EXTRACTED]
 - [[TenantDashboardPage()]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
@@ -29,4 +30,4 @@ tags:
 - [[useTenantSearch()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "src controllers · summary.controller.ts"
+community: "Slide Deck Prompts"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__summarycontrollerts
+  - community/Slide_Deck_Prompts
 ---
 
 # buildContext()
@@ -19,4 +19,4 @@ tags:
 - [[getSectionBody()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

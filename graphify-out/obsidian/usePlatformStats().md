@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
-location: "L23"
+community: "Community 62"
+location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Community_62
 ---
 
 # usePlatformStats()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_2]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Community_62

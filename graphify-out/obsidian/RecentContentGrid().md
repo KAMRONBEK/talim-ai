@@ -1,22 +1,21 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "[locale] dashboard"
-location: "L64"
+community: "Community 71"
+location: "L103"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Community_71
 ---
 
 # RecentContentGrid()
 
 ## Connections
 - [[T]] - `calls` [INFERRED]
-- [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[page.tsx_21]] - `imports` [EXTRACTED]
-- [[page.tsx_23]] - `imports` [EXTRACTED]
-- [[page.tsx_34]] - `imports` [EXTRACTED]
+- [[page.tsx_24]] - `imports` [EXTRACTED]
+- [[page.tsx_35]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_71

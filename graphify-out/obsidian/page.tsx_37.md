@@ -1,23 +1,24 @@
 ---
-source_file: "apps/web/app/[locale]/pricing/page.tsx"
+source_file: "apps/web/app/[locale]/impersonate/page.tsx"
 type: "code"
-community: "components marketing"
+community: "Community 81"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_marketing
+  - community/Community_81
 ---
 
 # page.tsx
 
 ## Connections
-- [[Footer()]] - `imports` [EXTRACTED]
-- [[Navbar()]] - `imports` [EXTRACTED]
-- [[Pricing()]] - `imports` [EXTRACTED]
-- [[PricingPage()]] - `contains` [EXTRACTED]
-- [[footer.tsx]] - `imports_from` [EXTRACTED]
-- [[navbar.tsx]] - `imports_from` [EXTRACTED]
-- [[pricing.tsx]] - `imports_from` [EXTRACTED]
+- [[ImpersonateInner()]] - `contains` [EXTRACTED]
+- [[ImpersonatePage()]] - `contains` [EXTRACTED]
+- [[SigningIn()]] - `contains` [EXTRACTED]
+- [[User]] - `imports` [EXTRACTED]
+- [[auth-routing.ts]] - `imports_from` [EXTRACTED]
+- [[getPostLoginPath()]] - `imports` [EXTRACTED]
+- [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_marketing
+#graphify/code #graphify/EXTRACTED #community/Community_81

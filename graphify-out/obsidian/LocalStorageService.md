@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "src services · LocalStorageService"
+community: "Community 117"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__LocalStorageService
+  - community/Community_117
 ---
 
 # LocalStorageService
@@ -22,4 +22,4 @@ tags:
 - [[index.ts]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__LocalStorageService
+#graphify/code #graphify/EXTRACTED #community/Community_117

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-3-tenant-experience.md"
 type: "document"
-community: "plans"
+community: "Community 57"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/plans
+  - community/Community_57
 ---
 
 # Epic 3 — Tenant (Organization) Experience
@@ -17,4 +17,4 @@ tags:
 - [[Epic Prompts Index]] - `references` [EXTRACTED]
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/plans
+#graphify/document #graphify/EXTRACTED #community/Community_57

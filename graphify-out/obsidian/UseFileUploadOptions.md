@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "ui components"
+community: "Community 53"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Community_53
 ---
 
 # UseFileUploadOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useFileUpload.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Community_53

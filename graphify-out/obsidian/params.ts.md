@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # params.ts
@@ -19,6 +19,7 @@ tags:
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[getParam()]] - `contains` [EXTRACTED]
+- [[learner.controller.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
@@ -31,4 +32,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

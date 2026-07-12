@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "packages types · package.json"
+community: "Community 75"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__packagejson
+  - community/Community_75
 ---
 
 # import
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[exports_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_75

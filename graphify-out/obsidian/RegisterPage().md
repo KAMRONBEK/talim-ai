@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/register/page.tsx"
 type: "code"
-community: "[locale] dashboard"
-location: "L13"
+community: "Admin App UI"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Admin_App_UI
 ---
 
 # RegisterPage()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_14]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Admin_App_UI

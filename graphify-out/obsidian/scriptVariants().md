@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/lib/uzbek-translit.ts"
 type: "code"
-community: "src lib · uzbek-translit.ts"
+community: "Community 41"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__uzbek-translitts
+  - community/Community_41
 ---
 
 # scriptVariants()
 
 ## Connections
 - [[guessScopeHeuristically()]] - `calls` [EXTRACTED]
+- [[looksLikeFollowUp()]] - `calls` [EXTRACTED]
 - [[rag.service.ts]] - `imports` [EXTRACTED]
 - [[searchSimilarChunks()]] - `calls` [EXTRACTED]
 - [[toCyrillic()]] - `calls` [EXTRACTED]
@@ -20,4 +21,4 @@ tags:
 - [[tutor-scope.ts]] - `imports` [EXTRACTED]
 - [[uzbek-translit.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__uzbek-translitts
+#graphify/code #graphify/EXTRACTED #community/Community_41

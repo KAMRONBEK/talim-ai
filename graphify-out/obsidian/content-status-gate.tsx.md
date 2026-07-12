@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "web lib"
+community: "Community 39"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib
+  - community/Community_39
 ---
 
 # content-status-gate.tsx
@@ -23,8 +23,8 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useRetryContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib
+#graphify/code #graphify/EXTRACTED #community/Community_39

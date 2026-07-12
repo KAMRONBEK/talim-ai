@@ -1,17 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "components learning"
+community: "Community 40"
 location: "L91"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning
+  - community/Community_40
 ---
 
 # CenteredMessage()
 
 ## Connections
-- [[page.tsx_32]] - `contains` [EXTRACTED]
+- [[page.tsx_33]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning
+#graphify/code #graphify/EXTRACTED #community/Community_40

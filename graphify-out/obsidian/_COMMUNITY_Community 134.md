@@ -1,17 +1,19 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.50
+members: 4
 ---
 
 # Community 134
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[FalkorDB Export]] - concept - .claude/skills/graphify/references/exports.md
-- [[Neo4j Export]] - concept - .claude/skills/graphify/references/exports.md
+- [[PATH]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh script]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[resolve_doppler()]] - code - scripts/cursor-talim-vps-mcp.sh
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "packages types"
-location: "L514"
+community: "Shared Types & Chat Hooks"
+location: "L840"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types
+  - community/Shared_Types__Chat_Hooks
 ---
 
 # UserUsageSummary
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks

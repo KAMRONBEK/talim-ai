@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "plans · Internationalization (uz / en / ru)"
+community: "Community 94"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/plans__Internationalization_uz_/_en_/_ru
+  - community/Community_94
 ---
 
 # Generate Grid (Yaratish)
@@ -14,4 +14,4 @@ tags:
 - [[Flashcards & Notes Generators]] - `references` [EXTRACTED]
 - [[Learn Hub Panel (ContentLearnPanel)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/plans__Internationalization_uz_/_en_/_ru
+#graphify/concept #graphify/EXTRACTED #community/Community_94

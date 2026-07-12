@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/user-display.ts"
 type: "code"
-community: "web lib · user-sidebar-footer.tsx"
+community: "Billing UI & Plans"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__user-sidebar-footertsx
+  - community/Billing_UI__Plans
 ---
 
 # getUserInitials()
@@ -16,4 +16,4 @@ tags:
 - [[user-display.ts]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__user-sidebar-footertsx
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

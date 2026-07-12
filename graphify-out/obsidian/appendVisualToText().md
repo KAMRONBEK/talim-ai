@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "packages types · useChatStore.ts"
-location: "L35"
+community: "Community 55"
+location: "L46"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__useChatStorets
+  - community/Community_55
 ---
 
 # appendVisualToText()
@@ -15,4 +15,4 @@ tags:
 - [[serializeVisualBlock()]] - `calls` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets
+#graphify/code #graphify/EXTRACTED #community/Community_55

@@ -1,34 +1,33 @@
 ---
-source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
+source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx"
 type: "code"
-community: "ui components"
+community: "Tenant Materials UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Tenant_Materials_UI
 ---
 
 # page.tsx
 
 ## Connections
-- [[Button]] - `imports` [EXTRACTED]
-- [[Dialog()]] - `imports` [EXTRACTED]
-- [[DialogContent()]] - `imports` [EXTRACTED]
-- [[DialogHeader()]] - `imports` [EXTRACTED]
-- [[DialogTitle()]] - `imports` [EXTRACTED]
-- [[Input]] - `imports` [EXTRACTED]
-- [[RecentContentGrid()]] - `imports` [EXTRACTED]
-- [[TenantMaterialsPage()]] - `contains` [EXTRACTED]
+- [[AppLocale]] - `imports` [EXTRACTED]
+- [[Badge()]] - `imports` [EXTRACTED]
+- [[ContentStatus]] - `imports` [EXTRACTED]
+- [[ContentType]] - `imports` [EXTRACTED]
+- [[MaterialMediaPanel()]] - `imports` [EXTRACTED]
+- [[TYPE_LABEL_KEY]] - `contains` [EXTRACTED]
+- [[TenantMaterialDetailPage()]] - `contains` [EXTRACTED]
+- [[buttonVariants]] - `imports` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
+- [[format-relative-time.ts]] - `imports_from` [EXTRACTED]
+- [[formatRelativeTime()]] - `imports` [EXTRACTED]
+- [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
-- [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
-- [[useCreateTenantYoutubeContent()]] - `imports` [EXTRACTED]
-- [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
+- [[material-media-panel.tsx]] - `imports_from` [EXTRACTED]
+- [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[useTenantContent()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
-- [[useTenantContents()]] - `imports` [EXTRACTED]
-- [[useTenantSearch()]] - `imports` [EXTRACTED]
-- [[useUploadTenantContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI

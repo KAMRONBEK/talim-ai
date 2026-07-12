@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/locale-api.ts"
 type: "code"
-community: "packages types · api.ts"
+community: "Community 98"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__apits
+  - community/Community_98
 ---
 
 # setApiLocale()
@@ -16,4 +16,4 @@ tags:
 - [[locale-api.ts]] - `contains` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__apits
+#graphify/code #graphify/EXTRACTED #community/Community_98

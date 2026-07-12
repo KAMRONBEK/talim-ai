@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "src services · env.ts"
+community: "Env Config & Job Events"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__envts
+  - community/Env_Config__Job_Events
 ---
 
 # envSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[env.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__envts
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events

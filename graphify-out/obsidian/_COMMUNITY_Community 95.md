@@ -1,22 +1,25 @@
 ---
 type: community
-cohesion: 0.29
-members: 7
+cohesion: 0.24
+members: 10
 ---
 
 # Community 95
 
-**Cohesion:** 0.29 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.24 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[Flashcards & Notes Generators]] - concept - docs/plans/youlearn-redesign.md
-- [[Generate Grid (Yaratish)]] - concept - docs/plans/youlearn-redesign.md
-- [[Learn Hub Panel (ContentLearnPanel)]] - concept - docs/plans/youlearn-redesign.md
-- [[Learning Workspace Redesign (YouLearn-inspired)]] - document - docs/plans/youlearn-redesign.md
-- [[Persistent Study Workspace (3-pane)]] - rationale - docs/plans/youlearn-redesign.md
-- [[Role Adaptations (server-side security)]] - rationale - docs/plans/youlearn-redesign.md
-- [[Visual Direction (girih, marker-highlight)]] - concept - docs/plans/youlearn-redesign.md
+- [[.constructor()_3]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[.publish()]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[.replay()]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[.subscribe()]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[InProcessJobEventBus]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[JobEvent]] - code - packages/types/jobEvents.ts
+- [[JobEventStatus]] - code - packages/types/jobEvents.ts
+- [[SeqJobEvent]] - code - packages/types/jobEvents.ts
+- [[UserState]] - code - apps/api/src/services/events/jobEvents.service.ts
+- [[jobEvents.ts]] - code - packages/types/jobEvents.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,10 +29,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 92]]
-- 1 edge to [[_COMMUNITY_Community 71]]
-- 1 edge to [[_COMMUNITY_Community 93]]
+- 4 edges to [[_COMMUNITY_Env Config & Job Events]]
+- 4 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 2 edges to [[_COMMUNITY_Community 52]]
+- 1 edge to [[_COMMUNITY_Admin & Usage Controllers]]
 
 ## Top bridge nodes
-- [[Learning Workspace Redesign (YouLearn-inspired)]] - degree 6, connects to 2 communities
-- [[Flashcards & Notes Generators]] - degree 2, connects to 1 community
+- [[SeqJobEvent]] - degree 7, connects to 3 communities
+- [[JobEvent]] - degree 6, connects to 3 communities
+- [[InProcessJobEventBus]] - degree 5, connects to 1 community
+- [[jobEvents.ts]] - degree 4, connects to 1 community
+- [[UserState]] - degree 2, connects to 1 community

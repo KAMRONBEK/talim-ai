@@ -1,22 +1,25 @@
 ---
 type: community
-cohesion: 0.48
-members: 7
+cohesion: 0.20
+members: 10
 ---
 
 # Community 97
 
-**Cohesion:** 0.48 - moderately connected
-**Members:** 7 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[OPTION_LABELS]] - code - packages/types/quiz-answer.ts
-- [[getOptionLabel()]] - code - packages/types/quiz-answer.ts
-- [[isSelectedAnswerCorrect()]] - code - packages/types/quiz-answer.ts
-- [[normalize()_1]] - code - packages/types/quiz-answer.ts
-- [[quiz-answer.ts]] - code - packages/types/quiz-answer.ts
-- [[resolveCorrectAnswer()]] - code - packages/types/quiz-answer.ts
-- [[stripOptionLabel()]] - code - packages/types/quiz-answer.ts
+- [[unnamed_1]] - code - apps/web/tsconfig.json
+- [[allowJs_1]] - code - apps/web/tsconfig.json
+- [[compilerOptions_2]] - code - apps/web/tsconfig.json
+- [[exclude_1]] - code - apps/web/tsconfig.json
+- [[extends_2]] - code - apps/web/tsconfig.json
+- [[include_2]] - code - apps/web/tsconfig.json
+- [[incremental_1]] - code - apps/web/tsconfig.json
+- [[paths_1]] - code - apps/web/tsconfig.json
+- [[plugins_1]] - code - apps/web/tsconfig.json
+- [[tsconfig.json_2]] - code - apps/web/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,13 +27,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_97
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 6 edges to [[_COMMUNITY_Quiz Controller]]
-- 3 edges to [[_COMMUNITY_Community 83]]
-- 3 edges to [[_COMMUNITY_Slide Deck Types]]
-
-## Top bridge nodes
-- [[isSelectedAnswerCorrect()]] - degree 11, connects to 3 communities
-- [[resolveCorrectAnswer()]] - degree 7, connects to 3 communities
-- [[quiz-answer.ts]] - degree 7, connects to 1 community

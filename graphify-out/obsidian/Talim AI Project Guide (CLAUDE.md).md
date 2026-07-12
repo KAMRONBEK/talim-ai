@@ -1,11 +1,11 @@
 ---
 source_file: "CLAUDE.md"
 type: "document"
-community: "docs · Multi-tenant isolation enforced central"
+community: "Community 86"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/docs__Multi-tenant_isolation_enforced_central
+  - community/Community_86
 ---
 
 # Talim AI project guide (CLAUDE.md)
@@ -18,4 +18,4 @@ tags:
 - [[Use dbmigratedeploy locally (checksum drift)]] - `references` [EXTRACTED]
 - [[i18n lives only in appsweb (next-intl + locale)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/docs__Multi-tenant_isolation_enforced_central
+#graphify/document #graphify/EXTRACTED #community/Community_86

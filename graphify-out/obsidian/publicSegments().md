@@ -1,19 +1,18 @@
 ---
-source_file: "apps/api/src/controllers/video.controller.ts"
+source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "src controllers"
-location: "L46"
+community: "Content API Controllers"
+location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # publicSegments()
 
 ## Connections
-- [[formatVideo()]] - `calls` [EXTRACTED]
-- [[parseSegments()]] - `calls` [EXTRACTED]
-- [[video.controller.ts]] - `contains` [EXTRACTED]
+- [[formatEpisode()]] - `calls` [EXTRACTED]
+- [[podcast.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

@@ -1,17 +1,18 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 3
 ---
 
 # Community 136
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 3 nodes
 
 ## Members
-- [[doppler-docker-restart.sh]] - code - scripts/doppler-docker-restart.sh
-- [[doppler-docker-restart.sh script]] - code - scripts/doppler-docker-restart.sh
+- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
+- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
+- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "web hooks"
+community: "Community 38"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Community_38
 ---
 
 # useLimitErrorHandler.ts
@@ -17,15 +17,16 @@ tags:
 - [[UploadCard.tsx]] - `imports_from` [EXTRACTED]
 - [[classifyLimitError()]] - `imports` [EXTRACTED]
 - [[limit-error.ts]] - `imports_from` [EXTRACTED]
-- [[page.tsx_29]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[page.tsx_32]] - `imports_from` [EXTRACTED]
 - [[page.tsx_33]] - `imports_from` [EXTRACTED]
+- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `contains` [EXTRACTED]
 - [[useUpgradeModal]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_38

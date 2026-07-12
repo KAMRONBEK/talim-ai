@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "src controllers · chat.controller.ts"
-location: "L158"
+community: "AI Tutor Chat API"
+location: "L159"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__chatcontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # streamChat()
@@ -29,4 +29,4 @@ tags:
 - [[serializeBlockForMessage()]] - `calls` [EXTRACTED]
 - [[streamStaticAssistantResponse()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

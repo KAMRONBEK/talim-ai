@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/store/useAuthStore.ts"
 type: "code"
-community: "admin store"
+community: "Community 81"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_store
+  - community/Community_81
 ---
 
 # useAuthStore
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useAuthStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_store
+#graphify/code #graphify/EXTRACTED #community/Community_81

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "src lib"
+community: "Tutor Visual Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib
+  - community/Tutor_Visual_Tools
 ---
 
 # tutor-tools.ts
@@ -42,4 +42,4 @@ tags:
 - [[validateManimScript()]] - `imports` [EXTRACTED]
 - [[validateMermaidPayload()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

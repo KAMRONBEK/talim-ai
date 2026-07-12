@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "components chat · DesmosGraph.tsx"
+community: "Community 82"
 location: "L232"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__DesmosGraphtsx
+  - community/Community_82
 ---
 
 # DesmosGraph()
@@ -17,4 +17,4 @@ tags:
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 - [[buildFallbackGraph()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__DesmosGraphtsx
+#graphify/code #graphify/EXTRACTED #community/Community_82

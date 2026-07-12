@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "src controllers · content.controller.ts"
-location: "L86"
+community: "Content Upload & Ingest"
+location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__contentcontrollerts
+  - community/Content_Upload__Ingest
 ---
 
 # formatContent()
@@ -19,4 +19,4 @@ tags:
 - [[retryContent()]] - `calls` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__contentcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest

@@ -1,21 +1,23 @@
 ---
 source_file: "apps/web/hooks/useFlashcards.ts"
 type: "code"
-community: "web hooks"
-location: "L8"
+community: "Flashcards Study Page"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks
+  - community/Flashcards_Study_Page
 ---
 
 # useFlashcards()
 
 ## Connections
-- [[FlashcardsPage()]] - `calls` [EXTRACTED]
-- [[page.tsx_29]] - `imports` [EXTRACTED]
+- [[ContentStage()]] - `calls` [EXTRACTED]
+- [[FlashcardsInner()]] - `calls` [EXTRACTED]
+- [[content-stage.tsx]] - `imports` [EXTRACTED]
+- [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useFlashcards.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

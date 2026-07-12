@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "tsconfig · node.json"
+community: "Community 102"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/tsconfig__nodejson
+  - community/Community_102
 ---
 
 # compilerOptions
@@ -19,4 +19,4 @@ tags:
 - [[outDir_1]] - `contains` [EXTRACTED]
 - [[rootDir_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/tsconfig__nodejson
+#graphify/code #graphify/EXTRACTED #community/Community_102

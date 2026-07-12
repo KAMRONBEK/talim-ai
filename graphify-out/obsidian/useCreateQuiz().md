@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L76"
+community: "Quiz Player & Hooks"
+location: "L77"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Quiz_Player__Hooks
 ---
 
 # useCreateQuiz()
 
 ## Connections
-- [[useContentActions()]] - `calls` [EXTRACTED]
-- [[useContentActions.ts]] - `imports` [EXTRACTED]
+- [[PracticeGenerator()]] - `calls` [EXTRACTED]
+- [[practice-generator.tsx]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks

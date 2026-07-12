@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "src controllers · tenant.controller.ts"
-location: "L7"
+community: "Community 48"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__tenantcontrollerts
+  - community/Community_48
 ---
 
 # requireOwnerTenant()
@@ -15,13 +15,20 @@ tags:
 - [[assignContent()]] - `calls` [EXTRACTED]
 - [[createStudent()]] - `calls` [EXTRACTED]
 - [[deleteStudent()]] - `calls` [EXTRACTED]
-- [[getProgress()]] - `calls` [EXTRACTED]
+- [[getProgress()_1]] - `calls` [EXTRACTED]
+- [[getProgressTopics()]] - `calls` [EXTRACTED]
 - [[getStudentProgress()]] - `calls` [EXTRACTED]
+- [[importStudents()]] - `calls` [EXTRACTED]
 - [[listContentAssignments()]] - `calls` [EXTRACTED]
+- [[listSentMessages()]] - `calls` [EXTRACTED]
 - [[listStudents()]] - `calls` [EXTRACTED]
+- [[markReplyRead()]] - `calls` [EXTRACTED]
+- [[messagesUnreadCount()]] - `calls` [EXTRACTED]
 - [[patchStudent()]] - `calls` [EXTRACTED]
 - [[resetStudentPassword()]] - `calls` [EXTRACTED]
+- [[respondToReply()]] - `calls` [EXTRACTED]
+- [[sendMessage()]] - `calls` [EXTRACTED]
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 - [[unassignContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__tenantcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_48

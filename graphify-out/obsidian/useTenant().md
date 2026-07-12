@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
-location: "L13"
+community: "Tenant Dashboard & Shell"
+location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # useTenant()
@@ -16,8 +16,8 @@ tags:
 - [[TenantSettingsPage()]] - `calls` [INFERRED]
 - [[TenantSidebarBody()]] - `calls` [EXTRACTED]
 - [[join-code-card.tsx]] - `imports` [EXTRACTED]
-- [[page.tsx_25]] - `imports` [EXTRACTED]
+- [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

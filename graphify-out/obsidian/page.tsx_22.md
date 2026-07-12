@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx"
 type: "code"
-community: "web lib"
+community: "Community 35"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib
+  - community/Community_35
 ---
 
 # page.tsx
@@ -14,9 +14,11 @@ tags:
 ## Connections
 - [[AssignContentPage()]] - `contains` [EXTRACTED]
 - [[AssignStudentsPanel()]] - `imports` [EXTRACTED]
+- [[MaterialMediaPanel()]] - `imports` [EXTRACTED]
 - [[assign-students-panel.tsx]] - `imports_from` [EXTRACTED]
+- [[material-media-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantContent()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib
+#graphify/code #graphify/EXTRACTED #community/Community_35

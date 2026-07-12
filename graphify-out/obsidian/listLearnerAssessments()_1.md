@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "assessment · learner.ts"
-location: "L12"
+community: "Assessments Service"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment__learnerts
+  - community/Assessments_Service
 ---
 
 # listLearnerAssessments()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment__learnerts
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

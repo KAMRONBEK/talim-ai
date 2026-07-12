@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/nextjs.json"
 type: "code"
-community: "tsconfig · nextjs.json"
+community: "Community 96"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/tsconfig__nextjsjson
+  - community/Community_96
 ---
 
 # extends
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[nextjs.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/tsconfig__nextjsjson
+#graphify/code #graphify/EXTRACTED #community/Community_96

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "subscription"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # prisma.ts
@@ -15,14 +15,17 @@ tags:
 - [[admin.ts]] - `imports_from` [EXTRACTED]
 - [[adminUserRole.service.ts]] - `imports_from` [EXTRACTED]
 - [[analytics.controller.ts]] - `imports_from` [EXTRACTED]
+- [[analytics.service.ts]] - `imports_from` [EXTRACTED]
 - [[assessments.ts]] - `imports_from` [EXTRACTED]
 - [[assignments.ts]] - `imports_from` [EXTRACTED]
 - [[audit.service.ts]] - `imports_from` [EXTRACTED]
 - [[auth.controller.ts]] - `imports_from` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[badges.service.ts]] - `imports_from` [EXTRACTED]
 - [[banks.ts]] - `imports_from` [EXTRACTED]
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
+- [[chunk-sampling.ts]] - `imports_from` [EXTRACTED]
 - [[content-shared.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
@@ -39,6 +42,8 @@ tags:
 - [[inspect-chunks.ts]] - `imports_from` [EXTRACTED]
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
+- [[mastery.service.ts]] - `imports_from` [EXTRACTED]
+- [[messages.ts]] - `imports_from` [EXTRACTED]
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[prisma_2]] - `contains` [EXTRACTED]
@@ -51,12 +56,14 @@ tags:
 - [[results.ts]] - `imports_from` [EXTRACTED]
 - [[section.controller.ts]] - `imports_from` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
+- [[sectionMastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[seed.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 - [[shared.ts_2]] - `imports_from` [EXTRACTED]
 - [[shared.ts_3]] - `imports_from` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[smoke-quota.ts]] - `imports_from` [EXTRACTED]
+- [[srs.service.ts]] - `imports_from` [EXTRACTED]
 - [[students.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
@@ -69,4 +76,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

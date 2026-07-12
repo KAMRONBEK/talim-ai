@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "plans · Internationalization (uz / en / ru)"
+community: "Community 94"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/plans__Internationalization_uz_/_en_/_ru
+  - community/Community_94
 ---
 
 # Learning Workspace Redesign (YouLearn-inspired)
@@ -18,4 +18,4 @@ tags:
 - [[Role Adaptations (server-side security)]] - `references` [EXTRACTED]
 - [[Visual Direction (girih, marker-highlight)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/plans__Internationalization_uz_/_en_/_ru
+#graphify/document #graphify/EXTRACTED #community/Community_94

@@ -1,38 +1,42 @@
 ---
 type: community
-cohesion: 0.15
-members: 23
+cohesion: 0.12
+members: 27
 ---
 
 # Community 36
 
-**Cohesion:** 0.15 - loosely connected
-**Members:** 23 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 27 nodes
 
 ## Members
-- [[INDIVIDUAL_QUOTA_FEATURES]] - code - apps/web/lib/limit-error.ts
-- [[LimitError]] - code - apps/web/lib/limit-error.ts
-- [[QuestionStyle_2]] - code - packages/types/index.ts
-- [[QuizAttempt]] - code - packages/types/index.ts
-- [[QuizKind]] - code - packages/types/index.ts
-- [[QuizPage()]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
-- [[QuizResult()]] - code - apps/web/components/quiz/QuizResult.tsx
-- [[YoutubeLinkForm()]] - code - apps/web/components/content/UploadCard.tsx
-- [[classifyLimitError()]] - code - apps/web/lib/limit-error.ts
-- [[limit-error.ts]] - code - apps/web/lib/limit-error.ts
-- [[page.tsx_37]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
-- [[useContent()]] - code - apps/web/hooks/useContent.ts
-- [[useContentActions()]] - code - apps/web/hooks/useContentActions.ts
-- [[useContentActions.ts]] - code - apps/web/hooks/useContentActions.ts
-- [[useCreateQuiz()]] - code - apps/web/hooks/useQuiz.ts
-- [[useLatestQuizAttempt()]] - code - apps/web/hooks/useQuiz.ts
-- [[useLimitErrorHandler()]] - code - apps/web/hooks/useLimitErrorHandler.ts
-- [[useLimitErrorHandler.ts]] - code - apps/web/hooks/useLimitErrorHandler.ts
-- [[useQuiz()]] - code - apps/web/hooks/useQuiz.ts
-- [[useQuiz.ts]] - code - apps/web/hooks/useQuiz.ts
-- [[useQuizHistory()]] - code - apps/web/hooks/useQuiz.ts
-- [[useSavedSummary()]] - code - apps/web/hooks/useQuiz.ts
-- [[useSubmitQuiz()]] - code - apps/web/hooks/useQuiz.ts
+- [[PageDimensions]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PageState]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfDocumentProxy]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfExcerptPayload]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfJsModule]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfPageProxy]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfSelectionMode]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfTextContentItem]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[PdfTextItem]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[PdfViewer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewer.tsx]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewerProps]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewport]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[Rect]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[clientRectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[cropPageCanvasRegion()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[ensureEndOfContent()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[estimateTextWidth()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[extractTextFromTextLayerMarquee()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[extractTextInDomRect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[getViewportTextBounds()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[isTextItem()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[pdf-area-selection.ts]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[pdfjs-cdn.ts]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[rectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[renderManualTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[renderTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -42,25 +46,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Content Detail Page]]
-- 9 edges to [[_COMMUNITY_Community 41]]
-- 7 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 6 edges to [[_COMMUNITY_Community 30]]
-- 6 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 6 edges to [[_COMMUNITY_Slide Deck Types]]
-- 5 edges to [[_COMMUNITY_Community 44]]
-- 5 edges to [[_COMMUNITY_Community 70]]
-- 3 edges to [[_COMMUNITY_Community 43]]
-- 3 edges to [[_COMMUNITY_Community 38]]
-- 3 edges to [[_COMMUNITY_Community 35]]
-- 3 edges to [[_COMMUNITY_Billing & Usage API]]
-- 2 edges to [[_COMMUNITY_App Layout & Guards]]
-- 2 edges to [[_COMMUNITY_Community 83]]
-- 1 edge to [[_COMMUNITY_Community 31]]
+- 5 edges to [[_COMMUNITY_Community 37]]
+- 1 edge to [[_COMMUNITY_Shared UI Primitives]]
+- 1 edge to [[_COMMUNITY_Admin App UI]]
+- 1 edge to [[_COMMUNITY_Community 33]]
 
 ## Top bridge nodes
-- [[useLimitErrorHandler()]] - degree 18, connects to 8 communities
-- [[useLimitErrorHandler.ts]] - degree 14, connects to 8 communities
-- [[page.tsx_37]] - degree 14, connects to 5 communities
-- [[useContent()]] - degree 14, connects to 5 communities
-- [[useContentActions.ts]] - degree 14, connects to 5 communities
+- [[PdfViewer.tsx]] - degree 22, connects to 3 communities
+- [[pdfjs-cdn.ts]] - degree 7, connects to 1 community
+- [[PdfExcerptPayload]] - degree 2, connects to 1 community
+- [[PdfViewer()]] - degree 2, connects to 1 community

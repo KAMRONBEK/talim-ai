@@ -1,36 +1,41 @@
 ---
 type: community
-cohesion: 0.16
-members: 21
+cohesion: 0.12
+members: 26
 ---
 
 # Community 41
 
-**Cohesion:** 0.16 - loosely connected
-**Members:** 21 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 26 nodes
 
 ## Members
-- [[ContentSidebarBody()]] - code - apps/web/components/layout/content-sidebar.tsx
-- [[LocaleSync()]] - code - apps/web/components/locale-sync.tsx
-- [[PodcastEpisode]] - code - packages/types/index.ts
-- [[PodcastPage()]] - code - apps/web/app/[locale]/content/[id]/podcast/page.tsx
-- [[PodcastPageInner()]] - code - apps/web/app/[locale]/content/[id]/podcast/page.tsx
-- [[PodcastPlayer()]] - code - apps/web/components/podcast/PodcastPlayer.tsx
-- [[PodcastPlayer.tsx]] - code - apps/web/components/podcast/PodcastPlayer.tsx
-- [[PodcastPlayerProps]] - code - apps/web/components/podcast/PodcastPlayer.tsx
-- [[formatDuration()]] - code - apps/web/app/[locale]/content/[id]/podcast/page.tsx
-- [[formatTime()_1]] - code - apps/web/components/podcast/PodcastPlayer.tsx
-- [[isNearEnd()]] - code - apps/web/components/podcast/PodcastPlayer.tsx
-- [[locale-sync.tsx]] - code - apps/web/components/locale-sync.tsx
-- [[page.tsx_30]] - code - apps/web/app/[locale]/content/[id]/podcast/page.tsx
-- [[useAutoGenerateOnLocaleChange()]] - code - apps/web/hooks/useLocaleContent.ts
-- [[useCreatePodcast()]] - code - apps/web/hooks/usePodcast.ts
-- [[useGenerateSummary()]] - code - apps/web/hooks/useQuiz.ts
-- [[useLocaleContent.ts]] - code - apps/web/hooks/useLocaleContent.ts
-- [[useLocaleSync()]] - code - apps/web/hooks/useLocaleContent.ts
-- [[usePodcast()]] - code - apps/web/hooks/usePodcast.ts
-- [[usePodcast.ts]] - code - apps/web/hooks/usePodcast.ts
-- [[useRegenerateEpisode()]] - code - apps/web/hooks/usePodcast.ts
+- [[CLARIFICATION_TEXT]] - code - apps/api/src/lib/tutor-scope.ts
+- [[CYRILLIC_TO_LATIN]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[ClassifyTutorScopeInput]] - code - apps/api/src/lib/tutor-scope.ts
+- [[LATIN_TO_CYRILLIC]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[OUT_OF_SCOPE_FOLLOWUP]] - code - apps/api/src/lib/tutor-scope.ts
+- [[OUT_OF_SCOPE_PREFIX]] - code - apps/api/src/lib/tutor-scope.ts
+- [[STOP_WORDS]] - code - apps/api/src/lib/tutor-scope.ts
+- [[TutorScopeDecision]] - code - apps/api/src/lib/tutor-scope.ts
+- [[TutorScopeRoute]] - code - apps/api/src/lib/tutor-scope.ts
+- [[classifyTutorScope()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[decisionSchema]] - code - apps/api/src/lib/tutor-scope.ts
+- [[formatRecentTurns()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[guessScopeHeuristically()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[isTutorClarification()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[isTutorScopeRefusal()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[looksLikeFollowUp()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[main()_6]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
+- [[overlapCount()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[scriptVariants()]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[toCyrillic()]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[toLatin()]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[tokenize()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[transliterate()]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[tutor-scope-smoke.ts]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
+- [[tutor-scope.ts]] - code - apps/api/src/lib/tutor-scope.ts
+- [[uzbek-translit.ts]] - code - apps/api/src/lib/uzbek-translit.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -40,21 +45,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 19 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 9 edges to [[_COMMUNITY_Community 36]]
-- 5 edges to [[_COMMUNITY_Content Detail Page]]
-- 5 edges to [[_COMMUNITY_Community 35]]
-- 4 edges to [[_COMMUNITY_Slide Deck Types]]
-- 3 edges to [[_COMMUNITY_Community 89]]
-- 2 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 2 edges to [[_COMMUNITY_Community 31]]
-- 2 edges to [[_COMMUNITY_Community 38]]
-- 1 edge to [[_COMMUNITY_Community 30]]
-- 1 edge to [[_COMMUNITY_App Layout & Guards]]
+- 10 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 2 edges to [[_COMMUNITY_Community 64]]
 
 ## Top bridge nodes
-- [[page.tsx_30]] - degree 23, connects to 7 communities
-- [[useLocaleContent.ts]] - degree 14, connects to 4 communities
-- [[usePodcast.ts]] - degree 11, connects to 4 communities
-- [[PodcastPageInner()]] - degree 9, connects to 3 communities
-- [[ContentSidebarBody()]] - degree 4, connects to 3 communities
+- [[tutor-scope.ts]] - degree 26, connects to 3 communities
+- [[uzbek-translit.ts]] - degree 8, connects to 1 community
+- [[scriptVariants()]] - degree 8, connects to 1 community
+- [[classifyTutorScope()]] - degree 7, connects to 1 community
+- [[ClassifyTutorScopeInput]] - degree 2, connects to 1 community

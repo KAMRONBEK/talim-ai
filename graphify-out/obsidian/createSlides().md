@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/slides.controller.ts"
 type: "code"
-community: "src services · slides.controller.ts"
+community: "Content API Controllers"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__slidescontrollerts
+  - community/Content_API_Controllers
 ---
 
 # createSlides()
@@ -21,4 +21,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[slides.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

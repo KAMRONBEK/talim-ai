@@ -1,38 +1,41 @@
 ---
 type: community
-cohesion: 0.13
-members: 23
+cohesion: 0.11
+members: 26
 ---
 
 # Community 37
 
-**Cohesion:** 0.13 - loosely connected
-**Members:** 23 nodes
+**Cohesion:** 0.11 - loosely connected
+**Members:** 26 nodes
 
 ## Members
-- [[CLARIFICATION_TEXT]] - code - apps/api/src/lib/tutor-scope.ts
-- [[CYRILLIC_TO_LATIN]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[ClassifyTutorScopeInput]] - code - apps/api/src/lib/tutor-scope.ts
-- [[LATIN_TO_CYRILLIC]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[OUT_OF_SCOPE_FOLLOWUP]] - code - apps/api/src/lib/tutor-scope.ts
-- [[OUT_OF_SCOPE_PREFIX]] - code - apps/api/src/lib/tutor-scope.ts
-- [[STOP_WORDS]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeDecision]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeRoute]] - code - apps/api/src/lib/tutor-scope.ts
-- [[classifyTutorScope()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[decisionSchema]] - code - apps/api/src/lib/tutor-scope.ts
-- [[guessScopeHeuristically()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[isTutorScopeRefusal()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[main()_6]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
-- [[overlapCount()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[scriptVariants()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[toCyrillic()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[toLatin()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tokenize()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[transliterate()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tutor-scope-smoke.ts]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
-- [[tutor-scope.ts]] - code - apps/api/src/lib/tutor-scope.ts
-- [[uzbek-translit.ts]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[.constructor()_5]] - code - apps/web/lib/authenticatedBlob.ts
+- [[BlobFetchError]] - code - apps/web/lib/authenticatedBlob.ts
+- [[ContentMasteryResponse]] - code - packages/types/index.ts
+- [[ContentStage()]] - code - apps/web/components/learning/content-stage.tsx
+- [[ContentStageProps]] - code - apps/web/components/learning/content-stage.tsx
+- [[FetchBlobOptions]] - code - apps/web/lib/authenticatedBlob.ts
+- [[PdfViewer]] - code - apps/web/components/learning/PdfViewerLazy.tsx
+- [[PdfViewerLazy.tsx]] - code - apps/web/components/learning/PdfViewerLazy.tsx
+- [[PdfViewerLoading()]] - code - apps/web/components/learning/PdfViewerLazy.tsx
+- [[StageExcerpt]] - code - apps/web/components/learning/content-stage.tsx
+- [[assessmentEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[authEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[authenticatedBlob.ts]] - code - apps/web/lib/authenticatedBlob.ts
+- [[content-stage.tsx]] - code - apps/web/components/learning/content-stage.tsx
+- [[contentEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[endpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[endpoints.ts]] - code - apps/web/lib/api/endpoints.ts
+- [[fetchAuthenticatedBlob()]] - code - apps/web/lib/authenticatedBlob.ts
+- [[learnerEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[loadPdfJs()]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[rasterize-pdf.ts]] - code - apps/web/lib/rasterize-pdf.ts
+- [[rasterizePdfToImages()]] - code - apps/web/lib/rasterize-pdf.ts
+- [[tenantEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[useMastery.ts]] - code - apps/web/hooks/useMastery.ts
+- [[useQuizHistory()]] - code - apps/web/hooks/useQuiz.ts
+- [[useReparseContent.ts]] - code - apps/web/hooks/useReparseContent.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -42,15 +45,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Community 48]]
-- 3 edges to [[_COMMUNITY_Usage Pricing & Chunk Tools]]
-- 2 edges to [[_COMMUNITY_Community 57]]
+- 7 edges to [[_COMMUNITY_Community 38]]
+- 6 edges to [[_COMMUNITY_Flashcards Study Page]]
+- 6 edges to [[_COMMUNITY_Community 40]]
+- 5 edges to [[_COMMUNITY_Community 36]]
+- 4 edges to [[_COMMUNITY_Transcript Panel]]
+- 4 edges to [[_COMMUNITY_Community 44]]
+- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 2 edges to [[_COMMUNITY_Community 32]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
 - 2 edges to [[_COMMUNITY_Community 35]]
-- 1 edge to [[_COMMUNITY_Slide Deck Types]]
+- 2 edges to [[_COMMUNITY_Community 52]]
+- 1 edge to [[_COMMUNITY_Community 43]]
+- 1 edge to [[_COMMUNITY_Community 46]]
+- 1 edge to [[_COMMUNITY_Admin App UI]]
 
 ## Top bridge nodes
-- [[tutor-scope.ts]] - degree 23, connects to 4 communities
-- [[uzbek-translit.ts]] - degree 8, connects to 1 community
-- [[scriptVariants()]] - degree 7, connects to 1 community
-- [[classifyTutorScope()]] - degree 6, connects to 1 community
-- [[ClassifyTutorScopeInput]] - degree 2, connects to 1 community
+- [[content-stage.tsx]] - degree 32, connects to 12 communities
+- [[ContentStage()]] - degree 8, connects to 5 communities
+- [[authenticatedBlob.ts]] - degree 8, connects to 3 communities
+- [[fetchAuthenticatedBlob()]] - degree 6, connects to 3 communities
+- [[useMastery.ts]] - degree 6, connects to 2 communities

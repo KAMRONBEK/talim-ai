@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "admin store"
-location: "L403"
+community: "Community 81"
+location: "L702"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_store
+  - community/Community_81
 ---
 
 # AdminUserListItem
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_store
+#graphify/code #graphify/EXTRACTED #community/Community_81

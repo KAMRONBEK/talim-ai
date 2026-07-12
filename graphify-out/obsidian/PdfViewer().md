@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
-location: "L118"
+community: "Community 36"
+location: "L123"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_36
 ---
 
 # PdfViewer()
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewer.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_36

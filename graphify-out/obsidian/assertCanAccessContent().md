@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # assertCanAccessContent()
@@ -27,6 +27,7 @@ tags:
 - [[getContent()]] - `calls` [EXTRACTED]
 - [[getContentChat()]] - `calls` [EXTRACTED]
 - [[getContentFile()]] - `calls` [EXTRACTED]
+- [[getContentMastery()]] - `calls` [EXTRACTED]
 - [[getContentProgress()]] - `calls` [EXTRACTED]
 - [[getContentTranscript()]] - `calls` [EXTRACTED]
 - [[getEpisodeProgress()]] - `calls` [EXTRACTED]
@@ -48,12 +49,14 @@ tags:
 - [[regenerateEpisode()]] - `calls` [EXTRACTED]
 - [[reparseContent()]] - `calls` [EXTRACTED]
 - [[retryContent()]] - `calls` [EXTRACTED]
+- [[reviewFlashcard()_1]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
+- [[srs.service.ts]] - `imports` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `calls` [EXTRACTED]
 - [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

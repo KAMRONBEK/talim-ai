@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "admin components"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Shared_UI_Primitives
 ---
 
 # input.tsx
@@ -17,4 +17,4 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

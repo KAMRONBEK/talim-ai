@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "src controllers · content.controller.ts"
+community: "Content Upload & Ingest"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__contentcontrollerts
+  - community/Content_Upload__Ingest
 ---
 
 # content.controller.ts
@@ -31,6 +31,7 @@ tags:
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[contentQueue]] - `imports` [EXTRACTED]
 - [[createYoutubeContent()]] - `contains` [EXTRACTED]
+- [[decodeUploadFilename()]] - `imports` [EXTRACTED]
 - [[deleteContent()_1]] - `contains` [EXTRACTED]
 - [[env.ts]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
@@ -38,6 +39,7 @@ tags:
 - [[extractTextFromPageImages()]] - `imports` [EXTRACTED]
 - [[extractYoutubeVideoId()]] - `imports` [EXTRACTED]
 - [[figure.service.ts]] - `imports_from` [EXTRACTED]
+- [[filename.ts]] - `imports_from` [EXTRACTED]
 - [[formatContent()]] - `contains` [EXTRACTED]
 - [[getContent()]] - `contains` [EXTRACTED]
 - [[getContentFile()]] - `contains` [EXTRACTED]
@@ -68,4 +70,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__contentcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest

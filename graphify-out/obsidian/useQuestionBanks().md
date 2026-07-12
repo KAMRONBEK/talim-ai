@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L15"
+community: "Assessment Pages & Wizard"
+location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Assessment_Pages__Wizard
 ---
 
 # useQuestionBanks()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

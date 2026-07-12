@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "src controllers · chat.controller.ts"
+community: "AI Tutor Chat API"
 location: "L123"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__chatcontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # resolveManimAsset()
@@ -16,4 +16,4 @@ tags:
 - [[getManimAsset()]] - `calls` [EXTRACTED]
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

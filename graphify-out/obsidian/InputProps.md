@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "admin components"
+community: "Shared UI Primitives"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Shared_UI_Primitives
 ---
 
 # InputProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[input.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

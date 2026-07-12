@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/progress/page.tsx"
 type: "code"
-community: "[locale] dashboard"
-location: "L8"
+community: "Account & Settings UI"
+location: "L31"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/locale_dashboard
+  - community/Account__Settings_UI
 ---
 
 # LearnerProgressPage()
@@ -15,6 +15,7 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_17]] - `contains` [EXTRACTED]
 - [[useContents()]] - `calls` [INFERRED]
+- [[useLearnerProgress()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/locale_dashboard
+#graphify/code #graphify/INFERRED #community/Account__Settings_UI

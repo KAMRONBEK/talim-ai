@@ -1,20 +1,22 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.38
+members: 7
 ---
 
 # Community 108
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.38 - loosely connected
+**Members:** 7 nodes
 
 ## Members
-- [[AI summaries]] - concept - docs/FEATURES.md
-- [[Auto quizzes (per-content)]] - concept - docs/FEATURES.md
-- [[F3 GET summaryid 404 console noise on workspace load]] - document - docs/qa/visual-qa-report.md
-- [[F4 React hydration error — RichText div inside p on quiz reveal]] - document - docs/qa/visual-qa-report.md
-- [[US-IND-030406 B2C workspace — Summary, Quiz, Chat (PDF)]] - document - docs/qa/user-stories.md
+- [[AdminHeader()]] - code - apps/admin/components/admin-header.tsx
+- [[AdminLayout()]] - code - apps/admin/app/(admin)/layout.tsx
+- [[AdminShell()]] - code - apps/admin/components/admin-shell.tsx
+- [[admin-header.tsx]] - code - apps/admin/components/admin-header.tsx
+- [[admin-shell.tsx]] - code - apps/admin/components/admin-shell.tsx
+- [[layout.tsx]] - code - apps/admin/app/(admin)/layout.tsx
+- [[navItems]] - code - apps/admin/components/admin-header.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,10 +26,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 71]]
-- 1 edge to [[_COMMUNITY_Community 77]]
-- 1 edge to [[_COMMUNITY_Community 92]]
+- 2 edges to [[_COMMUNITY_Admin App UI]]
 
 ## Top bridge nodes
-- [[Auto quizzes (per-content)]] - degree 4, connects to 2 communities
-- [[US-IND-030406 B2C workspace — Summary, Quiz, Chat (PDF)]] - degree 3, connects to 1 community
+- [[admin-header.tsx]] - degree 5, connects to 1 community

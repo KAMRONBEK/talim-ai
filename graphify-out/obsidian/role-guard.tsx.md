@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "components layout · role-guard.tsx"
+community: "Billing UI & Plans"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__role-guardtsx
+  - community/Billing_UI__Plans
 ---
 
 # role-guard.tsx
@@ -23,4 +23,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useAuthHydrated()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__role-guardtsx
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

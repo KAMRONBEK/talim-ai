@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "web"
+community: "Web Dependencies"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web
+  - community/Web_Dependencies
 ---
 
 # scripts
@@ -19,4 +19,4 @@ tags:
 - [[start_2]] - `contains` [EXTRACTED]
 - [[typecheck_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web
+#graphify/code #graphify/EXTRACTED #community/Web_Dependencies

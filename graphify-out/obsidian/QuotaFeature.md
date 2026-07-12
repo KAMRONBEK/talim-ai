@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web lib · upgrade-dialog.tsx"
-location: "L98"
+community: "Billing & Quota"
+location: "L147"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__upgrade-dialogtsx
+  - community/Billing__Quota
 ---
 
 # QuotaFeature
@@ -22,4 +22,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

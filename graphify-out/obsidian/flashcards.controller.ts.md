@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # flashcards.controller.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AppError]] - `imports` [EXTRACTED]
 - [[AuthenticatedRequest]] - `imports` [EXTRACTED]
+- [[ReviewRow]] - `contains` [EXTRACTED]
 - [[assertCanAccessContent()]] - `imports` [EXTRACTED]
 - [[assertCanGenerate()]] - `imports` [EXTRACTED]
 - [[assertQuota()]] - `imports` [EXTRACTED]
@@ -32,9 +33,15 @@ tags:
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
+- [[recordFlashcardReview()]] - `imports` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
+- [[reviewBodySchema_1]] - `contains` [EXTRACTED]
+- [[reviewFlashcard()]] - `contains` [EXTRACTED]
+- [[reviewFlashcard()_1]] - `imports` [EXTRACTED]
 - [[scopeKey()]] - `contains` [EXTRACTED]
+- [[sectionMastery.service.ts]] - `imports_from` [EXTRACTED]
+- [[srs.service.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

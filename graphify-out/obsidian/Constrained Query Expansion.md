@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/query.md"
 type: "rationale"
-community: "references"
+community: "Graphify Skill Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/references
+  - community/Graphify_Skill_Docs
 ---
 
 # Constrained Query Expansion
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[graphify query]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/references
+#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs

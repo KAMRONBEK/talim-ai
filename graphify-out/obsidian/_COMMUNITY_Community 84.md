@@ -1,24 +1,27 @@
 ---
 type: community
-cohesion: 0.28
-members: 9
+cohesion: 0.17
+members: 12
 ---
 
 # Community 84
 
-**Cohesion:** 0.28 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 12 nodes
 
 ## Members
-- [[Edge Case (EC) Traceability]] - concept - .claude/skills/qa-run/SKILL.md
-- [[Findings Ledger (Fn)]] - concept - .claude/skills/qa-run/SKILL.md
-- [[Playwright MCP (real browser driving)]] - concept - .claude/skills/qa-run/SKILL.md
-- [[Role-Isolation Check (S1)]] - concept - .claude/skills/qa-run/SKILL.md
-- [[Uzbek-First i18n Check]] - concept - .claude/skills/qa-run/SKILL.md
-- [[claudevisual-qa Branch]] - rationale - .claude/skills/qa-run/SKILL.md
-- [[qa-run skill]] - document - .claude/skills/qa-run/SKILL.md
-- [[user-stories.md (durable spec + results ledger)]] - concept - .claude/skills/qa-run/SKILL.md
-- [[visual-qa-report.md (run journal)]] - concept - .claude/skills/qa-run/SKILL.md
+- [[.tailwind.config]] - code - packages/config/tailwind/package.json
+- [[dependencies_3]] - code - packages/config/tailwind/package.json
+- [[devDependencies_4]] - code - packages/config/tailwind/package.json
+- [[exports]] - code - packages/config/tailwind/package.json
+- [[main_1]] - code - packages/config/tailwind/package.json
+- [[name_6]] - code - packages/config/tailwind/package.json
+- [[package.json_6]] - code - packages/config/tailwind/package.json
+- [[private_6]] - code - packages/config/tailwind/package.json
+- [[tailwindcss_2]] - code - packages/config/tailwind/package.json
+- [[tailwindcss-animate]] - code - packages/config/tailwind/package.json
+- [[type]] - code - packages/config/tailwind/package.json
+- [[version_5]] - code - packages/config/tailwind/package.json
 
 ## Live Query (requires Dataview plugin)
 

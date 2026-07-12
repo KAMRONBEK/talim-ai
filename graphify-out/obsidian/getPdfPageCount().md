@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "src services · usage-pricing.ts"
-location: "L28"
+community: "Community 50"
+location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__usage-pricingts
+  - community/Community_50
 ---
 
 # getPdfPageCount()
@@ -17,4 +17,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts
+#graphify/code #graphify/EXTRACTED #community/Community_50

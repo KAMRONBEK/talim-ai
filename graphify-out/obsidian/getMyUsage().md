@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/usage.controller.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin & Usage Controllers"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin__Usage_Controllers
 ---
 
 # getMyUsage()
@@ -16,4 +16,4 @@ tags:
 - [[monthToDateRange()]] - `calls` [EXTRACTED]
 - [[usage.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

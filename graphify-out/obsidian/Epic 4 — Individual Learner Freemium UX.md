@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-4-individual-freemium.md"
 type: "document"
-community: "plans"
+community: "Community 57"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/plans
+  - community/Community_57
 ---
 
 # Epic 4 — Individual Learner Freemium UX
@@ -16,4 +16,4 @@ tags:
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 - [[Quota-exceeded UpgradeModal UX]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/plans
+#graphify/document #graphify/EXTRACTED #community/Community_57

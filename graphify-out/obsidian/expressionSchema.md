@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "src lib · tutor-graph.ts"
+community: "Tutor Visual Tools"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__tutor-graphts
+  - community/Tutor_Visual_Tools
 ---
 
 # expressionSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-graph.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__tutor-graphts
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

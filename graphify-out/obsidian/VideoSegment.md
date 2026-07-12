@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "components deck · DeckPlayer.tsx"
-location: "L720"
+community: "Community 99"
+location: "L1273"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck__DeckPlayertsx
+  - community/Community_99
 ---
 
 # VideoSegment
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck__DeckPlayertsx
+#graphify/code #graphify/EXTRACTED #community/Community_99

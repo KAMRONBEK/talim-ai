@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/backlog/_template.md"
 type: "document"
-community: "plans"
+community: "Community 57"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/plans
+  - community/Community_57
 ---
 
 # Backlog Item Template
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/plans
+#graphify/document #graphify/EXTRACTED #community/Community_57

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useJobEvents.ts"
 type: "code"
-community: "web lib · providers.tsx"
-location: "L47"
+community: "Community 52"
+location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Community_52
 ---
 
 # applyEvent()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useJobEvents.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Community_52

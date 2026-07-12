@@ -1,17 +1,21 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.33
+members: 6
 ---
 
 # Community 121
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[config_1]] - code - apps/admin/postcss.config.mjs
-- [[postcss.config.mjs]] - code - apps/admin/postcss.config.mjs
+- [[.mcp.json]] - code - .mcp.json
+- [[@playwrightmcp_1]] - code - .mcp.json
+- [[bash_1]] - code - .mcp.json
+- [[npx_1]] - code - .mcp.json
+- [[playwright_1]] - code - .mcp.json
+- [[talim-vps_1]] - code - .mcp.json
 
 ## Live Query (requires Dataview plugin)
 

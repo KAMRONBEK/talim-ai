@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "components layout · plan.ts"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Tenant_Dashboard__Shell
 ---
 
 # tenant-shell.tsx
@@ -21,7 +21,7 @@ tags:
 - [[dashboard-header.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_3]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
-- [[page.tsx_23]] - `imports_from` [EXTRACTED]
+- [[page.tsx_24]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[useBilling()]] - `imports` [EXTRACTED]
@@ -30,4 +30,4 @@ tags:
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantSearch()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

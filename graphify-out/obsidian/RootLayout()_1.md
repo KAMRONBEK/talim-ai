@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/layout.tsx"
 type: "code"
-community: "web app · layout.tsx"
+community: "Community 148"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_app__layouttsx
+  - community/Community_148
 ---
 
 # RootLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_app__layouttsx
+#graphify/code #graphify/EXTRACTED #community/Community_148

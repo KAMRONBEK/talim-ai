@@ -1,35 +1,39 @@
 ---
 type: community
 cohesion: 0.15
-members: 20
+members: 24
 ---
 
 # Community 45
 
 **Cohesion:** 0.15 - loosely connected
-**Members:** 20 nodes
+**Members:** 24 nodes
 
 ## Members
-- [[ChartSeries]] - code - packages/types/tutor-visual.ts
-- [[ChatMessage]] - code - packages/types/index.ts
-- [[ChatState]] - code - apps/web/store/useChatStore.ts
-- [[DesmosExpression]] - code - packages/types/tutor-graph.ts
-- [[DesmosGraphPayload]] - code - packages/types/tutor-graph.ts
-- [[DesmosSlider]] - code - packages/types/tutor-graph.ts
-- [[DesmosViewport]] - code - packages/types/tutor-graph.ts
-- [[VisualBlock]] - code - packages/types/tutor-visual.ts
-- [[VisualKind]] - code - packages/types/tutor-visual.ts
-- [[VisualPayloadMap]] - code - packages/types/tutor-visual.ts
-- [[appendVisualToText()]] - code - apps/web/store/useChatStore.ts
-- [[parseFenceBlock()]] - code - packages/types/tutor-visual.ts
-- [[parseGraphBlock()]] - code - packages/types/tutor-graph.ts
-- [[parseVisualBlock()]] - code - packages/types/tutor-visual.ts
-- [[serializeDesmosAsVisual()]] - code - packages/types/tutor-visual.ts
-- [[serializeGraphBlock()_1]] - code - packages/types/tutor-graph.ts
-- [[serializeVisualBlock()]] - code - packages/types/tutor-visual.ts
-- [[tutor-graph.ts_1]] - code - packages/types/tutor-graph.ts
-- [[tutor-visual.ts]] - code - packages/types/tutor-visual.ts
-- [[useChatStore.ts]] - code - apps/web/store/useChatStore.ts
+- [[BigStatSlide]] - code - packages/types/deck.ts
+- [[BulletsSlide]] - code - packages/types/deck.ts
+- [[CalloutSlide]] - code - packages/types/deck.ts
+- [[ChartPayload]] - code - packages/types/tutor-visual.ts
+- [[ChartSlide]] - code - packages/types/deck.ts
+- [[ComparisonSlide]] - code - packages/types/deck.ts
+- [[ConceptSlide]] - code - packages/types/deck.ts
+- [[ContentSlideDeck]] - code - packages/types/deck.ts
+- [[CoverSlide]] - code - packages/types/deck.ts
+- [[DeckBullet]] - code - packages/types/deck.ts
+- [[DefinitionSlide]] - code - packages/types/deck.ts
+- [[DiagramSlide]] - code - packages/types/deck.ts
+- [[MermaidPayload]] - code - packages/types/tutor-visual.ts
+- [[ProcessSlide]] - code - packages/types/deck.ts
+- [[QuickCheckSlide]] - code - packages/types/deck.ts
+- [[QuoteSlide]] - code - packages/types/deck.ts
+- [[RecapSlide]] - code - packages/types/deck.ts
+- [[SectionSlide]] - code - packages/types/deck.ts
+- [[SlideBase]] - code - packages/types/deck.ts
+- [[SlideDeckStatus]] - code - packages/types/deck.ts
+- [[SlideLayout]] - code - packages/types/deck.ts
+- [[StatTrioSlide]] - code - packages/types/deck.ts
+- [[TwoColumnSlide]] - code - packages/types/deck.ts
+- [[deck.ts]] - code - packages/types/deck.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -39,19 +43,18 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 21 edges to [[_COMMUNITY_Slide Deck Types]]
-- 5 edges to [[_COMMUNITY_Tutor Visual Tools]]
-- 5 edges to [[_COMMUNITY_Community 43]]
-- 3 edges to [[_COMMUNITY_Community 48]]
-- 3 edges to [[_COMMUNITY_Community 47]]
-- 2 edges to [[_COMMUNITY_Community 35]]
-- 1 edge to [[_COMMUNITY_Env Config & Jobs]]
-- 1 edge to [[_COMMUNITY_Community 57]]
-- 1 edge to [[_COMMUNITY_Community 69]]
+- 24 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 17 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 3 edges to [[_COMMUNITY_Community 100]]
+- 3 edges to [[_COMMUNITY_Community 55]]
+- 2 edges to [[_COMMUNITY_Tutor Visual Tools]]
+- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 2 edges to [[_COMMUNITY_Community 67]]
+- 1 edge to [[_COMMUNITY_Community 40]]
 
 ## Top bridge nodes
-- [[VisualBlock]] - degree 7, connects to 5 communities
-- [[useChatStore.ts]] - degree 15, connects to 4 communities
-- [[tutor-visual.ts]] - degree 18, connects to 3 communities
-- [[parseFenceBlock()]] - degree 7, connects to 3 communities
-- [[serializeVisualBlock()]] - degree 7, connects to 3 communities
+- [[deck.ts]] - degree 30, connects to 5 communities
+- [[ChartPayload]] - degree 6, connects to 4 communities
+- [[MermaidPayload]] - degree 6, connects to 4 communities
+- [[ContentSlideDeck]] - degree 4, connects to 3 communities
+- [[ChartSlide]] - degree 5, connects to 2 communities

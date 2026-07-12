@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # podcast.controller.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AppError]] - `imports` [EXTRACTED]
 - [[AuthenticatedRequest]] - `imports` [EXTRACTED]
+- [[PodcastSegment]] - `imports` [EXTRACTED]
 - [[StorageService]] - `imports` [EXTRACTED]
 - [[assertCanAccessContent()]] - `imports` [EXTRACTED]
 - [[assertCanGenerate()]] - `imports` [EXTRACTED]
@@ -27,11 +28,13 @@ tags:
 - [[formatEpisode()]] - `contains` [EXTRACTED]
 - [[getParam()]] - `imports` [EXTRACTED]
 - [[getPodcast()]] - `contains` [EXTRACTED]
+- [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[podcastQueue]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
+- [[publicSegments()]] - `contains` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[regenerateEpisode()]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
@@ -40,4 +43,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

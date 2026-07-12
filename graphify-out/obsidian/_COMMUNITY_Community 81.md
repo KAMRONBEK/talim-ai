@@ -1,24 +1,28 @@
 ---
 type: community
-cohesion: 0.31
-members: 9
+cohesion: 0.17
+members: 13
 ---
 
 # Community 81
 
-**Cohesion:** 0.31 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[F31 Usage-limit errors mostly didn't surface the upgrade modal]] - document - docs/qa/user-stories.md
-- [[Hard upload cap UPLOAD_MAX_MB = 120]] - concept - docs/FEATURES.md
-- [[Pricing config (libpricing.ts + pricing page)]] - concept - docs/FEATURES.md
-- [[Quota error contract (402 QUOTA_EXCEEDED  413 PLAN_FILE_LIMIT  413 FILE_TOO_LARGE)]] - rationale - docs/FEATURES.md
-- [[Role-aware upgradePlanCode]] - rationale - docs/FEATURES.md
-- [[Single global upgrade modal (useUpgradeModal  GlobalUpgradeModal)]] - concept - docs/FEATURES.md
-- [[US-IND-08 Usage limit → subscription promotion modal]] - document - docs/qa/user-stories.md
-- [[Usage-limit UX & subscription promotion modal]] - concept - docs/FEATURES.md
-- [[classifyLimitError  useLimitErrorHandler decision logic]] - concept - docs/FEATURES.md
+- [[AdminUserDetail]] - code - packages/types/index.ts
+- [[AdminUserListItem]] - code - packages/types/index.ts
+- [[AuthState]] - code - apps/admin/store/useAuthStore.ts
+- [[AuthState_1]] - code - apps/web/store/useAuthStore.ts
+- [[ImpersonateInner()]] - code - apps/web/app/[locale]/impersonate/page.tsx
+- [[ImpersonatePage()]] - code - apps/web/app/[locale]/impersonate/page.tsx
+- [[SigningIn()]] - code - apps/web/app/[locale]/impersonate/page.tsx
+- [[User]] - code - packages/types/index.ts
+- [[page.tsx_37]] - code - apps/web/app/[locale]/impersonate/page.tsx
+- [[useAuthStore]] - code - apps/admin/store/useAuthStore.ts
+- [[useAuthStore_1]] - code - apps/web/store/useAuthStore.ts
+- [[useAuthStore.ts]] - code - apps/admin/store/useAuthStore.ts
+- [[useAuthStore.ts_1]] - code - apps/web/store/useAuthStore.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,7 +32,17 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Community 93]]
+- 7 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 3 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 2 edges to [[_COMMUNITY_Community 79]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 1 edge to [[_COMMUNITY_Community 46]]
+- 1 edge to [[_COMMUNITY_Community 52]]
+- 1 edge to [[_COMMUNITY_Account & Settings UI]]
 
 ## Top bridge nodes
-- [[Usage-limit UX & subscription promotion modal]] - degree 9, connects to 1 community
+- [[User]] - degree 10, connects to 4 communities
+- [[page.tsx_37]] - degree 8, connects to 3 communities
+- [[AdminUserListItem]] - degree 4, connects to 2 communities
+- [[AdminUserDetail]] - degree 3, connects to 2 communities
+- [[useAuthStore.ts]] - degree 4, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/locale-sync.tsx"
 type: "code"
-community: "web lib · providers.tsx"
+community: "Flashcards Study Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Flashcards_Study_Page
 ---
 
 # locale-sync.tsx
@@ -17,4 +17,4 @@ tags:
 - [[useLocaleContent.ts]] - `imports_from` [EXTRACTED]
 - [[useLocaleSync()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

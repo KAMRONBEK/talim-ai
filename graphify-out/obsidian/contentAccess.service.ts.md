@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "src controllers · content.controller.ts"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__contentcontrollerts
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # contentAccess.service.ts
@@ -27,18 +27,21 @@ tags:
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
 - [[getAssignedContentIds()]] - `contains` [EXTRACTED]
+- [[mastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
+- [[progress.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `contains` [EXTRACTED]
 - [[section.controller.ts]] - `imports_from` [EXTRACTED]
 - [[slides.controller.ts]] - `imports_from` [EXTRACTED]
+- [[srs.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__contentcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

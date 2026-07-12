@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "src controllers"
+community: "Content API Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers
+  - community/Content_API_Controllers
 ---
 
 # video.controller.ts
@@ -34,7 +34,7 @@ tags:
 - [[parseSegments()]] - `contains` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
-- [[publicSegments()]] - `contains` [EXTRACTED]
+- [[publicSegments()_1]] - `contains` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[scopeKey()_2]] - `contains` [EXTRACTED]
@@ -45,4 +45,4 @@ tags:
 - [[videoBodySchema]] - `contains` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

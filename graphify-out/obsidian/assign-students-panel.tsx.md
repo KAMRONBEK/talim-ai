@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/assign-students-panel.tsx"
 type: "code"
-community: "web hooks · page.tsx"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # assign-students-panel.tsx
@@ -18,11 +18,11 @@ tags:
 - [[Input]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[page.tsx_22]] - `imports_from` [EXTRACTED]
-- [[page.tsx_30]] - `imports_from` [EXTRACTED]
+- [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[useAssignContent()]] - `imports` [EXTRACTED]
 - [[useContentAssignments()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 - [[useUnassignContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

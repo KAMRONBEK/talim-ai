@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "components learning · pdf-area-selection.ts"
-location: "L90"
+community: "Community 36"
+location: "L95"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__pdf-area-selectionts
+  - community/Community_36
 ---
 
 # renderTextLayer()
@@ -16,4 +16,4 @@ tags:
 - [[ensureEndOfContent()]] - `calls` [EXTRACTED]
 - [[renderManualTextLayer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__pdf-area-selectionts
+#graphify/code #graphify/EXTRACTED #community/Community_36

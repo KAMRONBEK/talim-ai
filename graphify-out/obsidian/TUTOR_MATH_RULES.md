@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "src lib · locale-prompts.ts"
+community: "Community 31"
 location: "L162"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_lib__locale-promptsts
+  - community/Community_31
 ---
 
 # TUTOR_MATH_RULES
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_lib__locale-promptsts
+#graphify/code #graphify/EXTRACTED #community/Community_31

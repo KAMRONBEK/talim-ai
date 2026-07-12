@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "web lib · upgrade-dialog.tsx"
-location: "L32"
+community: "Community 49"
+location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__upgrade-dialogtsx
+  - community/Community_49
 ---
 
 # PlanCode
@@ -22,7 +22,8 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[pricing.ts]] - `imports` [EXTRACTED]
+- [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx
+#graphify/code #graphify/EXTRACTED #community/Community_49

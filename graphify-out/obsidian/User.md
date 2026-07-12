@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "admin store"
-location: "L175"
+community: "Community 81"
+location: "L367"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_store
+  - community/Community_81
 ---
 
 # User
@@ -16,10 +16,11 @@ tags:
 - [[AppLocale]] - `references` [EXTRACTED]
 - [[AuthState]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
+- [[page.tsx_37]] - `imports` [EXTRACTED]
 - [[session-sync.tsx]] - `imports` [EXTRACTED]
 - [[useAccount.ts]] - `imports` [EXTRACTED]
 - [[useAuthStore.ts]] - `imports` [EXTRACTED]
 - [[useAuthStore.ts_1]] - `imports` [EXTRACTED]
 - [[user-display.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_store
+#graphify/code #graphify/EXTRACTED #community/Community_81

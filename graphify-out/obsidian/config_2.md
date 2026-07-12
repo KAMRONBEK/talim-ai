@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/tailwind.config.ts"
 type: "code"
-community: "apps admin · tailwind.config.ts"
+community: "Community 125"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/apps_admin__tailwindconfigts
+  - community/Community_125
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tailwind.config.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/apps_admin__tailwindconfigts
+#graphify/code #graphify/EXTRACTED #community/Community_125

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "src jobs"
+community: "Community 95"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_jobs
+  - community/Community_95
 ---
 
 # InProcessJobEventBus
@@ -18,4 +18,4 @@ tags:
 - [[.subscribe()]] - `method` [EXTRACTED]
 - [[jobEvents.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_jobs
+#graphify/code #graphify/EXTRACTED #community/Community_95

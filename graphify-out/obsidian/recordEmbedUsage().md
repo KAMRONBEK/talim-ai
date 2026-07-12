@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "src services"
+community: "AI Tutor Chat API"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services
+  - community/AI_Tutor_Chat_API
 ---
 
 # recordEmbedUsage()
@@ -17,4 +17,4 @@ tags:
 - [[generateEmbeddings()]] - `calls` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

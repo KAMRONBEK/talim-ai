@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # smoke-quota.ts
@@ -23,4 +23,4 @@ tags:
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

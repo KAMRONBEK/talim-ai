@@ -1,18 +1,28 @@
 ---
-source_file: "apps/api/src/controllers/quiz.controller.ts"
+source_file: "packages/types/grading.ts"
 type: "code"
-community: "src controllers · quiz.controller.ts"
-location: "L100"
+community: "Community 70"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__quizcontrollerts
+  - community/Community_70
 ---
 
 # normalizeAnswer()
 
 ## Connections
-- [[isOpenAnswerCorrect()]] - `calls` [EXTRACTED]
-- [[quiz.controller.ts]] - `contains` [EXTRACTED]
+- [[buildDropdownClozeQuestion()]] - `calls` [EXTRACTED]
+- [[buildMatchingQuestion()]] - `calls` [EXTRACTED]
+- [[gradeQuestion()]] - `calls` [EXTRACTED]
+- [[grading.ts]] - `contains` [EXTRACTED]
+- [[hasBannedOption()]] - `calls` [EXTRACTED]
+- [[isCorrect()]] - `calls` [EXTRACTED]
+- [[orderingPairwiseCredit()]] - `calls` [EXTRACTED]
+- [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
+- [[question-builders.ts]] - `imports` [EXTRACTED]
+- [[question-inputs.tsx]] - `imports` [EXTRACTED]
+- [[question-postprocess.ts]] - `imports` [EXTRACTED]
+- [[shuffleOptionsWithKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__quizcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_70

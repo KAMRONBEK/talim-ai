@@ -1,23 +1,22 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "src services · learning-coverage-prompt.ts"
+community: "Community 118"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__learning-coverage-promptts
+  - community/Community_118
 ---
 
 # resolveCorrectAnswer()
 
 ## Connections
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
-- [[evaluateQuizAnswers()]] - `calls` [EXTRACTED]
 - [[getOptionLabel()]] - `calls` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[isSelectedAnswerCorrect()]] - `calls` [EXTRACTED]
+- [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[quiz-answer.ts]] - `contains` [EXTRACTED]
-- [[quiz.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__learning-coverage-promptts
+#graphify/code #graphify/EXTRACTED #community/Community_118

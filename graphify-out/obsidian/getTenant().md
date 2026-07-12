@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "subscription"
+community: "Billing & Quota"
 location: "L85"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Billing__Quota
 ---
 
 # getTenant()
@@ -18,4 +18,4 @@ tags:
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "admin components"
-location: "L354"
+community: "Assessment Pages & Wizard"
+location: "L647"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_components
+  - community/Assessment_Pages__Wizard
 ---
 
 # AssessmentSubmitResult
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_components
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

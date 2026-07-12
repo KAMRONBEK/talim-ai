@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/VideoTutorialViewer.tsx"
 type: "code"
-community: "components learning · ContentThumbnail()"
-location: "L14"
+community: "Transcript Panel"
+location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_learning__ContentThumbnail
+  - community/Transcript_Panel
 ---
 
 # VideoTutorialViewerProps
@@ -15,4 +15,4 @@ tags:
 - [[TranscriptExcerptPayload]] - `references` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_learning__ContentThumbnail
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

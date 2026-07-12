@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "web lib · upgrade-dialog.tsx"
+community: "Community 49"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__upgrade-dialogtsx
+  - community/Community_49
 ---
 
 # pricing.ts
@@ -14,6 +14,8 @@ tags:
 ## Connections
 - [[BillingPeriod]] - `contains` [EXTRACTED]
 - [[FeatureSpec]] - `contains` [EXTRACTED]
+- [[MANUAL_TIERS]] - `contains` [EXTRACTED]
+- [[ManualTier]] - `contains` [EXTRACTED]
 - [[PRICING_PLANS]] - `contains` [EXTRACTED]
 - [[PlanAudience]] - `contains` [EXTRACTED]
 - [[PlanCode]] - `imports` [EXTRACTED]
@@ -28,4 +30,4 @@ tags:
 - [[pricing.tsx]] - `imports_from` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__upgrade-dialogtsx
+#graphify/code #graphify/EXTRACTED #community/Community_49

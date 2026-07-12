@@ -1,27 +1,32 @@
 ---
 type: community
-cohesion: 0.23
-members: 12
+cohesion: 0.22
+members: 17
 ---
 
 # Community 70
 
-**Cohesion:** 0.23 - loosely connected
-**Members:** 12 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 17 nodes
 
 ## Members
-- [[LearningTopbar()]] - code - apps/web/components/layout/learning-topbar.tsx
-- [[LearningTopbarProps]] - code - apps/web/components/layout/learning-topbar.tsx
-- [[ThemeToggle()]] - code - apps/web/components/theme-toggle.tsx
-- [[ThemeValue]] - code - apps/web/components/theme-toggle.tsx
-- [[UseFileUploadOptions]] - code - apps/web/hooks/useFileUpload.tsx
-- [[learning-topbar.tsx]] - code - apps/web/components/layout/learning-topbar.tsx
-- [[theme-toggle.tsx]] - code - apps/web/components/theme-toggle.tsx
-- [[themeIcons]] - code - apps/web/components/theme-toggle.tsx
-- [[themeValues]] - code - apps/web/components/theme-toggle.tsx
-- [[useFileUpload()]] - code - apps/web/hooks/useFileUpload.tsx
-- [[useFileUpload.tsx]] - code - apps/web/hooks/useFileUpload.tsx
-- [[useUploadContent()]] - code - apps/web/hooks/useContent.ts
+- [[GradeResult]] - code - packages/types/grading.ts
+- [[HotspotRegion]] - code - packages/types/grading.ts
+- [[coerceStructuredAnswer()]] - code - packages/types/grading.ts
+- [[evidenceWeightForQuestion()]] - code - packages/types/grading.ts
+- [[fillBlankAcceptedPerBlank()]] - code - packages/types/grading.ts
+- [[gradeQuestion()]] - code - packages/types/grading.ts
+- [[grading.ts]] - code - packages/types/grading.ts
+- [[isCorrect()]] - code - packages/types/grading.ts
+- [[isNumericMatch()]] - code - packages/types/grading.ts
+- [[normalizeAnswer()]] - code - packages/types/grading.ts
+- [[orderingPairwiseCredit()]] - code - packages/types/grading.ts
+- [[parseArrayAnswer()]] - code - packages/types/grading.ts
+- [[parseHotspotPoint()]] - code - packages/types/grading.ts
+- [[parseHotspotRegions()]] - code - packages/types/grading.ts
+- [[parseMatchingChoices()]] - code - packages/types/grading.ts
+- [[parseNumericAnswer()]] - code - packages/types/grading.ts
+- [[pointInAnyRegion()]] - code - packages/types/grading.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -31,22 +36,19 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Community 31]]
-- 5 edges to [[_COMMUNITY_Community 36]]
-- 5 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 4 edges to [[_COMMUNITY_Community 40]]
-- 3 edges to [[_COMMUNITY_App Layout & Guards]]
-- 2 edges to [[_COMMUNITY_Content Progress Hooks]]
-- 2 edges to [[_COMMUNITY_Community 56]]
-- 2 edges to [[_COMMUNITY_Community 38]]
-- 2 edges to [[_COMMUNITY_Community 30]]
-- 1 edge to [[_COMMUNITY_Community 66]]
-- 1 edge to [[_COMMUNITY_Admin PlanStatus UI]]
-- 1 edge to [[_COMMUNITY_Content Detail Page]]
+- 12 edges to [[_COMMUNITY_Community 29]]
+- 5 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 4 edges to [[_COMMUNITY_Question Generation Engine]]
+- 4 edges to [[_COMMUNITY_Assessments Service]]
+- 3 edges to [[_COMMUNITY_Community 58]]
+- 2 edges to [[_COMMUNITY_Community 59]]
+- 2 edges to [[_COMMUNITY_Community 118]]
+- 1 edge to [[_COMMUNITY_Community 43]]
+- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
 
 ## Top bridge nodes
-- [[learning-topbar.tsx]] - degree 18, connects to 7 communities
-- [[theme-toggle.tsx]] - degree 10, connects to 5 communities
-- [[useFileUpload.tsx]] - degree 10, connects to 4 communities
-- [[useFileUpload()]] - degree 9, connects to 4 communities
-- [[ThemeToggle()]] - degree 5, connects to 3 communities
+- [[grading.ts]] - degree 26, connects to 6 communities
+- [[gradeQuestion()]] - degree 22, connects to 5 communities
+- [[normalizeAnswer()]] - degree 12, connects to 3 communities
+- [[isCorrect()]] - degree 5, connects to 1 community
+- [[parseHotspotRegions()]] - degree 4, connects to 1 community

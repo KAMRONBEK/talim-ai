@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/prisma/seed.ts"
 type: "code"
-community: "subscription"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/subscription
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # seed.ts
@@ -18,4 +18,4 @@ tags:
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/subscription
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

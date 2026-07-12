@@ -1,21 +1,23 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "assessment · learner.ts"
-location: "L56"
+community: "Assessments Service"
+location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment__learnerts
+  - community/Assessments_Service
 ---
 
 # submitLearnerAssessment()
 
 ## Connections
+- [[answerToString()]] - `calls` [EXTRACTED]
 - [[assertLearnerAssignment()]] - `calls` [EXTRACTED]
 - [[computeGamePoints()]] - `calls` [EXTRACTED]
-- [[isCorrect()]] - `calls` [EXTRACTED]
+- [[gradeQuestion()]] - `calls` [EXTRACTED]
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[learner.ts]] - `contains` [EXTRACTED]
+- [[recordAnswers()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment__learnerts
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

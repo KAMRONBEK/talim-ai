@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-1-subscriptions-billing.md"
 type: "concept"
-community: "plans"
+community: "Community 57"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/plans
+  - community/Community_57
 ---
 
 # Quota Enforcement Middleware (enforceQuota)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Epic 1 — Subscriptions & Billing]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/plans
+#graphify/concept #graphify/EXTRACTED #community/Community_57

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "web · components.json"
+community: "Community 65"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web__componentsjson
+  - community/Community_65
 ---
 
 # aliases
@@ -19,4 +19,4 @@ tags:
 - [[ui]] - `contains` [EXTRACTED]
 - [[utils]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web__componentsjson
+#graphify/code #graphify/EXTRACTED #community/Community_65

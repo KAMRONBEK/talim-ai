@@ -1,37 +1,41 @@
 ---
 type: community
-cohesion: 0.10
-members: 22
+cohesion: 0.13
+members: 26
 ---
 
 # Community 39
 
-**Cohesion:** 0.10 - loosely connected
-**Members:** 22 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 26 nodes
 
 ## Members
-- [[AI_PREFIX_PATTERNS]] - code - apps/api/src/lib/summary-prompt.ts
-- [[LANGUAGE_QUALITY]] - code - apps/api/src/lib/locale-prompts.ts
-- [[PODCAST_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
-- [[PODCAST_USER]] - code - apps/api/src/lib/locale-prompts.ts
-- [[ParsedTurn]] - code - apps/api/src/lib/locale-prompts.ts
-- [[QUIZ_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
-- [[QUIZ_STYLE]] - code - apps/api/src/lib/locale-prompts.ts
-- [[RAG_CHUNK_LABEL]] - code - apps/api/src/lib/locale-prompts.ts
-- [[SUMMARY_PREFIX_PATTERNS_EN]] - code - apps/api/src/lib/locale-prompts.ts
-- [[SUMMARY_PREFIX_PATTERNS_RU]] - code - apps/api/src/lib/locale-prompts.ts
-- [[SUMMARY_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
-- [[SUMMARY_USER]] - code - apps/api/src/lib/locale-prompts.ts
-- [[TUTOR_CONTEXT]] - code - apps/api/src/lib/locale-prompts.ts
-- [[TUTOR_MATH_RULES]] - code - apps/api/src/lib/locale-prompts.ts
-- [[TUTOR_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
-- [[TUTOR_VISUAL_RULES]] - code - apps/api/src/lib/locale-prompts.ts
-- [[buildSummaryUserPrompt()_1]] - code - apps/api/src/lib/summary-prompt.ts
-- [[buildTutorSystemMessage()]] - code - apps/api/src/lib/locale-prompts.ts
-- [[getTutorSystemPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
-- [[locale-prompts.ts]] - code - apps/api/src/lib/locale-prompts.ts
-- [[sanitizeSummaryOutput()_1]] - code - apps/api/src/lib/summary-prompt.ts
-- [[summary-prompt.ts]] - code - apps/api/src/lib/summary-prompt.ts
+- [[COUNT_PRESETS]] - code - apps/web/components/practice/practice-generator.tsx
+- [[DEPTHS]] - code - apps/web/components/practice/practice-generator.tsx
+- [[DeleteContentDialog()]] - code - apps/web/components/content/delete-content-dialog.tsx
+- [[DeleteContentDialogProps]] - code - apps/web/components/content/delete-content-dialog.tsx
+- [[Dialog()]] - code - packages/ui/components/dialog.tsx
+- [[DialogContent()]] - code - packages/ui/components/dialog.tsx
+- [[DialogContext]] - code - packages/ui/components/dialog.tsx
+- [[DialogContextValue]] - code - packages/ui/components/dialog.tsx
+- [[DialogDescription()]] - code - packages/ui/components/dialog.tsx
+- [[DialogFooter()]] - code - packages/ui/components/dialog.tsx
+- [[DialogHeader()]] - code - packages/ui/components/dialog.tsx
+- [[DialogTitle()]] - code - packages/ui/components/dialog.tsx
+- [[DialogTrigger()]] - code - packages/ui/components/dialog.tsx
+- [[LearnerMessagesBell()]] - code - apps/web/components/learner/learner-messages-bell.tsx
+- [[LearnerThreadMessage]] - code - packages/types/index.ts
+- [[PracticeGeneratorProps]] - code - apps/web/components/practice/practice-generator.tsx
+- [[content-status-gate.tsx]] - code - apps/web/components/content/content-status-gate.tsx
+- [[delete-content-dialog.tsx]] - code - apps/web/components/content/delete-content-dialog.tsx
+- [[dialog.tsx]] - code - packages/ui/components/dialog.tsx
+- [[learner-messages-bell.tsx]] - code - apps/web/components/learner/learner-messages-bell.tsx
+- [[practice-generator.tsx]] - code - apps/web/components/practice/practice-generator.tsx
+- [[useDeleteContent()_1]] - code - apps/web/hooks/useContent.ts
+- [[useLearnerMessages()]] - code - apps/web/hooks/useTenant.ts
+- [[useLearnerUnreadCount()]] - code - apps/web/hooks/useTenant.ts
+- [[useMarkMessageRead()]] - code - apps/web/hooks/useTenant.ts
+- [[useReplyToLearnerMessage()]] - code - apps/web/hooks/useTenant.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -41,15 +45,24 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 4 edges to [[_COMMUNITY_Section & Summary API]]
-- 4 edges to [[_COMMUNITY_Env Config & Jobs]]
-- 3 edges to [[_COMMUNITY_Community 48]]
-- 3 edges to [[_COMMUNITY_Community 67]]
+- 16 edges to [[_COMMUNITY_Admin App UI]]
+- 10 edges to [[_COMMUNITY_Community 33]]
+- 9 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 9 edges to [[_COMMUNITY_Community 38]]
+- 9 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 9 edges to [[_COMMUNITY_Tenant Materials UI]]
+- 8 edges to [[_COMMUNITY_Community 53]]
+- 7 edges to [[_COMMUNITY_Community 35]]
+- 5 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 4 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 3 edges to [[_COMMUNITY_Quiz Player & Hooks]]
 - 2 edges to [[_COMMUNITY_Community 46]]
-- 2 edges to [[_COMMUNITY_Usage Pricing & Chunk Tools]]
-- 1 edge to [[_COMMUNITY_Slide Deck Types]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 2 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 1 edge to [[_COMMUNITY_Question Generation Engine]]
 
 ## Top bridge nodes
-- [[locale-prompts.ts]] - degree 37, connects to 8 communities
-- [[buildTutorSystemMessage()]] - degree 4, connects to 1 community
+- [[practice-generator.tsx]] - degree 21, connects to 8 communities
+- [[DialogContent()]] - degree 13, connects to 8 communities
+- [[DialogHeader()]] - degree 13, connects to 8 communities
+- [[DialogTitle()]] - degree 13, connects to 8 communities
+- [[content-status-gate.tsx]] - degree 14, connects to 7 communities

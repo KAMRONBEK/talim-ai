@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "src controllers · assessment.controller.ts"
+community: "Community 63"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__assessmentcontrollerts
+  - community/Community_63
 ---
 
 # assessment.controller.ts
@@ -21,9 +21,11 @@ tags:
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[createAssessment()]] - `contains` [EXTRACTED]
 - [[createBank()]] - `contains` [EXTRACTED]
+- [[createBankQuestion()]] - `contains` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuestions()]] - `contains` [EXTRACTED]
 - [[getParam()]] - `imports` [EXTRACTED]
+- [[goLiveAssessment()]] - `contains` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[learnerAssessmentLeaderboard()]] - `contains` [EXTRACTED]
 - [[listAssessments()]] - `contains` [EXTRACTED]
@@ -33,7 +35,8 @@ tags:
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[patchQuestion()]] - `contains` [EXTRACTED]
 - [[requireTenant()]] - `contains` [EXTRACTED]
+- [[scheduleAssessment()]] - `contains` [EXTRACTED]
 - [[submitLearnerAssessment()]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__assessmentcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_63

@@ -1,17 +1,18 @@
 ---
-source_file: "apps/web/components/quiz/QuizCard.tsx"
+source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L23"
+community: "Community 118"
+location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Community_118
 ---
 
 # normalize()
 
 ## Connections
-- [[QuizCard.tsx]] - `contains` [EXTRACTED]
+- [[isSelectedAnswerCorrect()]] - `calls` [EXTRACTED]
+- [[quiz-answer.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_118

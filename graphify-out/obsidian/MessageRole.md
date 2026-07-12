@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "components chat · ChatMessage.tsx"
-location: "L16"
+community: "Community 85"
+location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__ChatMessagetsx
+  - community/Community_85
 ---
 
 # MessageRole
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_85

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "components deck"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_deck
+  - community/Shared_UI_Primitives
 ---
 
 # utils.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[cn()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_deck
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

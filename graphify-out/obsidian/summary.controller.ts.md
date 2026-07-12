@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "src controllers · summary.controller.ts"
+community: "Content API Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__summarycontrollerts
+  - community/Content_API_Controllers
 ---
 
 # summary.controller.ts
@@ -52,4 +52,4 @@ tags:
 - [[summaryBodySchema]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__summarycontrollerts
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers

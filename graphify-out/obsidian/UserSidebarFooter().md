@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "web lib · user-sidebar-footer.tsx"
-location: "L21"
+community: "Billing UI & Plans"
+location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__user-sidebar-footertsx
+  - community/Billing_UI__Plans
 ---
 
 # UserSidebarFooter()
@@ -22,4 +22,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__user-sidebar-footertsx
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

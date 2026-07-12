@@ -1,20 +1,22 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.29
+members: 7
 ---
 
 # Community 112
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.29 - loosely connected
+**Members:** 7 nodes
 
 ## Members
-- [[files]] - code - packages/config/tsconfig/package.json
-- [[name_7]] - code - packages/config/tsconfig/package.json
-- [[package.json_7]] - code - packages/config/tsconfig/package.json
-- [[private_7]] - code - packages/config/tsconfig/package.json
-- [[version_6]] - code - packages/config/tsconfig/package.json
+- [[Admin Subdomain DNS + SSL]] - concept - docs/DEPLOY.md
+- [[CI Deploy Workflow]] - concept - docs/DEPLOY.md
+- [[Docker Compose Prod Stack]] - concept - docs/DEPLOY.md
+- [[Doppler prd Secrets]] - concept - docs/DEPLOY.md
+- [[First Platform Admin Creation]] - concept - docs/DEPLOY.md
+- [[VPS Docker Deployment]] - document - docs/DEPLOY.md
+- [[nginx Reverse Proxy]] - concept - docs/DEPLOY.md
 
 ## Live Query (requires Dataview plugin)
 

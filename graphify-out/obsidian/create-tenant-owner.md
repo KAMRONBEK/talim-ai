@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "api · scripts"
+community: "Community 66"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/api__scripts
+  - community/Community_66
 ---
 
 # create-tenant-owner
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/api__scripts
+#graphify/code #graphify/EXTRACTED #community/Community_66

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "assessment · learner.ts"
-location: "L174"
+community: "Assessments Service"
+location: "L297"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/assessment__learnerts
+  - community/Assessments_Service
 ---
 
 # getLearnerAssessmentLeaderboard()
@@ -16,4 +16,4 @@ tags:
 - [[getAssessmentLeaderboard()]] - `calls` [EXTRACTED]
 - [[learner.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/assessment__learnerts
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

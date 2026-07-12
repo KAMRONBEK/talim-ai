@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "packages types · useChatStore.ts"
+community: "Community 55"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__useChatStorets
+  - community/Community_55
 ---
 
 # parseGraphBlock()
@@ -17,4 +17,4 @@ tags:
 - [[tutor-graph.ts_1]] - `contains` [EXTRACTED]
 - [[tutor-visual.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__useChatStorets
+#graphify/code #graphify/EXTRACTED #community/Community_55

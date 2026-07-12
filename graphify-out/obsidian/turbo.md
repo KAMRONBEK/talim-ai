@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "package.json"
-location: "L32"
+community: "Community 115"
+location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packagejson
+  - community/Community_115
 ---
 
 # turbo
@@ -15,4 +15,4 @@ tags:
 - [[devDependencies_3]] - `contains` [EXTRACTED]
 - [[turbo.json]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packagejson
+#graphify/code #graphify/EXTRACTED #community/Community_115

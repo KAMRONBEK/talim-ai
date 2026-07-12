@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "[locale] dashboard"
+community: "Community 33"
 location: "L364"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Community_33
 ---
 
 # Recap()
@@ -15,4 +15,4 @@ tags:
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_33

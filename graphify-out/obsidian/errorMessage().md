@@ -1,17 +1,17 @@
 ---
-source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
+source_file: "apps/admin/app/(admin)/content/page.tsx"
 type: "code"
-community: "admin hooks"
-location: "L13"
+community: "Community 87"
+location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_87
 ---
 
 # errorMessage()
 
 ## Connections
-- [[page.tsx_7]] - `contains` [EXTRACTED]
+- [[page.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_87

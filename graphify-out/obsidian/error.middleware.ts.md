@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # error.middleware.ts
@@ -38,6 +38,7 @@ tags:
 - [[learner.controller.ts]] - `imports_from` [EXTRACTED]
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
+- [[messages.ts]] - `imports_from` [EXTRACTED]
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
@@ -51,6 +52,7 @@ tags:
 - [[shared.ts_3]] - `imports_from` [EXTRACTED]
 - [[slides.controller.ts]] - `imports_from` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
+- [[srs.service.ts]] - `imports_from` [EXTRACTED]
 - [[students.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
@@ -65,4 +67,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

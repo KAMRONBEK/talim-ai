@@ -1,41 +1,44 @@
 ---
 type: community
-cohesion: 0.16
-members: 26
+cohesion: 0.08
+members: 29
 ---
 
 # Community 31
 
-**Cohesion:** 0.16 - loosely connected
-**Members:** 26 nodes
+**Cohesion:** 0.08 - loosely connected
+**Members:** 29 nodes
 
 ## Members
-- [[Avatar]] - code - packages/ui/components/avatar.tsx
-- [[AvatarFallback()]] - code - packages/ui/components/avatar.tsx
-- [[Badge()]] - code - packages/ui/components/badge.tsx
-- [[BadgeProps]] - code - packages/ui/components/badge.tsx
-- [[DeleteContentDialogProps]] - code - apps/web/components/content/delete-content-dialog.tsx
-- [[Dialog()]] - code - packages/ui/components/dialog.tsx
-- [[DialogContent()]] - code - packages/ui/components/dialog.tsx
-- [[DialogContext]] - code - packages/ui/components/dialog.tsx
-- [[DialogContextValue]] - code - packages/ui/components/dialog.tsx
-- [[DialogDescription()]] - code - packages/ui/components/dialog.tsx
-- [[DialogFooter()]] - code - packages/ui/components/dialog.tsx
-- [[DialogHeader()]] - code - packages/ui/components/dialog.tsx
-- [[DialogTitle()]] - code - packages/ui/components/dialog.tsx
-- [[DialogTrigger()]] - code - packages/ui/components/dialog.tsx
-- [[TenantMaterialsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[avatar.tsx]] - code - packages/ui/components/avatar.tsx
-- [[badge.tsx]] - code - packages/ui/components/badge.tsx
-- [[badgeVariants]] - code - packages/ui/components/badge.tsx
-- [[delete-content-dialog.tsx]] - code - apps/web/components/content/delete-content-dialog.tsx
-- [[dialog.tsx]] - code - packages/ui/components/dialog.tsx
-- [[index.ts_3]] - code - packages/ui/index.ts
-- [[page.tsx_23]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[quick-action-cards.tsx]] - code - apps/web/components/dashboard/quick-action-cards.tsx
-- [[useCreateTenantYoutubeContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useUploadTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[utils.ts]] - code - apps/web/lib/utils.ts
+- [[AI_PREFIX_PATTERNS]] - code - apps/api/src/lib/summary-prompt.ts
+- [[LANGUAGE_QUALITY]] - code - apps/api/src/lib/locale-prompts.ts
+- [[PODCAST_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
+- [[PODCAST_USER]] - code - apps/api/src/lib/locale-prompts.ts
+- [[ParsedTurn]] - code - apps/api/src/lib/locale-prompts.ts
+- [[QUIZ_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
+- [[QUIZ_STYLE]] - code - apps/api/src/lib/locale-prompts.ts
+- [[RAG_CHUNK_LABEL]] - code - apps/api/src/lib/locale-prompts.ts
+- [[SUMMARY_PREFIX_PATTERNS_EN]] - code - apps/api/src/lib/locale-prompts.ts
+- [[SUMMARY_PREFIX_PATTERNS_RU]] - code - apps/api/src/lib/locale-prompts.ts
+- [[SUMMARY_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
+- [[SUMMARY_USER]] - code - apps/api/src/lib/locale-prompts.ts
+- [[TUTOR_CONTEXT]] - code - apps/api/src/lib/locale-prompts.ts
+- [[TUTOR_MATH_RULES]] - code - apps/api/src/lib/locale-prompts.ts
+- [[TUTOR_PROMPTS]] - code - apps/api/src/lib/locale-prompts.ts
+- [[TUTOR_VISUAL_RULES]] - code - apps/api/src/lib/locale-prompts.ts
+- [[buildQuizUserPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[buildSummaryUserPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[buildSummaryUserPrompt()_1]] - code - apps/api/src/lib/summary-prompt.ts
+- [[buildTutorSystemMessage()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[generateSummaryText()]] - code - apps/api/src/controllers/summary.controller.ts
+- [[getQuizSystemPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[getRagChunkLabel()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[getSummarySystemPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[getTutorSystemPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[locale-prompts.ts]] - code - apps/api/src/lib/locale-prompts.ts
+- [[sanitizeSummaryOutput()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[sanitizeSummaryOutput()_1]] - code - apps/api/src/lib/summary-prompt.ts
+- [[summary-prompt.ts]] - code - apps/api/src/lib/summary-prompt.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -45,40 +48,18 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 21 edges to [[_COMMUNITY_Shared UI Components]]
-- 20 edges to [[_COMMUNITY_Admin Auth Pages & UI]]
-- 16 edges to [[_COMMUNITY_Tenant Web Pages]]
-- 8 edges to [[_COMMUNITY_Admin PlanStatus UI]]
-- 8 edges to [[_COMMUNITY_Community 66]]
-- 8 edges to [[_COMMUNITY_Community 30]]
-- 8 edges to [[_COMMUNITY_Content Detail Page]]
-- 8 edges to [[_COMMUNITY_Sheet UI Component]]
-- 7 edges to [[_COMMUNITY_Community 70]]
-- 5 edges to [[_COMMUNITY_Learner Assessment Pages]]
-- 5 edges to [[_COMMUNITY_Community 38]]
-- 4 edges to [[_COMMUNITY_Community 49]]
-- 4 edges to [[_COMMUNITY_Community 68]]
-- 3 edges to [[_COMMUNITY_Admin Content Pages]]
-- 3 edges to [[_COMMUNITY_Community 42]]
-- 3 edges to [[_COMMUNITY_Community 61]]
-- 2 edges to [[_COMMUNITY_Community 56]]
-- 2 edges to [[_COMMUNITY_Community 41]]
-- 2 edges to [[_COMMUNITY_Community 44]]
-- 2 edges to [[_COMMUNITY_Community 53]]
-- 2 edges to [[_COMMUNITY_Community 43]]
-- 2 edges to [[_COMMUNITY_Community 83]]
-- 1 edge to [[_COMMUNITY_Community 90]]
-- 1 edge to [[_COMMUNITY_Content Progress Hooks]]
-- 1 edge to [[_COMMUNITY_Community 40]]
-- 1 edge to [[_COMMUNITY_Community 36]]
-- 1 edge to [[_COMMUNITY_Community 89]]
-- 1 edge to [[_COMMUNITY_Community 101]]
-- 1 edge to [[_COMMUNITY_Community 32]]
-- 1 edge to [[_COMMUNITY_Community 34]]
+- 8 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 6 edges to [[_COMMUNITY_Content API Controllers]]
+- 4 edges to [[_COMMUNITY_Podcast Generation & TTS]]
+- 2 edges to [[_COMMUNITY_Community 114]]
+- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 1 edge to [[_COMMUNITY_Community 64]]
+- 1 edge to [[_COMMUNITY_Slide Deck Prompts]]
+- 1 edge to [[_COMMUNITY_Community 59]]
 
 ## Top bridge nodes
-- [[index.ts_3]] - degree 109, connects to 29 communities
-- [[page.tsx_23]] - degree 18, connects to 8 communities
-- [[Badge()]] - degree 12, connects to 6 communities
-- [[quick-action-cards.tsx]] - degree 12, connects to 5 communities
-- [[delete-content-dialog.tsx]] - degree 15, connects to 4 communities
+- [[locale-prompts.ts]] - degree 36, connects to 5 communities
+- [[generateSummaryText()]] - degree 10, connects to 5 communities
+- [[buildTutorSystemMessage()]] - degree 4, connects to 1 community
+- [[buildSummaryUserPrompt()]] - degree 3, connects to 1 community
+- [[getRagChunkLabel()]] - degree 3, connects to 1 community

@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "web hooks · page.tsx"
-location: "L23"
+community: "Tenant Dashboard & Shell"
+location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_hooks__pagetsx
+  - community/Tenant_Dashboard__Shell
 ---
 
 # usePatchTenant()
 
 ## Connections
 - [[TenantSettingsPage()]] - `calls` [INFERRED]
-- [[page.tsx_25]] - `imports` [EXTRACTED]
+- [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_hooks__pagetsx
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

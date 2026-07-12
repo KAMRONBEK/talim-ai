@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/shared.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin Content & Audit"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Content__Audit
 ---
 
 # shared.ts
@@ -23,4 +23,4 @@ tags:
 - [[tenants.controller.ts]] - `imports_from` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

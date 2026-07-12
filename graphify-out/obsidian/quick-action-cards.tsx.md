@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/quick-action-cards.tsx"
 type: "code"
-community: "ui components"
+community: "Community 53"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Community_53
 ---
 
 # quick-action-cards.tsx
@@ -21,8 +21,8 @@ tags:
 - [[YoutubeLinkForm()]] - `imports` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[page.tsx_34]] - `imports_from` [EXTRACTED]
+- [[page.tsx_35]] - `imports_from` [EXTRACTED]
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Community_53

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "src services · tts-normalize.ts"
+community: "Podcast Generation & TTS"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__tts-normalizets
+  - community/Podcast_Generation__TTS
 ---
 
 # tts-normalize.ts
@@ -20,4 +20,4 @@ tags:
 - [[splitScriptIntoChunks()]] - `contains` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__tts-normalizets
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS

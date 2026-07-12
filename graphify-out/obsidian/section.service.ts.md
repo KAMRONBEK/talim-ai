@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "src services"
+community: "Community 107"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services
+  - community/Community_107
 ---
 
 # section.service.ts
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[GeneratedSection]] - `contains` [EXTRACTED]
+- [[GeneratedSubsection]] - `contains` [EXTRACTED]
 - [[SECTION_TITLE_LOCALE_PROMPT]] - `contains` [EXTRACTED]
 - [[SectionTitleInput]] - `contains` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[translateSectionTitles()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services
+#graphify/code #graphify/EXTRACTED #community/Community_107

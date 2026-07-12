@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "[locale] dashboard"
-location: "L174"
+community: "Assessment Pages & Wizard"
+location: "L300"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/locale_dashboard
+  - community/Assessment_Pages__Wizard
 ---
 
 # useLearnerAssessments()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/locale_dashboard
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

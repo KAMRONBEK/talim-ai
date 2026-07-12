@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "web lib · providers.tsx"
+community: "Flashcards Study Page"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web_lib__providerstsx
+  - community/Flashcards_Study_Page
 ---
 
 # useLocaleSync()
@@ -17,4 +17,4 @@ tags:
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web_lib__providerstsx
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page

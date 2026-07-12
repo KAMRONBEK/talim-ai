@@ -1,33 +1,44 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "admin hooks"
+community: "Community 79"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/admin_hooks
+  - community/Community_79
 ---
 
 # useAdmin.ts
 
 ## Connections
+- [[AdminAnalyticsSummary]] - `imports` [EXTRACTED]
 - [[AdminAuditLogItem]] - `imports` [EXTRACTED]
+- [[AdminContentByTypeResponse]] - `imports` [EXTRACTED]
+- [[AdminContentDetail]] - `imports` [EXTRACTED]
 - [[AdminContentItem]] - `imports` [EXTRACTED]
+- [[AdminFunnelResponse]] - `imports` [EXTRACTED]
 - [[AdminGeneratedItem]] - `imports` [EXTRACTED]
+- [[AdminGeneratedReview]] - `imports` [EXTRACTED]
+- [[AdminImpersonateResponse]] - `imports` [EXTRACTED]
+- [[AdminMrrResponse]] - `imports` [EXTRACTED]
 - [[AdminPatchUserInput]] - `imports` [EXTRACTED]
 - [[AdminPlatformStats]] - `imports` [EXTRACTED]
+- [[AdminSpendByModelResponse]] - `imports` [EXTRACTED]
 - [[AdminSubscriptionListItem]] - `imports` [EXTRACTED]
 - [[AdminTenantDetail]] - `imports` [EXTRACTED]
 - [[AdminTenantListItem]] - `imports` [EXTRACTED]
 - [[AdminTenantUsageVsLimits]] - `imports` [EXTRACTED]
+- [[AdminTopOrgsResponse]] - `imports` [EXTRACTED]
 - [[AdminTutorRequest]] - `imports` [EXTRACTED]
 - [[AdminUpdateSubscriptionInput]] - `imports` [EXTRACTED]
 - [[AdminUsageSummaryRow]] - `imports` [EXTRACTED]
 - [[AdminUsageVsLimits]] - `imports` [EXTRACTED]
 - [[AdminUserDetail]] - `imports` [EXTRACTED]
+- [[AdminUserGrowthResponse]] - `imports` [EXTRACTED]
 - [[AdminUserListItem]] - `imports` [EXTRACTED]
 - [[AdminUserSubscription]] - `imports` [EXTRACTED]
+- [[AdminUsersByRoleResponse]] - `imports` [EXTRACTED]
 - [[PaginatedResponse]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[page.tsx]] - `imports_from` [EXTRACTED]
@@ -41,7 +52,17 @@ tags:
 - [[page.tsx_8]] - `imports_from` [EXTRACTED]
 - [[page.tsx_9]] - `imports_from` [EXTRACTED]
 - [[page.tsx_10]] - `imports_from` [EXTRACTED]
+- [[subscription-edit-drawer.tsx]] - `imports_from` [EXTRACTED]
+- [[useAdminAnalyticsByRole()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsContentByType()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsFunnel()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsMrr()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsSpendByModel()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsSummary()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsTopOrgs()]] - `contains` [EXTRACTED]
+- [[useAdminAnalyticsUserGrowth()]] - `contains` [EXTRACTED]
 - [[useAdminAuditLogs()]] - `contains` [EXTRACTED]
+- [[useAdminContentDetail()]] - `contains` [EXTRACTED]
 - [[useAdminContents()]] - `contains` [EXTRACTED]
 - [[useAdminGenerated()]] - `contains` [EXTRACTED]
 - [[useAdminSubscriptions()]] - `contains` [EXTRACTED]
@@ -54,12 +75,14 @@ tags:
 - [[useApproveTutorRequest()]] - `contains` [EXTRACTED]
 - [[useDeleteContent()]] - `contains` [EXTRACTED]
 - [[useDeleteUser()]] - `contains` [EXTRACTED]
+- [[useImpersonateUser()]] - `contains` [EXTRACTED]
 - [[usePatchUser()]] - `contains` [EXTRACTED]
 - [[usePlatformStats()]] - `contains` [EXTRACTED]
 - [[useRejectTutorRequest()]] - `contains` [EXTRACTED]
 - [[useResetUserPassword()]] - `contains` [EXTRACTED]
 - [[useRetryContent()]] - `contains` [EXTRACTED]
+- [[useReviewGenerated()]] - `contains` [EXTRACTED]
 - [[useUpdateTenant()]] - `contains` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/admin_hooks
+#graphify/code #graphify/EXTRACTED #community/Community_79

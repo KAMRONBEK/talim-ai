@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin-tutor-request.controller.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin Content & Audit"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin_Content__Audit
 ---
 
 # approveTutorRequest()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

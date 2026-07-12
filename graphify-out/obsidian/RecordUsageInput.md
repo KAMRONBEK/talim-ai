@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "src services · usage-pricing.ts"
+community: "Community 50"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__usage-pricingts
+  - community/Community_50
 ---
 
 # RecordUsageInput
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts
+#graphify/code #graphify/EXTRACTED #community/Community_50

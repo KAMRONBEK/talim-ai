@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "rationale"
-community: "api"
+community: "Admin Panel Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/api
+  - community/Admin_Panel_Docs
 ---
 
 # adminPasswordNote plaintext support-lookup (sensitive)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[appsadmin Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/api
+#graphify/rationale #graphify/EXTRACTED #community/Admin_Panel_Docs

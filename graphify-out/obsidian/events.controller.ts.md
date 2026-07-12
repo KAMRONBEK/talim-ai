@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/events.controller.ts"
 type: "code"
-community: "controllers admin"
+community: "Admin & Usage Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/controllers_admin
+  - community/Admin__Usage_Controllers
 ---
 
 # events.controller.ts
@@ -23,4 +23,4 @@ tags:
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamEvents()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/controllers_admin
+#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers

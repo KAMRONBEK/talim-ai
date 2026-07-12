@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api.ts"
 type: "code"
-community: "components chat"
+community: "Community 52"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat
+  - community/Community_52
 ---
 
 # getApiBaseUrl()
@@ -21,4 +21,4 @@ tags:
 - [[jobStream.ts]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat
+#graphify/code #graphify/EXTRACTED #community/Community_52

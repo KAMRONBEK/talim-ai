@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "src services · slides.controller.ts"
+community: "Slide Deck Prompts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__slidescontrollerts
+  - community/Slide_Deck_Prompts
 ---
 
 # slides.service.ts
@@ -65,4 +65,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[toBulletObjects()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

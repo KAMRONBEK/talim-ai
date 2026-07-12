@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "src controllers · chat.controller.ts"
-location: "L208"
+community: "AI Tutor Chat API"
+location: "L274"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__chatcontrollerts
+  - community/AI_Tutor_Chat_API
 ---
 
 # getClarificationResponse()
@@ -16,4 +16,4 @@ tags:
 - [[streamChat()]] - `calls` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__chatcontrollerts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "src controllers · tenant.controller.ts"
-location: "L55"
+community: "Community 48"
+location: "L117"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_controllers__tenantcontrollerts
+  - community/Community_48
 ---
 
 # deleteStudent()
@@ -16,4 +16,4 @@ tags:
 - [[requireOwnerTenant()]] - `calls` [EXTRACTED]
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_controllers__tenantcontrollerts
+#graphify/code #graphify/EXTRACTED #community/Community_48

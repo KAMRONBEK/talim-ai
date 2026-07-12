@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-prompt.ts"
 type: "code"
-community: "src services · slides.controller.ts"
+community: "Slide Deck Prompts"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__slidescontrollerts
+  - community/Slide_Deck_Prompts
 ---
 
 # estimatedMinutesFor()
@@ -16,4 +16,4 @@ tags:
 - [[deck-prompt.ts]] - `contains` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

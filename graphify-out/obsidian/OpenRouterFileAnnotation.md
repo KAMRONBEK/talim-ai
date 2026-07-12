@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "src services · usage-pricing.ts"
-location: "L197"
+community: "Community 50"
+location: "L205"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__usage-pricingts
+  - community/Community_50
 ---
 
 # OpenRouterFileAnnotation
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__usage-pricingts
+#graphify/code #graphify/EXTRACTED #community/Community_50

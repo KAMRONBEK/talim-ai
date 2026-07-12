@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "web"
+community: "Web Dependencies"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/web
+  - community/Web_Dependencies
 ---
 
 # eslint-config-next
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/web
+#graphify/code #graphify/EXTRACTED #community/Web_Dependencies

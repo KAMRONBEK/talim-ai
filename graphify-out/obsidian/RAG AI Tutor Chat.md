@@ -1,20 +1,19 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "plans · Internationalization (uz / en / ru)"
+community: "Community 77"
 location: "§1.7"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/plans__Internationalization_uz_/_en_/_ru
+  - graphify/EXTRACTED
+  - community/Community_77
 ---
 
-# RAG AI tutor chat
+# RAG AI Tutor Chat
 
 ## Connections
-- [[AI tutor visuals (Manim)]] - `references` [EXTRACTED]
 - [[Citations (Manba Pills)]] - `conceptually_related_to` [INFERRED]
-- [[Internationalization (uz  en  ru)]] - `conceptually_related_to` [INFERRED]
-- [[Sectioning]] - `shares_data_with` [INFERRED]
+- [[Manim Tutor Visuals]] - `references` [EXTRACTED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru
+#graphify/concept #graphify/EXTRACTED #community/Community_77

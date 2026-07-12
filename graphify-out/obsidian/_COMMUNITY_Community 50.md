@@ -1,33 +1,37 @@
 ---
 type: community
-cohesion: 0.11
-members: 18
+cohesion: 0.17
+members: 22
 ---
 
 # Community 50
 
-**Cohesion:** 0.11 - loosely connected
-**Members:** 18 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 22 nodes
 
 ## Members
-- [[@distubeytdl-core]] - code - apps/api/package.json
-- [[@langchaintextsplitters]] - code - apps/api/package.json
-- [[@prismaclient]] - code - apps/api/package.json
-- [[@talimtypes_1]] - code - apps/api/package.json
-- [[bcrypt]] - code - apps/api/package.json
-- [[bull]] - code - apps/api/package.json
-- [[cors]] - code - apps/api/package.json
-- [[dependencies_1]] - code - apps/api/package.json
-- [[express]] - code - apps/api/package.json
-- [[express-rate-limit]] - code - apps/api/package.json
-- [[gpt-tokenizer]] - code - apps/api/package.json
-- [[helmet]] - code - apps/api/package.json
-- [[jsonwebtoken]] - code - apps/api/package.json
-- [[multer]] - code - apps/api/package.json
-- [[openai]] - code - apps/api/package.json
-- [[pdf-parse]] - code - apps/api/package.json
-- [[youtube-transcript]] - code - apps/api/package.json
-- [[zod]] - code - apps/api/package.json
+- [[OpenRouterFileAnnotation]] - code - apps/api/src/services/pdf.service.ts
+- [[RecordUsageInput]] - code - apps/api/src/services/usage.service.ts
+- [[UsageContext]] - code - apps/api/src/services/usage.service.ts
+- [[captionPage()]] - code - apps/api/src/services/figure.service.ts
+- [[estimateCost()]] - code - apps/api/src/services/usage.service.ts
+- [[estimateTokenCostUsd()]] - code - apps/api/src/config/usage-pricing.ts
+- [[extractPdfPageRange()]] - code - apps/api/src/services/pdf.service.ts
+- [[extractPdfText()]] - code - apps/api/src/services/pdf.service.ts
+- [[extractWithOpenAI()]] - code - apps/api/src/services/pdf.service.ts
+- [[extractWithPdfParse()]] - code - apps/api/src/services/pdf.service.ts
+- [[figure.service.ts]] - code - apps/api/src/services/figure.service.ts
+- [[getPdfPageCount()]] - code - apps/api/src/services/pdf.service.ts
+- [[hasPrimaryOcrProvider()]] - code - apps/api/src/services/pdf.service.ts
+- [[ocrImageDataUrl()]] - code - apps/api/src/services/pdf.service.ts
+- [[ocrRequestOnce()]] - code - apps/api/src/services/pdf.service.ts
+- [[ocrViaOpenRouter()]] - code - apps/api/src/services/pdf.service.ts
+- [[pdf.service.ts]] - code - apps/api/src/services/pdf.service.ts
+- [[rasterizeAndOcrPdf()]] - code - apps/api/src/services/pdf.service.ts
+- [[recordUsage()]] - code - apps/api/src/services/usage.service.ts
+- [[runCli()]] - code - apps/api/src/services/pdf.service.ts
+- [[runPdftoppm()]] - code - apps/api/src/services/pdf.service.ts
+- [[usage.service.ts]] - code - apps/api/src/services/usage.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -37,7 +41,21 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 91]]
+- 12 edges to [[_COMMUNITY_Content Upload & Ingest]]
+- 11 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
+- 4 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
+- 4 edges to [[_COMMUNITY_Podcast Generation & TTS]]
+- 4 edges to [[_COMMUNITY_Community 68]]
+- 3 edges to [[_COMMUNITY_Community 51]]
+- 3 edges to [[_COMMUNITY_Community 64]]
+- 3 edges to [[_COMMUNITY_Billing & Quota]]
+- 1 edge to [[_COMMUNITY_Admin Content & Audit]]
+- 1 edge to [[_COMMUNITY_Admin & Usage Controllers]]
 
 ## Top bridge nodes
-- [[dependencies_1]] - degree 18, connects to 1 community
+- [[usage.service.ts]] - degree 22, connects to 10 communities
+- [[recordUsage()]] - degree 16, connects to 4 communities
+- [[figure.service.ts]] - degree 14, connects to 4 communities
+- [[UsageContext]] - degree 9, connects to 4 communities
+- [[pdf.service.ts]] - degree 23, connects to 2 communities

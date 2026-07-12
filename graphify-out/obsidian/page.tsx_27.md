@@ -1,37 +1,29 @@
 ---
-source_file: "apps/web/app/[locale]/(tenant)/tenant/students/page.tsx"
+source_file: "apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx"
 type: "code"
-community: "ui components"
+community: "Tenant Dashboard & Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components
+  - community/Tenant_Dashboard__Shell
 ---
 
 # page.tsx
 
 ## Connections
-- [[Badge()]] - `imports` [EXTRACTED]
+- [[ActivityHeatmap()]] - `imports` [EXTRACTED]
 - [[Button]] - `imports` [EXTRACTED]
-- [[Dialog()]] - `imports` [EXTRACTED]
-- [[DialogContent()]] - `imports` [EXTRACTED]
-- [[DialogHeader()]] - `imports` [EXTRACTED]
-- [[DialogTitle()]] - `imports` [EXTRACTED]
-- [[Input]] - `imports` [EXTRACTED]
-- [[JoinCodeCard()]] - `imports` [EXTRACTED]
-- [[Label()]] - `imports` [EXTRACTED]
-- [[TenantStudentsPage()]] - `contains` [EXTRACTED]
-- [[apiError()]] - `contains` [EXTRACTED]
+- [[ProgressBar()]] - `imports` [EXTRACTED]
+- [[TenantStudentDetailPage()]] - `contains` [EXTRACTED]
+- [[activity-heatmap.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
-- [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
-- [[useBilling()]] - `imports` [EXTRACTED]
-- [[useBilling.ts]] - `imports_from` [EXTRACTED]
-- [[useCreateTenantStudent()]] - `imports` [EXTRACTED]
-- [[usePatchTenantStudent()]] - `imports` [EXTRACTED]
-- [[useResetTenantStudentPassword()]] - `imports` [EXTRACTED]
+- [[profileInitials()]] - `contains` [EXTRACTED]
+- [[useAssignContent()]] - `imports` [EXTRACTED]
+- [[useStudentProgress()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
-- [[useTenantStudents()]] - `imports` [EXTRACTED]
+- [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
+- [[useTenantContents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell

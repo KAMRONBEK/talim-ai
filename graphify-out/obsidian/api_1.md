@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api.ts"
 type: "code"
-community: "packages types · api.ts"
+community: "Community 98"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/packages_types__apits
+  - community/Community_98
 ---
 
 # api
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[api.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/packages_types__apits
+#graphify/code #graphify/EXTRACTED #community/Community_98

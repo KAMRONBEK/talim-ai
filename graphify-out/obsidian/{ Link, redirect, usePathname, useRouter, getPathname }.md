@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "ui components · become-tutor-card.tsx"
+community: "Community 46"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ui_components__become-tutor-cardtsx
+  - community/Community_46
 ---
 
 # { Link, redirect, usePathname, useRouter, getPathname }
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[navigation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ui_components__become-tutor-cardtsx
+#graphify/code #graphify/EXTRACTED #community/Community_46

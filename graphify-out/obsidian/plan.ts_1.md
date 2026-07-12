@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "components layout · plan.ts"
+community: "Billing UI & Plans"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_layout__plants
+  - community/Billing_UI__Plans
 ---
 
 # plan.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[planMessageKey]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_layout__plants
+#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans

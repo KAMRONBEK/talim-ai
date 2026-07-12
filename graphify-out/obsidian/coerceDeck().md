@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "src services · slides.controller.ts"
+community: "Slide Deck Prompts"
 location: "L175"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/src_services__slidescontrollerts
+  - community/Slide_Deck_Prompts
 ---
 
 # coerceDeck()
@@ -18,4 +18,4 @@ tags:
 - [[isRecord()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/src_services__slidescontrollerts
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

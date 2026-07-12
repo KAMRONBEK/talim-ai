@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useChat.ts"
 type: "code"
-community: "components chat · ChatMessage.tsx"
+community: "Community 38"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/components_chat__ChatMessagetsx
+  - community/Community_38
 ---
 
 # useChatSession()
@@ -16,4 +16,4 @@ tags:
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
 - [[useChat.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/components_chat__ChatMessagetsx
+#graphify/code #graphify/EXTRACTED #community/Community_38

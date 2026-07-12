@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant.service.ts"
 type: "code"
-community: "services tenant"
+community: "Admin Tenants & Prisma Core"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/services_tenant
+  - community/Admin_Tenants__Prisma_Core
 ---
 
 # tenant.service.ts
@@ -18,6 +18,7 @@ tags:
 - [[create-tenant-owner.ts]] - `imports_from` [EXTRACTED]
 - [[formatTenant()]] - `re_exports` [EXTRACTED]
 - [[learner.controller.ts]] - `imports_from` [EXTRACTED]
+- [[messages.ts]] - `re_exports` [EXTRACTED]
 - [[organization.ts]] - `re_exports` [EXTRACTED]
 - [[progress.ts]] - `re_exports` [EXTRACTED]
 - [[shared.ts_3]] - `re_exports` [EXTRACTED]
@@ -25,4 +26,4 @@ tags:
 - [[tenant.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/services_tenant
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core

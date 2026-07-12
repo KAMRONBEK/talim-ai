@@ -1,30 +1,33 @@
 ---
 type: community
-cohesion: 0.26
-members: 15
+cohesion: 0.18
+members: 18
 ---
 
 # Community 62
 
-**Cohesion:** 0.26 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.18 - loosely connected
+**Members:** 18 nodes
 
 ## Members
-- [[assessment.controller.ts]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assessmentResults()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assignAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[createAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[createBank()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[generateQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[learnerAssessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listBanks()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listLearnerAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[patchQuestion()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[requireTenant()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[submitLearnerAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[AdminDashboardPage()]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[C]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[ChartCard()]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[ChartState()]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[PALETTE]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[StatCard()]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[page.tsx_2]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[tooltipStyle]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[usd()]] - code - apps/admin/app/(admin)/dashboard/page.tsx
+- [[useAdminAnalyticsByRole()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsContentByType()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsFunnel()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsMrr()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsSpendByModel()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsSummary()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsTopOrgs()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminAnalyticsUserGrowth()]] - code - apps/admin/hooks/useAdmin.ts
+- [[usePlatformStats()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -34,16 +37,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 10 edges to [[_COMMUNITY_Content & Podcast API]]
-- 3 edges to [[_COMMUNITY_Admin Audit & Auth]]
-- 1 edge to [[_COMMUNITY_Admin Analytics & Subscriptions]]
-- 1 edge to [[_COMMUNITY_Billing & Usage API]]
-- 1 edge to [[_COMMUNITY_Tenant Admin & Prisma]]
-- 1 edge to [[_COMMUNITY_Community 87]]
+- 10 edges to [[_COMMUNITY_Community 79]]
+- 4 edges to [[_COMMUNITY_Admin App UI]]
 
 ## Top bridge nodes
-- [[assessment.controller.ts]] - degree 23, connects to 6 communities
-- [[assessmentLeaderboard()]] - degree 3, connects to 1 community
-- [[assessmentResults()]] - degree 3, connects to 1 community
-- [[assignAssessment()]] - degree 3, connects to 1 community
-- [[generateQuestions()]] - degree 3, connects to 1 community
+- [[page.tsx_2]] - degree 22, connects to 2 communities
+- [[useAdminAnalyticsByRole()]] - degree 3, connects to 1 community
+- [[useAdminAnalyticsContentByType()]] - degree 3, connects to 1 community
+- [[useAdminAnalyticsFunnel()]] - degree 3, connects to 1 community
+- [[useAdminAnalyticsMrr()]] - degree 3, connects to 1 community
