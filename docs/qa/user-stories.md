@@ -383,8 +383,11 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | F# | Sev | Story · EC | Summary | Status | Fix commit |
 | --- | --- | --- | --- | --- | --- |
-| F76 | — | *(reserved)* | — | ⬜ | — |
-| F77–F99 | — | *(reserved — claim in order)* | — | ⬜ | — |
+| F76 | S3 | US-OWNER-20 · due-date | Assign due-date hint copy (uz/en/ru) + `assessment/shared.ts:168` schema comment both said the date "does not block submission", but `submitLearnerAssessment` (`learner.ts:97`) hard-**403s** late submits for WRITTEN + GAME. Reproduced live (past dueAt → 403). Corrected copy + comment to match enforcement. | 🟢 fixed | R18 (branch) |
+| F77 | S3 | US-OWNER-18 · assign | `assignAssessment` (`assessments.ts:133-136`) does `if (existing) continue` — re-assigning an already-assigned learner silently no-ops (`201 {assignments:[]}`), so a **due date / content-scope set on re-assign is dropped**, and (no unassign route) the due date can't be changed once assigned. Needs a product decision on upsert semantics. | 🟡 logged | — |
+| F78 | S3 | US-ADMIN-11 · EC3 | Flagging generated media is **label-only** — `GeneratedMediaReview{status:FLAGGED}` is written + shown in admin `/generated` but an exhaustive grep finds **zero** consumers on any learner/serving path, so a FLAGGED podcast/quiz/slideshow is still fully served. (Predicted by the expansion pass.) | 🟡 logged | — |
+| F79 | S3 | US-OWNER · csv-export | Students-roster CSV export escaped only RFC-4180 (quote/comma/newline), **not** formula injection (CWE-1236): a student name / `@username` starting with `= + - @ TAB CR` executes as a formula in Excel/Sheets. Names are user-controlled (self-enroll / owner / CSV import). Prefixed formula-leading cells with `'`; verified live end-to-end. | 🟢 fixed | R18 (branch) |
+| F80–F99 | — | *(reserved — claim in order)* | — | ⬜ | — |
 
 **High-probability finding candidates flagged during this expansion** (each needs the §E bundle before it earns an F#):
 - Impersonated session is unrestricted + non-revocable after exit (US-ADMIN-08b·EC16) — **S1** hypothesis.
@@ -405,7 +408,8 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 
 | O# | Kind | Story · EC | Note | Run seen | Re-triage status |
 | --- | --- | --- | --- | --- | --- |
-| O1 | *(template — flaky-suspect / enhancement / uz-fluency-doubt / one-off)* | — | — | — | open / promoted-to-F## / closed |
+| O80 | uz-fluency-doubt | US-XCUT-01 | Generated content + app-wide uz UI strings use ASCII apostrophe `U+0027` in `o'`/`g'` where Uzbek orthography wants `U+02BB` (`oʻ`/`gʻ`). Mirrors source PDF + `messages/uz.json` convention → product-wide decision, morning human review. | R18 | open |
+| O81 | security-hardening | US-ADMIN-08b | Impersonation tokens are **not single-use** — stateless 30-min JWT, no server-side nonce, so a token replays for its whole window (verified: 2nd identical request → 200). Deliberate stateless tradeoff; true single-use needs jti tracking. | R18 | open |
 
 ## B.3 — Story index rows (tick under each area in the backlog index)
 

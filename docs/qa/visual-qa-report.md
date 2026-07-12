@@ -906,3 +906,388 @@ Verified live against local dev (qa-individual / Ven diagrammasi PDF):
       active-blank design read as a single multiple choice). Verified live on 2- and
       3-blank questions: per-slot success/fail states, per-row correct-answer reveal,
       partial credit.
+
+---
+
+## Run 18 — 2026-07-12 (overnight, unattended) · SESSION-BASED deep QA of the post-2026-06-28 surface
+
+**Boot ritual (§A):** re-read rulebook + coverage-map + last 5 journal entries; `bash scripts/qa-preflight.sh`
+→ **exit 0** (stack reused healthy, all 4 QA accounts OK, fixtures ready, baseline typecheck OK). RCRCRC:
+the ENTIRE post-2026-06-28 feature surface (question-engine v2, practice v2, SRS flashcards, structured
+players, GAME live, messaging, CSV, impersonation, analytics) landed **after** the last real-browser QA
+(Runs 1–17 ended 2026-06-29). The "Practice v2 checks" section above is dev self-verification, not a
+persona-driven browser pass — so nearly every coverage-map cell is genuinely staleness-∞ / never
+oracle-verified via the browser. Picked 8 charters (C1–C8) sorted by freshest-code × risk × P0.
+Invariants compiled: seat-limit never exceeded · deactivated learner loses access immediately · learner
+sees only assigned · no cross-tenant id · GAME timing server-authoritative.
+
+### C1 — Practice generator v2 (INDIVIDUAL) · FedEx lens · persona Nodira/language-purist · uz · light · 1440
+
+**Charter:** Explore the Practice dialog + `/quiz/[id]` as Nodira with the FedEx lens + AI-grounding
+oracle, to discover data-integrity / AI-quality defects. **Done when:** count-preset fills to count;
+type-chip-alone deselects Mixed; every quiz key independently solved vs source; KaTeX 0 errors; uz
+deterministic pre-checks clean; grading metamorphic-tight passes.
+
+**Env/setup:** logged in `qa-individual@talim.local` via the real form; opened the one READY content
+"Ven diagrammasi 2-qism.pdf" (`cmq1fprts…`). Fetched all 4 section bodies via `curl :4000` as the
+**grounding oracle** — a Venn/set-theory + triangle-perimeter worksheet. Pre-solved the definite keys:
+triangle 34+21+15=**70**, 43+32+21=**96**, 32+46+58=**136**; rectangles 2(617+247)=**1728**,
+2(315+215)=**1060**; Venn 30-students 18+20−30=**8**. (Note: source problems 2/3/6 are under-specified in
+the worksheet itself — a clean AI answer there would be suspect; the generator avoided them.)
+
+**🟢 PASS — no findings.** Practice dialog renders the full documented v2 surface: scope (Joriy bo'lim /
+Butun material), count presets (5/10/15/20, 10 default), 10 type chips + **Aralash (Mixed) pressed by
+default**, depth picker (Aralash/Eslash/Tushunish/Qo'llash). **Derived-Mixed confirmed:** clicking
+**Raqamli (Numeric)** flipped `aria-pressed` on Numeric and **off Aralash** (derived-Mixed refactor
+works). Generated **count 5 + Numeric-only + current section** ("Uchburchak perimetri"):
+- **Fill-to-count: 5/5 Numeric generated — the "NUMERIC 0/15" regression-watch item is CLEAR this run.**
+  Single `POST /quiz/content/… → 202` (no double-fire), async job, ~35s to READY (bounded wait, no stall).
+- **All 5 keys independently solved + verified live** (Claims/World oracle): Q1 rect P=1728,en=247→bo'y
+  **617** ✓; Q2 tri P=96,sides 43,21→**32** ✓; Q3 rect P=1060,bo'y=315→en **215** (garbage 99999→
+  **"Noto'g'ri" + revealed key 215** ✓ metamorphic garbage→0%); Q4 rect 50×30→P **160** ✓; Q5 rect
+  P=600,bo'y=200→en **100** ✓. Every keyed answer graded **"To'g'ri!"** (metamorphic-tight 100%), every
+  explanation mathematically correct and grounded in the source's own numbers (two of five are fresh
+  "yangi sonlar" application items — still perimeter-grounded).
+- **Score arithmetic exact:** finish → **80% · "5 ta savoldan 4 tasi to'g'ri"** (4/5, the one garbage
+  answer). **Mastery moved UP 58→72** for the section on the strong result (Elo-KT upward). Result
+  **persisted after a real `location.reload()`** (depth-3 satisfied).
+- **Deterministic oracles clean:** `.katex-error` count **0**, no raw `$$`/`\frac`/```mermaid``` in text,
+  **0** raw i18n keys, **0** English-leak UI words on the uz page.
+
+**O80 (S4, low-confidence fluency — LOGGED, not a finding):** generated content + app-wide uz UI strings
+use the **ASCII apostrophe U+0027** in `o'`/`g'` sequences (9 instances on the quiz page) where Uzbek
+orthography wants **U+02BB** (`oʻ`/`gʻ`). This mirrors the source PDF and the `messages/uz.json`
+convention, so it is a product-wide orthography decision, not a generator bug — per §D the apostrophe
+substitution is an `O<n>` for morning human review, never a confirmed `F`. Evidence: `browser_evaluate`
+regex `[oOgG]'[a-zA-Z]` → 9, `[oOgG]ʻ` (U+02BB) → 0. Screenshot: `docs/qa/screenshots/run18-c1-numeric-quiz-80pct.png` (gitignored).
+
+**Test-data:** one Numeric practice quiz `cmrhoy7in…` generated for qa-individual's PDF + submitted once
+(80%), advancing that section's mastery 58→72 (harmless study-session data on the local dev DB). No
+fixtures touched.
+
+### C3 — Structured question players + grading truth-tables · FedEx lens · persona Karim(keyboard) · uz · light · 1440
+
+**Charter:** Exercise the structured question players (`question-inputs.tsx`, shared by the INDIVIDUAL
+practice player AND the learner assessment player) + shared `grading.ts` to discover grading /
+partial-credit / a11y defects. **Done when:** DROPDOWN_CLOZE renders one chip-row per blank (a9b2c397)
+with partial credit; MATCHING + ORDERING keys independently solved; grading truth-table holds
+(correct/partial/wrong); keyboard a11y present. **Efficiency note:** tested via the INDIVIDUAL practice
+generator (whole-material, count 10, types = DROPDOWN_CLOZE+MATCHING+ORDERING) because it drives the
+*exact same* shared player + grading code the learner assessment player uses — no owner setup needed.
+Generation took ~90s (structured + whole-material RAG stratification; bounded wait, no stall, no F59
+false-flag).
+
+**🟢 PASS — no findings. All three structured players + keys verified live against the source worksheet:**
+- **DROPDOWN_CLOZE (a9b2c397 confirmed):** the Venn stem (30 students, 18 math, 20 volleyball) renders
+  with **two inline numbered slot pills** ("1","2") and **two separate labeled chip rows** — "Bo'sh joy 1"
+  [6,8,10,12] and "Bo'sh joy 2" [10,12,14,16] — i.e. every blank gets its own row (the fix). **Partial
+  credit works:** answered blank1=8 (correct: 18+20−30) + blank2=16 (wrong) → **"Qisman to'g'ri — 1/2"**
+  with per-slot reveal ("To'g'ri javob: 12" for the missed slot) and a grounded explanation (20−8=12).
+- **MATCHING:** "60 students" item (35 books, 25 films, 15 both) via three native `<select>`s; answered
+  only-book=20, only-film=10, both=15 → **"To'g'ri!"** + correct explanation (35−15=20, 25−15=10, 15).
+  Right-option pool is distinct numbers (no duplicate-label case in this instance).
+- **ORDERING:** "100 customers" ascending-by-count. Uses **accessible Up/Down move buttons** (Yuqoriga/
+  Pastga ko'chirish — real `<button>`s, keyboard-operable; the WCAG-2.5.7 click alternative to drag is
+  present, not drag-only). Initial order was gradeable untouched (untouched-order-as-answer supported);
+  moved "both" up to [both=20, masq=30, choc=40] → **"To'g'ri!"** + grounded explanation (20,30,40).
+- **Grading truth-table holds** across all three: keyed→"To'g'ri!", partial→"Qisman to'g'ri — n/m",
+  wrong→"Noto'g'ri" with correct-answer reveal. Every key is mathematically correct and grounded in the
+  source's own numbers. Console clean throughout (only the baseline F3 summary-404).
+
+**Deferred to C4:** HOTSPOT + DRAG_DROP players (assessment-only, Wave C — not offered by the practice
+generator) and a full keyboard-only sweep of the learner assessment player. **Test-data:** one structured
+practice quiz `cmrhp6slv…` generated for qa-individual (not submitted/finished). No fixtures touched.
+
+### C2 — SRS flashcards (INDIVIDUAL) · OCD lens · persona Nodira · uz · light · 1440
+
+**Charter:** `/content/[id]/flashcards` — flip → 4-level SM-2 grade; Again re-queues; grade-failure must
+NOT advance the queue; **SM-2 persists after a real reload** (or confirm session-only); backs grounded.
+**Done when:** all the above verified live.
+
+**🟢 PASS — no findings. SM-2 persistence is REAL now (supersedes the Run-14 "session-only" note).**
+Empty state ("Hali fleshkarta yo'q" + Generate) → **12 cards generated** (~25s, bounded). Card faces
+grounded + mathematically correct against the source worksheet: card 1 front = the Venn 30-students
+problem, back **"8 ta o'quvchi ikkala musobaqada ham qatnashgan"** (18+20−30=8 ✓); card 2 back =
+"only-one activity **30**" with the breakdown "20 faqat kitob, 10 faqat film" (35−15=20, 25−15=10, sum
+30 ✓). **Flip works** (Savol→Javob). **4-level SM-2 buttons present:** Takrorlash (Again) / Qiyin (Hard)
+/ Bildim (Good) / Oson (Easy).
+- **Again re-queues + does NOT advance the learned queue:** grading card 1 "Takrorlash" kept the counter
+  at **0/12 · 12 ta qoldi** and advanced to the next card (the graded card stays due). Fires
+  `POST …/flashcards/{cardId}/review → 200` (persisted).
+- **Good advances:** grading card 2 "Bildim" moved the counter to **1/12 · 11 ta qoldi** (also POST
+  review 200).
+- **SM-2 scheduling persists across a real `location.reload()`:** after reload the deck is **11 due cards
+  (was 12)** — the Bildim-graded card was scheduled into the future and dropped out of today's due queue,
+  while the Takrorlash-graded Venn card is back at the front of the deck. So the server-side SM-2 due
+  scheduling survives reload (the per-session "n/m learned" counter still resets to 0/11, but the *deck
+  size* correctly reflects persisted scheduling). **This is a genuine improvement over Run 14's
+  session-only observation — the SRS review-persistence endpoint (`662d4c62`) now works end-to-end.**
+- i18n clean (uz card faces + rating labels proper Uzbek); console only the baseline F3 summary-404s.
+
+**Test-data:** one uz flashcard deck (12 cards) generated for qa-individual's PDF; 2 cards reviewed
+(1 Again, 1 Good) — harmless SRS study-session state on the local dev DB. No fixtures touched.
+
+### C4 — Assessment builder + server-authoritative assessment invariants · Antisocial lens · persona Karim/Nodira · OWNER · uz
+
+**Charter:** builder wizard + validation; **F56 DRAFT-assign block**; **due set/past-reject +
+submission-after-due blocked server-side**; learner-sees-only-PUBLISHED-assigned. **Method:** drove the
+real builder UI (owner) + the second-actor curl pattern (owner + teststudent1 tokens) + one Prisma
+state-setup for the due-enforcement test (the assign flow itself wasn't under test; there is **no
+assessment-unassign API route**, so a past dueAt on the existing assignment had to be set via Prisma,
+then restored). Full 8-type build-each-type→publish→learner-take was **not** run (generation-heavy; the
+4 structured players + grading were already oracle-verified in C3 via the shared `question-inputs.tsx`).
+
+**🐛→✅ F76 (S3, web i18n / product self-consistency — FIXED + verified live, `see commit`).** The
+assign-step due-date field carries the helper copy **"…lekin topshirishni bloklamaydi"** / EN "Shown to
+students but **does not block submission**" / RU "…но **не блокирует отправку**", and the `dueAt` schema
+comment (`assessment/shared.ts:168`) likewise said "Soft due date — informational only … does not block
+submission." **But the server hard-blocks late submission:** `submitLearnerAssessment`
+(`assessment/learner.ts:97-98`) computes the earliest non-null dueAt across the learner's assignment rows
+and, if past, `throw new AppError(403, 'This assessment is past its due date and no longer accepts
+submissions')` for **both WRITTEN and GAME**. **Reproduced live:** set teststudent1's QA-Written-Quiz!
+assignment `dueAt=2020-01-01` (Prisma) → `POST /learner/assessments/<id>/attempts {answers:{}}` → **403**
+`{"message":"This assessment is past its due date and no longer accepts submissions"}` (the due check
+runs *before* the attempt-limit / grading, so an empty body still trips it). Oracle: **Claims / product
+self-consistency** — the UI makes an explicit promise ("does not block") that the backend violates. The
+runbook §F lists "**submission-after-due blocked server-side**" as an expected done-condition, so the
+enforcement is the intended behavior and the stale copy is the bug. **Fix:** corrected `assessment.builder.dueDateHint`
+in uz/en/ru to state submissions close after the date + updated the schema comment to describe the 403
+enforcement. **Verified live (uz):** hint now "Belgilangan sana o'quvchiga ko'rsatiladi; shu sanadan
+keyin topshirish yopiladi." `pnpm` typecheck (types+web+admin) green. **State restored:** dueAt→null;
+the one stray 0-score attempt created while probing was deleted (Prisma). teststudent1 back to clean.
+
+**F77 (S3, api — LOGGED, structural, not fixed): the assign endpoint silently no-ops on an
+already-assigned learner, so a due date (or content/section) set on re-assign is dropped with a `201`
+success.** `assignAssessment` (`assessment/assessments.ts:133-136`) does `findFirst({assessmentId,
+learnerId}) → if (existing) continue`, then returns only the newly-created rows. **Observed live:**
+re-assigning QA-Written-Quiz! to the already-assigned teststudent1 with `dueAt:'2020-01-01'` returned
+**`201 {"assignments":[]}`** and the learner's dueAt stayed **null** — the new due date was silently
+discarded, with a success status and no "already assigned / nothing changed" signal. Because there is no
+unassign route, **an owner cannot change a due date (or re-scope content/section) once a learner is
+assigned**, and the builder's assign list still shows already-assigned learners as selectable. Fixing
+this needs a product decision on upsert semantics (update dueAt/content on re-assign? reset attempts?
+surface an "N already assigned" notice?) → structural, LOGGED per HARD RULES. | apps/api/src/services/assessment/assessments.ts:133-136 + apps/web assign panel feedback
+
+**🟢 Invariants + wizard (no findings):**
+- **F56 DRAFT-assign guard still present** (`assessments.ts:110-111` → `AppError(400, 'Assessment must be
+  published before it can be assigned')`); code-verified (no easy API path to flip status to re-drive it
+  live, and Run 13 already proved it end-to-end). The same guard also blocks go-live on a non-PUBLISHED
+  assessment (`assessments.ts:82-83`).
+- **Learner sees only PUBLISHED + assigned:** `/learner/assessments` for teststudent1 returns exactly the
+  2 PUBLISHED assessments assigned to them (QA Written Quiz!, QA Game Quiz); DRAFTs are filtered
+  (`learner.ts:21` `status:'PUBLISHED'`).
+- **Builder wizard** (5 steps: Bank→Yaratish→Ko'rib chiqish→Nashr→Tayinlash) gates forward navigation —
+  steps 2/3/4 are `disabled` until a bank is selected (couch-potato: can't skip ahead); the Assign button
+  is `disabled` until an assessment + ≥1 learner are chosen. The adversarial XSS student name
+  `🎓 Ali <script>alert(1)</script> Очень…` renders **escaped** in the assign learner checklist (no exec).
+
+**Deferred:** full 8-type build→publish→learner-take incl. HOTSPOT/DRAG_DROP players + keyboard-only
+sweep (generation-heavy; the shared player+grading for the 4 practice-reachable structured types is
+oracle-verified in C3). **Test-data:** all restored — teststudent1's assignment dueAt back to null, stray
+probing attempt deleted; no assessments/assignments created. No fixtures touched.
+
+### C6 — Two-way messaging: IDOR matrix + role-guard + XSS · Hostile persona · OWNER+LEARNER (curl second-actor + browser)
+
+**Charter:** broadcast→reply→respond→mark-read; **IDOR matrix on `/messages/:id/{read,reply,respond}`**;
+XSS-in-body escaped; deactivated/cross-tenant excluded from broadcast. **Method:** code-read the isolation
+guards (`services/tenant/messages.ts`) then confirmed every one live via the second-actor curl matrix
+(owner + teststudent1 tokens) + a browser XSS-render check.
+
+**🟢 PASS — no findings. Messaging isolation is airtight.** Every mutation scopes by
+`{messageId, recipientId: <self>, message: {tenantId}}` (`markRecipientRead` / `replyToTenantMessage` /
+`respondToStudentReply`), and the broadcast filters recipients to `role:LEARNER, active:true` in-tenant.
+**Live IDOR matrix** (owner sent M1→teststudent1 with an XSS body, M2→Test-Student-Two only):
+- teststudent1 `POST /learner/messages/<M2>/read` → **404** (not their recipient row) ✓
+- teststudent1 `POST /learner/messages/<M2>/reply` → **404** ✓
+- teststudent1 `GET /learner/messages` **excludes M2** (Test-Student-Two's message stays private) ✓
+- teststudent1 `POST /learner/messages/<M1>/reply` → **201**, `.../read` → **200** (own message works) ✓
+- teststudent1 `POST /tenant/messages` (owner-only send) → **403** (role guard `requireTenantOwner`) ✓
+- teststudent1 `POST /tenant/messages/<id>/respond` (owner-only) → **403** ✓
+- teststudent1 `POST /learner/messages/<bogus-cuid>/read` → **404** (cross-tenant / forged id) ✓
+- **XSS-in-body escaped:** M1's body `<script>alert(1)</script> IDOR-test body` is stored **raw**
+  (verified via API) but renders in the learner message bell as **literal text** — `browser_evaluate`
+  found the string as a leaf node's `textContent`, **0 injected `<script>` tags**, no alert dialog fired.
+  React auto-escaping holds. ✓
+- **Broadcast recipient filtering** (`sendTenantMessage` L70-76: `active:true` in-tenant, else 400 "No
+  valid active students") — code-verified; deactivated/cross-tenant/non-member ids are silently dropped.
+  (Not re-driven live to avoid deactivating a real student mid-run; the filter is unambiguous.)
+
+Also confirmed incidentally: the **learner dashboard shows only the 1 assigned material** (YouTube video)
+and the 2 assigned assessments (each "0/1 urinish" — the stray attempt from C4 is gone) — the
+learner-sees-only-assigned invariant holds visually. **Test-data:** the 3 probe messages (M1/M2/reply)
+were deleted from the dev DB (Prisma); tree clean. No fixtures touched.
+
+### C8 — Impersonation + analytics + moderation · Hostile / Saboteur persona · ADMIN (curl second-actor + code)
+
+**Charter:** impersonation single-use/expiry/tamper/deactivated-target + imp-session can't reach admin +
+audit attribution + exit; analytics 8 endpoints (empty-DB divide-by-zero, `days` fuzz); FLAGGED media
+actually hidden vs label-only. **Method:** code-read the impersonation mint + `GeneratedMediaReview`
+paths, then the live admin security matrix via curl (admin + minted imp tokens).
+
+**🟢 Impersonation security matrix — all pass.** `POST /admin/users/:id/impersonate` mints a **stateless
+30-min JWT** (`imp:true` + `impersonatorId`, reuses JWT_SECRET); refuses self (400) and other admins
+(403); nothing persisted beyond the audit row.
+- mint imp token for teststudent1 → **200** ✓
+- imp session → `/admin/stats/platform` → **403** (carries the target's LEARNER role; can't reach admin) ✓
+- imp session → `/learner/assessments` → **200** (acts as the learner) ✓
+- **tampered** token (last 4 chars mangled) → **401** (signature verify rejects) ✓
+- impersonate **self** → **400** ✓
+- **audit attribution correct:** newest `/admin/audit-logs` row = `IMPERSONATE · User ·
+  targetId=teststudent1 · meta{targetRole:TENANT_LEARNER, targetEmail}` with the real admin as
+  `adminUserId` ✓
+- deactivated-target: mint doesn't check `active`, but `requireActiveLearner` blocks the imp session on
+  `/learner/*` (403) — layered defense, code-verified.
+
+**O81 (S3, security-hardening — LOGGED, not a finding): impersonation tokens are NOT single-use.** By
+design the token is a stateless JWT with no server-side nonce/consumption record, so replaying the same
+token succeeds repeatedly for the full 30-min window (verified: 2nd identical request → **200**). This is
+a deliberate stateless tradeoff, but the runbook lists "single-use" as a desired property; true
+single-use would need server-side jti tracking (structural). Logged for morning review.
+
+**🟢 Analytics — all 8 endpoints healthy + fuzz-safe.** `summary / mrr / user-growth / by-role / funnel /
+content-by-type / top-orgs / spend-by-model` all **200** on the populated DB (no divide-by-zero). `days`
+fuzz on summary (`0, -1, abc, 999999, 1e9, 3.5, ""`) → **all 200**, no 500 / NaN crash (the `days=0`
+empty-window case is a good proxy for the empty-DB divide-by-zero concern).
+
+**F78 (S3, product gap — LOGGED, structural): flagging generated media is LABEL-ONLY — a FLAGGED
+podcast/quiz/slideshow/summary is never hidden from learners.** `reviewGenerated`
+(`admin/content.controller.ts:214`) upserts a `GeneratedMediaReview{status:APPROVED|FLAGGED}` + writes a
+`generated.review` audit row, and the admin `/generated` list left-joins that status **for display only**
+(`:180`, default PENDING). An **exhaustive repo grep** finds exactly TWO references to
+`generatedMediaReview` — that write and that admin-display read — and **ZERO** on any content-serving or
+access-guard path (`contentAccess.service.ts`, learner routes, the podcast/quiz/slides/summary serving
+endpoints). So an admin who flags harmful AI media believes they've protected students, but the item stays
+fully served. This is the exact "label-only = product gap" the runbook anticipated. Enforcing it needs a
+product decision (hide entirely? "under review" placeholder?) + serving-path checks → structural, LOGGED
+per HARD RULES. Oracle: product self-consistency / Purpose. | apps/api generated-media serving paths + contentAccess.service.ts
+
+**Test-data:** none to clean — the imp token is stateless/expiring; the IMPERSONATE audit row is a
+legitimate audit trail entry (left in place). No fixtures touched.
+
+### C5 — GAME live lifecycle + leaderboard/timing integrity · Antisocial/Hostile persona · OWNER + curl learner ("The cheater" soap opera)
+
+**Charter:** schedule→go-live→end-live + live banner + `?play`; **forged responseMs clamp (F39
+invariant)**; leaderboard integrity; server-authoritative timing. **Method:** code-read
+`computeGamePoints` + `setAssessmentLive`, then the live cheater matrix via curl (owner + teststudent1),
+resetting the consumed attempt via Prisma.
+
+**🟢 Cheat-clamp holds — no *impossible* scores possible (F39 residual re-confirmed, not a new find).**
+`computeGamePoints` (`assessment/shared.ts:205`) clamps the client-supplied timing:
+`rms = Math.min(Math.max(responseMs ?? limitMs, 0), limitMs)`, speedFactor 0.5–1.0, streakMult 1.0–1.5,
+and the submit schema enforces `timings: int().min(0)`. **Live cheater test (QA Game Quiz, 4×TF, 20s/Q):**
+- forged **negative** responseMs (−100) → **400 Validation error** "Number must be greater than or equal
+  to 0" (rejected at parse, *before* attempt creation — no attempt consumed) ✓
+- forged **responseMs=0** on all → **201**; each *correct* answer awarded exactly **1000** (speedFactor
+  clamped to 1.0, streak-1 mult 1.0), wrong answers **0**, pointsTotal **2000** for 2/4 correct. Points are
+  **bounded to the legit maximum** (no overflow / super-human score), and **correctness gates points**
+  (a forged instant time on a wrong answer earns nothing).
+- **Residual F39 (known, structural, still deferred):** timing is **client-authoritative** — the server
+  clamps the claimed responseMs but does NOT measure elapsed time from a server-recorded question-serve
+  timestamp, so a cheater who knows the answers can forge `responseMs=0` to always claim the max speed
+  factor and *match* the fastest-honest score (never exceed it). True server-authoritative timing needs
+  per-question serve timestamps (stateful) — the same structural change logged as F39 in prior runs.
+
+**🟢 Live lifecycle + leaderboard (no findings).** `setAssessmentLive` is start+end in one endpoint
+(`{live:true}` → isLive+liveEndsAt; `{live:false}` → isLive false), gated on PUBLISHED (L83). Verified:
+owner go-live → **200 isLive:true** and **teststudent1 immediately sees `isLive:true`** in
+`/learner/assessments` (drives the dashboard join-live banner + `?play`); owner end-live → isLive:false;
+**learner→go-live → 403** (role guard); state restored to isLive:false. Leaderboard endpoints (owner +
+learner) → **200**, ranked rows `{rank, learnerName, pointsTotal, score, maxStreak}` — existing entry
+"QA JoinCode Student" 1510 pts / 50% / streak 1, arithmetically consistent with honest clamped play
+(≈755/correct → speedFactor ≈0.75, not a forged 1000). **Test-data:** the forged cheat attempt was
+deleted (Prisma, maxAttempts=1 so teststudent1 stays takeable); live state restored to not-live. No
+fixtures touched.
+
+### C7 — CSV import/export: seat-boundary + formula-injection · Hostile/Nodira persona · OWNER (browser export + curl import)
+
+**Charter:** valid import + per-row errors; **seat-boundary + partial import**; BOM/semicolon; **formula-
+injection escaping on export**; perf. **Method:** code-read the import service + client export, then live
+import (curl) + real-app export (browser blob capture) + Prisma seat-limit setup.
+
+**🐛→✅ F79 (S3, web security — CSV formula injection on the students export — FIXED + verified live).**
+The roster export's `escapeCsv` (`tenant/students/page.tsx:142`) did only RFC-4180 quoting
+(`/[",\n]/`), **not** spreadsheet **formula-injection** escaping (CWE-1236). A student **name** (or the
+`@username` shown in the email column) starting with `= + - @ TAB CR` is written verbatim, so when the
+owner opens `students.csv` in Excel/Sheets/LibreOffice it executes as a **formula** (data exfil via
+`HYPERLINK`/`WEBSERVICE`, or DDE). Student names are user-controlled — self-enroll display name, owner
+create, **and CSV import** (confirmed: importing `=1+1 QAFORMULA` round-trips the name verbatim). Even a
+`=HYPERLINK(...)` name that got RFC-quoted (for its `"`) still starts with `=` once the CSV quotes are
+stripped → still a formula. **Repro (deterministic):** `browser_evaluate` of the old function → `=1+1`,
+`+2+3`, `-5`, `@SUM(A1)`, `\tTab` all exported unescaped. **Fix:** prefix a leading formula char with a
+single quote before RFC quoting. **Verified live end-to-end:** logged in as owner, imported 2 formula-
+named students, real-app "Eksport" of all rows (blob captured) → `'=1+1 QAFORMULA` / `'@SUM(A1)
+QAFORMULA2` and the `@username` cells also escaped — **0 dangerous cells**; normal names + comma-names
+still export correctly (RFC quoting intact). `@talim/web` typecheck green. Oracle: Standards / Security
+(OWASP CSV injection). Commit on branch.
+
+**🟢 Seat-boundary invariant — verified live (no findings).** `importStudents`
+(`services/tenant/students.ts:346`) passes `assertSeatBeforeConsume:true`, so the seat quota is
+re-checked per seat-consuming row (natural partial-import at the limit). **Live:** set QA Academy
+`seatLimit=6` with 6 active learners, imported 2 fresh → **`{created:0, seatLimited:2}`**, both rows
+`error_seat_limit "Seat limit reached"` — **the seat limit is never exceeded via import**, and the
+per-row report (`created/reactivated/skipped_duplicate/error_seat_limit/error` + summary counts) is
+detailed and correct. Import also enforces name-required + a `MAX_IMPORT_ROWS` cap per row.
+
+**Test-data:** all restored — `seatLimit` back to `null`, the 2 imported formula students **deleted**
+(active learners back to 4); the seat-boundary import created 0 rows. Downloaded `students.csv` lives in
+gitignored `.playwright-mcp/`. No fixtures touched.
+
+### Run 18 — closeout (§G)
+
+**8 charters, all completed. 2 bugs fixed + verified live, 2 logged structural, 2 observations. Full
+`pnpm` typecheck (types+web+admin) green after both code fixes; every commit on `claude/visual-qa`,
+nothing pushed.** This run finally put the **entire post-2026-06-28 surface** under a real persona-driven
+browser+API pass for the first time (Runs 1–17 predated it).
+
+**Fixed + verified live:**
+1. **F76** (S3, web i18n + api comment) — assign due-date hint said "does not block submission" but the
+   server 403s late submits; corrected uz/en/ru copy + schema comment. Reproduced the 403 live.
+2. **F79** (S3, web security) — CSV formula injection (CWE-1236) on the students export; prefixed
+   formula-leading cells with `'`. Verified end-to-end (imported `=1+1` name → export `'=1+1`).
+
+**Logged (structural → `docs/PLANS.md`, owner @KAMRONBEK, 2026-07-12):** F77 (assign re-assign no-op /
+un-editable due date), F78 (FLAGGED media label-only), F39 (client-supplied GAME `responseMs`; clamp
+bounds it but timing isn't server-measured), O81 (imp token not single-use).
+
+**Clean passes (oracle-verified, no findings):** C1 practice-generator v2 (5/5 Numeric fill-to-count, all
+keys independently solved + grounded, grading metamorphic-tight, mastery 58→72); C2 SRS flashcards (SM-2
+persistence now REAL — deck 12→11 due after reload, supersedes Run-14 session-only note); C3 structured
+players (DROPDOWN_CLOZE one-row-per-blank + partial credit, MATCHING/ORDERING keys); C6 messaging (full
+IDOR matrix 404, role-guard 403, XSS-escape); C5 GAME (cheat-clamp bounds forged scores, live lifecycle +
+role-guard), C8 impersonation matrix + analytics 8-endpoint `days` fuzz.
+
+**Observations:** O80 (ASCII apostrophe in uz `o'`/`g'` — product-wide), O81 (imp token replayable).
+
+**Coverage advanced (by depth):** ~15 cells moved from `viewed`(∞) → `oracle-verified`(0): quiz-generator
++ thin-content, flashcards populated/empty/review-fail, due-date, csv-import-valid/seat-boundary/export,
+game-live-control, messaging populated/IDOR, impersonate accept/replay-tamper, analytics-populated,
+flag-effect. ~5 more → `interacted` (structured-players, builder-8types, invalid-config, analytics-empty,
+game-live-play, csv-import-malformed).
+
+**Invariant sweep (all held):** seat-limit never exceeded (import at full seats → 0 created, 2
+seat-limited); learner sees only assigned (dashboard + `/learner/assessments`); no cross-tenant id
+(messaging IDOR 404s + learner list excludes others); GAME/assessment timing server-clamped (forged
+responseMs bounded, negatives 400) — the one residual is F39 (client-supplied, logged). Deactivated-learner
+access-loss was code-verified (not re-driven live to avoid deactivating a real student).
+
+**Flaky-suspect list:** none — every finding reproduced deterministically.
+
+**Blocked-on-job list:** none — all generation jobs completed within bounded waits (practice ~35–90s,
+flashcards ~25s); no stuck spinners, no F59 false-flags.
+
+**Staleness report:** the big untested frontier is now largely covered. Still `viewed`/∞ or not reached
+this run: HOTSPOT + DRAG_DROP structured players + full keyboard-only sweep (assessment-only, generation-
+heavy); full 8-type build→publish→learner-take round-trip; `mustChangePassword` flow; podcast/video
+per-part generate/retry on the tenant material-detail; deactivation-access-loss driven live; ru/en locale
+tier on the new surfaces (most cells oracle-verified at uz only). Impersonation *browser* accept/exit-UI
+(`/impersonate` route) — matrix was API-driven; the token-swap-and-restore UI is untested.
+
+**Tomorrow's charter queue (next run):**
+1. HOTSPOT + DRAG_DROP learner players — keyboard + touch a11y (build via owner, take as Aziza/Rustam).
+2. Impersonation **browser** flow — admin `/users/[id]` "Impersonate" → `/impersonate` accept → act →
+   exit restores admin session (UI half of C8; audit already verified).
+3. `mustChangePassword` — create an email-less kid, first-login banner → change → banner clears.
+4. Tenant material-detail per-part generate/retry/fail (podcast/video parts) + FAILED-part UI.
+5. ru + en locale tier on the R18-verified surfaces (practice/flashcards/assessments) — plural/overflow.
+6. Deactivation-access-loss driven **live** in the browser (R5 soap opera) + reactivate.
+7. Bad-neighborhood pass around F76/F77/F78/F79 (assessments assign + admin moderation + CSV).

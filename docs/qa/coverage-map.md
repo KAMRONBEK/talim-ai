@@ -26,47 +26,47 @@
 
 | cell_id | route | role | state | locale_tier | tour_last | depth | last_run | last_commit | findings | staleness |
 |---------|-------|------|-------|-------------|-----------|-------|----------|-------------|----------|-----------|
-| quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
-| quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | O80 | 0 |
+| quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | — | 0 |
 | quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
 | quiz.[id]/INDIVIDUAL/generating | /[locale]/quiz/[id] | INDIVIDUAL | loading/generating | uz | — | viewed | — | — | — | ∞ |
 | quiz.[id]/INDIVIDUAL/failed-job | /[locale]/quiz/[id] | INDIVIDUAL | error/failed-job | uz | — | viewed | — | — | F59 | ∞ |
-| content.[id].flashcards/INDIVIDUAL/populated | /[locale]/content/[id]/flashcards | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
-| content.[id].flashcards/INDIVIDUAL/empty | /[locale]/content/[id]/flashcards | INDIVIDUAL | empty | uz | — | viewed | — | — | — | ∞ |
-| content.[id].flashcards/INDIVIDUAL/review-fail | /[locale]/content/[id]/flashcards | INDIVIDUAL | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| content.[id].flashcards/INDIVIDUAL/populated | /[locale]/content/[id]/flashcards | INDIVIDUAL | populated | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
+| content.[id].flashcards/INDIVIDUAL/empty | /[locale]/content/[id]/flashcards | INDIVIDUAL | empty | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
+| content.[id].flashcards/INDIVIDUAL/review-fail | /[locale]/content/[id]/flashcards | INDIVIDUAL | error/failed-job | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
 | content.[id].flashcards/TENANT_LEARNER-deactivated/populated | /[locale]/content/[id]/flashcards | TENANT_LEARNER-deactivated | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id]/INDIVIDUAL/study-mode | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id]/INDIVIDUAL/selection-ask | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | F63 | ∞ |
 | content.[id]/INDIVIDUAL/section-rail | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id].podcast/INDIVIDUAL/transcript-sync | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id].podcast/INDIVIDUAL/legacy-timings | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
-| learner.assessments/TENANT_LEARNER-active/structured-players | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.assessments/TENANT_LEARNER-active/structured-players | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | FedEx | interacted | R2026-07-12a | a9b2c397 | — | 1 |
 | learner.assessments/TENANT_LEARNER-active/malformed-config | /[locale]/learner/assessments | TENANT_LEARNER-active | error/failed-job | uz | — | viewed | — | — | — | ∞ |
 | learner.assessments/TENANT_LEARNER-active/hotspot-dragdrop-a11y | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
 | learner.dashboard/TENANT_LEARNER-active/game-banner | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
-| learner.assessments/TENANT_LEARNER-active/game-live-play | /[locale]/learner/assessments | TENANT_LEARNER-active | loading/generating | uz | — | viewed | — | — | F39 | ∞ |
+| learner.assessments/TENANT_LEARNER-active/game-live-play | /[locale]/learner/assessments | TENANT_LEARNER-active | loading/generating | uz | Hostile | interacted | R2026-07-12a | 9714b45a | F39 | 1 |
 | learner.assessments/TENANT_LEARNER-active/quiz-review | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
-| learner.messages-bell/TENANT_LEARNER-active/populated | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
-| learner.messages-bell/TENANT_LEARNER-active/IDOR | /learner/messages/:id | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.messages-bell/TENANT_LEARNER-active/populated | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | Hostile | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
+| learner.messages-bell/TENANT_LEARNER-active/IDOR | /learner/messages/:id | TENANT_LEARNER-active | populated | uz | Hostile | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
 | tenant.progress/TENANT_OWNER/mastery-by-topic | /[locale]/tenant/progress | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
 | tenant.progress/TENANT_OWNER/mastery-empty | /[locale]/tenant/progress | TENANT_OWNER | empty | uz | — | viewed | — | — | — | ∞ |
-| tenant.assessments/TENANT_OWNER/builder-8types | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
-| tenant.assessments/TENANT_OWNER/invalid-config | /[locale]/tenant/assessments | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
-| tenant.assessments/TENANT_OWNER/due-date | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
-| tenant.assessments/TENANT_OWNER/game-live-control | /[locale]/tenant/assessments | TENANT_OWNER | loading/generating | uz | — | viewed | — | — | — | ∞ |
+| tenant.assessments/TENANT_OWNER/builder-8types | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | Antisocial | interacted | R2026-07-12a | 8fa216f3 | — | 1 |
+| tenant.assessments/TENANT_OWNER/invalid-config | /[locale]/tenant/assessments | TENANT_OWNER | error/failed-job | uz | Couch-potato | interacted | R2026-07-12a | 8fa216f3 | — | 1 |
+| tenant.assessments/TENANT_OWNER/due-date | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | Antisocial | oracle-verified | R2026-07-12a | 31500cd4 | F76,F77 | 0 |
+| tenant.assessments/TENANT_OWNER/game-live-control | /[locale]/tenant/assessments | TENANT_OWNER | loading/generating | uz | Antisocial | oracle-verified | R2026-07-12a | 9714b45a | — | 0 |
 | tenant.messages-bell/TENANT_OWNER/populated | /[locale]/tenant/dashboard | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
-| tenant.students/TENANT_OWNER/csv-import-valid | /[locale]/tenant/students | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
-| tenant.students/TENANT_OWNER/csv-import-malformed | /[locale]/tenant/students | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
-| tenant.students/TENANT_OWNER/csv-import-seat-boundary | /[locale]/tenant/students | TENANT_OWNER | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
-| tenant.students/TENANT_OWNER/csv-export | /[locale]/tenant/students | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.students/TENANT_OWNER/csv-import-valid | /[locale]/tenant/students | TENANT_OWNER | populated | uz | FedEx | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
+| tenant.students/TENANT_OWNER/csv-import-malformed | /[locale]/tenant/students | TENANT_OWNER | error/failed-job | uz | Couch-potato | interacted | R2026-07-12a | 2d8ddab3 | — | 1 |
+| tenant.students/TENANT_OWNER/csv-import-seat-boundary | /[locale]/tenant/students | TENANT_OWNER | quota-exceeded | uz | Nodira | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
+| tenant.students/TENANT_OWNER/csv-export | /[locale]/tenant/students | TENANT_OWNER | populated | uz | Hostile | oracle-verified | R2026-07-12a | 8dc84401 | F79 | 0 |
 | tenant.materials.[id]/TENANT_OWNER/per-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
 | tenant.materials.[id]/TENANT_OWNER/failed-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
 | tenant.materials.[id]/TENANT_LEARNER-active/role-guard | /[locale]/tenant/materials/[id] | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
-| impersonate/ADMIN/accept | /[locale]/impersonate | ADMIN | populated | uz | — | viewed | — | — | — | ∞ |
-| impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | — | viewed | — | — | — | ∞ |
-| admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | — | viewed | — | — | — | ∞ |
-| admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
-| admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
+| impersonate/ADMIN/accept | /[locale]/impersonate | ADMIN | populated | uz | Hostile | oracle-verified | R2026-07-12a | c73f9371 | O81 | 0 |
+| impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | Hostile | oracle-verified | R2026-07-12a | c73f9371 | O81 | 0 |
+| admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | Saboteur | interacted | R2026-07-12a | c73f9371 | — | 1 |
+| admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | Saboteur | oracle-verified | R2026-07-12a | c73f9371 | — | 0 |
+| admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-12a | c73f9371 | F78 | 0 |
 | admin.content/ADMIN/content-detail | /content/[id] (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
 | pricing/logged-out/cta | /[locale]/pricing | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
 | pricing/INDIVIDUAL/cta | /[locale]/pricing | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
