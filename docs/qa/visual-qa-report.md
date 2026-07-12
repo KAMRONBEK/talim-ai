@@ -901,7 +901,8 @@ Verified live against local dev (qa-individual / Ven diagrammasi PDF):
 - [x] "Fleshkartalar" removed from the left-panel Resources — flashcards live only in the
       Practice dialog now (deck route kept alive for existing decks/bookmarks).
 - [x] DROPDOWN_CLOZE redesigned from bare native selects to an inline cloze: the sentence
-      renders with tappable slot pills where the ___ markers sit, the active blank's
-      options render as chips, picking a chip fills the slot and advances to the next
-      empty blank; verified live (2-blank question: fill → Tekshirish → per-slot success
-      states, chips locked, explanation shown).
+      renders with numbered slot pills where the ___ markers sit, and EVERY blank gets its
+      own labeled chip row (a 3-gap question visibly offers 3 choice rows — the earlier
+      active-blank design read as a single multiple choice). Verified live on 2- and
+      3-blank questions: per-slot success/fail states, per-row correct-answer reveal,
+      partial credit.

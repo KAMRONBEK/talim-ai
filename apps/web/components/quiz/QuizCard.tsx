@@ -279,9 +279,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
           ) : kind === 'fillBlank' ? (
             <FillBlankInput question={q} value={arrayAnswer} revealed={isRevealed} onChangeBlank={setBlank} />
           ) : kind === 'dropdownCloze' ? (
-            // Keyed: the inline cloze holds local active-blank state (same rule as flashcards).
             <DropdownClozeInput
-              key={q.id}
               question={q}
               value={arrayAnswer}
               revealed={isRevealed}
