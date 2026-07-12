@@ -172,6 +172,7 @@ model User {
   assignedAssessments     AssessmentAssignment[]   @relation("AssessmentLearnerAssignments")
   assessmentAttempts      AssessmentAttempt[]
   tutorRequests           TutorRequest[]           @relation("TutorRequests")
+  sectionMasteries        SectionMastery[]
 
   @@index([email])
   @@index([role])
@@ -300,6 +301,7 @@ model Content {
   bankLinks        QuestionBankContent[]
   assessmentAssignments AssessmentAssignment[]
   figures          ContentFigure[]
+  sectionMasteries SectionMastery[]
 
   @@index([userId])
   @@index([tenantId])
@@ -474,6 +476,10 @@ model Quiz {
   style     String         @default("mixed")
   // Requested question count; null means "derive from kind" (QUICK=2, FULL=5).
   count     Int?
+  // Requested cognitive depth (recall | understanding | application | mixed).
+  depth     String         @default("mixed")
+  // Requested question types (JSON array of QuestionType). Null = derive from legacy style.
+  types     Json?
   locale    String         @default("uz")
   createdAt DateTime       @default(now())
   content   Content        @relation(fields: [contentId], references: [id], onDelete: Cascade)
@@ -500,7 +506,19 @@ model QuizQuestion {
   // Accepted answers for grading all question types. Null on pre-migration rows
   // (those are multiple-choice and fall back to correctAnswer).
   acceptableAnswers Json?
+  // Per-type structured config (FILL_BLANK blanks, MATCHING pairs, ORDERING items, ...).
+  config        Json?
   explanation   String?
+  // LLM-declared difficulty (easy | medium | hard); seeds the mastery item prior.
+  difficulty    String?
+  // Cognitive depth this item targets (recall | understanding | application).
+  bloom         String?
+  // Verbatim span from the source material proving the correct answer (hallucination firewall).
+  sourceQuote   String?      @db.Text
+  // Misconception rationales aligned with options order (JSON array of string|null).
+  optionRationales Json?
+  // Section the item was sourced from — resolved from chunk provenance for full-content quizzes.
+  sourceSectionId  String?
   quiz          Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
 
   @@index([quizId])
@@ -613,6 +631,14 @@ model BankQuestion {
   acceptableAnswers Json
   config            Json?
   explanation       String?            @db.Text
+  // LLM-declared difficulty (easy | medium | hard); seeds the mastery item prior.
+  difficulty        String?
+  // Cognitive depth this item targets (recall | understanding | application).
+  bloom             String?
+  // Verbatim span from the source material proving the correct answer (hallucination firewall).
+  sourceQuote       String?            @db.Text
+  // Misconception rationales aligned with options order (JSON array of string|null).
+  optionRationales  Json?
   status            BankQuestionStatus @default(DRAFT)
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
@@ -790,6 +816,46 @@ model SectionProgress {
   @@unique([userId, sectionId])
   @@index([userId])
   @@index([contentId])
+}
+
+// Per-(user, content, section) mastery state for the unified question engine — Elo-KT.
+// theta is an ability logit (clamped ±3); displayed mastery = 100·sigmoid(theta) with
+// Khan-style bands gated by attempt counts + distinct active days. scopeKey mirrors the
+// FlashcardDeck pattern ('full' when sectionId is null) so the unique key holds for the
+// whole-material bucket. Correct answers raise theta, wrong answers lower it; inactivity
+// decays it lazily at read/update time (no cron).
+model SectionMastery {
+  id            String    @id @default(cuid())
+  userId        String
+  contentId     String
+  sectionId     String?
+  scopeKey      String
+  theta         Float     @default(0)
+  attempts      Int       @default(0)
+  correct       Int       @default(0)
+  // Distinct calendar days with at least one answer (gates the "mastered" band).
+  activeDays    Int       @default(0)
+  lastAnswerDay String?
+  lastAnswerAt  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content       Content   @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentId, scopeKey])
+  @@index([userId])
+  @@index([contentId])
+}
+
+// Online difficulty calibration for question items across all users. itemKey is
+// "quiz:<quizQuestionId>" | "bank:<bankQuestionId>" | "card:<flashcardId>" (no FK on
+// purpose — items live in three tables). difficulty is an Elo logit seeded from the
+// LLM-declared difficulty (easy/medium/hard → −1/0/+1) with a pseudo-count prior.
+model QuestionStat {
+  itemKey    String   @id
+  difficulty Float    @default(0)
+  attempts   Int      @default(0)
+  updatedAt  DateTime @updatedAt
 }
 
 model ContentSummary {

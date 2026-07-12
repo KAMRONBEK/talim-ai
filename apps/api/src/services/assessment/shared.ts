@@ -1,8 +1,28 @@
 import { z } from 'zod';
 import { type BankQuestionStatus, type QuestionType } from '@prisma/client';
+import { jsonStringArray, parseQuestionConfig } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import { buildRagContext } from '../rag.service.js';
+
+// The grading engine lives in @talim/types (shared with the web app for instant practice
+// feedback). Re-exported here so the assessment services keep their original import surface.
+export {
+  normalizeAnswer,
+  jsonStringArray,
+  parseQuestionConfig,
+  parseArrayAnswer,
+  answerToString,
+  isCorrect,
+  gradeQuestion,
+  isAnswerableMultipleChoice,
+  isAnswerableMultipleSelect,
+  parseHotspotRegions,
+  pointInAnyRegion,
+  guessFloorForQuestion,
+  type GradeResult,
+  type HotspotRegion,
+} from '@talim/types';
 
 export const createBankSchema = z.object({
   title: z.string().min(1),
@@ -26,13 +46,34 @@ export const questionStyleEnum = z.enum([
 ]);
 export type QuestionStyle = z.infer<typeof questionStyleEnum>;
 
+export const questionDepthEnum = z.enum(['recall', 'understanding', 'application', 'mixed']);
+
 export const generateSchema = z.object({
   topic: z.string().min(1).optional(),
   contentId: z.string().min(1).optional(),
   sectionId: z.string().min(1).optional(),
-  count: z.number().int().min(1).max(30).default(12),
-  // What kind of questions to generate: a balanced mix, or all of one kind.
+  count: z.number().int().min(1).max(30).default(10),
+  // Legacy single-style knob: a balanced mix, or all of one kind. Ignored when `types` is set.
   style: questionStyleEnum.default('mixed'),
+  // Preferred: explicit set of question types to generate (multi-select in the UI).
+  types: z
+    .array(
+      z.enum([
+        'SHORT_ANSWER',
+        'NUMERIC',
+        'MULTIPLE_CHOICE',
+        'TRUE_FALSE',
+        'MULTIPLE_SELECT',
+        'FILL_BLANK',
+        'DROPDOWN_CLOZE',
+        'MATCHING',
+        'ORDERING',
+      ]),
+    )
+    .min(1)
+    .optional(),
+  // Cognitive depth: recall / understanding / application (near-transfer) or a mix.
+  depth: questionDepthEnum.default('mixed'),
 });
 
 // Every question type the storage + scoring engine supports. Shared by the patch
@@ -171,25 +212,14 @@ export interface GeneratedQuestion {
   acceptableAnswers?: string[];
   config?: Record<string, unknown> | null;
   explanation?: string | null;
-}
-
-export function jsonStringArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string') : [];
-}
-
-/**
- * A MULTIPLE_CHOICE question is only answerable if it has at least two options
- * AND at least one accepted answer exactly matches one of those options (after
- * normalization). Otherwise a learner can never select the correct string and is
- * guaranteed 0% — so such questions must never be persisted or approved.
- */
-export function isAnswerableMultipleChoice(
-  options: string[] | null | undefined,
-  acceptableAnswers: string[],
-): boolean {
-  if (!options || options.length < 2) return false;
-  const normalizedOptions = new Set(options.map(normalizeAnswer));
-  return acceptableAnswers.some((a) => normalizedOptions.has(normalizeAnswer(a)));
+  /** LLM-declared difficulty (easy | medium | hard); seeds the mastery item prior. */
+  difficulty?: string | null;
+  /** Cognitive depth this item targets (recall | understanding | application). */
+  bloom?: string | null;
+  /** Verbatim source span proving the correct answer (hallucination firewall). */
+  sourceQuote?: string | null;
+  /** Misconception rationale per option (index-aligned with options; null for the key). */
+  optionRationales?: (string | null)[] | null;
 }
 
 export function formatBank(bank: {
@@ -243,6 +273,10 @@ export function formatQuestion(question: {
   acceptableAnswers: unknown;
   config?: unknown;
   explanation: string | null;
+  difficulty?: string | null;
+  bloom?: string | null;
+  sourceQuote?: string | null;
+  optionRationales?: unknown;
   status: BankQuestionStatus;
   sourceContentId: string | null;
   sourceSectionId: string | null;
@@ -257,6 +291,12 @@ export function formatQuestion(question: {
     acceptableAnswers: jsonStringArray(question.acceptableAnswers),
     config: parseQuestionConfig(question.config),
     explanation: question.explanation,
+    difficulty: question.difficulty ?? null,
+    bloom: question.bloom ?? null,
+    sourceQuote: question.sourceQuote ?? null,
+    optionRationales: Array.isArray(question.optionRationales)
+      ? question.optionRationales.map((r) => (typeof r === 'string' ? r : null))
+      : null,
     status: question.status,
     sourceContentId: question.sourceContentId,
     sourceSectionId: question.sourceSectionId,
@@ -312,6 +352,13 @@ export async function assertBank(tenantId: string, bankId: string) {
   return bank;
 }
 
+/**
+ * Below this many characters of section text there is nothing to ground questions in —
+ * the sourceQuote firewall would reject everything the model invents, failing the whole
+ * generation. Thin (heading-only) sections widen to the full material instead.
+ */
+const MIN_SECTION_CONTEXT_CHARS = 500;
+
 export async function getSectionContext(tenantId: string, contentId?: string, sectionId?: string) {
   if (!contentId) return null;
   const content = await prisma.content.findFirst({ where: { id: contentId, tenantId } });
@@ -322,7 +369,7 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
     : null;
   if (sectionId && !section) throw new AppError(404, 'Section not found');
 
-  const chunks = await prisma.chunk.findMany({
+  let chunks = await prisma.chunk.findMany({
     where: {
       contentId,
       ...(section ? { chunkIndex: { gte: section.startChunk, lte: section.endChunk } } : {}),
@@ -330,340 +377,16 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
     orderBy: { chunkIndex: 'asc' },
     take: 20,
   });
+  if (section && chunks.reduce((sum, c) => sum + c.text.length, 0) < MIN_SECTION_CONTEXT_CHARS) {
+    chunks = await prisma.chunk.findMany({
+      where: { contentId },
+      orderBy: { chunkIndex: 'asc' },
+      take: 20,
+    });
+  }
   return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
 }
 
-export function normalizeAnswer(value: string): string {
-  return value.trim().toLowerCase().replace(/\s+/g, ' ');
-}
-
-export function isCorrect(question: { type: QuestionType; acceptableAnswers: unknown }, answer: string) {
-  const acceptable = jsonStringArray(question.acceptableAnswers);
-  // A blank/whitespace answer (including a game-quiz timer expiry, which submits '')
-  // is never correct. Without this guard, NUMERIC grading treats Number('') === 0 as a
-  // match whenever the correct answer is 0, awarding points for an unanswered question.
-  if (!answer.trim()) return false;
-  if (question.type === 'NUMERIC') {
-    const answerNumber = Number(answer.replace(',', '.'));
-    if (Number.isNaN(answerNumber)) return false;
-    return acceptable.some((value) => Math.abs(Number(value.replace(',', '.')) - answerNumber) <= 0.001);
-  }
-  const normalized = normalizeAnswer(answer);
-  return acceptable.some((value) => normalizeAnswer(value) === normalized);
-}
-
-/** Parse a Json question `config` blob into a plain object (or null). */
-export function parseQuestionConfig(config: unknown): Record<string, unknown> | null {
-  if (config && typeof config === 'object' && !Array.isArray(config)) {
-    return config as Record<string, unknown>;
-  }
-  return null;
-}
-
-/**
- * Canonical String form stored in AttemptAnswer.answer. Plain strings are kept
- * verbatim (back-compat); structured answers (arrays/objects from MULTIPLE_SELECT /
- * FILL_BLANK) are JSON-stringified so they round-trip through the single String column.
- */
-export function answerToString(raw: unknown): string {
-  if (raw == null) return '';
-  if (typeof raw === 'string') return raw;
-  return JSON.stringify(raw);
-}
-
-/**
- * Coerce a submitted answer into an array of strings for the multi-value types.
- * Accepts a real array, an object of strings (per-blank map), or a string that may
- * itself be a JSON-encoded array/object; a bare non-empty string becomes a 1-element
- * array so single-blank FILL_BLANK / single-select still work.
- */
-function parseArrayAnswer(raw: unknown): string[] {
-  if (Array.isArray(raw)) return raw.filter((v): v is string => typeof v === 'string');
-  if (raw && typeof raw === 'object') {
-    return Object.values(raw).filter((v): v is string => typeof v === 'string');
-  }
-  if (typeof raw === 'string') {
-    const s = raw.trim();
-    if (s.startsWith('[') || s.startsWith('{')) {
-      try {
-        const parsed = JSON.parse(s);
-        if (Array.isArray(parsed)) return parsed.filter((v): v is string => typeof v === 'string');
-        if (parsed && typeof parsed === 'object') {
-          return Object.values(parsed).filter((v): v is string => typeof v === 'string');
-        }
-      } catch {
-        /* not JSON — treat as a single bare answer below */
-      }
-    }
-    return s ? [raw] : [];
-  }
-  return [];
-}
-
-/**
- * Coerce a submitted structured answer into a plain array or object (or null). Accepts a
- * real array/object, or a string that is itself a JSON-encoded array/object (belt-and-braces
- * for values that were round-tripped through the String answer column). Unlike
- * `parseArrayAnswer` this preserves object keys, which the MATCHING grader needs to resolve
- * a `{ leftPrompt: chosenRight }` map.
- */
-function coerceStructuredAnswer(raw: unknown): unknown[] | Record<string, unknown> | null {
-  if (Array.isArray(raw)) return raw;
-  if (raw && typeof raw === 'object') return raw as Record<string, unknown>;
-  if (typeof raw === 'string') {
-    const s = raw.trim();
-    if (s.startsWith('[') || s.startsWith('{')) {
-      try {
-        const parsed: unknown = JSON.parse(s);
-        if (Array.isArray(parsed)) return parsed;
-        if (parsed && typeof parsed === 'object') return parsed as Record<string, unknown>;
-      } catch {
-        /* not JSON — no structured value */
-      }
-    }
-  }
-  return null;
-}
-
-/**
- * Resolve a MATCHING submission into the learner's chosen right-hand value per left prompt
- * (index-aligned with `left`). Two accepted submit shapes:
- *  - an ordered array of right values, parallel to `left`; or
- *  - an object keyed by left prompt text (or by the left index as a string).
- */
-function parseMatchingChoices(raw: unknown, left: string[], count: number): string[] {
-  const parsed = coerceStructuredAnswer(raw);
-  const out: string[] = [];
-  for (let i = 0; i < count; i++) {
-    let value: unknown;
-    if (Array.isArray(parsed)) {
-      value = parsed[i];
-    } else if (parsed && typeof parsed === 'object') {
-      const obj = parsed as Record<string, unknown>;
-      const key = left[i];
-      value = (key != null ? obj[key] : undefined) ?? obj[String(i)];
-    }
-    out.push(typeof value === 'string' ? value : '');
-  }
-  return out;
-}
-
-/** A single hotspot region as normalized (0..1, top-left origin) x/y offset + w/h fractions. */
-export interface HotspotRegion {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
-}
-
-/** Extract the well-formed hotspot regions from a question `config` blob (drops malformed ones). */
-export function parseHotspotRegions(config: Record<string, unknown> | null): HotspotRegion[] {
-  const raw = config?.regions;
-  if (!Array.isArray(raw)) return [];
-  const regions: HotspotRegion[] = [];
-  for (const r of raw) {
-    if (r && typeof r === 'object' && !Array.isArray(r)) {
-      const { x, y, w, h } = r as Record<string, unknown>;
-      if (
-        typeof x === 'number' &&
-        typeof y === 'number' &&
-        typeof w === 'number' &&
-        typeof h === 'number'
-      ) {
-        regions.push({ x, y, w, h });
-      }
-    }
-  }
-  return regions;
-}
-
-/** Parse a HOTSPOT submission ({ x, y } normalized click point) into a point, or null. */
-function parseHotspotPoint(raw: unknown): { x: number; y: number } | null {
-  const parsed = coerceStructuredAnswer(raw);
-  if (parsed && !Array.isArray(parsed)) {
-    const { x, y } = parsed as Record<string, unknown>;
-    if (typeof x === 'number' && typeof y === 'number') return { x, y };
-  }
-  return null;
-}
-
-/** True when a normalized click point lies inside ANY region (binary hit-test, inclusive edges). */
-export function pointInAnyRegion(regions: HotspotRegion[], point: { x: number; y: number }): boolean {
-  return regions.some(
-    (r) => point.x >= r.x && point.x <= r.x + r.w && point.y >= r.y && point.y <= r.y + r.h,
-  );
-}
-
-/**
- * A MULTIPLE_SELECT question is answerable only if it has at least two options and at
- * least one accepted answer, and every accepted answer exactly matches one option.
- */
-export function isAnswerableMultipleSelect(
-  options: string[] | null | undefined,
-  acceptableAnswers: string[],
-): boolean {
-  if (!options || options.length < 2) return false;
-  if (acceptableAnswers.length < 1) return false;
-  const normalizedOptions = new Set(options.map(normalizeAnswer));
-  return acceptableAnswers.every((a) => normalizedOptions.has(normalizeAnswer(a)));
-}
-
-/** Accepted answers per blank for a FILL_BLANK question (index = blank position). */
-function fillBlankAcceptedPerBlank(config: Record<string, unknown> | null, flat: string[]): string[][] {
-  const blankAnswers = config?.blankAnswers;
-  if (Array.isArray(blankAnswers) && blankAnswers.length > 0) {
-    return blankAnswers.map((b) => jsonStringArray(b));
-  }
-  const blanks = typeof config?.blanks === 'number' && config.blanks > 0 ? config.blanks : 1;
-  if (blanks <= 1) return [flat];
-  // Multi-blank without an explicit per-blank map: match each accepted answer to its blank by index.
-  return Array.from({ length: blanks }, (_, i) => (flat[i] != null ? [flat[i]] : []));
-}
-
-export interface GradeResult {
-  /** Fully correct (exact/complete match) — drives the correct-count percentage and game streak. */
-  correct: boolean;
-  /** 0..1 credit for this answer (before strict weighting). */
-  creditFraction: number;
-  /** Whether the learner supplied any non-blank answer (a blank is neither correct nor penalized). */
-  answered: boolean;
-}
-
-/**
- * Grade one question against a (possibly structured) submitted answer, computing
- * both full correctness and a 0..1 credit fraction. The string-answer types
- * (SHORT_ANSWER / NUMERIC / MULTIPLE_CHOICE / TRUE_FALSE) reuse `isCorrect` unchanged,
- * so their behaviour is identical to before.
- */
-export function gradeQuestion(
-  question: { type: QuestionType; options: unknown; acceptableAnswers: unknown; config?: unknown },
-  raw: unknown,
-  partialCredit: boolean,
-): GradeResult {
-  const acceptable = jsonStringArray(question.acceptableAnswers);
-
-  if (question.type === 'MULTIPLE_SELECT') {
-    const selected = [...new Set(parseArrayAnswer(raw).map(normalizeAnswer).filter(Boolean))];
-    const correctSet = new Set(acceptable.map(normalizeAnswer));
-    let correctlySelected = 0;
-    let wronglySelected = 0;
-    for (const s of selected) {
-      if (correctSet.has(s)) correctlySelected += 1;
-      else wronglySelected += 1;
-    }
-    const exact = correctlySelected === correctSet.size && wronglySelected === 0 && correctSet.size > 0;
-    const denom = correctSet.size || 1;
-    const partial = Math.min(Math.max((correctlySelected - wronglySelected) / denom, 0), 1);
-    return {
-      correct: exact,
-      creditFraction: partialCredit ? partial : exact ? 1 : 0,
-      answered: selected.length > 0,
-    };
-  }
-
-  // DROPDOWN_CLOZE grades exactly like FILL_BLANK: one selected value per blank, matched
-  // against the accepted value(s) for that blank. The only difference is presentation — the
-  // learner picks from a per-blank option list (config.blankOptions) rather than typing.
-  if (question.type === 'FILL_BLANK' || question.type === 'DROPDOWN_CLOZE') {
-    const perBlank = fillBlankAcceptedPerBlank(parseQuestionConfig(question.config), acceptable);
-    const answers = parseArrayAnswer(raw);
-    let hit = 0;
-    for (let i = 0; i < perBlank.length; i++) {
-      const accepted = (perBlank[i] ?? []).map(normalizeAnswer);
-      const got = normalizeAnswer(answers[i] ?? '');
-      if (got && accepted.includes(got)) hit += 1;
-    }
-    const fraction = perBlank.length > 0 ? hit / perBlank.length : 0;
-    const exact = fraction >= 1;
-    return {
-      correct: exact,
-      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
-      answered: answers.some((a) => a.trim() !== ''),
-    };
-  }
-
-  if (question.type === 'MATCHING') {
-    // acceptableAnswers = the correct right-hand value per left prompt, index-aligned with
-    // config.left. creditFraction = (#correctly matched pairs) / (#pairs); correct = all right.
-    const config = parseQuestionConfig(question.config);
-    const left = jsonStringArray(config?.left);
-    const correct = acceptable;
-    const count = correct.length;
-    const chosen = parseMatchingChoices(raw, left, count);
-    let hit = 0;
-    for (let i = 0; i < count; i++) {
-      const got = chosen[i] ?? '';
-      const want = correct[i] ?? '';
-      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
-    }
-    const fraction = count > 0 ? hit / count : 0;
-    const exact = count > 0 && hit === count;
-    return {
-      correct: exact,
-      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
-      answered: chosen.some((c) => c.trim() !== ''),
-    };
-  }
-
-  if (question.type === 'ORDERING') {
-    // acceptableAnswers = the items in their correct order. Absolute-position scoring:
-    // creditFraction = (#items placed in their correct absolute position) / (#items);
-    // correct = the full submitted sequence matches the correct order.
-    const correctOrder = acceptable;
-    const submitted = parseArrayAnswer(raw);
-    const count = correctOrder.length;
-    let hit = 0;
-    for (let i = 0; i < count; i++) {
-      const got = submitted[i] ?? '';
-      const want = correctOrder[i] ?? '';
-      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
-    }
-    const fraction = count > 0 ? hit / count : 0;
-    const exact = count > 0 && hit === count && submitted.length === count;
-    return {
-      correct: exact,
-      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
-      answered: submitted.some((a) => a.trim() !== ''),
-    };
-  }
-
-  if (question.type === 'HOTSPOT') {
-    // Binary spatial grading: correct iff the clicked point lies inside any region.
-    // acceptableAnswers is unused — the answer is the config.regions geometry. Empty/absent
-    // click => not answered and incorrect (no partial credit).
-    const regions = parseHotspotRegions(parseQuestionConfig(question.config));
-    const point = parseHotspotPoint(raw);
-    const correct = point != null && pointInAnyRegion(regions, point);
-    return { correct, creditFraction: correct ? 1 : 0, answered: point != null };
-  }
-
-  if (question.type === 'DRAG_DROP') {
-    // acceptableAnswers = the correct target label per item, index-aligned with config.items.
-    // Absolute-position scoring like ORDERING: creditFraction = (#items dropped in their correct
-    // target) / (#items); correct = every item placed correctly.
-    const correctTargets = acceptable;
-    const chosen = parseArrayAnswer(raw);
-    const count = correctTargets.length;
-    let hit = 0;
-    for (let i = 0; i < count; i++) {
-      const got = chosen[i] ?? '';
-      const want = correctTargets[i] ?? '';
-      if (got && normalizeAnswer(got) === normalizeAnswer(want)) hit += 1;
-    }
-    const fraction = count > 0 ? hit / count : 0;
-    const exact = count > 0 && hit === count && chosen.length === count;
-    return {
-      correct: exact,
-      creditFraction: partialCredit ? fraction : exact ? 1 : 0,
-      answered: chosen.some((a) => a.trim() !== ''),
-    };
-  }
-
-  // SHORT_ANSWER / NUMERIC / MULTIPLE_CHOICE / TRUE_FALSE — single string answer.
-  const answerString = answerToString(raw);
-  const correct = isCorrect(question, answerString);
-  return { correct, creditFraction: correct ? 1 : 0, answered: answerString.trim() !== '' };
-}
 
 export async function assertLearnerAssignment(tenantId: string, userId: string, assessmentId: string) {
   const assignment = await prisma.assessmentAssignment.findFirst({

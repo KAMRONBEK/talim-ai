@@ -40,7 +40,7 @@ export function LearningHistoryPanel({
                     className="flex items-center justify-between rounded-lg bg-muted/50 px-2.5 py-2 text-xs transition-colors hover:bg-muted"
                   >
                     <span>
-                      {q.kind === 'QUICK' ? t('quickCheckLabel') : t('fullQuizLabel')}
+                      {t('fullQuizLabel')}
                       {q.latestAttempt != null && (
                         <span className="ml-1 text-muted-foreground">
                           · {Math.round(q.latestAttempt.score)}%

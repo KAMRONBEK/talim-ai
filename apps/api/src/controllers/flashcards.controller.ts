@@ -9,11 +9,14 @@ import { assertQuota } from '../services/subscription.service.js';
 import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
 import { flashcardQueue } from '../services/queue.service.js';
 import { reviewFlashcard as applyFlashcardReview } from '../services/srs.service.js';
+import { recordFlashcardReview } from '../services/sectionMastery.service.js';
 
 const flashcardsBodySchema = z.object({
   sectionId: z.string().optional(),
   locale: z.enum(['uz', 'en', 'ru']).optional(),
   regenerate: z.boolean().optional(),
+  // Requested card count from the unified Practice generator (default handled by the job).
+  count: z.number().int().min(1).max(30).optional(),
 });
 
 const reviewBodySchema = z.object({
@@ -112,7 +115,29 @@ export async function reviewFlashcard(req: AuthenticatedRequest, res: Response):
   const { grade } = reviewBodySchema.parse(req.body ?? {});
 
   const review = await applyFlashcardReview(req.user, flashcardId, grade);
-  res.json({ review });
+
+  // Self-report evidence for Elo-KT mastery (half weight; only "again" counts as a fail).
+  // Must never break the review itself.
+  let masteryDeltas: unknown[] = [];
+  try {
+    const card = await prisma.flashcard.findUnique({
+      where: { id: flashcardId },
+      select: { deck: { select: { contentId: true, sectionId: true } } },
+    });
+    if (card) {
+      masteryDeltas = await recordFlashcardReview(
+        req.user.userId,
+        card.deck.contentId,
+        card.deck.sectionId,
+        flashcardId,
+        grade,
+      );
+    }
+  } catch (err) {
+    console.error('reviewFlashcard: mastery update failed', err);
+  }
+
+  res.json({ review, masteryDeltas });
 }
 
 export async function createFlashcards(req: AuthenticatedRequest, res: Response): Promise<void> {
@@ -157,7 +182,7 @@ export async function createFlashcards(req: AuthenticatedRequest, res: Response)
         include: { cards: true },
       });
 
-  await flashcardQueue.add({ contentId, deckId: deck.id, locale });
+  await flashcardQueue.add({ contentId, deckId: deck.id, locale, count: body.count });
 
   res.status(202).json({ deck: formatDeck(deck), cached: false });
 }

@@ -65,6 +65,7 @@ export const assessmentEndpoints = {
   quizSubmit: (id: string) => `/quiz/${id}/submit`,
   quizLatestAttempt: (id: string) => `/quiz/${id}/attempts/latest`,
   quizForContent: (contentId: string) => `/quiz/content/${contentId}`,
+  contentMastery: (contentId: string) => `/quiz/content/${contentId}/mastery`,
   summary: (contentId: string) => `/summary/${contentId}`,
 } as const;
 

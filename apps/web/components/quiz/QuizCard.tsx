@@ -4,48 +4,39 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button, Card, CardContent, Input } from '@talim/ui';
 import {
-  isSelectedAnswerCorrect,
+  gradeQuestion,
   resolveCorrectAnswer,
   type Quiz,
   type QuizQuestion,
 } from '@talim/types';
 import { RichText } from '@/components/learning/rich-text';
 import { isQuizGenerationStale, QUIZ_GENERATION_TIMEOUT_MS } from '@/hooks/useQuiz';
+import {
+  blankCount,
+  DropdownClozeInput,
+  FillBlankInput,
+  gradableQuestion,
+  isAnswerProvided,
+  MatchingInput,
+  MultipleSelectInput,
+  OrderingInput,
+  partialCreditUnits,
+  questionRenderKind,
+  questionTypeLabelKey,
+  TrueFalseInput,
+  type QuizAnswerValue,
+} from './question-inputs';
 
 interface QuizCardProps {
   quiz: Quiz;
-  onSubmit: (answers: Record<string, string>) => void;
+  onSubmit: (answers: Record<string, QuizAnswerValue>) => void;
   isSubmitting?: boolean;
 }
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-function normalize(value: string): string {
-  return value.trim().replace(/\s+/g, ' ').toLowerCase();
-}
-
-/** Mirror of the server grading for SHORT_ANSWER / NUMERIC, for instant feedback. */
-function isOpenAnswerCorrect(question: QuizQuestion, answer: string): boolean {
-  if (!answer.trim()) return false;
-  const acceptable = question.acceptableAnswers?.length
-    ? question.acceptableAnswers
-    : question.correctAnswer
-      ? [question.correctAnswer]
-      : [];
-  if (question.type === 'NUMERIC') {
-    const n = Number(answer.replace(',', '.'));
-    if (Number.isNaN(n)) return false;
-    return acceptable.some((v) => Math.abs(Number(v.replace(',', '.')) - n) <= 0.001);
-  }
-  return acceptable.some((v) => normalize(v) === normalize(answer));
-}
-
-function isQuestionCorrect(question: QuizQuestion, answer: string | undefined): boolean {
-  if (question.type === 'MULTIPLE_CHOICE') {
-    return isSelectedAnswerCorrect(question.options ?? [], answer, question.correctAnswer);
-  }
-  return isOpenAnswerCorrect(question, answer ?? '');
-}
+/** Kinds that reveal via an explicit Check button below the editor (vs. lock-on-click). */
+const CHECK_KINDS = new Set(['multipleSelect', 'fillBlank', 'dropdownCloze', 'matching', 'ordering']);
 
 function getOptionStyles(
   answered: boolean,
@@ -86,7 +77,7 @@ function getOptionStyles(
 
 export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const t = useTranslations('quiz');
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [answers, setAnswers] = useState<Record<string, QuizAnswerValue>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [, setTick] = useState(0);
@@ -128,17 +119,28 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const q = questions[currentIndex] as QuizQuestion | undefined;
   const progressPct = ((currentIndex + 1) / questions.length) * 100;
 
+  /** Current value for a question; ORDERING defaults to the options' starting order. */
+  const valueFor = (question: QuizQuestion): QuizAnswerValue | undefined => {
+    const value = answers[question.id];
+    if (questionRenderKind(question) === 'ordering' && !Array.isArray(value)) {
+      return question.options ?? [];
+    }
+    return value;
+  };
+
+  // Multiple-choice / true-false lock and reveal on selection (original behaviour).
   const handleSelect = (questionId: string, answer: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
-    // Multiple-choice locks/reveals on selection (matches the original behaviour).
     setRevealed((prev) => ({ ...prev, [questionId]: true }));
   };
 
-  const handleType = (questionId: string, value: string) => {
+  // Check-based editors stay editable; editing after a check hides the verdict again.
+  const handleValue = (questionId: string, value: QuizAnswerValue) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
-    // Typed answers stay editable until the learner checks them.
     setRevealed((prev) => (prev[questionId] ? { ...prev, [questionId]: false } : prev));
   };
+
+  const reveal = (questionId: string) => setRevealed((prev) => ({ ...prev, [questionId]: true }));
 
   const goNext = () => {
     if (currentIndex < questions.length - 1) setCurrentIndex((i) => i + 1);
@@ -148,9 +150,9 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   };
 
   const handleSubmit = () => {
-    const currentAnswers = questions.reduce<Record<string, string>>((acc, question) => {
-      const answer = answers[question.id];
-      if (answer && answer.trim()) acc[question.id] = answer;
+    const currentAnswers = questions.reduce<Record<string, QuizAnswerValue>>((acc, question) => {
+      const value = valueFor(question);
+      if (value != null && isAnswerProvided(question, value)) acc[question.id] = value;
       return acc;
     }, {});
     onSubmit(currentAnswers);
@@ -158,20 +160,40 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
 
   if (!q) return null;
 
-  const isMultipleChoice = q.type === 'MULTIPLE_CHOICE';
-  const answer = answers[q.id];
-  const hasAnswer = Boolean(answer && answer.trim());
+  const kind = questionRenderKind(q);
+  const answer = valueFor(q);
+  const hasAnswer = isAnswerProvided(q, answer);
   const isRevealed = revealed[q.id] ?? false;
-  const isCorrect = isQuestionCorrect(q, answer);
-  const typeLabel = isMultipleChoice
-    ? t('multipleChoice')
-    : q.type === 'NUMERIC'
-      ? t('numeric')
-      : t('shortAnswer');
-  const allQuestionsAnswered = questions.every((question) => {
-    const a = answers[question.id];
-    return Boolean(a && a.trim());
-  });
+  // Single grading engine — identical to the server's submit grading.
+  const grade = gradeQuestion(gradableQuestion(q), answer ?? '', true);
+  const isCorrect = grade.correct;
+  const isPartial = !isCorrect && grade.creditFraction > 0 && grade.creditFraction < 1;
+  const typeLabel = t(questionTypeLabelKey(q.type));
+  const allQuestionsAnswered = questions.every((question) =>
+    isAnswerProvided(question, valueFor(question)),
+  );
+
+  const partialLabel = (() => {
+    const units = partialCreditUnits(q);
+    if (units && units > 1) {
+      return t('partiallyCorrectFraction', {
+        hits: Math.round(grade.creditFraction * units),
+        total: units,
+      });
+    }
+    return t('partiallyCorrectPercent', { percent: Math.round(grade.creditFraction * 100) });
+  })();
+
+  const stringAnswer = typeof answer === 'string' ? answer : '';
+  const arrayAnswer = Array.isArray(answer) ? answer : [];
+  const recordAnswer =
+    answer && typeof answer === 'object' && !Array.isArray(answer) ? answer : {};
+
+  const setBlank = (index: number, text: string) => {
+    const count = blankCount(q);
+    const next = Array.from({ length: count }, (_, i) => (i === index ? text : arrayAnswer[i] ?? ''));
+    handleValue(q.id, next);
+  };
 
   return (
     <div className="space-y-4">
@@ -195,11 +217,12 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
             <RichText>{q.question}</RichText>
           </div>
 
-          {isMultipleChoice ? (
+          {kind === 'multipleChoice' ? (
             <div className="space-y-2.5">
               {(q.options ?? []).map((option, i) => {
-                const selected = answer === option;
-                const isCorrectOption = option === resolveCorrectAnswer(q.options ?? [], q.correctAnswer);
+                const selected = stringAnswer === option;
+                const isCorrectOption =
+                  option === resolveCorrectAnswer(q.options ?? [], q.correctAnswer);
                 const styles = getOptionStyles(isRevealed, selected, isCorrectOption, isCorrect);
                 const letter = LETTERS[i] ?? String(i + 1);
                 return (
@@ -227,18 +250,59 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
                 );
               })}
             </div>
+          ) : kind === 'trueFalse' ? (
+            <TrueFalseInput
+              question={q}
+              value={typeof answer === 'string' ? answer : undefined}
+              revealed={isRevealed}
+              onSelect={(option) => handleSelect(q.id, option)}
+            />
+          ) : kind === 'multipleSelect' ? (
+            <MultipleSelectInput
+              question={q}
+              value={arrayAnswer}
+              revealed={isRevealed}
+              onToggle={(option) =>
+                handleValue(
+                  q.id,
+                  arrayAnswer.includes(option)
+                    ? arrayAnswer.filter((v) => v !== option)
+                    : [...arrayAnswer, option],
+                )
+              }
+            />
+          ) : kind === 'fillBlank' ? (
+            <FillBlankInput question={q} value={arrayAnswer} revealed={isRevealed} onChangeBlank={setBlank} />
+          ) : kind === 'dropdownCloze' ? (
+            <DropdownClozeInput question={q} value={arrayAnswer} revealed={isRevealed} onChangeBlank={setBlank} />
+          ) : kind === 'matching' ? (
+            <MatchingInput
+              question={q}
+              value={recordAnswer}
+              revealed={isRevealed}
+              onPick={(leftPrompt, right) =>
+                handleValue(q.id, { ...recordAnswer, [leftPrompt]: right })
+              }
+            />
+          ) : kind === 'ordering' ? (
+            <OrderingInput
+              question={q}
+              value={arrayAnswer.length ? arrayAnswer : (q.options ?? [])}
+              revealed={isRevealed}
+              onReorder={(next) => handleValue(q.id, next)}
+            />
           ) : (
             <div className="flex flex-col gap-3 sm:flex-row">
               <Input
-                type={q.type === 'NUMERIC' ? 'text' : 'text'}
+                type="text"
                 inputMode={q.type === 'NUMERIC' ? 'decimal' : 'text'}
                 placeholder={t('answerPlaceholder')}
-                value={answer ?? ''}
-                onChange={(e) => handleType(q.id, e.target.value)}
+                value={stringAnswer}
+                onChange={(e) => handleValue(q.id, e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && hasAnswer) {
                     e.preventDefault();
-                    setRevealed((prev) => ({ ...prev, [q.id]: true }));
+                    reveal(q.id);
                   }
                 }}
                 aria-invalid={isRevealed && !isCorrect}
@@ -252,7 +316,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               />
               <Button
                 variant="outline"
-                onClick={() => setRevealed((prev) => ({ ...prev, [q.id]: true }))}
+                onClick={() => reveal(q.id)}
                 disabled={!hasAnswer || isRevealed}
                 className="shrink-0"
               >
@@ -261,12 +325,38 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
             </div>
           )}
 
+          {CHECK_KINDS.has(kind) && (
+            <div className="flex justify-end">
+              <Button variant="outline" onClick={() => reveal(q.id)} disabled={!hasAnswer || isRevealed}>
+                {t('check')}
+              </Button>
+            </div>
+          )}
+
           {isRevealed && (
-            <p className={`text-sm font-semibold ${isCorrect ? 'text-success' : 'text-destructive'}`}>
-              {isCorrect ? t('correct') : t('incorrect')}
+            <p
+              className={`text-sm font-semibold ${
+                isCorrect ? 'text-success' : isPartial ? 'text-warning' : 'text-destructive'
+              }`}
+            >
+              {isCorrect ? t('correct') : isPartial ? partialLabel : t('incorrect')}
             </p>
           )}
-          {isRevealed && !isMultipleChoice && !isCorrect && q.acceptableAnswers?.length > 0 && (
+          {isRevealed &&
+            kind === 'multipleChoice' &&
+            !isCorrect &&
+            (() => {
+              // Misconception rationale for the wrong option the learner picked.
+              const selectedIndex = (q.options ?? []).indexOf(stringAnswer);
+              const rationale = selectedIndex >= 0 ? q.optionRationales?.[selectedIndex] : null;
+              return rationale ? (
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-destructive">{t('whyWrong')}</span>{' '}
+                  <RichText inline>{rationale}</RichText>
+                </p>
+              ) : null;
+            })()}
+          {isRevealed && kind === 'open' && !isCorrect && q.acceptableAnswers?.length > 0 && (
             <p className="text-sm text-muted-foreground">
               {t('correctAnswerLabel')}{' '}
               <span className="font-semibold text-foreground">

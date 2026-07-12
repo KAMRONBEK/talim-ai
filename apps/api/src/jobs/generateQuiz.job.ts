@@ -1,21 +1,42 @@
-import { Prisma, type QuizKind } from '@prisma/client';
-import { parseAppLocale } from '@talim/types';
+import { Prisma, type QuestionType } from '@prisma/client';
+import { parseAppLocale, type QuestionDepth } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
 import { jobEvents } from '../services/events/jobEvents.service.js';
-import { getQuizSystemPrompt, buildQuizUserPrompt } from '../lib/locale-prompts.js';
-import { getQuestionCount } from '../lib/quiz-prompt.js';
-import { normalizeQuestionType, type QuestionStyle } from '../lib/assessment-prompt.js';
-import { dropParrotingQuestions } from '../lib/question-quality.js';
+import { type QuestionStyle } from '../lib/assessment-prompt.js';
 import {
-  type GeneratedQuestion,
-  isAnswerableMultipleChoice,
-  jsonStringArray,
-} from '../services/assessment/shared.js';
+  getQuestionGenSystemPrompt,
+  buildQuestionGenPrompt,
+  normalizePracticeQuestionType,
+  typesFromStyle,
+  GENERATABLE_TYPES,
+  type GeneratableQuestionType,
+} from '../lib/question-gen-prompt.js';
+import {
+  postprocessGeneratedQuestions,
+  overgenerateCount,
+} from '../lib/question-postprocess.js';
+import { type GeneratedQuestion } from '../services/assessment/shared.js';
 
-async function getSectionContext(contentId: string, sectionId: string): Promise<string> {
+interface ContextChunk {
+  text: string;
+  chunkIndex: number;
+}
+
+/**
+ * Below this many characters of section text there is nothing to ground questions in —
+ * the model pads from its own knowledge and the sourceQuote firewall then rejects every
+ * item (observed live: a heading-only 42-char section failed 9/9). Such sections widen
+ * their context to the whole material instead.
+ */
+const MIN_SECTION_CONTEXT_CHARS = 500;
+
+async function getSectionChunks(
+  contentId: string,
+  sectionId: string,
+): Promise<{ sectionTitle: string; chunks: ContextChunk[] }> {
   const section = await prisma.contentSection.findFirst({
     where: { id: sectionId, contentId },
   });
@@ -29,8 +50,57 @@ async function getSectionContext(contentId: string, sectionId: string): Promise<
     orderBy: { chunkIndex: 'asc' },
     take: 15,
   });
+  return {
+    sectionTitle: section.title,
+    chunks: chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })),
+  };
+}
 
-  return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
+/** Loose containment normalization shared with the postprocess quote check. */
+function containmentNormalize(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize('NFKC')
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Attribute a question to the section its sourceQuote came from, so answers on a
+ * full-content quiz still update per-section mastery. Resolution: quote → containing
+ * chunk → section whose [startChunk, endChunk] range covers it.
+ */
+function resolveSourceSection(
+  sourceQuote: string | null,
+  chunks: ContextChunk[],
+  sections: { id: string; startChunk: number; endChunk: number }[],
+): string | null {
+  if (!sourceQuote || sections.length === 0) return null;
+  const quote = containmentNormalize(sourceQuote);
+  if (quote.length < 15) return null;
+  const hit = chunks.find((c) => containmentNormalize(c.text).includes(quote));
+  if (!hit) return null;
+  const section = sections.find(
+    (s) => hit.chunkIndex >= s.startChunk && hit.chunkIndex <= s.endChunk,
+  );
+  return section?.id ?? null;
+}
+
+/** Resolve the requested type set: explicit types win; else derive from the legacy style. */
+function resolveRequestedTypes(
+  jobTypes: string[] | undefined,
+  quizTypes: unknown,
+  style: QuestionStyle,
+): GeneratableQuestionType[] | null {
+  const raw = jobTypes ?? (Array.isArray(quizTypes) ? (quizTypes as string[]) : null);
+  if (raw && raw.length > 0) {
+    const valid = raw.filter((t): t is GeneratableQuestionType =>
+      (GENERATABLE_TYPES as string[]).includes(t),
+    );
+    if (valid.length > 0) return valid;
+  }
+  return typesFromStyle(style);
 }
 
 export function registerGenerateQuizJob(): void {
@@ -39,9 +109,10 @@ export function registerGenerateQuizJob(): void {
       contentId,
       quizId,
       sectionId,
-      kind,
       style: jobStyle,
       count: jobCount,
+      types: jobTypes,
+      depth: jobDepth,
       locale: jobLocale,
     } = job.data as GenerateQuizJobData;
 
@@ -53,25 +124,50 @@ export function registerGenerateQuizJob(): void {
     const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
     const locale = parseAppLocale(jobLocale ?? quiz?.locale);
 
-    const quizKind: QuizKind = kind ?? 'FULL';
     const style: QuestionStyle = jobStyle ?? (quiz?.style as QuestionStyle) ?? 'mixed';
-    const count = jobCount ?? quiz?.count ?? getQuestionCount(quizKind);
+    const count = jobCount ?? quiz?.count ?? 5;
+    const depth: QuestionDepth = jobDepth ?? ((quiz?.depth as QuestionDepth) ?? 'mixed');
+    const requestedTypes = resolveRequestedTypes(jobTypes, quiz?.types, style);
 
-    let context: string;
+    let chunks: ContextChunk[];
+    let topicTitle = content.title;
     if (sectionId) {
-      context = await getSectionContext(contentId, sectionId);
+      const sectionCtx = await getSectionChunks(contentId, sectionId);
+      chunks = sectionCtx.chunks;
+      const sectionChars = chunks.reduce((sum, c) => sum + c.text.length, 0);
+      if (sectionChars < MIN_SECTION_CONTEXT_CHARS) {
+        // Thin (heading-only) section: pull topically similar chunks from the whole
+        // material so quotes can anchor to real text, and keep the section title as the
+        // topic focus so questions stay on the section's theme.
+        topicTitle = `${content.title} — ${sectionCtx.sectionTitle}`;
+        const widened = await searchSimilarChunks(contentId, sectionCtx.sectionTitle, 10, {
+          userId: content.userId,
+          metadata: { contentId, quizId },
+        });
+        const widenedChars = widened.reduce((sum, c) => sum + c.text.length, 0);
+        if (widenedChars > sectionChars) chunks = widened;
+      }
     } else {
-      const chunks = await searchSimilarChunks(contentId, content.title, 10, {
+      chunks = await searchSimilarChunks(contentId, content.title, 10, {
         userId: content.userId,
         metadata: { contentId, quizId },
       });
-      context = buildRagContext(chunks);
     }
+    const context = buildRagContext(chunks);
 
     const result = await generateJsonCompletion<{ questions: GeneratedQuestion[] }>(
       [
-        { role: 'system', content: getQuizSystemPrompt(locale) },
-        { role: 'user', content: buildQuizUserPrompt(locale, content.title, context, { style, count }) },
+        { role: 'system', content: getQuestionGenSystemPrompt(locale) },
+        {
+          role: 'user',
+          content: buildQuestionGenPrompt(locale, {
+            title: topicTitle,
+            context,
+            count: overgenerateCount(count),
+            types: requestedTypes,
+            depth,
+          }),
+        },
       ],
       {
         usage: {
@@ -86,46 +182,55 @@ export function registerGenerateQuizJob(): void {
     if (generated.length === 0) {
       throw new Error('No quiz questions generated');
     }
-    // Drop questions copied near-verbatim from the material (no parroting).
-    const usable = dropParrotingQuestions(generated, context);
+
+    const { questions, skipped } = postprocessGeneratedQuestions({
+      generated,
+      context,
+      count,
+      allowedTypes: requestedTypes as QuestionType[] | null,
+      normalizeType: normalizePracticeQuestionType,
+    });
+
+    if (questions.length === 0) {
+      throw new Error(`No valid quiz questions generated (skipped ${skipped})`);
+    }
+
+    // Section provenance for per-section mastery (full-content quizzes resolve per item).
+    const sections = sectionId
+      ? []
+      : await prisma.contentSection.findMany({
+          where: { contentId },
+          select: { id: true, startChunk: true, endChunk: true },
+        });
 
     await prisma.quizQuestion.deleteMany({ where: { quizId } });
-
-    let created = 0;
-    let skipped = 0;
-    for (const q of usable) {
-      const acceptableAnswers = jsonStringArray(q.acceptableAnswers);
-      if (!q.prompt || !acceptableAnswers.length) {
-        skipped++;
-        continue;
-      }
-      const type = normalizeQuestionType(q.type);
-      const options = Array.isArray(q.options) ? jsonStringArray(q.options) : null;
-      // Never persist an unanswerable multiple-choice question (no option matches the answer).
-      if (type === 'MULTIPLE_CHOICE' && !isAnswerableMultipleChoice(options, acceptableAnswers)) {
-        skipped++;
-        continue;
-      }
+    for (const q of questions) {
       await prisma.quizQuestion.create({
         data: {
           quizId,
           question: q.prompt,
-          type,
-          options: type === 'MULTIPLE_CHOICE' && options ? options : Prisma.JsonNull,
+          type: q.type,
+          options: q.options ? q.options : Prisma.JsonNull,
           // Legacy single-answer field, kept for backward-compatible multiple-choice grading.
-          correctAnswer: acceptableAnswers[0] ?? '',
-          acceptableAnswers,
-          explanation: q.explanation ?? null,
+          correctAnswer: q.acceptableAnswers[0] ?? '',
+          acceptableAnswers: q.acceptableAnswers,
+          config: q.config ? (q.config as Prisma.InputJsonValue) : Prisma.JsonNull,
+          explanation: q.explanation,
+          difficulty: q.difficulty,
+          bloom: q.bloom,
+          sourceQuote: q.sourceQuote,
+          optionRationales: q.optionRationales
+            ? (q.optionRationales as Prisma.InputJsonValue)
+            : Prisma.JsonNull,
+          sourceSectionId: sectionId ?? resolveSourceSection(q.sourceQuote, chunks, sections),
         },
       });
-      created++;
     }
 
-    if (created === 0) {
-      throw new Error(`No valid quiz questions generated (skipped ${skipped})`);
-    }
     if (skipped > 0) {
-      console.warn(`generateQuiz: skipped ${skipped} invalid question(s) for quiz ${quizId} (created ${created})`);
+      console.warn(
+        `generateQuiz: skipped ${skipped} invalid question(s) for quiz ${quizId} (created ${questions.length})`,
+      );
     }
     jobEvents.publish(content.userId, { type: 'quiz.status', quizId, contentId, status: 'READY' });
   });

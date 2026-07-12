@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Loader2, FileText, BookOpen, Check } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { cn } from '@talim/ui';
-import type { ContentSection, QuestionStyle, SectionProgress } from '@talim/types';
+import type { ContentSection, SectionProgress } from '@talim/types';
 import { ContentGenerationsBlock } from '@/components/layout/content-generations';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
@@ -14,13 +14,8 @@ const SECTION_COMPLETE_THRESHOLD = 70;
 /** Generation handlers wired in from the layout (where useContentActions lives). */
 export interface SidebarGenerationProps {
   onSummary: () => void;
-  onQuiz: (style?: QuestionStyle) => void;
-  onQuickCheck: (style?: QuestionStyle) => void;
   summaryPending?: boolean;
-  quizPending?: boolean;
-  quickCheckPending?: boolean;
   quizCount?: number;
-  canQuiz?: boolean;
   hideGenerateActions?: boolean;
 }
 
@@ -162,13 +157,9 @@ export function ContentSidebarBody({
           <ContentGenerationsBlock
             contentId={contentId}
             onSummary={generations.onSummary}
-            onQuiz={generations.onQuiz}
-            onQuickCheck={generations.onQuickCheck}
             summaryPending={generations.summaryPending}
-            quizPending={generations.quizPending}
-            quickCheckPending={generations.quickCheckPending}
             quizCount={generations.quizCount}
-            canQuiz={generations.canQuiz}
+            activeSectionId={activeSectionId}
             hideGenerateActions={generations.hideGenerateActions}
             onAction={onNavigate}
           />

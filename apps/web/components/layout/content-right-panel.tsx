@@ -1,19 +1,26 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
-import type { LearningHistory, QuestionStyle } from '@talim/types';
+import { cn, Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
+import type { LearningHistory, MasteryBand } from '@talim/types';
 import { LearningHistoryPanel } from '@/components/learning/learning-history-panel';
 import { ContentGenerationsBlock } from '@/components/layout/content-generations';
+import { useContentMastery } from '@/hooks/useMastery';
+import { useSections } from '@/hooks/useSections';
+
+/** Band → bar color: neutral until evidence, warm while learning, pine when earned. */
+const BAND_BAR: Record<MasteryBand, string> = {
+  none: 'bg-border',
+  attempted: 'bg-muted-foreground/50',
+  familiar: 'bg-accent-secondary',
+  proficient: 'bg-primary/70',
+  mastered: 'bg-primary',
+};
 
 export interface ContentRightPanelBodyProps {
   contentId: string;
   onSummary: () => void;
-  onQuiz: (style?: QuestionStyle) => void;
-  onQuickCheck: (style?: QuestionStyle) => void;
   summaryPending?: boolean;
-  quizPending?: boolean;
-  quickCheckPending?: boolean;
   overallCoverage?: number;
   sectionCoverage?: number;
   streakDays?: number;
@@ -22,8 +29,8 @@ export interface ContentRightPanelBodyProps {
   onOpenSummary: (summary: string) => void;
   onAction?: () => void;
   hideGenerateActions?: boolean;
-  /** False when the content has no active section to anchor a quiz to. */
-  canQuiz?: boolean;
+  /** Anchors the Practice generator's "current section" scope. */
+  activeSectionId?: string;
   /**
    * Render the generations block (default true). The reader hides it on desktop because
    * generations now live in the left content sidebar; the mobile drawer keeps it.
@@ -34,11 +41,7 @@ export interface ContentRightPanelBodyProps {
 export function ContentRightPanelBody({
   contentId,
   onSummary,
-  onQuiz,
-  onQuickCheck,
   summaryPending,
-  quizPending,
-  quickCheckPending,
   overallCoverage = 0,
   sectionCoverage = 0,
   streakDays = 0,
@@ -47,7 +50,7 @@ export function ContentRightPanelBody({
   onOpenSummary,
   onAction,
   hideGenerateActions = false,
-  canQuiz = true,
+  activeSectionId,
   showGenerations = true,
 }: ContentRightPanelBodyProps) {
   const t = useTranslations('content');
@@ -55,6 +58,12 @@ export function ContentRightPanelBody({
   const progress = Math.min(1, Math.max(0, sectionCoverage / 100));
   const offset = circumference * (1 - progress);
   const displayPercent = Math.round(sectionCoverage);
+
+  // Both queries dedupe with the reader page's own calls (same query keys) — no extra fetches.
+  const { data: mastery } = useContentMastery(contentId);
+  const { data: sections } = useSections(contentId);
+  const sectionTitles = new Map((sections ?? []).map((s) => [s.id, s.title]));
+  const masteryRows = mastery?.sections ?? [];
 
   return (
     <>
@@ -87,17 +96,58 @@ export function ContentRightPanelBody({
         </p>
       </div>
 
+      {masteryRows.length > 0 && (
+        <div className="border-b border-border/70 p-5">
+          <h3 className="mb-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {t('mastery.title')}
+          </h3>
+          <ul className="space-y-3">
+            {masteryRows.map((row) => {
+              const title = row.sectionId
+                ? (sectionTitles.get(row.sectionId) ?? '—')
+                : t('mastery.wholeMaterial');
+              const width = Math.min(100, Math.max(0, row.score));
+              return (
+                <li key={row.scopeKey}>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-xs font-medium">{title}</span>
+                    <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+                      {Math.round(row.score)}
+                    </span>
+                  </div>
+                  <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
+                    <div
+                      className={cn('h-full rounded-full transition-all', BAND_BAR[row.band])}
+                      style={{ width: `${width}%` }}
+                    />
+                  </div>
+                  <div className="mt-0.5 flex items-center justify-between gap-2">
+                    <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                      {t(`mastery.band_${row.band}`)}
+                    </span>
+                    {row.needsReview && (
+                      <span className="text-[10px] font-medium text-accent-secondary">
+                        {t('mastery.needsReview')}
+                      </span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
+            {t('mastery.helper')}
+          </p>
+        </div>
+      )}
+
       {showGenerations && (
         <ContentGenerationsBlock
           contentId={contentId}
           onSummary={onSummary}
-          onQuiz={onQuiz}
-          onQuickCheck={onQuickCheck}
           summaryPending={summaryPending}
-          quizPending={quizPending}
-          quickCheckPending={quickCheckPending}
           quizCount={quizCount}
-          canQuiz={canQuiz}
+          activeSectionId={activeSectionId}
           hideGenerateActions={hideGenerateActions}
           onAction={onAction}
         />

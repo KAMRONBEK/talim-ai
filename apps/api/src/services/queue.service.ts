@@ -18,9 +18,12 @@ export interface GenerateQuizJobData {
   quizId: string;
   sectionId?: string;
   kind?: 'FULL' | 'QUICK';
-  // Question-type style and resolved question count (mirrors the tutor generator).
+  // Legacy single-style knob (used when `types` is absent).
   style?: 'mixed' | 'multipleChoice' | 'trueFalse' | 'written' | 'numeric';
   count?: number;
+  // Unified generator params: explicit question-type set + cognitive depth.
+  types?: string[];
+  depth?: 'recall' | 'understanding' | 'application' | 'mixed';
   locale?: string;
 }
 
@@ -42,6 +45,8 @@ export interface GenerateFlashcardsJobData {
   contentId: string;
   deckId: string;
   locale?: string;
+  /** Requested card count (Practice dialog); defaults to the job's TARGET_CARDS. */
+  count?: number;
 }
 
 export interface RenderManimJobData {

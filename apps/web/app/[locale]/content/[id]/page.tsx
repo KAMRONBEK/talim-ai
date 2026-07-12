@@ -11,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@talim/ui';
-import type { QuestionStyle } from '@talim/types';
 import { useContent } from '@/hooks/useContent';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useChatStore } from '@/store/useChatStore';
@@ -64,7 +63,6 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const { data: history } = useLearningHistory(id);
 
   const {
-    createQuiz,
     generateSummary,
     retryContent,
     summary,
@@ -74,7 +72,6 @@ function ContentWorkspaceInner({ id }: { id: string }) {
     setDeleteOpen,
     actionError,
     clearActionError,
-    handleCreateQuiz,
     handleSummary,
     handleOpenSummary,
   } = useContentActions(id, activeSectionId);
@@ -155,13 +152,10 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const panelProps = {
     contentId: id,
     onSummary: handleSummary,
-    onQuiz: (style?: QuestionStyle) => handleCreateQuiz('FULL', style ? { style } : undefined),
-    onQuickCheck: (style?: QuestionStyle) =>
-      handleCreateQuiz('QUICK', style ? { style } : undefined),
-    canQuiz: !!activeSectionId,
+    // Scopes the Practice generator's "current section" option; the mastery list under the
+    // progress area lives on the ['mastery', id] query key (hooks invalidate it on submits).
+    activeSectionId,
     summaryPending: generateSummary.isPending,
-    quizPending: createQuiz.isPending,
-    quickCheckPending: createQuiz.isPending,
     overallCoverage: progressData?.contentProgress?.overallCoverage ?? 0,
     sectionCoverage: sectionProgress?.coverageScore ?? 0,
     streakDays: history?.streakDays ?? 0,

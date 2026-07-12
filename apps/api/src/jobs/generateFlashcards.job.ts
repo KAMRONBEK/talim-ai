@@ -14,40 +14,44 @@ const MAX_CARDS = 30;
 
 // Flashcards are generated in the content's locale (Uzbek-first audience). Each prompt asks
 // for a JSON array of {front, back} pairs: a short prompt/term on the front, a concise answer
-// on the back.
-const PROMPTS: Record<AppLocale, { system: string; instruction: string }> = {
+// on the back. `count` is the requested card count from the unified Practice generator.
+const PROMPTS: Record<AppLocale, { system: string; instruction: (count: number) => string }> = {
   uz: {
     system:
       "Siz o'quv materialidan sifatli fleshkartalar (flashcards) tayyorlovchi yordamchisiz. " +
       'Javobni faqat to\'g\'ri Uzbek tilida bering.',
-    instruction:
-      `Quyidagi material asosida ${TARGET_CARDS} ta fleshkarta tayyorlang. Har bir karta ` +
+    instruction: (count) =>
+      `Quyidagi material asosida ${count} ta fleshkarta tayyorlang. Har bir karta ` +
       'qisqa savol yoki tushuncha (front) va aniq, ixcham javob (back) dan iborat bo\'lsin. ' +
+      'Kartada materialdagi gap AYNAN ko\'chirilmasin — o\'z so\'zlaringiz bilan ifodalang. ' +
       'Javobni JSON ko\'rinishida bering: {"cards":[{"front":"...","back":"..."}]}. ' +
       'Faqat materialdagi ma\'lumotga tayaning.',
   },
   en: {
     system:
       'You create high-quality study flashcards from learning material. Respond in clear English.',
-    instruction:
-      `Create ${TARGET_CARDS} flashcards from the material below. Each card has a short ` +
-      'question or term (front) and a concise answer (back). Respond as JSON: ' +
+    instruction: (count) =>
+      `Create ${count} flashcards from the material below. Each card has a short ` +
+      'question or term (front) and a concise answer (back). Do not copy sentences verbatim — ' +
+      'rephrase in your own words. Respond as JSON: ' +
       '{"cards":[{"front":"...","back":"..."}]}. Use only information from the material.',
   },
   ru: {
     system:
       'Вы создаёте качественные учебные карточки из материала. Отвечайте на чистом русском языке.',
-    instruction:
-      `Создайте ${TARGET_CARDS} карточек на основе материала ниже. У каждой карточки короткий ` +
-      'вопрос или термин (front) и краткий ответ (back). Ответ в формате JSON: ' +
+    instruction: (count) =>
+      `Создайте ${count} карточек на основе материала ниже. У каждой карточки короткий ` +
+      'вопрос или термин (front) и краткий ответ (back). Не копируйте предложения дословно — ' +
+      'переформулируйте своими словами. Ответ в формате JSON: ' +
       '{"cards":[{"front":"...","back":"..."}]}. Используйте только данные из материала.',
   },
 };
 
 export function registerGenerateFlashcardsJob(): void {
   flashcardQueue.process(async (job) => {
-    const { contentId, deckId, locale: jobLocale } = job.data as GenerateFlashcardsJobData;
+    const { contentId, deckId, locale: jobLocale, count: jobCount } = job.data as GenerateFlashcardsJobData;
     const locale = parseAppLocale(jobLocale);
+    const targetCards = Math.min(Math.max(jobCount ?? TARGET_CARDS, 1), MAX_CARDS);
 
     const deck = await prisma.flashcardDeck.findUnique({ where: { id: deckId } });
     if (!deck) throw new Error(`Flashcard deck ${deckId} not found`);
@@ -76,7 +80,7 @@ export function registerGenerateFlashcardsJob(): void {
     const result = await generateJsonCompletion<{ cards: GeneratedCard[] }>(
       [
         { role: 'system', content: prompt.system },
-        { role: 'user', content: `${prompt.instruction}\n\n---\n${context}` },
+        { role: 'user', content: `${prompt.instruction(targetCards)}\n\n---\n${context}` },
       ],
       {
         // Metered under SUMMARY_GEN until a dedicated FLASHCARD_GEN usage feature exists.
@@ -99,7 +103,7 @@ export function registerGenerateFlashcardsJob(): void {
           c.front.trim().length > 0 &&
           c.back.trim().length > 0,
       )
-      .slice(0, MAX_CARDS);
+      .slice(0, targetCards);
 
     if (cards.length === 0) {
       await prisma.flashcardDeck.update({ where: { id: deckId }, data: { status: 'FAILED' } });

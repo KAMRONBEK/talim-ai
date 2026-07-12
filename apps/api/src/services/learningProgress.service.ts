@@ -1,9 +1,9 @@
-import type { Quiz, QuizAttempt } from '@prisma/client';
+import type { Quiz, QuizAttempt, QuestionType } from '@prisma/client';
 import { AppError } from '../middleware/error.middleware.js';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from './ai.service.js';
 import { getSectionBody } from './section.service.js';
-import { isSelectedAnswerCorrect } from '@talim/types';
+import { gradeQuestion, jsonStringArray } from '@talim/types';
 import {
   LEARNING_COVERAGE_SYSTEM_PROMPT,
   buildLearningCoverageUserPrompt,
@@ -11,7 +11,6 @@ import {
 } from '../lib/learning-coverage-prompt.js';
 
 const SECTION_COMPLETE_THRESHOLD = 70;
-const QUICK_CHECK_LOOKBACK = 10;
 
 function todayUtcDate(): Date {
   const now = new Date();
@@ -117,24 +116,6 @@ async function estimateAiCoverage(
   }
 }
 
-async function computeQuickCheckAccuracy(
-  userId: string,
-  sectionId: string,
-): Promise<number | null> {
-  const attempts = await prisma.quizAttempt.findMany({
-    where: {
-      userId,
-      quiz: { sectionId, kind: 'QUICK' },
-    },
-    orderBy: { createdAt: 'desc' },
-    take: QUICK_CHECK_LOOKBACK,
-  });
-
-  if (attempts.length === 0) return null;
-  const avg = attempts.reduce((sum, a) => sum + a.score, 0) / attempts.length;
-  return Math.round(avg * 10) / 10;
-}
-
 async function computeBestFullQuizScore(
   userId: string,
   sectionId: string,
@@ -152,20 +133,17 @@ async function computeBestFullQuizScore(
 
 function blendCoverageScore(params: {
   quizBestScore: number | null;
-  quickCheckAccuracy: number | null;
   viewedAt: Date | null;
   aiEstimate: number | null;
 }): number {
   const quizComponent = params.quizBestScore ?? 0;
-  const quickComponent = params.quickCheckAccuracy ?? 0;
   const viewedBonus = params.viewedAt ? 100 : 0;
   const aiEstimate = params.aiEstimate ?? quizComponent;
 
-  const blended =
-    0.4 * quizComponent +
-    0.3 * quickComponent +
-    0.1 * viewedBonus +
-    0.2 * aiEstimate;
+  // QUICK quizzes are fully retired (legacy rows were relabeled FULL by the
+  // 20260712000000_retire_quick_quizzes migration), so the old 30% quick-check
+  // weight is permanently folded into the quiz and AI components.
+  const blended = 0.6 * quizComponent + 0.1 * viewedBonus + 0.3 * aiEstimate;
 
   return Math.round(Math.max(0, Math.min(100, blended)) * 10) / 10;
 }
@@ -210,8 +188,11 @@ type QuizWithQuestions = Quiz & {
   questions: {
     id: string;
     question: string;
+    type: QuestionType;
     options: unknown;
     correctAnswer: string;
+    acceptableAnswers: unknown;
+    config?: unknown;
     explanation: string | null;
   }[];
 };
@@ -221,12 +202,26 @@ function buildCoverageResults(
   answers: Record<string, string>,
 ): CoverageQuestionResult[] {
   return questions.map((q) => {
-    const options = Array.isArray(q.options) ? (q.options as string[]) : [];
+    // Stored answers are canonical strings (structured values JSON-stringified); the shared
+    // grading engine parses and grades every question type, so the correctness flags fed to
+    // the AI coverage estimate stay accurate for the full type set.
     const selected = answers[q.id] ?? '';
+    const acceptable = jsonStringArray(q.acceptableAnswers);
+    const graded = gradeQuestion(
+      {
+        type: q.type,
+        options: q.options,
+        acceptableAnswers:
+          acceptable.length > 0 ? acceptable : q.correctAnswer ? [q.correctAnswer] : [],
+        config: q.config,
+      },
+      selected,
+      /* partialCredit */ true,
+    );
     return {
       question: q.question,
       selectedAnswer: selected,
-      correct: isSelectedAnswerCorrect(options, selected, q.correctAnswer),
+      correct: graded.correct,
       explanation: q.explanation,
     };
   });
@@ -259,11 +254,9 @@ async function persistSectionProgress(
   });
 
   const quizBestScore = await computeBestFullQuizScore(userId, quiz.sectionId);
-  const quickCheckAccuracy = await computeQuickCheckAccuracy(userId, quiz.sectionId);
 
   let coverageScore = blendCoverageScore({
     quizBestScore,
-    quickCheckAccuracy,
     viewedAt: existing?.viewedAt ?? null,
     aiEstimate,
   });
@@ -280,13 +273,11 @@ async function persistSectionProgress(
       contentId: quiz.contentId,
       coverageScore,
       quizBestScore,
-      quickCheckAccuracy,
       aiFeedback,
     },
     update: {
       coverageScore,
       quizBestScore,
-      quickCheckAccuracy,
       aiFeedback: aiFeedback ?? existing?.aiFeedback ?? null,
     },
   });
@@ -343,6 +334,9 @@ export async function updateProgressAfterQuizSubmit(
   attempt: QuizAttempt,
   answers: Record<string, string>,
 ): Promise<void> {
+  // Whole-material quizzes (sectionId null) have no section-coverage row to update, but
+  // they still count as learning activity for the streak.
+  await recordLearningActivity(userId);
   if (!quiz.sectionId) return;
 
   const section = await prisma.contentSection.findUnique({
