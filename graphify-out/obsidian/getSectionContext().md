@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Assessments Service"
+community: "Quiz Generation Job"
 location: "L356"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Quiz_Generation_Job
 ---
 
 # getSectionContext()
@@ -18,4 +18,4 @@ tags:
 - [[sampleChunksEvenly()]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

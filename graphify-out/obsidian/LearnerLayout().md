@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/layout.tsx"
 type: "code"
-community: "Community 43"
+community: "Auth & App Shell UI"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Auth__App_Shell_UI
 ---
 
 # LearnerLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Podcast Generation & Prompts"
+community: "Locale AI Prompts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__Prompts
+  - community/Locale_AI_Prompts
 ---
 
 # locale-prompts.ts
@@ -49,4 +49,4 @@ tags:
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts
+#graphify/code #graphify/EXTRACTED #community/Locale_AI_Prompts

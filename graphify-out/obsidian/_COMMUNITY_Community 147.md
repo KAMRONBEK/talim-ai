@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[RootPage()]] - code - apps/admin/app/page.tsx
-- [[page.tsx_12]] - code - apps/admin/app/page.tsx
+- [[Admin SSR error page (hasHydrated TypeError)]] - document - docs/qa/screenshots/_admin_err.html
+- [[Generic Internal Server Error page]] - document - docs/qa/screenshots/_err.html
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types"
+community: "Tenant Hooks & Messaging"
 location: "L287"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types
+  - community/Tenant_Hooks__Messaging
 ---
 
 # TenantMessageThread
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types
+#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging

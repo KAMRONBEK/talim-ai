@@ -1,22 +1,20 @@
 ---
 type: community
-cohesion: 0.48
-members: 7
+cohesion: 0.50
+members: 5
 ---
 
 # Community 121
 
-**Cohesion:** 0.48 - moderately connected
-**Members:** 7 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[OPTION_LABELS]] - code - packages/types/quiz-answer.ts
-- [[getOptionLabel()]] - code - packages/types/quiz-answer.ts
-- [[isSelectedAnswerCorrect()]] - code - packages/types/quiz-answer.ts
-- [[normalize()]] - code - packages/types/quiz-answer.ts
-- [[quiz-answer.ts]] - code - packages/types/quiz-answer.ts
-- [[resolveCorrectAnswer()]] - code - packages/types/quiz-answer.ts
-- [[stripOptionLabel()]] - code - packages/types/quiz-answer.ts
+- [[AI Sparkle Star]] - concept - apps/web/app/icon.svg
+- [[Letter T Monogram]] - concept - apps/web/app/icon.svg
+- [[Talim AI App Icon]] - image - apps/web/app/icon.svg
+- [[Violet-to-Marigold Gradient]] - concept - apps/web/app/icon.svg
+- [[Web App Brand Favicon]] - concept - apps/web/app/icon.svg
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,13 +22,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_121
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 3 edges to [[_COMMUNITY_Shared Types]]
-- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Community 45]]
-
-## Top bridge nodes
-- [[quiz-answer.ts]] - degree 8, connects to 2 communities
-- [[isSelectedAnswerCorrect()]] - degree 6, connects to 2 communities
-- [[resolveCorrectAnswer()]] - degree 6, connects to 2 communities

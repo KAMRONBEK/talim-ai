@@ -1,20 +1,17 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 1.00
+members: 2
 ---
 
 # Community 134
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[_genpdf.js]] - code - docs/qa/screenshots/_genpdf.js
-- [[esc()]] - code - docs/qa/screenshots/_genpdf.js
-- [[fs]] - code - docs/qa/screenshots/_genpdf.js
-- [[lines]] - code - docs/qa/screenshots/_genpdf.js
-- [[objs]] - code - docs/qa/screenshots/_genpdf.js
+- [[config_1]] - code - apps/admin/postcss.config.mjs
+- [[postcss.config.mjs]] - code - apps/admin/postcss.config.mjs
 
 ## Live Query (requires Dataview plugin)
 

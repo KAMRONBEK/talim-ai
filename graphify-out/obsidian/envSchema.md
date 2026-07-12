@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "Community 32"
+community: "Config, Pricing & Embeddings"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Config_Pricing__Embeddings
 ---
 
 # envSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[env.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings

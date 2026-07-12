@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Community 38"
+community: "Admin Users & Tenants UI"
 location: "L43"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_38
+  - community/Admin_Users__Tenants_UI
 ---
 
 # UserDetailPage()
@@ -24,4 +24,4 @@ tags:
 - [[useResetUserPassword()]] - `calls` [INFERRED]
 - [[useUpdateUserSubscription()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_38
+#graphify/code #graphify/INFERRED #community/Admin_Users__Tenants_UI

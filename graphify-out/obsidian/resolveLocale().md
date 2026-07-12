@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale.ts"
 type: "code"
-community: "Podcast API"
+community: "Media & Progress Controllers"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_API
+  - community/Media__Progress_Controllers
 ---
 
 # resolveLocale()
@@ -44,4 +44,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_API
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

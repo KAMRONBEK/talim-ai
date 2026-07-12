@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Community 34"
+community: "Content Workspace & Chat"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Content_Workspace__Chat
 ---
 
 # page.tsx
@@ -58,4 +58,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat

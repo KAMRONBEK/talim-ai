@@ -1,19 +1,18 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "code"
-community: "Community 100"
+community: "Platform Docs & Deploy"
 location: "jobs.deploy"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Platform_Docs__Deploy
 ---
 
 # VPS Pull & Restart Job
 
 ## Connections
-- [[Bounded Waits & Login-stall Fallback]] - `semantically_similar_to` [INFERRED]
 - [[Build & Push GHCR Job]] - `references` [EXTRACTED]
 - [[Deploy to VPS GitHub Actions Workflow]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_100
+#graphify/code #graphify/EXTRACTED #community/Platform_Docs__Deploy

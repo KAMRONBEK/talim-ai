@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "Community 33"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Auth__App_Shell_UI
 ---
 
 # dashboard-sidebar.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useContents()]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

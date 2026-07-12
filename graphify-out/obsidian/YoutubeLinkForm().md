@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Community 54"
+community: "Shared UI Primitives"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Shared_UI_Primitives
 ---
 
 # YoutubeLinkForm()
@@ -18,4 +18,4 @@ tags:
 - [[useCreateYoutubeContent()]] - `calls` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

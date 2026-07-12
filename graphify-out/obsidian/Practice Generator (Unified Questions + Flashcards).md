@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 44"
+community: "Community 94"
 location: "§1.6"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/Community_94
 ---
 
 # Practice Generator (Unified Questions + Flashcards)
@@ -20,4 +20,4 @@ tags:
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 - [[Unified Generation Parameters (counttypesdepthscope)]] - `implements` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_44
+#graphify/concept #graphify/EXTRACTED #community/Community_94

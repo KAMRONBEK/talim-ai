@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/adminUserRole.service.ts"
 type: "code"
-community: "Community 71"
+community: "Community 85"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_71
+  - community/Community_85
 ---
 
 # adminUserRole.service.ts
@@ -26,4 +26,4 @@ tags:
 - [[tutorRequest.service.ts]] - `imports_from` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_71
+#graphify/code #graphify/EXTRACTED #community/Community_85

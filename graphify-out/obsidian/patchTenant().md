@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Admin Content & Audit"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Admin_Content__Audit
 ---
 
 # patchTenant()
@@ -19,4 +19,4 @@ tags:
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

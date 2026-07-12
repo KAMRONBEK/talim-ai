@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 49"
+community: "Content API Controller"
 location: "L474"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Content_API_Controller
 ---
 
 # extractTextFromPageImages()
@@ -18,4 +18,4 @@ tags:
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controller

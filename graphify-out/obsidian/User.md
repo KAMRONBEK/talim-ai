@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 114"
+community: "Shared Types & Auth Stores"
 location: "L367"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_114
+  - community/Shared_Types__Auth_Stores
 ---
 
 # User
@@ -23,4 +23,4 @@ tags:
 - [[useAuthStore.ts_1]] - `imports` [EXTRACTED]
 - [[user-display.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_114
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores

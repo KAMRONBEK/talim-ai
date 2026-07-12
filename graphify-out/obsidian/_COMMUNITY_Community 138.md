@@ -1,19 +1,17 @@
 ---
 type: community
-cohesion: 0.50
-members: 4
+cohesion: 1.00
+members: 2
 ---
 
 # Community 138
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 4 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[PATH]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[cursor-talim-vps-mcp.sh]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[cursor-talim-vps-mcp.sh script]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[resolve_doppler()]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[ThemeProvider()]] - code - apps/admin/components/theme-provider.tsx
+- [[theme-provider.tsx]] - code - apps/admin/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

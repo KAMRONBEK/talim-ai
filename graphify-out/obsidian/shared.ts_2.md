@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Billing, Usage & Limits"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Billing_Usage__Limits
 ---
 
 # shared.ts
@@ -35,4 +35,4 @@ tags:
 - [[tenant.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

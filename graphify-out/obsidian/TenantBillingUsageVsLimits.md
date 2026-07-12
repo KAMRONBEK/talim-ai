@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types"
+community: "Shared Types & Auth Stores"
 location: "L192"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types
+  - community/Shared_Types__Auth_Stores
 ---
 
 # TenantBillingUsageVsLimits
@@ -16,4 +16,4 @@ tags:
 - [[billing-summary-card.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores

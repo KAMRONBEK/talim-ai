@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "§2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Question Generation Pipeline (overgenerate, filter, shuffle)
@@ -23,4 +23,4 @@ tags:
 - [[SourceQuote Anchor (Hallucination Firewall)]] - `references` [EXTRACTED]
 - [[Stratified Whole-Material Chunk Spread]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_50
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Plan

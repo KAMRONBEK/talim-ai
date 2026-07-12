@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "Community 82"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/Auth__App_Shell_UI
 ---
 
 # language-switcher.tsx
@@ -25,4 +25,4 @@ tags:
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[setApiLocale()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_82
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

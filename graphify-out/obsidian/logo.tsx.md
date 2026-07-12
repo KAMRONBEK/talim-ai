@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/logo.tsx"
 type: "code"
-community: "Community 104"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/Shared_UI_Primitives
 ---
 
 # logo.tsx
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[page.tsx_11]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

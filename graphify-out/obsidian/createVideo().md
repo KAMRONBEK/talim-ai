@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "Podcast API"
+community: "Media & Progress Controllers"
 location: "L101"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_API
+  - community/Media__Progress_Controllers
 ---
 
 # createVideo()
@@ -21,4 +21,4 @@ tags:
 - [[scopeKey()_2]] - `calls` [EXTRACTED]
 - [[video.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_API
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

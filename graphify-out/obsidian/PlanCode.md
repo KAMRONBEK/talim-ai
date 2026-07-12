@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Flashcards API"
+community: "Billing, Usage & Limits"
 location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API
+  - community/Billing_Usage__Limits
 ---
 
 # PlanCode
@@ -26,4 +26,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

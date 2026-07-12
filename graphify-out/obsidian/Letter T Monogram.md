@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/app/icon.svg"
 type: "concept"
-community: "Community 129"
+community: "Community 121"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_129
+  - community/Community_121
 ---
 
 # Letter T Monogram
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI App Icon]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_129
+#graphify/concept #graphify/EXTRACTED #community/Community_121

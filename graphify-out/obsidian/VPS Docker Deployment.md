@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "document"
-community: "Community 117"
+community: "Community 109"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_117
+  - community/Community_109
 ---
 
 # VPS Docker Deployment
@@ -18,4 +18,4 @@ tags:
 - [[First Platform Admin Creation]] - `references` [EXTRACTED]
 - [[nginx Reverse Proxy]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_117
+#graphify/document #graphify/EXTRACTED #community/Community_109

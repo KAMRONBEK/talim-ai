@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Flashcards Generation & Jobs"
+community: "Background Jobs & Queues"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Generation__Jobs
+  - community/Background_Jobs__Queues
 ---
 
 # GenerateVideoJobData
@@ -15,4 +15,4 @@ tags:
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs
+#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues

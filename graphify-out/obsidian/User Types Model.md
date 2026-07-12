@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "concept"
-community: "Community 62"
+community: "Plans & Epics Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Plans__Epics_Docs
 ---
 
 # User Types Model
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_62
+#graphify/concept #graphify/EXTRACTED #community/Plans__Epics_Docs

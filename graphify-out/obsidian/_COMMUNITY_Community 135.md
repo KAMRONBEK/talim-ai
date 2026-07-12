@@ -1,20 +1,17 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 1.00
+members: 2
 ---
 
 # Community 135
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[files]] - code - packages/config/tsconfig/package.json
-- [[name_7]] - code - packages/config/tsconfig/package.json
-- [[package.json_7]] - code - packages/config/tsconfig/package.json
-- [[private_7]] - code - packages/config/tsconfig/package.json
-- [[version_6]] - code - packages/config/tsconfig/package.json
+- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
+- [[index.js]] - code - packages/config/eslint/index.js
 
 ## Live Query (requires Dataview plugin)
 

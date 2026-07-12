@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Community 67"
+community: "Tenant Service"
 location: "L120"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/Tenant_Service
 ---
 
 # patchTenantForOwner()
@@ -15,4 +15,4 @@ tags:
 - [[formatTenant()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/Tenant_Service

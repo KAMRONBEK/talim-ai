@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Community 39"
+community: "Shared UI Primitives"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Shared_UI_Primitives
 ---
 
 # CardHeader
@@ -23,4 +23,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

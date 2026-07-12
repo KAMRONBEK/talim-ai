@@ -1,27 +1,26 @@
 ---
 type: community
-cohesion: 0.24
-members: 12
+cohesion: 0.27
+members: 11
 ---
 
 # Community 91
 
-**Cohesion:** 0.24 - loosely connected
-**Members:** 12 nodes
+**Cohesion:** 0.27 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[.constructor()_3]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[.publish()]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[.replay()]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[.subscribe()]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[InProcessJobEventBus]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[JobEvent]] - code - packages/types/jobEvents.ts
-- [[JobEventBus]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[JobEventStatus]] - code - packages/types/jobEvents.ts
-- [[SeqJobEvent]] - code - packages/types/jobEvents.ts
-- [[UserState]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[jobEvents.service.ts]] - code - apps/api/src/services/events/jobEvents.service.ts
-- [[jobEvents.ts]] - code - packages/types/jobEvents.ts
+- [[Hero CTAs gradient primary 'Bepul boshlash' and outlined secondary 'Xususiyatlarni ko'rish', plus trust row 'PDF, YouTube, slaydlar va ma'ruzalar bilan ishlaydi' with source-type avatars]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Hero badge 'AI bilan o'rganish', headline 'Har qanday narsani. O'zingizning yo'lingiz bilan.' with warm highlight bar, subcopy about uploading PDFvideoslideslectures for AI summaries, podcast_c21f2a05]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Learner progress indicator inside mock card 'Sizning taraqqiyotingiz' gradient bar at 72%]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Marketing message upload any material (PDFvideoslideslecture) and get AI summaries, podcasts, quizzes, and a personal AI tutor]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Navbar fix verification filename marks this as the fixed state of the tablet-width navbar (elements fit one row without overflow)]] - rationale - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Navbar Talim AI logo, theme-toggle icon, 'Kirish' link, gradient 'Boshlash' CTA in a single compact row]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Product mock card 'Genetik kod va tarjima' (Biologiya 101 · 11-bob) with AI badge and rows for generated summary (3 daqiqa o'qish), ready podcast (8 daqiqa tinglash), quiz (12 ta savol)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - image - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Tablet 768px responsive breakpoint single-column hero layout with full-width mock card]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Uzbek (uz locale) localization all landing copy rendered in Uzbek via next-intl locale routing]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Visual design language lavenderviolet backdrop, purple-to-orange gradient CTAs and progress bar, rounded cards on light surface (relation to committed 'Scholar' pine+clay system uncertain)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,20 +28,3 @@ members: 12
 TABLE source_file, type FROM #community/Community_91
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 5 edges to [[_COMMUNITY_Shared Types]]
-- 3 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
-- 2 edges to [[_COMMUNITY_Admin & Events Controllers]]
-- 2 edges to [[_COMMUNITY_Community 51]]
-- 1 edge to [[_COMMUNITY_Podcast Generation & Prompts]]
-- 1 edge to [[_COMMUNITY_Quiz Generation Job]]
-- 1 edge to [[_COMMUNITY_Community 32]]
-- 1 edge to [[_COMMUNITY_Community 85]]
-
-## Top bridge nodes
-- [[jobEvents.service.ts]] - degree 14, connects to 7 communities
-- [[SeqJobEvent]] - degree 7, connects to 2 communities
-- [[JobEvent]] - degree 6, connects to 2 communities
-- [[jobEvents.ts]] - degree 4, connects to 1 community
-- [[JobEventStatus]] - degree 2, connects to 1 community

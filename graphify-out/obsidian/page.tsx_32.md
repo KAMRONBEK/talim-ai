@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/podcast/page.tsx"
 type: "code"
-community: "Content Hooks & Locale"
+community: "Content & Flashcards Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Hooks__Locale
+  - community/Content__Flashcards_Hooks
 ---
 
 # page.tsx
@@ -36,4 +36,4 @@ tags:
 - [[useRegenerateEpisode()]] - `imports` [EXTRACTED]
 - [[useUpdatePodcastProgress()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

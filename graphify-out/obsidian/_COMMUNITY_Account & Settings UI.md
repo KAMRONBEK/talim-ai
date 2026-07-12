@@ -1,45 +1,71 @@
 ---
 type: community
-cohesion: 0.10
-members: 31
+cohesion: 0.07
+members: 57
 ---
 
 # Account & Settings UI
 
-**Cohesion:** 0.10 - loosely connected
-**Members:** 31 nodes
+**Cohesion:** 0.07 - loosely connected
+**Members:** 57 nodes
 
 ## Members
-- [[AccountSummary()]] - code - apps/web/components/account/account-summary.tsx
-- [[AssignedMaterialCard()]] - code - apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx
-- [[BADGE_LABEL_KEYS]] - code - apps/web/app/[locale]/(learner)/learner/progress/page.tsx
-- [[CardStatus]] - code - apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx
+- [[AssignStudentsPanel()]] - code - apps/web/components/tenant/assign-students-panel.tsx
+- [[BillingSummaryCard()]] - code - apps/web/components/account/billing-summary-card.tsx
+- [[Button]] - code - packages/ui/components/button.tsx
 - [[DashboardSettingsPage()]] - code - apps/web/app/[locale]/dashboard/settings/page.tsx
-- [[LearnerDashboardPage()]] - code - apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx
-- [[LearnerMaterial]] - code - packages/types/index.ts
-- [[LearnerProgressPage()]] - code - apps/web/app/[locale]/(learner)/learner/progress/page.tsx
-- [[LearnerSettingsPage()]] - code - apps/web/app/[locale]/(learner)/learner/settings/page.tsx
+- [[JoinCodeCard()]] - code - apps/web/components/tenant/join-code-card.tsx
+- [[OnboardingChecklist()]] - code - apps/web/components/tenant/onboarding-checklist.tsx
 - [[ProfileCard()]] - code - apps/web/components/account/profile-card.tsx
-- [[StatCard()_1]] - code - apps/web/app/[locale]/(learner)/learner/progress/page.tsx
-- [[StudentWelcomeBanner()]] - code - apps/web/components/learner/student-welcome-banner.tsx
-- [[account-summary.tsx]] - code - apps/web/components/account/account-summary.tsx
-- [[dismissOnboarding()]] - code - apps/web/lib/onboarding.ts
-- [[getOnboardingKey()]] - code - apps/web/lib/onboarding.ts
-- [[isOnboardingPending()]] - code - apps/web/lib/onboarding.ts
-- [[onboarding.ts]] - code - apps/web/lib/onboarding.ts
+- [[StatCard()_2]] - code - apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx
+- [[StudentImportResponse]] - code - packages/types/index.ts
+- [[TenantDashboardPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx
+- [[TenantSettingsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx
+- [[TenantStudent]] - code - packages/types/index.ts
+- [[TenantStudentDetailPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx
+- [[TenantStudentsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
+- [[ThemeToggle()]] - code - apps/admin/components/theme-toggle.tsx
+- [[ThemeToggle()_1]] - code - apps/web/components/theme-toggle.tsx
+- [[ThemeValue]] - code - apps/admin/components/theme-toggle.tsx
+- [[ThemeValue_1]] - code - apps/web/components/theme-toggle.tsx
+- [[UsageMeter()]] - code - apps/web/components/account/billing-summary-card.tsx
+- [[apiError()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
+- [[assign-students-panel.tsx]] - code - apps/web/components/tenant/assign-students-panel.tsx
+- [[billing-summary-card.tsx]] - code - apps/web/components/account/billing-summary-card.tsx
+- [[join-code-card.tsx]] - code - apps/web/components/tenant/join-code-card.tsx
+- [[onboarding-checklist.tsx]] - code - apps/web/components/tenant/onboarding-checklist.tsx
 - [[page.tsx_36]] - code - apps/web/app/[locale]/dashboard/settings/page.tsx
-- [[page.tsx_16]] - code - apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx
-- [[page.tsx_17]] - code - apps/web/app/[locale]/(learner)/learner/progress/page.tsx
-- [[page.tsx_18]] - code - apps/web/app/[locale]/(learner)/learner/settings/page.tsx
+- [[page.tsx_21]] - code - apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx
+- [[page.tsx_26]] - code - apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx
+- [[page.tsx_27]] - code - apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx
+- [[page.tsx_28]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
 - [[profile-card.tsx]] - code - apps/web/components/account/profile-card.tsx
-- [[roleKey]] - code - apps/web/components/account/account-summary.tsx
-- [[student-welcome-banner.tsx]] - code - apps/web/components/learner/student-welcome-banner.tsx
-- [[typeStyles]] - code - apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx
+- [[profileInitials()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx
+- [[studentInitials()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
+- [[theme-toggle.tsx]] - code - apps/admin/components/theme-toggle.tsx
+- [[theme-toggle.tsx_1]] - code - apps/web/components/theme-toggle.tsx
+- [[themeIcons]] - code - apps/web/components/theme-toggle.tsx
+- [[themeMeta]] - code - apps/admin/components/theme-toggle.tsx
+- [[themeValues]] - code - apps/admin/components/theme-toggle.tsx
+- [[themeValues_1]] - code - apps/web/components/theme-toggle.tsx
 - [[useAccount.ts]] - code - apps/web/hooks/useAccount.ts
+- [[useAssignContent()]] - code - apps/web/hooks/useTenant.ts
 - [[useChangePassword()]] - code - apps/web/hooks/useAccount.ts
-- [[useLearnerMaterials()]] - code - apps/web/hooks/useTenant.ts
-- [[useLearnerProgress()]] - code - apps/web/hooks/useTenant.ts
-- [[useLearnerSummary()]] - code - apps/web/hooks/useTenant.ts
+- [[useContentAssignments()]] - code - apps/web/hooks/useTenant.ts
+- [[useCreateTenantStudent()]] - code - apps/web/hooks/useTenant.ts
+- [[useImportStudents()]] - code - apps/web/hooks/useTenant.ts
+- [[usePatchTenant()]] - code - apps/web/hooks/useTenant.ts
+- [[usePatchTenantStudent()]] - code - apps/web/hooks/useTenant.ts
+- [[useRegenerateJoinCode()]] - code - apps/web/hooks/useTenant.ts
+- [[useResetTenantStudentPassword()]] - code - apps/web/hooks/useTenant.ts
+- [[useSendTenantMessage()]] - code - apps/web/hooks/useTenant.ts
+- [[useStudentProgress()]] - code - apps/web/hooks/useTenant.ts
+- [[useTenant()]] - code - apps/web/hooks/useTenant.ts
+- [[useTenantAssessments()]] - code - apps/web/hooks/useAssessments.ts
+- [[useTenantContents()]] - code - apps/web/hooks/useTenantContent.ts
+- [[useTenantSearch()]] - code - apps/web/contexts/tenant-shell.tsx
+- [[useTenantStudents()]] - code - apps/web/hooks/useTenant.ts
+- [[useUnassignContent()]] - code - apps/web/hooks/useTenant.ts
 - [[useUpdateProfile()]] - code - apps/web/hooks/useAccount.ts
 
 ## Live Query (requires Dataview plugin)
@@ -50,24 +76,35 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 11 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 10 edges to [[_COMMUNITY_Admin App UI]]
-- 8 edges to [[_COMMUNITY_Community 33]]
-- 5 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 5 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 4 edges to [[_COMMUNITY_Community 71]]
-- 4 edges to [[_COMMUNITY_Community 46]]
-- 3 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 3 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
-- 3 edges to [[_COMMUNITY_Community 35]]
-- 3 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 1 edge to [[_COMMUNITY_Community 80]]
-- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
-- 1 edge to [[_COMMUNITY_Community 81]]
+- 31 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 24 edges to [[_COMMUNITY_Auth & App Shell UI]]
+- 23 edges to [[_COMMUNITY_Tenant Hooks & Messaging]]
+- 13 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 12 edges to [[_COMMUNITY_B2C Dashboard Shell]]
+- 12 edges to [[_COMMUNITY_Dialog & Button UI]]
+- 10 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 8 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 6 edges to [[_COMMUNITY_Learner Account & Onboarding]]
+- 4 edges to [[_COMMUNITY_Content Workspace & Chat]]
+- 4 edges to [[_COMMUNITY_Providers & Job Events]]
+- 3 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
+- 3 edges to [[_COMMUNITY_Content & Flashcards Hooks]]
+- 2 edges to [[_COMMUNITY_Subscription Editor UI]]
+- 2 edges to [[_COMMUNITY_Admin Users & Tenants UI]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 1 edge to [[_COMMUNITY_Community 103]]
+- 1 edge to [[_COMMUNITY_Community 88]]
+- 1 edge to [[_COMMUNITY_Community 104]]
+- 1 edge to [[_COMMUNITY_Admin Analytics]]
+- 1 edge to [[_COMMUNITY_Community 110]]
+- 1 edge to [[_COMMUNITY_API Endpoints & Media Hooks]]
+- 1 edge to [[_COMMUNITY_Transcript Panel]]
+- 1 edge to [[_COMMUNITY_Quiz Player Inputs]]
 
 ## Top bridge nodes
-- [[page.tsx_16]] - degree 25, connects to 9 communities
-- [[profile-card.tsx]] - degree 12, connects to 4 communities
-- [[account-summary.tsx]] - degree 7, connects to 4 communities
-- [[LearnerDashboardPage()]] - degree 7, connects to 4 communities
-- [[page.tsx_17]] - degree 10, connects to 3 communities
+- [[Button]] - degree 56, connects to 23 communities
+- [[page.tsx_28]] - degree 30, connects to 7 communities
+- [[page.tsx_21]] - degree 17, connects to 7 communities
+- [[page.tsx_27]] - degree 13, connects to 5 communities
+- [[page.tsx_26]] - degree 21, connects to 4 communities

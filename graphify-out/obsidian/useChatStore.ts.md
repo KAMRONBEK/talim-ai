@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Community 61"
+community: "Chat Message Rendering"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/Chat_Message_Rendering
 ---
 
 # useChatStore.ts
@@ -30,4 +30,4 @@ tags:
 - [[serializeVisualBlock()]] - `imports` [EXTRACTED]
 - [[useChatStore]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering

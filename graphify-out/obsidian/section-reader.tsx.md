@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Community 84"
+community: "API Endpoints & Media Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # section-reader.tsx
@@ -28,4 +28,4 @@ tags:
 - [[useSlides()]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_84
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

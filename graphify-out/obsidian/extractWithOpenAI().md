@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 60"
+community: "PDF & OCR Service"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_60
+  - community/PDF__OCR_Service
 ---
 
 # extractWithOpenAI()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_60
+#graphify/code #graphify/EXTRACTED #community/PDF__OCR_Service

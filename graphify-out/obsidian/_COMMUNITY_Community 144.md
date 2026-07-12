@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[next.config.ts]] - code - apps/admin/next.config.ts
-- [[nextConfig]] - code - apps/admin/next.config.ts
+- [[Honest Audit Trail (EXTRACTEDINFERREDAMBIGUOUS)]] - rationale - .claude/skills/graphify/SKILL.md
+- [[Honesty Rules]] - rationale - .claude/skills/graphify/SKILL.md
 
 ## Live Query (requires Dataview plugin)
 

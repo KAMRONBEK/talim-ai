@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/ContentList.tsx"
 type: "code"
-community: "Community 39"
+community: "Shared UI Primitives"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Shared_UI_Primitives
 ---
 
 # ContentListProps
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[ContentList.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

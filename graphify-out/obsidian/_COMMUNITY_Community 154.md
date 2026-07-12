@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 154
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[makeQueryClient()_1]] - code - apps/web/lib/queryClient.ts
-- [[queryClient.ts_1]] - code - apps/web/lib/queryClient.ts
+- [[QA with Playwright MCP]] - document - docs/QA.md
 
 ## Live Query (requires Dataview plugin)
 

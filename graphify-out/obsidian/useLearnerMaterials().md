@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Community 58"
+community: "Content Grid & Learner Dashboard"
 location: "L249"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Content_Grid__Learner_Dashboard
 ---
 
 # useLearnerMaterials()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard

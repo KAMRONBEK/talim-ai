@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Community 36"
+community: "Content Sidebar & Generations"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/Content_Sidebar__Generations
 ---
 
 # content-generations.tsx
@@ -20,4 +20,4 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations

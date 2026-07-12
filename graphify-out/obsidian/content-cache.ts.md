@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "Community 59"
+community: "Content Assignment & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_59
+  - community/Content_Assignment__Hooks
 ---
 
 # content-cache.ts
@@ -25,4 +25,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_59
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

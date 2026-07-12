@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/analytics.controller.ts"
 type: "code"
-community: "Admin Analytics"
+community: "Admin Analytics Endpoints"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics
+  - community/Admin_Analytics_Endpoints
 ---
 
 # analytics.controller.ts
@@ -44,4 +44,4 @@ tags:
 - [[usageDaysSchema]] - `contains` [EXTRACTED]
 - [[usageSummary()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics_Endpoints

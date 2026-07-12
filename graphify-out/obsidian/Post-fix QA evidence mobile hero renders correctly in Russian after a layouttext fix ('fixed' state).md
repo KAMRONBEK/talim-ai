@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg"
 type: "rationale"
-community: "Community 89"
+community: "Landing Screenshot (RU)"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Community_89
+  - community/Landing_Screenshot_RU
 ---
 
 # Post-fix QA evidence: mobile hero renders correctly in Russian after a layout/text fix ('fixed' state)
@@ -14,4 +14,4 @@ tags:
 - [[Headline 'Изучайте что угодно. По-своему.' with gold highlight marker on 'По-своему.']] - `conceptually_related_to` [AMBIGUOUS]
 - [[QA screenshot Russian landing page mobile hero (post-fix, dark theme)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Community_89
+#graphify/rationale #graphify/INFERRED #community/Landing_Screenshot_RU

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Community 48"
+community: "B2C Dashboard Shell"
 location: "L167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/B2C_Dashboard_Shell
 ---
 
 # ContentLayoutSuspenseFallback()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[layout.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg"
 type: "concept"
-community: "Community 96"
+community: "Community 91"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_96
+  - community/Community_91
 ---
 
 # Uzbek (uz locale) localization: all landing copy rendered in Uzbek via next-intl [locale] routing
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_96
+#graphify/concept #graphify/EXTRACTED #community/Community_91

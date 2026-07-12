@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Community 36"
+community: "Dialog & Button UI"
 location: "L85"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/Dialog__Button_UI
 ---
 
 # DialogDescription()
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI

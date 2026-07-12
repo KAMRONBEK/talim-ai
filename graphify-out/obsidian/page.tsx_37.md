@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/impersonate/page.tsx"
 type: "code"
-community: "Community 48"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Auth__App_Shell_UI
 ---
 
 # page.tsx
@@ -21,4 +21,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

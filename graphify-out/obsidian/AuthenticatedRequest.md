@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "Admin Content & Audit"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/Admin_Content__Audit
 ---
 
 # AuthenticatedRequest
@@ -41,4 +41,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

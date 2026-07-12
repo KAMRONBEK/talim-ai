@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Community 45"
+community: "Question Banks & Builders"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/Question_Banks__Builders
 ---
 
 # jsonStringArray()
@@ -37,4 +37,4 @@ tags:
 - [[shared.ts_1]] - `imports` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders

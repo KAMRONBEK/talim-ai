@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/brand/logo.tsx"
 type: "code"
-community: "Community 33"
+community: "Auth & App Shell UI"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Auth__App_Shell_UI
 ---
 
 # LogoMark()
@@ -23,4 +23,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

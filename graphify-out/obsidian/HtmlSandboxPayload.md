@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Community 70"
+community: "Chat Visual Embeds"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/Chat_Visual_Embeds
 ---
 
 # HtmlSandboxPayload
@@ -18,4 +18,4 @@ tags:
 - [[tutor-html-sandbox.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds

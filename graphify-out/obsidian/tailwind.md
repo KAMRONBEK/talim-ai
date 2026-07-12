@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Community 68"
+community: "Web Component Config"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/Web_Component_Config
 ---
 
 # tailwind
@@ -19,4 +19,4 @@ tags:
 - [[cssVariables]] - `contains` [EXTRACTED]
 - [[prefix]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/Web_Component_Config

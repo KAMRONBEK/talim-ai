@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/audit/page.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Shared_UI_Primitives
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminAuditLogs()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

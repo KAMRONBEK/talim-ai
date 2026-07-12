@@ -1,12 +1,12 @@
 ---
 source_file: "CLAUDE.md"
 type: "rationale"
-community: "Community 93"
+community: "Community 89"
 location: "Architecture conventions & invariants"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_93
+  - community/Community_89
 ---
 
 # Multi-tenant isolation enforced centrally (assertCanAccessContent)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI project guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_93
+#graphify/rationale #graphify/EXTRACTED #community/Community_89

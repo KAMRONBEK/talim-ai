@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "rationale"
-community: "Community 76"
+community: "Platform Docs & Deploy"
 tags:
   - graphify/rationale
-  - graphify/EXTRACTED
-  - community/Community_76
+  - graphify/INFERRED
+  - community/Platform_Docs__Deploy
 ---
 
 # Role Adaptations (server-side security)
@@ -14,4 +14,4 @@ tags:
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 - [[Multi-Tenant Isolation Guard (contentAccess.service)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_76
+#graphify/rationale #graphify/INFERRED #community/Platform_Docs__Deploy

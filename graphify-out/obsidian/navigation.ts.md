@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Community 82"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/Auth__App_Shell_UI
 ---
 
 # navigation.ts
@@ -65,4 +65,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[{ Link, redirect, usePathname, useRouter, getPathname }]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_82
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

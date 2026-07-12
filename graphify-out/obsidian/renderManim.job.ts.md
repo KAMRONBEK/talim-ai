@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Flashcards Generation & Jobs"
+community: "Job Registration & Manim"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Generation__Jobs
+  - community/Job_Registration__Manim
 ---
 
 # renderManim.job.ts
@@ -35,4 +35,4 @@ tags:
 - [[resolveManimAsset()]] - `contains` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs
+#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim

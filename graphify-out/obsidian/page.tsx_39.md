@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/pricing/page.tsx"
 type: "code"
-community: "Community 101"
+community: "Marketing Landing UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_101
+  - community/Marketing_Landing_UI
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[navbar.tsx]] - `imports_from` [EXTRACTED]
 - [[pricing.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_101
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI

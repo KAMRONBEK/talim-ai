@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
-community: "Community 65"
+community: "Auth API Controller"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_65
+  - community/Auth_API_Controller
 ---
 
 # signToken()
@@ -18,4 +18,4 @@ tags:
 - [[me()]] - `calls` [EXTRACTED]
 - [[register()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_65
+#graphify/code #graphify/EXTRACTED #community/Auth_API_Controller

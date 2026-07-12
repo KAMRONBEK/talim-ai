@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero.jpeg"
 type: "image"
-community: "Community 95"
+community: "Community 90"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Community_95
+  - community/Community_90
 ---
 
 # QA screenshot: Russian landing page mobile hero (pre-fix, dark theme) — full above-the-fold hero of Talim AI at ~390px width
@@ -22,4 +22,4 @@ tags:
 - [[Sticky top nav Talim AI logo mark (gradient rounded square with T), brand name, darklight theme toggle (moon icon), and compact gradient CTA 'Начать']] - `references` [EXTRACTED]
 - [[Value-prop paragraph upload any material (PDF, video, slides, lecture) and get summaries, podcasts, quizzes, and a personal AI tutor — mirrors the B2C ingest-to-outputs pipeline]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/Community_95
+#graphify/image #graphify/EXTRACTED #community/Community_90

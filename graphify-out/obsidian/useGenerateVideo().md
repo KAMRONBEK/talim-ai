@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "Content & Flashcards Hooks"
 location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content__Flashcards_Hooks
 ---
 
 # useGenerateVideo()
@@ -19,4 +19,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

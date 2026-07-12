@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "rationale"
-community: "Community 62"
+community: "Plans & Epics Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Plans__Epics_Docs
 ---
 
 # Suggested Build Order
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_62
+#graphify/rationale #graphify/EXTRACTED #community/Plans__Epics_Docs

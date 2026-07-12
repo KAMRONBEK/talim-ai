@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Auth & App Shell UI"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Auth__App_Shell_UI
 ---
 
 # LanguageSwitcher()
@@ -19,4 +19,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/events.controller.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "Billing, Usage & Limits"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/Billing_Usage__Limits
 ---
 
 # events.controller.ts
@@ -23,4 +23,4 @@ tags:
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamEvents()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

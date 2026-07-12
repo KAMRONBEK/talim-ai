@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 158
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[Pythagoras QA fixture text]] - document - docs/qa/screenshots/qa-pythagoras.txt
-- [[Pythagorean Theorem QA test PDF]] - paper - docs/qa/screenshots/qa-pythagoras.pdf
+- [[Persona Karim (impatient tutor)]] - concept - docs/qa/human-qa-playbook.md
 
 ## Live Query (requires Dataview plugin)
 

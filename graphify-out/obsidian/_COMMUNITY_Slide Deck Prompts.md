@@ -60,26 +60,24 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Podcast API]]
-- 5 edges to [[_COMMUNITY_Community 32]]
-- 5 edges to [[_COMMUNITY_Shared Types]]
-- 5 edges to [[_COMMUNITY_Admin Tenants API]]
-- 5 edges to [[_COMMUNITY_Community 83]]
-- 3 edges to [[_COMMUNITY_Assessment API Controllers]]
-- 3 edges to [[_COMMUNITY_Community 49]]
-- 3 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
-- 3 edges to [[_COMMUNITY_Slide Deck UI]]
-- 3 edges to [[_COMMUNITY_Flashcards API]]
-- 3 edges to [[_COMMUNITY_Community 46]]
-- 2 edges to [[_COMMUNITY_Content Hooks & Locale]]
-- 2 edges to [[_COMMUNITY_Community 84]]
-- 2 edges to [[_COMMUNITY_Content Assignment & Hooks]]
-- 2 edges to [[_COMMUNITY_Community 53]]
-- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
+- 9 edges to [[_COMMUNITY_Media & Progress Controllers]]
+- 7 edges to [[_COMMUNITY_Slide Deck UI]]
+- 6 edges to [[_COMMUNITY_Content API Controller]]
+- 6 edges to [[_COMMUNITY_Billing, Usage & Limits]]
+- 5 edges to [[_COMMUNITY_Background Jobs & Queues]]
+- 5 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 5 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 2 edges to [[_COMMUNITY_Config, Pricing & Embeddings]]
+- 2 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
+- 2 edges to [[_COMMUNITY_Flashcards API & Prisma Seed]]
+- 2 edges to [[_COMMUNITY_AI Provider Service]]
+- 2 edges to [[_COMMUNITY_Section Service]]
+- 2 edges to [[_COMMUNITY_API Endpoints & Media Hooks]]
+- 1 edge to [[_COMMUNITY_Community 95]]
 
 ## Top bridge nodes
-- [[slides.service.ts]] - degree 52, connects to 14 communities
-- [[autoGenerateSectionDecks()]] - degree 9, connects to 4 communities
+- [[slides.service.ts]] - degree 52, connects to 13 communities
 - [[DeckAudience]] - degree 6, connects to 4 communities
-- [[deck-schema.ts]] - degree 18, connects to 3 communities
 - [[deck-prompt.ts]] - degree 13, connects to 3 communities
+- [[autoGenerateSectionDecks()]] - degree 9, connects to 3 communities
+- [[ContentSlideDeck]] - degree 4, connects to 3 communities

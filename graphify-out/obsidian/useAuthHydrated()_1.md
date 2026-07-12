@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "Community 35"
+community: "Auth & App Shell UI"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Auth__App_Shell_UI
 ---
 
 # useAuthHydrated()
@@ -15,4 +15,4 @@ tags:
 - [[RoleGuard()]] - `calls` [EXTRACTED]
 - [[role-guard.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

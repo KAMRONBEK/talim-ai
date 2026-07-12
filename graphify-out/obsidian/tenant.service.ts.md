@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant.service.ts"
 type: "code"
-community: "Community 67"
+community: "Tenant Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/Tenant_Service
 ---
 
 # tenant.service.ts
@@ -26,4 +26,4 @@ tags:
 - [[tenant.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/Tenant_Service

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Community 58"
+community: "Learner Account & Onboarding"
 location: "L239"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Learner_Account__Onboarding
 ---
 
 # useLearnerSummary()
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_18]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/Learner_Account__Onboarding

@@ -1,21 +1,20 @@
 ---
 type: community
-cohesion: 0.33
-members: 6
+cohesion: 0.40
+members: 5
 ---
 
 # Community 122
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 6 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[@playwrightmcp]] - code - .cursor/mcp.json
-- [[bash]] - code - .cursor/mcp.json
-- [[mcp.json]] - code - .cursor/mcp.json
-- [[npx]] - code - .cursor/mcp.json
-- [[playwright]] - code - .cursor/mcp.json
-- [[talim-vps]] - code - .cursor/mcp.json
+- [[main]] - code - packages/config/eslint/package.json
+- [[name_4]] - code - packages/config/eslint/package.json
+- [[package.json_4]] - code - packages/config/eslint/package.json
+- [[private_4]] - code - packages/config/eslint/package.json
+- [[version_3]] - code - packages/config/eslint/package.json
 
 ## Live Query (requires Dataview plugin)
 

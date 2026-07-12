@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Community 33"
+community: "Auth & App Shell UI"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Auth__App_Shell_UI
 ---
 
 # SheetContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

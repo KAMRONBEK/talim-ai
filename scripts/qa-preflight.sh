@@ -83,6 +83,50 @@ else
   fi
 fi
 
+# --- 3b. Deterministic test fixtures (uz-math.pdf + answer key, CSV imports, ---
+# reject-path files). The overnight agent uploads KNOWN content so AI output can
+# be graded against docs/qa/fixtures/uz-math-facts.md instead of eyeballed.
+if node "${REPO}/scripts/qa-fixtures.mjs" >/dev/null 2>&1; then
+  log "fixtures ready (docs/qa/fixtures/ — see uz-math-facts.md for the answer key)"
+else
+  log "WARN: qa-fixtures.mjs failed — agent must generate/upload its own test PDF"
+fi
+
+# --- 3c. Test-account health: probe the canonical QA logins ONCE via the API ---
+# so the run learns broken/rotated credentials in 2 seconds here instead of
+# burning browser turns discovering them one login-form at a time. Failed probes
+# WARN (the runbook §1 tells the agent to recreate missing accounts) — only the
+# stack being down aborts. NOTE: loginRateLimit counts only FAILED attempts, so
+# these probes never rate-limit a healthy account set.
+probe_login(){
+  local code
+  code="$(curl -s -o /dev/null -w '%{http_code}' -m 8 -X POST \
+    -H 'Content-Type: application/json' \
+    -d "{\"email\":\"$1\",\"password\":\"$2\"}" \
+    "http://localhost:${API}/auth/login" 2>/dev/null || echo 000)"
+  if [ "$code" = 200 ]; then
+    log "  account ok:     $1"
+  else
+    log "  ACCOUNT BROKEN: $1 (login=$code) — recreate per runbook §1 before testing this role"
+    ACCOUNTS_BROKEN=$((ACCOUNTS_BROKEN + 1))
+  fi
+}
+ACCOUNTS_BROKEN=0
+log "probing QA test accounts (creds ledger: docs/qa/visual-qa-report.md)"
+probe_login "qa-admin@talim.local"      "QaAdmin-12345"
+probe_login "qa-owner@talim.local"      "QaOwner-12345"
+probe_login "qa-individual@talim.local" "Individual-12345"
+probe_login "teststudent1"              "Student-12345"
+[ "$ACCOUNTS_BROKEN" -gt 0 ] && log "WARN: $ACCOUNTS_BROKEN QA account(s) unusable — recreate them FIRST (runbook §1)"
+
+# --- 3d. Disk space (screenshots + .next + logs need room; low disk wedges runs)
+AVAIL_GB="$(df -g "${REPO}" 2>/dev/null | awk 'NR==2 {print $4}')"
+if [ -n "${AVAIL_GB:-}" ] && [ "$AVAIL_GB" -lt 5 ] 2>/dev/null; then
+  log "WARN: only ${AVAIL_GB}GB free — clean disk before a long unattended run"
+else
+  log "disk ok (${AVAIL_GB:-?}GB free)"
+fi
+
 # --- 4. Clean ephemeral QA artifacts so the working tree / final commit stays clean
 rm -rf "${REPO}/.playwright-mcp" 2>/dev/null || true
 find "${REPO}" -maxdepth 1 -name '*.png' -delete 2>/dev/null || true

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/progress/page.tsx"
 type: "code"
-community: "Community 58"
+community: "Learner Account & Onboarding"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Learner_Account__Onboarding
 ---
 
 # BADGE_LABEL_KEYS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_17]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/Learner_Account__Onboarding

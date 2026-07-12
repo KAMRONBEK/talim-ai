@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Community 43"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Auth__App_Shell_UI
 ---
 
 # useBilling.ts
@@ -24,4 +24,4 @@ tags:
 - [[useRequestUpgrade()]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

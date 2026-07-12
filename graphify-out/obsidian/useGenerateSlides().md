@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "API Endpoints & Media Hooks"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # useGenerateSlides()
@@ -20,4 +20,4 @@ tags:
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

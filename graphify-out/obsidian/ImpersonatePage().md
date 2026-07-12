@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/impersonate/page.tsx"
 type: "code"
-community: "Community 48"
+community: "Auth & App Shell UI"
 location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Auth__App_Shell_UI
 ---
 
 # ImpersonatePage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_37]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Content API Controller"
 location: "L109"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Content_API_Controller
 ---
 
 # listContent()
@@ -15,4 +15,4 @@ tags:
 - [[buildContentListWhere()]] - `calls` [EXTRACTED]
 - [[content.controller.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controller

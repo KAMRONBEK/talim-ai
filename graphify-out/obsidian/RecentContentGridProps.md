@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Community 31"
+community: "Content Assignment & Hooks"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Content_Assignment__Hooks
 ---
 
 # RecentContentGridProps
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

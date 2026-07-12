@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "Community 63"
+community: "API Dependencies"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_63
+  - community/API_Dependencies
 ---
 
 # jsonwebtoken
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_63
+#graphify/code #graphify/EXTRACTED #community/API_Dependencies

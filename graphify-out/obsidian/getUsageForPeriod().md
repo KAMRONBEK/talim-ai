@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Billing, Usage & Limits"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Billing_Usage__Limits
 ---
 
 # getUsageForPeriod()
@@ -24,4 +24,4 @@ tags:
 - [[user.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

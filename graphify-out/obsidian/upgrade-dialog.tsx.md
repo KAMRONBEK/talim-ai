@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/upgrade-dialog.tsx"
 type: "code"
-community: "Community 80"
+community: "Providers & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_80
+  - community/Providers__Job_Events
 ---
 
 # upgrade-dialog.tsx
@@ -27,4 +27,4 @@ tags:
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[useRequestUpgrade()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_80
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

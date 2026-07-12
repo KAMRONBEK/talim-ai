@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Community 84"
+community: "API Endpoints & Media Hooks"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # Mode
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[section-reader.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_84
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

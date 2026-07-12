@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Community 84"
+community: "Slide Deck UI"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/Slide_Deck_UI
 ---
 
 # FullscreenDoc
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[DeckPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_84
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

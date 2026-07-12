@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/global-upgrade-modal.tsx"
 type: "code"
-community: "Community 43"
+community: "Providers & Job Events"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Providers__Job_Events
 ---
 
 # GlobalUpgradeModal()
@@ -16,4 +16,4 @@ tags:
 - [[providers.tsx_1]] - `imports` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

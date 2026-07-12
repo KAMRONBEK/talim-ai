@@ -1,20 +1,18 @@
 ---
 type: community
-cohesion: 0.50
-members: 5
+cohesion: 1.00
+members: 3
 ---
 
 # Community 129
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 3 nodes
 
 ## Members
-- [[AI Sparkle Star]] - concept - apps/web/app/icon.svg
-- [[Letter T Monogram]] - concept - apps/web/app/icon.svg
-- [[Talim AI App Icon]] - image - apps/web/app/icon.svg
-- [[Violet-to-Marigold Gradient]] - concept - apps/web/app/icon.svg
-- [[Web App Brand Favicon]] - concept - apps/web/app/icon.svg
+- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
+- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
+- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
 
 ## Live Query (requires Dataview plugin)
 

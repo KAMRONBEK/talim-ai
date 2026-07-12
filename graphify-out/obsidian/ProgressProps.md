@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/progress.tsx"
 type: "code"
-community: "Community 39"
+community: "Content Grid & Learner Dashboard"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Content_Grid__Learner_Dashboard
 ---
 
 # ProgressProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[progress.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard

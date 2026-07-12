@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Flashcards API"
+community: "Billing, Usage & Limits"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API
+  - community/Billing_Usage__Limits
 ---
 
 # AppError
@@ -61,4 +61,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

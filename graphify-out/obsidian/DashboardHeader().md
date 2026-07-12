@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "Community 43"
+community: "B2C Dashboard Shell"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/B2C_Dashboard_Shell
 ---
 
 # DashboardHeader()
@@ -19,4 +19,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useBilling()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell

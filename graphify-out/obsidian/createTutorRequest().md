@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tutorRequest.service.ts"
 type: "code"
-community: "Community 71"
+community: "Auth API Controller"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_71
+  - community/Auth_API_Controller
 ---
 
 # createTutorRequest()
@@ -17,4 +17,4 @@ tags:
 - [[tutorRequest.service.ts]] - `contains` [EXTRACTED]
 - [[upgradeToTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_71
+#graphify/code #graphify/EXTRACTED #community/Auth_API_Controller

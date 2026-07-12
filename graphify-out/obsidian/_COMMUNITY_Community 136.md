@@ -1,19 +1,17 @@
 ---
 type: community
-cohesion: 0.50
-members: 4
+cohesion: 1.00
+members: 2
 ---
 
 # Community 136
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 4 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 2 nodes
 
 ## Members
-- [[LOCALES]] - code - apps/admin/middleware.ts
-- [[config]] - code - apps/admin/middleware.ts
-- [[middleware()]] - code - apps/admin/middleware.ts
-- [[middleware.ts]] - code - apps/admin/middleware.ts
+- [[RootPage()]] - code - apps/admin/app/page.tsx
+- [[page.tsx_12]] - code - apps/admin/app/page.tsx
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Community 40"
+community: "Question Banks & Builders"
 location: "L170"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Question_Banks__Builders
 ---
 
 # buildManualStorage()
@@ -21,4 +21,4 @@ tags:
 - [[isAnswerableMultipleSelect()]] - `calls` [EXTRACTED]
 - [[patchQuestion()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders

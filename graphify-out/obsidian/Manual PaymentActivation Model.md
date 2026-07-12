@@ -1,12 +1,12 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Community 100"
+community: "Platform Docs & Deploy"
 location: "§1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Platform_Docs__Deploy
 ---
 
 # Manual Payment/Activation Model
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_100
+#graphify/concept #graphify/EXTRACTED #community/Platform_Docs__Deploy

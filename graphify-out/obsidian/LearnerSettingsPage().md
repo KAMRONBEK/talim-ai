@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/settings/page.tsx"
 type: "code"
-community: "Community 58"
+community: "Learner Account & Onboarding"
 location: "L12"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_58
+  - community/Learner_Account__Onboarding
 ---
 
 # LearnerSettingsPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_18]] - `contains` [EXTRACTED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_58
+#graphify/code #graphify/INFERRED #community/Learner_Account__Onboarding

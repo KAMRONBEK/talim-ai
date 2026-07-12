@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 31"
+community: "Content Grid & Learner Dashboard"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Content_Grid__Learner_Dashboard
 ---
 
 # ContentType
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard

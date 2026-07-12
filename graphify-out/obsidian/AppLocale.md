@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Content Hooks & Locale"
+community: "Content Grid & Learner Dashboard"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Hooks__Locale
+  - community/Content_Grid__Learner_Dashboard
 ---
 
 # AppLocale
@@ -62,4 +62,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale
+#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard

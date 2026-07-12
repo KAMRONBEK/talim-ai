@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Tutor Scope Classifier"
 location: "L133"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Tutor_Scope_Classifier
 ---
 
 # guessScopeHeuristically()
@@ -19,4 +19,4 @@ tags:
 - [[tokenize()]] - `calls` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classifier

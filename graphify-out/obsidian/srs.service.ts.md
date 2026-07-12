@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/srs.service.ts"
 type: "code"
-community: "Flashcards API"
+community: "Flashcards API & Prisma Seed"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API
+  - community/Flashcards_API__Prisma_Seed
 ---
 
 # srs.service.ts
@@ -26,4 +26,4 @@ tags:
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[reviewFlashcard()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed

@@ -1,17 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "qa"
+community: "QA Playbook & Coverage Map"
 tags:
   - graphify/document
-  - graphify/INFERRED
-  - community/qa
+  - graphify/EXTRACTED
+  - community/QA_Playbook__Coverage_Map
 ---
 
 # US-LEARNER-01: Sees only assigned materials (isolation)
 
 ## Connections
-- [[F8 (S2, fixed) inaccessible content hung on Loading forever — now redirects to role home]] - `references` [EXTRACTED]
-- [[Multi-tenant isolation (contentAccess.service.ts  assertCanAccessContent)]] - `conceptually_related_to` [INFERRED]
+- [[Edge case (EC) equivalence class]] - `references` [EXTRACTED]
+- [[NeverEver invariants (seat limit, deactivation, isolation, server-authoritative GAME)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/qa
+#graphify/document #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map

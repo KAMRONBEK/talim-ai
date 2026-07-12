@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/create-admin.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Flashcards API & Prisma Seed"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Flashcards_API__Prisma_Seed
 ---
 
 # create-admin.ts
@@ -17,4 +17,4 @@ tags:
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed

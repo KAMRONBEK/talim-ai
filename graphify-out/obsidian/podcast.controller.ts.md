@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Podcast API"
+community: "Media & Progress Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_API
+  - community/Media__Progress_Controllers
 ---
 
 # podcast.controller.ts
@@ -43,4 +43,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_API
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

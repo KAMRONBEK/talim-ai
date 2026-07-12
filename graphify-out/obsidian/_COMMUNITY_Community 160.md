@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 160
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[doppler-docker.sh]] - code - scripts/doppler-docker.sh
-- [[doppler-docker.sh script]] - code - scripts/doppler-docker.sh
+- [[docker-compose.prod.yml (production override)]] - document - docker-compose.prod.yml
 
 ## Live Query (requires Dataview plugin)
 

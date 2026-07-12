@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[RootLayout()_1]] - code - apps/web/app/layout.tsx
-- [[layout.tsx_7]] - code - apps/web/app/layout.tsx
+- [[config_5]] - code - apps/web/postcss.config.mjs
+- [[postcss.config.mjs_1]] - code - apps/web/postcss.config.mjs
 
 ## Live Query (requires Dataview plugin)
 

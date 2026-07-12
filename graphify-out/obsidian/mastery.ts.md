@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Community 57"
+community: "Section Mastery & Elo"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_57
+  - community/Section_Mastery__Elo
 ---
 
 # mastery.ts
@@ -27,4 +27,4 @@ tags:
 - [[resolveMasteryBand()]] - `contains` [EXTRACTED]
 - [[sigmoid()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_57
+#graphify/code #graphify/EXTRACTED #community/Section_Mastery__Elo

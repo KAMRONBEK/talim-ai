@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSidebarSheet.ts"
 type: "code"
-community: "Community 35"
+community: "Content & Flashcards Hooks"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Content__Flashcards_Hooks
 ---
 
 # useSidebarSheet()
@@ -20,4 +20,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

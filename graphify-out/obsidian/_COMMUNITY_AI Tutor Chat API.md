@@ -1,57 +1,41 @@
 ---
 type: community
-cohesion: 0.08
-members: 42
+cohesion: 0.15
+members: 26
 ---
 
 # AI Tutor Chat API
 
-**Cohesion:** 0.08 - loosely connected
-**Members:** 42 nodes
+**Cohesion:** 0.15 - loosely connected
+**Members:** 26 nodes
 
 ## Members
-- [[CLARIFICATION_TEXT]] - code - apps/api/src/lib/tutor-scope.ts
-- [[CYRILLIC_TO_LATIN]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[ClassifyTutorScopeInput]] - code - apps/api/src/lib/tutor-scope.ts
-- [[LATIN_TO_CYRILLIC]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[OUT_OF_SCOPE_FOLLOWUP]] - code - apps/api/src/lib/tutor-scope.ts
-- [[OUT_OF_SCOPE_PREFIX]] - code - apps/api/src/lib/tutor-scope.ts
-- [[STOP_WORDS]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeDecision]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeRoute]] - code - apps/api/src/lib/tutor-scope.ts
+- [[FIGURE_LABEL]] - code - apps/api/src/services/rag.service.ts
+- [[boundContextByTokens()]] - code - apps/api/src/services/rag.service.ts
+- [[buildContext()]] - code - apps/api/src/services/slides.service.ts
 - [[buildFigureContext()]] - code - apps/api/src/services/rag.service.ts
 - [[buildRagContext()]] - code - apps/api/src/services/rag.service.ts
 - [[chat.controller.ts]] - code - apps/api/src/controllers/chat.controller.ts
-- [[classifyTutorScope()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[decisionSchema]] - code - apps/api/src/lib/tutor-scope.ts
-- [[formatRecentTurns()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[chunkText()]] - code - apps/api/src/services/rag.service.ts
+- [[countTokens()]] - code - apps/api/src/services/rag.service.ts
 - [[getClarificationResponse()]] - code - apps/api/src/lib/tutor-scope.ts
 - [[getManimAsset()]] - code - apps/api/src/controllers/chat.controller.ts
 - [[getOrCreateSession()]] - code - apps/api/src/controllers/chat.controller.ts
 - [[getOutOfScopeResponse()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[guessScopeHeuristically()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[isTutorClarification()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[isTutorScopeRefusal()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[looksLikeFollowUp()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[main()_6]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
+- [[getRagChunkLabel()]] - code - apps/api/src/lib/locale-prompts.ts
 - [[mapChatMessage()]] - code - apps/api/src/controllers/chat.controller.ts
 - [[mergeSimilarChunks()]] - code - apps/api/src/services/rag.service.ts
-- [[overlapCount()]] - code - apps/api/src/lib/tutor-scope.ts
+- [[rag.service.ts]] - code - apps/api/src/services/rag.service.ts
 - [[rerank()]] - code - apps/api/src/services/rag.service.ts
 - [[resolveManimAsset()]] - code - apps/api/src/jobs/renderManim.job.ts
-- [[scriptVariants()]] - code - apps/api/src/lib/uzbek-translit.ts
 - [[searchSimilarChunks()]] - code - apps/api/src/services/rag.service.ts
 - [[searchSimilarFigures()]] - code - apps/api/src/services/rag.service.ts
+- [[splitByTokens()]] - code - apps/api/src/services/rag.service.ts
 - [[streamChat()]] - code - apps/api/src/controllers/chat.controller.ts
 - [[streamSchema]] - code - apps/api/src/controllers/chat.controller.ts
 - [[streamStaticAssistantResponse()]] - code - apps/api/src/controllers/chat.controller.ts
-- [[toCyrillic()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[toLatin()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tokenize()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[transliterate()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tutor-scope-smoke.ts]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
-- [[tutor-scope.ts]] - code - apps/api/src/lib/tutor-scope.ts
-- [[uzbek-translit.ts]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[toBlocks()]] - code - apps/api/src/services/rag.service.ts
+- [[tokenTail()]] - code - apps/api/src/services/rag.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -61,28 +45,33 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 13 edges to [[_COMMUNITY_Community 32]]
-- 6 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
-- 5 edges to [[_COMMUNITY_Assessment API Controllers]]
-- 5 edges to [[_COMMUNITY_Podcast API]]
-- 5 edges to [[_COMMUNITY_Podcast Generation & Prompts]]
-- 5 edges to [[_COMMUNITY_Community 73]]
-- 3 edges to [[_COMMUNITY_Admin & Events Controllers]]
-- 3 edges to [[_COMMUNITY_Flashcards API]]
-- 3 edges to [[_COMMUNITY_Community 46]]
-- 3 edges to [[_COMMUNITY_Content Hooks & Locale]]
-- 2 edges to [[_COMMUNITY_Admin Tenants API]]
-- 2 edges to [[_COMMUNITY_Shared Types]]
-- 2 edges to [[_COMMUNITY_Community 83]]
-- 2 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 10 edges to [[_COMMUNITY_Tutor Scope Classifier]]
+- 9 edges to [[_COMMUNITY_Config, Pricing & Embeddings]]
+- 9 edges to [[_COMMUNITY_Media & Progress Controllers]]
+- 7 edges to [[_COMMUNITY_Locale AI Prompts]]
+- 6 edges to [[_COMMUNITY_Flashcards API & Prisma Seed]]
+- 6 edges to [[_COMMUNITY_Tutor Visual Tools]]
+- 6 edges to [[_COMMUNITY_Community 95]]
+- 5 edges to [[_COMMUNITY_Background Jobs & Queues]]
+- 5 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 4 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 4 edges to [[_COMMUNITY_Content API Controller]]
+- 3 edges to [[_COMMUNITY_Job Registration & Manim]]
+- 3 edges to [[_COMMUNITY_Assessment & Tutor-Request Controllers]]
+- 3 edges to [[_COMMUNITY_Podcast Generation & Prompts]]
+- 2 edges to [[_COMMUNITY_Billing, Usage & Limits]]
+- 2 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 2 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
 - 2 edges to [[_COMMUNITY_Assessments Service]]
-- 1 edge to [[_COMMUNITY_Community 64]]
-- 1 edge to [[_COMMUNITY_Community 41]]
-- 1 edge to [[_COMMUNITY_Slide Deck Prompts]]
+- 1 edge to [[_COMMUNITY_Fonts & Layout]]
+- 1 edge to [[_COMMUNITY_Admin Content & Audit]]
+- 1 edge to [[_COMMUNITY_AI Provider Service]]
+- 1 edge to [[_COMMUNITY_API Middleware]]
+- 1 edge to [[_COMMUNITY_Section Service]]
 
 ## Top bridge nodes
-- [[chat.controller.ts]] - degree 48, connects to 14 communities
-- [[buildRagContext()]] - degree 12, connects to 7 communities
+- [[chat.controller.ts]] - degree 48, connects to 15 communities
+- [[rag.service.ts]] - degree 40, connects to 14 communities
+- [[buildRagContext()]] - degree 12, connects to 6 communities
 - [[streamChat()]] - degree 16, connects to 4 communities
-- [[tutor-scope.ts]] - degree 26, connects to 3 communities
-- [[searchSimilarChunks()]] - degree 8, connects to 2 communities
+- [[searchSimilarChunks()]] - degree 8, connects to 4 communities

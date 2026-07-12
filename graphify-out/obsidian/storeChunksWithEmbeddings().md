@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Community 32"
+community: "Content API Controller"
 location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Content_API_Controller
 ---
 
 # storeChunksWithEmbeddings()
@@ -19,4 +19,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controller

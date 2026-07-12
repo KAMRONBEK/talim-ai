@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLANS.md"
 type: "document"
-community: "Community 62"
+community: "Plans & Epics Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Plans__Epics_Docs
 ---
 
 # Product Plans Roadmap
@@ -24,4 +24,4 @@ tags:
 - [[Suggested Build Order]] - `references` [EXTRACTED]
 - [[User Types Model]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_62
+#graphify/document #graphify/EXTRACTED #community/Plans__Epics_Docs

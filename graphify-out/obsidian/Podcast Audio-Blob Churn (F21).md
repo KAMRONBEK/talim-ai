@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "concept"
-community: "Community 44"
+community: "Visual QA Report"
 location: "Run 5"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_44
+  - community/Visual_QA_Report
 ---
 
 # Podcast Audio-Blob Churn (F21)
@@ -15,4 +15,4 @@ tags:
 - [[Overnight Visual QA Report]] - `references` [EXTRACTED]
 - [[Podcast Generation (TTS + Synced Transcript)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_44
+#graphify/concept #graphify/INFERRED #community/Visual_QA_Report

@@ -1,18 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 3
+members: 2
 ---
 
 # Community 141
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[buildTutorContextBlock()]] - code - apps/api/src/lib/tutor-prompt.ts
-- [[buildTutorSystemMessage()_1]] - code - apps/api/src/lib/tutor-prompt.ts
-- [[tutor-prompt.ts]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[RootLayout()_1]] - code - apps/web/app/layout.tsx
+- [[layout.tsx_7]] - code - apps/web/app/layout.tsx
 
 ## Live Query (requires Dataview plugin)
 

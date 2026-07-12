@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Billing, Usage & Limits"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Billing_Usage__Limits
 ---
 
 # resolveTenantUpgradePlanCode()
@@ -16,4 +16,4 @@ tags:
 - [[getFileLimitsForTenant()]] - `calls` [EXTRACTED]
 - [[tenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Tenant Dashboard & Shell"
+community: "Account & Settings UI"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Shell
+  - community/Account__Settings_UI
 ---
 
 # useTenantContents()
@@ -27,4 +27,4 @@ tags:
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

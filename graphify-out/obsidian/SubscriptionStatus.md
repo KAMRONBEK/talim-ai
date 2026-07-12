@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 38"
+community: "Community 88"
 location: "L79"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/Community_88
 ---
 
 # SubscriptionStatus
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/Community_88

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Community 83"
+community: "Locale AI Prompts"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_83
+  - community/Locale_AI_Prompts
 ---
 
 # generateSummaryText()
@@ -23,4 +23,4 @@ tags:
 - [[sanitizeSummaryOutput()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_83
+#graphify/code #graphify/EXTRACTED #community/Locale_AI_Prompts

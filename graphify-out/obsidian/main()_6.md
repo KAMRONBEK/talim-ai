@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/tutor-scope-smoke.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Tutor Scope Classifier"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Tutor_Scope_Classifier
 ---
 
 # main()
@@ -15,4 +15,4 @@ tags:
 - [[classifyTutorScope()]] - `calls` [EXTRACTED]
 - [[tutor-scope-smoke.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classifier

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Dashboard & Shell"
+community: "Account & Settings UI"
 location: "L150"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Shell
+  - community/Account__Settings_UI
 ---
 
 # useTenantAssessments()
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

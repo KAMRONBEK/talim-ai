@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Assessments Service"
+community: "Question Banks & Builders"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Question_Banks__Builders
 ---
 
 # banks.ts
@@ -54,4 +54,4 @@ tags:
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 - [[typesFromStyle()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders

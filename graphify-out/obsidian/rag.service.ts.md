@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Community 32"
+community: "AI Tutor Chat API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/AI_Tutor_Chat_API
 ---
 
 # rag.service.ts
@@ -53,4 +53,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[uzbek-translit.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-1-subscriptions-billing.md"
 type: "document"
-community: "Community 62"
+community: "Plans & Epics Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Plans__Epics_Docs
 ---
 
 # Epic 1 — Subscriptions & Billing
@@ -19,4 +19,4 @@ tags:
 - [[Quota Enforcement Middleware (enforceQuota)]] - `references` [EXTRACTED]
 - [[Stripe Integration]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_62
+#graphify/document #graphify/EXTRACTED #community/Plans__Epics_Docs

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/flashcards/page.tsx"
 type: "code"
-community: "Community 66"
+community: "Content & Flashcards Hooks"
 location: "L243"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/Content__Flashcards_Hooks
 ---
 
 # FlashcardsPage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_30]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

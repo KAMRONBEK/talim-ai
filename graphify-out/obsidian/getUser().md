@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/users.controller.ts"
 type: "code"
-community: "Admin Tenants API"
+community: "Admin Content & Audit"
 location: "L146"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants_API
+  - community/Admin_Content__Audit
 ---
 
 # getUser()
@@ -22,4 +22,4 @@ tags:
 - [[resolveTenantIdForUser()]] - `calls` [EXTRACTED]
 - [[users.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

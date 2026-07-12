@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/selection-ask.tsx"
 type: "code"
-community: "Community 84"
+community: "Summary & Rich Text"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/Summary__Rich_Text
 ---
 
 # TipState
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[selection-ask.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_84
+#graphify/code #graphify/EXTRACTED #community/Summary__Rich_Text

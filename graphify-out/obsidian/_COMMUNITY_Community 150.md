@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[api]] - code - apps/admin/lib/api.ts
-- [[api.ts]] - code - apps/admin/lib/api.ts
+- [[doppler-docker.sh]] - code - scripts/doppler-docker.sh
+- [[doppler-docker.sh script]] - code - scripts/doppler-docker.sh
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Community 90"
+community: "Chat Message Rendering"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_90
+  - community/Chat_Message_Rendering
 ---
 
 # LocalChatMessage
@@ -15,4 +15,4 @@ tags:
 - [[MessageRole]] - `references` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_90
+#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering

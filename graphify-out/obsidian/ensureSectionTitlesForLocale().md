@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Podcast API"
+community: "Section Service"
 location: "L172"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_API
+  - community/Section_Service
 ---
 
 # ensureSectionTitlesForLocale()
@@ -18,4 +18,4 @@ tags:
 - [[section.service.ts]] - `contains` [EXTRACTED]
 - [[translateSectionTitles()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_API
+#graphify/code #graphify/EXTRACTED #community/Section_Service

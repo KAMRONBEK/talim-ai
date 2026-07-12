@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Shared UI Primitives"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Shared_UI_Primitives
 ---
 
 # Input
@@ -40,4 +40,4 @@ tags:
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

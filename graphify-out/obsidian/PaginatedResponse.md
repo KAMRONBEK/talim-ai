@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Dashboard UI"
+community: "Admin Analytics"
 location: "L1021"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_UI
+  - community/Admin_Analytics
 ---
 
 # PaginatedResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

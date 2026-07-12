@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "Community 34"
+community: "Content Assignment & Hooks"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Content_Assignment__Hooks
 ---
 
 # ContentStatusGate()
@@ -16,4 +16,4 @@ tags:
 - [[content-status-gate.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

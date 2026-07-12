@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "paper"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "header research base, §3"
 tags:
   - graphify/paper
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Moodle grading tolerances / QTI partial credit (reference)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Partial Credit Rules (creditFraction)]] - `cites` [EXTRACTED]
 
-#graphify/paper #graphify/EXTRACTED #community/Community_50
+#graphify/paper #graphify/EXTRACTED #community/Question_Engine_Plan

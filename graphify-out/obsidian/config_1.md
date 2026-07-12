@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/postcss.config.mjs"
 type: "code"
-community: "Community 145"
+community: "Community 134"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_145
+  - community/Community_134
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[postcss.config.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_145
+#graphify/code #graphify/EXTRACTED #community/Community_134

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/progress/page.tsx"
 type: "code"
-community: "Community 58"
+community: "Learner Account & Onboarding"
 location: "L31"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_58
+  - community/Learner_Account__Onboarding
 ---
 
 # LearnerProgressPage()
@@ -18,4 +18,4 @@ tags:
 - [[useLearnerProgress()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_58
+#graphify/code #graphify/INFERRED #community/Learner_Account__Onboarding

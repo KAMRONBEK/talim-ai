@@ -1,17 +1,19 @@
 ---
-source_file: ".claude/skills/qa-run/SKILL.md"
+source_file: "docs/qa/user-stories.md"
 type: "concept"
-community: "qa run"
+community: "QA Playbook & Coverage Map"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/qa_run
+  - community/QA_Playbook__Coverage_Map
 ---
 
-# Findings Ledger (F<n>)
+# Findings ledger (F<n>)
 
 ## Connections
-- [[Edge Case (EC) Traceability]] - `conceptually_related_to` [EXTRACTED]
-- [[user-stories.md (durable spec + results ledger)]] - `references` [EXTRACTED]
+- [[Finding self-verification protocol (§E)]] - `references` [EXTRACTED]
+- [[Observations ledger (On)]] - `semantically_similar_to` [INFERRED]
+- [[US-IND-08 Usage limit - subscription promotion modal]] - `references` [EXTRACTED]
+- [[user-stories.md — EC spec + findings ledger]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/qa_run
+#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map

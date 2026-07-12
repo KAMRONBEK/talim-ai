@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useReparseContent.ts"
 type: "code"
-community: "Community 34"
+community: "API Endpoints & Media Hooks"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # useReparseContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[useReparseContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

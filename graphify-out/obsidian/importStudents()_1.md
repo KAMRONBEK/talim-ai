@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Community 75"
+community: "Student Provisioning & CSV"
 location: "L322"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_75
+  - community/Student_Provisioning__CSV
 ---
 
 # importStudents()
@@ -17,4 +17,4 @@ tags:
 - [[provisionStudent()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_75
+#graphify/code #graphify/EXTRACTED #community/Student_Provisioning__CSV

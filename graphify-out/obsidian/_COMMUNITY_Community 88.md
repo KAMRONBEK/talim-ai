@@ -1,28 +1,26 @@
 ---
 type: community
-cohesion: 0.24
-members: 13
+cohesion: 0.25
+members: 11
 ---
 
 # Community 88
 
-**Cohesion:** 0.24 - loosely connected
-**Members:** 13 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[AI_PREFIX_PATTERNS_1]] - code - apps/web/lib/format-summary.ts
-- [[Block]] - code - apps/web/components/learning/summary-text.tsx
-- [[Section]] - code - apps/web/components/learning/summary-text.tsx
-- [[SummaryText()]] - code - apps/web/components/learning/summary-text.tsx
-- [[asHeading()]] - code - apps/web/components/learning/summary-text.tsx
-- [[countWords()]] - code - apps/web/components/learning/summary-text.tsx
-- [[format-summary.ts]] - code - apps/web/lib/format-summary.ts
-- [[formatSummaryForDisplay()]] - code - apps/web/lib/format-summary.ts
-- [[parseSummary()]] - code - apps/web/components/learning/summary-text.tsx
-- [[splitLead()]] - code - apps/web/components/learning/summary-text.tsx
-- [[splitSummaryParagraphs()]] - code - apps/web/lib/format-summary.ts
-- [[stripInline()]] - code - apps/web/components/learning/summary-text.tsx
-- [[summary-text.tsx]] - code - apps/web/components/learning/summary-text.tsx
+- [[PLAN_LABELS]] - code - apps/admin/lib/plan.ts
+- [[STATUS_OPTIONS_1]] - code - apps/admin/app/(admin)/tenants/[id]/page.tsx
+- [[SubscriptionStatus]] - code - packages/types/index.ts
+- [[TENANT_PLANS]] - code - apps/admin/app/(admin)/tenants/[id]/page.tsx
+- [[TenantDetailPage()]] - code - apps/admin/app/(admin)/tenants/[id]/page.tsx
+- [[formatLimit()]] - code - apps/admin/app/(admin)/tenants/[id]/page.tsx
+- [[page.tsx_5]] - code - apps/admin/app/(admin)/tenants/[id]/page.tsx
+- [[plan.ts]] - code - apps/admin/lib/plan.ts
+- [[planLabel()]] - code - apps/admin/lib/plan.ts
+- [[useAdminTenant()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useUpdateTenant()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,14 +30,18 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Community 48]]
-- 2 edges to [[_COMMUNITY_Community 34]]
-- 2 edges to [[_COMMUNITY_Community 66]]
-- 2 edges to [[_COMMUNITY_Community 84]]
-- 2 edges to [[_COMMUNITY_Slide Deck UI]]
-- 1 edge to [[_COMMUNITY_Community 39]]
-- 1 edge to [[_COMMUNITY_Content Access & Mastery UI]]
+- 6 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 6 edges to [[_COMMUNITY_Admin Users & Tenants UI]]
+- 5 edges to [[_COMMUNITY_Subscription Editor UI]]
+- 3 edges to [[_COMMUNITY_Admin Analytics]]
+- 2 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 1 edge to [[_COMMUNITY_Account & Settings UI]]
+- 1 edge to [[_COMMUNITY_Billing, Usage & Limits]]
+- 1 edge to [[_COMMUNITY_Community 110]]
 
 ## Top bridge nodes
-- [[summary-text.tsx]] - degree 17, connects to 6 communities
-- [[SummaryText()]] - degree 7, connects to 5 communities
+- [[page.tsx_5]] - degree 18, connects to 5 communities
+- [[planLabel()]] - degree 9, connects to 3 communities
+- [[SubscriptionStatus]] - degree 4, connects to 3 communities
+- [[useAdminTenant()]] - degree 5, connects to 2 communities
+- [[useUpdateTenant()]] - degree 5, connects to 2 communities

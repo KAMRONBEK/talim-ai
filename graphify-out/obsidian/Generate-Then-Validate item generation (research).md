@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "paper"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "header research base"
 tags:
   - graphify/paper
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Generate-Then-Validate item generation (research)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `cites` [EXTRACTED]
 
-#graphify/paper #graphify/EXTRACTED #community/Community_50
+#graphify/paper #graphify/EXTRACTED #community/Question_Engine_Plan

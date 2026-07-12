@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "§1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Unified Generation Parameters (count/types/depth/scope)
@@ -18,4 +18,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[QuizKind QUICK Retirement]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_50
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Plan

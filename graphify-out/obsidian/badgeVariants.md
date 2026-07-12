@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Community 39"
+community: "Shared UI Primitives"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Shared_UI_Primitives
 ---
 
 # badgeVariants
@@ -16,4 +16,4 @@ tags:
 - [[badge.tsx]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

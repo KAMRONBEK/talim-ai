@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Assessment Pages & Wizard"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Assessment_Pages__Wizard
 ---
 
 # QuestionType
@@ -21,4 +21,4 @@ tags:
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/quick-action-cards.tsx"
 type: "code"
-community: "Community 54"
+community: "Dialog & Button UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Dialog__Button_UI
 ---
 
 # quick-action-cards.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI

@@ -1,54 +1,47 @@
 ---
 type: community
-cohesion: 0.10
-members: 39
+cohesion: 0.12
+members: 32
 ---
 
 # Content Assignment & Hooks
 
-**Cohesion:** 0.10 - loosely connected
-**Members:** 39 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 32 nodes
 
 ## Members
-- [[.constructor()_5]] - code - apps/web/lib/authenticatedBlob.ts
 - [[AssignContentPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[BlobFetchError]] - code - apps/web/lib/authenticatedBlob.ts
-- [[CenteredMessage()]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[CenteredMessage()_1]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
-- [[EmptyState()]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[EmptyState()_1]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
-- [[FetchBlobOptions]] - code - apps/web/lib/authenticatedBlob.ts
-- [[GeneratingState()]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[GeneratingState()_1]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
+- [[Content]] - code - packages/types/index.ts
+- [[ContentState]] - code - apps/web/store/useContentStore.ts
+- [[ContentStatusGate()]] - code - apps/web/components/content/content-status-gate.tsx
+- [[ContentStatusGateProps]] - code - apps/web/components/content/content-status-gate.tsx
+- [[DeleteContentDialog()]] - code - apps/web/components/content/delete-content-dialog.tsx
 - [[JobStreamState]] - code - apps/web/store/useJobStreamStore.ts
-- [[MaterialMediaPanel()]] - code - apps/web/components/tenant/material-media-panel.tsx
-- [[SectionReader()]] - code - apps/web/components/learning/section-reader.tsx
-- [[SlidesInner()]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[SlidesPage()]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[TenantMaterialDetailPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx
-- [[TileState]] - code - apps/web/components/tenant/material-media-panel.tsx
-- [[VideoInner()]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
-- [[VideoPage()]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
-- [[authenticatedBlob.ts]] - code - apps/web/lib/authenticatedBlob.ts
-- [[fetchAuthenticatedBlob()]] - code - apps/web/lib/authenticatedBlob.ts
-- [[isRegen()]] - code - apps/web/components/tenant/material-media-panel.tsx
-- [[material-media-panel.tsx]] - code - apps/web/components/tenant/material-media-panel.tsx
+- [[LIST_KEYS]] - code - apps/web/lib/content-cache.ts
+- [[ListSnapshot]] - code - apps/web/lib/content-cache.ts
+- [[ProcessingCard()]] - code - apps/web/components/content/content-status-gate.tsx
+- [[RecentContentGridProps]] - code - apps/web/components/dashboard/recent-content-grid.tsx
+- [[content-cache.ts]] - code - apps/web/lib/content-cache.ts
+- [[content-status-gate.tsx]] - code - apps/web/components/content/content-status-gate.tsx
+- [[contentApiBase()]] - code - apps/web/hooks/useContent.ts
+- [[invalidateContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[listHasProcessing()]] - code - apps/web/lib/content-cache.ts
 - [[page.tsx_22]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[page.tsx_33]] - code - apps/web/app/[locale]/content/[id]/slides/page.tsx
-- [[page.tsx_34]] - code - apps/web/app/[locale]/content/[id]/video/page.tsx
-- [[slidesKey()]] - code - apps/web/hooks/useSlides.ts
-- [[useGenerateSlides()]] - code - apps/web/hooks/useSlides.ts
-- [[useGenerateVideo()]] - code - apps/web/hooks/useVideo.ts
+- [[prependContentToLists()]] - code - apps/web/lib/content-cache.ts
+- [[removeContentFromLists()]] - code - apps/web/lib/content-cache.ts
+- [[restoreContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[snapshotContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[useContent.ts]] - code - apps/web/hooks/useContent.ts
+- [[useContentStore]] - code - apps/web/store/useContentStore.ts
+- [[useContentStore.ts]] - code - apps/web/store/useContentStore.ts
+- [[useDeleteContent()_1]] - code - apps/web/hooks/useContent.ts
+- [[useDeleteTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
 - [[useJobStreamStore]] - code - apps/web/store/useJobStreamStore.ts
 - [[useJobStreamStore.ts]] - code - apps/web/store/useJobStreamStore.ts
-- [[useSections()]] - code - apps/web/hooks/useSections.ts
-- [[useSections.ts]] - code - apps/web/hooks/useSections.ts
-- [[useSlides()]] - code - apps/web/hooks/useSlides.ts
-- [[useSlides.ts]] - code - apps/web/hooks/useSlides.ts
+- [[useRetryContent()_1]] - code - apps/web/hooks/useContent.ts
+- [[useRetryTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
 - [[useTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useVideo()]] - code - apps/web/hooks/useVideo.ts
-- [[useVideo.ts]] - code - apps/web/hooks/useVideo.ts
-- [[videoKey()]] - code - apps/web/hooks/useVideo.ts
+- [[useTenantContent.ts]] - code - apps/web/hooks/useTenantContent.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -58,31 +51,25 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 30 edges to [[_COMMUNITY_Content Hooks & Locale]]
-- 14 edges to [[_COMMUNITY_Community 34]]
-- 11 edges to [[_COMMUNITY_Content Access & Mastery UI]]
-- 8 edges to [[_COMMUNITY_Community 59]]
-- 7 edges to [[_COMMUNITY_Community 84]]
-- 6 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 6 edges to [[_COMMUNITY_Community 66]]
-- 5 edges to [[_COMMUNITY_Community 31]]
-- 5 edges to [[_COMMUNITY_Community 51]]
-- 4 edges to [[_COMMUNITY_Slide Deck UI]]
-- 4 edges to [[_COMMUNITY_Community 86]]
-- 3 edges to [[_COMMUNITY_Community 82]]
-- 3 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 3 edges to [[_COMMUNITY_Community 48]]
-- 3 edges to [[_COMMUNITY_Shared Types]]
-- 2 edges to [[_COMMUNITY_Account & Login UI]]
-- 2 edges to [[_COMMUNITY_Community 39]]
-- 2 edges to [[_COMMUNITY_Community 106]]
-- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
-- 1 edge to [[_COMMUNITY_Community 54]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 21 edges to [[_COMMUNITY_Content & Flashcards Hooks]]
+- 10 edges to [[_COMMUNITY_Account & Settings UI]]
+- 10 edges to [[_COMMUNITY_Dialog & Button UI]]
+- 8 edges to [[_COMMUNITY_B2C Dashboard Shell]]
+- 7 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
+- 6 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 5 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 4 edges to [[_COMMUNITY_Auth & App Shell UI]]
+- 4 edges to [[_COMMUNITY_Content Workspace & Chat]]
+- 4 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 3 edges to [[_COMMUNITY_API Endpoints & Media Hooks]]
+- 3 edges to [[_COMMUNITY_Providers & Job Events]]
+- 1 edge to [[_COMMUNITY_Learner Account & Onboarding]]
+- 1 edge to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 1 edge to [[_COMMUNITY_Slide Deck UI]]
 
 ## Top bridge nodes
-- [[page.tsx_34]] - degree 26, connects to 8 communities
-- [[page.tsx_33]] - degree 17, connects to 7 communities
-- [[useJobStreamStore]] - degree 17, connects to 7 communities
-- [[material-media-panel.tsx]] - degree 21, connects to 6 communities
-- [[useSections.ts]] - degree 13, connects to 6 communities
+- [[useContent.ts]] - degree 35, connects to 11 communities
+- [[content-status-gate.tsx]] - degree 14, connects to 7 communities
+- [[useTenantContent.ts]] - degree 25, connects to 5 communities
+- [[useJobStreamStore]] - degree 17, connects to 5 communities
+- [[Content]] - degree 16, connects to 5 communities

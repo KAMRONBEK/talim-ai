@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "Content & Flashcards Hooks"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content__Flashcards_Hooks
 ---
 
 # MaterialMediaPanel()
@@ -26,4 +26,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useVideo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

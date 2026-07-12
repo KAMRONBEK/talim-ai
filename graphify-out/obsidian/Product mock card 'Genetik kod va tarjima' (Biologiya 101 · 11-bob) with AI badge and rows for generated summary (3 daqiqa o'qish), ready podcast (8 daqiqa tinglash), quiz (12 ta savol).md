@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg"
 type: "concept"
-community: "Community 96"
+community: "Community 91"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_96
+  - community/Community_91
 ---
 
 # Product mock card: 'Genetik kod va tarjima' (Biologiya 101 · 11-bob) with AI badge and rows for generated summary (3 daqiqa o'qish), ready podcast (8 daqiqa tinglash), quiz (12 ta savol)
@@ -15,4 +15,4 @@ tags:
 - [[Marketing message upload any material (PDFvideoslideslecture) and get AI summaries, podcasts, quizzes, and a personal AI tutor]] - `conceptually_related_to` [INFERRED]
 - [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_96
+#graphify/concept #graphify/EXTRACTED #community/Community_91

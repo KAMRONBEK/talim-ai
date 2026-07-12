@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "Community 37"
+community: "PDF Viewer & Selection"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/PDF_Viewer__Selection
 ---
 
 # PdfViewer.tsx
@@ -35,4 +35,4 @@ tags:
 - [[renderManualTextLayer()]] - `contains` [EXTRACTED]
 - [[renderTextLayer()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/PDF_Viewer__Selection

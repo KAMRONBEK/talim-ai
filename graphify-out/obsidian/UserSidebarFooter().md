@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Community 33"
+community: "Auth & App Shell UI"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Auth__App_Shell_UI
 ---
 
 # UserSidebarFooter()
@@ -22,4 +22,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

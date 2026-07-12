@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "Community 85"
+community: "Assessments Service"
 location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Assessments_Service
 ---
 
 # submitLearnerAssessment()
@@ -20,4 +20,4 @@ tags:
 - [[learner.ts]] - `contains` [EXTRACTED]
 - [[recordAnswers()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

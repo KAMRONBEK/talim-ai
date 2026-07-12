@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/index.ts"
 type: "code"
-community: "Flashcards Generation & Jobs"
+community: "Job Registration & Manim"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Generation__Jobs
+  - community/Job_Registration__Manim
 ---
 
 # bootstrap()
@@ -20,4 +20,4 @@ tags:
 - [[registerProcessContentJob()]] - `calls` [EXTRACTED]
 - [[registerRenderManimJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs
+#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim

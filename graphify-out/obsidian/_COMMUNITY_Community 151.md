@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[makeQueryClient()]] - code - apps/admin/lib/queryClient.ts
-- [[queryClient.ts]] - code - apps/admin/lib/queryClient.ts
+- [[doppler-docker-restart.sh]] - code - scripts/doppler-docker-restart.sh
+- [[doppler-docker-restart.sh script]] - code - scripts/doppler-docker-restart.sh
 
 ## Live Query (requires Dataview plugin)
 

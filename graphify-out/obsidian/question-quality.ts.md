@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-quality.ts"
 type: "code"
-community: "Community 40"
+community: "Question Post-processing"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Question_Post-processing
 ---
 
 # question-quality.ts
@@ -17,4 +17,4 @@ tags:
 - [[normalizeText()]] - `contains` [EXTRACTED]
 - [[question-postprocess.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Question_Post-processing

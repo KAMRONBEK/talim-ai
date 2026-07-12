@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/impersonation.ts"
 type: "code"
-community: "Community 32"
+community: "Config, Pricing & Embeddings"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Config_Pricing__Embeddings
 ---
 
 # impersonation.ts
@@ -18,4 +18,4 @@ tags:
 - [[signImpersonationToken()]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings

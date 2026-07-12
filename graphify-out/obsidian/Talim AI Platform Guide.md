@@ -1,11 +1,11 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "document"
-community: "Community 100"
+community: "Platform Docs & Deploy"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Platform_Docs__Deploy
 ---
 
 # Talim AI Platform Guide
@@ -20,4 +20,4 @@ tags:
 - [[UserRole Model (ADMIN  TENANT_OWNER  TENANT_LEARNER  INDIVIDUAL)]] - `references` [EXTRACTED]
 - [[processContent Ingestion Job]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_100
+#graphify/document #graphify/EXTRACTED #community/Platform_Docs__Deploy

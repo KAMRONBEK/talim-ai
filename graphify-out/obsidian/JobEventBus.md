@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "Community 91"
+community: "Providers & Job Events"
 location: "L66"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_91
+  - community/Providers__Job_Events
 ---
 
 # JobEventBus
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[jobEvents.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_91
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

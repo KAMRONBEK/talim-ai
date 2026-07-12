@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/content.routes.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # content.routes.ts
@@ -36,4 +36,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

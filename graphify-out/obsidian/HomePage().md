@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/page.tsx"
 type: "code"
-community: "Community 30"
+community: "Marketing Landing UI"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/Marketing_Landing_UI
 ---
 
 # HomePage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_38]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI

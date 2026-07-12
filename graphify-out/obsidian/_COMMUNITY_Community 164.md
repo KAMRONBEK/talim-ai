@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[QA with Playwright MCP]] - document - docs/QA.md
+- [[next-env.d.ts_1]] - code - apps/web/next-env.d.ts
 
 ## Live Query (requires Dataview plugin)
 

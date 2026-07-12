@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useUpgradeModal.ts"
 type: "code"
-community: "Community 43"
+community: "Providers & Job Events"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Providers__Job_Events
 ---
 
 # UpgradeModalState
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useUpgradeModal.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

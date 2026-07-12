@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Community 68"
+community: "Web Component Config"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_68
+  - community/Web_Component_Config
 ---
 
 # tsx
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[components.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_68
+#graphify/code #graphify/EXTRACTED #community/Web_Component_Config

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "Content Hooks & Locale"
+community: "Content & Flashcards Hooks"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Hooks__Locale
+  - community/Content__Flashcards_Hooks
 ---
 
 # useRegenerateEpisode()
@@ -17,4 +17,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[usePodcast.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

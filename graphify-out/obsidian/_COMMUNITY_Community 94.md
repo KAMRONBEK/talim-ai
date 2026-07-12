@@ -1,26 +1,25 @@
 ---
 type: community
-cohesion: 0.25
-members: 11
+cohesion: 0.24
+members: 10
 ---
 
 # Community 94
 
-**Cohesion:** 0.25 - loosely connected
-**Members:** 11 nodes
+**Cohesion:** 0.24 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[BoolBadge()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[ContentDetailModal()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[ContentPage()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[DetailStat()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[errorMessage()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[page.tsx_1]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[statusPillClass()]] - code - apps/admin/app/(admin)/content/page.tsx
-- [[useAdminContentDetail()]] - code - apps/admin/hooks/useAdmin.ts
-- [[useAdminContents()]] - code - apps/admin/hooks/useAdmin.ts
-- [[useDeleteContent()]] - code - apps/admin/hooks/useAdmin.ts
-- [[useRetryContent()]] - code - apps/admin/hooks/useAdmin.ts
+- [[11-Type Question Grading Engine (packagestypesgrading.ts)]] - concept - docs/FEATURES.md
+- [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - concept - docs/plans/question-engine.md
+- [[Elo-KT Section Mastery]] - concept - docs/FEATURES.md
+- [[Evidence-Gated Mastery Bands]] - concept - docs/plans/question-engine.md
+- [[Flashcards as First-Class Question Type]] - concept - docs/FEATURES.md
+- [[Pelánek Elo mastery modeling (research)]] - paper - docs/plans/question-engine.md
+- [[Practice Generator (Unified Questions + Flashcards)]] - concept - docs/FEATURES.md
+- [[Question Banks (AI-Generated + Manual, Approve Flow)]] - concept - docs/FEATURES.md
+- [[Unified Grading Module (packagestypesgrading.ts)]] - concept - docs/plans/question-engine.md
+- [[Uzbek Apostrophe Normalization]] - concept - docs/plans/question-engine.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -30,13 +29,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Admin Dashboard UI]]
-- 4 edges to [[_COMMUNITY_Account & Login UI]]
-- 2 edges to [[_COMMUNITY_Community 39]]
+- 9 edges to [[_COMMUNITY_Question Engine Plan]]
+- 5 edges to [[_COMMUNITY_Features Docs]]
+- 2 edges to [[_COMMUNITY_Visual QA Report]]
 
 ## Top bridge nodes
-- [[page.tsx_1]] - degree 17, connects to 3 communities
-- [[useAdminContentDetail()]] - degree 3, connects to 1 community
-- [[useAdminContents()]] - degree 3, connects to 1 community
-- [[useDeleteContent()]] - degree 3, connects to 1 community
-- [[useRetryContent()]] - degree 3, connects to 1 community
+- [[Practice Generator (Unified Questions + Flashcards)]] - degree 7, connects to 3 communities
+- [[Uzbek Apostrophe Normalization]] - degree 4, connects to 2 communities
+- [[Flashcards as First-Class Question Type]] - degree 3, connects to 2 communities
+- [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - degree 6, connects to 1 community
+- [[11-Type Question Grading Engine (packagestypesgrading.ts)]] - degree 5, connects to 1 community

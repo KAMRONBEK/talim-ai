@@ -14,6 +14,11 @@
 # Usage:   pnpm qa:overnight
 # Tunables: QA_BUDGET (USD, default 120)   QA_TURNS (default 2500)
 #          QA_REPORT_ONLY=1  → find + report only, fix nothing (safer first pass)
+#          QA_FOCUS="messaging,csv-import,US-OWNER-21"  → seed the charter selector (areas/US-ids)
+#          QA_TOUR="saboteur"     → pin one tour lens for the night (see human-qa-playbook §2.2)
+#          QA_PERSONA="Rustam"    → pin one persona (see human-qa-playbook §1)
+#          QA_SOAP=1              → run ONLY the named soap-opera sessions (playbook §6)
+#          QA_MAX_SESSIONS=20     → cap the number of charter sessions this run
 #
 set -uo pipefail
 
@@ -31,16 +36,30 @@ git checkout "$BRANCH" 2>/dev/null || git checkout -b "$BRANCH" || {
   echo "❌ could not switch to $BRANCH (commit/stash your changes first)."; exit 1; }
 
 MODE_NOTE=""
-FIX_CLAUSE="Fix clear bugs per the runbook; log ambiguous ones."
+FIX_CLAUSE="Fix clear, low-risk bugs and verify each; log ambiguous/structural ones as F<n>, curios/enhancements as O<n>."
 if [ "${QA_REPORT_ONLY:-0}" = "1" ]; then
   MODE_NOTE=" [REPORT-ONLY]"
-  FIX_CLAUSE="REPORT-ONLY: do NOT edit any code — only screenshot, console-check, and write docs/qa/visual-qa-report.md with every finding."
+  FIX_CLAUSE="REPORT-ONLY: do NOT edit any code — only drive the browser, run oracles + self-verification, and record findings in the ledgers + journal."
 fi
+
+# Optional focus/pin knobs → woven into the prompt so charter selection honours them.
+FOCUS_CLAUSE=""
+[ -n "${QA_FOCUS:-}" ]        && FOCUS_CLAUSE=" Bias charter selection toward: ${QA_FOCUS}."
+[ -n "${QA_TOUR:-}" ]         && FOCUS_CLAUSE="${FOCUS_CLAUSE} Pin the tour lens to '${QA_TOUR}' for every session."
+[ -n "${QA_PERSONA:-}" ]      && FOCUS_CLAUSE="${FOCUS_CLAUSE} Pin the persona to '${QA_PERSONA}'."
+[ -n "${QA_MAX_SESSIONS:-}" ] && FOCUS_CLAUSE="${FOCUS_CLAUSE} Run at most ${QA_MAX_SESSIONS} charter sessions."
+[ "${QA_SOAP:-0}" = "1" ]     && FOCUS_CLAUSE="${FOCUS_CLAUSE} SOAP-ONLY: run only the named soap-opera sessions in human-qa-playbook §6."
 
 echo "▶ Overnight deep QA${MODE_NOTE} on '$BRANCH' — budget \$$BUDGET, max turns $TURNS"
 echo "  log: $LOG   runbook: docs/qa/overnight-visual-qa.md (resumable: just re-run)"
 
-PROMPT="Follow docs/qa/overnight-visual-qa.md EXHAUSTIVELY. You are unattended overnight; obey its HARD RULES. Test every single thing — every element in every state, every form's every error path, every flow end-to-end with result verification, every locale (uz/ru/en), light AND dark, mobile/tablet/desktop, plus the edge/adversarial and AI-output checks. ${FIX_CLAUSE} Keep the resumable checklist in docs/qa/visual-qa-report.md updated so you never restart from zero."
+PROMPT="Follow docs/qa/overnight-visual-qa.md. You are unattended overnight; obey its HARD RULES and the §0 anti-stall playbook. Run it as a SESSION-BASED, persona-driven, minute-detail exploration, NOT a breadth-first 'does it render' sweep:
+1) Boot ritual (§A): re-read the rulebook + docs/qa/coverage-map.md + the last 5 journal entries; run bash scripts/qa-preflight.sh (exit 1 aborts); compile the Never/Ever invariants + RCRCRC priorities.
+2) Charter selection (§B): pick 6-10 charters from docs/qa/coverage-map.md by staleness×risk; NEVER re-test a cell touched in the last 2 runs unless code changed under it; write Hendrickson-form charters with pre-committed done-conditions.
+3) Session loop (§C): tag each session with one persona + one tour lens from docs/qa/human-qa-playbook.md; run the per-page ritual to DEPTH≥3 (open→interact→submit→verify persisted after a real reload); apply ≥3 input attacks per field; vigilance-scan console+network after every action.
+4) Oracles (§D): grade AI output against docs/qa/fixtures/uz-math-facts.md (factual grounding, solve every quiz key, decomposed Uzbek rubric, deterministic KaTeX/mermaid) — rendering alone does not pass.
+5) Self-verify (§E) BEFORE any F<n>: reproduce twice from fresh state, minimal repro, environment-attribution + skeptic pass, evidence triple (screenshot+console+failing request), severity; curios/enhancements/fluency-doubts → the O<n> ledger.
+Reach the post-2026-06-28 surface in §F (practice v2, SRS flashcards, structured players, GAME-live, messaging, CSV import/export, impersonation, analytics/moderation). Update docs/qa/coverage-map.md + append a session report + git commit PER CHARTER. Reconcile the ledgers at run end (§G). ${FIX_CLAUSE}${FOCUS_CLAUSE}"
 
 # Keep the Mac awake during the run (no-op on systems without caffeinate).
 CAFFEINATE=""
@@ -94,7 +113,7 @@ fi
 # allowlisted, so the unattended run cannot perform them.
 $CAFFEINATE claude -p "$PROMPT" \
   --permission-mode acceptEdits \
-  --allowedTools "Read,Edit,Write,Grep,Glob,mcp__playwright__*,Bash(pnpm *),Bash(doppler *),Bash(curl *),Bash(node *),Bash(npx *),Bash(caffeinate *),Bash(ps *),Bash(pgrep *),Bash(pkill *),Bash(lsof *),Bash(kill *),Bash(sleep *),Bash(mkdir *),Bash(ls *),Bash(cat *),Bash(head *),Bash(tail *),Bash(wc *),Bash(date *),Bash(echo *),Bash(grep *),Bash(rg *),Bash(find *),Bash(awk *),Bash(sed *),Bash(graphify *),Bash(bash scripts/qa-preflight.sh*),Bash(bash scripts/free-dev-ports.sh*),Bash(rm -rf .playwright-mcp*),Bash(rm -f .playwright-mcp*),Bash(git add *),Bash(git commit *),Bash(git status*),Bash(git diff*),Bash(git log*),Bash(git show*),Bash(git branch*),Bash(git rev-parse*),Bash(git stash*),Bash(git checkout claude/*),Bash(git checkout -b claude/*)" \
+  --allowedTools "Read,Edit,Write,Grep,Glob,mcp__playwright__*,Bash(pnpm *),Bash(doppler *),Bash(curl *),Bash(node *),Bash(npx *),Bash(caffeinate *),Bash(ps *),Bash(pgrep *),Bash(pkill *),Bash(lsof *),Bash(kill *),Bash(sleep *),Bash(mkdir *),Bash(ls *),Bash(cat *),Bash(head *),Bash(tail *),Bash(wc *),Bash(date *),Bash(echo *),Bash(grep *),Bash(rg *),Bash(find *),Bash(awk *),Bash(sed *),Bash(df *),Bash(shasum *),Bash(graphify *),Bash(bash scripts/qa-preflight.sh*),Bash(bash scripts/qa-fixtures.mjs*),Bash(bash scripts/free-dev-ports.sh*),Bash(rm -rf .playwright-mcp*),Bash(rm -f .playwright-mcp*),Bash(git add *),Bash(git commit *),Bash(git status*),Bash(git diff*),Bash(git log*),Bash(git show*),Bash(git branch*),Bash(git rev-parse*),Bash(git stash*),Bash(git worktree*),Bash(git checkout claude/*),Bash(git checkout -b claude/*)" \
   --max-budget-usd "$BUDGET" \
   --max-turns "$TURNS" \
   2>&1 | tee -a "$LOG"

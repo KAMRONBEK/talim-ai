@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/events.controller.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # streamEvents()
@@ -15,4 +15,4 @@ tags:
 - [[events.controller.ts]] - `contains` [EXTRACTED]
 - [[events.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

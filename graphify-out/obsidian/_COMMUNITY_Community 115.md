@@ -1,22 +1,21 @@
 ---
 type: community
-cohesion: 0.38
-members: 7
+cohesion: 0.33
+members: 6
 ---
 
 # Community 115
 
-**Cohesion:** 0.38 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[ClassMastery]] - code - packages/types/index.ts
-- [[TenantProgressPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[isRecentlyActive()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[masteryTone()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[page.tsx_25]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[useTenantProgress()]] - code - apps/web/hooks/useTenant.ts
-- [[useTenantProgressTopics()]] - code - apps/web/hooks/useTenant.ts
+- [[.mcp.json]] - code - .mcp.json
+- [[@playwrightmcp_1]] - code - .mcp.json
+- [[bash_1]] - code - .mcp.json
+- [[npx_1]] - code - .mcp.json
+- [[playwright_1]] - code - .mcp.json
+- [[talim-vps_1]] - code - .mcp.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,17 +23,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_115
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 4 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 2 edges to [[_COMMUNITY_Shared Types]]
-- 1 edge to [[_COMMUNITY_Learning Coverage & Badges]]
-- 1 edge to [[_COMMUNITY_Community 82]]
-- 1 edge to [[_COMMUNITY_Content Access & Mastery UI]]
-
-## Top bridge nodes
-- [[page.tsx_25]] - degree 9, connects to 3 communities
-- [[ClassMastery]] - degree 4, connects to 3 communities
-- [[TenantProgressPage()]] - degree 4, connects to 1 community
-- [[useTenantProgress()]] - degree 3, connects to 1 community
-- [[useTenantProgressTopics()]] - degree 3, connects to 1 community

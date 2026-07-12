@@ -1,11 +1,11 @@
 ---
 source_file: "docs/test-accounts.md"
 type: "document"
-community: "Community 93"
+community: "Community 89"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_93
+  - community/Community_89
 ---
 
 # Test accounts (shared dev+prod credentials)
@@ -14,4 +14,4 @@ tags:
 - [[Email-less kid synthetic email (username@students.talim.local)]] - `references` [EXTRACTED]
 - [[Post-login landing by role (dashboard routes)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_93
+#graphify/document #graphify/EXTRACTED #community/Community_89

@@ -1,28 +1,27 @@
 ---
 type: community
-cohesion: 0.21
-members: 13
+cohesion: 0.17
+members: 12
 ---
 
 # Community 86
 
-**Cohesion:** 0.21 - loosely connected
-**Members:** 13 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 12 nodes
 
 ## Members
-- [[ContentMasteryResponse]] - code - packages/types/index.ts
-- [[assessmentEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[authEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[contentEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[endpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[endpoints.ts]] - code - apps/web/lib/api/endpoints.ts
-- [[learnerEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[loadPdfJs()]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[rasterize-pdf.ts]] - code - apps/web/lib/rasterize-pdf.ts
-- [[rasterizePdfToImages()]] - code - apps/web/lib/rasterize-pdf.ts
-- [[tenantEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[useMastery.ts]] - code - apps/web/hooks/useMastery.ts
-- [[useReparseContent.ts]] - code - apps/web/hooks/useReparseContent.ts
+- [[AI Tutor Visuals (Manim render tool)]] - concept - docs/FEATURES.md
+- [[Citations (Manba Pills)]] - concept - docs/plans/youlearn-redesign.md
+- [[Flashcards & Notes Generators]] - concept - docs/plans/youlearn-redesign.md
+- [[GAME Assessment Mode (timer, speed points, streaks)]] - concept - docs/FEATURES.md
+- [[GAME Timings Cheat (F39)]] - concept - docs/qa/visual-qa-report.md
+- [[Generate Grid (Yaratish)]] - concept - docs/plans/youlearn-redesign.md
+- [[Interactive Quiz Learn Player]] - concept - docs/plans/youlearn-redesign.md
+- [[Learn Hub Panel (ContentLearnPanel)]] - concept - docs/plans/youlearn-redesign.md
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - document - docs/plans/youlearn-redesign.md
+- [[Persistent Study Workspace (3-pane)]] - rationale - docs/plans/youlearn-redesign.md
+- [[RAG AI Tutor Chat]] - concept - docs/FEATURES.md
+- [[Visual Direction (girih, marker-highlight)]] - concept - docs/plans/youlearn-redesign.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,17 +31,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 4 edges to [[_COMMUNITY_Content Assignment & Hooks]]
-- 3 edges to [[_COMMUNITY_Community 37]]
-- 2 edges to [[_COMMUNITY_Community 34]]
-- 2 edges to [[_COMMUNITY_Content Access & Mastery UI]]
-- 2 edges to [[_COMMUNITY_Community 66]]
-- 2 edges to [[_COMMUNITY_Shared Types]]
-- 1 edge to [[_COMMUNITY_Community 57]]
+- 4 edges to [[_COMMUNITY_Features Docs]]
+- 1 edge to [[_COMMUNITY_Platform Docs & Deploy]]
+- 1 edge to [[_COMMUNITY_Visual QA Report]]
 
 ## Top bridge nodes
-- [[endpoints.ts]] - degree 10, connects to 2 communities
-- [[useReparseContent.ts]] - degree 8, connects to 2 communities
-- [[useMastery.ts]] - degree 6, connects to 2 communities
-- [[contentEndpoints]] - degree 4, connects to 2 communities
-- [[ContentMasteryResponse]] - degree 3, connects to 2 communities
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - degree 6, connects to 1 community
+- [[GAME Assessment Mode (timer, speed points, streaks)]] - degree 4, connects to 1 community
+- [[RAG AI Tutor Chat]] - degree 3, connects to 1 community
+- [[AI Tutor Visuals (Manim render tool)]] - degree 2, connects to 1 community
+- [[GAME Timings Cheat (F39)]] - degree 2, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/rate-limit.middleware.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # authWriteRateLimit
@@ -15,4 +15,4 @@ tags:
 - [[auth.routes.ts]] - `imports` [EXTRACTED]
 - [[rate-limit.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

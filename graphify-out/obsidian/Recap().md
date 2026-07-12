@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "B2C Dashboard Shell"
 location: "L364"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/B2C_Dashboard_Shell
 ---
 
 # Recap()
@@ -15,4 +15,4 @@ tags:
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Community 45"
+community: "Grading Engine Types"
 location: "L222"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/Grading_Engine_Types
 ---
 
 # pointInAnyRegion()
@@ -15,4 +15,4 @@ tags:
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
 - [[grading.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/Grading_Engine_Types

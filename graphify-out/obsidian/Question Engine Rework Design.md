@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "document"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "whole document"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Question Engine Rework Design
@@ -32,4 +32,4 @@ tags:
 - [[Unified Grading Module (packagestypesgrading.ts)]] - `references` [EXTRACTED]
 - [[Uzbek Apostrophe Normalization]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_50
+#graphify/document #graphify/EXTRACTED #community/Question_Engine_Plan

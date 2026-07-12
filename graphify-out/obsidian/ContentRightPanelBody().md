@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "Content Workspace & Chat"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/Content_Workspace__Chat
 ---
 
 # ContentRightPanelBody()
@@ -18,4 +18,4 @@ tags:
 - [[useContentMastery()]] - `calls` [EXTRACTED]
 - [[useSections()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Community 32"
+community: "Config, Pricing & Embeddings"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Config_Pricing__Embeddings
 ---
 
 # UsageContext
@@ -22,4 +22,4 @@ tags:
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 - [[youtube.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings

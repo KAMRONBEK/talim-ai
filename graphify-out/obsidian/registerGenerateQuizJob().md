@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Flashcards Generation & Jobs"
+community: "Job Registration & Manim"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Generation__Jobs
+  - community/Job_Registration__Manim
 ---
 
 # registerGenerateQuizJob()
@@ -16,4 +16,4 @@ tags:
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs
+#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim

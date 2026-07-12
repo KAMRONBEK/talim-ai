@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/settings/page.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Account & Settings UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Account__Settings_UI
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

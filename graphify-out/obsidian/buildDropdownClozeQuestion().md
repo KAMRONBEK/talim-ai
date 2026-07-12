@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Community 45"
+community: "Question Banks & Builders"
 location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/Question_Banks__Builders
 ---
 
 # buildDropdownClozeQuestion()
@@ -18,4 +18,4 @@ tags:
 - [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 - [[question-builders.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders

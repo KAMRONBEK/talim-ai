@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/limit-error.ts"
 type: "code"
-community: "Community 34"
+community: "Billing, Usage & Limits"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Billing_Usage__Limits
 ---
 
 # limit-error.ts
@@ -21,4 +21,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits

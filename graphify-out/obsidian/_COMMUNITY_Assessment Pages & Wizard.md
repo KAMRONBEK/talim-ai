@@ -1,13 +1,13 @@
 ---
 type: community
 cohesion: 0.05
-members: 72
+members: 73
 ---
 
 # Assessment Pages & Wizard
 
 **Cohesion:** 0.05 - loosely connected
-**Members:** 72 nodes
+**Members:** 73 nodes
 
 ## Members
 - [[ANSWER_CHIPS]] - code - apps/web/components/learner/game-quiz-player.tsx
@@ -41,6 +41,7 @@ members: 72
 - [[QuestionBody]] - code - apps/web/components/tenant/question-editor.tsx
 - [[QuestionDifficulty]] - code - packages/types/index.ts
 - [[QuestionEditor()]] - code - apps/web/components/tenant/question-editor.tsx
+- [[QuestionType]] - code - packages/types/index.ts
 - [[ResultsSection()]] - code - apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx
 - [[SIMPLE_ANSWER_TYPES]] - code - apps/web/components/tenant/question-editor.tsx
 - [[STATUS_FILTERS_1]] - code - apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx
@@ -91,24 +92,25 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 18 edges to [[_COMMUNITY_Shared Types]]
-- 10 edges to [[_COMMUNITY_Account & Login UI]]
-- 10 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 9 edges to [[_COMMUNITY_Content Access & Mastery UI]]
-- 6 edges to [[_COMMUNITY_Community 31]]
-- 6 edges to [[_COMMUNITY_Community 39]]
-- 5 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 4 edges to [[_COMMUNITY_Community 36]]
-- 3 edges to [[_COMMUNITY_Community 58]]
-- 2 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 19 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 13 edges to [[_COMMUNITY_Account & Settings UI]]
+- 12 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 9 edges to [[_COMMUNITY_B2C Dashboard Shell]]
+- 7 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
+- 5 edges to [[_COMMUNITY_Tenant Hooks & Messaging]]
+- 5 edges to [[_COMMUNITY_Dialog & Button UI]]
 - 2 edges to [[_COMMUNITY_Slide Deck UI]]
 - 2 edges to [[_COMMUNITY_Quiz Generation Job]]
-- 2 edges to [[_COMMUNITY_Community 33]]
-- 1 edge to [[_COMMUNITY_Community 59]]
+- 2 edges to [[_COMMUNITY_Auth & App Shell UI]]
+- 2 edges to [[_COMMUNITY_Quiz Player Inputs]]
+- 1 edge to [[_COMMUNITY_Content Assignment & Hooks]]
+- 1 edge to [[_COMMUNITY_Summary & Rich Text]]
+- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
+- 1 edge to [[_COMMUNITY_Grading Engine Types]]
 
 ## Top bridge nodes
-- [[page.tsx_19]] - degree 51, connects to 10 communities
-- [[useAssessments.ts]] - degree 38, connects to 5 communities
-- [[question-editor.tsx]] - degree 24, connects to 5 communities
-- [[game-quiz-player.tsx]] - degree 23, connects to 5 communities
+- [[page.tsx_19]] - degree 51, connects to 8 communities
+- [[game-quiz-player.tsx]] - degree 23, connects to 6 communities
 - [[page.tsx_15]] - degree 22, connects to 5 communities
+- [[QuestionType]] - degree 8, connects to 5 communities
+- [[useAssessments.ts]] - degree 38, connects to 4 communities

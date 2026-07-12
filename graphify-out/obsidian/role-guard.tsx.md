@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "Community 35"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Auth__App_Shell_UI
 ---
 
 # role-guard.tsx
@@ -23,4 +23,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useAuthHydrated()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

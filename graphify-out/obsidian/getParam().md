@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Assessment API Controllers"
+community: "Assessment & Tutor-Request Controllers"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_API_Controllers
+  - community/Assessment__Tutor-Request_Controllers
 ---
 
 # getParam()
@@ -112,4 +112,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers

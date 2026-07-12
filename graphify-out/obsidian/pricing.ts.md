@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Community 80"
+community: "Providers & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_80
+  - community/Providers__Job_Events
 ---
 
 # pricing.ts
@@ -30,4 +30,4 @@ tags:
 - [[pricing.tsx]] - `imports_from` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_80
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

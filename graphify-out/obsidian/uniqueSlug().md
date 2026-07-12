@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Community 67"
+community: "Tenant Service"
 location: "L57"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/Tenant_Service
 ---
 
 # uniqueSlug()
@@ -17,4 +17,4 @@ tags:
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 - [[slugifyOrgName()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/Tenant_Service

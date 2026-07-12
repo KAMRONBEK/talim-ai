@@ -1,24 +1,23 @@
 ---
 type: community
-cohesion: 0.31
-members: 9
+cohesion: 0.36
+members: 8
 ---
 
 # Community 104
 
-**Cohesion:** 0.31 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.36 - loosely connected
+**Members:** 8 nodes
 
 ## Members
-- [[AdminHeader()]] - code - apps/admin/components/admin-header.tsx
-- [[AdminLayout()]] - code - apps/admin/app/(admin)/layout.tsx
-- [[AdminShell()]] - code - apps/admin/components/admin-shell.tsx
-- [[LogoMark()]] - code - apps/admin/components/logo.tsx
-- [[admin-header.tsx]] - code - apps/admin/components/admin-header.tsx
-- [[admin-shell.tsx]] - code - apps/admin/components/admin-shell.tsx
-- [[layout.tsx]] - code - apps/admin/app/(admin)/layout.tsx
-- [[logo.tsx]] - code - apps/admin/components/logo.tsx
-- [[navItems]] - code - apps/admin/components/admin-header.tsx
+- [[STATUS_FILTERS]] - code - apps/admin/app/(admin)/tutor-requests/page.tsx
+- [[TutorRequestsPage()]] - code - apps/admin/app/(admin)/tutor-requests/page.tsx
+- [[errorMessage()_1]] - code - apps/admin/app/(admin)/tutor-requests/page.tsx
+- [[page.tsx_7]] - code - apps/admin/app/(admin)/tutor-requests/page.tsx
+- [[requestStatusBadge()]] - code - apps/admin/app/(admin)/tutor-requests/page.tsx
+- [[useAdminTutorRequests()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useApproveTutorRequest()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useRejectTutorRequest()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,10 +27,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Account & Login UI]]
-- 2 edges to [[_COMMUNITY_Slide Deck UI]]
-- 1 edge to [[_COMMUNITY_Community 39]]
+- 4 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 4 edges to [[_COMMUNITY_Admin Analytics]]
+- 1 edge to [[_COMMUNITY_Account & Settings UI]]
 
 ## Top bridge nodes
-- [[logo.tsx]] - degree 5, connects to 3 communities
-- [[LogoMark()]] - degree 4, connects to 2 communities
+- [[page.tsx_7]] - degree 13, connects to 3 communities
+- [[useAdminTutorRequests()]] - degree 3, connects to 1 community
+- [[useApproveTutorRequest()]] - degree 3, connects to 1 community
+- [[useRejectTutorRequest()]] - degree 3, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Community 48"
+community: "Auth & App Shell UI"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Auth__App_Shell_UI
 ---
 
 # getPostLoginPath()
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_38]] - `imports` [EXTRACTED]
 - [[role-guard.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

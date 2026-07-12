@@ -1,15 +1,16 @@
 ---
 type: community
 cohesion: 0.08
-members: 41
+members: 43
 ---
 
 # Tutor Visual Tools
 
 **Cohesion:** 0.08 - loosely connected
-**Members:** 41 nodes
+**Members:** 43 nodes
 
 ## Members
+- [[ManimPayload]] - code - packages/types/tutor-visual.ts
 - [[RENDER_CHART_TOOL]] - code - apps/api/src/lib/tutor-chart.ts
 - [[RENDER_GEOGEBRA_TOOL]] - code - apps/api/src/lib/tutor-geogebra.ts
 - [[RENDER_GRAPH_TOOL]] - code - apps/api/src/lib/tutor-graph.ts
@@ -25,6 +26,7 @@ members: 41
 - [[expressionSchema]] - code - apps/api/src/lib/tutor-graph.ts
 - [[finiteNumber]] - code - apps/api/src/lib/tutor-graph.ts
 - [[geogebraSchema]] - code - apps/api/src/lib/tutor-geogebra.ts
+- [[getTutorTools()]] - code - apps/api/src/lib/tutor-tools.ts
 - [[graphPayloadSchema]] - code - apps/api/src/lib/tutor-graph.ts
 - [[handleTutorToolCall()]] - code - apps/api/src/lib/tutor-tools.ts
 - [[htmlSandboxSchema]] - code - apps/api/src/lib/tutor-html-sandbox.ts
@@ -60,17 +62,17 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 8 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 9 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 7 edges to [[_COMMUNITY_Chat Message Rendering]]
 - 6 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 6 edges to [[_COMMUNITY_Community 55]]
-- 5 edges to [[_COMMUNITY_Community 64]]
-- 2 edges to [[_COMMUNITY_Community 45]]
-- 2 edges to [[_COMMUNITY_Community 67]]
-- 1 edge to [[_COMMUNITY_Community 52]]
+- 5 edges to [[_COMMUNITY_AI Provider Service]]
+- 3 edges to [[_COMMUNITY_Chat Visual Embeds]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Job Registration & Manim]]
 
 ## Top bridge nodes
 - [[tutor-tools.ts]] - degree 29, connects to 4 communities
+- [[ManimPayload]] - degree 5, connects to 4 communities
 - [[tutor-graph.ts]] - degree 14, connects to 2 communities
 - [[tutor-graph-smoke.ts]] - degree 10, connects to 2 communities
-- [[tutor-manim.ts]] - degree 7, connects to 2 communities
 - [[tutor-chart.ts]] - degree 6, connects to 2 communities

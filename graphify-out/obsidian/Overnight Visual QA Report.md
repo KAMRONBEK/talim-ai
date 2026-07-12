@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Community 72"
+community: "Visual QA Report"
 location: "whole document"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_72
+  - community/Visual_QA_Report
 ---
 
 # Overnight Visual QA Report
@@ -30,4 +30,4 @@ tags:
 - [[Stateless-JWT Staleness (F11F45F46)]] - `references` [EXTRACTED]
 - [[Uzbek Relative-Time Formatting (F18)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_72
+#graphify/document #graphify/EXTRACTED #community/Visual_QA_Report

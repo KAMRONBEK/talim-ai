@@ -367,3 +367,82 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | F20 | S3 | US-XCUT-01 · EC6 | **Count strings not pluralized (Russian + English).** `sectionCount`/`quizCount`/`questionCount`/`episodes`/`quizAttempts` hardcoded the genitive-plural suffix (`"{count} разделов"`, `"{count} sections"`) instead of ICU `plural`. Russian showed `"4 разделов"` (needs paucal `"4 раздела"`; "разделов" is 5+ only) and English `"1 sections"`. Fixed all 5 in en (`one`/`other`) + ru (`one`/`few`/`many`/`other`) using next-intl ICU `plural`; uz left unchanged (Uzbek nouns invariant after numerals). Verified live: ru "4 раздела"/"2 вопроса"/"5 вопросов", en "4 sections". | ✅ fixed | `aa42bf1` |
 | F19 | S3 | US-IND-07 · EC | **Dashboard search "no results" shows the "no content yet" empty state.** Typing a non-matching term in the dashboard hero search (client-side filter of the recents grid) empties the list and renders "Hali material yo'q. …birinchi materialingizni qo'shing" ("You have no materials yet, add your first") — confusing for a user who *does* have content but filtered it out. Should show a distinct "no results match your search" state. Not fixed: needs a new string in uz/en/ru + grid logic to distinguish filtered-empty from truly-empty (product copy decision). | 🟡 logged | — |
 | … | | | *(backfill F1–F14 here)* | | |
+
+
+---
+
+# Coverage-expansion additions (2026-07-12) — reservations, observations ledger, index
+
+## B.1 — Findings-ledger reservation (insert as a note above the ledger table + reserved rows)
+
+> **Reserved block F76–F99** for the coverage-expansion pass (US-IND-26→34, US-LEARNER-14→18,
+> US-OWNER-18→25, US-ADMIN-08b/10/11, US-XCUT-22→24). Claim numbers **in order** as findings are
+> confirmed via the §E self-verification protocol; do not reuse F1–F75. A finding is only assigned
+> an F-number after reproduce-twice + evidence-bundle + skeptic pass. Everything unverified or
+> preference-level goes to the **Observations ledger (`O<n>`)** below, not here.
+
+| F# | Sev | Story · EC | Summary | Status | Fix commit |
+| --- | --- | --- | --- | --- | --- |
+| F76 | — | *(reserved)* | — | ⬜ | — |
+| F77–F99 | — | *(reserved — claim in order)* | — | ⬜ | — |
+
+**High-probability finding candidates flagged during this expansion** (each needs the §E bundle before it earns an F#):
+- Impersonated session is unrestricted + non-revocable after exit (US-ADMIN-08b·EC16) — **S1** hypothesis.
+- FLAGGED media not actually hidden from learners (US-ADMIN-11·EC3) — **S2** or product-gap.
+- B2C/tenant flashcards POST lacks `enforceQuota` → free generation (US-IND-28·EC17) — **S2**.
+- `shared.ts:168` "informational only" comment contradicts `learner.ts` 403 due-date enforcement (US-OWNER-20) — pin, then S3 doc fix.
+- ORDERING untouched-initial-order as a free point (US-LEARNER-14·EC7) — **S2** candidate, pin first.
+- Forged `responseMs` inflates GAME leaderboard (US-LEARNER-16·EC4) — ties existing F39.
+- Analytics empty-DB divide-by-zero + 429 on rapid refresh (US-ADMIN-10·EC2/EC5) — **S2**.
+
+## B.2 — Observations ledger (`O<n>`) — NEW section, place after the Findings ledger
+
+> **Observations (`O<n>`)** capture non-defect signals: enhancements, preferences, one-off
+> non-reproducible oddities, and low-confidence Uzbek-fluency doubts for morning human review.
+> They are **not** findings (no F#) and never block a run close. **Mandatory re-triage each run:**
+> an `O<n>` that becomes reproducible with a named oracle + evidence bundle is promoted to an `F<n>`
+> (this closes the F63 "dismissed as artifact → real bug" failure). Enhancements stay observations.
+
+| O# | Kind | Story · EC | Note | Run seen | Re-triage status |
+| --- | --- | --- | --- | --- | --- |
+| O1 | *(template — flaky-suspect / enhancement / uz-fluency-doubt / one-off)* | — | — | — | open / promoted-to-F## / closed |
+
+## B.3 — Story index rows (tick under each area in the backlog index)
+
+### INDIVIDUAL (B2C) — add
+- [ ] US-IND-26 Practice generator v2 (count × types × depth, Mixed default, fill-to-count) · P0
+- [ ] US-IND-27 Fill-to-count guarantee + per-type count variance · P0
+- [ ] US-IND-28 SRS flashcard session (SM-2, 4-level, Again re-queue, state-leak guard) · P0
+- [ ] US-IND-29 In-practice flashcards · P0
+- [ ] US-IND-30 Elo-KT mastery (up/down, live update, streaks, concurrency) · P1
+- [ ] US-IND-31 Study-mode toggle (semantics + persistence) · P1
+- [ ] US-IND-32 Text-selection Ask-AI seed (desktop-vs-mobile, F63 guard) · P1
+- [ ] US-IND-33 Section-rail hierarchy nav · P1
+- [ ] US-IND-34 Podcast transcript sync (click-seek, rescale, legacy fallback) · P1
+
+### TENANT_OWNER — add
+- [ ] US-OWNER-18 Mastery-by-topic on tenant progress · P1
+- [ ] US-OWNER-19 Assessment builder — all 8 types round-trip · P0
+- [ ] US-OWNER-20 Due-date enforcement matrix (server-side 403) · P0
+- [ ] US-OWNER-21 GAME-live lifecycle (schedule→go-live→end-live, concurrent learner) · P0
+- [ ] US-OWNER-22 Messaging (owner side) + IDOR · P0
+- [ ] US-OWNER-23 CSV import (valid/malformed/dup/seat-limit) · P0
+- [ ] US-OWNER-24 CSV export escaping / formula-injection · P0
+- [ ] US-OWNER-25 Material detail + per-part generate/retry/fail · P1
+
+### TENANT_LEARNER — add
+- [ ] US-LEARNER-14 Structured question players + grading truth-tables + a11y · P0
+- [ ] US-LEARNER-15 GAME live banner + `?play` deep-link · P0
+- [ ] US-LEARNER-16 GAME structured types under timer + timeout races · P0
+- [ ] US-LEARNER-17 Quiz review / strict result breakdown · P0
+- [ ] US-LEARNER-18 Messaging (learner side) + IDOR · P0
+
+### ADMIN (3001) — add
+- [ ] US-ADMIN-08b Impersonation lifecycle + token-abuse matrix · P0 (S1)
+- [ ] US-ADMIN-10 Analytics dashboard (8 endpoints, empty-DB, fuzz, 429) · P1
+- [ ] US-ADMIN-11 Approve/flag effects visible to end users + content detail · P0
+
+### XCUT (cross-cutting) — add
+- [ ] US-XCUT-22 KaTeX in every player · P1
+- [ ] US-XCUT-23 `/terms` + `/pricing` i18n + CTA-by-role · P2
+- [ ] US-XCUT-24 TypeBadge i18n on content grids · P2

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-3-tenant-experience.md"
 type: "concept"
-community: "Community 62"
+community: "Plans & Epics Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Plans__Epics_Docs
 ---
 
 # Content Assignment & Learner Scoping
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Epic 3 — Tenant (Organization) Experience]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_62
+#graphify/concept #graphify/EXTRACTED #community/Plans__Epics_Docs

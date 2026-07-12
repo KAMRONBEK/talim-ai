@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/queryClient.ts"
 type: "code"
-community: "Community 151"
+community: "Community 140"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_151
+  - community/Community_140
 ---
 
 # makeQueryClient()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[queryClient.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_151
+#graphify/code #graphify/EXTRACTED #community/Community_140

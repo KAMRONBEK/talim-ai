@@ -1,25 +1,23 @@
 ---
 type: community
-cohesion: 0.20
-members: 10
+cohesion: 0.25
+members: 8
 ---
 
 # Community 102
 
-**Cohesion:** 0.20 - loosely connected
-**Members:** 10 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 8 nodes
 
 ## Members
-- [[$schema_2]] - code - packages/config/tsconfig/nextjs.json
-- [[compilerOptions_4]] - code - packages/config/tsconfig/nextjs.json
-- [[extends_3]] - code - packages/config/tsconfig/nextjs.json
-- [[jsx]] - code - packages/config/tsconfig/nextjs.json
-- [[lib_1]] - code - packages/config/tsconfig/nextjs.json
-- [[module_1]] - code - packages/config/tsconfig/nextjs.json
-- [[moduleResolution_1]] - code - packages/config/tsconfig/nextjs.json
-- [[nextjs.json]] - code - packages/config/tsconfig/nextjs.json
-- [[noEmit]] - code - packages/config/tsconfig/nextjs.json
-- [[plugins_2]] - code - packages/config/tsconfig/nextjs.json
+- [[compilerOptions_1]] - code - apps/api/tsconfig.json
+- [[declaration]] - code - apps/api/tsconfig.json
+- [[declarationMap]] - code - apps/api/tsconfig.json
+- [[extends_1]] - code - apps/api/tsconfig.json
+- [[include_1]] - code - apps/api/tsconfig.json
+- [[outDir]] - code - apps/api/tsconfig.json
+- [[rootDir]] - code - apps/api/tsconfig.json
+- [[tsconfig.json_1]] - code - apps/api/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 

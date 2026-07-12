@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/user-display.ts"
 type: "code"
-community: "Community 33"
+community: "Auth & App Shell UI"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Auth__App_Shell_UI
 ---
 
 # getUserInitials()
@@ -16,4 +16,4 @@ tags:
 - [[user-display.ts]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

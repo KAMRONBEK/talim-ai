@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Community 66"
+community: "API Endpoints & Media Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # content-stage.tsx
@@ -45,4 +45,4 @@ tags:
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 - [[useQuizHistory()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

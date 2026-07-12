@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "Community 74"
+community: "YouTube Transcript Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_74
+  - community/YouTube_Transcript_Service
 ---
 
 # youtube.service.ts
@@ -38,4 +38,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_74
+#graphify/code #graphify/EXTRACTED #community/YouTube_Transcript_Service

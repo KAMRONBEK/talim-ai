@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Podcast Generation & Prompts"
+community: "AI Tutor Chat API"
 location: "L381"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__Prompts
+  - community/AI_Tutor_Chat_API
 ---
 
 # getRagChunkLabel()
@@ -16,4 +16,4 @@ tags:
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 - [[rag.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

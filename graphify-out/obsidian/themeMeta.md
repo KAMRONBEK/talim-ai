@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/theme-toggle.tsx"
 type: "code"
-community: "Community 130"
+community: "Account & Settings UI"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_130
+  - community/Account__Settings_UI
 ---
 
 # themeMeta
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-toggle.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_130
+#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI

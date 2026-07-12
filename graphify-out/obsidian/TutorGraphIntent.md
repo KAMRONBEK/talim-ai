@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph-intent.ts"
 type: "code"
-community: "Community 46"
+community: "AI Provider Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/AI_Provider_Service
 ---
 
 # TutorGraphIntent
@@ -16,4 +16,4 @@ tags:
 - [[ai.service.ts]] - `imports` [EXTRACTED]
 - [[tutor-graph-intent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service

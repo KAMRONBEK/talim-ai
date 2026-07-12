@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewerLazy.tsx"
 type: "code"
-community: "Community 66"
+community: "API Endpoints & Media Hooks"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # PdfViewer
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewerLazy.tsx]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

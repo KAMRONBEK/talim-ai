@@ -1,20 +1,18 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 1.00
+members: 3
 ---
 
 # Community 131
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 1.00 - tightly connected
+**Members:** 3 nodes
 
 ## Members
-- [[ThemeToggle()_1]] - code - apps/web/components/theme-toggle.tsx
-- [[ThemeValue_1]] - code - apps/web/components/theme-toggle.tsx
-- [[theme-toggle.tsx_1]] - code - apps/web/components/theme-toggle.tsx
-- [[themeIcons]] - code - apps/web/components/theme-toggle.tsx
-- [[themeValues_1]] - code - apps/web/components/theme-toggle.tsx
+- [[free-dev-ports.sh]] - code - scripts/free-dev-ports.sh
+- [[free-dev-ports.sh script]] - code - scripts/free-dev-ports.sh
+- [[free_ports()]] - code - scripts/free-dev-ports.sh
 
 ## Live Query (requires Dataview plugin)
 
@@ -22,10 +20,3 @@ members: 5
 TABLE source_file, type FROM #community/Community_131
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 1 edge to [[_COMMUNITY_Account & Login UI]]
-- 1 edge to [[_COMMUNITY_Community 39]]
-
-## Top bridge nodes
-- [[theme-toggle.tsx_1]] - degree 6, connects to 2 communities

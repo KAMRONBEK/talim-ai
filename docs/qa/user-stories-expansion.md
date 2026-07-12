@@ -3381,3 +3381,759 @@ Hypotheses from reading source during the expansion. **Not verified at runtime**
 | EC15 | Connected → steady-state polling | `/content` etc. drop to ≤1 req/30s while connected; 0 console errors | ✅ | — | browser |
 | EC16 | Disconnected (handshake fail / API down) | fast 3–5s safety-net poll resumes (watchdog 45s reconnect, retry:5000) | 🟡 | — | code-verified; not live-stressed |
 | EC17 | No regression | content/media pages render clean after the polling→push change | ✅ | — | 5 tenant pages, 0 errors |
+
+
+---
+
+# Coverage expansion — post-2026-06-28 feature surface (added 2026-07-12)
+
+> New/deepened stories mined from the current code (question-engine v2, SRS flashcards, structured
+> question types, GAME-live, messaging, CSV import/export, impersonation, analytics/moderation, math
+> in every player, static pages). Promote into `user-stories.md` as each is verified. See
+> `docs/qa/coverage-map.md` for the frontier ledger and `docs/qa/human-qa-playbook.md` for how to test.
+
+<!-- ===== AREA: practice / question-engine v2 (INDIVIDUAL) ===== -->
+## Area: Question engine v2 — practice generator, structured players, flashcards, mastery
+
+> Post-2026-06-28 surface. Code read: `apps/web/components/practice/practice-generator.tsx`,
+> `apps/web/app/[locale]/quiz/[id]/page.tsx`, `apps/web/hooks/useQuiz.ts`,
+> `apps/web/components/quiz/question-inputs.tsx`, `packages/types/grading.ts` (`gradeQuestion`),
+> `apps/web/app/[locale]/content/[id]/flashcards/page.tsx`, `apps/web/hooks/useFlashcards.ts`,
+> `apps/api/src/jobs/{generateQuiz,generateFlashcards}.job.ts`,
+> `apps/api/src/lib/question-gen.ts`, `apps/api/src/services/sectionMastery.service.ts`,
+> `apps/web/components/layout/content-right-panel.tsx`, `apps/web/hooks/useMastery.ts`.
+
+---
+
+### US-IND-26: Practice generator v2 — count presets × type chips × depth picker × Mixed default
+**As an** individual, **I want** to configure a practice set by count, question types (incl. Flashcards), and depth, **so that** I get exactly the practice I asked for regardless of how thin my content is.
+**Routes/code:** `/[locale]/quiz/[id]` (generator dialog) · `practice-generator.tsx` · `POST /quiz/content/:contentId` · `useQuiz.ts` · `question-gen.ts` (fill-to-count retry).
+**Priority:** P0 · **Last verified:** ⬜ (never — new)
+
+**Acceptance criteria**
+- AC1 — Given a READY content, When I open the generator, select a count preset + one or more type chips + a depth, and generate, Then a set of exactly that count is produced using only the selected types at the requested depth.
+- AC2 — Given I select **0 type chips**, When I generate, Then the server defaults to **Mixed** (all types), not an empty/error set.
+- AC3 — Given thin content, When I request a high count, Then the server **fills to count** (retry pass) and never silently returns fewer without a signal.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Each count preset (e.g. 5/10/20) on rich content | Set length == preset exactly | ⬜ | — | — |
+| EC2 | Preset N on **thin** content (fill-to-count) | Server retries to reach N; if truly impossible, returns fewer **with a visible "generated M of N" notice**, not a silent shortfall | ⬜ | — | oracle: `curl` source len vs count |
+| EC3 | Each type chip **alone** (MCQ / short / cloze / matching / ordering / dropdown-cloze / hotspot / drag-drop / flashcards) | Only that type appears in the set | ⬜ | — | 9 rows, one per type |
+| EC4 | Two/three chips combined | Set mixes only the chosen types, no others | ⬜ | — | — |
+| EC5 | **0 chips → Mixed default** | Generates a mixed set (AC2); no empty state, no error | ⬜ | — | — |
+| EC6 | Depth picker recall vs apply vs mixed | Question *character* changes (recall=definitional, apply=scenario); verify not identical stems | ⬜ | — | oracle: Product-consistency |
+| EC7 | Flashcards-only session from generator | Lands the in-practice flashcard player (US-IND-29), not the MCQ player | ⬜ | — | — |
+| EC8 | Generation quota exhausted (FREE) → 402 | Upgrade modal opens from THIS dialog with "AI generation limit" headline (not silent) | ⬜ | — | ties US-IND-08 |
+| EC9 | **Double-click Generate** (dedupe) | Exactly one POST / one set created (R1 recipe: `Promise.all` 3×click → count POSTs) | ⬜ | — | S2 quota double-burn |
+| EC10 | **Cancel mid-generation** | Dialog closes / job abandoned cleanly; no stuck spinner, no orphan quiz (R2 reload variant) | ⬜ | — | — |
+| EC11 | Count set to 0 / negative / non-numeric (if free-typed) | Rejected client+server; no empty set generated | ⬜ | — | numeric attack catalog |
+| EC12 | Count = extreme (e.g. 2³¹) | Clamped or 400; no OOM/hang | ⬜ | — | — |
+| EC13 | Generate while a prior set still generating | Second request queued or blocked, not interleaved into a corrupt set | ⬜ | — | race |
+| EC14 | i18n dialog in uz/ru | All labels/chips/depth/count localized; no raw keys, no English leak on uz | ⬜ | — | Uzbek-first |
+| EC15 | Mobile dialog layout (390px) | Chips wrap, buttons reachable, no horizontal scroll, tap targets ≥44px | ⬜ | — | mobile |
+| EC16 | Learner opens generator on assigned content | Blocked (learners don't self-generate practice) or scoped per role guard | ⬜ | — | isolation |
+| EC17 | KaTeX in generated stems/options | Renders (no `.katex-error`, no raw `$$`) — cross-ref US-XCUT-22 | ⬜ | — | — |
+
+**Notes / open questions**
+- Confirm whether the fill-to-count "M of N" shortfall is surfaced in UI or only server-side; if silent, that is a finding candidate (name oracle: Product-consistency).
+
+---
+
+### US-IND-27: Fill-to-count guarantee & per-type count variance on sparse content
+**As an** individual, **I want** the generator to honour my requested count even when content is short, **so that** I'm not shortchanged silently.
+**Routes/code:** `POST /quiz/content/:contentId` · `question-gen.ts` retry pass · `generateQuiz.job.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Requesting N questions on content that can only support M<N triggers a retry pass; the response makes the shortfall explicit.
+- AC2 — Requesting N of a single type the content can't support degrades gracefully (fewer or Mixed-fallback per spec), never loops forever.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | N=20 on a 3-sentence content | Retry to reach 20; if capped, explicit "M of N" | ⬜ | — | fixture `uz-math.pdf` |
+| EC2 | N of a type the content can't yield (e.g. 10 hotspots on text-only PDF) | Degrades to fewer or Mixed, no infinite retry loop, bounded wall-clock | ⬜ | — | anti-stall |
+| EC3 | Count variance across repeated generations | Count stays == requested each time (no drift) | ⬜ | — | metamorphic-tight |
+| EC4 | Generation job FAILED / 0 questions | Terminal FAILED state (F59 pattern), not eternal spinner | ⬜ | — | ties F59 |
+| EC5 | Job stuck (Bull) past wall-clock cap | Cell marked `blocked-on-job`, revisit at run end; not a stall | ⬜ | — | §0 anti-stall |
+
+**Notes / open questions**
+- Oracle for EC1: `curl :4000` the source section text, count atomic claims available, compare to achievable question count.
+
+---
+
+### US-IND-28: SRS flashcard study session (SM-2, 4-level grading, Again re-queue)
+**As an** individual, **I want** to study flashcards with spaced repetition, **so that** scheduling adapts to how well I know each card.
+**Routes/code:** `/[locale]/content/[id]/flashcards` · `flashcards/page.tsx` · `useFlashcards.ts` · `POST /content/:id/flashcards/:cardId/review` · `generateFlashcards.job.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Given a generated deck, When I flip a card and grade it Again/Hard/Good/Easy, Then SM-2 interval/easiness updates and persists after a real reload.
+- AC2 — "Again" re-queues the card to the end of the session and does NOT count it as reviewed.
+- AC3 — A review-mutation failure surfaces `reviewFailed` and does NOT advance the queue (no optimistic leak — regression 12374e85).
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Flip → 4 grade buttons hardest→easiest | Again/Hard/Good/Easy present, correct order, localized | ⬜ | — | — |
+| EC2 | Grade Easy → **reload** → card no longer due | SM-2 interval persisted server-side (depth-3 reload oracle) | ⬜ | — | — |
+| EC3 | Grade Again → same card returns later in session | Re-queued to end; session not marked complete until re-graded | ⬜ | — | — |
+| EC4 | Grade Again repeatedly | Interval floor respected; no negative/NaN interval | ⬜ | — | SM-2 boundary |
+| EC5 | **Review mutation fails (500 / offline)** | `reviewFailed` shown; queue does NOT advance; card stays gradeable | ⬜ | — | S2, regression 12374e85 (R8 fault-inject) |
+| EC6 | Due-only vs all-cards toggle | Due-only shows only due cards; all-cards shows full deck | ⬜ | — | — |
+| EC7 | Empty deck (generation returned 0) | Empty/complete state, not a crash or eternal spinner | ⬜ | — | — |
+| EC8 | All cards graded → completion state | "Session complete" with counts, no leftover card | ⬜ | — | — |
+| EC9 | Flashcard back vs its `sourceQuote` | Back is defensible against the quoted source sentence | ⬜ | — | oracle: Claims/factual grounding |
+| EC10 | Deactivated learner mid-session | Access lost immediately on next action (isolation invariant, R5) | ⬜ | — | S1 |
+| EC11 | Review a **foreign** cardId (other user's content) | 404 via `assertCanAccessContent`; never grades | ⬜ | — | S1 IDOR |
+| EC12 | Learner (blockLearnerMutations) POST review vs POST generate | review allowed, generate blocked — verify asymmetry | ⬜ | — | — |
+| EC13 | Double-tap grade (Aziza persona) | Single review recorded, queue advances once (R11 rage-click) | ⬜ | — | — |
+| EC14 | i18n grade buttons uz/ru | Localized, no English leak on uz | ⬜ | — | — |
+| EC15 | Mobile card flip tap (390px) | Flip works on tap; card + buttons fit; no overflow | ⬜ | — | mobile |
+| EC16 | KaTeX on card front/back | Renders both sides (US-XCUT-22) | ⬜ | — | — |
+| EC17 | Quota exhausted → POST flashcards | 402 (or documented free-generation hole — see apiAdminGaps) | ⬜ | — | S2 candidate |
+
+**Notes / open questions**
+- Confirm the B2C + tenant flashcards POSTs actually assert quota (no `enforceQuota` middleware per code read); if not, file the free-generation hole with the "review allowed / generate blocked" evidence.
+
+---
+
+### US-IND-29: In-practice flashcards (flashcards as a practice type inside a session)
+**As an** individual, **I want** flashcards to appear as a type inside a mixed practice session, **so that** SRS study integrates with my other practice.
+**Routes/code:** `practice-generator.tsx` (Flashcards chip) · `quiz/[id]/page.tsx` in-session player · `useFlashcards.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Flashcards chip in a mixed set | Flashcard items interleave with graded questions correctly | ⬜ | — | — |
+| EC2 | Flashcards-only via generator | Lands the flashcard player, not MCQ player (US-IND-26·EC7) | ⬜ | — | — |
+| EC3 | In-session flashcard review vs dedicated-route review | Same SM-2 scheduling applied (no divergent state) | ⬜ | — | Product-consistency |
+| EC4 | Session mixes flashcards + Again re-queue | Again re-queues within session; graded questions unaffected | ⬜ | — | — |
+| EC5 | i18n / mobile in-session flashcard | Localized, fits 390px | ⬜ | — | — |
+
+**Notes / open questions**
+- Verify in-practice flashcards write reviews through the same endpoint as the dedicated route (no state fork).
+
+---
+
+### US-IND-30: Elo-KT mastery — plus/minus after practice, whole-material streaks, live update
+**As an** individual, **I want** my mastery to rise on correct answers and fall on wrong ones and update without reload, **so that** the panel reflects my real standing.
+**Routes/code:** `content-right-panel.tsx` (useMastery) · `useMastery.ts` · `GET /quiz/content/:contentId/mastery` · `sectionMastery.service.ts`.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — After a practice submit, mastery moves UP on correct and DOWN on wrong, and the panel updates without a manual reload.
+- AC2 — Whole-material streak increments across sections and resets on a wrong answer per spec.
+- AC3 — A brand-new user shows a baseline value, never NaN.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Submit all-correct practice | Mastery rises; panel updates live | ⬜ | — | Nodira recomputes by hand |
+| EC2 | Submit all-wrong practice | Mastery **falls** (plus/minus); not floored at prior value | ⬜ | — | — |
+| EC3 | Per-section vs whole-material aggregation | Section deltas roll up correctly to material mastery | ⬜ | — | — |
+| EC4 | Whole-material streak increments across sections | Increments; resets to 0 on a wrong answer | ⬜ | — | — |
+| EC5 | New user baseline | Baseline shown (e.g. 0 or seeded), never NaN/undefined | ⬜ | — | — |
+| EC6 | **Two rapid submits (race)** | Mastery applied once per submit, not double-counted (Elo double-apply) | ⬜ | — | S2 race, R1 |
+| EC7 | Mastery for a **foreign** contentId | 404 via isolation guard | ⬜ | — | S1 |
+| EC8 | i18n mastery labels uz/ru | Localized, no leak | ⬜ | — | — |
+| EC9 | Mobile mastery panel | Renders, no overflow | ⬜ | — | mobile |
+| EC10 | "Open study view" navigation | Lands the correct section | ⬜ | — | ties US-IND-33 |
+
+**Notes / open questions**
+- `sectionMastery.service` ≠ the older `mastery.service` (memory note) — verify which endpoint the panel hits and that they don't double-write.
+
+---
+
+### US-IND-31: Study-mode toggle in the content stage (semantics + persistence)
+**As an** individual, **I want** a study-mode toggle, **so that** I can switch the reader between modes and have it stick.
+**Routes/code:** `components/learning/content-stage.tsx` (`modeToggleLabel`) · `content-sidebar.tsx`.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Toggle study mode on/off | Layout/progress-tracking changes as designed | ⬜ | — | — |
+| EC2 | Toggle → **reload** | Setting persists across reload (depth-3 oracle) | ⬜ | — | — |
+| EC3 | Toggle persists across locale switch | Preserved when switching uz/ru/en | ⬜ | — | i18n |
+| EC4 | Toggle aria-label localized | uz/ru localized, no raw key | ⬜ | — | — |
+| EC5 | Keyboard access to toggle | Reachable via Tab, visible focus, Space/Enter toggles | ⬜ | — | a11y |
+| EC6 | Mobile toggle | Reachable in drawer/stage at 390px | ⬜ | — | mobile |
+
+**Notes / open questions**
+- Confirm what "study mode" changes functionally (progress tracking vs pure layout) so the oracle is concrete.
+
+---
+
+### US-IND-32: Text-selection "Ask AI" popover → auto-open Chat seeded with excerpt
+**As an** individual, **I want** to select text and ask the AI about it, **so that** the tutor answers scoped to my selection — without a duplicate panel opening on desktop.
+**Routes/code:** `components/learning/{section-reader,selection-ask}.tsx` · chat panel · `ContentLearnPanelSheet` (F63 regression class).
+**Priority:** P1 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Selecting text shows an Ask-AI popover near the selection; clicking it opens Chat pre-seeded with the excerpt.
+- AC2 — On **desktop** the visible panel's AI-Tutor tab is seeded; the mobile Learn sheet must NOT also open (F63 duplicate-panel regression).
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Select text → popover position | Near selection; repositions at viewport edges, not clipped | ⬜ | — | — |
+| EC2 | Click Ask AI (desktop 1440px) | Chat seeded with excerpt; **0 duplicate dialogs/backdrops** (F63) | ⬜ | — | S2 regression guard |
+| EC3 | Click Ask AI (mobile 390px) | Mobile Learn sheet opens seeded; single panel | ⬜ | — | mobile |
+| EC4 | Empty/whitespace selection | No popover / no-op; no empty chat seed | ⬜ | — | — |
+| EC5 | Selection spanning KaTeX/mermaid block | Excerpt captured sanely; no crash; chat seed readable | ⬜ | — | — |
+| EC6 | Selection across page/section boundary | Excerpt captured or gracefully truncated; scope respected | ⬜ | — | — |
+| EC7 | Ask-AI respects learner scope + quota | Seeded question honours role scope and 402 quota | ⬜ | — | isolation |
+| EC8 | Keyboard access to the popover | Reachable / dismissible via keyboard | ⬜ | — | a11y |
+| EC9 | i18n popover + seeded prompt uz/ru | Localized, no English leak | ⬜ | — | — |
+| EC10 | Rapid re-select (OCD tour) | Popover repositions, no stale excerpt, no stacked panels | ⬜ | — | race |
+
+**Notes / open questions**
+- F63 fixed by gating `setPanelOpen(true)` to mobile only — this story is the standing regression guard for that class.
+
+---
+
+### US-IND-33: Section-rail hierarchy navigation
+**As an** individual, **I want** a hierarchical section rail, **so that** I can navigate long content and see where I am.
+**Routes/code:** `components/layout/content-sidebar.tsx` · section-rail.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Nested hierarchy expand/collapse | Sub-sections expand/collapse; state stable | ⬜ | — | — |
+| EC2 | Current-section highlight on scroll | Highlight follows scroll position accurately | ⬜ | — | — |
+| EC3 | Deep-link to a subsection | Rail scrolls/opens to that subsection | ⬜ | — | — |
+| EC4 | Progress ring updates | Ring reflects real progress, not stale | ⬜ | — | — |
+| EC5 | Very long section titles | Truncate with ellipsis, no overflow (truncation sweep) | ⬜ | — | typography |
+| EC6 | Rail on mobile (drawer) | Opens as drawer, navigable, closes cleanly | ⬜ | — | mobile |
+| EC7 | i18n rail labels uz/ru | Localized; ru longer titles don't break layout | ⬜ | — | i18n |
+| EC8 | Keyboard nav of rail | Tab-reachable, logical order, visible focus | ⬜ | — | a11y |
+
+---
+
+### US-IND-34: Podcast transcript sync with real per-segment timings
+**As an** individual, **I want** the transcript to follow the audio and let me click to seek, **so that** I can read along accurately.
+**Routes/code:** `lib/podcast-segments.ts` · `components/podcast/PodcastPlayer.tsx` · `components/learning/TranscriptPanel.tsx`.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Playing audio highlights the correct transcript segment and auto-scrolls.
+- AC2 — Clicking a segment seeks audio to its start.
+- AC3 — Timings rescale when server duration ≠ audio duration; a LEGACY episode with no persisted timings falls back to derived timings without crashing.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Play → highlight tracks `currentTime` | Correct segment highlighted; auto-scrolls | ⬜ | — | player oracle via `browser_evaluate` |
+| EC2 | Click a segment → seek | `audio.currentTime` jumps to segment start | ⬜ | — | — |
+| EC3 | Server duration ≠ audio duration | Timings rescale; highlight still accurate | ⬜ | — | deliberate mismatch |
+| EC4 | LEGACY episode, no persisted timings | Falls back to char-weight derivation; still highlights, no crash | ⬜ | — | — |
+| EC5 | Seek across a segment boundary | Highlight updates to the correct segment | ⬜ | — | — |
+| EC6 | Playback-rate change (0.5/1.5/2) | Sync holds; rate persists across parts | ⬜ | — | — |
+| EC7 | Drift at end of a long episode | Last segment stays highlighted through `ended` | ⬜ | — | — |
+| EC8 | Empty-segments episode | Renders old behaviour, no crash | ⬜ | — | — |
+| EC9 | Mobile transcript panel | Renders, scrolls, taps seek at 390px | ⬜ | — | mobile |
+| EC10 | uz/ru transcript with long words | No overflow; line highlight aligned | ⬜ | — | i18n |
+| EC11 | Only one media element playing at a time | Starting this podcast pauses any other media | ⬜ | — | player invariant |
+
+---
+
+<!-- ===== AREA: structured question players (LEARNER) ===== -->
+## Area: Structured question-type players & GAME-live (TENANT_LEARNER)
+
+> Code read: `apps/web/components/quiz/question-inputs.tsx` (624 loc),
+> `apps/web/app/[locale]/(learner)/learner/assessments/page.tsx` (HOTSPOT/DRAG_DROP players, `?play` deep-link),
+> `apps/web/components/learner/game-quiz-player.tsx` (847 loc), `leaderboard-table.tsx`,
+> `packages/types/grading.ts` (`gradeQuestion`), `apps/web/components/learner/learner-messages-bell.tsx`,
+> `apps/web/hooks/useTenant.ts`.
+
+---
+
+### US-LEARNER-14: Structured question-type players — grading truth-tables & a11y
+**As a** learner, **I want** every question type to grade fairly and be usable by keyboard/touch, **so that** my score reflects my knowledge regardless of type.
+**Routes/code:** `question-inputs.tsx` · learner assessments HOTSPOT/DRAG_DROP players · `gradeQuestion()`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Each type (MCQ, SHORT, FILL_BLANK cloze, DROPDOWN_CLOZE, MATCHING, ORDERING, HOTSPOT, DRAG_DROP) grades correct=full, wrong=0, and awards partial credit per `creditFraction` where applicable, matching the strict result breakdown.
+- AC2 — Malformed config from the API degrades gracefully (player renders a safe state, does not crash).
+- AC3 — HOTSPOT and DRAG_DROP have a keyboard-operable alternative (WCAG 2.5.7) and usable touch targets.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | MCQ correct/incorrect | full / 0; single-select enforced | ⬜ | — | solve key independently |
+| EC2 | SHORT answer — Uzbek apostrophe variants (U+02BB/U+2018/U+2019/ASCII) | All four accepted as equal by grading | ⬜ | — | apostrophe quadruple |
+| EC3 | FILL_BLANK cloze — one defensible answer per blank | Each blank has exactly one correct answer; grading accepts it | ⬜ | — | oracle: solve every key |
+| EC4 | **DROPDOWN_CLOZE — one chip row per blank** | N blanks → N isolated chip rows; selecting/changing one chip doesn't affect others (regression a9b2c397) | ⬜ | — | S2 regression guard |
+| EC5 | MATCHING with **duplicate right-side labels** | Grades correctly despite duplicate labels; no ambiguity mis-score | ⬜ | — | — |
+| EC6 | MATCHING partial credit | Partial pairs → `creditFraction`, matches breakdown | ⬜ | — | truth-table |
+| EC7 | **ORDERING — submit untouched initial order** | Is starting order a valid answer (question-inputs L110 comment)? Verify not a free point unless intended | ⬜ | — | S2 candidate |
+| EC8 | ORDERING partial credit | Partially-correct order → fractional credit per spec | ⬜ | — | — |
+| EC9 | HOTSPOT click at region borders | Border precision correct; near-miss = wrong, not crash | ⬜ | — | — |
+| EC10 | HOTSPOT image fails to load | Safe error state, still submittable/skippable | ⬜ | — | R8 fault-inject |
+| EC11 | DRAG_DROP correct/incorrect placement | Grades per placement; partial credit if spec allows | ⬜ | — | — |
+| EC12 | **Malformed config** (missing options/regions/pairs) | Player degrades, does not crash or 500; graceful grading | ⬜ | — | S2, adversarial API |
+| EC13 | Adversarial submit (missing pair, dup ordering index, out-of-bounds hotspot coords) | Server grades gracefully, no 500 | ⬜ | — | API table-test |
+| EC14 | Garbage answer → 0; keyed answer → 100% | Metamorphic-tight | ⬜ | — | — |
+| EC15 | HOTSPOT/DRAG_DROP **keyboard** operation | Fully operable without a mouse; visible focus | ⬜ | — | S2 a11y (WCAG 2.5.7) |
+| EC16 | HOTSPOT/DRAG_DROP **touch** (390px + emit-touch) | Tap/drag works; targets ≥44px | ⬜ | — | mobile, R12 |
+| EC17 | One full quiz per type completed keyboard-only | Each type finishable via keyboard | ⬜ | — | a11y |
+| EC18 | KaTeX in stems/options/chips | Renders in every player (US-XCUT-22) | ⬜ | — | — |
+| EC19 | i18n type labels + instructions uz/ru | Localized, no English leak | ⬜ | — | — |
+| EC20 | Cross-tenant/foreign question via crafted id | 404 via isolation guard | ⬜ | — | S1 |
+
+**Notes / open questions**
+- EC7 must pin behaviour with a test before anyone "fixes" it — document the intended semantics of an untouched ORDERING submission.
+
+---
+
+### US-LEARNER-15: GAME live — dashboard banner + `?play` deep-link
+**As a** learner, **I want** to see when a game goes live and jump straight in, **so that** I join the class game on time.
+**Routes/code:** learner dashboard live-game banner · `learner/assessments/page.tsx` (`?play` deep-link L866) · 60s poll.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Owner schedules a start time | Learner sees "scheduled" state; **cannot play early** (server-gated, not UI-only) | ⬜ | — | S2, curl pre-scheduledAt |
+| EC2 | Owner goes live | Banner appears on learner dashboard within poll interval (bounded wait) | ⬜ | — | two-actor: curl owner |
+| EC3 | `?play` deep-link | Opens the correct game | ⬜ | — | — |
+| EC4 | Banner appears/disappears without manual refresh | Poll-driven; disappears on end-live | ⬜ | — | — |
+| EC5 | Deep-link to an ended/foreign game | Clean error, no crash, no cross-tenant access | ⬜ | — | S1 isolation |
+| EC6 | Banner i18n uz/ru | Localized | ⬜ | — | — |
+| EC7 | Banner mobile layout (390px) | Fits, tappable, no overflow | ⬜ | — | mobile |
+| EC8 | Submit attempt **before** scheduledAt/go-live via raw API | 403/blocked server-side | ⬜ | — | S2, curl |
+
+**Notes / open questions**
+- Second concurrent actor is `curl :4000` (two accounts can't share one browser context) — owner goes live via API while learner tab polls.
+
+---
+
+### US-LEARNER-16: GAME with structured types under the per-question timer + timeout races
+**As a** learner, **I want** structured questions to work under the game timer, **so that** timeouts and mid-drag expiry behave sanely.
+**Routes/code:** `game-quiz-player.tsx` (`maxStreak` L277) · per-question timer · structured players.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | HOTSPOT/DRAG_DROP under per-question timer | Playable; timeout mid-drag resolves to a scored/blank answer, no crash | ⬜ | — | R9, no page.clock |
+| EC2 | Timer expiry at buzzer | Answer locked at expiry; server-authoritative timing honoured | ⬜ | — | S2 |
+| EC3 | Speed-points + streak math in HUD vs server result | HUD matches server (Nodira recompute) | ⬜ | — | — |
+| EC4 | **Forged tiny `responseMs`** (page.route body-rewrite) | Server clamps / ignores client timing; leaderboard integrity holds | ⬜ | — | S2, F39, soap "cheater" |
+| EC5 | Machine-gun ~0.3s answers | No dup submits; speed points plausible | ⬜ | — | R9 machine-gun |
+| EC6 | End-live mid-attempt (race) | In-flight player sees a clean end state, no crash/hang | ⬜ | — | S2 race |
+| EC7 | Refresh mid-timer | Timer reflects server truth on reload, no free time (R2) | ⬜ | — | — |
+| EC8 | HUD i18n uz/ru | Localized | ⬜ | — | — |
+| EC9 | HUD mobile layout | Fits 390px, timer/streak visible | ⬜ | — | mobile |
+
+**Notes / open questions**
+- `page.clock` is forbidden here — GAME timing is server-authoritative; use real bounded `browser_wait_for` for human-speed profile.
+
+---
+
+### US-LEARNER-17: Quiz review / strict result breakdown after finishing
+**As a** learner, **I want** a per-question breakdown after I finish, **so that** I see exactly what I got right, wrong, and partial.
+**Routes/code:** learner assessments review view · `gradeQuestion` breakdown · leaderboard.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Review shows per-question correct/wrong | Accurate against the key | ⬜ | — | solve key |
+| EC2 | Partial credit on MATCHING/ORDERING in breakdown | Fractional credit shown, matches score | ⬜ | — | — |
+| EC3 | Your-answer vs correct-answer per question | Both shown, correctly attributed | ⬜ | — | — |
+| EC4 | KaTeX in review stems/options | Renders (US-XCUT-22) | ⬜ | — | — |
+| EC5 | Review i18n uz/ru | Localized | ⬜ | — | — |
+| EC6 | Review mobile layout | Fits 390px | ⬜ | — | mobile |
+| EC7 | Foreign attempt review via crafted id | 404 isolation | ⬜ | — | S1 |
+
+---
+
+### US-LEARNER-18: Messaging (learner side) — receive, reply, mark-read, bell poll
+**As a** learner, **I want** to receive tutor messages, reply, and see unread counts, **so that** I can communicate with my tutor.
+**Routes/code:** `learner-messages-bell.tsx` · `GET /learner/messages`, `POST /learner/messages/:id/{read,reply}` · 60s poll · `useTenant.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — A tutor broadcast increments the learner's bell badge within the 60s poll; opening the thread and posting a reply appears in the tutor inbox.
+- AC2 — Mark-read clears the badge and stays cleared after reload.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Tutor sends → bell badge increments within 60s | Badge updates on poll | ⬜ | — | two-actor curl owner |
+| EC2 | Open thread → reply posts | Reply appears in tutor inbox thread | ⬜ | — | — |
+| EC3 | Mark-read → badge clears → reload | Stays cleared (persisted) | ⬜ | — | depth-3 |
+| EC4 | Empty inbox state | Clean empty state, no crash | ⬜ | — | — |
+| EC5 | **Deactivated learner** excluded from broadcast | Does not receive; reply blocked (requireActiveLearner) | ⬜ | — | S1 |
+| EC6 | **IDOR: read/reply another learner's message id (same tenant)** | 404/403; never reads foreign thread | ⬜ | — | S1 |
+| EC7 | **IDOR: cross-tenant message id** (tutor B's message) | 404/403 | ⬜ | — | S1 |
+| EC8 | INDIVIDUAL role hits learner message routes | Blocked / 404 (must not poll) | ⬜ | — | isolation |
+| EC9 | XSS payload in message body | Rendered escaped in learner panel | ⬜ | — | S2 |
+| EC10 | Reply while offline | Visible error + retry, not silent drop | ⬜ | — | R7 |
+| EC11 | Reply to a thread whose class-membership was removed | Negative handled cleanly | ⬜ | — | race |
+| EC12 | Bell panel i18n uz/ru | Localized | ⬜ | — | — |
+| EC13 | Mobile sheet rendering of panel | Renders as sheet, scrolls, no overflow | ⬜ | — | mobile |
+| EC14 | Two tabs, same account, one marks read | Other tab reflects on next poll, no dup badge (R4) | ⬜ | — | race |
+
+---
+
+<!-- ===== AREA: assessment authoring, GAME-live control, messaging, CSV, mastery (OWNER) ===== -->
+## Area: Assessment builder, GAME-live control, messaging, CSV import/export (TENANT_OWNER)
+
+> Code read: `apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx` (1332 loc, `dueAt` L1248, LiveControls L221-300),
+> `apps/web/components/tenant/question-editor.tsx` (911 loc), `material-media-panel.tsx`,
+> `apps/web/app/[locale]/(tenant)/tenant/students/page.tsx` (926 loc, csv dialog L83-217, export L140-156),
+> `apps/web/components/tenant/tenant-messages-bell.tsx`, `useTenant.ts`,
+> `apps/api/src/services/assessment/{assessments,learner,results,shared}.ts`,
+> `apps/api/src/services/tenant/{students,messages}.ts`, `sectionMastery.service.ts`.
+
+---
+
+### US-OWNER-18: Mastery-by-topic on tenant progress
+**As a** tenant owner, **I want** a mastery-by-topic view, **so that** I see class coverage.
+**Routes/code:** tenant progress page (`masteryByTopic*`, `openStudyView` keys) · `sectionMastery.service`.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Empty state (no materials assigned) | "Assign materials and coverage appears" empty copy | ⬜ | — | — |
+| EC2 | Populated mastery-by-topic | Topics + mastery render; numbers reconcile (Nodira) | ⬜ | — | — |
+| EC3 | New topic with no attempts | Baseline, never NaN | ⬜ | — | — |
+| EC4 | "Open study view" navigation | Lands the right section | ⬜ | — | ties US-IND-33 |
+| EC5 | i18n labels uz/ru | Localized | ⬜ | — | — |
+| EC6 | Mobile layout | Fits 390px | ⬜ | — | mobile |
+| EC7 | Cross-tenant: owner B cannot see owner A topics | Scoped to own org | ⬜ | — | S1 |
+
+---
+
+### US-OWNER-19: Assessment authoring builder — all 8 types round-trip owner→learner
+**As a** tenant owner, **I want** to compose an assessment from all v2 question types, **so that** learners get exactly the questions I built.
+**Routes/code:** `tenant/assessments/page.tsx` · `question-editor.tsx` (structured-type authoring).
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — An assessment mixing all 8 types is built, published, assigned, and each type renders + grades correctly for the learner.
+- AC2 — The question-editor validates incomplete configs before save (no unrenderable question ships).
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Build MCQ / SHORT / FILL_BLANK / DROPDOWN_CLOZE / MATCHING / ORDERING / HOTSPOT / DRAG_DROP | Each authored, saved, renders for learner | ⬜ | — | 8 rows |
+| EC2 | MATCHING pairs add/remove | Pairs editable; min-pair validation | ⬜ | — | — |
+| EC3 | ORDERING items reorder | Items editable; order captured | ⬜ | — | — |
+| EC4 | Cloze blank syntax | Blanks parsed; N blanks → N answers | ⬜ | — | — |
+| EC5 | HOTSPOT region drawing | Regions drawn/saved; coords valid | ⬜ | — | — |
+| EC6 | DRAG_DROP targets | Targets + draggables authored | ⬜ | — | — |
+| EC7 | **Invalid config save** (missing options/regions/pairs) | Validation blocks save with a clear message; no unrenderable question | ⬜ | — | S2 |
+| EC8 | Round-trip: publish → assign → learner renders+grades each type | Owner intent == learner experience | ⬜ | — | FedEx tour |
+| EC9 | **Edit-after-assign while student mid-attempt (race)** | Student does not see stale/mismatched questions mid-attempt; defined behaviour | ⬜ | — | S2 race |
+| EC10 | **DRAFT assign blocked** (F56 regression) | Assigning a DRAFT → 400 | ⬜ | — | S2 regression guard |
+| EC11 | Builder i18n uz/ru | Localized editor labels | ⬜ | — | — |
+| EC12 | Builder mobile layout | Usable/degraded-gracefully at 390px | ⬜ | — | mobile |
+| EC13 | KaTeX in authored stems/options | Renders for learner | ⬜ | — | — |
+| EC14 | Cross-tenant: owner B cannot edit owner A's assessment | 404/403 | ⬜ | — | S1 |
+
+---
+
+### US-OWNER-20: Due-date enforcement matrix
+**As a** tenant owner, **I want** to set due dates, **so that** submissions after the deadline are blocked server-side.
+**Routes/code:** `POST /tenant/assessments/:id/assign` (`dueAt`) · `assessment/learner.ts` (403 past due L84-98) · `shared.ts` (stale "informational only" comment L168).
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Setting a due date and submitting after it returns 403 server-side (WRITTEN and GAME); the stale shared.ts comment must be reconciled with the enforcing code.
+- AC2 — The earliest non-null `dueAt` across a learner's multiple assignment rows governs; null-vs-dated semantics documented.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Set due date | Persists; learner sees due badge | ⬜ | — | — |
+| EC2 | Clear due date | Reverts to no-deadline | ⬜ | — | — |
+| EC3 | Past date set at assign | Rejected? — pin behaviour (accept-with-warning vs reject) | ⬜ | — | — |
+| EC4 | Submit 1s **before** due | Accepted | ⬜ | — | curl boundary |
+| EC5 | Submit 1s **after** due | 403 server-side (both WRITTEN + GAME) | ⬜ | — | S2, pin both sides |
+| EC6 | Attempt started before, submitted after (timed GAME) | Mid-attempt expiry UX defined; not silent data loss | ⬜ | — | S2 race |
+| EC7 | Two assignment rows: one dueAt + one null | Earliest non-null wins — pin as intended semantics | ⬜ | — | — |
+| EC8 | Due-date render TZ (Asia/Tashkent) | Tutor picker day == learner render day; 23:59 vs 00:00 boundary | ⬜ | — | CDP setTimezoneOverride |
+| EC9 | Overdue styling i18n/relative-time uz/ru | Localized, correct Uzbek relative time | ⬜ | — | — |
+| EC10 | Mobile due badge | Renders 390px | ⬜ | — | mobile |
+
+**Notes / open questions**
+- `learner.ts` hard-blocks (403) but `shared.ts:168` says display-only — behaviour must be pinned by tests before either side is "fixed".
+
+---
+
+### US-OWNER-21: GAME-live lifecycle — schedule → go-live → end-live with a concurrent learner
+**As a** tenant owner, **I want** to schedule, launch, and end a live game, **so that** the class plays together with a live leaderboard.
+**Routes/code:** `tenant/assessments/page.tsx` LiveControls (`scheduledAt`, `isLive`, goLive/endLive) · `PATCH .../schedule`, `POST .../go-live` · `GET .../leaderboard`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Schedule sets a start; go-live opens play (learner blocked before); end-live closes it; the live leaderboard updates for concurrent players.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Schedule a start time | Learner sees "scheduled", cannot play early (server-gated) | ⬜ | — | curl learner |
+| EC2 | Go-live | Play opens; learner banner appears (US-LEARNER-15) | ⬜ | — | — |
+| EC3 | **Double go-live clicks** | Idempotent; one live state, no dup (R1) | ⬜ | — | race |
+| EC4 | End-live mid-attempt | In-flight learner sees clean end (US-LEARNER-16·EC6) | ⬜ | — | S2 race |
+| EC5 | Two learners playing simultaneously | Live leaderboard updates for both; ranks consistent | ⬜ | — | curl 2nd actor |
+| EC6 | Leaderboard tie-break with null `durationMs` | Stable, deterministic tie-break | ⬜ | — | — |
+| EC7 | Leaderboard self-highlight (`highlightId` passed) | Current learner row highlighted (verify fix) | ⬜ | — | — |
+| EC8 | Schedule then **clear** the schedule | Reverts to unscheduled; learner state updates | ⬜ | — | — |
+| EC9 | **maxAttempts race** — two parallel submits | attempts ≤ maxAttempts (no sneak-past) | ⬜ | — | S2 race, Promise.all×5 |
+| EC10 | Leaderboard privacy | Learner endpoint doesn't leak other students' emails; cross-assessment id probe 404 | ⬜ | — | S1 |
+| EC11 | LiveControls i18n uz/ru | Localized | ⬜ | — | — |
+| EC12 | Mobile LiveControls | Usable 390px | ⬜ | — | mobile |
+
+---
+
+### US-OWNER-22: Messaging (owner side) — broadcast → inbox respond → mark-read
+**As a** tenant owner, **I want** to broadcast to students and respond to their replies, **so that** I run two-way threaded messaging.
+**Routes/code:** `tenant-messages-bell.tsx` · `GET/POST /tenant/messages`, `POST /tenant/messages/:id/{read,respond}` · `useTenant.ts` · `services/tenant/messages.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Owner broadcasts to a subset of active learners; each recipient's bell increments; owner sees replies in the inbox thread and can respond.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Broadcast to a subset of active learners | Only selected active learners receive | ⬜ | — | — |
+| EC2 | Deactivated learner excluded | Not a recipient | ⬜ | — | S1 |
+| EC3 | Learner reply appears in owner inbox thread | Thread shows reply | ⬜ | — | — |
+| EC4 | Owner respond continues thread | Response appended | ⬜ | — | — |
+| EC5 | Owner bell unread count | Increments on new reply; clears on read; stays cleared after reload | ⬜ | — | depth-3 |
+| EC6 | **IDOR: respond to a foreign message id** (org Y) | 404/403 | ⬜ | — | S1 |
+| EC7 | POST `/respond` where `:id` is a tutor message not a student reply | Rejected / handled, no state corruption | ⬜ | — | S2 |
+| EC8 | XSS in broadcast body | Escaped in learner + owner render | ⬜ | — | S2 |
+| EC9 | Empty / oversized body | Validation; no crash | ⬜ | — | — |
+| EC10 | 60s bell poll both roles | Owner bell updates within poll | ⬜ | — | — |
+| EC11 | Reply-while-tutor-deletes-thread (race) | Handled cleanly | ⬜ | — | race |
+| EC12 | i18n thread UI uz/ru | Localized | ⬜ | — | — |
+| EC13 | Mobile inbox sheet | Renders 390px | ⬜ | — | mobile |
+| EC14 | unread-count endpoint gating (INDIVIDUAL must not poll/404) | INDIVIDUAL blocked | ⬜ | — | isolation |
+
+---
+
+### US-OWNER-23: CSV student import — valid / malformed / dup / seat-limit boundary
+**As a** tenant owner, **I want** to bulk-import students from CSV, **so that** I onboard a class fast with clear per-row errors.
+**Routes/code:** `tenant/students/page.tsx` (csv dialog L83-217) · `POST /tenant/students/import` · `services/tenant/students.ts`.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — Valid CSV creates students and shows credentials once; malformed rows are reported per-row with partial-success semantics defined.
+- AC2 — Import crossing the seat limit is blocked at the boundary with a clear error.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Valid CSV paste | Students created; credentials shown once | ⬜ | — | fixture students-valid.csv |
+| EC2 | Missing-name row | Per-row error; other rows outcome per defined semantics | ⬜ | — | students-malformed.csv |
+| EC3 | Bad-email row | Per-row error | ⬜ | — | — |
+| EC4 | Duplicate within the paste | Per-row dup error | ⬜ | — | — |
+| EC5 | Duplicate vs existing student (incl. synthetic `@students.talim.local`) | Per-row dup error | ⬜ | — | — |
+| EC6 | **Import exceeding seat limit** | Blocked at boundary row; clear "seat limit" error (not "upload") | ⬜ | — | S2, boundary |
+| EC7 | **All-or-nothing vs continue-on-error** | Pin the partial-success semantics | ⬜ | — | — |
+| EC8 | Email-less kid rows | Synthetic email + `mustChangePassword` set | ⬜ | — | — |
+| EC9 | BOM / semicolon-delimited / Windows-1251 / Excel-quoted | Parsed correctly; Uzbek chars intact | ⬜ | — | encoding attacks |
+| EC10 | 500-row paste (perf) | Completes under bounded wall-clock; no hang | ⬜ | — | anti-stall |
+| EC11 | **Concurrent import + single-create race** near last seat | Exactly-one path consumes the last seat | ⬜ | — | S2 race |
+| EC12 | XSS in a name round-tripping to export | Escaped on render and on export | ⬜ | — | S2 |
+| EC13 | Dialog i18n uz/ru | Localized | ⬜ | — | — |
+| EC14 | Mobile dialog | Usable 390px | ⬜ | — | mobile |
+| EC15 | Cross-tenant: import can't target another org | Scoped to own org | ⬜ | — | S1 |
+
+---
+
+### US-OWNER-24: CSV export — escaping & formula-injection safety
+**As a** tenant owner, **I want** to export selected students to CSV, **so that** I have a roster — without exposing spreadsheet formula-injection.
+**Routes/code:** `tenant/students/page.tsx` export L140-156 (`escapeCsv`).
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Export selected rows | CSV downloads with correct columns | ⬜ | — | — |
+| EC2 | **Formula injection** (`=CMD`, `+`, `-`, `@` leading) | Escaped (prefix `'` or quoted) so Excel won't execute | ⬜ | — | S2 |
+| EC3 | Commas / quotes / newlines in names | Quoted/escaped correctly | ⬜ | — | — |
+| EC4 | Export with 0 selected | No-op / disabled; no empty-file crash | ⬜ | — | — |
+| EC5 | Unicode / Uzbek apostrophe names round-trip | Unmangled in export | ⬜ | — | — |
+| EC6 | Trailing newline / BOM in output | Consistent, no stray whitespace | ⬜ | — | clipboard-style check |
+
+---
+
+### US-OWNER-25: Material detail page + per-part media generate/retry/fail
+**As a** tenant owner, **I want** to generate/retry media per section "part", **so that** I control media production granularly.
+**Routes/code:** `tenant/materials/[id]/page.tsx` · `material-media-panel.tsx`.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Per-section generate video/podcast part | Part generates; status transitions correctly | ⬜ | — | manual per-part (memory) |
+| EC2 | Retry a FAILED part independently | Only that part re-runs | ⬜ | — | — |
+| EC3 | Generate two parts concurrently | Both progress; no cross-corruption | ⬜ | — | race |
+| EC4 | Quota exhaustion mid-parts | 402 surfaced on the part; others unaffected | ⬜ | — | — |
+| EC5 | Stuck part past wall-clock cap | Marked blocked-on-job, not a stall | ⬜ | — | anti-stall |
+| EC6 | Assigned-students summary on page | Accurate count/list | ⬜ | — | — |
+| EC7 | Navigate to assign from detail | Lands assign flow | ⬜ | — | — |
+| EC8 | **Learner never sees this page** | Role guard blocks/redirects | ⬜ | — | S1 |
+| EC9 | i18n uz/ru | Localized | ⬜ | — | — |
+| EC10 | Mobile parts-list layout | Fits 390px | ⬜ | — | mobile |
+
+---
+
+<!-- ===== AREA: admin impersonation / analytics / moderation ===== -->
+## Area: Admin impersonation, analytics, content moderation
+
+> Code read: `POST /admin/users/:id/impersonate` · `apps/api/src/lib/impersonation.ts` ·
+> `apps/api/src/controllers/admin/{users,content,analytics}.controller.ts` ·
+> `apps/web/app/[locale]/impersonate/page.tsx` · `apps/admin/app/(admin)/{dashboard,content,users/[id]}`.
+
+---
+
+### US-ADMIN-08b: Impersonation lifecycle + token-abuse negative matrix
+**As a** platform admin, **I want** to impersonate a user safely, **so that** I can debug their view without a standing security hole.
+**Routes/code:** `POST /admin/users/:id/impersonate` · `impersonation.ts` (stateless 30-min JWT) · web `/[locale]/impersonate`.
+**Priority:** P0 (S1 security) · **Last verified:** ⬜
+
+**Acceptance criteria**
+- AC1 — An impersonation token lands the admin in the target's role/routes; exiting restores the admin session; an audit row records the impersonation.
+- AC2 — Token is single-use/expiring; tamper, replay, and impersonating disallowed targets are rejected.
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Non-admin hits `/impersonate` endpoint | 403 (router gate) | ⬜ | — | S1 |
+| EC2 | Impersonate an ADMIN | 403 | ⬜ | — | S1 |
+| EC3 | Impersonate self | 400 | ⬜ | — | — |
+| EC4 | Impersonate nonexistent user | 404 | ⬜ | — | — |
+| EC5 | Impersonate a **deactivated** TENANT_LEARNER | `requireActiveLearner` still 403s on /learner/* — verify | ⬜ | — | S1 |
+| EC6 | Token decoded: `imp:true` + `impersonatorId` + 30m exp | Present and correct | ⬜ | — | curl decode |
+| EC7 | Impersonated session hits **admin routes** | 403 (cannot escalate back to admin) | ⏭️ | — | — |
+| EC8 | **Replay a used accept URL** | Rejected (single-use) | ⬜ | — | S1, soap "impersonator" |
+| EC9 | **Tampered token** | Rejected | ⬜ | — | S1 |
+| EC10 | Token expiry at 30m mid-session | Clean expiry UX, not a 401 storm | ⬜ | — | — |
+| EC11 | Exit flow on web `/[locale]/impersonate` | Restores admin session (or documents cross-origin behaviour) | ⬜ | — | — |
+| EC12 | IMPERSONATE audit row | Written with correct `impersonatorId` + metadata | ⬜ | — | — |
+| EC13 | Actions taken **while impersonated** | Audit attribution defined (target vs admin trail) — flag if admin trail lost | ⬜ | — | S2 candidate |
+| EC14 | Accept while already logged in as someone else | No silent session clobber; defined behaviour | ⬜ | — | — |
+| EC15 | Locale on the accept route | Preserved | ⬜ | — | i18n |
+| EC16 | Impersonated session can perform ALL target writes (delete content, change pw, submit) | Document the scope; if unrestricted + non-revocable, S1 finding | ⬜ | — | S1 |
+
+**Notes / open questions**
+- Per apiAdminGaps: nothing downstream inspects `imp:true`, so an impersonated session may perform all target writes and is not revocable after exit — this is the central S1 hypothesis to confirm/refute with evidence.
+
+---
+
+### US-ADMIN-10: Analytics dashboard — 8 endpoints, empty-DB, param fuzz, rate limit
+**As a** platform admin, **I want** the analytics dashboard, **so that** I see platform health without crashes on empty data.
+**Routes/code:** `GET /admin/analytics/{summary,mrr,user-growth,by-role,funnel,content-by-type,top-orgs,spend-by-model}` · `analytics.controller.ts` · admin dashboard.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Each of the 8 endpoints on populated DB | 200, plausible numbers (cross-check seed) | ⬜ | — | 8 rows |
+| EC2 | **Empty DB** (funnel/MRR divide-by-zero) | 0/NaN-safe rendering, no crash | ⬜ | — | S2 |
+| EC3 | `days` param negative / huge / non-numeric | Validated; no crash/OOM | ⬜ | — | numeric fuzz |
+| EC4 | MRR given manual/ADMIN-source subs (no real payments) | Correct given manual-activation model | ⬜ | — | — |
+| EC5 | Dashboard fires 8+ requests → **429** (120/60s admin bucket) | UI handles 429 gracefully on rapid refresh | ⬜ | — | schedule LAST |
+| EC6 | Number/currency formatting | so'm/thousands formatting correct | ⬜ | — | — |
+| EC7 | Empty-tenant range | Renders empty range cleanly | ⬜ | — | — |
+
+**Notes / open questions**
+- Admin panel has no i18n — do not run locale checks here; English is intentional.
+
+---
+
+### US-ADMIN-11: Content moderation — approve/flag effects visible to end users + content detail
+**As a** platform admin, **I want** to flag/approve generated media, **so that** flagged content is actually hidden from learners (or documented as label-only).
+**Routes/code:** `POST /admin/generated/:kind/:mediaId/review` · `GET /admin/content/:id/detail` · `content.controller.ts` L197,230.
+**Priority:** P0 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Approve a PENDING media | Transitions to APPROVED; audit row `generated.review` | ⬜ | — | — |
+| EC2 | Flag a media | Transitions to FLAGGED; audit row | ⬜ | — | — |
+| EC3 | **FLAGGED media visibility to INDIVIDUAL + TENANT_LEARNER** | Hidden from learners — or, if label-only, documented as a product gap | ⬜ | — | S2 candidate |
+| EC4 | Unflag / re-review | Transitions back; audit each transition | ⬜ | — | — |
+| EC5 | Invalid `:kind` / bogus `mediaId` | 400/404, no crash | ⬜ | — | — |
+| EC6 | `mediaId` of a deleted content | Handled cleanly | ⬜ | — | — |
+| EC7 | Flag-while-learner-is-reading (race) | Consistent state; no crash | ⬜ | — | race |
+| EC8 | `GET /admin/content/:id/detail` for FAILED content | Renders detail, no leak of internals to non-admin | ⬜ | — | — |
+| EC9 | Content detail for deleted-mid-request content | Clean 404 | ⬜ | — | — |
+| EC10 | Audit rows for `generated.review`, `IMPERSONATE`, `content.retry_job`, `user.update` | One row per action, correct targetType/metadata | ⬜ | — | audit inventory gap |
+| EC11 | Delete/retry from content detail | Works + audits | ⬜ | — | — |
+
+---
+
+<!-- ===== AREA: XCUT — new players math, static pages ===== -->
+## Area: XCUT — KaTeX in all players, static pages, TypeBadge i18n
+
+---
+
+### US-XCUT-22: KaTeX / math rendering across every question & media player
+**As a** user, **I want** math to render in every player, **so that** equations are readable wherever they appear.
+**Routes/code:** `lib/preprocess-latex.ts` · `quiz/question-inputs.tsx` · `game-quiz-player.tsx` · flashcards page · review breakdown.
+**Priority:** P1 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | LaTeX in stems (practice/quiz/WRITTEN/GAME) | Renders; `.katex-error`==0; no raw `$$`/`\frac` in snapshot | ⬜ | — | deterministic oracle |
+| EC2 | LaTeX in MC option radio labels | Renders in labels | ⬜ | — | — |
+| EC3 | LaTeX in cloze chips | Renders in chips | ⬜ | — | — |
+| EC4 | LaTeX on flashcard front/back | Renders both sides | ⬜ | — | — |
+| EC5 | LaTeX in GAME player under timer | Renders during live game | ⬜ | — | — |
+| EC6 | LaTeX in result-breakdown/review | Renders in review | ⬜ | — | — |
+| EC7 | **Malformed LaTeX** | Degrades gracefully (no crash, safe fallback) | ⬜ | — | negative |
+| EC8 | uz text mixed with math | Both render, no leak/garble | ⬜ | — | i18n |
+| EC9 | Dark theme math rendering | Legible on dark | ⬜ | — | theme |
+| EC10 | Wide equation on mobile | Scrolls/wraps, no horizontal page scroll | ⬜ | — | mobile |
+
+---
+
+### US-XCUT-23: Static pages — `/terms` + `/pricing` (i18n, CTA-by-role)
+**As a** visitor, **I want** localized terms and pricing pages, **so that** they read natively and route CTAs correctly for my auth state.
+**Routes/code:** `apps/web/app/[locale]/{terms,pricing}/page.tsx` · UpgradeDialog · `lib/pricing.ts`.
+**Priority:** P2 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | `/uz/terms` + `/uz/pricing` render | No raw keys, no English leak (Uzbek-first) | ⬜ | — | regex sweep |
+| EC2 | `/ru` + `/en` variants | Localized, key symmetry across all 3 | ⬜ | — | — |
+| EC3 | Pricing CTA — logged-out | Routes to register | ⬜ | — | CTA-by-role matrix |
+| EC4 | Pricing CTA — logged-in FREE individual | Opens upgrade modal | ⬜ | — | — |
+| EC5 | Pricing CTA — tenant owner | Routes to tenant billing | ⬜ | — | — |
+| EC6 | Pricing consistency with manual-activation model | No checkout/payment implied | ⬜ | — | — |
+| EC7 | Terms reachable from register flow | Link resolves per-locale | ⬜ | — | — |
+| EC8 | `<html lang>` / meta / title per locale | Correct per route/locale | ⬜ | — | SEO |
+| EC9 | Mobile layout both pages | Fits 390px, no overflow | ⬜ | — | mobile |
+
+---
+
+### US-XCUT-24: TypeBadge i18n on content grids
+**As a** user, **I want** content-type badges localized, **so that** every list surface reads natively.
+**Routes/code:** `apps/web/components/dashboard/recent-content-grid.tsx` (TypeBadge) · `messages/{uz,ru,en}.json`.
+**Priority:** P2 · **Last verified:** ⬜
+
+**Edge cases & negative paths**
+| # | Scenario | Expected behaviour | Status | Finding | Fix |
+| --- | --- | --- | --- | --- | --- |
+| EC1 | Every ContentType badge in uz/ru/en | Localized label per type; no raw key | ⬜ | — | snapshot per locale |
+| EC2 | Dark-theme badge contrast | ≥4.5:1 in dark | ⬜ | — | contrast audit |
+| EC3 | Mobile badge rendering | No overflow / clip at 390px | ⬜ | — | mobile |
+| EC4 | Admin surfaces use no TypeBadge i18n | Verify admin intentionally English (no i18n) | ⬜ | — | 🚫 by design |

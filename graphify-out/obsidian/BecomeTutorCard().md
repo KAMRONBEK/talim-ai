@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/become-tutor-card.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Shared UI Primitives"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Shared_UI_Primitives
 ---
 
 # BecomeTutorCard()
@@ -18,4 +18,4 @@ tags:
 - [[useMyTutorRequest()]] - `calls` [EXTRACTED]
 - [[useRequestTutor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

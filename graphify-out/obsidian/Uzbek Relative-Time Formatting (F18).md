@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "concept"
-community: "Community 72"
+community: "Visual QA Report"
 location: "Run 5"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_72
+  - community/Visual_QA_Report
 ---
 
 # Uzbek Relative-Time Formatting (F18)
@@ -16,4 +16,4 @@ tags:
 - [[Overnight Visual QA Report]] - `references` [EXTRACTED]
 - [[Uzbek Apostrophe Normalization]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_72
+#graphify/concept #graphify/INFERRED #community/Visual_QA_Report

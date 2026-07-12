@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen-prompt.ts"
 type: "code"
-community: "Assessments Service"
+community: "Quiz Generation Job"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Quiz_Generation_Job
 ---
 
 # typesFromStyle()
@@ -18,4 +18,4 @@ tags:
 - [[question-gen-prompt.ts]] - `contains` [EXTRACTED]
 - [[resolveRequestedTypes()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

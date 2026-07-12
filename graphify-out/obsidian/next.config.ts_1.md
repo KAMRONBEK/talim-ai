@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/next.config.ts"
 type: "code"
-community: "Community 143"
+community: "Community 132"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_143
+  - community/Community_132
 ---
 
 # next.config.ts
@@ -15,4 +15,4 @@ tags:
 - [[nextConfig_1]] - `contains` [EXTRACTED]
 - [[withNextIntl]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_143
+#graphify/code #graphify/EXTRACTED #community/Community_132

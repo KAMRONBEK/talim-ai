@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Community 88"
+community: "Summary & Rich Text"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_88
+  - community/Summary__Rich_Text
 ---
 
 # splitSummaryParagraphs()
@@ -15,4 +15,4 @@ tags:
 - [[format-summary.ts]] - `contains` [EXTRACTED]
 - [[formatSummaryForDisplay()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_88
+#graphify/code #graphify/EXTRACTED #community/Summary__Rich_Text

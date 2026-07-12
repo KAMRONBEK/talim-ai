@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Community 55"
+community: "Subscription Editor UI"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_55
+  - community/Subscription_Editor_UI
 ---
 
 # STATUS_LABELS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[subscription-edit-drawer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_55
+#graphify/code #graphify/EXTRACTED #community/Subscription_Editor_UI

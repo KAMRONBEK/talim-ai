@@ -1,54 +1,49 @@
 ---
 type: community
-cohesion: 0.09
-members: 39
+cohesion: 0.10
+members: 34
 ---
 
 # Assessments Service
 
-**Cohesion:** 0.09 - loosely connected
-**Members:** 39 nodes
+**Cohesion:** 0.10 - loosely connected
+**Members:** 34 nodes
 
 ## Members
+- [[AnswerEvidence]] - code - apps/api/src/services/sectionMastery.service.ts
+- [[LeaderboardAttempt]] - code - apps/api/src/services/assessment/shared.ts
 - [[QuestionStyle_1]] - code - apps/api/src/services/assessment/shared.ts
-- [[SampledChunk]] - code - apps/api/src/lib/chunk-sampling.ts
 - [[SubmitAnswerValue]] - code - apps/api/src/services/assessment/shared.ts
-- [[assertBank()]] - code - apps/api/src/services/assessment/shared.ts
-- [[assertTenantContentIds()]] - code - apps/api/src/services/assessment/shared.ts
+- [[answerToString()]] - code - packages/types/grading.ts
+- [[assertLearnerAssignment()]] - code - apps/api/src/services/assessment/shared.ts
+- [[assessment.service.ts]] - code - apps/api/src/services/assessment.service.ts
 - [[assessments.ts]] - code - apps/api/src/services/assessment/assessments.ts
 - [[assignAssessment()_1]] - code - apps/api/src/services/assessment/assessments.ts
 - [[assignAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[banks.ts]] - code - apps/api/src/services/assessment/banks.ts
-- [[chunk-sampling.ts]] - code - apps/api/src/lib/chunk-sampling.ts
+- [[computeGamePoints()]] - code - apps/api/src/services/assessment/shared.ts
 - [[createAssessment()_1]] - code - apps/api/src/services/assessment/assessments.ts
 - [[createAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[createBank()_1]] - code - apps/api/src/services/assessment/banks.ts
-- [[createBankQuestion()_1]] - code - apps/api/src/services/assessment/banks.ts
-- [[createBankSchema]] - code - apps/api/src/services/assessment/shared.ts
 - [[createQuestionSchema]] - code - apps/api/src/services/assessment/shared.ts
 - [[formatAssessment()]] - code - apps/api/src/services/assessment/shared.ts
-- [[formatBank()]] - code - apps/api/src/services/assessment/shared.ts
-- [[formatQuestion()]] - code - apps/api/src/services/assessment/shared.ts
-- [[generateQuestions()_1]] - code - apps/api/src/services/assessment/banks.ts
-- [[generateSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[getSectionContext()]] - code - apps/api/src/services/assessment/shared.ts
+- [[getAssessmentLeaderboard()]] - code - apps/api/src/services/assessment/results.ts
+- [[getAssessmentResults()]] - code - apps/api/src/services/assessment/results.ts
+- [[getLearnerAssessmentLeaderboard()]] - code - apps/api/src/services/assessment/learner.ts
 - [[goLiveAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
+- [[learner.ts]] - code - apps/api/src/services/assessment/learner.ts
+- [[learnerDisplayName()]] - code - apps/api/src/services/assessment/shared.ts
 - [[listAssessments()_1]] - code - apps/api/src/services/assessment/assessments.ts
-- [[listBanks()_1]] - code - apps/api/src/services/assessment/banks.ts
-- [[listQuestions()_1]] - code - apps/api/src/services/assessment/banks.ts
-- [[patchQuestionSchema]] - code - apps/api/src/services/assessment/shared.ts
+- [[listLearnerAssessments()_1]] - code - apps/api/src/services/assessment/learner.ts
 - [[questionDepthEnum]] - code - apps/api/src/services/assessment/shared.ts
 - [[questionStyleEnum]] - code - apps/api/src/services/assessment/shared.ts
 - [[questionTypeEnum]] - code - apps/api/src/services/assessment/shared.ts
-- [[resolveRequestedTypes()]] - code - apps/api/src/jobs/generateQuiz.job.ts
-- [[sampleChunksEvenly()]] - code - apps/api/src/lib/chunk-sampling.ts
+- [[results.ts]] - code - apps/api/src/services/assessment/results.ts
 - [[scheduleAssessment()_1]] - code - apps/api/src/services/assessment/assessments.ts
 - [[scheduleAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
 - [[setAssessmentLive()]] - code - apps/api/src/services/assessment/assessments.ts
 - [[shared.ts_1]] - code - apps/api/src/services/assessment/shared.ts
 - [[submitAnswerValueSchema]] - code - apps/api/src/services/assessment/shared.ts
 - [[submitAssessmentSchema]] - code - apps/api/src/services/assessment/shared.ts
-- [[typesFromStyle()]] - code - apps/api/src/lib/question-gen-prompt.ts
+- [[submitLearnerAssessment()_1]] - code - apps/api/src/services/assessment/learner.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -58,22 +53,25 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 13 edges to [[_COMMUNITY_Quiz Generation Job]]
-- 10 edges to [[_COMMUNITY_Community 40]]
-- 9 edges to [[_COMMUNITY_Community 45]]
-- 9 edges to [[_COMMUNITY_Community 85]]
-- 8 edges to [[_COMMUNITY_Admin Tenants API]]
-- 6 edges to [[_COMMUNITY_Flashcards API]]
-- 4 edges to [[_COMMUNITY_Community 56]]
-- 4 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Shared Types]]
-- 2 edges to [[_COMMUNITY_Community 105]]
+- 14 edges to [[_COMMUNITY_Question Banks & Builders]]
+- 9 edges to [[_COMMUNITY_Flashcards API & Prisma Seed]]
+- 8 edges to [[_COMMUNITY_Billing, Usage & Limits]]
+- 7 edges to [[_COMMUNITY_Quiz API Controller]]
+- 4 edges to [[_COMMUNITY_Section Mastery & Elo]]
+- 4 edges to [[_COMMUNITY_Grading Engine Types]]
+- 3 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 2 edges to [[_COMMUNITY_Question Post-processing]]
+- 2 edges to [[_COMMUNITY_Quiz Player Inputs]]
+- 2 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
 - 2 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 1 edge to [[_COMMUNITY_Community 32]]
+- 1 edge to [[_COMMUNITY_Assessment & Tutor-Request Controllers]]
+- 1 edge to [[_COMMUNITY_Providers & Job Events]]
+- 1 edge to [[_COMMUNITY_Background Jobs & Queues]]
+- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
 
 ## Top bridge nodes
-- [[shared.ts_1]] - degree 45, connects to 11 communities
-- [[banks.ts]] - degree 41, connects to 9 communities
-- [[assessments.ts]] - degree 16, connects to 3 communities
-- [[formatQuestion()]] - degree 6, connects to 3 communities
-- [[generateQuestions()_1]] - degree 6, connects to 2 communities
+- [[learner.ts]] - degree 25, connects to 10 communities
+- [[shared.ts_1]] - degree 45, connects to 9 communities
+- [[submitLearnerAssessment()_1]] - degree 7, connects to 3 communities
+- [[assessments.ts]] - degree 16, connects to 2 communities
+- [[results.ts]] - degree 11, connects to 2 communities

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 115"
+community: "Tenant Hooks & Messaging"
 location: "L454"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_115
+  - community/Tenant_Hooks__Messaging
 ---
 
 # ClassMastery
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_25]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_115
+#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging

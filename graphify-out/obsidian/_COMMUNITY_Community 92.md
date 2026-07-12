@@ -1,27 +1,26 @@
 ---
 type: community
-cohesion: 0.17
-members: 12
+cohesion: 0.18
+members: 11
 ---
 
 # Community 92
 
-**Cohesion:** 0.17 - loosely connected
-**Members:** 12 nodes
+**Cohesion:** 0.18 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[.tailwind.config]] - code - packages/config/tailwind/package.json
-- [[dependencies_3]] - code - packages/config/tailwind/package.json
-- [[devDependencies_4]] - code - packages/config/tailwind/package.json
-- [[exports]] - code - packages/config/tailwind/package.json
-- [[main_1]] - code - packages/config/tailwind/package.json
-- [[name_6]] - code - packages/config/tailwind/package.json
-- [[package.json_6]] - code - packages/config/tailwind/package.json
-- [[private_6]] - code - packages/config/tailwind/package.json
-- [[tailwindcss_2]] - code - packages/config/tailwind/package.json
-- [[tailwindcss-animate]] - code - packages/config/tailwind/package.json
-- [[type]] - code - packages/config/tailwind/package.json
-- [[version_5]] - code - packages/config/tailwind/package.json
+- [[build_5]] - code - turbo.json
+- [[cache]] - code - turbo.json
+- [[dependsOn]] - code - turbo.json
+- [[dependsOn_1]] - code - turbo.json
+- [[dependsOn_2]] - code - turbo.json
+- [[dev_4]] - code - turbo.json
+- [[lint_5]] - code - turbo.json
+- [[outputs]] - code - turbo.json
+- [[persistent]] - code - turbo.json
+- [[tasks]] - code - turbo.json
+- [[typecheck_6]] - code - turbo.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,3 +28,9 @@ members: 12
 TABLE source_file, type FROM #community/Community_92
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_Community 111]]
+
+## Top bridge nodes
+- [[tasks]] - degree 5, connects to 1 community

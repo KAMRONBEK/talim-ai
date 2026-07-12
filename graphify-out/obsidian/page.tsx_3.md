@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Community 111"
+community: "Community 103"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_111
+  - community/Community_103
 ---
 
 # page.tsx
@@ -24,4 +24,4 @@ tags:
 - [[useAdminGenerated()]] - `imports` [EXTRACTED]
 - [[useReviewGenerated()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_111
+#graphify/code #graphify/EXTRACTED #community/Community_103

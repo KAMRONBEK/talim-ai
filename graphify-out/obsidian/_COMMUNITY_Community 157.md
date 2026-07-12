@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 157
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[Admin SSR error page (hasHydrated TypeError)]] - document - docs/qa/screenshots/_admin_err.html
-- [[Generic Internal Server Error page]] - document - docs/qa/screenshots/_err.html
+- [[Persona Dilnoza (ru-speaking student)]] - concept - docs/qa/human-qa-playbook.md
 
 ## Live Query (requires Dataview plugin)
 

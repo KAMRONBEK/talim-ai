@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/session-sync.tsx"
 type: "code"
-community: "Community 51"
+community: "Providers & Job Events"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/Providers__Job_Events
 ---
 
 # session-sync.tsx
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[providers.tsx_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

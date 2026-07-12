@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "concept"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "Practice generator v2 checks sections"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Practice Generator v2 Live Checks (2026-07-12)
@@ -19,4 +19,4 @@ tags:
 - [[Overnight Visual QA Report]] - `references` [EXTRACTED]
 - [[Stratified Whole-Material Chunk Spread]] - `references` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_50
+#graphify/concept #graphify/INFERRED #community/Question_Engine_Plan

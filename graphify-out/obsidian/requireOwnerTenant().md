@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Community 52"
+community: "Tenant Owner Controller"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/Tenant_Owner_Controller
 ---
 
 # requireOwnerTenant()
@@ -31,4 +31,4 @@ tags:
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 - [[unassignContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/Tenant_Owner_Controller

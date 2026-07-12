@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/html-sandbox-templates.ts"
 type: "code"
-community: "Community 70"
+community: "Chat Visual Embeds"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/Chat_Visual_Embeds
 ---
 
 # num()
@@ -15,4 +15,4 @@ tags:
 - [[buildSandboxHtml()]] - `calls` [EXTRACTED]
 - [[html-sandbox-templates.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds

@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[ThemeProvider()]] - code - apps/admin/components/theme-provider.tsx
-- [[theme-provider.tsx]] - code - apps/admin/components/theme-provider.tsx
+- [[FalkorDB Export]] - concept - .claude/skills/graphify/references/exports.md
+- [[Neo4j Export]] - concept - .claude/skills/graphify/references/exports.md
 
 ## Live Query (requires Dataview plugin)
 

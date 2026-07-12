@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/learning-history-panel.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "Content Workspace & Chat"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/Content_Workspace__Chat
 ---
 
 # learning-history-panel.tsx
@@ -22,4 +22,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat

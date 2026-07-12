@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 48"
+community: "Auth & App Shell UI"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Auth__App_Shell_UI
 ---
 
 # UserRole
@@ -20,4 +20,4 @@ tags:
 - [[role-guard.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

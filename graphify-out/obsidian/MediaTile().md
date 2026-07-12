@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "Content & Flashcards Hooks"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/Content__Flashcards_Hooks
 ---
 
 # MediaTile()
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[material-media-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

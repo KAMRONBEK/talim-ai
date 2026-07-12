@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "document"
-community: "Community 44"
+community: "Features Docs"
 location: "whole document"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/Features_Docs
 ---
 
 # Talim AI Feature Catalog
@@ -39,4 +39,4 @@ tags:
 - [[Usage-Limit Promotion Modal (402413 error contract)]] - `references` [EXTRACTED]
 - [[YouTube Import]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_44
+#graphify/document #graphify/EXTRACTED #community/Features_Docs

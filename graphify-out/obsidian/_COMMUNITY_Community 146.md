@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
-- [[index.js]] - code - packages/config/eslint/index.js
+- [[buildPodcastUserPrompt()_1]] - code - apps/api/src/lib/podcast-prompt.ts
+- [[podcast-prompt.ts]] - code - apps/api/src/lib/podcast-prompt.ts
 
 ## Live Query (requires Dataview plugin)
 

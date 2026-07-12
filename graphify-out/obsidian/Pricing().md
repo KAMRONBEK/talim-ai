@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/pricing.tsx"
 type: "code"
-community: "Community 101"
+community: "Marketing Landing UI"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_101
+  - community/Marketing_Landing_UI
 ---
 
 # Pricing()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_39]] - `imports` [EXTRACTED]
 - [[pricing.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_101
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI

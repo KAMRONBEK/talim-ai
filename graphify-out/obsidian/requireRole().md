@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # requireRole()
@@ -15,4 +15,4 @@ tags:
 - [[admin.routes.ts]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

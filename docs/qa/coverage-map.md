@@ -1,0 +1,75 @@
+# Talim QA Coverage Map — machine-readable frontier ledger
+
+> **Role of this file (source of truth for coverage).** This is the planner's frontier ledger:
+> one row per **route × role × state-variant** cell. The session planner sorts cells by
+> `staleness × risk − recentness` and picks 6–10 charters per run. `user-stories.md` owns the EC
+> spec + F-ledger; `visual-qa-report.md` owns the session journal. This file owns **what has been
+> covered, how deeply, and how stale it is** — nothing else.
+>
+> **Frontier formula.** `staleness` = runs-since-last-touch (planner sorts desc). Risk is boosted
+> for: recently-changed code (git-log since last run), cells with prior findings, never-oracle-verified
+> cells, and all P0 gap areas. **Never pick a cell tested in the last 2 runs unless code changed under it.**
+>
+> **Run-ID scheme:** `R<date><seq>` (e.g. `R2026-07-12a`). **staleness stamp** = `last_run` + `last_commit`.
+>
+> **Axes.**
+> - **role:** ADMIN · TENANT_OWNER · TENANT_LEARNER-active · TENANT_LEARNER-deactivated · INDIVIDUAL · logged-out
+> - **state (explicit sweep dimension):** empty · populated · error/failed-job · loading/generating · quota-exceeded · mustChangePassword · locale{uz,ru,en} · theme{light,dark} · viewport{desktop,390}
+> - **depth enum:** viewed < interacted < oracle-verified
+> - **locale-tier:** uz (primary) · ru (secondary) · en (low-priority) — a cell is not `oracle-verified`
+>   for i18n until at least uz + ru are checked.
+>
+> **Auto-enumeration.** Routes are enumerated at run start from `apps/web/app/[locale]` and
+> `apps/admin/app`; a run-start diff flags **new routes as staleness-∞ cells** (top of the queue).
+> This committed file is a seeded skeleton — the P0/P1 frontier from the coverage-expansion pass —
+> plus the header contract. The enumerator fills the long tail.
+
+| cell_id | route | role | state | locale_tier | tour_last | depth | last_run | last_commit | findings | staleness |
+|---------|-------|------|-------|-------------|-----------|-------|----------|-------------|----------|-----------|
+| quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/generating | /[locale]/quiz/[id] | INDIVIDUAL | loading/generating | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/failed-job | /[locale]/quiz/[id] | INDIVIDUAL | error/failed-job | uz | — | viewed | — | — | F59 | ∞ |
+| content.[id].flashcards/INDIVIDUAL/populated | /[locale]/content/[id]/flashcards | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id].flashcards/INDIVIDUAL/empty | /[locale]/content/[id]/flashcards | INDIVIDUAL | empty | uz | — | viewed | — | — | — | ∞ |
+| content.[id].flashcards/INDIVIDUAL/review-fail | /[locale]/content/[id]/flashcards | INDIVIDUAL | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| content.[id].flashcards/TENANT_LEARNER-deactivated/populated | /[locale]/content/[id]/flashcards | TENANT_LEARNER-deactivated | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id]/INDIVIDUAL/study-mode | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id]/INDIVIDUAL/selection-ask | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | F63 | ∞ |
+| content.[id]/INDIVIDUAL/section-rail | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id].podcast/INDIVIDUAL/transcript-sync | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id].podcast/INDIVIDUAL/legacy-timings | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.assessments/TENANT_LEARNER-active/structured-players | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.assessments/TENANT_LEARNER-active/malformed-config | /[locale]/learner/assessments | TENANT_LEARNER-active | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| learner.assessments/TENANT_LEARNER-active/hotspot-dragdrop-a11y | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.dashboard/TENANT_LEARNER-active/game-banner | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.assessments/TENANT_LEARNER-active/game-live-play | /[locale]/learner/assessments | TENANT_LEARNER-active | loading/generating | uz | — | viewed | — | — | F39 | ∞ |
+| learner.assessments/TENANT_LEARNER-active/quiz-review | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.messages-bell/TENANT_LEARNER-active/populated | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.messages-bell/TENANT_LEARNER-active/IDOR | /learner/messages/:id | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.progress/TENANT_OWNER/mastery-by-topic | /[locale]/tenant/progress | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.progress/TENANT_OWNER/mastery-empty | /[locale]/tenant/progress | TENANT_OWNER | empty | uz | — | viewed | — | — | — | ∞ |
+| tenant.assessments/TENANT_OWNER/builder-8types | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.assessments/TENANT_OWNER/invalid-config | /[locale]/tenant/assessments | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| tenant.assessments/TENANT_OWNER/due-date | /[locale]/tenant/assessments | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.assessments/TENANT_OWNER/game-live-control | /[locale]/tenant/assessments | TENANT_OWNER | loading/generating | uz | — | viewed | — | — | — | ∞ |
+| tenant.messages-bell/TENANT_OWNER/populated | /[locale]/tenant/dashboard | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.students/TENANT_OWNER/csv-import-valid | /[locale]/tenant/students | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.students/TENANT_OWNER/csv-import-malformed | /[locale]/tenant/students | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| tenant.students/TENANT_OWNER/csv-import-seat-boundary | /[locale]/tenant/students | TENANT_OWNER | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
+| tenant.students/TENANT_OWNER/csv-export | /[locale]/tenant/students | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.materials.[id]/TENANT_OWNER/per-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| tenant.materials.[id]/TENANT_OWNER/failed-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| tenant.materials.[id]/TENANT_LEARNER-active/role-guard | /[locale]/tenant/materials/[id] | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| impersonate/ADMIN/accept | /[locale]/impersonate | ADMIN | populated | uz | — | viewed | — | — | — | ∞ |
+| impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | — | viewed | — | — | — | ∞ |
+| admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | — | viewed | — | — | — | ∞ |
+| admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
+| admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
+| admin.content/ADMIN/content-detail | /content/[id] (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
+| pricing/logged-out/cta | /[locale]/pricing | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
+| pricing/INDIVIDUAL/cta | /[locale]/pricing | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| pricing/TENANT_OWNER/cta | /[locale]/pricing | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| terms/logged-out/render | /[locale]/terms | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
+| dashboard/INDIVIDUAL/typebadge | /[locale]/dashboard | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |

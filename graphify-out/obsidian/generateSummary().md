@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Podcast API"
+community: "Media & Progress Controllers"
 location: "L121"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_API
+  - community/Media__Progress_Controllers
 ---
 
 # generateSummary()
@@ -24,4 +24,4 @@ tags:
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_API
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

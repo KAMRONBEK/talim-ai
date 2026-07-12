@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Community 45"
+community: "Grading Engine Types"
 location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/Grading_Engine_Types
 ---
 
 # coerceStructuredAnswer()
@@ -16,4 +16,4 @@ tags:
 - [[parseHotspotPoint()]] - `calls` [EXTRACTED]
 - [[parseMatchingChoices()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/Grading_Engine_Types

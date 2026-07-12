@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/page.tsx"
 type: "code"
-community: "Community 118"
+community: "Community 110"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_118
+  - community/Community_110
 ---
 
 # UsersPage()
@@ -17,4 +17,4 @@ tags:
 - [[useDeleteUser()]] - `calls` [EXTRACTED]
 - [[useResetUserPassword()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_118
+#graphify/code #graphify/EXTRACTED #community/Community_110

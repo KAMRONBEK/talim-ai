@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Content Hooks & Locale"
+community: "Transcript Panel"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Hooks__Locale
+  - community/Transcript_Panel
 ---
 
 # useTranscript.ts
@@ -19,4 +19,4 @@ tags:
 - [[useContentBase.ts]] - `imports_from` [EXTRACTED]
 - [[useTranscript()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel

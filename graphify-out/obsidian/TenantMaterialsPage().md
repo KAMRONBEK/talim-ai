@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Community 54"
+community: "Dialog & Button UI"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Dialog__Button_UI
 ---
 
 # TenantMaterialsPage()
@@ -21,4 +21,4 @@ tags:
 - [[useTenantSearch()]] - `calls` [EXTRACTED]
 - [[useUploadTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI

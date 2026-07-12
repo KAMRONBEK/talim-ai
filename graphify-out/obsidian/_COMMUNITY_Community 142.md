@@ -1,18 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 3
+members: 2
 ---
 
 # Community 142
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[free-dev-ports.sh]] - code - scripts/free-dev-ports.sh
-- [[free-dev-ports.sh script]] - code - scripts/free-dev-ports.sh
-- [[free_ports()]] - code - scripts/free-dev-ports.sh
+- [[ThemeProvider()_1]] - code - apps/web/components/theme-provider.tsx
+- [[theme-provider.tsx_1]] - code - apps/web/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Assessment API Controllers"
+community: "Content API Controller"
 location: "L125"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_API_Controllers
+  - community/Content_API_Controller
 ---
 
 # uploadContent()
@@ -20,4 +20,4 @@ tags:
 - [[getFileLimitsForUser()]] - `calls` [EXTRACTED]
 - [[getPdfPageCount()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_API_Controller

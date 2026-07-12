@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "Community 34"
+community: "Content & Flashcards Hooks"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Content__Flashcards_Hooks
 ---
 
 # useLimitErrorHandler()
@@ -35,4 +35,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `contains` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

@@ -1,55 +1,46 @@
 ---
 type: community
-cohesion: 0.08
-members: 40
+cohesion: 0.09
+members: 31
 ---
 
 # Admin Analytics
 
-**Cohesion:** 0.08 - loosely connected
-**Members:** 40 nodes
+**Cohesion:** 0.09 - loosely connected
+**Members:** 31 nodes
 
 ## Members
 - [[ALL_CONTENT_TYPES]] - code - apps/api/src/services/admin/analytics.service.ts
 - [[ALL_ROLES]] - code - apps/api/src/services/admin/analytics.service.ts
 - [[AdminAnalyticsSummary]] - code - packages/types/index.ts
+- [[AdminAuditLogItem]] - code - packages/types/index.ts
 - [[AdminChunkSample]] - code - apps/api/src/services/admin/analytics.service.ts
 - [[AdminContentByTypeResponse]] - code - packages/types/index.ts
+- [[AdminContentDetail]] - code - packages/types/index.ts
+- [[AdminContentItem]] - code - packages/types/index.ts
 - [[AdminFunnelResponse]] - code - packages/types/index.ts
+- [[AdminGeneratedItem]] - code - packages/types/index.ts
+- [[AdminGeneratedReview]] - code - packages/types/index.ts
+- [[AdminImpersonateResponse]] - code - packages/types/index.ts
 - [[AdminMrrResponse]] - code - packages/types/index.ts
+- [[AdminPlatformStats]] - code - packages/types/index.ts
 - [[AdminSpendByModelResponse]] - code - packages/types/index.ts
 - [[AdminTopOrgsResponse]] - code - packages/types/index.ts
+- [[AdminUpdateSubscriptionInput]] - code - packages/types/index.ts
+- [[AdminUsageSummaryRow]] - code - packages/types/index.ts
 - [[AdminUserGrowthResponse]] - code - packages/types/index.ts
 - [[AdminUsersByRoleResponse]] - code - packages/types/index.ts
-- [[PLAN_MONTHLY_PRICE_USD]] - code - apps/api/src/config/usage-pricing.ts
-- [[TOKEN_PRICING_PER_MILLION]] - code - apps/api/src/config/usage-pricing.ts
-- [[analytics.controller.ts]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[PaginatedResponse]] - code - packages/types/index.ts
+- [[UsagePage()]] - code - apps/admin/app/(admin)/usage/page.tsx
 - [[analytics.service.ts]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[analyticsByRole()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsContentByType()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsFunnel()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
 - [[analyticsMrr()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsSpendByModel()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
 - [[analyticsSummary()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsTopOrgs()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsUserGrowth()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
 - [[computeMrr()]] - code - apps/api/src/services/admin/analytics.service.ts
 - [[daysAgo()]] - code - apps/api/src/services/admin/analytics.service.ts
 - [[getAnalyticsSummary()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getContentByType()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getFunnel()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getSpendByModel()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getTopOrgs()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getUserGrowth()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getUsersByRole()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[listSubscriptions()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[listSubscriptionsForAdmin()]] - code - apps/api/src/services/subscription/admin.ts
-- [[planMonthlyPriceUsd()]] - code - apps/api/src/config/usage-pricing.ts
-- [[platformStats()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[subscriptionListSchema]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[usage-pricing.ts]] - code - apps/api/src/config/usage-pricing.ts
-- [[usageDaysSchema]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[usageSummary()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
+- [[page.tsx_8]] - code - apps/admin/app/(admin)/usage/page.tsx
+- [[useAdmin.ts]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminUsage()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -59,16 +50,25 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Shared Types]]
-- 8 edges to [[_COMMUNITY_Admin Dashboard UI]]
-- 6 edges to [[_COMMUNITY_Admin Tenants API]]
-- 4 edges to [[_COMMUNITY_Admin Content & Audit]]
-- 3 edges to [[_COMMUNITY_Community 60]]
-- 3 edges to [[_COMMUNITY_Admin & Events Controllers]]
+- 26 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 11 edges to [[_COMMUNITY_Admin Analytics Endpoints]]
+- 10 edges to [[_COMMUNITY_Admin Dashboard UI]]
+- 8 edges to [[_COMMUNITY_Shared UI Primitives]]
+- 8 edges to [[_COMMUNITY_Admin Users & Tenants UI]]
+- 5 edges to [[_COMMUNITY_Subscription Editor UI]]
+- 4 edges to [[_COMMUNITY_Community 104]]
+- 4 edges to [[_COMMUNITY_Community 110]]
+- 3 edges to [[_COMMUNITY_Community 103]]
+- 3 edges to [[_COMMUNITY_Community 88]]
+- 3 edges to [[_COMMUNITY_Config, Pricing & Embeddings]]
+- 2 edges to [[_COMMUNITY_Admin Content & Audit]]
+- 2 edges to [[_COMMUNITY_Flashcards API & Prisma Seed]]
+- 1 edge to [[_COMMUNITY_Account & Settings UI]]
+- 1 edge to [[_COMMUNITY_Content Grid & Learner Dashboard]]
 
 ## Top bridge nodes
-- [[analytics.service.ts]] - degree 29, connects to 4 communities
-- [[analytics.controller.ts]] - degree 31, connects to 3 communities
-- [[AdminAnalyticsSummary]] - degree 3, connects to 2 communities
-- [[AdminContentByTypeResponse]] - degree 3, connects to 2 communities
-- [[AdminFunnelResponse]] - degree 3, connects to 2 communities
+- [[useAdmin.ts]] - degree 72, connects to 10 communities
+- [[analytics.service.ts]] - degree 29, connects to 5 communities
+- [[page.tsx_8]] - degree 5, connects to 2 communities
+- [[getAnalyticsSummary()]] - degree 5, connects to 1 community
+- [[computeMrr()]] - degree 4, connects to 1 community

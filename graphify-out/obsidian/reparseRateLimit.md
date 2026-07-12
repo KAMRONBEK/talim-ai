@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/rate-limit.middleware.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # reparseRateLimit
@@ -16,4 +16,4 @@ tags:
 - [[rate-limit.middleware.ts]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

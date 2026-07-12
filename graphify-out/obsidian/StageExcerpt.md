@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Community 66"
+community: "API Endpoints & Media Hooks"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # StageExcerpt
@@ -15,4 +15,4 @@ tags:
 - [[content-stage.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

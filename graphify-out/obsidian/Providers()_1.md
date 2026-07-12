@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "Community 51"
+community: "Providers & Job Events"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/Providers__Job_Events
 ---
 
 # Providers()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[providers.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events

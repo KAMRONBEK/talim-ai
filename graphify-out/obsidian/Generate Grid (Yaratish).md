@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 107"
+community: "Community 86"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_107
+  - community/Community_86
 ---
 
 # Generate Grid (Yaratish)
@@ -14,4 +14,4 @@ tags:
 - [[Flashcards & Notes Generators]] - `references` [EXTRACTED]
 - [[Learn Hub Panel (ContentLearnPanel)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_107
+#graphify/concept #graphify/EXTRACTED #community/Community_86

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Community 100"
+community: "Platform Docs & Deploy"
 location: "§7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Platform_Docs__Deploy
 ---
 
 # Production Deployment Topology (nginx + Docker + GHCR)
@@ -15,4 +15,4 @@ tags:
 - [[Deploy to VPS GitHub Actions Workflow]] - `references` [EXTRACTED]
 - [[Talim AI Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_100
+#graphify/concept #graphify/EXTRACTED #community/Platform_Docs__Deploy

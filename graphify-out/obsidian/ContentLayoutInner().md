@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Content Hooks & Locale"
+community: "Content & Flashcards Hooks"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Hooks__Locale
+  - community/Content__Flashcards_Hooks
 ---
 
 # ContentLayoutInner()
@@ -23,4 +23,4 @@ tags:
 - [[useSections()]] - `calls` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale
+#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks

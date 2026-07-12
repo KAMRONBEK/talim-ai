@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 153
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[ThemeProvider()_1]] - code - apps/web/components/theme-provider.tsx
-- [[theme-provider.tsx_1]] - code - apps/web/components/theme-provider.tsx
+- [[next-env.d.ts]] - code - apps/admin/next-env.d.ts
 
 ## Live Query (requires Dataview plugin)
 

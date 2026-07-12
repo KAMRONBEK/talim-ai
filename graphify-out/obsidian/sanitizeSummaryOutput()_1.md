@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/summary-prompt.ts"
 type: "code"
-community: "Podcast Generation & Prompts"
+community: "Locale AI Prompts"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__Prompts
+  - community/Locale_AI_Prompts
 ---
 
 # sanitizeSummaryOutput()
@@ -15,4 +15,4 @@ tags:
 - [[locale-prompts.ts]] - `imports` [EXTRACTED]
 - [[summary-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts
+#graphify/code #graphify/EXTRACTED #community/Locale_AI_Prompts

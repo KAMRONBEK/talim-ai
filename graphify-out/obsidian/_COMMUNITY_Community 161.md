@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 161
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[doppler-docker-restart.sh]] - code - scripts/doppler-docker-restart.sh
-- [[doppler-docker-restart.sh script]] - code - scripts/doppler-docker-restart.sh
+- [[docker-compose.registry.yml (GHCR prebuilt images)]] - document - docker-compose.registry.yml
 
 ## Live Query (requires Dataview plugin)
 

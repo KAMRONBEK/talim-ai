@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin.controller.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "Admin Content & Audit"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/Admin_Content__Audit
 ---
 
 # admin.controller.ts
@@ -18,4 +18,4 @@ tags:
 - [[tenants.controller.ts]] - `re_exports` [EXTRACTED]
 - [[users.controller.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/index.ts"
 type: "code"
-community: "Admin & Events Controllers"
+community: "API Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Events_Controllers
+  - community/API_Middleware
 ---
 
 # index.ts
@@ -37,4 +37,4 @@ tags:
 - [[usage.routes.ts]] - `imports_from` [EXTRACTED]
 - [[usageRoutes]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
+#graphify/code #graphify/EXTRACTED #community/API_Middleware

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Community 32"
+community: "AI Tutor Chat API"
 location: "L79"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/AI_Tutor_Chat_API
 ---
 
 # chunkText()
@@ -20,4 +20,4 @@ tags:
 - [[toBlocks()]] - `calls` [EXTRACTED]
 - [[tokenTail()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

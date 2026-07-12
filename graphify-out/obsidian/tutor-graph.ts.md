@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "Community 73"
+community: "Tutor Visual Tools"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_73
+  - community/Tutor_Visual_Tools
 ---
 
 # tutor-graph.ts
@@ -27,4 +27,4 @@ tags:
 - [[validateGraphPayload()]] - `contains` [EXTRACTED]
 - [[viewportSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_73
+#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools

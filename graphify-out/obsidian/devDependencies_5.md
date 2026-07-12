@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "Community 79"
+community: "Types Package Manifest"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_79
+  - community/Types_Package_Manifest
 ---
 
 # devDependencies
@@ -16,4 +16,4 @@ tags:
 - [[package.json_8]] - `contains` [EXTRACTED]
 - [[typescript_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_79
+#graphify/code #graphify/EXTRACTED #community/Types_Package_Manifest

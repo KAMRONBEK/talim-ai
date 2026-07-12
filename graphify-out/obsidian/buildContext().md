@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Community 83"
+community: "AI Tutor Chat API"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_83
+  - community/AI_Tutor_Chat_API
 ---
 
 # buildContext()
@@ -19,4 +19,4 @@ tags:
 - [[getSectionBody()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_83
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API

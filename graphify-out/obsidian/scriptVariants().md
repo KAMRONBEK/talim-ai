@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/uzbek-translit.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Tutor Scope Classifier"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Tutor_Scope_Classifier
 ---
 
 # scriptVariants()
@@ -21,4 +21,4 @@ tags:
 - [[tutor-scope.ts]] - `imports` [EXTRACTED]
 - [[uzbek-translit.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classifier

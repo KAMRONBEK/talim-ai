@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Community 36"
+community: "Tenant Hooks & Messaging"
 location: "L274"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/Tenant_Hooks__Messaging
 ---
 
 # useLearnerUnreadCount()
@@ -16,4 +16,4 @@ tags:
 - [[learner-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging

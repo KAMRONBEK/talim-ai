@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[config_1]] - code - apps/admin/postcss.config.mjs
-- [[postcss.config.mjs]] - code - apps/admin/postcss.config.mjs
+- [[Named soap operas (multi-actor sessions)]] - concept - docs/qa/human-qa-playbook.md
+- [[Persona Power admin]] - concept - docs/qa/human-qa-playbook.md
 
 ## Live Query (requires Dataview plugin)
 

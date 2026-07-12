@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useReparseContent.ts"
 type: "code"
-community: "Community 86"
+community: "API Endpoints & Media Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_86
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # useReparseContent.ts
@@ -21,4 +21,4 @@ tags:
 - [[rasterizePdfToImages()]] - `imports` [EXTRACTED]
 - [[useReparseContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_86
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

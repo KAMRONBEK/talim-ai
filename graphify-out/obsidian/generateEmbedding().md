@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Community 32"
+community: "Community 95"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_95
 ---
 
 # generateEmbedding()
@@ -21,4 +21,4 @@ tags:
 - [[searchSimilarFigures()]] - `calls` [EXTRACTED]
 - [[searchWithDistance()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_95

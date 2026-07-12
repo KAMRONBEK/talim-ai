@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Community 94"
+community: "Shared UI Primitives"
 location: "L246"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Shared_UI_Primitives
 ---
 
 # useDeleteContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_1]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_94
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

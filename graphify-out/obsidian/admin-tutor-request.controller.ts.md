@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin-tutor-request.controller.ts"
 type: "code"
-community: "Admin Content & Audit"
+community: "Assessment & Tutor-Request Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit
+  - community/Assessment__Tutor-Request_Controllers
 ---
 
 # admin-tutor-request.controller.ts
@@ -27,4 +27,4 @@ tags:
 - [[tutorRequest.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit
+#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers

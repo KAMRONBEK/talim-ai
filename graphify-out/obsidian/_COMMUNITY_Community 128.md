@@ -1,20 +1,19 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.67
+members: 4
 ---
 
 # Community 128
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[config_2]] - code - apps/admin/tailwind.config.ts
-- [[config_6]] - code - apps/web/tailwind.config.ts
-- [[tailwind.config.ts]] - code - apps/admin/tailwind.config.ts
-- [[tailwind.config.ts_2]] - code - packages/config/tailwind/tailwind.config.ts
-- [[tailwind.config.ts_1]] - code - apps/web/tailwind.config.ts
+- [[qa-overnight.sh]] - code - scripts/qa-overnight.sh
+- [[qa-overnight.sh script]] - code - scripts/qa-overnight.sh
+- [[qa_http()]] - code - scripts/qa-overnight.sh
+- [[qa_stack_healthy()]] - code - scripts/qa-overnight.sh
 
 ## Live Query (requires Dataview plugin)
 

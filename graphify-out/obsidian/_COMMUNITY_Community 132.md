@@ -1,20 +1,18 @@
 ---
 type: community
-cohesion: 0.40
-members: 5
+cohesion: 0.67
+members: 3
 ---
 
 # Community 132
 
-**Cohesion:** 0.40 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 3 nodes
 
 ## Members
-- [[main]] - code - packages/config/eslint/package.json
-- [[name_4]] - code - packages/config/eslint/package.json
-- [[package.json_4]] - code - packages/config/eslint/package.json
-- [[private_4]] - code - packages/config/eslint/package.json
-- [[version_3]] - code - packages/config/eslint/package.json
+- [[next.config.ts_1]] - code - apps/web/next.config.ts
+- [[nextConfig_1]] - code - apps/web/next.config.ts
+- [[withNextIntl]] - code - apps/web/next.config.ts
 
 ## Live Query (requires Dataview plugin)
 

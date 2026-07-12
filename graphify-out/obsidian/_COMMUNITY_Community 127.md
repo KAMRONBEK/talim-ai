@@ -1,21 +1,19 @@
 ---
 type: community
-cohesion: 0.33
-members: 6
+cohesion: 0.50
+members: 4
 ---
 
 # Community 127
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 6 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[compilerOptions_7]] - code - packages/ui/tsconfig.json
-- [[extends_6]] - code - packages/ui/tsconfig.json
-- [[include_4]] - code - packages/ui/tsconfig.json
-- [[jsx_1]] - code - packages/ui/tsconfig.json
-- [[lib_3]] - code - packages/ui/tsconfig.json
-- [[tsconfig.json_4]] - code - packages/ui/tsconfig.json
+- [[PATH]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh script]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[resolve_doppler()]] - code - scripts/cursor-talim-vps-mcp.sh
 
 ## Live Query (requires Dataview plugin)
 

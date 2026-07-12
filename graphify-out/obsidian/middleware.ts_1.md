@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/middleware.ts"
 type: "code"
-community: "Community 82"
+community: "Fonts & Layout"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/Fonts__Layout
 ---
 
 # middleware.ts
@@ -16,4 +16,4 @@ tags:
 - [[routing]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_82
+#graphify/code #graphify/EXTRACTED #community/Fonts__Layout

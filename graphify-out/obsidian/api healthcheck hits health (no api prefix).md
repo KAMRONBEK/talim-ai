@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "concept"
-community: "Community 93"
+community: "Community 89"
 location: "services.api.healthcheck"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_93
+  - community/Community_89
 ---
 
 # api healthcheck hits /health (no /api prefix)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[API routes mounted at root; health is GET health]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_93
+#graphify/concept #graphify/INFERRED #community/Community_89

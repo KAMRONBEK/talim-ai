@@ -1,22 +1,20 @@
 ---
 type: community
-cohesion: 0.48
-members: 7
+cohesion: 0.40
+members: 5
 ---
 
 # Community 120
 
-**Cohesion:** 0.48 - moderately connected
-**Members:** 7 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[fail()]] - code - scripts/qa-preflight.sh
-- [[healthy()]] - code - scripts/qa-preflight.sh
-- [[http()]] - code - scripts/qa-preflight.sh
-- [[log()]] - code - scripts/qa-preflight.sh
-- [[poll()]] - code - scripts/qa-preflight.sh
-- [[qa-preflight.sh]] - code - scripts/qa-preflight.sh
-- [[qa-preflight.sh script]] - code - scripts/qa-preflight.sh
+- [[config_2]] - code - apps/admin/tailwind.config.ts
+- [[config_6]] - code - apps/web/tailwind.config.ts
+- [[tailwind.config.ts]] - code - apps/admin/tailwind.config.ts
+- [[tailwind.config.ts_2]] - code - packages/config/tailwind/tailwind.config.ts
+- [[tailwind.config.ts_1]] - code - apps/web/tailwind.config.ts
 
 ## Live Query (requires Dataview plugin)
 

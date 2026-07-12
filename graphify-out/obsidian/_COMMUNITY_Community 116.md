@@ -1,22 +1,21 @@
 ---
 type: community
-cohesion: 0.38
-members: 7
+cohesion: 0.33
+members: 6
 ---
 
 # Community 116
 
-**Cohesion:** 0.38 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[Compose service admin (Next.js platform-admin panel)]] - concept - docker-compose.yml
-- [[Compose service api (Express + Prisma + Bull)]] - concept - docker-compose.yml
-- [[Compose service db (pgvectorpgvectorpg16)]] - concept - docker-compose.yml
-- [[Compose service nginx (reverse proxy + TLS)]] - concept - docker-compose.yml
-- [[Compose service redis (redis7-alpine)]] - concept - docker-compose.yml
-- [[Compose service web (Next.js learnertenant app)]] - concept - docker-compose.yml
-- [[Doppler-injected Compose secrets]] - rationale - docker-compose.yml
+- [[engines]] - code - package.json
+- [[name_3]] - code - package.json
+- [[node]] - code - package.json
+- [[package.json_3]] - code - package.json
+- [[packageManager]] - code - package.json
+- [[private_3]] - code - package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,3 +23,10 @@ members: 7
 TABLE source_file, type FROM #community/Community_116
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 1 edge to [[_COMMUNITY_Community 111]]
+- 1 edge to [[_COMMUNITY_Root Package Scripts]]
+
+## Top bridge nodes
+- [[package.json_3]] - degree 6, connects to 2 communities

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/processContent.job.ts"
 type: "code"
-community: "Flashcards Generation & Jobs"
+community: "Job Registration & Manim"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Generation__Jobs
+  - community/Job_Registration__Manim
 ---
 
 # registerProcessContentJob()
@@ -16,4 +16,4 @@ tags:
 - [[index.ts]] - `imports` [EXTRACTED]
 - [[processContent.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs
+#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim

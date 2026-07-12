@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useMastery.ts"
 type: "code"
-community: "Community 86"
+community: "Content Workspace & Chat"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_86
+  - community/Content_Workspace__Chat
 ---
 
 # useMastery.ts
@@ -19,4 +19,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useContentMastery()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_86
+#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat

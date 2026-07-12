@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/processContent.job.ts"
 type: "code"
-community: "Community 32"
+community: "Background Jobs & Queues"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Background_Jobs__Queues
 ---
 
 # processContent.job.ts
@@ -39,4 +39,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues

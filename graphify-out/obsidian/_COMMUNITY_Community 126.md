@@ -1,21 +1,19 @@
 ---
 type: community
-cohesion: 0.33
-members: 6
+cohesion: 0.50
+members: 4
 ---
 
 # Community 126
 
-**Cohesion:** 0.33 - loosely connected
-**Members:** 6 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[compilerOptions_6]] - code - packages/types/tsconfig.json
-- [[extends_5]] - code - packages/types/tsconfig.json
-- [[include_3]] - code - packages/types/tsconfig.json
-- [[outDir_2]] - code - packages/types/tsconfig.json
-- [[rootDir_2]] - code - packages/types/tsconfig.json
-- [[tsconfig.json_3]] - code - packages/types/tsconfig.json
+- [[name_5]] - code - packages/config/package.json
+- [[package.json_5]] - code - packages/config/package.json
+- [[private_5]] - code - packages/config/package.json
+- [[version_4]] - code - packages/config/package.json
 
 ## Live Query (requires Dataview plugin)
 

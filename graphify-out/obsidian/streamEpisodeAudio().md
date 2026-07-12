@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Assessment API Controllers"
+community: "Media & Progress Controllers"
 location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_API_Controllers
+  - community/Media__Progress_Controllers
 ---
 
 # streamEpisodeAudio()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

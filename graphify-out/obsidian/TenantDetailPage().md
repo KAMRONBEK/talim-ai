@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/[id]/page.tsx"
 type: "code"
-community: "Community 38"
+community: "Community 88"
 location: "L18"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_38
+  - community/Community_88
 ---
 
 # TenantDetailPage()
@@ -18,4 +18,4 @@ tags:
 - [[useAdminTenant()]] - `calls` [INFERRED]
 - [[useUpdateTenant()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_38
+#graphify/code #graphify/INFERRED #community/Community_88

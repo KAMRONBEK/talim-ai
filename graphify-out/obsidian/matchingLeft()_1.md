@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/question-inputs.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Quiz Player Inputs"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Quiz_Player_Inputs
 ---
 
 # matchingLeft()
@@ -18,4 +18,4 @@ tags:
 - [[question-inputs.tsx]] - `contains` [EXTRACTED]
 - [[questionRenderKind]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs

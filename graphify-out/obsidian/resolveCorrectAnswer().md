@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Community 121"
+community: "Community 113"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_121
+  - community/Community_113
 ---
 
 # resolveCorrectAnswer()
@@ -19,4 +19,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[quiz-answer.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_121
+#graphify/code #graphify/EXTRACTED #community/Community_113

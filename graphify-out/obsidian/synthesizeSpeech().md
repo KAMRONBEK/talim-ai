@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "Community 47"
+community: "Podcast Generation & Prompts"
 location: "L168"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_47
+  - community/Podcast_Generation__Prompts
 ---
 
 # synthesizeSpeech()
@@ -20,4 +20,4 @@ tags:
 - [[synthesizeChunk()]] - `calls` [EXTRACTED]
 - [[tts.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_47
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/auth/auth-shell.tsx"
 type: "code"
-community: "Account & Login UI"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Login_UI
+  - community/Auth__App_Shell_UI
 ---
 
 # auth-shell.tsx
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_13]] - `imports_from` [EXTRACTED]
 - [[page.tsx_14]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Login_UI
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

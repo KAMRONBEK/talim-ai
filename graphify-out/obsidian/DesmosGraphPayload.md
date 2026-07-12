@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "Community 61"
+community: "Chat Message Rendering"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/Chat_Message_Rendering
 ---
 
 # DesmosGraphPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-visual.ts]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering

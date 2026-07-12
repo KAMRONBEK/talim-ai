@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "paper"
-community: "Community 50"
+community: "Community 94"
 location: "header research base"
 tags:
   - graphify/paper
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_94
 ---
 
 # Pelánek Elo mastery modeling (research)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - `cites` [EXTRACTED]
 
-#graphify/paper #graphify/EXTRACTED #community/Community_50
+#graphify/paper #graphify/EXTRACTED #community/Community_94

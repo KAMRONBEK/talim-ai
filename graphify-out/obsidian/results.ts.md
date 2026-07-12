@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/results.ts"
 type: "code"
-community: "Community 85"
+community: "Assessments Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Assessments_Service
 ---
 
 # results.ts
@@ -24,4 +24,4 @@ tags:
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

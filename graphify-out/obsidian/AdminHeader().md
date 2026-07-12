@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/admin-header.tsx"
 type: "code"
-community: "Community 104"
+community: "Community 106"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/Community_106
 ---
 
 # AdminHeader()
@@ -15,4 +15,4 @@ tags:
 - [[admin-header.tsx]] - `contains` [EXTRACTED]
 - [[admin-shell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/Community_106

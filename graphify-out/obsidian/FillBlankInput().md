@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/question-inputs.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Quiz Player Inputs"
 location: "L245"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Quiz_Player_Inputs
 ---
 
 # FillBlankInput()
@@ -16,4 +16,4 @@ tags:
 - [[blankCount()]] - `calls` [EXTRACTED]
 - [[question-inputs.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs

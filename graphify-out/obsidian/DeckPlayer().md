@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Community 84"
+community: "API Endpoints & Media Hooks"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_84
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # DeckPlayer()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_84
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

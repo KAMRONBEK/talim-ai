@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Community 50"
+community: "Question Engine Plan"
 location: "§1, §7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Question_Engine_Plan
 ---
 
 # Flashcard Integration (FLASHCARD first-class type)
@@ -18,4 +18,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Unified Generation Parameters (counttypesdepthscope)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_50
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Plan

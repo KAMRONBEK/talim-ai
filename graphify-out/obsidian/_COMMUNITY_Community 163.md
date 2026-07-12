@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[next-env.d.ts]] - code - apps/admin/next-env.d.ts
+- [[pnpm-workspace.yaml]] - document - pnpm-workspace.yaml
 
 ## Live Query (requires Dataview plugin)
 

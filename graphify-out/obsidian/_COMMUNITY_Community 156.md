@@ -1,17 +1,16 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 1
 ---
 
 # Community 156
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 1 nodes
 
 ## Members
-- [[buildPodcastUserPrompt()_1]] - code - apps/api/src/lib/podcast-prompt.ts
-- [[podcast-prompt.ts]] - code - apps/api/src/lib/podcast-prompt.ts
+- [[Minute-detail catalog (per-page checks - MCP call)]] - concept - docs/qa/human-qa-playbook.md
 
 ## Live Query (requires Dataview plugin)
 

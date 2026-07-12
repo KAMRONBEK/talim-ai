@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
 type: "code"
-community: "Community 112"
+community: "Community 104"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_112
+  - community/Community_104
 ---
 
 # page.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useApproveTutorRequest()]] - `imports` [EXTRACTED]
 - [[useRejectTutorRequest()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_112
+#graphify/code #graphify/EXTRACTED #community/Community_104

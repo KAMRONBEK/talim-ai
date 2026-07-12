@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Community 88"
+community: "Summary & Rich Text"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_88
+  - community/Summary__Rich_Text
 ---
 
 # summary-text.tsx
@@ -30,4 +30,4 @@ tags:
 - [[splitLead()]] - `contains` [EXTRACTED]
 - [[stripInline()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_88
+#graphify/code #graphify/EXTRACTED #community/Summary__Rich_Text

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/avatar.tsx"
 type: "code"
-community: "Community 39"
+community: "Shared UI Primitives"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Shared_UI_Primitives
 ---
 
 # Avatar
@@ -17,4 +17,4 @@ tags:
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

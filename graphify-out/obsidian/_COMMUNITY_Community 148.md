@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[Providers()]] - code - apps/admin/components/providers.tsx
-- [[providers.tsx]] - code - apps/admin/components/providers.tsx
+- [[Pythagoras QA fixture text]] - document - docs/qa/screenshots/qa-pythagoras.txt
+- [[Pythagorean Theorem QA test PDF]] - paper - docs/qa/screenshots/qa-pythagoras.pdf
 
 ## Live Query (requires Dataview plugin)
 

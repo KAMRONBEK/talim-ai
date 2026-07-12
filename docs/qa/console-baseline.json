@@ -1,0 +1,15 @@
+{
+  "_doc": "Per-route allowlisted console/network noise. Anything not listed is a finding; prune entries that stop appearing. Extend as the run confirms benign noise.",
+  "global": {
+    "console": [],
+    "network": []
+  },
+  "routes": {
+    "/[locale]/content/[id]": {
+      "console": [],
+      "network": [
+        { "match": "GET /summary", "status": 404, "reason": "F3 — summary not yet generated on first load; benign", "sev": "waived" }
+      ]
+    }
+  }
+}

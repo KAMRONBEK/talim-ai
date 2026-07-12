@@ -1,12 +1,12 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Community 44"
+community: "Features Docs"
 location: "§5"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_44
+  - community/Features_Docs
 ---
 
 # processContent Ingestion Job
@@ -16,4 +16,4 @@ tags:
 - [[Hierarchical Sectioning (2-level chaptersubsection)]] - `references` [INFERRED]
 - [[Talim AI Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_44
+#graphify/concept #graphify/INFERRED #community/Features_Docs

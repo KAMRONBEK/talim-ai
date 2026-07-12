@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/sectionMastery.service.ts"
 type: "code"
-community: "Community 85"
+community: "Assessments Service"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Assessments_Service
 ---
 
 # AnswerEvidence
@@ -16,4 +16,4 @@ tags:
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

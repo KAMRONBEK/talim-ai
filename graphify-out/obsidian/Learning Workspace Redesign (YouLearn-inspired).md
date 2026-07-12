@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "Community 107"
+community: "Community 86"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_107
+  - community/Community_86
 ---
 
 # Learning Workspace Redesign (YouLearn-inspired)
@@ -18,4 +18,4 @@ tags:
 - [[Role Adaptations (server-side security)]] - `references` [EXTRACTED]
 - [[Visual Direction (girih, marker-highlight)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_107
+#graphify/document #graphify/EXTRACTED #community/Community_86

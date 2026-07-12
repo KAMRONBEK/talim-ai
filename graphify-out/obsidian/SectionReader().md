@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "API Endpoints & Media Hooks"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # SectionReader()
@@ -20,4 +20,4 @@ tags:
 - [[useGenerateSlides()]] - `calls` [EXTRACTED]
 - [[useSlides()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

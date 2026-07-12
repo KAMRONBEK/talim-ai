@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/learner-shell.tsx"
 type: "code"
-community: "Community 43"
+community: "Auth & App Shell UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Auth__App_Shell_UI
 ---
 
 # learner-shell.tsx
@@ -24,4 +24,4 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

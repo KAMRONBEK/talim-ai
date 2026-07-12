@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "Community 87"
+community: "Desmos Graph Embed"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_87
+  - community/Desmos_Graph_Embed
 ---
 
 # DesmosGraph.tsx
@@ -28,4 +28,4 @@ tags:
 - [[loadDesmosScript()]] - `contains` [EXTRACTED]
 - [[toFallbackExpression()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_87
+#graphify/code #graphify/EXTRACTED #community/Desmos_Graph_Embed

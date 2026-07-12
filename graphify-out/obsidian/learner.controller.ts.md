@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/learner.controller.ts"
 type: "code"
-community: "Community 99"
+community: "Assessment & Tutor-Request Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_99
+  - community/Assessment__Tutor-Request_Controllers
 ---
 
 # learner.controller.ts
@@ -32,4 +32,4 @@ tags:
 - [[tenant.service.ts]] - `imports_from` [EXTRACTED]
 - [[unreadMessageCount()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_99
+#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers

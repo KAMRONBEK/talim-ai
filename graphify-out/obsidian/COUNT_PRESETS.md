@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/practice/practice-generator.tsx"
 type: "code"
-community: "Community 36"
+community: "Dialog & Button UI"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/Dialog__Button_UI
 ---
 
 # COUNT_PRESETS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[practice-generator.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "Community 43"
+community: "Auth & App Shell UI"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Auth__App_Shell_UI
 ---
 
 # planMessageKey
@@ -18,4 +18,4 @@ tags:
 - [[plan.ts_1]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI

@@ -26,7 +26,8 @@
     "docker:down": "docker compose down",
     "docker:re": "bash scripts/doppler-docker-restart.sh",
     "doppler:setup": "doppler setup --no-interactive",
-    "doppler:upload": "doppler secrets upload env.template --project talim-ai --config dev"
+    "doppler:upload": "doppler secrets upload env.template --project talim-ai --config dev",
+    "qa:fixtures": "node scripts/qa-fixtures.mjs"
   },
   "devDependencies": {
     "prettier": "^3.4.2",

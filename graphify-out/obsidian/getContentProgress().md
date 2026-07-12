@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/progress.controller.ts"
 type: "code"
-community: "Assessment API Controllers"
+community: "Media & Progress Controllers"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_API_Controllers
+  - community/Media__Progress_Controllers
 ---
 
 # getContentProgress()
@@ -17,4 +17,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[progress.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers

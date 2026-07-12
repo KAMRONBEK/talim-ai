@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/register/page.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "Shared UI Primitives"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/Shared_UI_Primitives
 ---
 
 # RegisterPage()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_14]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero.jpeg"
 type: "image"
-community: "Community 95"
+community: "Community 90"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Community_95
+  - community/Community_90
 ---
 
 # Hero headline 'Изучайте что угодно. По-своему.' (Learn anything. Your way.) — second phrase emphasized with a warm highlight block behind the text
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[QA screenshot Russian landing page mobile hero (pre-fix, dark theme) — full above-the-fold hero of Talim AI at ~390px width]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/Community_95
+#graphify/image #graphify/EXTRACTED #community/Community_90

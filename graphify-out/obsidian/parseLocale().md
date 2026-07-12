@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/request.ts"
 type: "code"
-community: "Community 82"
+community: "Fonts & Layout"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/Fonts__Layout
 ---
 
 # parseLocale()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[request.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_82
+#graphify/code #graphify/EXTRACTED #community/Fonts__Layout

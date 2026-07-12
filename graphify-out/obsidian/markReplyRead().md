@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Community 52"
+community: "Tenant Owner Controller"
 location: "L88"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/Tenant_Owner_Controller
 ---
 
 # markReplyRead()
@@ -16,4 +16,4 @@ tags:
 - [[requireOwnerTenant()]] - `calls` [EXTRACTED]
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/Tenant_Owner_Controller

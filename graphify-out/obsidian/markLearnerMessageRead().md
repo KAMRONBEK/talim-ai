@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/messages.ts"
 type: "code"
-community: "Community 77"
+community: "Tenant Messaging Service"
 location: "L348"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/Tenant_Messaging_Service
 ---
 
 # markLearnerMessageRead()
@@ -15,4 +15,4 @@ tags:
 - [[markRecipientRead()]] - `calls` [EXTRACTED]
 - [[messages.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_77
+#graphify/code #graphify/EXTRACTED #community/Tenant_Messaging_Service

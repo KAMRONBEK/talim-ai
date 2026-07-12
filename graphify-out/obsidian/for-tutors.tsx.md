@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/for-tutors.tsx"
 type: "code"
-community: "Community 30"
+community: "Marketing Landing UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_30
+  - community/Marketing_Landing_UI
 ---
 
 # for-tutors.tsx
@@ -17,4 +17,4 @@ tags:
 - [[landing-page.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_30
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI

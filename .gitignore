@@ -18,6 +18,8 @@ coverage
 .playwright-mcp/
 # Ephemeral QA screenshots (repo root — delete after MCP/browser testing)
 /*.png
+# Generated QA test fixtures (regenerate: pnpm qa:fixtures — the script is the fixture)
+docs/qa/fixtures/
 
 # Graphify knowledge graph — commit the graph + Obsidian vault so they sync
 # across machines via git. Ignore machine-specific + local-only bits.

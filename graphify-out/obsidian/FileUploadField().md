@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Community 54"
+community: "Dialog & Button UI"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Dialog__Button_UI
 ---
 
 # FileUploadField()
@@ -18,4 +18,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI

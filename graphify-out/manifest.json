@@ -1670,9 +1670,9 @@
     "semantic_hash": "3085f753128b62429afe6b66a6859da6"
   },
   "package.json": {
-    "mtime": 1782673229.0688734,
-    "ast_hash": "ccd907202c814d1dd4caeb1c45fca233",
-    "semantic_hash": "ccd907202c814d1dd4caeb1c45fca233"
+    "mtime": 1783852152.2902424,
+    "ast_hash": "d0f47e14e39fac89766dd308253a3b1e",
+    "semantic_hash": "d0f47e14e39fac89766dd308253a3b1e"
   },
   "packages/config/eslint/index.js": {
     "mtime": 1780599089.1910558,
@@ -1855,9 +1855,9 @@
     "semantic_hash": "1df8f00e863c4670d350df19d3d78ece"
   },
   "scripts/qa-overnight.sh": {
-    "mtime": 1782674812.5530012,
-    "ast_hash": "94de34b599f7ea29e19ef09b7316647a",
-    "semantic_hash": "94de34b599f7ea29e19ef09b7316647a"
+    "mtime": 1783852867.833503,
+    "ast_hash": "00fecbca1e9a669aac6976ccc8b4e5b5",
+    "semantic_hash": "00fecbca1e9a669aac6976ccc8b4e5b5"
   },
   "turbo.json": {
     "mtime": 1780599089.1947293,
@@ -1915,9 +1915,9 @@
     "semantic_hash": "c698309979460d0f02ba616417844399"
   },
   ".claude/skills/qa-run/SKILL.md": {
-    "mtime": 1782673218.0188682,
-    "ast_hash": "dc91d42ffdba2609ccac2a4f319272d4",
-    "semantic_hash": "dc91d42ffdba2609ccac2a4f319272d4"
+    "mtime": 1783852967.296087,
+    "ast_hash": "c1f53a158ead38f8b3742aaac23d79cf",
+    "semantic_hash": "c1f53a158ead38f8b3742aaac23d79cf"
   },
   ".github/workflows/deploy.yml": {
     "mtime": 1782828649.6888278,
@@ -2035,9 +2035,9 @@
     "semantic_hash": "9083ea8c77e37e68d214c279da4a4cf4"
   },
   "docs/qa/overnight-visual-qa.md": {
-    "mtime": 1782674827.3125403,
-    "ast_hash": "194da72a01b91fe24a5e5e5a8fb64960",
-    "semantic_hash": "194da72a01b91fe24a5e5e5a8fb64960"
+    "mtime": 1783853074.1966162,
+    "ast_hash": "6e41c582000efa014c5571f1435c174b",
+    "semantic_hash": "6e41c582000efa014c5571f1435c174b"
   },
   "docs/qa/screenshots/_admin_err.html": {
     "mtime": 1782352137.2758055,
@@ -2055,9 +2055,9 @@
     "semantic_hash": "09589123695dd74d3b9cc17439a612c1"
   },
   "docs/qa/user-stories.md": {
-    "mtime": 1782691251.357736,
-    "ast_hash": "d3d5318296fb8128db42426b820cab24",
-    "semantic_hash": "d3d5318296fb8128db42426b820cab24"
+    "mtime": 1783852809.3435533,
+    "ast_hash": "a23a0080dc0a7870a93ced34c806931a",
+    "semantic_hash": "a23a0080dc0a7870a93ced34c806931a"
   },
   "docs/qa/visual-qa-report.md": {
     "mtime": 1783850136.0903986,
@@ -2075,7 +2075,7 @@
     "semantic_hash": "df695b740a06853bb680988ab4501f0b"
   },
   "docs/qa/screenshots/qa-pythagoras.pdf": {
-    "mtime": 1782349745.2228405,
+    "mtime": 1783851782.383652,
     "ast_hash": "4d63d3b0bf12d7345638097359d786fe",
     "semantic_hash": "4d63d3b0bf12d7345638097359d786fe"
   },
@@ -2260,9 +2260,9 @@
     "semantic_hash": "f76dbb002fecc8b2fcc3c3353b2c531c"
   },
   "docs/qa/user-stories-expansion.md": {
-    "mtime": 1782611186.758071,
-    "ast_hash": "693917ebb650626500b6c03e97a99e1d",
-    "semantic_hash": "693917ebb650626500b6c03e97a99e1d"
+    "mtime": 1783852809.341897,
+    "ast_hash": "1a0fb6103fd036d37441a9629577211a",
+    "semantic_hash": "1a0fb6103fd036d37441a9629577211a"
   },
   "docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg": {
     "mtime": 1782613350.2073905,
@@ -2285,9 +2285,9 @@
     "semantic_hash": "58d33cca79d465fc51fd8be47b51c6dd"
   },
   ".claude/settings.local.json": {
-    "mtime": 1782673067.2290707,
-    "ast_hash": "d4f82bd66b683db6c649dc4111bc5881",
-    "semantic_hash": "d4f82bd66b683db6c649dc4111bc5881"
+    "mtime": 1783852880.1466491,
+    "ast_hash": "1850a53e7fd890a0a63d2d95fb29c793",
+    "semantic_hash": "1850a53e7fd890a0a63d2d95fb29c793"
   },
   "apps/admin/components/admin-header.tsx": {
     "mtime": 1782895796.2064571,
@@ -2540,13 +2540,33 @@
     "semantic_hash": "e55885450d4b3570a06b8168dbd7dbe3"
   },
   "scripts/qa-preflight.sh": {
-    "mtime": 1782673305.1144412,
-    "ast_hash": "4d4f177f7267c1974c48e9610d9f3e0b",
-    "semantic_hash": "4d4f177f7267c1974c48e9610d9f3e0b"
+    "mtime": 1783852243.015055,
+    "ast_hash": "a779ce69b3398e9bc5e981af168a2de2",
+    "semantic_hash": "a779ce69b3398e9bc5e981af168a2de2"
   },
   "docs/plans/question-engine.md": {
     "mtime": 1783850307.6607523,
     "ast_hash": "54295044a48a7c6a3e7b55f9a524f760",
     "semantic_hash": "54295044a48a7c6a3e7b55f9a524f760"
+  },
+  "docs/qa/console-baseline.json": {
+    "mtime": 1783852765.4287417,
+    "ast_hash": "f0f0b34cc562dc94e912dc74e87617f1",
+    "semantic_hash": "f0f0b34cc562dc94e912dc74e87617f1"
+  },
+  "scripts/qa-fixtures.mjs": {
+    "mtime": 1783852998.0211542,
+    "ast_hash": "8bb0353f0f191df0ea614e30327794e0",
+    "semantic_hash": "8bb0353f0f191df0ea614e30327794e0"
+  },
+  "docs/qa/coverage-map.md": {
+    "mtime": 1783852765.428633,
+    "ast_hash": "9ffebb80f93c7d4efdd7f2413452ea6b",
+    "semantic_hash": "9ffebb80f93c7d4efdd7f2413452ea6b"
+  },
+  "docs/qa/human-qa-playbook.md": {
+    "mtime": 1783852765.4277735,
+    "ast_hash": "a1ea8e7b0dc9a2c342efb7d58cd0faab",
+    "semantic_hash": "a1ea8e7b0dc9a2c342efb7d58cd0faab"
   }
 }

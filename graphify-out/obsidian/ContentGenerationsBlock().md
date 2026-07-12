@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Content Access & Mastery UI"
+community: "Content Sidebar & Generations"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Access__Mastery_UI
+  - community/Content_Sidebar__Generations
 ---
 
 # ContentGenerationsBlock()
@@ -17,4 +17,4 @@ tags:
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations

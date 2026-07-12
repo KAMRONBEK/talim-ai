@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Admin Analytics"
+community: "Config, Pricing & Embeddings"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics
+  - community/Config_Pricing__Embeddings
 ---
 
 # usage-pricing.ts
@@ -19,4 +19,4 @@ tags:
 - [[planMonthlyPriceUsd()]] - `contains` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics
+#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings

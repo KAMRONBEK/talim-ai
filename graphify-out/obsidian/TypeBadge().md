@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Community 31"
+community: "Content Grid & Learner Dashboard"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Content_Grid__Learner_Dashboard
 ---
 
 # TypeBadge()
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeThumbnailUrl()]] - `calls` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard

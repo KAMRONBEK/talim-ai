@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types"
+community: "Quiz Player & Hooks"
 location: "L1195"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types
+  - community/Quiz_Player__Hooks
 ---
 
 # QuizAttempt
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg"
 type: "image"
-community: "Community 89"
+community: "Landing Screenshot (RU)"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/Landing_Screenshot_RU
 ---
 
 # Product demo card: 'Генетический код и тр…' / Биология 101 · Глава 11, AI badge, 'Конспект готов · 3 мин чтения'
@@ -14,4 +14,4 @@ tags:
 - [[Advertised platform features AI summaries (конспекты), podcasts, quizzes, personal AI tutor from uploaded material]] - `conceptually_related_to` [INFERRED]
 - [[Hero section badge 'Учитесь с ИИ', stacked headline, value-prop copy, CTA pair]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/Community_89
+#graphify/image #graphify/EXTRACTED #community/Landing_Screenshot_RU

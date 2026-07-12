@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Community 66"
+community: "API Endpoints & Media Hooks"
 location: "L46"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_66
+  - community/API_Endpoints__Media_Hooks
 ---
 
 # useQuizHistory()
@@ -16,4 +16,4 @@ tags:
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_66
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks

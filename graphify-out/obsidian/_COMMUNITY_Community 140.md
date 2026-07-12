@@ -1,18 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 3
+members: 2
 ---
 
 # Community 140
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
-- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
-- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
+- [[makeQueryClient()]] - code - apps/admin/lib/queryClient.ts
+- [[queryClient.ts]] - code - apps/admin/lib/queryClient.ts
 
 ## Live Query (requires Dataview plugin)
 
