@@ -223,3 +223,19 @@ flowchart LR
 | Content isolation | Strict tenant DB scoping vs shared pool | Epic 3 |
 | Slideshow product name | `ContentVideo` in schema vs user-facing "slideshow" | Epic 3 UI |
 | Admin URL | `apps/admin` on `admin.talim-ai.uz` | Done (Epic 2) |
+
+---
+
+## QA-deferred structural items (from overnight visual-QA, Run 18 — 2026-07-12)
+
+Structural findings that need a product decision, a schema migration, or a hot-path/auth change — not
+safe to auto-fix in an unattended QA run. Each has an evidence bundle in `docs/qa/user-stories.md`
+(findings ledger) + `docs/qa/visual-qa-report.md` (Run 18).
+
+| Item | What | Why deferred | Owner | Logged |
+|------|------|--------------|-------|--------|
+| F78 | FLAGGED generated media (podcast/quiz/slideshow/summary) is label-only — never hidden from learners; no serving-path consumer of `GeneratedMediaReview.status`. | Needs a product decision on hide semantics ("under review" placeholder vs full hide) + serving-path enforcement. | @KAMRONBEK | 2026-07-12 |
+| F77 | Assessment re-assign is a silent no-op on already-assigned learners (`if (existing) continue`); a due-date / content-scope change is dropped and there is no unassign route. | Needs upsert-semantics decision (update dueAt/content? reset attempts?) + an unassign endpoint. | @KAMRONBEK | 2026-07-12 |
+| F39 | GAME leaderboard speed-points use client-supplied `responseMs` (clamped to [0,limit], negatives rejected — so no *impossible* scores, but a cheater who knows answers can forge `responseMs=0` for the max speed factor). | True server-authoritative timing needs a per-attempt/per-question served-timestamp (stateful) — schema + hot scoring-path change. | @KAMRONBEK | 2026-07-12 |
+| O81 | Impersonation token is not single-use (stateless 30-min JWT, replayable within its window). | Server-side jti/nonce tracking = structural; stateless was a deliberate tradeoff. | @KAMRONBEK | 2026-07-12 |
+| F59/F69/F62/F75 | (prior runs) persisted `Quiz.status`; web `error.tsx` boundary; API error-code contract; web `text-destructive` token split. | Migrations / app-wide render behaviour / design calls. | @KAMRONBEK | 2026-06-29 |
