@@ -880,3 +880,18 @@ Verified live against local dev (qa-individual / Ven diagrammasi PDF):
       renders via KaTeX (RichText normalization).
 - [ ] Regression watch: requested-type balance is best-effort — a type can come back with 0
       items if the model/filters starve it (observed: NUMERIC 0/15 in one run).
+
+### Post-review-fix verification (2026-07-12, second pass)
+
+- [x] Flashcards-only session (types=[FLASHCARD], count 5): 5/5 generated; **consecutive
+      cards do NOT leak reveal state** — card 2 requires its own "Javobni ko'rish" after
+      card 1 was revealed and self-graded (key={q.id} fix verified live).
+- [x] Revisiting an answered card shows its back + locked Bildim/Bilmadim + verdict.
+- [x] Self-report grading honest: 3×Bildim/2×Bilmadim → 60%, mastery moved DOWN 64→58
+      (half-weight self-report evidence).
+- [x] Review view shows localized self-report labels (Bildim/Bilmadim, not raw sentinels),
+      card back as "To'g'ri javob", difficulty/bloom badges, Manba collapsible.
+- [x] Practice dialog after derived-Mixed refactor: Aralash pressed by default, type
+      chips toggle correctly, Fleshkartalar selectable alone or with other types.
+- [x] FREE-plan daily generation quota path: 402 → Pro upsell modal renders with manual
+      activation copy (bonus coverage; usage reset in dev DB to continue testing).
