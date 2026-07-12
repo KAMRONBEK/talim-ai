@@ -1,41 +1,42 @@
 ---
 type: community
-cohesion: 0.11
-members: 26
+cohesion: 0.12
+members: 27
 ---
 
 # Community 37
 
-**Cohesion:** 0.11 - loosely connected
-**Members:** 26 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 27 nodes
 
 ## Members
-- [[.constructor()_5]] - code - apps/web/lib/authenticatedBlob.ts
-- [[BlobFetchError]] - code - apps/web/lib/authenticatedBlob.ts
-- [[ContentMasteryResponse]] - code - packages/types/index.ts
-- [[ContentStage()]] - code - apps/web/components/learning/content-stage.tsx
-- [[ContentStageProps]] - code - apps/web/components/learning/content-stage.tsx
-- [[FetchBlobOptions]] - code - apps/web/lib/authenticatedBlob.ts
-- [[PdfViewer]] - code - apps/web/components/learning/PdfViewerLazy.tsx
-- [[PdfViewerLazy.tsx]] - code - apps/web/components/learning/PdfViewerLazy.tsx
-- [[PdfViewerLoading()]] - code - apps/web/components/learning/PdfViewerLazy.tsx
-- [[StageExcerpt]] - code - apps/web/components/learning/content-stage.tsx
-- [[assessmentEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[authEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[authenticatedBlob.ts]] - code - apps/web/lib/authenticatedBlob.ts
-- [[content-stage.tsx]] - code - apps/web/components/learning/content-stage.tsx
-- [[contentEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[endpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[endpoints.ts]] - code - apps/web/lib/api/endpoints.ts
-- [[fetchAuthenticatedBlob()]] - code - apps/web/lib/authenticatedBlob.ts
-- [[learnerEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[loadPdfJs()]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[rasterize-pdf.ts]] - code - apps/web/lib/rasterize-pdf.ts
-- [[rasterizePdfToImages()]] - code - apps/web/lib/rasterize-pdf.ts
-- [[tenantEndpoints]] - code - apps/web/lib/api/endpoints.ts
-- [[useMastery.ts]] - code - apps/web/hooks/useMastery.ts
-- [[useQuizHistory()]] - code - apps/web/hooks/useQuiz.ts
-- [[useReparseContent.ts]] - code - apps/web/hooks/useReparseContent.ts
+- [[PageDimensions]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PageState]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfDocumentProxy]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfExcerptPayload]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfJsModule]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfPageProxy]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[PdfSelectionMode]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfTextContentItem]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[PdfTextItem]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[PdfViewer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewer.tsx]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewerProps]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[PdfViewport]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[Rect]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[clientRectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[cropPageCanvasRegion()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[ensureEndOfContent()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[estimateTextWidth()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[extractTextFromTextLayerMarquee()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[extractTextInDomRect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[getViewportTextBounds()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[isTextItem()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[pdf-area-selection.ts]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[pdfjs-cdn.ts]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[rectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
+- [[renderManualTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[renderTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -45,26 +46,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Community 38]]
-- 6 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 6 edges to [[_COMMUNITY_Community 40]]
-- 5 edges to [[_COMMUNITY_Community 36]]
-- 4 edges to [[_COMMUNITY_Transcript Panel]]
-- 4 edges to [[_COMMUNITY_Community 44]]
-- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 2 edges to [[_COMMUNITY_Community 32]]
-- 2 edges to [[_COMMUNITY_Community 33]]
-- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 2 edges to [[_COMMUNITY_Community 35]]
-- 2 edges to [[_COMMUNITY_Community 52]]
-- 1 edge to [[_COMMUNITY_Community 43]]
-- 1 edge to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Admin App UI]]
+- 3 edges to [[_COMMUNITY_Community 86]]
+- 2 edges to [[_COMMUNITY_Community 66]]
+- 1 edge to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Community 39]]
+- 1 edge to [[_COMMUNITY_Content Access & Mastery UI]]
 
 ## Top bridge nodes
-- [[content-stage.tsx]] - degree 32, connects to 12 communities
-- [[ContentStage()]] - degree 8, connects to 5 communities
-- [[authenticatedBlob.ts]] - degree 8, connects to 3 communities
-- [[fetchAuthenticatedBlob()]] - degree 6, connects to 3 communities
-- [[useMastery.ts]] - degree 6, connects to 2 communities
+- [[PdfViewer.tsx]] - degree 22, connects to 4 communities
+- [[pdfjs-cdn.ts]] - degree 7, connects to 1 community
+- [[PdfExcerptPayload]] - degree 2, connects to 1 community
+- [[PdfViewer()]] - degree 2, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Community 54"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Community_54
 ---
 
 # ButtonProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[button.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Community_54

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/tutor-graph-smoke.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "Community 73"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/Community_73
 ---
 
 # main()
@@ -19,4 +19,4 @@ tags:
 - [[tutor-graph-smoke.ts]] - `contains` [EXTRACTED]
 - [[validateGraphPayload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Community_73

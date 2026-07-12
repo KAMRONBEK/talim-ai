@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tutorRequest.service.ts"
 type: "code"
-community: "Community 47"
+community: "Community 71"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_47
+  - community/Community_71
 ---
 
 # createTutorRequest()
@@ -17,4 +17,4 @@ tags:
 - [[tutorRequest.service.ts]] - `contains` [EXTRACTED]
 - [[upgradeToTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_47
+#graphify/code #graphify/EXTRACTED #community/Community_71

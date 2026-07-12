@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Community 49"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Community_49
 ---
 
 # sendContentFile()
@@ -18,4 +18,4 @@ tags:
 - [[getContentFile()_1]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Community_49

@@ -1,23 +1,24 @@
 ---
 type: community
-cohesion: 0.36
-members: 8
+cohesion: 0.28
+members: 9
 ---
 
 # Community 106
 
-**Cohesion:** 0.36 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.28 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[Locale]] - code - apps/web/i18n/routing.ts
-- [[config_4]] - code - apps/web/middleware.ts
-- [[locales]] - code - apps/web/i18n/routing.ts
-- [[middleware.ts_1]] - code - apps/web/middleware.ts
-- [[parseLocale()]] - code - apps/web/i18n/request.ts
-- [[request.ts]] - code - apps/web/i18n/request.ts
-- [[routing]] - code - apps/web/i18n/routing.ts
-- [[routing.ts]] - code - apps/web/i18n/routing.ts
+- [[FullscreenDoc_1]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[FullscreenEl_1]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[NarratedVideoLabels]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[NarratedVideoPlayer()]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[NarratedVideoPlayer.tsx]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[TeacherMascot()]] - code - apps/web/components/deck/TeacherMascot.tsx
+- [[TeacherMascot.tsx]] - code - apps/web/components/deck/TeacherMascot.tsx
+- [[VideoSegment]] - code - packages/types/index.ts
+- [[formatTime()]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,11 +28,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Community 46]]
-- 3 edges to [[_COMMUNITY_Community 61]]
+- 2 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 2 edges to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Podcast API]]
+- 1 edge to [[_COMMUNITY_Community 84]]
 
 ## Top bridge nodes
-- [[routing.ts]] - degree 8, connects to 2 communities
-- [[routing]] - degree 5, connects to 2 communities
-- [[Locale]] - degree 4, connects to 2 communities
-- [[locales]] - degree 2, connects to 1 community
+- [[NarratedVideoPlayer.tsx]] - degree 13, connects to 4 communities
+- [[VideoSegment]] - degree 3, connects to 2 communities
+- [[NarratedVideoPlayer()]] - degree 3, connects to 1 community

@@ -10,12 +10,12 @@ members: 6
 **Members:** 6 nodes
 
 ## Members
-- [[compilerOptions_7]] - code - packages/ui/tsconfig.json
-- [[extends_6]] - code - packages/ui/tsconfig.json
-- [[include_4]] - code - packages/ui/tsconfig.json
-- [[jsx_1]] - code - packages/ui/tsconfig.json
-- [[lib_3]] - code - packages/ui/tsconfig.json
-- [[tsconfig.json_4]] - code - packages/ui/tsconfig.json
+- [[.mcp.json]] - code - .mcp.json
+- [[@playwrightmcp_1]] - code - .mcp.json
+- [[bash_1]] - code - .mcp.json
+- [[npx_1]] - code - .mcp.json
+- [[playwright_1]] - code - .mcp.json
+- [[talim-vps_1]] - code - .mcp.json
 
 ## Live Query (requires Dataview plugin)
 

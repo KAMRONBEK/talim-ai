@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/display.ts"
 type: "code"
-community: "Community 61"
+community: "Community 64"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/Community_64
 ---
 
 # display
@@ -15,4 +15,4 @@ tags:
 - [[display.ts]] - `contains` [EXTRACTED]
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/Community_64

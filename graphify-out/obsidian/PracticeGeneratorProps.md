@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/practice/practice-generator.tsx"
 type: "code"
-community: "Community 39"
+community: "Community 36"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Community_36
 ---
 
 # PracticeGeneratorProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[practice-generator.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Community_36

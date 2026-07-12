@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ManimVideo.tsx"
 type: "code"
-community: "Community 52"
+community: "Community 51"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_52
+  - community/Community_51
 ---
 
 # ManimVideo()
@@ -17,4 +17,4 @@ tags:
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 - [[getApiBaseUrl()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_52
+#graphify/code #graphify/EXTRACTED #community/Community_51

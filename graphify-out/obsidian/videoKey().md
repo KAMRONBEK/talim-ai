@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Community 40"
+community: "Content Assignment & Hooks"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Content_Assignment__Hooks
 ---
 
 # videoKey()
@@ -15,4 +15,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

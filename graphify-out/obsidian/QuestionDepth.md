@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Quiz Generation Job"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Quiz_Generation_Job
 ---
 
 # QuestionDepth
@@ -23,4 +23,4 @@ tags:
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

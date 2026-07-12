@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 35"
+community: "Community 59"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Community_59
 ---
 
 # contentApiBase()
@@ -18,4 +18,4 @@ tags:
 - [[useDeleteContent()_1]] - `calls` [EXTRACTED]
 - [[useRetryContent()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Community_59

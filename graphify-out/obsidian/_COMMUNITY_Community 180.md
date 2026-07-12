@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-OWNER-01 Create a student (email, email-less kid, name-only)]] - document - docs/qa/user-stories-expansion.md
+- [[US-IND-24 Quiz DEEPEN (0partial gen, FAILED-vs-generating, retry, grading)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

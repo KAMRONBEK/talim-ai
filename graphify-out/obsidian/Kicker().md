@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Slide Deck UI"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Slide_Deck_UI
 ---
 
 # Kicker()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

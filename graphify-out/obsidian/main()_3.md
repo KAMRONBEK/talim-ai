@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Community 83"
 location: "L89"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Community_83
 ---
 
 # main()
@@ -20,4 +20,4 @@ tags:
 - [[preview()]] - `calls` [EXTRACTED]
 - [[searchWithDistance()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Community_83

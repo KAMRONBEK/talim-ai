@@ -1,11 +1,11 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "code"
-community: "Community 127"
+community: "Community 100"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_127
+  - community/Community_100
 ---
 
 # Deploy to VPS GitHub Actions Workflow
@@ -16,4 +16,4 @@ tags:
 - [[Production Deployment Topology (nginx + Docker + GHCR)]] - `references` [EXTRACTED]
 - [[VPS Pull & Restart Job]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_127
+#graphify/code #graphify/EXTRACTED #community/Community_100

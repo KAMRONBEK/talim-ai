@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Assessment API Controllers"
 location: "L67"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Assessment_API_Controllers
 ---
 
 # assertCanMutateContent()
@@ -21,4 +21,4 @@ tags:
 - [[retryContent()]] - `calls` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers

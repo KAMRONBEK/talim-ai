@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "Community 28"
+community: "UI Package Deps"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_28
+  - community/UI_Package_Deps
 ---
 
 # next
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[peerDependencies]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_28
+#graphify/code #graphify/EXTRACTED #community/UI_Package_Deps

@@ -1,25 +1,26 @@
 ---
 type: community
-cohesion: 0.20
-members: 10
+cohesion: 0.25
+members: 11
 ---
 
 # Community 94
 
-**Cohesion:** 0.20 - loosely connected
-**Members:** 10 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 11 nodes
 
 ## Members
-- [[Citations (Manba Pills)]] - concept - docs/plans/youlearn-redesign.md
-- [[Flashcards & Notes Generators]] - concept - docs/plans/youlearn-redesign.md
-- [[Generate Grid (Yaratish)]] - concept - docs/plans/youlearn-redesign.md
-- [[Learn Hub Panel (ContentLearnPanel)]] - concept - docs/plans/youlearn-redesign.md
-- [[Learning Workspace Redesign (YouLearn-inspired)]] - document - docs/plans/youlearn-redesign.md
-- [[Multi-tenant Isolation Guard (contentAccess.service)]] - concept - docs/FEATURES.md
-- [[Persistent Study Workspace (3-pane)]] - rationale - docs/plans/youlearn-redesign.md
-- [[Role Adaptations (server-side security)]] - rationale - docs/plans/youlearn-redesign.md
-- [[US-LEARNER-01 Sees Only Assigned Materials (S1 isolation story)]] - concept - docs/qa/user-stories.md
-- [[Visual Direction (girih, marker-highlight)]] - concept - docs/plans/youlearn-redesign.md
+- [[BoolBadge()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[ContentDetailModal()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[ContentPage()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[DetailStat()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[errorMessage()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[page.tsx_1]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[statusPillClass()]] - code - apps/admin/app/(admin)/content/page.tsx
+- [[useAdminContentDetail()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useAdminContents()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useDeleteContent()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useRetryContent()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -29,12 +30,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Community 77]]
-- 2 edges to [[_COMMUNITY_Community 72]]
-- 1 edge to [[_COMMUNITY_Community 120]]
+- 5 edges to [[_COMMUNITY_Admin Dashboard UI]]
+- 4 edges to [[_COMMUNITY_Account & Login UI]]
+- 2 edges to [[_COMMUNITY_Community 39]]
 
 ## Top bridge nodes
-- [[Multi-tenant Isolation Guard (contentAccess.service)]] - degree 5, connects to 3 communities
-- [[Learning Workspace Redesign (YouLearn-inspired)]] - degree 6, connects to 1 community
-- [[Citations (Manba Pills)]] - degree 2, connects to 1 community
-- [[US-LEARNER-01 Sees Only Assigned Materials (S1 isolation story)]] - degree 2, connects to 1 community
+- [[page.tsx_1]] - degree 17, connects to 3 communities
+- [[useAdminContentDetail()]] - degree 3, connects to 1 community
+- [[useAdminContents()]] - degree 3, connects to 1 community
+- [[useDeleteContent()]] - degree 3, connects to 1 community
+- [[useRetryContent()]] - degree 3, connects to 1 community

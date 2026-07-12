@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Assessment API Controllers"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Assessment_API_Controllers
 ---
 
 # assertCanAccessContent()
@@ -59,4 +59,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers

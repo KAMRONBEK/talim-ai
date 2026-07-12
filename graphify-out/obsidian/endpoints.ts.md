@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api/endpoints.ts"
 type: "code"
-community: "Community 37"
+community: "Community 86"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/Community_86
 ---
 
 # endpoints.ts
@@ -23,4 +23,4 @@ tags:
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/Community_86

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/analytics.service.ts"
 type: "code"
-community: "Community 51"
+community: "Admin Analytics"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/Admin_Analytics
 ---
 
 # ALL_CONTENT_TYPES
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[analytics.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

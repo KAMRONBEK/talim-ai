@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/authenticatedBlob.ts"
 type: "code"
-community: "Community 37"
+community: "Content Assignment & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/Content_Assignment__Hooks
 ---
 
 # authenticatedBlob.ts
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

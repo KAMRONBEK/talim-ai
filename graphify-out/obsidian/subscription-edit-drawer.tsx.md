@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Community 54"
+community: "Community 55"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Community_55
 ---
 
 # subscription-edit-drawer.tsx
@@ -37,4 +37,4 @@ tags:
 - [[useUpdateTenant()]] - `imports` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Community_55

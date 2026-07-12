@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "Community 38"
+community: "Community 34"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/Community_34
 ---
 
 # ChatWindow()
@@ -19,4 +19,4 @@ tags:
 - [[useChatStore]] - `calls` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/Community_34

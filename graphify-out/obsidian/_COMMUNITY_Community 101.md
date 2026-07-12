@@ -1,24 +1,25 @@
 ---
 type: community
-cohesion: 0.31
-members: 9
+cohesion: 0.24
+members: 10
 ---
 
 # Community 101
 
-**Cohesion:** 0.31 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.24 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[Defect nav labels 'Qanday ishlaydi' and O'qituvchilar uchun wrap onto two lines inside the pill at 768px, breaking navbar alignment]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Defect right-side gradient CTA button (likely 'Boshlash') is clipped at the viewport edge, only 'Bo' visible at 768px]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Hero section 'AI bilan o'rganish' badge, headline 'Har qanday narsani. O'zingizning yo'lingiz bilan.' with orange highlight, subcopy about PDFvideoslidelecture uploads, CTAs 'Bepul boshlash' _8284c19d]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Landing navbar at 768px Talim AI logo, pill nav (Xususiyatlar active, Qanday ishlaydi, O'qituvchilar uchun, Mahsulot, Narxlar), theme toggle, Kirish, CTA]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Marketing navbar component in appsweb (componentsmarketing) responsible for this responsive layout]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Product demo card 'Genetik kod va tarjima' (Biologiya 101, 11-bob) showing AI outputs summary (3 min read), podcast (8 min listen), quiz (12 questions), 72% progress bar]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[QA screenshot Uzbek landing page at tablet 768px showing navbar pre-fix state]] - image - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Tablet 768px responsive breakpoint — desktop nav still rendered instead of collapsing to a compacthamburger layout]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
-- [[Uzbek (uz) locale rendering of the marketing landing page — longer Uzbek strings drive the navbar wrapping at tablet width]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg
+- [[Footer()]] - code - apps/web/components/marketing/footer.tsx
+- [[MANUAL_TIERS]] - code - apps/web/lib/pricing.ts
+- [[Navbar()]] - code - apps/web/components/marketing/navbar.tsx
+- [[Pricing()]] - code - apps/web/components/marketing/pricing.tsx
+- [[PricingPage()]] - code - apps/web/app/[locale]/pricing/page.tsx
+- [[SECTIONS]] - code - apps/web/app/[locale]/terms/page.tsx
+- [[TermsPage()]] - code - apps/web/app/[locale]/terms/page.tsx
+- [[page.tsx_39]] - code - apps/web/app/[locale]/pricing/page.tsx
+- [[page.tsx_41]] - code - apps/web/app/[locale]/terms/page.tsx
+- [[pricing.tsx]] - code - apps/web/components/marketing/pricing.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,3 +27,17 @@ members: 9
 TABLE source_file, type FROM #community/Community_101
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 6 edges to [[_COMMUNITY_Community 33]]
+- 4 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 2 edges to [[_COMMUNITY_Community 30]]
+- 2 edges to [[_COMMUNITY_Community 80]]
+- 1 edge to [[_COMMUNITY_Community 82]]
+
+## Top bridge nodes
+- [[Footer()]] - degree 5, connects to 3 communities
+- [[Navbar()]] - degree 5, connects to 3 communities
+- [[pricing.tsx]] - degree 5, connects to 2 communities
+- [[page.tsx_39]] - degree 7, connects to 1 community
+- [[page.tsx_41]] - degree 6, connects to 1 community

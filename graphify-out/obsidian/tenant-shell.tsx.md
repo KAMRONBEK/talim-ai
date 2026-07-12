@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Tenant Dashboard & Shell"
+community: "Community 35"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Shell
+  - community/Community_35
 ---
 
 # tenant-shell.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantSearch()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Shell
+#graphify/code #graphify/EXTRACTED #community/Community_35

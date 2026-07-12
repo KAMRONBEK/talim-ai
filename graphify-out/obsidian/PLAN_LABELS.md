@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/plan.ts"
 type: "code"
-community: "Community 34"
+community: "Community 38"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_38
 ---
 
 # PLAN_LABELS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[plan.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_38

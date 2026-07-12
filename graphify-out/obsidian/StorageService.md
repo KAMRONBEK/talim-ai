@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Flashcards Generation & Jobs"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Flashcards_Generation__Jobs
 ---
 
 # StorageService
@@ -27,4 +27,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

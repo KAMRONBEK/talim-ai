@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[Admin SSR error page (hasHydrated TypeError)]] - document - docs/qa/screenshots/_admin_err.html
-- [[Generic Internal Server Error page]] - document - docs/qa/screenshots/_err.html
+- [[ThemeProvider()_1]] - code - apps/web/components/theme-provider.tsx
+- [[theme-provider.tsx_1]] - code - apps/web/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

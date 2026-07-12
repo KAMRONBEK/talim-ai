@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 81"
+community: "Admin Dashboard UI"
 location: "L702"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_81
+  - community/Admin_Dashboard_UI
 ---
 
 # AdminUserListItem
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_81
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI

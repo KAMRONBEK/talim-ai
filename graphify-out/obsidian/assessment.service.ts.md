@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment.service.ts"
 type: "code"
-community: "Assessments Service"
+community: "Community 85"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Community_85
 ---
 
 # assessment.service.ts
@@ -18,4 +18,4 @@ tags:
 - [[learner.ts]] - `re_exports` [EXTRACTED]
 - [[results.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Community_85

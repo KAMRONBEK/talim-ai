@@ -1,32 +1,32 @@
 ---
 type: community
-cohesion: 0.18
+cohesion: 0.12
 members: 17
 ---
 
 # Community 69
 
-**Cohesion:** 0.18 - loosely connected
+**Cohesion:** 0.12 - loosely connected
 **Members:** 17 nodes
 
 ## Members
-- [[ImportRowInput]] - code - apps/api/src/services/tenant/students.ts
-- [[ProvisionStudentParams]] - code - apps/api/src/services/tenant/students.ts
-- [[ProvisionStudentResult]] - code - apps/api/src/services/tenant/students.ts
-- [[StudentImportRowReport]] - code - apps/api/src/services/tenant/students.ts
-- [[createStudent()_1]] - code - apps/api/src/services/tenant/students.ts
-- [[createStudentSchema]] - code - apps/api/src/services/tenant/shared.ts
-- [[deleteStudent()_1]] - code - apps/api/src/services/tenant/students.ts
-- [[formatStudentRow()]] - code - apps/api/src/services/tenant/shared.ts
-- [[generateImportUsername()]] - code - apps/api/src/services/tenant/students.ts
-- [[importStudents()_1]] - code - apps/api/src/services/tenant/students.ts
-- [[normalizeImportInput()]] - code - apps/api/src/services/tenant/students.ts
-- [[parseCsv()]] - code - apps/api/src/services/tenant/students.ts
-- [[patchStudent()_1]] - code - apps/api/src/services/tenant/students.ts
-- [[patchStudentSchema]] - code - apps/api/src/services/tenant/shared.ts
-- [[provisionStudent()]] - code - apps/api/src/services/tenant/students.ts
-- [[resetStudentPassword()_1]] - code - apps/api/src/services/tenant/students.ts
-- [[students.ts]] - code - apps/api/src/services/tenant/students.ts
+- [[build_1]] - code - apps/api/package.json
+- [[create-admin]] - code - apps/api/package.json
+- [[create-tenant-owner]] - code - apps/api/package.json
+- [[dbgenerate]] - code - apps/api/package.json
+- [[dbmigrate]] - code - apps/api/package.json
+- [[dbpush]] - code - apps/api/package.json
+- [[dbseed]] - code - apps/api/package.json
+- [[dbstudio]] - code - apps/api/package.json
+- [[dev_1]] - code - apps/api/package.json
+- [[inspect-chunks]] - code - apps/api/package.json
+- [[lint_1]] - code - apps/api/package.json
+- [[prebuild]] - code - apps/api/package.json
+- [[predev]] - code - apps/api/package.json
+- [[pretypecheck]] - code - apps/api/package.json
+- [[scripts_1]] - code - apps/api/package.json
+- [[start_1]] - code - apps/api/package.json
+- [[typecheck_1]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -36,13 +36,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 6 edges to [[_COMMUNITY_Billing & Quota]]
-- 2 edges to [[_COMMUNITY_Community 80]]
+- 1 edge to [[_COMMUNITY_Community 113]]
 
 ## Top bridge nodes
-- [[students.ts]] - degree 27, connects to 3 communities
-- [[formatStudentRow()]] - degree 6, connects to 1 community
-- [[provisionStudent()]] - degree 5, connects to 1 community
-- [[createStudent()_1]] - degree 3, connects to 1 community
-- [[patchStudent()_1]] - degree 3, connects to 1 community
+- [[scripts_1]] - degree 17, connects to 1 community

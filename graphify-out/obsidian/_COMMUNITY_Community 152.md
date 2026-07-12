@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[buildPodcastUserPrompt()_1]] - code - apps/api/src/lib/podcast-prompt.ts
-- [[podcast-prompt.ts]] - code - apps/api/src/lib/podcast-prompt.ts
+- [[RootLayout()_1]] - code - apps/web/app/layout.tsx
+- [[layout.tsx_7]] - code - apps/web/app/layout.tsx
 
 ## Live Query (requires Dataview plugin)
 

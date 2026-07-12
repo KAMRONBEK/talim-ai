@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Admin & Events Controllers"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Admin__Events_Controllers
 ---
 
 # resolveTenantIdForUser()
@@ -28,4 +28,4 @@ tags:
 - [[tenant.middleware.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers

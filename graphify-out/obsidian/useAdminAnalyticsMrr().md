@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Community 62"
+community: "Admin Dashboard UI"
 location: "L330"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_62
+  - community/Admin_Dashboard_UI
 ---
 
 # useAdminAnalyticsMrr()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_2]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_62
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI

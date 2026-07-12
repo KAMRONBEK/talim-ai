@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/index.ts"
 type: "code"
-community: "Admin App UI"
+community: "Community 39"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Community_39
 ---
 
 # index.ts
@@ -135,4 +135,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[utils.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Community_39

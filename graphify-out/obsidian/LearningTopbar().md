@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Community 33"
+community: "Account & Login UI"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Account__Login_UI
 ---
 
 # LearningTopbar()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

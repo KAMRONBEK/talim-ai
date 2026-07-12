@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useMastery.ts"
 type: "code"
-community: "Community 37"
+community: "Community 86"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/Community_86
 ---
 
 # useMastery.ts
@@ -19,4 +19,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useContentMastery()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/Community_86

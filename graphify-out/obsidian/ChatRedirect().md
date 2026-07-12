@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/chat/page.tsx"
 type: "code"
-community: "Community 46"
+community: "Community 82"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/Community_82
 ---
 
 # ChatRedirect()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_29]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/Community_82

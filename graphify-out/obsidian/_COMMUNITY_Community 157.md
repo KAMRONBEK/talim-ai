@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[doppler-docker-restart.sh]] - code - scripts/doppler-docker-restart.sh
-- [[doppler-docker-restart.sh script]] - code - scripts/doppler-docker-restart.sh
+- [[Admin SSR error page (hasHydrated TypeError)]] - document - docs/qa/screenshots/_admin_err.html
+- [[Generic Internal Server Error page]] - document - docs/qa/screenshots/_err.html
 
 ## Live Query (requires Dataview plugin)
 

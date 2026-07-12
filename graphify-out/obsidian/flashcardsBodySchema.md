@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Flashcards API"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Flashcards_API
 ---
 
 # flashcardsBodySchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[flashcards.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

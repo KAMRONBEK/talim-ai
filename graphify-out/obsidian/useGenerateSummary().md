@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Community 38"
+community: "Community 34"
 location: "L149"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/Community_34
 ---
 
 # useGenerateSummary()
@@ -22,4 +22,4 @@ tags:
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/Community_34

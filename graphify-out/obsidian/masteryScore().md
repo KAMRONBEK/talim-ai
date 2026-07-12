@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Community 43"
+community: "Community 57"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Community_57
 ---
 
 # masteryScore()
@@ -17,4 +17,4 @@ tags:
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 - [[sigmoid()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Community_57

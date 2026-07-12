@@ -1,18 +1,19 @@
 ---
 type: community
 cohesion: 0.67
-members: 3
+members: 4
 ---
 
 # Community 139
 
 **Cohesion:** 0.67 - moderately connected
-**Members:** 3 nodes
+**Members:** 4 nodes
 
 ## Members
-- [[next.config.ts_1]] - code - apps/web/next.config.ts
-- [[nextConfig_1]] - code - apps/web/next.config.ts
-- [[withNextIntl]] - code - apps/web/next.config.ts
+- [[qa-overnight.sh]] - code - scripts/qa-overnight.sh
+- [[qa-overnight.sh script]] - code - scripts/qa-overnight.sh
+- [[qa_http()]] - code - scripts/qa-overnight.sh
+- [[qa_stack_healthy()]] - code - scripts/qa-overnight.sh
 
 ## Live Query (requires Dataview plugin)
 

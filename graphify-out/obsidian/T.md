@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Community 33"
+community: "Content Access & Mastery UI"
 location: "L127"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_33
+  - community/Content_Access__Mastery_UI
 ---
 
 # T
@@ -138,4 +138,4 @@ tags:
 - [[YoutubeLinkForm()]] - `calls` [INFERRED]
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_33
+#graphify/code #graphify/INFERRED #community/Content_Access__Mastery_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/delete-content-dialog.tsx"
 type: "code"
-community: "Community 39"
+community: "Community 36"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Community_36
 ---
 
 # delete-content-dialog.tsx
@@ -28,4 +28,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useDeleteContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Community_36

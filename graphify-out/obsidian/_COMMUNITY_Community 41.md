@@ -1,41 +1,41 @@
 ---
 type: community
-cohesion: 0.12
+cohesion: 0.13
 members: 26
 ---
 
 # Community 41
 
-**Cohesion:** 0.12 - loosely connected
+**Cohesion:** 0.13 - loosely connected
 **Members:** 26 nodes
 
 ## Members
-- [[CLARIFICATION_TEXT]] - code - apps/api/src/lib/tutor-scope.ts
-- [[CYRILLIC_TO_LATIN]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[ClassifyTutorScopeInput]] - code - apps/api/src/lib/tutor-scope.ts
-- [[LATIN_TO_CYRILLIC]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[OUT_OF_SCOPE_FOLLOWUP]] - code - apps/api/src/lib/tutor-scope.ts
-- [[OUT_OF_SCOPE_PREFIX]] - code - apps/api/src/lib/tutor-scope.ts
-- [[STOP_WORDS]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeDecision]] - code - apps/api/src/lib/tutor-scope.ts
-- [[TutorScopeRoute]] - code - apps/api/src/lib/tutor-scope.ts
-- [[classifyTutorScope()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[decisionSchema]] - code - apps/api/src/lib/tutor-scope.ts
-- [[formatRecentTurns()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[guessScopeHeuristically()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[isTutorClarification()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[isTutorScopeRefusal()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[looksLikeFollowUp()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[main()_6]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
-- [[overlapCount()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[scriptVariants()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[toCyrillic()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[toLatin()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tokenize()]] - code - apps/api/src/lib/tutor-scope.ts
-- [[transliterate()]] - code - apps/api/src/lib/uzbek-translit.ts
-- [[tutor-scope-smoke.ts]] - code - apps/api/src/scripts/tutor-scope-smoke.ts
-- [[tutor-scope.ts]] - code - apps/api/src/lib/tutor-scope.ts
-- [[uzbek-translit.ts]] - code - apps/api/src/lib/uzbek-translit.ts
+- [[ManimPayload]] - code - packages/types/tutor-visual.ts
+- [[RENDER_CHART_TOOL]] - code - apps/api/src/lib/tutor-chart.ts
+- [[RENDER_GEOGEBRA_TOOL]] - code - apps/api/src/lib/tutor-geogebra.ts
+- [[RENDER_HTML_SANDBOX_TOOL]] - code - apps/api/src/lib/tutor-html-sandbox.ts
+- [[RENDER_MANIM_TOOL]] - code - apps/api/src/lib/tutor-manim.ts
+- [[RENDER_MERMAID_TOOL]] - code - apps/api/src/lib/tutor-mermaid.ts
+- [[ToolHandlerResult]] - code - apps/api/src/lib/tutor-tools.ts
+- [[buildPendingManimPayload()]] - code - apps/api/src/lib/tutor-manim.ts
+- [[chartSchema_1]] - code - apps/api/src/lib/tutor-chart.ts
+- [[geogebraSchema]] - code - apps/api/src/lib/tutor-geogebra.ts
+- [[getTutorTools()]] - code - apps/api/src/lib/tutor-tools.ts
+- [[handleTutorToolCall()]] - code - apps/api/src/lib/tutor-tools.ts
+- [[htmlSandboxSchema]] - code - apps/api/src/lib/tutor-html-sandbox.ts
+- [[manimSchema]] - code - apps/api/src/lib/tutor-manim.ts
+- [[mermaidSchema_1]] - code - apps/api/src/lib/tutor-mermaid.ts
+- [[tutor-chart.ts]] - code - apps/api/src/lib/tutor-chart.ts
+- [[tutor-geogebra.ts]] - code - apps/api/src/lib/tutor-geogebra.ts
+- [[tutor-html-sandbox.ts]] - code - apps/api/src/lib/tutor-html-sandbox.ts
+- [[tutor-manim.ts]] - code - apps/api/src/lib/tutor-manim.ts
+- [[tutor-mermaid.ts]] - code - apps/api/src/lib/tutor-mermaid.ts
+- [[tutor-tools.ts]] - code - apps/api/src/lib/tutor-tools.ts
+- [[validateChartPayload()]] - code - apps/api/src/lib/tutor-chart.ts
+- [[validateGeoGebraPayload()]] - code - apps/api/src/lib/tutor-geogebra.ts
+- [[validateHtmlSandboxPayload()]] - code - apps/api/src/lib/tutor-html-sandbox.ts
+- [[validateManimScript()]] - code - apps/api/src/lib/tutor-manim.ts
+- [[validateMermaidPayload()]] - code - apps/api/src/lib/tutor-mermaid.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -45,13 +45,19 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 10 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 2 edges to [[_COMMUNITY_Community 64]]
+- 7 edges to [[_COMMUNITY_Shared Types]]
+- 6 edges to [[_COMMUNITY_Community 73]]
+- 3 edges to [[_COMMUNITY_Community 61]]
+- 3 edges to [[_COMMUNITY_Community 46]]
+- 2 edges to [[_COMMUNITY_Community 53]]
+- 2 edges to [[_COMMUNITY_Community 70]]
+- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
+- 1 edge to [[_COMMUNITY_Flashcards Generation & Jobs]]
+- 1 edge to [[_COMMUNITY_Community 51]]
 
 ## Top bridge nodes
-- [[tutor-scope.ts]] - degree 26, connects to 3 communities
-- [[uzbek-translit.ts]] - degree 8, connects to 1 community
-- [[scriptVariants()]] - degree 8, connects to 1 community
-- [[classifyTutorScope()]] - degree 7, connects to 1 community
-- [[ClassifyTutorScopeInput]] - degree 2, connects to 1 community
+- [[tutor-tools.ts]] - degree 29, connects to 5 communities
+- [[ManimPayload]] - degree 5, connects to 4 communities
+- [[handleTutorToolCall()]] - degree 9, connects to 2 communities
+- [[tutor-chart.ts]] - degree 6, connects to 2 communities
+- [[tutor-geogebra.ts]] - degree 6, connects to 2 communities

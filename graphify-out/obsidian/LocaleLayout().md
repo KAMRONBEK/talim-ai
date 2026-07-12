@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "Community 61"
+community: "Community 64"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_61
+  - community/Community_64
 ---
 
 # LocaleLayout()
@@ -15,4 +15,4 @@ tags:
 - [[getMessages()]] - `calls` [INFERRED]
 - [[layout.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Community_61
+#graphify/code #graphify/INFERRED #community/Community_64

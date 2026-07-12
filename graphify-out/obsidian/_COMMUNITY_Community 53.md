@@ -1,36 +1,38 @@
 ---
 type: community
 cohesion: 0.16
-members: 21
+members: 23
 ---
 
 # Community 53
 
 **Cohesion:** 0.16 - loosely connected
-**Members:** 21 nodes
+**Members:** 23 nodes
 
 ## Members
-- [[FILTER_CHIPS]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[FileUploadField()]] - code - apps/web/components/content/UploadCard.tsx
-- [[MaterialFilter]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[QuickActionCards()]] - code - apps/web/components/dashboard/quick-action-cards.tsx
-- [[TenantMaterialDetailPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx
-- [[TenantMaterialsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[UploadCallbacks]] - code - apps/web/components/content/UploadCard.tsx
-- [[UploadCard()]] - code - apps/web/components/content/UploadCard.tsx
-- [[UploadCard.tsx]] - code - apps/web/components/content/UploadCard.tsx
-- [[UploadCardProps]] - code - apps/web/components/content/UploadCard.tsx
-- [[UseFileUploadOptions]] - code - apps/web/hooks/useFileUpload.tsx
-- [[YoutubeLinkForm()]] - code - apps/web/components/content/UploadCard.tsx
-- [[buttonVariants]] - code - packages/ui/components/button.tsx
-- [[page.tsx_24]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx
-- [[quick-action-cards.tsx]] - code - apps/web/components/dashboard/quick-action-cards.tsx
-- [[useCreateTenantYoutubeContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useCreateYoutubeContent()]] - code - apps/web/hooks/useContent.ts
-- [[useFileUpload()]] - code - apps/web/hooks/useFileUpload.tsx
-- [[useFileUpload.tsx]] - code - apps/web/hooks/useFileUpload.tsx
-- [[useUploadContent()]] - code - apps/web/hooks/useContent.ts
-- [[useUploadTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
+- [[BigStatSlide]] - code - packages/types/deck.ts
+- [[BulletsSlide]] - code - packages/types/deck.ts
+- [[CalloutSlide]] - code - packages/types/deck.ts
+- [[ChartPayload]] - code - packages/types/tutor-visual.ts
+- [[ChartSlide]] - code - packages/types/deck.ts
+- [[ComparisonSlide]] - code - packages/types/deck.ts
+- [[ConceptSlide]] - code - packages/types/deck.ts
+- [[CoverSlide]] - code - packages/types/deck.ts
+- [[DeckBullet]] - code - packages/types/deck.ts
+- [[DefinitionSlide]] - code - packages/types/deck.ts
+- [[DiagramSlide]] - code - packages/types/deck.ts
+- [[MermaidPayload]] - code - packages/types/tutor-visual.ts
+- [[ProcessSlide]] - code - packages/types/deck.ts
+- [[QuickCheckSlide]] - code - packages/types/deck.ts
+- [[QuoteSlide]] - code - packages/types/deck.ts
+- [[RecapSlide]] - code - packages/types/deck.ts
+- [[SectionSlide]] - code - packages/types/deck.ts
+- [[SlideBase]] - code - packages/types/deck.ts
+- [[SlideDeckStatus]] - code - packages/types/deck.ts
+- [[SlideLayout]] - code - packages/types/deck.ts
+- [[StatTrioSlide]] - code - packages/types/deck.ts
+- [[TwoColumnSlide]] - code - packages/types/deck.ts
+- [[deck.ts]] - code - packages/types/deck.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -40,21 +42,17 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 11 edges to [[_COMMUNITY_Admin App UI]]
-- 8 edges to [[_COMMUNITY_Community 35]]
-- 8 edges to [[_COMMUNITY_Community 39]]
-- 7 edges to [[_COMMUNITY_Community 33]]
-- 7 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 6 edges to [[_COMMUNITY_Community 38]]
-- 5 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 4 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 3 edges to [[_COMMUNITY_Community 71]]
-- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Community 46]]
+- 23 edges to [[_COMMUNITY_Shared Types]]
+- 19 edges to [[_COMMUNITY_Slide Deck UI]]
+- 3 edges to [[_COMMUNITY_Community 61]]
+- 2 edges to [[_COMMUNITY_Community 41]]
+- 2 edges to [[_COMMUNITY_Community 70]]
+- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 1 edge to [[_COMMUNITY_Community 84]]
 
 ## Top bridge nodes
-- [[page.tsx_24]] - degree 21, connects to 8 communities
-- [[UploadCard.tsx]] - degree 21, connects to 5 communities
-- [[quick-action-cards.tsx]] - degree 12, connects to 4 communities
-- [[TenantMaterialDetailPage()]] - degree 6, connects to 4 communities
-- [[useFileUpload.tsx]] - degree 10, connects to 3 communities
+- [[deck.ts]] - degree 30, connects to 5 communities
+- [[ChartPayload]] - degree 6, connects to 4 communities
+- [[MermaidPayload]] - degree 6, connects to 4 communities
+- [[ChartSlide]] - degree 5, connects to 2 communities
+- [[DiagramSlide]] - degree 5, connects to 2 communities

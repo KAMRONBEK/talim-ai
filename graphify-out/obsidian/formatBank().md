@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Community 29"
+community: "Assessments Service"
 location: "L226"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_29
+  - community/Assessments_Service
 ---
 
 # formatBank()
@@ -16,4 +16,4 @@ tags:
 - [[createBank()_1]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_29
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Podcast API"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Podcast_API
 ---
 
 # assertCanGenerate()
@@ -28,4 +28,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Podcast_API

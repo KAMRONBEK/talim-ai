@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-XCUT-12 Quota matrix — feature × plan × role → 402413 contract]] - document - docs/qa/user-stories-expansion.md
+- [[US-XCUT-03 Accessibility — focus, ARIA, keyboard, contrast, reduced-motion]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

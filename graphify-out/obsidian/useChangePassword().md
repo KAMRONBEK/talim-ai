@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Account & Settings UI"
+community: "Account & Login UI"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Account__Login_UI
 ---
 
 # useChangePassword()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useAccount.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

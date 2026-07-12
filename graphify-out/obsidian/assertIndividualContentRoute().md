@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Flashcards API"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Flashcards_API
 ---
 
 # assertIndividualContentRoute()
@@ -15,4 +15,4 @@ tags:
 - [[assertCanMutateContent()]] - `calls` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

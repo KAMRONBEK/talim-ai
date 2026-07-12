@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ingest.service.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Community 32"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Community_32
 ---
 
 # ingest.service.ts
@@ -25,4 +25,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Community_32

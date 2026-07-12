@@ -1,23 +1,35 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "document"
-community: "Community 78"
+community: "Community 50"
+location: "whole document"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_78
+  - community/Community_50
 ---
 
 # Question Engine Rework Design
 
 ## Connections
-- [[Elo-KT Mastery Model (SectionMastery  QuestionStat)]] - `references` [EXTRACTED]
-- [[FLASHCARD First-class Question Type]] - `references` [EXTRACTED]
+- [[Balanced Answer-Position Shuffle]] - `references` [EXTRACTED]
+- [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - `references` [EXTRACTED]
+- [[Evidence-Gated Mastery Bands]] - `references` [EXTRACTED]
 - [[Fill-to-Count Retry Pass]] - `references` [EXTRACTED]
-- [[Generation Pipeline (overgenerate → rule filter → balanced shuffle)]] - `references` [EXTRACTED]
+- [[Flashcard Integration (FLASHCARD first-class type)]] - `references` [EXTRACTED]
+- [[Inline Cloze (DropdownClozeInput)]] - `references` [EXTRACTED]
 - [[LaTeX Math Rendering Mandate]] - `references` [EXTRACTED]
+- [[Misconception-Derived Distractors]] - `references` [EXTRACTED]
+- [[Near-Transfer Question Constraints]] - `references` [EXTRACTED]
+- [[Numeric-Answer Verification (candidate second pass)]] - `references` [EXTRACTED]
+- [[Partial Credit Rules (creditFraction)]] - `references` [EXTRACTED]
+- [[Practice Generator (Unified Questions + Flashcards)]] - `cites` [EXTRACTED]
+- [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `references` [EXTRACTED]
+- [[QuizKind QUICK Retirement]] - `references` [EXTRACTED]
+- [[SourceQuote Anchor (Hallucination Firewall)]] - `references` [EXTRACTED]
+- [[Stratified Whole-Material Chunk Spread]] - `references` [EXTRACTED]
 - [[Unified Generation Parameters (counttypesdepthscope)]] - `references` [EXTRACTED]
 - [[Unified Grading Module (packagestypesgrading.ts)]] - `references` [EXTRACTED]
-- [[Unified Practice Generator (questions + flashcards)]] - `cites` [EXTRACTED]
+- [[Uzbek Apostrophe Normalization]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_78
+#graphify/document #graphify/EXTRACTED #community/Community_50

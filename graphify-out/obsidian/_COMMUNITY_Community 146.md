@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[api]] - code - apps/admin/lib/api.ts
-- [[api.ts]] - code - apps/admin/lib/api.ts
+- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
+- [[index.js]] - code - packages/config/eslint/index.js
 
 ## Live Query (requires Dataview plugin)
 

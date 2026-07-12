@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-IND-23 Chat  AI tutor DEEPEN (streaming, abort, sources, Manim, scope)]] - document - docs/qa/user-stories-expansion.md
+- [[US-IND-10 Upload validation, size & plan-cap boundaries]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

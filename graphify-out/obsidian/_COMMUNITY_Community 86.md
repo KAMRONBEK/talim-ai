@@ -1,26 +1,28 @@
 ---
 type: community
-cohesion: 0.18
-members: 11
+cohesion: 0.21
+members: 13
 ---
 
 # Community 86
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 11 nodes
+**Cohesion:** 0.21 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[API routes mounted at root; health is GET health]] - rationale - CLAUDE.md
-- [[Email-less kid synthetic email (username@students.talim.local)]] - rationale - docs/test-accounts.md
-- [[Manual activation — no payment integration]] - rationale - CLAUDE.md
-- [[Multi-tenant isolation enforced centrally (assertCanAccessContent)]] - rationale - CLAUDE.md
-- [[Post-login landing by role (dashboard routes)]] - concept - docs/test-accounts.md
-- [[Roles & product model (ADMINTENANT_OWNERTENANT_LEARNERINDIVIDUAL)]] - concept - CLAUDE.md
-- [[Talim AI project guide (CLAUDE.md)]] - document - CLAUDE.md
-- [[Test accounts (shared dev+prod credentials)]] - document - docs/test-accounts.md
-- [[Use dbmigratedeploy locally (checksum drift)]] - rationale - CLAUDE.md
-- [[api healthcheck hits health (no api prefix)]] - concept - docker-compose.yml
-- [[i18n lives only in appsweb (next-intl + locale)]] - rationale - CLAUDE.md
+- [[ContentMasteryResponse]] - code - packages/types/index.ts
+- [[assessmentEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[authEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[contentEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[endpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[endpoints.ts]] - code - apps/web/lib/api/endpoints.ts
+- [[learnerEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[loadPdfJs()]] - code - apps/web/lib/pdfjs-cdn.ts
+- [[rasterize-pdf.ts]] - code - apps/web/lib/rasterize-pdf.ts
+- [[rasterizePdfToImages()]] - code - apps/web/lib/rasterize-pdf.ts
+- [[tenantEndpoints]] - code - apps/web/lib/api/endpoints.ts
+- [[useMastery.ts]] - code - apps/web/hooks/useMastery.ts
+- [[useReparseContent.ts]] - code - apps/web/hooks/useReparseContent.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,3 +30,19 @@ members: 11
 TABLE source_file, type FROM #community/Community_86
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 4 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 3 edges to [[_COMMUNITY_Community 37]]
+- 2 edges to [[_COMMUNITY_Community 34]]
+- 2 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 2 edges to [[_COMMUNITY_Community 66]]
+- 2 edges to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Community 57]]
+
+## Top bridge nodes
+- [[endpoints.ts]] - degree 10, connects to 2 communities
+- [[useReparseContent.ts]] - degree 8, connects to 2 communities
+- [[useMastery.ts]] - degree 6, connects to 2 communities
+- [[contentEndpoints]] - degree 4, connects to 2 communities
+- [[ContentMasteryResponse]] - degree 3, connects to 2 communities

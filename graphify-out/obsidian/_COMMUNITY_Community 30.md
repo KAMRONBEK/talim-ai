@@ -49,13 +49,15 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Community 46]]
-- 8 edges to [[_COMMUNITY_Community 33]]
-- 2 edges to [[_COMMUNITY_Billing UI & Plans]]
+- 8 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 5 edges to [[_COMMUNITY_Community 82]]
+- 2 edges to [[_COMMUNITY_Community 48]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 2 edges to [[_COMMUNITY_Community 101]]
 
 ## Top bridge nodes
+- [[landing-page.tsx]] - degree 24, connects to 2 communities
 - [[page.tsx_38]] - degree 6, connects to 2 communities
-- [[landing-page.tsx]] - degree 24, connects to 1 community
 - [[pricing-section.tsx]] - degree 5, connects to 1 community
 - [[for-tutors.tsx]] - degree 4, connects to 1 community
 - [[cta.tsx]] - degree 3, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Community 38"
+community: "Community 34"
 location: "L40"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_38
+  - community/Community_34
 ---
 
 # ContentWorkspaceInner()
@@ -25,4 +25,4 @@ tags:
 - [[useSection()]] - `calls` [INFERRED]
 - [[useSections()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_38
+#graphify/code #graphify/INFERRED #community/Community_34

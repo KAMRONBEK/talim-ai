@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Content Hooks & Locale"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Content_Hooks__Locale
 ---
 
 # useContentBase()
@@ -40,4 +40,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

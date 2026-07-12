@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Community 44"
+community: "Community 88"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/Community_88
 ---
 
 # countWords()
@@ -15,4 +15,4 @@ tags:
 - [[SummaryText()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/Community_88

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Community 34"
+community: "Community 38"
 location: "L43"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_34
+  - community/Community_38
 ---
 
 # UserDetailPage()
@@ -24,4 +24,4 @@ tags:
 - [[useResetUserPassword()]] - `calls` [INFERRED]
 - [[useUpdateUserSubscription()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_34
+#graphify/code #graphify/INFERRED #community/Community_38

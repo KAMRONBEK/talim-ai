@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Community 67"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Community_67
 ---
 
 # assignmentSchema
@@ -15,4 +15,4 @@ tags:
 - [[assignments.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Community_67

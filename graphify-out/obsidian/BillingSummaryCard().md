@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/billing-summary-card.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # BillingSummaryCard()
@@ -19,4 +19,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

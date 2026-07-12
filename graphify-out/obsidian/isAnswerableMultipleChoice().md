@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Community 29"
+community: "Community 40"
 location: "L234"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_29
+  - community/Community_40
 ---
 
 # isAnswerableMultipleChoice()
@@ -19,4 +19,4 @@ tags:
 - [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_29
+#graphify/code #graphify/EXTRACTED #community/Community_40

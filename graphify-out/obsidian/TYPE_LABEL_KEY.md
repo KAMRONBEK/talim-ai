@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # TYPE_LABEL_KEY
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_23]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

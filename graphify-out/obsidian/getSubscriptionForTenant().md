@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Billing & Quota"
+community: "Admin Tenants API"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota
+  - community/Admin_Tenants_API
 ---
 
 # getSubscriptionForTenant()
@@ -23,4 +23,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

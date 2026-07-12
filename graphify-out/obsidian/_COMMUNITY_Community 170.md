@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-IND-09 Upload a PDF → processing → READY → workspace]] - document - docs/qa/user-stories-expansion.md
+- [[US-AUTH-04 Change password + tutoradmin reset + forced first-login change]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Billing & Quota"
+community: "Admin Tenants API"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota
+  - community/Admin_Tenants_API
 ---
 
 # requireActiveTenantSubscription()
@@ -16,4 +16,4 @@ tags:
 - [[getSubscriptionForTenant()]] - `calls` [EXTRACTED]
 - [[tenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

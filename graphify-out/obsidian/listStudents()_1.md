@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Community 80"
+community: "Learning Coverage & Badges"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_80
+  - community/Learning_Coverage__Badges
 ---
 
 # listStudents()
@@ -16,4 +16,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_80
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

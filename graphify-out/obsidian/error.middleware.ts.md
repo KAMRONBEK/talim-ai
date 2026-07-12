@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Flashcards API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Flashcards_API
 ---
 
 # error.middleware.ts
@@ -67,4 +67,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

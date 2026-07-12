@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/sectionMastery.service.ts"
 type: "code"
-community: "Community 43"
+community: "Community 57"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Community_57
 ---
 
 # sectionMastery.service.ts
@@ -35,4 +35,4 @@ tags:
 - [[resolveMasteryBand()]] - `imports` [EXTRACTED]
 - [[scopeKeyFor()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Community_57

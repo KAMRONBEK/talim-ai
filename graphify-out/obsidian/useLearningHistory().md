@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Community 33"
+community: "Content Hooks & Locale"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Content_Hooks__Locale
 ---
 
 # useLearningHistory()
@@ -19,4 +19,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

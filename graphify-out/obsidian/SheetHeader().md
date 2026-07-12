@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Community 32"
+community: "Community 33"
 location: "L146"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_33
 ---
 
 # SheetHeader()
@@ -22,4 +22,4 @@ tags:
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_33

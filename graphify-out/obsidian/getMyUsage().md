@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/usage.controller.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Flashcards API"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Flashcards_API
 ---
 
 # getMyUsage()
@@ -16,4 +16,4 @@ tags:
 - [[monthToDateRange()]] - `calls` [EXTRACTED]
 - [[usage.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

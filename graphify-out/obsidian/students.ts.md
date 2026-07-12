@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Community 69"
+community: "Community 75"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_69
+  - community/Community_75
 ---
 
 # students.ts
@@ -40,4 +40,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_69
+#graphify/code #graphify/EXTRACTED #community/Community_75

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/layout.tsx"
 type: "code"
-community: "Community 61"
+community: "Community 64"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/Community_64
 ---
 
 # layout.tsx
@@ -23,4 +23,4 @@ tags:
 - [[newsreader]] - `imports` [EXTRACTED]
 - [[newsreader.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/Community_64

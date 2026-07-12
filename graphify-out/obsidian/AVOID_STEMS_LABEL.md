@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen-prompt.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Quiz Generation Job"
 location: "L305"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Quiz_Generation_Job
 ---
 
 # AVOID_STEMS_LABEL
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[question-gen-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

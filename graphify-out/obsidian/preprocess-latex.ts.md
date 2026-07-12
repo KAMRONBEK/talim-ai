@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "Community 85"
+community: "Community 90"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Community_90
 ---
 
 # preprocess-latex.ts
@@ -16,4 +16,4 @@ tags:
 - [[normalizeSegment()]] - `contains` [EXTRACTED]
 - [[preprocessLatex()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Community_90

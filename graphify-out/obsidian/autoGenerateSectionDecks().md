@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Slide Deck Prompts"
 location: "L289"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Slide_Deck_Prompts
 ---
 
 # autoGenerateSectionDecks()
@@ -22,4 +22,4 @@ tags:
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

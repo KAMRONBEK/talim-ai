@@ -1,28 +1,30 @@
 ---
 type: community
 cohesion: 0.21
-members: 13
+members: 15
 ---
 
 # Community 83
 
 **Cohesion:** 0.21 - loosely connected
-**Members:** 13 nodes
+**Members:** 15 nodes
 
 ## Members
-- [[Advertised platform features AI summaries (конспекты), podcasts, quizzes, personal AI tutor from uploaded material]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[CTA pair primary gradient 'Начать бесплатно', secondary outlined 'Смотреть возможности']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Dark theme variant of the landing page (near-black background, light text, user-switchable via toggle)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Headline 'Изучайте что угодно. По-своему.' with gold highlight marker on 'По-своему.']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Hero section badge 'Учитесь с ИИ', stacked headline, value-prop copy, CTA pair]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Mobile viewport responsive layout (single-column, stacked hero)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Post-fix QA evidence mobile hero renders correctly in Russian after a layouttext fix ('fixed' state)]] - rationale - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Product demo card 'Генетический код и тр…'  Биология 101 · Глава 11, AI badge, 'Конспект готов · 3 мин чтения']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[QA screenshot Russian landing page mobile hero (post-fix, dark theme)]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Russian (ru) locale rendering of the marketing landing page]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Sticky mobile header Talim AI logo, theme-toggle (moon) icon, gradient 'Начать' CTA]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Supported-formats strip avatar icon cluster + 'Работает с PDF, YouTube, слайдами и лекциями']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
-- [[Value-prop paragraph upload any material (PDF, video, slides, lecture) → get конспекты, подкасты, тесты, личный ИИ-репетитор]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[boundContextByTokens()]] - code - apps/api/src/services/rag.service.ts
+- [[buildContext()]] - code - apps/api/src/services/slides.service.ts
+- [[buildSummaryUserPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[generateSummaryText()]] - code - apps/api/src/controllers/summary.controller.ts
+- [[getChunkStats()]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[getEmbeddingStatusByIndex()]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[getOrderedChunks()]] - code - apps/api/src/services/rag.service.ts
+- [[getSectionBody()]] - code - apps/api/src/services/section.service.ts
+- [[getSummarySystemPrompt()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[inspect-chunks.ts]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[main()_3]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[parseArgs()_2]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[preview()]] - code - apps/api/src/scripts/inspect-chunks.ts
+- [[sanitizeSummaryOutput()]] - code - apps/api/src/lib/locale-prompts.ts
+- [[searchWithDistance()]] - code - apps/api/src/scripts/inspect-chunks.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -30,3 +32,20 @@ members: 13
 TABLE source_file, type FROM #community/Community_83
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 10 edges to [[_COMMUNITY_Podcast API]]
+- 8 edges to [[_COMMUNITY_Community 32]]
+- 5 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 4 edges to [[_COMMUNITY_Podcast Generation & Prompts]]
+- 2 edges to [[_COMMUNITY_Community 46]]
+- 2 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 2 edges to [[_COMMUNITY_Admin Tenants API]]
+- 2 edges to [[_COMMUNITY_Learning Coverage & Badges]]
+
+## Top bridge nodes
+- [[getSectionBody()]] - degree 9, connects to 4 communities
+- [[boundContextByTokens()]] - degree 6, connects to 4 communities
+- [[generateSummaryText()]] - degree 10, connects to 3 communities
+- [[getOrderedChunks()]] - degree 7, connects to 3 communities
+- [[inspect-chunks.ts]] - degree 13, connects to 2 communities

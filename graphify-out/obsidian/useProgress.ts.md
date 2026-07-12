@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Content Hooks & Locale"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Content_Hooks__Locale
 ---
 
 # useProgress.ts
@@ -27,4 +27,4 @@ tags:
 - [[usePodcastProgress()]] - `contains` [EXTRACTED]
 - [[useUpdatePodcastProgress()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Flashcards Generation & Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Flashcards_Generation__Jobs
 ---
 
 # storage.service.ts
@@ -29,4 +29,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

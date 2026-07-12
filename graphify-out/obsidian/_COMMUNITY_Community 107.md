@@ -1,23 +1,24 @@
 ---
 type: community
-cohesion: 0.29
-members: 8
+cohesion: 0.22
+members: 9
 ---
 
 # Community 107
 
-**Cohesion:** 0.29 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[GeneratedSection]] - code - apps/api/src/services/section.service.ts
-- [[GeneratedSubsection]] - code - apps/api/src/services/section.service.ts
-- [[SECTION_TITLE_LOCALE_PROMPT]] - code - apps/api/src/services/section.service.ts
-- [[SectionTitleInput]] - code - apps/api/src/services/section.service.ts
-- [[buildSectionUserPrompt()]] - code - apps/api/src/lib/section-prompt.ts
-- [[section-prompt.ts]] - code - apps/api/src/lib/section-prompt.ts
-- [[section.service.ts]] - code - apps/api/src/services/section.service.ts
-- [[translateSectionTitles()]] - code - apps/api/src/services/section.service.ts
+- [[AI Tutor Visuals (Manim render tool)]] - concept - docs/FEATURES.md
+- [[Citations (Manba Pills)]] - concept - docs/plans/youlearn-redesign.md
+- [[Flashcards & Notes Generators]] - concept - docs/plans/youlearn-redesign.md
+- [[Generate Grid (Yaratish)]] - concept - docs/plans/youlearn-redesign.md
+- [[Learn Hub Panel (ContentLearnPanel)]] - concept - docs/plans/youlearn-redesign.md
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - document - docs/plans/youlearn-redesign.md
+- [[Persistent Study Workspace (3-pane)]] - rationale - docs/plans/youlearn-redesign.md
+- [[RAG AI Tutor Chat]] - concept - docs/FEATURES.md
+- [[Visual Direction (girih, marker-highlight)]] - concept - docs/plans/youlearn-redesign.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,16 +28,11 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Content API Controllers]]
-- 3 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 2 edges to [[_COMMUNITY_Community 64]]
-- 2 edges to [[_COMMUNITY_Community 59]]
-- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Env Config & Job Events]]
-- 1 edge to [[_COMMUNITY_Slide Deck Prompts]]
+- 2 edges to [[_COMMUNITY_Community 44]]
+- 1 edge to [[_COMMUNITY_Community 72]]
+- 1 edge to [[_COMMUNITY_Community 76]]
 
 ## Top bridge nodes
-- [[section.service.ts]] - degree 23, connects to 8 communities
-- [[buildSectionUserPrompt()]] - degree 3, connects to 1 community
-- [[translateSectionTitles()]] - degree 2, connects to 1 community
+- [[Learning Workspace Redesign (YouLearn-inspired)]] - degree 6, connects to 2 communities
+- [[RAG AI Tutor Chat]] - degree 3, connects to 1 community
+- [[AI Tutor Visuals (Manim render tool)]] - degree 2, connects to 1 community

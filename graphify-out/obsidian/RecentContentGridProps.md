@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # RecentContentGridProps
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

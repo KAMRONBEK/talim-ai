@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/label.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Account & Login UI"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Account__Login_UI
 ---
 
 # Label()
@@ -27,4 +27,4 @@ tags:
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

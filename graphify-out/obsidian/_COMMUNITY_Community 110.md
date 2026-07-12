@@ -1,22 +1,23 @@
 ---
 type: community
-cohesion: 0.38
-members: 7
+cohesion: 0.25
+members: 8
 ---
 
 # Community 110
 
-**Cohesion:** 0.38 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.25 - loosely connected
+**Members:** 8 nodes
 
 ## Members
-- [[ClassMastery]] - code - packages/types/index.ts
-- [[TenantProgressPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[isRecentlyActive()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[masteryTone()]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[page.tsx_25]] - code - apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx
-- [[useTenantProgress()]] - code - apps/web/hooks/useTenant.ts
-- [[useTenantProgressTopics()]] - code - apps/web/hooks/useTenant.ts
+- [[compilerOptions_1]] - code - apps/api/tsconfig.json
+- [[declaration]] - code - apps/api/tsconfig.json
+- [[declarationMap]] - code - apps/api/tsconfig.json
+- [[extends_1]] - code - apps/api/tsconfig.json
+- [[include_1]] - code - apps/api/tsconfig.json
+- [[outDir]] - code - apps/api/tsconfig.json
+- [[rootDir]] - code - apps/api/tsconfig.json
+- [[tsconfig.json_1]] - code - apps/api/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,17 +25,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_110
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 4 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Community 92]]
-- 1 edge to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Community 33]]
-
-## Top bridge nodes
-- [[page.tsx_25]] - degree 9, connects to 3 communities
-- [[ClassMastery]] - degree 4, connects to 3 communities
-- [[TenantProgressPage()]] - degree 4, connects to 1 community
-- [[useTenantProgress()]] - degree 3, connects to 1 community
-- [[useTenantProgressTopics()]] - degree 3, connects to 1 community

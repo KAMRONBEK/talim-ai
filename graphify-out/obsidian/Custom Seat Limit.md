@@ -1,20 +1,20 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "docs · Become-a-tutor request flow"
+community: "Community 44"
 location: "§3.5"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/docs__Become-a-tutor_request_flow
+  - community/Community_44
 ---
 
-# Custom seat limit
+# Custom Seat Limit
 
 ## Connections
-- [[Class JOIN CODE self-enroll]] - `references` [INFERRED]
-- [[Students management (email + email-less username students)]] - `references` [EXTRACTED]
-- [[Tenant management + subscriptions]] - `references` [EXTRACTED]
-- [[Tutor-request approvals (org + subscription + seat limit)]] - `references` [EXTRACTED]
+- [[Become-a-Tutor Request Flow]] - `references` [EXTRACTED]
+- [[Class Join-Code Self-Enroll]] - `conceptually_related_to` [INFERRED]
+- [[Orphaned Account on Seat-FullInvalid-Code Register (F27F43)]] - `conceptually_related_to` [INFERRED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/docs__Become-a-tutor_request_flow
+#graphify/concept #graphify/EXTRACTED #community/Community_44

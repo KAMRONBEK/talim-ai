@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 81"
+community: "Community 114"
 location: "L367"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_81
+  - community/Community_114
 ---
 
 # User
@@ -23,4 +23,4 @@ tags:
 - [[useAuthStore.ts_1]] - `imports` [EXTRACTED]
 - [[user-display.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_81
+#graphify/code #graphify/EXTRACTED #community/Community_114

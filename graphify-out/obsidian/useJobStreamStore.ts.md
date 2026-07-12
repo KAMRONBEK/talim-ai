@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useJobStreamStore.ts"
 type: "code"
-community: "Community 35"
+community: "Content Assignment & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Content_Assignment__Hooks
 ---
 
 # useJobStreamStore.ts
@@ -22,4 +22,4 @@ tags:
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 48"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_48
 ---
 
 # UserRole
@@ -20,4 +20,4 @@ tags:
 - [[role-guard.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_48

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Community 38"
+community: "Community 34"
 location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/Community_34
 ---
 
 # useChatStore
@@ -19,4 +19,4 @@ tags:
 - [[selection-ask.tsx]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/Community_34

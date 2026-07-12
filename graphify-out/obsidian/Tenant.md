@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Shared Types"
 location: "L380"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Shared_Types
 ---
 
 # Tenant
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Shared_Types

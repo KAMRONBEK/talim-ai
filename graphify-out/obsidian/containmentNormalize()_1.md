@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-postprocess.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Community 40"
 location: "L76"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Community_40
 ---
 
 # containmentNormalize()
@@ -15,4 +15,4 @@ tags:
 - [[question-postprocess.ts]] - `contains` [EXTRACTED]
 - [[verifySourceQuote()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Community_40

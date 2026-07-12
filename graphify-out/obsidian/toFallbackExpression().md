@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/DesmosGraph.tsx"
 type: "code"
-community: "Community 82"
+community: "Community 87"
 location: "L56"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_82
+  - community/Community_87
 ---
 
 # toFallbackExpression()
@@ -15,4 +15,4 @@ tags:
 - [[DesmosGraph.tsx]] - `contains` [EXTRACTED]
 - [[buildFallbackGraph()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_82
+#graphify/code #graphify/EXTRACTED #community/Community_87

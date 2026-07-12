@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Community 40"
+community: "Content Assignment & Hooks"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Content_Assignment__Hooks
 ---
 
 # slidesKey()
@@ -15,4 +15,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

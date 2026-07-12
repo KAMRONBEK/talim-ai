@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "Flashcards Generation & Jobs"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Flashcards_Generation__Jobs
 ---
 
 # GeneratePodcastJobData
@@ -15,4 +15,4 @@ tags:
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/prisma/seed.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Admin Tenants API"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Admin_Tenants_API
 ---
 
 # PLANS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[seed.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

@@ -1,19 +1,20 @@
 ---
 type: community
-cohesion: 0.50
-members: 4
+cohesion: 0.40
+members: 5
 ---
 
 # Community 132
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 4 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[LOCALES]] - code - apps/admin/middleware.ts
-- [[config]] - code - apps/admin/middleware.ts
-- [[middleware()]] - code - apps/admin/middleware.ts
-- [[middleware.ts]] - code - apps/admin/middleware.ts
+- [[main]] - code - packages/config/eslint/package.json
+- [[name_4]] - code - packages/config/eslint/package.json
+- [[package.json_4]] - code - packages/config/eslint/package.json
+- [[private_4]] - code - packages/config/eslint/package.json
+- [[version_3]] - code - packages/config/eslint/package.json
 
 ## Live Query (requires Dataview plugin)
 

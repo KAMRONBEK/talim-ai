@@ -1,18 +1,19 @@
 ---
 type: community
-cohesion: 1.00
-members: 3
+cohesion: 0.50
+members: 4
 ---
 
 # Community 138
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[free-dev-ports.sh]] - code - scripts/free-dev-ports.sh
-- [[free-dev-ports.sh script]] - code - scripts/free-dev-ports.sh
-- [[free_ports()]] - code - scripts/free-dev-ports.sh
+- [[PATH]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[cursor-talim-vps-mcp.sh script]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[resolve_doppler()]] - code - scripts/cursor-talim-vps-mcp.sh
 
 ## Live Query (requires Dataview plugin)
 

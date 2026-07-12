@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/progress.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community 39"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_39
 ---
 
 # ProgressProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[progress.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_39

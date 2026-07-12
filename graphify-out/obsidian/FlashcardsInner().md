@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/flashcards/page.tsx"
 type: "code"
-community: "Flashcards Study Page"
+community: "Community 66"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Community_66
 ---
 
 # FlashcardsInner()
@@ -20,4 +20,4 @@ tags:
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 - [[useReviewFlashcard()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Community_66

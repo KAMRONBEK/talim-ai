@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Content Hooks & Locale"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Content_Hooks__Locale
 ---
 
 # AppLocale
@@ -62,4 +62,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

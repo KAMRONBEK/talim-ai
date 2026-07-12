@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Community 32"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Community_32
 ---
 
 # generateContentSections()
@@ -18,4 +18,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Community_32

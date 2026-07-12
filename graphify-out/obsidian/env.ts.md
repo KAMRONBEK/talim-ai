@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/env.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Community 32"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Community_32
 ---
 
 # env.ts
@@ -36,4 +36,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Community_32

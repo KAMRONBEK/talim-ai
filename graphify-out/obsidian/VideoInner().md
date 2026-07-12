@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
 type: "code"
-community: "Community 40"
+community: "Content Assignment & Hooks"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Content_Assignment__Hooks
 ---
 
 # VideoInner()
@@ -22,4 +22,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useVideo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

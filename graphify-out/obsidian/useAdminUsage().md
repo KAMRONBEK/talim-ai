@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Community 79"
+community: "Admin Dashboard UI"
 location: "L197"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_79
+  - community/Admin_Dashboard_UI
 ---
 
 # useAdminUsage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_8]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_79
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI

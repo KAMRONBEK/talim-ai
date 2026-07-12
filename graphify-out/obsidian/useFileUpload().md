@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "Community 53"
+community: "Community 54"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_53
+  - community/Community_54
 ---
 
 # useFileUpload()
@@ -22,4 +22,4 @@ tags:
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 - [[useUploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_53
+#graphify/code #graphify/EXTRACTED #community/Community_54

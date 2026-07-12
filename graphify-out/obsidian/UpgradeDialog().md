@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/upgrade-dialog.tsx"
 type: "code"
-community: "Community 49"
+community: "Community 80"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Community_80
 ---
 
 # UpgradeDialog()
@@ -20,4 +20,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `contains` [EXTRACTED]
 - [[useRequestUpgrade()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Community_80

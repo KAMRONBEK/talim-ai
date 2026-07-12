@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Assessments Service"
+community: "Community 85"
 location: "L103"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Community_85
 ---
 
 # answerToString()
@@ -19,4 +19,4 @@ tags:
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Community_85

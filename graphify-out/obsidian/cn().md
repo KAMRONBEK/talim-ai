@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Slide Deck UI"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Slide_Deck_UI
 ---
 
 # cn()
@@ -113,4 +113,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

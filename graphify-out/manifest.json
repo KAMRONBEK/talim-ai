@@ -1320,9 +1320,9 @@
     "semantic_hash": "6af59078ae4c071fcc932e9e5da6f27e"
   },
   "apps/web/components/quiz/QuizCard.tsx": {
-    "mtime": 1783844100.5891771,
-    "ast_hash": "5955d66c454f9a1846cb200dbe655c7f",
-    "semantic_hash": "5955d66c454f9a1846cb200dbe655c7f"
+    "mtime": 1783849862.3127348,
+    "ast_hash": "1b4bfb3c25daacf6a00b9ffbd504636d",
+    "semantic_hash": "1b4bfb3c25daacf6a00b9ffbd504636d"
   },
   "apps/web/components/quiz/QuizResult.tsx": {
     "mtime": 1782893532.7602067,
@@ -1970,9 +1970,9 @@
     "semantic_hash": "c6186ef62f7468821870392c22ccd13c"
   },
   "docs/FEATURES.md": {
-    "mtime": 1783843352.9322166,
-    "ast_hash": "28cb08ec3d49b754123fe0f0a1fbe07d",
-    "semantic_hash": "28cb08ec3d49b754123fe0f0a1fbe07d"
+    "mtime": 1783850290.5396693,
+    "ast_hash": "994b12ce3f860288dc27a2fabfd998f4",
+    "semantic_hash": "994b12ce3f860288dc27a2fabfd998f4"
   },
   "docs/PLANS.md": {
     "mtime": 1782165699.5542321,
@@ -2060,9 +2060,9 @@
     "semantic_hash": "d3d5318296fb8128db42426b820cab24"
   },
   "docs/qa/visual-qa-report.md": {
-    "mtime": 1783843391.8610096,
-    "ast_hash": "00301dd7ea9eb51f98108cc7cbc6327b",
-    "semantic_hash": "00301dd7ea9eb51f98108cc7cbc6327b"
+    "mtime": 1783850136.0903986,
+    "ast_hash": "972255c266bdb1171b8d2526d6140943",
+    "semantic_hash": "972255c266bdb1171b8d2526d6140943"
   },
   "doppler.yaml": {
     "mtime": 1780599089.1905563,
@@ -2230,9 +2230,9 @@
     "semantic_hash": "7c387340a65d66a81e14b8c1503cd7b6"
   },
   "apps/web/components/layout/content-generations.tsx": {
-    "mtime": 1783838965.370075,
-    "ast_hash": "8702d65047e0cb46f2c681d64443cd73",
-    "semantic_hash": "8702d65047e0cb46f2c681d64443cd73"
+    "mtime": 1783849297.0160053,
+    "ast_hash": "8ad7b2274255e985814ef5e7ff2aaec5",
+    "semantic_hash": "8ad7b2274255e985814ef5e7ff2aaec5"
   },
   "apps/web/hooks/useFlashcards.ts": {
     "mtime": 1783838965.3719468,
@@ -2485,9 +2485,9 @@
     "semantic_hash": "6d968681578b4745ba9c0f66b35939da"
   },
   "apps/web/components/quiz/question-inputs.tsx": {
-    "mtime": 1783844138.5720677,
-    "ast_hash": "dec4b8fac9f10784a4e2a0cbd749728b",
-    "semantic_hash": "dec4b8fac9f10784a4e2a0cbd749728b"
+    "mtime": 1783849848.820513,
+    "ast_hash": "8de8e9e8066275a32508da9b09a5e24b",
+    "semantic_hash": "8de8e9e8066275a32508da9b09a5e24b"
   },
   "apps/web/components/tenant/material-media-panel.tsx": {
     "mtime": 1782893532.7606459,
@@ -2545,8 +2545,8 @@
     "semantic_hash": "4d4f177f7267c1974c48e9610d9f3e0b"
   },
   "docs/plans/question-engine.md": {
-    "mtime": 1783843391.8587592,
-    "ast_hash": "47a25df1a85bbf211153061726ab6c6b",
-    "semantic_hash": "47a25df1a85bbf211153061726ab6c6b"
+    "mtime": 1783850307.6607523,
+    "ast_hash": "54295044a48a7c6a3e7b55f9a524f760",
+    "semantic_hash": "54295044a48a7c6a3e7b55f9a524f760"
   }
 }

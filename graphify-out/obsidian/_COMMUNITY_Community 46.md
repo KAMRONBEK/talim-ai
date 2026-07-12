@@ -1,38 +1,40 @@
 ---
 type: community
-cohesion: 0.16
-members: 23
+cohesion: 0.11
+members: 25
 ---
 
 # Community 46
 
-**Cohesion:** 0.16 - loosely connected
-**Members:** 23 nodes
+**Cohesion:** 0.11 - loosely connected
+**Members:** 25 nodes
 
 ## Members
-- [[AuthGuard()_1]] - code - apps/web/components/auth-guard.tsx
-- [[ChatRedirect()]] - code - apps/web/app/[locale]/content/[id]/chat/page.tsx
-- [[FOOTER_LINKS]] - code - apps/web/components/marketing/footer.tsx
-- [[Footer()]] - code - apps/web/components/marketing/footer.tsx
-- [[LanguageSwitcher()]] - code - apps/web/components/language-switcher.tsx
-- [[LearningTopbarProps]] - code - apps/web/components/layout/learning-topbar.tsx
-- [[LogoMark()_1]] - code - apps/web/components/brand/logo.tsx
-- [[Navbar()]] - code - apps/web/components/marketing/navbar.tsx
-- [[PricingPage()]] - code - apps/web/app/[locale]/pricing/page.tsx
-- [[SECTIONS]] - code - apps/web/app/[locale]/terms/page.tsx
-- [[TermsPage()]] - code - apps/web/app/[locale]/terms/page.tsx
-- [[auth-guard.tsx_1]] - code - apps/web/components/auth-guard.tsx
-- [[auth-shell.tsx]] - code - apps/web/components/auth/auth-shell.tsx
-- [[footer.tsx]] - code - apps/web/components/marketing/footer.tsx
-- [[language-switcher.tsx]] - code - apps/web/components/language-switcher.tsx
-- [[learning-topbar.tsx]] - code - apps/web/components/layout/learning-topbar.tsx
-- [[logo.tsx_1]] - code - apps/web/components/brand/logo.tsx
-- [[navbar.tsx]] - code - apps/web/components/marketing/navbar.tsx
-- [[navigation.ts]] - code - apps/web/i18n/navigation.ts
-- [[page.tsx_29]] - code - apps/web/app/[locale]/content/[id]/chat/page.tsx
-- [[page.tsx_39]] - code - apps/web/app/[locale]/pricing/page.tsx
-- [[page.tsx_41]] - code - apps/web/app/[locale]/terms/page.tsx
-- [[{ Link, redirect, usePathname, useRouter, getPathname }]] - code - apps/web/i18n/navigation.ts
+- [[AiUsageContext]] - code - apps/api/src/services/ai.service.ts
+- [[ChatMessageContent]] - code - apps/api/src/services/ai.service.ts
+- [[ChatMessageInput]] - code - apps/api/src/services/ai.service.ts
+- [[GeneratedSection]] - code - apps/api/src/services/section.service.ts
+- [[GeneratedSubsection]] - code - apps/api/src/services/section.service.ts
+- [[SECTION_TITLE_LOCALE_PROMPT]] - code - apps/api/src/services/section.service.ts
+- [[SectionTitleInput]] - code - apps/api/src/services/section.service.ts
+- [[TutorGraphIntent]] - code - apps/api/src/lib/tutor-graph-intent.ts
+- [[TutorStreamEvent]] - code - apps/api/src/services/ai.service.ts
+- [[TutorToolOptions]] - code - apps/api/src/services/ai.service.ts
+- [[ai.service.ts]] - code - apps/api/src/services/ai.service.ts
+- [[buildGraphIntentInstruction()]] - code - apps/api/src/services/ai.service.ts
+- [[buildSectionUserPrompt()]] - code - apps/api/src/lib/section-prompt.ts
+- [[createDeepSeekChatCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[createDeepSeekChatStream()]] - code - apps/api/src/services/ai.service.ts
+- [[deepseek]] - code - apps/api/src/services/ai.service.ts
+- [[generateChatCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[generateJsonCompletion()]] - code - apps/api/src/services/ai.service.ts
+- [[openai_1]] - code - apps/api/src/services/ai.service.ts
+- [[recordCompletionUsage()]] - code - apps/api/src/services/ai.service.ts
+- [[section-prompt.ts]] - code - apps/api/src/lib/section-prompt.ts
+- [[section.service.ts]] - code - apps/api/src/services/section.service.ts
+- [[toTextOnlyMessages()]] - code - apps/api/src/services/ai.service.ts
+- [[translateSectionTitles()]] - code - apps/api/src/services/section.service.ts
+- [[withTutorToolInstructions()]] - code - apps/api/src/services/ai.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -42,34 +44,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Admin App UI]]
-- 10 edges to [[_COMMUNITY_Community 33]]
-- 9 edges to [[_COMMUNITY_Community 30]]
-- 9 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 8 edges to [[_COMMUNITY_Community 32]]
-- 7 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 5 edges to [[_COMMUNITY_Community 106]]
-- 4 edges to [[_COMMUNITY_Account & Settings UI]]
-- 4 edges to [[_COMMUNITY_Community 49]]
-- 3 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 2 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 2 edges to [[_COMMUNITY_Community 40]]
-- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 2 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
-- 2 edges to [[_COMMUNITY_Community 39]]
-- 2 edges to [[_COMMUNITY_Community 98]]
-- 2 edges to [[_COMMUNITY_Community 53]]
-- 1 edge to [[_COMMUNITY_Community 35]]
-- 1 edge to [[_COMMUNITY_Community 110]]
-- 1 edge to [[_COMMUNITY_Community 38]]
-- 1 edge to [[_COMMUNITY_Community 81]]
-- 1 edge to [[_COMMUNITY_Community 37]]
-- 1 edge to [[_COMMUNITY_Community 71]]
+- 7 edges to [[_COMMUNITY_Podcast API]]
+- 6 edges to [[_COMMUNITY_Community 32]]
+- 4 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
+- 3 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 3 edges to [[_COMMUNITY_Community 41]]
+- 3 edges to [[_COMMUNITY_Community 60]]
+- 3 edges to [[_COMMUNITY_Learning Coverage & Badges]]
+- 3 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 2 edges to [[_COMMUNITY_Community 83]]
+- 2 edges to [[_COMMUNITY_Podcast Generation & Prompts]]
+- 2 edges to [[_COMMUNITY_Admin Tenants API]]
+- 2 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 2 edges to [[_COMMUNITY_Community 73]]
+- 2 edges to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Community 61]]
+- 1 edge to [[_COMMUNITY_Content Hooks & Locale]]
 
 ## Top bridge nodes
-- [[navigation.ts]] - degree 52, connects to 20 communities
-- [[logo.tsx_1]] - degree 11, connects to 6 communities
-- [[LogoMark()_1]] - degree 10, connects to 5 communities
-- [[learning-topbar.tsx]] - degree 16, connects to 4 communities
-- [[language-switcher.tsx]] - degree 12, connects to 4 communities
+- [[ai.service.ts]] - degree 36, connects to 13 communities
+- [[section.service.ts]] - degree 23, connects to 8 communities
+- [[generateJsonCompletion()]] - degree 10, connects to 5 communities
+- [[generateChatCompletion()]] - degree 6, connects to 3 communities
+- [[recordCompletionUsage()]] - degree 4, connects to 1 community

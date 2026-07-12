@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/messages.ts"
 type: "code"
-community: "Community 73"
+community: "Community 77"
 location: "L96"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_73
+  - community/Community_77
 ---
 
 # listTenantMessageThreads()
@@ -15,4 +15,4 @@ tags:
 - [[messages.ts]] - `contains` [EXTRACTED]
 - [[resolveSenderNames()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_73
+#graphify/code #graphify/EXTRACTED #community/Community_77

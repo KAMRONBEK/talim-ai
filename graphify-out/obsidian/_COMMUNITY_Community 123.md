@@ -10,12 +10,12 @@ members: 6
 **Members:** 6 nodes
 
 ## Members
-- [[compilerOptions_6]] - code - packages/types/tsconfig.json
-- [[extends_5]] - code - packages/types/tsconfig.json
-- [[include_3]] - code - packages/types/tsconfig.json
-- [[outDir_2]] - code - packages/types/tsconfig.json
-- [[rootDir_2]] - code - packages/types/tsconfig.json
-- [[tsconfig.json_3]] - code - packages/types/tsconfig.json
+- [[ResizableSplit()]] - code - apps/web/components/layout/resizable-split.tsx
+- [[ResizableSplitProps]] - code - apps/web/components/layout/resizable-split.tsx
+- [[clampLeftWidth()]] - code - apps/web/components/layout/resizable-split.tsx
+- [[readStoredPercent()]] - code - apps/web/components/layout/resizable-split.tsx
+- [[resizable-split.tsx]] - code - apps/web/components/layout/resizable-split.tsx
+- [[writeStoredPercent()]] - code - apps/web/components/layout/resizable-split.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -23,3 +23,13 @@ members: 6
 TABLE source_file, type FROM #community/Community_123
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 2 edges to [[_COMMUNITY_Community 34]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Community 39]]
+- 1 edge to [[_COMMUNITY_Content Access & Mastery UI]]
+
+## Top bridge nodes
+- [[resizable-split.tsx]] - degree 8, connects to 3 communities
+- [[ResizableSplit()]] - degree 4, connects to 3 communities

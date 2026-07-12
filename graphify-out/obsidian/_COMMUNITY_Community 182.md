@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-OWNER-11 Billing & seat display + inactive-subscription banner]] - document - docs/qa/user-stories-expansion.md
+- [[US-LEARNER-06 Forced password change on first login (mustChangePassword kid)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

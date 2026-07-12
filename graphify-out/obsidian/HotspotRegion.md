@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Community 70"
+community: "Community 45"
 location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_70
+  - community/Community_45
 ---
 
 # HotspotRegion
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[grading.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_70
+#graphify/code #graphify/EXTRACTED #community/Community_45

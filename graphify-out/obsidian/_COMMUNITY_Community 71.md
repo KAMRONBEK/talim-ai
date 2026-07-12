@@ -1,31 +1,32 @@
 ---
 type: community
-cohesion: 0.22
-members: 16
+cohesion: 0.19
+members: 17
 ---
 
 # Community 71
 
-**Cohesion:** 0.22 - loosely connected
-**Members:** 16 nodes
+**Cohesion:** 0.19 - loosely connected
+**Members:** 17 nodes
 
 ## Members
-- [[DashboardLayout()]] - code - apps/web/app/[locale]/dashboard/layout.tsx
-- [[DashboardPage()]] - code - apps/web/app/[locale]/dashboard/page.tsx
-- [[DashboardSearchBar()]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
-- [[DashboardSearchContext]] - code - apps/web/contexts/dashboard-search.tsx
-- [[DashboardShell()]] - code - apps/web/contexts/dashboard-search.tsx
-- [[DashboardSidebar()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
-- [[RecentContentGrid()]] - code - apps/web/components/dashboard/recent-content-grid.tsx
-- [[dashboard-search-bar.tsx]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
-- [[dashboard-search.tsx]] - code - apps/web/contexts/dashboard-search.tsx
-- [[getFirstName()]] - code - apps/web/app/[locale]/dashboard/page.tsx
-- [[layout.tsx_5]] - code - apps/web/app/[locale]/dashboard/layout.tsx
-- [[page.tsx_35]] - code - apps/web/app/[locale]/dashboard/page.tsx
-- [[useContents()]] - code - apps/web/hooks/useContent.ts
-- [[useDashboardSearch()]] - code - apps/web/contexts/dashboard-search.tsx
-- [[useSidebarSheet()]] - code - apps/web/hooks/useSidebarSheet.ts
-- [[useSidebarSheet.ts]] - code - apps/web/hooks/useSidebarSheet.ts
+- [[AdminRoleChangeInput]] - code - apps/api/src/services/adminUserRole.service.ts
+- [[adminUserRole.service.ts]] - code - apps/api/src/services/adminUserRole.service.ts
+- [[applyAdminRoleChange()]] - code - apps/api/src/services/adminUserRole.service.ts
+- [[approveSchema]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[approveTutorRequest()_1]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[createSchema]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[createTenantForOwner()]] - code - apps/api/src/services/tenant/organization.ts
+- [[createTutorRequest()]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[ensureIndividualSubscription()]] - code - apps/api/src/services/adminUserRole.service.ts
+- [[ensureTenantSubscription()]] - code - apps/api/src/services/tenant/organization.ts
+- [[formatRequest()]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[getDefaultTenantPlanId()]] - code - apps/api/src/services/tenant/shared.ts
+- [[listTutorRequests()_1]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[rejectTutorRequest()_1]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[transferTenantOwnership()]] - code - apps/api/src/services/adminUserRole.service.ts
+- [[tutorRequest.service.ts]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[upgradeToTenant()]] - code - apps/api/src/controllers/auth.controller.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -35,21 +36,15 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Community 33]]
-- 5 edges to [[_COMMUNITY_Community 32]]
-- 4 edges to [[_COMMUNITY_Account & Settings UI]]
-- 4 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 4 edges to [[_COMMUNITY_Community 35]]
-- 4 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 3 edges to [[_COMMUNITY_Community 53]]
-- 2 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 2 edges to [[_COMMUNITY_Admin App UI]]
-- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
-- 1 edge to [[_COMMUNITY_Community 46]]
+- 7 edges to [[_COMMUNITY_Community 67]]
+- 6 edges to [[_COMMUNITY_Admin Tenants API]]
+- 5 edges to [[_COMMUNITY_Community 65]]
+- 4 edges to [[_COMMUNITY_Admin Content & Audit]]
+- 4 edges to [[_COMMUNITY_Flashcards API]]
 
 ## Top bridge nodes
-- [[RecentContentGrid()]] - degree 5, connects to 4 communities
-- [[page.tsx_35]] - degree 12, connects to 3 communities
-- [[useContents()]] - degree 11, connects to 3 communities
-- [[useSidebarSheet.ts]] - degree 5, connects to 3 communities
-- [[dashboard-search.tsx]] - degree 15, connects to 2 communities
+- [[tutorRequest.service.ts]] - degree 16, connects to 4 communities
+- [[adminUserRole.service.ts]] - degree 13, connects to 4 communities
+- [[createTenantForOwner()]] - degree 8, connects to 2 communities
+- [[applyAdminRoleChange()]] - degree 9, connects to 1 community
+- [[formatRequest()]] - degree 5, connects to 1 community

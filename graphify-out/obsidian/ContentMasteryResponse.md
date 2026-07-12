@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 37"
+community: "Community 86"
 location: "L1220"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/Community_86
 ---
 
 # ContentMasteryResponse
@@ -16,4 +16,4 @@ tags:
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 - [[useMastery.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/Community_86

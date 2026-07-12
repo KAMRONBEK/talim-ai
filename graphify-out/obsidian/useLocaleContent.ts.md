@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Content Hooks & Locale"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Content_Hooks__Locale
 ---
 
 # useLocaleContent.ts
@@ -27,4 +27,4 @@ tags:
 - [[usePodcast.ts]] - `imports_from` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

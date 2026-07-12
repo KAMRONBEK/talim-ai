@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Community 33"
+community: "Community 48"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Community_48
 ---
 
 # layout.tsx
@@ -49,4 +49,4 @@ tags:
 - [[useSidebarSheet()]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Community_48

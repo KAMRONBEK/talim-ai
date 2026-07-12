@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useUpgradeModal.ts"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # useUpgradeModal
@@ -20,4 +20,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

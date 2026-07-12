@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/assessment-prompt.ts"
 type: "code"
-community: "Community 114"
+community: "Quiz Generation Job"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_114
+  - community/Quiz_Generation_Job
 ---
 
 # assessment-prompt.ts
@@ -23,4 +23,4 @@ tags:
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[styleInstruction()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_114
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useMastery.ts"
 type: "code"
-community: "Community 32"
+community: "Content Access & Mastery UI"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Content_Access__Mastery_UI
 ---
 
 # useContentMastery()
@@ -16,4 +16,4 @@ tags:
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[useMastery.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

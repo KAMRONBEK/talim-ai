@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/slides.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Podcast API"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Podcast_API
 ---
 
 # getSlides()
@@ -19,4 +19,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[slides.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Podcast_API

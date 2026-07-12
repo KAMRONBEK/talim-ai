@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/summary-prompt.ts"
 type: "code"
-community: "Community 31"
+community: "Podcast Generation & Prompts"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Podcast_Generation__Prompts
 ---
 
 # AI_PREFIX_PATTERNS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[summary-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts

@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[pnpm-workspace.yaml]] - document - pnpm-workspace.yaml
+- [[docker-compose.prod.yml (production override)]] - document - docker-compose.prod.yml
 
 ## Live Query (requires Dataview plugin)
 

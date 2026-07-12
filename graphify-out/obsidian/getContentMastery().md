@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Community 56"
 location: "L494"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Community_56
 ---
 
 # getContentMastery()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_56

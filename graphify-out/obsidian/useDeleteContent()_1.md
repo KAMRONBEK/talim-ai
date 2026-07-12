@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 39"
+community: "Community 59"
 location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Community_59
 ---
 
 # useDeleteContent()
@@ -17,4 +17,4 @@ tags:
 - [[delete-content-dialog.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Community_59

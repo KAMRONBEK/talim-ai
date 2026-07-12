@@ -1,16 +1,17 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "rationale"
-community: "docs · Assignment, attempts & max attempts"
+community: "Community 44"
+location: "conventions preamble"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/docs__Assignment_attempts__max_attempts
+  - graphify/EXTRACTED
+  - community/Community_44
 ---
 
-# Barrel-split module pattern
+# Barrel-Split Module Pattern
 
 ## Connections
-- [[Written assessments]] - `conceptually_related_to` [INFERRED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/INFERRED #community/docs__Assignment_attempts__max_attempts
+#graphify/rationale #graphify/EXTRACTED #community/Community_44

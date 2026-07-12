@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L197"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # BillingMeResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useBilling.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

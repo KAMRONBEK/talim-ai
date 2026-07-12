@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 39"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_39
 ---
 
 # badgeVariants
@@ -16,4 +16,4 @@ tags:
 - [[badge.tsx]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_39

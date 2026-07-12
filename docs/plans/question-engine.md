@@ -199,3 +199,21 @@ felt bolted-on; formulas rendered raw):
   MATH NOTATION block, all locales); the shared `RichText` renderer normalizes `\(..\)` /
   `\[..\]` delimiters to dollars and converts bare newlines to markdown hard breaks so
   multi-line stems (e.g. an expression under the question line) don't collapse.
+
+## 8. UI polish round (2026-07-12, user feedback)
+
+- **Flashcards out of the left panel**: the content sidebar's Resources block no longer
+  lists a standalone "Fleshkartalar" entry — flashcards exist only as a Practice-dialog
+  type. The deck route stays alive for existing decks/bookmarks.
+- **Inline cloze** (`DropdownClozeInput` rebuilt twice on feedback): first from bare
+  per-blank native `<select>`s to an inline sentence with slot pills + chips; then from a
+  single "active blank" chip row to **one labeled chip row per blank** — a 3-gap question
+  visibly offers 3 choice rows (the active-blank indirection read as a single multiple
+  choice, and post-check only the last blank's options/correct answer were visible).
+  Slots are pure numbered indicators; each row is judged independently on check with the
+  correct answer shown under wrong blanks; QuizCard suppresses the plain stem for this
+  type so the sentence isn't rendered twice.
+- **Known content-quality gap (not a UI/grading bug)**: model arithmetic in generated
+  numeric cloze keys can be wrong (observed: "neither" blank keyed 5 where the numbers
+  give 15). The sourceQuote firewall can't catch computed values — a candidate fix is a
+  second-pass numeric-answer verification step in the generation pipeline.

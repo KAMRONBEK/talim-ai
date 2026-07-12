@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/section-prompt.ts"
 type: "code"
-community: "Community 107"
+community: "Community 46"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_107
+  - community/Community_46
 ---
 
 # buildSectionUserPrompt()
@@ -16,4 +16,4 @@ tags:
 - [[section-prompt.ts]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_107
+#graphify/code #graphify/EXTRACTED #community/Community_46

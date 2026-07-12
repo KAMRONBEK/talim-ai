@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-XCUT-21 SSE job-events stream replaces completion polling]] - document - docs/qa/user-stories-expansion.md
+- [[US-XCUT-04 Multi-tenant isolation matrix — every content + assessment endpoint]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mastery.service.ts"
 type: "code"
-community: "Community 92"
+community: "Learning Coverage & Badges"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_92
+  - community/Learning_Coverage__Badges
 ---
 
 # LearnerMastery
@@ -15,4 +15,4 @@ tags:
 - [[MasteryTopic]] - `references` [EXTRACTED]
 - [[mastery.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_92
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

@@ -1,13 +1,13 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Community 174"
+community: "Community 178"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_174
+  - community/Community_178
 ---
 
 # US-IND-21: B2C dashboard — grid, search, empty/no-results, thumbnails
 
-#graphify/document #graphify/EXTRACTED #community/Community_174
+#graphify/document #graphify/EXTRACTED #community/Community_178

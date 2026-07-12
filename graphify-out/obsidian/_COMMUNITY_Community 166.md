@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-AUTH-04 Change password + tutoradmin reset + forced first-login change]] - document - docs/qa/user-stories-expansion.md
+- [[US-ADMIN-01 Approve a tutor request → org + ACTIVE subscription + seat limit]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

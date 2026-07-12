@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Community 59"
+community: "Learning Coverage & Badges"
 location: "L134"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_59
+  - community/Learning_Coverage__Badges
 ---
 
 # blendCoverageScore()
@@ -15,4 +15,4 @@ tags:
 - [[learningProgress.service.ts]] - `contains` [EXTRACTED]
 - [[persistSectionProgress()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_59
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

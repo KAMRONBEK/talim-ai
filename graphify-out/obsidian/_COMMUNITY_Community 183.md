@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-XCUT-02 Mobile (≤640) + tablet (768) responsive layouts]] - document - docs/qa/user-stories-expansion.md
+- [[US-LEARNER-08 Reads assigned content as a learner (read allowed, gen blocked)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

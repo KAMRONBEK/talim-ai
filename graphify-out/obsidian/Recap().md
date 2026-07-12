@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Community 33"
+community: "Content Access & Mastery UI"
 location: "L364"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Content_Access__Mastery_UI
 ---
 
 # Recap()
@@ -15,4 +15,4 @@ tags:
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

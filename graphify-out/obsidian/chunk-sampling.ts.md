@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/chunk-sampling.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Assessments Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Assessments_Service
 ---
 
 # chunk-sampling.ts
@@ -19,4 +19,4 @@ tags:
 - [[sampleChunksEvenly()]] - `contains` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

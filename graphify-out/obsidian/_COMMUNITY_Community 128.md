@@ -10,11 +10,11 @@ members: 5
 **Members:** 5 nodes
 
 ## Members
-- [[main]] - code - packages/config/eslint/package.json
-- [[name_4]] - code - packages/config/eslint/package.json
-- [[package.json_4]] - code - packages/config/eslint/package.json
-- [[private_4]] - code - packages/config/eslint/package.json
-- [[version_3]] - code - packages/config/eslint/package.json
+- [[config_2]] - code - apps/admin/tailwind.config.ts
+- [[config_6]] - code - apps/web/tailwind.config.ts
+- [[tailwind.config.ts]] - code - apps/admin/tailwind.config.ts
+- [[tailwind.config.ts_2]] - code - packages/config/tailwind/tailwind.config.ts
+- [[tailwind.config.ts_1]] - code - apps/web/tailwind.config.ts
 
 ## Live Query (requires Dataview plugin)
 

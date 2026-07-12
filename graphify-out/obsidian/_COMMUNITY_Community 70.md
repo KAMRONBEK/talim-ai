@@ -1,32 +1,32 @@
 ---
 type: community
-cohesion: 0.22
+cohesion: 0.18
 members: 17
 ---
 
 # Community 70
 
-**Cohesion:** 0.22 - loosely connected
+**Cohesion:** 0.18 - loosely connected
 **Members:** 17 nodes
 
 ## Members
-- [[GradeResult]] - code - packages/types/grading.ts
-- [[HotspotRegion]] - code - packages/types/grading.ts
-- [[coerceStructuredAnswer()]] - code - packages/types/grading.ts
-- [[evidenceWeightForQuestion()]] - code - packages/types/grading.ts
-- [[fillBlankAcceptedPerBlank()]] - code - packages/types/grading.ts
-- [[gradeQuestion()]] - code - packages/types/grading.ts
-- [[grading.ts]] - code - packages/types/grading.ts
-- [[isCorrect()]] - code - packages/types/grading.ts
-- [[isNumericMatch()]] - code - packages/types/grading.ts
-- [[normalizeAnswer()]] - code - packages/types/grading.ts
-- [[orderingPairwiseCredit()]] - code - packages/types/grading.ts
-- [[parseArrayAnswer()]] - code - packages/types/grading.ts
-- [[parseHotspotPoint()]] - code - packages/types/grading.ts
-- [[parseHotspotRegions()]] - code - packages/types/grading.ts
-- [[parseMatchingChoices()]] - code - packages/types/grading.ts
-- [[parseNumericAnswer()]] - code - packages/types/grading.ts
-- [[pointInAnyRegion()]] - code - packages/types/grading.ts
+- [[COLORS]] - code - apps/web/components/chat/TutorChart.tsx
+- [[GeoGebraEmbed()]] - code - apps/web/components/chat/GeoGebraEmbed.tsx
+- [[GeoGebraEmbed.tsx]] - code - apps/web/components/chat/GeoGebraEmbed.tsx
+- [[GeoGebraPayload]] - code - packages/types/tutor-visual.ts
+- [[HtmlSandbox()]] - code - apps/web/components/chat/HtmlSandbox.tsx
+- [[HtmlSandbox.tsx]] - code - apps/web/components/chat/HtmlSandbox.tsx
+- [[HtmlSandboxPayload]] - code - packages/types/tutor-visual.ts
+- [[MermaidDiagram()]] - code - apps/web/components/chat/MermaidDiagram.tsx
+- [[MermaidDiagram.tsx]] - code - apps/web/components/chat/MermaidDiagram.tsx
+- [[TutorChart()]] - code - apps/web/components/chat/TutorChart.tsx
+- [[TutorChart.tsx]] - code - apps/web/components/chat/TutorChart.tsx
+- [[VisualBlockRenderer.tsx]] - code - apps/web/components/chat/VisualBlockRenderer.tsx
+- [[Window_1]] - code - apps/web/components/chat/GeoGebraEmbed.tsx
+- [[buildRows()]] - code - apps/web/components/chat/TutorChart.tsx
+- [[buildSandboxHtml()]] - code - apps/web/lib/html-sandbox-templates.ts
+- [[html-sandbox-templates.ts]] - code - apps/web/lib/html-sandbox-templates.ts
+- [[num()]] - code - apps/web/lib/html-sandbox-templates.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -36,19 +36,19 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Community 29]]
-- 5 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 4 edges to [[_COMMUNITY_Question Generation Engine]]
-- 4 edges to [[_COMMUNITY_Assessments Service]]
-- 3 edges to [[_COMMUNITY_Community 58]]
-- 2 edges to [[_COMMUNITY_Community 59]]
-- 2 edges to [[_COMMUNITY_Community 118]]
-- 1 edge to [[_COMMUNITY_Community 43]]
-- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 8 edges to [[_COMMUNITY_Shared Types]]
+- 4 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 4 edges to [[_COMMUNITY_Slide Deck UI]]
+- 3 edges to [[_COMMUNITY_Community 61]]
+- 2 edges to [[_COMMUNITY_Community 41]]
+- 2 edges to [[_COMMUNITY_Community 87]]
+- 2 edges to [[_COMMUNITY_Community 51]]
+- 2 edges to [[_COMMUNITY_Community 53]]
+- 2 edges to [[_COMMUNITY_Community 90]]
 
 ## Top bridge nodes
-- [[grading.ts]] - degree 26, connects to 6 communities
-- [[gradeQuestion()]] - degree 22, connects to 5 communities
-- [[normalizeAnswer()]] - degree 12, connects to 3 communities
-- [[isCorrect()]] - degree 5, connects to 1 community
-- [[parseHotspotRegions()]] - degree 4, connects to 1 community
+- [[VisualBlockRenderer.tsx]] - degree 16, connects to 5 communities
+- [[TutorChart.tsx]] - degree 7, connects to 3 communities
+- [[MermaidDiagram.tsx]] - degree 5, connects to 3 communities
+- [[HtmlSandboxPayload]] - degree 5, connects to 3 communities
+- [[GeoGebraPayload]] - degree 4, connects to 3 communities

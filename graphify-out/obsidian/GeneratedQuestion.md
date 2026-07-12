@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Community 40"
 location: "L209"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Community_40
 ---
 
 # GeneratedQuestion
@@ -18,4 +18,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Community_40

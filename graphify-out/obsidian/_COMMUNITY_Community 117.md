@@ -1,22 +1,22 @@
 ---
 type: community
-cohesion: 0.48
+cohesion: 0.29
 members: 7
 ---
 
 # Community 117
 
-**Cohesion:** 0.48 - moderately connected
+**Cohesion:** 0.29 - loosely connected
 **Members:** 7 nodes
 
 ## Members
-- [[.constructor()_4]] - code - apps/api/src/services/storage.service.ts
-- [[.delete()]] - code - apps/api/src/services/storage.service.ts
-- [[.ensureDir()]] - code - apps/api/src/services/storage.service.ts
-- [[.get()]] - code - apps/api/src/services/storage.service.ts
-- [[.resolvePath()]] - code - apps/api/src/services/storage.service.ts
-- [[.save()]] - code - apps/api/src/services/storage.service.ts
-- [[LocalStorageService]] - code - apps/api/src/services/storage.service.ts
+- [[Admin Subdomain DNS + SSL]] - concept - docs/DEPLOY.md
+- [[CI Deploy Workflow]] - concept - docs/DEPLOY.md
+- [[Docker Compose Prod Stack]] - concept - docs/DEPLOY.md
+- [[Doppler prd Secrets]] - concept - docs/DEPLOY.md
+- [[First Platform Admin Creation]] - concept - docs/DEPLOY.md
+- [[VPS Docker Deployment]] - document - docs/DEPLOY.md
+- [[nginx Reverse Proxy]] - concept - docs/DEPLOY.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,10 +24,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_117
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 2 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 1 edge to [[_COMMUNITY_Content Upload & Ingest]]
-
-## Top bridge nodes
-- [[LocalStorageService]] - degree 9, connects to 2 communities

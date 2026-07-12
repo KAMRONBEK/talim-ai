@@ -1,18 +1,19 @@
 ---
 type: community
-cohesion: 1.00
-members: 3
+cohesion: 0.50
+members: 4
 ---
 
 # Community 136
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
-- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
-- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
+- [[LOCALES]] - code - apps/admin/middleware.ts
+- [[config]] - code - apps/admin/middleware.ts
+- [[middleware()]] - code - apps/admin/middleware.ts
+- [[middleware.ts]] - code - apps/admin/middleware.ts
 
 ## Live Query (requires Dataview plugin)
 

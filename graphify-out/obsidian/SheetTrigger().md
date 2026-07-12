@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Community 32"
+community: "Community 33"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_33
 ---
 
 # SheetTrigger()
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_33

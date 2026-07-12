@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/jobEvents.ts"
 type: "code"
-community: "Community 95"
+community: "Community 91"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_95
+  - community/Community_91
 ---
 
 # JobEvent
@@ -19,4 +19,4 @@ tags:
 - [[jobStream.ts]] - `imports` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_95
+#graphify/code #graphify/EXTRACTED #community/Community_91

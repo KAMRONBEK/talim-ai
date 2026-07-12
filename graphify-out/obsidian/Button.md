@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Account & Login UI"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Account__Login_UI
 ---
 
 # Button
@@ -69,4 +69,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

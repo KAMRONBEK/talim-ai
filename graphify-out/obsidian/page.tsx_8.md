@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/usage/page.tsx"
 type: "code"
-community: "Community 79"
+community: "Admin Dashboard UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_79
+  - community/Admin_Dashboard_UI
 ---
 
 # page.tsx
@@ -18,4 +18,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminUsage()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_79
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI

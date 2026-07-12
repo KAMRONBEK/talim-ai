@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[FalkorDB Export]] - concept - .claude/skills/graphify/references/exports.md
-- [[Neo4j Export]] - concept - .claude/skills/graphify/references/exports.md
+- [[Honest Audit Trail (EXTRACTEDINFERREDAMBIGUOUS)]] - rationale - .claude/skills/graphify/SKILL.md
+- [[Honesty Rules]] - rationale - .claude/skills/graphify/SKILL.md
 
 ## Live Query (requires Dataview plugin)
 

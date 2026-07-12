@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-AUTH-07 Session  JWT lifecycle (expiry, tamper, return-after-login)]] - document - docs/qa/user-stories-expansion.md
+- [[US-AUTH-02 Register a new individual account (+ optional join code)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

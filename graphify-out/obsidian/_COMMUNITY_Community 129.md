@@ -1,20 +1,20 @@
 ---
 type: community
-cohesion: 0.40
+cohesion: 0.50
 members: 5
 ---
 
 # Community 129
 
-**Cohesion:** 0.40 - moderately connected
+**Cohesion:** 0.50 - moderately connected
 **Members:** 5 nodes
 
 ## Members
-- [[Assessment publish  assign flow (DRAFT vs PUBLISHED, attempts, results)]] - concept - docs/qa/user-stories-expansion.md
-- [[US-LEARNER-05 Take an assessment (WRITTEN + GAME) — attempts, timer, resume]] - document - docs/qa/user-stories-expansion.md
-- [[US-OWNER-07 Build a question bank — AI-generate drafts, approvereject]] - document - docs/qa/user-stories-expansion.md
-- [[US-OWNER-08 Compose, publish, assign & review a WRITTEN assessment]] - document - docs/qa/user-stories-expansion.md
-- [[US-OWNER-09 GAME assessment — timer, speed points, streaks, leaderboard]] - document - docs/qa/user-stories-expansion.md
+- [[AI Sparkle Star]] - concept - apps/web/app/icon.svg
+- [[Letter T Monogram]] - concept - apps/web/app/icon.svg
+- [[Talim AI App Icon]] - image - apps/web/app/icon.svg
+- [[Violet-to-Marigold Gradient]] - concept - apps/web/app/icon.svg
+- [[Web App Brand Favicon]] - concept - apps/web/app/icon.svg
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Community 31"
+community: "Podcast Generation & Prompts"
 location: "L385"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_31
+  - community/Podcast_Generation__Prompts
 ---
 
 # buildTutorSystemMessage()
@@ -17,4 +17,4 @@ tags:
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_31
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts

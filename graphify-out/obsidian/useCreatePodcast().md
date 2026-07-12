@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Content Hooks & Locale"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Content_Hooks__Locale
 ---
 
 # useCreatePodcast()
@@ -21,4 +21,4 @@ tags:
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[usePodcast.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

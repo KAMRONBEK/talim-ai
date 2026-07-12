@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Community 72"
+community: "Community 76"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_72
+  - community/Community_76
 ---
 
 # User Stories & QA Traceability Ledger
@@ -13,9 +13,7 @@ tags:
 ## Connections
 - [[Edge-case (EC) Matrix per Story]] - `references` [EXTRACTED]
 - [[Findings Ledger (F)]] - `references` [EXTRACTED]
-- [[Global UpgradePromotion Modal]] - `cites` [EXTRACTED]
-- [[Overnight Visual QA Report (Run Journal)]] - `references` [EXTRACTED]
 - [[US-LEARNER-01 Sees Only Assigned Materials (S1 isolation story)]] - `references` [EXTRACTED]
 - [[qa-run Skill — Resumable Visual QA Run]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_72
+#graphify/document #graphify/EXTRACTED #community/Community_76

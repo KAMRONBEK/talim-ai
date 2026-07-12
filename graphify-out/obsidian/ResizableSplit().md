@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/resizable-split.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community 123"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_123
 ---
 
 # ResizableSplit()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[resizable-split.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_123

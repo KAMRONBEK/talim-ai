@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learner-navigation.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # LearnerSidebar()
@@ -16,4 +16,4 @@ tags:
 - [[learner-navigation.tsx]] - `contains` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

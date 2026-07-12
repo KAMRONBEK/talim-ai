@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/analytics.controller.ts"
 type: "code"
-community: "Community 51"
+community: "Admin Analytics"
 location: "L83"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/Admin_Analytics
 ---
 
 # analyticsSummary()
@@ -15,4 +15,4 @@ tags:
 - [[analytics.controller.ts]] - `contains` [EXTRACTED]
 - [[getAnalyticsSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

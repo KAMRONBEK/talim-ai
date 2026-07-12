@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "Community 85"
+community: "Community 90"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Community_90
 ---
 
 # preprocessLatex()
@@ -16,4 +16,4 @@ tags:
 - [[TutorMessageContent.tsx]] - `imports` [EXTRACTED]
 - [[preprocess-latex.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Community_90

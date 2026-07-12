@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Community 58"
+community: "Community 56"
 location: "L443"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_58
+  - community/Community_56
 ---
 
 # submitQuiz()
@@ -20,4 +20,4 @@ tags:
 - [[recordAnswers()]] - `calls` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_58
+#graphify/code #graphify/EXTRACTED #community/Community_56

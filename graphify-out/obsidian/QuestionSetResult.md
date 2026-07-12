@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Quiz Generation Job"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Quiz_Generation_Job
 ---
 
 # QuestionSetResult
@@ -16,4 +16,4 @@ tags:
 - [[SkipReason]] - `references` [EXTRACTED]
 - [[question-gen.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

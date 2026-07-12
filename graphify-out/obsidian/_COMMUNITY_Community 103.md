@@ -1,23 +1,25 @@
 ---
 type: community
-cohesion: 0.25
-members: 8
+cohesion: 0.20
+members: 10
 ---
 
 # Community 103
 
-**Cohesion:** 0.25 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[compilerOptions_1]] - code - apps/api/tsconfig.json
-- [[declaration]] - code - apps/api/tsconfig.json
-- [[declarationMap]] - code - apps/api/tsconfig.json
-- [[extends_1]] - code - apps/api/tsconfig.json
-- [[include_1]] - code - apps/api/tsconfig.json
-- [[outDir]] - code - apps/api/tsconfig.json
-- [[rootDir]] - code - apps/api/tsconfig.json
-- [[tsconfig.json_1]] - code - apps/api/tsconfig.json
+- [[unnamed_1]] - code - apps/web/tsconfig.json
+- [[allowJs_1]] - code - apps/web/tsconfig.json
+- [[compilerOptions_2]] - code - apps/web/tsconfig.json
+- [[exclude_1]] - code - apps/web/tsconfig.json
+- [[extends_2]] - code - apps/web/tsconfig.json
+- [[include_2]] - code - apps/web/tsconfig.json
+- [[incremental_1]] - code - apps/web/tsconfig.json
+- [[paths_1]] - code - apps/web/tsconfig.json
+- [[plugins_1]] - code - apps/web/tsconfig.json
+- [[tsconfig.json_2]] - code - apps/web/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 

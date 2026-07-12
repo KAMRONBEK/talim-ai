@@ -1,18 +1,19 @@
 ---
 type: community
-cohesion: 1.00
-members: 3
+cohesion: 0.50
+members: 4
 ---
 
 # Community 137
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Cohesion:** 0.50 - moderately connected
+**Members:** 4 nodes
 
 ## Members
-- [[buildTutorContextBlock()]] - code - apps/api/src/lib/tutor-prompt.ts
-- [[buildTutorSystemMessage()_1]] - code - apps/api/src/lib/tutor-prompt.ts
-- [[tutor-prompt.ts]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[name_5]] - code - packages/config/package.json
+- [[package.json_5]] - code - packages/config/package.json
+- [[private_5]] - code - packages/config/package.json
+- [[version_4]] - code - packages/config/package.json
 
 ## Live Query (requires Dataview plugin)
 

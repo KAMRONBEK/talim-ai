@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Community 49"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Community_49
 ---
 
 # content-shared.ts
@@ -31,4 +31,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Community_49

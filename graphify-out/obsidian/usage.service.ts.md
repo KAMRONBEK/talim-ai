@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Community 50"
+community: "Community 60"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_60
 ---
 
 # usage.service.ts
@@ -35,4 +35,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/Community_60

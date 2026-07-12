@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learner-navigation.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 33"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_33
 ---
 
 # learnerNavKeys
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner-navigation.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_33

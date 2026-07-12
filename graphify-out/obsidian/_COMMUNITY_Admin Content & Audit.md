@@ -1,13 +1,13 @@
 ---
 type: community
 cohesion: 0.08
-members: 41
+members: 42
 ---
 
 # Admin Content & Audit
 
 **Cohesion:** 0.08 - loosely connected
-**Members:** 41 nodes
+**Members:** 42 nodes
 
 ## Members
 - [[GENERATED_KINDS]] - code - apps/api/src/controllers/admin/content.controller.ts
@@ -19,6 +19,7 @@ members: 41
 - [[cancelContentJobs()]] - code - apps/api/src/services/queue.service.ts
 - [[content.controller.ts]] - code - apps/api/src/controllers/admin/content.controller.ts
 - [[contentDetail()]] - code - apps/api/src/controllers/admin/content.controller.ts
+- [[contentQueue]] - code - apps/api/src/services/queue.service.ts
 - [[createUser()]] - code - apps/api/src/controllers/admin/users.controller.ts
 - [[createUserSchema]] - code - apps/api/src/controllers/admin/users.controller.ts
 - [[deleteContent()]] - code - apps/api/src/controllers/admin/content.controller.ts
@@ -60,21 +61,23 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 22 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 18 edges to [[_COMMUNITY_Content API Controllers]]
-- 15 edges to [[_COMMUNITY_Admin & Usage Controllers]]
-- 11 edges to [[_COMMUNITY_Billing & Quota]]
-- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 4 edges to [[_COMMUNITY_Content Upload & Ingest]]
-- 2 edges to [[_COMMUNITY_Community 56]]
-- 2 edges to [[_COMMUNITY_Community 51]]
-- 2 edges to [[_COMMUNITY_Community 98]]
-- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Community 50]]
+- 22 edges to [[_COMMUNITY_Admin Tenants API]]
+- 17 edges to [[_COMMUNITY_Assessment API Controllers]]
+- 15 edges to [[_COMMUNITY_Admin & Events Controllers]]
+- 7 edges to [[_COMMUNITY_Flashcards API]]
+- 5 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
+- 4 edges to [[_COMMUNITY_Community 71]]
+- 4 edges to [[_COMMUNITY_Admin Analytics]]
+- 3 edges to [[_COMMUNITY_Podcast API]]
+- 3 edges to [[_COMMUNITY_Community 32]]
+- 3 edges to [[_COMMUNITY_Community 49]]
+- 2 edges to [[_COMMUNITY_Community 105]]
+- 1 edge to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Community 60]]
 
 ## Top bridge nodes
-- [[users.controller.ts]] - degree 43, connects to 6 communities
-- [[content.controller.ts]] - degree 29, connects to 6 communities
+- [[users.controller.ts]] - degree 43, connects to 8 communities
+- [[content.controller.ts]] - degree 29, connects to 7 communities
+- [[admin-tutor-request.controller.ts]] - degree 14, connects to 5 communities
 - [[shared.ts]] - degree 10, connects to 4 communities
-- [[admin-tutor-request.controller.ts]] - degree 14, connects to 3 communities
-- [[cancelContentJobs()]] - degree 7, connects to 3 communities
+- [[contentQueue]] - degree 5, connects to 4 communities

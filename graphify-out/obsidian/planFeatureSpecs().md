@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Community 49"
+community: "Community 80"
 location: "L168"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Community_80
 ---
 
 # planFeatureSpecs()
@@ -16,4 +16,4 @@ tags:
 - [[pricing.ts]] - `contains` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Community_80

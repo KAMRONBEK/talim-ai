@@ -1,33 +1,33 @@
 ---
 type: community
-cohesion: 0.22
+cohesion: 0.11
 members: 18
 ---
 
 # Community 63
 
-**Cohesion:** 0.22 - loosely connected
+**Cohesion:** 0.11 - loosely connected
 **Members:** 18 nodes
 
 ## Members
-- [[assessment.controller.ts]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assessmentResults()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[assignAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[createAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[createBank()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[createBankQuestion()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[generateQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[goLiveAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[learnerAssessmentLeaderboard()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listBanks()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listLearnerAssessments()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[listQuestions()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[patchQuestion()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[requireTenant()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[scheduleAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
-- [[submitLearnerAssessment()]] - code - apps/api/src/controllers/assessment.controller.ts
+- [[@distubeytdl-core]] - code - apps/api/package.json
+- [[@langchaintextsplitters]] - code - apps/api/package.json
+- [[@prismaclient]] - code - apps/api/package.json
+- [[@talimtypes_1]] - code - apps/api/package.json
+- [[bcrypt]] - code - apps/api/package.json
+- [[bull]] - code - apps/api/package.json
+- [[cors]] - code - apps/api/package.json
+- [[dependencies_1]] - code - apps/api/package.json
+- [[express]] - code - apps/api/package.json
+- [[express-rate-limit]] - code - apps/api/package.json
+- [[gpt-tokenizer]] - code - apps/api/package.json
+- [[helmet]] - code - apps/api/package.json
+- [[jsonwebtoken]] - code - apps/api/package.json
+- [[multer]] - code - apps/api/package.json
+- [[openai]] - code - apps/api/package.json
+- [[pdf-parse]] - code - apps/api/package.json
+- [[youtube-transcript]] - code - apps/api/package.json
+- [[zod]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -37,14 +37,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 13 edges to [[_COMMUNITY_Content API Controllers]]
-- 4 edges to [[_COMMUNITY_Admin & Usage Controllers]]
-- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 1 edge to [[_COMMUNITY_Assessments Service]]
+- 1 edge to [[_COMMUNITY_Community 113]]
 
 ## Top bridge nodes
-- [[assessment.controller.ts]] - degree 26, connects to 4 communities
-- [[assessmentLeaderboard()]] - degree 3, connects to 1 community
-- [[assessmentResults()]] - degree 3, connects to 1 community
-- [[assignAssessment()]] - degree 3, connects to 1 community
-- [[createBankQuestion()]] - degree 3, connects to 1 community
+- [[dependencies_1]] - degree 18, connects to 1 community

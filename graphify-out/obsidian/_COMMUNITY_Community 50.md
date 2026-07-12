@@ -1,37 +1,39 @@
 ---
 type: community
-cohesion: 0.17
-members: 22
+cohesion: 0.16
+members: 24
 ---
 
 # Community 50
 
-**Cohesion:** 0.17 - loosely connected
-**Members:** 22 nodes
+**Cohesion:** 0.16 - loosely connected
+**Members:** 24 nodes
 
 ## Members
-- [[OpenRouterFileAnnotation]] - code - apps/api/src/services/pdf.service.ts
-- [[RecordUsageInput]] - code - apps/api/src/services/usage.service.ts
-- [[UsageContext]] - code - apps/api/src/services/usage.service.ts
-- [[captionPage()]] - code - apps/api/src/services/figure.service.ts
-- [[estimateCost()]] - code - apps/api/src/services/usage.service.ts
-- [[estimateTokenCostUsd()]] - code - apps/api/src/config/usage-pricing.ts
-- [[extractPdfPageRange()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractPdfText()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractWithOpenAI()]] - code - apps/api/src/services/pdf.service.ts
-- [[extractWithPdfParse()]] - code - apps/api/src/services/pdf.service.ts
-- [[figure.service.ts]] - code - apps/api/src/services/figure.service.ts
-- [[getPdfPageCount()]] - code - apps/api/src/services/pdf.service.ts
-- [[hasPrimaryOcrProvider()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrImageDataUrl()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrRequestOnce()]] - code - apps/api/src/services/pdf.service.ts
-- [[ocrViaOpenRouter()]] - code - apps/api/src/services/pdf.service.ts
-- [[pdf.service.ts]] - code - apps/api/src/services/pdf.service.ts
-- [[rasterizeAndOcrPdf()]] - code - apps/api/src/services/pdf.service.ts
-- [[recordUsage()]] - code - apps/api/src/services/usage.service.ts
-- [[runCli()]] - code - apps/api/src/services/pdf.service.ts
-- [[runPdftoppm()]] - code - apps/api/src/services/pdf.service.ts
-- [[usage.service.ts]] - code - apps/api/src/services/usage.service.ts
+- [[Balanced Answer-Position Shuffle]] - concept - docs/plans/question-engine.md
+- [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - concept - docs/plans/question-engine.md
+- [[Evidence-Gated Mastery Bands]] - concept - docs/plans/question-engine.md
+- [[Fill-to-Count Retry Pass]] - concept - docs/plans/question-engine.md
+- [[Flashcard Integration (FLASHCARD first-class type)]] - concept - docs/plans/question-engine.md
+- [[Generate-Then-Validate item generation (research)]] - paper - docs/plans/question-engine.md
+- [[IWF Item-Writing Rubric (research)]] - paper - docs/plans/question-engine.md
+- [[Inline Cloze (DropdownClozeInput)]] - concept - docs/plans/question-engine.md
+- [[LaTeX Math Rendering Mandate]] - concept - docs/plans/question-engine.md
+- [[Misconception-Derived Distractors]] - concept - docs/plans/question-engine.md
+- [[Moodle grading tolerances  QTI partial credit (reference)]] - paper - docs/plans/question-engine.md
+- [[Near-Transfer Question Constraints]] - concept - docs/plans/question-engine.md
+- [[Numeric-Answer Verification (candidate second pass)]] - concept - docs/plans/question-engine.md
+- [[Partial Credit Rules (creditFraction)]] - concept - docs/plans/question-engine.md
+- [[Pelánek Elo mastery modeling (research)]] - paper - docs/plans/question-engine.md
+- [[Practice Generator v2 Live Checks (2026-07-12)]] - concept - docs/qa/visual-qa-report.md
+- [[Question Engine Rework Design]] - document - docs/plans/question-engine.md
+- [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - concept - docs/plans/question-engine.md
+- [[QuizKind QUICK Retirement]] - concept - docs/plans/question-engine.md
+- [[SourceQuote Anchor (Hallucination Firewall)]] - concept - docs/plans/question-engine.md
+- [[Stratified Whole-Material Chunk Spread]] - concept - docs/plans/question-engine.md
+- [[Unified Generation Parameters (counttypesdepthscope)]] - concept - docs/plans/question-engine.md
+- [[Unified Grading Module (packagestypesgrading.ts)]] - concept - docs/plans/question-engine.md
+- [[Uzbek Apostrophe Normalization]] - concept - docs/plans/question-engine.md
 
 ## Live Query (requires Dataview plugin)
 
@@ -41,21 +43,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Content Upload & Ingest]]
-- 11 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 4 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 4 edges to [[_COMMUNITY_Podcast Generation & TTS]]
-- 4 edges to [[_COMMUNITY_Community 68]]
-- 3 edges to [[_COMMUNITY_Community 51]]
-- 3 edges to [[_COMMUNITY_Community 64]]
-- 3 edges to [[_COMMUNITY_Billing & Quota]]
-- 1 edge to [[_COMMUNITY_Admin Content & Audit]]
-- 1 edge to [[_COMMUNITY_Admin & Usage Controllers]]
+- 6 edges to [[_COMMUNITY_Community 44]]
+- 2 edges to [[_COMMUNITY_Community 72]]
 
 ## Top bridge nodes
-- [[usage.service.ts]] - degree 22, connects to 10 communities
-- [[recordUsage()]] - degree 16, connects to 4 communities
-- [[figure.service.ts]] - degree 14, connects to 4 communities
-- [[UsageContext]] - degree 9, connects to 4 communities
-- [[pdf.service.ts]] - degree 23, connects to 2 communities
+- [[Uzbek Apostrophe Normalization]] - degree 4, connects to 2 communities
+- [[Question Engine Rework Design]] - degree 19, connects to 1 community
+- [[Elo-KT Mastery Model (SectionMastery, QuestionStat)]] - degree 6, connects to 1 community
+- [[Practice Generator v2 Live Checks (2026-07-12)]] - degree 6, connects to 1 community
+- [[Flashcard Integration (FLASHCARD first-class type)]] - degree 5, connects to 1 community

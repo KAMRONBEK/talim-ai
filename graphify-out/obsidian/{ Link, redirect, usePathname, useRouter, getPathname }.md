@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Community 46"
+community: "Community 82"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/Community_82
 ---
 
 # { Link, redirect, usePathname, useRouter, getPathname }
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[navigation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/Community_82

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Community 104"
+community: "Community 111"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/Community_111
 ---
 
 # tabs
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/Community_111

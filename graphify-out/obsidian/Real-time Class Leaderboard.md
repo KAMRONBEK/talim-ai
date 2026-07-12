@@ -1,18 +1,20 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 77"
+community: "Community 72"
 location: "§4.6"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_77
+  - community/Community_72
 ---
 
-# Real-time Class Leaderboard
+# Real-Time Class Leaderboard
 
 ## Connections
-- [[GAME Assessment Mode]] - `shares_data_with` [EXTRACTED]
+- [[Background Jobs (BullRedis)]] - `references` [EXTRACTED]
+- [[GAME Assessment Mode (timer, speed points, streaks)]] - `conceptually_related_to` [EXTRACTED]
+- [[SSE Job-Events Stream (Run 9, replaces completion polling)]] - `conceptually_related_to` [INFERRED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_77
+#graphify/concept #graphify/EXTRACTED #community/Community_72

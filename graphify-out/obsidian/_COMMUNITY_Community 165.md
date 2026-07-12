@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-AUTH-02 Register a new individual account (+ optional join code)]] - document - docs/qa/user-stories-expansion.md
+- [[Python Interpreter Guard]] - rationale - .claude/skills/graphify/SKILL.md
 
 ## Live Query (requires Dataview plugin)
 

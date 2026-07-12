@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Community 71"
+community: "Community 35"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_71
+  - community/Community_35
 ---
 
 # DashboardPage()
@@ -18,4 +18,4 @@ tags:
 - [[useContents()]] - `calls` [INFERRED]
 - [[useDashboardSearch()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_71
+#graphify/code #graphify/INFERRED #community/Community_35

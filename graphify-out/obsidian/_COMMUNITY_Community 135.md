@@ -1,19 +1,20 @@
 ---
 type: community
-cohesion: 0.67
-members: 4
+cohesion: 0.40
+members: 5
 ---
 
 # Community 135
 
-**Cohesion:** 0.67 - moderately connected
-**Members:** 4 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[qa-overnight.sh]] - code - scripts/qa-overnight.sh
-- [[qa-overnight.sh script]] - code - scripts/qa-overnight.sh
-- [[qa_http()]] - code - scripts/qa-overnight.sh
-- [[qa_stack_healthy()]] - code - scripts/qa-overnight.sh
+- [[files]] - code - packages/config/tsconfig/package.json
+- [[name_7]] - code - packages/config/tsconfig/package.json
+- [[package.json_7]] - code - packages/config/tsconfig/package.json
+- [[private_7]] - code - packages/config/tsconfig/package.json
+- [[version_6]] - code - packages/config/tsconfig/package.json
 
 ## Live Query (requires Dataview plugin)
 

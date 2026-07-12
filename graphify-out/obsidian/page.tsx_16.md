@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # page.tsx
@@ -38,4 +38,4 @@ tags:
 - [[useLearnerSummary()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Community_58

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Community 35"
+community: "Content Hooks & Locale"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Content_Hooks__Locale
 ---
 
 # useContent()
@@ -30,4 +30,4 @@ tags:
 - [[useContent.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

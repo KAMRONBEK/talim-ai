@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
 type: "code"
-community: "Community 40"
+community: "Content Assignment & Hooks"
 location: "L190"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_40
+  - community/Content_Assignment__Hooks
 ---
 
 # EmptyState()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_34]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_40
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[doppler-docker.sh]] - code - scripts/doppler-docker.sh
-- [[doppler-docker.sh script]] - code - scripts/doppler-docker.sh
+- [[buildPodcastUserPrompt()_1]] - code - apps/api/src/lib/podcast-prompt.ts
+- [[podcast-prompt.ts]] - code - apps/api/src/lib/podcast-prompt.ts
 
 ## Live Query (requires Dataview plugin)
 

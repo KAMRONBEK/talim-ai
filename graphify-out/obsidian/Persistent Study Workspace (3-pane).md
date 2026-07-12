@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "rationale"
-community: "Community 94"
+community: "Community 107"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Community_107
 ---
 
 # Persistent Study Workspace (3-pane)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_94
+#graphify/rationale #graphify/EXTRACTED #community/Community_107

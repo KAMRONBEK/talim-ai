@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[docker-compose.prod.yml (production override)]] - document - docker-compose.prod.yml
+- [[US-XCUT-07 i18n — number, currency, date, relative-time, plural formatting]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

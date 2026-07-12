@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/admin.routes.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Admin & Events Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Admin__Events_Controllers
 ---
 
 # admin.routes.ts
@@ -25,4 +25,4 @@ tags:
 - [[index.ts_1]] - `imports_from` [EXTRACTED]
 - [[requireRole()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers

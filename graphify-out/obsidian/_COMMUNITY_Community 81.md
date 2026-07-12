@@ -1,28 +1,30 @@
 ---
 type: community
-cohesion: 0.17
-members: 13
+cohesion: 0.13
+members: 15
 ---
 
 # Community 81
 
-**Cohesion:** 0.17 - loosely connected
-**Members:** 13 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 15 nodes
 
 ## Members
-- [[AdminUserDetail]] - code - packages/types/index.ts
-- [[AdminUserListItem]] - code - packages/types/index.ts
-- [[AuthState]] - code - apps/admin/store/useAuthStore.ts
-- [[AuthState_1]] - code - apps/web/store/useAuthStore.ts
-- [[ImpersonateInner()]] - code - apps/web/app/[locale]/impersonate/page.tsx
-- [[ImpersonatePage()]] - code - apps/web/app/[locale]/impersonate/page.tsx
-- [[SigningIn()]] - code - apps/web/app/[locale]/impersonate/page.tsx
-- [[User]] - code - packages/types/index.ts
-- [[page.tsx_37]] - code - apps/web/app/[locale]/impersonate/page.tsx
-- [[useAuthStore]] - code - apps/admin/store/useAuthStore.ts
-- [[useAuthStore_1]] - code - apps/web/store/useAuthStore.ts
-- [[useAuthStore.ts]] - code - apps/admin/store/useAuthStore.ts
-- [[useAuthStore.ts_1]] - code - apps/web/store/useAuthStore.ts
+- [[@talimeslint-config_1]] - code - apps/api/package.json
+- [[@talimtsconfig_1]] - code - apps/api/package.json
+- [[@typesbcrypt]] - code - apps/api/package.json
+- [[@typesbull]] - code - apps/api/package.json
+- [[@typescors]] - code - apps/api/package.json
+- [[@typesexpress]] - code - apps/api/package.json
+- [[@typesjsonwebtoken]] - code - apps/api/package.json
+- [[@typesmulter]] - code - apps/api/package.json
+- [[@typesnode_1]] - code - apps/api/package.json
+- [[@typespdf-parse]] - code - apps/api/package.json
+- [[devDependencies_1]] - code - apps/api/package.json
+- [[eslint_1]] - code - apps/api/package.json
+- [[prisma]] - code - apps/api/package.json
+- [[tsx]] - code - apps/api/package.json
+- [[typescript_1]] - code - apps/api/package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -32,17 +34,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 7 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 3 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 2 edges to [[_COMMUNITY_Community 79]]
-- 2 edges to [[_COMMUNITY_Community 33]]
-- 1 edge to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Community 52]]
-- 1 edge to [[_COMMUNITY_Account & Settings UI]]
+- 1 edge to [[_COMMUNITY_Community 113]]
 
 ## Top bridge nodes
-- [[User]] - degree 10, connects to 4 communities
-- [[page.tsx_37]] - degree 8, connects to 3 communities
-- [[AdminUserListItem]] - degree 4, connects to 2 communities
-- [[AdminUserDetail]] - degree 3, connects to 2 communities
-- [[useAuthStore.ts]] - degree 4, connects to 1 community
+- [[devDependencies_1]] - degree 15, connects to 1 community

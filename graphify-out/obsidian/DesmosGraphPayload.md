@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "Community 55"
+community: "Community 61"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_55
+  - community/Community_61
 ---
 
 # DesmosGraphPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-visual.ts]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_55
+#graphify/code #graphify/EXTRACTED #community/Community_61

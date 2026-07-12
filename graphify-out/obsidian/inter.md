@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/inter.ts"
 type: "code"
-community: "Community 61"
+community: "Community 64"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_61
+  - community/Community_64
 ---
 
 # inter
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_1]] - `imports` [EXTRACTED]
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_61
+#graphify/code #graphify/EXTRACTED #community/Community_64

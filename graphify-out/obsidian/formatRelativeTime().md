@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # formatRelativeTime()
@@ -30,4 +30,4 @@ tags:
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

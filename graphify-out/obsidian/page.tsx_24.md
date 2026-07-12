@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Community 53"
+community: "Community 54"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_53
+  - community/Community_54
 ---
 
 # page.tsx
@@ -34,4 +34,4 @@ tags:
 - [[useTenantSearch()]] - `imports` [EXTRACTED]
 - [[useUploadTenantContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_53
+#graphify/code #graphify/EXTRACTED #community/Community_54

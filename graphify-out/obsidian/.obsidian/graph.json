@@ -8,14 +8,14 @@
       }
     },
     {
-      "query": "tag:#community/Shared_Types_&_Chat_Hooks",
+      "query": "tag:#community/Admin_Tenants_API",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Content_API_Controllers",
+      "query": "tag:#community/Shared_Types",
       "color": {
         "a": 1,
         "rgb": 14767961
@@ -29,119 +29,119 @@
       }
     },
     {
-      "query": "tag:#community/Admin_Tenants_&_Prisma_Core",
+      "query": "tag:#community/Admin_&_Events_Controllers",
       "color": {
         "a": 1,
         "rgb": 5873999
-      }
-    },
-    {
-      "query": "tag:#community/Env_Config_&_Job_Events",
-      "color": {
-        "a": 1,
-        "rgb": 15583560
-      }
-    },
-    {
-      "query": "tag:#community/Admin_&_Usage_Controllers",
-      "color": {
-        "a": 1,
-        "rgb": 11565729
-      }
-    },
-    {
-      "query": "tag:#community/Billing_&_Quota",
-      "color": {
-        "a": 1,
-        "rgb": 16752039
       }
     },
     {
       "query": "tag:#community/Quiz_Player_&_Hooks",
       "color": {
         "a": 1,
-        "rgb": 10253663
-      }
-    },
-    {
-      "query": "tag:#community/Admin_App_UI",
-      "color": {
-        "a": 1,
-        "rgb": 12234924
+        "rgb": 15583560
       }
     },
     {
       "query": "tag:#community/Graphify_Skill_Docs",
       "color": {
         "a": 1,
-        "rgb": 5142951
-      }
-    },
-    {
-      "query": "tag:#community/Question_Generation_Engine",
-      "color": {
-        "a": 1,
-        "rgb": 15896107
-      }
-    },
-    {
-      "query": "tag:#community/Shared_UI_Primitives",
-      "color": {
-        "a": 1,
-        "rgb": 14767961
-      }
-    },
-    {
-      "query": "tag:#community/AI_Tutor_Chat_API",
-      "color": {
-        "a": 1,
-        "rgb": 7780274
-      }
-    },
-    {
-      "query": "tag:#community/Web_Dependencies",
-      "color": {
-        "a": 1,
-        "rgb": 5873999
-      }
-    },
-    {
-      "query": "tag:#community/Billing_UI_&_Plans",
-      "color": {
-        "a": 1,
-        "rgb": 15583560
-      }
-    },
-    {
-      "query": "tag:#community/Admin_Content_&_Audit",
-      "color": {
-        "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Slide_Deck_Prompts",
+      "query": "tag:#community/Flashcards_Generation_&_Jobs",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Tutor_Visual_Tools",
+      "query": "tag:#community/Assessment_API_Controllers",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Transcript_Panel",
+      "query": "tag:#community/Admin_Content_&_Audit",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Content_Upload_&_Ingest",
+      "query": "tag:#community/AI_Tutor_Chat_API",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
+      }
+    },
+    {
+      "query": "tag:#community/Learning_Coverage_&_Badges",
+      "color": {
+        "a": 1,
+        "rgb": 15896107
+      }
+    },
+    {
+      "query": "tag:#community/Web_Dependencies",
+      "color": {
+        "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/Slide_Deck_Prompts",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
+      }
+    },
+    {
+      "query": "tag:#community/Admin_Analytics",
+      "color": {
+        "a": 1,
+        "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/Quiz_Generation_Job",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Assessments_Service",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
+      }
+    },
+    {
+      "query": "tag:#community/Content_Assignment_&_Hooks",
+      "color": {
+        "a": 1,
+        "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Podcast_API",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Slide_Deck_UI",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/Transcript_Panel",
       "color": {
         "a": 1,
         "rgb": 5142951
@@ -155,56 +155,56 @@
       }
     },
     {
-      "query": "tag:#community/Assessments_Service",
+      "query": "tag:#community/Admin_Dashboard_UI",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Podcast_Generation_&_TTS",
+      "query": "tag:#community/Admin_Panel_Docs",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Admin_Panel_Docs",
+      "query": "tag:#community/Flashcards_API",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Tenant_Materials_UI",
+      "query": "tag:#community/Podcast_Generation_&_Prompts",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Flashcards_Study_Page",
+      "query": "tag:#community/Account_&_Login_UI",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Account_&_Settings_UI",
+      "query": "tag:#community/Content_Access_&_Mastery_UI",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_28",
+      "query": "tag:#community/UI_Package_Deps",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_29",
+      "query": "tag:#community/Content_Hooks_&_Locale",
       "color": {
         "a": 1,
         "rgb": 12234924
@@ -1370,6 +1370,27 @@
       "color": {
         "a": 1,
         "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Community_196",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
+      }
+    },
+    {
+      "query": "tag:#community/Community_197",
+      "color": {
+        "a": 1,
+        "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Community_198",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
       }
     }
   ]

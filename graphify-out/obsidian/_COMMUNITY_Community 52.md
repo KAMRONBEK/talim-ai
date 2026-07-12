@@ -1,36 +1,38 @@
 ---
 type: community
-cohesion: 0.14
-members: 21
+cohesion: 0.17
+members: 23
 ---
 
 # Community 52
 
-**Cohesion:** 0.14 - loosely connected
-**Members:** 21 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 23 nodes
 
 ## Members
-- [[.loop()]] - code - apps/web/lib/jobStream.ts
-- [[.onConnected()]] - code - apps/web/lib/jobStream.ts
-- [[.setConnected()]] - code - apps/web/lib/jobStream.ts
-- [[.start()]] - code - apps/web/lib/jobStream.ts
-- [[.stop()]] - code - apps/web/lib/jobStream.ts
-- [[.subscribe()_1]] - code - apps/web/lib/jobStream.ts
-- [[JobStream]] - code - apps/web/lib/jobStream.ts
-- [[JobStream()]] - code - apps/web/components/providers.tsx
-- [[Listener]] - code - apps/web/lib/jobStream.ts
-- [[ManimPayload]] - code - packages/types/tutor-visual.ts
-- [[ManimVideo()]] - code - apps/web/components/chat/ManimVideo.tsx
-- [[ManimVideo.tsx]] - code - apps/web/components/chat/ManimVideo.tsx
-- [[Providers()_1]] - code - apps/web/components/providers.tsx
-- [[SessionSync()]] - code - apps/web/components/session-sync.tsx
-- [[applyEvent()]] - code - apps/web/hooks/useJobEvents.ts
-- [[getApiBaseUrl()]] - code - apps/web/lib/api.ts
-- [[jobStream.ts]] - code - apps/web/lib/jobStream.ts
-- [[providers.tsx_1]] - code - apps/web/components/providers.tsx
-- [[session-sync.tsx]] - code - apps/web/components/session-sync.tsx
-- [[useJobEvents()]] - code - apps/web/hooks/useJobEvents.ts
-- [[useJobEvents.ts]] - code - apps/web/hooks/useJobEvents.ts
+- [[assignContent()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[createStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[deleteStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[getProgress()_1]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[getProgressTopics()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[getStudentProgress()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[getTenant()_1]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[importStudents()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[listContentAssignments()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[listSentMessages()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[listStudents()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[markReplyRead()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[messagesUnreadCount()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[patchStudent()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[patchTenant()_1]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[readLocale()_1]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[regenerateJoinCode()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[requireOwnerTenant()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[resetStudentPassword()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[respondToReply()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[sendMessage()]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[tenant.controller.ts]] - code - apps/api/src/controllers/tenant.controller.ts
+- [[unassignContent()]] - code - apps/api/src/controllers/tenant.controller.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -40,23 +42,18 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 3 edges to [[_COMMUNITY_Community 35]]
-- 2 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 2 edges to [[_COMMUNITY_Community 67]]
-- 2 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 2 edges to [[_COMMUNITY_Community 95]]
-- 2 edges to [[_COMMUNITY_Community 37]]
-- 2 edges to [[_COMMUNITY_Community 55]]
-- 1 edge to [[_COMMUNITY_Env Config & Job Events]]
-- 1 edge to [[_COMMUNITY_Tutor Visual Tools]]
-- 1 edge to [[_COMMUNITY_Community 33]]
-- 1 edge to [[_COMMUNITY_Community 81]]
-- 1 edge to [[_COMMUNITY_Community 98]]
+- 8 edges to [[_COMMUNITY_Assessment API Controllers]]
+- 3 edges to [[_COMMUNITY_Admin & Events Controllers]]
+- 2 edges to [[_COMMUNITY_Flashcards API]]
+- 2 edges to [[_COMMUNITY_Community 105]]
+- 1 edge to [[_COMMUNITY_Podcast API]]
+- 1 edge to [[_COMMUNITY_Learning Coverage & Badges]]
+- 1 edge to [[_COMMUNITY_Community 67]]
+- 1 edge to [[_COMMUNITY_Shared Types]]
 
 ## Top bridge nodes
-- [[ManimPayload]] - degree 5, connects to 4 communities
-- [[useJobEvents.ts]] - degree 9, connects to 3 communities
-- [[getApiBaseUrl()]] - degree 8, connects to 3 communities
-- [[providers.tsx_1]] - degree 10, connects to 2 communities
-- [[jobStream.ts]] - degree 6, connects to 2 communities
+- [[tenant.controller.ts]] - degree 33, connects to 8 communities
+- [[readLocale()_1]] - degree 5, connects to 1 community
+- [[getStudentProgress()]] - degree 4, connects to 1 community
+- [[deleteStudent()]] - degree 3, connects to 1 community
+- [[listContentAssignments()]] - degree 3, connects to 1 community

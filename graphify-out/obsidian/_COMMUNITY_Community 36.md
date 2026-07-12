@@ -1,42 +1,42 @@
 ---
 type: community
-cohesion: 0.12
+cohesion: 0.13
 members: 27
 ---
 
 # Community 36
 
-**Cohesion:** 0.12 - loosely connected
+**Cohesion:** 0.13 - loosely connected
 **Members:** 27 nodes
 
 ## Members
-- [[PageDimensions]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PageState]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfDocumentProxy]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfExcerptPayload]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfJsModule]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfPageProxy]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[PdfSelectionMode]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfTextContentItem]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[PdfTextItem]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[PdfViewer()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewer.tsx]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewerProps]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[PdfViewport]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[Rect]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[clientRectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[cropPageCanvasRegion()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[ensureEndOfContent()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[estimateTextWidth()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[extractTextFromTextLayerMarquee()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[extractTextInDomRect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[getViewportTextBounds()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[isTextItem()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[pdf-area-selection.ts]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[pdfjs-cdn.ts]] - code - apps/web/lib/pdfjs-cdn.ts
-- [[rectsIntersect()]] - code - apps/web/components/learning/pdf-area-selection.ts
-- [[renderManualTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
-- [[renderTextLayer()]] - code - apps/web/components/learning/PdfViewer.tsx
+- [[COUNT_PRESETS]] - code - apps/web/components/practice/practice-generator.tsx
+- [[ContentGenerationsBlockProps]] - code - apps/web/components/layout/content-generations.tsx
+- [[DEPTHS]] - code - apps/web/components/practice/practice-generator.tsx
+- [[DeleteContentDialogProps]] - code - apps/web/components/content/delete-content-dialog.tsx
+- [[Dialog()]] - code - packages/ui/components/dialog.tsx
+- [[DialogContent()]] - code - packages/ui/components/dialog.tsx
+- [[DialogContext]] - code - packages/ui/components/dialog.tsx
+- [[DialogContextValue]] - code - packages/ui/components/dialog.tsx
+- [[DialogDescription()]] - code - packages/ui/components/dialog.tsx
+- [[DialogFooter()]] - code - packages/ui/components/dialog.tsx
+- [[DialogHeader()]] - code - packages/ui/components/dialog.tsx
+- [[DialogTitle()]] - code - packages/ui/components/dialog.tsx
+- [[DialogTrigger()]] - code - packages/ui/components/dialog.tsx
+- [[LearnerMessagesBell()]] - code - apps/web/components/learner/learner-messages-bell.tsx
+- [[LearnerThreadMessage]] - code - packages/types/index.ts
+- [[PracticeGenerator()]] - code - apps/web/components/practice/practice-generator.tsx
+- [[PracticeGeneratorProps]] - code - apps/web/components/practice/practice-generator.tsx
+- [[content-generations.tsx]] - code - apps/web/components/layout/content-generations.tsx
+- [[delete-content-dialog.tsx]] - code - apps/web/components/content/delete-content-dialog.tsx
+- [[dialog.tsx]] - code - packages/ui/components/dialog.tsx
+- [[learner-messages-bell.tsx]] - code - apps/web/components/learner/learner-messages-bell.tsx
+- [[practice-generator.tsx]] - code - apps/web/components/practice/practice-generator.tsx
+- [[useCreateQuiz()]] - code - apps/web/hooks/useQuiz.ts
+- [[useLearnerMessages()]] - code - apps/web/hooks/useTenant.ts
+- [[useLearnerUnreadCount()]] - code - apps/web/hooks/useTenant.ts
+- [[useMarkMessageRead()]] - code - apps/web/hooks/useTenant.ts
+- [[useReplyToLearnerMessage()]] - code - apps/web/hooks/useTenant.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -46,13 +46,27 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Community 37]]
-- 1 edge to [[_COMMUNITY_Shared UI Primitives]]
-- 1 edge to [[_COMMUNITY_Admin App UI]]
-- 1 edge to [[_COMMUNITY_Community 33]]
+- 11 edges to [[_COMMUNITY_Community 39]]
+- 10 edges to [[_COMMUNITY_Community 34]]
+- 9 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 8 edges to [[_COMMUNITY_Community 54]]
+- 8 edges to [[_COMMUNITY_Community 31]]
+- 8 edges to [[_COMMUNITY_Slide Deck UI]]
+- 5 edges to [[_COMMUNITY_Community 48]]
+- 4 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 4 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 3 edges to [[_COMMUNITY_Account & Login UI]]
+- 3 edges to [[_COMMUNITY_Shared Types]]
+- 3 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 2 edges to [[_COMMUNITY_Community 59]]
+- 2 edges to [[_COMMUNITY_Community 82]]
+- 2 edges to [[_COMMUNITY_Community 43]]
+- 1 edge to [[_COMMUNITY_Content Hooks & Locale]]
+- 1 edge to [[_COMMUNITY_Quiz Generation Job]]
 
 ## Top bridge nodes
-- [[PdfViewer.tsx]] - degree 22, connects to 3 communities
-- [[pdfjs-cdn.ts]] - degree 7, connects to 1 community
-- [[PdfExcerptPayload]] - degree 2, connects to 1 community
-- [[PdfViewer()]] - degree 2, connects to 1 community
+- [[practice-generator.tsx]] - degree 21, connects to 8 communities
+- [[learner-messages-bell.tsx]] - degree 20, connects to 8 communities
+- [[DialogContent()]] - degree 13, connects to 8 communities
+- [[DialogHeader()]] - degree 13, connects to 8 communities
+- [[DialogTitle()]] - degree 13, connects to 8 communities

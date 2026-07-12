@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckMarkdown.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Slide Deck UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Slide_Deck_UI
 ---
 
 # DeckMarkdown.tsx
@@ -17,4 +17,4 @@ tags:
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

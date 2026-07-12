@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # UZ_UNIT_LABELS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[format-relative-time.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

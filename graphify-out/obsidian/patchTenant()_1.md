@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Community 48"
+community: "Community 52"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_48
+  - community/Community_52
 ---
 
 # patchTenant()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_48
+#graphify/code #graphify/EXTRACTED #community/Community_52

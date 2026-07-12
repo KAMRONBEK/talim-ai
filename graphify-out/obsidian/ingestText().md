@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ingest.service.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "Community 32"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Community_32
 ---
 
 # ingestText()
@@ -21,4 +21,4 @@ tags:
 - [[storeChunksWithEmbeddings()]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Community_32

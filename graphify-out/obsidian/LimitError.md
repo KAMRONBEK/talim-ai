@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/limit-error.ts"
 type: "code"
-community: "Community 38"
+community: "Community 34"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_38
+  - community/Community_34
 ---
 
 # LimitError
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[limit-error.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_38
+#graphify/code #graphify/EXTRACTED #community/Community_34

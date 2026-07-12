@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Community 110"
+community: "Community 115"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_110
+  - community/Community_115
 ---
 
 # page.tsx
@@ -22,4 +22,4 @@ tags:
 - [[useTenantProgress()]] - `imports` [EXTRACTED]
 - [[useTenantProgressTopics()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_110
+#graphify/code #graphify/EXTRACTED #community/Community_115

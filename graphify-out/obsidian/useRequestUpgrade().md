@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Community 49"
+community: "Community 80"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Community_80
 ---
 
 # useRequestUpgrade()
@@ -16,4 +16,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Community_80

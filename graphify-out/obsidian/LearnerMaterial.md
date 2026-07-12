@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L485"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # LearnerMaterial
@@ -17,4 +17,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Community_58

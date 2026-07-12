@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Community 100"
+community: "Slide Deck UI"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Slide_Deck_UI
 ---
 
 # DeckIcon
@@ -16,4 +16,4 @@ tags:
 - [[deck.ts]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_100
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

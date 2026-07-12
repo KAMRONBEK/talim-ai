@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Quiz Generation Job"
 location: "L56"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Quiz_Generation_Job
 ---
 
 # containmentNormalize()
@@ -15,4 +15,4 @@ tags:
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 - [[resolveSourceSection()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

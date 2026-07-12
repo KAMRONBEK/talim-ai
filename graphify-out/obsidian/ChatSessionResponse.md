@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Community 34"
 location: "L1149"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Community_34
 ---
 
 # ChatSessionResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useChat.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_34

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "Community 32"
+community: "Community 35"
 location: "L118"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_35
 ---
 
 # DashboardSidebarSheet()
@@ -16,4 +16,4 @@ tags:
 - [[dashboard-search.tsx]] - `imports` [EXTRACTED]
 - [[dashboard-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_35

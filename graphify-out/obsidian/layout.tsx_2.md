@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/layout.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # layout.tsx
@@ -16,4 +16,4 @@ tags:
 - [[LearnerShell()]] - `imports` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

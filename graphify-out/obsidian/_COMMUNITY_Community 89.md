@@ -1,26 +1,28 @@
 ---
 type: community
-cohesion: 0.27
-members: 11
+cohesion: 0.21
+members: 13
 ---
 
 # Community 89
 
-**Cohesion:** 0.27 - loosely connected
-**Members:** 11 nodes
+**Cohesion:** 0.21 - loosely connected
+**Members:** 13 nodes
 
 ## Members
-- [[Hero CTAs gradient primary 'Bepul boshlash' and outlined secondary 'Xususiyatlarni ko'rish', plus trust row 'PDF, YouTube, slaydlar va ma'ruzalar bilan ishlaydi' with source-type avatars]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Hero badge 'AI bilan o'rganish', headline 'Har qanday narsani. O'zingizning yo'lingiz bilan.' with warm highlight bar, subcopy about uploading PDFvideoslideslectures for AI summaries, podcast_c21f2a05]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Learner progress indicator inside mock card 'Sizning taraqqiyotingiz' gradient bar at 72%]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Marketing message upload any material (PDFvideoslideslecture) and get AI summaries, podcasts, quizzes, and a personal AI tutor]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Navbar fix verification filename marks this as the fixed state of the tablet-width navbar (elements fit one row without overflow)]] - rationale - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Navbar Talim AI logo, theme-toggle icon, 'Kirish' link, gradient 'Boshlash' CTA in a single compact row]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Product mock card 'Genetik kod va tarjima' (Biologiya 101 · 11-bob) with AI badge and rows for generated summary (3 daqiqa o'qish), ready podcast (8 daqiqa tinglash), quiz (12 ta savol)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - image - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Tablet 768px responsive breakpoint single-column hero layout with full-width mock card]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Uzbek (uz locale) localization all landing copy rendered in Uzbek via next-intl locale routing]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
-- [[Visual design language lavenderviolet backdrop, purple-to-orange gradient CTAs and progress bar, rounded cards on light surface (relation to committed 'Scholar' pine+clay system uncertain)]] - concept - docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg
+- [[Advertised platform features AI summaries (конспекты), podcasts, quizzes, personal AI tutor from uploaded material]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[CTA pair primary gradient 'Начать бесплатно', secondary outlined 'Смотреть возможности']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Dark theme variant of the landing page (near-black background, light text, user-switchable via toggle)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Headline 'Изучайте что угодно. По-своему.' with gold highlight marker on 'По-своему.']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Hero section badge 'Учитесь с ИИ', stacked headline, value-prop copy, CTA pair]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Mobile viewport responsive layout (single-column, stacked hero)]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Post-fix QA evidence mobile hero renders correctly in Russian after a layouttext fix ('fixed' state)]] - rationale - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Product demo card 'Генетический код и тр…'  Биология 101 · Глава 11, AI badge, 'Конспект готов · 3 мин чтения']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[QA screenshot Russian landing page mobile hero (post-fix, dark theme)]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Russian (ru) locale rendering of the marketing landing page]] - concept - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Sticky mobile header Talim AI logo, theme-toggle (moon) icon, gradient 'Начать' CTA]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Supported-formats strip avatar icon cluster + 'Работает с PDF, YouTube, слайдами и лекциями']] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
+- [[Value-prop paragraph upload any material (PDF, video, slides, lecture) → get конспекты, подкасты, тесты, личный ИИ-репетитор]] - image - docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg
 
 ## Live Query (requires Dataview plugin)
 

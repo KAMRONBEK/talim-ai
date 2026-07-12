@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Billing & Quota"
+community: "Admin Tenants API"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota
+  - community/Admin_Tenants_API
 ---
 
 # getUsageForPeriod()
@@ -24,4 +24,4 @@ tags:
 - [[user.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

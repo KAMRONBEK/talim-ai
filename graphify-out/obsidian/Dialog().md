@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Community 39"
+community: "Community 36"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_39
+  - community/Community_36
 ---
 
 # Dialog()
@@ -25,4 +25,4 @@ tags:
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_39
+#graphify/code #graphify/EXTRACTED #community/Community_36

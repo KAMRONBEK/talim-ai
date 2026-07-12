@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Generation Engine"
+community: "Community 40"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Generation_Engine
+  - community/Community_40
 ---
 
 # shuffled()
@@ -19,4 +19,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shuffleOptionsWithKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Generation_Engine
+#graphify/code #graphify/EXTRACTED #community/Community_40

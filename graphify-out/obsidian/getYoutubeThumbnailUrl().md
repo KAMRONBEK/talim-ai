@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # getYoutubeThumbnailUrl()
@@ -18,4 +18,4 @@ tags:
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[youtube.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

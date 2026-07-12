@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L739"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # AssessmentCard()
@@ -16,4 +16,4 @@ tags:
 - [[formatRelativeTime()]] - `calls` [INFERRED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Materials_UI
+#graphify/code #graphify/INFERRED #community/Community_31

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/analytics.service.ts"
 type: "code"
-community: "Community 51"
+community: "Admin Analytics"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_51
+  - community/Admin_Analytics
 ---
 
 # computeMrr()
@@ -17,4 +17,4 @@ tags:
 - [[analyticsMrr()]] - `calls` [EXTRACTED]
 - [[getAnalyticsSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_51
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

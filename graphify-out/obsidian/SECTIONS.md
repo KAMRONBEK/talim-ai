@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/terms/page.tsx"
 type: "code"
-community: "Community 46"
+community: "Community 101"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/Community_101
 ---
 
 # SECTIONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_41]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/Community_101

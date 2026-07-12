@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Podcast API"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Podcast_API
 ---
 
 # StoredSegment
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[video.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Podcast_API

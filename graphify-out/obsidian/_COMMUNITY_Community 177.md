@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-IND-25 Podcast DEEPEN (fine controls, multi-episode, per-episode regen)]] - document - docs/qa/user-stories-expansion.md
+- [[US-IND-18 AI Video — per-section narrated slideshow (parts)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,22 +1,22 @@
 ---
 type: community
-cohesion: 0.48
+cohesion: 0.43
 members: 7
 ---
 
 # Community 118
 
-**Cohesion:** 0.48 - moderately connected
+**Cohesion:** 0.43 - moderately connected
 **Members:** 7 nodes
 
 ## Members
-- [[OPTION_LABELS]] - code - packages/types/quiz-answer.ts
-- [[getOptionLabel()]] - code - packages/types/quiz-answer.ts
-- [[isSelectedAnswerCorrect()]] - code - packages/types/quiz-answer.ts
-- [[normalize()]] - code - packages/types/quiz-answer.ts
-- [[quiz-answer.ts]] - code - packages/types/quiz-answer.ts
-- [[resolveCorrectAnswer()]] - code - packages/types/quiz-answer.ts
-- [[stripOptionLabel()]] - code - packages/types/quiz-answer.ts
+- [[UsersPage()]] - code - apps/admin/app/(admin)/users/page.tsx
+- [[page.tsx_10]] - code - apps/admin/app/(admin)/users/page.tsx
+- [[roleBadge()]] - code - apps/admin/app/(admin)/users/page.tsx
+- [[subStatusBadge()]] - code - apps/admin/app/(admin)/users/page.tsx
+- [[useAdminUsers()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useDeleteUser()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useResetUserPassword()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,11 +26,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 2 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Community 70]]
+- 4 edges to [[_COMMUNITY_Admin Dashboard UI]]
+- 3 edges to [[_COMMUNITY_Community 38]]
+- 2 edges to [[_COMMUNITY_Account & Login UI]]
+- 1 edge to [[_COMMUNITY_Community 39]]
 
 ## Top bridge nodes
-- [[quiz-answer.ts]] - degree 8, connects to 2 communities
-- [[isSelectedAnswerCorrect()]] - degree 6, connects to 2 communities
-- [[resolveCorrectAnswer()]] - degree 6, connects to 2 communities
+- [[page.tsx_10]] - degree 11, connects to 4 communities
+- [[useResetUserPassword()]] - degree 5, connects to 2 communities
+- [[useAdminUsers()]] - degree 3, connects to 1 community
+- [[useDeleteUser()]] - degree 3, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Admin Tenants API"
 location: "L190"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Admin_Tenants_API
 ---
 
 # adminUpdateTenantSubscription()
@@ -19,4 +19,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

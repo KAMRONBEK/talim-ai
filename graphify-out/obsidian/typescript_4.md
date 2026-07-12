@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "Community 75"
+community: "Community 79"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_75
+  - community/Community_79
 ---
 
 # typescript
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_75
+#graphify/code #graphify/EXTRACTED #community/Community_79

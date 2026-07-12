@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/index.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Flashcards Generation & Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Flashcards_Generation__Jobs
 ---
 
 # index.ts
@@ -35,4 +35,4 @@ tags:
 - [[routes]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

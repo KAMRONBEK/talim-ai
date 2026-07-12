@@ -1,37 +1,39 @@
 ---
 type: community
-cohesion: 0.14
-members: 22
+cohesion: 0.20
+members: 24
 ---
 
 # Community 49
 
-**Cohesion:** 0.14 - loosely connected
-**Members:** 22 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 24 nodes
 
 ## Members
-- [[.constructor()_2]] - code - apps/api/src/middleware/error.middleware.ts
-- [[ApiErrorLike]] - code - apps/web/lib/limit-error.ts
-- [[BillingPeriod]] - code - apps/web/lib/pricing.ts
-- [[FeatureSpec]] - code - apps/web/lib/pricing.ts
-- [[MANUAL_TIERS]] - code - apps/web/lib/pricing.ts
-- [[ManualTier]] - code - apps/web/lib/pricing.ts
-- [[PRICING_PLANS]] - code - apps/web/lib/pricing.ts
-- [[PlanAudience]] - code - apps/web/lib/pricing.ts
-- [[PlanCode]] - code - packages/types/index.ts
-- [[PlanLimitsView]] - code - apps/web/lib/pricing.ts
-- [[Pricing()]] - code - apps/web/components/marketing/pricing.tsx
-- [[PricingPlan]] - code - apps/web/lib/pricing.ts
-- [[UpgradeDialog()]] - code - apps/web/components/account/upgrade-dialog.tsx
-- [[effectiveMonthlyUzs()]] - code - apps/web/lib/pricing.ts
-- [[formatUzs()]] - code - apps/web/lib/pricing.ts
-- [[getPlan()]] - code - apps/web/lib/pricing.ts
-- [[planFeatureSpecs()]] - code - apps/web/lib/pricing.ts
-- [[plansForAudience()]] - code - apps/web/lib/pricing.ts
-- [[pricing.ts]] - code - apps/web/lib/pricing.ts
-- [[pricing.tsx]] - code - apps/web/components/marketing/pricing.tsx
-- [[upgrade-dialog.tsx]] - code - apps/web/components/account/upgrade-dialog.tsx
-- [[useRequestUpgrade()]] - code - apps/web/hooks/useBilling.ts
+- [[assertTenantOwnsContent()]] - code - apps/api/src/services/contentAccess.service.ts
+- [[content-shared.ts]] - code - apps/api/src/controllers/content-shared.ts
+- [[createYoutubeContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[decodeUploadFilename()]] - code - apps/api/src/lib/filename.ts
+- [[deleteContent()_2]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[extractTextFromPageImages()]] - code - apps/api/src/services/pdf.service.ts
+- [[filename.ts]] - code - apps/api/src/lib/filename.ts
+- [[formatContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[formatTranscriptSegment()]] - code - apps/api/src/controllers/content-shared.ts
+- [[getContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[getContentFile()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[getContentTranscript()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[listContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[loadOrBackfillTranscript()]] - code - apps/api/src/controllers/content-shared.ts
+- [[ocrPdfRegion()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[ocrRegionSchema]] - code - apps/api/src/controllers/content-shared.ts
+- [[reparseContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[reparseSchema]] - code - apps/api/src/controllers/content-shared.ts
+- [[requireTenantId()]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[retryContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[sendContentFile()]] - code - apps/api/src/controllers/content-shared.ts
+- [[tenant-content.controller.ts]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[uploadContent()_1]] - code - apps/api/src/controllers/tenant-content.controller.ts
+- [[youtubeSchema]] - code - apps/api/src/controllers/content-shared.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -41,21 +43,21 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 4 edges to [[_COMMUNITY_Billing & Quota]]
-- 4 edges to [[_COMMUNITY_Community 46]]
-- 4 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 2 edges to [[_COMMUNITY_Community 34]]
-- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 2 edges to [[_COMMUNITY_Admin App UI]]
-- 2 edges to [[_COMMUNITY_Community 33]]
-- 2 edges to [[_COMMUNITY_Community 38]]
-- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Community 54]]
-- 1 edge to [[_COMMUNITY_Shared UI Primitives]]
+- 21 edges to [[_COMMUNITY_Assessment API Controllers]]
+- 11 edges to [[_COMMUNITY_Community 32]]
+- 7 edges to [[_COMMUNITY_Admin Tenants API]]
+- 6 edges to [[_COMMUNITY_Community 74]]
+- 5 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
+- 5 edges to [[_COMMUNITY_Community 60]]
+- 4 edges to [[_COMMUNITY_Flashcards API]]
+- 3 edges to [[_COMMUNITY_Admin & Events Controllers]]
+- 3 edges to [[_COMMUNITY_Admin Content & Audit]]
+- 3 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 1 edge to [[_COMMUNITY_Podcast API]]
 
 ## Top bridge nodes
-- [[PlanCode]] - degree 13, connects to 6 communities
-- [[upgrade-dialog.tsx]] - degree 14, connects to 4 communities
-- [[UpgradeDialog()]] - degree 7, connects to 2 communities
-- [[ApiErrorLike]] - degree 3, connects to 2 communities
-- [[Pricing()]] - degree 3, connects to 2 communities
+- [[tenant-content.controller.ts]] - degree 51, connects to 11 communities
+- [[content-shared.ts]] - degree 18, connects to 6 communities
+- [[reparseContent()_1]] - degree 10, connects to 4 communities
+- [[loadOrBackfillTranscript()]] - degree 6, connects to 2 communities
+- [[deleteContent()_2]] - degree 5, connects to 2 communities

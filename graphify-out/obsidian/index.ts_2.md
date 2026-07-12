@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Shared Types"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Shared_Types
 ---
 
 # index.ts
@@ -379,4 +379,4 @@ tags:
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Shared_Types

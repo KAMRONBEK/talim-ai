@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[Token Reduction Benchmark]] - concept - .claude/skills/graphify/references/exports.md
+- [[US-XCUT-06 i18n — every surface localized, key symmetry, no leaks]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

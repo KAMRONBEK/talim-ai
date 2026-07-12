@@ -91,22 +91,24 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 20 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 10 edges to [[_COMMUNITY_Admin App UI]]
+- 18 edges to [[_COMMUNITY_Shared Types]]
+- 10 edges to [[_COMMUNITY_Account & Login UI]]
 - 10 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 9 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 9 edges to [[_COMMUNITY_Community 33]]
-- 8 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 4 edges to [[_COMMUNITY_Community 39]]
-- 3 edges to [[_COMMUNITY_Account & Settings UI]]
-- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 2 edges to [[_COMMUNITY_Question Generation Engine]]
-- 2 edges to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Community 35]]
+- 9 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 6 edges to [[_COMMUNITY_Community 31]]
+- 6 edges to [[_COMMUNITY_Community 39]]
+- 5 edges to [[_COMMUNITY_Quiz Player & Hooks]]
+- 4 edges to [[_COMMUNITY_Community 36]]
+- 3 edges to [[_COMMUNITY_Community 58]]
+- 2 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 2 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 1 edge to [[_COMMUNITY_Community 59]]
 
 ## Top bridge nodes
-- [[page.tsx_19]] - degree 51, connects to 8 communities
+- [[page.tsx_19]] - degree 51, connects to 10 communities
 - [[useAssessments.ts]] - degree 38, connects to 5 communities
-- [[question-editor.tsx]] - degree 24, connects to 4 communities
-- [[game-quiz-player.tsx]] - degree 23, connects to 4 communities
-- [[page.tsx_15]] - degree 22, connects to 4 communities
+- [[question-editor.tsx]] - degree 24, connects to 5 communities
+- [[game-quiz-player.tsx]] - degree 23, connects to 5 communities
+- [[page.tsx_15]] - degree 22, connects to 5 communities

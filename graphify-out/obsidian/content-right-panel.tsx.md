@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Community 32"
+community: "Content Access & Mastery UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Content_Access__Mastery_UI
 ---
 
 # content-right-panel.tsx
@@ -38,4 +38,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/onboarding.ts"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # dismissOnboarding()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_18]] - `imports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Community_58

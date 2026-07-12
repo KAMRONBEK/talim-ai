@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[next-env.d.ts_1]] - code - apps/web/next-env.d.ts
+- [[docker-compose.registry.yml (GHCR prebuilt images)]] - document - docker-compose.registry.yml
 
 ## Live Query (requires Dataview plugin)
 

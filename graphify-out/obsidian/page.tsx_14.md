@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/register/page.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Account & Login UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Account__Login_UI
 ---
 
 # page.tsx
@@ -27,4 +27,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

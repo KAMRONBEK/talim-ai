@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Community 44"
+community: "Community 88"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/Community_88
 ---
 
 # AI_PREFIX_PATTERNS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[format-summary.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/Community_88

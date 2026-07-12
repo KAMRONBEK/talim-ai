@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Transcript Panel"
+community: "Content Hooks & Locale"
 location: "L1070"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Content_Hooks__Locale
 ---
 
 # ContentTranscriptResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTranscript.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

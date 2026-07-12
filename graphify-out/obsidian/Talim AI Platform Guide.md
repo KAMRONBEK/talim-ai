@@ -1,18 +1,18 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "document"
-community: "Community 120"
+community: "Community 100"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_120
+  - community/Community_100
 ---
 
 # Talim AI Platform Guide
 
 ## Connections
 - [[Manual PaymentActivation Model]] - `references` [EXTRACTED]
-- [[Multi-tenant Isolation Guard (contentAccess.service)]] - `references` [INFERRED]
+- [[Multi-Tenant Isolation Guard (contentAccess.service)]] - `references` [INFERRED]
 - [[Production Deployment Topology (nginx + Docker + GHCR)]] - `references` [EXTRACTED]
 - [[Talim AI Feature Catalog]] - `conceptually_related_to` [INFERRED]
 - [[Talim AI Platform]] - `references` [EXTRACTED]
@@ -20,4 +20,4 @@ tags:
 - [[UserRole Model (ADMIN  TENANT_OWNER  TENANT_LEARNER  INDIVIDUAL)]] - `references` [EXTRACTED]
 - [[processContent Ingestion Job]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_120
+#graphify/document #graphify/EXTRACTED #community/Community_100

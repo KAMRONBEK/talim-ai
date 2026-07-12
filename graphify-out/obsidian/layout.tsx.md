@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/layout.tsx"
 type: "code"
-community: "Community 108"
+community: "Community 104"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_108
+  - community/Community_104
 ---
 
 # layout.tsx
@@ -16,4 +16,4 @@ tags:
 - [[AdminShell()]] - `imports` [EXTRACTED]
 - [[admin-shell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_108
+#graphify/code #graphify/EXTRACTED #community/Community_104

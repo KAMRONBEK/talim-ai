@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[Providers()]] - code - apps/admin/components/providers.tsx
-- [[providers.tsx]] - code - apps/admin/components/providers.tsx
+- [[next.config.ts]] - code - apps/admin/next.config.ts
+- [[nextConfig]] - code - apps/admin/next.config.ts
 
 ## Live Query (requires Dataview plugin)
 

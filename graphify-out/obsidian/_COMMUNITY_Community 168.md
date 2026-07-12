@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-AUTH-06 Become-tutor request → admin approval → role unlock]] - document - docs/qa/user-stories-expansion.md
+- [[US-ADMIN-05 Content & generated-media moderation (browse  delete  retry)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

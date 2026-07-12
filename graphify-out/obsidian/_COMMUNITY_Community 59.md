@@ -1,34 +1,36 @@
 ---
 type: community
-cohesion: 0.21
-members: 19
+cohesion: 0.17
+members: 21
 ---
 
 # Community 59
 
-**Cohesion:** 0.21 - loosely connected
-**Members:** 19 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 21 nodes
 
 ## Members
-- [[CoverageQuestionResult]] - code - apps/api/src/lib/learning-coverage-prompt.ts
-- [[QuizWithQuestions]] - code - apps/api/src/services/learningProgress.service.ts
-- [[blendCoverageScore()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[buildCoverageResults()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[buildLearningCoverageUserPrompt()]] - code - apps/api/src/lib/learning-coverage-prompt.ts
-- [[computeBestFullQuizScore()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[estimateAiCoverage()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[getSectionBody()]] - code - apps/api/src/services/section.service.ts
-- [[isLatestSectionAttempt()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[isSectionComplete()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[learning-coverage-prompt.ts]] - code - apps/api/src/lib/learning-coverage-prompt.ts
-- [[learningProgress.service.ts]] - code - apps/api/src/services/learningProgress.service.ts
-- [[markSectionViewed()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[persistSectionProgress()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[recalculateContentProgress()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[recordLearningActivity()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[refineSectionProgressWithAi()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[todayUtcDate()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[updateProgressAfterQuizSubmit()]] - code - apps/api/src/services/learningProgress.service.ts
+- [[Content]] - code - packages/types/index.ts
+- [[ContentStageProps]] - code - apps/web/components/learning/content-stage.tsx
+- [[ContentState]] - code - apps/web/store/useContentStore.ts
+- [[ContentStatusGateProps]] - code - apps/web/components/content/content-status-gate.tsx
+- [[LIST_KEYS]] - code - apps/web/lib/content-cache.ts
+- [[ListSnapshot]] - code - apps/web/lib/content-cache.ts
+- [[content-cache.ts]] - code - apps/web/lib/content-cache.ts
+- [[contentApiBase()]] - code - apps/web/hooks/useContent.ts
+- [[invalidateContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[listHasProcessing()]] - code - apps/web/lib/content-cache.ts
+- [[prependContentToLists()]] - code - apps/web/lib/content-cache.ts
+- [[removeContentFromLists()]] - code - apps/web/lib/content-cache.ts
+- [[restoreContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[snapshotContentLists()]] - code - apps/web/lib/content-cache.ts
+- [[useContent.ts]] - code - apps/web/hooks/useContent.ts
+- [[useContentStore]] - code - apps/web/store/useContentStore.ts
+- [[useContentStore.ts]] - code - apps/web/store/useContentStore.ts
+- [[useDeleteContent()_1]] - code - apps/web/hooks/useContent.ts
+- [[useDeleteTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
+- [[useRetryTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
+- [[useTenantContent.ts]] - code - apps/web/hooks/useTenantContent.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -38,22 +40,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Content API Controllers]]
-- 4 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 4 edges to [[_COMMUNITY_Community 80]]
+- 9 edges to [[_COMMUNITY_Community 34]]
+- 8 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 7 edges to [[_COMMUNITY_Community 54]]
+- 6 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 5 edges to [[_COMMUNITY_Shared Types]]
 - 3 edges to [[_COMMUNITY_Community 58]]
-- 2 edges to [[_COMMUNITY_Community 64]]
-- 2 edges to [[_COMMUNITY_Community 107]]
-- 2 edges to [[_COMMUNITY_Community 70]]
-- 2 edges to [[_COMMUNITY_Community 29]]
-- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
-- 1 edge to [[_COMMUNITY_Community 31]]
-- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Community 92]]
+- 3 edges to [[_COMMUNITY_Community 31]]
+- 3 edges to [[_COMMUNITY_Community 66]]
+- 3 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 3 edges to [[_COMMUNITY_Community 35]]
+- 2 edges to [[_COMMUNITY_Community 48]]
+- 2 edges to [[_COMMUNITY_Community 39]]
+- 2 edges to [[_COMMUNITY_Community 36]]
+- 1 edge to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 1 edge to [[_COMMUNITY_Quiz Player & Hooks]]
+- 1 edge to [[_COMMUNITY_Community 33]]
 
 ## Top bridge nodes
-- [[learningProgress.service.ts]] - degree 35, connects to 10 communities
-- [[getSectionBody()]] - degree 9, connects to 4 communities
-- [[buildCoverageResults()]] - degree 4, connects to 2 communities
-- [[recordLearningActivity()]] - degree 7, connects to 1 community
-- [[updateProgressAfterQuizSubmit()]] - degree 6, connects to 1 community
+- [[useContent.ts]] - degree 35, connects to 12 communities
+- [[Content]] - degree 16, connects to 7 communities
+- [[useTenantContent.ts]] - degree 25, connects to 6 communities
+- [[contentApiBase()]] - degree 5, connects to 3 communities
+- [[useDeleteContent()_1]] - degree 4, connects to 2 communities

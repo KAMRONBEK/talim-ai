@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen-prompt.ts"
 type: "code"
-community: "Community 29"
+community: "Assessments Service"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_29
+  - community/Assessments_Service
 ---
 
 # typesFromStyle()
@@ -18,4 +18,4 @@ tags:
 - [[question-gen-prompt.ts]] - `contains` [EXTRACTED]
 - [[resolveRequestedTypes()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_29
+#graphify/code #graphify/EXTRACTED #community/Assessments_Service

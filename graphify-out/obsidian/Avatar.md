@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/avatar.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Community 39"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Community_39
 ---
 
 # Avatar
@@ -17,4 +17,4 @@ tags:
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Community_39

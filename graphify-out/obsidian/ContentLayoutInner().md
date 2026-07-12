@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Community 33"
+community: "Content Hooks & Locale"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Content_Hooks__Locale
 ---
 
 # ContentLayoutInner()
@@ -23,4 +23,4 @@ tags:
 - [[useSections()]] - `calls` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Content_Hooks__Locale

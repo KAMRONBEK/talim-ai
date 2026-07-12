@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Community 50"
+community: "Community 60"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_60
 ---
 
 # estimateCost()
@@ -16,4 +16,4 @@ tags:
 - [[recordUsage()]] - `calls` [EXTRACTED]
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/Community_60

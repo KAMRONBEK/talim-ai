@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Community 39"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Community_39
 ---
 
 # CardHeader
@@ -23,4 +23,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Community_39

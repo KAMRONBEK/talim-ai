@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Shared Types"
 location: "L747"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Shared_Types
 ---
 
 # TutorRequest
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useTutorRequest.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Shared_Types

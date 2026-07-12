@@ -1,16 +1,15 @@
 ---
 type: community
-cohesion: 0.08
-members: 38
+cohesion: 0.09
+members: 36
 ---
 
 # Transcript Panel
 
-**Cohesion:** 0.08 - loosely connected
-**Members:** 38 nodes
+**Cohesion:** 0.09 - loosely connected
+**Members:** 36 nodes
 
 ## Members
-- [[ContentTranscriptResponse]] - code - packages/types/index.ts
 - [[PodcastPlayer()]] - code - apps/web/components/podcast/PodcastPlayer.tsx
 - [[PodcastPlayer.tsx]] - code - apps/web/components/podcast/PodcastPlayer.tsx
 - [[PodcastPlayerProps]] - code - apps/web/components/podcast/PodcastPlayer.tsx
@@ -46,7 +45,6 @@ members: 38
 - [[podcast-segments.ts]] - code - apps/web/lib/podcast-segments.ts
 - [[rescalePodcastSegments()]] - code - apps/web/lib/podcast-segments.ts
 - [[useTranscript()]] - code - apps/web/hooks/useTranscript.ts
-- [[useTranscript.ts]] - code - apps/web/hooks/useTranscript.ts
 - [[youtube.ts]] - code - apps/web/lib/youtube.ts
 
 ## Live Query (requires Dataview plugin)
@@ -57,19 +55,20 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 8 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 5 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 4 edges to [[_COMMUNITY_Community 37]]
-- 4 edges to [[_COMMUNITY_Admin App UI]]
-- 3 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 3 edges to [[_COMMUNITY_Community 33]]
-- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 1 edge to [[_COMMUNITY_Content API Controllers]]
-- 1 edge to [[_COMMUNITY_Podcast Generation & TTS]]
+- 6 edges to [[_COMMUNITY_Shared Types]]
+- 5 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 4 edges to [[_COMMUNITY_Community 66]]
+- 3 edges to [[_COMMUNITY_Community 31]]
+- 3 edges to [[_COMMUNITY_Community 39]]
+- 3 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Podcast API]]
+- 1 edge to [[_COMMUNITY_Podcast Generation & Prompts]]
+- 1 edge to [[_COMMUNITY_Account & Login UI]]
 
 ## Top bridge nodes
-- [[VideoTutorialViewer.tsx]] - degree 20, connects to 4 communities
+- [[VideoTutorialViewer.tsx]] - degree 20, connects to 5 communities
 - [[TranscriptPanel.tsx]] - degree 17, connects to 4 communities
-- [[PodcastPlayer.tsx]] - degree 15, connects to 3 communities
+- [[PodcastPlayer.tsx]] - degree 15, connects to 4 communities
 - [[PodcastSegment]] - degree 6, connects to 3 communities
-- [[useTranscript.ts]] - degree 6, connects to 2 communities
+- [[VideoTutorialViewer()]] - degree 5, connects to 2 communities

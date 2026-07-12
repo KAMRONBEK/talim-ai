@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/progress.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Assessment API Controllers"
 location: "L207"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Assessment_API_Controllers
 ---
 
 # getEpisodeProgress()
@@ -17,4 +17,4 @@ tags:
 - [[progress.controller.ts]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers

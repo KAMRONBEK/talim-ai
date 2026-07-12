@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Assessment API Controllers"
 location: "L174"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Assessment_API_Controllers
 ---
 
 # createYoutubeContent()
@@ -17,4 +17,4 @@ tags:
 - [[extractYoutubeVideoId()]] - `calls` [EXTRACTED]
 - [[formatContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers

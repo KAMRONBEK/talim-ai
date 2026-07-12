@@ -1,33 +1,33 @@
 ---
 type: community
-cohesion: 0.16
+cohesion: 0.19
 members: 18
 ---
 
 # Community 64
 
-**Cohesion:** 0.16 - loosely connected
+**Cohesion:** 0.19 - loosely connected
 **Members:** 18 nodes
 
 ## Members
-- [[AiUsageContext]] - code - apps/api/src/services/ai.service.ts
-- [[ChatMessageContent]] - code - apps/api/src/services/ai.service.ts
-- [[ChatMessageInput]] - code - apps/api/src/services/ai.service.ts
-- [[TutorGraphIntent]] - code - apps/api/src/lib/tutor-graph-intent.ts
-- [[TutorStreamEvent]] - code - apps/api/src/services/ai.service.ts
-- [[TutorToolOptions]] - code - apps/api/src/services/ai.service.ts
-- [[ai.service.ts]] - code - apps/api/src/services/ai.service.ts
-- [[buildGraphIntentInstruction()]] - code - apps/api/src/services/ai.service.ts
-- [[createDeepSeekChatCompletion()]] - code - apps/api/src/services/ai.service.ts
-- [[createDeepSeekChatStream()]] - code - apps/api/src/services/ai.service.ts
-- [[deepseek]] - code - apps/api/src/services/ai.service.ts
-- [[generateChatCompletion()]] - code - apps/api/src/services/ai.service.ts
-- [[generateJsonCompletion()]] - code - apps/api/src/services/ai.service.ts
-- [[getTutorTools()]] - code - apps/api/src/lib/tutor-tools.ts
-- [[openai_1]] - code - apps/api/src/services/ai.service.ts
-- [[recordCompletionUsage()]] - code - apps/api/src/services/ai.service.ts
-- [[toTextOnlyMessages()]] - code - apps/api/src/services/ai.service.ts
-- [[withTutorToolInstructions()]] - code - apps/api/src/services/ai.service.ts
+- [[LocaleLayout()]] - code - apps/web/app/[locale]/layout.tsx
+- [[RootLayout()]] - code - apps/admin/app/layout.tsx
+- [[display]] - code - packages/ui/fonts/display.ts
+- [[display.ts]] - code - packages/ui/fonts/display.ts
+- [[generateStaticParams()]] - code - apps/web/app/[locale]/layout.tsx
+- [[getMessages()]] - code - apps/api/src/controllers/chat.controller.ts
+- [[grotesk]] - code - packages/ui/fonts/grotesk.ts
+- [[grotesk.ts]] - code - packages/ui/fonts/grotesk.ts
+- [[inter]] - code - packages/ui/fonts/inter.ts
+- [[inter.ts]] - code - packages/ui/fonts/inter.ts
+- [[jakarta]] - code - packages/ui/fonts/jakarta.ts
+- [[jakarta.ts]] - code - packages/ui/fonts/jakarta.ts
+- [[layout.tsx_1]] - code - apps/admin/app/layout.tsx
+- [[layout.tsx_6]] - code - apps/web/app/[locale]/layout.tsx
+- [[metadata]] - code - apps/admin/app/layout.tsx
+- [[metadata_1]] - code - apps/web/app/[locale]/layout.tsx
+- [[newsreader]] - code - packages/ui/fonts/newsreader.ts
+- [[newsreader.ts]] - code - packages/ui/fonts/newsreader.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -37,24 +37,10 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 5 edges to [[_COMMUNITY_Tutor Visual Tools]]
-- 3 edges to [[_COMMUNITY_Community 50]]
-- 2 edges to [[_COMMUNITY_Content API Controllers]]
-- 2 edges to [[_COMMUNITY_Podcast Generation & TTS]]
-- 2 edges to [[_COMMUNITY_Question Generation Engine]]
-- 2 edges to [[_COMMUNITY_Community 41]]
-- 2 edges to [[_COMMUNITY_Community 59]]
-- 2 edges to [[_COMMUNITY_Community 107]]
-- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
+- 3 edges to [[_COMMUNITY_Community 82]]
 - 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
-- 1 edge to [[_COMMUNITY_Community 31]]
-- 1 edge to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Community 55]]
+- 1 edge to [[_COMMUNITY_Assessment API Controllers]]
 
 ## Top bridge nodes
-- [[ai.service.ts]] - degree 36, connects to 13 communities
-- [[generateJsonCompletion()]] - degree 10, connects to 6 communities
-- [[generateChatCompletion()]] - degree 6, connects to 3 communities
-- [[recordCompletionUsage()]] - degree 4, connects to 1 community
-- [[TutorGraphIntent]] - degree 3, connects to 1 community
+- [[getMessages()]] - degree 3, connects to 2 communities
+- [[layout.tsx_6]] - degree 16, connects to 1 community

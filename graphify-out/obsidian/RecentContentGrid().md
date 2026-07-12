@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Community 71"
+community: "Community 31"
 location: "L103"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_71
+  - community/Community_31
 ---
 
 # RecentContentGrid()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_35]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_71
+#graphify/code #graphify/EXTRACTED #community/Community_31

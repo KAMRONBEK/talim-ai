@@ -1,17 +1,18 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "plans · Internationalization (uz / en / ru)"
+community: "Community 44"
 location: "§1.2"
 tags:
   - graphify/concept
-  - graphify/INFERRED
-  - community/plans__Internationalization_uz_/_en_/_ru
+  - graphify/EXTRACTED
+  - community/Community_44
 ---
 
-# YouTube import
+# YouTube Import
 
 ## Connections
-- [[Sectioning]] - `references` [INFERRED]
+- [[Content Ingestion Pipeline (UploadParseSectionChunkEmbed)]] - `conceptually_related_to` [EXTRACTED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/plans__Internationalization_uz_/_en_/_ru
+#graphify/concept #graphify/EXTRACTED #community/Community_44

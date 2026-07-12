@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[Pythagoras QA fixture text]] - document - docs/qa/screenshots/qa-pythagoras.txt
-- [[Pythagorean Theorem QA test PDF]] - paper - docs/qa/screenshots/qa-pythagoras.pdf
+- [[makeQueryClient()_1]] - code - apps/web/lib/queryClient.ts
+- [[queryClient.ts_1]] - code - apps/web/lib/queryClient.ts
 
 ## Live Query (requires Dataview plugin)
 

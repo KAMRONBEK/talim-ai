@@ -1,31 +1,32 @@
 ---
 type: community
-cohesion: 0.13
-members: 16
+cohesion: 0.18
+members: 17
 ---
 
 # Community 75
 
-**Cohesion:** 0.13 - loosely connected
-**Members:** 16 nodes
+**Cohesion:** 0.18 - loosely connected
+**Members:** 17 nodes
 
 ## Members
-- [[@talimtsconfig_3]] - code - packages/types/package.json
-- [[build_4]] - code - packages/types/package.json
-- [[default]] - code - packages/types/package.json
-- [[devDependencies_5]] - code - packages/types/package.json
-- [[exports_1]] - code - packages/types/package.json
-- [[import]] - code - packages/types/package.json
-- [[main_2]] - code - packages/types/package.json
-- [[name_8]] - code - packages/types/package.json
-- [[package.json_8]] - code - packages/types/package.json
-- [[private_8]] - code - packages/types/package.json
-- [[require]] - code - packages/types/package.json
-- [[scripts_4]] - code - packages/types/package.json
-- [[typecheck_4]] - code - packages/types/package.json
-- [[types]] - code - packages/types/package.json
-- [[typescript_4]] - code - packages/types/package.json
-- [[version_7]] - code - packages/types/package.json
+- [[ImportRowInput]] - code - apps/api/src/services/tenant/students.ts
+- [[ProvisionStudentParams]] - code - apps/api/src/services/tenant/students.ts
+- [[ProvisionStudentResult]] - code - apps/api/src/services/tenant/students.ts
+- [[StudentImportRowReport]] - code - apps/api/src/services/tenant/students.ts
+- [[createStudent()_1]] - code - apps/api/src/services/tenant/students.ts
+- [[createStudentSchema]] - code - apps/api/src/services/tenant/shared.ts
+- [[deleteStudent()_1]] - code - apps/api/src/services/tenant/students.ts
+- [[formatStudentRow()]] - code - apps/api/src/services/tenant/shared.ts
+- [[generateImportUsername()]] - code - apps/api/src/services/tenant/students.ts
+- [[importStudents()_1]] - code - apps/api/src/services/tenant/students.ts
+- [[normalizeImportInput()]] - code - apps/api/src/services/tenant/students.ts
+- [[parseCsv()]] - code - apps/api/src/services/tenant/students.ts
+- [[patchStudent()_1]] - code - apps/api/src/services/tenant/students.ts
+- [[patchStudentSchema]] - code - apps/api/src/services/tenant/shared.ts
+- [[provisionStudent()]] - code - apps/api/src/services/tenant/students.ts
+- [[resetStudentPassword()_1]] - code - apps/api/src/services/tenant/students.ts
+- [[students.ts]] - code - apps/api/src/services/tenant/students.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -33,3 +34,16 @@ members: 16
 TABLE source_file, type FROM #community/Community_75
 SORT file.name ASC
 ```
+
+## Connections to other communities
+- 7 edges to [[_COMMUNITY_Admin Tenants API]]
+- 5 edges to [[_COMMUNITY_Community 67]]
+- 3 edges to [[_COMMUNITY_Flashcards API]]
+- 2 edges to [[_COMMUNITY_Learning Coverage & Badges]]
+
+## Top bridge nodes
+- [[students.ts]] - degree 27, connects to 4 communities
+- [[formatStudentRow()]] - degree 6, connects to 1 community
+- [[provisionStudent()]] - degree 5, connects to 1 community
+- [[createStudent()_1]] - degree 3, connects to 1 community
+- [[patchStudent()_1]] - degree 3, connects to 1 community

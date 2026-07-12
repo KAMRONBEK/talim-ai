@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Community 63"
+community: "Assessment API Controllers"
 location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_63
+  - community/Assessment_API_Controllers
 ---
 
 # listAssessments()
@@ -15,4 +15,4 @@ tags:
 - [[assessment.controller.ts]] - `contains` [EXTRACTED]
 - [[requireTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_63
+#graphify/code #graphify/EXTRACTED #community/Assessment_API_Controllers

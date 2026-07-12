@@ -1,36 +1,38 @@
 ---
 type: community
-cohesion: 0.11
-members: 21
+cohesion: 0.13
+members: 23
 ---
 
 # Community 51
 
-**Cohesion:** 0.11 - loosely connected
-**Members:** 21 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 23 nodes
 
 ## Members
-- [[ALL_CONTENT_TYPES]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[ALL_ROLES]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[AdminAnalyticsSummary]] - code - packages/types/index.ts
-- [[AdminChunkSample]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[AdminContentByTypeResponse]] - code - packages/types/index.ts
-- [[AdminFunnelResponse]] - code - packages/types/index.ts
-- [[AdminMrrResponse]] - code - packages/types/index.ts
-- [[AdminSpendByModelResponse]] - code - packages/types/index.ts
-- [[AdminTopOrgsResponse]] - code - packages/types/index.ts
-- [[AdminUserGrowthResponse]] - code - packages/types/index.ts
-- [[AdminUsersByRoleResponse]] - code - packages/types/index.ts
-- [[PLAN_MONTHLY_PRICE_USD]] - code - apps/api/src/config/usage-pricing.ts
-- [[TOKEN_PRICING_PER_MILLION]] - code - apps/api/src/config/usage-pricing.ts
-- [[analytics.service.ts]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[analyticsMrr()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[analyticsSummary()]] - code - apps/api/src/controllers/admin/analytics.controller.ts
-- [[computeMrr()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[daysAgo()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[getAnalyticsSummary()]] - code - apps/api/src/services/admin/analytics.service.ts
-- [[planMonthlyPriceUsd()]] - code - apps/api/src/config/usage-pricing.ts
-- [[usage-pricing.ts]] - code - apps/api/src/config/usage-pricing.ts
+- [[.loop()]] - code - apps/web/lib/jobStream.ts
+- [[.onConnected()]] - code - apps/web/lib/jobStream.ts
+- [[.setConnected()]] - code - apps/web/lib/jobStream.ts
+- [[.start()]] - code - apps/web/lib/jobStream.ts
+- [[.stop()]] - code - apps/web/lib/jobStream.ts
+- [[.subscribe()_1]] - code - apps/web/lib/jobStream.ts
+- [[JobStream]] - code - apps/web/lib/jobStream.ts
+- [[JobStream()]] - code - apps/web/components/providers.tsx
+- [[Listener]] - code - apps/web/lib/jobStream.ts
+- [[LocaleSync()]] - code - apps/web/components/locale-sync.tsx
+- [[ManimVideo()]] - code - apps/web/components/chat/ManimVideo.tsx
+- [[ManimVideo.tsx]] - code - apps/web/components/chat/ManimVideo.tsx
+- [[Providers()_1]] - code - apps/web/components/providers.tsx
+- [[SessionSync()]] - code - apps/web/components/session-sync.tsx
+- [[applyEvent()]] - code - apps/web/hooks/useJobEvents.ts
+- [[getApiBaseUrl()]] - code - apps/web/lib/api.ts
+- [[jobStream.ts]] - code - apps/web/lib/jobStream.ts
+- [[locale-sync.tsx]] - code - apps/web/components/locale-sync.tsx
+- [[providers.tsx_1]] - code - apps/web/components/providers.tsx
+- [[session-sync.tsx]] - code - apps/web/components/session-sync.tsx
+- [[useJobEvents()]] - code - apps/web/hooks/useJobEvents.ts
+- [[useJobEvents.ts]] - code - apps/web/hooks/useJobEvents.ts
+- [[useLocaleSync()]] - code - apps/web/hooks/useLocaleContent.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -40,16 +42,21 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 11 edges to [[_COMMUNITY_Community 56]]
-- 9 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 8 edges to [[_COMMUNITY_Community 79]]
-- 3 edges to [[_COMMUNITY_Community 50]]
-- 2 edges to [[_COMMUNITY_Admin Content & Audit]]
-- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
+- 5 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 4 edges to [[_COMMUNITY_Shared Types]]
+- 3 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 2 edges to [[_COMMUNITY_Community 43]]
+- 2 edges to [[_COMMUNITY_Community 70]]
+- 2 edges to [[_COMMUNITY_Community 91]]
+- 1 edge to [[_COMMUNITY_Community 41]]
+- 1 edge to [[_COMMUNITY_Content Access & Mastery UI]]
+- 1 edge to [[_COMMUNITY_Community 114]]
+- 1 edge to [[_COMMUNITY_Community 105]]
+- 1 edge to [[_COMMUNITY_Community 61]]
 
 ## Top bridge nodes
-- [[analytics.service.ts]] - degree 29, connects to 5 communities
-- [[AdminAnalyticsSummary]] - degree 3, connects to 2 communities
-- [[AdminContentByTypeResponse]] - degree 3, connects to 2 communities
-- [[AdminFunnelResponse]] - degree 3, connects to 2 communities
-- [[AdminMrrResponse]] - degree 3, connects to 2 communities
+- [[useJobEvents.ts]] - degree 9, connects to 3 communities
+- [[getApiBaseUrl()]] - degree 8, connects to 3 communities
+- [[ManimVideo.tsx]] - degree 5, connects to 3 communities
+- [[jobStream.ts]] - degree 6, connects to 2 communities
+- [[ManimVideo()]] - degree 4, connects to 2 communities

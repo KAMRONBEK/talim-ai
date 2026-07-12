@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 49"
+community: "Flashcards API"
 location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Flashcards_API
 ---
 
 # PlanCode
@@ -26,4 +26,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-XCUT-06 i18n — every surface localized, key symmetry, no leaks]] - document - docs/qa/user-stories-expansion.md
+- [[US-OWNER-11 Billing & seat display + inactive-subscription banner]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

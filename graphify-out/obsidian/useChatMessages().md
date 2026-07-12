@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useChat.ts"
 type: "code"
-community: "Shared Types & Chat Hooks"
+community: "Community 34"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Chat_Hooks
+  - community/Community_34
 ---
 
 # useChatMessages()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useChat.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Chat_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_34

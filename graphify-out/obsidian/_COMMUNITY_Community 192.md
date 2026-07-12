@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[docker-compose.registry.yml (GHCR prebuilt images)]] - document - docker-compose.registry.yml
+- [[US-XCUT-12 Quota matrix — feature × plan × role → 402413 contract]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

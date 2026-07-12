@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Community 117"
+community: "Flashcards Generation & Jobs"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_117
+  - community/Flashcards_Generation__Jobs
 ---
 
 # LocalStorageService
@@ -22,4 +22,4 @@ tags:
 - [[index.ts]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_117
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

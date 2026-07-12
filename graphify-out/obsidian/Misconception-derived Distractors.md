@@ -1,17 +1,18 @@
 ---
 source_file: "docs/plans/question-engine.md"
-type: "rationale"
-community: "Community 78"
+type: "concept"
+community: "Community 50"
 location: "§2"
 tags:
-  - graphify/rationale
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_78
+  - community/Community_50
 ---
 
-# Misconception-derived Distractors
+# Misconception-Derived Distractors
 
 ## Connections
-- [[Generation Pipeline (overgenerate → rule filter → balanced shuffle)]] - `references` [EXTRACTED]
+- [[Question Engine Rework Design]] - `references` [EXTRACTED]
+- [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_78
+#graphify/concept #graphify/EXTRACTED #community/Community_50

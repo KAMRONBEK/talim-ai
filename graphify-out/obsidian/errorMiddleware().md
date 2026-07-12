@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Flashcards Generation & Jobs"
 location: "L55"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Flashcards_Generation__Jobs
 ---
 
 # errorMiddleware()
@@ -15,4 +15,4 @@ tags:
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Generation__Jobs

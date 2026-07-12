@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L143"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # LearnerDashboardPage()
@@ -20,4 +20,4 @@ tags:
 - [[useLearnerMaterials()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Account__Settings_UI
+#graphify/code #graphify/INFERRED #community/Community_58

@@ -1,24 +1,25 @@
 ---
 type: community
-cohesion: 0.25
-members: 9
+cohesion: 0.27
+members: 10
 ---
 
 # Community 100
 
-**Cohesion:** 0.25 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.27 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[ACCENT_HEX]] - code - apps/web/lib/deck-theme.ts
-- [[ACCENT_TO_PALETTE]] - code - apps/web/lib/deck-theme.ts
-- [[DeckAccent]] - code - packages/types/deck.ts
-- [[DeckIcon]] - code - packages/types/deck.ts
-- [[DeckPalette]] - code - apps/web/lib/deck-theme.ts
-- [[DeckSlide]] - code - packages/types/deck.ts
-- [[ICONS]] - code - apps/web/lib/deck-theme.ts
-- [[PaletteName]] - code - apps/web/lib/deck-theme.ts
-- [[deck-theme.ts]] - code - apps/web/lib/deck-theme.ts
+- [[Build & Push GHCR Job]] - code - .github/workflows/deploy.yml
+- [[Deploy to VPS GitHub Actions Workflow]] - code - .github/workflows/deploy.yml
+- [[Detect Changed Apps Job]] - code - .github/workflows/deploy.yml
+- [[Manual PaymentActivation Model]] - concept - docs/PLATFORM.md
+- [[Production Deployment Topology (nginx + Docker + GHCR)]] - concept - docs/PLATFORM.md
+- [[Talim AI Platform]] - concept - docs/PLATFORM.md
+- [[Talim AI Platform Guide]] - document - docs/PLATFORM.md
+- [[Three-app Monorepo Architecture]] - concept - docs/PLATFORM.md
+- [[UserRole Model (ADMIN  TENANT_OWNER  TENANT_LEARNER  INDIVIDUAL)]] - concept - docs/PLATFORM.md
+- [[VPS Pull & Restart Job]] - code - .github/workflows/deploy.yml
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,14 +29,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 4 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 3 edges to [[_COMMUNITY_Slide Deck Prompts]]
-- 3 edges to [[_COMMUNITY_Community 45]]
-- 1 edge to [[_COMMUNITY_Community 33]]
+- 2 edges to [[_COMMUNITY_Community 76]]
+- 2 edges to [[_COMMUNITY_Community 44]]
 
 ## Top bridge nodes
-- [[DeckAccent]] - degree 6, connects to 4 communities
-- [[DeckSlide]] - degree 6, connects to 4 communities
-- [[deck-theme.ts]] - degree 14, connects to 3 communities
-- [[DeckIcon]] - degree 3, connects to 2 communities
+- [[Talim AI Platform Guide]] - degree 8, connects to 2 communities
+- [[VPS Pull & Restart Job]] - degree 3, connects to 1 community

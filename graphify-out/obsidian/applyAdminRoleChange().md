@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/adminUserRole.service.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Community 71"
 location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Community_71
 ---
 
 # applyAdminRoleChange()
@@ -22,4 +22,4 @@ tags:
 - [[tutorRequest.service.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Community_71

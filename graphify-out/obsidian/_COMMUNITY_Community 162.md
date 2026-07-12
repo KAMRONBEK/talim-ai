@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 162
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[US-ADMIN-01 Approve a tutor request → org + ACTIVE subscription + seat limit]] - document - docs/qa/user-stories-expansion.md
+- [[config_5]] - code - apps/web/postcss.config.mjs
+- [[postcss.config.mjs_1]] - code - apps/web/postcss.config.mjs
 
 ## Live Query (requires Dataview plugin)
 

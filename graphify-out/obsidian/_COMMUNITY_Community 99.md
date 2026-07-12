@@ -1,24 +1,25 @@
 ---
 type: community
-cohesion: 0.28
-members: 9
+cohesion: 0.31
+members: 10
 ---
 
 # Community 99
 
-**Cohesion:** 0.28 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.31 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[FullscreenDoc_1]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
-- [[FullscreenEl_1]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
-- [[NarratedVideoLabels]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
-- [[NarratedVideoPlayer()]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
-- [[NarratedVideoPlayer.tsx]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
-- [[TeacherMascot()]] - code - apps/web/components/deck/TeacherMascot.tsx
-- [[TeacherMascot.tsx]] - code - apps/web/components/deck/TeacherMascot.tsx
-- [[VideoSegment]] - code - packages/types/index.ts
-- [[formatTime()]] - code - apps/web/components/deck/NarratedVideoPlayer.tsx
+- [[getMaterials()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[getProgress()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[getSummary()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[learner.controller.ts]] - code - apps/api/src/controllers/learner.controller.ts
+- [[listMessages()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[markMessageRead()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[readLocale()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[replyToMessage()]] - code - apps/api/src/controllers/learner.controller.ts
+- [[requireTenant()_1]] - code - apps/api/src/controllers/learner.controller.ts
+- [[unreadMessageCount()]] - code - apps/api/src/controllers/learner.controller.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -28,12 +29,16 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 2 edges to [[_COMMUNITY_Community 40]]
-- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 1 edge to [[_COMMUNITY_Content API Controllers]]
+- 3 edges to [[_COMMUNITY_Assessment API Controllers]]
+- 3 edges to [[_COMMUNITY_Admin & Events Controllers]]
+- 2 edges to [[_COMMUNITY_Flashcards API]]
+- 2 edges to [[_COMMUNITY_Community 105]]
+- 1 edge to [[_COMMUNITY_Podcast API]]
+- 1 edge to [[_COMMUNITY_Community 67]]
+- 1 edge to [[_COMMUNITY_Shared Types]]
 
 ## Top bridge nodes
-- [[NarratedVideoPlayer.tsx]] - degree 13, connects to 3 communities
-- [[VideoSegment]] - degree 3, connects to 2 communities
-- [[NarratedVideoPlayer()]] - degree 3, connects to 1 community
+- [[learner.controller.ts]] - degree 19, connects to 7 communities
+- [[markMessageRead()]] - degree 3, connects to 1 community
+- [[readLocale()]] - degree 3, connects to 1 community
+- [[replyToMessage()]] - degree 3, connects to 1 community

@@ -10,13 +10,13 @@ members: 7
 **Members:** 7 nodes
 
 ## Members
-- [[AssessmentQuestionStyle]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[QuestionStyle]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[assessment-prompt.ts]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[buildAssessmentPrompt()]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[normalizeAssessmentQuestionType()]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[normalizeQuestionType()]] - code - apps/api/src/lib/assessment-prompt.ts
-- [[styleInstruction()]] - code - apps/api/src/lib/assessment-prompt.ts
+- [[AuthState]] - code - apps/admin/store/useAuthStore.ts
+- [[AuthState_1]] - code - apps/web/store/useAuthStore.ts
+- [[User]] - code - packages/types/index.ts
+- [[useAuthStore]] - code - apps/admin/store/useAuthStore.ts
+- [[useAuthStore_1]] - code - apps/web/store/useAuthStore.ts
+- [[useAuthStore.ts]] - code - apps/admin/store/useAuthStore.ts
+- [[useAuthStore.ts_1]] - code - apps/web/store/useAuthStore.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -26,13 +26,15 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 2 edges to [[_COMMUNITY_Community 29]]
-- 2 edges to [[_COMMUNITY_Community 31]]
-- 2 edges to [[_COMMUNITY_Question Generation Engine]]
+- 3 edges to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Community 48]]
+- 1 edge to [[_COMMUNITY_Community 51]]
+- 1 edge to [[_COMMUNITY_Account & Login UI]]
+- 1 edge to [[_COMMUNITY_Community 33]]
+- 1 edge to [[_COMMUNITY_Admin Dashboard UI]]
+- 1 edge to [[_COMMUNITY_Content Hooks & Locale]]
 
 ## Top bridge nodes
-- [[assessment-prompt.ts]] - degree 10, connects to 4 communities
-- [[QuestionStyle]] - degree 3, connects to 2 communities
-- [[AssessmentQuestionStyle]] - degree 2, connects to 1 community
-- [[normalizeAssessmentQuestionType()]] - degree 2, connects to 1 community
+- [[User]] - degree 10, connects to 7 communities
+- [[useAuthStore.ts]] - degree 4, connects to 1 community
+- [[useAuthStore.ts_1]] - degree 4, connects to 1 community

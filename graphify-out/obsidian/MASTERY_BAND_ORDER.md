@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Community 43"
+community: "Community 57"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_43
+  - community/Community_57
 ---
 
 # MASTERY_BAND_ORDER
@@ -15,4 +15,4 @@ tags:
 - [[mastery.ts]] - `contains` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_43
+#graphify/code #graphify/EXTRACTED #community/Community_57

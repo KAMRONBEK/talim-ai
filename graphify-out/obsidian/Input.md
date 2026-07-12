@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Account & Login UI"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Account__Login_UI
 ---
 
 # Input
@@ -40,4 +40,4 @@ tags:
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

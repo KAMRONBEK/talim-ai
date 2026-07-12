@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 159
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[next-env.d.ts]] - code - apps/admin/next-env.d.ts
+- [[FalkorDB Export]] - concept - .claude/skills/graphify/references/exports.md
+- [[Neo4j Export]] - concept - .claude/skills/graphify/references/exports.md
 
 ## Live Query (requires Dataview plugin)
 

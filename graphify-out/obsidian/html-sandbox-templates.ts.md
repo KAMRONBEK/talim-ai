@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/html-sandbox-templates.ts"
 type: "code"
-community: "Community 67"
+community: "Community 70"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_67
+  - community/Community_70
 ---
 
 # html-sandbox-templates.ts
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[num()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_67
+#graphify/code #graphify/EXTRACTED #community/Community_70

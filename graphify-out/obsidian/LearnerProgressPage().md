@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/progress/page.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L31"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # LearnerProgressPage()
@@ -18,4 +18,4 @@ tags:
 - [[useLearnerProgress()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Account__Settings_UI
+#graphify/code #graphify/INFERRED #community/Community_58

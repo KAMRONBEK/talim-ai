@@ -1,19 +1,20 @@
 ---
 type: community
-cohesion: 0.50
-members: 4
+cohesion: 0.40
+members: 5
 ---
 
 # Community 134
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 4 nodes
+**Cohesion:** 0.40 - moderately connected
+**Members:** 5 nodes
 
 ## Members
-- [[PATH]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[cursor-talim-vps-mcp.sh]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[cursor-talim-vps-mcp.sh script]] - code - scripts/cursor-talim-vps-mcp.sh
-- [[resolve_doppler()]] - code - scripts/cursor-talim-vps-mcp.sh
+- [[_genpdf.js]] - code - docs/qa/screenshots/_genpdf.js
+- [[esc()]] - code - docs/qa/screenshots/_genpdf.js
+- [[fs]] - code - docs/qa/screenshots/_genpdf.js
+- [[lines]] - code - docs/qa/screenshots/_genpdf.js
+- [[objs]] - code - docs/qa/screenshots/_genpdf.js
 
 ## Live Query (requires Dataview plugin)
 

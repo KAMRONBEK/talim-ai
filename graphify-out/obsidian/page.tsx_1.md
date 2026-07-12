@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/content/page.tsx"
 type: "code"
-community: "Community 87"
+community: "Community 94"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_87
+  - community/Community_94
 ---
 
 # page.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useDeleteContent()]] - `imports` [EXTRACTED]
 - [[useRetryContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_87
+#graphify/code #graphify/EXTRACTED #community/Community_94

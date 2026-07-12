@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 54"
+community: "Community 55"
 location: "L128"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_54
+  - community/Community_55
 ---
 
 # AdminSubscriptionListItem
@@ -18,4 +18,4 @@ tags:
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_54
+#graphify/code #graphify/EXTRACTED #community/Community_55

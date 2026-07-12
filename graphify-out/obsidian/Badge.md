@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 80"
+community: "Learning Coverage & Badges"
 location: "L438"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_80
+  - community/Learning_Coverage__Badges
 ---
 
 # Badge
@@ -15,4 +15,4 @@ tags:
 - [[badges.service.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_80
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

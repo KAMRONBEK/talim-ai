@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/quota.middleware.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Admin & Events Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Admin__Events_Controllers
 ---
 
 # quota.middleware.ts
@@ -27,4 +27,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers

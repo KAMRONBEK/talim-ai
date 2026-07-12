@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-geogebra.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "Community 41"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/Community_41
 ---
 
 # geogebraSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-geogebra.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Community_41

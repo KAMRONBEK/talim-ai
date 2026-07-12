@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "concept"
-community: "Community 112"
+community: "Community 117"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_112
+  - community/Community_117
 ---
 
 # First Platform Admin Creation
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[VPS Docker Deployment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_112
+#graphify/concept #graphify/EXTRACTED #community/Community_117

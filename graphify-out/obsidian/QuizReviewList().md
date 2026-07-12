@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Content Access & Mastery UI"
 location: "L67"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Content_Access__Mastery_UI
 ---
 
 # QuizReviewList()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_40]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

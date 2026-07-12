@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSections.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Community 34"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Community_34
 ---
 
 # useSection()
@@ -17,4 +17,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useSections.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Community_34

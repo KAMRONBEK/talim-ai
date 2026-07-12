@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/app/icon.svg"
 type: "image"
-community: "Community 126"
+community: "Community 129"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Community_126
+  - community/Community_129
 ---
 
 # Talim AI App Icon
@@ -16,4 +16,4 @@ tags:
 - [[Violet-to-Marigold Gradient]] - `references` [EXTRACTED]
 - [[Web App Brand Favicon]] - `conceptually_related_to` [INFERRED]
 
-#graphify/image #graphify/EXTRACTED #community/Community_126
+#graphify/image #graphify/EXTRACTED #community/Community_129

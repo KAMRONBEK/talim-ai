@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[makeQueryClient()]] - code - apps/admin/lib/queryClient.ts
-- [[queryClient.ts]] - code - apps/admin/lib/queryClient.ts
+- [[RootPage()]] - code - apps/admin/app/page.tsx
+- [[page.tsx_12]] - code - apps/admin/app/page.tsx
 
 ## Live Query (requires Dataview plugin)
 

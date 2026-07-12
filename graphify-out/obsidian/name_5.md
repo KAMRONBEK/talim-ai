@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/package.json"
 type: "code"
-community: "Community 133"
+community: "Community 137"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_133
+  - community/Community_137
 ---
 
 # name
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_133
+#graphify/code #graphify/EXTRACTED #community/Community_137

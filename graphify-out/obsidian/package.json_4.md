@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/eslint/package.json"
 type: "code"
-community: "Community 128"
+community: "Community 132"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_128
+  - community/Community_132
 ---
 
 # package.json
@@ -17,4 +17,4 @@ tags:
 - [[private_4]] - `contains` [EXTRACTED]
 - [[version_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_128
+#graphify/code #graphify/EXTRACTED #community/Community_132

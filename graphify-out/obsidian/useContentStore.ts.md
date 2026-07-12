@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useContentStore.ts"
 type: "code"
-community: "Community 35"
+community: "Community 59"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Community_59
 ---
 
 # useContentStore.ts
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useContentStore]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Community_59

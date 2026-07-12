@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Community 37"
+community: "Community 66"
 location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_37
+  - community/Community_66
 ---
 
 # ContentStage()
@@ -21,4 +21,4 @@ tags:
 - [[usePodcast()]] - `calls` [EXTRACTED]
 - [[useQuizHistory()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_37
+#graphify/code #graphify/EXTRACTED #community/Community_66

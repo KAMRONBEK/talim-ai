@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "Community 36"
+community: "Community 37"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_36
+  - community/Community_37
 ---
 
 # ensureEndOfContent()
@@ -16,4 +16,4 @@ tags:
 - [[renderManualTextLayer()]] - `calls` [EXTRACTED]
 - [[renderTextLayer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_36
+#graphify/code #graphify/EXTRACTED #community/Community_37

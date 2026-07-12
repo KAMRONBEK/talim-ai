@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant.service.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Community 67"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Community_67
 ---
 
 # tenant.service.ts
@@ -26,4 +26,4 @@ tags:
 - [[tenant.controller.ts]] - `imports_from` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Community_67

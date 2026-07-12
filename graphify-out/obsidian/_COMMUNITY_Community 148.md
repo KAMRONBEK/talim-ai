@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[RootLayout()_1]] - code - apps/web/app/layout.tsx
-- [[layout.tsx_7]] - code - apps/web/app/layout.tsx
+- [[Providers()]] - code - apps/admin/components/providers.tsx
+- [[providers.tsx]] - code - apps/admin/components/providers.tsx
 
 ## Live Query (requires Dataview plugin)
 

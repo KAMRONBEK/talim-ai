@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Community 49"
+community: "Community 80"
 location: "L195"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Community_80
 ---
 
 # plansForAudience()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Community_80

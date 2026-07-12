@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "concept"
-community: "Community 129"
+community: "Community 133"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_129
+  - community/Community_133
 ---
 
 # Assessment publish / assign flow (DRAFT vs PUBLISHED, attempts, results)
@@ -16,4 +16,4 @@ tags:
 - [[US-OWNER-08 Compose, publish, assign & review a WRITTEN assessment]] - `conceptually_related_to` [INFERRED]
 - [[US-OWNER-09 GAME assessment — timer, speed points, streaks, leaderboard]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_129
+#graphify/concept #graphify/INFERRED #community/Community_133

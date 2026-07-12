@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Community 50"
+community: "Community 60"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_60
 ---
 
 # estimateTokenCostUsd()
@@ -17,4 +17,4 @@ tags:
 - [[usage-pricing.ts]] - `contains` [EXTRACTED]
 - [[usage.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/Community_60

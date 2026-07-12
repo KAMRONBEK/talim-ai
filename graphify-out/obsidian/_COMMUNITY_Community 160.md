@@ -1,16 +1,17 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 2
 ---
 
 # Community 160
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 2 nodes
 
 ## Members
-- [[QA with Playwright MCP]] - document - docs/QA.md
+- [[doppler-docker.sh]] - code - scripts/doppler-docker.sh
+- [[doppler-docker.sh script]] - code - scripts/doppler-docker.sh
 
 ## Live Query (requires Dataview plugin)
 

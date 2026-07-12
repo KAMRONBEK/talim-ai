@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "Env Config & Job Events"
+community: "Community 91"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Job_Events
+  - community/Community_91
 ---
 
 # jobEvents.service.ts
@@ -27,4 +27,4 @@ tags:
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Community_91

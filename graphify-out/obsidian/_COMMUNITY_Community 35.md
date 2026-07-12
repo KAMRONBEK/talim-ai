@@ -1,42 +1,42 @@
 ---
 type: community
-cohesion: 0.15
+cohesion: 0.13
 members: 27
 ---
 
 # Community 35
 
-**Cohesion:** 0.15 - loosely connected
+**Cohesion:** 0.13 - loosely connected
 **Members:** 27 nodes
 
 ## Members
-- [[AssignContentPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[Content]] - code - packages/types/index.ts
-- [[ContentState]] - code - apps/web/store/useContentStore.ts
-- [[ContentStatusGateProps]] - code - apps/web/components/content/content-status-gate.tsx
-- [[JobStreamState]] - code - apps/web/store/useJobStreamStore.ts
-- [[LIST_KEYS]] - code - apps/web/lib/content-cache.ts
-- [[ListSnapshot]] - code - apps/web/lib/content-cache.ts
-- [[content-cache.ts]] - code - apps/web/lib/content-cache.ts
-- [[contentApiBase()]] - code - apps/web/hooks/useContent.ts
-- [[invalidateContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[listHasProcessing()]] - code - apps/web/lib/content-cache.ts
-- [[page.tsx_22]] - code - apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx
-- [[prependContentToLists()]] - code - apps/web/lib/content-cache.ts
-- [[removeContentFromLists()]] - code - apps/web/lib/content-cache.ts
-- [[restoreContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[snapshotContentLists()]] - code - apps/web/lib/content-cache.ts
-- [[useContent()]] - code - apps/web/hooks/useContent.ts
-- [[useContent.ts]] - code - apps/web/hooks/useContent.ts
-- [[useContentStore]] - code - apps/web/store/useContentStore.ts
-- [[useContentStore.ts]] - code - apps/web/store/useContentStore.ts
-- [[useDeleteTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useJobStreamStore]] - code - apps/web/store/useJobStreamStore.ts
-- [[useJobStreamStore.ts]] - code - apps/web/store/useJobStreamStore.ts
-- [[useRetryContent()_1]] - code - apps/web/hooks/useContent.ts
-- [[useRetryTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useTenantContent()]] - code - apps/web/hooks/useTenantContent.ts
-- [[useTenantContent.ts]] - code - apps/web/hooks/useTenantContent.ts
+- [[DashboardLayout()]] - code - apps/web/app/[locale]/dashboard/layout.tsx
+- [[DashboardPage()]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[DashboardSearchBar()]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
+- [[DashboardSearchContext]] - code - apps/web/contexts/dashboard-search.tsx
+- [[DashboardShell()]] - code - apps/web/contexts/dashboard-search.tsx
+- [[DashboardSidebar()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[DashboardSidebarBody()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[DashboardSidebarSheet()]] - code - apps/web/components/layout/dashboard-sidebar.tsx
+- [[RoleGuard()]] - code - apps/web/components/role-guard.tsx
+- [[TenantLayout()]] - code - apps/web/app/[locale]/(tenant)/layout.tsx
+- [[TenantSearchContext]] - code - apps/web/contexts/tenant-shell.tsx
+- [[TenantShell()]] - code - apps/web/contexts/tenant-shell.tsx
+- [[TenantSidebar()]] - code - apps/web/components/layout/tenant-sidebar.tsx
+- [[TenantSidebarSheet()]] - code - apps/web/components/layout/tenant-sidebar.tsx
+- [[dashboard-search-bar.tsx]] - code - apps/web/components/dashboard/dashboard-search-bar.tsx
+- [[dashboard-search.tsx]] - code - apps/web/contexts/dashboard-search.tsx
+- [[getFirstName()]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[layout.tsx_5]] - code - apps/web/app/[locale]/dashboard/layout.tsx
+- [[layout.tsx_3]] - code - apps/web/app/[locale]/(tenant)/layout.tsx
+- [[page.tsx_35]] - code - apps/web/app/[locale]/dashboard/page.tsx
+- [[role-guard.tsx]] - code - apps/web/components/role-guard.tsx
+- [[tenant-shell.tsx]] - code - apps/web/contexts/tenant-shell.tsx
+- [[useAuthHydrated()_1]] - code - apps/web/components/role-guard.tsx
+- [[useContents()]] - code - apps/web/hooks/useContent.ts
+- [[useDashboardSearch()]] - code - apps/web/contexts/dashboard-search.tsx
+- [[useSidebarSheet()]] - code - apps/web/hooks/useSidebarSheet.ts
+- [[useSidebarSheet.ts]] - code - apps/web/hooks/useSidebarSheet.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -46,29 +46,25 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Community 40]]
-- 11 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 9 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
-- 8 edges to [[_COMMUNITY_Community 53]]
-- 7 edges to [[_COMMUNITY_Community 39]]
-- 6 edges to [[_COMMUNITY_Community 38]]
-- 6 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 5 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 4 edges to [[_COMMUNITY_Community 33]]
-- 4 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 4 edges to [[_COMMUNITY_Community 71]]
-- 3 edges to [[_COMMUNITY_Account & Settings UI]]
-- 3 edges to [[_COMMUNITY_Community 52]]
-- 2 edges to [[_COMMUNITY_Admin App UI]]
-- 2 edges to [[_COMMUNITY_Community 37]]
-- 1 edge to [[_COMMUNITY_Assessment Pages & Wizard]]
-- 1 edge to [[_COMMUNITY_Community 46]]
-- 1 edge to [[_COMMUNITY_Community 32]]
-- 1 edge to [[_COMMUNITY_Billing UI & Plans]]
+- 9 edges to [[_COMMUNITY_Community 43]]
+- 8 edges to [[_COMMUNITY_Community 33]]
+- 5 edges to [[_COMMUNITY_Community 48]]
+- 5 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 4 edges to [[_COMMUNITY_Community 58]]
+- 3 edges to [[_COMMUNITY_Community 54]]
+- 3 edges to [[_COMMUNITY_Community 59]]
+- 2 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 2 edges to [[_COMMUNITY_Community 31]]
+- 2 edges to [[_COMMUNITY_Account & Login UI]]
+- 2 edges to [[_COMMUNITY_Community 82]]
+- 1 edge to [[_COMMUNITY_Content Hooks & Locale]]
+- 1 edge to [[_COMMUNITY_Community 39]]
+- 1 edge to [[_COMMUNITY_Shared Types]]
+- 1 edge to [[_COMMUNITY_Content Assignment & Hooks]]
 
 ## Top bridge nodes
-- [[useContent.ts]] - degree 35, connects to 12 communities
-- [[Content]] - degree 16, connects to 7 communities
-- [[useJobStreamStore]] - degree 17, connects to 6 communities
-- [[useTenantContent.ts]] - degree 25, connects to 5 communities
-- [[useContent()]] - degree 17, connects to 5 communities
+- [[tenant-shell.tsx]] - degree 17, connects to 4 communities
+- [[useContents()]] - degree 11, connects to 4 communities
+- [[role-guard.tsx]] - degree 10, connects to 4 communities
+- [[page.tsx_35]] - degree 12, connects to 3 communities
+- [[dashboard-search.tsx]] - degree 15, connects to 2 communities

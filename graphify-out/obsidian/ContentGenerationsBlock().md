@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Community 33"
+community: "Content Access & Mastery UI"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Content_Access__Mastery_UI
 ---
 
 # ContentGenerationsBlock()
@@ -17,4 +17,4 @@ tags:
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

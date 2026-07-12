@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Community 50"
+community: "Community 60"
 location: "L205"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_50
+  - community/Community_60
 ---
 
 # OpenRouterFileAnnotation
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_50
+#graphify/code #graphify/EXTRACTED #community/Community_60

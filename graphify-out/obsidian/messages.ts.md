@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/messages.ts"
 type: "code"
-community: "Community 73"
+community: "Community 77"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_73
+  - community/Community_77
 ---
 
 # messages.ts
@@ -33,4 +33,4 @@ tags:
 - [[sendTenantMessage()]] - `contains` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_73
+#graphify/code #graphify/EXTRACTED #community/Community_77

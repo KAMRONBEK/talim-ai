@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-XCUT-07 i18n — number, currency, date, relative-time, plural formatting]] - document - docs/qa/user-stories-expansion.md
+- [[US-XCUT-02 Mobile (≤640) + tablet (768) responsive layouts]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

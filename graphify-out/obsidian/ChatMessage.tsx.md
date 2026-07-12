@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatMessage.tsx"
 type: "code"
-community: "Community 85"
+community: "Community 90"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Community_90
 ---
 
 # ChatMessage.tsx
@@ -22,4 +22,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Community_90

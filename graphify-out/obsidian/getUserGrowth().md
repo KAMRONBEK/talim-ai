@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/analytics.service.ts"
 type: "code"
-community: "Community 56"
+community: "Admin Analytics"
 location: "L96"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_56
+  - community/Admin_Analytics
 ---
 
 # getUserGrowth()
@@ -16,4 +16,4 @@ tags:
 - [[analytics.service.ts]] - `contains` [EXTRACTED]
 - [[analyticsUserGrowth()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_56
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/srs.service.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Flashcards API"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Flashcards_API
 ---
 
 # reviewFlashcard()
@@ -16,4 +16,4 @@ tags:
 - [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[srs.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

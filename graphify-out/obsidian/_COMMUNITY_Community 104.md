@@ -1,23 +1,24 @@
 ---
 type: community
-cohesion: 0.32
-members: 8
+cohesion: 0.31
+members: 9
 ---
 
 # Community 104
 
-**Cohesion:** 0.32 - loosely connected
-**Members:** 8 nodes
+**Cohesion:** 0.31 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[GeneratedPage()]] - code - apps/admin/app/(admin)/generated/page.tsx
-- [[MediaReviewStatus]] - code - packages/types/index.ts
-- [[page.tsx_3]] - code - apps/admin/app/(admin)/generated/page.tsx
-- [[reviewPillClass()]] - code - apps/admin/app/(admin)/generated/page.tsx
-- [[statusPillClass()_1]] - code - apps/admin/app/(admin)/generated/page.tsx
-- [[tabs]] - code - apps/admin/app/(admin)/generated/page.tsx
-- [[useAdminGenerated()]] - code - apps/admin/hooks/useAdmin.ts
-- [[useReviewGenerated()]] - code - apps/admin/hooks/useAdmin.ts
+- [[AdminHeader()]] - code - apps/admin/components/admin-header.tsx
+- [[AdminLayout()]] - code - apps/admin/app/(admin)/layout.tsx
+- [[AdminShell()]] - code - apps/admin/components/admin-shell.tsx
+- [[LogoMark()]] - code - apps/admin/components/logo.tsx
+- [[admin-header.tsx]] - code - apps/admin/components/admin-header.tsx
+- [[admin-shell.tsx]] - code - apps/admin/components/admin-shell.tsx
+- [[layout.tsx]] - code - apps/admin/app/(admin)/layout.tsx
+- [[logo.tsx]] - code - apps/admin/components/logo.tsx
+- [[navItems]] - code - apps/admin/components/admin-header.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,12 +28,10 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Community 79]]
-- 2 edges to [[_COMMUNITY_Admin App UI]]
-- 2 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
+- 2 edges to [[_COMMUNITY_Account & Login UI]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Community 39]]
 
 ## Top bridge nodes
-- [[page.tsx_3]] - degree 11, connects to 3 communities
-- [[useAdminGenerated()]] - degree 3, connects to 1 community
-- [[useReviewGenerated()]] - degree 3, connects to 1 community
-- [[MediaReviewStatus]] - degree 2, connects to 1 community
+- [[logo.tsx]] - degree 5, connects to 3 communities
+- [[LogoMark()]] - degree 4, connects to 2 communities

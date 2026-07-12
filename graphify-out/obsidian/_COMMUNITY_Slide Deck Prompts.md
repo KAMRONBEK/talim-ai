@@ -12,6 +12,7 @@ members: 41
 ## Members
 - [[ACCENTS]] - code - apps/api/src/lib/deck-prompt.ts
 - [[BODY]] - code - apps/api/src/lib/deck-schema.ts
+- [[ContentSlideDeck]] - code - packages/types/deck.ts
 - [[DeckAudience]] - code - packages/types/deck.ts
 - [[Overrides]] - code - apps/api/src/services/slides.service.ts
 - [[ParsedDeck]] - code - apps/api/src/lib/deck-schema.ts
@@ -22,9 +23,8 @@ members: 41
 - [[_slideAssign]] - code - apps/api/src/lib/deck-schema.ts
 - [[accentEnum]] - code - apps/api/src/lib/deck-schema.ts
 - [[audienceTone()]] - code - apps/api/src/lib/deck-prompt.ts
+- [[autoGenerateSectionDecks()]] - code - apps/api/src/services/slides.service.ts
 - [[base]] - code - apps/api/src/lib/deck-schema.ts
-- [[boundContextByTokens()]] - code - apps/api/src/services/rag.service.ts
-- [[buildContext()]] - code - apps/api/src/services/slides.service.ts
 - [[buildDeckUserPrompt()]] - code - apps/api/src/lib/deck-prompt.ts
 - [[bullet]] - code - apps/api/src/lib/deck-schema.ts
 - [[chartSchema]] - code - apps/api/src/lib/deck-schema.ts
@@ -60,26 +60,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 10 edges to [[_COMMUNITY_Content API Controllers]]
-- 6 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 6 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 6 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 5 edges to [[_COMMUNITY_Content Upload & Ingest]]
-- 4 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 3 edges to [[_COMMUNITY_Community 100]]
-- 3 edges to [[_COMMUNITY_Billing & Quota]]
-- 2 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 2 edges to [[_COMMUNITY_Community 64]]
-- 2 edges to [[_COMMUNITY_Community 59]]
-- 2 edges to [[_COMMUNITY_Community 45]]
-- 1 edge to [[_COMMUNITY_Community 31]]
-- 1 edge to [[_COMMUNITY_Podcast Generation & TTS]]
-- 1 edge to [[_COMMUNITY_Community 107]]
-- 1 edge to [[_COMMUNITY_Community 40]]
+- 9 edges to [[_COMMUNITY_Podcast API]]
+- 5 edges to [[_COMMUNITY_Community 32]]
+- 5 edges to [[_COMMUNITY_Shared Types]]
+- 5 edges to [[_COMMUNITY_Admin Tenants API]]
+- 5 edges to [[_COMMUNITY_Community 83]]
+- 3 edges to [[_COMMUNITY_Assessment API Controllers]]
+- 3 edges to [[_COMMUNITY_Community 49]]
+- 3 edges to [[_COMMUNITY_Flashcards Generation & Jobs]]
+- 3 edges to [[_COMMUNITY_Slide Deck UI]]
+- 3 edges to [[_COMMUNITY_Flashcards API]]
+- 3 edges to [[_COMMUNITY_Community 46]]
+- 2 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 2 edges to [[_COMMUNITY_Community 84]]
+- 2 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 2 edges to [[_COMMUNITY_Community 53]]
+- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
 
 ## Top bridge nodes
-- [[slides.service.ts]] - degree 52, connects to 13 communities
-- [[boundContextByTokens()]] - degree 6, connects to 4 communities
+- [[slides.service.ts]] - degree 52, connects to 14 communities
+- [[autoGenerateSectionDecks()]] - degree 9, connects to 4 communities
 - [[DeckAudience]] - degree 6, connects to 4 communities
 - [[deck-schema.ts]] - degree 18, connects to 3 communities
-- [[generateAndStoreSlideDeck()]] - degree 8, connects to 3 communities
+- [[deck-prompt.ts]] - degree 13, connects to 3 communities

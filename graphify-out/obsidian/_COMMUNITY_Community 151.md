@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[Honest Audit Trail (EXTRACTEDINFERREDAMBIGUOUS)]] - rationale - .claude/skills/graphify/SKILL.md
-- [[Honesty Rules]] - rationale - .claude/skills/graphify/SKILL.md
+- [[makeQueryClient()]] - code - apps/admin/lib/queryClient.ts
+- [[queryClient.ts]] - code - apps/admin/lib/queryClient.ts
 
 ## Live Query (requires Dataview plugin)
 

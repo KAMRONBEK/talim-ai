@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Flashcards API"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Flashcards_API
 ---
 
 # PlanFileLimitError
@@ -17,4 +17,4 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Flashcards_API

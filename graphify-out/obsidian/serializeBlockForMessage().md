@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "Community 73"
 location: "L110"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/Community_73
 ---
 
 # serializeBlockForMessage()
@@ -19,4 +19,4 @@ tags:
 - [[tutor-graph-smoke.ts]] - `imports` [EXTRACTED]
 - [[tutor-tools.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Community_73

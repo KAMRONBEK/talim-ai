@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "Community 32"
+community: "Community 33"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Community_33
 ---
 
 # dashboard-sidebar.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useContents()]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Community_33

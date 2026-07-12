@@ -1,17 +1,18 @@
 ---
 type: community
-cohesion: 1.00
-members: 2
+cohesion: 0.67
+members: 3
 ---
 
 # Community 143
 
-**Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Cohesion:** 0.67 - moderately connected
+**Members:** 3 nodes
 
 ## Members
-- [[RootPage()]] - code - apps/admin/app/page.tsx
-- [[page.tsx_12]] - code - apps/admin/app/page.tsx
+- [[next.config.ts_1]] - code - apps/web/next.config.ts
+- [[nextConfig_1]] - code - apps/web/next.config.ts
+- [[withNextIntl]] - code - apps/web/next.config.ts
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 48"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_48
 ---
 
 # auth-routing.ts
@@ -26,4 +26,4 @@ tags:
 - [[role-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_48

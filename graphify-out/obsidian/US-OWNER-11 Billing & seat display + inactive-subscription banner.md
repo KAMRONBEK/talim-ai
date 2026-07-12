@@ -1,13 +1,13 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Community 182"
+community: "Community 186"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_182
+  - community/Community_186
 ---
 
 # US-OWNER-11: Billing & seat display + inactive-subscription banner
 
-#graphify/document #graphify/EXTRACTED #community/Community_182
+#graphify/document #graphify/EXTRACTED #community/Community_186

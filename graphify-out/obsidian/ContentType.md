@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Materials UI"
+community: "Community 31"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Materials_UI
+  - community/Community_31
 ---
 
 # ContentType
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Materials_UI
+#graphify/code #graphify/EXTRACTED #community/Community_31

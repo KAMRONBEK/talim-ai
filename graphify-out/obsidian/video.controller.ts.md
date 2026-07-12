@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "Content API Controllers"
+community: "Podcast API"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controllers
+  - community/Podcast_API
 ---
 
 # video.controller.ts
@@ -45,4 +45,4 @@ tags:
 - [[videoBodySchema]] - `contains` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controllers
+#graphify/code #graphify/EXTRACTED #community/Podcast_API

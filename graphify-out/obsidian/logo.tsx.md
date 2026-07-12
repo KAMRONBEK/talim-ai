@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/logo.tsx"
 type: "code"
-community: "Admin App UI"
+community: "Community 104"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_UI
+  - community/Community_104
 ---
 
 # logo.tsx
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[page.tsx_11]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_UI
+#graphify/code #graphify/EXTRACTED #community/Community_104

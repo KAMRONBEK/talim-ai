@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/onboarding.ts"
 type: "code"
-community: "Account & Settings UI"
+community: "Community 58"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Community_58
 ---
 
 # getOnboardingKey()
@@ -16,4 +16,4 @@ tags:
 - [[isOnboardingPending()]] - `calls` [EXTRACTED]
 - [[onboarding.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Community_58

@@ -1,24 +1,25 @@
 ---
 type: community
-cohesion: 0.22
-members: 9
+cohesion: 0.20
+members: 10
 ---
 
 # Community 102
 
-**Cohesion:** 0.22 - loosely connected
-**Members:** 9 nodes
+**Cohesion:** 0.20 - loosely connected
+**Members:** 10 nodes
 
 ## Members
-- [[$schema_3]] - code - packages/config/tsconfig/node.json
-- [[compilerOptions_5]] - code - packages/config/tsconfig/node.json
-- [[extends_4]] - code - packages/config/tsconfig/node.json
-- [[lib_2]] - code - packages/config/tsconfig/node.json
-- [[module_2]] - code - packages/config/tsconfig/node.json
-- [[moduleResolution_2]] - code - packages/config/tsconfig/node.json
-- [[node.json]] - code - packages/config/tsconfig/node.json
-- [[outDir_1]] - code - packages/config/tsconfig/node.json
-- [[rootDir_1]] - code - packages/config/tsconfig/node.json
+- [[$schema_2]] - code - packages/config/tsconfig/nextjs.json
+- [[compilerOptions_4]] - code - packages/config/tsconfig/nextjs.json
+- [[extends_3]] - code - packages/config/tsconfig/nextjs.json
+- [[jsx]] - code - packages/config/tsconfig/nextjs.json
+- [[lib_1]] - code - packages/config/tsconfig/nextjs.json
+- [[module_1]] - code - packages/config/tsconfig/nextjs.json
+- [[moduleResolution_1]] - code - packages/config/tsconfig/nextjs.json
+- [[nextjs.json]] - code - packages/config/tsconfig/nextjs.json
+- [[noEmit]] - code - packages/config/tsconfig/nextjs.json
+- [[plugins_2]] - code - packages/config/tsconfig/nextjs.json
 
 ## Live Query (requires Dataview plugin)
 

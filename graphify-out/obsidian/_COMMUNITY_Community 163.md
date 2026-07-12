@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-ADMIN-03 Admin user management (role change  reset-pw  delete  patch sub)]] - document - docs/qa/user-stories-expansion.md
+- [[next-env.d.ts]] - code - apps/admin/next-env.d.ts
 
 ## Live Query (requires Dataview plugin)
 

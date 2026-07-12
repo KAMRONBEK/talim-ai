@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/upload.middleware.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Admin & Events Controllers"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Admin__Events_Controllers
 ---
 
 # storage
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[upload.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers

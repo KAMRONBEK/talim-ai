@@ -1,17 +1,20 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Platform Job & Content Pipeline Concepts"
+community: "Community 44"
+location: "§6.7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Platform_Job__Content_Pipeline_Concepts
+  - community/Community_44
 ---
 
 # Background Jobs (Bull/Redis)
 
 ## Connections
-- [[Feature Catalog]] - `references` [EXTRACTED]
-- [[processContent Job (ingest→RAG)]] - `conceptually_related_to` [INFERRED]
+- [[Content Ingestion Pipeline (UploadParseSectionChunkEmbed)]] - `references` [EXTRACTED]
+- [[Podcast Generation (TTS + Synced Transcript)]] - `references` [EXTRACTED]
+- [[Real-Time Class Leaderboard]] - `references` [EXTRACTED]
+- [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Platform_Job__Content_Pipeline_Concepts
+#graphify/concept #graphify/EXTRACTED #community/Community_44

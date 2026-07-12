@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/profile-card.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Account & Login UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Account__Login_UI
 ---
 
 # profile-card.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useAccount.ts]] - `imports_from` [EXTRACTED]
 - [[useUpdateProfile()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Account__Login_UI

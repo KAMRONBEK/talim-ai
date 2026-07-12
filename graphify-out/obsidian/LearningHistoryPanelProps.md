@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/learning-history-panel.tsx"
 type: "code"
-community: "Community 32"
+community: "Content Access & Mastery UI"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Content_Access__Mastery_UI
 ---
 
 # LearningHistoryPanelProps
@@ -15,4 +15,4 @@ tags:
 - [[LearningHistory]] - `references` [EXTRACTED]
 - [[learning-history-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

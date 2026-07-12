@@ -1,30 +1,28 @@
 ---
 type: community
-cohesion: 0.08
-members: 53
+cohesion: 0.09
+members: 50
 ---
 
 # Quiz Player & Hooks
 
-**Cohesion:** 0.08 - loosely connected
-**Members:** 53 nodes
+**Cohesion:** 0.09 - loosely connected
+**Members:** 50 nodes
 
 ## Members
 - [[CHECK_KINDS]] - code - apps/web/components/quiz/QuizCard.tsx
 - [[DropdownClozeInput()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[FillBlankInput()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[FlashcardInput()]] - code - apps/web/components/quiz/question-inputs.tsx
-- [[Input]] - code - packages/ui/components/input.tsx
 - [[LETTERS]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
 - [[LETTERS_1]] - code - apps/web/components/quiz/QuizCard.tsx
-- [[MasteryDeltaList()]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
+- [[MasteryDelta]] - code - packages/types/index.ts
 - [[MatchingInput()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[MultipleSelectInput()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[OrderingInput()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[QuestionType]] - code - packages/types/index.ts
 - [[Quiz]] - code - packages/types/index.ts
 - [[QuizAnswerValue]] - code - apps/web/components/quiz/question-inputs.tsx
-- [[QuizAttempt]] - code - packages/types/index.ts
 - [[QuizCard()]] - code - apps/web/components/quiz/QuizCard.tsx
 - [[QuizCard.tsx]] - code - apps/web/components/quiz/QuizCard.tsx
 - [[QuizCardProps]] - code - apps/web/components/quiz/QuizCard.tsx
@@ -33,7 +31,6 @@ members: 53
 - [[QuizResult()]] - code - apps/web/components/quiz/QuizResult.tsx
 - [[QuizResult.tsx]] - code - apps/web/components/quiz/QuizResult.tsx
 - [[QuizResultProps]] - code - apps/web/components/quiz/QuizResult.tsx
-- [[QuizReviewList()]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
 - [[QuizWithLatestAttempt]] - code - packages/types/index.ts
 - [[RichText()]] - code - apps/web/components/learning/rich-text.tsx
 - [[TYPE_LABEL_KEYS]] - code - apps/web/components/quiz/question-inputs.tsx
@@ -52,13 +49,13 @@ members: 53
 - [[normalizeGeneratedText()]] - code - apps/web/components/learning/rich-text.tsx
 - [[optionRevealClass()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[page.tsx_40]] - code - apps/web/app/[locale]/quiz/[id]/page.tsx
+- [[parseQuestionConfig()]] - code - packages/types/grading.ts
 - [[partialCreditUnits()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[question-inputs.tsx]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[questionRenderKind]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[questionTypeLabelKey()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[revealBorder()]] - code - apps/web/components/quiz/question-inputs.tsx
 - [[rich-text.tsx]] - code - apps/web/components/learning/rich-text.tsx
-- [[useCreateQuiz()]] - code - apps/web/hooks/useQuiz.ts
 - [[useLatestQuizAttempt()]] - code - apps/web/hooks/useQuiz.ts
 - [[useQuiz()]] - code - apps/web/hooks/useQuiz.ts
 - [[useQuiz.ts]] - code - apps/web/hooks/useQuiz.ts
@@ -72,38 +69,32 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 17 edges to [[_COMMUNITY_Admin App UI]]
-- 11 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 10 edges to [[_COMMUNITY_Community 33]]
-- 9 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
-- 8 edges to [[_COMMUNITY_Community 29]]
-- 6 edges to [[_COMMUNITY_Community 35]]
-- 5 edges to [[_COMMUNITY_Community 70]]
-- 3 edges to [[_COMMUNITY_Community 34]]
-- 3 edges to [[_COMMUNITY_Tenant Dashboard & Shell]]
+- 13 edges to [[_COMMUNITY_Community 45]]
+- 11 edges to [[_COMMUNITY_Account & Login UI]]
+- 10 edges to [[_COMMUNITY_Shared Types]]
+- 8 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 6 edges to [[_COMMUNITY_Community 39]]
+- 6 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 5 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
+- 5 edges to [[_COMMUNITY_Content Hooks & Locale]]
+- 4 edges to [[_COMMUNITY_Assessments Service]]
 - 3 edges to [[_COMMUNITY_Community 40]]
-- 3 edges to [[_COMMUNITY_Community 46]]
-- 3 edges to [[_COMMUNITY_Community 43]]
-- 3 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 3 edges to [[_COMMUNITY_Community 39]]
-- 3 edges to [[_COMMUNITY_Community 38]]
-- 2 edges to [[_COMMUNITY_Community 53]]
-- 2 edges to [[_COMMUNITY_Flashcards Study Page]]
-- 2 edges to [[_COMMUNITY_Community 118]]
-- 2 edges to [[_COMMUNITY_Community 37]]
-- 2 edges to [[_COMMUNITY_Community 44]]
-- 1 edge to [[_COMMUNITY_Community 87]]
-- 1 edge to [[_COMMUNITY_Community 54]]
-- 1 edge to [[_COMMUNITY_Community 105]]
-- 1 edge to [[_COMMUNITY_Community 113]]
-- 1 edge to [[_COMMUNITY_Tenant Materials UI]]
-- 1 edge to [[_COMMUNITY_Account & Settings UI]]
-- 1 edge to [[_COMMUNITY_Community 71]]
-- 1 edge to [[_COMMUNITY_Question Generation Engine]]
+- 3 edges to [[_COMMUNITY_Community 57]]
+- 3 edges to [[_COMMUNITY_Community 66]]
+- 3 edges to [[_COMMUNITY_Community 36]]
+- 3 edges to [[_COMMUNITY_Community 34]]
+- 2 edges to [[_COMMUNITY_Community 85]]
+- 2 edges to [[_COMMUNITY_Community 121]]
+- 2 edges to [[_COMMUNITY_Community 84]]
+- 2 edges to [[_COMMUNITY_Slide Deck UI]]
+- 1 edge to [[_COMMUNITY_Community 56]]
+- 1 edge to [[_COMMUNITY_Community 59]]
+- 1 edge to [[_COMMUNITY_Community 82]]
+- 1 edge to [[_COMMUNITY_Quiz Generation Job]]
 
 ## Top bridge nodes
-- [[Input]] - degree 27, connects to 13 communities
 - [[page.tsx_40]] - degree 39, connects to 11 communities
-- [[useQuiz.ts]] - degree 25, connects to 9 communities
-- [[QuizCard.tsx]] - degree 35, connects to 4 communities
+- [[useQuiz.ts]] - degree 25, connects to 7 communities
+- [[QuizCard.tsx]] - degree 35, connects to 5 communities
+- [[MasteryDelta]] - degree 8, connects to 5 communities
 - [[question-inputs.tsx]] - degree 34, connects to 4 communities

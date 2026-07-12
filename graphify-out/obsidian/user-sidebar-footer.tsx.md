@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 33"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_33
 ---
 
 # user-sidebar-footer.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[user-display.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_33

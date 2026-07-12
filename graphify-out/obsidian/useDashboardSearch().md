@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/dashboard-search.tsx"
 type: "code"
-community: "Community 71"
+community: "Community 35"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_71
+  - community/Community_35
 ---
 
 # useDashboardSearch()
@@ -18,4 +18,4 @@ tags:
 - [[dashboard-search.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_35]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_71
+#graphify/code #graphify/EXTRACTED #community/Community_35

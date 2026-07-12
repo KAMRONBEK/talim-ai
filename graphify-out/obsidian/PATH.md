@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/cursor-talim-vps-mcp.sh"
 type: "code"
-community: "Community 134"
+community: "Community 138"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_134
+  - community/Community_138
 ---
 
 # PATH
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[cursor-talim-vps-mcp.sh]] - `defines` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_134
+#graphify/code #graphify/EXTRACTED #community/Community_138

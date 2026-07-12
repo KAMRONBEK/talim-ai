@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Slide Deck UI"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Slide_Deck_UI
 ---
 
 # Section()
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[paletteFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

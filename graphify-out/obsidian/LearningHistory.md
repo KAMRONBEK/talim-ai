@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Community 32"
+community: "Content Access & Mastery UI"
 location: "L1334"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_32
+  - community/Content_Access__Mastery_UI
 ---
 
 # LearningHistory
@@ -19,4 +19,4 @@ tags:
 - [[learning-history-panel.tsx]] - `imports` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_32
+#graphify/code #graphify/EXTRACTED #community/Content_Access__Mastery_UI

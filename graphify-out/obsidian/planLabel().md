@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/plan.ts"
 type: "code"
-community: "Community 34"
+community: "Community 38"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_34
+  - community/Community_38
 ---
 
 # planLabel()
@@ -22,4 +22,4 @@ tags:
 - [[plan.ts]] - `contains` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_34
+#graphify/code #graphify/EXTRACTED #community/Community_38

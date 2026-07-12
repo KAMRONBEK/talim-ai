@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/navbar.tsx"
 type: "code"
-community: "Community 46"
+community: "Community 101"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/Community_101
 ---
 
 # Navbar()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_39]] - `imports` [EXTRACTED]
 - [[page.tsx_41]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/Community_101

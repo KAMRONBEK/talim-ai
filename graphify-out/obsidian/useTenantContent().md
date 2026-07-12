@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Community 35"
+community: "Content Assignment & Hooks"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_35
+  - community/Content_Assignment__Hooks
 ---
 
 # useTenantContent()
@@ -19,4 +19,4 @@ tags:
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_35
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

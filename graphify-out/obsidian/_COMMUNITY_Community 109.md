@@ -1,22 +1,24 @@
 ---
 type: community
-cohesion: 0.29
-members: 7
+cohesion: 0.22
+members: 9
 ---
 
 # Community 109
 
-**Cohesion:** 0.29 - loosely connected
-**Members:** 7 nodes
+**Cohesion:** 0.22 - loosely connected
+**Members:** 9 nodes
 
 ## Members
-- [[name_1]] - code - apps/api/package.json
-- [[package.json_1]] - code - apps/api/package.json
-- [[prisma_1]] - code - apps/api/package.json
-- [[private_1]] - code - apps/api/package.json
-- [[schema]] - code - apps/api/package.json
-- [[seed]] - code - apps/api/package.json
-- [[version_1]] - code - apps/api/package.json
+- [[$schema_3]] - code - packages/config/tsconfig/node.json
+- [[compilerOptions_5]] - code - packages/config/tsconfig/node.json
+- [[extends_4]] - code - packages/config/tsconfig/node.json
+- [[lib_2]] - code - packages/config/tsconfig/node.json
+- [[module_2]] - code - packages/config/tsconfig/node.json
+- [[moduleResolution_2]] - code - packages/config/tsconfig/node.json
+- [[node.json]] - code - packages/config/tsconfig/node.json
+- [[outDir_1]] - code - packages/config/tsconfig/node.json
+- [[rootDir_1]] - code - packages/config/tsconfig/node.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -24,11 +26,3 @@ members: 7
 TABLE source_file, type FROM #community/Community_109
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 60]]
-- 1 edge to [[_COMMUNITY_Community 76]]
-- 1 edge to [[_COMMUNITY_Community 66]]
-
-## Top bridge nodes
-- [[package.json_1]] - degree 7, connects to 3 communities

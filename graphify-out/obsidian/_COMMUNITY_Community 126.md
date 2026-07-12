@@ -1,20 +1,21 @@
 ---
 type: community
-cohesion: 0.50
-members: 5
+cohesion: 0.33
+members: 6
 ---
 
 # Community 126
 
-**Cohesion:** 0.50 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[AI Sparkle Star]] - concept - apps/web/app/icon.svg
-- [[Letter T Monogram]] - concept - apps/web/app/icon.svg
-- [[Talim AI App Icon]] - image - apps/web/app/icon.svg
-- [[Violet-to-Marigold Gradient]] - concept - apps/web/app/icon.svg
-- [[Web App Brand Favicon]] - concept - apps/web/app/icon.svg
+- [[compilerOptions_6]] - code - packages/types/tsconfig.json
+- [[extends_5]] - code - packages/types/tsconfig.json
+- [[include_3]] - code - packages/types/tsconfig.json
+- [[outDir_2]] - code - packages/types/tsconfig.json
+- [[rootDir_2]] - code - packages/types/tsconfig.json
+- [[tsconfig.json_3]] - code - packages/types/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 

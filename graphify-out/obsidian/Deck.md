@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community 84"
 location: "L209"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_84
 ---
 
 # Deck
@@ -20,4 +20,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_84

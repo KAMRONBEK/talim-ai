@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Community 44"
+community: "Community 84"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_44
+  - community/Community_84
 ---
 
 # Mode
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[section-reader.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_44
+#graphify/code #graphify/EXTRACTED #community/Community_84

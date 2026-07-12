@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-IND-21 B2C dashboard — grid, search, emptyno-results, thumbnails]] - document - docs/qa/user-stories-expansion.md
+- [[US-IND-09 Upload a PDF → processing → READY → workspace]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

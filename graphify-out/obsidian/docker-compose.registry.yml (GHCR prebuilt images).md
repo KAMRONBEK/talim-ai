@@ -1,13 +1,13 @@
 ---
 source_file: "docker-compose.registry.yml"
 type: "document"
-community: "Community 192"
+community: "Community 195"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_192
+  - community/Community_195
 ---
 
 # docker-compose.registry.yml (GHCR prebuilt images)
 
-#graphify/document #graphify/EXTRACTED #community/Community_192
+#graphify/document #graphify/EXTRACTED #community/Community_195

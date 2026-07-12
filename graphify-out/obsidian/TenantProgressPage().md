@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Community 110"
+community: "Community 115"
 location: "L23"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Community_110
+  - community/Community_115
 ---
 
 # TenantProgressPage()
@@ -17,4 +17,4 @@ tags:
 - [[useTenantProgress()]] - `calls` [INFERRED]
 - [[useTenantProgressTopics()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Community_110
+#graphify/code #graphify/INFERRED #community/Community_115

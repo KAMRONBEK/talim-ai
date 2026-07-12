@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/create-admin.ts"
 type: "code"
-community: "Admin Tenants & Prisma Core"
+community: "Admin Tenants API"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenants__Prisma_Core
+  - community/Admin_Tenants_API
 ---
 
 # parseArgs()
@@ -15,4 +15,4 @@ tags:
 - [[create-admin.ts]] - `contains` [EXTRACTED]
 - [[main()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenants__Prisma_Core
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenants_API

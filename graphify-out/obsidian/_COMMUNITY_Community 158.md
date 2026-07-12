@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[config_5]] - code - apps/web/postcss.config.mjs
-- [[postcss.config.mjs_1]] - code - apps/web/postcss.config.mjs
+- [[Pythagoras QA fixture text]] - document - docs/qa/screenshots/qa-pythagoras.txt
+- [[Pythagorean Theorem QA test PDF]] - paper - docs/qa/screenshots/qa-pythagoras.pdf
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Community 45"
+community: "Slide Deck Prompts"
 location: "L224"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_45
+  - community/Slide_Deck_Prompts
 ---
 
 # ContentSlideDeck
@@ -17,4 +17,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_45
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts

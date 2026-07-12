@@ -1,11 +1,11 @@
 ---
 source_file: "CLAUDE.md"
 type: "document"
-community: "Community 86"
+community: "Community 93"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_86
+  - community/Community_93
 ---
 
 # Talim AI project guide (CLAUDE.md)
@@ -18,4 +18,4 @@ tags:
 - [[Use dbmigratedeploy locally (checksum drift)]] - `references` [EXTRACTED]
 - [[i18n lives only in appsweb (next-intl + locale)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_86
+#graphify/document #graphify/EXTRACTED #community/Community_93

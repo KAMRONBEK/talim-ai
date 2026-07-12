@@ -1,20 +1,21 @@
 ---
 type: community
-cohesion: 0.60
-members: 5
+cohesion: 0.33
+members: 6
 ---
 
 # Community 127
 
-**Cohesion:** 0.60 - moderately connected
-**Members:** 5 nodes
+**Cohesion:** 0.33 - loosely connected
+**Members:** 6 nodes
 
 ## Members
-- [[Build & Push GHCR Job]] - code - .github/workflows/deploy.yml
-- [[Deploy to VPS GitHub Actions Workflow]] - code - .github/workflows/deploy.yml
-- [[Detect Changed Apps Job]] - code - .github/workflows/deploy.yml
-- [[Production Deployment Topology (nginx + Docker + GHCR)]] - concept - docs/PLATFORM.md
-- [[VPS Pull & Restart Job]] - code - .github/workflows/deploy.yml
+- [[compilerOptions_7]] - code - packages/ui/tsconfig.json
+- [[extends_6]] - code - packages/ui/tsconfig.json
+- [[include_4]] - code - packages/ui/tsconfig.json
+- [[jsx_1]] - code - packages/ui/tsconfig.json
+- [[lib_3]] - code - packages/ui/tsconfig.json
+- [[tsconfig.json_4]] - code - packages/ui/tsconfig.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -22,11 +23,3 @@ members: 5
 TABLE source_file, type FROM #community/Community_127
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 1 edge to [[_COMMUNITY_Community 72]]
-- 1 edge to [[_COMMUNITY_Community 120]]
-
-## Top bridge nodes
-- [[VPS Pull & Restart Job]] - degree 3, connects to 1 community
-- [[Production Deployment Topology (nginx + Docker + GHCR)]] - degree 2, connects to 1 community

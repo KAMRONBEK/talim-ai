@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/global-upgrade-modal.tsx"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # GlobalUpgradeModal()
@@ -16,4 +16,4 @@ tags:
 - [[providers.tsx_1]] - `imports` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

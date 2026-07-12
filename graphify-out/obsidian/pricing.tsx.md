@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/pricing.tsx"
 type: "code"
-community: "Community 49"
+community: "Community 101"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_49
+  - community/Community_101
 ---
 
 # pricing.tsx
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_39]] - `imports_from` [EXTRACTED]
 - [[pricing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_49
+#graphify/code #graphify/EXTRACTED #community/Community_101

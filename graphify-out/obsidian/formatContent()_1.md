@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant-content.controller.ts"
 type: "code"
-community: "Content Upload & Ingest"
+community: "Community 49"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Upload__Ingest
+  - community/Community_49
 ---
 
 # formatContent()
@@ -19,4 +19,4 @@ tags:
 - [[tenant-content.controller.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Upload__Ingest
+#graphify/code #graphify/EXTRACTED #community/Community_49

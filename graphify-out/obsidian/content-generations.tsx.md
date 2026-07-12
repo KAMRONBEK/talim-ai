@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Community 33"
+community: "Community 36"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_33
+  - community/Community_36
 ---
 
 # content-generations.tsx
@@ -20,4 +20,4 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_33
+#graphify/code #graphify/EXTRACTED #community/Community_36

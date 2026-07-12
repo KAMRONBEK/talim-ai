@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-5-usage-metering.md"
 type: "document"
-community: "Community 57"
+community: "Community 62"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_57
+  - community/Community_62
 ---
 
 # Epic 5 — Usage Metering & Platform Cost
@@ -18,4 +18,4 @@ tags:
 - [[Epic Prompts Index]] - `references` [EXTRACTED]
 - [[Product Plans Roadmap]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_57
+#graphify/document #graphify/EXTRACTED #community/Community_62

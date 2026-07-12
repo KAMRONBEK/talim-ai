@@ -1,13 +1,13 @@
 ---
 type: community
-cohesion: 0.07
-members: 64
+cohesion: 0.08
+members: 55
 ---
 
 # Tenant Dashboard & Shell
 
-**Cohesion:** 0.07 - loosely connected
-**Members:** 64 nodes
+**Cohesion:** 0.08 - loosely connected
+**Members:** 55 nodes
 
 ## Members
 - [[ActivityHeatmap()]] - code - apps/web/components/tenant/activity-heatmap.tsx
@@ -29,15 +29,10 @@ members: 64
 - [[StudentImportResponse]] - code - packages/types/index.ts
 - [[StudentProgressSummary]] - code - packages/types/index.ts
 - [[TenantDashboardPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx
-- [[TenantLayout()]] - code - apps/web/app/[locale]/(tenant)/layout.tsx
 - [[TenantProgressSummary]] - code - packages/types/index.ts
-- [[TenantSearchContext]] - code - apps/web/contexts/tenant-shell.tsx
 - [[TenantSentMessagesResponse]] - code - packages/types/index.ts
 - [[TenantSettingsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx
-- [[TenantShell()]] - code - apps/web/contexts/tenant-shell.tsx
-- [[TenantSidebar()]] - code - apps/web/components/layout/tenant-sidebar.tsx
 - [[TenantSidebarBody()]] - code - apps/web/components/layout/tenant-sidebar.tsx
-- [[TenantSidebarSheet()]] - code - apps/web/components/layout/tenant-sidebar.tsx
 - [[TenantStudent]] - code - packages/types/index.ts
 - [[TenantStudentDetailPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx
 - [[TenantStudentsPage()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
@@ -46,8 +41,6 @@ members: 64
 - [[apiError()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
 - [[assign-students-panel.tsx]] - code - apps/web/components/tenant/assign-students-panel.tsx
 - [[join-code-card.tsx]] - code - apps/web/components/tenant/join-code-card.tsx
-- [[layout.tsx_3]] - code - apps/web/app/[locale]/(tenant)/layout.tsx
-- [[navItems_1]] - code - apps/web/components/layout/tenant-sidebar.tsx
 - [[onboarding-checklist.tsx]] - code - apps/web/components/tenant/onboarding-checklist.tsx
 - [[page.tsx_21]] - code - apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx
 - [[page.tsx_26]] - code - apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx
@@ -55,8 +48,6 @@ members: 64
 - [[page.tsx_28]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
 - [[profileInitials()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx
 - [[studentInitials()]] - code - apps/web/app/[locale]/(tenant)/tenant/students/page.tsx
-- [[tenant-shell.tsx]] - code - apps/web/contexts/tenant-shell.tsx
-- [[tenant-sidebar.tsx]] - code - apps/web/components/layout/tenant-sidebar.tsx
 - [[useAssignContent()]] - code - apps/web/hooks/useTenant.ts
 - [[useContentAssignments()]] - code - apps/web/hooks/useTenant.ts
 - [[useCreateTenantStudent()]] - code - apps/web/hooks/useTenant.ts
@@ -83,28 +74,29 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 21 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 18 edges to [[_COMMUNITY_Admin App UI]]
-- 14 edges to [[_COMMUNITY_Billing UI & Plans]]
-- 11 edges to [[_COMMUNITY_Account & Settings UI]]
+- 21 edges to [[_COMMUNITY_Shared Types]]
+- 15 edges to [[_COMMUNITY_Account & Login UI]]
 - 10 edges to [[_COMMUNITY_Assessment Pages & Wizard]]
-- 9 edges to [[_COMMUNITY_Community 35]]
-- 9 edges to [[_COMMUNITY_Community 33]]
+- 9 edges to [[_COMMUNITY_Community 58]]
 - 9 edges to [[_COMMUNITY_Community 39]]
-- 8 edges to [[_COMMUNITY_Tenant Materials UI]]
-- 7 edges to [[_COMMUNITY_Community 46]]
-- 5 edges to [[_COMMUNITY_Community 53]]
-- 4 edges to [[_COMMUNITY_Community 71]]
-- 4 edges to [[_COMMUNITY_Community 110]]
-- 4 edges to [[_COMMUNITY_Shared UI Primitives]]
-- 4 edges to [[_COMMUNITY_Community 32]]
-- 3 edges to [[_COMMUNITY_Quiz Player & Hooks]]
-- 2 edges to [[_COMMUNITY_Community 38]]
-- 1 edge to [[_COMMUNITY_Community 80]]
+- 9 edges to [[_COMMUNITY_Community 36]]
+- 8 edges to [[_COMMUNITY_Content Access & Mastery UI]]
+- 7 edges to [[_COMMUNITY_Community 31]]
+- 6 edges to [[_COMMUNITY_Community 59]]
+- 5 edges to [[_COMMUNITY_Community 43]]
+- 4 edges to [[_COMMUNITY_Community 82]]
+- 4 edges to [[_COMMUNITY_Community 54]]
+- 4 edges to [[_COMMUNITY_Community 115]]
+- 4 edges to [[_COMMUNITY_Community 33]]
+- 3 edges to [[_COMMUNITY_Content Assignment & Hooks]]
+- 3 edges to [[_COMMUNITY_Slide Deck UI]]
+- 2 edges to [[_COMMUNITY_Community 35]]
+- 2 edges to [[_COMMUNITY_Community 34]]
+- 1 edge to [[_COMMUNITY_Learning Coverage & Badges]]
 
 ## Top bridge nodes
-- [[page.tsx_28]] - degree 30, connects to 9 communities
-- [[useTenant.ts]] - degree 62, connects to 7 communities
-- [[page.tsx_26]] - degree 21, connects to 6 communities
-- [[page.tsx_21]] - degree 17, connects to 6 communities
-- [[tenant-sidebar.tsx]] - degree 19, connects to 5 communities
+- [[useTenant.ts]] - degree 62, connects to 8 communities
+- [[page.tsx_28]] - degree 30, connects to 8 communities
+- [[page.tsx_21]] - degree 17, connects to 7 communities
+- [[page.tsx_26]] - degree 21, connects to 5 communities
+- [[useTenantContents()]] - degree 14, connects to 4 communities

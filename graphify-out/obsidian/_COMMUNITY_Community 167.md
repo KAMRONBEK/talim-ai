@@ -10,7 +10,7 @@ members: 1
 **Members:** 1 nodes
 
 ## Members
-- [[US-AUTH-05 Logout (clears session, redirect, no back-button re-entry)]] - document - docs/qa/user-stories-expansion.md
+- [[US-ADMIN-03 Admin user management (role change  reset-pw  delete  patch sub)]] - document - docs/qa/user-stories-expansion.md
 
 ## Live Query (requires Dataview plugin)
 

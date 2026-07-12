@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[ThemeProvider()_1]] - code - apps/web/components/theme-provider.tsx
-- [[theme-provider.tsx_1]] - code - apps/web/components/theme-provider.tsx
+- [[ThemeProvider()]] - code - apps/admin/components/theme-provider.tsx
+- [[theme-provider.tsx]] - code - apps/admin/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

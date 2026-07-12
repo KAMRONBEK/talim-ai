@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Community 55"
+community: "Community 61"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_55
+  - community/Community_61
 ---
 
 # ChatState
@@ -15,4 +15,4 @@ tags:
 - [[ChatMessage]] - `references` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_55
+#graphify/code #graphify/EXTRACTED #community/Community_61

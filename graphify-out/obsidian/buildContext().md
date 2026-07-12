@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Slide Deck Prompts"
+community: "Community 83"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Community_83
 ---
 
 # buildContext()
@@ -19,4 +19,4 @@ tags:
 - [[getSectionBody()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Community_83

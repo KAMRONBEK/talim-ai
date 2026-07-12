@@ -1,30 +1,31 @@
 ---
 type: community
-cohesion: 0.20
-members: 15
+cohesion: 0.18
+members: 16
 ---
 
 # Community 77
 
-**Cohesion:** 0.20 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.18 - loosely connected
+**Members:** 16 nodes
 
 ## Members
-- [[BullRedis Background Jobs]] - concept - docs/FEATURES.md
-- [[Class Join-Code Self-Enroll]] - concept - docs/FEATURES.md
-- [[Content Upload & Ingestion Pipeline]] - concept - docs/FEATURES.md
-- [[GAME Assessment Mode]] - concept - docs/FEATURES.md
-- [[Global UpgradePromotion Modal]] - concept - docs/FEATURES.md
-- [[Hierarchical Content Sectioning]] - concept - docs/FEATURES.md
-- [[Interactive Quiz Learn Player]] - concept - docs/plans/youlearn-redesign.md
-- [[Manim Tutor Visuals]] - concept - docs/FEATURES.md
-- [[Podcast Generation with Synced Transcript]] - concept - docs/FEATURES.md
-- [[RAG AI Tutor Chat]] - concept - docs/FEATURES.md
-- [[Real-time Class Leaderboard]] - concept - docs/FEATURES.md
-- [[Talim AI Feature Catalog]] - document - docs/FEATURES.md
-- [[Usage Metering & Quotas]] - concept - docs/FEATURES.md
-- [[Uzbek-first i18n (uzenru)]] - concept - docs/FEATURES.md
-- [[processContent Ingestion Job]] - concept - docs/PLATFORM.md
+- [[SentMessageShape]] - code - apps/api/src/services/tenant/messages.ts
+- [[formatSentMessage()]] - code - apps/api/src/services/tenant/messages.ts
+- [[getLearnerUnreadCount()]] - code - apps/api/src/services/tenant/messages.ts
+- [[getOwnerUnreadReplyCount()]] - code - apps/api/src/services/tenant/messages.ts
+- [[listLearnerMessages()]] - code - apps/api/src/services/tenant/messages.ts
+- [[listTenantMessageThreads()]] - code - apps/api/src/services/tenant/messages.ts
+- [[markLearnerMessageRead()]] - code - apps/api/src/services/tenant/messages.ts
+- [[markOwnerReplyRead()]] - code - apps/api/src/services/tenant/messages.ts
+- [[markRecipientRead()]] - code - apps/api/src/services/tenant/messages.ts
+- [[messages.ts]] - code - apps/api/src/services/tenant/messages.ts
+- [[replyMessageSchema]] - code - apps/api/src/services/tenant/messages.ts
+- [[replyToTenantMessage()]] - code - apps/api/src/services/tenant/messages.ts
+- [[resolveSenderNames()]] - code - apps/api/src/services/tenant/messages.ts
+- [[respondToStudentReply()]] - code - apps/api/src/services/tenant/messages.ts
+- [[sendMessageSchema]] - code - apps/api/src/services/tenant/messages.ts
+- [[sendTenantMessage()]] - code - apps/api/src/services/tenant/messages.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -34,14 +35,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 4 edges to [[_COMMUNITY_Community 78]]
-- 3 edges to [[_COMMUNITY_Community 94]]
-- 3 edges to [[_COMMUNITY_Community 120]]
-- 2 edges to [[_COMMUNITY_Community 72]]
+- 2 edges to [[_COMMUNITY_Admin Tenants API]]
+- 2 edges to [[_COMMUNITY_Flashcards API]]
+- 1 edge to [[_COMMUNITY_Community 67]]
 
 ## Top bridge nodes
-- [[Talim AI Feature Catalog]] - degree 20, connects to 4 communities
-- [[RAG AI Tutor Chat]] - degree 3, connects to 1 community
-- [[Global UpgradePromotion Modal]] - degree 3, connects to 1 community
-- [[processContent Ingestion Job]] - degree 3, connects to 1 community
-- [[Interactive Quiz Learn Player]] - degree 2, connects to 1 community
+- [[messages.ts]] - degree 20, connects to 3 communities

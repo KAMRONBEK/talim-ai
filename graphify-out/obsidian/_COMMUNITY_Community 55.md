@@ -1,35 +1,37 @@
 ---
 type: community
-cohesion: 0.15
-members: 20
+cohesion: 0.13
+members: 22
 ---
 
 # Community 55
 
-**Cohesion:** 0.15 - loosely connected
-**Members:** 20 nodes
+**Cohesion:** 0.13 - loosely connected
+**Members:** 22 nodes
 
 ## Members
-- [[ChartSeries]] - code - packages/types/tutor-visual.ts
-- [[ChatMessage]] - code - packages/types/index.ts
-- [[ChatState]] - code - apps/web/store/useChatStore.ts
-- [[DesmosExpression]] - code - packages/types/tutor-graph.ts
-- [[DesmosGraphPayload]] - code - packages/types/tutor-graph.ts
-- [[DesmosSlider]] - code - packages/types/tutor-graph.ts
-- [[DesmosViewport]] - code - packages/types/tutor-graph.ts
-- [[VisualBlock]] - code - packages/types/tutor-visual.ts
-- [[VisualKind]] - code - packages/types/tutor-visual.ts
-- [[VisualPayloadMap]] - code - packages/types/tutor-visual.ts
-- [[appendVisualToText()]] - code - apps/web/store/useChatStore.ts
-- [[parseFenceBlock()]] - code - packages/types/tutor-visual.ts
-- [[parseGraphBlock()]] - code - packages/types/tutor-graph.ts
-- [[parseVisualBlock()]] - code - packages/types/tutor-visual.ts
-- [[serializeDesmosAsVisual()]] - code - packages/types/tutor-visual.ts
-- [[serializeGraphBlock()_1]] - code - packages/types/tutor-graph.ts
-- [[serializeVisualBlock()]] - code - packages/types/tutor-visual.ts
-- [[tutor-graph.ts_1]] - code - packages/types/tutor-graph.ts
-- [[tutor-visual.ts]] - code - packages/types/tutor-visual.ts
-- [[useChatStore.ts]] - code - apps/web/store/useChatStore.ts
+- [[AdminSubscriptionListItem]] - code - packages/types/index.ts
+- [[DrawerBody()]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[DrawerBodyProps]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[FieldLabel()]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[KIND_OPTIONS]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[PLAN_OPTIONS]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[STATUS_LABELS]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[STATUS_OPTIONS_3]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[STATUS_OPTIONS]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[SubscriptionEditDrawer()]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[SubscriptionEditDrawerProps]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[SubscriptionsPage()]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[TENANT_PLANS_1]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[USER_PLANS]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[formatDate()]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[initials()]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[page.tsx_4]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[statusPillClass()_2]] - code - apps/admin/app/(admin)/subscriptions/page.tsx
+- [[subscription-edit-drawer.tsx]] - code - apps/admin/components/subscription-edit-drawer.tsx
+- [[useAdminSubscriptions()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useUpdateTenant()]] - code - apps/admin/hooks/useAdmin.ts
+- [[useUpdateUserSubscription()]] - code - apps/admin/hooks/useAdmin.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -39,22 +41,17 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 18 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 6 edges to [[_COMMUNITY_Tutor Visual Tools]]
-- 3 edges to [[_COMMUNITY_Community 38]]
-- 3 edges to [[_COMMUNITY_Community 85]]
-- 3 edges to [[_COMMUNITY_Community 67]]
-- 3 edges to [[_COMMUNITY_Community 45]]
-- 2 edges to [[_COMMUNITY_Community 52]]
-- 2 edges to [[_COMMUNITY_Community 98]]
-- 1 edge to [[_COMMUNITY_Env Config & Job Events]]
-- 1 edge to [[_COMMUNITY_Community 64]]
-- 1 edge to [[_COMMUNITY_Community 82]]
-- 1 edge to [[_COMMUNITY_Community 44]]
+- 7 edges to [[_COMMUNITY_Community 38]]
+- 6 edges to [[_COMMUNITY_Admin Dashboard UI]]
+- 3 edges to [[_COMMUNITY_Account & Login UI]]
+- 3 edges to [[_COMMUNITY_Shared Types]]
+- 2 edges to [[_COMMUNITY_Community 39]]
+- 2 edges to [[_COMMUNITY_Community 33]]
+- 1 edge to [[_COMMUNITY_Flashcards API]]
 
 ## Top bridge nodes
-- [[useChatStore.ts]] - degree 17, connects to 6 communities
-- [[VisualBlock]] - degree 7, connects to 5 communities
-- [[tutor-visual.ts]] - degree 18, connects to 4 communities
-- [[parseFenceBlock()]] - degree 7, connects to 3 communities
-- [[DesmosGraphPayload]] - degree 6, connects to 3 communities
+- [[subscription-edit-drawer.tsx]] - degree 24, connects to 7 communities
+- [[page.tsx_4]] - degree 15, connects to 5 communities
+- [[useUpdateTenant()]] - degree 5, connects to 2 communities
+- [[useUpdateUserSubscription()]] - degree 5, connects to 2 communities
+- [[AdminSubscriptionListItem]] - degree 5, connects to 2 communities

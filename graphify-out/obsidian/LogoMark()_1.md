@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/brand/logo.tsx"
 type: "code"
-community: "Community 46"
+community: "Community 33"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_46
+  - community/Community_33
 ---
 
 # LogoMark()
@@ -23,4 +23,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_46
+#graphify/code #graphify/EXTRACTED #community/Community_33

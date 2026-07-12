@@ -1,17 +1,18 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 3
 ---
 
 # Community 142
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 3 nodes
 
 ## Members
-- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
-- [[index.js]] - code - packages/config/eslint/index.js
+- [[free-dev-ports.sh]] - code - scripts/free-dev-ports.sh
+- [[free-dev-ports.sh script]] - code - scripts/free-dev-ports.sh
+- [[free_ports()]] - code - scripts/free-dev-ports.sh
 
 ## Live Query (requires Dataview plugin)
 

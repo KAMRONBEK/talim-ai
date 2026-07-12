@@ -1,17 +1,18 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 3
 ---
 
 # Community 141
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 3 nodes
 
 ## Members
-- [[config_1]] - code - apps/admin/postcss.config.mjs
-- [[postcss.config.mjs]] - code - apps/admin/postcss.config.mjs
+- [[buildTutorContextBlock()]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[buildTutorSystemMessage()_1]] - code - apps/api/src/lib/tutor-prompt.ts
+- [[tutor-prompt.ts]] - code - apps/api/src/lib/tutor-prompt.ts
 
 ## Live Query (requires Dataview plugin)
 

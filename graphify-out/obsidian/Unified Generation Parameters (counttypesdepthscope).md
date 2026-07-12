@@ -1,19 +1,21 @@
 ---
 source_file: "docs/plans/question-engine.md"
-type: "rationale"
-community: "Community 78"
+type: "concept"
+community: "Community 50"
 location: "§1"
 tags:
-  - graphify/rationale
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_78
+  - community/Community_50
 ---
 
 # Unified Generation Parameters (count/types/depth/scope)
 
 ## Connections
-- [[Generation Pipeline (overgenerate → rule filter → balanced shuffle)]] - `references` [EXTRACTED]
+- [[Flashcard Integration (FLASHCARD first-class type)]] - `references` [EXTRACTED]
+- [[Near-Transfer Question Constraints]] - `references` [EXTRACTED]
+- [[Practice Generator (Unified Questions + Flashcards)]] - `implements` [INFERRED]
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
-- [[Unified Practice Generator (questions + flashcards)]] - `implements` [INFERRED]
+- [[QuizKind QUICK Retirement]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_78
+#graphify/concept #graphify/EXTRACTED #community/Community_50

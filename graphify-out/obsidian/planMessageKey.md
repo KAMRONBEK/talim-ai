@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "Billing UI & Plans"
+community: "Community 43"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_UI__Plans
+  - community/Community_43
 ---
 
 # planMessageKey
@@ -18,4 +18,4 @@ tags:
 - [[plan.ts_1]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_UI__Plans
+#graphify/code #graphify/EXTRACTED #community/Community_43

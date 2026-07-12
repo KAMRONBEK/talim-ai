@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSections.ts"
 type: "code"
-community: "Flashcards Study Page"
+community: "Content Assignment & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Study_Page
+  - community/Content_Assignment__Hooks
 ---
 
 # useSections.ts
@@ -26,4 +26,4 @@ tags:
 - [[useSection()]] - `contains` [EXTRACTED]
 - [[useSections()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Study_Page
+#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks

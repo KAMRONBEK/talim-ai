@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Community 100"
+community: "Slide Deck UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_100
+  - community/Slide_Deck_UI
 ---
 
 # deck-theme.ts
@@ -27,4 +27,4 @@ tags:
 - [[paletteFor()]] - `contains` [EXTRACTED]
 - [[resolveSlideAccentHex()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_100
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI

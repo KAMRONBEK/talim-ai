@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/billing.routes.ts"
 type: "code"
-community: "Admin & Usage Controllers"
+community: "Admin & Events Controllers"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin__Usage_Controllers
+  - community/Admin__Events_Controllers
 ---
 
 # billingRoutes
@@ -15,4 +15,4 @@ tags:
 - [[billing.routes.ts]] - `contains` [EXTRACTED]
 - [[index.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin__Usage_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin__Events_Controllers
