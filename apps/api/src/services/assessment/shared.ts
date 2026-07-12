@@ -165,7 +165,9 @@ export const assignAssessmentSchema = z.object({
   learnerIds: z.array(z.string()).min(1),
   contentId: z.string().min(1).optional(),
   sectionId: z.string().min(1).optional(),
-  // Soft due date — informational only (display + overdue styling); does not block submission.
+  // Due date — shown to the learner (display + overdue styling) AND enforced: submissions after
+  // this instant are rejected with 403 in submitLearnerAssessment (services/assessment/learner.ts),
+  // for both WRITTEN and GAME modes. A null dueAt never blocks.
   // Accepts an ISO date string (e.g. from an <input type="date">) and coerces to a Date.
   dueAt: z.coerce.date().nullish(),
 });

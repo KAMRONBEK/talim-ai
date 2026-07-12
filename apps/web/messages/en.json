@@ -760,7 +760,7 @@
       "approveAll": "Approve all ({count})",
       "approvingAll": "Approving…",
       "dueDateLabel": "Due date (optional)",
-      "dueDateHint": "Shown to students but does not block submission.",
+      "dueDateHint": "Shown to students; submissions are closed after this date.",
       "gradingLabel": "Grading",
       "strictScoringLabel": "Strict scoring (negative marking)",
       "strictScoringHint": "Wrong answers deduct points; unanswered questions are never penalized.",

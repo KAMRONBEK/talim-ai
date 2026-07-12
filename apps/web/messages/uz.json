@@ -760,7 +760,7 @@
       "approveAll": "Barchasini tasdiqlash ({count})",
       "approvingAll": "Tasdiqlanmoqda…",
       "dueDateLabel": "Topshirish muddati (ixtiyoriy)",
-      "dueDateHint": "Belgilangan sana o'quvchiga ko'rsatiladi, lekin topshirishni bloklamaydi.",
+      "dueDateHint": "Belgilangan sana o'quvchiga ko'rsatiladi; shu sanadan keyin topshirish yopiladi.",
       "gradingLabel": "Baholash",
       "strictScoringLabel": "Qat'iy baholash (manfiy ball)",
       "strictScoringHint": "Noto‘g‘ri javoblar ballni kamaytiradi; javob berilmagan savollar uchun jarima yo‘q.",
