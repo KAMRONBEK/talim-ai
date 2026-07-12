@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { FileText, Headphones, Clapperboard, Layers, ListChecks } from 'lucide-react';
+import { FileText, Headphones, Clapperboard, ListChecks } from 'lucide-react';
 import { PracticeGenerator } from '@/components/practice/practice-generator';
 
 export interface ContentGenerationsBlockProps {
@@ -87,19 +87,8 @@ export function ContentGenerationsBlock({
             <div className="text-[11px] text-muted-foreground">{t('watchAction')}</div>
           </div>
         </Link>
-        <Link
-          href={`/content/${contentId}/flashcards`}
-          onClick={onAction}
-          className="flex items-center gap-2.5 rounded-xl bg-muted/50 p-2.5 text-sm transition-colors hover:bg-muted"
-        >
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-accent-secondary/10 text-accent-secondary">
-            <Layers className="h-4 w-4" />
-          </span>
-          <div>
-            <div className="font-medium">{t('flashcards')}</div>
-            <div className="text-[11px] text-muted-foreground">{t('flashcardsAction')}</div>
-          </div>
-        </Link>
+        {/* Flashcards are a Practice question type now — no standalone sidebar entry.
+            The deck route stays alive for existing decks/bookmarks. */}
         {!hideGenerateActions && (
           <>
             {/* Opening the dialog must NOT fire onAction — on mobile that would close the

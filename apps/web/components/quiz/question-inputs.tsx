@@ -286,6 +286,13 @@ export function FillBlankInput({
   );
 }
 
+/**
+ * Inline cloze: the sentence itself renders with tappable blank slots where the "___"
+ * markers sit, and the ACTIVE blank's options render as chips below — pick a chip, it
+ * fills the slot and focus advances to the next empty blank. Replaces the old bare
+ * per-blank native <select> list. Holds local active-blank state — callers must key
+ * this component by question id (same rule as FlashcardInput).
+ */
 export function DropdownClozeInput({
   question,
   value,
@@ -300,54 +307,120 @@ export function DropdownClozeInput({
   const t = useTranslations('quiz');
   const count = blankCount(question);
   const pools = clozeOptions(question);
+  const [active, setActive] = useState(0);
+
+  // The stem carries the blanks as runs of underscores; slots render in their place.
+  const segments = question.question.split(/_{2,}/);
+  const markerCount = segments.length - 1;
+
+  const blankFor = (i: number) => {
+    const text = value[i] ?? '';
+    const accepted = acceptedForBlank(question, i);
+    const correct =
+      text.trim() !== '' && accepted.some((a) => normalizeAnswer(a) === normalizeAnswer(text));
+    return { text, accepted, correct };
+  };
+
+  const pick = (option: string) => {
+    onChangeBlank(active, option);
+    // Advance to the next unfilled blank (the one just picked no longer counts as empty).
+    for (let step = 1; step < count; step++) {
+      const next = (active + step) % count;
+      if (!(value[next] ?? '').trim()) {
+        setActive(next);
+        return;
+      }
+    }
+  };
+
+  const slot = (i: number) => {
+    const { text, correct } = blankFor(i);
+    const isActive = i === active;
+    const stateClass = revealed
+      ? correct
+        ? 'border-success bg-success-muted text-foreground'
+        : 'border-destructive bg-destructive/10 text-foreground'
+      : isActive
+        ? 'border-primary bg-accent/40 text-foreground'
+        : text
+          ? 'border-primary/40 bg-secondary text-foreground'
+          : 'border-dashed border-muted-foreground/50 bg-muted/30 text-muted-foreground';
+    return (
+      <button
+        key={`slot-${i}`}
+        type="button"
+        onClick={() => setActive(i)}
+        aria-label={t('blankLabel', { number: i + 1 })}
+        className={`mx-1 inline-flex min-w-[4.5rem] items-baseline justify-center rounded-lg border-2 px-2.5 py-0.5 align-baseline text-[0.85em] font-semibold transition-colors ${stateClass}`}
+      >
+        {text ? <RichText inline>{text}</RichText> : count > 1 ? String(i + 1) : '…'}
+      </button>
+    );
+  };
+
+  const activeBlank = blankFor(active);
+  const pool = pools[active] ?? [];
+  const acceptedSet = activeBlank.accepted.map(normalizeAnswer);
+
   return (
-    <div className="space-y-2.5">
-      {Array.from({ length: count }).map((_, i) => {
-        const pool = pools[i] ?? [];
-        const text = value[i] ?? '';
-        const accepted = acceptedForBlank(question, i);
-        const correct =
-          text.trim() !== '' && accepted.some((a) => normalizeAnswer(a) === normalizeAnswer(text));
-        return (
-          <div key={i} className="flex flex-wrap items-center gap-2">
-            {count > 1 && (
-              <span className="text-xs text-muted-foreground">
-                {t('blankLabel', { number: i + 1 })}
-              </span>
-            )}
-            {pool.length > 0 ? (
-              <select
-                className={`${selectClass} ${revealBorder(revealed, correct) ?? ''}`}
-                value={text}
-                onChange={(e) => onChangeBlank(i, e.target.value)}
-              >
-                <option value="">{t('choosePlaceholder')}</option>
-                {pool.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              // Empty pool → graceful text-input fallback (matches the WrittenForm).
-              <Input
-                className={`h-10 w-48 ${revealBorder(revealed, correct) ?? ''}`}
-                value={text}
-                onChange={(e) => onChangeBlank(i, e.target.value)}
-                placeholder={t('blankLabel', { number: i + 1 })}
-              />
-            )}
-            {revealed && !correct && accepted.length > 0 && (
-              <span className="text-sm text-muted-foreground">
-                {t('correctAnswerLabel')}{' '}
-                <span className="font-semibold text-foreground">
-                  <RichText inline>{accepted[0] ?? ''}</RichText>
-                </span>
-              </span>
-            )}
+    <div className="space-y-4">
+      <div className="font-display text-xl font-semibold leading-[2.2] text-foreground sm:text-2xl">
+        {segments.map((seg, i) => (
+          <span key={i}>
+            <RichText inline>{seg}</RichText>
+            {i < markerCount && (i < count ? slot(i) : '___')}
+          </span>
+        ))}
+        {/* Blanks declared in config beyond the stem's markers still get a slot. */}
+        {Array.from({ length: Math.max(0, count - markerCount) }).map((_, j) =>
+          slot(markerCount + j),
+        )}
+      </div>
+
+      {pool.length > 0 ? (
+        <div className="space-y-1.5">
+          {count > 1 && (
+            <p className="text-xs text-muted-foreground">
+              {t('blankLabel', { number: active + 1 })}
+            </p>
+          )}
+          <div className="flex flex-wrap gap-2">
+            {pool.map((opt) => {
+              const chosen = normalizeAnswer(activeBlank.text) === normalizeAnswer(opt);
+              const isCorrectOption = acceptedSet.includes(normalizeAnswer(opt));
+              return (
+                <button
+                  key={opt}
+                  type="button"
+                  disabled={revealed}
+                  aria-pressed={chosen}
+                  onClick={() => pick(opt)}
+                  className={`rounded-xl border-2 bg-muted/30 px-4 py-2 text-[15px] transition-colors disabled:cursor-default ${optionRevealClass(revealed, chosen, isCorrectOption)}`}
+                >
+                  <RichText inline>{opt}</RichText>
+                </button>
+              );
+            })}
           </div>
-        );
-      })}
+        </div>
+      ) : (
+        // Empty pool → graceful text-input fallback (matches the WrittenForm).
+        <Input
+          className={`h-10 w-56 ${revealBorder(revealed, activeBlank.correct) ?? ''}`}
+          value={activeBlank.text}
+          onChange={(e) => onChangeBlank(active, e.target.value)}
+          placeholder={t('blankLabel', { number: active + 1 })}
+        />
+      )}
+
+      {revealed && !activeBlank.correct && activeBlank.accepted.length > 0 && (
+        <p className="text-sm text-muted-foreground">
+          {t('correctAnswerLabel')}{' '}
+          <span className="font-semibold text-foreground">
+            <RichText inline>{activeBlank.accepted[0] ?? ''}</RichText>
+          </span>
+        </p>
+      )}
     </div>
   );
 }

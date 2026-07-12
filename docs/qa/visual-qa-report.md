@@ -895,3 +895,13 @@ Verified live against local dev (qa-individual / Ven diagrammasi PDF):
       chips toggle correctly, Fleshkartalar selectable alone or with other types.
 - [x] FREE-plan daily generation quota path: 402 → Pro upsell modal renders with manual
       activation copy (bonus coverage; usage reset in dev DB to continue testing).
+
+### Practice polish (2026-07-12, third pass)
+
+- [x] "Fleshkartalar" removed from the left-panel Resources — flashcards live only in the
+      Practice dialog now (deck route kept alive for existing decks/bookmarks).
+- [x] DROPDOWN_CLOZE redesigned from bare native selects to an inline cloze: the sentence
+      renders with tappable slot pills where the ___ markers sit, the active blank's
+      options render as chips, picking a chip fills the slot and advances to the next
+      empty blank; verified live (2-blank question: fill → Tekshirish → per-slot success
+      states, chips locked, explanation shown).

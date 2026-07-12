@@ -214,9 +214,13 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
               {typeLabel}
             </span>
           </div>
-          <div className="font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">
-            <RichText>{q.question}</RichText>
-          </div>
+          {/* The inline cloze renders the sentence itself (with slot buttons in place of
+              the ___ markers), so the plain stem would duplicate it. */}
+          {kind !== 'dropdownCloze' && (
+            <div className="font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+              <RichText>{q.question}</RichText>
+            </div>
+          )}
 
           {kind === 'multipleChoice' ? (
             <div className="space-y-2.5">
@@ -275,7 +279,14 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
           ) : kind === 'fillBlank' ? (
             <FillBlankInput question={q} value={arrayAnswer} revealed={isRevealed} onChangeBlank={setBlank} />
           ) : kind === 'dropdownCloze' ? (
-            <DropdownClozeInput question={q} value={arrayAnswer} revealed={isRevealed} onChangeBlank={setBlank} />
+            // Keyed: the inline cloze holds local active-blank state (same rule as flashcards).
+            <DropdownClozeInput
+              key={q.id}
+              question={q}
+              value={arrayAnswer}
+              revealed={isRevealed}
+              onChangeBlank={setBlank}
+            />
           ) : kind === 'matching' ? (
             <MatchingInput
               question={q}
