@@ -1582,3 +1582,65 @@ CSV *import* parser). No adjacent injection surface.
 **F76/F77/F78** are structural, already in `docs/PLANS.md` (Run 18) — no code-level neighborhood to
 re-sweep. **Oracle:** self-consistency + Standards. **No new findings** — tonight's fix (F80) and the
 prior F79 are isolated; O84 is transient. **Test-data:** 4 probe users created + deleted; tree clean.
+
+### Run 19 — closeout (§G)
+
+**8 charters, all completed. 1 bug fixed + verified live (F80), 6 observations logged (O82–O87), 1
+structural deferral to PLANS (HOTSPOT/DRAG_DROP a11y). Full types+web+admin typecheck green; every
+commit on `claude/visual-qa`, nothing pushed.** This run put the two freshest RCRCRC surfaces
+(written-answer AI-judge grading `eb563533`; SSE event-streaming `a783868a`) under deep oracle-graded
+passes for the first time, plus three P0-gap invariants driven **live** (mustChangePassword,
+impersonation-UI, deactivation-access-loss) and the structured-player keyboard-a11y frontier.
+
+**Fixed + verified live:** **F80** (S3, ru i18n) — two Russian dashboard strings were Latin-
+transliterated; corrected to Cyrillic, verified on `/ru/dashboard`, typecheck trio green.
+
+**Clean passes (oracle-verified, no findings):** C1 written-grading (16/16 metamorphic-tight —
+garbage/plausible-wrong/injection all rejected, paraphrase accepted, submit==check==reload); C2 SSE
+(202+push-primary no polling-storm, reload-mid-flight GENERATING recovery, boot reconciler covers all
+6 media types, factually-perfect podcast); C3 mustChangePassword (create→banner→change→clear, pw
+rotation 401/200); C4 impersonation UI (imp:true token, acts-as-learner, admin 403, admin session
+isolated on separate origin/store); C5 deactivation-access-loss **live** (mid-session deactivate →
+404/403 same-JWT, reactivate → restored); C6 structured-player keyboard-a11y (DROPDOWN_CLOZE buttons+
+aria-pressed, MATCHING native `<select>`, ORDERING move-buttons **not drag-only**); C7 ru/en locale
+tier (key-parity 1287³, ru/en otherwise clean); C8 bad-neighborhood (all 3 neighborhoods clean).
+
+**Coverage advanced (by depth):** 8 new/updated cells → `oracle-verified` this run
+(short-answer-ai-judge, podcast/sse-generate, must-change-pw, impersonate/browser-ui-flow,
+deactivation/access-loss-live, structured-player-a11y, dashboard/i18n-ru-en). The hotspot-dragdrop-a11y
+cell is now annotated `PLANS:QA-DEFER-HOTSPOT-A11Y` (blocked on an owner image-assessment build).
+
+**Invariant sweep (all held):** seat-limit never exceeded (kid create 4→5 of 25); deactivated learner
+loses content access **immediately** (mid-session, same JWT → 404/403; C5 live); learner sees only
+assigned (C4 imp view + C5); no cross-tenant id (impersonation carries target role, admin 403);
+GAME/assessment timing server-clamped (residual F39 unchanged, in PLANS). Written-grading never gives
+credit for a wrong answer (C1 over-acceptance battery). XSS-escaping holds (student-name `<script>`).
+
+**Flaky-suspect list:** **O84** — `/billing/me` one-off 500 on a fresh learner's first load;
+NOT reproducible (0/4 fresh first-calls, 8/8 curl, browser retry all 200) → transient (API-process
+saturated by a concurrent TTS job). Re-triaged: stays observation.
+
+**Blocked-on-job list:** none stuck. Note: **structured-type practice generation ~130s** (O87) —
+long but SSE-driven, completed within bounded waits; no F59-style stuck spinner all run.
+
+**Staleness report — still `viewed`/∞ or not reached this run:** HOTSPOT + DRAG_DROP learner players
+(assessment-builder-only → PLANS deferral, needs an owner image-build); GAME-live end-to-end browser
+play (`?play` deep-link, per-Q timer auto-lock) — API-verified in R18 but not browser-driven at the
+learner this run; tenant material-detail per-part generate/retry/**FAILED-part** UI (podcast/video
+parts) still `viewed`; admin content-detail; pricing/terms cells; full 8-type owner-build→publish→
+learner-take round-trip; ru/en tier on the assessment/quiz-player chrome (only dashboard/content
+chrome checked this run).
+
+**Tomorrow's charter queue (next run):**
+1. **HOTSPOT + DRAG_DROP** — owner builds an image-based assessment (unblocks `QA-DEFER-HOTSPOT-A11Y`),
+   then learner keyboard+touch a11y + grading truth-table.
+2. **GAME-live end-to-end in the browser** — schedule→go-live (owner) → learner `?play` join banner,
+   per-question timer auto-lock, speed-points, leaderboard self-highlight (UI half of R18's API C5).
+3. **Tenant material-detail per-part** generate/retry + **FAILED-part** UI (podcast/video parts) — the
+   `viewed`/∞ per-part media flow; pair with an induced FAILED job to exercise the reconciler live.
+4. **O82/O83 podcast** — confirm the 1:17-vs-1:31 duration source + the "Videoning" transcript copy on
+   audio (promote to F if reproducible with a named oracle).
+5. **Re-examination bucket (fresh angle):** re-attack C1 written-grading as *Hostile* (unicode/RTL/
+   very-long answers, judge-budget exhaustion) and C4 impersonation replay/expiry in the **browser**.
+6. **ru/en tier on assessment + quiz-player chrome** (structured players, GAME player) — the untouched
+   i18n surface.

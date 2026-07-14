@@ -387,7 +387,8 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | F77 | S3 | US-OWNER-18 · assign | `assignAssessment` (`assessments.ts:133-136`) does `if (existing) continue` — re-assigning an already-assigned learner silently no-ops (`201 {assignments:[]}`), so a **due date / content-scope set on re-assign is dropped**, and (no unassign route) the due date can't be changed once assigned. Needs a product decision on upsert semantics. | 🟡 logged | — |
 | F78 | S3 | US-ADMIN-11 · EC3 | Flagging generated media is **label-only** — `GeneratedMediaReview{status:FLAGGED}` is written + shown in admin `/generated` but an exhaustive grep finds **zero** consumers on any learner/serving path, so a FLAGGED podcast/quiz/slideshow is still fully served. (Predicted by the expansion pass.) | 🟡 logged | — |
 | F79 | S3 | US-OWNER · csv-export | Students-roster CSV export escaped only RFC-4180 (quote/comma/newline), **not** formula injection (CWE-1236): a student name / `@username` starting with `= + - @ TAB CR` executes as a formula in Excel/Sheets. Names are user-controlled (self-enroll / owner / CSV import). Prefixed formula-leading cells with `'`; verified live end-to-end. | 🟢 fixed | R18 (branch) |
-| F80–F99 | — | *(reserved — claim in order)* | — | ⬜ | — |
+| F80 | S3 | US-XCUT · i18n-ru | `ru.json` `becomeTutorPromo` + `readyToLearnSubtitle` (B2C dashboard) were **Russian written in Latin transliteration** ("Upravlyayte uchenikami…", "Dobavte istochnik…") instead of Cyrillic — garbled/off-brand for the secondary-priority language. Deep 3-file sweep confirmed only these 2 (key-parity 1287/1287/1287, 0 missing). Corrected to Cyrillic; verified live on `/ru/dashboard`; typecheck trio green. | 🟢 fixed | R19 (branch) |
+| F81–F99 | — | *(reserved — claim in order)* | — | ⬜ | — |
 
 **High-probability finding candidates flagged during this expansion** (each needs the §E bundle before it earns an F#):
 - Impersonated session is unrestricted + non-revocable after exit (US-ADMIN-08b·EC16) — **S1** hypothesis.
@@ -410,6 +411,12 @@ Backfill F1–F14 from `visual-qa-report.md` as you revisit them.
 | --- | --- | --- | --- | --- | --- |
 | O80 | uz-fluency-doubt | US-XCUT-01 | Generated content + app-wide uz UI strings use ASCII apostrophe `U+0027` in `o'`/`g'` where Uzbek orthography wants `U+02BB` (`oʻ`/`gʻ`). Mirrors source PDF + `messages/uz.json` convention → product-wide decision, morning human review. | R18 | open |
 | O81 | security-hardening | US-ADMIN-08b | Impersonation tokens are **not single-use** — stateless 30-min JWT, no server-side nonce, so a token replays for its whole window (verified: 2nd identical request → 200). Deliberate stateless tradeoff; true single-use needs jti tracking. | R18 | open |
+| O82 | media-metadata | US-IND · podcast | Podcast episode row shows duration **"1:17"** but the player total reads **"1:31"** — ~14s label vs decoded-audio mismatch (stored TTS estimate vs actual?). | R19 | open |
+| O83 | copy | US-IND · podcast | Podcast transcript click-to-seek hint reads "**Videoning** shu joyiga o'tish…" (says *video* on an audio podcast) — likely a shared media-transcript string. | R19 | open |
+| O84 | flaky-suspect | US-LEARNER · billing | `GET /billing/me` returned a one-off **500** on a fresh learner's first dashboard load, then self-healed (browser retry 200; 8/8 curl 200; **4/4 fresh-account first-calls 200**). Non-reproducible → transient (likely API-process saturated finishing a podcast TTS Bull job; API==worker). Not elevated. | R19 | open (transient-confirmed) |
+| O85 | security-UX | US-ADMIN-08b | Impersonated learner session shows **no "you are impersonating" banner** — an admin acting as a user has no in-app indicator (session correct + audited). A persistent banner + one-click exit would reduce acting-under-identity-unaware risk. Enhancement. | R19 | open |
+| O86 | UX | US-LEARNER · deactivation | A learner deactivated **mid-session** (valid JWT) sees the assigned list silently empty with **no "your account was deactivated" message** — only the login path (F16) explains it. | R19 | open |
+| O87 | perf | US-IND · practice | Structured-type practice generation (DROPDOWN_CLOZE+MATCHING+ORDERING ×10, whole-material) took **~130s** — much slower than SHORT_ANSWER (~35s); SSE kept the UI honest (no stuck spinner) but it's a long wait. | R19 | open |
 
 ## B.3 — Story index rows (tick under each area in the backlog index)
 
