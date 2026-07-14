@@ -1720,3 +1720,22 @@ chrome checked this run).
 **🟡 O82 confirmed → PLANS deferral (S4, structural).** Episode 1's stored `durationSec` = **93s ("1:33")** (episode-list row + DB), but the loaded `<audio>.duration` (readyState=4, **ground truth**) = **103s ("1:43")** — the stored value is ~10s (~11%) short. The **player time is correct**; only the list label under-counts. **Named oracle:** the decoded audio duration. **Root cause (schema comment):** durationSec/segments are derived at synthesis from mp3 **byte-length ≈ ms** (CBR assumption) which drifts on VBR/ID3/padding. The real fix (probe decoded duration post-synthesis + persist) is a **backend `generatePodcast` job change** — not a low-risk unattended UI fix → logged in `docs/PLANS.md` (O82, owner @KAMRONBEK, 2026-07-14). Not an F (cosmetic + structural). O82 stays a ledger reference pointing at the PLANS row.
 
 **Oracle:** charisma/i18n (Standards) + reliability (World — decoded duration). **1 fix (F81), 1 structural deferral (O82→PLANS).** **Test-data:** none. **Cells:** podcast/legacy-timings + transcript-sync advanced (transcript copy corrected; duration attributed).
+
+### C6 — Impersonation replay/tamper/authz + deactivated-target · ADMIN · security/tenant-isolation lens (REGRESSION BUCKET, fresh angle)
+
+**Charter:** Re-attack the oracle-verified impersonation cell from a NEW angle (replay/tamper/mint-authz/deactivated-target, vs R19's accept+acts-as UI flow), to discover **security/tenant-isolation** defects. **Done when:** token authz + tamper-resistance + the active-membership invariant under impersonation are all proven against the live API. `POST /admin/users/:id/impersonate` mints a stateless 30-min JWT (`imp:true`+`impersonatorId`, `users.controller.ts:402`).
+
+**🟢 8-check impersonation security battery (live API):**
+- **mint (admin)** → 200, payload `{userId:learner, role:TENANT_LEARNER, imp:true, impersonatorId:admin, exp=30min}` ✓
+- **imp → /learner/assessments** → **200** (acts as the target learner) ✓
+- **imp → /admin/users** → **403** — an impersonation session **cannot reach admin routes** (token carries the target's role, not ADMIN) ✓
+- **tamper** (flip last sig char) → **401** (JWT signature verified) ✓
+- **non-admin mint** (owner token → impersonate) → **403** (only ADMIN mints) ✓
+- **self-impersonate** (admin→admin id) → **400** ("Cannot impersonate yourself"); admin-target guard (403) also present in code ✓
+- **replay** (reuse the SAME imp token twice) → **200 both** — confirms **O81** (stateless, replayable within the 30-min window; NOT single-use) — pre-existing, in `docs/PLANS.md`, deduped not re-filed.
+
+**🟢 INVARIANT — impersonation does NOT bypass active-membership.** Minted imp token for teststudent2 (active) → `/learner/assessments` **200**; owner `PATCH /tenant/students/:id {active:false}` → **same imp token now 403**; reactivate → **200 restored**. A deactivated learner loses access **even through an admin impersonation session** — `requireActiveLearner`/`contentAccess` re-checks per request, impersonation is not a backdoor. teststudent2 restored to active.
+
+**🟢 Audit attribution.** `/admin/audit-logs` shows the **IMPERSONATE** entries with `targetType:User` + `metadata:{targetEmail, targetRole:TENANT_LEARNER}` for each mint (teststudent1/teststudent2). (Also visible: C2's `UPGRADE_REQUESTED{requestedPlan:INDIVIDUAL_PRO}` — the request-upgrade left a benign audit signal, not an account change, corroborating C2's no-auto-promotion result.)
+
+**Oracle:** security/tenant-isolation (World). **No new F** (O81 pre-existing). Browser exit-restores-admin = R19 C4 (admin 3001 session is a separate store; O85 no in-web imp banner). **Test-data:** teststudent2 deactivated+reactivated (net zero); throwaway audit entries only. **Cell:** replay-tamper re-verified + deactivated-target added, tour_last→Hostile.

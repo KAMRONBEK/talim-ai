@@ -72,7 +72,7 @@
 | tenant.materials.[id]/TENANT_LEARNER-active/role-guard | /[locale]/tenant/materials/[id] | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
 | impersonate/ADMIN/accept | /[locale]/impersonate | ADMIN | populated | uz | Hostile | oracle-verified | R2026-07-12a | c73f9371 | O81 | 0 |
 | impersonate/ADMIN/browser-ui-flow | /users/[id]→/impersonate | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-14a | c73f9371 | O85 | 0 |
-| impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | Hostile | oracle-verified | R2026-07-12a | c73f9371 | O81 | 0 |
+| impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | Saboteur | oracle-verified | R2026-07-14b | c73f9371 | O81 | 0 |
 | admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | Saboteur | interacted | R2026-07-12a | c73f9371 | — | 1 |
 | admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | Saboteur | oracle-verified | R2026-07-12a | c73f9371 | — | 0 |
 | admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-12a | c73f9371 | F78 | 0 |
