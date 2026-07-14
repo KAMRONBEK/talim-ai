@@ -1343,3 +1343,46 @@ No findings — the highest-risk new code is solid. Also incidentally confirmed 
 went upload→READY with no stuck GENERATING. **Test-data:** `uz-math.pdf` content (`cmrkrfbcv…`) +
 practice quiz left on INDIVIDUAL's own workspace for reuse by later charters; to be cleaned at
 run-end. No fixtures touched.
+
+### C2 — SSE generation streaming (rollback + no-stuck-GENERATING) · Rustam (low-bandwidth) · INDIVIDUAL · FedEx tour
+
+**Charter:** Explore the new SSE event-streaming architecture (`a783862`/`a783868a`: `GET /events`,
+`jobEvents.service`, `jobEventAudience`, client `useJobStreamStore`/`jobStream`; 202+Bull+push) as
+Rustam, FedEx lens on one podcast job, to discover **reliability/data-integrity** defects. **Done
+when:** SSE stream open in browser, a real generation is push-driven to completion (not polled), a
+reload mid-flight recovers GENERATING (no stuck/lost state), and the stuck-claim rollback invariant
+is verified.
+
+**🟢 SSE endpoint (code) is robust.** `events.controller.streamEvents` = one `GET /events` SSE per
+tab: id-only job events, `X-Accel-Buffering:no`, 20s heartbeat, **Last-Event-ID replay with
+gap-detection** (`missed===null → event:resync → client full-invalidation`), socket-write failures
+swallowed + cleanup on `req.close`.
+
+**🟢 Stuck-GENERATING rollback invariant — covered by `reconcileStuckMediaClaims` (code-verified).**
+On boot it flips every in-flight row (content PROCESSING; slide-deck/question-bank/**podcast/video/
+flashcard** GENERATING) that has **no live Bull job** backing it → FAILED, re-enabling Retry. This
+closes the durability gap (process restart / Redis eviction drops the job after the optimistic DB
+claim) that would otherwise 409 every retry forever. Comprehensive across all 6 media types.
+
+**🟢 Live push-driven generation + reload-mid-flight recovery (depth-3).** As INDIVIDUAL on
+`uz-math.pdf` → podcast: **`POST /content/:id/podcast → 202 Accepted`**, UI → "Podkast
+yaratilmoqda…". **Side-quest: `location.reload()` mid-generation** → UI **correctly recovered**
+GENERATING ("1 epizod · Podkast yaratilmoqda…", episode "Tayyorlanmoqda", Retry affordance present),
+a fresh `/events` EventSource reconnected (#63) — state is server-derived, survives reload, never
+stuck/lost. Then, **without any manual refresh**, the SSE drove the UI to **"Tayyor" (ready)** with a
+full audio player + transcript. **No polling storm:** over the whole ~2-min job there were only ~4
+podcast GET refetches (SSE-event-triggered react-query invalidation), NOT a 2s poll loop — the
+push-primary design holds.
+
+**🟢 Podcast factual oracle — perfect grounding.** The two-speaker Uzbek transcript matches
+`uz-math-facts.md` on every claim (3·4→5, 9+16=25, a≠0, **D=b²−4ac** correct sign, D<0→no real
+roots, x²−5x+6→{2,3}, sets {2,3}/{1,2,3,4}, all 3 Q&A: 10 / 2,3 / 2) and **avoids both trap
+answers** (no "Pifagor discovered it first"; no D=b²+4ac). Natural Uzbek, proper apostrophes.
+
+**Oracle:** reliability/data-integrity (History/self-consistency) + World (factual). No findings.
+**O82 (S3/S4 curio — LOGGED):** episode row shows duration **"1:17"** but the player total reads
+**"1:31"** — a ~14s label vs decoded-audio mismatch (possibly stored TTS estimate vs actual length);
+worth a morning look, not a confirmed bug. **O83 (S4 copy — LOGGED):** the podcast transcript
+click-to-seek hint reads "**Videoning** shu joyiga o'tish…" (says *video* on an audio podcast) —
+likely a shared media-transcript string; fluency/polish, human review. **Test-data:** 1 podcast
+episode created on INDIVIDUAL's own uz-math content (own workspace, harmless); cleaned at run-end.
