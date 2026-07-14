@@ -44,9 +44,9 @@
 | content.[id]/INDIVIDUAL/study-mode | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id]/INDIVIDUAL/selection-ask | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | F63 | ∞ |
 | content.[id]/INDIVIDUAL/section-rail | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
-| content.[id].podcast/INDIVIDUAL/transcript-sync | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id].podcast/INDIVIDUAL/transcript-sync | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | OCD | oracle-verified | R2026-07-14b | a783868a | F81 | 0 |
 | content.[id].podcast/INDIVIDUAL/sse-generate | /[locale]/content/[id]/podcast | INDIVIDUAL | loading/generating | uz | FedEx | oracle-verified | R2026-07-14a | a783868a | O82,O83 | 0 |
-| content.[id].podcast/INDIVIDUAL/legacy-timings | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id].podcast/INDIVIDUAL/legacy-timings | /[locale]/content/[id]/podcast | INDIVIDUAL | populated | uz | OCD | interacted | R2026-07-14b | a783868a | O82→PLANS | 1 |
 | learner.assessments/TENANT_LEARNER-active/structured-players | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | FedEx | interacted | R2026-07-12a | a9b2c397 | — | 1 |
 | learner.assessments/TENANT_LEARNER-active/malformed-config | /[locale]/learner/assessments | TENANT_LEARNER-active | error/failed-job | uz | — | viewed | — | — | — | ∞ |
 | learner.assessments/TENANT_LEARNER-active/hotspot-dragdrop-a11y | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | PLANS:QA-DEFER-HOTSPOT-A11Y | ∞ |
