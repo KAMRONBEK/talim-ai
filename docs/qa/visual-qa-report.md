@@ -1451,3 +1451,35 @@ visible indicator (the session is correct + audited, but a persistent banner + o
 reduce the risk of an admin acting under a user's identity unaware). Enhancement, morning review.
 **Test-data:** stateless 30-min imp token (expires itself); one IMPERSONATE audit row (legitimate
 trail, left in place). No fixtures touched.
+
+### C5 — Deactivation-access-loss (live, mid-session) + reactivate · Nodira + curl 2nd-actor · TENANT_LEARNER · R5 soap opera
+
+**Charter:** Explore the "deactivated learner loses content access immediately" invariant LIVE as
+Nodira (owner curl 2nd-actor deactivates while the learner session is open), to discover
+**security/tenant-isolation** defects. **Done when:** an active learner has content access; the owner
+deactivates mid-session; the learner's NEXT action loses access (no re-login); reactivation restores
+it — all with the same JWT.
+
+**🟢 Baseline (active).** Real teststudent1 login (imp:false), opened the assigned YouTube material
+in-browser → **full render** (video iframe + 6 chapters + transcript); API: content **200**,
+`/learner/assessments` **200**, 1 assigned material on the dashboard.
+
+**🟢 Deactivate mid-session → access lost IMMEDIATELY (same token).** Owner (curl 2nd-actor)
+`PATCH /tenant/students/:id {active:false}` → 200. Learner's next requests, **same JWT, no re-login**:
+- assigned content `assertCanAccessContent` → **404** (was 200);
+- `/learner/assessments` `requireActiveLearner` → **403** ("deactivated", was 200);
+- browser reload of the content page → **redirected to /learner/dashboard**, which now shows
+  **"0 ta material biriktirildi"** / "Hali material tayinlanmagan" and school name degraded to
+  generic "Maktab" — every assigned item vanished, no crash (the console 403/404 cascade is the
+  expected §0.6 deactivation noise, not findings).
+
+**🟢 Reactivate → access restored IMMEDIATELY.** Owner `PATCH {active:true}` → 200. Same-token
+requests: content **200**, `/learner/assessments` **200**; dashboard reload → **"QA Academy" + 1 ta
+material biriktirildi**, the YouTube material back in "Sizga biriktirilgan". Full round-trip.
+
+**Oracle:** security/tenant-isolation (World) — `contentAccess.service` re-checks active membership
+per request, so the switch is live, not JWT-expiry-bound. No F. **O86 (S4 UX — LOGGED):** a learner
+deactivated **mid-session** (valid JWT) sees the assigned list silently empty with **no "your account
+was deactivated" message** — only the login path (F16) explains it. Minor; showing an explicit
+mid-session notice would be clearer. **Test-data:** teststudent1 **restored to active** (original
+state) — clean. No fixtures touched.

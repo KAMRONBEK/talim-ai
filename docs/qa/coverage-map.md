@@ -40,6 +40,7 @@
 | content.[id].flashcards/INDIVIDUAL/empty | /[locale]/content/[id]/flashcards | INDIVIDUAL | empty | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
 | content.[id].flashcards/INDIVIDUAL/review-fail | /[locale]/content/[id]/flashcards | INDIVIDUAL | error/failed-job | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
 | content.[id].flashcards/TENANT_LEARNER-deactivated/populated | /[locale]/content/[id]/flashcards | TENANT_LEARNER-deactivated | populated | uz | — | viewed | — | — | — | ∞ |
+| content.[id]/TENANT_LEARNER-deactivated/access-loss-live | /[locale]/content/[id] | TENANT_LEARNER-deactivated | populated | uz | Nodira | oracle-verified | R2026-07-14a | 13a93172 | O86 | 0 |
 | content.[id]/INDIVIDUAL/study-mode | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | content.[id]/INDIVIDUAL/selection-ask | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | F63 | ∞ |
 | content.[id]/INDIVIDUAL/section-rail | /[locale]/content/[id] | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
