@@ -1739,3 +1739,17 @@ chrome checked this run).
 **🟢 Audit attribution.** `/admin/audit-logs` shows the **IMPERSONATE** entries with `targetType:User` + `metadata:{targetEmail, targetRole:TENANT_LEARNER}` for each mint (teststudent1/teststudent2). (Also visible: C2's `UPGRADE_REQUESTED{requestedPlan:INDIVIDUAL_PRO}` — the request-upgrade left a benign audit signal, not an account change, corroborating C2's no-auto-promotion result.)
 
 **Oracle:** security/tenant-isolation (World). **No new F** (O81 pre-existing). Browser exit-restores-admin = R19 C4 (admin 3001 session is a separate store; O85 no in-web imp banner). **Test-data:** teststudent2 deactivated+reactivated (net zero); throwaway audit entries only. **Cell:** replay-tamper re-verified + deactivated-target added, tour_last→Hostile.
+
+### C5 — ru/en tier on quiz-player + assessment-builder chrome · Dilnoza (ru) / en · charisma/i18n lens
+
+**Charter:** Extend the i18n oracle to the untouched player + assessment surfaces (quiz-player, structured players, GAME player, leaderboard, assessment-builder) at ru (secondary) + en (low-priority), to discover **charisma/i18n** defects (raw keys, wrong-language leakage, script consistency). **Done when:** deterministic raw-key + English-on-ru + Cyrillic-on-en scans are clean across those chromes.
+
+**🟢 Quiz-player + structured player (DROPDOWN_CLOZE), ru & en.** `/ru/quiz/…` chrome = **Проверить / Назад / Далее / Выйти / + Загрузить** (0 raw keys, 0 English UI leakage, Cyrillic present). `/en/quiz/…` chrome = **Check / Previous / Next / Log out / + Upload** (0 raw keys, 0 Cyrillic leak). The uz math option-chips (kvadrati/ildizi/ko'paytmasi) are the AI-generated quiz **content** (content-locale ≠ UI-locale — expected), not chrome.
+
+**🟢 Learner assessments + leaderboard-table, ru.** `/ru/learner/assessments`: **Начать / Таблица лидеров / Достигнут лимит попыток** — 0 raw keys, 0 English leakage. The `leaderboard-table` renders fully in Russian.
+
+**🟢 Assessment-builder chrome, ru.** `/ru/tenant/assessments`: headings **Оценивание / Живые игровые викторины / Банки вопросов / Результаты и таблица лидеров**; wizard steps **Банк/Генерация/Проверка/Публикация/Назначение**; live-game **В эфир / Очистить расписание**; **Создать банк / Новое оценивание / Назад / Далее** — all proper Russian, 0 raw keys. (The only "English" scan hit — "Bank" — is inside the *user-created* bank name "Physics TF Bank", not chrome.)
+
+**🟢 GAME player + leaderboard components i18n'd (source oracle).** `game-quiz-player.tsx` uses `t()` **68×**, `leaderboard-table.tsx` **4×**; no hardcoded user-facing English literals — consistent with C3's fully-Uzbek live game. **O89 (S4 docs — LOGGED, low-confidence):** `apps/web/CLAUDE.md` §2 still warns that `game-quiz-player.tsx`/`leaderboard-table.tsx` "still contain hardcoded English strings" — that note is **stale**; both are now `useTranslations`-driven. Doc-only nit for morning review; not a product bug. (ru/en *live* GAME-player render not directly exercised — needs a second go-live; verified via source + the uz C3 render.)
+
+**Oracle:** charisma/i18n (Standards — script consistency + no wrong-language leakage). **No F.** **Test-data:** none. **Cells:** quiz-player + structured-player + assessment-builder promoted toward oracle-verified(uz+ru).
