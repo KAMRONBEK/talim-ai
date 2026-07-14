@@ -51,9 +51,9 @@
 | learner.assessments/TENANT_LEARNER-active/malformed-config | /[locale]/learner/assessments | TENANT_LEARNER-active | error/failed-job | uz | — | viewed | — | — | — | ∞ |
 | learner.assessments/TENANT_LEARNER-active/hotspot-dragdrop-a11y | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | PLANS:QA-DEFER-HOTSPOT-A11Y | ∞ |
 | quiz.[id]/INDIVIDUAL/structured-player-a11y | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Rustam | oracle-verified | R2026-07-14a | a9b2c397 | O87 | 0 |
-| learner.dashboard/TENANT_LEARNER-active/game-banner | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
-| learner.assessments/TENANT_LEARNER-active/game-live-play | /[locale]/learner/assessments | TENANT_LEARNER-active | loading/generating | uz | Hostile | interacted | R2026-07-12a | 9714b45a | F39 | 1 |
-| learner.assessments/TENANT_LEARNER-active/quiz-review | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.dashboard/TENANT_LEARNER-active/game-banner | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | FedEx | oracle-verified | R2026-07-14b | 9714b45a | — | 0 |
+| learner.assessments/TENANT_LEARNER-active/game-live-play | /[locale]/learner/assessments | TENANT_LEARNER-active | loading/generating | uz | FedEx | oracle-verified | R2026-07-14b | 9714b45a | F39 | 0 |
+| learner.assessments/TENANT_LEARNER-active/quiz-review | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | FedEx | oracle-verified | R2026-07-14b | 9714b45a | — | 0 |
 | learner.messages-bell/TENANT_LEARNER-active/populated | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | Hostile | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
 | learner.messages-bell/TENANT_LEARNER-active/IDOR | /learner/messages/:id | TENANT_LEARNER-active | populated | uz | Hostile | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
 | tenant.progress/TENANT_OWNER/mastery-by-topic | /[locale]/tenant/progress | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
