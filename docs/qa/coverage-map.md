@@ -33,7 +33,7 @@
 | quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | O80 | 0 |
 | quiz.[id]/INDIVIDUAL/short-answer-ai-judge | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Hostile | oracle-verified | R2026-07-14b | 02fbf803 | — | 0 |
 | quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | — | 0 |
-| quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
+| quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | Couch-potato | oracle-verified | R2026-07-14b | 02fbf803 | — | 0 |
 | quiz.[id]/INDIVIDUAL/generating | /[locale]/quiz/[id] | INDIVIDUAL | loading/generating | uz | — | viewed | — | — | — | ∞ |
 | quiz.[id]/INDIVIDUAL/failed-job | /[locale]/quiz/[id] | INDIVIDUAL | error/failed-job | uz | — | viewed | — | — | F59 | ∞ |
 | content.[id].flashcards/INDIVIDUAL/populated | /[locale]/content/[id]/flashcards | INDIVIDUAL | populated | uz | OCD | oracle-verified | R2026-07-12a | 662d4c62 | — | 0 |
