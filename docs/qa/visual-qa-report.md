@@ -1419,3 +1419,35 @@ worker). Evidence: failing req #34 (500) + retry #41 (200) + 8× curl (200). Per
 the billing/plan widget is user-visible, so worth a deterministic-repro attempt on a fresh account
 next run. **Test-data:** email-less kid `qakid19` (pw now `KidNew-67890`) left in QA Academy (seat 5)
 — documented in the creds ledger for reuse; delete at run-end if seats are needed.
+
+### C4 — Impersonation browser flow (UI half) · Power admin · ADMIN(:3001)→LEARNER(:3000) · Hostile lens
+
+**Charter:** Explore the impersonation **browser** flow (the UI half of Run-18 C8's API matrix) as
+the Power admin, to discover **security/tenant-isolation** defects. **Done when:** admin
+`/users/[id]` Impersonate mints a token, "Open impersonated session" acts as the learner, the imp
+session cannot reach admin, and the admin session is restored/untouched.
+
+**🟢 Mint → dialog.** Admin `/users/cmqpv8wse…` (teststudent1) "**Impersonate**" → dialog
+"Impersonation token": the minted JWT decodes to `{userId:teststudent1, role:TENANT_LEARNER,
+tenantId, imp:true, impersonatorId:<admin>, exp:+30min}`, with copy / "Open impersonated session" /
+Done and the "recorded in the audit log" note. (Admin-login redirect stalled on POST-200 → §0.3
+direct-nav `/dashboard` fallback; not a finding.)
+
+**🟢 Open session → acts as learner.** New tab `:3000/en/learner/dashboard` as **Test Student One**,
+QA Academy, showing **only the 1 assigned material + 2 assessments** (learner-sees-only-assigned
+holds). Stored `talim-auth` token = **`imp:true` + `impersonatorId`**, role TENANT_LEARNER.
+
+**🟢 Isolation invariants (verified LIVE in-browser, not just curl).** From the impersonated tab:
+`fetch(:4000/admin/stats/platform)` → **403**, `fetch(:4000/learner/assessments)` → **200** — the
+imp session carries the target's LEARNER role and **cannot reach admin**. The admin app (:3001) keeps
+a **separate** `talim-admin-auth` store (ADMIN token, `imp:false`, admin route **200**) on a
+different origin from the learner app's `talim-auth`, so the impersonated session **can never clobber
+the admin session** — exit/restore is safe by construction (close the imp tab; admin stays authed).
+
+**Oracle:** security/tenant-isolation (World/Standards). No findings — impersonation is now verified
+**end-to-end** (Run-18 API matrix + this browser UI). **O85 (S4 UX — LOGGED):** the impersonated
+learner session shows **no in-app "you are impersonating" banner** — an admin acting as a user has no
+visible indicator (the session is correct + audited, but a persistent banner + one-click "exit" would
+reduce the risk of an admin acting under a user's identity unaware). Enhancement, morning review.
+**Test-data:** stateless 30-min imp token (expires itself); one IMPERSONATE audit row (legitimate
+trail, left in place). No fixtures touched.
