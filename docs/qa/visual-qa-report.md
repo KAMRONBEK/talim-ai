@@ -1553,3 +1553,32 @@ leakage, proper Cyrillic**. **en** dashboard ("Home/Become a tutor/Manage studen
 **0 raw keys**; the only Cyrillic on the en page is the correct "Русский" locale-switcher label.
 
 **Test-data:** none. Cells promoted toward oracle-verified(uz+ru) for the dashboard/content chrome.
+
+### C8 — Bad-neighborhood pass around tonight's bugs · Hostile/Nodira · cross-cutting audit
+
+**Charter:** Last-hour cluster pass around every bug found this run (bugs cluster). **Done when:** the
+F80 (i18n), O84 (billing-500) and F79 (CSV-injection) neighborhoods are swept for adjacent defects.
+
+**🟢 F80 neighborhood (i18n) — CLEAN.** 3-file parity + leakage scan: **uz/en/ru all 1287 keys, 0
+missing in any direction** (no fallback-bug risk). Post-fix ru.json has **no remaining transliterated
+prose** (the 2 residual heuristic hits — CSV placeholder column-names + a testimonial proper name —
+are legitimately Latin). `en.json` has no Cyrillic leak except the correct `locales.ru` = "Русский"
+label. F80 was fully isolated.
+
+**🟢 O84 neighborhood (billing-500) — NOT reproducible → confirmed transient.** Registered **4 fresh
+INDIVIDUAL accounts** and hit `/billing/me` as the **very first authenticated call** each time →
+**4/4 = 200, 0 first-call 500s.** Combined with the earlier 8/8 curl + browser-retry-200, the
+one-off 500 is a genuine transient (most plausibly the single API-process being momentarily saturated
+finishing the C2 podcast TTS Bull job — API and worker share the event loop), NOT a systemic
+first-call/cold-pool bug. O84 correctly stays a flaky-suspect (not elevated). Resolves the PROOF
+"trust-least" concern. (4 throwaway `@probe.local` users deleted via Prisma — clean.)
+
+**🟢 F79 neighborhood (CSV formula-injection) — CLEAN.** Repo-wide sweep for spreadsheet exports:
+the **only** CSV export in the entire codebase is the tenant students roster (`tenant/students/
+page.tsx`, client-side) — already F79-fixed with formula-char escaping. **No admin export, no API
+export** shares the gap (`apps/admin` has zero CSV export paths; `apps/api` only has the students
+CSV *import* parser). No adjacent injection surface.
+
+**F76/F77/F78** are structural, already in `docs/PLANS.md` (Run 18) — no code-level neighborhood to
+re-sweep. **Oracle:** self-consistency + Standards. **No new findings** — tonight's fix (F80) and the
+prior F79 are isolated; O84 is transient. **Test-data:** 4 probe users created + deleted; tree clean.
