@@ -77,20 +77,23 @@ function recordCompletionUsage(
   });
 }
 
+type DeepSeekThinking = 'enabled' | 'disabled';
+
 function createDeepSeekChatCompletion(
   messages: ChatMessageInput[],
-  options?: { temperature?: number; timeoutMs?: number },
+  options?: { temperature?: number; timeoutMs?: number; thinking?: DeepSeekThinking },
 ) {
   return deepseek.chat.completions.create(
     {
       model: env.DEEPSEEK_MODEL,
       messages: toTextOnlyMessages(messages),
       ...(options?.temperature !== undefined ? { temperature: options.temperature } : {}),
-      extra_body: {
-        thinking: {
-          type: env.DEEPSEEK_THINKING,
-        },
-      },
+      // DeepSeek reads `thinking` as a TOP-LEVEL request param. Nesting it under
+      // `extra_body` (a Python-SDK idiom) is silently dropped by the Node SDK, so the
+      // control was a no-op and every call ran in the model's default (reasoning) mode.
+      // Keep it top-level, and let callers override per-request (the answer judge asks
+      // for reasoning so its semantic-equivalence verdicts are accurate).
+      thinking: { type: options?.thinking ?? env.DEEPSEEK_THINKING },
     } as any,
     // SDK-level timeout aborts the HTTP request itself (no detached promise races).
     options?.timeoutMs !== undefined ? { timeout: options.timeoutMs } : undefined,
@@ -104,11 +107,7 @@ function createDeepSeekChatStream(messages: ChatMessageInput[]) {
     stream: true,
     // Ask for a final usage chunk so streamed completions meter tokens like sync ones.
     stream_options: { include_usage: true },
-    extra_body: {
-      thinking: {
-        type: env.DEEPSEEK_THINKING,
-      },
-    },
+    thinking: { type: env.DEEPSEEK_THINKING },
   } as any);
 }
 
@@ -292,7 +291,12 @@ export async function* streamTutorWithTools(
 
 export async function generateJsonCompletion<T>(
   messages: ChatMessageInput[],
-  options?: { temperature?: number; timeoutMs?: number; usage?: AiUsageContext },
+  options?: {
+    temperature?: number;
+    timeoutMs?: number;
+    usage?: AiUsageContext;
+    thinking?: DeepSeekThinking;
+  },
 ): Promise<T> {
   const response = await createDeepSeekChatCompletion(messages, options);
   // Await so usage is persisted before any subsequent quota check (sequential

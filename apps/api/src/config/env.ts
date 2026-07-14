@@ -8,7 +8,7 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(32),
   DEEPSEEK_API_KEY: z.string().default(''),
   DEEPSEEK_MODEL: z.string().default('deepseek-v4-flash'),
-  DEEPSEEK_THINKING: z.enum(['enabled', 'disabled']).default('disabled'),
+  DEEPSEEK_THINKING: z.enum(['enabled', 'disabled']).default('enabled'),
   OPENAI_API_KEY: z.string().default(''),
   // Optional Cohere Rerank API key. When set, hybrid retrieval results are reranked
   // (rerank-v3.5) for a quality boost; when empty, retrieval falls back to RRF order.
