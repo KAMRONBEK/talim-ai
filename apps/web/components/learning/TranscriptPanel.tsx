@@ -22,6 +22,12 @@ interface TranscriptPanelProps {
    */
   onExcerptSelected?: (payload: TranscriptExcerptPayload) => void;
   onSelectionCleared?: () => void;
+  /**
+   * Which medium this transcript syncs to — drives the click-to-seek hint copy
+   * ("…of the video" vs "…of the audio"). Defaults to 'video'; the podcast
+   * player passes 'audio' so the hint doesn't wrongly say "video".
+   */
+  mediaKind?: 'video' | 'audio';
 }
 
 interface TranscriptSentence {
@@ -144,6 +150,7 @@ export function TranscriptPanel({
   onSeek,
   onExcerptSelected,
   onSelectionCleared,
+  mediaKind = 'video',
 }: TranscriptPanelProps) {
   const t = useTranslations('content');
   const activeRef = useRef<HTMLSpanElement | null>(null);
@@ -242,7 +249,9 @@ export function TranscriptPanel({
           </p>
         ))}
         <div className="pt-2 text-[11px] text-muted-foreground">
-          {paragraphs.length > 0 ? t('transcriptClickToSeek') : null}
+          {paragraphs.length > 0
+            ? t(mediaKind === 'audio' ? 'transcriptClickToSeekAudio' : 'transcriptClickToSeek')
+            : null}
         </div>
       </div>
     </div>

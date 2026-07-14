@@ -252,6 +252,7 @@
     "transcriptNotAvailable": "Transkript hali mavjud emas.",
     "selectTranscriptToAsk": "Shu qism haqida so'rash uchun transkript matnini tanlang.",
     "transcriptClickToSeek": "Videoning shu joyiga o'tish uchun gap ustiga bosing.",
+    "transcriptClickToSeekAudio": "Audioning shu joyiga o'tish uchun gap ustiga bosing.",
     "videoEmbedUnavailable": "Bu videoni ichki oynada ko'rsatib bo'lmaydi. Uni YouTube'da oching.",
     "viewerNotAvailable": "Ushbu tur uchun ko'ruvchi mavjud emas.",
     "selectFile": "Fayl tanlash",

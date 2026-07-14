@@ -252,6 +252,7 @@
     "transcriptNotAvailable": "Transcript is not available yet.",
     "selectTranscriptToAsk": "Select transcript text to ask about that part.",
     "transcriptClickToSeek": "Click a sentence to jump to that part of the video.",
+    "transcriptClickToSeekAudio": "Click a sentence to jump to that part of the audio.",
     "videoEmbedUnavailable": "This video cannot be embedded. Open it on YouTube instead.",
     "viewerNotAvailable": "No viewer available for this type.",
     "selectFile": "Choose file",

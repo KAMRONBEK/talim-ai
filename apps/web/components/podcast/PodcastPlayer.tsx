@@ -214,6 +214,7 @@ export function PodcastPlayer({
             segments={effectiveSegments}
             currentMs={Math.round(current * 1000)}
             onSeek={(ms) => seekTo(ms / 1000)}
+            mediaKind="audio"
           />
         </div>
       ) : null}
