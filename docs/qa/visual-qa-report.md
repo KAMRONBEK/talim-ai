@@ -1753,3 +1753,33 @@ chrome checked this run).
 **🟢 GAME player + leaderboard components i18n'd (source oracle).** `game-quiz-player.tsx` uses `t()` **68×**, `leaderboard-table.tsx` **4×**; no hardcoded user-facing English literals — consistent with C3's fully-Uzbek live game. **O89 (S4 docs — LOGGED, low-confidence):** `apps/web/CLAUDE.md` §2 still warns that `game-quiz-player.tsx`/`leaderboard-table.tsx` "still contain hardcoded English strings" — that note is **stale**; both are now `useTranslations`-driven. Doc-only nit for morning review; not a product bug. (ru/en *live* GAME-player render not directly exercised — needs a second go-live; verified via source + the uz C3 render.)
 
 **Oracle:** charisma/i18n (Standards — script consistency + no wrong-language leakage). **No F.** **Test-data:** none. **Cells:** quiz-player + structured-player + assessment-builder promoted toward oracle-verified(uz+ru).
+
+### C8 — Bad-neighborhood pass (around F81) + Run 20 closeout (§G)
+
+**Bad-neighborhood (F81 the only fix tonight):** **🟢 i18n key-parity clean** — uz/en/ru all **1288** keys (was 1287, +1 F81 key present in all three, 0 drift). **🟢 no adjacent mislabel** — `VideoTutorialViewer` does NOT pass `mediaKind` → keeps the correct "video" copy (regression-safe); the only other podcast-area "video" string is the legitimate upload-types list "Fayl, audio, video". F81 is fully isolated. O82/O88 neighborhoods = podcast-media metadata (both already logged/deferred; video-parts share the durationSec estimator but AI Video isn't generated on the test content → unverified, same-root-cause note carried in PLANS O82).
+
+### Run 20 — closeout (§G)
+
+**8 charters, all completed. 1 bug fixed + verified live (F81); 3 new observations (O88, O89, O82-promoted-then-deferred); 1 structural deferral to PLANS (O82). Full types+web+admin typecheck green; every commit on `claude/visual-qa`, nothing pushed. No journal↔ledger drift.** This run closed the two biggest untested P0 surfaces — **GAME-live end-to-end in the real browser** (C3) and **quota-402/upgrade** (C2) — plus deep security re-attacks (written-judge Hostile C1, impersonation battery C6) and the per-part media + i18n frontier.
+
+**Fixed + verified live:** **F81** (S4, i18n/copy) — podcast transcript hint said "video" on an audio player; added `mediaKind='audio'` + `transcriptClickToSeekAudio` (uz/en/ru), video viewer unchanged, verified live.
+
+**Clean passes (oracle-verified, no findings):** C1 written-judge Hostile (11-input battery: keyed=100%, injection/bait/garbage/wrong-plausible=0%, typo+synonym accepted, RTL no-crash); C2 quota-402 (server-enforced, polished manual-payment modal, no auto-promotion invariant); C3 GAME-live e2e browser (go-live→?play→20s timer→submit→leaderboard self-highlight→end-live; `computeGamePoints` formula reproduces awarded points; assigned-only 403, maxAttempts, timing clamp); C4 material per-part (6 retryable episodes, induced degraded part isolates + restores); C5 ru/en player/assessment i18n (0 raw keys, 0 leakage); C6 impersonation battery (mint-authz/tamper-401/imp-no-admin-403/self-400; deactivated-target 403 invariant; audit attribution).
+
+**Coverage advanced (by depth):** 9 cells → `oracle-verified` this run (short-answer-ai-judge[Hostile], quota-exceeded, game-live-play, game-banner, quiz-review, per-part, transcript-sync, quiz-player-i18n-ru-en, assessment-builder-i18n-ru); failed-part + legacy-timings → `interacted`.
+
+**Invariant sweep (all held):** seat-limit n/a this run; deactivated learner loses access immediately — **even through impersonation** (C6 imp→403 after deactivate); learner sees only assigned (teststudent2→403 "not assigned", C3); no cross-tenant id; GAME timing server-clamped (`computeGamePoints` reproduces points; responseMs range-clamped, negatives 400; residual client-speed = F39, PLANS); **INDIVIDUAL never auto-promoted** (C2 upgrade-request → still FREE/INDIVIDUAL); impersonation authz solid.
+
+**Flaky-suspect list:** **O84** (R19) — `/billing/me` one-off 500; still transient, not reproduced this run (not re-tested; carry forward). No new flaky-suspects.
+
+**Blocked-on-job list:** none stuck. INDIVIDUAL generation quota is **5/5 exhausted** for the rest of tonight (C2 hit the cap) — blocks any further INDIVIDUAL quiz/media generation until the daily reset; existing content was sufficient for all remaining charters.
+
+**Staleness report — still `viewed`/∞ or not reached this run:** HOTSPOT + DRAG_DROP learner players (PLANS `QA-DEFER-HOTSPOT-A11Y`, needs owner image-build); ru/en **live GAME-player** render (verified via source+uz, not directly rendered at ru/en — needs a 2nd go-live); AI **Video** per-part generate/retry + FAILED (video not generated on test content; same durationSec estimator as O82, unverified); admin content-detail; pricing/terms cells; analytics 8-endpoint fuzz (empty-DB ÷0, `days` fuzz, 429); moderation FLAGGED-hidden (F78, PLANS); CSV import BOM/semicolon/Windows-1251 + 500-row perf.
+
+**Tomorrow's charter queue (next run):**
+1. **HOTSPOT + DRAG_DROP** — owner builds an image assessment (unblocks `QA-DEFER-HOTSPOT-A11Y`), then learner keyboard+touch a11y + grading truth-table.
+2. **AI Video per-part** generate/retry + induced FAILED (the O82 durationSec estimator likely repeats for video → confirm/relate) — pair with a live FAILED job for the reconciler.
+3. **Analytics 8-endpoint** admin fuzz — empty-DB divide-by-zero, `days` param fuzz, 429 under rapid refresh (US-ADMIN-10, never oracle-counted).
+4. **Moderation FLAGGED-hidden** (F78) — is a FLAGGED podcast/quiz actually withheld from the learner serving path, or label-only? (product-gap confirm).
+5. **CSV import robustness** — BOM/semicolon/Windows-1251 encodings, seat-boundary + concurrent-import race, 500-row perf (fresh angle on csv-import cells).
+6. **Re-examination bucket:** re-attack C3 GAME-live at **ru/en** (live player render) + C1 written-judge with a **Cyrillic/RTL answer key** (different content-locale than uz).
