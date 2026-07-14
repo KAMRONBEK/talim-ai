@@ -31,7 +31,7 @@
 | cell_id | route | role | state | locale_tier | tour_last | depth | last_run | last_commit | findings | staleness |
 |---------|-------|------|-------|-------------|-----------|-------|----------|-------------|----------|-----------|
 | quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | O80 | 0 |
-| quiz.[id]/INDIVIDUAL/short-answer-ai-judge | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Nodira | oracle-verified | R2026-07-14a | eb563533 | — | 0 |
+| quiz.[id]/INDIVIDUAL/short-answer-ai-judge | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Hostile | oracle-verified | R2026-07-14b | 02fbf803 | — | 0 |
 | quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | — | 0 |
 | quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
 | quiz.[id]/INDIVIDUAL/generating | /[locale]/quiz/[id] | INDIVIDUAL | loading/generating | uz | — | viewed | — | — | — | ∞ |
