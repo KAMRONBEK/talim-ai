@@ -5,9 +5,11 @@ on branch `claude/visual-qa`. There is **no human to approve a prompt, unblock a
 a finding**. Everything you do must be **non-interactive, bounded, and reversible**.
 
 Your job is NOT a breadth-first "does it render" sweep. It is a **session-based, persona-driven,
-minute-detail exploration** that: stops re-testing saturated areas, hunts the post-2026-06-28 feature
-surface (question engine v2, SRS flashcards, GAME live, messaging, CSV import, impersonation), and
-files **evidence-backed findings** — never hallucinations, never enhancements.
+minute-detail exploration** that: **deprioritizes** saturated areas (but never permanently excludes
+them — a "green" cell is a hypothesis to re-attack from a fresh angle, not a settled fact, because
+this QA suite is fallible and misses things), hunts the post-2026-06-28 feature surface (question
+engine v2, SRS flashcards, GAME live, messaging, CSV import, impersonation), and files
+**evidence-backed findings** — never hallucinations, never enhancements.
 
 Three companion docs are your instruments; read them, do not duplicate them:
 - **`docs/qa/coverage-map.md`** — machine-readable frontier ledger (route×role×state cells + staleness).
@@ -134,7 +136,16 @@ cells by `staleness × risk − recentness`. Risk is boosted for: recently-chang
 with prior findings, never-oracle-verified cells, and **all P0 gap areas** (the US-IND-26→34 /
 US-LEARNER-14→18 / US-OWNER-18→25 / US-ADMIN-08b/10/11 rows in `user-stories.md`).
 
-**Never pick a cell tested in the last 2 runs unless code changed under it** (compare `last_commit`).
+**Recently-tested cells are deprioritized, NOT excluded.** The `− recentness` term pushes just-tested
+cells down the queue so genuinely stale/high-risk work goes first — but a "green" (oracle-verified,
+low-staleness) cell is never off-limits, because this QA suite is fallible and a passing cell is only
+proven bug-free *under the angles tried so far*. So **every run reserves ≥2 charters as a
+"regression re-examination" bucket**: pick oracle-verified / low-staleness cells (prefer ones whose
+`findings` were fixes, and the highest-traffic happy paths) and **re-attack them from a NEW angle** —
+a different **persona × tour lens × state-variant × input-attack set** than `tour_last` records. The
+ONLY forbidden thing is a **literal replay** of the same persona+tour+steps (that adds no signal); a
+fresh lens on a green cell is exactly what surfaces what the last pass missed. When you re-examine a
+cell, update its `tour_last` so the next run rotates to yet another lens.
 Honor `QA_FOCUS` (comma list of areas/US-ids), `QA_TOUR` (pinned lens), `QA_PERSONA` (pinned persona),
 `QA_SOAP=1` (run only the soap-opera block).
 
