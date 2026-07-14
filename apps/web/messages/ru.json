@@ -99,7 +99,7 @@
       "desc": "Управляйте профилем, паролем и планом.",
       "languageHint": "Язык можно изменить в переключателе в шапке."
     },
-    "readyToLearnSubtitle": "Dobavte istochnik, i Talim prevratit ego v urok."
+    "readyToLearnSubtitle": "Добавьте источник, и Talim превратит его в урок."
   },
   "sidebar": {
     "recents": "Недавние",
@@ -110,7 +110,7 @@
     "read": "Читать",
     "listenPodcast": "Слушать подкаст",
     "watchVideo": "Смотреть видео",
-    "becomeTutorPromo": "Upravlyayte uchenikami i naznachayte materialy."
+    "becomeTutorPromo": "Управляйте учениками и назначайте материалы."
   },
   "content": {
     "summary": "Конспект",

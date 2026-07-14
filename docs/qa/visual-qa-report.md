@@ -1520,3 +1520,36 @@ fallback, unverified). **O87 (S4 perf — LOGGED):** structured-type practice ge
 podcast; SSE kept the UI honest (no stuck spinner) but it's a long wait; worth a generation-latency
 look. **Test-data:** practice quiz `cmrksjfpi…` on INDIVIDUAL's own uz-math content — harmless, cleaned
 at run-end. No fixtures touched.
+
+### C7 — ru + en locale tier on R18/R19-verified surfaces · Dilnoza (ru learner) · INDIVIDUAL · charisma/i18n lens
+
+**Charter:** Explore the ru (secondary) + en (low-priority) locale tier on surfaces previously
+verified at uz only, to discover **charisma/i18n** defects (raw keys, wrong-language leakage, script
+consistency). **Done when:** deterministic raw-key scan + English-on-ru / Cyrillic-on-en leakage
+scans + script-consistency across login/dashboard/content chrome; every touched cell promoted toward
+i18n oracle-verified (uz+ru).
+
+**🐛→✅ F80 (S3, ru i18n — FIXED + verified live). Two Russian strings were written in LATIN
+transliteration instead of Cyrillic.** On the B2C dashboard, `ru.json`:
+- `becomeTutorPromo` = "**Upravlyayte uchenikami i naznachayte materialy.**" (Become-a-tutor card)
+- `readyToLearnSubtitle` = "**Dobavte istochnik, i Talim prevratit ego v urok.**" (upload prompt)
+
+A Russian speaker sees garbled transliterated text where Cyrillic is expected — unprofessional and
+off-brand for the secondary-priority language (`[[talim-language-policy]]`). **Self-verified:** live
+scan of `/ru/dashboard` surfaced the Latin sentences; grep confirmed the two `ru.json` values; a
+**deep ru.json sweep** (values with ≥2 Latin words and no Cyrillic, brand/loanwords allow-listed)
+found **only these two** as transliterated prose (the other 3 hits — "URL slug", a CSV placeholder
+with column names + Uzbek example names, a testimonial proper name — are legitimately Latin, not
+bugs). **Fix:** de-transliterated to proper Cyrillic ("Управляйте учениками и назначайте материалы." /
+"Добавьте источник, и Talim превратит его в урок.") — meaning cross-checked against en+uz. **Verified
+live:** `/ru/dashboard` reload shows the Cyrillic, Latin gone; ru.json valid JSON; types+web+admin
+typecheck all green. Oracle: Standards (script consistency) + product self-consistency (uz/en were
+correct). Commit on branch.
+
+**🟢 Otherwise clean across the tier.** Deterministic scans (raw-key regex `\b[a-z]+(\.[a-zA-Z]+){2,}`
++ English-UI-word list + Cyrillic-on-en): **ru** login ("Войти"/"Регистрация"), dashboard (post-fix),
+content chrome ("РАЗДЕЛЫ/ДЕЙСТВИЯ/РЕСУРСЫ/Практика/ИИ-подкаст/ИИ-видео") — **0 raw keys, 0 English
+leakage, proper Cyrillic**. **en** dashboard ("Home/Become a tutor/Manage students…/Free/Log out") —
+**0 raw keys**; the only Cyrillic on the en page is the correct "Русский" locale-switcher label.
+
+**Test-data:** none. Cells promoted toward oracle-verified(uz+ru) for the dashboard/content chrome.
