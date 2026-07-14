@@ -15,6 +15,9 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
 # Production-only dependency tree that ships to the runner. Excludes the dev
 # toolchain (typescript, tsx, eslint, @types/*) — the bulk of the old ~1.4GB
 # image — while keeping `prisma` (now a prod dep) so the container self-migrates.
+# `--filter @talim/api...` scopes the install to the api + ONLY its (workspace)
+# deps, so unrelated workspace packages' deps (e.g. packages/ui's tailwind
+# toolchain, which the api never imports) don't leak into the runtime image.
 # Prisma's client is generated HERE so the generated code + query engine land in
 # this prod-only node_modules (the runtime imports them).
 FROM base AS prod-deps
@@ -23,7 +26,7 @@ COPY apps/api/package.json ./apps/api/
 COPY packages ./packages
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     pnpm config set store-dir /pnpm/store && \
-    pnpm install --frozen-lockfile --prod
+    pnpm install --frozen-lockfile --prod --filter @talim/api...
 COPY apps/api/src/prisma ./apps/api/src/prisma
 WORKDIR /app/apps/api
 RUN pnpm exec prisma generate

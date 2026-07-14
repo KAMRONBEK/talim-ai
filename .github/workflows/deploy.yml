@@ -137,15 +137,18 @@ jobs:
             export DOPPLER_TOKEN
             DOPPLER_RUN="doppler run --project talim-ai --config prd --"
 
-            # Reclaim disk BEFORE pulling. On this 2GB/small-disk VPS a backlog of
-            # superseded image layers (worse after a failed deploy, when the trailing
-            # prune below never runs) can fill the disk mid-pull and hang the box. The
-            # OLD stack is still running at this point, so every in-use image is protected
-            # and only orphaned layers/containers are removed. `|| true` so a cleanup
-            # hiccup never aborts the deploy.
+            # Reclaim ONLY dangling layers before pulling — NOT `-af`. Disk is not the
+            # tight resource on this box (RAM is); an aggressive `-af` evicts the shared
+            # ~193MB node:alpine base the moment the old app images are superseded, forcing
+            # EVERY deploy to re-download + decompress it (~193MB → real RAM pressure on the
+            # 1.9GB box). Dangling-only keeps that base cached, so a routine deploy pulls
+            # just the changed app layers. Superseded images are reclaimed by the
+            # post-deploy `prune -af` below (only after the new stack is healthy). The OLD
+            # stack is still running here, so its in-use layers are protected regardless.
+            # `|| true` so a cleanup hiccup never aborts the deploy.
             echo "disk before cleanup:"; df -h / | tail -1
             docker container prune -f || true
-            docker image prune -af || true
+            docker image prune -f || true
             echo "disk after cleanup:"; df -h / | tail -1
 
             # Pull :latest for the app tier ONLY (api/web/admin from GHCR). db/redis/nginx
