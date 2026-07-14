@@ -8,7 +8,11 @@
 >
 > **Frontier formula.** `staleness` = runs-since-last-touch (planner sorts desc). Risk is boosted
 > for: recently-changed code (git-log since last run), cells with prior findings, never-oracle-verified
-> cells, and all P0 gap areas. **Never pick a cell tested in the last 2 runs unless code changed under it.**
+> cells, and all P0 gap areas. **Recently-tested cells are deprioritized, NOT excluded** — the
+> `− recentness` term pushes them down the queue, but a "green" cell is never off-limits (this suite is
+> fallible; a passing cell is only proven bug-free under the angles tried so far). **Every run reserves
+> ≥2 charters to re-examine oracle-verified / low-staleness cells from a NEW angle** (different
+> persona × tour × state × input-attack than `tour_last`) — the only forbidden move is a literal replay.
 >
 > **Run-ID scheme:** `R<date><seq>` (e.g. `R2026-07-12a`). **staleness stamp** = `last_run` + `last_commit`.
 >
@@ -27,6 +31,7 @@
 | cell_id | route | role | state | locale_tier | tour_last | depth | last_run | last_commit | findings | staleness |
 |---------|-------|------|-------|-------------|-----------|-------|----------|-------------|----------|-----------|
 | quiz.[id]/INDIVIDUAL/generator | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | O80 | 0 |
+| quiz.[id]/INDIVIDUAL/short-answer-ai-judge | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Nodira | oracle-verified | R2026-07-14a | eb563533 | — | 0 |
 | quiz.[id]/INDIVIDUAL/thin-content | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | FedEx | oracle-verified | R2026-07-12a | a9b2c397 | — | 0 |
 | quiz.[id]/INDIVIDUAL/quota-exceeded | /[locale]/quiz/[id] | INDIVIDUAL | quota-exceeded | uz | — | viewed | — | — | — | ∞ |
 | quiz.[id]/INDIVIDUAL/generating | /[locale]/quiz/[id] | INDIVIDUAL | loading/generating | uz | — | viewed | — | — | — | ∞ |
