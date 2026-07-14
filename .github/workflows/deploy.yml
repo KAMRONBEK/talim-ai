@@ -137,6 +137,17 @@ jobs:
             export DOPPLER_TOKEN
             DOPPLER_RUN="doppler run --project talim-ai --config prd --"
 
+            # Reclaim disk BEFORE pulling. On this 2GB/small-disk VPS a backlog of
+            # superseded image layers (worse after a failed deploy, when the trailing
+            # prune below never runs) can fill the disk mid-pull and hang the box. The
+            # OLD stack is still running at this point, so every in-use image is protected
+            # and only orphaned layers/containers are removed. `|| true` so a cleanup
+            # hiccup never aborts the deploy.
+            echo "disk before cleanup:"; df -h / | tail -1
+            docker container prune -f || true
+            docker image prune -af || true
+            echo "disk after cleanup:"; df -h / | tail -1
+
             # Pull :latest for the app tier ONLY (api/web/admin from GHCR). db/redis/nginx
             # are pinned public images already on the host — pulling them from Docker Hub
             # every deploy intermittently fails on TLS timeouts and aborts the whole deploy.
@@ -158,4 +169,7 @@ jobs:
             ${DOPPLER_RUN} docker compose ${COMPOSE_FILES} up -d --no-build --force-recreate --no-deps --wait nginx
 
             docker logout ghcr.io || true
-            docker image prune -f
+            # Free the images the new stack just superseded (now unused; running
+            # containers protect their own images). -af, not dangling-only, and never
+            # fail the deploy on a prune hiccup.
+            docker image prune -af || true
