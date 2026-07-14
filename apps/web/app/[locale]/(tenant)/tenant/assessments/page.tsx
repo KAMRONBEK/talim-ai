@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   BarChart3,
   CalendarClock,
@@ -11,6 +12,7 @@ import {
   ClipboardList,
   FileText,
   Library,
+  Loader2,
   Pencil,
   Plus,
   Radio,
@@ -372,6 +374,37 @@ export default function TenantAssessmentsPage() {
 
   const selectedBank = banks.find((bank) => bank.id === selectedBankId);
 
+  // Generation now runs as a background job: the POST returns 202 immediately and the
+  // bank carries generationStatus. GENERATING drives the non-blocking indicator; the
+  // tutor keeps working and the bank.status SSE event refreshes banks + questions.
+  const bankGenerating = selectedBank?.generationStatus === 'GENERATING';
+
+  const submitGenerate = async () => {
+    await generate.mutateAsync({
+      topic: draftTopic || undefined,
+      count: draftCount,
+      depth: draftDepth,
+      // Chosen types replace the legacy `style` knob; empty = balanced mix.
+      ...(draftTypes.length > 0 ? { types: draftTypes } : {}),
+    });
+    setDraftTopic('');
+  };
+
+  // Disconnected-SSE fallback: the banks-list safety poll notices the GENERATING →
+  // READY/FAILED flip; refresh this bank's questions too. (While connected, the
+  // bank.status event already invalidates both keys.)
+  const queryClient = useQueryClient();
+  const bankGenStatus = selectedBank?.generationStatus ?? null;
+  const prevGenStatus = useRef(bankGenStatus);
+  useEffect(() => {
+    if (prevGenStatus.current === 'GENERATING' && bankGenStatus !== 'GENERATING' && selectedBankId) {
+      void queryClient.invalidateQueries({
+        queryKey: ['tenant', 'question-banks', selectedBankId, 'questions'],
+      });
+    }
+    prevGenStatus.current = bankGenStatus;
+  }, [bankGenStatus, selectedBankId, queryClient]);
+
   // --- Wizard chrome: one step visible at a time; Next is gated where a prerequisite is missing.
   const [step, setStep] = useState<WizardStep>('bank');
   const stepIndex = WIZARD_STEPS.indexOf(step);
@@ -618,7 +651,15 @@ export default function TenantAssessmentsPage() {
                       : 'border-border/70 hover:border-border hover:bg-secondary/50'
                   }`}
                 >
-                  <span className="block truncate font-display font-semibold">{bank.title}</span>
+                  <span className="flex items-center gap-2">
+                    <span className="block truncate font-display font-semibold">{bank.title}</span>
+                    {bank.generationStatus === 'GENERATING' && (
+                      <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-accent-secondary/15 px-2 py-0.5 font-label text-[10px] font-semibold text-accent-secondary">
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                        {t('generating')}
+                      </span>
+                    )}
+                  </span>
                   <span className="mt-1 block text-xs tabular-nums text-muted-foreground">
                     {t('approvedCount', { approved: bank.approvedCount, total: bank.questionCount })}
                   </span>
@@ -659,14 +700,7 @@ export default function TenantAssessmentsPage() {
               className="mt-4 space-y-4"
               onSubmit={async (event) => {
                 event.preventDefault();
-                await generate.mutateAsync({
-                  topic: draftTopic || undefined,
-                  count: draftCount,
-                  depth: draftDepth,
-                  // Chosen types replace the legacy `style` knob; empty = balanced mix.
-                  ...(draftTypes.length > 0 ? { types: draftTypes } : {}),
-                });
-                setDraftTopic('');
+                await submitGenerate();
               }}
             >
               <Input
@@ -739,11 +773,33 @@ export default function TenantAssessmentsPage() {
                   })}
                 </div>
               </div>
-              <Button type="submit" disabled={generate.isPending}>
-                <Sparkles className="h-4 w-4" />
-                {generate.isPending ? t('generating') : t('generateDrafts')}
+              <Button type="submit" disabled={generate.isPending || bankGenerating}>
+                {bankGenerating ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Sparkles className="h-4 w-4" />
+                )}
+                {bankGenerating ? t('generating') : t('generateDrafts')}
               </Button>
             </form>
+          )}
+          {bankGenerating && (
+            <div className="mt-3 flex items-start gap-2 rounded-xl bg-secondary/60 px-3 py-2.5 text-sm text-muted-foreground">
+              <Loader2 className="mt-0.5 h-4 w-4 shrink-0 animate-spin" />
+              <span>{t('generatingInBackground')}</span>
+            </div>
+          )}
+          {selectedBank?.generationStatus === 'FAILED' && (
+            <div className="mt-3 space-y-2 rounded-xl border border-destructive/30 bg-destructive/5 px-3 py-2.5 text-sm">
+              <p className="text-destructive">
+                {t('generationFailed')}
+                {selectedBank.generationError ? ` — ${selectedBank.generationError}` : ''}
+              </p>
+              <Button size="sm" variant="outline" onClick={submitGenerate} disabled={generate.isPending}>
+                <Sparkles className="h-4 w-4" />
+                {t('generationRetry')}
+              </Button>
+            </div>
           )}
           {generate.isError && (
             <p className="mt-2 text-sm text-destructive">{mutErr(generate.error, t('genericError'))}</p>

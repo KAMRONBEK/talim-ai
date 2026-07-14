@@ -597,6 +597,10 @@ model QuestionBank {
   createdById String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+  // Async AI question generation tracking (Bull job + bank.status SSE).
+  // Null = never generated; GENERATING blocks a concurrent enqueue (409).
+  generationStatus GeneratedMediaStatus?
+  generationError  String?
   tenant      Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   createdBy   User           @relation("QuestionBanksCreated", fields: [createdById], references: [id], onDelete: Cascade)
   questions   BankQuestion[]

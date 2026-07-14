@@ -9,7 +9,7 @@ import { chunkText, storeChunksWithEmbeddings } from '../services/rag.service.js
 import { generateContentSections } from '../services/section.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { autoGenerateSectionDecks } from '../services/slides.service.js';
-import { jobEvents } from '../services/events/jobEvents.service.js';
+import { publishContentEvent } from '../services/events/jobEventAudience.js';
 
 export function registerProcessContentJob(): void {
   contentQueue.process(async (job) => {
@@ -80,9 +80,9 @@ export function registerProcessContentJob(): void {
         where: { id: contentId },
         data: { status: ContentStatus.READY },
       });
-      // Push to the owner's tabs so they stop polling and refetch (content + sections +
-      // slides + summary) immediately.
-      jobEvents.publish(content.userId, { type: 'content.status', contentId, status: 'READY' });
+      // Push to everyone who can see this content (owner + assigned learners) so their
+      // tabs stop polling and refetch (content + sections + slides + summary) immediately.
+      void publishContentEvent(contentId, { type: 'content.status', contentId, status: 'READY' });
 
       // Pre-generate section slide decks so students see ready slides immediately.
       // Best-effort and quota-aware — never fails an already-READY content.
@@ -112,7 +112,7 @@ export function registerProcessContentJob(): void {
         where: { id: contentId },
         data: { status: ContentStatus.FAILED },
       });
-      jobEvents.publish(content.userId, { type: 'content.status', contentId, status: 'FAILED' });
+      void publishContentEvent(contentId, { type: 'content.status', contentId, status: 'FAILED' });
       throw error;
     }
   });

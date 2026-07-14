@@ -53,6 +53,13 @@ export function SectionReader({
   const lastLimit = useRef<ReturnType<typeof classifyGenerationError> | null>(null);
 
   const deck = deckRow?.deck ?? null;
+  // Generation is a 202+background-job flow: the row's GENERATING/FAILED status
+  // (refreshed by the slides.status SSE event) drives the UI, not just the brief
+  // enqueue mutation. A learner can't generate, so a GENERATING row (their tutor is
+  // regenerating) must not hide their text fallback.
+  const serverGenerating = deckRow?.status === 'GENERATING';
+  const serverFailed = deckRow?.status === 'FAILED';
+  const showGenerating = generate.isPending || (serverGenerating && !isLearner);
   const hasBody = !!body && body.trim().length > 0;
   const errorInfo = classifyGenerationError(generate.error);
   if (generate.isError && errorInfo.kind !== 'error') {
@@ -65,15 +72,18 @@ export function SectionReader({
       ? t('limitReached', { used: lastLimit.current.used ?? 0, limit: lastLimit.current.limit ?? 0 })
       : t('limitReachedGeneric');
 
-  // Auto-generate the deck once per section for users who can generate.
+  // Auto-generate the deck once per section for users who can generate. A deck that is
+  // already GENERATING (enqueued elsewhere / another tab) or FAILED (explicit retry
+  // instead) must not trigger another enqueue.
   useEffect(() => {
     if (mode !== 'slides' || !sectionId || isLearner || limitBlocked.current) return;
-    if (deck || isLoading || generateRef.current.isPending || generateRef.current.isError) return;
+    if (deck || isLoading || serverGenerating || serverFailed) return;
+    if (generateRef.current.isPending || generateRef.current.isError) return;
     if (!hasBody) return;
     if (attempted.current.has(sectionId)) return;
     attempted.current.add(sectionId);
     generateRef.current.mutate({});
-  }, [mode, sectionId, isLearner, deck, isLoading, hasBody]);
+  }, [mode, sectionId, isLearner, deck, isLoading, serverGenerating, serverFailed, hasBody]);
 
   const TextView = (
     <SelectionAsk>
@@ -115,15 +125,25 @@ export function SectionReader({
           </button>
         </div>
         {mode === 'slides' && deck && !isLearner && !limited && (
-          <button
-            type="button"
-            onClick={() => generate.mutate({})}
-            disabled={generate.isPending}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:opacity-50"
-          >
-            <RefreshCw className={generate.isPending ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
-            {t('regenerate')}
-          </button>
+          <div className="flex items-center gap-3">
+            {/* A regenerate that FAILED in the background job keeps rendering the old
+                deck, so the CenteredCard error branch below is unreachable — surface
+                the failure inline next to the retry button instead. */}
+            {serverFailed && (
+              <span className="max-w-[14rem] truncate text-sm text-destructive" title={t('error')}>
+                {t('error')}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={() => generate.mutate({ regenerate: true })}
+              disabled={showGenerating}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground disabled:opacity-50"
+            >
+              <RefreshCw className={showGenerating ? 'h-4 w-4 animate-spin' : 'h-4 w-4'} />
+              {t('regenerate')}
+            </button>
+          </div>
         )}
       </div>
 
@@ -143,7 +163,7 @@ export function SectionReader({
         <CenteredCard>
           <p className="text-sm text-muted-foreground">{tContent('sectionLoading')}</p>
         </CenteredCard>
-      ) : generate.isPending ? (
+      ) : showGenerating ? (
         <CenteredCard>
           <div className="relative flex h-14 w-14 items-center justify-center">
             <span className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
@@ -171,7 +191,7 @@ export function SectionReader({
             {tContent('viewText')}
           </button>
         </CenteredCard>
-      ) : generate.isError ? (
+      ) : generate.isError || serverFailed ? (
         <CenteredCard>
           <p className="text-sm text-destructive">{t('error')}</p>
           <button

@@ -3,7 +3,7 @@ import { parseAppLocale, type QuestionDepth } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { searchSimilarChunks, buildRagContext } from '../services/rag.service.js';
 import { quizQueue, type GenerateQuizJobData } from '../services/queue.service.js';
-import { jobEvents } from '../services/events/jobEvents.service.js';
+import { publishContentEvent } from '../services/events/jobEventAudience.js';
 import { type QuestionStyle } from '../lib/assessment-prompt.js';
 import {
   normalizePracticeQuestionType,
@@ -210,7 +210,7 @@ export function registerGenerateQuizJob(): void {
         `generateQuiz: quiz ${quizId} delivered ${questions.length}/${count} in ${passes} pass(es), skipped ${skipped} ${JSON.stringify(breakdown)}`,
       );
     }
-    jobEvents.publish(content.userId, { type: 'quiz.status', quizId, contentId, status: 'READY' });
+    void publishContentEvent(contentId, { type: 'quiz.status', quizId, contentId, status: 'READY' });
   });
 
   quizQueue.on('failed', async (job, err) => {
@@ -219,17 +219,11 @@ export function registerGenerateQuizJob(): void {
     // forever — push a FAILED so it can stop.
     const data = job?.data as GenerateQuizJobData | undefined;
     if (!data?.quizId) return;
-    const owner = await prisma.content.findUnique({
-      where: { id: data.contentId },
-      select: { userId: true },
+    await publishContentEvent(data.contentId, {
+      type: 'quiz.status',
+      quizId: data.quizId,
+      contentId: data.contentId,
+      status: 'FAILED',
     });
-    if (owner) {
-      jobEvents.publish(owner.userId, {
-        type: 'quiz.status',
-        quizId: data.quizId,
-        contentId: data.contentId,
-        status: 'FAILED',
-      });
-    }
   });
 }

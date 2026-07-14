@@ -30,7 +30,11 @@ function SlidesInner({ id }: { id: string }) {
   };
 
   const deck = deckRow?.deck ?? null;
-  const generating = generate.isPending;
+  // Generation is a 202+background-job flow: the deck row's GENERATING status
+  // (refreshed by the slides.status SSE event) drives the spinner, not just the
+  // brief enqueue mutation; job failures surface as status FAILED.
+  const generating = generate.isPending || deckRow?.status === 'GENERATING';
+  const failed = deckRow?.status === 'FAILED';
 
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col">
@@ -50,10 +54,14 @@ function SlidesInner({ id }: { id: string }) {
         </div>
         <div className="flex items-center gap-3">
           {/* When a deck already exists the EmptyState (which renders genError)
-              isn't shown, so surface regenerate errors here too. */}
-          {genError && deck && (
-            <span className="max-w-[16rem] truncate text-sm text-destructive" title={genError}>
-              {genError}
+              isn't shown, so surface enqueue errors AND job-level failures (status
+              FAILED from the background run) here too. */}
+          {(genError || failed) && deck && (
+            <span
+              className="max-w-[16rem] truncate text-sm text-destructive"
+              title={genError ?? t('error')}
+            >
+              {genError ?? t('error')}
             </span>
           )}
           {!isLearner && deck && (
@@ -80,7 +88,7 @@ function SlidesInner({ id }: { id: string }) {
             body={t('emptyBody')}
             cta={t('generate')}
             onGenerate={() => runGenerate(false)}
-            error={genError}
+            error={genError ?? (failed ? t('error') : null)}
           />
         )}
       </div>

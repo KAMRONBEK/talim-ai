@@ -10,6 +10,10 @@ import {
 } from '../../lib/question-gen-prompt.js';
 import { generateQuestionSet } from '../../lib/question-gen.js';
 import {
+  bankQuestionsQueue,
+  type GenerateBankQuestionsJobData,
+} from '../queue.service.js';
+import {
   buildStructuredQuestion,
   buildHotspotQuestion,
   buildDragDropQuestion,
@@ -72,6 +76,62 @@ export async function listQuestions(tenantId: string, bankId: string) {
     orderBy: { createdAt: 'desc' },
   });
   return questions.map(formatQuestion);
+}
+
+/**
+ * Enqueue AI question generation for a bank (20–90s of LLM work — far too slow to block
+ * the tutor's request). Validates up front so 400s stay synchronous, claims the bank
+ * atomically (409 when a run is already in flight), and hands off to the Bull worker,
+ * which runs `generateQuestions` below and publishes a `bank.status` SSE event when done.
+ * Quota is checked by `enforceQuota('GENERATION')` on the route at request time; usage
+ * metering (QUESTION_DRAFT) stays inside `generateQuestionSet` and thus runs in the job.
+ */
+export async function enqueueGenerateQuestions(
+  tenantId: string,
+  userId: string,
+  bankId: string,
+  input: unknown,
+) {
+  await assertBank(tenantId, bankId);
+  const body = generateSchema.parse(input ?? {});
+
+  // Atomic GENERATING claim — a concurrent second request loses the updateMany and 409s.
+  const claimed = await prisma.questionBank.updateMany({
+    where: {
+      id: bankId,
+      OR: [{ generationStatus: null }, { generationStatus: { not: 'GENERATING' } }],
+    },
+    data: { generationStatus: 'GENERATING', generationError: null },
+  });
+  if (claimed.count === 0) {
+    throw new AppError(409, 'Question generation is already running for this bank');
+  }
+
+  try {
+    const jobData: GenerateBankQuestionsJobData = { bankId, tenantId, userId, input: body };
+    await bankQuestionsQueue.add(jobData);
+  } catch (err) {
+    // Enqueue failed (e.g. Redis down) — release the claim so the tutor can retry.
+    await prisma.questionBank
+      .updateMany({
+        where: { id: bankId },
+        data: {
+          generationStatus: 'FAILED',
+          generationError: 'Could not start generation. Please try again.',
+        },
+      })
+      .catch(() => undefined);
+    throw err;
+  }
+
+  const bank = await prisma.questionBank.findUniqueOrThrow({
+    where: { id: bankId },
+    include: {
+      questions: { select: { status: true } },
+      materials: { include: { content: { select: { id: true, title: true } } } },
+    },
+  });
+  return formatBank(bank);
 }
 
 export async function generateQuestions(

@@ -18,6 +18,9 @@ export type JobEvent =
       status: 'READY' | 'FAILED' | 'GENERATING';
     }
   | { type: 'quiz.status'; quizId: string; contentId?: string; status: 'READY' | 'FAILED' }
+  | { type: 'transcript.status'; contentId: string; status: 'READY' | 'FAILED' }
+  | { type: 'manim.status'; jobId: string; status: 'READY' | 'FAILED' }
+  | { type: 'bank.status'; bankId: string; status: 'READY' | 'FAILED' }
   | { type: 'leaderboard.update'; assessmentId: string; tenantId: string };
 
 /** Wire frame: carries a monotonic per-user sequence id for Last-Event-ID replay. */

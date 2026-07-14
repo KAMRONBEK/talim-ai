@@ -165,6 +165,14 @@ export function VideoTutorialViewer({
         <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border bg-card p-4 text-center text-sm text-muted-foreground">
           {t('transcriptLoadError')}
         </div>
+      ) : transcript?.status === 'transcribing' ? (
+        <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border bg-card p-4 text-center text-sm text-muted-foreground">
+          <span className="animate-pulse">{t('transcriptTranscribing')}</span>
+        </div>
+      ) : transcript?.status === 'failed' ? (
+        <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border bg-card p-4 text-center text-sm text-muted-foreground">
+          {t('transcriptFailed')}
+        </div>
       ) : (
         <TranscriptPanel
           segments={transcript?.segments ?? []}

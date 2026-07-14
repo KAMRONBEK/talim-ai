@@ -529,6 +529,10 @@ export interface QuestionBank {
   topic: string | null;
   createdById: string;
   createdAt: string;
+  /** Async AI generation job state; null when the bank has never generated. */
+  generationStatus: GeneratedMediaStatus | null;
+  /** Failure message from the last generation run (FAILED only). */
+  generationError: string | null;
   questionCount: number;
   approvedCount: number;
   /** Materials (Content) this bank is about. */
@@ -1067,12 +1071,20 @@ export interface TranscriptSegment {
   source: TranscriptSource;
 }
 
+/**
+ * Lazy YouTube-backfill state of a transcript: `transcribing` while the backfill
+ * job runs (segments empty), `failed` when the job permanently failed, `ready`
+ * when segments are stored (or the content has no source URL to backfill from).
+ */
+export type TranscriptBackfillStatus = 'ready' | 'transcribing' | 'failed';
+
 export interface ContentTranscriptResponse {
   transcript: {
     contentId: string;
     source: TranscriptSource | null;
     durationMs: number | null;
     segments: TranscriptSegment[];
+    status: TranscriptBackfillStatus;
   };
 }
 

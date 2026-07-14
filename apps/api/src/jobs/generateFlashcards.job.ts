@@ -2,7 +2,7 @@ import { parseAppLocale, type AppLocale } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { flashcardQueue, type GenerateFlashcardsJobData } from '../services/queue.service.js';
-import { jobEvents } from '../services/events/jobEvents.service.js';
+import { publishContentEvent } from '../services/events/jobEventAudience.js';
 
 interface GeneratedCard {
   front: string;
@@ -107,7 +107,7 @@ export function registerGenerateFlashcardsJob(): void {
 
     if (cards.length === 0) {
       await prisma.flashcardDeck.update({ where: { id: deckId }, data: { status: 'FAILED' } });
-      jobEvents.publish(content.userId, {
+      void publishContentEvent(contentId, {
         type: 'flashcards.status',
         contentId,
         sectionId: deck.sectionId ?? undefined,
@@ -129,7 +129,7 @@ export function registerGenerateFlashcardsJob(): void {
       prisma.flashcardDeck.update({ where: { id: deckId }, data: { status: 'READY' } }),
     ]);
 
-    jobEvents.publish(content.userId, {
+    void publishContentEvent(contentId, {
       type: 'flashcards.status',
       contentId,
       sectionId: deck.sectionId ?? undefined,
@@ -144,17 +144,11 @@ export function registerGenerateFlashcardsJob(): void {
     const deck = await prisma.flashcardDeck
       .update({ where: { id: data.deckId }, data: { status: 'FAILED' } })
       .catch(() => null);
-    const owner = await prisma.content.findUnique({
-      where: { id: data.contentId },
-      select: { userId: true },
+    await publishContentEvent(data.contentId, {
+      type: 'flashcards.status',
+      contentId: data.contentId,
+      sectionId: deck?.sectionId ?? undefined,
+      status: 'FAILED',
     });
-    if (owner) {
-      jobEvents.publish(owner.userId, {
-        type: 'flashcards.status',
-        contentId: data.contentId,
-        sectionId: deck?.sectionId ?? undefined,
-        status: 'FAILED',
-      });
-    }
   });
 }

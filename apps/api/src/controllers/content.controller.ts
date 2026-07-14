@@ -1,7 +1,6 @@
 import type { Response } from 'express';
 import { ContentType } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
-import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
@@ -9,14 +8,7 @@ import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { decodeUploadFilename } from '../lib/filename.js';
-import {
-  extractRegionTextFromImage,
-  extractTextFromPageImages,
-  getPdfPageCount,
-} from '../services/pdf.service.js';
-import { captionAndStoreFigures } from '../services/figure.service.js';
-import { ingestText } from '../services/ingest.service.js';
-import { autoGenerateSectionDecks } from '../services/slides.service.js';
+import { extractRegionTextFromImage, getPdfPageCount } from '../services/pdf.service.js';
 import {
   assertQuota,
   getFileLimitsForUser,
@@ -35,12 +27,16 @@ import {
   reparseSchema,
   sendContentFile,
   loadOrBackfillTranscript,
+  enqueueReparse,
 } from './content-shared.js';
 
 /**
  * Re-read a document via vision OCR of client-rasterized page images, then
  * re-ingest (replaces chunks + sections). The reliable path for scanned/image
- * PDFs whose embedded text layer is empty or junk.
+ * PDFs whose embedded text layer is empty or junk. The OCR + re-embed take
+ * 1–4+ minutes, so the work runs as a Bull job (reparseContent.job.ts): stage
+ * the page images in storage, flip to PROCESSING, enqueue, respond 202 — the
+ * client's processing screen + the SSE content.status event close the loop.
  */
 export async function reparseContent(req: AuthenticatedRequest, res: Response): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
@@ -56,32 +52,8 @@ export async function reparseContent(req: AuthenticatedRequest, res: Response): 
     tenantId: req.user.tenantId,
   });
 
-  await prisma.content.update({ where: { id: content.id }, data: { status: 'PROCESSING' } });
-  try {
-    const usage = {
-      userId: content.userId,
-      tenantId: content.tenantId ?? undefined,
-      metadata: { contentId: content.id, reparse: true },
-    };
-    const text = await extractTextFromPageImages(pages, usage);
-    const { chunkCount } = await ingestText(content.id, text, usage);
-    const updated = await prisma.content.update({ where: { id: content.id }, data: { status: 'READY' } });
-    res.json({ content: formatContent(updated), chunks: chunkCount });
-    // Caption + index the page figures (best-effort) so diagrams are retrievable.
-    void captionAndStoreFigures(content.id, pages, usage).catch(() => {});
-    // Pre-generate the new section decks in the background (best-effort).
-    void autoGenerateSectionDecks({
-      contentId: content.id,
-      userId: content.userId,
-      tenantId: content.tenantId ?? null,
-      role: req.user.role,
-      title: content.title,
-      locale: env.DEFAULT_CONTENT_LOCALE,
-    }).catch(() => {});
-  } catch (error) {
-    await prisma.content.update({ where: { id: content.id }, data: { status: 'FAILED' } });
-    throw error;
-  }
+  const updated = await enqueueReparse(content, req.user.userId, pages);
+  res.status(202).json({ content: formatContent(updated) });
 }
 
 function formatContent(content: {

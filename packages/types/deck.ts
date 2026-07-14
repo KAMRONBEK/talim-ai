@@ -218,7 +218,7 @@ export interface Deck {
   slides: DeckSlide[];
 }
 
-export type SlideDeckStatus = 'PENDING' | 'READY' | 'FAILED';
+export type SlideDeckStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';
 
 /** API response shape for a generated deck. */
 export interface ContentSlideDeck {

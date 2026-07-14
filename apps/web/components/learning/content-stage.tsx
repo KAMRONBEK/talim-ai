@@ -1,14 +1,17 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useQueryClient } from '@tanstack/react-query';
 import { FileText, Loader2, Presentation, RefreshCw, Youtube } from 'lucide-react';
 import { cn } from '@talim/ui';
-import type { Content } from '@talim/types';
+import type { AppLocale, Content } from '@talim/types';
 import { useRouter } from '@/i18n/navigation';
-import { useGenerateSummary, useQuizHistory } from '@/hooks/useQuiz';
+import { useQuizHistory, useSavedSummary } from '@/hooks/useQuiz';
 import { usePodcast } from '@/hooks/usePodcast';
 import { useFlashcards } from '@/hooks/useFlashcards';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
+import { streamSummaryGeneration } from '@/lib/summaryStream';
 import { fetchAuthenticatedBlob } from '@/lib/authenticatedBlob';
 import { useAuthStore } from '@/store/useAuthStore';
 import { contentEndpoints } from '@/lib/api/endpoints';
@@ -67,12 +70,20 @@ export function ContentStage({
   const t = useTranslations('content');
   const tChat = useTranslations('chat');
   const router = useRouter();
-  const generateSummary = useGenerateSummary();
+  const locale = useLocale() as AppLocale;
+  const queryClient = useQueryClient();
+  const handleLimitError = useLimitErrorHandler();
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [pdfError, setPdfError] = useState(false);
   const [pdfReload, setPdfReload] = useState(0);
   const [view, setView] = useState<'material' | 'summary'>('material');
-  const [summary, setSummary] = useState<string | null>(null);
+  // Whole-document summary: the GET-cached copy loads instantly; a missing one is
+  // streamed token-by-token into `streamedSummary` (learners never generate).
+  const { data: savedSummary, isLoading: savedSummaryLoading } = useSavedSummary(contentId);
+  const [streamedSummary, setStreamedSummary] = useState<string | null>(null);
+  const [summaryPending, setSummaryPending] = useState(false);
+  const [summaryError, setSummaryError] = useState<string | null>(null);
+  const summary = streamedSummary ?? savedSummary ?? null;
   const [selectionHint, setSelectionHint] = useState<string | null>(null);
 
   const isPdf = content.type === 'PDF' || content.type === 'SLIDE';
@@ -133,19 +144,46 @@ export function ContentStage({
   }, [isPdf, content.storagePath, contentId, isTenantOwner, pdfReload]);
 
   const loadSummary = useCallback(async () => {
-    if (summary || generateSummary.isPending) return;
+    if (summary || summaryPending || savedSummaryLoading) return;
+    // Learners can't generate (POST is learner-blocked server-side) — they only
+    // see the owner's saved summary via the GET above.
+    if (isLearner) return;
+    setSummaryError(null);
+    setSummaryPending(true);
     try {
-      const text = await generateSummary.mutateAsync({ contentId });
-      setSummary(text);
-    } catch {
-      /* surfaced by the not-available copy below */
+      const final = await streamSummaryGeneration({
+        contentId,
+        onText: (fullText) => setStreamedSummary(fullText),
+      });
+      // Persisted summary is the sanitized text — settle on it and seed the
+      // react-query cache so other summary views agree without a refetch.
+      setStreamedSummary(final.summary);
+      queryClient.setQueryData(['summary', contentId, 'full', locale], final.summary);
+      void queryClient.invalidateQueries({ queryKey: ['learning-history', contentId, locale] });
+    } catch (err) {
+      setStreamedSummary(null);
+      // handleLimitError returns null when it opened the upgrade modal — don't stack an
+      // inline error + Retry behind the modal (matches the useContentActions pattern).
+      setSummaryError(handleLimitError(err, t('summaryFailed')));
+    } finally {
+      setSummaryPending(false);
     }
-  }, [summary, generateSummary, contentId]);
+  }, [
+    summary,
+    summaryPending,
+    savedSummaryLoading,
+    isLearner,
+    contentId,
+    locale,
+    queryClient,
+    handleLimitError,
+    t,
+  ]);
 
   useEffect(() => {
     if (view === 'summary') void loadSummary();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- load once per switch to summary
-  }, [view]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- kick off per switch to summary (and once the saved-summary lookup settles)
+  }, [view, savedSummaryLoading]);
 
   const handlePdfExcerpt = useCallback(
     (payload: PdfExcerptPayload) => {
@@ -312,10 +350,24 @@ export function ContentStage({
       <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden">
         {view === 'summary' ? (
           <div className="min-h-0 flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
-            {generateSummary.isPending ? (
-              <p className="text-muted-foreground">{t('summaryGenerating')}</p>
-            ) : summary ? (
+            {summary ? (
+              // Streams in token-by-token while generating; the final sanitized
+              // text replaces it on completion.
               <SummaryText text={summary} />
+            ) : summaryPending || savedSummaryLoading ? (
+              <p className="text-muted-foreground">{t('summaryGenerating')}</p>
+            ) : summaryError ? (
+              <div className="flex flex-col items-start gap-3">
+                <p className="text-destructive">{summaryError}</p>
+                <button
+                  type="button"
+                  onClick={() => void loadSummary()}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 py-2 text-sm font-semibold transition-colors hover:-translate-y-px hover:bg-secondary"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  {t('summaryRetry')}
+                </button>
+              </div>
             ) : (
               <p className="text-muted-foreground">{t('summaryNotAvailable')}</p>
             )}

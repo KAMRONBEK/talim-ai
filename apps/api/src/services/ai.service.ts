@@ -102,6 +102,8 @@ function createDeepSeekChatStream(messages: ChatMessageInput[]) {
     model: env.DEEPSEEK_MODEL,
     messages: toTextOnlyMessages(messages),
     stream: true,
+    // Ask for a final usage chunk so streamed completions meter tokens like sync ones.
+    stream_options: { include_usage: true },
     extra_body: {
       thinking: {
         type: env.DEEPSEEK_THINKING,
@@ -119,14 +121,22 @@ export async function generateChatCompletion(
   return response.choices[0]?.message?.content ?? '';
 }
 
-export async function* streamChatCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
+export async function* streamChatCompletion(
+  messages: ChatMessageInput[],
+  usage?: AiUsageContext,
+): AsyncGenerator<string> {
   const stream =
     (await createDeepSeekChatStream(messages)) as unknown as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
 
+  let finalUsage: { prompt_tokens?: number; completion_tokens?: number } | null = null;
   for await (const chunk of stream) {
+    if (chunk.usage) finalUsage = chunk.usage;
     const text = chunk.choices[0]?.delta?.content ?? '';
     if (text) yield text;
   }
+
+  // Fire-and-forget like the sync path; recordUsage swallows its own failures.
+  recordCompletionUsage(usage, env.DEEPSEEK_MODEL, { usage: finalUsage });
 }
 
 export async function* streamTutorCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {

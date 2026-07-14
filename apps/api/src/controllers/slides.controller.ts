@@ -10,7 +10,7 @@ import { assertCanAccessContent, assertCanGenerate } from '../services/contentAc
 import {
   getSlideDeck,
   getReadySlideDeckAnyLocale,
-  generateAndStoreSlideDeck,
+  enqueueSlideDeckGeneration,
 } from '../services/slides.service.js';
 
 const slidesBodySchema = z.object({
@@ -48,11 +48,17 @@ export async function createSlides(req: AuthenticatedRequest, res: Response): Pr
 
   // Serve a cached, finished deck without re-spending generation quota — unless the
   // caller explicitly asked to regenerate (the "Regenerate" button), which must force a
-  // fresh deck rather than silently returning the existing one.
+  // fresh deck rather than silently returning the existing one. A deck that is already
+  // GENERATING is returned as-is (202) instead of enqueueing a duplicate job; only an
+  // explicit regenerate may force a new run past an in-flight one.
   if (!body.regenerate) {
     const existing = await getSlideDeck(contentId, locale, body.sectionId);
     if (existing && existing.status === 'READY' && existing.deck) {
       res.json({ slides: existing, cached: true });
+      return;
+    }
+    if (existing && existing.status === 'GENERATING') {
+      res.status(202).json({ slides: existing, cached: false });
       return;
     }
   }
@@ -62,7 +68,9 @@ export async function createSlides(req: AuthenticatedRequest, res: Response): Pr
     tenantId: req.user.tenantId,
   });
 
-  const slides = await generateAndStoreSlideDeck({
+  // Generation takes 30–120s of LLM work — run it as a Bull job. Completion is pushed
+  // over SSE (slides.status READY/FAILED); the client refetches through GET /slides.
+  const slides = await enqueueSlideDeckGeneration({
     userId: req.user.userId,
     tenantId: req.user.tenantId,
     contentId,
@@ -72,5 +80,5 @@ export async function createSlides(req: AuthenticatedRequest, res: Response): Pr
     sectionId: body.sectionId,
   });
 
-  res.json({ slides, cached: false });
+  res.status(202).json({ slides, cached: false });
 }

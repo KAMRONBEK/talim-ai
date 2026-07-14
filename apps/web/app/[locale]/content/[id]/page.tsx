@@ -63,9 +63,9 @@ function ContentWorkspaceInner({ id }: { id: string }) {
   const { data: history } = useLearningHistory(id);
 
   const {
-    generateSummary,
     retryContent,
     summary,
+    summaryPending,
     summaryOpen,
     setSummaryOpen,
     deleteOpen,
@@ -155,7 +155,7 @@ function ContentWorkspaceInner({ id }: { id: string }) {
     // Scopes the Practice generator's "current section" option; the mastery list under the
     // progress area lives on the ['mastery', id] query key (hooks invalidate it on submits).
     activeSectionId,
-    summaryPending: generateSummary.isPending,
+    summaryPending,
     overallCoverage: progressData?.contentProgress?.overallCoverage ?? 0,
     sectionCoverage: sectionProgress?.coverageScore ?? 0,
     streakDays: history?.streakDays ?? 0,
@@ -288,7 +288,11 @@ function ContentWorkspaceInner({ id }: { id: string }) {
           <DialogHeader>
             <DialogTitle>{t('summaryTitle')}</DialogTitle>
           </DialogHeader>
-          <SummaryText text={summary ?? ''} />
+          {summaryPending && !summary ? (
+            <p className="text-sm text-muted-foreground">{t('summaryGenerating')}</p>
+          ) : (
+            <SummaryText text={summary ?? ''} />
+          )}
         </DialogContent>
       </Dialog>
 

@@ -136,8 +136,10 @@ export function MaterialMediaPanel({ contentId }: { contentId: string }) {
             : 'empty';
 
   const slStatus = slides.data?.status;
+  // Slides generation is a 202+job flow: the deck row's GENERATING status (refreshed by
+  // the slides.status SSE event) drives the spinner, not just the brief mutation.
   const slidesState: TileState =
-    genSlides.isPending || slStatus === 'PENDING'
+    genSlides.isPending || slStatus === 'PENDING' || slStatus === 'GENERATING'
       ? 'generating'
       : slStatus === 'FAILED'
         ? 'failed'

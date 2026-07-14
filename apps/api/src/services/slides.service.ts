@@ -7,6 +7,12 @@ import { assertQuota } from './subscription.service.js';
 import { getOrderedChunks, buildRagContext, boundContextByTokens } from './rag.service.js';
 import { getSectionBody } from './section.service.js';
 import { generateJsonCompletion } from './ai.service.js';
+import { slidesQueue, type GenerateSlidesJobData } from './queue.service.js';
+import {
+  publishContentEvent,
+  publishContentEventTo,
+  resolveContentAudience,
+} from './events/jobEventAudience.js';
 import { deckSchema, slideSchema } from '../lib/deck-schema.js';
 import {
   getDeckSystemPrompt,
@@ -252,6 +258,18 @@ export async function generateAndStoreSlideDeck(params: {
   locale: AppLocale;
   audience: DeckAudience;
   sectionId?: string;
+  /**
+   * Pre-resolved audience for the READY event. Pass this when generating many decks for
+   * one content in a loop (autoGenerateSectionDecks) so the fan-out doesn't re-run the
+   * assignee query per section. Omit to resolve lazily.
+   */
+  recipients?: readonly string[];
+  /**
+   * Suppress the `slides.status READY` publish. The video job builds a deck as a side
+   * effect; it must not tell every viewer's slides tab that a deck they never requested
+   * is ready. Defaults to publishing.
+   */
+  emitEvent?: boolean;
 }): Promise<ContentSlideDeck> {
   const deck = await generateSlideDeck(params);
   const scopeKey = deckScopeKey(params.sectionId);
@@ -277,6 +295,100 @@ export async function generateAndStoreSlideDeck(params: {
       sectionId: params.sectionId ?? null,
     },
   });
+  // Single completion point for every caller (manual slides job, ingest-time
+  // autoGenerateSectionDecks). Tell the owner and assigned learners the deck is ready —
+  // unless the caller opts out (video job's implicit build) or passes a pre-resolved
+  // audience (loop callers, so we don't re-query assignees per section).
+  if (params.emitEvent !== false) {
+    if (params.recipients) {
+      publishContentEventTo(params.recipients, {
+        type: 'slides.status',
+        contentId: params.contentId,
+        sectionId: params.sectionId,
+        status: 'READY',
+      });
+    } else {
+      void publishContentEvent(params.contentId, {
+        type: 'slides.status',
+        contentId: params.contentId,
+        sectionId: params.sectionId,
+        status: 'READY',
+      });
+    }
+  }
+  return formatSlideDeck(row);
+}
+
+/**
+ * Async manual generation: mark the deck row GENERATING (so the UI shows progress and
+ * duplicate requests can short-circuit) and enqueue the Bull job that runs
+ * `generateAndStoreSlideDeck`. Returns the GENERATING row for the 202 response.
+ */
+export async function enqueueSlideDeckGeneration(params: {
+  userId: string;
+  tenantId?: string | null;
+  contentId: string;
+  title: string;
+  locale: AppLocale;
+  audience: DeckAudience;
+  sectionId?: string;
+}): Promise<ContentSlideDeck> {
+  const scopeKey = deckScopeKey(params.sectionId);
+  const row = await prisma.contentSlideDeck.upsert({
+    where: {
+      contentId_locale_scopeKey: { contentId: params.contentId, locale: params.locale, scopeKey },
+    },
+    create: {
+      contentId: params.contentId,
+      locale: params.locale,
+      scopeKey,
+      sectionId: params.sectionId ?? null,
+      status: 'GENERATING',
+      audience: params.audience,
+    },
+    // Keep the previous `deck` JSON so a regenerate can keep showing the old deck
+    // while the replacement renders.
+    update: {
+      status: 'GENERATING',
+      audience: params.audience,
+      sectionId: params.sectionId ?? null,
+    },
+  });
+  const jobData: GenerateSlidesJobData = {
+    contentId: params.contentId,
+    userId: params.userId,
+    tenantId: params.tenantId ?? null,
+    title: params.title,
+    locale: params.locale,
+    audience: params.audience,
+    sectionId: params.sectionId,
+  };
+  try {
+    await slidesQueue.add(jobData);
+  } catch (err) {
+    // Enqueue failed (e.g. Redis down) — release the GENERATING claim, or every later
+    // non-regenerate POST would 202 against a job that never existed (permanent spinner).
+    // The status guard avoids clobbering a concurrent run's READY write; the old deck
+    // JSON is kept so a failed regenerate still shows the previous deck.
+    await prisma.contentSlideDeck
+      .updateMany({
+        where: {
+          contentId: params.contentId,
+          locale: params.locale,
+          scopeKey,
+          status: 'GENERATING',
+        },
+        data: { status: 'FAILED' },
+      })
+      .catch(() => undefined);
+    void publishContentEvent(params.contentId, {
+      type: 'slides.status',
+      contentId: params.contentId,
+      sectionId: params.sectionId,
+      status: 'FAILED',
+    });
+    throw err;
+  }
   return formatSlideDeck(row);
 }
 
@@ -301,6 +413,10 @@ export async function autoGenerateSectionDecks(params: {
     select: { id: true },
   });
   const audience = params.audience ?? 'students';
+  // Resolve the fan-out audience ONCE for the whole batch: publishing per section would
+  // otherwise re-run the assignee query for every section (N+1) and, for an assigned
+  // class, hammer every learner with S back-to-back slide refetches on the completion spike.
+  const recipients = await resolveContentAudience(params.contentId);
 
   for (const section of sections) {
     try {
@@ -319,6 +435,7 @@ export async function autoGenerateSectionDecks(params: {
         locale: params.locale,
         audience,
         sectionId: section.id,
+        recipients,
       });
     } catch (err) {
       // Out of quota → stop; any other per-section failure → skip and continue.

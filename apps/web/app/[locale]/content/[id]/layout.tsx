@@ -60,8 +60,8 @@ function ContentLayoutInner({
   const isLearner = role === 'TENANT_LEARNER';
   const {
     handleSummary,
-    generateSummary,
     summary,
+    summaryPending,
     summaryOpen,
     setSummaryOpen,
     actionError,
@@ -100,7 +100,7 @@ function ContentLayoutInner({
 
   const generations: SidebarGenerationProps = {
     onSummary: handleSummary,
-    summaryPending: generateSummary.isPending,
+    summaryPending,
     quizCount: history?.quizzes.length ?? 0,
     hideGenerateActions: isLearner,
   };
@@ -148,7 +148,11 @@ function ContentLayoutInner({
           <DialogHeader>
             <DialogTitle>{tContent('summaryTitle')}</DialogTitle>
           </DialogHeader>
-          <SummaryText text={summary ?? ''} />
+          {summaryPending && !summary ? (
+            <p className="text-sm text-muted-foreground">{tContent('summaryGenerating')}</p>
+          ) : (
+            <SummaryText text={summary ?? ''} />
+          )}
         </DialogContent>
       </Dialog>
     </div>

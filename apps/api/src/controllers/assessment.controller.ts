@@ -28,13 +28,15 @@ export async function listQuestions(req: AuthenticatedRequest, res: Response): P
 
 export async function generateQuestions(req: AuthenticatedRequest, res: Response): Promise<void> {
   const { tenantId, userId } = requireTenant(req);
-  const questions = await assessmentService.generateQuestions(
+  // Generation runs as a Bull job (20–90s of LLM work). 202 + the GENERATING bank;
+  // completion arrives as a `bank.status` SSE event (jobs/generateBankQuestions.job.ts).
+  const bank = await assessmentService.enqueueGenerateQuestions(
     tenantId,
     userId,
     getParam(req, 'bankId'),
     req.body,
   );
-  res.status(201).json({ questions });
+  res.status(202).json({ bank });
 }
 
 export async function createBankQuestion(req: AuthenticatedRequest, res: Response): Promise<void> {

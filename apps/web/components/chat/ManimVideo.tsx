@@ -1,17 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import type { ManimPayload } from '@talim/types';
 import { getApiBaseUrl } from '@/lib/api';
+import { jobStream } from '@/lib/jobStream';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
+
+/** Renders take up to ~120s normally; past this we stop polling and show a timeout. */
+const RENDER_DEADLINE_MS = 5 * 60_000;
 
 export function ManimVideo({ payload }: { payload: ManimPayload }) {
   const t = useTranslations('chat');
   const token = useAuthStore((s) => s.token);
+  const connected = useJobStreamStore((s) => s.connected);
   const [status, setStatus] = useState(payload.status);
+  const [timedOut, setTimedOut] = useState(false);
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [mediaType, setMediaType] = useState<'video' | 'svg'>('video');
+  const deadlineRef = useRef<number | null>(null);
 
   const assetPath =
     payload.url?.startsWith('http')
@@ -24,10 +32,33 @@ export function ManimVideo({ payload }: { payload: ManimPayload }) {
     setStatus(payload.status);
   }, [payload.status]);
 
+  // Push-primary: the render job publishes a user-scoped manim.status event; react
+  // immediately instead of waiting for the next poll tick. Crucially, FAILED is only
+  // knowable via the event — a failed render 404s identically to a pending one.
   useEffect(() => {
-    if (status !== 'pending' || !payload.jobId || !token) return;
+    if (status !== 'pending' || !payload.jobId) return;
+    return jobStream.subscribe((ev) => {
+      if (ev.type !== 'manim.status' || ev.jobId !== payload.jobId) return;
+      if (ev.status === 'READY') {
+        setTimedOut(false);
+        setStatus('ready'); // triggers the asset fetch below
+      } else {
+        setStatus('failed');
+      }
+    });
+  }, [status, payload.jobId]);
+
+  // Safety-net poll: slow while the SSE stream is connected, fast fallback while
+  // disconnected, and hard-bounded so an unreported failure can't poll forever.
+  useEffect(() => {
+    if (status !== 'pending' || timedOut || !payload.jobId || !token) return;
+    if (deadlineRef.current === null) deadlineRef.current = Date.now() + RENDER_DEADLINE_MS;
 
     const interval = setInterval(async () => {
+      if (Date.now() > (deadlineRef.current ?? 0)) {
+        setTimedOut(true);
+        return;
+      }
       try {
         const res = await fetch(
           `${getApiBaseUrl()}/chat/visual/manim/${payload.jobId}/asset`,
@@ -37,10 +68,10 @@ export function ManimVideo({ payload }: { payload: ManimPayload }) {
       } catch {
         // keep polling
       }
-    }, 3000);
+    }, connected ? 15_000 : 3_000);
 
     return () => clearInterval(interval);
-  }, [status, payload.jobId, token]);
+  }, [status, timedOut, payload.jobId, token, connected]);
 
   useEffect(() => {
     if (status !== 'ready' || !assetPath || !token) return;
@@ -67,10 +98,10 @@ export function ManimVideo({ payload }: { payload: ManimPayload }) {
     };
   }, [status, assetPath, token]);
 
-  if (status === 'failed') {
+  if (status === 'failed' || timedOut) {
     return (
       <div className="my-2 rounded-md border border-destructive/40 bg-muted p-3 text-xs text-destructive">
-        {t('manimError')}: {payload.error ?? t('manimFailed')}
+        {t('manimError')}: {timedOut ? t('manimTimeout') : (payload.error ?? t('manimFailed'))}
       </div>
     );
   }

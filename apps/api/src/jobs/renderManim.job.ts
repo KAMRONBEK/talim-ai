@@ -6,6 +6,7 @@ import { prisma } from '../lib/prisma.js';
 import { env } from '../config/env.js';
 import { manimQueue, type RenderManimJobData } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
+import { jobEvents } from '../services/events/jobEvents.service.js';
 import type { ManimPayload, VisualBlock } from '@talim/types';
 
 const execFileAsync = promisify(execFile);
@@ -40,6 +41,31 @@ function replaceManimBlockInText(
     return match;
   });
   return replaced ? updated : null;
+}
+
+/**
+ * Push a user-scoped `manim.status` event so the chat UI stops polling the asset
+ * endpoint (a failed render 404s identically to a pending one, so without this the
+ * client cannot tell them apart). The job payload has no userId — resolve the chat
+ * user via the message the job patches. Must NEVER break the job: swallows everything.
+ */
+async function publishManimStatus(
+  jobId: string,
+  messageId: string | undefined,
+  status: 'READY' | 'FAILED',
+): Promise<void> {
+  try {
+    if (!messageId) return;
+    const msg = await prisma.chatMessage.findUnique({
+      where: { id: messageId },
+      select: { session: { select: { userId: true } } },
+    });
+    const userId = msg?.session.userId;
+    if (!userId) return;
+    jobEvents.publish(userId, { type: 'manim.status', jobId, status });
+  } catch (err) {
+    console.error(`renderManim: failed to publish manim.status for job ${jobId}:`, err);
+  }
 }
 
 async function renderWithManimCli(jobId: string, script: string): Promise<string> {
@@ -116,7 +142,18 @@ export function registerRenderManimJob(): void {
       }
     }
 
+    void publishManimStatus(jobId, messageId, 'READY');
+
     return { storagePath, url };
+  });
+
+  // The processor rethrows on render failure (after patching the failed block into the
+  // message), so this single handler covers every failure path without double-publishing.
+  manimQueue.on('failed', async (job, err) => {
+    console.error(`Manim job ${job?.id} failed:`, err.message);
+    const data = job?.data as RenderManimJobData | undefined;
+    if (!data?.jobId) return;
+    await publishManimStatus(data.jobId, data.messageId, 'FAILED');
   });
 }
 

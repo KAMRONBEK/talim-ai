@@ -12,6 +12,7 @@ import {
   buildFigureContext,
 } from '../services/rag.service.js';
 import { streamTutorWithTools } from '../services/ai.service.js';
+import { sseHeaders, sseData, sseDone } from '../lib/sse.js';
 import { serializeBlockForMessage } from '../lib/tutor-tools.js';
 import { buildTutorSystemMessage } from '../lib/locale-prompts.js';
 import { detectTutorGraphIntent } from '../lib/tutor-graph-intent.js';
@@ -91,9 +92,9 @@ async function streamStaticAssistantResponse(
     data: { sessionId, role: 'ASSISTANT', text },
   });
 
-  res.write(`data: ${JSON.stringify({ text })}\n\n`);
-  res.write(`data: ${JSON.stringify({ sessionId })}\n\n`);
-  res.write('data: [DONE]\n\n');
+  sseData(res, { text });
+  sseData(res, { sessionId });
+  sseDone(res);
   res.end();
 }
 
@@ -237,10 +238,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     recentTurns,
   });
 
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.flushHeaders?.();
+  sseHeaders(res);
 
   if (scopeDecision.route === 'unrelated') {
     await streamStaticAssistantResponse(res, sessionId, getOutOfScopeResponse(locale));
@@ -303,13 +301,13 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     })) {
       if (event.type === 'text') {
         fullResponse += event.text;
-        res.write(`data: ${JSON.stringify({ text: event.text })}\n\n`);
+        sseData(res, { text: event.text });
       } else if (event.type === 'visual') {
         const blockStr = serializeBlockForMessage(event.block);
         fullResponse += blockStr;
-        res.write(`data: ${JSON.stringify({ visual: event.block })}\n\n`);
+        sseData(res, { visual: event.block });
         if (event.block.kind === 'desmos') {
-          res.write(`data: ${JSON.stringify({ graph: event.block.payload })}\n\n`);
+          sseData(res, { graph: event.block.payload });
         }
       } else if (event.type === 'manim_enqueue') {
         manimJobs.push({ jobId: event.jobId, script: event.script });
@@ -328,11 +326,11 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
       });
     }
 
-    res.write(`data: ${JSON.stringify({ sessionId })}\n\n`);
-    res.write('data: [DONE]\n\n');
+    sseData(res, { sessionId });
+    sseDone(res);
     res.end();
   } catch (error) {
-    res.write(`data: ${JSON.stringify({ error: 'Stream failed' })}\n\n`);
+    sseData(res, { error: 'Stream failed' });
     res.end();
     console.error('Chat stream failed:', error);
   }

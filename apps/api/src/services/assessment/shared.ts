@@ -232,6 +232,8 @@ export function formatBank(bank: {
   topic: string | null;
   createdById: string;
   createdAt: Date;
+  generationStatus?: 'PENDING' | 'GENERATING' | 'READY' | 'FAILED' | null;
+  generationError?: string | null;
   questions?: { status: BankQuestionStatus }[];
   materials?: { content: { id: string; title: string } }[];
 }) {
@@ -243,6 +245,8 @@ export function formatBank(bank: {
     topic: bank.topic,
     createdById: bank.createdById,
     createdAt: bank.createdAt.toISOString(),
+    generationStatus: bank.generationStatus ?? null,
+    generationError: bank.generationError ?? null,
     questionCount: questions.length,
     approvedCount: questions.filter((q) => q.status === 'APPROVED').length,
     materials: (bank.materials ?? []).map((m) => ({ id: m.content.id, title: m.content.title })),

@@ -14,6 +14,8 @@ import type {
   TenantAssessment,
 } from '@talim/types';
 import { api } from '@/lib/api';
+import { useJobStreamStore } from '@/store/useJobStreamStore';
+import { inFlightRefetchInterval } from '@/lib/pushPrimaryInterval';
 
 /**
  * Every backend generation style (mirrors `questionStyleEnum` in
@@ -47,12 +49,20 @@ export type BankQuestionEditableFields = {
 };
 
 export function useQuestionBanks() {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['tenant', 'question-banks'],
     queryFn: async () => {
       const { data } = await api.get<{ banks: QuestionBank[] }>('/tenant/question-banks');
       return data.banks;
     },
+    // SSE-primary (the bank-questions job publishes bank.status); slow safety-net poll
+    // only while a generation is in flight and the event stream is disconnected.
+    refetchInterval: (query) =>
+      inFlightRefetchInterval(
+        !!query.state.data?.some((bank) => bank.generationStatus === 'GENERATING'),
+        connected,
+      ),
   });
 }
 
@@ -95,14 +105,17 @@ export function useGenerateBankQuestions(bankId: string | null) {
       types?: QuestionType[];
       depth?: QuestionDepth;
     }) => {
-      const { data } = await api.post<{ questions: BankQuestion[] }>(
+      // 202: generation runs as a background job; the returned bank is GENERATING and the
+      // server publishes a `bank.status` SSE event when questions land (or the run fails).
+      const { data } = await api.post<{ bank: QuestionBank }>(
         `/tenant/question-banks/${bankId}/generate`,
         input,
       );
-      return data.questions;
+      return data.bank;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['tenant', 'question-banks', bankId, 'questions'] }),
+    // Prefix invalidation covers both the banks list (['tenant','question-banks']) and
+    // this bank's questions key (['tenant','question-banks',bankId,'questions']).
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['tenant', 'question-banks'] }),
   });
 }
 
@@ -238,13 +251,13 @@ export function useAssessmentResults(assessmentId: string | null) {
 }
 
 // Live-leaderboard SSE (leaderboard.update) is the primary refresh path; while a game is
-// live we also poll on a slow interval as a fallback for when the SSE stream is down.
-const LIVE_LEADERBOARD_POLL_MS = 5_000;
-
+// live we also poll as a safety net — fast only while the SSE stream is actually down,
+// slow otherwise (same push-primary pattern as the media status hooks).
 export function useAssessmentLeaderboard(
   assessmentId: string | null,
   { live = false }: { live?: boolean } = {},
 ) {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['tenant', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -254,7 +267,9 @@ export function useAssessmentLeaderboard(
       return data;
     },
     enabled: Boolean(assessmentId),
-    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
+    // A live game keeps the board polling (leaderboard.update events drive it while
+    // connected; the fast fallback covers a dropped stream).
+    refetchInterval: inFlightRefetchInterval(live, connected),
   });
 }
 
@@ -262,6 +277,7 @@ export function useLearnerLeaderboard(
   assessmentId: string | null,
   { live = false }: { live?: boolean } = {},
 ) {
+  const connected = useJobStreamStore((s) => s.connected);
   return useQuery({
     queryKey: ['learner', 'assessments', assessmentId, 'leaderboard'],
     queryFn: async () => {
@@ -271,7 +287,8 @@ export function useLearnerLeaderboard(
       return data;
     },
     enabled: Boolean(assessmentId),
-    refetchInterval: live ? LIVE_LEADERBOARD_POLL_MS : false,
+    // Mirror useAssessmentLeaderboard: live board polls, static board doesn't.
+    refetchInterval: inFlightRefetchInterval(live, connected),
   });
 }
 

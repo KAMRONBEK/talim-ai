@@ -33,10 +33,26 @@ export function useJobEvents(): void {
         qc.invalidateQueries({ queryKey: ['video'] });
         qc.invalidateQueries({ queryKey: ['slides'] });
         qc.invalidateQueries({ queryKey: ['flashcards'] });
+        qc.invalidateQueries({ queryKey: ['content-transcript'] });
+        qc.invalidateQueries({ queryKey: ['tenant', 'question-banks'] });
+        qc.invalidateQueries({ queryKey: ['quiz'] });
+        qc.invalidateQueries({ queryKey: ['quiz-history'] });
+        // Mirror the content.status READY per-event invalidations: a re-ingest that
+        // finished while disconnected also replaced sections and summaries.
+        qc.invalidateQueries({ queryKey: ['sections'] });
+        qc.invalidateQueries({ queryKey: ['section'] });
+        qc.invalidateQueries({ queryKey: ['summary'] });
         // Live leaderboards may have advanced while we were disconnected (partial-match
         // covers both the tenant and learner assessment query trees).
         qc.invalidateQueries({ queryKey: ['tenant', 'assessments'] });
         qc.invalidateQueries({ queryKey: ['learner', 'assessments'] });
+        // manim.status has no react-query key (the pending visual lives in the chat
+        // session query, not a manim-scoped one), so it can't be caught up like the
+        // others — and a FAILED render 404s identically to a pending one, so ManimVideo's
+        // asset poll can't detect it. The render job patches the ready/failed status into
+        // the ChatMessage, so refetch the chat session (the key useChatSession/ChatWindow
+        // actually read): a manim event missed during the disconnect is recovered from there.
+        qc.invalidateQueries({ queryKey: ['chat-session'] });
       }
     });
     jobStream.start(token);
@@ -78,6 +94,18 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
       qc.invalidateQueries({ queryKey: ['quiz', ev.quizId] });
       if (ev.contentId) qc.invalidateQueries({ queryKey: ['quiz-history', ev.contentId] });
       break;
+    case 'transcript.status':
+      qc.invalidateQueries({ queryKey: ['content-transcript', ev.contentId] });
+      break;
+    case 'bank.status':
+      // Refresh both the bank's question list and the banks index (question counts /
+      // generation state shown in the tenant assessments builder).
+      qc.invalidateQueries({ queryKey: ['tenant', 'question-banks', ev.bankId, 'questions'] });
+      qc.invalidateQueries({ queryKey: ['tenant', 'question-banks'] });
+      break;
+    // manim.status is intentionally NOT handled here: the pending visual lives in the
+    // Zustand chat store (not react-query), so ManimVideo subscribes to jobStream
+    // directly and reacts to its own jobId.
     case 'leaderboard.update':
       // Refresh both the tenant-owner board and the learner board for this assessment
       // (keys mirror useAssessmentLeaderboard / useLearnerLeaderboard in useAssessments).
