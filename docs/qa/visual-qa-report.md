@@ -1483,3 +1483,40 @@ deactivated **mid-session** (valid JWT) sees the assigned list silently empty wi
 was deactivated" message** — only the login path (F16) explains it. Minor; showing an explicit
 mid-session notice would be clearer. **Test-data:** teststudent1 **restored to active** (original
 state) — clean. No fixtures touched.
+
+### C6 — Structured-player keyboard-a11y (HOTSPOT/DRAG_DROP scoped out) · Rustam · INDIVIDUAL · keyboard-only lens
+
+**Charter:** Explore structured-question-player **keyboard a11y** as Rustam, to discover
+**usability/keyboard-a11y** defects. Original target (HOTSPOT + DRAG_DROP) is **assessment-builder-
+only** (image + regions / drag targets) — not reachable without an owner image-build, so **scoped to
+the reachable players** (DROPDOWN_CLOZE / MATCHING / ORDERING) via a freely-regeneratable INDIVIDUAL
+practice quiz. **Done when:** each player is operable keyboard-only (focus, activate, no drag-only
+trap) with visible focus + ARIA state. HOTSPOT/DRAG_DROP → PLANS deferral.
+
+**Setup:** INDIVIDUAL practice quiz on uz-math, 3 types selected (Ro'yxatdan tanlash / Moslashtirish /
+Tartiblash) → 10 questions, all within the 3 requested types (generator honored the type filter).
+Structured generation was **slow (~130s)** — bounded-waited, no stuck-spinner (informational, see O87).
+
+**🟢 DROPDOWN_CLOZE — keyboard-accessible.** Options are native `<button>` chips (`tabIndex:0`, not
+disabled); `.focus()` + **Enter selects** (blank fills, chip `aria-pressed=true`, Tekshirish/Keyingi
+enable). Focus indicator present via Tailwind `focus-visible:ring-2 ring-offset-2` (not `outline`).
+Factual: Q1 gipotenuza "kvadrati" ✓, Q2 legs 12·16 → 20 (√400), distractors 18/24/30 all wrong ✓.
+
+**🟢 MATCHING — native `<select>` (gold-standard a11y).** Q3 renders one native combobox per prompt
+(D>0 / D=0 / D<0), each fully keyboard/AT-operable (Tab + arrow/type-ahead). Keys correct: D>0→two
+distinct real, D=0→one repeated, D<0→no real roots (source-grounded).
+
+**🟢 ORDERING — button-based, NOT drag-only.** Q4 provides **"Yuqoriga/Pastga ko'chirish" (move
+up/down) buttons per item** with correct boundary disabling (top item's up / bottom item's down
+disabled). Activating item-1's move-down **reordered the list** (Hindiston↓ → Bobil,Hindiston,Pifagor)
+and the boundary-disabled buttons updated — reordering is fully keyboard-operable, the #1 a11y trap
+(drag-only) is **avoided**.
+
+**Oracle:** usability/keyboard-a11y (Standards/WCAG operable). No F — all three reachable players pass
+keyboard-a11y. **HOTSPOT + DRAG_DROP a11y → PLANS `QA-DEFER-HOTSPOT-A11Y`** (owner must build an
+image-based assessment first; ORDERING's move-button pattern suggests DRAG_DROP likely has a keyboard
+fallback, unverified). **O87 (S4 perf — LOGGED):** structured-type practice generation (DROPDOWN_CLOZE
++MATCHING+ORDERING ×10, whole-material) took **~130s** — noticeably slower than SHORT_ANSWER (~35s) /
+podcast; SSE kept the UI honest (no stuck spinner) but it's a long wait; worth a generation-latency
+look. **Test-data:** practice quiz `cmrksjfpi…` on INDIVIDUAL's own uz-math content — harmless, cleaned
+at run-end. No fixtures touched.
