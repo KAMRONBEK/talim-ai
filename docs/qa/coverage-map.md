@@ -79,3 +79,4 @@
 | pricing/TENANT_OWNER/cta | /[locale]/pricing | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
 | terms/logged-out/render | /[locale]/terms | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/typebadge | /[locale]/dashboard | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
+| learner.dashboard/TENANT_LEARNER-active/must-change-pw | /[locale]/learner/dashboard | TENANT_LEARNER-active | mustChangePassword | uz | Aziza | oracle-verified | R2026-07-14a | 13a93172 | O84 | 0 |

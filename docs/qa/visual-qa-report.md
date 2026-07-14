@@ -1386,3 +1386,36 @@ worth a morning look, not a confirmed bug. **O83 (S4 copy — LOGGED):** the pod
 click-to-seek hint reads "**Videoning** shu joyiga o'tish…" (says *video* on an audio podcast) —
 likely a shared media-transcript string; fluency/polish, human review. **Test-data:** 1 podcast
 episode created on INDIVIDUAL's own uz-math content (own workspace, harmless); cleaned at run-end.
+
+### C3 — mustChangePassword first-login flow · Aziza (email-less kid) · OWNER→LEARNER · Money/onboarding tour
+
+**Charter:** Explore the email-less-kid onboarding + first-login credential flow as Aziza, to
+discover **usability/data-integrity** defects. **Done when:** owner creates an email-less kid →
+synthetic email + one-time creds; first login shows the mustChangePassword banner; changing the
+password in Settings clears it (persists on a real dashboard load); old pw rejected + new accepted.
+
+**🟢 Owner create → email-less kid.** As OWNER (QA Academy), "O'quvchi qo'shish" → name "Aziza QA
+Kid" + username `qakid19` + explicit temp pw, no email → created with **synthetic email
+`qakid19@students.talim.local`**, one-time credential card ("bir marta ko'rsatiladi"). **Seat
+invariant:** 4→**5** of 25 — under limit. (Incidental: the existing XSS-probe student name
+`<script>alert(1)</script>` renders as **escaped literal text**, no alert — XSS-escaping holds.)
+
+**🟢 First login → banner → change → clear.** Logged in **by username** `qakid19` → learner
+dashboard shows the **mustChangePassword banner**: "Talim AI ga xush kelibsiz — O'qituvchingiz bu
+hisobni yaratdi. Xavfsizlik uchun vaqtinchalik parolni Sozlamalarda o'zgartiring." → Settings link.
+Learner Settings → Parol (Joriy/Yangi) → save. **Banner GONE** on the next full dashboard load (only
+the generic "Xush kelibsiz, Aziza QA Kid" header remains). **Password rotation verified via API:**
+old `KidTemp-12345` → **401**, new `KidNew-67890` → **200**.
+
+**Oracle:** product self-consistency + Standards (banner reflects `mustChangePassword`). No F.
+**O84 (S2/S3 flaky-suspect — LOGGED, NOT a confirmed finding): intermittent `GET /billing/me` 500 on
+a fresh learner's FIRST dashboard load.** On the kid's very first dashboard render, `/billing/me?
+locale=uz` returned **500** (browser req #34), but the client's own immediate retry (#41) returned
+**200**, and **8/8 subsequent curls all 200** — non-reproducible. `getBillingMe` for a TENANT_LEARNER
+runs `getSubscriptionForUser` + `getUsageVsLimits` on a just-created account; the transient smells
+like a cold Prisma pool / just-created-account read race (the single API process is also the Bull
+worker). Evidence: failing req #34 (500) + retry #41 (200) + 8× curl (200). Per §E rule-1
+(non-repro) this is an **O flaky-suspect for morning review**, not an F — but a first-login 500 on
+the billing/plan widget is user-visible, so worth a deterministic-repro attempt on a fresh account
+next run. **Test-data:** email-less kid `qakid19` (pw now `KidNew-67890`) left in QA Academy (seat 5)
+— documented in the creds ledger for reuse; delete at run-end if seats are needed.
