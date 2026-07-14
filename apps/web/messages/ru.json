@@ -252,6 +252,7 @@
     "transcriptNotAvailable": "Транскрипт пока недоступен.",
     "selectTranscriptToAsk": "Выделите текст транскрипта, чтобы спросить об этом фрагменте.",
     "transcriptClickToSeek": "Нажмите на предложение, чтобы перейти к этому месту видео.",
+    "transcriptClickToSeekAudio": "Нажмите на предложение, чтобы перейти к этому месту аудио.",
     "videoEmbedUnavailable": "Это видео нельзя встроить. Откройте его на YouTube.",
     "viewerNotAvailable": "Просмотр для этого типа недоступен.",
     "selectFile": "Выбрать файл",
