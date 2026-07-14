@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "Content & Flashcards Hooks"
+community: "Upgrade Modal & Chat Window"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Flashcards_Hooks
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # useLimitErrorHandler()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[ChatWindow()]] - `calls` [EXTRACTED]
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
+- [[ContentStage()]] - `calls` [EXTRACTED]
 - [[ContentWorkspaceInner()]] - `calls` [INFERRED]
 - [[FlashcardsInner()]] - `calls` [EXTRACTED]
 - [[PodcastPageInner()]] - `calls` [EXTRACTED]
@@ -22,6 +23,7 @@ tags:
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
 - [[VideoInner()]] - `calls` [EXTRACTED]
 - [[YoutubeLinkForm()]] - `calls` [EXTRACTED]
+- [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
@@ -35,4 +37,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `contains` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

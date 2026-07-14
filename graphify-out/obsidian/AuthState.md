@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/store/useAuthStore.ts"
 type: "code"
-community: "Shared Types & Auth Stores"
+community: "Admin Auth Store"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Auth_Stores
+  - community/Admin_Auth_Store
 ---
 
 # AuthState
@@ -15,4 +15,4 @@ tags:
 - [[User]] - `references` [EXTRACTED]
 - [[useAuthStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Store

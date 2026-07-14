@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # DialogTitle()
@@ -26,4 +26,4 @@ tags:
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Learning Progress & Coverage"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Learning_Progress__Coverage
 ---
 
 # learningProgress.service.ts
@@ -16,6 +16,8 @@ tags:
 - [[CoverageQuestionResult]] - `imports` [EXTRACTED]
 - [[QuizWithQuestions]] - `contains` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports_from` [EXTRACTED]
+- [[applyAiJudgeToGrades()]] - `imports` [EXTRACTED]
 - [[badges.service.ts]] - `imports_from` [EXTRACTED]
 - [[blendCoverageScore()]] - `contains` [EXTRACTED]
 - [[buildCoverageResults()]] - `contains` [EXTRACTED]
@@ -40,12 +42,14 @@ tags:
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
+- [[quizQuestionKey()]] - `imports` [EXTRACTED]
 - [[recalculateContentProgress()]] - `contains` [EXTRACTED]
 - [[recordLearningActivity()]] - `contains` [EXTRACTED]
 - [[refineSectionProgressWithAi()]] - `contains` [EXTRACTED]
+- [[resolveAcceptedAnswers()]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[todayUtcDate()]] - `contains` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage

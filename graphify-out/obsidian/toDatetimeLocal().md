@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Assessment Pages & Wizard"
-location: "L104"
+community: "Tenant Assessment Builder UI"
+location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Pages__Wizard
+  - community/Tenant_Assessment_Builder_UI
 ---
 
 # toDatetimeLocal()
@@ -15,4 +15,4 @@ tags:
 - [[LiveGameRow()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard
+#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Assessment Pages & Wizard"
+community: "Tenant Assessment Builder UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Pages__Wizard
+  - community/Tenant_Assessment_Builder_UI
 ---
 
 # useAssessments.ts
@@ -27,12 +27,14 @@ tags:
 - [[QuestionType]] - `imports` [EXTRACTED]
 - [[TenantAssessment]] - `imports` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports_from` [EXTRACTED]
+- [[inFlightRefetchInterval()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[page.tsx_15]] - `imports_from` [EXTRACTED]
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
 - [[page.tsx_19]] - `imports_from` [EXTRACTED]
 - [[page.tsx_21]] - `imports_from` [EXTRACTED]
 - [[page.tsx_26]] - `imports_from` [EXTRACTED]
+- [[pushPrimaryInterval.ts]] - `imports_from` [EXTRACTED]
 - [[question-editor.tsx]] - `imports_from` [EXTRACTED]
 - [[useAssessmentLeaderboard()]] - `contains` [EXTRACTED]
 - [[useAssessmentResults()]] - `contains` [EXTRACTED]
@@ -42,6 +44,8 @@ tags:
 - [[useCreateBankQuestion()]] - `contains` [EXTRACTED]
 - [[useCreateQuestionBank()]] - `contains` [EXTRACTED]
 - [[useGenerateBankQuestions()]] - `contains` [EXTRACTED]
+- [[useJobStreamStore]] - `imports` [EXTRACTED]
+- [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 - [[useLearnerAssessments()]] - `contains` [EXTRACTED]
 - [[useLearnerLeaderboard()]] - `contains` [EXTRACTED]
 - [[usePatchBankQuestion()]] - `contains` [EXTRACTED]
@@ -51,4 +55,4 @@ tags:
 - [[useSubmitLearnerAssessment()]] - `contains` [EXTRACTED]
 - [[useTenantAssessments()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard
+#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI

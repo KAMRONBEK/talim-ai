@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
-location: "L29"
+community: "Prisma Client & Seed"
+location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Prisma_Client__Seed
 ---
 
 # computeStreakDays()
@@ -23,4 +23,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[todayUtcDate()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Learner Dashboard"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Learner_Dashboard
 ---
 
 # useContents()
@@ -24,4 +24,4 @@ tags:
 - [[useContent.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

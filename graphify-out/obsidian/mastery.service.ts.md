@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mastery.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Prisma Client & Seed"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Prisma_Client__Seed
 ---
 
 # mastery.service.ts
@@ -30,4 +30,4 @@ tags:
 - [[roundPct()]] - `contains` [EXTRACTED]
 - [[tenant.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Tenant Owner Controller"
+community: "Learner Controller"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Controller
+  - community/Learner_Controller
 ---
 
 # tenant.controller.ts
@@ -46,4 +46,4 @@ tags:
 - [[tenant.service.ts]] - `imports_from` [EXTRACTED]
 - [[unassignContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Owner_Controller
+#graphify/code #graphify/EXTRACTED #community/Learner_Controller

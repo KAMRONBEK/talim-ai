@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Billing & Access Guards"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Billing__Access_Guards
 ---
 
 # RoleGuard()
@@ -18,4 +18,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
 - [[useAuthHydrated()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

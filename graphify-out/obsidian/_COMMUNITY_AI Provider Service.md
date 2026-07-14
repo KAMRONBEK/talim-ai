@@ -1,13 +1,13 @@
 ---
 type: community
-cohesion: 0.18
-members: 17
+cohesion: 0.17
+members: 16
 ---
 
 # AI Provider Service
 
-**Cohesion:** 0.18 - loosely connected
-**Members:** 17 nodes
+**Cohesion:** 0.17 - loosely connected
+**Members:** 16 nodes
 
 ## Members
 - [[AiUsageContext]] - code - apps/api/src/services/ai.service.ts
@@ -21,7 +21,6 @@ members: 17
 - [[createDeepSeekChatCompletion()]] - code - apps/api/src/services/ai.service.ts
 - [[createDeepSeekChatStream()]] - code - apps/api/src/services/ai.service.ts
 - [[deepseek]] - code - apps/api/src/services/ai.service.ts
-- [[generateChatCompletion()]] - code - apps/api/src/services/ai.service.ts
 - [[generateJsonCompletion()]] - code - apps/api/src/services/ai.service.ts
 - [[openai_1]] - code - apps/api/src/services/ai.service.ts
 - [[recordCompletionUsage()]] - code - apps/api/src/services/ai.service.ts
@@ -36,24 +35,24 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Config, Pricing & Embeddings]]
-- 5 edges to [[_COMMUNITY_Tutor Visual Tools]]
-- 4 edges to [[_COMMUNITY_Background Jobs & Queues]]
-- 2 edges to [[_COMMUNITY_Media & Progress Controllers]]
-- 2 edges to [[_COMMUNITY_Podcast Generation & Prompts]]
-- 2 edges to [[_COMMUNITY_Quiz Generation Job]]
+- 5 edges to [[_COMMUNITY_Summary Controller]]
+- 5 edges to [[_COMMUNITY_AI Tutor Visual Tools]]
+- 4 edges to [[_COMMUNITY_API Bootstrap & Background Jobs]]
+- 4 edges to [[_COMMUNITY_Job Event Fan-out & Media Jobs]]
+- 3 edges to [[_COMMUNITY_Usage Pricing & Metering]]
+- 2 edges to [[_COMMUNITY_Quiz Generation Pipeline]]
 - 2 edges to [[_COMMUNITY_Tutor Scope Classifier]]
-- 2 edges to [[_COMMUNITY_Learning Coverage & Badges]]
-- 2 edges to [[_COMMUNITY_Section Service]]
-- 2 edges to [[_COMMUNITY_Slide Deck Prompts]]
-- 1 edge to [[_COMMUNITY_AI Tutor Chat API]]
-- 1 edge to [[_COMMUNITY_Locale AI Prompts]]
-- 1 edge to [[_COMMUNITY_Shared Types & Auth Stores]]
-- 1 edge to [[_COMMUNITY_Chat Message Rendering]]
+- 2 edges to [[_COMMUNITY_Quiz Controller & Grading]]
+- 2 edges to [[_COMMUNITY_Learning Progress & Coverage]]
+- 2 edges to [[_COMMUNITY_Section Controller]]
+- 1 edge to [[_COMMUNITY_AI Tutor Chat Controller]]
+- 1 edge to [[_COMMUNITY_Podcast Generation & TTS]]
+- 1 edge to [[_COMMUNITY_Shared Types & Zustand Stores]]
+- 1 edge to [[_COMMUNITY_Tutor Chat Visual Components]]
 
 ## Top bridge nodes
-- [[ai.service.ts]] - degree 36, connects to 13 communities
-- [[generateJsonCompletion()]] - degree 10, connects to 6 communities
-- [[generateChatCompletion()]] - degree 6, connects to 3 communities
-- [[recordCompletionUsage()]] - degree 4, connects to 1 community
+- [[ai.service.ts]] - degree 37, connects to 14 communities
+- [[generateJsonCompletion()]] - degree 11, connects to 7 communities
+- [[recordCompletionUsage()]] - degree 4, connects to 2 communities
+- [[createDeepSeekChatCompletion()]] - degree 4, connects to 1 community
 - [[TutorGraphIntent]] - degree 3, connects to 1 community

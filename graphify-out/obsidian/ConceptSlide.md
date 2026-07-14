@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Slide Deck UI"
+community: "Slide Deck Player UI"
 location: "L88"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_UI
+  - community/Slide_Deck_Player_UI
 ---
 
 # ConceptSlide
@@ -17,4 +17,4 @@ tags:
 - [[deck.ts]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI

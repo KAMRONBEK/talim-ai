@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/pdf-area-selection.ts"
 type: "code"
-community: "PDF Viewer & Selection"
+community: "PDF Text Selection"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer__Selection
+  - community/PDF_Text_Selection
 ---
 
 # pdf-area-selection.ts
@@ -25,4 +25,4 @@ tags:
 - [[isTextItem()]] - `contains` [EXTRACTED]
 - [[rectsIntersect()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer__Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection

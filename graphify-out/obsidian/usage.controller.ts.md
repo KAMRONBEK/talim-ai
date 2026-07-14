@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/usage.controller.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Admin Content & Audit Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Admin_Content__Audit_Controllers
 ---
 
 # usage.controller.ts
@@ -22,4 +22,4 @@ tags:
 - [[usage.routes.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers

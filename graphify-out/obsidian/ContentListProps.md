@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/ContentList.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Content Query Hooks"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Content_Query_Hooks
 ---
 
 # ContentListProps
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[ContentList.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks

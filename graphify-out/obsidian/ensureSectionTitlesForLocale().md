@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Section Service"
+community: "Section Controller"
 location: "L172"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Service
+  - community/Section_Controller
 ---
 
 # ensureSectionTitlesForLocale()
@@ -18,4 +18,4 @@ tags:
 - [[section.service.ts]] - `contains` [EXTRACTED]
 - [[translateSectionTitles()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Service
+#graphify/code #graphify/EXTRACTED #community/Section_Controller

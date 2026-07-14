@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Auth & Assignment UI"
 location: "L55"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Auth__Assignment_UI
 ---
 
 # AssignedMaterialCard()
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `calls` [INFERRED]
 - [[page.tsx_16]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/INFERRED #community/Auth__Assignment_UI

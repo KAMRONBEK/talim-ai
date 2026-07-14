@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/question-inputs.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
-location: "L128"
+community: "Quiz Player UI"
+location: "L138"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player__Hooks
+  - community/Quiz_Player_UI
 ---
 
 # formatAnswerDisplay()
@@ -15,4 +15,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[question-inputs.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player__Hooks
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

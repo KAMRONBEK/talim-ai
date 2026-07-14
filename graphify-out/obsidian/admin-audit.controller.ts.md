@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin-audit.controller.ts"
 type: "code"
-community: "Admin Content & Audit"
+community: "Admin Content & Audit Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit
+  - community/Admin_Content__Audit_Controllers
 ---
 
 # admin-audit.controller.ts
@@ -20,4 +20,4 @@ tags:
 - [[listAuditLogs()]] - `contains` [EXTRACTED]
 - [[schema_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers

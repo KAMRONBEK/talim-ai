@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 86"
+community: "AI Tutor & RAG Plans"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_86
+  - community/AI_Tutor__RAG_Plans
 ---
 
 # Visual Direction (girih, marker-highlight)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_86
+#graphify/concept #graphify/EXTRACTED #community/AI_Tutor__RAG_Plans

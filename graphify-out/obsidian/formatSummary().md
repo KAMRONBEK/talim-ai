@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Media & Progress Controllers"
-location: "L75"
+community: "Summary Controller"
+location: "L133"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Summary_Controller
 ---
 
 # formatSummary()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getSummary()_1]] - `calls` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "Providers & Job Events"
+community: "In-Process Job Event Bus"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/In-Process_Job_Event_Bus
 ---
 
 # jobEvents.service.ts
@@ -18,13 +18,11 @@ tags:
 - [[SeqJobEvent]] - `imports` [EXTRACTED]
 - [[UserState]] - `contains` [EXTRACTED]
 - [[events.controller.ts]] - `imports_from` [EXTRACTED]
-- [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
-- [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
-- [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[jobEvents]] - `contains` [EXTRACTED]
 - [[learner.ts]] - `imports_from` [EXTRACTED]
-- [[processContent.job.ts]] - `imports_from` [EXTRACTED]
+- [[renderManim.job.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/In-Process_Job_Event_Bus

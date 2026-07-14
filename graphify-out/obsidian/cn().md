@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Slide Deck UI"
+community: "Auth & Assignment UI"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_UI
+  - community/Auth__Assignment_UI
 ---
 
 # cn()
@@ -113,4 +113,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

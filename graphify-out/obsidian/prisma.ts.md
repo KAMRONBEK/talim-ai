@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "Flashcards API & Prisma Seed"
+community: "Prisma Client & Seed"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API__Prisma_Seed
+  - community/Prisma_Client__Seed
 ---
 
 # prisma.ts
@@ -16,11 +16,13 @@ tags:
 - [[adminUserRole.service.ts]] - `imports_from` [EXTRACTED]
 - [[analytics.controller.ts]] - `imports_from` [EXTRACTED]
 - [[analytics.service.ts]] - `imports_from` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports_from` [EXTRACTED]
 - [[assessments.ts]] - `imports_from` [EXTRACTED]
 - [[assignments.ts]] - `imports_from` [EXTRACTED]
 - [[audit.service.ts]] - `imports_from` [EXTRACTED]
 - [[auth.controller.ts]] - `imports_from` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[backfillTranscript.job.ts]] - `imports_from` [EXTRACTED]
 - [[badges.service.ts]] - `imports_from` [EXTRACTED]
 - [[banks.ts]] - `imports_from` [EXTRACTED]
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
@@ -34,15 +36,19 @@ tags:
 - [[create-tenant-owner.ts]] - `imports_from` [EXTRACTED]
 - [[figure.service.ts]] - `imports_from` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateSlides.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[ingest.service.ts]] - `imports_from` [EXTRACTED]
 - [[inspect-chunks.ts]] - `imports_from` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 - [[mastery.service.ts]] - `imports_from` [EXTRACTED]
+- [[mediaReconciler.service.ts]] - `imports_from` [EXTRACTED]
 - [[messages.ts]] - `imports_from` [EXTRACTED]
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
@@ -53,6 +59,7 @@ tags:
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports_from` [EXTRACTED]
+- [[reparseContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[results.ts]] - `imports_from` [EXTRACTED]
 - [[section.controller.ts]] - `imports_from` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
@@ -76,4 +83,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

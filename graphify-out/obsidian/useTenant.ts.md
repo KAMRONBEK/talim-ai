@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Tenant Dashboard & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Hooks__Messaging
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # useTenant.ts
@@ -75,4 +75,4 @@ tags:
 - [[useTenantUnreadCount()]] - `contains` [EXTRACTED]
 - [[useUnassignContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

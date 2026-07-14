@@ -1,24 +1,22 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "Background Jobs & Queues"
+community: "API Bootstrap & Background Jobs"
 location: "L65"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # jobEvents
 
 ## Connections
 - [[events.controller.ts]] - `imports` [EXTRACTED]
-- [[generateFlashcards.job.ts]] - `imports` [EXTRACTED]
-- [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
-- [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
-- [[generateVideo.job.ts]] - `imports` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports` [EXTRACTED]
 - [[jobEvents.service.ts]] - `contains` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
-- [[processContent.job.ts]] - `imports` [EXTRACTED]
+- [[renderManim.job.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

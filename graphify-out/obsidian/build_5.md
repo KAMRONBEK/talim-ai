@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Community 92"
+community: "Turborepo Task Config"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_92
+  - community/Turborepo_Task_Config
 ---
 
 # build
@@ -16,4 +16,4 @@ tags:
 - [[outputs]] - `contains` [EXTRACTED]
 - [[tasks]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_92
+#graphify/code #graphify/EXTRACTED #community/Turborepo_Task_Config

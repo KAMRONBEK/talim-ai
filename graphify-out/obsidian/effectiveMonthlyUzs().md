@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Providers & Job Events"
+community: "Upgrade Dialog & Pricing"
 location: "L204"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Upgrade_Dialog__Pricing
 ---
 
 # effectiveMonthlyUzs()
@@ -16,4 +16,4 @@ tags:
 - [[pricing.ts]] - `contains` [EXTRACTED]
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing

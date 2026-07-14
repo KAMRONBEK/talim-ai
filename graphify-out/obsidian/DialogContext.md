@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # DialogContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dialog.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

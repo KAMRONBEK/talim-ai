@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Assessment Pages & Wizard"
+community: "Tenant Assessment Builder UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Pages__Wizard
+  - community/Tenant_Assessment_Builder_UI
 ---
 
 # page.tsx
@@ -64,4 +64,4 @@ tags:
 - [[useTenantContents()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Pages__Wizard
+#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI

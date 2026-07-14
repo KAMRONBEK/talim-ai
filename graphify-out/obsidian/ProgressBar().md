@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/activity-heatmap.tsx"
 type: "code"
-community: "Learner Account & Onboarding"
+community: "Tenant Dashboard & Hooks"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Account__Onboarding
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # ProgressBar()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_17]] - `imports` [EXTRACTED]
 - [[page.tsx_27]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Account__Onboarding
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

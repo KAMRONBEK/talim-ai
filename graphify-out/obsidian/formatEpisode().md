@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Media & Progress Controllers"
+community: "Content Media Controllers"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Content_Media_Controllers
 ---
 
 # formatEpisode()
@@ -15,4 +15,4 @@ tags:
 - [[podcast.controller.ts]] - `contains` [EXTRACTED]
 - [[publicSegments()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

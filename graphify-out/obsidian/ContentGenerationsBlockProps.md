@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Content Sidebar & Generations"
+community: "Sheet & Layout Components"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Sidebar__Generations
+  - community/Sheet__Layout_Components
 ---
 
 # ContentGenerationsBlockProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[content-generations.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

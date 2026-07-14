@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Media & Progress Controllers"
+community: "Content Media Controllers"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Content_Media_Controllers
 ---
 
 # assertCanAccessContent()
@@ -55,8 +55,9 @@ tags:
 - [[srs.service.ts]] - `imports` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `calls` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

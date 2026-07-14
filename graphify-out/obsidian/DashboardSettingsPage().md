@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/settings/page.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Shared UI Primitives"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Shared_UI_Primitives
 ---
 
 # DashboardSettingsPage()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[page.tsx_36]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

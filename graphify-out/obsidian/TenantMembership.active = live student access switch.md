@@ -1,11 +1,11 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "rationale"
-community: "Architecture Concepts (CLAUDE.md)"
+community: "Admin & API Architecture Docs"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Architecture_Concepts_CLAUDEmd
+  - community/Admin__API_Architecture_Docs
 ---
 
 # TenantMembership.active = live student access switch
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[contentAccess.service.ts (isolation guard)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Architecture_Concepts_CLAUDEmd
+#graphify/rationale #graphify/EXTRACTED #community/Admin__API_Architecture_Docs

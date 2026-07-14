@@ -1,12 +1,12 @@
 ---
 source_file: ".cursor/mcp.json"
 type: "code"
-community: "Community 114"
+community: "Cursor MCP Config"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_114
+  - community/Cursor_MCP_Config
 ---
 
 # playwright
@@ -16,4 +16,4 @@ tags:
 - [[mcp.json]] - `contains` [EXTRACTED]
 - [[npx]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_114
+#graphify/code #graphify/EXTRACTED #community/Cursor_MCP_Config

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/footer.tsx"
 type: "code"
-community: "Marketing Landing UI"
+community: "Marketing Landing Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_UI
+  - community/Marketing_Landing_Components
 ---
 
 # footer.tsx
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_39]] - `imports_from` [EXTRACTED]
 - [[page.tsx_41]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "PDF Viewer & Selection"
+community: "PDF Text Selection"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer__Selection
+  - community/PDF_Text_Selection
 ---
 
 # PdfPageProxy
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[pdfjs-cdn.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer__Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Auth Stores"
-location: "L1093"
+community: "Locale Sync & Content Hooks"
+location: "L1105"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Auth_Stores
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # PodcastEpisode
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/onboarding-checklist.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Tenant Dashboard & Hooks"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # OnboardingChecklist()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_21]] - `imports` [EXTRACTED]
 - [[page.tsx_26]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

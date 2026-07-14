@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Section Mastery & Elo"
+community: "Section Mastery (Elo-KT)"
 location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery__Elo
+  - community/Section_Mastery_Elo-KT
 ---
 
 # resolveMasteryBand()
@@ -17,4 +17,4 @@ tags:
 - [[recordAnswers()]] - `calls` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery__Elo
+#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT

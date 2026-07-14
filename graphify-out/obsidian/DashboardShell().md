@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/dashboard-search.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Billing & Access Guards"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Billing__Access_Guards
 ---
 
 # DashboardShell()
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_5]] - `imports` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/practice/practice-generator.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # PracticeGeneratorProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[practice-generator.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

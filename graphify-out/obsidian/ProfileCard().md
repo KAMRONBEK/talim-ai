@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/profile-card.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Shared UI Primitives"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Shared_UI_Primitives
 ---
 
 # ProfileCard()
@@ -19,4 +19,4 @@ tags:
 - [[profile-card.tsx]] - `contains` [EXTRACTED]
 - [[useUpdateProfile()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

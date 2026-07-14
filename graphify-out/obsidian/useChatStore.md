@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Content Workspace & Chat"
+community: "Upgrade Modal & Chat Window"
 location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Workspace__Chat
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # useChatStore
@@ -19,4 +19,4 @@ tags:
 - [[selection-ask.tsx]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

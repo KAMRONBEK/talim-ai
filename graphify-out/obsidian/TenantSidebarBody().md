@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Tenant Dashboard & Hooks"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # TenantSidebarBody()
@@ -17,4 +17,4 @@ tags:
 - [[useTenant()]] - `calls` [EXTRACTED]
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

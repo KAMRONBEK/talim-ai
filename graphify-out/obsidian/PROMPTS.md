@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateFlashcards.job.ts"
 type: "code"
-community: "Background Jobs & Queues"
+community: "API Bootstrap & Background Jobs"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # PROMPTS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generateFlashcards.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

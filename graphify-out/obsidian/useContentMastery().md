@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useMastery.ts"
 type: "code"
-community: "Content Workspace & Chat"
+community: "Sheet & Layout Components"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Workspace__Chat
+  - community/Sheet__Layout_Components
 ---
 
 # useContentMastery()
@@ -16,4 +16,4 @@ tags:
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
 - [[useMastery.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

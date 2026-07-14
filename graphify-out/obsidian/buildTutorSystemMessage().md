@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Locale AI Prompts"
+community: "AI Prompt Builders"
 location: "L385"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_AI_Prompts
+  - community/AI_Prompt_Builders
 ---
 
 # buildTutorSystemMessage()
@@ -17,4 +17,4 @@ tags:
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_AI_Prompts
+#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders

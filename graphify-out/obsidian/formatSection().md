@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/section.controller.ts"
 type: "code"
-community: "Section Service"
+community: "Section Controller"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Service
+  - community/Section_Controller
 ---
 
 # formatSection()
@@ -15,4 +15,4 @@ tags:
 - [[getSection()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Service
+#graphify/code #graphify/EXTRACTED #community/Section_Controller

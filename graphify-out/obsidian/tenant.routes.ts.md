@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "API Middleware"
+community: "API Routes & Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware
+  - community/API_Routes__Middleware
 ---
 
 # tenant.routes.ts
@@ -39,4 +39,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware
+#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Transcript Panel"
-location: "L1085"
+community: "Transcript Panel UI"
+location: "L1097"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Transcript_Panel_UI
 ---
 
 # PodcastSegment
@@ -19,4 +19,4 @@ tags:
 - [[podcast-segments.ts]] - `imports` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI

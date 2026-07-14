@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "Chat Message Rendering"
+community: "Shared Types & Zustand Stores"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Message_Rendering
+  - community/Shared_Types__Zustand_Stores
 ---
 
 # tutor-graph.ts
@@ -21,4 +21,4 @@ tags:
 - [[serializeGraphBlock()_1]] - `contains` [EXTRACTED]
 - [[tutor-visual.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores

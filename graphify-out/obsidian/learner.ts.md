@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/learner.ts"
 type: "code"
-community: "Assessments Service"
+community: "Assessment Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Assessment_Service
 ---
 
 # learner.ts
@@ -15,9 +15,12 @@ tags:
 - [[AnswerEvidence]] - `imports` [EXTRACTED]
 - [[AppError]] - `imports` [EXTRACTED]
 - [[MasteryDelta]] - `imports` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports_from` [EXTRACTED]
 - [[answerToString()]] - `imports` [EXTRACTED]
+- [[applyAiJudgeToGrades()]] - `imports` [EXTRACTED]
 - [[assertLearnerAssignment()]] - `imports` [EXTRACTED]
 - [[assessment.service.ts]] - `re_exports` [EXTRACTED]
+- [[bankQuestionKey()]] - `imports` [EXTRACTED]
 - [[computeGamePoints()]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[getAssessmentLeaderboard()]] - `imports` [EXTRACTED]
@@ -38,4 +41,4 @@ tags:
 - [[submitAssessmentSchema]] - `imports` [EXTRACTED]
 - [[submitLearnerAssessment()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Assessment_Service

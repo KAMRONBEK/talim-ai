@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content API Controller"
-location: "L45"
+community: "Content Controller (B2C)"
+location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controller
+  - community/Content_Controller_B2C
 ---
 
 # reparseContent()
@@ -15,12 +15,9 @@ tags:
 - [[assertCanAccessContent()]] - `calls` [EXTRACTED]
 - [[assertCanMutateContent()]] - `calls` [EXTRACTED]
 - [[assertQuota()]] - `calls` [EXTRACTED]
-- [[autoGenerateSectionDecks()]] - `calls` [EXTRACTED]
-- [[captionAndStoreFigures()]] - `calls` [EXTRACTED]
 - [[content.controller.ts_1]] - `contains` [EXTRACTED]
-- [[extractTextFromPageImages()]] - `calls` [EXTRACTED]
+- [[enqueueReparse()]] - `calls` [EXTRACTED]
 - [[formatContent()]] - `calls` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
-- [[ingestText()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C

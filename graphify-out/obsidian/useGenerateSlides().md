@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "API Endpoints & Media Hooks"
-location: "L40"
+community: "Locale Sync & Content Hooks"
+location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # useGenerateSlides()
@@ -20,4 +20,4 @@ tags:
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

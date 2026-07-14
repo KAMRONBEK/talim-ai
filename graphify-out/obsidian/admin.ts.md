@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/admin.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Subscription & Billing Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Subscription__Billing_Service
 ---
 
 # admin.ts
@@ -19,4 +19,4 @@ tags:
 - [[shared.ts_2]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service

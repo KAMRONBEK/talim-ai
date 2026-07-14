@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Community 94"
+community: "Grading Engine Design Docs"
 location: "§3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Grading_Engine_Design_Docs
 ---
 
 # Unified Grading Module (packages/types/grading.ts)
@@ -18,4 +18,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Uzbek Apostrophe Normalization]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_94
+#graphify/concept #graphify/EXTRACTED #community/Grading_Engine_Design_Docs

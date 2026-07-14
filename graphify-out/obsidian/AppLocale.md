@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Flashcards UI"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Flashcards_UI
 ---
 
 # AppLocale
@@ -22,6 +22,7 @@ tags:
 - [[Quiz]] - `references` [EXTRACTED]
 - [[User]] - `references` [EXTRACTED]
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[deck-prompt.ts]] - `imports` [EXTRACTED]
 - [[format-relative-time.ts]] - `imports` [EXTRACTED]
 - [[generateFlashcards.job.ts]] - `imports` [EXTRACTED]
@@ -53,6 +54,7 @@ tags:
 - [[tts.service.ts]] - `imports` [EXTRACTED]
 - [[tutor-scope.ts]] - `imports` [EXTRACTED]
 - [[useChat.ts]] - `imports` [EXTRACTED]
+- [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[usePodcast.ts]] - `imports` [EXTRACTED]
@@ -62,4 +64,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Flashcards_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/login/page.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Shared_UI_Primitives
 ---
 
 # page.tsx
@@ -27,4 +27,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

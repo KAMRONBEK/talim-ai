@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Question Banks & Builders"
-location: "L247"
+community: "Question Bank Service"
+location: "L355"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # isAnswerableMultipleSelect()
@@ -19,4 +19,4 @@ tags:
 - [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

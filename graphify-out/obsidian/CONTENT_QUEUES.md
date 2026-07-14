@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Background Jobs & Queues"
-location: "L62"
+community: "API Bootstrap & Background Jobs"
+location: "L116"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # CONTENT_QUEUES
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

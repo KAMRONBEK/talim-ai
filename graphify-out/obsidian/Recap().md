@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Slide Deck Player UI"
 location: "L364"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Slide_Deck_Player_UI
 ---
 
 # Recap()
@@ -15,4 +15,4 @@ tags:
 - [[Slide.tsx]] - `contains` [EXTRACTED]
 - [[T]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI

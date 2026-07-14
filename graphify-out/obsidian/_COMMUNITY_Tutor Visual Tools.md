@@ -62,13 +62,14 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 9 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
-- 7 edges to [[_COMMUNITY_Chat Message Rendering]]
-- 6 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 5 edges to [[_COMMUNITY_AI Provider Service]]
-- 3 edges to [[_COMMUNITY_Chat Visual Embeds]]
-- 2 edges to [[_COMMUNITY_Slide Deck UI]]
-- 1 edge to [[_COMMUNITY_Job Registration & Manim]]
+- 9 edges to [[_COMMUNITY_Shared Types & Locale]]
+- 7 edges to [[_COMMUNITY_Tutor Visual Blocks]]
+- 6 edges to [[_COMMUNITY_Chat Streaming API]]
+- 5 edges to [[_COMMUNITY_AI Summary & Ingest]]
+- 2 edges to [[_COMMUNITY_Deck Type Definitions]]
+- 2 edges to [[_COMMUNITY_Visual Block Renderers]]
+- 1 edge to [[_COMMUNITY_Bull Jobs & Queues]]
+- 1 edge to [[_COMMUNITY_Web API Client & Job Stream]]
 
 ## Top bridge nodes
 - [[tutor-tools.ts]] - degree 29, connects to 4 communities

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/TutorMessageContent.tsx"
 type: "code"
-community: "Chat Message Rendering"
+community: "Tutor Chat Visual Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Message_Rendering
+  - community/Tutor_Chat_Visual_Components
 ---
 
 # TutorMessageContent.tsx
@@ -22,4 +22,4 @@ tags:
 - [[preprocess-latex.ts]] - `imports_from` [EXTRACTED]
 - [[preprocessLatex()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering
+#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components

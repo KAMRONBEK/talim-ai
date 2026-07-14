@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/question-inputs.tsx"
 type: "code"
-community: "Quiz Player Inputs"
+community: "Quiz Player UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_Inputs
+  - community/Quiz_Player_UI
 ---
 
 # question-inputs.tsx
@@ -34,8 +34,11 @@ tags:
 - [[gradableQuestion()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[isAiCheckable()]] - `contains` [EXTRACTED]
+- [[isAiJudgedQuestionType()]] - `imports` [EXTRACTED]
 - [[isAnswerProvided()]] - `contains` [EXTRACTED]
 - [[jsonStringArray()]] - `imports` [EXTRACTED]
+- [[matchesAcceptedAnswer()]] - `imports` [EXTRACTED]
 - [[matchingLeft()_1]] - `contains` [EXTRACTED]
 - [[normalizeAnswer()]] - `imports` [EXTRACTED]
 - [[optionRevealClass()]] - `contains` [EXTRACTED]
@@ -44,7 +47,8 @@ tags:
 - [[partialCreditUnits()]] - `contains` [EXTRACTED]
 - [[questionRenderKind]] - `contains` [EXTRACTED]
 - [[questionTypeLabelKey()]] - `contains` [EXTRACTED]
+- [[resolveAcceptedAnswers()]] - `imports` [EXTRACTED]
 - [[revealBorder()]] - `contains` [EXTRACTED]
 - [[rich-text.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

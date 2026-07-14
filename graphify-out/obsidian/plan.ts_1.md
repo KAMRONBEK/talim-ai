@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/plan.ts"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Billing & Access Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Billing__Access_Guards
 ---
 
 # plan.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[planMessageKey]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

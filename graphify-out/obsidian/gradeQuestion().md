@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Grading Engine Types"
-location: "L323"
+community: "Answer Grading Engine"
+location: "L431"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Grading_Engine_Types
+  - community/Answer_Grading_Engine
 ---
 
 # gradeQuestion()
@@ -16,6 +16,7 @@ tags:
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[answerToString()]] - `calls` [EXTRACTED]
 - [[buildCoverageResults()]] - `calls` [EXTRACTED]
+- [[checkAnswer()]] - `calls` [EXTRACTED]
 - [[evaluateQuizAnswers()]] - `calls` [EXTRACTED]
 - [[fillBlankAcceptedPerBlank()]] - `calls` [EXTRACTED]
 - [[grading.ts]] - `contains` [EXTRACTED]
@@ -23,6 +24,7 @@ tags:
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
+- [[matchesAcceptedAnswer()]] - `calls` [EXTRACTED]
 - [[normalizeAnswer()]] - `calls` [EXTRACTED]
 - [[orderingPairwiseCredit()]] - `calls` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
@@ -33,6 +35,5 @@ tags:
 - [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 - [[pointInAnyRegion()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
-- [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Grading_Engine_Types
+#graphify/code #graphify/EXTRACTED #community/Answer_Grading_Engine

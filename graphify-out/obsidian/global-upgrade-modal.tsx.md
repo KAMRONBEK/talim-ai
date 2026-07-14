@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/global-upgrade-modal.tsx"
 type: "code"
-community: "Providers & Job Events"
+community: "Upgrade Modal & Chat Window"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # global-upgrade-modal.tsx
@@ -19,4 +19,4 @@ tags:
 - [[useUpgradeModal]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

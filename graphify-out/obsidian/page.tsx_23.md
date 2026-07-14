@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Auth & Assignment UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Auth__Assignment_UI
 ---
 
 # page.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useTenantContent()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

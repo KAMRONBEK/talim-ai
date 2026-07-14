@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/app/icon.svg"
 type: "concept"
-community: "Community 121"
+community: "Web App Brand Icons"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_121
+  - community/Web_App_Brand_Icons
 ---
 
 # Violet-to-Marigold Gradient
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI App Icon]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_121
+#graphify/concept #graphify/EXTRACTED #community/Web_App_Brand_Icons

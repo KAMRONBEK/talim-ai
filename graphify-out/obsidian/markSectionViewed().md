@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
-location: "L58"
+community: "Learning Progress & Coverage"
+location: "L59"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Learning_Progress__Coverage
 ---
 
 # markSectionViewed()
@@ -18,4 +18,4 @@ tags:
 - [[recalculateContentProgress()]] - `calls` [EXTRACTED]
 - [[recordLearningActivity()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage

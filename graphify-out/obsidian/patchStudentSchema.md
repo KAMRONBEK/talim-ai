@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant Service"
+community: "Student Management Service"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Service
+  - community/Student_Management_Service
 ---
 
 # patchStudentSchema
@@ -15,4 +15,4 @@ tags:
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 - [[students.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Service
+#graphify/code #graphify/EXTRACTED #community/Student_Management_Service

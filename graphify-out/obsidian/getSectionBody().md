@@ -1,19 +1,19 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Section Service"
+community: "Section Controller"
 location: "L214"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Service
+  - community/Section_Controller
 ---
 
 # getSectionBody()
 
 ## Connections
 - [[buildContext()]] - `calls` [EXTRACTED]
-- [[generateSummaryText()]] - `calls` [EXTRACTED]
+- [[buildSummaryMessages()]] - `calls` [EXTRACTED]
 - [[getSection()]] - `calls` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
 - [[refineSectionProgressWithAi()]] - `calls` [EXTRACTED]
@@ -22,4 +22,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Service
+#graphify/code #graphify/EXTRACTED #community/Section_Controller

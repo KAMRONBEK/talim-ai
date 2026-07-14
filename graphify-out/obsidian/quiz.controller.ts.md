@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz API Controller"
+community: "Quiz Controller & Grading"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_API_Controller
+  - community/Quiz_Controller__Grading
 ---
 
 # quiz.controller.ts
@@ -15,15 +15,21 @@ tags:
 - [[AnswerEvidence]] - `imports` [EXTRACTED]
 - [[AppError]] - `imports` [EXTRACTED]
 - [[AuthenticatedRequest]] - `imports` [EXTRACTED]
+- [[GradeResult]] - `imports` [EXTRACTED]
+- [[JudgeOptions]] - `imports` [EXTRACTED]
 - [[MasteryDelta]] - `imports` [EXTRACTED]
 - [[QuizEvaluation]] - `contains` [EXTRACTED]
 - [[QuizQuestionForEvaluation]] - `contains` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports_from` [EXTRACTED]
 - [[answerToString()]] - `imports` [EXTRACTED]
+- [[applyAiJudgeToGrades()]] - `imports` [EXTRACTED]
 - [[assertCanAccessContent()]] - `imports` [EXTRACTED]
 - [[assertCanGenerate()]] - `imports` [EXTRACTED]
 - [[assertQuizAccess()]] - `contains` [EXTRACTED]
 - [[assertQuota()]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[checkAnswer()]] - `contains` [EXTRACTED]
+- [[checkAnswerSchema]] - `contains` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[createQuiz()]] - `contains` [EXTRACTED]
 - [[createQuizSchema]] - `contains` [EXTRACTED]
@@ -40,7 +46,9 @@ tags:
 - [[getSubmittedOptionLabel()]] - `contains` [EXTRACTED]
 - [[gradeQuestion()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
+- [[isAiJudgedQuestionType()]] - `imports` [EXTRACTED]
 - [[jsonStringArray()]] - `imports` [EXTRACTED]
+- [[judgeWrittenAnswers()]] - `imports` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 - [[listAttempts()]] - `contains` [EXTRACTED]
 - [[listQuizzesByContent()]] - `contains` [EXTRACTED]
@@ -55,8 +63,10 @@ tags:
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.routes.ts]] - `imports_from` [EXTRACTED]
 - [[quizCreatorUserId()]] - `contains` [EXTRACTED]
+- [[quizQuestionKey()]] - `imports` [EXTRACTED]
 - [[quizQueue]] - `imports` [EXTRACTED]
 - [[recordAnswers()]] - `imports` [EXTRACTED]
+- [[resolveAcceptedAnswers()]] - `imports` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[resolveSubmittedAnswer()]] - `contains` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `imports_from` [EXTRACTED]
@@ -68,4 +78,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading

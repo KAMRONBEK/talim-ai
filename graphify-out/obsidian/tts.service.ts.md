@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "Podcast Generation & Prompts"
+community: "Podcast Generation & TTS"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__Prompts
+  - community/Podcast_Generation__TTS
 ---
 
 # tts.service.ts
@@ -46,4 +46,4 @@ tags:
 - [[tts-normalize.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS

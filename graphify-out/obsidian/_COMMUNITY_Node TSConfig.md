@@ -4,7 +4,7 @@ cohesion: 0.22
 members: 9
 ---
 
-# Node TSConfig
+# Node tsconfig
 
 **Cohesion:** 0.22 - loosely connected
 **Members:** 9 nodes
@@ -23,6 +23,6 @@ members: 9
 ## Live Query (requires Dataview plugin)
 
 ```dataview
-TABLE source_file, type FROM #community/Node_TSConfig
+TABLE source_file, type FROM #community/Node_tsconfig
 SORT file.name ASC
 ```

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Media & Progress Controllers"
+community: "Summary Controller"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Summary_Controller
 ---
 
 # summary.controller.ts
@@ -15,6 +15,7 @@ tags:
 - [[AppError]] - `imports` [EXTRACTED]
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[AuthenticatedRequest]] - `imports` [EXTRACTED]
+- [[ChatMessageInput]] - `imports` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
 - [[assertCanAccessContent()]] - `imports` [EXTRACTED]
 - [[assertCanGenerate()]] - `imports` [EXTRACTED]
@@ -22,6 +23,7 @@ tags:
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[boundContextByTokens()]] - `imports` [EXTRACTED]
 - [[buildRagContext()]] - `imports` [EXTRACTED]
+- [[buildSummaryMessages()]] - `contains` [EXTRACTED]
 - [[buildSummaryUserPrompt()]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
@@ -39,6 +41,7 @@ tags:
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
+- [[persistAndRecordSummary()]] - `contains` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
@@ -47,9 +50,14 @@ tags:
 - [[sanitizeSummaryOutput()]] - `imports` [EXTRACTED]
 - [[scopeKey()_1]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
+- [[sse.ts]] - `imports_from` [EXTRACTED]
+- [[sseData()]] - `imports` [EXTRACTED]
+- [[sseDone()]] - `imports` [EXTRACTED]
+- [[sseHeaders()]] - `imports` [EXTRACTED]
+- [[streamSummary()]] - `contains` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.routes.ts]] - `imports_from` [EXTRACTED]
 - [[summaryBodySchema]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

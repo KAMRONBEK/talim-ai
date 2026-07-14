@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/assign-students-panel.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Tenant Dashboard & Hooks"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # AssignStudentsPanel()
@@ -21,4 +21,4 @@ tags:
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 - [[useUnassignContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/page.tsx"
 type: "code"
-community: "Community 136"
+community: "Admin Root Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_136
+  - community/Admin_Root_Page
 ---
 
 # page.tsx
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[RootPage()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_136
+#graphify/code #graphify/EXTRACTED #community/Admin_Root_Page

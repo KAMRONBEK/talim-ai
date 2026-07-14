@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Marketing Landing UI"
+community: "Marketing Landing Components"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_UI
+  - community/Marketing_Landing_Components
 ---
 
 # MANUAL_TIERS
@@ -15,4 +15,4 @@ tags:
 - [[pricing.ts]] - `contains` [EXTRACTED]
 - [[pricing.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

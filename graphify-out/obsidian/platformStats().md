@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/analytics.controller.ts"
 type: "code"
-community: "Admin Analytics Endpoints"
+community: "Admin Analytics"
 location: "L121"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics_Endpoints
+  - community/Admin_Analytics
 ---
 
 # platformStats()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[analytics.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics_Endpoints
+#graphify/code #graphify/EXTRACTED #community/Admin_Analytics

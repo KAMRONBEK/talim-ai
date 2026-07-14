@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "Fonts & Layout"
+community: "Fonts & Root Layout"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Fonts__Layout
+  - community/Fonts__Root_Layout
 ---
 
 # LocaleLayout()
@@ -15,4 +15,4 @@ tags:
 - [[getMessages()]] - `calls` [INFERRED]
 - [[layout.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Fonts__Layout
+#graphify/code #graphify/INFERRED #community/Fonts__Root_Layout

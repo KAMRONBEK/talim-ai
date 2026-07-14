@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Auth API Controller"
+community: "Auth Controller"
 location: "L80"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_API_Controller
+  - community/Auth_Controller
 ---
 
 # joinTenantByCode()
@@ -18,4 +18,4 @@ tags:
 - [[organization.ts]] - `contains` [EXTRACTED]
 - [[register()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Auth_Controller

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "Community 95"
+community: "Usage Pricing & Metering"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_95
+  - community/Usage_Pricing__Metering
 ---
 
 # inspect-chunks.ts
@@ -26,4 +26,4 @@ tags:
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[searchWithDistance()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_95
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering

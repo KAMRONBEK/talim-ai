@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/usage/page.tsx"
 type: "code"
-community: "Admin Analytics"
+community: "Admin Dashboard & Charts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics
+  - community/Admin_Dashboard__Charts
 ---
 
 # page.tsx
@@ -18,4 +18,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminUsage()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts

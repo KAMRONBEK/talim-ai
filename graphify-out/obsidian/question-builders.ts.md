@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Banks & Builders"
+community: "Question Bank Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # question-builders.ts
@@ -31,4 +31,4 @@ tags:
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 - [[shuffled()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

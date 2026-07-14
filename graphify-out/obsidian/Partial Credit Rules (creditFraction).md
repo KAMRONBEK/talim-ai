@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Plan"
+community: "Grading Engine Design Docs"
 location: "§3"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Plan
+  - community/Grading_Engine_Design_Docs
 ---
 
 # Partial Credit Rules (creditFraction)
@@ -17,4 +17,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Unified Grading Module (packagestypesgrading.ts)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Plan
+#graphify/concept #graphify/EXTRACTED #community/Grading_Engine_Design_Docs

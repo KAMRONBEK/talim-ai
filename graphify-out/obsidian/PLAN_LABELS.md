@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/plan.ts"
 type: "code"
-community: "Community 88"
+community: "Admin Subscription UI"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_88
+  - community/Admin_Subscription_UI
 ---
 
 # PLAN_LABELS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[plan.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_88
+#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI

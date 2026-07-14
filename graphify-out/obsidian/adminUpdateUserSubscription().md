@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Subscription & Billing Service"
 location: "L46"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Subscription__Billing_Service
 ---
 
 # adminUpdateUserSubscription()
@@ -18,4 +18,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service

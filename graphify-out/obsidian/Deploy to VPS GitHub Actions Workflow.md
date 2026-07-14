@@ -1,11 +1,11 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "code"
-community: "Platform Docs & Deploy"
+community: "Platform Guide Docs"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Platform_Docs__Deploy
+  - community/Platform_Guide_Docs
 ---
 
 # Deploy to VPS GitHub Actions Workflow
@@ -16,4 +16,4 @@ tags:
 - [[Production Deployment Topology (nginx + Docker + GHCR)]] - `references` [EXTRACTED]
 - [[VPS Pull & Restart Job]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Platform_Docs__Deploy
+#graphify/code #graphify/EXTRACTED #community/Platform_Guide_Docs

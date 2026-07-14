@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF & OCR Service"
+community: "PDF Extraction Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF__OCR_Service
+  - community/PDF_Extraction_Service
 ---
 
 # pdf.service.ts
@@ -31,9 +31,10 @@ tags:
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[rasterizeAndOcrPdf()]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `imports` [EXTRACTED]
+- [[reparseContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[runCli()]] - `contains` [EXTRACTED]
 - [[runPdftoppm()]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF__OCR_Service
+#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service

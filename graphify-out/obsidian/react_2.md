@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Deps"
+community: "UI Package Config"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Deps
+  - community/UI_Package_Config
 ---
 
 # react
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[peerDependencies]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Deps
+#graphify/code #graphify/EXTRACTED #community/UI_Package_Config

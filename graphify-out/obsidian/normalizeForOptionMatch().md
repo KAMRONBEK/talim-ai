@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz API Controller"
-location: "L162"
+community: "Quiz Controller & Grading"
+location: "L173"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_API_Controller
+  - community/Quiz_Controller__Grading
 ---
 
 # normalizeForOptionMatch()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading

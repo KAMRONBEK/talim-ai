@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Chat Message Rendering"
+community: "Tutor Chat Visual Components"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Message_Rendering
+  - community/Tutor_Chat_Visual_Components
 ---
 
 # MessageRole
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering
+#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components

@@ -1,20 +1,19 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz API Controller"
-location: "L176"
+community: "Quiz Controller & Grading"
+location: "L187"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_API_Controller
+  - community/Quiz_Controller__Grading
 ---
 
 # resolveSubmittedAnswer()
 
 ## Connections
-- [[evaluateQuizAnswers()]] - `calls` [EXTRACTED]
 - [[getSubmittedOptionLabel()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 - [[stripSubmittedOptionLabel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading

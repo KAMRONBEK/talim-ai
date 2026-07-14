@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Assessment Pages & Wizard"
+community: "Tenant Assessment Builder UI"
 location: "L863"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Assessment_Pages__Wizard
+  - community/Tenant_Assessment_Builder_UI
 ---
 
 # LearnerAssessmentsPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 - [[useLearnerAssessments()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Assessment_Pages__Wizard
+#graphify/code #graphify/INFERRED #community/Tenant_Assessment_Builder_UI

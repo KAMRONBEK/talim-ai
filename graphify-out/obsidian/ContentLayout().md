@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Content & Flashcards Hooks"
-location: "L172"
+community: "Content Detail Page"
+location: "L176"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Flashcards_Hooks
+  - community/Content_Detail_Page
 ---
 
 # ContentLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page

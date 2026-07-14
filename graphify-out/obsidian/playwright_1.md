@@ -1,12 +1,12 @@
 ---
 source_file: ".mcp.json"
 type: "code"
-community: "Community 115"
+community: "MCP Config (Playwright)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_115
+  - community/MCP_Config_Playwright
 ---
 
 # playwright
@@ -16,4 +16,4 @@ tags:
 - [[@playwrightmcp_1]] - `references` [EXTRACTED]
 - [[npx_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_115
+#graphify/code #graphify/EXTRACTED #community/MCP_Config_Playwright

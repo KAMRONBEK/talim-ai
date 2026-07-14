@@ -1,13 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
-type: "document"
-community: "qa · US-OWNER-12: Delete a material"
+type: "concept"
+community: "Product Plans & Epics"
 tags:
-  - graphify/document
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/qa__US-OWNER-12_Delete_a_material
+  - community/Product_Plans__Epics
 ---
 
 # US-OWNER-12: Delete a material
 
-#graphify/document #graphify/EXTRACTED #community/qa__US-OWNER-12_Delete_a_material
+## Connections
+- [[Multi-tenant isolation guard (contentAccess.service  assertCanAccessContent)]] - `references` [EXTRACTED]
+- [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
+
+#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics

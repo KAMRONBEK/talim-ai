@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/results.ts"
 type: "code"
-community: "Assessments Service"
+community: "Assessment Service"
 location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessments_Service
+  - community/Assessment_Service
 ---
 
 # getAssessmentResults()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[results.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessments_Service
+#graphify/code #graphify/EXTRACTED #community/Assessment_Service

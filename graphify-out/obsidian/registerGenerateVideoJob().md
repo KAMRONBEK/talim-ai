@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Job Registration & Manim"
+community: "API Bootstrap & Background Jobs"
 location: "L117"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Registration__Manim
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # registerGenerateVideoJob()
@@ -16,4 +16,4 @@ tags:
 - [[generateVideo.job.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

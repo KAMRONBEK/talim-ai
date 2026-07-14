@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Assessment & Tutor-Request Controllers"
+community: "Content Media Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment__Tutor-Request_Controllers
+  - community/Content_Media_Controllers
 ---
 
 # params.ts
@@ -32,4 +32,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

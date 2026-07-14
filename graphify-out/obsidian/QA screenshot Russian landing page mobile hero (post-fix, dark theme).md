@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg"
 type: "image"
-community: "Landing Screenshot (RU)"
+community: "QA Screenshots (RU Landing)"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Landing_Screenshot_RU
+  - community/QA_Screenshots_RU_Landing
 ---
 
 # QA screenshot: Russian landing page mobile hero (post-fix, dark theme)
@@ -18,4 +18,4 @@ tags:
 - [[Russian (ru) locale rendering of the marketing landing page]] - `conceptually_related_to` [EXTRACTED]
 - [[Sticky mobile header Talim AI logo, theme-toggle (moon) icon, gradient 'Начать' CTA]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/Landing_Screenshot_RU
+#graphify/image #graphify/EXTRACTED #community/QA_Screenshots_RU_Landing

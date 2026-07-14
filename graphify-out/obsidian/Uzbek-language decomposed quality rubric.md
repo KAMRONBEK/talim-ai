@@ -1,18 +1,17 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Coverage Map"
+community: "QA Playbook & Oracles"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Coverage_Map
+  - community/QA_Playbook__Oracles
 ---
 
 # Uzbek-language decomposed quality rubric
 
 ## Connections
 - [[AI-output grading rubric (FEW HICCUPPS oracles)]] - `references` [EXTRACTED]
-- [[Observations ledger (On)]] - `conceptually_related_to` [EXTRACTED]
 - [[Uzbek apostrophe quadruple (U+02BB attack)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map
+#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles

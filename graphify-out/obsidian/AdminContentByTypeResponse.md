@@ -2,7 +2,7 @@
 source_file: "packages/types/index.ts"
 type: "code"
 community: "Admin Analytics"
-location: "L939"
+location: "L943"
 tags:
   - graphify/code
   - graphify/EXTRACTED

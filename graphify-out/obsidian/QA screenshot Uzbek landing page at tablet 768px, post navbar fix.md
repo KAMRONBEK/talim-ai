@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg"
 type: "image"
-community: "Community 91"
+community: "QA Screenshots (UZ Landing)"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/Community_91
+  - community/QA_Screenshots_UZ_Landing
 ---
 
 # QA screenshot: Uzbek landing page at tablet 768px, post navbar fix
@@ -20,4 +20,4 @@ tags:
 - [[Uzbek (uz locale) localization all landing copy rendered in Uzbek via next-intl locale routing]] - `references` [EXTRACTED]
 - [[Visual design language lavenderviolet backdrop, purple-to-orange gradient CTAs and progress bar, rounded cards on light surface (relation to committed 'Scholar' pine+clay system uncertain)]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/Community_91
+#graphify/image #graphify/EXTRACTED #community/QA_Screenshots_UZ_Landing

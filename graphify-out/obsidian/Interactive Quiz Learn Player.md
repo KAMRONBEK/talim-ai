@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 86"
+community: "Feature Catalog Docs"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_86
+  - community/Feature_Catalog_Docs
 ---
 
 # Interactive Quiz Learn Player
@@ -14,4 +14,4 @@ tags:
 - [[GAME Assessment Mode (timer, speed points, streaks)]] - `semantically_similar_to` [INFERRED]
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Community_86
+#graphify/concept #graphify/INFERRED #community/Feature_Catalog_Docs

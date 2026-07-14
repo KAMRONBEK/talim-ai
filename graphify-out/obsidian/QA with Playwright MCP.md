@@ -1,13 +1,13 @@
 ---
 source_file: "docs/QA.md"
 type: "document"
-community: "Community 154"
+community: "QA Playwright Doc"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_154
+  - community/QA_Playwright_Doc
 ---
 
 # QA with Playwright MCP
 
-#graphify/document #graphify/EXTRACTED #community/Community_154
+#graphify/document #graphify/EXTRACTED #community/QA_Playwright_Doc

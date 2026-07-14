@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Config, Pricing & Embeddings"
+community: "Usage Pricing & Metering"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Config_Pricing__Embeddings
+  - community/Usage_Pricing__Metering
 ---
 
 # planMonthlyPriceUsd()
@@ -15,4 +15,4 @@ tags:
 - [[analytics.service.ts]] - `imports` [EXTRACTED]
 - [[usage-pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering

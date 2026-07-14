@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Background Jobs & Queues"
+community: "API Bootstrap & Background Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # storage.service.ts
@@ -25,8 +25,10 @@ tags:
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
+- [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports_from` [EXTRACTED]
+- [[reparseContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

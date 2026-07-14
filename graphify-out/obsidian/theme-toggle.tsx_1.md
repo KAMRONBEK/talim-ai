@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/theme-toggle.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Shared UI Primitives"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Shared_UI_Primitives
 ---
 
 # theme-toggle.tsx
@@ -19,4 +19,4 @@ tags:
 - [[themeIcons]] - `contains` [EXTRACTED]
 - [[themeValues_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

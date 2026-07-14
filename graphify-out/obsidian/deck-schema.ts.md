@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-schema.ts"
 type: "code"
-community: "Slide Deck Prompts"
+community: "Deck Schema"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Deck_Schema
 ---
 
 # deck-schema.ts
@@ -31,4 +31,4 @@ tags:
 - [[slideSchema]] - `contains` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Deck_Schema

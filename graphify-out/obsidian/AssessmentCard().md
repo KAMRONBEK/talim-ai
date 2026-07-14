@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Messaging Hooks"
 location: "L739"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Hooks__Messaging
+  - community/Messaging_Hooks
 ---
 
 # AssessmentCard()
@@ -16,4 +16,4 @@ tags:
 - [[formatRelativeTime()]] - `calls` [INFERRED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/INFERRED #community/Messaging_Hooks

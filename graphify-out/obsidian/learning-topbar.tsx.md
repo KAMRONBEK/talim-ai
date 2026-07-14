@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Marketing Landing Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Marketing_Landing_Components
 ---
 
 # learning-topbar.tsx
@@ -29,4 +29,4 @@ tags:
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

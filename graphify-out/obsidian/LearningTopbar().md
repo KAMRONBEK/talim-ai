@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # LearningTopbar()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

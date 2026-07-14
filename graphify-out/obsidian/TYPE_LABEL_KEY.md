@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Auth & Assignment UI"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Auth__Assignment_UI
 ---
 
 # TYPE_LABEL_KEY
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_23]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Content Media Controllers"
 location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Content_Media_Controllers
 ---
 
 # assertQuota()
@@ -42,9 +42,10 @@ tags:
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[smoke-quota.ts]] - `imports` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

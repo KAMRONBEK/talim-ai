@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Job Registration & Manim"
-location: "L11"
+community: "API Bootstrap & Background Jobs"
+location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Registration__Manim
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # execFileAsync
@@ -15,4 +15,4 @@ tags:
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 - [[renderWithManimCli()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Registration__Manim
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

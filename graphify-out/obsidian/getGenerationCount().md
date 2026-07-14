@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Subscription & Billing Service"
 location: "L99"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Subscription__Billing_Service
 ---
 
 # getGenerationCount()
@@ -17,4 +17,4 @@ tags:
 - [[getUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[user.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service

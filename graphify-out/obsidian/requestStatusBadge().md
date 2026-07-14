@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
 type: "code"
-community: "Community 104"
+community: "Admin Dashboard & Charts"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/Admin_Dashboard__Charts
 ---
 
 # requestStatusBadge()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts

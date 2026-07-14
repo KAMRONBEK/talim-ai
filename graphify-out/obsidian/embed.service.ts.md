@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Config, Pricing & Embeddings"
+community: "Usage Pricing & Metering"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Config_Pricing__Embeddings
+  - community/Usage_Pricing__Metering
 ---
 
 # embed.service.ts
@@ -27,4 +27,4 @@ tags:
 - [[recordUsage()]] - `imports` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings
+#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering

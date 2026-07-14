@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/content/page.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Admin Dashboard & Charts"
 location: "L182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Admin_Dashboard__Charts
 ---
 
 # ContentPage()
@@ -17,4 +17,4 @@ tags:
 - [[useDeleteContent()]] - `calls` [EXTRACTED]
 - [[useRetryContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts

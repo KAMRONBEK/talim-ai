@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale.ts"
 type: "code"
-community: "Media & Progress Controllers"
+community: "Content Media Controllers"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Content_Media_Controllers
 ---
 
 # resolveLocale()
@@ -40,8 +40,9 @@ tags:
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "YouTube Transcript Service"
+community: "YouTube Ingest Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/YouTube_Transcript_Service
+  - community/YouTube_Ingest_Service
 ---
 
 # youtube.service.ts
@@ -20,9 +20,9 @@ tags:
 - [[UsageContext]] - `imports` [EXTRACTED]
 - [[YoutubeTranscriptItem]] - `contains` [EXTRACTED]
 - [[YoutubeTranscriptResult]] - `contains` [EXTRACTED]
+- [[backfillTranscript.job.ts]] - `imports_from` [EXTRACTED]
 - [[buildTranscriptionPrompt()]] - `contains` [EXTRACTED]
 - [[cleanTranscriptText()]] - `contains` [EXTRACTED]
-- [[content-shared.ts]] - `imports_from` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports_from` [EXTRACTED]
 - [[env.ts]] - `imports_from` [EXTRACTED]
 - [[extractYoutubeAudio()]] - `contains` [EXTRACTED]
@@ -38,4 +38,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/YouTube_Transcript_Service
+#graphify/code #graphify/EXTRACTED #community/YouTube_Ingest_Service

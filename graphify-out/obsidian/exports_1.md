@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "Types Package Manifest"
+community: "Types Package Config"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Types_Package_Manifest
+  - community/Types_Package_Config
 ---
 
 # exports
@@ -18,4 +18,4 @@ tags:
 - [[require]] - `contains` [EXTRACTED]
 - [[types]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Types_Package_Manifest
+#graphify/code #graphify/EXTRACTED #community/Types_Package_Config

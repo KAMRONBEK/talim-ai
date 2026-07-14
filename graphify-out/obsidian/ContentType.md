@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Auth & Assignment UI"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Auth__Assignment_UI
 ---
 
 # ContentType
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

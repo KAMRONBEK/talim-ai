@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "API Endpoints & Media Hooks"
-location: "L12"
+community: "Locale Sync & Content Hooks"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # useSlides()
@@ -21,6 +21,7 @@ tags:
 - [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[slidesKey()]] - `calls` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

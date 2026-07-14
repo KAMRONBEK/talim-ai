@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/adminUserRole.service.ts"
 type: "code"
-community: "Community 85"
+community: "Tenant Org & Roles Service"
 location: "L56"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_85
+  - community/Tenant_Org__Roles_Service
 ---
 
 # ensureIndividualSubscription()
@@ -15,4 +15,4 @@ tags:
 - [[adminUserRole.service.ts]] - `contains` [EXTRACTED]
 - [[applyAdminRoleChange()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_85
+#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service

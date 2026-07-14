@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Player & Hooks"
+community: "Quiz Player UI"
 location: "L280"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Quiz_Player__Hooks
+  - community/Quiz_Player_UI
 ---
 
 # QuizPage()
@@ -20,4 +20,4 @@ tags:
 - [[useQuiz()]] - `calls` [INFERRED]
 - [[useSubmitQuiz()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Quiz_Player__Hooks
+#graphify/code #graphify/INFERRED #community/Quiz_Player_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Quiz Player Inputs"
-location: "L1154"
+community: "Quiz Player UI"
+location: "L1166"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_Inputs
+  - community/Quiz_Player_UI
 ---
 
 # QuizQuestion
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

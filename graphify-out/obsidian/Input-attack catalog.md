@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Coverage Map"
+community: "QA Playbook & Oracles"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Coverage_Map
+  - community/QA_Playbook__Oracles
 ---
 
 # Input-attack catalog
@@ -15,4 +15,4 @@ tags:
 - [[Uzbek apostrophe quadruple (U+02BB attack)]] - `references` [EXTRACTED]
 - [[overnight-visual-qa.md — overnight DEEP QA runbook]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map
+#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles

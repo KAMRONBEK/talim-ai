@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Chat Visual Embeds"
+community: "AI Tutor Visual Tools"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Visual_Embeds
+  - community/AI_Tutor_Visual_Tools
 ---
 
 # GeoGebraPayload
@@ -17,4 +17,4 @@ tags:
 - [[tutor-geogebra.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools

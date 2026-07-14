@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "Providers & Job Events"
+community: "Locale Sync & Content Hooks"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # useLocaleSync()
@@ -17,4 +17,4 @@ tags:
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

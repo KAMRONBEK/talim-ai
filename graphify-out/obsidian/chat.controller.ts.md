@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "AI Tutor Chat Controller"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/AI_Tutor_Chat_Controller
 ---
 
 # chat.controller.ts
@@ -53,6 +53,10 @@ tags:
 - [[searchSimilarChunks()]] - `imports` [EXTRACTED]
 - [[searchSimilarFigures()]] - `imports` [EXTRACTED]
 - [[serializeBlockForMessage()]] - `imports` [EXTRACTED]
+- [[sse.ts]] - `imports_from` [EXTRACTED]
+- [[sseData()]] - `imports` [EXTRACTED]
+- [[sseDone()]] - `imports` [EXTRACTED]
+- [[sseHeaders()]] - `imports` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamChat()]] - `contains` [EXTRACTED]
 - [[streamSchema]] - `contains` [EXTRACTED]
@@ -61,4 +65,4 @@ tags:
 - [[tutor-scope.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller

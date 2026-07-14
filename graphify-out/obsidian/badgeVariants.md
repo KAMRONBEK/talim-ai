@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Auth & Assignment UI"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Auth__Assignment_UI
 ---
 
 # badgeVariants
@@ -16,4 +16,4 @@ tags:
 - [[badge.tsx]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

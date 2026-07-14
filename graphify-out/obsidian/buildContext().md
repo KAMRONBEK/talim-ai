@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "AI Tutor Chat API"
-location: "L86"
+community: "Job Event Fan-out & Media Jobs"
+location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # buildContext()
@@ -19,4 +19,4 @@ tags:
 - [[getSectionBody()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

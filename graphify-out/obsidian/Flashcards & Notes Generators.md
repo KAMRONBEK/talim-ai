@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "concept"
-community: "Community 86"
+community: "AI Tutor & RAG Plans"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_86
+  - community/AI_Tutor__RAG_Plans
 ---
 
 # Flashcards & Notes Generators
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Generate Grid (Yaratish)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_86
+#graphify/concept #graphify/EXTRACTED #community/AI_Tutor__RAG_Plans

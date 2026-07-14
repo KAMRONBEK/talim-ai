@@ -2,7 +2,7 @@
 source_file: "packages/types/index.ts"
 type: "code"
 community: "Shared UI Primitives"
-location: "L1028"
+location: "L1032"
 tags:
   - graphify/code
   - graphify/EXTRACTED

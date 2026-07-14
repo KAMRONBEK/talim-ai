@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Background Jobs & Queues"
+community: "Job Event Fan-out & Media Jobs"
 location: "L77"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # buildNarrations()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generateVideo.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

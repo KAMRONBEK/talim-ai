@@ -32,11 +32,10 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Tutor Embed Components]]
-- 1 edge to [[_COMMUNITY_Shared TypeScript Types (@talimtypes)]]
-- 1 edge to [[_COMMUNITY_Chat Store & Tutor Graph Payloads]]
-- 1 edge to [[_COMMUNITY_Login Page & Sheet UI]]
+- 2 edges to [[_COMMUNITY_Shared Types & Zustand Stores]]
+- 2 edges to [[_COMMUNITY_Tutor Chat Visual Components]]
+- 1 edge to [[_COMMUNITY_Auth & Assignment UI]]
 
 ## Top bridge nodes
-- [[DesmosGraph.tsx]] - degree 15, connects to 3 communities
+- [[DesmosGraph.tsx]] - degree 15, connects to 2 communities
 - [[DesmosGraph()]] - degree 4, connects to 2 communities

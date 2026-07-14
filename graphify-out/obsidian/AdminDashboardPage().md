@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "Admin Dashboard UI"
+community: "Admin Dashboard & Charts"
 location: "L117"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Admin_Dashboard_UI
+  - community/Admin_Dashboard__Charts
 ---
 
 # AdminDashboardPage()
@@ -24,4 +24,4 @@ tags:
 - [[useAdminAnalyticsUserGrowth()]] - `calls` [INFERRED]
 - [[usePlatformStats()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Admin_Dashboard_UI
+#graphify/code #graphify/INFERRED #community/Admin_Dashboard__Charts

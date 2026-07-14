@@ -1,23 +1,25 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Grading Engine Types"
+community: "Answer Grading Engine"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Grading_Engine_Types
+  - community/Answer_Grading_Engine
 ---
 
 # normalizeAnswer()
 
 ## Connections
+- [[answerJudge.service.ts]] - `imports` [EXTRACTED]
 - [[buildDropdownClozeQuestion()]] - `calls` [EXTRACTED]
 - [[buildMatchingQuestion()]] - `calls` [EXTRACTED]
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
 - [[grading.ts]] - `contains` [EXTRACTED]
 - [[hasBannedOption()]] - `calls` [EXTRACTED]
 - [[isCorrect()]] - `calls` [EXTRACTED]
+- [[matchesAcceptedAnswer()]] - `calls` [EXTRACTED]
 - [[orderingPairwiseCredit()]] - `calls` [EXTRACTED]
 - [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
 - [[question-builders.ts]] - `imports` [EXTRACTED]
@@ -25,4 +27,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shuffleOptionsWithKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Grading_Engine_Types
+#graphify/code #graphify/EXTRACTED #community/Answer_Grading_Engine

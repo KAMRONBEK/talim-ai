@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Question Banks & Builders"
-location: "L268"
+community: "Question Bank Service"
+location: "L274"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # formatQuestion()
@@ -19,4 +19,4 @@ tags:
 - [[patchQuestion()_1]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

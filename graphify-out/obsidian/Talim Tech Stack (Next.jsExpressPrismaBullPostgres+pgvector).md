@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "concept"
-community: "Architecture Concepts (CLAUDE.md)"
+community: "Admin & API Architecture Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Architecture_Concepts_CLAUDEmd
+  - community/Admin__API_Architecture_Docs
 ---
 
 # Talim Tech Stack (Next.js/Express/Prisma/Bull/Postgres+pgvector)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI README]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Architecture_Concepts_CLAUDEmd
+#graphify/concept #graphify/EXTRACTED #community/Admin__API_Architecture_Docs

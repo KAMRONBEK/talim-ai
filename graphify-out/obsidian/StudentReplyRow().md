@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/tenant-messages-bell.tsx"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Messaging Hooks"
 location: "L195"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Hooks__Messaging
+  - community/Messaging_Hooks
 ---
 
 # StudentReplyRow()
@@ -17,4 +17,4 @@ tags:
 - [[tenant-messages-bell.tsx]] - `contains` [EXTRACTED]
 - [[useRespondToReply()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks

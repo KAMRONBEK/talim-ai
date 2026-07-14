@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Coverage Map"
+community: "QA Evidence Protocol"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Coverage_Map
+  - community/QA_Evidence_Protocol
 ---
 
 # Screenshot visual-judgment rubric
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Evidence triple (console + network + screenshot)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map
+#graphify/concept #graphify/EXTRACTED #community/QA_Evidence_Protocol

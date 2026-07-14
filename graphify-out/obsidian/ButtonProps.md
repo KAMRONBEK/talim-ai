@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Shared UI Primitives"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Shared_UI_Primitives
 ---
 
 # ButtonProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[button.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives

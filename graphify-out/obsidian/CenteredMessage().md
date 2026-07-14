@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "API Endpoints & Media Hooks"
-location: "L91"
+community: "Upgrade Modal & Chat Window"
+location: "L99"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # CenteredMessage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_33]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

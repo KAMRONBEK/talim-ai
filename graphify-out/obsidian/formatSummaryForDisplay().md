@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Summary & Rich Text"
+community: "Section Reader UI"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary__Rich_Text
+  - community/Section_Reader_UI
 ---
 
 # formatSummaryForDisplay()
@@ -17,4 +17,4 @@ tags:
 - [[splitSummaryParagraphs()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary__Rich_Text
+#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI

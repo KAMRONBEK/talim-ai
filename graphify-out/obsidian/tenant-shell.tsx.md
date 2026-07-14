@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Billing & Access Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Billing__Access_Guards
 ---
 
 # tenant-shell.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantSearch()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

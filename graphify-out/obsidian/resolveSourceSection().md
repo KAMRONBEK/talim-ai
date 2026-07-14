@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Quiz Generation Pipeline"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Quiz_Generation_Pipeline
 ---
 
 # resolveSourceSection()
@@ -15,4 +15,4 @@ tags:
 - [[containmentNormalize()]] - `calls` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline

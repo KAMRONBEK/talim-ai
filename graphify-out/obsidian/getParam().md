@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Assessment & Tutor-Request Controllers"
+community: "Assessment Controller"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment__Tutor-Request_Controllers
+  - community/Assessment_Controller
 ---
 
 # getParam()
@@ -19,6 +19,7 @@ tags:
 - [[assessmentResults()]] - `calls` [EXTRACTED]
 - [[assignAssessment()]] - `calls` [EXTRACTED]
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[checkAnswer()]] - `calls` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentDetail()]] - `calls` [EXTRACTED]
@@ -102,6 +103,7 @@ tags:
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[streamEpisodeAudio()]] - `calls` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[streamVideoSegmentAudio()]] - `calls` [EXTRACTED]
 - [[submitLearnerAssessment()]] - `calls` [EXTRACTED]
 - [[submitQuiz()]] - `calls` [EXTRACTED]
@@ -112,4 +114,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

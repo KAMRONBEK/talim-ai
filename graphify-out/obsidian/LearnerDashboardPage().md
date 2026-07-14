@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Learner Dashboard"
 location: "L143"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Learner_Dashboard
 ---
 
 # LearnerDashboardPage()
@@ -20,4 +20,4 @@ tags:
 - [[useLearnerMaterials()]] - `calls` [INFERRED]
 - [[useLearnerSummary()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/INFERRED #community/Learner_Dashboard

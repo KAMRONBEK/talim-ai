@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Community 104"
+community: "Admin Dashboard & Charts"
 location: "L290"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_104
+  - community/Admin_Dashboard__Charts
 ---
 
 # useApproveTutorRequest()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_7]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_104
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts

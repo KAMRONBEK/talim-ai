@@ -1,1158 +1,1172 @@
 {
   "colorGroups": [
     {
-      "query": "tag:#community/Shared_Types_&_Auth_Stores",
+      "query": "tag:#community/Shared_Types_&_Zustand_Stores",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Assessment_Pages_&_Wizard",
+      "query": "tag:#community/Tenant_Assessment_Builder_UI",
       "color": {
         "a": 1,
         "rgb": 15896107
-      }
-    },
-    {
-      "query": "tag:#community/Auth_&_App_Shell_UI",
-      "color": {
-        "a": 1,
-        "rgb": 14767961
-      }
-    },
-    {
-      "query": "tag:#community/Slide_Deck_UI",
-      "color": {
-        "a": 1,
-        "rgb": 7780274
-      }
-    },
-    {
-      "query": "tag:#community/Billing,_Usage_&_Limits",
-      "color": {
-        "a": 1,
-        "rgb": 5873999
-      }
-    },
-    {
-      "query": "tag:#community/Content_&_Flashcards_Hooks",
-      "color": {
-        "a": 1,
-        "rgb": 15583560
       }
     },
     {
       "query": "tag:#community/Shared_UI_Primitives",
       "color": {
         "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/Slide_Deck_Player_UI",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
+      }
+    },
+    {
+      "query": "tag:#community/API_Bootstrap_&_Background_Jobs",
+      "color": {
+        "a": 1,
+        "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/Tenant_Dashboard_&_Hooks",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Quiz_Player_UI",
+      "color": {
+        "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Account_&_Settings_UI",
+      "query": "tag:#community/Marketing_Landing_Components",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Providers_&_Job_Events",
+      "query": "tag:#community/Admin_Dashboard_&_Charts",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Media_&_Progress_Controllers",
+      "query": "tag:#community/Billing_&_Access_Guards",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/API_Middleware",
+      "query": "tag:#community/API_Routes_&_Middleware",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/QA_Playbook_&_Coverage_Map",
+      "query": "tag:#community/Content_Media_Controllers",
       "color": {
         "a": 1,
         "rgb": 15896107
+      }
+    },
+    {
+      "query": "tag:#community/Admin_Content_&_Audit_Controllers",
+      "color": {
+        "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/Auth_&_Assignment_UI",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
       }
     },
     {
       "query": "tag:#community/Graphify_Skill_Docs",
       "color": {
         "a": 1,
-        "rgb": 14767961
-      }
-    },
-    {
-      "query": "tag:#community/Admin_Content_&_Audit",
-      "color": {
-        "a": 1,
-        "rgb": 7780274
-      }
-    },
-    {
-      "query": "tag:#community/Quiz_Generation_Job",
-      "color": {
-        "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Content_API_Controller",
+      "query": "tag:#community/Admin_Subscription_UI",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Tenant_Hooks_&_Messaging",
+      "query": "tag:#community/Sheet_&_Layout_Components",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Tutor_Visual_Tools",
+      "query": "tag:#community/Subscription_&_Billing_Service",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Marketing_Landing_UI",
+      "query": "tag:#community/Product_Plans_&_Epics",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Web_Dependencies",
+      "query": "tag:#community/Quiz_Generation_Pipeline",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Slide_Deck_Prompts",
+      "query": "tag:#community/AI_Tutor_Visual_Tools",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/API_Endpoints_&_Media_Hooks",
+      "query": "tag:#community/Job_Event_Fan-out_&_Media_Jobs",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Learning_Coverage_&_Badges",
+      "query": "tag:#community/Web_App_Dependencies",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Transcript_Panel",
+      "query": "tag:#community/Locale_Sync_&_Content_Hooks",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Content_Workspace_&_Chat",
+      "query": "tag:#community/Content_Controller_(B2C)",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Dialog_&_Button_UI",
+      "query": "tag:#community/Prisma_Client_&_Seed",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Admin_Dependencies",
+      "query": "tag:#community/Quiz_Controller_&_Grading",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Assessment_&_Tutor-Request_Controllers",
+      "query": "tag:#community/Learner_Controller",
       "color": {
         "a": 1,
         "rgb": 16752039
-      }
-    },
-    {
-      "query": "tag:#community/Assessments_Service",
-      "color": {
-        "a": 1,
-        "rgb": 10253663
-      }
-    },
-    {
-      "query": "tag:#community/Podcast_Generation_&_Prompts",
-      "color": {
-        "a": 1,
-        "rgb": 12234924
-      }
-    },
-    {
-      "query": "tag:#community/Architecture_Concepts_(CLAUDE.md)",
-      "color": {
-        "a": 1,
-        "rgb": 5142951
-      }
-    },
-    {
-      "query": "tag:#community/Content_Assignment_&_Hooks",
-      "color": {
-        "a": 1,
-        "rgb": 15896107
-      }
-    },
-    {
-      "query": "tag:#community/Chat_Message_Rendering",
-      "color": {
-        "a": 1,
-        "rgb": 14767961
       }
     },
     {
       "query": "tag:#community/Admin_Analytics",
       "color": {
         "a": 1,
-        "rgb": 7780274
-      }
-    },
-    {
-      "query": "tag:#community/Content_Grid_&_Learner_Dashboard",
-      "color": {
-        "a": 1,
-        "rgb": 5873999
-      }
-    },
-    {
-      "query": "tag:#community/Quiz_Player_Inputs",
-      "color": {
-        "a": 1,
-        "rgb": 15583560
-      }
-    },
-    {
-      "query": "tag:#community/UI_Package_Deps",
-      "color": {
-        "a": 1,
-        "rgb": 11565729
-      }
-    },
-    {
-      "query": "tag:#community/PDF_Viewer_&_Selection",
-      "color": {
-        "a": 1,
-        "rgb": 16752039
-      }
-    },
-    {
-      "query": "tag:#community/Locale_AI_Prompts",
-      "color": {
-        "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/B2C_Dashboard_Shell",
+      "query": "tag:#community/Admin_App_Dependencies",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Question_Banks_&_Builders",
+      "query": "tag:#community/Assessment_Service",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Root_Package_Scripts",
+      "query": "tag:#community/Dialog_Components",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Fonts_&_Layout",
+      "query": "tag:#community/Web_API_Client_&_Endpoints",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/AI_Tutor_Chat_API",
+      "query": "tag:#community/AI_Tutor_Chat_Controller",
       "color": {
         "a": 1,
         "rgb": 7780274
+      }
+    },
+    {
+      "query": "tag:#community/Podcast_Generation_&_TTS",
+      "color": {
+        "a": 1,
+        "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/Admin_&_API_Architecture_Docs",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Transcript_Panel_UI",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
+      }
+    },
+    {
+      "query": "tag:#community/Question_Bank_Service",
+      "color": {
+        "a": 1,
+        "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/UI_Package_Config",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Web_Providers_&_Job-Event_Stream",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/Usage_Pricing_&_Metering",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
+      }
+    },
+    {
+      "query": "tag:#community/Auth_Controller",
+      "color": {
+        "a": 1,
+        "rgb": 15896107
+      }
+    },
+    {
+      "query": "tag:#community/SSE_Endpoint_&_Error_Middleware",
+      "color": {
+        "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/AI_Prompt_Builders",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
+      }
+    },
+    {
+      "query": "tag:#community/PDF_Text_Selection",
+      "color": {
+        "a": 1,
+        "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/Monorepo_Scripts",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Learner_Dashboard",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
+      }
+    },
+    {
+      "query": "tag:#community/Tenant_Org_&_Roles_Service",
+      "color": {
+        "a": 1,
+        "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Fonts_&_Root_Layout",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Tutor_Chat_Visual_Components",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/QA_Playbook_&_Oracles",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
       }
     },
     {
       "query": "tag:#community/Tutor_Scope_Classifier",
       "color": {
         "a": 1,
-        "rgb": 5873999
-      }
-    },
-    {
-      "query": "tag:#community/Background_Jobs_&_Queues",
-      "color": {
-        "a": 1,
-        "rgb": 15583560
-      }
-    },
-    {
-      "query": "tag:#community/Config,_Pricing_&_Embeddings",
-      "color": {
-        "a": 1,
-        "rgb": 11565729
-      }
-    },
-    {
-      "query": "tag:#community/Flashcards_API_&_Prisma_Seed",
-      "color": {
-        "a": 1,
-        "rgb": 16752039
-      }
-    },
-    {
-      "query": "tag:#community/Tenant_Owner_Controller",
-      "color": {
-        "a": 1,
-        "rgb": 10253663
-      }
-    },
-    {
-      "query": "tag:#community/Subscription_Editor_UI",
-      "color": {
-        "a": 1,
-        "rgb": 12234924
-      }
-    },
-    {
-      "query": "tag:#community/Section_Mastery_&_Elo",
-      "color": {
-        "a": 1,
-        "rgb": 5142951
-      }
-    },
-    {
-      "query": "tag:#community/Learner_Account_&_Onboarding",
-      "color": {
-        "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Chat_Visual_Embeds",
+      "query": "tag:#community/Section_Reader_UI",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Auth_API_Controller",
+      "query": "tag:#community/Content_Query_Hooks",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Quiz_API_Controller",
+      "query": "tag:#community/Section_Mastery_(Elo-KT)",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Features_Docs",
+      "query": "tag:#community/Messaging_Hooks",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Tenant_Service",
+      "query": "tag:#community/Answer_Grading_Engine",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Admin_Analytics_Endpoints",
+      "query": "tag:#community/Content_Detail_Page",
       "color": {
         "a": 1,
         "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Question_Engine_Design_Docs",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Upgrade_Modal_&_Chat_Window",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/Feature_Catalog_Docs",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
       }
     },
     {
       "query": "tag:#community/Question_Post-processing",
       "color": {
         "a": 1,
-        "rgb": 10253663
+        "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Plans_&_Epics_Docs",
+      "query": "tag:#community/Assessment_Controller",
       "color": {
         "a": 1,
-        "rgb": 12234924
-      }
-    },
-    {
-      "query": "tag:#community/Question_Engine_Plan",
-      "color": {
-        "a": 1,
-        "rgb": 5142951
+        "rgb": 14767961
       }
     },
     {
       "query": "tag:#community/API_Dependencies",
       "color": {
         "a": 1,
-        "rgb": 15896107
-      }
-    },
-    {
-      "query": "tag:#community/Admin_Dashboard_UI",
-      "color": {
-        "a": 1,
-        "rgb": 14767961
-      }
-    },
-    {
-      "query": "tag:#community/Quiz_Player_&_Hooks",
-      "color": {
-        "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Job_Registration_&_Manim",
+      "query": "tag:#community/Web_shadcn_Config",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Summary_&_Rich_Text",
+      "query": "tag:#community/API_Scripts",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Web_Component_Config",
+      "query": "tag:#community/Flashcards_UI",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/API_Package_Scripts",
+      "query": "tag:#community/Learning_Progress_&_Coverage",
       "color": {
         "a": 1,
         "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Student_Management_Service",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Upgrade_Dialog_&_Pricing",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
       }
     },
     {
       "query": "tag:#community/AI_Provider_Service",
       "color": {
         "a": 1,
-        "rgb": 10253663
-      }
-    },
-    {
-      "query": "tag:#community/YouTube_Transcript_Service",
-      "color": {
-        "a": 1,
-        "rgb": 12234924
-      }
-    },
-    {
-      "query": "tag:#community/Grading_Engine_Types",
-      "color": {
-        "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Admin_Users_&_Tenants_UI",
+      "query": "tag:#community/QA_Fixture_Generator",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/QA_Fixtures_Generator",
+      "query": "tag:#community/PDF_Extraction_Service",
       "color": {
         "a": 1,
         "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/YouTube_Ingest_Service",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
       }
     },
     {
       "query": "tag:#community/Tenant_Messaging_Service",
       "color": {
         "a": 1,
-        "rgb": 7780274
-      }
-    },
-    {
-      "query": "tag:#community/TSConfig_Base",
-      "color": {
-        "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Types_Package_Manifest",
+      "query": "tag:#community/Shared_tsconfig_(base)",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/API_Dev_Dependencies",
+      "query": "tag:#community/Types_Package_Config",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Section_Service",
+      "query": "tag:#community/API_Dev_Tooling_Config",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/PDF_&_OCR_Service",
+      "query": "tag:#community/Section_Controller",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Student_Provisioning_&_CSV",
+      "query": "tag:#community/Deck_Schema",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Desmos_Graph_Embed",
+      "query": "tag:#community/Dashboard_Search",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Visual_QA_Report",
+      "query": "tag:#community/Desmos_Graph_Component",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Platform_Docs_&_Deploy",
+      "query": "tag:#community/Billing_&_Admin_Plan_Docs",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Content_Sidebar_&_Generations",
+      "query": "tag:#community/QA_Screenshots_(RU_Landing)",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Landing_Screenshot_(RU)",
+      "query": "tag:#community/Summary_Controller",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_85",
+      "query": "tag:#community/In-Process_Job_Event_Bus",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_86",
+      "query": "tag:#community/Tailwind_Config_Package",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_87",
+      "query": "tag:#community/Architecture_Invariants_(CLAUDE.md)",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_88",
+      "query": "tag:#community/AI_Tutor_&_RAG_Plans",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_89",
+      "query": "tag:#community/QA_Screenshots_(RU_Mobile)",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_90",
+      "query": "tag:#community/QA_Screenshots_(UZ_Landing)",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_91",
+      "query": "tag:#community/Turborepo_Task_Config",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_92",
+      "query": "tag:#community/Admin_tsconfig",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_93",
+      "query": "tag:#community/Platform_Guide_Docs",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_94",
+      "query": "tag:#community/Next.js_tsconfig",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_95",
+      "query": "tag:#community/Web_tsconfig",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_96",
+      "query": "tag:#community/Admin_Auth_Store",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_97",
+      "query": "tag:#community/Narrated_Video_Player",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_98",
+      "query": "tag:#community/QA_Screenshots_(UZ_Navbar)",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_99",
+      "query": "tag:#community/Node_tsconfig",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_100",
+      "query": "tag:#community/API_tsconfig",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_101",
+      "query": "tag:#community/Admin_Generated-Media_Page",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_102",
+      "query": "tag:#community/QA_Preflight_Script",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_103",
+      "query": "tag:#community/Admin_Layout_Shell",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_104",
+      "query": "tag:#community/API_Package_Config",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_105",
+      "query": "tag:#community/Docker_Compose_Services",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_106",
+      "query": "tag:#community/Deployment_Docs",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_107",
+      "query": "tag:#community/Grading_Engine_Design_Docs",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_108",
+      "query": "tag:#community/Root_Dev_Tooling",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_109",
+      "query": "tag:#community/Local_Storage_Service",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_110",
+      "query": "tag:#community/Quiz_Answer_Helpers",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_111",
+      "query": "tag:#community/Cursor_MCP_Config",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_112",
+      "query": "tag:#community/MCP_Config_(Playwright)",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_113",
+      "query": "tag:#community/Root_Package_Config",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_114",
+      "query": "tag:#community/Types_tsconfig",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_115",
+      "query": "tag:#community/UI_tsconfig",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_116",
+      "query": "tag:#community/Admin_Tailwind_Config",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_117",
+      "query": "tag:#community/Web_App_Brand_Icons",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_118",
+      "query": "tag:#community/ESLint_Config_Package",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_119",
+      "query": "tag:#community/QA_PDF_Generator_Script",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_120",
+      "query": "tag:#community/tsconfig_Package_Meta",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_121",
+      "query": "tag:#community/Admin_Middleware",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_122",
+      "query": "tag:#community/Config_Package_Meta",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_123",
+      "query": "tag:#community/QA_Evidence_Protocol",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_124",
+      "query": "tag:#community/VPS_MCP_Script",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_125",
+      "query": "tag:#community/QA_Overnight_Script",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_126",
+      "query": "tag:#community/Admin_Auth_Guard",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_127",
+      "query": "tag:#community/Tutor_Prompt_Builder",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_128",
+      "query": "tag:#community/Dev_Ports_Script",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_129",
+      "query": "tag:#community/Web_Next_Config",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_130",
+      "query": "tag:#community/Admin_Next_Config",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_131",
+      "query": "tag:#community/Admin_PostCSS_Config",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_132",
+      "query": "tag:#community/API_ESLint_Config",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_133",
+      "query": "tag:#community/Admin_Root_Page",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_134",
+      "query": "tag:#community/Admin_Providers",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_135",
+      "query": "tag:#community/Admin_Theme_Provider",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_136",
+      "query": "tag:#community/Admin_API_Client",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_137",
+      "query": "tag:#community/Admin_Query_Client",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_138",
+      "query": "tag:#community/Web_Root_Layout",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_139",
+      "query": "tag:#community/Web_Theme_Provider",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_140",
+      "query": "tag:#community/Web_Query_Client",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_141",
+      "query": "tag:#community/Graphify_Honesty_Rules",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_142",
+      "query": "tag:#community/QA_Personas_(Admin)",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_143",
+      "query": "tag:#community/Podcast_Prompt_Builder",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_144",
+      "query": "tag:#community/QA_Admin_Error_Screens",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_145",
+      "query": "tag:#community/QA_Pythagoras_Fixture",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_146",
+      "query": "tag:#community/Graphify_Export_Docs",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_147",
+      "query": "tag:#community/Doppler_Docker_Script",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_148",
+      "query": "tag:#community/Doppler_Docker_Restart",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_149",
+      "query": "tag:#community/Web_PostCSS_Config",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_150",
+      "query": "tag:#community/Admin_Next_Env",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_151",
+      "query": "tag:#community/Backlog_Template",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_152",
+      "query": "tag:#community/QA_Playwright_Doc",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_153",
+      "query": "tag:#community/Graphify_Interpreter_Guard",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_154",
+      "query": "tag:#community/QA_Depth-3_Coverage",
       "color": {
         "a": 1,
         "rgb": 5873999
       }
     },
     {
-      "query": "tag:#community/Community_155",
+      "query": "tag:#community/QA_Minute-Detail_Catalog",
       "color": {
         "a": 1,
         "rgb": 15583560
       }
     },
     {
-      "query": "tag:#community/Community_156",
+      "query": "tag:#community/QA_Persona_(Dilnoza)",
       "color": {
         "a": 1,
         "rgb": 11565729
       }
     },
     {
-      "query": "tag:#community/Community_157",
+      "query": "tag:#community/QA_Persona_(Karim)",
       "color": {
         "a": 1,
         "rgb": 16752039
       }
     },
     {
-      "query": "tag:#community/Community_158",
+      "query": "tag:#community/QA_Charter_Note",
       "color": {
         "a": 1,
         "rgb": 10253663
       }
     },
     {
-      "query": "tag:#community/Community_159",
+      "query": "tag:#community/QA_Feature_Surface_Note",
       "color": {
         "a": 1,
         "rgb": 12234924
       }
     },
     {
-      "query": "tag:#community/Community_160",
+      "query": "tag:#community/Graphify_Benchmark_Doc",
       "color": {
         "a": 1,
         "rgb": 5142951
       }
     },
     {
-      "query": "tag:#community/Community_161",
+      "query": "tag:#community/Compose_Prod_Override",
       "color": {
         "a": 1,
         "rgb": 15896107
       }
     },
     {
-      "query": "tag:#community/Community_162",
+      "query": "tag:#community/Compose_Registry_Override",
       "color": {
         "a": 1,
         "rgb": 14767961
       }
     },
     {
-      "query": "tag:#community/Community_163",
+      "query": "tag:#community/Doppler_Config",
       "color": {
         "a": 1,
         "rgb": 7780274
       }
     },
     {
-      "query": "tag:#community/Community_164",
+      "query": "tag:#community/PNPM_Workspace",
       "color": {
         "a": 1,
         "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/User-Story_Backlog_Doc",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Web_Next_Env",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
       }
     }
   ]

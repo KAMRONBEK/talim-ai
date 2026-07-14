@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-html-sandbox.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "AI Tutor Visual Tools"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/AI_Tutor_Visual_Tools
 ---
 
 # htmlSandboxSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-html-sandbox.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools

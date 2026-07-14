@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/theme-provider.tsx"
 type: "code"
-community: "Community 138"
+community: "Admin Theme Provider"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_138
+  - community/Admin_Theme_Provider
 ---
 
 # ThemeProvider()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-provider.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_138
+#graphify/code #graphify/EXTRACTED #community/Admin_Theme_Provider

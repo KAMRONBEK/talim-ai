@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/generation-error.ts"
 type: "code"
-community: "API Endpoints & Media Hooks"
+community: "Section Reader UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Section_Reader_UI
 ---
 
 # generation-error.ts
@@ -17,4 +17,4 @@ tags:
 - [[classifyGenerationError()]] - `contains` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI

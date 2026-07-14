@@ -1,20 +1,22 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
-location: "L200"
+community: "Quiz Controller & Grading"
+location: "L201"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Quiz_Controller__Grading
 ---
 
 # buildCoverageResults()
 
 ## Connections
+- [[applyAiJudgeToGrades()]] - `calls` [EXTRACTED]
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
-- [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[learningProgress.service.ts]] - `contains` [EXTRACTED]
+- [[quizQuestionKey()]] - `calls` [EXTRACTED]
 - [[refineSectionProgressWithAi()]] - `calls` [EXTRACTED]
+- [[resolveAcceptedAnswers()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading

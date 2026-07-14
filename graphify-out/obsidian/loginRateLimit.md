@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/rate-limit.middleware.ts"
 type: "code"
-community: "API Middleware"
-location: "L8"
+community: "API Routes & Middleware"
+location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware
+  - community/API_Routes__Middleware
 ---
 
 # loginRateLimit
@@ -15,4 +15,4 @@ tags:
 - [[auth.routes.ts]] - `imports` [EXTRACTED]
 - [[rate-limit.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware
+#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware

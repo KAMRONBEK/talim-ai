@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Subscription Editor UI"
+community: "Admin Subscription UI"
 location: "L128"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Editor_UI
+  - community/Admin_Subscription_UI
 ---
 
 # AdminSubscriptionListItem
@@ -18,4 +18,4 @@ tags:
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Editor_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI

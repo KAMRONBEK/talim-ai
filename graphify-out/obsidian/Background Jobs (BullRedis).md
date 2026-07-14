@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Features Docs"
+community: "Feature Catalog Docs"
 location: "§6.7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Features_Docs
+  - community/Feature_Catalog_Docs
 ---
 
 # Background Jobs (Bull/Redis)
@@ -17,4 +17,4 @@ tags:
 - [[Real-Time Class Leaderboard]] - `references` [EXTRACTED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Features_Docs
+#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Docs

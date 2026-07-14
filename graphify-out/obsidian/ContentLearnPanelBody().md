@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-learn-panel.tsx"
 type: "code"
-community: "Content Workspace & Chat"
+community: "Sheet & Layout Components"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Workspace__Chat
+  - community/Sheet__Layout_Components
 ---
 
 # ContentLearnPanelBody()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[content-learn-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

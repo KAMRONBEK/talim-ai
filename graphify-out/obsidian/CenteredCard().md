@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "API Endpoints & Media Hooks"
-location: "L207"
+community: "Section Reader UI"
+location: "L227"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Section_Reader_UI
 ---
 
 # CenteredCard()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[section-reader.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI

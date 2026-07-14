@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/HtmlSandbox.tsx"
 type: "code"
-community: "Chat Visual Embeds"
+community: "Tutor Chat Visual Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Visual_Embeds
+  - community/Tutor_Chat_Visual_Components
 ---
 
 # HtmlSandbox.tsx
@@ -19,4 +19,4 @@ tags:
 - [[html-sandbox-templates.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds
+#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components

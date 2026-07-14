@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content API Controller"
+community: "Prisma Client & Seed"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controller
+  - community/Prisma_Client__Seed
 ---
 
 # assertIndividualContentRoute()
@@ -15,4 +15,4 @@ tags:
 - [[assertCanMutateContent()]] - `calls` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

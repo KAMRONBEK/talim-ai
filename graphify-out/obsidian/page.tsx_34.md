@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
 type: "code"
-community: "Content & Flashcards Hooks"
+community: "Locale Sync & Content Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Flashcards_Hooks
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # page.tsx
@@ -39,4 +39,4 @@ tags:
 - [[useVideo()]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

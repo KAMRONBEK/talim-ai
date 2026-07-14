@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Content Workspace & Chat"
+community: "Sheet & Layout Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Workspace__Chat
+  - community/Sheet__Layout_Components
 ---
 
 # content-right-panel.tsx
@@ -38,4 +38,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

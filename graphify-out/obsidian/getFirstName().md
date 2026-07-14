@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Dashboard Search"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Dashboard_Search
 ---
 
 # getFirstName()
@@ -15,4 +15,4 @@ tags:
 - [[DashboardPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_35]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Dashboard_Search

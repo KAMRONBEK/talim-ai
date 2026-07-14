@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useContentStore.ts"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "Content Query Hooks"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content_Query_Hooks
 ---
 
 # useContentStore
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useContentStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks

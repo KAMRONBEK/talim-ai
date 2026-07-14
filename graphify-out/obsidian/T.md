@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Auth & Assignment UI"
 location: "L127"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/B2C_Dashboard_Shell
+  - community/Auth__Assignment_UI
 ---
 
 # T
@@ -138,4 +138,4 @@ tags:
 - [[YoutubeLinkForm()]] - `calls` [INFERRED]
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/INFERRED #community/Auth__Assignment_UI

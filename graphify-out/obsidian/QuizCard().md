@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizCard.tsx"
 type: "code"
-community: "Quiz Player Inputs"
-location: "L79"
+community: "Quiz Player UI"
+location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_Inputs
+  - community/Quiz_Player_UI
 ---
 
 # QuizCard()
@@ -20,5 +20,6 @@ tags:
 - [[isQuizGenerationStale()]] - `calls` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[questionTypeLabelKey()]] - `calls` [EXTRACTED]
+- [[useCheckQuizAnswer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

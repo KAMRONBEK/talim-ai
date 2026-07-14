@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "PDF Viewer & Selection"
+community: "Web API Client & Endpoints"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Viewer__Selection
+  - community/Web_API_Client__Endpoints
 ---
 
 # loadPdfJs()
@@ -17,4 +17,4 @@ tags:
 - [[rasterize-pdf.ts]] - `imports` [EXTRACTED]
 - [[rasterizePdfToImages()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Viewer__Selection
+#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints

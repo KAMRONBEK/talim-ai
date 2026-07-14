@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "SSE Endpoint & Error Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/SSE_Endpoint__Error_Middleware
 ---
 
 # smoke-quota.ts
@@ -23,4 +23,4 @@ tags:
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware

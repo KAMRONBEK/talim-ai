@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web Dependencies"
+community: "Web App Dependencies"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Dependencies
+  - community/Web_App_Dependencies
 ---
 
 # devDependencies
@@ -26,4 +26,4 @@ tags:
 - [[tailwindcss_1]] - `contains` [EXTRACTED]
 - [[typescript_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies

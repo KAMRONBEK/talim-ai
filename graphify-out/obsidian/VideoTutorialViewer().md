@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/VideoTutorialViewer.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Web API Client & Endpoints"
 location: "L68"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Web_API_Client__Endpoints
 ---
 
 # VideoTutorialViewer()
@@ -18,4 +18,4 @@ tags:
 - [[getYoutubeVideoId()]] - `calls` [EXTRACTED]
 - [[useTranscript()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints

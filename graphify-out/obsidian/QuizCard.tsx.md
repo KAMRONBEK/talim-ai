@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizCard.tsx"
 type: "code"
-community: "Quiz Player Inputs"
+community: "Quiz Player UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_Inputs
+  - community/Quiz_Player_UI
 ---
 
 # QuizCard.tsx
@@ -31,12 +31,14 @@ tags:
 - [[QuizQuestion]] - `imports` [EXTRACTED]
 - [[RichText()]] - `imports` [EXTRACTED]
 - [[TrueFalseInput()]] - `imports` [EXTRACTED]
+- [[WrittenCheckResult]] - `imports` [EXTRACTED]
 - [[blankCount()]] - `imports` [EXTRACTED]
 - [[getOptionStyles()]] - `contains` [EXTRACTED]
 - [[gradableQuestion()]] - `imports` [EXTRACTED]
 - [[gradeQuestion()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[isAiCheckable()]] - `imports` [EXTRACTED]
 - [[isAnswerProvided()]] - `imports` [EXTRACTED]
 - [[isQuizGenerationStale()]] - `imports` [EXTRACTED]
 - [[page.tsx_40]] - `imports_from` [EXTRACTED]
@@ -46,6 +48,7 @@ tags:
 - [[questionTypeLabelKey()]] - `imports` [EXTRACTED]
 - [[resolveCorrectAnswer()]] - `imports` [EXTRACTED]
 - [[rich-text.tsx]] - `imports_from` [EXTRACTED]
+- [[useCheckQuizAnswer()]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

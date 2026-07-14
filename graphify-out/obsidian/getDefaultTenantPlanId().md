@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Community 117"
+community: "Tenant Org & Roles Service"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_117
+  - community/Tenant_Org__Roles_Service
 ---
 
 # getDefaultTenantPlanId()
@@ -17,4 +17,4 @@ tags:
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_117
+#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service

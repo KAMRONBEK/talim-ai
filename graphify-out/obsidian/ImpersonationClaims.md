@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/impersonation.ts"
 type: "code"
-community: "Config, Pricing & Embeddings"
+community: "API Bootstrap & Background Jobs"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Config_Pricing__Embeddings
+  - community/API_Bootstrap__Background_Jobs
 ---
 
 # ImpersonationClaims
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[impersonation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Config_Pricing__Embeddings
+#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs

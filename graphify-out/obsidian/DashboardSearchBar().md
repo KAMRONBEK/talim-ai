@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/dashboard-search-bar.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Dashboard Search"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Dashboard_Search
 ---
 
 # DashboardSearchBar()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_35]] - `imports` [EXTRACTED]
 - [[useDashboardSearch()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Dashboard_Search

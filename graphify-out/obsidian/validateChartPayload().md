@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-chart.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "AI Tutor Visual Tools"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/AI_Tutor_Visual_Tools
 ---
 
 # validateChartPayload()
@@ -16,4 +16,4 @@ tags:
 - [[tutor-chart.ts]] - `contains` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools

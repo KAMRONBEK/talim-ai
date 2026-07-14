@@ -38,12 +38,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 13 edges to [[_COMMUNITY_Question Banks & Builders]]
-- 7 edges to [[_COMMUNITY_Quiz Generation Job]]
-- 4 edges to [[_COMMUNITY_Grading Engine Types]]
-- 2 edges to [[_COMMUNITY_Assessments Service]]
-- 2 edges to [[_COMMUNITY_Quiz Player Inputs]]
-- 1 edge to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 13 edges to [[_COMMUNITY_Question Bank Service]]
+- 7 edges to [[_COMMUNITY_Quiz Generation Pipeline]]
+- 4 edges to [[_COMMUNITY_Answer Grading Engine]]
+- 2 edges to [[_COMMUNITY_Assessment Service]]
+- 2 edges to [[_COMMUNITY_Quiz Player UI]]
+- 1 edge to [[_COMMUNITY_Shared Types & Zustand Stores]]
 
 ## Top bridge nodes
 - [[question-postprocess.ts]] - degree 30, connects to 6 communities

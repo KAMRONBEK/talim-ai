@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/assessment.controller.ts"
 type: "code"
-community: "Assessment & Tutor-Request Controllers"
-location: "L140"
+community: "Assessment Controller"
+location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment__Tutor-Request_Controllers
+  - community/Assessment_Controller
 ---
 
 # submitLearnerAssessment()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[requireTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

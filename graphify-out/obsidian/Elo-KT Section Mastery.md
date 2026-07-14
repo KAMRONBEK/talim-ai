@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 94"
+community: "Question Engine Design Docs"
 location: "§1.6"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Question_Engine_Design_Docs
 ---
 
 # Elo-KT Section Mastery
@@ -16,4 +16,4 @@ tags:
 - [[Practice Generator (Unified Questions + Flashcards)]] - `conceptually_related_to` [EXTRACTED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_94
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs

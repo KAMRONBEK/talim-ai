@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/slides.controller.ts"
 type: "code"
-community: "Media & Progress Controllers"
+community: "Content Media Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Content_Media_Controllers
 ---
 
 # slides.controller.ts
@@ -23,8 +23,8 @@ tags:
 - [[content.routes.ts]] - `imports_from` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[createSlides()]] - `contains` [EXTRACTED]
+- [[enqueueSlideDeckGeneration()]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
-- [[generateAndStoreSlideDeck()]] - `imports` [EXTRACTED]
 - [[getParam()]] - `imports` [EXTRACTED]
 - [[getReadySlideDeckAnyLocale()]] - `imports` [EXTRACTED]
 - [[getSlideDeck()]] - `imports` [EXTRACTED]
@@ -38,4 +38,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

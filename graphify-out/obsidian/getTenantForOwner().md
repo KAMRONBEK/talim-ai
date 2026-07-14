@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Tenant Service"
+community: "Tenant Org & Roles Service"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Service
+  - community/Tenant_Org__Roles_Service
 ---
 
 # getTenantForOwner()
@@ -16,4 +16,4 @@ tags:
 - [[generateUniqueJoinCode()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service

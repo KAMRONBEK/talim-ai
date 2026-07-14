@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Section Mastery & Elo"
-location: "L465"
+community: "Section Mastery (Elo-KT)"
+location: "L578"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery__Elo
+  - community/Section_Mastery_Elo-KT
 ---
 
 # guessFloorForQuestion()
@@ -17,4 +17,4 @@ tags:
 - [[recordAnswers()]] - `calls` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery__Elo
+#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "SSE Endpoint & Error Middleware"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/SSE_Endpoint__Error_Middleware
 ---
 
 # AppError
@@ -24,12 +24,14 @@ tags:
 - [[banks.ts]] - `imports` [EXTRACTED]
 - [[billing.controller.ts]] - `imports` [EXTRACTED]
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[content-shared.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts]] - `imports` [EXTRACTED]
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 - [[events.controller.ts]] - `imports` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports` [EXTRACTED]
 - [[learner.controller.ts]] - `imports` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
@@ -61,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware

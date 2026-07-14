@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "document"
-community: "Architecture Concepts (CLAUDE.md)"
+community: "Admin & API Architecture Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Architecture_Concepts_CLAUDEmd
+  - community/Admin__API_Architecture_Docs
 ---
 
 # apps/admin Guide (CLAUDE.md)
@@ -15,4 +15,4 @@ tags:
 - [[adminPasswordNote plaintext support-lookup (sensitive)]] - `references` [EXTRACTED]
 - [[appsadmin — platform-admin panel (Talim Admin, port 3001)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Architecture_Concepts_CLAUDEmd
+#graphify/document #graphify/EXTRACTED #community/Admin__API_Architecture_Docs

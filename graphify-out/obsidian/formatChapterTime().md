@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/VideoTutorialViewer.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Transcript Panel UI"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Transcript_Panel_UI
 ---
 
 # formatChapterTime()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[VideoTutorialViewer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI

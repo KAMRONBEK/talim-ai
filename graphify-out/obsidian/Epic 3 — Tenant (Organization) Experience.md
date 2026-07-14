@@ -1,20 +1,19 @@
 ---
-source_file: "docs/plans/epic-3-tenant-experience.md"
-type: "document"
-community: "Plans & Epics Docs"
+source_file: "docs/PLANS.md"
+type: "concept"
+community: "Product Plans & Epics"
 tags:
-  - graphify/document
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Plans__Epics_Docs
+  - community/Product_Plans__Epics
 ---
 
 # Epic 3 — Tenant (Organization) Experience
 
 ## Connections
-- [[Content Assignment & Learner Scoping]] - `references` [EXTRACTED]
 - [[Epic 1 — Subscriptions & Billing]] - `references` [EXTRACTED]
 - [[Epic 6 — Tenant AI Assistant]] - `references` [EXTRACTED]
-- [[Epic Prompts Index]] - `references` [EXTRACTED]
-- [[Product Plans Roadmap]] - `references` [EXTRACTED]
+- [[US-LEARNER-01 Learner sees only assigned materials]] - `conceptually_related_to` [INFERRED]
+- [[User Role Model (INDIVIDUAL  TENANT_OWNER  TENANT_LEARNER  ADMIN)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/document #graphify/EXTRACTED #community/Plans__Epics_Docs
+#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics

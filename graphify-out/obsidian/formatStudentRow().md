@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Student Provisioning & CSV"
+community: "Student Management Service"
 location: "L105"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Student_Provisioning__CSV
+  - community/Student_Management_Service
 ---
 
 # formatStudentRow()
@@ -19,4 +19,4 @@ tags:
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 - [[students.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Student_Provisioning__CSV
+#graphify/code #graphify/EXTRACTED #community/Student_Management_Service

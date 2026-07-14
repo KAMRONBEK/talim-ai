@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 94"
+community: "Grading Engine Design Docs"
 location: "§4.7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Grading_Engine_Design_Docs
 ---
 
 # 11-Type Question Grading Engine (packages/types/grading.ts)
@@ -18,4 +18,4 @@ tags:
 - [[Unified Grading Module (packagestypesgrading.ts)]] - `implements` [INFERRED]
 - [[Uzbek Apostrophe Normalization]] - `references` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_94
+#graphify/concept #graphify/EXTRACTED #community/Grading_Engine_Design_Docs

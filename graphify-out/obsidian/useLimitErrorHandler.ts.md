@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "Content & Flashcards Hooks"
+community: "Upgrade Modal & Chat Window"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Flashcards_Hooks
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # useLimitErrorHandler.ts
@@ -16,6 +16,7 @@ tags:
 - [[INDIVIDUAL_QUOTA_FEATURES]] - `imports` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports_from` [EXTRACTED]
 - [[classifyLimitError()]] - `imports` [EXTRACTED]
+- [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[limit-error.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
@@ -29,4 +30,4 @@ tags:
 - [[useUpgradeModal]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

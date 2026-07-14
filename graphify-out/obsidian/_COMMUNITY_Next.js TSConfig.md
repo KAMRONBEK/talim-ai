@@ -4,7 +4,7 @@ cohesion: 0.20
 members: 10
 ---
 
-# Next.js TSConfig
+# Next.js tsconfig
 
 **Cohesion:** 0.20 - loosely connected
 **Members:** 10 nodes
@@ -24,6 +24,6 @@ members: 10
 ## Live Query (requires Dataview plugin)
 
 ```dataview
-TABLE source_file, type FROM #community/Nextjs_TSConfig
+TABLE source_file, type FROM #community/Nextjs_tsconfig
 SORT file.name ASC
 ```

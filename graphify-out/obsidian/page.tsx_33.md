@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "API Endpoints & Media Hooks"
+community: "Upgrade Modal & Chat Window"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # page.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useSlides()]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

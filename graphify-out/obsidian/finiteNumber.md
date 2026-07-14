@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "Tutor Visual Tools"
+community: "AI Tutor Visual Tools"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Visual_Tools
+  - community/AI_Tutor_Visual_Tools
 ---
 
 # finiteNumber
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-graph.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools

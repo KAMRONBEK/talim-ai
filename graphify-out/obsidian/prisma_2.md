@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "Flashcards API & Prisma Seed"
+community: "Prisma Client & Seed"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API__Prisma_Seed
+  - community/Prisma_Client__Seed
 ---
 
 # prisma
@@ -16,11 +16,13 @@ tags:
 - [[adminUserRole.service.ts]] - `imports` [EXTRACTED]
 - [[analytics.controller.ts]] - `imports` [EXTRACTED]
 - [[analytics.service.ts]] - `imports` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports` [EXTRACTED]
 - [[assessments.ts]] - `imports` [EXTRACTED]
 - [[assignments.ts]] - `imports` [EXTRACTED]
 - [[audit.service.ts]] - `imports` [EXTRACTED]
 - [[auth.controller.ts]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports` [EXTRACTED]
+- [[backfillTranscript.job.ts]] - `imports` [EXTRACTED]
 - [[badges.service.ts]] - `imports` [EXTRACTED]
 - [[banks.ts]] - `imports` [EXTRACTED]
 - [[billing.controller.ts]] - `imports` [EXTRACTED]
@@ -34,15 +36,19 @@ tags:
 - [[create-tenant-owner.ts]] - `imports` [EXTRACTED]
 - [[figure.service.ts]] - `imports` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports` [EXTRACTED]
 - [[generateFlashcards.job.ts]] - `imports` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
+- [[generateSlides.job.ts]] - `imports` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[ingest.service.ts]] - `imports` [EXTRACTED]
 - [[inspect-chunks.ts]] - `imports` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
 - [[mastery.service.ts]] - `imports` [EXTRACTED]
+- [[mediaReconciler.service.ts]] - `imports` [EXTRACTED]
 - [[messages.ts]] - `imports` [EXTRACTED]
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
@@ -53,6 +59,7 @@ tags:
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[rag.service.ts]] - `imports` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports` [EXTRACTED]
+- [[reparseContent.job.ts]] - `imports` [EXTRACTED]
 - [[results.ts]] - `imports` [EXTRACTED]
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `imports` [EXTRACTED]
@@ -76,4 +83,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

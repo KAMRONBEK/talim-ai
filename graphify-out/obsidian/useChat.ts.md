@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useChat.ts"
 type: "code"
-community: "Shared Types & Auth Stores"
+community: "Upgrade Modal & Chat Window"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Auth_Stores
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # useChat.ts
@@ -19,4 +19,4 @@ tags:
 - [[useChatMessages()]] - `contains` [EXTRACTED]
 - [[useChatSession()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

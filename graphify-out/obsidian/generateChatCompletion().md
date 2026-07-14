@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
-location: "L109"
+community: "Summary Controller"
+location: "L115"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/Summary_Controller
 ---
 
 # generateChatCompletion()
@@ -19,4 +19,4 @@ tags:
 - [[recordCompletionUsage()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

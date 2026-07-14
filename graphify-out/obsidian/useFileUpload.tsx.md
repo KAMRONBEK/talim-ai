@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # useFileUpload.tsx
@@ -23,4 +23,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 - [[useUploadContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

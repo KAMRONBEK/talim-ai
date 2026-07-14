@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content API Controller"
-location: "L271"
+community: "Content Controller (B2C)"
+location: "L243"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controller
+  - community/Content_Controller_B2C
 ---
 
 # ocrPdfRegion()
@@ -17,4 +17,4 @@ tags:
 - [[extractRegionTextFromImage()]] - `calls` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C

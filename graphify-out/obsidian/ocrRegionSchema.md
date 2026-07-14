@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content API Controller"
-location: "L18"
+community: "Content Controller (B2C)"
+location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controller
+  - community/Content_Controller_B2C
 ---
 
 # ocrRegionSchema
@@ -16,4 +16,4 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C

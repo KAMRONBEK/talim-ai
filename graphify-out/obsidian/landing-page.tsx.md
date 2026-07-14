@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/landing-page.tsx"
 type: "code"
-community: "Marketing Landing UI"
+community: "Marketing Landing Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_UI
+  - community/Marketing_Landing_Components
 ---
 
 # landing-page.tsx
@@ -37,4 +37,4 @@ tags:
 - [[stats.tsx]] - `imports_from` [EXTRACTED]
 - [[testimonials.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

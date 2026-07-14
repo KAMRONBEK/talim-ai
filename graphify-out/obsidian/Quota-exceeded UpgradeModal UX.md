@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/epic-4-individual-freemium.md"
 type: "concept"
-community: "Plans & Epics Docs"
+community: "Billing & Admin Plan Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Plans__Epics_Docs
+  - community/Billing__Admin_Plan_Docs
 ---
 
 # Quota-exceeded UpgradeModal UX
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Epic 4 — Individual Learner Freemium UX]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Plans__Epics_Docs
+#graphify/concept #graphify/EXTRACTED #community/Billing__Admin_Plan_Docs

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/test-accounts.md"
 type: "concept"
-community: "Community 89"
+community: "Architecture Invariants (CLAUDE.md)"
 location: "Post-login landing"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/Architecture_Invariants_CLAUDEmd
 ---
 
 # Post-login landing by role (dashboard routes)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Test accounts (shared dev+prod credentials)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_89
+#graphify/concept #graphify/EXTRACTED #community/Architecture_Invariants_CLAUDEmd

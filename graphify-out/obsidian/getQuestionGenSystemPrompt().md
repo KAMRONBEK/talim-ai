@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen-prompt.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Quiz Generation Pipeline"
 location: "L214"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Quiz_Generation_Pipeline
 ---
 
 # getQuestionGenSystemPrompt()
@@ -17,4 +17,4 @@ tags:
 - [[question-gen.ts]] - `imports` [EXTRACTED]
 - [[typeRules()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline

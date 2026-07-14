@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/tenant-shell.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Dialog Components"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Dialog_Components
 ---
 
 # useTenantSearch()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_24]] - `imports` [EXTRACTED]
 - [[tenant-shell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

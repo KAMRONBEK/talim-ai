@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Tenant Dashboard & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Hooks__Messaging
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # page.tsx
@@ -22,4 +22,4 @@ tags:
 - [[useTenantProgress()]] - `imports` [EXTRACTED]
 - [[useTenantProgressTopics()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

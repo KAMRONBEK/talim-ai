@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Auth Stores"
+community: "Shared Types & Zustand Stores"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Auth_Stores
+  - community/Shared_Types__Zustand_Stores
 ---
 
 # index.ts
@@ -212,6 +212,7 @@ tags:
 - [[TenantSentMessagesResponse]] - `contains` [EXTRACTED]
 - [[TenantStudent]] - `contains` [EXTRACTED]
 - [[TenantUnreadReplyCountResponse]] - `contains` [EXTRACTED]
+- [[TranscriptBackfillStatus]] - `contains` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `imports_from` [EXTRACTED]
 - [[TranscriptSegment]] - `contains` [EXTRACTED]
 - [[TranscriptSource]] - `contains` [EXTRACTED]
@@ -232,9 +233,11 @@ tags:
 - [[VisualBlockRenderer.tsx]] - `imports_from` [EXTRACTED]
 - [[VisualKind]] - `re_exports` [EXTRACTED]
 - [[VisualPayloadMap]] - `re_exports` [EXTRACTED]
+- [[WrittenCheckResult]] - `contains` [EXTRACTED]
 - [[account-summary.tsx]] - `imports_from` [EXTRACTED]
 - [[ai.service.ts]] - `imports_from` [EXTRACTED]
 - [[analytics.service.ts]] - `imports_from` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports_from` [EXTRACTED]
 - [[auth-routing.ts]] - `imports_from` [EXTRACTED]
 - [[auth.controller.ts]] - `imports_from` [EXTRACTED]
 - [[badges.service.ts]] - `imports_from` [EXTRACTED]
@@ -258,11 +261,13 @@ tags:
 - [[generateFlashcards.job.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
+- [[generateSlides.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports_from` [EXTRACTED]
 - [[grading.ts]] - `re_exports` [EXTRACTED]
 - [[html-sandbox-templates.ts]] - `imports_from` [EXTRACTED]
 - [[isAppLocale()]] - `re_exports` [EXTRACTED]
 - [[isSelectedAnswerCorrect()]] - `re_exports` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[jobEvents.ts]] - `re_exports` [EXTRACTED]
 - [[jobStream.ts]] - `imports_from` [EXTRACTED]
@@ -360,6 +365,7 @@ tags:
 - [[useChat.ts]] - `imports_from` [EXTRACTED]
 - [[useChatStore.ts]] - `imports_from` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
+- [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useContentStore.ts]] - `imports_from` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
@@ -368,6 +374,7 @@ tags:
 - [[usePodcast.ts]] - `imports_from` [EXTRACTED]
 - [[useProgress.ts]] - `imports_from` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
+- [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
@@ -379,4 +386,4 @@ tags:
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Auth_Stores
+#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores

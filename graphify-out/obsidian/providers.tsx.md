@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/providers.tsx"
 type: "code"
-community: "Community 137"
+community: "Admin Providers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_137
+  - community/Admin_Providers
 ---
 
 # providers.tsx
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Providers()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_137
+#graphify/code #graphify/EXTRACTED #community/Admin_Providers

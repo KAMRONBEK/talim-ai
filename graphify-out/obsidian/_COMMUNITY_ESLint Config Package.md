@@ -10,11 +10,11 @@ members: 5
 **Members:** 5 nodes
 
 ## Members
-- [[files]] - code - packages/config/tsconfig/package.json
-- [[name_7]] - code - packages/config/tsconfig/package.json
-- [[package.json_7]] - code - packages/config/tsconfig/package.json
-- [[private_7]] - code - packages/config/tsconfig/package.json
-- [[version_6]] - code - packages/config/tsconfig/package.json
+- [[main]] - code - packages/config/eslint/package.json
+- [[name_4]] - code - packages/config/eslint/package.json
+- [[package.json_4]] - code - packages/config/eslint/package.json
+- [[private_4]] - code - packages/config/eslint/package.json
+- [[version_3]] - code - packages/config/eslint/package.json
 
 ## Live Query (requires Dataview plugin)
 

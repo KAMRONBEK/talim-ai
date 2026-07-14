@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Transcript Panel UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Transcript_Panel_UI
 ---
 
 # PodcastPlayer.tsx
@@ -28,4 +28,4 @@ tags:
 - [[podcast-segments.ts]] - `imports_from` [EXTRACTED]
 - [[rescalePodcastSegments()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI

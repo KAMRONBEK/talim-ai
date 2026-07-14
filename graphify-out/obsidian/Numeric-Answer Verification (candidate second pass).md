@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Plan"
+community: "Question Engine Design Docs"
 location: "§8"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Plan
+  - community/Question_Engine_Design_Docs
 ---
 
 # Numeric-Answer Verification (candidate second pass)
@@ -15,4 +15,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[SourceQuote Anchor (Hallucination Firewall)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Plan
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs

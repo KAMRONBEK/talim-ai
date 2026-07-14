@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "AI Tutor Chat API"
+community: "AI Tutor Chat Controller"
 location: "L188"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/AI_Tutor_Chat_Controller
 ---
 
 # searchSimilarChunks()
@@ -21,4 +21,4 @@ tags:
 - [[scriptVariants()]] - `calls` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller

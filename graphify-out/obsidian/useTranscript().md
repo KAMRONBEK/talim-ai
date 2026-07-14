@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Transcript Panel"
-location: "L6"
+community: "Web Providers & Job-Event Stream"
+location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Web_Providers__Job-Event_Stream
 ---
 
 # useTranscript()
@@ -15,6 +15,7 @@ tags:
 - [[VideoTutorialViewer()]] - `calls` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTranscript.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "Podcast Generation & Prompts"
+community: "Podcast Generation & TTS"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__Prompts
+  - community/Podcast_Generation__TTS
 ---
 
 # generatePodcast.job.ts
@@ -26,14 +26,14 @@ tags:
 - [[getPodcastSystemPrompt()]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[jobEvents]] - `imports` [EXTRACTED]
-- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
 - [[parsePodcastDialogue()]] - `imports` [EXTRACTED]
 - [[podcastQueue]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
+- [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[registerGeneratePodcastJob()]] - `contains` [EXTRACTED]
@@ -42,4 +42,4 @@ tags:
 - [[synthesizeSpeech()]] - `imports` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__Prompts
+#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS

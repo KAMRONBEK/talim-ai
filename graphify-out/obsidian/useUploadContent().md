@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Dialog & Button UI"
+community: "Dialog Components"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog__Button_UI
+  - community/Dialog_Components
 ---
 
 # useUploadContent()
@@ -16,4 +16,4 @@ tags:
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog__Button_UI
+#graphify/code #graphify/EXTRACTED #community/Dialog_Components

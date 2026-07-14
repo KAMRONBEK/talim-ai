@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/MermaidDiagram.tsx"
 type: "code"
-community: "Chat Visual Embeds"
+community: "Slide Deck Player UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Visual_Embeds
+  - community/Slide_Deck_Player_UI
 ---
 
 # MermaidDiagram.tsx
@@ -18,4 +18,4 @@ tags:
 - [[VisualBlockRenderer.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds
+#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI

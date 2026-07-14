@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "Content Query Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content_Query_Hooks
 ---
 
 # useTenantContent.ts
@@ -38,4 +38,4 @@ tags:
 - [[useTenantContents()]] - `contains` [EXTRACTED]
 - [[useUploadTenantContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks

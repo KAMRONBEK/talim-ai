@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Learner Dashboard"
 location: "L485"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Learner_Dashboard
 ---
 
 # LearnerMaterial
@@ -17,4 +17,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

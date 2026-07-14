@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Flashcards API & Prisma Seed"
+community: "API Routes & Middleware"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API__Prisma_Seed
+  - community/API_Routes__Middleware
 ---
 
 # auth.middleware.ts
@@ -45,6 +45,7 @@ tags:
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.routes.ts]] - `imports_from` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports_from` [EXTRACTED]
+- [[rate-limit.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[requireRole()]] - `contains` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `imports` [EXTRACTED]
 - [[section.controller.ts]] - `imports_from` [EXTRACTED]
@@ -62,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed
+#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware

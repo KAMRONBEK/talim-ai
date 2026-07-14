@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Community 103"
+community: "Admin Generated-Media Page"
 location: "L402"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_103
+  - community/Admin_Generated-Media_Page
 ---
 
 # useReviewGenerated()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_3]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_103
+#graphify/code #graphify/EXTRACTED #community/Admin_Generated-Media_Page

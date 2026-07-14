@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Subscription Editor UI"
+community: "Admin Subscription UI"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Editor_UI
+  - community/Admin_Subscription_UI
 ---
 
 # initials()
@@ -15,4 +15,4 @@ tags:
 - [[DrawerBody()]] - `calls` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Editor_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI

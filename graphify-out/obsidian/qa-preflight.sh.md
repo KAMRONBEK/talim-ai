@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/qa-preflight.sh"
 type: "code"
-community: "Community 105"
+community: "QA Preflight Script"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_105
+  - community/QA_Preflight_Script
 ---
 
 # qa-preflight.sh
@@ -20,4 +20,4 @@ tags:
 - [[probe_login()]] - `defines` [EXTRACTED]
 - [[qa-preflight.sh script]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_105
+#graphify/code #graphify/EXTRACTED #community/QA_Preflight_Script

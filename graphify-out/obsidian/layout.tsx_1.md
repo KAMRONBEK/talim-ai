@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/layout.tsx"
 type: "code"
-community: "Fonts & Layout"
+community: "Fonts & Root Layout"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Layout
+  - community/Fonts__Root_Layout
 ---
 
 # layout.tsx
@@ -23,4 +23,4 @@ tags:
 - [[newsreader]] - `imports` [EXTRACTED]
 - [[newsreader.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Layout
+#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout

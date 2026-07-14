@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/jobStream.ts"
 type: "code"
-community: "Providers & Job Events"
+community: "Web Providers & Job-Event Stream"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Web_Providers__Job-Event_Stream
 ---
 
 # Listener
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[jobStream.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream

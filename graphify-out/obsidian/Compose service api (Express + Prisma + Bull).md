@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "concept"
-community: "Community 108"
+community: "Docker Compose Services"
 location: "services.api"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_108
+  - community/Docker_Compose_Services
 ---
 
 # Compose service: api (Express + Prisma + Bull)
@@ -19,4 +19,4 @@ tags:
 - [[Compose service web (Next.js learnertenant app)]] - `references` [EXTRACTED]
 - [[Doppler-injected Compose secrets]] - `rationale_for` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_108
+#graphify/concept #graphify/EXTRACTED #community/Docker_Compose_Services

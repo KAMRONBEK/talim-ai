@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Tenant Dashboard & Hooks"
 location: "L229"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Hooks__Messaging
+  - community/Tenant_Dashboard__Hooks
 ---
 
 # useTenantProgress()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_25]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks

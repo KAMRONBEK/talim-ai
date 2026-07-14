@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Question Banks & Builders"
+community: "Question Bank Service"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # jsonStringArray()
@@ -14,11 +14,9 @@ tags:
 ## Connections
 - [[acceptedForBlank()]] - `calls` [EXTRACTED]
 - [[banks.ts]] - `imports` [EXTRACTED]
-- [[buildCoverageResults()]] - `calls` [EXTRACTED]
 - [[buildDragDropQuestion()]] - `calls` [EXTRACTED]
 - [[buildDropdownClozeQuestion()]] - `calls` [EXTRACTED]
 - [[buildMatchingQuestion()]] - `calls` [EXTRACTED]
-- [[evaluateQuizAnswers()]] - `calls` [EXTRACTED]
 - [[formatQuestion()]] - `calls` [EXTRACTED]
 - [[formatQuiz()]] - `calls` [EXTRACTED]
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
@@ -34,7 +32,7 @@ tags:
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[resolveAcceptedAnswers()]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `imports` [EXTRACTED]
-- [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

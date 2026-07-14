@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "API Endpoints & Media Hooks"
+community: "Web API Client & Endpoints"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Web_API_Client__Endpoints
 ---
 
 # content-stage.tsx
 
 ## Connections
+- [[AppLocale]] - `imports` [EXTRACTED]
 - [[Content]] - `imports` [EXTRACTED]
 - [[ContentStage()]] - `contains` [EXTRACTED]
 - [[ContentStageProps]] - `contains` [EXTRACTED]
@@ -36,13 +37,17 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
+- [[streamSummaryGeneration()]] - `imports` [EXTRACTED]
 - [[summary-text.tsx]] - `imports_from` [EXTRACTED]
+- [[summaryStream.ts]] - `imports_from` [EXTRACTED]
 - [[useFlashcards()]] - `imports` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
-- [[useGenerateSummary()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
+- [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 - [[usePodcast()]] - `imports` [EXTRACTED]
 - [[usePodcast.ts]] - `imports_from` [EXTRACTED]
 - [[useQuiz.ts]] - `imports_from` [EXTRACTED]
 - [[useQuizHistory()]] - `imports` [EXTRACTED]
+- [[useSavedSummary()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints

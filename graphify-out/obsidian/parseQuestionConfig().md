@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Quiz Player Inputs"
-location: "L39"
+community: "Quiz Player UI"
+location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_Inputs
+  - community/Quiz_Player_UI
 ---
 
 # parseQuestionConfig()
@@ -31,4 +31,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_Inputs
+#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI

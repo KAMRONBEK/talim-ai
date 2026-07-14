@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Content API Controller"
+community: "Subscription & Billing Service"
 location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_API_Controller
+  - community/Subscription__Billing_Service
 ---
 
 # getFileLimitsForTenant()
@@ -18,4 +18,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service

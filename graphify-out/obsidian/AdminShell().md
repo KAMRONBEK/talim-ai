@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/admin-shell.tsx"
 type: "code"
-community: "Community 106"
+community: "Admin Layout Shell"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_106
+  - community/Admin_Layout_Shell
 ---
 
 # AdminShell()
@@ -15,4 +15,4 @@ tags:
 - [[admin-shell.tsx]] - `contains` [EXTRACTED]
 - [[layout.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_106
+#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Shell

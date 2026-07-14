@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Flashcards API & Prisma Seed"
+community: "Content Media Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API__Prisma_Seed
+  - community/Content_Media_Controllers
 ---
 
 # flashcards.controller.ts
@@ -44,4 +44,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed
+#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers

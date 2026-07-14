@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Root Package Scripts"
+community: "Monorepo Scripts"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Package_Scripts
+  - community/Monorepo_Scripts
 ---
 
 # qa:overnight
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Package_Scripts
+#graphify/code #graphify/EXTRACTED #community/Monorepo_Scripts

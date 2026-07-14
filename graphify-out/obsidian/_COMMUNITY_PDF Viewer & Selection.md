@@ -49,10 +49,11 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 4 edges to [[_COMMUNITY_API Endpoints & Media Hooks]]
-- 1 edge to [[_COMMUNITY_Slide Deck UI]]
+- 2 edges to [[_COMMUNITY_Content Stage & Limits]]
+- 2 edges to [[_COMMUNITY_Web API Client & Job Stream]]
 - 1 edge to [[_COMMUNITY_Shared UI Primitives]]
-- 1 edge to [[_COMMUNITY_B2C Dashboard Shell]]
+- 1 edge to [[_COMMUNITY_Admin Panel UI]]
+- 1 edge to [[_COMMUNITY_Marketing Landing Page]]
 
 ## Top bridge nodes
 - [[PdfViewer.tsx]] - degree 22, connects to 3 communities

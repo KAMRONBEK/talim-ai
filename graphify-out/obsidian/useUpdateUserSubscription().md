@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Subscription Editor UI"
+community: "Admin Subscription UI"
 location: "L155"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Editor_UI
+  - community/Admin_Subscription_UI
 ---
 
 # useUpdateUserSubscription()
@@ -18,4 +18,4 @@ tags:
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Editor_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI

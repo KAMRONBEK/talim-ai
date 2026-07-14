@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Question Banks & Builders"
+community: "Question Bank Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # banks.ts
@@ -14,12 +14,14 @@ tags:
 ## Connections
 - [[AppError]] - `imports` [EXTRACTED]
 - [[GeneratableQuestionType]] - `imports` [EXTRACTED]
+- [[GenerateBankQuestionsJobData]] - `imports` [EXTRACTED]
 - [[STRUCTURED_QUESTION_ERROR]] - `imports` [EXTRACTED]
 - [[StructuredStorage]] - `imports` [EXTRACTED]
 - [[assertBank()]] - `imports` [EXTRACTED]
 - [[assertTenantContentIds()]] - `imports` [EXTRACTED]
 - [[assessment-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[assessment.service.ts]] - `re_exports` [EXTRACTED]
+- [[bankQuestionsQueue]] - `imports` [EXTRACTED]
 - [[buildDragDropQuestion()]] - `imports` [EXTRACTED]
 - [[buildHotspotQuestion()]] - `imports` [EXTRACTED]
 - [[buildManualStorage()]] - `contains` [EXTRACTED]
@@ -28,9 +30,11 @@ tags:
 - [[createBankQuestion()_1]] - `contains` [EXTRACTED]
 - [[createBankSchema]] - `imports` [EXTRACTED]
 - [[createQuestionSchema]] - `imports` [EXTRACTED]
+- [[enqueueGenerateQuestions()]] - `contains` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[formatBank()]] - `imports` [EXTRACTED]
 - [[formatQuestion()]] - `imports` [EXTRACTED]
+- [[generateBankQuestions.job.ts]] - `imports_from` [EXTRACTED]
 - [[generateQuestionSet()]] - `imports` [EXTRACTED]
 - [[generateQuestions()_1]] - `contains` [EXTRACTED]
 - [[generateSchema]] - `imports` [EXTRACTED]
@@ -51,7 +55,8 @@ tags:
 - [[question-builders.ts]] - `imports_from` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[question-gen.ts]] - `imports_from` [EXTRACTED]
+- [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 - [[typesFromStyle()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

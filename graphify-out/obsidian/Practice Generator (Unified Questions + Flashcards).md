@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Community 94"
+community: "Question Engine Design Docs"
 location: "§1.6"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_94
+  - community/Question_Engine_Design_Docs
 ---
 
 # Practice Generator (Unified Questions + Flashcards)
@@ -16,8 +16,7 @@ tags:
 - [[Elo-KT Section Mastery]] - `conceptually_related_to` [EXTRACTED]
 - [[Flashcards as First-Class Question Type]] - `references` [EXTRACTED]
 - [[Question Engine Rework Design]] - `cites` [EXTRACTED]
-- [[Quiz Generation Staleness Check (F59)]] - `conceptually_related_to` [INFERRED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 - [[Unified Generation Parameters (counttypesdepthscope)]] - `implements` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_94
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs

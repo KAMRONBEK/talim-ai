@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/shared.ts"
 type: "code"
-community: "Admin Content & Audit"
+community: "Admin Content & Audit Controllers"
 location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit
+  - community/Admin_Content__Audit_Controllers
 ---
 
 # buildUserWhere()
@@ -16,4 +16,4 @@ tags:
 - [[shared.ts]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers

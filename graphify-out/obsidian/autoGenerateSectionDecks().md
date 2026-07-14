@@ -1,25 +1,23 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Slide Deck Prompts"
-location: "L289"
+community: "Job Event Fan-out & Media Jobs"
+location: "L401"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # autoGenerateSectionDecks()
 
 ## Connections
 - [[assertQuota()]] - `calls` [EXTRACTED]
-- [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[generateAndStoreSlideDeck()]] - `calls` [EXTRACTED]
 - [[getSlideDeck()]] - `calls` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
-- [[reparseContent()]] - `calls` [EXTRACTED]
-- [[reparseContent()_1]] - `calls` [EXTRACTED]
+- [[reparseContent.job.ts]] - `imports` [EXTRACTED]
+- [[resolveContentAudience()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
-- [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

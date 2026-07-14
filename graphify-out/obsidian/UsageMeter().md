@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/billing-summary-card.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Billing & Access Guards"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Billing__Access_Guards
 ---
 
 # UsageMeter()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[billing-summary-card.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

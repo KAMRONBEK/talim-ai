@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Assignment & Hooks"
-location: "L1033"
+community: "Content Query Hooks"
+location: "L1037"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content_Query_Hooks
 ---
 
 # Content
@@ -27,6 +27,7 @@ tags:
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
 - [[useContentStore.ts]] - `imports` [EXTRACTED]
+- [[useReparseContent.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks

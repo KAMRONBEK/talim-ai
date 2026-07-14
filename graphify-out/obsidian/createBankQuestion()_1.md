@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Question Banks & Builders"
-location: "L243"
+community: "Question Bank Service"
+location: "L303"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # createBankQuestion()
@@ -18,4 +18,4 @@ tags:
 - [[formatQuestion()]] - `calls` [EXTRACTED]
 - [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

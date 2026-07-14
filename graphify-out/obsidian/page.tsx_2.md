@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "Admin Dashboard UI"
+community: "Admin Dashboard & Charts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_UI
+  - community/Admin_Dashboard__Charts
 ---
 
 # page.tsx
@@ -35,4 +35,4 @@ tags:
 - [[useAdminAnalyticsUserGrowth()]] - `imports` [EXTRACTED]
 - [[usePlatformStats()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mastery.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Prisma Client & Seed"
 location: "L112"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Prisma_Client__Seed
 ---
 
 # getClassMastery()
@@ -17,4 +17,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[resolveSectionTitles()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed

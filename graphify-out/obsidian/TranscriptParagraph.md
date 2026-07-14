@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel"
+community: "Transcript Panel UI"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel
+  - community/Transcript_Panel_UI
 ---
 
 # TranscriptParagraph
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI

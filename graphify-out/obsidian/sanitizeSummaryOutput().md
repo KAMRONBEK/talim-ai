@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Locale AI Prompts"
+community: "Summary Controller"
 location: "L335"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_AI_Prompts
+  - community/Summary_Controller
 ---
 
 # sanitizeSummaryOutput()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[generateSummaryText()]] - `calls` [EXTRACTED]
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
+- [[streamSummary()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_AI_Prompts
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

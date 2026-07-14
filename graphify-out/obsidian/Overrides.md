@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Slide Deck Prompts"
-location: "L102"
+community: "Job Event Fan-out & Media Jobs"
+location: "L108"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # Overrides
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

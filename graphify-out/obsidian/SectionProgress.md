@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Sidebar & Generations"
-location: "L1247"
+community: "Sheet & Layout Components"
+location: "L1266"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Sidebar__Generations
+  - community/Sheet__Layout_Components
 ---
 
 # SectionProgress
@@ -16,4 +16,4 @@ tags:
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

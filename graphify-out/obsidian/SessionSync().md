@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/session-sync.tsx"
 type: "code"
-community: "Providers & Job Events"
+community: "Admin Auth Store"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Admin_Auth_Store
 ---
 
 # SessionSync()
@@ -15,4 +15,4 @@ tags:
 - [[providers.tsx_1]] - `imports` [EXTRACTED]
 - [[session-sync.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Store

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/section.controller.ts"
 type: "code"
-community: "Section Service"
+community: "Section Controller"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Service
+  - community/Section_Controller
 ---
 
 # listSections()
@@ -18,4 +18,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Service
+#graphify/code #graphify/EXTRACTED #community/Section_Controller

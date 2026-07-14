@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "Content Workspace & Chat"
+community: "Upgrade Modal & Chat Window"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Workspace__Chat
+  - community/Upgrade_Modal__Chat_Window
 ---
 
 # ChatWindow.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Workspace__Chat
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window

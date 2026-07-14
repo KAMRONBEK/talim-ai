@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Coverage Map"
+community: "QA Playbook & Oracles"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Coverage_Map
+  - community/QA_Playbook__Oracles
 ---
 
 # Persona: Hostile actor
@@ -15,4 +15,4 @@ tags:
 - [[Behaviour-simulation recipes R1-R15]] - `references` [EXTRACTED]
 - [[NeverEver invariants (seat limit, deactivation, isolation, server-authoritative GAME)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map
+#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles

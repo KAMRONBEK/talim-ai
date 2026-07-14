@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Background Jobs & Queues"
+community: "Job Event Fan-out & Media Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # generateVideo.job.ts
@@ -26,11 +26,11 @@ tags:
 - [[getSlideDeck()]] - `imports` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[jobEvents]] - `imports` [EXTRACTED]
-- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
+- [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[registerGenerateVideoJob()]] - `contains` [EXTRACTED]
 - [[slideToText()]] - `contains` [EXTRACTED]
@@ -40,4 +40,4 @@ tags:
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

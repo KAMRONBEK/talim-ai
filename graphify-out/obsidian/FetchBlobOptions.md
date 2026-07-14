@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/authenticatedBlob.ts"
 type: "code"
-community: "API Endpoints & Media Hooks"
+community: "Web API Client & Endpoints"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Web_API_Client__Endpoints
 ---
 
 # FetchBlobOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[authenticatedBlob.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints

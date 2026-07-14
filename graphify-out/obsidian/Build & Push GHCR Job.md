@@ -1,12 +1,12 @@
 ---
 source_file: ".github/workflows/deploy.yml"
 type: "code"
-community: "Platform Docs & Deploy"
+community: "Platform Guide Docs"
 location: "jobs.build"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Platform_Docs__Deploy
+  - community/Platform_Guide_Docs
 ---
 
 # Build & Push GHCR Job
@@ -16,4 +16,4 @@ tags:
 - [[Detect Changed Apps Job]] - `references` [EXTRACTED]
 - [[VPS Pull & Restart Job]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Platform_Docs__Deploy
+#graphify/code #graphify/EXTRACTED #community/Platform_Guide_Docs

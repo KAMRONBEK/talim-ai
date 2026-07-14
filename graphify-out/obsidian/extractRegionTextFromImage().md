@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF & OCR Service"
+community: "PDF Extraction Service"
 location: "L458"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF__OCR_Service
+  - community/PDF_Extraction_Service
 ---
 
 # extractRegionTextFromImage()
@@ -19,4 +19,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF__OCR_Service
+#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service

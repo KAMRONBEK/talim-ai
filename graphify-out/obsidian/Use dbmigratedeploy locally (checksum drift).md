@@ -1,12 +1,12 @@
 ---
 source_file: "CLAUDE.md"
 type: "rationale"
-community: "Community 89"
+community: "Architecture Invariants (CLAUDE.md)"
 location: "Architecture conventions & invariants"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_89
+  - community/Architecture_Invariants_CLAUDEmd
 ---
 
 # Use db:migrate:deploy locally (checksum drift)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI project guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_89
+#graphify/rationale #graphify/EXTRACTED #community/Architecture_Invariants_CLAUDEmd

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/billing-summary-card.tsx"
 type: "code"
-community: "Account & Settings UI"
+community: "Billing & Access Guards"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Account__Settings_UI
+  - community/Billing__Access_Guards
 ---
 
 # BillingSummaryCard()
@@ -19,4 +19,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Account__Settings_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Banks & Builders"
+community: "Question Bank Service"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Banks__Builders
+  - community/Question_Bank_Service
 ---
 
 # buildMatchingQuestion()
@@ -19,4 +19,4 @@ tags:
 - [[question-builders.ts]] - `contains` [EXTRACTED]
 - [[shuffled()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Banks__Builders
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

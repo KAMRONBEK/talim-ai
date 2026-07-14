@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ManimVideo.tsx"
 type: "code"
-community: "Chat Visual Embeds"
-location: "L9"
+community: "Web Providers & Job-Event Stream"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Visual_Embeds
+  - community/Web_Providers__Job-Event_Stream
 ---
 
 # ManimVideo()
@@ -16,5 +16,6 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 - [[getApiBaseUrl()]] - `calls` [EXTRACTED]
+- [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Visual_Embeds
+#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream

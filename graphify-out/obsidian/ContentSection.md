@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Sidebar & Generations"
-location: "L1045"
+community: "Sheet & Layout Components"
+location: "L1049"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Sidebar__Generations
+  - community/Sheet__Layout_Components
 ---
 
 # ContentSection
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useSections.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

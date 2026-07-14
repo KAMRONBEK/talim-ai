@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Hooks & Messaging"
+community: "Messaging Hooks"
 location: "L318"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Hooks__Messaging
+  - community/Messaging_Hooks
 ---
 
 # useReplyToLearnerMessage()
@@ -16,4 +16,4 @@ tags:
 - [[learner-messages-bell.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Hooks__Messaging
+#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks

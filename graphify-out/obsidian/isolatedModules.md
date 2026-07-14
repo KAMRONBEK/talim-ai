@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/base.json"
 type: "code"
-community: "TSConfig Base"
+community: "Shared tsconfig (base)"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TSConfig_Base
+  - community/Shared_tsconfig_base
 ---
 
 # isolatedModules
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TSConfig_Base
+#graphify/code #graphify/EXTRACTED #community/Shared_tsconfig_base

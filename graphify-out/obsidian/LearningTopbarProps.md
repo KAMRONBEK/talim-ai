@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Marketing Landing Components"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Marketing_Landing_Components
 ---
 
 # LearningTopbarProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learning-topbar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

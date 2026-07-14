@@ -1,13 +1,13 @@
 ---
 source_file: "docker-compose.registry.yml"
 type: "document"
-community: "Community 161"
+community: "Compose Registry Override"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_161
+  - community/Compose_Registry_Override
 ---
 
 # docker-compose.registry.yml (GHCR prebuilt images)
 
-#graphify/document #graphify/EXTRACTED #community/Community_161
+#graphify/document #graphify/EXTRACTED #community/Compose_Registry_Override

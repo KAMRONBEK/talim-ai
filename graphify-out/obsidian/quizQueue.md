@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Background Jobs & Queues"
-location: "L5"
+community: "Quiz Generation Pipeline"
+location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Background_Jobs__Queues
+  - community/Quiz_Generation_Pipeline
 ---
 
 # quizQueue
@@ -16,4 +16,4 @@ tags:
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Background_Jobs__Queues
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/testimonials.tsx"
 type: "code"
-community: "Marketing Landing UI"
+community: "Marketing Landing Components"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_UI
+  - community/Marketing_Landing_Components
 ---
 
 # Testimonials()
@@ -16,4 +16,4 @@ tags:
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 - [[testimonials.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_UI
+#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components

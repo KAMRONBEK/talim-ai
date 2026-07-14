@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/qa-fixtures.mjs"
 type: "code"
-community: "QA Fixtures Generator"
+community: "QA Fixture Generator"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/QA_Fixtures_Generator
+  - community/QA_Fixture_Generator
 ---
 
 # buildTextPdf()
@@ -16,4 +16,4 @@ tags:
 - [[makePdf()]] - `calls` [EXTRACTED]
 - [[qa-fixtures.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/QA_Fixtures_Generator
+#graphify/code #graphify/EXTRACTED #community/QA_Fixture_Generator

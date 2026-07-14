@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/upgrade-dialog.tsx"
 type: "code"
-community: "Providers & Job Events"
+community: "Upgrade Dialog & Pricing"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Providers__Job_Events
+  - community/Upgrade_Dialog__Pricing
 ---
 
 # UpgradeDialog()
@@ -20,4 +20,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `contains` [EXTRACTED]
 - [[useRequestUpgrade()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Providers__Job_Events
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/package.json"
 type: "code"
-community: "Admin Dependencies"
+community: "Admin App Dependencies"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dependencies
+  - community/Admin_App_Dependencies
 ---
 
 # devDependencies
@@ -26,4 +26,4 @@ tags:
 - [[tailwindcss]] - `contains` [EXTRACTED]
 - [[typescript]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Admin_App_Dependencies

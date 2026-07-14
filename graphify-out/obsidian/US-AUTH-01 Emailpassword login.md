@@ -1,18 +1,16 @@
 ---
 source_file: "docs/qa/user-stories.md"
-type: "document"
-community: "qa"
+type: "concept"
+community: "Product Plans & Epics"
 tags:
-  - graphify/document
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/qa
+  - community/Product_Plans__Epics
 ---
 
 # US-AUTH-01: Email/password login
 
 ## Connections
-- [[F16 (S2, fixed) deactivated login showed 'server unreachable' not 'account deactivated']] - `references` [EXTRACTED]
-- [[F17 (S2, fixed) emailusername login was case-sensitive — locked users out of a P0 flow]] - `references` [EXTRACTED]
-- [[F2 (S2, fixed) wrong-password login showed no error — global 401 interceptor wiped inline error]] - `references` [EXTRACTED]
+- [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/qa
+#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics

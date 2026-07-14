@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Slide Deck UI"
+community: "Auth & Assignment UI"
 location: "L220"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_UI
+  - community/Auth__Assignment_UI
 ---
 
 # Definition()
@@ -16,4 +16,4 @@ tags:
 - [[T]] - `calls` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_UI
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

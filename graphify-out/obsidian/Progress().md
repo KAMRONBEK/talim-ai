@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/progress.tsx"
 type: "code"
-community: "Content Grid & Learner Dashboard"
+community: "Auth & Assignment UI"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Grid__Learner_Dashboard
+  - community/Auth__Assignment_UI
 ---
 
 # Progress()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[progress.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Grid__Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "SSE Endpoint & Error Middleware"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/SSE_Endpoint__Error_Middleware
 ---
 
 # QuotaExceededError
@@ -22,4 +22,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware

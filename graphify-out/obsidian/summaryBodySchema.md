@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Media & Progress Controllers"
-location: "L21"
+community: "Summary Controller"
+location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Media__Progress_Controllers
+  - community/Summary_Controller
 ---
 
 # summaryBodySchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Media__Progress_Controllers
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

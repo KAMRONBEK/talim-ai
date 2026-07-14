@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Architecture Concepts (CLAUDE.md)"
+community: "Admin & API Architecture Docs"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Architecture_Concepts_CLAUDEmd
+  - community/Admin__API_Architecture_Docs
 ---
 
 # Talim AI README
@@ -19,4 +19,4 @@ tags:
 - [[Environment variables (DATABASE_URLJWT_SECRETOPENAIDEEPSEEK...)]] - `references` [EXTRACTED]
 - [[Talim Tech Stack (Next.jsExpressPrismaBullPostgres+pgvector)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Architecture_Concepts_CLAUDEmd
+#graphify/document #graphify/EXTRACTED #community/Admin__API_Architecture_Docs

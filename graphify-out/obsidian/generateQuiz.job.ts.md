@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Quiz Generation Pipeline"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Quiz_Generation_Pipeline
 ---
 
 # generateQuiz.job.ts
@@ -26,12 +26,12 @@ tags:
 - [[getSectionChunks()]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[jobEvents]] - `imports` [EXTRACTED]
-- [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
+- [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[normalizePracticeQuestionType()]] - `imports` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
 - [[prisma_2]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
+- [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[question-gen.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
@@ -45,4 +45,4 @@ tags:
 - [[typesFromStyle()]] - `imports` [EXTRACTED]
 - [[wholeMaterialTarget()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline

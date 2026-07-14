@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/chunk-sampling.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Question Bank Service"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Question_Bank_Service
 ---
 
 # sampleChunksEvenly()
@@ -17,4 +17,4 @@ tags:
 - [[getSectionContext()]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service

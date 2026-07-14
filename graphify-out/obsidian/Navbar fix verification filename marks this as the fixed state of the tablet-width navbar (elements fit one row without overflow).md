@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar-fixed.jpeg"
 type: "rationale"
-community: "Community 91"
+community: "QA Screenshots (UZ Landing)"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/Community_91
+  - community/QA_Screenshots_UZ_Landing
 ---
 
 # Navbar fix verification: filename marks this as the fixed state of the tablet-width navbar (elements fit one row without overflow)
@@ -15,4 +15,4 @@ tags:
 - [[QA screenshot Uzbek landing page at tablet 768px, post navbar fix]] - `references` [EXTRACTED]
 - [[Tablet 768px responsive breakpoint single-column hero layout with full-width mock card]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/Community_91
+#graphify/rationale #graphify/INFERRED #community/QA_Screenshots_UZ_Landing

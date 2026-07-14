@@ -1,13 +1,13 @@
 ---
 type: community
 cohesion: 0.10
-members: 34
+members: 33
 ---
 
 # Podcast Generation & TTS
 
 **Cohesion:** 0.10 - loosely connected
-**Members:** 34 nodes
+**Members:** 33 nodes
 
 ## Members
 - [[AZURE_LANG]] - code - apps/api/src/services/tts.service.ts
@@ -31,7 +31,6 @@ members: 34
 - [[normalizeScriptForTts()]] - code - apps/api/src/lib/tts-normalize.ts
 - [[openai_3]] - code - apps/api/src/services/tts.service.ts
 - [[parsePodcastDialogue()]] - code - apps/api/src/lib/locale-prompts.ts
-- [[podcastQueue]] - code - apps/api/src/services/queue.service.ts
 - [[recordTtsUsage()]] - code - apps/api/src/services/tts.service.ts
 - [[sanitizeForXml()]] - code - apps/api/src/services/tts.service.ts
 - [[sleep()]] - code - apps/api/src/services/tts.service.ts
@@ -53,22 +52,22 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 12 edges to [[_COMMUNITY_Env Config & Job Events]]
-- 5 edges to [[_COMMUNITY_Shared Types & Chat Hooks]]
-- 4 edges to [[_COMMUNITY_Community 31]]
-- 4 edges to [[_COMMUNITY_Community 50]]
-- 2 edges to [[_COMMUNITY_Admin Tenants & Prisma Core]]
-- 2 edges to [[_COMMUNITY_Community 64]]
-- 2 edges to [[_COMMUNITY_AI Tutor Chat API]]
-- 1 edge to [[_COMMUNITY_Content API Controllers]]
-- 1 edge to [[_COMMUNITY_Slide Deck Prompts]]
-- 1 edge to [[_COMMUNITY_Content Upload & Ingest]]
-- 1 edge to [[_COMMUNITY_Transcript Panel]]
-- 1 edge to [[_COMMUNITY_Community 98]]
+- 9 edges to [[_COMMUNITY_API Bootstrap & Background Jobs]]
+- 5 edges to [[_COMMUNITY_Job Event Fan-out & Media Jobs]]
+- 4 edges to [[_COMMUNITY_AI Prompt Builders]]
+- 4 edges to [[_COMMUNITY_Usage Pricing & Metering]]
+- 3 edges to [[_COMMUNITY_Shared Types & Zustand Stores]]
+- 2 edges to [[_COMMUNITY_Prisma Client & Seed]]
+- 2 edges to [[_COMMUNITY_AI Tutor Chat Controller]]
+- 2 edges to [[_COMMUNITY_Flashcards UI]]
+- 1 edge to [[_COMMUNITY_AI Provider Service]]
+- 1 edge to [[_COMMUNITY_Summary Controller]]
+- 1 edge to [[_COMMUNITY_Transcript Panel UI]]
+- 1 edge to [[_COMMUNITY_Learner Controller]]
 
 ## Top bridge nodes
 - [[generatePodcast.job.ts]] - degree 29, connects to 10 communities
-- [[tts.service.ts]] - degree 33, connects to 3 communities
-- [[podcastQueue]] - degree 3, connects to 2 communities
-- [[tts-normalize.ts]] - degree 7, connects to 1 community
+- [[tts.service.ts]] - degree 33, connects to 5 communities
+- [[tts-normalize.ts]] - degree 7, connects to 2 communities
 - [[synthesizeSpeech()]] - degree 7, connects to 1 community
+- [[recordTtsUsage()]] - degree 4, connects to 1 community

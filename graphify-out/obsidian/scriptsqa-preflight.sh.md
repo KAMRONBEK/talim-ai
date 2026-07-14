@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "code"
-community: "QA Playbook & Coverage Map"
+community: "QA Playbook & Oracles"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/QA_Playbook__Coverage_Map
+  - community/QA_Playbook__Oracles
 ---
 
 # scripts/qa-preflight.sh
@@ -16,4 +16,4 @@ tags:
 - [[qa-run visual-QA skill]] - `references` [EXTRACTED]
 - [[scriptsqa-overnight.sh (launcher)]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/QA_Playbook__Coverage_Map
+#graphify/code #graphify/EXTRACTED #community/QA_Playbook__Oracles

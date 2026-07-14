@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api/endpoints.ts"
 type: "code"
-community: "API Endpoints & Media Hooks"
+community: "Web API Client & Endpoints"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Media_Hooks
+  - community/Web_API_Client__Endpoints
 ---
 
 # contentEndpoints
@@ -17,4 +17,4 @@ tags:
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Media_Hooks
+#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints

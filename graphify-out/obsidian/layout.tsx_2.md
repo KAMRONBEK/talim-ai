@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/layout.tsx"
 type: "code"
-community: "Auth & App Shell UI"
+community: "Billing & Access Guards"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__App_Shell_UI
+  - community/Billing__Access_Guards
 ---
 
 # layout.tsx
@@ -16,4 +16,4 @@ tags:
 - [[LearnerShell()]] - `imports` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__App_Shell_UI
+#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards

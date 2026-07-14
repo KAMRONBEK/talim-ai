@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Content & Flashcards Hooks"
+community: "Locale Sync & Content Hooks"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content__Flashcards_Hooks
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # MaterialMediaPanel()
@@ -26,4 +26,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useVideo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content__Flashcards_Hooks
+#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks

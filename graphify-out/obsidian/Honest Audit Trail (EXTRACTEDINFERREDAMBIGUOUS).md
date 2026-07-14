@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "Community 144"
+community: "Graphify Honesty Rules"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Community_144
+  - community/Graphify_Honesty_Rules
 ---
 
 # Honest Audit Trail (EXTRACTED/INFERRED/AMBIGUOUS)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Honesty Rules]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Community_144
+#graphify/rationale #graphify/EXTRACTED #community/Graphify_Honesty_Rules

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Assessment Pages & Wizard"
-location: "L310"
+community: "Tenant Assessment Builder UI"
+location: "L312"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Assessment_Pages__Wizard
+  - community/Tenant_Assessment_Builder_UI
 ---
 
 # TenantAssessmentsPage()
@@ -27,4 +27,4 @@ tags:
 - [[useTenantContents()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Assessment_Pages__Wizard
+#graphify/code #graphify/INFERRED #community/Tenant_Assessment_Builder_UI

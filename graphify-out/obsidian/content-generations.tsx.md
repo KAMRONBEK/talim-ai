@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Content Sidebar & Generations"
+community: "Sheet & Layout Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Sidebar__Generations
+  - community/Sheet__Layout_Components
 ---
 
 # content-generations.tsx
@@ -20,4 +20,4 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Sidebar__Generations
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

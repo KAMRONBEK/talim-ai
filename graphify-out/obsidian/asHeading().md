@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Summary & Rich Text"
+community: "Section Reader UI"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary__Rich_Text
+  - community/Section_Reader_UI
 ---
 
 # asHeading()
@@ -16,4 +16,4 @@ tags:
 - [[stripInline()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary__Rich_Text
+#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI

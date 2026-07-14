@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Dashboard Search"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Dashboard_Search
 ---
 
 # page.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useContents()]] - `imports` [EXTRACTED]
 - [[useDashboardSearch()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Dashboard_Search

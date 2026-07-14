@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Community 111"
+community: "Root Dev Tooling"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_111
+  - community/Root_Dev_Tooling
 ---
 
 # globalPassThroughEnv
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[turbo.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_111
+#graphify/code #graphify/EXTRACTED #community/Root_Dev_Tooling

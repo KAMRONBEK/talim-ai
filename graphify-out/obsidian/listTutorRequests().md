@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin-tutor-request.controller.ts"
 type: "code"
-community: "Assessment & Tutor-Request Controllers"
+community: "Admin Content & Audit Controllers"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment__Tutor-Request_Controllers
+  - community/Admin_Content__Audit_Controllers
 ---
 
 # listTutorRequests()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[admin-tutor-request.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment__Tutor-Request_Controllers
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers

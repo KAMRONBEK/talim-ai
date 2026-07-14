@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "concept"
-community: "Community 109"
+community: "Deployment Docs"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Community_109
+  - community/Deployment_Docs
 ---
 
 # nginx Reverse Proxy
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[VPS Docker Deployment]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Community_109
+#graphify/concept #graphify/EXTRACTED #community/Deployment_Docs

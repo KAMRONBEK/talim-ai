@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/tsconfig.json"
 type: "code"
-community: "Community 119"
+community: "UI tsconfig"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_119
+  - community/UI_tsconfig
 ---
 
 # lib
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_119
+#graphify/code #graphify/EXTRACTED #community/UI_tsconfig

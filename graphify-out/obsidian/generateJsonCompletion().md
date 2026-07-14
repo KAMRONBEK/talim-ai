@@ -2,7 +2,7 @@
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
 community: "AI Provider Service"
-location: "L279"
+location: "L293"
 tags:
   - graphify/code
   - graphify/EXTRACTED
@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[ai.service.ts]] - `contains` [EXTRACTED]
+- [[answerJudge.service.ts]] - `imports` [EXTRACTED]
 - [[createDeepSeekChatCompletion()]] - `calls` [EXTRACTED]
 - [[generateFlashcards.job.ts]] - `imports` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]

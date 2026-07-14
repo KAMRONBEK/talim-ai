@@ -1,16 +1,13 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "rationale"
-community: "QA Playbook & Coverage Map"
+community: "QA Depth-3 Coverage"
 tags:
   - graphify/rationale
-  - graphify/INFERRED
-  - community/QA_Playbook__Coverage_Map
+  - graphify/EXTRACTED
+  - community/QA_Depth-3_Coverage
 ---
 
 # Depth-3 coverage (open->interact->submit->persist-after-reload)
 
-## Connections
-- [[Depth enum (viewed  interacted  oracle-verified)]] - `semantically_similar_to` [INFERRED]
-
-#graphify/rationale #graphify/INFERRED #community/QA_Playbook__Coverage_Map
+#graphify/rationale #graphify/EXTRACTED #community/QA_Depth-3_Coverage

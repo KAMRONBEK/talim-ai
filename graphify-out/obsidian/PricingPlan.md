@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Billing, Usage & Limits"
+community: "Upgrade Dialog & Pricing"
 location: "L65"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing_Usage__Limits
+  - community/Upgrade_Dialog__Pricing
 ---
 
 # PricingPlan
@@ -15,4 +15,4 @@ tags:
 - [[PlanCode]] - `references` [EXTRACTED]
 - [[pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing_Usage__Limits
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing

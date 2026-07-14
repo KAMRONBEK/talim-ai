@@ -1,20 +1,21 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Slide Deck Prompts"
-location: "L36"
+community: "Job Event Fan-out & Media Jobs"
+location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # formatSlideDeck()
 
 ## Connections
+- [[enqueueSlideDeckGeneration()]] - `calls` [EXTRACTED]
 - [[generateAndStoreSlideDeck()]] - `calls` [EXTRACTED]
 - [[getReadySlideDeckAnyLocale()]] - `calls` [EXTRACTED]
 - [[getSlideDeck()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

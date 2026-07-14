@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/newsreader.ts"
 type: "code"
-community: "Fonts & Layout"
+community: "Fonts & Root Layout"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Layout
+  - community/Fonts__Root_Layout
 ---
 
 # newsreader
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 - [[newsreader.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Layout
+#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout

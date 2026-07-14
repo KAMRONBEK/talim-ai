@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Chat Message Rendering"
+community: "Tutor Chat Visual Components"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Message_Rendering
+  - community/Tutor_Chat_Visual_Components
 ---
 
 # LocalChatMessage
@@ -15,4 +15,4 @@ tags:
 - [[MessageRole]] - `references` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Message_Rendering
+#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components

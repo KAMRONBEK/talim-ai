@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Community 113"
+community: "Quiz Answer Helpers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_113
+  - community/Quiz_Answer_Helpers
 ---
 
 # quiz-answer.ts
@@ -21,4 +21,4 @@ tags:
 - [[resolveCorrectAnswer()]] - `contains` [EXTRACTED]
 - [[stripOptionLabel()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_113
+#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Helpers

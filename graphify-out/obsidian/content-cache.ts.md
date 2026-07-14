@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "Content Assignment & Hooks"
+community: "Content Query Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Assignment__Hooks
+  - community/Content_Query_Hooks
 ---
 
 # content-cache.ts
@@ -23,6 +23,7 @@ tags:
 - [[restoreContentLists()]] - `contains` [EXTRACTED]
 - [[snapshotContentLists()]] - `contains` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
+- [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Assignment__Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Features Docs"
+community: "Feature Catalog Docs"
 location: "§2.4, §5.2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Features_Docs
+  - community/Feature_Catalog_Docs
 ---
 
 # Become-a-Tutor Request Flow
@@ -14,7 +14,6 @@ tags:
 ## Connections
 - [[Custom Seat Limit]] - `references` [EXTRACTED]
 - [[Manual Subscription Activation (no payment gateway)]] - `conceptually_related_to` [EXTRACTED]
-- [[Stateless-JWT Staleness (F11F45F46)]] - `conceptually_related_to` [INFERRED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Features_Docs
+#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Docs

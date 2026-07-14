@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "API Middleware"
+community: "API Routes & Middleware"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Middleware
+  - community/API_Routes__Middleware
 ---
 
 # requireRole()
@@ -15,4 +15,4 @@ tags:
 - [[admin.routes.ts]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Middleware
+#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware

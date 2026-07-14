@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Locale Sync & Content Hooks"
 location: "L233"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/B2C_Dashboard_Shell
+  - community/Locale_Sync__Content_Hooks
 ---
 
 # MasteryDeltaList()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_40]] - `contains` [EXTRACTED]
 - [[useSections()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/INFERRED #community/Locale_Sync__Content_Hooks

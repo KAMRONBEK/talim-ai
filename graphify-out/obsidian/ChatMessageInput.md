@@ -13,5 +13,6 @@ tags:
 
 ## Connections
 - [[ai.service.ts]] - `contains` [EXTRACTED]
+- [[summary.controller.ts]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/AI_Provider_Service

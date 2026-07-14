@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-prompt.ts"
 type: "code"
-community: "Slide Deck Prompts"
+community: "Job Event Fan-out & Media Jobs"
 location: "L82"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Prompts
+  - community/Job_Event_Fan-out__Media_Jobs
 ---
 
 # audienceTone()
@@ -15,4 +15,4 @@ tags:
 - [[deck-prompt.ts]] - `contains` [EXTRACTED]
 - [[getDeckSystemPrompt()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Prompts
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs

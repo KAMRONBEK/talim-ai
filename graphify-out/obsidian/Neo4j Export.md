@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/exports.md"
 type: "concept"
-community: "Community 149"
+community: "Graphify Export Docs"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Community_149
+  - community/Graphify_Export_Docs
 ---
 
 # Neo4j Export
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[FalkorDB Export]] - `semantically_similar_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Community_149
+#graphify/concept #graphify/INFERRED #community/Graphify_Export_Docs

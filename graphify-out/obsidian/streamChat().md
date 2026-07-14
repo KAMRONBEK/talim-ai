@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "AI Tutor Chat API"
-location: "L159"
+community: "AI Tutor Chat Controller"
+location: "L160"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_API
+  - community/AI_Tutor_Chat_Controller
 ---
 
 # streamChat()
@@ -27,6 +27,9 @@ tags:
 - [[searchSimilarChunks()]] - `calls` [EXTRACTED]
 - [[searchSimilarFigures()]] - `calls` [EXTRACTED]
 - [[serializeBlockForMessage()]] - `calls` [EXTRACTED]
+- [[sseData()]] - `calls` [EXTRACTED]
+- [[sseDone()]] - `calls` [EXTRACTED]
+- [[sseHeaders()]] - `calls` [EXTRACTED]
 - [[streamStaticAssistantResponse()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_API
+#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller

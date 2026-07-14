@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "B2C Dashboard Shell"
+community: "Sheet & Layout Components"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/B2C_Dashboard_Shell
+  - community/Sheet__Layout_Components
 ---
 
 # DashboardSidebarBody()
@@ -16,4 +16,4 @@ tags:
 - [[dashboard-sidebar.tsx]] - `contains` [EXTRACTED]
 - [[useContents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/B2C_Dashboard_Shell
+#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components

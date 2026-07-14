@@ -45,10 +45,10 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 10 edges to [[_COMMUNITY_AI Tutor Chat API]]
+- 10 edges to [[_COMMUNITY_AI Tutor Chat Controller]]
 - 2 edges to [[_COMMUNITY_AI Provider Service]]
-- 2 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
-- 1 edge to [[_COMMUNITY_Shared Types & Auth Stores]]
+- 2 edges to [[_COMMUNITY_Flashcards UI]]
+- 1 edge to [[_COMMUNITY_Shared Types & Zustand Stores]]
 
 ## Top bridge nodes
 - [[tutor-scope.ts]] - degree 26, connects to 4 communities

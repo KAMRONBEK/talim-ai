@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Community 117"
+community: "Tenant Org & Roles Service"
 location: "L190"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Community_117
+  - community/Tenant_Org__Roles_Service
 ---
 
 # adminUpdateTenantSubscription()
@@ -19,4 +19,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Community_117
+#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service

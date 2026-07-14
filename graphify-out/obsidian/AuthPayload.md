@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Flashcards API & Prisma Seed"
+community: "Prisma Client & Seed"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_API__Prisma_Seed
+  - community/Prisma_Client__Seed
 ---
 
 # AuthPayload
@@ -16,4 +16,4 @@ tags:
 - [[contentAccess.service.ts]] - `imports` [EXTRACTED]
 - [[srs.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_API__Prisma_Seed
+#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
