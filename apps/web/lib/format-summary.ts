@@ -25,7 +25,7 @@ export function formatSummaryForDisplay(text: string): string {
     .trim();
 }
 
-export function splitSummaryParagraphs(text: string): string[] {
+function splitSummaryParagraphs(text: string): string[] {
   return formatSummaryForDisplay(text)
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.replace(/\n/g, ' ').trim())

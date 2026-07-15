@@ -33,7 +33,7 @@ const AZURE_VOICES_BY_LOCALE: Record<AppLocale, [string, string]> = {
 };
 
 /** Host index in a two-speaker podcast (0 = host A, 1 = host B). */
-export type Speaker = 0 | 1;
+type Speaker = 0 | 1;
 
 // Bound how many synthesis requests run at once. Long scripts split into many
 // ~700-char chunks; firing them all at once trips Azure's per-resource rate limit.
@@ -152,7 +152,11 @@ function synthesizeChunk(
 }
 
 /** Run async tasks with a bounded concurrency, preserving input order. */
-async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+async function mapLimit<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>,
+): Promise<R[]> {
   const results = new Array<R>(items.length);
   let cursor = 0;
   async function worker(): Promise<void> {
@@ -243,17 +247,4 @@ export async function synthesizeDialogueWithSegments(
   }
 
   return { audio: Buffer.concat(buffers), segments };
-}
-
-/**
- * Synthesize a two-host conversation: each turn is voiced by its speaker's voice
- * (host A vs host B), then concatenated in order — a 2-person podcast.
- */
-export async function synthesizeDialogue(
-  turns: DialogueTurn[],
-  locale: AppLocale = 'uz',
-  usage?: UsageContext,
-): Promise<Buffer> {
-  const { audio } = await synthesizeDialogueWithSegments(turns, locale, usage);
-  return audio;
 }

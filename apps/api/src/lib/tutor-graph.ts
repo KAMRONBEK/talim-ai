@@ -1,4 +1,4 @@
-import { type DesmosGraphPayload, GRAPH_FENCE_LANG } from '@talim/types';
+import { type DesmosGraphPayload } from '@talim/types';
 import type OpenAI from 'openai';
 import { z } from 'zod';
 
@@ -16,15 +16,17 @@ const expressionSchema = z.object({
   hidden: z.boolean().optional(),
 });
 
-const sliderSchema = z.object({
-  id: z.string().min(1).max(32),
-  latex: z.string().min(1).max(MAX_LATEX_LEN),
-  min: finiteNumber.min(-VIEWPORT_LIMIT).max(VIEWPORT_LIMIT).optional(),
-  max: finiteNumber.min(-VIEWPORT_LIMIT).max(VIEWPORT_LIMIT).optional(),
-  step: finiteNumber.positive().max(100).optional(),
-}).refine((s) => s.min === undefined || s.max === undefined || s.max > s.min, {
-  message: 'Invalid slider bounds',
-});
+const sliderSchema = z
+  .object({
+    id: z.string().min(1).max(32),
+    latex: z.string().min(1).max(MAX_LATEX_LEN),
+    min: finiteNumber.min(-VIEWPORT_LIMIT).max(VIEWPORT_LIMIT).optional(),
+    max: finiteNumber.min(-VIEWPORT_LIMIT).max(VIEWPORT_LIMIT).optional(),
+    step: finiteNumber.positive().max(100).optional(),
+  })
+  .refine((s) => s.min === undefined || s.max === undefined || s.max > s.min, {
+    message: 'Invalid slider bounds',
+  });
 
 const viewportSchema = z
   .object({
@@ -59,11 +61,6 @@ function assertUniqueIds(ids: string[]): void {
     }
     seen.add(id);
   }
-}
-
-/** @deprecated Use serializeVisualBlock from tutor-tools */
-export function serializeGraphBlock(payload: DesmosGraphPayload): string {
-  return `\n\n\`\`\`${GRAPH_FENCE_LANG}\n${JSON.stringify(payload)}\n\`\`\`\n\n`;
 }
 
 export function validateGraphPayload(raw: unknown): DesmosGraphPayload {

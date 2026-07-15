@@ -4,7 +4,7 @@
  * plan CODES (FREE / INDIVIDUAL_PRO / TENANT_STARTER / TENANT_GROWTH) are unchanged
  * and remain the API contract.
  */
-export const PLAN_LABELS: Record<string, string> = {
+const PLAN_LABELS: Record<string, string> = {
   FREE: 'Free',
   INDIVIDUAL_PRO: 'Pro',
   TENANT_STARTER: 'Team',

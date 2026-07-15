@@ -39,7 +39,7 @@ async function main(): Promise<void> {
 
   const existing = await prisma.user.findUnique({ where: { email } });
 
-  let user = existing
+  const user = existing
     ? await prisma.user.update({
         where: { email },
         data: {

@@ -9,7 +9,7 @@
  * instance from `@/lib/api` and the path builders from `@/lib/api/endpoints`.
  */
 
-export const authEndpoints = {
+const authEndpoints = {
   login: () => '/auth/login',
   register: () => '/auth/register',
   me: () => '/auth/me',
@@ -18,7 +18,7 @@ export const authEndpoints = {
   upgradeToTenant: () => '/auth/upgrade-to-tenant',
 } as const;
 
-export const tenantEndpoints = {
+const tenantEndpoints = {
   root: () => '/tenant',
   content: () => '/tenant/content',
   contentItem: (id: string) => `/tenant/content/${id}`,
@@ -34,7 +34,7 @@ export const tenantEndpoints = {
   billing: () => '/billing/me',
 } as const;
 
-export const learnerEndpoints = {
+const learnerEndpoints = {
   assessments: () => '/learner/assessments',
   summary: () => '/learner/summary',
 } as const;
@@ -69,7 +69,7 @@ export const assessmentEndpoints = {
   summary: (contentId: string) => `/summary/${contentId}`,
 } as const;
 
-export const endpoints = {
+const endpoints = {
   auth: authEndpoints,
   tenant: tenantEndpoints,
   learner: learnerEndpoints,

@@ -19,7 +19,7 @@ export interface SidebarGenerationProps {
   hideGenerateActions?: boolean;
 }
 
-export interface ContentSidebarBodyProps {
+interface ContentSidebarBodyProps {
   contentId: string;
   contentTitle: string;
   sections: ContentSection[];
@@ -30,7 +30,7 @@ export interface ContentSidebarBodyProps {
   generations?: SidebarGenerationProps;
 }
 
-export function ContentSidebarBody({
+function ContentSidebarBody({
   contentId,
   contentTitle,
   sections,
@@ -71,8 +71,7 @@ export function ContentSidebarBody({
 
   const sectionLink = (section: ContentSection) => {
     const progress = sectionProgressMap[section.id];
-    const complete =
-      progress != null && progress.coverageScore >= SECTION_COMPLETE_THRESHOLD;
+    const complete = progress != null && progress.coverageScore >= SECTION_COMPLETE_THRESHOLD;
     const active = activeSectionId === section.id;
     return (
       <Link
@@ -127,31 +126,31 @@ export function ContentSidebarBody({
       </div>
       <div className="flex-1 overflow-y-auto">
         <div className="p-3">
-        <p className="mb-2 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          {t('sections')}
-        </p>
-        <div className="space-y-0.5">
-          {topLevelSections.map((section) => {
-            const children = childrenByParent.get(section.id);
-            if (!children || children.length === 0) {
-              return sectionLink(section);
-            }
-            return (
-              <div key={section.id} className="space-y-0.5">
-                {sectionLink(section)}
-                <div className="ml-3 space-y-0.5 border-l border-border/70 pl-2">
-                  {children.map((child) => sectionLink(child))}
+          <p className="mb-2 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {t('sections')}
+          </p>
+          <div className="space-y-0.5">
+            {topLevelSections.map((section) => {
+              const children = childrenByParent.get(section.id);
+              if (!children || children.length === 0) {
+                return sectionLink(section);
+              }
+              return (
+                <div key={section.id} className="space-y-0.5">
+                  {sectionLink(section)}
+                  <div className="ml-3 space-y-0.5 border-l border-border/70 pl-2">
+                    {children.map((child) => sectionLink(child))}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-        <p className="mb-2 mt-6 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          {t('actions')}
-        </p>
-        <div className="space-y-0.5">
-          {navLink(`/content/${contentId}`, t('read'), <BookOpen className="h-4 w-4" />)}
-        </div>
+              );
+            })}
+          </div>
+          <p className="mb-2 mt-6 px-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            {t('actions')}
+          </p>
+          <div className="space-y-0.5">
+            {navLink(`/content/${contentId}`, t('read'), <BookOpen className="h-4 w-4" />)}
+          </div>
         </div>
         {generations && (
           <ContentGenerationsBlock
@@ -184,16 +183,15 @@ interface ContentSidebarSheetProps extends ContentSidebarBodyProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function ContentSidebarSheet({
-  open,
-  onOpenChange,
-  ...props
-}: ContentSidebarSheetProps) {
+export function ContentSidebarSheet({ open, onOpenChange, ...props }: ContentSidebarSheetProps) {
   const t = useTranslations('common');
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0">
+      <SheetContent
+        side="left"
+        className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0"
+      >
         <SheetHeader className="sr-only">
           <SheetTitle>{t('menu')}</SheetTitle>
         </SheetHeader>

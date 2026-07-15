@@ -23,7 +23,11 @@ export function useTenantContents() {
     },
     // SSE-primary (useJobEvents); slow safety-net poll only while disconnected.
     refetchInterval: (query) =>
-      listHasProcessing(query.state.data as Content[] | undefined) ? (connected ? 30_000 : 3000) : false,
+      listHasProcessing(query.state.data as Content[] | undefined)
+        ? connected
+          ? 30_000
+          : 3000
+        : false,
   });
 }
 
@@ -76,7 +80,7 @@ export function useCreateTenantYoutubeContent() {
   });
 }
 
-export function useDeleteTenantContent() {
+function useDeleteTenantContent() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
@@ -99,7 +103,7 @@ export function useDeleteTenantContent() {
   });
 }
 
-export function useRetryTenantContent() {
+function useRetryTenantContent() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {

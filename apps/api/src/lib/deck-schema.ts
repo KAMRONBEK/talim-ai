@@ -4,7 +4,16 @@ import type { Deck, DeckSlide } from '@talim/types';
 const MAX_MERMAID = 4000;
 const MERMAID_DENY = /<script|javascript:|on\w+=/i;
 
-const accentEnum = z.enum(['teal', 'indigo', 'violet', 'coral', 'amber', 'sky', 'emerald', 'fuchsia']);
+const accentEnum = z.enum([
+  'teal',
+  'indigo',
+  'violet',
+  'coral',
+  'amber',
+  'sky',
+  'emerald',
+  'fuchsia',
+]);
 const iconEnum = z.enum([
   'lightbulb',
   'alert-triangle',
@@ -54,7 +63,10 @@ const chartSchema = z
     xLabel: z.string().max(64).optional(),
     yLabel: z.string().max(64).optional(),
   })
-  .refine((c) => c.series.every((s) => s.data.length === c.labels.length), 'series length must match labels');
+  .refine(
+    (c) => c.series.every((s) => s.data.length === c.labels.length),
+    'series length must match labels',
+  );
 
 const base = {
   id: z.string().min(1).max(60),
@@ -86,7 +98,13 @@ export const slideSchema = z.discriminatedUnion('layout', [
     subtitle: z.string().max(160).optional(),
     index: z.string().max(4).optional(),
   }),
-  z.object({ ...base, layout: z.literal('concept'), title: TITLE, body: BODY.optional(), icon: iconEnum.optional() }),
+  z.object({
+    ...base,
+    layout: z.literal('concept'),
+    title: TITLE,
+    body: BODY.optional(),
+    icon: iconEnum.optional(),
+  }),
   z.object({
     ...base,
     layout: z.literal('bullets'),
@@ -114,7 +132,10 @@ export const slideSchema = z.discriminatedUnion('layout', [
     ...base,
     layout: z.literal('statTrio'),
     title: TITLE.optional(),
-    stats: z.array(z.object({ value: z.string().max(24), label: z.string().max(80) })).min(2).max(3),
+    stats: z
+      .array(z.object({ value: z.string().max(24), label: z.string().max(80) }))
+      .min(2)
+      .max(3),
   }),
   z.object({
     ...base,
@@ -145,7 +166,13 @@ export const slideSchema = z.discriminatedUnion('layout', [
     title: TITLE,
     orientation: z.enum(['vertical', 'horizontal']).optional(),
     steps: z
-      .array(z.object({ title: z.string().max(80), detail: z.string().max(160).optional(), icon: iconEnum.optional() }))
+      .array(
+        z.object({
+          title: z.string().max(80),
+          detail: z.string().max(160).optional(),
+          icon: iconEnum.optional(),
+        }),
+      )
       .min(2)
       .max(6),
   }),
@@ -170,13 +197,22 @@ export const slideSchema = z.discriminatedUnion('layout', [
     title: z.string().max(80).optional(),
     markdown: BODY,
   }),
-  z.object({ ...base, layout: z.literal('recap'), title: TITLE, points: z.array(z.string().max(160)).min(2).max(6) }),
+  z.object({
+    ...base,
+    layout: z.literal('recap'),
+    title: TITLE,
+    points: z.array(z.string().max(160)).min(2).max(6),
+  }),
   z.object({
     ...base,
     layout: z.literal('quickCheck'),
     question: z.string().max(200),
     kind: z.enum(['mcq', 'trueFalse', 'open']),
-    options: z.array(z.object({ text: z.string().max(160), correct: z.boolean() })).min(2).max(4).optional(),
+    options: z
+      .array(z.object({ text: z.string().max(160), correct: z.boolean() }))
+      .min(2)
+      .max(4)
+      .optional(),
     answerExplanation: z.string().max(280).optional(),
   }),
 ]);
@@ -193,8 +229,8 @@ export const deckSchema = z.object({
   slides: z.array(slideSchema).min(4).max(30),
 });
 
-export type ParsedDeck = z.infer<typeof deckSchema>;
-export type ParsedSlide = z.infer<typeof slideSchema>;
+type ParsedDeck = z.infer<typeof deckSchema>;
+type ParsedSlide = z.infer<typeof slideSchema>;
 
 // Compile-time guarantee that the zod schema stays assignable to the shared TS types.
 const _deckAssign: Deck = {} as ParsedDeck;

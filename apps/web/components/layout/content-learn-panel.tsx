@@ -28,7 +28,7 @@ export interface ContentLearnPanelProps {
   onAction?: () => void;
 }
 
-export function ContentLearnPanelBody({
+function ContentLearnPanelBody({
   panelProps,
   contentTitle,
   activeTab,

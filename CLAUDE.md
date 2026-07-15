@@ -26,7 +26,7 @@ Talim AI is a multi-tenant AI learning platform with both **B2C** (an individual
 `/login`, and `app/(admin)/{dashboard,tutor-requests,users,users/[id],tenants,tenants/[id],content,generated,subscriptions,usage,audit}`
 
 ### apps/api routes (`apps/api/src/routes/index.ts`)
-`GET /health`, plus `/auth /content /chat /quiz /summary /admin /usage /billing /tenant /learner`. Security: `helmet` + CORS allow-list (`apps/api/src/index.ts`). Background jobs registered at boot: `processContent`, `generateQuiz`, `generatePodcast`, `renderManim` (`apps/api/src/jobs`).
+`GET /health`, plus `/auth /content /chat /quiz /summary /admin /usage /billing /tenant /learner`. Security: `helmet` + CORS allow-list (`apps/api/src/index.ts`). Background jobs registered at boot (10 processors, `apps/api/src/jobs`): `processContent`, `reparseContent`, `generateQuiz`, `generatePodcast`, `generateVideo`, `generateFlashcards`, `generateSlides`, `renderManim`, `generateBankQuestions`, `backfillTranscript`.
 
 ## Roles & product model
 

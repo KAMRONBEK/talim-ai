@@ -1,5 +1,4 @@
 import multer from 'multer';
-import { env } from '../config/env.js';
 
 const storage = multer.memoryStorage();
 
@@ -22,9 +21,11 @@ export const upload = multer({
     if (file.mimetype === 'application/pdf' || file.originalname.toLowerCase().endsWith('.pdf')) {
       cb(null, true);
     } else {
-      cb(new Error('Only PDF files are supported. Please export PowerPoint (.ppt/.pptx) to PDF and upload that.'));
+      cb(
+        new Error(
+          'Only PDF files are supported. Please export PowerPoint (.ppt/.pptx) to PDF and upload that.',
+        ),
+      );
     }
   },
 });
-
-export const uploadDir = env.UPLOAD_DIR;

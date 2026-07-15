@@ -39,7 +39,7 @@ export function deckScopeKey(sectionId?: string): string {
   return sectionId ?? 'full';
 }
 
-export function formatSlideDeck(row: SlideDeckRow): ContentSlideDeck {
+function formatSlideDeck(row: SlideDeckRow): ContentSlideDeck {
   return {
     id: row.id,
     contentId: row.contentId,
@@ -105,7 +105,9 @@ async function buildContext(contentId: string, sectionId?: string): Promise<stri
   return boundContextByTokens(context, 18000);
 }
 
-type Overrides = Pick<Deck, 'accent' | 'language' | 'audience' | 'sourceContentId'> & { title: string };
+type Overrides = Pick<Deck, 'accent' | 'language' | 'audience' | 'sourceContentId'> & {
+  title: string;
+};
 
 const FILENAME_RE = /\.(pdf|pptx?|docx?|txt)$/i;
 
@@ -114,7 +116,9 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 }
 
 function toBulletObjects(arr: unknown[]): unknown[] {
-  return arr.map((b) => (typeof b === 'string' ? { text: b } : isRecord(b) ? b : { text: String(b) }));
+  return arr.map((b) =>
+    typeof b === 'string' ? { text: b } : isRecord(b) ? b : { text: String(b) },
+  );
 }
 
 /**
@@ -138,7 +142,10 @@ function normalizeSlide(s: unknown): unknown {
     if (Array.isArray(slide.bullets)) slide.bullets = toBulletObjects(slide.bullets);
   } else if (layout === 'recap') {
     const pts = Array.isArray(slide.points) ? slide.points : items;
-    if (pts) slide.points = pts.map((p) => String(typeof p === 'object' && p && 'text' in p ? (p as { text: unknown }).text : p));
+    if (pts)
+      slide.points = pts.map((p) =>
+        String(typeof p === 'object' && p && 'text' in p ? (p as { text: unknown }).text : p),
+      );
   } else if (layout === 'statTrio') {
     if (!Array.isArray(slide.stats) && items) slide.stats = items;
   } else if (layout === 'process') {
@@ -150,13 +157,20 @@ function normalizeSlide(s: unknown): unknown {
       const fromBody = typeof slide.body === 'string' && slide.body.trim() ? slide.body : undefined;
       slide.question = fromBody ?? (typeof slide.title === 'string' ? slide.title : undefined);
     }
-    if (Array.isArray(slide.options) && slide.options.length && typeof slide.options[0] === 'string') {
+    if (
+      Array.isArray(slide.options) &&
+      slide.options.length &&
+      typeof slide.options[0] === 'string'
+    ) {
       const correctIdx = Array.isArray(slide.correct)
         ? slide.correct
         : typeof slide.correctIndex === 'number'
           ? [slide.correctIndex]
           : [];
-      slide.options = slide.options.map((opt, i) => ({ text: String(opt), correct: correctIdx.includes(i) }));
+      slide.options = slide.options.map((opt, i) => ({
+        text: String(opt),
+        correct: correctIdx.includes(i),
+      }));
     }
   }
 
@@ -171,7 +185,8 @@ function normalizeSlide(s: unknown): unknown {
 
 /** Prefer a real deck title; else the cover slide's title; else the filename sans extension. */
 function deriveTitle(obj: Record<string, unknown>, slides: unknown[], fallback: string): string {
-  if (typeof obj.title === 'string' && obj.title.trim() && !FILENAME_RE.test(obj.title)) return obj.title;
+  if (typeof obj.title === 'string' && obj.title.trim() && !FILENAME_RE.test(obj.title))
+    return obj.title;
   const cover = slides.find((s) => isRecord(s) && s.layout === 'cover');
   if (isRecord(cover) && typeof cover.title === 'string' && cover.title.trim()) return cover.title;
   return fallback.replace(FILENAME_RE, '').trim() || fallback;
@@ -190,7 +205,8 @@ function coerceDeck(raw: unknown, overrides: Overrides): Deck {
   obj.audience = overrides.audience;
   obj.sourceContentId = overrides.sourceContentId;
   obj.title = deriveTitle(obj, rawSlides, overrides.title);
-  if (typeof obj.estimatedMinutes !== 'number') obj.estimatedMinutes = estimatedMinutesFor(rawSlides.length);
+  if (typeof obj.estimatedMinutes !== 'number')
+    obj.estimatedMinutes = estimatedMinutesFor(rawSlides.length);
 
   const direct = deckSchema.safeParse(obj);
   if (direct.success) return direct.data as Deck;
@@ -217,7 +233,7 @@ function coerceDeck(raw: unknown, overrides: Overrides): Deck {
   };
 }
 
-export async function generateSlideDeck(params: {
+async function generateSlideDeck(params: {
   userId: string;
   tenantId?: string | null;
   contentId: string;
@@ -237,13 +253,26 @@ export async function generateSlideDeck(params: {
       { role: 'system', content: getDeckSystemPrompt(locale, audience) },
       {
         role: 'user',
-        content: buildDeckUserPrompt({ title, audience, locale, targetSlides, contentId, accent, context }),
+        content: buildDeckUserPrompt({
+          title,
+          audience,
+          locale,
+          targetSlides,
+          contentId,
+          accent,
+          context,
+        }),
       },
     ],
     {
       temperature: 0.4,
       // tenantId is required so tenant generation counts toward the tenant's quota.
-      usage: { userId, tenantId: tenantId ?? undefined, feature: 'SLIDESHOW_GEN', metadata: { contentId, sectionId } },
+      usage: {
+        userId,
+        tenantId: tenantId ?? undefined,
+        feature: 'SLIDESHOW_GEN',
+        metadata: { contentId, sectionId },
+      },
     },
   );
 

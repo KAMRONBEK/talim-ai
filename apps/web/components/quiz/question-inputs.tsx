@@ -46,18 +46,18 @@ export function blankCount(question: QuizQuestion): number {
   return typeof raw === 'number' && raw > 0 ? Math.floor(raw) : 1;
 }
 
-export function clozeOptions(question: QuizQuestion): string[][] {
+function clozeOptions(question: QuizQuestion): string[][] {
   const raw = parseQuestionConfig(question.config)?.blankOptions;
   if (!Array.isArray(raw)) return [];
   return raw.map((pool) => jsonStringArray(pool));
 }
 
-export function matchingLeft(question: QuizQuestion): string[] {
+function matchingLeft(question: QuizQuestion): string[] {
   return jsonStringArray(parseQuestionConfig(question.config)?.left);
 }
 
 /** Legacy rows can have an empty acceptableAnswers list — fall back to correctAnswer. */
-export function acceptedAnswers(question: QuizQuestion): string[] {
+function acceptedAnswers(question: QuizQuestion): string[] {
   return resolveAcceptedAnswers(question.acceptableAnswers, question.correctAnswer);
 }
 
@@ -76,7 +76,7 @@ export function gradableQuestion(question: QuizQuestion): QuizQuestion {
 }
 
 /** Accepted answers for one blank (mirrors the grader's per-blank resolution). */
-export function acceptedForBlank(question: QuizQuestion, index: number): string[] {
+function acceptedForBlank(question: QuizQuestion, index: number): string[] {
   const blankAnswers = parseQuestionConfig(question.config)?.blankAnswers;
   if (Array.isArray(blankAnswers) && blankAnswers.length > 0) {
     return jsonStringArray(blankAnswers[index]);
@@ -177,9 +177,13 @@ function optionRevealClass(revealed: boolean, selected: boolean, isCorrectOption
       : 'border-border hover:border-muted-foreground/30 hover:bg-muted/50';
   }
   if (selected) {
-    return isCorrectOption ? 'border-success bg-success-muted' : 'border-destructive bg-destructive/10';
+    return isCorrectOption
+      ? 'border-success bg-success-muted'
+      : 'border-destructive bg-destructive/10';
   }
-  return isCorrectOption ? 'border-success bg-success-muted/80' : 'border-border bg-muted/20 opacity-60';
+  return isCorrectOption
+    ? 'border-success bg-success-muted/80'
+    : 'border-border bg-muted/20 opacity-60';
 }
 
 export function TrueFalseInput({
@@ -559,7 +563,7 @@ export function OrderingInput({
 
 /** Sentinel answer values for self-graded FLASHCARD items — the single source is the
  * shared grading engine (@talim/types), re-exported here for the quiz UI. */
-export { FLASHCARD_KNOWN, FLASHCARD_UNKNOWN };
+export { FLASHCARD_KNOWN };
 
 /**
  * Self-graded study card inside a practice session: the front is the question stem

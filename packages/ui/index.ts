@@ -4,7 +4,6 @@ export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 export { Badge, badgeVariants } from './components/badge';
 export { Avatar, AvatarFallback } from './components/avatar';
 export { Progress } from './components/progress';
-export { Separator } from './components/separator';
 export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from './components/dialog';
 export { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from './components/sheet';
 export { Label } from './components/label';

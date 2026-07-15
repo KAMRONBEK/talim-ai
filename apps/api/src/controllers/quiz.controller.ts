@@ -20,7 +20,11 @@ import {
 import { updateProgressAfterQuizSubmit } from '../services/learningProgress.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertCanAccessContent, assertCanGenerate } from '../services/contentAccess.service.js';
-import { questionStyleEnum, questionDepthEnum, submitAnswerValueSchema } from '../services/assessment/shared.js';
+import {
+  questionStyleEnum,
+  questionDepthEnum,
+  submitAnswerValueSchema,
+} from '../services/assessment/shared.js';
 import {
   recordAnswers,
   getContentMastery as getContentMasteryState,
@@ -175,12 +179,15 @@ function normalizeForOptionMatch(value: string): string {
 }
 
 function getSubmittedOptionLabel(value: string): string | null {
-  const match = value.trim().match(/^([A-Z])(?:[\).:\s]|$)/i);
+  const match = value.trim().match(/^([A-Z])(?:[).:\s]|$)/i);
   return match?.[1]?.toUpperCase() ?? null;
 }
 
 function stripSubmittedOptionLabel(value: string): string {
-  return value.trim().replace(/^[A-Z][\).:\s]+/i, '').trim();
+  return value
+    .trim()
+    .replace(/^[A-Z][).:\s]+/i, '')
+    .trim();
 }
 
 /** Resolve a MULTIPLE_CHOICE submission ("B", "B) text", or the option text) to option text. */
@@ -195,7 +202,8 @@ function resolveSubmittedAnswer(options: string[], submittedAnswer: string | und
   const label = getSubmittedOptionLabel(submittedAnswer);
   if (label) {
     const labelIndex = label.charCodeAt(0) - 'A'.charCodeAt(0);
-    if (labelIndex >= 0 && labelIndex < options.length) return options[labelIndex] ?? submittedAnswer;
+    if (labelIndex >= 0 && labelIndex < options.length)
+      return options[labelIndex] ?? submittedAnswer;
   }
 
   const unlabelledAnswer = stripSubmittedOptionLabel(submittedAnswer);
@@ -375,15 +383,17 @@ export async function createQuiz(req: AuthenticatedRequest, res: Response): Prom
   });
 }
 
-export async function listQuizzesByContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+export async function listQuizzesByContent(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'contentId');
   const locale = resolveLocale(req);
 
   await assertCanAccessContent(req.user, contentId);
 
-  const quizUserFilter =
-    req.user.role === 'INDIVIDUAL' ? { userId: req.user.userId } : {};
+  const quizUserFilter = req.user.role === 'INDIVIDUAL' ? { userId: req.user.userId } : {};
 
   const quizzes = await prisma.quiz.findMany({
     where: { contentId, locale, ...quizUserFilter },
@@ -460,9 +470,13 @@ export async function getLatestAttempt(req: AuthenticatedRequest, res: Response)
   // Read path: reuse cached AI verdicts only (no new judge calls on a GET). Best-effort
   // consistency — attempts that predate an engine improvement re-grade slightly better
   // than their stored score, which is this endpoint's long-standing intent.
-  const evaluation = await evaluateQuizAnswers(questions, attempt.answers as Record<string, string>, {
-    cachedOnly: true,
-  });
+  const evaluation = await evaluateQuizAnswers(
+    questions,
+    attempt.answers as Record<string, string>,
+    {
+      cachedOnly: true,
+    },
+  );
 
   res.json({
     attempt: formatAttempt({
@@ -547,7 +561,10 @@ export async function checkAnswer(req: AuthenticatedRequest, res: Response): Pro
   ]);
   if (!question) throw new AppError(404, 'Question not found');
 
-  const referenceAnswers = resolveAcceptedAnswers(question.acceptableAnswers, question.correctAnswer);
+  const referenceAnswers = resolveAcceptedAnswers(
+    question.acceptableAnswers,
+    question.correctAnswer,
+  );
   const grade = gradeQuestion(
     {
       type: question.type,

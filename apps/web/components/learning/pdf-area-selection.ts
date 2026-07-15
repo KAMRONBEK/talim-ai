@@ -16,7 +16,7 @@ interface PdfTextItem {
 
 type PdfTextContentItem = PdfTextItem | { type: string };
 
-export function rectsIntersect(a: Rect, b: Rect, tolerance = 0): boolean {
+function rectsIntersect(a: Rect, b: Rect, tolerance = 0): boolean {
   return (
     a.left - tolerance < b.left + b.width &&
     a.left + a.width + tolerance > b.left &&

@@ -22,11 +22,17 @@ export async function streamEvents(req: AuthenticatedRequest, res: Response): Pr
   res.write('retry: 5000\n\n');
 
   let unsubscribe: () => void = () => {};
-  let heartbeat: ReturnType<typeof setInterval> | undefined;
   const cleanup = () => {
-    if (heartbeat) clearInterval(heartbeat);
+    clearInterval(heartbeat);
     unsubscribe();
   };
+  const heartbeat = setInterval(() => {
+    try {
+      res.write(': ping\n\n');
+    } catch {
+      cleanup();
+    }
+  }, 20_000);
 
   // A write to a closed/destroyed socket throws; swallow it and clean up so the failure
   // never propagates back into the publisher (which runs on the job thread).
@@ -53,12 +59,5 @@ export async function streamEvents(req: AuthenticatedRequest, res: Response): Pr
   }
 
   unsubscribe = jobEvents.subscribe(userId, send);
-  heartbeat = setInterval(() => {
-    try {
-      res.write(': ping\n\n');
-    } catch {
-      cleanup();
-    }
-  }, 20_000);
   req.on('close', cleanup);
 }

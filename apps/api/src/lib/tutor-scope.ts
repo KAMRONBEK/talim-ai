@@ -3,11 +3,7 @@ import { z } from 'zod';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { scriptVariants } from './uzbek-translit.js';
 
-export type TutorScopeRoute =
-  | 'direct'
-  | 'related_extension'
-  | 'unrelated'
-  | 'needs_clarification';
+type TutorScopeRoute = 'direct' | 'related_extension' | 'unrelated' | 'needs_clarification';
 
 export interface TutorScopeDecision {
   route: TutorScopeRoute;
@@ -85,7 +81,7 @@ const OUT_OF_SCOPE_PREFIX: Record<AppLocale, string> = {
 };
 
 const OUT_OF_SCOPE_FOLLOWUP: Record<AppLocale, string> = {
-  uz: "Hozirgi materialga oid savol bersangiz, yordam beraman.",
+  uz: 'Hozirgi materialga oid savol bersangiz, yordam beraman.',
   en: 'If you ask about the current material, I can help.',
   ru: 'Если зададите вопрос по текущему материалу, я помогу.',
 };
@@ -161,7 +157,9 @@ function guessScopeHeuristically(input: ClassifyTutorScopeInput): TutorScopeDeci
   const titleOverlap = overlapCount(queryTokens, titleTokens);
 
   if (titleOverlap > 0) {
-    const route = /compare|difference|advanced|double|coupled|nonlinear|chaotic/i.test(input.message)
+    const route = /compare|difference|advanced|double|coupled|nonlinear|chaotic/i.test(
+      input.message,
+    )
       ? 'related_extension'
       : 'direct';
     return {

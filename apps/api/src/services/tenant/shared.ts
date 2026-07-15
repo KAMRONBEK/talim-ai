@@ -55,7 +55,7 @@ export function formatTenant(tenant: {
 }
 
 export async function uniqueSlug(base: string): Promise<string> {
-  let slug = slugifyOrgName(base);
+  const slug = slugifyOrgName(base);
   let suffix = 0;
   while (true) {
     const candidate = suffix === 0 ? slug : `${slug}-${suffix}`;
@@ -65,7 +65,7 @@ export async function uniqueSlug(base: string): Promise<string> {
   }
 }
 
-export const DEFAULT_TENANT_PLAN_CODE = 'TENANT_STARTER';
+const DEFAULT_TENANT_PLAN_CODE = 'TENANT_STARTER';
 
 export async function getDefaultTenantPlanId(): Promise<string> {
   const plan = await prisma.plan.findUnique({ where: { code: DEFAULT_TENANT_PLAN_CODE } });

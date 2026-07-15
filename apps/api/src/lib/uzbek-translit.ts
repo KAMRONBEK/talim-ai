@@ -116,11 +116,11 @@ function transliterate(text: string, map: [string, string][]): string {
 const CYRILLIC_RE = /[а-яёўғқҳ]/i;
 const LATIN_RE = /[a-z]/i;
 
-export function toCyrillic(text: string): string {
+function toCyrillic(text: string): string {
   return transliterate(text, LATIN_TO_CYRILLIC);
 }
 
-export function toLatin(text: string): string {
+function toLatin(text: string): string {
   return transliterate(text, CYRILLIC_TO_LATIN);
 }
 

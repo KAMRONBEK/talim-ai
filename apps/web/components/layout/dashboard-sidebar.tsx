@@ -10,11 +10,11 @@ import { UserSidebarFooter } from '@/components/layout/user-sidebar-footer';
 import { LogoMark } from '@/components/brand/logo';
 import { useAuthStore } from '@/store/useAuthStore';
 
-export interface DashboardSidebarBodyProps {
+interface DashboardSidebarBodyProps {
   onNavigate?: () => void;
 }
 
-export function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
+function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
   const t = useTranslations('sidebar');
   const tCommon = useTranslations('common');
   const { data: contents } = useContents();
@@ -120,7 +120,10 @@ export function DashboardSidebarSheet({ open, onOpenChange }: DashboardSidebarSh
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="left" className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0">
+      <SheetContent
+        side="left"
+        className="flex h-dvh w-[min(100%,16rem)] flex-col overflow-hidden p-0"
+      >
         <SheetHeader className="sr-only">
           <SheetTitle>{t('menu')}</SheetTitle>
         </SheetHeader>

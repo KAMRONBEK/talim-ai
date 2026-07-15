@@ -31,22 +31,56 @@ const WRONG_OG_APOSTROPHE =
 // Non-breaking space and zero-width characters (built by code point to keep the
 // source ASCII-clean and free of invisible glyphs).
 const NBSP_RE = new RegExp(String.fromCharCode(0xa0), 'g');
+/* eslint-disable no-misleading-character-class -- ZWJ (U+200D) is in this class ON
+   PURPOSE: we are stripping zero-width characters, not matching grapheme clusters,
+   so the "joined sequence" warning does not apply. */
 const ZERO_WIDTH_RE = new RegExp(
   '[' + String.fromCharCode(0x200b, 0x200c, 0x200d, 0xfeff) + ']',
   'g',
 );
+/* eslint-enable no-misleading-character-class */
 
 const CYRILLIC_RANGE = /[Ѐ-ӿ]/;
 
 // Uzbek Cyrillic -> Latin (O'zbek lotin yozuvi). Lowercase; case is restored
 // afterwards. 'е' is handled contextually (iotated word-initially / post-vowel).
 const UZ_CYR_TO_LAT: Record<string, string> = {
-  а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', ж: 'j', з: 'z', и: 'i', й: 'y',
-  к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't',
-  у: 'u', ф: 'f', х: 'x', ц: 's', ч: 'ch', ш: 'sh', щ: 'sh',
-  ы: 'i', э: 'e', ё: 'yo', ю: 'yu', я: 'ya',
-  ў: `o${MOD_TURNED_COMMA}`, қ: 'q', ғ: `g${MOD_TURNED_COMMA}`, ҳ: 'h',
-  ъ: MOD_APOSTROPHE, ь: '',
+  а: 'a',
+  б: 'b',
+  в: 'v',
+  г: 'g',
+  д: 'd',
+  ж: 'j',
+  з: 'z',
+  и: 'i',
+  й: 'y',
+  к: 'k',
+  л: 'l',
+  м: 'm',
+  н: 'n',
+  о: 'o',
+  п: 'p',
+  р: 'r',
+  с: 's',
+  т: 't',
+  у: 'u',
+  ф: 'f',
+  х: 'x',
+  ц: 's',
+  ч: 'ch',
+  ш: 'sh',
+  щ: 'sh',
+  ы: 'i',
+  э: 'e',
+  ё: 'yo',
+  ю: 'yu',
+  я: 'ya',
+  ў: `o${MOD_TURNED_COMMA}`,
+  қ: 'q',
+  ғ: `g${MOD_TURNED_COMMA}`,
+  ҳ: 'h',
+  ъ: MOD_APOSTROPHE,
+  ь: '',
   // 'е' resolved in transliterateUzbek()
 };
 

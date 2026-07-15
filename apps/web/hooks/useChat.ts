@@ -9,9 +9,7 @@ export function useChatSession(contentId: string) {
   return useQuery({
     queryKey: ['chat-session', contentId, locale],
     queryFn: async () => {
-      const { data } = await api.get<ChatSessionResponse>(
-        `/chat/content/${contentId}/messages`,
-      );
+      const { data } = await api.get<ChatSessionResponse>(`/chat/content/${contentId}/messages`);
       return data;
     },
     enabled: !!contentId,
@@ -19,7 +17,7 @@ export function useChatSession(contentId: string) {
 }
 
 /** @deprecated Use useChatSession(contentId) instead */
-export function useChatMessages(sessionId: string | null) {
+function useChatMessages(sessionId: string | null) {
   return useQuery({
     queryKey: ['chat-messages', sessionId],
     queryFn: async () => {

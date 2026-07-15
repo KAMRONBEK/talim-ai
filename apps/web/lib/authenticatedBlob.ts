@@ -2,7 +2,7 @@ import { getApiBaseUrl } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 
 /** Carries the HTTP status so callers can distinguish permanent (4xx) from transient failures. */
-export class BlobFetchError extends Error {
+class BlobFetchError extends Error {
   status?: number;
   constructor(message: string, status?: number) {
     super(message);
@@ -24,7 +24,10 @@ export interface FetchBlobOptions {
   stallTimeoutMs?: number;
 }
 
-export async function fetchAuthenticatedBlob(path: string, options?: FetchBlobOptions): Promise<string> {
+export async function fetchAuthenticatedBlob(
+  path: string,
+  options?: FetchBlobOptions,
+): Promise<string> {
   const token = useAuthStore.getState().token;
   if (!token) throw new BlobFetchError('Not authenticated');
 

@@ -3,11 +3,7 @@ import bcrypt from 'bcrypt';
 import { prisma } from '../../lib/prisma.js';
 import { AppError, QuotaExceededError } from '../../middleware/error.middleware.js';
 import { assertTenantQuota } from '../subscription.service.js';
-import {
-  createStudentSchema,
-  formatStudentRow,
-  patchStudentSchema,
-} from './shared.js';
+import { createStudentSchema, formatStudentRow, patchStudentSchema } from './shared.js';
 
 export async function listStudents(tenantId: string) {
   const memberships = await prisma.tenantMembership.findMany({
@@ -94,7 +90,7 @@ export interface ProvisionStudentResult {
  * re-queries the live active-student count) only on the seat-consuming create/reactivate
  * paths — giving natural partial-import behaviour at the seat limit.
  */
-export async function provisionStudent(
+async function provisionStudent(
   tenantId: string,
   params: ProvisionStudentParams,
   opts: { assertSeatBeforeConsume?: boolean; formatRow?: boolean } = {},
@@ -190,11 +186,7 @@ export async function provisionStudent(
   };
 }
 
-export async function createStudent(
-  tenantId: string,
-  assignedById: string,
-  input: unknown,
-) {
+export async function createStudent(tenantId: string, assignedById: string, input: unknown) {
   const body = createStudentSchema.parse(input);
   // Assert the seat quota up-front and unconditionally (unchanged behaviour); provisionStudent
   // therefore must NOT re-assert it on the seat-consuming paths.
@@ -257,7 +249,11 @@ function parseCsv(csv: string): ImportRowInput[] {
   const headerCols = ['name', 'email', 'username'];
   const hasHeader = first.some((c) => headerCols.includes(c));
   const idx = hasHeader
-    ? { name: first.indexOf('name'), email: first.indexOf('email'), username: first.indexOf('username') }
+    ? {
+        name: first.indexOf('name'),
+        email: first.indexOf('email'),
+        username: first.indexOf('username'),
+      }
     : { name: 0, email: -1, username: -1 };
   const dataLines = hasHeader ? lines.slice(1) : lines;
 
@@ -294,10 +290,17 @@ function normalizeImportInput(input: unknown): ImportRowInput[] {
 
 /** Derive a unique username for a name-only import row (email-less student). */
 async function generateImportUsername(name: string): Promise<string> {
-  const base = name.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 20) || 'student';
+  const base =
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '')
+      .slice(0, 20) || 'student';
   for (let i = 0; i < 10; i += 1) {
     const candidate = `${base}${crypto.randomBytes(3).toString('hex')}`;
-    const taken = await prisma.user.findUnique({ where: { username: candidate }, select: { id: true } });
+    const taken = await prisma.user.findUnique({
+      where: { username: candidate },
+      select: { id: true },
+    });
     if (!taken) return candidate;
   }
   return `${base}${crypto.randomUUID().slice(0, 8)}`;
@@ -331,7 +334,12 @@ export async function importStudents(tenantId: string, _assignedById: string, in
     rowNum += 1;
     const name = raw.name?.trim() ?? '';
     if (rowNum > MAX_IMPORT_ROWS) {
-      report.push({ row: rowNum, name, result: 'error', message: `Row limit is ${MAX_IMPORT_ROWS}` });
+      report.push({
+        row: rowNum,
+        name,
+        result: 'error',
+        message: `Row limit is ${MAX_IMPORT_ROWS}`,
+      });
       continue;
     }
     if (!name) {
@@ -358,7 +366,12 @@ export async function importStudents(tenantId: string, _assignedById: string, in
       });
     } catch (err) {
       if (err instanceof QuotaExceededError) {
-        report.push({ row: rowNum, name, result: 'error_seat_limit', message: 'Seat limit reached' });
+        report.push({
+          row: rowNum,
+          name,
+          result: 'error_seat_limit',
+          message: 'Seat limit reached',
+        });
       } else if (
         err instanceof AppError &&
         err.statusCode === 409 &&
@@ -388,11 +401,7 @@ export async function importStudents(tenantId: string, _assignedById: string, in
   };
 }
 
-export async function patchStudent(
-  tenantId: string,
-  learnerId: string,
-  input: unknown,
-) {
+export async function patchStudent(tenantId: string, learnerId: string, input: unknown) {
   const body = patchStudentSchema.parse(input);
   const membership = await prisma.tenantMembership.findFirst({
     where: { tenantId, userId: learnerId, role: 'LEARNER' },

@@ -12,7 +12,7 @@ function normalizeText(value: string): string {
  * says"). True when the whole prompt, or a 10+ word contiguous run of it, appears
  * verbatim in the source context.
  */
-export function isParroting(prompt: string, context: string): boolean {
+function isParroting(prompt: string, context: string): boolean {
   const p = normalizeText(prompt.replace(/\?+\s*$/, ''));
   const words = p.split(' ').filter(Boolean);
   if (words.length < 6) return false; // too short to judge as copied

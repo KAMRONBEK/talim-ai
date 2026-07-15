@@ -18,7 +18,6 @@ import { PlanFileLimitError } from '../middleware/error.middleware.js';
 import {
   assertCanAccessContent,
   assertCanMutateContent,
-  assertCanGenerate,
   buildContentListWhere,
 } from '../services/contentAccess.service.js';
 import {
@@ -143,7 +142,10 @@ export async function uploadContent(req: AuthenticatedRequest, res: Response): P
   res.status(201).json({ content: formatContent(content) });
 }
 
-export async function createYoutubeContent(req: AuthenticatedRequest, res: Response): Promise<void> {
+export async function createYoutubeContent(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   assertCanMutateContent(req.user);
   const body = youtubeSchema.parse(req.body);
@@ -191,7 +193,10 @@ export async function retryContent(req: AuthenticatedRequest, res: Response): Pr
   res.json({ content: formatContent(updated) });
 }
 
-export async function getContentTranscript(req: AuthenticatedRequest, res: Response): Promise<void> {
+export async function getContentTranscript(
+  req: AuthenticatedRequest,
+  res: Response,
+): Promise<void> {
   if (!req.user) throw new AppError(401, 'Unauthorized');
   const contentId = getParam(req, 'id');
   const content = await assertCanAccessContent(req.user, contentId);
@@ -227,9 +232,7 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
     where: { contentId: content.id },
   });
   await Promise.all(
-    videos
-      .filter((v) => v.storagePath)
-      .map((v) => storageService.delete(v.storagePath!)),
+    videos.filter((v) => v.storagePath).map((v) => storageService.delete(v.storagePath!)),
   );
 
   if (content.storagePath) {
