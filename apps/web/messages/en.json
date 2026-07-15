@@ -1318,46 +1318,7 @@
     "pricing": {
       "eyebrow": "Pricing",
       "title": "Start free, scale when you teach",
-      "plans": {
-        "0": {
-          "name": "Learner",
-          "price": "Free",
-          "desc": "For solo study.",
-          "bullets": {
-            "0": "Upload PDFs & YouTube",
-            "1": "Summaries & quizzes",
-            "2": "AI tutor chat"
-          },
-          "cta": "Get started"
-        },
-        "1": {
-          "name": "Tutor",
-          "price": "Seats",
-          "priceSuffix": "/ by class",
-          "badge": "Most chosen",
-          "desc": "Activated by our team to fit your roster.",
-          "bullets": {
-            "0": "Everything in Learner",
-            "1": "Students & assignments",
-            "2": "Question banks & assessments",
-            "3": "Game quizzes + leaderboard"
-          },
-          "cta": "Request access"
-        },
-        "2": {
-          "name": "School",
-          "price": "Custom",
-          "desc": "For institutions.",
-          "bullets": {
-            "0": "Multiple tutors & orgs",
-            "1": "Priority onboarding",
-            "2": "Usage reporting"
-          },
-          "cta": "Talk to us"
-        }
-      },
-      "subtitle": "Free for individual learners. Tutor and school plans are activated by our team to fit your class.",
-      "note": "No credit card. We activate paid plans manually — just request access."
+      "subtitle": "Free for individual learners. Tutor and school plans are activated by our team to fit your class."
     },
     "stats": {
       "items": {

@@ -1318,46 +1318,7 @@
     "pricing": {
       "eyebrow": "Narxlar",
       "title": "Bepul boshlang, o'qita boshlaganingizda kengaying",
-      "plans": {
-        "0": {
-          "name": "O'quvchi",
-          "price": "Bepul",
-          "desc": "Yakka o'rganish uchun.",
-          "bullets": {
-            "0": "PDF va YouTube yuklash",
-            "1": "Xulosalar va testlar",
-            "2": "AI o'qituvchi suhbati"
-          },
-          "cta": "Boshlash"
-        },
-        "1": {
-          "name": "O'qituvchi",
-          "price": "O'rinlar",
-          "priceSuffix": "/ sinf bo'yicha",
-          "badge": "Eng ko'p tanlangan",
-          "desc": "Jamoamiz tomonidan o'quvchilaringizga moslab faollashtiriladi.",
-          "bullets": {
-            "0": "O'quvchidagi barcha imkoniyatlar",
-            "1": "O'quvchilar va topshiriqlar",
-            "2": "Savollar banki va baholashlar",
-            "3": "O'yin-testlar + reyting jadvali"
-          },
-          "cta": "Ruxsat so'rash"
-        },
-        "2": {
-          "name": "Maktab",
-          "price": "Kelishilgan",
-          "desc": "Muassasalar uchun.",
-          "bullets": {
-            "0": "Bir nechta o'qituvchi va tashkilotlar",
-            "1": "Birinchi navbatdagi yo'lga qo'yish",
-            "2": "Foydalanish hisobotlari"
-          },
-          "cta": "Biz bilan bog'laning"
-        }
-      },
-      "subtitle": "Yakka o‘rganuvchilar uchun bepul. Repetitor va maktab tariflari sinfingizga moslab jamoamiz tomonidan faollashtiriladi.",
-      "note": "Karta talab qilinmaydi. Pullik tariflarni qo‘lda faollashtiramiz — shunchaki so‘rov yuboring."
+      "subtitle": "Yakka o‘rganuvchilar uchun bepul. Repetitor va maktab tariflari sinfingizga moslab jamoamiz tomonidan faollashtiriladi."
     },
     "stats": {
       "items": {
