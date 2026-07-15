@@ -15,6 +15,9 @@
 #   * `label` claims "Done" even when every LLM batch fails (e.g. missing
 #     python 'openai' package: fix = uv tool install 'graphifyy[openai]' --force),
 #     so we VERIFY labels afterwards instead of trusting the exit message.
+#   * Schema-in-graph (future): standalone `extract --postgres DSN` crashes in
+#     the current build (UnboundLocalError cli.py:2155). Revisit on upgrade, or
+#     pass --postgres alongside the path on the next full /graphify rebuild.
 set -euo pipefail
 cd "$(dirname "$0")/.." || exit 1
 
