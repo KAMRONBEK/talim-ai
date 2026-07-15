@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # slideToText()
 
 ## Connections
+- [[buildNarrations()]] - `calls` [EXTRACTED]
 - [[generateVideo.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

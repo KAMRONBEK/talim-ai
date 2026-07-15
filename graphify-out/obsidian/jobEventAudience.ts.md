@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEventAudience.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # jobEventAudience.ts
@@ -23,7 +23,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[jobEvents]] - `imports` [EXTRACTED]
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEvent()]] - `contains` [EXTRACTED]
@@ -32,4 +32,4 @@ tags:
 - [[resolveContentAudience()]] - `contains` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

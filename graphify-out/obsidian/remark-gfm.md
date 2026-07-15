@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
-location: "L28"
+community: "Community None"
+location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # remark-gfm
 
 ## Connections
 - [[dependencies_2]] - `contains` [EXTRACTED]
+- [[remark-gfm_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

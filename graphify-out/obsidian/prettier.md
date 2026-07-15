@@ -1,17 +1,18 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Root Dev Tooling"
+community: "Monorepo Root Config"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Dev_Tooling
+  - community/Monorepo_Root_Config
 ---
 
 # prettier
 
 ## Connections
 - [[devDependencies_3]] - `contains` [EXTRACTED]
+- [[prettier_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Dev_Tooling
+#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config

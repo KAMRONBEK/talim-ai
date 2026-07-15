@@ -1,19 +1,22 @@
 ---
 source_file: "apps/web/components/quiz/question-inputs.tsx"
 type: "code"
-community: "Quiz Player UI"
-location: "L255"
+community: "Community None"
+location: "L259"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Community_None
 ---
 
 # FillBlankInput()
 
 ## Connections
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
+- [[acceptedForBlank()]] - `calls` [EXTRACTED]
 - [[blankCount()]] - `calls` [EXTRACTED]
+- [[matchesAcceptedAnswer()]] - `calls` [EXTRACTED]
 - [[question-inputs.tsx]] - `contains` [EXTRACTED]
+- [[revealBorder()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Community_None
 ---
 
 # clampToTokenLimit()
@@ -14,5 +14,6 @@ tags:
 ## Connections
 - [[embed.service.ts]] - `contains` [EXTRACTED]
 - [[generateEmbedding()]] - `calls` [EXTRACTED]
+- [[generateEmbeddings()]] - `indirect_call` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Community_None

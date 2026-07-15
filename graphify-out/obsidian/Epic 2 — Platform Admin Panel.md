@@ -1,16 +1,19 @@
 ---
 source_file: "docs/PLANS.md"
-type: "concept"
-community: "Product Plans & Epics"
+type: "document"
+community: "Product Planning Backlog"
+location: "L69"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/Product_Planning_Backlog
 ---
 
-# Epic 2 — Platform Admin Panel
+# Epic 2 — Platform admin panel
 
 ## Connections
-- [[Epic 5 — Usage Metering & Platform Cost]] - `references` [EXTRACTED]
+- [[AI prompt_1]] - `contains` [EXTRACTED]
+- [[Requirements_1]] - `contains` [EXTRACTED]
+- [[Talim AI — Product plans]] - `contains` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/Product_Planning_Backlog

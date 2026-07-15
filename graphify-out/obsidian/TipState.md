@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/selection-ask.tsx"
 type: "code"
-community: "Section Reader UI"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Reader_UI
+  - community/Community_None
 ---
 
 # TipState
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[selection-ask.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

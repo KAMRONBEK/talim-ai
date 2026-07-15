@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/package.json"
-type: "code"
-community: "Web App Dependencies"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
 location: "L14"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # @talim/ui
 
 ## Connections
-- [[dependencies_2]] - `contains` [EXTRACTED]
+- [[@talimui]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

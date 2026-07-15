@@ -1,28 +1,28 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "Community None"
 location: "L40"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Content_Detail_Page
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # ContentWorkspaceInner()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[getHomePathForRole()]] - `calls` [INFERRED]
+- [[getHomePathForRole()]] - `calls` [EXTRACTED]
 - [[page.tsx_31]] - `contains` [EXTRACTED]
-- [[useChatStore]] - `calls` [INFERRED]
-- [[useContent()]] - `calls` [INFERRED]
-- [[useContentActions()]] - `calls` [INFERRED]
-- [[useContentProgress()]] - `calls` [INFERRED]
-- [[useLearningHistory()]] - `calls` [INFERRED]
-- [[useLimitErrorHandler()]] - `calls` [INFERRED]
-- [[useReparseContent()]] - `calls` [INFERRED]
-- [[useSection()]] - `calls` [INFERRED]
-- [[useSections()]] - `calls` [INFERRED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
+- [[useChatStore]] - `calls` [EXTRACTED]
+- [[useContent()]] - `calls` [EXTRACTED]
+- [[useContentActions()]] - `calls` [EXTRACTED]
+- [[useContentProgress()]] - `calls` [EXTRACTED]
+- [[useLearningHistory()]] - `calls` [EXTRACTED]
+- [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
+- [[useReparseContent()]] - `calls` [EXTRACTED]
+- [[useSection()]] - `calls` [EXTRACTED]
+- [[useSections()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

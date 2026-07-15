@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tutor-requests/page.tsx"
 type: "code"
-community: "Admin Dashboard & Charts"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Community_None
 ---
 
 # page.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useApproveTutorRequest()]] - `imports` [EXTRACTED]
 - [[useRejectTutorRequest()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Community_None

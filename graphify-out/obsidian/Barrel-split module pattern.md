@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "rationale"
-community: "Feature Catalog Docs"
+community: "Feature Catalog Overview"
 location: "conventions preamble"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Docs
+  - community/Feature_Catalog_Overview
 ---
 
 # Barrel-Split Module Pattern
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Feature_Catalog_Docs
+#graphify/rationale #graphify/EXTRACTED #community/Feature_Catalog_Overview

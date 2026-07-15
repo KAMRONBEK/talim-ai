@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Community_None
 ---
 
 # shared.ts
@@ -24,7 +24,7 @@ tags:
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[patchStudentSchema]] - `contains` [EXTRACTED]
 - [[patchTenantSchema]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[randomJoinCode()]] - `contains` [EXTRACTED]
 - [[slugifyOrgName()]] - `imports` [EXTRACTED]
@@ -33,4 +33,4 @@ tags:
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[uniqueSlug()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

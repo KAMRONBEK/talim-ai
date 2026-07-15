@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Section Mastery (Elo-KT)"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery_Elo-KT
+  - community/Community_None
 ---
 
 # MasteryBand
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_2]] - `imports` [EXTRACTED]
 - [[mastery.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT
+#graphify/code #graphify/EXTRACTED #community/Community_None

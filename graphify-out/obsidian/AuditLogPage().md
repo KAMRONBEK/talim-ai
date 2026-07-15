@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/audit/page.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_None
 ---
 
 # AuditLogPage()
@@ -15,4 +15,4 @@ tags:
 - [[page.tsx]] - `contains` [EXTRACTED]
 - [[useAdminAuditLogs()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_None

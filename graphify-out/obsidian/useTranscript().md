@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTranscript.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Community_None
 ---
 
 # useTranscript()
@@ -14,8 +14,9 @@ tags:
 ## Connections
 - [[VideoTutorialViewer()]] - `calls` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
+- [[inFlightRefetchInterval()]] - `calls` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTranscript.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

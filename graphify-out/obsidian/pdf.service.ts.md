@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Community_None
 ---
 
 # pdf.service.ts
@@ -24,7 +24,6 @@ tags:
 - [[extractWithOpenAI()]] - `contains` [EXTRACTED]
 - [[extractWithPdfParse()]] - `contains` [EXTRACTED]
 - [[getPdfPageCount()]] - `contains` [EXTRACTED]
-- [[hasPrimaryOcrProvider()]] - `contains` [EXTRACTED]
 - [[ocrImageDataUrl()]] - `contains` [EXTRACTED]
 - [[ocrRequestOnce()]] - `contains` [EXTRACTED]
 - [[ocrViaOpenRouter()]] - `contains` [EXTRACTED]
@@ -37,4 +36,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Assessment_Builder_UI
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # Leaderboard()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
-- [[useLearnerLeaderboard()]] - `calls` [INFERRED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
+- [[useLearnerLeaderboard()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

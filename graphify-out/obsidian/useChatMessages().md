@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useChat.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
-location: "L22"
+community: "Community None"
+location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Community_None
 ---
 
 # useChatMessages()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useChat.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Community_None

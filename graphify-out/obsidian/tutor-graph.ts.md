@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Community_None
 ---
 
 # tutor-graph.ts
@@ -20,11 +20,10 @@ tags:
 - [[graphPayloadSchema]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[sanitizeLatex()]] - `contains` [EXTRACTED]
-- [[serializeGraphBlock()]] - `contains` [EXTRACTED]
 - [[sliderSchema]] - `contains` [EXTRACTED]
 - [[tutor-graph-smoke.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 - [[validateGraphPayload()]] - `contains` [EXTRACTED]
 - [[viewportSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Community_None

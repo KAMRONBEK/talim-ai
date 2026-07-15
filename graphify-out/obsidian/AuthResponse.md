@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared UI Primitives"
-location: "L1032"
+community: "Community None"
+location: "L973"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_None
 ---
 
 # AuthResponse
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_13]] - `imports` [EXTRACTED]
 - [[page.tsx_14]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_None

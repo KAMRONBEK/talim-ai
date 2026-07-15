@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/rich-text.tsx"
 type: "code"
-community: "Quiz Player UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Community_None
 ---
 
 # rich-text.tsx
@@ -23,4 +23,4 @@ tags:
 - [[question-inputs.tsx]] - `imports_from` [EXTRACTED]
 - [[selection-ask.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

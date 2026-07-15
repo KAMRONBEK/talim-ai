@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Community None"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Community_None
 ---
 
 # formatDeck()
@@ -16,4 +16,4 @@ tags:
 - [[flashcards.controller.ts]] - `contains` [EXTRACTED]
 - [[getFlashcards()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,19 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Community_None
 ---
 
 # Providers()
 
 ## Connections
+- [[layout.tsx_6]] - `imports` [EXTRACTED]
+- [[makeQueryClient()_1]] - `calls` [EXTRACTED]
 - [[providers.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

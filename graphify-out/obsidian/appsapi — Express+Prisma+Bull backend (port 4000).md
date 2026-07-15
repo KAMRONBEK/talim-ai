@@ -1,11 +1,11 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "concept"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # apps/api — Express+Prisma+Bull backend (port 4000)
@@ -20,4 +20,4 @@ tags:
 - [[appsapi Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 - [[contentAccess.service.ts (isolation guard)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Architecture

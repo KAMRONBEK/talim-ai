@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "concept"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # Four QA instruments (one source of truth each)
@@ -15,4 +15,4 @@ tags:
 - [[qa-run visual-QA skill]] - `references` [EXTRACTED]
 - [[visual-qa-report.md — session journal]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/concept #graphify/EXTRACTED #community/QA_Testing_Methodology

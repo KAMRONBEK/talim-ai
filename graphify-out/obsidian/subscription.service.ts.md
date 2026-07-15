@@ -1,19 +1,17 @@
 ---
 source_file: "apps/api/src/services/subscription.service.ts"
 type: "code"
-community: "Subscription & Billing Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Community_None
 ---
 
 # subscription.service.ts
 
 ## Connections
-- [[PlanLimits]] - `re_exports` [EXTRACTED]
-- [[SubscriptionView]] - `re_exports` [EXTRACTED]
 - [[admin.ts]] - `re_exports` [EXTRACTED]
 - [[analytics.controller.ts]] - `imports_from` [EXTRACTED]
 - [[billing.controller.ts]] - `imports_from` [EXTRACTED]
@@ -25,7 +23,6 @@ tags:
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports_from` [EXTRACTED]
-- [[shared.ts_2]] - `re_exports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports_from` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[smoke-quota.ts]] - `imports_from` [EXTRACTED]
@@ -38,4 +35,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

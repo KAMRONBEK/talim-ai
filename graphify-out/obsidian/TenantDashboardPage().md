@@ -1,22 +1,22 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Community None"
 location: "L69"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Dashboard__Hooks
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # TenantDashboardPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_21]] - `contains` [EXTRACTED]
-- [[useTenantAssessments()]] - `calls` [INFERRED]
-- [[useTenantContents()]] - `calls` [INFERRED]
-- [[useTenantSearch()]] - `calls` [INFERRED]
-- [[useTenantStudents()]] - `calls` [INFERRED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
+- [[useTenantAssessments()]] - `calls` [EXTRACTED]
+- [[useTenantContents()]] - `calls` [EXTRACTED]
+- [[useTenantSearch()]] - `calls` [EXTRACTED]
+- [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

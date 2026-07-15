@@ -1,17 +1,17 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "API Package Config"
-location: "L59"
+community: "Community None"
+location: "L57"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Package_Config
+  - community/Community_None
 ---
 
 # schema
 
 ## Connections
-- [[prisma_1]] - `contains` [EXTRACTED]
+- [[prisma_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

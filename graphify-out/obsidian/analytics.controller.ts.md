@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/analytics.controller.ts"
 type: "code"
-community: "Admin Analytics"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics
+  - community/Community_None
 ---
 
 # analytics.controller.ts
@@ -36,7 +36,7 @@ tags:
 - [[listSubscriptionsForAdmin()]] - `imports` [EXTRACTED]
 - [[paginationSchema]] - `imports` [EXTRACTED]
 - [[platformStats()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
@@ -44,4 +44,4 @@ tags:
 - [[usageDaysSchema]] - `contains` [EXTRACTED]
 - [[usageSummary()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics
+#graphify/code #graphify/EXTRACTED #community/Community_None

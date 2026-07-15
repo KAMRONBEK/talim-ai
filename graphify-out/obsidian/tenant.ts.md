@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Subscription & Billing Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Community_None
 ---
 
 # tenant.ts
@@ -33,7 +33,7 @@ tags:
 - [[getTenantVideoCount()]] - `contains` [EXTRACTED]
 - [[getUsageForPeriod()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[requireActiveTenantSubscription()]] - `contains` [EXTRACTED]
 - [[resolveTenantUpgradePlanCode()]] - `contains` [EXTRACTED]
@@ -42,4 +42,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[user.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

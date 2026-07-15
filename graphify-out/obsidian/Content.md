@@ -1,21 +1,18 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Query Hooks"
-location: "L1037"
+community: "Community None"
+location: "L978"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Query_Hooks
+  - community/Community_None
 ---
 
 # Content
 
 ## Connections
-- [[ContentList.tsx]] - `imports` [EXTRACTED]
-- [[ContentListProps]] - `references` [EXTRACTED]
 - [[ContentStageProps]] - `references` [EXTRACTED]
-- [[ContentState]] - `references` [EXTRACTED]
 - [[ContentStatusGateProps]] - `references` [EXTRACTED]
 - [[RecentContentGridProps]] - `references` [EXTRACTED]
 - [[content-cache.ts]] - `imports` [EXTRACTED]
@@ -26,8 +23,7 @@ tags:
 - [[page.tsx_16]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
-- [[useContentStore.ts]] - `imports` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

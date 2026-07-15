@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Slide Deck Player UI"
+community: "Community None"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Player_UI
+  - community/Community_None
 ---
 
 # DeckPalette
@@ -15,4 +15,4 @@ tags:
 - [[DeckAccent]] - `references` [EXTRACTED]
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

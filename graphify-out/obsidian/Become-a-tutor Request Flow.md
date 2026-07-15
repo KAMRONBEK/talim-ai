@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog Docs"
+community: "Feature Catalog Overview"
 location: "§2.4, §5.2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Docs
+  - community/Feature_Catalog_Overview
 ---
 
 # Become-a-Tutor Request Flow
@@ -16,4 +16,4 @@ tags:
 - [[Manual Subscription Activation (no payment gateway)]] - `conceptually_related_to` [EXTRACTED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Docs
+#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Overview

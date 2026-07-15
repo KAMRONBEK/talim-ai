@@ -1,20 +1,18 @@
 ---
-source_file: "packages/ui/package.json"
+source_file: "packages/config/tailwind/package.json"
 type: "code"
-community: "UI Package Config"
-location: "L24"
+community: "Community None"
+location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Community_None
 ---
 
 # dependencies
 
 ## Connections
-- [[class-variance-authority]] - `contains` [EXTRACTED]
-- [[clsx]] - `contains` [EXTRACTED]
-- [[package.json_9]] - `contains` [EXTRACTED]
-- [[tailwind-merge]] - `contains` [EXTRACTED]
+- [[package.json_6]] - `contains` [EXTRACTED]
+- [[tailwindcss-animate]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

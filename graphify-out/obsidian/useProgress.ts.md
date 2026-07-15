@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Content Detail Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Community_None
 ---
 
 # useProgress.ts
@@ -15,6 +15,8 @@ tags:
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[ContentProgressResponse]] - `imports` [EXTRACTED]
 - [[LearningHistory]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[page.tsx_31]] - `imports_from` [EXTRACTED]
@@ -27,4 +29,4 @@ tags:
 - [[usePodcastProgress()]] - `contains` [EXTRACTED]
 - [[useUpdatePodcastProgress()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/section.controller.ts"
 type: "code"
-community: "Section Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Controller
+  - community/Community_None
 ---
 
 # section.controller.ts
@@ -29,11 +29,11 @@ tags:
 - [[listSections()]] - `contains` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[resolveSectionTitle()]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

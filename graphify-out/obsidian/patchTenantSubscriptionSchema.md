@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Admin Content & Audit Controllers"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit_Controllers
+  - community/Community_None
 ---
 
 # patchTenantSubscriptionSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

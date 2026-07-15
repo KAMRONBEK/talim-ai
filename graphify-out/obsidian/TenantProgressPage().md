@@ -1,20 +1,21 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Dashboard__Hooks
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # TenantProgressPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[isRecentlyActive()]] - `calls` [EXTRACTED]
+- [[masteryTone()]] - `calls` [EXTRACTED]
 - [[page.tsx_25]] - `contains` [EXTRACTED]
-- [[useTenantProgress()]] - `calls` [INFERRED]
-- [[useTenantProgressTopics()]] - `calls` [INFERRED]
+- [[useTenantProgress()]] - `calls` [EXTRACTED]
+- [[useTenantProgressTopics()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Monorepo Scripts"
+community: "Database Scripts & Commands"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Monorepo_Scripts
+  - community/Database_Scripts__Commands
 ---
 
 # scripts
@@ -40,4 +40,4 @@ tags:
 - [[qapreflight]] - `contains` [EXTRACTED]
 - [[typecheck_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Scripts
+#graphify/code #graphify/EXTRACTED #community/Database_Scripts__Commands

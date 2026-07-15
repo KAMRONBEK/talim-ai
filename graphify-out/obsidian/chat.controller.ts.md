@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Community_None
 ---
 
 # chat.controller.ts
@@ -43,7 +43,7 @@ tags:
 - [[mapChatMessage()]] - `contains` [EXTRACTED]
 - [[mergeSimilarChunks()]] - `imports` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
@@ -61,8 +61,9 @@ tags:
 - [[streamChat()]] - `contains` [EXTRACTED]
 - [[streamSchema]] - `contains` [EXTRACTED]
 - [[streamStaticAssistantResponse()]] - `contains` [EXTRACTED]
+- [[streamTutorWithTools()]] - `imports` [EXTRACTED]
 - [[tutor-graph-intent.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-scope.ts]] - `imports_from` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

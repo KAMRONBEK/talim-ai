@@ -1,12 +1,12 @@
 ---
 source_file: "CLAUDE.md"
 type: "rationale"
-community: "Architecture Invariants (CLAUDE.md)"
+community: "Platform Architecture Guide"
 location: "Roles & product model"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Architecture_Invariants_CLAUDEmd
+  - community/Platform_Architecture_Guide
 ---
 
 # Manual activation — no payment integration
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI project guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Architecture_Invariants_CLAUDEmd
+#graphify/rationale #graphify/EXTRACTED #community/Platform_Architecture_Guide

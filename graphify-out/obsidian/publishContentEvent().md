@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEventAudience.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # publishContentEvent()
@@ -23,8 +23,16 @@ tags:
 - [[jobEventAudience.ts]] - `contains` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[publishContentEventTo()]] - `calls` [EXTRACTED]
+- [[registerBackfillTranscriptJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateFlashcardsJob()]] - `calls` [EXTRACTED]
+- [[registerGeneratePodcastJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateSlidesJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateVideoJob()]] - `calls` [EXTRACTED]
+- [[registerProcessContentJob()]] - `calls` [EXTRACTED]
+- [[registerReparseContentJob()]] - `calls` [EXTRACTED]
 - [[reparseContent.job.ts]] - `imports` [EXTRACTED]
 - [[resolveContentAudience()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

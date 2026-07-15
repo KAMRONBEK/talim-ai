@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/generation-error.ts"
 type: "code"
-community: "Section Reader UI"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Reader_UI
+  - community/Community_None
 ---
 
 # GenerationErrorInfo
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generation-error.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

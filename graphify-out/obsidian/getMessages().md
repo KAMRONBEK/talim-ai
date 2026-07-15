@@ -1,19 +1,19 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Fonts & Root Layout"
+community: "Community None"
 location: "L124"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/Community_None
 ---
 
 # getMessages()
 
 ## Connections
-- [[LocaleLayout()]] - `calls` [INFERRED]
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
+- [[mapChatMessage()]] - `indirect_call` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/Community_None

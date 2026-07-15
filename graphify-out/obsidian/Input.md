@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/input.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_None
 ---
 
 # Input
@@ -36,8 +36,9 @@ tags:
 - [[page.tsx_24]] - `imports` [EXTRACTED]
 - [[page.tsx_26]] - `imports` [EXTRACTED]
 - [[page.tsx_28]] - `imports` [EXTRACTED]
+- [[password-card.tsx]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_None

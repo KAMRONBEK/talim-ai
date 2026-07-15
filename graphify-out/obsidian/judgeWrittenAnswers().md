@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/answerJudge.service.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L186"
+community: "Community None"
+location: "L189"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Community_None
 ---
 
 # judgeWrittenAnswers()
@@ -16,7 +16,10 @@ tags:
 - [[applyAiJudgeToGrades()]] - `calls` [EXTRACTED]
 - [[checkAnswer()]] - `calls` [EXTRACTED]
 - [[consumeJudgeBudget()]] - `calls` [EXTRACTED]
+- [[isJudgeable()]] - `indirect_call` [INFERRED]
 - [[judgeWithModel()]] - `calls` [EXTRACTED]
+- [[normalizeAnswer()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[verdictHash()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Community_None

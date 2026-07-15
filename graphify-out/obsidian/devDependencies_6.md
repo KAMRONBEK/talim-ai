@@ -1,24 +1,19 @@
 ---
-source_file: "packages/ui/package.json"
+source_file: "packages/types/package.json"
 type: "code"
-community: "UI Package Config"
-location: "L29"
+community: "Community None"
+location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Community_None
 ---
 
 # devDependencies
 
 ## Connections
-- [[@talimtsconfig_4]] - `contains` [EXTRACTED]
-- [[@typesreact_2]] - `contains` [EXTRACTED]
-- [[@typesreact-dom_2]] - `contains` [EXTRACTED]
-- [[next_3]] - `contains` [EXTRACTED]
-- [[package.json_9]] - `contains` [EXTRACTED]
-- [[react_3]] - `contains` [EXTRACTED]
-- [[react-dom_3]] - `contains` [EXTRACTED]
-- [[typescript_5]] - `contains` [EXTRACTED]
+- [[@talimtsconfig_6]] - `contains` [EXTRACTED]
+- [[package.json_8]] - `contains` [EXTRACTED]
+- [[typescript_8]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

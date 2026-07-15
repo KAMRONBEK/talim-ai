@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/src/index.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Community_None
 ---
 
 # bootstrap()
 
 ## Connections
+- [[errorMiddleware()]] - `indirect_call` [INFERRED]
 - [[index.ts]] - `contains` [EXTRACTED]
 - [[reconcileStuckMediaClaims()]] - `calls` [EXTRACTED]
 - [[registerBackfillTranscriptJob()]] - `calls` [EXTRACTED]
@@ -25,4 +26,4 @@ tags:
 - [[registerRenderManimJob()]] - `calls` [EXTRACTED]
 - [[registerReparseContentJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

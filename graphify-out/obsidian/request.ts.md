@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/request.ts"
 type: "code"
-community: "Fonts & Root Layout"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/Community_None
 ---
 
 # request.ts
@@ -17,4 +17,4 @@ tags:
 - [[routing]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/Community_None

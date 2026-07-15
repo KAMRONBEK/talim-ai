@@ -1,20 +1,21 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
-location: "L23"
+community: "Community None"
+location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Community_None
 ---
 
 # TenantSidebarBody()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useTenant()]] - `calls` [EXTRACTED]
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

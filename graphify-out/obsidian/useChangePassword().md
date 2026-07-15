@@ -1,17 +1,19 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_None
 ---
 
 # useChangePassword()
 
 ## Connections
+- [[PasswordCard()]] - `calls` [EXTRACTED]
+- [[password-card.tsx]] - `imports` [EXTRACTED]
 - [[useAccount.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_None

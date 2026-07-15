@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/lib/tutor-scope.ts"
 type: "code"
-community: "Tutor Scope Classifier"
-location: "L284"
+community: "Community None"
+location: "L282"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classifier
+  - community/Community_None
 ---
 
 # isTutorClarification()
 
 ## Connections
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
+- [[streamChat()]] - `calls` [EXTRACTED]
 - [[tutor-scope.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classifier
+#graphify/code #graphify/EXTRACTED #community/Community_None

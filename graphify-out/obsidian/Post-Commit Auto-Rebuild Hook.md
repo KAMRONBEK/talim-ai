@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/hooks.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Graphify Development Tools"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Graphify_Development_Tools
 ---
 
 # Post-Commit Auto-Rebuild Hook
@@ -13,6 +13,5 @@ tags:
 ## Connections
 - [[Code-Only Change (skip semantic extraction)]] - `conceptually_related_to` [INFERRED]
 - [[Work Memory  LESSONS]] - `references` [EXTRACTED]
-- [[graphify skill]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Graphify_Development_Tools

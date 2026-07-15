@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Knowledge Graph Extraction"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Knowledge_Graph_Extraction
 ---
 
 # Gemini Extraction Backend
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Semantic (LLM) Extraction]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Knowledge_Graph_Extraction

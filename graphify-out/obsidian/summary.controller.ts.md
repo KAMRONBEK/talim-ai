@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Summary Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary_Controller
+  - community/Community_None
 ---
 
 # summary.controller.ts
@@ -42,7 +42,7 @@ tags:
 - [[locale.ts]] - `imports_from` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[persistAndRecordSummary()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[recordLearningActivity()]] - `imports` [EXTRACTED]
@@ -54,10 +54,11 @@ tags:
 - [[sseData()]] - `imports` [EXTRACTED]
 - [[sseDone()]] - `imports` [EXTRACTED]
 - [[sseHeaders()]] - `imports` [EXTRACTED]
+- [[streamChatCompletion()]] - `imports` [EXTRACTED]
 - [[streamSummary()]] - `contains` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[summary.routes.ts]] - `imports_from` [EXTRACTED]
 - [[summaryBodySchema]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

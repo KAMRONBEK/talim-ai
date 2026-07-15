@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Podcast Generation & TTS"
-location: "L292"
+community: "Community None"
+location: "L221"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Community_None
 ---
 
 # getPodcastSystemPrompt()
@@ -14,5 +14,6 @@ tags:
 ## Connections
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
+- [[registerGeneratePodcastJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Community_None

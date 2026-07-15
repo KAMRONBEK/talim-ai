@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Admin Content & Audit Controllers"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit_Controllers
+  - community/Community_None
 ---
 
 # tenants.controller.ts
@@ -29,11 +29,11 @@ tags:
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[patchTenant()]] - `contains` [EXTRACTED]
 - [[patchTenantSubscriptionSchema]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts]] - `imports_from` [EXTRACTED]
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

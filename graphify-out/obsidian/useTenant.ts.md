@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Community_None
 ---
 
 # useTenant.ts
@@ -33,6 +33,8 @@ tags:
 - [[TenantSentMessagesResponse]] - `imports` [EXTRACTED]
 - [[TenantStudent]] - `imports` [EXTRACTED]
 - [[TenantUnreadReplyCountResponse]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[assign-students-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
@@ -49,6 +51,8 @@ tags:
 - [[tenant-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[useAssignContent()]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useContentAssignments()]] - `contains` [EXTRACTED]
 - [[useCreateTenantStudent()]] - `contains` [EXTRACTED]
 - [[useImportStudents()]] - `contains` [EXTRACTED]
@@ -75,4 +79,4 @@ tags:
 - [[useTenantUnreadCount()]] - `contains` [EXTRACTED]
 - [[useUnassignContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

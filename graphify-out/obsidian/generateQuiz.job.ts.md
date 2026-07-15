@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Community_None
 ---
 
 # generateQuiz.job.ts
@@ -29,7 +29,7 @@ tags:
 - [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[normalizePracticeQuestionType()]] - `imports` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
@@ -45,4 +45,4 @@ tags:
 - [[typesFromStyle()]] - `imports` [EXTRACTED]
 - [[wholeMaterialTarget()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Community_None

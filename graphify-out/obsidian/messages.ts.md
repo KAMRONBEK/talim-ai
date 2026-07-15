@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/messages.ts"
 type: "code"
-community: "Tenant Messaging Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Messaging_Service
+  - community/Community_None
 ---
 
 # messages.ts
@@ -23,7 +23,7 @@ tags:
 - [[markLearnerMessageRead()]] - `contains` [EXTRACTED]
 - [[markOwnerReplyRead()]] - `contains` [EXTRACTED]
 - [[markRecipientRead()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[replyMessageSchema]] - `contains` [EXTRACTED]
 - [[replyToTenantMessage()]] - `contains` [EXTRACTED]
@@ -33,4 +33,4 @@ tags:
 - [[sendTenantMessage()]] - `contains` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Messaging_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

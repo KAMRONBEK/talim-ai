@@ -1,13 +1,17 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Community 176"
+community: "Community None"
+location: "L470"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_176
+  - community/Community_None
 ---
 
 # US-IND-11: Scanned-PDF OCR ladder (Mistral-OCR → poppler → vision)
 
-#graphify/document #graphify/EXTRACTED #community/Community_176
+## Connections
+- [[Area B2C ingest PDFSLIDE upload, OCR, YouTube, processing job]] - `contains` [EXTRACTED]
+
+#graphify/document #graphify/EXTRACTED #community/Community_None

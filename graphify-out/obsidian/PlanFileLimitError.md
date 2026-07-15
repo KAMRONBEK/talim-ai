@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Community None"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Community_None
 ---
 
 # PlanFileLimitError
@@ -17,4 +17,4 @@ tags:
 - [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Community None"
 location: "L334"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Community_None
 ---
 
 # patchQuestion()
@@ -21,4 +21,4 @@ tags:
 - [[jsonStringArray()]] - `calls` [EXTRACTED]
 - [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

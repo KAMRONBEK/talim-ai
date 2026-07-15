@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Community None"
 location: "L188"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Community_None
 ---
 
 # searchSimilarChunks()
@@ -17,8 +17,9 @@ tags:
 - [[generateEmbedding()]] - `calls` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[rag.service.ts]] - `contains` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `calls` [EXTRACTED]
 - [[rerank()]] - `calls` [EXTRACTED]
 - [[scriptVariants()]] - `calls` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

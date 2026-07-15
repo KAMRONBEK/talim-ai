@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFlashcards.ts"
 type: "code"
-community: "Flashcards UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_UI
+  - community/Community_None
 ---
 
 # useFlashcards.ts
@@ -17,6 +17,8 @@ tags:
 - [[FlashcardGrade_1]] - `imports` [EXTRACTED]
 - [[FlashcardReviewState]] - `imports` [EXTRACTED]
 - [[MasteryDelta]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[page.tsx_30]] - `imports_from` [EXTRACTED]
@@ -28,4 +30,4 @@ tags:
 - [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 - [[useReviewFlashcard()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

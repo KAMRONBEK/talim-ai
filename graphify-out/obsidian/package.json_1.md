@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "API Package Config"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Package_Config
+  - community/Community_None
 ---
 
 # package.json
@@ -15,9 +15,9 @@ tags:
 - [[dependencies_1]] - `contains` [EXTRACTED]
 - [[devDependencies_1]] - `contains` [EXTRACTED]
 - [[name_1]] - `contains` [EXTRACTED]
-- [[prisma_1]] - `contains` [EXTRACTED]
+- [[prisma_2]] - `contains` [EXTRACTED]
 - [[private_1]] - `contains` [EXTRACTED]
 - [[scripts_1]] - `contains` [EXTRACTED]
 - [[version_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

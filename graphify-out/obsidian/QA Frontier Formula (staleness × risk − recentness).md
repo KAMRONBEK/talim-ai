@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/coverage-map.md"
 type: "rationale"
-community: "Product Plans & Epics"
+community: "QA Deferred Bug Reports"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Deferred_Bug_Reports
 ---
 
 # QA Frontier Formula (staleness × risk − recentness)
@@ -14,4 +14,4 @@ tags:
 - [[PersonaLens Charter Method (FedEx, Hostile, Antisocial, Saboteur, OCD, Couch-potato)]] - `semantically_similar_to` [INFERRED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `rationale_for` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/rationale #graphify/EXTRACTED #community/QA_Deferred_Bug_Reports

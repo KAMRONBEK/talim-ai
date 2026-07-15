@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/middleware.ts"
 type: "code"
-community: "Admin Middleware"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Middleware
+  - community/Community_None
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

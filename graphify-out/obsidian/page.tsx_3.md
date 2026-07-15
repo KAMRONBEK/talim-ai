@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Admin Generated-Media Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated-Media_Page
+  - community/Community_None
 ---
 
 # page.tsx
@@ -15,6 +15,8 @@ tags:
 - [[Button]] - `imports` [EXTRACTED]
 - [[GeneratedPage()]] - `contains` [EXTRACTED]
 - [[MediaReviewStatus]] - `imports` [EXTRACTED]
+- [[api]] - `imports` [EXTRACTED]
+- [[api.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[reviewPillClass()]] - `contains` [EXTRACTED]
@@ -24,4 +26,4 @@ tags:
 - [[useAdminGenerated()]] - `imports` [EXTRACTED]
 - [[useReviewGenerated()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated-Media_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

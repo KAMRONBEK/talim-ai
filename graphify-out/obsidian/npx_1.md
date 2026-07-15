@@ -1,12 +1,12 @@
 ---
 source_file: ".mcp.json"
 type: "code"
-community: "MCP Config (Playwright)"
+community: "Playwright MCP Config (alt)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/MCP_Config_Playwright
+  - community/Playwright_MCP_Config_alt
 ---
 
 # npx
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[playwright_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/MCP_Config_Playwright
+#graphify/code #graphify/EXTRACTED #community/Playwright_MCP_Config_alt

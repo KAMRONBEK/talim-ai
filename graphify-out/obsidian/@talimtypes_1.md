@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/package.json"
-type: "code"
-community: "API Dependencies"
-location: "L27"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L13"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/API_Dependencies
+  - community/Community_None
 ---
 
 # @talim/types
 
 ## Connections
-- [[dependencies_1]] - `contains` [EXTRACTED]
+- [[@talimtypes]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

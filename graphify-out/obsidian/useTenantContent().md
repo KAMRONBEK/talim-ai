@@ -1,22 +1,22 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Auth & Assignment UI"
-location: "L30"
+community: "Community None"
+location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Community_None
 ---
 
 # useTenantContent()
 
 ## Connections
 - [[AssignContentPage()]] - `calls` [EXTRACTED]
-- [[TenantMaterialDetailPage()]] - `calls` [INFERRED]
+- [[TenantMaterialDetailPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_22]] - `imports` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller (B2C)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Community_None
 ---
 
 # content-shared.ts
@@ -25,7 +25,7 @@ tags:
 - [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[loadOrBackfillTranscript()]] - `contains` [EXTRACTED]
 - [[ocrRegionSchema]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEventTo()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
@@ -38,4 +38,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Community_None
 ---
 
 # videoKey()
 
 ## Connections
+- [[useGenerateVideo()]] - `calls` [EXTRACTED]
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

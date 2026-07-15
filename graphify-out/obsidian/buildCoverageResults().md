@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L201"
+community: "Community None"
+location: "L195"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Community_None
 ---
 
 # buildCoverageResults()
@@ -19,4 +19,4 @@ tags:
 - [[refineSectionProgressWithAi()]] - `calls` [EXTRACTED]
 - [[resolveAcceptedAnswers()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Community_None

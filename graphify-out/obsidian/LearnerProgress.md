@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Prisma Client & Seed"
-location: "L495"
+community: "Community None"
+location: "L454"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # LearnerProgress
@@ -16,4 +16,4 @@ tags:
 - [[progress.ts]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

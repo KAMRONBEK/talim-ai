@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "API Dev Tooling Config"
-location: "L52"
+community: "Community None"
+location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Dev_Tooling_Config
+  - community/Community_None
 ---
 
 # @types/pdf-parse
 
 ## Connections
+- [[@typespdf-parse_1]] - `imports` [EXTRACTED]
 - [[devDependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Dev_Tooling_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

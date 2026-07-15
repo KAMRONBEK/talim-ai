@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Community None"
 location: "L89"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Community_None
 ---
 
 # main()
@@ -20,4 +20,4 @@ tags:
 - [[preview()]] - `calls` [EXTRACTED]
 - [[searchWithDistance()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Community_None

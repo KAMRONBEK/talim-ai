@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/nextjs.json"
 type: "code"
-community: "Next.js tsconfig"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Nextjs_tsconfig
+  - community/Community_None
 ---
 
 # noEmit
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Nextjs_tsconfig
+#graphify/code #graphify/EXTRACTED #community/Community_None

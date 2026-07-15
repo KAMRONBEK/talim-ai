@@ -1,14 +1,17 @@
 ---
-source_file: "apps/web/next-env.d.ts"
-type: "code"
-community: "Web Next Env"
-location: "L1"
+source_file: "apps/admin/tsconfig.json"
+type: "concept"
+community: "Community None"
+location: "L9"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_Next_Env
+  - community/Community_None
 ---
 
 # next-env.d.ts
 
-#graphify/code #graphify/EXTRACTED #community/Web_Next_Env
+## Connections
+- [[include]] - `extends` [EXTRACTED]
+
+#graphify/concept #graphify/EXTRACTED #community/Community_None

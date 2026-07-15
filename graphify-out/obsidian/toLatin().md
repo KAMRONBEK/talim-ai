@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/uzbek-translit.ts"
 type: "code"
-community: "Tutor Scope Classifier"
+community: "Community None"
 location: "L123"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Scope_Classifier
+  - community/Community_None
 ---
 
 # toLatin()
@@ -16,4 +16,4 @@ tags:
 - [[transliterate()]] - `calls` [EXTRACTED]
 - [[uzbek-translit.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Scope_Classifier
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Answer Grading Engine"
+community: "Community None"
 location: "L211"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Answer_Grading_Engine
+  - community/Community_None
 ---
 
 # answerToString()
@@ -17,5 +17,6 @@ tags:
 - [[grading.ts]] - `contains` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Answer_Grading_Engine
+#graphify/code #graphify/EXTRACTED #community/Community_None

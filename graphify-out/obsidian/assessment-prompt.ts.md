@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/assessment-prompt.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Community_None
 ---
 
 # assessment-prompt.ts
@@ -15,12 +15,8 @@ tags:
 - [[AssessmentQuestionStyle]] - `contains` [EXTRACTED]
 - [[QuestionStyle]] - `contains` [EXTRACTED]
 - [[banks.ts]] - `imports_from` [EXTRACTED]
-- [[buildAssessmentPrompt()]] - `contains` [EXTRACTED]
 - [[generateQuiz.job.ts]] - `imports_from` [EXTRACTED]
-- [[locale-prompts.ts]] - `imports_from` [EXTRACTED]
 - [[normalizeAssessmentQuestionType()]] - `contains` [EXTRACTED]
-- [[normalizeQuestionType()]] - `contains` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
-- [[styleInstruction()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Community_None

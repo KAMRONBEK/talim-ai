@@ -1,17 +1,18 @@
 ---
-source_file: "packages/ui/package.json"
+source_file: "apps/web/package.json"
 type: "code"
-community: "UI Package Config"
-location: "L20"
+community: "Community None"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Community_None
 ---
 
 # next
 
 ## Connections
-- [[peerDependencies]] - `contains` [EXTRACTED]
+- [[dependencies_2]] - `contains` [EXTRACTED]
+- [[next_3]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
-location: "L116"
+community: "Community None"
+location: "L118"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # toBulletObjects()
 
 ## Connections
+- [[isRecord()]] - `calls` [EXTRACTED]
 - [[normalizeSlide()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

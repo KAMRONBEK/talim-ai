@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
-location: "L48"
+community: "Community None"
+location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/Community_None
 ---
 
 # toTextOnlyMessages()
@@ -16,4 +16,4 @@ tags:
 - [[createDeepSeekChatCompletion()]] - `calls` [EXTRACTED]
 - [[createDeepSeekChatStream()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

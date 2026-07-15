@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "In-Process Job Event Bus"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/In-Process_Job_Event_Bus
+  - community/Community_None
 ---
 
 # jobEvents.service.ts
@@ -14,7 +14,6 @@ tags:
 ## Connections
 - [[InProcessJobEventBus]] - `contains` [EXTRACTED]
 - [[JobEvent]] - `imports` [EXTRACTED]
-- [[JobEventBus]] - `contains` [EXTRACTED]
 - [[SeqJobEvent]] - `imports` [EXTRACTED]
 - [[UserState]] - `contains` [EXTRACTED]
 - [[events.controller.ts]] - `imports_from` [EXTRACTED]
@@ -25,4 +24,4 @@ tags:
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/In-Process_Job_Event_Bus
+#graphify/code #graphify/EXTRACTED #community/Community_None

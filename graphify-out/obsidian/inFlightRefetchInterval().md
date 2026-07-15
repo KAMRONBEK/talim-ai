@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pushPrimaryInterval.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Community None"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Community_None
 ---
 
 # inFlightRefetchInterval()
@@ -16,7 +16,10 @@ tags:
 - [[useAssessmentLeaderboard()]] - `calls` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 - [[useLearnerLeaderboard()]] - `calls` [EXTRACTED]
+- [[useQuestionBanks()]] - `calls` [EXTRACTED]
+- [[useSlides()]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
+- [[useTranscript()]] - `calls` [EXTRACTED]
 - [[useTranscript.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

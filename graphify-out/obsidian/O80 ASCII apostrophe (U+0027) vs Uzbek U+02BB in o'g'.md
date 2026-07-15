@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "concept"
-community: "Product Plans & Epics"
+community: "QA Traceability Ledger"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Traceability_Ledger
 ---
 
 # O80: ASCII apostrophe (U+0027) vs Uzbek U+02BB in o'/g'
@@ -16,4 +16,4 @@ tags:
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 - [[US-XCUT-01 i18n — Uzbek-first localization]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/concept #graphify/EXTRACTED #community/QA_Traceability_Ledger

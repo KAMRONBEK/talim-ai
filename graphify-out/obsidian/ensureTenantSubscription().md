@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Community_None
 ---
 
 # ensureTenantSubscription()
@@ -17,4 +17,4 @@ tags:
 - [[getDefaultTenantPlanId()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Community_None
 ---
 
 # material-media-panel.tsx
@@ -33,5 +33,6 @@ tags:
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo()]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
+- [[utils.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

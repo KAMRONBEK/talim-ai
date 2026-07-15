@@ -1,35 +1,35 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
-location: "L12"
+community: "Community None"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # dependencies
 
 ## Connections
-- [[@talimtypes_2]] - `contains` [EXTRACTED]
-- [[@talimui_1]] - `contains` [EXTRACTED]
-- [[@tanstackreact-query_1]] - `contains` [EXTRACTED]
-- [[axios_1]] - `contains` [EXTRACTED]
+- [[@talimtypes_4]] - `contains` [EXTRACTED]
+- [[@talimui_2]] - `contains` [EXTRACTED]
+- [[@tanstackreact-query_2]] - `contains` [EXTRACTED]
+- [[axios_2]] - `contains` [EXTRACTED]
 - [[katex]] - `contains` [EXTRACTED]
-- [[lucide-react_1]] - `contains` [EXTRACTED]
+- [[lucide-react_2]] - `contains` [EXTRACTED]
 - [[mermaid]] - `contains` [EXTRACTED]
-- [[next_1]] - `contains` [EXTRACTED]
+- [[next_2]] - `contains` [EXTRACTED]
 - [[next-intl]] - `contains` [EXTRACTED]
-- [[next-themes_1]] - `contains` [EXTRACTED]
+- [[next-themes_2]] - `contains` [EXTRACTED]
 - [[package.json_2]] - `contains` [EXTRACTED]
-- [[react_1]] - `contains` [EXTRACTED]
-- [[react-dom_1]] - `contains` [EXTRACTED]
+- [[react_2]] - `contains` [EXTRACTED]
+- [[react-dom_2]] - `contains` [EXTRACTED]
 - [[react-markdown]] - `contains` [EXTRACTED]
-- [[recharts_1]] - `contains` [EXTRACTED]
+- [[recharts_2]] - `contains` [EXTRACTED]
 - [[rehype-katex]] - `contains` [EXTRACTED]
 - [[remark-gfm]] - `contains` [EXTRACTED]
 - [[remark-math]] - `contains` [EXTRACTED]
-- [[zustand_1]] - `contains` [EXTRACTED]
+- [[zustand_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

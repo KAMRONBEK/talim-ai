@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # getAssignedContentIds()
@@ -17,4 +17,4 @@ tags:
 - [[getLearnerMastery()]] - `calls` [EXTRACTED]
 - [[mastery.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Player UI"
+community: "Community None"
 location: "L63"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Community_None
 ---
 
 # useLatestQuizAttempt()
 
 ## Connections
-- [[QuizPage()]] - `calls` [INFERRED]
+- [[QuizPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

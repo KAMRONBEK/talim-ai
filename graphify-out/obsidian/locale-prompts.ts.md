@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "AI Prompt Builders"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Prompt_Builders
+  - community/Community_None
 ---
 
 # locale-prompts.ts
@@ -17,9 +17,6 @@ tags:
 - [[PODCAST_PROMPTS]] - `contains` [EXTRACTED]
 - [[PODCAST_USER]] - `contains` [EXTRACTED]
 - [[ParsedTurn]] - `contains` [EXTRACTED]
-- [[QUIZ_PROMPTS]] - `contains` [EXTRACTED]
-- [[QUIZ_STYLE]] - `contains` [EXTRACTED]
-- [[QuestionStyle]] - `imports` [EXTRACTED]
 - [[RAG_CHUNK_LABEL]] - `contains` [EXTRACTED]
 - [[SUMMARY_PREFIX_PATTERNS_EN]] - `contains` [EXTRACTED]
 - [[SUMMARY_PREFIX_PATTERNS_RU]] - `contains` [EXTRACTED]
@@ -29,15 +26,12 @@ tags:
 - [[TUTOR_MATH_RULES]] - `contains` [EXTRACTED]
 - [[TUTOR_PROMPTS]] - `contains` [EXTRACTED]
 - [[TUTOR_VISUAL_RULES]] - `contains` [EXTRACTED]
-- [[assessment-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[buildPodcastUserPrompt()]] - `contains` [EXTRACTED]
-- [[buildQuizUserPrompt()]] - `contains` [EXTRACTED]
 - [[buildSummaryUserPrompt()]] - `contains` [EXTRACTED]
 - [[buildTutorSystemMessage()]] - `contains` [EXTRACTED]
 - [[chat.controller.ts]] - `imports_from` [EXTRACTED]
 - [[generatePodcast.job.ts]] - `imports_from` [EXTRACTED]
 - [[getPodcastSystemPrompt()]] - `contains` [EXTRACTED]
-- [[getQuizSystemPrompt()]] - `contains` [EXTRACTED]
 - [[getRagChunkLabel()]] - `contains` [EXTRACTED]
 - [[getSummarySystemPrompt()]] - `contains` [EXTRACTED]
 - [[getTutorSystemPrompt()]] - `contains` [EXTRACTED]
@@ -49,4 +43,4 @@ tags:
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Community None"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Community_None
 ---
 
 # useGenerateSlides()
@@ -18,6 +18,8 @@ tags:
 - [[material-media-panel.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
+- [[slidesKey()]] - `calls` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

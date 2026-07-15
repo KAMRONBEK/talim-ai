@@ -1,18 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Community None"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Community_None
 ---
 
 # TenantMaterialsPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[buttonVariants]] - `calls` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 - [[page.tsx_24]] - `contains` [EXTRACTED]
@@ -21,4 +20,4 @@ tags:
 - [[useTenantSearch()]] - `calls` [EXTRACTED]
 - [[useUploadTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

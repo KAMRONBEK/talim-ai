@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "rationale"
-community: "Graphify Skill Docs"
+community: "Graph Query & Traversal"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Graph_Query__Traversal
 ---
 
 # Fast Path (existing graph query)
@@ -14,4 +14,4 @@ tags:
 - [[graph.json]] - `references` [EXTRACTED]
 - [[graphify query]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/rationale #graphify/EXTRACTED #community/Graph_Query__Traversal

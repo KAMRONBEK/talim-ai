@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Student Management Service"
-location: "L436"
+community: "Community None"
+location: "L445"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Student_Management_Service
+  - community/Community_None
 ---
 
 # resetStudentPassword()
@@ -15,4 +15,4 @@ tags:
 - [[formatStudentRow()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Student_Management_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

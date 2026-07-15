@@ -1,11 +1,11 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "rationale"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # Single API process is also the Bull worker
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[API bootstrap() (helmetCORSjobslisten)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/rationale #graphify/EXTRACTED #community/Admin_Panel_Architecture

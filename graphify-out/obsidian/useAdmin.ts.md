@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Dashboard & Charts"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Community_None
 ---
 
 # useAdmin.ts
@@ -40,6 +40,8 @@ tags:
 - [[AdminUserSubscription]] - `imports` [EXTRACTED]
 - [[AdminUsersByRoleResponse]] - `imports` [EXTRACTED]
 - [[PaginatedResponse]] - `imports` [EXTRACTED]
+- [[api]] - `imports` [EXTRACTED]
+- [[api.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[page.tsx]] - `imports_from` [EXTRACTED]
 - [[page.tsx_1]] - `imports_from` [EXTRACTED]
@@ -85,4 +87,4 @@ tags:
 - [[useUpdateTenant()]] - `contains` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Community_None

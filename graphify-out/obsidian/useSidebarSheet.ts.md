@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSidebarSheet.ts"
 type: "code"
-community: "Billing & Access Guards"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Community_None
 ---
 
 # useSidebarSheet.ts
@@ -18,4 +18,4 @@ tags:
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useSidebarSheet()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Community_None

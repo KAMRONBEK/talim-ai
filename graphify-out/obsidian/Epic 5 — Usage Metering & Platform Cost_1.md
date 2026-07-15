@@ -1,20 +1,18 @@
 ---
 source_file: "docs/plans/epic-5-usage-metering.md"
 type: "document"
-community: "Billing & Admin Plan Docs"
+community: "Community None"
+location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Billing__Admin_Plan_Docs
+  - community/Community_None
 ---
 
-# Epic 5 — Usage Metering & Platform Cost
+# Epic 5 — Usage metering & platform cost
 
 ## Connections
-- [[ApiUsageEvent Model & recordUsage]] - `references` [EXTRACTED]
-- [[Epic 1 — Subscriptions & Billing_1]] - `references` [EXTRACTED]
-- [[Epic 2 — Platform Admin Panel_1]] - `references` [EXTRACTED]
-- [[Epic 6 — Tenant AI Assistant_1]] - `references` [EXTRACTED]
-- [[Epic Prompts Index]] - `references` [EXTRACTED]
+- [[Cursor prompt_5]] - `contains` [EXTRACTED]
+- [[epic-5-usage-metering]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Billing__Admin_Plan_Docs
+#graphify/document #graphify/EXTRACTED #community/Community_None

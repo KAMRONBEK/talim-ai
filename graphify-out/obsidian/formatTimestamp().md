@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel UI"
-location: "L47"
+community: "Community None"
+location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel_UI
+  - community/Community_None
 ---
 
 # formatTimestamp()
 
 ## Connections
+- [[TranscriptPanel()]] - `calls` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 - [[formatTranscriptExcerpt()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

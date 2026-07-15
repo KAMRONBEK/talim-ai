@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/NarratedVideoPlayer.tsx"
 type: "code"
-community: "Narrated Video Player"
+community: "Community None"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Narrated_Video_Player
+  - community/Community_None
 ---
 
 # formatTime()
@@ -15,4 +15,4 @@ tags:
 - [[NarratedVideoPlayer()]] - `calls` [EXTRACTED]
 - [[NarratedVideoPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Narrated_Video_Player
+#graphify/code #graphify/EXTRACTED #community/Community_None

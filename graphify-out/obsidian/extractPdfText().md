@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L388"
+community: "Community None"
+location: "L391"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Community_None
 ---
 
 # extractPdfText()
@@ -18,5 +18,6 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rasterizeAndOcrPdf()]] - `calls` [EXTRACTED]
+- [[registerProcessContentJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

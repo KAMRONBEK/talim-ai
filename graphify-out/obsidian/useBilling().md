@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Billing & Access Guards"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Community_None
 ---
 
 # useBilling()
@@ -23,7 +23,8 @@ tags:
 - [[page.tsx_20]] - `imports` [EXTRACTED]
 - [[page.tsx_28]] - `imports` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useBilling.ts]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Community_None

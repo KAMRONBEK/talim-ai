@@ -1,18 +1,19 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Community None"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Community_None
 ---
 
 # cn()
 
 ## Connections
-- [[AssignedMaterialCard()]] - `calls` [INFERRED]
+- [[ActivityHeatmap()]] - `calls` [EXTRACTED]
+- [[AssignedMaterialCard()]] - `calls` [EXTRACTED]
 - [[AvatarFallback()]] - `calls` [EXTRACTED]
 - [[Badge()]] - `calls` [EXTRACTED]
 - [[BigStat()]] - `calls` [EXTRACTED]
@@ -21,7 +22,11 @@ tags:
 - [[ChartLayout()]] - `calls` [EXTRACTED]
 - [[ChatMessage()]] - `calls` [EXTRACTED]
 - [[ChatMessage.tsx]] - `imports` [EXTRACTED]
+- [[Comparison()]] - `calls` [EXTRACTED]
 - [[Concept()]] - `calls` [EXTRACTED]
+- [[ContentLearnPanelBody()]] - `calls` [EXTRACTED]
+- [[ContentRightPanelBody()]] - `calls` [EXTRACTED]
+- [[ContentSidebarBody()]] - `calls` [EXTRACTED]
 - [[ContentStage()]] - `calls` [EXTRACTED]
 - [[ContentThumbnail()]] - `calls` [EXTRACTED]
 - [[Cover()]] - `calls` [EXTRACTED]
@@ -38,20 +43,27 @@ tags:
 - [[DialogTitle()]] - `calls` [EXTRACTED]
 - [[FileUploadField()]] - `calls` [EXTRACTED]
 - [[Label()]] - `calls` [EXTRACTED]
+- [[LearnerBottomNav()]] - `calls` [EXTRACTED]
+- [[LearnerMessagesBell()]] - `calls` [EXTRACTED]
+- [[LearnerSidebar()]] - `calls` [EXTRACTED]
 - [[LogoMark()]] - `calls` [EXTRACTED]
 - [[LogoMark()_1]] - `calls` [EXTRACTED]
 - [[MediaTile()]] - `calls` [EXTRACTED]
+- [[PdfViewer()]] - `calls` [EXTRACTED]
 - [[PdfViewer.tsx]] - `imports` [EXTRACTED]
+- [[PracticeGenerator()]] - `calls` [EXTRACTED]
+- [[Process()]] - `calls` [EXTRACTED]
+- [[ProcessingCard()]] - `calls` [EXTRACTED]
 - [[Progress()]] - `calls` [EXTRACTED]
 - [[QuickActionCards()]] - `calls` [EXTRACTED]
 - [[QuickCheck()]] - `calls` [EXTRACTED]
 - [[QuoteLayout()]] - `calls` [EXTRACTED]
+- [[Recap()]] - `calls` [EXTRACTED]
 - [[ResizableSplit()]] - `calls` [EXTRACTED]
 - [[RichText()]] - `calls` [EXTRACTED]
 - [[Section()]] - `calls` [EXTRACTED]
 - [[SectionReader()]] - `calls` [EXTRACTED]
 - [[SelectionAsk()]] - `calls` [EXTRACTED]
-- [[Separator()]] - `calls` [EXTRACTED]
 - [[SheetContent()]] - `calls` [EXTRACTED]
 - [[SheetHeader()]] - `calls` [EXTRACTED]
 - [[SheetTitle()]] - `calls` [EXTRACTED]
@@ -60,16 +72,22 @@ tags:
 - [[SlideTitle()]] - `calls` [EXTRACTED]
 - [[StatTrio()]] - `calls` [EXTRACTED]
 - [[SummaryText()]] - `calls` [EXTRACTED]
-- [[TenantAssessmentsPage()]] - `calls` [INFERRED]
-- [[TenantMaterialDetailPage()]] - `calls` [INFERRED]
+- [[TenantAssessmentsPage()]] - `calls` [EXTRACTED]
+- [[TenantMaterialDetailPage()]] - `calls` [EXTRACTED]
 - [[TenantMaterialsPage()]] - `calls` [EXTRACTED]
+- [[TenantMessagesBell()]] - `calls` [EXTRACTED]
+- [[TenantSidebarBody()]] - `calls` [EXTRACTED]
 - [[TenantStudentsPage()]] - `calls` [EXTRACTED]
 - [[ThreadBubble()]] - `calls` [EXTRACTED]
+- [[TranscriptPanel()]] - `calls` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `imports` [EXTRACTED]
 - [[TwoColumn()]] - `calls` [EXTRACTED]
 - [[TypeBadge()]] - `calls` [EXTRACTED]
+- [[UpgradeDialog()]] - `calls` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
 - [[UserSidebarFooter()]] - `calls` [EXTRACTED]
+- [[VideoInner()]] - `calls` [EXTRACTED]
+- [[VideoTutorialViewer()]] - `calls` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `imports` [EXTRACTED]
 - [[activity-heatmap.tsx]] - `imports` [EXTRACTED]
 - [[avatar.tsx]] - `imports` [EXTRACTED]
@@ -104,7 +122,6 @@ tags:
 - [[rich-text.tsx]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[selection-ask.tsx]] - `imports` [EXTRACTED]
-- [[separator.tsx]] - `imports` [EXTRACTED]
 - [[sheet.tsx]] - `imports` [EXTRACTED]
 - [[summary-text.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
@@ -113,4 +130,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

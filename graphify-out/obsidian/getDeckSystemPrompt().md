@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-prompt.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # getDeckSystemPrompt()
@@ -18,4 +18,4 @@ tags:
 - [[languageGuidance()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

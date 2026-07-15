@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Grading Engine Design Docs"
+community: "Question Grading Engine"
 location: "§4.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Grading_Engine_Design_Docs
+  - community/Question_Grading_Engine
 ---
 
 # Question Banks (AI-Generated + Manual, Approve Flow)
@@ -15,4 +15,4 @@ tags:
 - [[11-Type Question Grading Engine (packagestypesgrading.ts)]] - `references` [EXTRACTED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Grading_Engine_Design_Docs
+#graphify/concept #graphify/EXTRACTED #community/Question_Grading_Engine

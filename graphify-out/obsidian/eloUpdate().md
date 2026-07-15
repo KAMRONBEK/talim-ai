@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Section Mastery (Elo-KT)"
+community: "Community None"
 location: "L135"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery_Elo-KT
+  - community/Community_None
 ---
 
 # eloUpdate()
@@ -17,4 +17,4 @@ tags:
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 - [[sigmoid()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "paper"
-community: "Question Engine Design Docs"
+community: "Question Engine Rework Design"
 location: "header research base"
 tags:
   - graphify/paper
   - graphify/EXTRACTED
-  - community/Question_Engine_Design_Docs
+  - community/Question_Engine_Rework_Design
 ---
 
 # IWF Item-Writing Rubric (research)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `cites` [EXTRACTED]
 
-#graphify/paper #graphify/EXTRACTED #community/Question_Engine_Design_Docs
+#graphify/paper #graphify/EXTRACTED #community/Question_Engine_Rework_Design

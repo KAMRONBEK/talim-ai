@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Community None"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Community_None
 ---
 
 # wholeMaterialTarget()
 
 ## Connections
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Community_None

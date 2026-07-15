@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/assignments.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Community_None
 ---
 
 # assignments.ts
@@ -17,10 +17,10 @@ tags:
 - [[assignmentSchema]] - `imports` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[listContentAssignments()_1]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_3]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[unassignContent()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

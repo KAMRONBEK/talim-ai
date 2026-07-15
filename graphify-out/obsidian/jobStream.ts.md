@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/jobStream.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Community_None
 ---
 
 # jobStream.ts
@@ -16,8 +16,9 @@ tags:
 - [[JobStream]] - `contains` [EXTRACTED]
 - [[Listener]] - `contains` [EXTRACTED]
 - [[ManimVideo.tsx]] - `imports_from` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[getApiBaseUrl()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

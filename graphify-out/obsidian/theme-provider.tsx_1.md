@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/theme-provider.tsx"
 type: "code"
-community: "Web Theme Provider"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Theme_Provider
+  - community/Community_None
 ---
 
 # theme-provider.tsx
 
 ## Connections
 - [[ThemeProvider()_1]] - `contains` [EXTRACTED]
+- [[providers.tsx_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Theme_Provider
+#graphify/code #graphify/EXTRACTED #community/Community_None

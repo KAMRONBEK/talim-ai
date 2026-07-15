@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Community_None
 ---
 
 # page.tsx
@@ -18,12 +18,14 @@ tags:
 - [[JoinCodeCard()]] - `imports` [EXTRACTED]
 - [[Label()]] - `imports` [EXTRACTED]
 - [[OnboardingChecklist()]] - `imports` [EXTRACTED]
+- [[PasswordCard()]] - `imports` [EXTRACTED]
 - [[ProfileCard()]] - `imports` [EXTRACTED]
 - [[TenantSettingsPage()]] - `contains` [EXTRACTED]
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[join-code-card.tsx]] - `imports_from` [EXTRACTED]
 - [[onboarding-checklist.tsx]] - `imports_from` [EXTRACTED]
+- [[password-card.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[useAssessments.ts]] - `imports_from` [EXTRACTED]
 - [[usePatchTenant()]] - `imports` [EXTRACTED]
@@ -34,4 +36,4 @@ tags:
 - [[useTenantContents()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

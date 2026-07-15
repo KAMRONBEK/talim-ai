@@ -1,21 +1,21 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Community None"
 location: "L122"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Community_None
 ---
 
 # usePatchBankQuestion()
 
 ## Connections
 - [[QuestionEditor()]] - `calls` [EXTRACTED]
-- [[TenantAssessmentsPage()]] - `calls` [INFERRED]
+- [[TenantAssessmentsPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

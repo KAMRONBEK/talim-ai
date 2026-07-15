@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/package.json"
-type: "code"
-community: "API Dev Tooling Config"
-location: "L44"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L28"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/API_Dev_Tooling_Config
+  - community/Community_None
 ---
 
 # @talim/tsconfig
 
 ## Connections
-- [[devDependencies_1]] - `contains` [EXTRACTED]
+- [[@talimtsconfig]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Dev_Tooling_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

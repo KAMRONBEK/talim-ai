@@ -1,17 +1,18 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Config"
+community: "Community None"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Community_None
 ---
 
 # tailwind-merge
 
 ## Connections
-- [[dependencies_4]] - `contains` [EXTRACTED]
+- [[dependencies_5]] - `contains` [EXTRACTED]
+- [[tailwind-merge_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-schema.ts"
 type: "code"
-community: "Deck Schema"
-location: "L184"
+community: "Community None"
+location: "L220"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Schema
+  - community/Community_None
 ---
 
 # deckSchema
@@ -15,4 +15,4 @@ tags:
 - [[deck-schema.ts]] - `contains` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Schema
+#graphify/code #graphify/EXTRACTED #community/Community_None

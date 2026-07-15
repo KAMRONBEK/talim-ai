@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/package.json"
-type: "code"
-community: "API Dev Tooling Config"
-location: "L53"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L33"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/API_Dev_Tooling_Config
+  - community/Community_None
 ---
 
 # eslint
 
 ## Connections
-- [[devDependencies_1]] - `contains` [EXTRACTED]
+- [[eslint]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Dev_Tooling_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

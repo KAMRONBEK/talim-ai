@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/srs.service.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # srs.service.ts
@@ -22,8 +22,8 @@ tags:
 - [[contentAccess.service.ts]] - `imports_from` [EXTRACTED]
 - [[error.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[reviewFlashcard()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

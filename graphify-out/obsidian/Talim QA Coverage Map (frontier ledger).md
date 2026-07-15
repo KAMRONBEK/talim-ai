@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/coverage-map.md"
 type: "document"
-community: "Product Plans & Epics"
+community: "QA Deferred Bug Reports"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Deferred_Bug_Reports
 ---
 
 # Talim QA Coverage Map (frontier ledger)
@@ -26,4 +26,4 @@ tags:
 - [[Run 18 — Session-based deep QA of the post-2026-06-28 surface]] - `references` [EXTRACTED]
 - [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/QA_Deferred_Bug_Reports

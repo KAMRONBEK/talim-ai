@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/banks.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Community_None
 ---
 
 # banks.ts
@@ -50,7 +50,7 @@ tags:
 - [[parseQuestionConfig()]] - `imports` [EXTRACTED]
 - [[patchQuestion()_1]] - `contains` [EXTRACTED]
 - [[patchQuestionSchema]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[question-builders.ts]] - `imports_from` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `imports_from` [EXTRACTED]
@@ -59,4 +59,4 @@ tags:
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 - [[typesFromStyle()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg"
 type: "image"
-community: "QA Screenshots (UZ Navbar)"
+community: "Uzbek Landing Defects"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/QA_Screenshots_UZ_Navbar
+  - community/Uzbek_Landing_Defects
 ---
 
 # QA screenshot: Uzbek landing page at tablet 768px showing navbar pre-fix state
@@ -16,4 +16,4 @@ tags:
 - [[Product demo card 'Genetik kod va tarjima' (Biologiya 101, 11-bob) showing AI outputs summary (3 min read), podcast (8 min listen), quiz (12 questions), 72% progress bar]] - `references` [EXTRACTED]
 - [[Uzbek (uz) locale rendering of the marketing landing page — longer Uzbek strings drive the navbar wrapping at tablet width]] - `references` [EXTRACTED]
 
-#graphify/image #graphify/EXTRACTED #community/QA_Screenshots_UZ_Navbar
+#graphify/image #graphify/EXTRACTED #community/Uzbek_Landing_Defects

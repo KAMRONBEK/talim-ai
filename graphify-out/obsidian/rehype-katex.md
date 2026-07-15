@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
-location: "L27"
+community: "Community None"
+location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # rehype-katex
 
 ## Connections
 - [[dependencies_2]] - `contains` [EXTRACTED]
+- [[rehype-katex_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

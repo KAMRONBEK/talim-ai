@@ -1,22 +1,21 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/page.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Auth__Assignment_UI
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # TenantMaterialDetailPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[buttonVariants]] - `calls` [INFERRED]
-- [[cn()]] - `calls` [INFERRED]
-- [[formatRelativeTime()]] - `calls` [INFERRED]
+- [[buttonVariants]] - `calls` [EXTRACTED]
+- [[cn()]] - `calls` [EXTRACTED]
+- [[formatRelativeTime()]] - `calls` [EXTRACTED]
 - [[page.tsx_23]] - `contains` [EXTRACTED]
-- [[useTenantContent()]] - `calls` [INFERRED]
+- [[useTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

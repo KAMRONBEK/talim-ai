@@ -1,13 +1,13 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Persona (Karim)"
+community: "Karim Persona"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Persona_Karim
+  - community/Karim_Persona
 ---
 
 # Persona: Karim (impatient tutor)
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Persona_Karim
+#graphify/concept #graphify/EXTRACTED #community/Karim_Persona

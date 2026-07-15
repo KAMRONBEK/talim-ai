@@ -1,12 +1,12 @@
 ---
 source_file: ".cursor/mcp.json"
 type: "code"
-community: "Cursor MCP Config"
+community: "Playwright MCP Config"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Cursor_MCP_Config
+  - community/Playwright_MCP_Config
 ---
 
 # talim-vps
@@ -15,4 +15,4 @@ tags:
 - [[bash]] - `references` [EXTRACTED]
 - [[mcp.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Cursor_MCP_Config
+#graphify/code #graphify/EXTRACTED #community/Playwright_MCP_Config

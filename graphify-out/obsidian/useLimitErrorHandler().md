@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "Community None"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Community_None
 ---
 
 # useLimitErrorHandler()
@@ -15,14 +15,16 @@ tags:
 - [[ChatWindow()]] - `calls` [EXTRACTED]
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
 - [[ContentStage()]] - `calls` [EXTRACTED]
-- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[ContentWorkspaceInner()]] - `calls` [EXTRACTED]
 - [[FlashcardsInner()]] - `calls` [EXTRACTED]
+- [[INDIVIDUAL_QUOTA_FEATURES]] - `references` [EXTRACTED]
 - [[PodcastPageInner()]] - `calls` [EXTRACTED]
 - [[PracticeGenerator()]] - `calls` [EXTRACTED]
 - [[SlidesInner()]] - `calls` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
 - [[VideoInner()]] - `calls` [EXTRACTED]
 - [[YoutubeLinkForm()]] - `calls` [EXTRACTED]
+- [[classifyLimitError()]] - `calls` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
@@ -30,6 +32,7 @@ tags:
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useContentActions()]] - `calls` [EXTRACTED]
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
@@ -37,4 +40,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `contains` [EXTRACTED]
 - [[useUpgradeModal]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Community_None

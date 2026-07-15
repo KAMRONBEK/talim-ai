@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckMarkdown.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Community_None
 ---
 
 # DeckMarkdown()
@@ -16,4 +16,4 @@ tags:
 - [[Slide.tsx]] - `imports` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

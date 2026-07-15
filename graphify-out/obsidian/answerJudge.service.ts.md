@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/answerJudge.service.ts"
 type: "code"
-community: "Quiz Controller & Grading"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Community_None
 ---
 
 # answerJudge.service.ts
@@ -32,10 +32,10 @@ tags:
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 - [[normalizeAnswer()]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quizQuestionKey()]] - `contains` [EXTRACTED]
 - [[verdictHash()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "concept"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # apps/admin — platform-admin panel (Talim Admin, port 3001)
@@ -16,4 +16,4 @@ tags:
 - [[Admin routes (dashboardtutor-requestsuserstenantscontentgeneratedsubscriptionsusageaudit)]] - `references` [EXTRACTED]
 - [[appsadmin Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Architecture

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mastery.service.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # mastery.service.ts
@@ -22,7 +22,7 @@ tags:
 - [[getLearnerMastery()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
 - [[resolveSectionTitles()]] - `contains` [EXTRACTED]
@@ -30,4 +30,4 @@ tags:
 - [[roundPct()]] - `contains` [EXTRACTED]
 - [[tenant.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

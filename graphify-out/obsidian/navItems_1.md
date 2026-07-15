@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Marketing Landing Components"
-location: "L13"
+community: "Community None"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Community_None
 ---
 
 # navItems
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

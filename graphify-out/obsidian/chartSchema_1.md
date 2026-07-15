@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-chart.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Community_None
 ---
 
 # chartSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-chart.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Community_None

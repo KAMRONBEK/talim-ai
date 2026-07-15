@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/rasterize-pdf.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Community_None
 ---
 
 # rasterizePdfToImages()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[loadPdfJs()]] - `calls` [EXTRACTED]
 - [[rasterize-pdf.ts]] - `contains` [EXTRACTED]
+- [[useReparseContent()]] - `calls` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Community_None

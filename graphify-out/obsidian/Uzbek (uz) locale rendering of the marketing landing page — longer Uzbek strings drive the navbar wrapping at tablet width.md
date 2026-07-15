@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg"
 type: "concept"
-community: "QA Screenshots (UZ Navbar)"
+community: "Uzbek Landing Defects"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Screenshots_UZ_Navbar
+  - community/Uzbek_Landing_Defects
 ---
 
 # Uzbek (uz) locale rendering of the marketing landing page — longer Uzbek strings drive the navbar wrapping at tablet width
@@ -14,4 +14,4 @@ tags:
 - [[Defect nav labels 'Qanday ishlaydi' and O'qituvchilar uchun wrap onto two lines inside the pill at 768px, breaking navbar alignment]] - `conceptually_related_to` [INFERRED]
 - [[QA screenshot Uzbek landing page at tablet 768px showing navbar pre-fix state]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Screenshots_UZ_Navbar
+#graphify/concept #graphify/EXTRACTED #community/Uzbek_Landing_Defects

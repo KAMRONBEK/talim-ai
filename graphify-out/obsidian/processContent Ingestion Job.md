@@ -1,12 +1,12 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Feature Catalog Docs"
+community: "Feature Catalog Overview"
 location: "§5"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Feature_Catalog_Docs
+  - community/Feature_Catalog_Overview
 ---
 
 # processContent Ingestion Job
@@ -16,4 +16,4 @@ tags:
 - [[Hierarchical Sectioning (2-level chaptersubsection)]] - `references` [INFERRED]
 - [[Talim AI Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/INFERRED #community/Feature_Catalog_Docs
+#graphify/concept #graphify/INFERRED #community/Feature_Catalog_Overview

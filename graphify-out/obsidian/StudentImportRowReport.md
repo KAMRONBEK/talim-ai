@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Student Management Service"
-location: "L306"
+community: "Community None"
+location: "L309"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Student_Management_Service
+  - community/Community_None
 ---
 
 # StudentImportRowReport
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Student_Management_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

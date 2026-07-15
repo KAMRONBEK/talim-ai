@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L423"
+community: "Community None"
+location: "L426"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Community_None
 ---
 
 # ocrImageDataUrl()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[extractRegionTextFromImage()]] - `calls` [EXTRACTED]
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
+- [[rasterizeAndOcrPdf()]] - `calls` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

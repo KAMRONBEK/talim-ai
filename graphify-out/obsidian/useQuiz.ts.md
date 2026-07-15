@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Player UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Community_None
 ---
 
 # useQuiz.ts
@@ -21,6 +21,8 @@ tags:
 - [[QuizCard.tsx]] - `imports_from` [EXTRACTED]
 - [[QuizWithLatestAttempt]] - `imports` [EXTRACTED]
 - [[WrittenCheckResult]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isQuizGenerationStale()]] - `contains` [EXTRACTED]
@@ -40,4 +42,4 @@ tags:
 - [[useSavedSummary()]] - `contains` [EXTRACTED]
 - [[useSubmitQuiz()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

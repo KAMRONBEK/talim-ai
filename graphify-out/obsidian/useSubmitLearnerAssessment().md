@@ -1,21 +1,21 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Community None"
 location: "L327"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Community_None
 ---
 
 # useSubmitLearnerAssessment()
 
 ## Connections
 - [[GameQuizPlayer()]] - `calls` [EXTRACTED]
-- [[WrittenForm()]] - `calls` [INFERRED]
+- [[WrittenForm()]] - `calls` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

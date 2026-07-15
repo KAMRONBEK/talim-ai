@@ -1,17 +1,17 @@
 ---
-source_file: "packages/types/package.json"
-type: "code"
-community: "Types Package Config"
-location: "L20"
+source_file: "apps/api/package.json"
+type: "concept"
+community: "Community None"
+location: "L44"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Types_Package_Config
+  - community/Community_None
 ---
 
 # @talim/tsconfig
 
 ## Connections
-- [[devDependencies_5]] - `contains` [EXTRACTED]
+- [[@talimtsconfig_2]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Types_Package_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

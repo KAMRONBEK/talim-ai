@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/badges.service.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # clamp01()
@@ -15,4 +15,4 @@ tags:
 - [[badges.service.ts]] - `contains` [EXTRACTED]
 - [[computeBadges()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

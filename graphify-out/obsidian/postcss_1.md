@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/package.json"
-type: "code"
-community: "Web App Dependencies"
-location: "L42"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L35"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # postcss
 
 ## Connections
-- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[postcss]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

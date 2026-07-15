@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
-location: "L147"
+community: "Community None"
+location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Community_None
 ---
 
 # QuotaFeature
@@ -18,8 +18,7 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[limit-error.ts]] - `imports` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports` [EXTRACTED]
-- [[shared.ts_2]] - `imports` [EXTRACTED]
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/Community_None
 ---
 
 # ai.service.ts
@@ -15,6 +15,7 @@ tags:
 - [[AiUsageContext]] - `contains` [EXTRACTED]
 - [[ChatMessageContent]] - `contains` [EXTRACTED]
 - [[ChatMessageInput]] - `contains` [EXTRACTED]
+- [[DeepSeekThinking]] - `contains` [EXTRACTED]
 - [[Env]] - `imports` [EXTRACTED]
 - [[TutorGraphIntent]] - `imports` [EXTRACTED]
 - [[TutorStreamEvent]] - `contains` [EXTRACTED]
@@ -36,12 +37,14 @@ tags:
 - [[handleTutorToolCall()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
-- [[openai_1]] - `contains` [EXTRACTED]
+- [[openai_2]] - `contains` [EXTRACTED]
 - [[question-gen.ts]] - `imports_from` [EXTRACTED]
 - [[recordCompletionUsage()]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
+- [[streamChatCompletion()]] - `contains` [EXTRACTED]
+- [[streamTutorWithTools()]] - `contains` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[toTextOnlyMessages()]] - `contains` [EXTRACTED]
 - [[tutor-graph-intent.ts]] - `imports_from` [EXTRACTED]
@@ -50,4 +53,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[withTutorToolInstructions()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

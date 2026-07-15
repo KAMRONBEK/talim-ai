@@ -1,19 +1,17 @@
 ---
 source_file: "apps/api/package.json"
-type: "code"
-community: "API Package Config"
-location: "L58"
+type: "concept"
+community: "Community None"
+location: "L38"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/API_Package_Config
+  - community/Community_None
 ---
 
 # prisma
 
 ## Connections
-- [[package.json_1]] - `contains` [EXTRACTED]
-- [[schema]] - `contains` [EXTRACTED]
-- [[seed]] - `contains` [EXTRACTED]
+- [[prisma]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Package_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

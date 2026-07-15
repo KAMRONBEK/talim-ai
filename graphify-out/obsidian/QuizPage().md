@@ -1,23 +1,22 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Player UI"
+community: "Community None"
 location: "L280"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Quiz_Player_UI
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # QuizPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[isQuizGenerationStale()]] - `calls` [INFERRED]
+- [[isQuizGenerationStale()]] - `calls` [EXTRACTED]
 - [[page.tsx_40]] - `contains` [EXTRACTED]
-- [[useContent()]] - `calls` [INFERRED]
-- [[useLatestQuizAttempt()]] - `calls` [INFERRED]
-- [[useQuiz()]] - `calls` [INFERRED]
-- [[useSubmitQuiz()]] - `calls` [INFERRED]
+- [[useContent()]] - `calls` [EXTRACTED]
+- [[useLatestQuizAttempt()]] - `calls` [EXTRACTED]
+- [[useQuiz()]] - `calls` [EXTRACTED]
+- [[useSubmitQuiz()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

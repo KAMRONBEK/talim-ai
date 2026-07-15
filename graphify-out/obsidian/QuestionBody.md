@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/question-editor.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
-location: "L64"
+community: "Community None"
+location: "L58"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Community_None
 ---
 
 # QuestionBody
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[question-editor.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

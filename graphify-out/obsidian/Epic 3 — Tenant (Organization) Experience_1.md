@@ -1,19 +1,18 @@
 ---
 source_file: "docs/plans/epic-3-tenant-experience.md"
 type: "document"
-community: "Billing & Admin Plan Docs"
+community: "Community None"
+location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Billing__Admin_Plan_Docs
+  - community/Community_None
 ---
 
-# Epic 3 — Tenant (Organization) Experience
+# Epic 3 — Tenant (organization) experience
 
 ## Connections
-- [[Content Assignment & Learner Scoping]] - `references` [EXTRACTED]
-- [[Epic 1 — Subscriptions & Billing_1]] - `references` [EXTRACTED]
-- [[Epic 6 — Tenant AI Assistant_1]] - `references` [EXTRACTED]
-- [[Epic Prompts Index]] - `references` [EXTRACTED]
+- [[Cursor prompt_3]] - `contains` [EXTRACTED]
+- [[epic-3-tenant-experience]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Billing__Admin_Plan_Docs
+#graphify/document #graphify/EXTRACTED #community/Community_None

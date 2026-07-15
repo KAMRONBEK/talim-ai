@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # generateVideo.job.ts
@@ -28,7 +28,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[parseAppLocale()]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
@@ -40,4 +40,4 @@ tags:
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

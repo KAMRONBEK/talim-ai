@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/podcast-segments.ts"
 type: "code"
-community: "Transcript Panel UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel_UI
+  - community/Community_None
 ---
 
 # podcast-segments.ts
@@ -19,4 +19,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[rescalePodcastSegments()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

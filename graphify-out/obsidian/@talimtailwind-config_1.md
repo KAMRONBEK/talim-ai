@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/package.json"
-type: "code"
-community: "Web App Dependencies"
-location: "L34"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L27"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Community_None
 ---
 
 # @talim/tailwind-config
 
 ## Connections
-- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[@talimtailwind-config]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

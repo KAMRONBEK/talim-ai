@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/src/services/embed.service.ts"
+source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "Usage Pricing & Metering"
-location: "L7"
+community: "Community None"
+location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Community_None
 ---
 
 # openai
 
 ## Connections
-- [[embed.service.ts]] - `contains` [EXTRACTED]
+- [[ai.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Community_None

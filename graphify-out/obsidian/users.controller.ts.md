@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/users.controller.ts"
 type: "code"
-community: "Admin Content & Audit Controllers"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Audit_Controllers
+  - community/Community_None
 ---
 
 # users.controller.ts
@@ -45,7 +45,7 @@ tags:
 - [[patchUser()]] - `contains` [EXTRACTED]
 - [[patchUserSchema]] - `contains` [EXTRACTED]
 - [[patchUserSubscription()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[resetPasswordSchema]] - `contains` [EXTRACTED]
 - [[resetUserPassword()]] - `contains` [EXTRACTED]
@@ -56,4 +56,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Audit_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

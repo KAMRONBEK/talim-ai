@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/chunk-sampling.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # SampledChunk
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[chunk-sampling.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

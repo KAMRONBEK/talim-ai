@@ -1,19 +1,20 @@
 ---
 source_file: "docs/PLANS.md"
-type: "concept"
-community: "Product Plans & Epics"
+type: "document"
+community: "Product Planning Backlog"
+location: "L90"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/Product_Planning_Backlog
 ---
 
-# Epic 3 — Tenant (Organization) Experience
+# Epic 3 — Tenant (organization) experience
 
 ## Connections
-- [[Epic 1 — Subscriptions & Billing]] - `references` [EXTRACTED]
-- [[Epic 6 — Tenant AI Assistant]] - `references` [EXTRACTED]
-- [[US-LEARNER-01 Learner sees only assigned materials]] - `conceptually_related_to` [INFERRED]
-- [[User Role Model (INDIVIDUAL  TENANT_OWNER  TENANT_LEARNER  ADMIN)]] - `conceptually_related_to` [INFERRED]
+- [[AI prompt_2]] - `contains` [EXTRACTED]
+- [[Data model notes]] - `contains` [EXTRACTED]
+- [[Requirements_2]] - `contains` [EXTRACTED]
+- [[Talim AI — Product plans]] - `contains` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/Product_Planning_Backlog

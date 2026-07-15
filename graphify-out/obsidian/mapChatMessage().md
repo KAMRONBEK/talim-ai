@@ -1,17 +1,19 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Community None"
 location: "L66"
 tags:
   - graphify/code
-  - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - graphify/INFERRED
+  - community/Community_None
 ---
 
 # mapChatMessage()
 
 ## Connections
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
+- [[getContentChat()]] - `indirect_call` [INFERRED]
+- [[getMessages()]] - `indirect_call` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/INFERRED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Messaging Hooks"
+community: "Community None"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Messaging_Hooks
+  - community/Community_None
 ---
 
 # formatUzbek()
@@ -15,4 +15,4 @@ tags:
 - [[format-relative-time.ts]] - `contains` [EXTRACTED]
 - [[formatRelativeTime()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

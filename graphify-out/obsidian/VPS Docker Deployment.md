@@ -1,11 +1,11 @@
 ---
 source_file: "docs/DEPLOY.md"
 type: "document"
-community: "Deployment Docs"
+community: "Deployment & Infrastructure"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Deployment_Docs
+  - community/Deployment__Infrastructure
 ---
 
 # VPS Docker Deployment
@@ -14,8 +14,8 @@ tags:
 - [[Admin Subdomain DNS + SSL]] - `references` [EXTRACTED]
 - [[CI Deploy Workflow]] - `references` [EXTRACTED]
 - [[Docker Compose Prod Stack]] - `references` [EXTRACTED]
-- [[Doppler prd Secrets]] - `references` [EXTRACTED]
-- [[First Platform Admin Creation]] - `references` [EXTRACTED]
+- [[Doppler `prd` secrets]] - `references` [EXTRACTED]
+- [[First platform admin]] - `references` [EXTRACTED]
 - [[nginx Reverse Proxy]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Deployment_Docs
+#graphify/document #graphify/EXTRACTED #community/Deployment__Infrastructure

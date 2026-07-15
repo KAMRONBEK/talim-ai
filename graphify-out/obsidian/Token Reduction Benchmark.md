@@ -1,13 +1,13 @@
 ---
 source_file: ".claude/skills/graphify/references/exports.md"
 type: "concept"
-community: "Graphify Benchmark Doc"
+community: "Token Reduction Benchmark"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Benchmark_Doc
+  - community/Token_Reduction_Benchmark
 ---
 
 # Token Reduction Benchmark
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Benchmark_Doc
+#graphify/concept #graphify/EXTRACTED #community/Token_Reduction_Benchmark

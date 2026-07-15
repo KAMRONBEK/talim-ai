@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Assessment Service"
-location: "L314"
+community: "Community None"
+location: "L308"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Service
+  - community/Community_None
 ---
 
 # formatAssessment()
@@ -14,8 +14,9 @@ tags:
 ## Connections
 - [[assessments.ts]] - `imports` [EXTRACTED]
 - [[createAssessment()_1]] - `calls` [EXTRACTED]
+- [[listAssessments()_1]] - `indirect_call` [INFERRED]
 - [[scheduleAssessment()_1]] - `calls` [EXTRACTED]
 - [[setAssessmentLive()]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,19 +1,23 @@
 ---
 source_file: "apps/admin/lib/plan.ts"
 type: "code"
-community: "Admin Subscription UI"
+community: "Community None"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Community_None
 ---
 
 # planLabel()
 
 ## Connections
-- [[TenantDetailPage()]] - `calls` [INFERRED]
-- [[UserDetailPage()]] - `calls` [INFERRED]
+- [[DrawerBody()]] - `calls` [EXTRACTED]
+- [[SubscriptionsPage()]] - `calls` [EXTRACTED]
+- [[TenantDetailPage()]] - `calls` [EXTRACTED]
+- [[TenantsPage()]] - `calls` [EXTRACTED]
+- [[UserDetailPage()]] - `calls` [EXTRACTED]
+- [[UsersPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_4]] - `imports` [EXTRACTED]
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_6]] - `imports` [EXTRACTED]
@@ -22,4 +26,4 @@ tags:
 - [[plan.ts]] - `contains` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

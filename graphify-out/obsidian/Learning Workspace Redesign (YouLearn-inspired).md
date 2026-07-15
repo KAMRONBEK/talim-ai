@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "AI Tutor & RAG Plans"
+community: "AI Tutor Workspace"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/AI_Tutor__RAG_Plans
+  - community/AI_Tutor_Workspace
 ---
 
 # Learning Workspace Redesign (YouLearn-inspired)
@@ -18,4 +18,4 @@ tags:
 - [[Role Adaptations (server-side security)]] - `references` [EXTRACTED]
 - [[Visual Direction (girih, marker-highlight)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/AI_Tutor__RAG_Plans
+#graphify/document #graphify/EXTRACTED #community/AI_Tutor_Workspace

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L177"
+community: "Community None"
+location: "L181"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Community_None
 ---
 
 # getSubmittedOptionLabel()
@@ -15,4 +15,4 @@ tags:
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 - [[resolveSubmittedAnswer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Community_None

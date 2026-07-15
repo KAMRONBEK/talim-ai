@@ -1,17 +1,18 @@
 ---
 source_file: "apps/admin/package.json"
 type: "code"
-community: "Admin App Dependencies"
+community: "Community None"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_Dependencies
+  - community/Community_None
 ---
 
 # eslint
 
 ## Connections
 - [[devDependencies]] - `contains` [EXTRACTED]
+- [[eslint_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

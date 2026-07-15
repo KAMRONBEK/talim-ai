@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/src/jobs/generateVideo.job.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Community None"
 location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Community_None
 ---
 
 # estimateDurationSec()
 
 ## Connections
 - [[generateVideo.job.ts]] - `contains` [EXTRACTED]
+- [[registerGenerateVideoJob()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

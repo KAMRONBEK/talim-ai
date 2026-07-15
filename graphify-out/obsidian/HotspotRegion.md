@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Answer Grading Engine"
+community: "Community None"
 location: "L291"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Answer_Grading_Engine
+  - community/Community_None
 ---
 
 # HotspotRegion
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[grading.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Answer_Grading_Engine
+#graphify/code #graphify/EXTRACTED #community/Community_None

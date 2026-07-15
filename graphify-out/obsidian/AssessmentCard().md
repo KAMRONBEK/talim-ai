@@ -1,19 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Messaging Hooks"
+community: "Community None"
 location: "L739"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Messaging_Hooks
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # AssessmentCard()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[formatRelativeTime()]] - `calls` [INFERRED]
+- [[formatRelativeTime()]] - `calls` [EXTRACTED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

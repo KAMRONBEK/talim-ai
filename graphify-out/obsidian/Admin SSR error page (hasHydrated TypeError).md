@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/_admin_err.html"
 type: "document"
-community: "QA Admin Error Screens"
+community: "Admin SSR Errors"
 tags:
   - graphify/document
   - graphify/INFERRED
-  - community/QA_Admin_Error_Screens
+  - community/Admin_SSR_Errors
 ---
 
 # Admin SSR error page (hasHydrated TypeError)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Generic Internal Server Error page]] - `semantically_similar_to` [INFERRED]
 
-#graphify/document #graphify/INFERRED #community/QA_Admin_Error_Screens
+#graphify/document #graphify/INFERRED #community/Admin_SSR_Errors

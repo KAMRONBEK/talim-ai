@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tutorRequest.service.ts"
 type: "code"
-community: "Auth Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller
+  - community/Community_None
 ---
 
 # tutorRequest.service.ts
@@ -25,8 +25,8 @@ tags:
 - [[formatRequest()]] - `contains` [EXTRACTED]
 - [[getMyLatestTutorRequest()]] - `contains` [EXTRACTED]
 - [[listTutorRequests()_1]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[rejectTutorRequest()_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

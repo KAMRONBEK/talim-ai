@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "AI Tutor & RAG Plans"
+community: "AI Tutor Workspace"
 location: "§6.6"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/AI_Tutor__RAG_Plans
+  - community/AI_Tutor_Workspace
 ---
 
 # Multi-Tenant Isolation Guard (contentAccess.service)
@@ -16,4 +16,4 @@ tags:
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 - [[Talim AI Platform Guide]] - `references` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/AI_Tutor__RAG_Plans
+#graphify/concept #graphify/INFERRED #community/AI_Tutor_Workspace

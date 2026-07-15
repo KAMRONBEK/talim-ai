@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "Summary Controller"
-location: "L115"
+community: "Community None"
+location: "L111"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary_Controller
+  - community/Community_None
 ---
 
 # generateChatCompletion()
@@ -17,6 +17,7 @@ tags:
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[generateSummaryText()]] - `calls` [EXTRACTED]
 - [[recordCompletionUsage()]] - `calls` [EXTRACTED]
+- [[registerGeneratePodcastJob()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

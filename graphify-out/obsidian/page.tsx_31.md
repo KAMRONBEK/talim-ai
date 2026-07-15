@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Community_None
 ---
 
 # page.tsx
@@ -41,6 +41,8 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[resizable-split.tsx]] - `imports_from` [EXTRACTED]
 - [[summary-text.tsx]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useChatStore]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports_from` [EXTRACTED]
 - [[useContent()]] - `imports` [EXTRACTED]
@@ -58,4 +60,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

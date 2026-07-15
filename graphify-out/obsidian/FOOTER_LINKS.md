@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/footer.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Community_None
 ---
 
 # FOOTER_LINKS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/coverage-map.md"
 type: "concept"
-community: "Product Plans & Epics"
+community: "Route Coverage Enumeration"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/Route_Coverage_Enumeration
 ---
 
 # Coverage Cell (route × role × state-variant)
@@ -15,4 +15,4 @@ tags:
 - [[Route Auto-Enumeration at Run Start]] - `conceptually_related_to` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/concept #graphify/EXTRACTED #community/Route_Coverage_Enumeration

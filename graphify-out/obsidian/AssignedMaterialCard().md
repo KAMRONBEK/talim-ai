@@ -1,19 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Community None"
 location: "L55"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Auth__Assignment_UI
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # AssignedMaterialCard()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[cn()]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[page.tsx_16]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

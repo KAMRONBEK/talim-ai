@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/content.routes.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Community_None
 ---
 
 # content.routes.ts
@@ -36,4 +36,4 @@ tags:
 - [[upload.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

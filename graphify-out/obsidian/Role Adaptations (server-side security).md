@@ -1,11 +1,11 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "rationale"
-community: "AI Tutor & RAG Plans"
+community: "AI Tutor Workspace"
 tags:
   - graphify/rationale
   - graphify/INFERRED
-  - community/AI_Tutor__RAG_Plans
+  - community/AI_Tutor_Workspace
 ---
 
 # Role Adaptations (server-side security)
@@ -14,4 +14,4 @@ tags:
 - [[Learning Workspace Redesign (YouLearn-inspired)]] - `references` [EXTRACTED]
 - [[Multi-Tenant Isolation Guard (contentAccess.service)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/INFERRED #community/AI_Tutor__RAG_Plans
+#graphify/rationale #graphify/INFERRED #community/AI_Tutor_Workspace

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateFlashcards.job.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Community_None
 ---
 
 # GeneratedCard
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generateFlashcards.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

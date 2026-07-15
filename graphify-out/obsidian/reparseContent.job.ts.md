@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/reparseContent.job.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Community_None
 ---
 
 # reparseContent.job.ts
@@ -25,7 +25,7 @@ tags:
 - [[ingestText()]] - `imports` [EXTRACTED]
 - [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[pdf.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
@@ -34,4 +34,4 @@ tags:
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[storage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

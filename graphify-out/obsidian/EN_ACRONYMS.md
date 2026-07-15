@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "Podcast Generation & TTS"
-location: "L3"
+community: "Community None"
+location: "L135"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Community_None
 ---
 
 # EN_ACRONYMS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tts-normalize.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Community_None

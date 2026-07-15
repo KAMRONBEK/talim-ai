@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Community None"
 location: "L79"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Community_None
 ---
 
 # chunkText()
@@ -17,7 +17,8 @@ tags:
 - [[ingestText()]] - `calls` [EXTRACTED]
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rag.service.ts]] - `contains` [EXTRACTED]
+- [[registerProcessContentJob()]] - `calls` [EXTRACTED]
 - [[toBlocks()]] - `calls` [EXTRACTED]
 - [[tokenTail()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/PLATFORM.md"
 type: "concept"
-community: "Platform Guide Docs"
+community: "Deployment & DevOps"
 location: "§2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Platform_Guide_Docs
+  - community/Deployment__DevOps
 ---
 
 # Three-app Monorepo Architecture
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI Platform Guide]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Platform_Guide_Docs
+#graphify/concept #graphify/EXTRACTED #community/Deployment__DevOps

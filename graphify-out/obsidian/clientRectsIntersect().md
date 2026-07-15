@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/pdf-area-selection.ts"
 type: "code"
-community: "PDF Text Selection"
+community: "Community None"
 location: "L54"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Selection
+  - community/Community_None
 ---
 
 # clientRectsIntersect()
@@ -15,4 +15,4 @@ tags:
 - [[extractTextFromTextLayerMarquee()]] - `calls` [EXTRACTED]
 - [[pdf-area-selection.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection
+#graphify/code #graphify/EXTRACTED #community/Community_None

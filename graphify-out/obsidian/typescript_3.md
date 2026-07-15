@@ -1,17 +1,17 @@
 ---
-source_file: "package.json"
-type: "code"
-community: "Root Dev Tooling"
-location: "L35"
+source_file: "apps/api/package.json"
+type: "concept"
+community: "Community None"
+location: "L54"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Root_Dev_Tooling
+  - community/Community_None
 ---
 
 # typescript
 
 ## Connections
-- [[devDependencies_3]] - `contains` [EXTRACTED]
+- [[typescript_2]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Dev_Tooling
+#graphify/concept #graphify/EXTRACTED #community/Community_None

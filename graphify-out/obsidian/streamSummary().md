@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Summary Controller"
+community: "Community None"
 location: "L240"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary_Controller
+  - community/Community_None
 ---
 
 # streamSummary()
@@ -25,7 +25,8 @@ tags:
 - [[sseData()]] - `calls` [EXTRACTED]
 - [[sseDone()]] - `calls` [EXTRACTED]
 - [[sseHeaders()]] - `calls` [EXTRACTED]
+- [[streamChatCompletion()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/locale-api.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Community_None
 ---
 
 # getApiLocale()
@@ -19,4 +19,4 @@ tags:
 - [[summaryStream.ts]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Community_None

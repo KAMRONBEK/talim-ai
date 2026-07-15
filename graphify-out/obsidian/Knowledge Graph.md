@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Graph Community Detection"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Graph_Community_Detection
 ---
 
 # Knowledge Graph
@@ -13,6 +13,5 @@ tags:
 ## Connections
 - [[Community Detection]] - `conceptually_related_to` [EXTRACTED]
 - [[God Nodes]] - `conceptually_related_to` [EXTRACTED]
-- [[graphify skill]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Graph_Community_Detection

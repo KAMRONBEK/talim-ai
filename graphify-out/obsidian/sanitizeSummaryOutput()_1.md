@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/summary-prompt.ts"
 type: "code"
-community: "AI Prompt Builders"
-location: "L33"
+community: "Community None"
+location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Prompt_Builders
+  - community/Community_None
 ---
 
 # sanitizeSummaryOutput()
@@ -15,4 +15,4 @@ tags:
 - [[locale-prompts.ts]] - `imports` [EXTRACTED]
 - [[summary-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Community None"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Community_None
 ---
 
 # formatTenant()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[getTenant()]] - `calls` [EXTRACTED]
 - [[getTenantForOwner()]] - `calls` [EXTRACTED]
+- [[listTenants()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `imports` [EXTRACTED]
 - [[patchTenant()]] - `calls` [EXTRACTED]
 - [[patchTenantForOwner()]] - `calls` [EXTRACTED]
@@ -22,4 +23,4 @@ tags:
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

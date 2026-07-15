@@ -1,18 +1,20 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Content Query Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Query_Hooks
+  - community/Community_None
 ---
 
 # useTenantContent.ts
 
 ## Connections
 - [[Content]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[content-cache.ts]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[invalidateContentLists()]] - `imports` [EXTRACTED]
@@ -38,4 +40,4 @@ tags:
 - [[useTenantContents()]] - `contains` [EXTRACTED]
 - [[useUploadTenantContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

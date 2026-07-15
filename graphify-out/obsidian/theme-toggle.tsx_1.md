@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/theme-toggle.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Community_None
 ---
 
 # theme-toggle.tsx
@@ -15,8 +15,12 @@ tags:
 - [[Button]] - `imports` [EXTRACTED]
 - [[ThemeToggle()_1]] - `contains` [EXTRACTED]
 - [[ThemeValue_1]] - `contains` [EXTRACTED]
+- [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
+- [[dashboard-header.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
+- [[navbar.tsx]] - `imports_from` [EXTRACTED]
 - [[themeIcons]] - `contains` [EXTRACTED]
 - [[themeValues_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Community_None

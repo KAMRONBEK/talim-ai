@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-postprocess.ts"
 type: "code"
-community: "Question Post-processing"
+community: "Community None"
 location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Post-processing
+  - community/Community_None
 ---
 
 # postprocessGeneratedQuestions()
@@ -32,4 +32,4 @@ tags:
 - [[shuffled()]] - `calls` [EXTRACTED]
 - [[verifySourceQuote()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Post-processing
+#graphify/code #graphify/EXTRACTED #community/Community_None

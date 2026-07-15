@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Community_None
 ---
 
 # queue.service.ts
@@ -62,4 +62,4 @@ tags:
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 - [[videoQueue]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

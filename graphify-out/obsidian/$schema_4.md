@@ -1,17 +1,17 @@
 ---
-source_file: "turbo.json"
+source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "Root Dev Tooling"
+community: "Community None"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Dev_Tooling
+  - community/Community_None
 ---
 
 # $schema
 
 ## Connections
-- [[turbo.json]] - `contains` [EXTRACTED]
+- [[node.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Dev_Tooling
+#graphify/code #graphify/EXTRACTED #community/Community_None

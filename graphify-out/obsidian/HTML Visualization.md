@@ -1,16 +1,13 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Graphify Tool Features"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Graphify_Tool_Features
 ---
 
 # HTML Visualization
 
-## Connections
-- [[graphify skill]] - `references` [EXTRACTED]
-
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Graphify_Tool_Features

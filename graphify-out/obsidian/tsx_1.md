@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/components.json"
-type: "code"
-community: "Web shadcn Config"
-location: "L5"
+source_file: "apps/api/package.json"
+type: "concept"
+community: "Community None"
+location: "L53"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_shadcn_Config
+  - community/Community_None
 ---
 
 # tsx
 
 ## Connections
-- [[components.json]] - `contains` [EXTRACTED]
+- [[tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_shadcn_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

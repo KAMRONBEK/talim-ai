@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/events.controller.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Community_None
 ---
 
 # events.controller.ts
@@ -23,4 +23,4 @@ tags:
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamEvents()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

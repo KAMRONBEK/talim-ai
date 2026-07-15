@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/progress.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Community None"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Community_None
 ---
 
 # getTenantProgress()
@@ -16,4 +16,4 @@ tags:
 - [[listStudents()_1]] - `calls` [EXTRACTED]
 - [[progress.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Community_None

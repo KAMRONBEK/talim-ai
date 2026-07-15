@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage
+  - community/Community_None
 ---
 
 # learningProgress.service.ts
@@ -31,13 +31,11 @@ tags:
 - [[gradeQuestion()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isLatestSectionAttempt()]] - `contains` [EXTRACTED]
-- [[isSectionComplete()]] - `contains` [EXTRACTED]
-- [[jsonStringArray()]] - `imports` [EXTRACTED]
 - [[learning-coverage-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[markSectionViewed()]] - `contains` [EXTRACTED]
 - [[mastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[persistSectionProgress()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
@@ -52,4 +50,4 @@ tags:
 - [[todayUtcDate()]] - `contains` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/chat.routes.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Community_None
 ---
 
 # chat.routes.ts
@@ -24,4 +24,4 @@ tags:
 - [[quota.middleware.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.middleware.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

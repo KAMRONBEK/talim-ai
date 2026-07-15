@@ -15,6 +15,10 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          # full history: the graphify-freshness step counts commits since the
+          # graph's built_at_commit, which a shallow clone can't resolve
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
 
@@ -41,6 +45,20 @@ jobs:
       # @talim/eslint-config; web/admin use next/core-web-vitals via .eslintrc.json).
       - name: Lint
         run: pnpm lint
+
+      # Warn-only: surface knowledge-graph drift so someone runs
+      # scripts/graphify-refresh.sh. Never fails the build.
+      - name: Graphify freshness (warn-only)
+        if: always()
+        run: |
+          BUILT=$(node -e "console.log(require('./graphify-out/graph.json').built_at_commit || '')" 2>/dev/null || true)
+          if [ -n "$BUILT" ] && git cat-file -e "$BUILT^{commit}" 2>/dev/null; then
+            DRIFT=$(git rev-list --count "$BUILT"..HEAD 2>/dev/null || echo "?")
+            echo "graphify graph is $DRIFT commits behind HEAD"
+            if [ "$DRIFT" != "?" ] && [ "$DRIFT" -gt 30 ]; then
+              echo "::warning title=Graphify graph stale::graph.json is $DRIFT commits behind HEAD — run scripts/graphify-refresh.sh"
+            fi
+          fi
       # NOTE: full app compilation (tsc for api, `next build` for web/admin) is
       # already exercised by the Docker `build` job in deploy.yml, so it is not
       # duplicated here — this gate is the fast type/lint check that precedes it.

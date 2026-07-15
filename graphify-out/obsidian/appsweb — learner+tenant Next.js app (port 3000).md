@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/CLAUDE.md"
 type: "concept"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # apps/web — learner+tenant Next.js app (port 3000)
@@ -19,4 +19,4 @@ tags:
 - [[appsweb Guide (CLAUDE.md)]] - `references` [EXTRACTED]
 - [[game-quiz-player.tsx (GAME-mode runner)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Architecture

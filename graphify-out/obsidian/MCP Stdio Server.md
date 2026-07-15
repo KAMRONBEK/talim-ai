@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/exports.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Graph Query & Traversal"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Graphify_Skill_Docs
+  - community/Graph_Query__Traversal
 ---
 
 # MCP Stdio Server
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[graphify query]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/INFERRED #community/Graph_Query__Traversal

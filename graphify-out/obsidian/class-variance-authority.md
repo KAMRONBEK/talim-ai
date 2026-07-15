@@ -1,17 +1,18 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Config"
+community: "Community None"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Community_None
 ---
 
 # class-variance-authority
 
 ## Connections
-- [[dependencies_4]] - `contains` [EXTRACTED]
+- [[class-variance-authority_1]] - `imports` [EXTRACTED]
+- [[dependencies_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None
