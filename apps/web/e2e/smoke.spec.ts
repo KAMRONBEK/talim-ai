@@ -10,7 +10,8 @@ const API = process.env.E2E_API_URL ?? 'http://localhost:4000';
 test('marketing home renders and the API is healthy', async ({ page, request }) => {
   const res = await page.goto('/');
   expect(res?.ok()).toBeTruthy();
-  await expect(page).toHaveURL(/\/uz(\/|$)/); // default locale prefix
+  // Any locale prefix — next-intl resolves it from Accept-Language (CI sends `en`).
+  await expect(page).toHaveURL(/\/(uz|en|ru)(\/|$)/);
   await expect(page.locator('body')).not.toBeEmpty();
 
   const health = await request.get(`${API}/health`);
