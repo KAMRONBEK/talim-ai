@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  launchd agent that runs the deep overnight QA on this Mac every night at 02:30.
+
+  It runs the login shell (`zsh -l`) so pnpm / docker / doppler / claude are on PATH
+  exactly as in your terminal. The qa-overnight.sh harness itself brings up the stack
+  (docker db/redis → migrate → 3 dev servers) and is resumable, so a missed night just
+  continues the next run. Requires at run time: Mac awake, Docker Desktop running,
+  Doppler logged in.
+
+  Install:
+    cp scripts/com.talim.qa-overnight.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.talim.qa-overnight.plist
+  Disable:
+    launchctl unload ~/Library/LaunchAgents/com.talim.qa-overnight.plist
+  Run once now (test):
+    launchctl start com.talim.qa-overnight
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.talim.qa-overnight</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>-lc</string>
+        <string>cd "$HOME/Documents/apps/talim-ai" &amp;&amp; pnpm qa:overnight</string>
+    </array>
+
+    <!-- 02:30 every day -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>2</integer>
+        <key>Minute</key><integer>30</integer>
+    </dict>
+
+    <!-- Don't fire a burst of catch-up runs after the Mac wakes from a long sleep. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/talim-qa-overnight.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/talim-qa-overnight.err.log</string>
+
+    <!-- QA is CPU/IO heavy; keep it low priority so it doesn't hog the machine. -->
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>Nice</key>
+    <integer>5</integer>
+</dict>
+</plist>
