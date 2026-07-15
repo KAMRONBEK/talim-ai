@@ -36,12 +36,10 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      # Lint is INFORMATIONAL for now: `pnpm lint` has pre-existing failures across
-      # the monorepo (packages/ui has no local eslint; web/admin `next lint` fails in
-      # CI) that predate this gate. Keep it visible but non-blocking so typecheck is
-      # the hard gate; flip `continue-on-error` off once lint is cleaned up repo-wide.
-      - name: Lint (non-blocking)
-        continue-on-error: true
+      # Lint is a HARD gate: the whole monorepo lints clean as of the
+      # chore/codebase-cleanup pass (shared flat eslint 9 config in
+      # @talim/eslint-config; web/admin use next/core-web-vitals via .eslintrc.json).
+      - name: Lint
         run: pnpm lint
       # NOTE: full app compilation (tsc for api, `next build` for web/admin) is
       # already exercised by the Docker `build` job in deploy.yml, so it is not

@@ -1,5 +1,4 @@
 import multer from 'multer';
-import { env } from '../config/env.js';
 
 const storage = multer.memoryStorage();
 
@@ -30,5 +29,3 @@ export const upload = multer({
     }
   },
 });
-
-const uploadDir = env.UPLOAD_DIR;

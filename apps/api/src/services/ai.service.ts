@@ -136,12 +136,6 @@ export async function* streamChatCompletion(
   recordCompletionUsage(usage, env.DEEPSEEK_MODEL, { usage: finalUsage });
 }
 
-async function* streamTutorCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
-  for await (const event of streamTutorWithTools(messages)) {
-    if (event.type === 'text') yield event.text;
-  }
-}
-
 function buildGraphIntentInstruction(intent?: TutorGraphIntent): string | null {
   if (!intent?.isExplicit) return null;
 

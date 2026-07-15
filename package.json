@@ -2,7 +2,7 @@
   "name": "talim-ai",
   "private": true,
   "scripts": {
-    "build": "doppler run -- turbo run build",
+    "build": "doppler run -- sh -c 'NODE_ENV=production turbo run build'",
     "dev": "pnpm --filter @talim/types build && doppler run -- turbo run dev",
     "dev:admin": "pnpm --filter @talim/types build && doppler run -- pnpm --filter @talim/admin dev",
     "dev:all": "pnpm dev:clean && pnpm dev:infra && pnpm db:migrate:deploy && pnpm db:seed && pnpm dev",

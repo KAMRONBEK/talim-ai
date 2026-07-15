@@ -3,7 +3,7 @@ import { AppError } from '../middleware/error.middleware.js';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from './ai.service.js';
 import { getSectionBody } from './section.service.js';
-import { gradeQuestion, jsonStringArray, resolveAcceptedAnswers } from '@talim/types';
+import { gradeQuestion, resolveAcceptedAnswers } from '@talim/types';
 import { applyAiJudgeToGrades, quizQuestionKey } from './answerJudge.service.js';
 import {
   LEARNING_COVERAGE_SYSTEM_PROMPT,
@@ -355,10 +355,6 @@ export async function updateProgressAfterQuizSubmit(
   void refineSectionProgressWithAi(userId, quiz, answers, attempt.id).catch((err: unknown) => {
     console.error('AI progress refinement failed:', err);
   });
-}
-
-function isSectionComplete(coverageScore: number): boolean {
-  return coverageScore >= SECTION_COMPLETE_THRESHOLD;
 }
 
 export { SECTION_COMPLETE_THRESHOLD };

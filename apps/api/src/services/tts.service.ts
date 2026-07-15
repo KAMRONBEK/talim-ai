@@ -248,16 +248,3 @@ export async function synthesizeDialogueWithSegments(
 
   return { audio: Buffer.concat(buffers), segments };
 }
-
-/**
- * Synthesize a two-host conversation: each turn is voiced by its speaker's voice
- * (host A vs host B), then concatenated in order — a 2-person podcast.
- */
-async function synthesizeDialogue(
-  turns: DialogueTurn[],
-  locale: AppLocale = 'uz',
-  usage?: UsageContext,
-): Promise<Buffer> {
-  const { audio } = await synthesizeDialogueWithSegments(turns, locale, usage);
-  return audio;
-}

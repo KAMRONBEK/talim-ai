@@ -55,7 +55,7 @@ export function formatTenant(tenant: {
 }
 
 export async function uniqueSlug(base: string): Promise<string> {
-  let slug = slugifyOrgName(base);
+  const slug = slugifyOrgName(base);
   let suffix = 0;
   while (true) {
     const candidate = suffix === 0 ? slug : `${slug}-${suffix}`;

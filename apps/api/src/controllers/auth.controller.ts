@@ -48,11 +48,9 @@ function signToken(
   role: UserRole,
   tenantId?: string | null,
 ): string {
-  return jwt.sign(
-    { userId, email, role, ...(tenantId ? { tenantId } : {}) },
-    env.JWT_SECRET,
-    { expiresIn: '7d' },
-  );
+  return jwt.sign({ userId, email, role, ...(tenantId ? { tenantId } : {}) }, env.JWT_SECRET, {
+    expiresIn: '7d',
+  });
 }
 
 async function formatUser(user: {
@@ -149,7 +147,7 @@ export async function joinClass(req: AuthenticatedRequest, res: Response): Promi
   res.json({ user: formatted, token, tenantName });
 }
 
-export async function registerTenant(req: AuthenticatedRequest, res: Response): Promise<void> {
+export async function registerTenant(_req: AuthenticatedRequest, _res: Response): Promise<void> {
   throw new AppError(403, 'Tenant accounts are created by platform admins');
 }
 
@@ -173,7 +171,9 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
   // or an email stored with mixed case still resolves to the right account.
   const user = identifier.includes('@')
     ? await prisma.user.findFirst({ where: { email: { equals: identifier, mode: 'insensitive' } } })
-    : await prisma.user.findFirst({ where: { username: { equals: identifier, mode: 'insensitive' } } });
+    : await prisma.user.findFirst({
+        where: { username: { equals: identifier, mode: 'insensitive' } },
+      });
   if (!user) {
     throw new AppError(401, 'Invalid credentials');
   }

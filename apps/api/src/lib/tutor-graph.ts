@@ -1,4 +1,4 @@
-import { type DesmosGraphPayload, GRAPH_FENCE_LANG } from '@talim/types';
+import { type DesmosGraphPayload } from '@talim/types';
 import type OpenAI from 'openai';
 import { z } from 'zod';
 
@@ -61,11 +61,6 @@ function assertUniqueIds(ids: string[]): void {
     }
     seen.add(id);
   }
-}
-
-/** @deprecated Use serializeVisualBlock from tutor-tools */
-function serializeGraphBlock(payload: DesmosGraphPayload): string {
-  return `\n\n\`\`\`${GRAPH_FENCE_LANG}\n${JSON.stringify(payload)}\n\`\`\`\n\n`;
 }
 
 export function validateGraphPayload(raw: unknown): DesmosGraphPayload {

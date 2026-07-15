@@ -16,9 +16,6 @@ const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) :
 // no SDK — to avoid any ESM/CJS module-resolution surface in the prod image.
 const OPENROUTER_API = 'https://openrouter.ai/api/v1';
 
-/** True when a dedicated OCR provider is configured (primary scanned-PDF path). */
-const hasPrimaryOcrProvider = (): boolean => env.OPENROUTER_API_KEY.length > 0;
-
 async function extractWithPdfParse(buffer: Buffer): Promise<string> {
   // pdf-parse bundles an old pdf.js that throws on some real-world PDFs (e.g.
   // "FormatError: bad XRef entry"). Treat any parse failure as "no text" so
@@ -134,9 +131,11 @@ function runPdftoppm(
     });
     proc.on('close', (code) => {
       clearTimeout(timer);
-      code === 0
-        ? resolve()
-        : reject(new Error(`pdftoppm exited ${code}: ${stderr.slice(0, 200)}`));
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`pdftoppm exited ${code}: ${stderr.slice(0, 200)}`));
+      }
     });
   });
 }
@@ -222,7 +221,11 @@ function runCli(cmd: string, args: string[], timeoutMs = 120_000): Promise<void>
     });
     proc.on('close', (code) => {
       clearTimeout(timer);
-      code === 0 ? resolve() : reject(new Error(`${cmd} exited ${code}: ${stderr.slice(0, 200)}`));
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`${cmd} exited ${code}: ${stderr.slice(0, 200)}`));
+      }
     });
   });
 }

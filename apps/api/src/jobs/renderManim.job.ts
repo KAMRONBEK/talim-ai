@@ -88,7 +88,7 @@ async function renderWithManimCli(jobId: string, script: string): Promise<string
   return storageService.save(buffer, `manim-${jobId}.mp4`);
 }
 
-async function renderFallbackSvg(jobId: string, script: string): Promise<string> {
+async function renderFallbackSvg(jobId: string, _script: string): Promise<string> {
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="270" viewBox="0 0 480 270">
   <rect width="480" height="270" fill="#1e1e2e"/>

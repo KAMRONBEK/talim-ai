@@ -1,8 +1,5 @@
-import { z } from 'zod';
 import type { Request } from 'express';
 import { DEFAULT_LOCALE, parseAppLocale, type AppLocale } from '@talim/types';
-
-const localeSchema = z.enum(['uz', 'en', 'ru']).default(DEFAULT_LOCALE);
 
 export function resolveLocale(
   req: Request,

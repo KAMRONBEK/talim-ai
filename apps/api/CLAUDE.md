@@ -22,9 +22,10 @@ apps, product/role model) see the root `CLAUDE.md`.
   `chunkText` in `services/rag.service.ts` — no langchain.)
 - **Entry point:** `src/index.ts` → `bootstrap()`:
   1. Ensures the local upload dir exists when `storageService` is the `LocalStorageService`.
-  2. **Registers all four Bull job processors** before the server listens:
-     `registerProcessContentJob`, `registerGenerateQuizJob`, `registerGeneratePodcastJob`,
-     `registerRenderManimJob` (so this single process is both the API and the worker).
+  2. **Registers all ten Bull job processors** before the server listens (so this single
+     process is both the API and the worker): `processContent`, `reparseContent`,
+     `generateQuiz`, `generatePodcast`, `generateVideo`, `generateFlashcards`,
+     `generateSlides`, `renderManim`, `generateBankQuestions`, `backfillTranscript`.
   3. `app.set('trust proxy', 1)` — runs behind nginx in prod; needed so `req.ip` and the rate
      limiter see the real client IP from `X-Forwarded-For`.
   4. **helmet** with `contentSecurityPolicy`, `crossOriginResourcePolicy`, and
@@ -38,7 +39,8 @@ apps, product/role model) see the root `CLAUDE.md`.
 - **Config:** `src/config/env.ts` validates `process.env` with a zod schema and `process.exit(1)`
   on failure. Notable vars: `DATABASE_URL`, `REDIS_URL`, `JWT_SECRET` (min 32 chars),
   `OPENAI_API_KEY`, `DEEPSEEK_API_KEY` / `DEEPSEEK_MODEL`, `TUTOR_MODEL` (default `gpt-4o`),
-  `TTS_MODEL` / `TTS_PROVIDER` (`openai` | `elevenlabs`), `TRANSCRIPTION_MODEL`, `MANIM_BIN`,
+  `TTS_MODEL` / `TTS_PROVIDER` (`openai` | `elevenlabs` | `azure` — prod uses `azure`,
+  Microsoft native uz/ru neural voices), `TRANSCRIPTION_MODEL`, `MANIM_BIN`,
   `UPLOAD_DIR` (default `/uploads`), `DEFAULT_CONTENT_LOCALE` (`uz`|`en`|`ru`), `CORS_ORIGIN`.
   Secrets come from **Doppler** (root scripts wrap commands in `doppler run --`); never hardcode.
 - Pricing constants live in `src/config/usage-pricing.ts`.
@@ -229,11 +231,17 @@ processors live in `src/jobs/`, registered at boot in `index.ts`:
   `PROCESSING`, extracts text (PDF via `pdf.service`, YouTube transcript via `youtube.service`
   storing `ContentTranscriptSegment`s), `chunkText` → `storeChunksWithEmbeddings` (pgvector),
   generates sections, sets `READY`/`FAILED`. Charges a `GENERATION` quota when large enough.
+- **`reparse-content`** (`reparseContent.job.ts`) — re-runs extraction/sectioning for existing content.
 - **`generate-quiz`** (`generateQuiz.job.ts`) — async quiz generation for a content/section.
-- **`generate-podcast`** (`generatePodcast.job.ts`) — TTS podcast episode rendering.
+- **`generate-podcast`** (`generatePodcast.job.ts`) — TTS podcast episode rendering (per-section parts).
+- **`generate-video`** (`generateVideo.job.ts`) — AI video parts from section slide decks.
+- **`generate-flashcards`** (`generateFlashcards.job.ts`) — flashcard deck generation.
+- **`generate-slides`** (`generateSlides.job.ts`) — per-section slide deck generation.
 - **`render-manim`** (`renderManim.job.ts`) — runs the Manim binary (`env.MANIM_BIN`) to render
   tutor visuals, stores the asset, and patches the `manim` visual block (ready/failed) back into
   the chat message (`@talim/types` `ManimPayload`/`VisualBlock`).
+- **`generate-bank-questions`** (`generateBankQuestions.job.ts`) — AI question-bank drafts for tenants.
+- **`backfill-transcript`** (`backfillTranscript.job.ts`) — backfills transcript segments for older content.
 
 `cancelContentJobs(contentId)` removes pending/active content-scoped jobs across the content/quiz/
 podcast queues (used when content is deleted). Redis must be running (`docker-compose.yml`).

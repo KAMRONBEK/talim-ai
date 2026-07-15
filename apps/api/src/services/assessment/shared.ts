@@ -37,7 +37,6 @@ export const questionStyleEnum = z.enum([
   'written',
   'numeric',
 ]);
-type QuestionStyle = z.infer<typeof questionStyleEnum>;
 
 export const questionDepthEnum = z.enum(['recall', 'understanding', 'application', 'mixed']);
 
@@ -180,7 +179,6 @@ export const submitAnswerValueSchema = z.union([
   z.array(z.string()),
   z.record(z.string(), z.string()),
 ]);
-type SubmitAnswerValue = z.infer<typeof submitAnswerValueSchema>;
 
 export const submitAssessmentSchema = z.object({
   answers: z.record(z.string(), submitAnswerValueSchema),
