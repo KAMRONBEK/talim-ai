@@ -56,11 +56,18 @@ jobs:
               | sed 's/^/matrix=/' >> "$GITHUB_OUTPUT"
           fi
 
+  # Quality gate — typecheck + lint must pass before we spend a runner building
+  # images or touch the VPS. Reuses .github/workflows/ci.yml via workflow_call so
+  # the PR check and the deploy gate are literally the same job.
+  verify:
+    name: Verify
+    uses: ./.github/workflows/ci.yml
+
   # Build only the changed images, in parallel, on a 4-vCPU/16GB runner with a
   # persistent layer cache, and push to GHCR. The 2GB VPS never builds anything.
   build:
     name: Build & push ${{ matrix.app }}
-    needs: changes
+    needs: [changes, verify]
     if: needs.changes.outputs.matrix != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 30

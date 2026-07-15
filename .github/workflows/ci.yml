@@ -1,0 +1,43 @@
+name: CI
+
+# Quality gate for the autonomous loop: nothing broken reaches main.
+# Runs on every PR (branch protection can require it) AND is called by deploy.yml
+# via workflow_call, so a direct push to main is gated too. build (the expensive
+# Docker build) only runs after this passes.
+on:
+  pull_request:
+  workflow_call:
+
+jobs:
+  verify:
+    name: typecheck · lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      # Generate the Prisma client (schema-only, no DB needed) so api typecheck
+      # doesn't hit hundreds of phantom errors from a stale/absent client.
+      - name: Generate Prisma client
+        run: pnpm --filter @talim/api exec prisma generate
+
+      # turbo builds ^build deps (@talim/types, @talim/ui) first, then tsc --noEmit.
+      # No Doppler / secrets needed — typecheck & lint don't touch runtime env.
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+      # NOTE: full app compilation (tsc for api, `next build` for web/admin) is
+      # already exercised by the Docker `build` job in deploy.yml, so it is not
+      # duplicated here — this gate is the fast type/lint check that precedes it.

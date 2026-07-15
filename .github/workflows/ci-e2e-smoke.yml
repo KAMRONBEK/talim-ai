@@ -1,0 +1,87 @@
+name: E2E smoke
+
+# Lean Playwright smoke on the full stack — the deterministic Actions complement to
+# the stateful nightly QA on the Mac. Stands up Postgres(pgvector)+Redis, builds api
+# + web, migrates + seeds a FRESH DB, then drives 3 critical Chromium flows
+# (marketing renders, login form renders, learner can log in → dashboard).
+on:
+  pull_request:
+    paths:
+      - 'apps/web/**'
+      - 'apps/api/**'
+      - 'packages/**'
+      - '.github/workflows/ci-e2e-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    name: Playwright smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: talim
+          POSTGRES_PASSWORD: talim
+          POSTGRES_DB: talim
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U talim -d talim"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://talim:talim@localhost:5432/talim
+      REDIS_URL: redis://localhost:6379
+      JWT_SECRET: ci-e2e-jwt-secret-not-a-real-secret-32ch
+      OPENAI_API_KEY: sk-ci-dummy
+      DEEPSEEK_API_KEY: ci-dummy
+      # Inlined into the web client bundle at build so the browser calls the local API.
+      NEXT_PUBLIC_API_URL: http://localhost:4000
+      CORS_ORIGIN: http://localhost:3000
+      UPLOAD_DIR: /tmp/talim-uploads
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build types, api, web
+        run: |
+          pnpm --filter @talim/types build
+          pnpm --filter @talim/api exec prisma generate
+          pnpm --filter @talim/api build
+          pnpm --filter @talim/web build
+
+      - name: Migrate + seed database
+        run: |
+          pnpm --filter @talim/api exec prisma migrate deploy
+          pnpm --filter @talim/api exec prisma db seed
+
+      - name: Install Chromium
+        run: pnpm --filter @talim/web exec playwright install --with-deps chromium
+
+      - name: Run smoke
+        run: pnpm --filter @talim/web test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report/
+          retention-days: 7
