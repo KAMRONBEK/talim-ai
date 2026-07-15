@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/update.md"
 type: "document"
-community: "Graphify Update Options"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Update_Options
+  - community/Community_None
 ---
 
 # update.md
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graphify reference incremental update and cluster-only]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Update_Options
+#graphify/document #graphify/EXTRACTED #community/Community_None

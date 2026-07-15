@@ -1,16 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 0
 ---
 
 # Podcast Failed Part
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[run20-podcast-failed-part]] - document - docs/qa/screenshots/run20-podcast-failed-part.md
 
 ## Live Query (requires Dataview plugin)
 

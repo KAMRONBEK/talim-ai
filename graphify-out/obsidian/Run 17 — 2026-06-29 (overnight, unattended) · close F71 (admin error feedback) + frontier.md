@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Visual QA Reports"
+community: "Community None"
 location: "L826"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Visual_QA_Reports
+  - community/Community_None
 ---
 
 # Run 17 — 2026-06-29 (overnight, unattended) · close F71 (admin error feedback) + frontier
@@ -15,4 +15,4 @@ tags:
 - [[Overnight Visual QA Report — Talim AI]] - `contains` [EXTRACTED]
 - [[Run 17 — closing summary]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Visual_QA_Reports
+#graphify/document #graphify/EXTRACTED #community/Community_None

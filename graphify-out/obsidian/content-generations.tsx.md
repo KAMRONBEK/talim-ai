@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # content-generations.tsx
@@ -20,4 +20,4 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

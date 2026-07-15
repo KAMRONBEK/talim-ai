@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/middleware.ts"
 type: "code"
-community: "i18n Middleware"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/i18n_Middleware
+  - community/Community_None
 ---
 
 # middleware()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[middleware.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/i18n_Middleware
+#graphify/code #graphify/EXTRACTED #community/Community_None

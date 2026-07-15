@@ -30,9 +30,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_Graphify Tool Features]]
 - 1 edge to [[_COMMUNITY_Graphify URL Ingestion]]
 
 ## Top bridge nodes
-- [[Semantic (LLM) Extraction]] - degree 4, connects to 1 community
 - [[build_merge (replace-on-re-extract)]] - degree 3, connects to 1 community

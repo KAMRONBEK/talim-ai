@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Analytics & Usage Pricing"
+community: "Community None"
 location: "L844"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics__Usage_Pricing
+  - community/Community_None
 ---
 
 # AdminMrrResponse
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

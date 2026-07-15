@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Question Engine v2"
+community: "Community None"
 location: "L3522"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Question_Engine_v2
+  - community/Community_None
 ---
 
 # US-IND-30: Elo-KT mastery — plus/minus after practice, whole-material streaks, live update
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Question engine v2 — practice generator, structured players, flashcards, mastery]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Question_Engine_v2
+#graphify/document #graphify/EXTRACTED #community/Community_None

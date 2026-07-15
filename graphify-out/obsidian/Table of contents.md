@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "document"
-community: "Human QA Playbook"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Human_QA_Playbook
+  - community/Community_None
 ---
 
 # Table of contents
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI — Human QA Playbook]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Human_QA_Playbook
+#graphify/document #graphify/EXTRACTED #community/Community_None

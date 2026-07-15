@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # StatCard()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_21]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

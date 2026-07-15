@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Admin Panel Stories"
+community: "Community None"
 location: "L1718"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_Panel_Stories
+  - community/Community_None
 ---
 
 # Area: Admin panel + billing/seats + subscriptions
@@ -23,4 +23,4 @@ tags:
 - [[US-ADMIN-09 Subscription status transitions & their access effects (cross-cutting)]] - `contains` [EXTRACTED]
 - [[US-OWNER-11 Billing & seat display + inactive-subscription banner + request-upgrade]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

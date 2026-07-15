@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L68"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # main()
@@ -19,4 +19,4 @@ tags:
 - [[parseArgs()_3]] - `calls` [EXTRACTED]
 - [[smoke-quota.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Analytics & Usage Pricing"
+community: "Community None"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics__Usage_Pricing
+  - community/Community_None
 ---
 
 # TOKEN_PRICING_PER_MILLION
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[usage-pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

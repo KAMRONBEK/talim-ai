@@ -1,18 +1,17 @@
 ---
 source_file: "apps/web/components/learning/section-reader.tsx"
 type: "code"
-community: "Deck Player & Section Reader"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player__Section_Reader
+  - community/Community_None
 ---
 
 # SectionReader()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[classifyGenerationError()]] - `calls` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
@@ -20,4 +19,4 @@ tags:
 - [[useGenerateSlides()]] - `calls` [EXTRACTED]
 - [[useSlides()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader
+#graphify/code #graphify/EXTRACTED #community/Community_None

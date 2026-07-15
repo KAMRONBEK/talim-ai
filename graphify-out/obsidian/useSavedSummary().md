@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L205"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useSavedSummary()
@@ -20,4 +20,4 @@ tags:
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

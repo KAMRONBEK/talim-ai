@@ -1,17 +1,20 @@
 ---
 source_file: "packages/config/tsconfig/package.json"
 type: "code"
-community: "Package Def (Utilities)"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Package_Def_Utilities
+  - community/Community_None
 ---
 
 # files
 
 ## Connections
+- [[base.json_1]] - `extends` [EXTRACTED]
+- [[nextjs.json_1]] - `extends` [EXTRACTED]
+- [[node.json_1]] - `extends` [EXTRACTED]
 - [[package.json_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Package_Def_Utilities
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/learner.controller.ts"
 type: "code"
-community: "Learner API Controller"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_API_Controller
+  - community/Community_None
 ---
 
 # getMaterials()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_API_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

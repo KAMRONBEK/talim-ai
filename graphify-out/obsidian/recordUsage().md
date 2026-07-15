@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # recordUsage()
@@ -25,8 +25,9 @@ tags:
 - [[recordCompletionUsage()]] - `calls` [EXTRACTED]
 - [[recordEmbedUsage()]] - `calls` [EXTRACTED]
 - [[recordTtsUsage()]] - `calls` [EXTRACTED]
+- [[streamTutorWithTools()]] - `calls` [EXTRACTED]
 - [[tts.service.ts]] - `imports` [EXTRACTED]
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 - [[youtube.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

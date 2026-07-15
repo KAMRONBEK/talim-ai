@@ -1,17 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 0
 ---
 
 # API Module
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[api]] - code - apps/admin/lib/api.ts
-- [[api.ts]] - code - apps/admin/lib/api.ts
 
 ## Live Query (requires Dataview plugin)
 

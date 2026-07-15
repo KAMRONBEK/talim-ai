@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/assign-students-panel.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # assign-students-panel.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 - [[useUnassignContent()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

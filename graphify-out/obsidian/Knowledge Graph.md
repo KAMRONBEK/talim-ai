@@ -11,7 +11,6 @@ tags:
 # Knowledge Graph
 
 ## Connections
-- [[graphify_1]] - `conceptually_related_to` [EXTRACTED]
 - [[Community Detection]] - `conceptually_related_to` [EXTRACTED]
 - [[God Nodes]] - `conceptually_related_to` [EXTRACTED]
 

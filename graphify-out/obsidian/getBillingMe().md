@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/billing.controller.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # getBillingMe()
@@ -17,4 +17,4 @@ tags:
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[getUsageVsLimits()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

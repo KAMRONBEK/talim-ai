@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useJobStreamStore.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useJobStreamStore.ts
@@ -26,4 +26,4 @@ tags:
 - [[useTranscript.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

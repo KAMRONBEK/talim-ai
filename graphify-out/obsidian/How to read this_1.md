@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "User Stories & QA Traceability"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__QA_Traceability
+  - community/Community_None
 ---
 
 # How to read this
@@ -16,4 +16,4 @@ tags:
 - [[Status legend]] - `contains` [EXTRACTED]
 - [[Talim AI — User Stories & QA Traceability]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__QA_Traceability
+#graphify/document #graphify/EXTRACTED #community/Community_None

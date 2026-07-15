@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # layout.tsx
 
 ## Connections
+- [[AuthGuard()_1]] - `imports` [EXTRACTED]
 - [[ContentAccessRedirect()]] - `contains` [EXTRACTED]
 - [[ContentLayout()]] - `contains` [EXTRACTED]
 - [[ContentLayoutInner()]] - `contains` [EXTRACTED]
@@ -26,6 +27,7 @@ tags:
 - [[SidebarGenerationProps]] - `imports` [EXTRACTED]
 - [[SummaryText()]] - `imports` [EXTRACTED]
 - [[UserRole]] - `imports` [EXTRACTED]
+- [[auth-guard.tsx_1]] - `imports_from` [EXTRACTED]
 - [[auth-routing.ts]] - `imports_from` [EXTRACTED]
 - [[content-sidebar.tsx]] - `imports_from` [EXTRACTED]
 - [[getHomePathForRole()]] - `imports` [EXTRACTED]
@@ -34,6 +36,8 @@ tags:
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[summary-text.tsx]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `imports` [EXTRACTED]
 - [[useContent()]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
@@ -49,4 +53,4 @@ tags:
 - [[useSidebarSheet()]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

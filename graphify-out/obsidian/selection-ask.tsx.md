@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/selection-ask.tsx"
 type: "code"
-community: "Deck Player & Section Reader"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player__Section_Reader
+  - community/Community_None
 ---
 
 # selection-ask.tsx
@@ -22,4 +22,4 @@ tags:
 - [[useChatStore]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader
+#graphify/code #graphify/EXTRACTED #community/Community_None

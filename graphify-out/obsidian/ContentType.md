@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # ContentType
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

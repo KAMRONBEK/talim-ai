@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Deck Player & Section Reader"
+community: "Community None"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player__Section_Reader
+  - community/Community_None
 ---
 
 # asHeading()
@@ -16,4 +16,4 @@ tags:
 - [[stripInline()]] - `calls` [EXTRACTED]
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader
+#graphify/code #graphify/EXTRACTED #community/Community_None

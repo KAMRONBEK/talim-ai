@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "TTS Text Normalization"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Text_Normalization
+  - community/Community_None
 ---
 
 # tts.service.ts
@@ -31,7 +31,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[mapLimit()]] - `contains` [EXTRACTED]
 - [[normalizeScriptForTts()]] - `imports` [EXTRACTED]
-- [[openai_3]] - `contains` [EXTRACTED]
+- [[openai_4]] - `contains` [EXTRACTED]
 - [[recordTtsUsage()]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `imports` [EXTRACTED]
 - [[sanitizeForXml()]] - `contains` [EXTRACTED]
@@ -45,4 +45,4 @@ tags:
 - [[tts-normalize.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization
+#graphify/code #graphify/EXTRACTED #community/Community_None

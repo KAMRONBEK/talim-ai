@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useSlides.ts
@@ -15,6 +15,8 @@ tags:
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[ContentSlideDeck]] - `imports` [EXTRACTED]
 - [[DeckAudience]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[contentEndpoints]] - `imports` [EXTRACTED]
 - [[endpoints.ts]] - `imports_from` [EXTRACTED]
 - [[inFlightRefetchInterval()]] - `imports` [EXTRACTED]
@@ -25,9 +27,11 @@ tags:
 - [[pushPrimaryInterval.ts]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 - [[slidesKey()]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useGenerateSlides()]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `imports` [EXTRACTED]
 - [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

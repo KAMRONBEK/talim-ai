@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/usage.routes.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Community_None
 ---
 
 # usage.routes.ts
@@ -20,4 +20,4 @@ tags:
 - [[usage.controller.ts]] - `imports_from` [EXTRACTED]
 - [[usageRoutes]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

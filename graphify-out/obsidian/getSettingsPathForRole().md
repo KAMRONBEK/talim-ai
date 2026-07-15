@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # getSettingsPathForRole()
@@ -16,4 +16,4 @@ tags:
 - [[auth-routing.ts]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/github-and-merge.md"
 type: "document"
-community: "Graphify GitHub Clone"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_GitHub_Clone
+  - community/Community_None
 ---
 
 # graphify reference: GitHub clone and cross-repo merge
@@ -15,4 +15,4 @@ tags:
 - [[Step 0 - Clone GitHub repo(s) (only if a GitHub URL was given)]] - `contains` [EXTRACTED]
 - [[github-and-merge]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_GitHub_Clone
+#graphify/document #graphify/EXTRACTED #community/Community_None

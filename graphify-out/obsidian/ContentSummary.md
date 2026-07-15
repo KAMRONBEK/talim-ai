@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content & Subscriptions"
+community: "Community None"
 location: "L1209"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Subscriptions
+  - community/Community_None
 ---
 
 # ContentSummary
@@ -15,4 +15,4 @@ tags:
 - [[AppLocale]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/Community_None

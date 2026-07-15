@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "document"
-community: "Graphify Extraction Pipeline"
+community: "Community None"
 location: "L448"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Extraction_Pipeline
+  - community/Community_None
 ---
 
 # Step 4.5 - Graph health check (read-only integrity gate)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[What You Must Do When Invoked]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Extraction_Pipeline
+#graphify/document #graphify/EXTRACTED #community/Community_None

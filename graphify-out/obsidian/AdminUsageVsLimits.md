@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Tenant Hooks"
+community: "Community None"
 location: "L124"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant_Hooks
+  - community/Community_None
 ---
 
 # AdminUsageVsLimits
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

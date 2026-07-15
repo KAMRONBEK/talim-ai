@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Question Editor Component"
+community: "Community None"
 location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Editor_Component
+  - community/Community_None
 ---
 
 # useCreateBankQuestion()
@@ -16,4 +16,4 @@ tags:
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Editor_Component
+#graphify/code #graphify/EXTRACTED #community/Community_None

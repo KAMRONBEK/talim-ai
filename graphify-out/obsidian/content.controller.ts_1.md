@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content Controller (YouTube/OCR)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_YouTube/OCR
+  - community/Community_None
 ---
 
 # content.controller.ts
@@ -17,7 +17,6 @@ tags:
 - [[PlanFileLimitError]] - `imports` [EXTRACTED]
 - [[StorageService]] - `imports` [EXTRACTED]
 - [[assertCanAccessContent()]] - `imports` [EXTRACTED]
-- [[assertCanGenerate()]] - `imports` [EXTRACTED]
 - [[assertCanMutateContent()]] - `imports` [EXTRACTED]
 - [[assertQuota()]] - `imports` [EXTRACTED]
 - [[auth.middleware.ts]] - `imports_from` [EXTRACTED]
@@ -49,7 +48,7 @@ tags:
 - [[ocrRegionSchema]] - `imports` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[pdf.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[reparseContent()]] - `contains` [EXTRACTED]
@@ -62,4 +61,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR
+#graphify/code #graphify/EXTRACTED #community/Community_None

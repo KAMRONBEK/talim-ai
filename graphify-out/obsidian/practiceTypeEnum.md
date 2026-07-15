@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller"
+community: "Community None"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/Community_None
 ---
 
 # practiceTypeEnum
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

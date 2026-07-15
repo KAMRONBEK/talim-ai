@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/dashboard/page.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # page.tsx
@@ -23,6 +23,8 @@ tags:
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useAssessments.ts]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantAssessments()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
@@ -30,4 +32,4 @@ tags:
 - [[useTenantSearch()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

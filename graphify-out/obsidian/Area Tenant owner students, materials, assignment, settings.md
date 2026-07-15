@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Tenant Owner Stories"
+community: "Community None"
 location: "L1063"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Stories
+  - community/Community_None
 ---
 
 # Area: Tenant owner: students, materials, assignment, settings
@@ -24,4 +24,4 @@ tags:
 - [[US-OWNER-14 Cross-tenant isolation — owner A vs owner B (consolidated IDOR matrix)]] - `contains` [EXTRACTED]
 - [[US-OWNER-15 Student roster — list, search, seat usage, activity columns]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Tenant_Owner_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

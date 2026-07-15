@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # SheetContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[sheet.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

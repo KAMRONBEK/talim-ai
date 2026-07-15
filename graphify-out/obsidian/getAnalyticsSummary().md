@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/analytics.service.ts"
 type: "code"
-community: "Analytics & Usage Pricing"
+community: "Community None"
 location: "L67"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics__Usage_Pricing
+  - community/Community_None
 ---
 
 # getAnalyticsSummary()
@@ -18,4 +18,4 @@ tags:
 - [[computeMrr()]] - `calls` [EXTRACTED]
 - [[daysAgo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

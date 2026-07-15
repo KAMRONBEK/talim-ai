@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/jobStream.ts"
 type: "code"
-community: "Manim Video & Job Stream"
+community: "Community None"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Manim_Video__Job_Stream
+  - community/Community_None
 ---
 
 # Listener
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[jobStream.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Manim_Video__Job_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

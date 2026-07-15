@@ -11,9 +11,9 @@ tags:
 # US-LEARNER-01: Learner sees only assigned materials
 
 ## Connections
-- [[Epic 3 — Tenant (Organization) Experience_2]] - `conceptually_related_to` [INFERRED]
 - [[Multi-tenant isolation guard (contentAccess.service  assertCanAccessContent)]] - `references` [EXTRACTED]
 - [[US-LEARNER-04 Learner blocked from owneradmin tools]] - `conceptually_related_to` [INFERRED]
 - [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
+- [[epic-3-tenant-experience]] - `conceptually_related_to` [INFERRED]
 
 #graphify/concept #graphify/INFERRED #community/QA_Traceability_Ledger

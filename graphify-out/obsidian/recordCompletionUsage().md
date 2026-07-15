@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Service (DeepSeek)"
+community: "Community None"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Service_DeepSeek
+  - community/Community_None
 ---
 
 # recordCompletionUsage()
@@ -16,5 +16,6 @@ tags:
 - [[generateChatCompletion()]] - `calls` [EXTRACTED]
 - [[generateJsonCompletion()]] - `calls` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
+- [[streamChatCompletion()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek
+#graphify/code #graphify/EXTRACTED #community/Community_None

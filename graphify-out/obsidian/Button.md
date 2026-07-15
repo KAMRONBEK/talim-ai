@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # Button
@@ -57,6 +57,7 @@ tags:
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
+- [[password-card.tsx]] - `imports` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
@@ -69,4 +70,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

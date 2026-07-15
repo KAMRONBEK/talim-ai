@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/vps-watchdog.sh"
 type: "code"
-community: "VPS Watchdog Script"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/VPS_Watchdog_Script
+  - community/Community_None
 ---
 
 # vps-watchdog.sh script
@@ -16,4 +16,4 @@ tags:
 - [[log()_1]] - `calls` [EXTRACTED]
 - [[vps-watchdog.sh]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/VPS_Watchdog_Script
+#graphify/code #graphify/EXTRACTED #community/Community_None

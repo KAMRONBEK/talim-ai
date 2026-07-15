@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # MaterialMediaPanel()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[isRegen()]] - `calls` [EXTRACTED]
 - [[material-media-panel.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_22]] - `imports` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
@@ -26,4 +26,4 @@ tags:
 - [[useSlides()]] - `calls` [EXTRACTED]
 - [[useVideo()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/badges.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # clamp01()
@@ -15,4 +15,4 @@ tags:
 - [[badges.service.ts]] - `contains` [EXTRACTED]
 - [[computeBadges()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

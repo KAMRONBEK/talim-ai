@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # prependContentToLists()
@@ -14,6 +14,10 @@ tags:
 ## Connections
 - [[content-cache.ts]] - `contains` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
+- [[useCreateTenantYoutubeContent()]] - `calls` [EXTRACTED]
+- [[useCreateYoutubeContent()]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
+- [[useUploadContent()]] - `calls` [EXTRACTED]
+- [[useUploadTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

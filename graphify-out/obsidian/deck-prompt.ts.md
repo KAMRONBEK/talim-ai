@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-prompt.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # deck-prompt.ts
@@ -26,4 +26,4 @@ tags:
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[targetSlideCount()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

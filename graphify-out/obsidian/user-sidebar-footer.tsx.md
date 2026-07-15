@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # user-sidebar-footer.tsx
@@ -26,10 +26,14 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[learner-navigation.tsx]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[plan.ts_1]] - `imports_from` [EXTRACTED]
 - [[planMessageKey]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[user-display.ts]] - `imports_from` [EXTRACTED]
+- [[utils.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

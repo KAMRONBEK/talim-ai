@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # useFileUpload()
@@ -22,4 +22,4 @@ tags:
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 - [[useUploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

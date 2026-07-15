@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateBankQuestions.job.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # generateBankQuestions.job.ts
@@ -21,10 +21,10 @@ tags:
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[jobEvents]] - `imports` [EXTRACTED]
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishBankStatus()]] - `contains` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[registerGenerateBankQuestionsJob()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

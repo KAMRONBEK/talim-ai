@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/quota.middleware.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Community_None
 ---
 
 # quota.middleware.ts
@@ -27,4 +27,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

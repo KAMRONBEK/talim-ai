@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Post-Review Fix Verification"
+community: "Community None"
 location: "L884"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Post-Review_Fix_Verification
+  - community/Community_None
 ---
 
 # Post-review-fix verification (2026-07-12, second pass)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Practice generator v2 checks (2026-07-12)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Post-Review_Fix_Verification
+#graphify/document #graphify/EXTRACTED #community/Community_None

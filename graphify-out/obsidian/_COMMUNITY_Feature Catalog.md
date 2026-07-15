@@ -23,7 +23,6 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_User Story Expansion Backlog]]
 - 1 edge to [[_COMMUNITY_Content Ingestion Pipeline]]
 - 1 edge to [[_COMMUNITY_Accounts & Auth Overview]]
 - 1 edge to [[_COMMUNITY_Tenant Experience Overview]]
@@ -33,4 +32,3 @@ SORT file.name ASC
 
 ## Top bridge nodes
 - [[Talim AI — Feature Catalog]] - degree 9, connects to 6 communities
-- [[FEATURES_2]] - degree 2, connects to 1 community

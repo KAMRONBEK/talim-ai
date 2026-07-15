@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Summary Controller"
+community: "Community None"
 location: "L302"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary_Controller
+  - community/Community_None
 ---
 
 # getOrderedChunks()
@@ -20,4 +20,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

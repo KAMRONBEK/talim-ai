@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Question Engine v2"
+community: "Community None"
 location: "L3396"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Question_Engine_v2
+  - community/Community_None
 ---
 
 # Area: Question engine v2 — practice generator, structured players, flashcards, mastery
@@ -23,4 +23,4 @@ tags:
 - [[US-IND-33 Section-rail hierarchy navigation]] - `contains` [EXTRACTED]
 - [[US-IND-34 Podcast transcript sync with real per-segment timings]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Question_Engine_v2
+#graphify/document #graphify/EXTRACTED #community/Community_None

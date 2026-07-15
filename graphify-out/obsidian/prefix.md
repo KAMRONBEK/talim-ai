@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Component Library Config"
+community: "Community None"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Component_Library_Config
+  - community/Community_None
 ---
 
 # prefix
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tailwind]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Component_Library_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

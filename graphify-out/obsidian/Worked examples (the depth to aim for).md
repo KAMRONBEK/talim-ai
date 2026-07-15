@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "User Stories & QA Traceability"
+community: "Community None"
 location: "L71"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__QA_Traceability
+  - community/Community_None
 ---
 
 # Worked examples (the depth to aim for)
@@ -23,4 +23,4 @@ tags:
 - [[US-OWNER-12 Delete a material]] - `contains` [EXTRACTED]
 - [[US-XCUT-01 i18n — every user-facing string localized, Uzbek-first]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__QA_Traceability
+#graphify/document #graphify/EXTRACTED #community/Community_None

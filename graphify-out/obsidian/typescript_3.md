@@ -1,17 +1,17 @@
 ---
-source_file: "package.json"
-type: "code"
-community: "Monorepo Root Config"
-location: "L35"
+source_file: "apps/api/package.json"
+type: "concept"
+community: "Community None"
+location: "L54"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Monorepo_Root_Config
+  - community/Community_None
 ---
 
 # typescript
 
 ## Connections
-- [[devDependencies_3]] - `contains` [EXTRACTED]
+- [[typescript_2]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

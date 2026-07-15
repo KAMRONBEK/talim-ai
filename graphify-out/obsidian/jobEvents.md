@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEvents.service.ts"
 type: "code"
-community: "Job Event Bus"
+community: "Community None"
 location: "L65"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Bus
+  - community/Community_None
 ---
 
 # jobEvents
@@ -19,4 +19,4 @@ tags:
 - [[learner.ts]] - `imports` [EXTRACTED]
 - [[renderManim.job.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Bus
+#graphify/code #graphify/EXTRACTED #community/Community_None

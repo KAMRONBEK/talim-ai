@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L85"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # getTenant()
@@ -18,4 +18,4 @@ tags:
 - [[getTenantUsageVsLimits()]] - `calls` [EXTRACTED]
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

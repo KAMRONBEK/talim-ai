@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Quiz Page & Hooks"
+community: "Community None"
 location: "L1118"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Page__Hooks
+  - community/Community_None
 ---
 
 # Quiz
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useGenerateSlides()
@@ -18,6 +18,8 @@ tags:
 - [[material-media-panel.tsx]] - `imports` [EXTRACTED]
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
+- [[slidesKey()]] - `calls` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useSlides.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

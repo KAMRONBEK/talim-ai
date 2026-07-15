@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Admin & Learner User Stories"
+community: "Community None"
 location: "L3388"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin__Learner_User_Stories
+  - community/Community_None
 ---
 
 # Coverage expansion — post-2026-06-28 feature surface (added 2026-07-12)
@@ -19,4 +19,4 @@ tags:
 - [[Area XCUT — KaTeX in all players, static pages, TypeBadge i18n]] - `contains` [EXTRACTED]
 - [[user-stories-expansion]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin__Learner_User_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

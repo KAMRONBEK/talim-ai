@@ -1,13 +1,13 @@
 ---
 type: community
 cohesion: 0.29
-members: 7
+members: 6
 ---
 
 # Monorepo Root Config
 
 **Cohesion:** 0.29 - loosely connected
-**Members:** 7 nodes
+**Members:** 6 nodes
 
 ## Members
 - [[$schema_5]] - code - turbo.json
@@ -15,8 +15,7 @@ members: 7
 - [[globalPassThroughEnv]] - code - turbo.json
 - [[prettier]] - code - package.json
 - [[turbo]] - code - package.json
-- [[turbo.json]] - code - turbo.json
-- [[typescript_3]] - code - package.json
+- [[typescript_6]] - code - package.json
 
 ## Live Query (requires Dataview plugin)
 
@@ -27,8 +26,6 @@ SORT file.name ASC
 
 ## Connections to other communities
 - 1 edge to [[_COMMUNITY_Root Package.json]]
-- 1 edge to [[_COMMUNITY_Build & Task Pipeline]]
 
 ## Top bridge nodes
 - [[devDependencies_3]] - degree 4, connects to 1 community
-- [[turbo.json]] - degree 4, connects to 1 community

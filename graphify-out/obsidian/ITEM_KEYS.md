@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/testimonials.tsx"
 type: "code"
-community: "Marketing Landing Page"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Page
+  - community/Community_None
 ---
 
 # ITEM_KEYS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[testimonials.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

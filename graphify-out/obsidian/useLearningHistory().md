@@ -1,22 +1,22 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useLearningHistory()
 
 ## Connections
 - [[ContentLayoutInner()]] - `calls` [EXTRACTED]
-- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[ContentWorkspaceInner()]] - `calls` [EXTRACTED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

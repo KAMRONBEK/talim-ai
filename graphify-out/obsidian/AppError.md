@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # AppError
@@ -63,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

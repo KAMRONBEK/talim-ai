@@ -39,9 +39,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Product Plan Epics]]
 - 1 edge to [[_COMMUNITY_Product Epics Documentation]]
 - 1 edge to [[_COMMUNITY_Product Roadmap Notes]]
+- 1 edge to [[_COMMUNITY_Product Plan Epics]]
 
 ## Top bridge nodes
 - [[Talim AI — Product plans]] - degree 14, connects to 3 communities

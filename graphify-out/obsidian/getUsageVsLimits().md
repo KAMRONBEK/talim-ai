@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L202"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # getUsageVsLimits()
@@ -28,4 +28,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

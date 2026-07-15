@@ -1,19 +1,18 @@
 ---
 source_file: "apps/web/components/marketing/faq.tsx"
 type: "code"
-community: "Marketing Landing Page"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Page
+  - community/Community_None
 ---
 
 # Faq()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[faq.tsx]] - `contains` [EXTRACTED]
 - [[landing-page.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

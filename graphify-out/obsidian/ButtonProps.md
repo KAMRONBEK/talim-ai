@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # ButtonProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[button.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

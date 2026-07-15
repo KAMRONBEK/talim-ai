@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # Dialog()
@@ -25,4 +25,4 @@ tags:
 - [[quick-action-cards.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

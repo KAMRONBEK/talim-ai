@@ -1,21 +1,20 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/progress/page.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L31"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Learner_Dashboard
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # LearnerProgressPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_17]] - `contains` [EXTRACTED]
-- [[useContents()]] - `calls` [INFERRED]
-- [[useLearnerProgress()]] - `calls` [INFERRED]
-- [[useLearnerSummary()]] - `calls` [INFERRED]
+- [[useContents()]] - `calls` [EXTRACTED]
+- [[useLearnerProgress()]] - `calls` [EXTRACTED]
+- [[useLearnerSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

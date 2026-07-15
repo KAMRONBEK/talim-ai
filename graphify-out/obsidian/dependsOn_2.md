@@ -12,6 +12,7 @@ tags:
 # dependsOn
 
 ## Connections
+- [[build_6]] - `extends` [EXTRACTED]
 - [[typecheck_6]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Build__Task_Pipeline

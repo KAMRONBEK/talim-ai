@@ -1,21 +1,21 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L22"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Billing_Page
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # DashboardPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[getFirstName()]] - `calls` [EXTRACTED]
 - [[page.tsx_35]] - `contains` [EXTRACTED]
-- [[useContents()]] - `calls` [INFERRED]
-- [[useDashboardSearch()]] - `calls` [INFERRED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
+- [[useContents()]] - `calls` [EXTRACTED]
+- [[useDashboardSearch()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

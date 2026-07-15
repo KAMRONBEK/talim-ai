@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "Workspace Redesign Document"
+community: "Community None"
 location: "L211"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Workspace_Redesign_Document
+  - community/Community_None
 ---
 
 # P0 — First usable workspace slice (pure re-composition)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Phased plan]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Workspace_Redesign_Document
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Story Index Template"
+community: "Community None"
 location: "L254"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Story_Index_Template
+  - community/Community_None
 ---
 
 # Story index (backlog — expand each with the template)
@@ -20,4 +20,4 @@ tags:
 - [[Talim AI — User Stories & QA Traceability]] - `contains` [EXTRACTED]
 - [[XCUT (cross-cutting)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Story_Index_Template
+#graphify/document #graphify/EXTRACTED #community/Community_None

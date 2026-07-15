@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/base.json"
 type: "code"
-community: "TypeScript Base Config"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TypeScript_Base_Config
+  - community/Community_None
 ---
 
 # noUncheckedIndexedAccess
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TypeScript_Base_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

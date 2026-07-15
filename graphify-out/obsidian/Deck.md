@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L209"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # Deck
@@ -20,4 +20,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

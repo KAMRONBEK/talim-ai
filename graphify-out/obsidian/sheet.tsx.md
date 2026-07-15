@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # sheet.tsx
@@ -21,5 +21,6 @@ tags:
 - [[SheetTrigger()]] - `contains` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
+- [[utils.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

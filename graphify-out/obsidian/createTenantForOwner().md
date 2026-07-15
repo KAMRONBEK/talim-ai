@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Admin Role Management"
+community: "Community None"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Role_Management
+  - community/Community_None
 ---
 
 # createTenantForOwner()
@@ -21,4 +21,4 @@ tags:
 - [[organization.ts]] - `contains` [EXTRACTED]
 - [[uniqueSlug()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Role_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

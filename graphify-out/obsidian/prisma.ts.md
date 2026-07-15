@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/prisma.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # prisma.ts
@@ -52,7 +52,7 @@ tags:
 - [[messages.ts]] - `imports_from` [EXTRACTED]
 - [[organization.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `contains` [EXTRACTED]
+- [[prisma_3]] - `contains` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
@@ -83,4 +83,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

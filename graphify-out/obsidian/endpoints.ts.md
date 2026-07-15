@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api/endpoints.ts"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # endpoints.ts
@@ -23,4 +23,4 @@ tags:
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

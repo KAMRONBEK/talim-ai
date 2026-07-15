@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "Admin Dashboard Page"
+community: "Community None"
 location: "L117"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Admin_Dashboard_Page
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # AdminDashboardPage()
@@ -14,14 +14,14 @@ tags:
 ## Connections
 - [[page.tsx_2]] - `contains` [EXTRACTED]
 - [[usd()]] - `calls` [EXTRACTED]
-- [[useAdminAnalyticsByRole()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsContentByType()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsFunnel()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsMrr()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsSpendByModel()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsSummary()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsTopOrgs()]] - `calls` [INFERRED]
-- [[useAdminAnalyticsUserGrowth()]] - `calls` [INFERRED]
-- [[usePlatformStats()]] - `calls` [INFERRED]
+- [[useAdminAnalyticsByRole()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsContentByType()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsFunnel()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsMrr()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsSpendByModel()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsSummary()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsTopOrgs()]] - `calls` [EXTRACTED]
+- [[useAdminAnalyticsUserGrowth()]] - `calls` [EXTRACTED]
+- [[usePlatformStats()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Admin_Dashboard_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

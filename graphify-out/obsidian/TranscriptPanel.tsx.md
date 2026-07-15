@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel & Video Viewer"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel__Video_Viewer
+  - community/Community_None
 ---
 
 # TranscriptPanel.tsx
@@ -30,4 +30,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel__Video_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_None

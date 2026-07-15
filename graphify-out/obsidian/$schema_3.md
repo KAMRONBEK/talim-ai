@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/nextjs.json"
 type: "code"
-community: "Next.js TypeScript Config"
+community: "Community None"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Nextjs_TypeScript_Config
+  - community/Community_None
 ---
 
 # $schema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[nextjs.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Nextjs_TypeScript_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

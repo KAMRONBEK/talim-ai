@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/Community_None
 ---
 
 # quiz.controller.ts
@@ -56,7 +56,7 @@ tags:
 - [[normalizeForOptionMatch()]] - `contains` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
 - [[practiceTypeEnum]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[questionDepthEnum]] - `imports` [EXTRACTED]
 - [[questionStyleEnum]] - `imports` [EXTRACTED]
@@ -78,4 +78,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

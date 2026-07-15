@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Content Controller (YouTube/OCR)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_YouTube/OCR
+  - community/Community_None
 ---
 
 # contentAccess.service.ts
@@ -29,7 +29,7 @@ tags:
 - [[getAssignedContentIds()]] - `contains` [EXTRACTED]
 - [[mastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
@@ -44,4 +44,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR
+#graphify/code #graphify/EXTRACTED #community/Community_None

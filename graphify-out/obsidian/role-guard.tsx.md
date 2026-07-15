@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/role-guard.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # role-guard.tsx
@@ -22,5 +22,7 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[useAuthHydrated()_1]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

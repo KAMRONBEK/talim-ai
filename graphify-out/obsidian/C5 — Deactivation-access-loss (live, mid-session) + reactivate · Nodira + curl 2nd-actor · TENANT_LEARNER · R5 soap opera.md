@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Run 19 Charters"
+community: "Community None"
 location: "L1455"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Run_19_Charters
+  - community/Community_None
 ---
 
 # C5 — Deactivation-access-loss (live, mid-session) + reactivate · Nodira + curl 2nd-actor · TENANT_LEARNER · R5 soap opera
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Run 19 — R2026-07-14a (deep, session-based, RCRCRC-driven; unattended overnight)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Run_19_Charters
+#graphify/document #graphify/EXTRACTED #community/Community_None

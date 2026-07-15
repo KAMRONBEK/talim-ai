@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/query.md"
 type: "document"
-community: "Graphify Query Reference"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Query_Reference
+  - community/Community_None
 ---
 
 # Step 0 — Constrained query expansion (REQUIRED before traversal)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graphify reference query, path, explain]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Query_Reference
+#graphify/document #graphify/EXTRACTED #community/Community_None

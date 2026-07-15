@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/dashboard/page.tsx"
 type: "code"
-community: "Admin Dashboard Page"
+community: "Community None"
 location: "L60"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_Page
+  - community/Community_None
 ---
 
 # usd()
@@ -15,4 +15,4 @@ tags:
 - [[AdminDashboardPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -11,7 +11,6 @@ tags:
 # graphify add URL
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[URL Ingestion (auto-detected types)]] - `conceptually_related_to` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Graphify_URL_Ingestion

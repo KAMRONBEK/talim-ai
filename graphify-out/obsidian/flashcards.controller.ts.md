@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # flashcards.controller.ts
@@ -30,7 +30,7 @@ tags:
 - [[getParam()]] - `imports` [EXTRACTED]
 - [[locale.ts]] - `imports_from` [EXTRACTED]
 - [[params.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
 - [[recordFlashcardReview()]] - `imports` [EXTRACTED]
@@ -44,4 +44,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

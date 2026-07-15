@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Auth Lifecycle Stories"
+community: "Community None"
 location: "L36"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Auth_Lifecycle_Stories
+  - community/Community_None
 ---
 
 # Area: Auth lifecycle (register, reset, logout, become-tutor, session)
@@ -21,4 +21,4 @@ tags:
 - [[US-AUTH-08 Rate limiting on auth endpoints]] - `contains` [EXTRACTED]
 - [[US-AUTH-09 register-tenant endpoint + role-writenormalization boundaries]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Auth_Lifecycle_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,20 @@
 ---
-source_file: "docs/PLANS.md"
-type: "concept"
-community: "Product Plan Epics"
+source_file: "docs/plans/epic-5-usage-metering.md"
+type: "document"
+community: "Architecture Notes for Epics"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plan_Epics
+  - community/Architecture_Notes_for_Epics
 ---
 
 # Epic 5 — Usage Metering & Platform Cost
 
 ## Connections
-- [[Epic 1 — Subscriptions & billing]] - `references` [EXTRACTED]
+- [[ApiUsageEvent Model & recordUsage]] - `references` [EXTRACTED]
+- [[Epic 1 — Subscriptions & Billing_2]] - `references` [EXTRACTED]
 - [[Epic 2 — Platform Admin Panel_2]] - `references` [EXTRACTED]
+- [[Epic 6 — Tenant AI Assistant]] - `references` [EXTRACTED]
+- [[Epic Prompts Index]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plan_Epics
+#graphify/document #graphify/EXTRACTED #community/Architecture_Notes_for_Epics

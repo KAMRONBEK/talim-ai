@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Audit & Content Management"
+community: "Community None"
 location: "L127"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Audit__Content_Management
+  - community/Community_None
 ---
 
 # cancelContentJobs()
@@ -20,4 +20,4 @@ tags:
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Audit__Content_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

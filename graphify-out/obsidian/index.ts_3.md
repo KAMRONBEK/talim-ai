@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/index.ts"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # index.ts
@@ -109,6 +109,7 @@ tags:
 - [[page.tsx_33]] - `imports_from` [EXTRACTED]
 - [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[page.tsx_40]] - `imports_from` [EXTRACTED]
+- [[password-card.tsx]] - `imports_from` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[progress.tsx]] - `re_exports` [EXTRACTED]
@@ -131,5 +132,6 @@ tags:
 - [[upgrade-dialog.tsx]] - `imports_from` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[utils.ts]] - `re_exports` [EXTRACTED]
+- [[utils.ts_1]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

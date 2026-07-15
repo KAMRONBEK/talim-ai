@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/page.tsx"
 type: "code"
-community: "Admin User Management"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_User_Management
+  - community/Community_None
 ---
 
 # page.tsx
@@ -16,6 +16,7 @@ tags:
 - [[Input]] - `imports` [EXTRACTED]
 - [[UsersPage()]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[plan.ts]] - `imports_from` [EXTRACTED]
 - [[planLabel()]] - `imports` [EXTRACTED]
 - [[roleBadge()]] - `contains` [EXTRACTED]
 - [[subStatusBadge()]] - `contains` [EXTRACTED]
@@ -24,4 +25,4 @@ tags:
 - [[useDeleteUser()]] - `imports` [EXTRACTED]
 - [[useResetUserPassword()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_User_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

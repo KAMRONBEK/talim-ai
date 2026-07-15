@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Audit & Content Management"
+community: "Community None"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Audit__Content_Management
+  - community/Community_None
 ---
 
 # AuthenticatedRequest
@@ -33,6 +33,7 @@ tags:
 - [[rate-limit.middleware.ts]] - `imports` [EXTRACTED]
 - [[section.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
+- [[streamEvents()]] - `references` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[tenant.controller.ts]] - `imports` [EXTRACTED]
@@ -42,4 +43,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Audit__Content_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

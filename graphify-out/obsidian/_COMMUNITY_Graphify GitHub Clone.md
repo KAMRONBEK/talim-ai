@@ -1,18 +1,15 @@
 ---
 type: community
 cohesion: 0.67
-members: 3
+members: 0
 ---
 
 # Graphify GitHub Clone
 
 **Cohesion:** 0.67 - moderately connected
-**Members:** 3 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[Step 0 - Clone GitHub repo(s) (only if a GitHub URL was given)]] - document - .claude/skills/graphify/references/github-and-merge.md
-- [[github-and-merge]] - document - .claude/skills/graphify/references/github-and-merge.md
-- [[graphify reference GitHub clone and cross-repo merge]] - document - .claude/skills/graphify/references/github-and-merge.md
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/analytics.controller.ts"
 type: "code"
-community: "Analytics Controller"
+community: "Community None"
 location: "L91"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics_Controller
+  - community/Community_None
 ---
 
 # analyticsUserGrowth()
@@ -15,4 +15,4 @@ tags:
 - [[analytics.controller.ts]] - `contains` [EXTRACTED]
 - [[getUserGrowth()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,8 +1,8 @@
 {
   ".claude/settings.json": {
-    "mtime": 1782438223.9830115,
-    "ast_hash": "6210d822d77b81302f43115b2a17e2de",
-    "semantic_hash": "6210d822d77b81302f43115b2a17e2de"
+    "mtime": 1784126197.2725723,
+    "ast_hash": "50c12ef4cf8e13ef9be301a4b04d8a91",
+    "semantic_hash": ""
   },
   ".cursor/mcp.json": {
     "mtime": 1780603575.4453592,
@@ -1895,8 +1895,8 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784122588.5033057,
-    "ast_hash": "c3dc9f0807b9bdac24d126339b3e6475",
+    "mtime": 1784126263.6094735,
+    "ast_hash": "549d670c41712708091f22986ada99f4",
     "semantic_hash": ""
   },
   "README.md": {
@@ -2645,13 +2645,38 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1784122588.5031052,
-    "ast_hash": "dbe8d7384ced89dc6cb586d0c76ad5bf",
+    "mtime": 1784126246.8429706,
+    "ast_hash": "1403b14634e90fe8dd1ac71625c67f00",
     "semantic_hash": ""
   },
   "docs/qa/screenshots/run20-podcast-failed-part.md": {
     "mtime": 1784053588.3424933,
     "ast_hash": "0067e687771373c8ffeae56a1f3fea4d",
+    "semantic_hash": ""
+  },
+  ".claude/hooks/graphify-context.mjs": {
+    "mtime": 1784126161.4566507,
+    "ast_hash": "338f9030399cda194a8402d1c236bfaa",
+    "semantic_hash": ""
+  },
+  ".claude/hooks/graphify-search-hint.mjs": {
+    "mtime": 1784126169.894222,
+    "ast_hash": "a9ffa1ca8dce43950f59fa147945b4f0",
+    "semantic_hash": ""
+  },
+  "apps/web/components/account/password-card.tsx": {
+    "mtime": 1782165699.5502222,
+    "ast_hash": "1d581b6d7007be77e1084c5c113a5b75",
+    "semantic_hash": ""
+  },
+  "scripts/graphify-home.mjs": {
+    "mtime": 1784126103.9542692,
+    "ast_hash": "73883bfe2648bca2f5c3bf14ee069b51",
+    "semantic_hash": ""
+  },
+  "scripts/graphify-refresh.sh": {
+    "mtime": 1784126230.2932703,
+    "ast_hash": "9a6d22facef5a514a0a8071c31268e53",
     "semantic_hash": ""
   }
 }

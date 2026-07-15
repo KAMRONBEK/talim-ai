@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Subscription Edit Drawer"
+community: "Community None"
 location: "L136"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Edit_Drawer
+  - community/Community_None
 ---
 
 # useAdminSubscriptions()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_4]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Edit_Drawer
+#graphify/code #graphify/EXTRACTED #community/Community_None

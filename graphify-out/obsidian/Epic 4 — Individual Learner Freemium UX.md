@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/epic-4-individual-freemium.md"
 type: "document"
-community: "Product Epics Documentation"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Epics_Documentation
+  - community/Community_None
 ---
 
 # Epic 4 — Individual learner freemium UX
@@ -15,4 +15,4 @@ tags:
 - [[Cursor prompt_4]] - `contains` [EXTRACTED]
 - [[epic-4-individual-freemium]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Epics_Documentation
+#graphify/document #graphify/EXTRACTED #community/Community_None

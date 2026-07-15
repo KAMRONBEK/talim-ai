@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # RecordUsageInput
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

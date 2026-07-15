@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/learner/game-quiz-player.tsx"
 type: "code"
-community: "Game Quiz Player"
+community: "Community None"
 location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Game_Quiz_Player
+  - community/Community_None
 ---
 
 # GameQuizPlayer()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[clozeOptions()]] - `calls` [EXTRACTED]
 - [[dragItems()]] - `calls` [EXTRACTED]
 - [[dragTargets()]] - `calls` [EXTRACTED]
 - [[fillBlankCount()]] - `calls` [EXTRACTED]
@@ -22,4 +22,4 @@ tags:
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Game_Quiz_Player
+#graphify/code #graphify/EXTRACTED #community/Community_None

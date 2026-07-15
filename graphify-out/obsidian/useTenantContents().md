@@ -1,23 +1,24 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # useTenantContents()
 
 ## Connections
-- [[TenantAssessmentsPage()]] - `calls` [INFERRED]
-- [[TenantDashboardPage()]] - `calls` [INFERRED]
+- [[TenantAssessmentsPage()]] - `calls` [EXTRACTED]
+- [[TenantDashboardPage()]] - `calls` [EXTRACTED]
 - [[TenantMaterialsPage()]] - `calls` [EXTRACTED]
-- [[TenantSettingsPage()]] - `calls` [INFERRED]
-- [[TenantStudentDetailPage()]] - `calls` [INFERRED]
+- [[TenantSettingsPage()]] - `calls` [EXTRACTED]
+- [[TenantStudentDetailPage()]] - `calls` [EXTRACTED]
 - [[TenantStudentsPage()]] - `calls` [EXTRACTED]
+- [[listHasProcessing()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `imports` [EXTRACTED]
 - [[page.tsx_21]] - `imports` [EXTRACTED]
 - [[page.tsx_24]] - `imports` [EXTRACTED]
@@ -27,4 +28,4 @@ tags:
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

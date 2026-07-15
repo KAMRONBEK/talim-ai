@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "PDF Text Extraction"
+community: "Community None"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Extraction
+  - community/Community_None
 ---
 
 # PdfJsModule
 
 ## Connections
+- [[.getDocument()]] - `method` [EXTRACTED]
 - [[PdfViewer.tsx]] - `imports` [EXTRACTED]
 - [[pdfjs-cdn.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction
+#graphify/code #graphify/EXTRACTED #community/Community_None

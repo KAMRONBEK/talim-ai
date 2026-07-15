@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSections.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useSections()
@@ -14,8 +14,8 @@ tags:
 ## Connections
 - [[ContentLayoutInner()]] - `calls` [EXTRACTED]
 - [[ContentRightPanelBody()]] - `calls` [EXTRACTED]
-- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
-- [[MasteryDeltaList()]] - `calls` [INFERRED]
+- [[ContentWorkspaceInner()]] - `calls` [EXTRACTED]
+- [[MasteryDeltaList()]] - `calls` [EXTRACTED]
 - [[MaterialMediaPanel()]] - `calls` [EXTRACTED]
 - [[VideoInner()]] - `calls` [EXTRACTED]
 - [[content-right-panel.tsx]] - `imports` [EXTRACTED]
@@ -27,4 +27,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useSections.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

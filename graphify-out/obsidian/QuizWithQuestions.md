@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # QuizWithQuestions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learningProgress.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

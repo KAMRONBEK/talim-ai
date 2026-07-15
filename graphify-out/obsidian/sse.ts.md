@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/sse.ts"
 type: "code"
-community: "Chat Controller (SSE)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller_SSE
+  - community/Community_None
 ---
 
 # sse.ts
@@ -18,4 +18,4 @@ tags:
 - [[sseHeaders()]] - `contains` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller_SSE
+#graphify/code #graphify/EXTRACTED #community/Community_None

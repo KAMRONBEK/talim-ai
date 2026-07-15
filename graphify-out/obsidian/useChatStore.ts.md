@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Chat Store & Tutor Graph"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Store__Tutor_Graph
+  - community/Community_None
 ---
 
 # useChatStore.ts
@@ -19,6 +19,7 @@ tags:
 - [[LocalChatMessage]] - `contains` [EXTRACTED]
 - [[MessageRole]] - `imports` [EXTRACTED]
 - [[VisualBlock]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[appendVisualToText()]] - `contains` [EXTRACTED]
 - [[getApiBaseUrl()]] - `imports` [EXTRACTED]
 - [[getApiLocale()]] - `imports` [EXTRACTED]
@@ -28,6 +29,8 @@ tags:
 - [[selection-ask.tsx]] - `imports_from` [EXTRACTED]
 - [[serializeGraphBlock()]] - `imports` [EXTRACTED]
 - [[serializeVisualBlock()]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useChatStore]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph
+#graphify/code #graphify/EXTRACTED #community/Community_None

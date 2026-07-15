@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/users.controller.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L146"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # getUser()
@@ -22,4 +22,4 @@ tags:
 - [[resolveTenantIdForUser()]] - `calls` [EXTRACTED]
 - [[users.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

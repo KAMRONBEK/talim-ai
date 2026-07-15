@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/logo.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # LogoMark()
@@ -17,4 +17,4 @@ tags:
 - [[logo.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_11]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

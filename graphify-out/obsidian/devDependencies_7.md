@@ -1,26 +1,26 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "Shared UI Dependencies"
+community: "Community None"
 location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Dependencies
+  - community/Community_None
 ---
 
 # devDependencies
 
 ## Connections
-- [[@talimeslint-config_3]] - `contains` [EXTRACTED]
-- [[@talimtsconfig_4]] - `contains` [EXTRACTED]
-- [[@typesreact_2]] - `contains` [EXTRACTED]
-- [[@typesreact-dom_2]] - `contains` [EXTRACTED]
-- [[eslint_5]] - `contains` [EXTRACTED]
-- [[next_3]] - `contains` [EXTRACTED]
+- [[@talimeslint-config_7]] - `contains` [EXTRACTED]
+- [[@talimtsconfig_8]] - `contains` [EXTRACTED]
+- [[@typesreact_4]] - `contains` [EXTRACTED]
+- [[@typesreact-dom_4]] - `contains` [EXTRACTED]
+- [[eslint_10]] - `contains` [EXTRACTED]
+- [[next_6]] - `contains` [EXTRACTED]
 - [[package.json_9]] - `contains` [EXTRACTED]
-- [[react_3]] - `contains` [EXTRACTED]
-- [[react-dom_3]] - `contains` [EXTRACTED]
-- [[typescript_5]] - `contains` [EXTRACTED]
+- [[react_6]] - `contains` [EXTRACTED]
+- [[react-dom_6]] - `contains` [EXTRACTED]
+- [[typescript_10]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

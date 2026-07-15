@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "Shared UI Dependencies"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Dependencies
+  - community/Community_None
 ---
 
 # typecheck
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

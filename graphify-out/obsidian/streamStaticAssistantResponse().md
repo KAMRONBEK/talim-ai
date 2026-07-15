@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Chat Controller (SSE)"
+community: "Community None"
 location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller_SSE
+  - community/Community_None
 ---
 
 # streamStaticAssistantResponse()
@@ -17,4 +17,4 @@ tags:
 - [[sseDone()]] - `calls` [EXTRACTED]
 - [[streamChat()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller_SSE
+#graphify/code #graphify/EXTRACTED #community/Community_None

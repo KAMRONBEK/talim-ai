@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Test Plan Overview"
+community: "Community None"
 location: "L101"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Test_Plan_Overview
+  - community/Community_None
 ---
 
 # EDGE / ADVERSARIAL
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Resumable checklist]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Test_Plan_Overview
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,20 +1,21 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # TenantSidebarBody()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useTenant()]] - `calls` [EXTRACTED]
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

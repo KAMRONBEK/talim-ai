@@ -1,21 +1,22 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Become Tutor & Auth Shell"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Become_Tutor__Auth_Shell
+  - community/Community_None
 ---
 
 # getHomePathForRole()
 
 ## Connections
-- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[ContentAccessRedirect()]] - `calls` [EXTRACTED]
+- [[ContentWorkspaceInner()]] - `calls` [EXTRACTED]
 - [[auth-routing.ts]] - `contains` [EXTRACTED]
 - [[getPostLoginPath()]] - `calls` [EXTRACTED]
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,28 +1,15 @@
 ---
 type: community
 cohesion: 0.22
-members: 13
+members: 0
 ---
 
 # Desmos Graph Component
 
 **Cohesion:** 0.22 - loosely connected
-**Members:** 13 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[DesmosCalculator]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[DesmosGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[DesmosGraph.tsx]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[FallbackGraph]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[FallbackPoint]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[FallbackSvgGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[Window]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[axisLine()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[buildFallbackGraph()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[evaluateFallbackExpression()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[fallbackPath()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[loadDesmosScript()]] - code - apps/web/components/chat/DesmosGraph.tsx
-- [[toFallbackExpression()]] - code - apps/web/components/chat/DesmosGraph.tsx
 
 ## Live Query (requires Dataview plugin)
 
@@ -30,13 +17,3 @@ members: 13
 TABLE source_file, type FROM #community/Desmos_Graph_Component
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 2 edges to [[_COMMUNITY_Tutor Embed Components]]
-- 1 edge to [[_COMMUNITY_Admin Content & Subscriptions]]
-- 1 edge to [[_COMMUNITY_Chat Store & Tutor Graph]]
-- 1 edge to [[_COMMUNITY_Learner Dashboard]]
-
-## Top bridge nodes
-- [[DesmosGraph.tsx]] - degree 15, connects to 3 communities
-- [[DesmosGraph()]] - degree 4, connects to 2 communities

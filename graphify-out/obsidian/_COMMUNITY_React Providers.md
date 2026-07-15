@@ -1,17 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 0
 ---
 
 # React Providers
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[Providers()]] - code - apps/admin/components/providers.tsx
-- [[providers.tsx]] - code - apps/admin/components/providers.tsx
 
 ## Live Query (requires Dataview plugin)
 

@@ -27,12 +27,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Graphify Tool Features]]
 - 1 edge to [[_COMMUNITY_Graph Query & Traversal]]
 - 1 edge to [[_COMMUNITY_Graphify URL Ingestion]]
 
 ## Top bridge nodes
 - [[Code-Only Change (skip semantic extraction)]] - degree 4, connects to 1 community
-- [[Post-Commit Auto-Rebuild Hook]] - degree 3, connects to 1 community
-- [[VideoAudio Transcription]] - degree 3, connects to 1 community
 - [[save-result Feedback Loop]] - degree 2, connects to 1 community

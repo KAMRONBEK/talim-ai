@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "YouTube Transcription Service"
+community: "Community None"
 location: "L56"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/YouTube_Transcription_Service
+  - community/Community_None
 ---
 
 # cleanTranscriptText()
@@ -15,6 +15,8 @@ tags:
 - [[extractYoutubeTranscript()]] - `calls` [EXTRACTED]
 - [[fallbackTextSegments()]] - `calls` [EXTRACTED]
 - [[generateYoutubeTranscript()]] - `calls` [EXTRACTED]
+- [[normalizeCaptionSegments()]] - `calls` [EXTRACTED]
+- [[normalizeTranscriptionSegments()]] - `calls` [EXTRACTED]
 - [[youtube.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/YouTube_Transcription_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

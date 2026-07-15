@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Transcript Panel & Video Viewer"
+community: "Community None"
 location: "L1038"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel__Video_Viewer
+  - community/Community_None
 ---
 
 # PodcastSegment
@@ -19,4 +19,4 @@ tags:
 - [[podcast-segments.ts]] - `imports` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel__Video_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_None

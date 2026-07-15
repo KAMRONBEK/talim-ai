@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Owner Assessment Tools"
+community: "Community None"
 location: "L3817"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Owner_Assessment_Tools
+  - community/Community_None
 ---
 
 # US-OWNER-19: Assessment authoring builder — all 8 types round-trip owner→learner
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Assessment builder, GAME-live control, messaging, CSV importexport (TENANT_OWNER)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Owner_Assessment_Tools
+#graphify/document #graphify/EXTRACTED #community/Community_None

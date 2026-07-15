@@ -1,19 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L863"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Learner_Dashboard
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # LearnerAssessmentsPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
-- [[useLearnerAssessments()]] - `calls` [INFERRED]
+- [[useLearnerAssessments()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

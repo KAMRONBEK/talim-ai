@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/layout/resizable-split.tsx"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # readStoredPercent()
 
 ## Connections
+- [[ResizableSplit()]] - `calls` [EXTRACTED]
 - [[resizable-split.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

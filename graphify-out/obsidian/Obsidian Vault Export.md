@@ -10,7 +10,4 @@ tags:
 
 # Obsidian Vault Export
 
-## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
-
 #graphify/concept #graphify/EXTRACTED #community/Graphify_Tool_Features

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # material-media-panel.tsx
@@ -33,5 +33,6 @@ tags:
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 - [[useVideo()]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
+- [[utils.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

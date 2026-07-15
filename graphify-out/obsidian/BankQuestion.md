@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Question Editor Component"
+community: "Community None"
 location: "L501"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Editor_Component
+  - community/Community_None
 ---
 
 # BankQuestion
@@ -17,4 +17,4 @@ tags:
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Editor_Component
+#graphify/code #graphify/EXTRACTED #community/Community_None

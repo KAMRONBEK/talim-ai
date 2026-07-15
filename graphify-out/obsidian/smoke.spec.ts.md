@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/e2e/smoke.spec.ts"
 type: "code"
-community: "Playwright Test Setup"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Playwright_Test_Setup
+  - community/Community_None
 ---
 
 # smoke.spec.ts
@@ -15,4 +15,4 @@ tags:
 - [[TEST_USER]] - `imports` [EXTRACTED]
 - [[global-setup.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Playwright_Test_Setup
+#graphify/code #graphify/EXTRACTED #community/Community_None

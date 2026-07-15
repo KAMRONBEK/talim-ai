@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content & Subscriptions"
+community: "Community None"
 location: "L164"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Subscriptions
+  - community/Community_None
 ---
 
 # TenantBillingUsageVsLimits
@@ -16,4 +16,4 @@ tags:
 - [[billing-summary-card.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/Community_None

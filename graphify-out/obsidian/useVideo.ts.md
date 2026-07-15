@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useVideo.ts
@@ -14,6 +14,8 @@ tags:
 ## Connections
 - [[AppLocale]] - `imports` [EXTRACTED]
 - [[ContentVideo]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[material-media-panel.tsx]] - `imports_from` [EXTRACTED]
 - [[page.tsx_34]] - `imports_from` [EXTRACTED]
@@ -25,4 +27,4 @@ tags:
 - [[useVideo()]] - `contains` [EXTRACTED]
 - [[videoKey()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

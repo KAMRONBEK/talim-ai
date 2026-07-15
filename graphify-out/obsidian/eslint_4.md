@@ -1,17 +1,18 @@
 ---
-source_file: "packages/config/eslint/package.json"
+source_file: "apps/web/package.json"
 type: "code"
-community: "ESLint Config Package"
-location: "L15"
+community: "Community None"
+location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ESLint_Config_Package
+  - community/Community_None
 ---
 
 # eslint
 
 ## Connections
-- [[peerDependencies]] - `contains` [EXTRACTED]
+- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[eslint_5]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ESLint_Config_Package
+#graphify/code #graphify/EXTRACTED #community/Community_None

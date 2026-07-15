@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/answerJudge.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # quizQuestionKey()
@@ -19,4 +19,4 @@ tags:
 - [[learningProgress.service.ts]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

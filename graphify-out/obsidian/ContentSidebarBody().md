@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # ContentSidebarBody()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[content-sidebar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/progress.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L113"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # getLearnerMaterials()
@@ -15,4 +15,4 @@ tags:
 - [[progress.ts]] - `contains` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

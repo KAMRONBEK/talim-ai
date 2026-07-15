@@ -1,19 +1,19 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Dashboard Page"
+community: "Community None"
 location: "L360"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard_Page
+  - community/Community_None
 ---
 
 # useAdminAnalyticsFunnel()
 
 ## Connections
-- [[AdminDashboardPage()]] - `calls` [INFERRED]
+- [[AdminDashboardPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_2]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

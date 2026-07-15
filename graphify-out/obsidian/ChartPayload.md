@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Slide UI Components"
+community: "Community None"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_UI_Components
+  - community/Community_None
 ---
 
 # ChartPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-chart.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

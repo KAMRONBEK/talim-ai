@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "document"
-community: "Graphify Extraction Pipeline"
+community: "Community None"
 location: "L191"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Extraction_Pipeline
+  - community/Community_None
 ---
 
 # Part B - Semantic extraction (parallel subagents)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Step 3 - Extract entities and relationships]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Extraction_Pipeline
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Community None"
 location: "L94"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Community_None
 ---
 
 # tenantContent
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/content-stage.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # content-stage.tsx
@@ -40,6 +40,8 @@ tags:
 - [[streamSummaryGeneration()]] - `imports` [EXTRACTED]
 - [[summary-text.tsx]] - `imports_from` [EXTRACTED]
 - [[summaryStream.ts]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useFlashcards()]] - `imports` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
@@ -50,4 +52,4 @@ tags:
 - [[useQuizHistory()]] - `imports` [EXTRACTED]
 - [[useSavedSummary()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

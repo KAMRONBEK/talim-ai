@@ -1,22 +1,21 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/students/[id]/page.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Billing__Profile_UI
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # TenantStudentDetailPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_27]] - `contains` [EXTRACTED]
 - [[profileInitials()]] - `calls` [EXTRACTED]
-- [[useAssignContent()]] - `calls` [INFERRED]
-- [[useStudentProgress()]] - `calls` [INFERRED]
-- [[useTenantContents()]] - `calls` [INFERRED]
+- [[useAssignContent()]] - `calls` [EXTRACTED]
+- [[useStudentProgress()]] - `calls` [EXTRACTED]
+- [[useTenantContents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

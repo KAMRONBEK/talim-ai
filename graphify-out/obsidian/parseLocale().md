@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/request.ts"
 type: "code"
-community: "API Client & Locale Routing"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Client__Locale_Routing
+  - community/Community_None
 ---
 
 # parseLocale()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[request.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Client__Locale_Routing
+#graphify/code #graphify/EXTRACTED #community/Community_None

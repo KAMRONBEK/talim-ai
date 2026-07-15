@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mastery.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L53"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # getLearnerMastery()
@@ -21,4 +21,4 @@ tags:
 - [[resolveTenantIdForUser()]] - `calls` [EXTRACTED]
 - [[roundPct()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

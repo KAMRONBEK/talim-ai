@@ -1,19 +1,20 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/settings/page.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Learner_Dashboard
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # LearnerSettingsPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[dismissOnboarding()]] - `calls` [EXTRACTED]
 - [[page.tsx_18]] - `contains` [EXTRACTED]
-- [[useLearnerSummary()]] - `calls` [INFERRED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
+- [[useLearnerSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

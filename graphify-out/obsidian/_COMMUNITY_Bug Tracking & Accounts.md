@@ -23,9 +23,8 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_QA Deferred Bug Reports]]
+- 2 edges to [[_COMMUNITY_QA Deferred Bug Reports]]
 - 1 edge to [[_COMMUNITY_QA Traceability Ledger]]
 
 ## Top bridge nodes
 - [[Overnight Visual QA Report (session journal, Runs 1–18)]] - degree 5, connects to 2 communities
-- [[F45 Stale JWT after role change (tutor approval)]] - degree 2, connects to 1 community

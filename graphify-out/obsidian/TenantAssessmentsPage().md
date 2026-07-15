@@ -1,30 +1,30 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessments Page"
+community: "Community None"
 location: "L312"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Assessments_Page
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # TenantAssessmentsPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[cn()]] - `calls` [INFERRED]
+- [[WIZARD_STEPS]] - `references` [EXTRACTED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[mutErr()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
-- [[useAssignAssessment()]] - `calls` [INFERRED]
-- [[useBankQuestions()]] - `calls` [INFERRED]
-- [[useCreateAssessment()]] - `calls` [INFERRED]
-- [[useCreateQuestionBank()]] - `calls` [INFERRED]
-- [[useGenerateBankQuestions()]] - `calls` [INFERRED]
-- [[usePatchBankQuestion()]] - `calls` [INFERRED]
-- [[useQuestionBanks()]] - `calls` [INFERRED]
-- [[useTenantAssessments()]] - `calls` [INFERRED]
-- [[useTenantContents()]] - `calls` [INFERRED]
-- [[useTenantStudents()]] - `calls` [INFERRED]
+- [[useAssignAssessment()]] - `calls` [EXTRACTED]
+- [[useBankQuestions()]] - `calls` [EXTRACTED]
+- [[useCreateAssessment()]] - `calls` [EXTRACTED]
+- [[useCreateQuestionBank()]] - `calls` [EXTRACTED]
+- [[useGenerateBankQuestions()]] - `calls` [EXTRACTED]
+- [[usePatchBankQuestion()]] - `calls` [EXTRACTED]
+- [[useQuestionBanks()]] - `calls` [EXTRACTED]
+- [[useTenantAssessments()]] - `calls` [EXTRACTED]
+- [[useTenantContents()]] - `calls` [EXTRACTED]
+- [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessments_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

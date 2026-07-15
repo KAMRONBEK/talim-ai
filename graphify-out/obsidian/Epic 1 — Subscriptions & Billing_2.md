@@ -11,9 +11,9 @@ tags:
 # Epic 1 — Subscriptions & Billing
 
 ## Connections
-- [[Epic 3 — Tenant (Organization) Experience_3]] - `references` [EXTRACTED]
+- [[Epic 3 — Tenant (Organization) Experience_2]] - `references` [EXTRACTED]
 - [[Epic 4 — Individual Learner Freemium UX_1]] - `references` [EXTRACTED]
-- [[Epic 5 — Usage Metering & Platform Cost_3]] - `references` [EXTRACTED]
+- [[Epic 5 — Usage Metering & Platform Cost_2]] - `references` [EXTRACTED]
 - [[Epic Prompts Index]] - `references` [EXTRACTED]
 - [[Quota Enforcement Middleware (enforceQuota)]] - `references` [EXTRACTED]
 - [[Stripe Integration]] - `references` [EXTRACTED]

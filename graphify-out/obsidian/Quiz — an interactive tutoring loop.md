@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "Workspace Redesign Document"
+community: "Community None"
 location: "L128"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Workspace_Redesign_Document
+  - community/Community_None
 ---
 
 # Quiz — an interactive tutoring loop
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI — Learning Workspace Redesign (YouLearn-inspired)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Workspace_Redesign_Document
+#graphify/document #graphify/EXTRACTED #community/Community_None

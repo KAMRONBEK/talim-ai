@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L55"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # getSlideDeck()
@@ -18,7 +18,8 @@ tags:
 - [[formatSlideDeck()]] - `calls` [EXTRACTED]
 - [[generateVideo.job.ts]] - `imports` [EXTRACTED]
 - [[getSlides()]] - `calls` [EXTRACTED]
+- [[registerGenerateVideoJob()]] - `calls` [EXTRACTED]
 - [[slides.controller.ts]] - `imports` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

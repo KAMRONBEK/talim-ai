@@ -1,18 +1,17 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "document"
-community: "Graphify Tool Features"
+community: "Community None"
 location: "L669"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Tool_Features
+  - community/Community_None
 ---
 
 # Honesty Rules
 
 ## Connections
 - [[graphify_1]] - `contains` [EXTRACTED]
-- [[Honest Audit Trail (EXTRACTEDINFERREDAMBIGUOUS)]] - `rationale_for` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Tool_Features
+#graphify/document #graphify/EXTRACTED #community/Community_None

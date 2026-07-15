@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Quiz Controller"
+community: "Community None"
 location: "L377"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller
+  - community/Community_None
 ---
 
 # GradeResult
@@ -15,4 +15,4 @@ tags:
 - [[grading.ts]] - `contains` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

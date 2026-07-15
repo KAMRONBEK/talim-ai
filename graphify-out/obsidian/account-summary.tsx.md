@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/account-summary.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # account-summary.tsx
@@ -19,5 +19,7 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[page.tsx_18]] - `imports_from` [EXTRACTED]
 - [[roleKey]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

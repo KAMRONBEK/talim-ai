@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Run 18 Charters"
+community: "Community None"
 location: "L912"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Run_18_Charters
+  - community/Community_None
 ---
 
 # Run 18 — 2026-07-12 (overnight, unattended) · SESSION-BASED deep QA of the post-2026-06-28 surface
@@ -23,4 +23,4 @@ tags:
 - [[Overnight Visual QA Report — Talim AI]] - `contains` [EXTRACTED]
 - [[Run 18 — closeout (§G)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Run_18_Charters
+#graphify/document #graphify/EXTRACTED #community/Community_None

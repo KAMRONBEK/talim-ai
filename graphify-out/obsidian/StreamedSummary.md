@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/summaryStream.ts"
 type: "code"
-community: "API Client & Locale Routing"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Client__Locale_Routing
+  - community/Community_None
 ---
 
 # StreamedSummary
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[summaryStream.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Client__Locale_Routing
+#graphify/code #graphify/EXTRACTED #community/Community_None

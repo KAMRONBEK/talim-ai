@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant.controller.ts"
 type: "code"
-community: "Tenant Student Management"
+community: "Community None"
 location: "L75"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Student_Management
+  - community/Community_None
 ---
 
 # listSentMessages()
@@ -15,4 +15,4 @@ tags:
 - [[requireOwnerTenant()]] - `calls` [EXTRACTED]
 - [[tenant.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Student_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

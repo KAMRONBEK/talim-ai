@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/theme-toggle.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # themeMeta
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-toggle.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

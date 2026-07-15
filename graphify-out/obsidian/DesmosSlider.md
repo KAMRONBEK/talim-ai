@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "Chat Store & Tutor Graph"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Store__Tutor_Graph
+  - community/Community_None
 ---
 
 # DesmosSlider
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[tutor-graph.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph
+#graphify/code #graphify/EXTRACTED #community/Community_None

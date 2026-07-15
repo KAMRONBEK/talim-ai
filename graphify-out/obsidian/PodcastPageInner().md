@@ -1,19 +1,21 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/podcast/page.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # PodcastPageInner()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[fetchAuthenticatedBlob()]] - `calls` [EXTRACTED]
+- [[formatDuration()]] - `calls` [EXTRACTED]
 - [[page.tsx_32]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useContent()]] - `calls` [EXTRACTED]
 - [[useCreatePodcast()]] - `calls` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
@@ -22,4 +24,4 @@ tags:
 - [[useRegenerateEpisode()]] - `calls` [EXTRACTED]
 - [[useUpdatePodcastProgress()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

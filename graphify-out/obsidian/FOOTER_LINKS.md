@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/footer.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # FOOTER_LINKS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

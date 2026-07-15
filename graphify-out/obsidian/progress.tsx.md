@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/progress.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # progress.tsx
@@ -16,5 +16,6 @@ tags:
 - [[ProgressProps]] - `contains` [EXTRACTED]
 - [[cn()]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
+- [[utils.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

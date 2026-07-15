@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/qa-run/SKILL.md"
 type: "document"
-community: "Visual QA Skill Guide"
+community: "Community None"
 location: "L102"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Visual_QA_Skill_Guide
+  - community/Community_None
 ---
 
 # The mindset
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI — Visual QA run]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Visual_QA_Skill_Guide
+#graphify/document #graphify/EXTRACTED #community/Community_None

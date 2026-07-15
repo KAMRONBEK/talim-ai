@@ -1,17 +1,18 @@
 ---
 source_file: "apps/api/src/jobs/renderManim.job.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # buildReadyBlock()
 
 ## Connections
+- [[registerRenderManimJob()]] - `calls` [EXTRACTED]
 - [[renderManim.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

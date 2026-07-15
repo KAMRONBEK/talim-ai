@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # DashboardHeaderProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dashboard-header.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

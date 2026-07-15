@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L66"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # ContentThumbnail()
@@ -16,4 +16,4 @@ tags:
 - [[getYoutubeThumbnailUrl()]] - `calls` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/billing-summary-card.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # billing-summary-card.tsx
@@ -21,10 +21,13 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_26]] - `imports_from` [EXTRACTED]
 - [[page.tsx_36]] - `imports_from` [EXTRACTED]
+- [[plan.ts_1]] - `imports_from` [EXTRACTED]
 - [[planMessageKey]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 - [[useUpgradeModal]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

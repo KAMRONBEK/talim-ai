@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L234"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # extractPdfPageRange()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[runCli()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

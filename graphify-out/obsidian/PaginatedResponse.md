@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content Page"
+community: "Community None"
 location: "L966"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content_Page
+  - community/Community_None
 ---
 
 # PaginatedResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -15,6 +15,6 @@ tags:
 - [[package.json_3]] - `contains` [EXTRACTED]
 - [[prettier]] - `contains` [EXTRACTED]
 - [[turbo]] - `contains` [EXTRACTED]
-- [[typescript_3]] - `contains` [EXTRACTED]
+- [[typescript_6]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config

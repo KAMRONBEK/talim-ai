@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/jobEvents.ts"
 type: "code"
-community: "Admin Content & Subscriptions"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Subscriptions
+  - community/Community_None
 ---
 
 # JobEventStatus
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[jobEvents.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/Community_None

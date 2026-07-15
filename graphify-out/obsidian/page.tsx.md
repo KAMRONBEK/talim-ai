@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/audit/page.tsx"
 type: "code"
-community: "Become Tutor & Auth Shell"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Become_Tutor__Auth_Shell
+  - community/Community_None
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminAuditLogs()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_None

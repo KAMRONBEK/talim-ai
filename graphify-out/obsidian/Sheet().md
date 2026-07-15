@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/sheet.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # Sheet()
@@ -22,4 +22,4 @@ tags:
 - [[subscription-edit-drawer.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

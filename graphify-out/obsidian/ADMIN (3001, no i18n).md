@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Test Plan Overview"
+community: "Community None"
 location: "L89"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Test_Plan_Overview
+  - community/Community_None
 ---
 
 # ADMIN (3001, no i18n)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Resumable checklist]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Test_Plan_Overview
+#graphify/document #graphify/EXTRACTED #community/Community_None

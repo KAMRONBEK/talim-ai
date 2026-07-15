@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Story Index Template"
+community: "Community None"
 location: "L266"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Story_Index_Template
+  - community/Community_None
 ---
 
 # INDIVIDUAL (B2C)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Story index (backlog — expand each with the template)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Story_Index_Template
+#graphify/document #graphify/EXTRACTED #community/Community_None

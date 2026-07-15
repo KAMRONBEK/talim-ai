@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/badges.service.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # badges.service.ts
@@ -19,8 +19,8 @@ tags:
 - [[finalize()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

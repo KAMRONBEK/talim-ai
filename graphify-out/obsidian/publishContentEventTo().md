@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/events/jobEventAudience.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # publishContentEventTo()
@@ -19,4 +19,4 @@ tags:
 - [[publishContentEvent()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

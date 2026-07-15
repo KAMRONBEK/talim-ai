@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Generated Media Review"
+community: "Community None"
 location: "L185"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated_Media_Review
+  - community/Community_None
 ---
 
 # useAdminGenerated()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_3]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated_Media_Review
+#graphify/code #graphify/EXTRACTED #community/Community_None

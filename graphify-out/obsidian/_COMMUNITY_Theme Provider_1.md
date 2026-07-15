@@ -1,17 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 0
 ---
 
 # Theme Provider
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[ThemeProvider()_1]] - code - apps/web/components/theme-provider.tsx
-- [[theme-provider.tsx_1]] - code - apps/web/components/theme-provider.tsx
 
 ## Live Query (requires Dataview plugin)
 

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Content & Subscriptions"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Content__Subscriptions
+  - community/Community_None
 ---
 
 # index.ts
@@ -322,7 +322,6 @@ tags:
 - [[session-sync.tsx]] - `imports_from` [EXTRACTED]
 - [[shared.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `re_exports` [EXTRACTED]
-- [[shared.ts_2]] - `re_exports` [EXTRACTED]
 - [[slides.controller.ts]] - `imports_from` [EXTRACTED]
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `imports_from` [EXTRACTED]
@@ -372,4 +371,4 @@ tags:
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions
+#graphify/code #graphify/EXTRACTED #community/Community_None

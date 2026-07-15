@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # content-right-panel.tsx
@@ -38,4 +38,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

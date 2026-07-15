@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatMessage.tsx"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # ChatMessage.tsx
@@ -22,4 +22,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "Workspace Redesign Document"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Workspace_Redesign_Document
+  - community/Community_None
 ---
 
 # Talim AI — Learning Workspace Redesign (YouLearn-inspired)
@@ -25,4 +25,4 @@ tags:
 - [[Visual direction (both themes first-class)]] - `contains` [EXTRACTED]
 - [[youlearn-redesign]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Workspace_Redesign_Document
+#graphify/document #graphify/EXTRACTED #community/Community_None

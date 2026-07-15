@@ -1,17 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 0
 ---
 
 # ESLint Config
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[.eslintrc.json]] - code - apps/admin/.eslintrc.json
-- [[extends]] - code - apps/admin/.eslintrc.json
 
 ## Live Query (requires Dataview plugin)
 

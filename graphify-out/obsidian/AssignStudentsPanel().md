@@ -1,18 +1,17 @@
 ---
 source_file: "apps/web/components/tenant/assign-students-panel.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # AssignStudentsPanel()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[assign-students-panel.tsx]] - `contains` [EXTRACTED]
 - [[page.tsx_22]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
@@ -21,4 +20,4 @@ tags:
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 - [[useUnassignContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

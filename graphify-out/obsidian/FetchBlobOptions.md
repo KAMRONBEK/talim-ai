@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/authenticatedBlob.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # FetchBlobOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[authenticatedBlob.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "document"
-community: "Question Engine Rework Document"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Question_Engine_Rework_Document
+  - community/Community_None
 ---
 
 # Question Engine Rework — Design
@@ -24,4 +24,4 @@ tags:
 - [[Why (product owner requirements)]] - `contains` [EXTRACTED]
 - [[question-engine]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Question_Engine_Rework_Document
+#graphify/document #graphify/EXTRACTED #community/Community_None

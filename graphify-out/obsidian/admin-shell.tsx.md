@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/admin-shell.tsx"
 type: "code"
-community: "Admin Layout Components"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Layout_Components
+  - community/Community_None
 ---
 
 # admin-shell.tsx
@@ -14,7 +14,9 @@ tags:
 ## Connections
 - [[AdminHeader()]] - `imports` [EXTRACTED]
 - [[AdminShell()]] - `contains` [EXTRACTED]
+- [[AuthGuard()]] - `imports` [EXTRACTED]
 - [[admin-header.tsx]] - `imports_from` [EXTRACTED]
+- [[auth-guard.tsx]] - `imports_from` [EXTRACTED]
 - [[layout.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

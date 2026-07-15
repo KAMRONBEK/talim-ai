@@ -11,7 +11,6 @@ tags:
 # Video/Audio Transcription
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[Code-Only Change (skip semantic extraction)]] - `references` [EXTRACTED]
 - [[Whisper Domain-Hint Prompt]] - `references` [EXTRACTED]
 

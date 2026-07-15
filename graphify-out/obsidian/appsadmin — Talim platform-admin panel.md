@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "document"
-community: "Admin Panel Guide"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_Panel_Guide
+  - community/Community_None
 ---
 
 # apps/admin — Talim platform-admin panel
@@ -20,4 +20,4 @@ tags:
 - [[6. Gotchas]] - `contains` [EXTRACTED]
 - [[CLAUDE_2]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Guide
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Admin Panel Stories"
+community: "Community None"
 location: "L2033"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_Panel_Stories
+  - community/Community_None
 ---
 
 # US-OWNER-11: Billing & seat display + inactive-subscription banner + request-upgrade
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Admin panel + billingseats + subscriptions]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

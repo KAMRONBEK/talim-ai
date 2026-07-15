@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "TTS Text Normalization"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Text_Normalization
+  - community/Community_None
 ---
 
 # MOD_TURNED_COMMA
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tts-normalize.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -28,9 +28,3 @@ members: 11
 TABLE source_file, type FROM #community/Build__Task_Pipeline
 SORT file.name ASC
 ```
-
-## Connections to other communities
-- 1 edge to [[_COMMUNITY_Monorepo Root Config]]
-
-## Top bridge nodes
-- [[tasks]] - degree 5, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "Summary Controller"
+community: "Community None"
 location: "L179"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Summary_Controller
+  - community/Community_None
 ---
 
 # generateSummary()
@@ -24,4 +24,4 @@ tags:
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 - [[summaryUserId()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Summary_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

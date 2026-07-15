@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/hooks/useJobEvents.ts"
 type: "code"
-community: "Manim Video & Job Stream"
+community: "Community None"
 location: "L67"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Manim_Video__Job_Stream
+  - community/Community_None
 ---
 
 # applyEvent()
 
 ## Connections
+- [[useJobEvents()]] - `calls` [EXTRACTED]
 - [[useJobEvents.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Manim_Video__Job_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

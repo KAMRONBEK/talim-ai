@@ -1,19 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Page & Hooks"
+community: "Community None"
 location: "L233"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Quiz_Page__Hooks
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # MasteryDeltaList()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[MASTERY_BAND_ORDER]] - `references` [EXTRACTED]
 - [[page.tsx_40]] - `contains` [EXTRACTED]
-- [[useSections()]] - `calls` [INFERRED]
+- [[useSections()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Quiz_Page__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

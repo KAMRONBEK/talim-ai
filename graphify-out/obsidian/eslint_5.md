@@ -1,17 +1,17 @@
 ---
-source_file: "packages/ui/package.json"
-type: "code"
-community: "Shared UI Dependencies"
-location: "L34"
+source_file: "apps/web/package.json"
+type: "concept"
+community: "Community None"
+location: "L42"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Shared_UI_Dependencies
+  - community/Community_None
 ---
 
 # eslint
 
 ## Connections
-- [[devDependencies_7]] - `contains` [EXTRACTED]
+- [[eslint_4]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

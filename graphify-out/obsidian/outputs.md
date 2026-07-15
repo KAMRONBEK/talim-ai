@@ -12,6 +12,9 @@ tags:
 # outputs
 
 ## Connections
+- [[!.nextcache]] - `extends` [EXTRACTED]
+- [[.next]] - `extends` [EXTRACTED]
 - [[build_5]] - `contains` [EXTRACTED]
+- [[dist]] - `extends` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Build__Task_Pipeline

@@ -1,14 +1,17 @@
 ---
 source_file: "apps/admin/next-env.d.ts"
 type: "code"
-community: "Next.js Env Types"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Nextjs_Env_Types
+  - community/Community_None
 ---
 
 # next-env.d.ts
 
-#graphify/code #graphify/EXTRACTED #community/Nextjs_Env_Types
+## Connections
+- [[NOTE This file should not be edited]] - `rationale_for` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Community_None

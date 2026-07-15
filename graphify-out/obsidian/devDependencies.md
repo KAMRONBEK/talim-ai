@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/package.json"
 type: "code"
-community: "Frontend Dependencies (with UI)"
+community: "Community None"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Frontend_Dependencies_with_UI
+  - community/Community_None
 ---
 
 # devDependencies
@@ -26,4 +26,4 @@ tags:
 - [[tailwindcss]] - `contains` [EXTRACTED]
 - [[typescript]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies_with_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/rich-text.tsx"
 type: "code"
-community: "Quiz Answer Input Components"
+community: "Community None"
 location: "L41"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Answer_Input_Components
+  - community/Community_None
 ---
 
 # RichText()
@@ -15,8 +15,9 @@ tags:
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 - [[game-quiz-player.tsx]] - `imports` [EXTRACTED]
+- [[normalizeGeneratedText()]] - `calls` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 - [[rich-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Input_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

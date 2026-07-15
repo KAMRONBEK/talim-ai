@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Subscription Edit Drawer"
+community: "Community None"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription_Edit_Drawer
+  - community/Community_None
 ---
 
 # formatDate()
@@ -15,4 +15,4 @@ tags:
 - [[DrawerBody()]] - `calls` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription_Edit_Drawer
+#graphify/code #graphify/EXTRACTED #community/Community_None

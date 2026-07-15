@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # toBlocks()
@@ -17,4 +17,4 @@ tags:
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 - [[splitByTokens()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

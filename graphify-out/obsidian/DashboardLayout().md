@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/layout.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # DashboardLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

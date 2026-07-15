@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/CLAUDE.md"
 type: "document"
-community: "App Architecture Overview"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/App_Architecture_Overview
+  - community/Community_None
 ---
 
 # apps/api — Express + Prisma backend
@@ -23,4 +23,4 @@ tags:
 - [[9. Local gotchas]] - `contains` [EXTRACTED]
 - [[CLAUDE_3]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/App_Architecture_Overview
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "Global Providers & Upgrade Modal"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Global_Providers__Upgrade_Modal
+  - community/Community_None
 ---
 
 # JobStream()
@@ -15,4 +15,4 @@ tags:
 - [[providers.tsx_1]] - `contains` [EXTRACTED]
 - [[useJobEvents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal
+#graphify/code #graphify/EXTRACTED #community/Community_None

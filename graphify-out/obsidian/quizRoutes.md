@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/quiz.routes.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Community_None
 ---
 
 # quizRoutes
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_1]] - `imports` [EXTRACTED]
 - [[quiz.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

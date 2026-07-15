@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L1194"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # SectionProgress
@@ -16,4 +16,4 @@ tags:
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

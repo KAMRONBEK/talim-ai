@@ -12,6 +12,7 @@ tags:
 # esc()
 
 ## Connections
+- [[buildTextPdf()]] - `calls` [EXTRACTED]
 - [[qa-fixtures.mjs]] - `contains` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/QA_Fixture_PDF_Generation

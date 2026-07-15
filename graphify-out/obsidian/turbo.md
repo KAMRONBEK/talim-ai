@@ -13,6 +13,6 @@ tags:
 
 ## Connections
 - [[devDependencies_3]] - `contains` [EXTRACTED]
-- [[turbo.json]] - `imports` [EXTRACTED]
+- [[turbo_1]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config

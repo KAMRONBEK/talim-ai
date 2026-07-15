@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tts-normalize.ts"
 type: "code"
-community: "TTS Text Normalization"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Text_Normalization
+  - community/Community_None
 ---
 
 # tts-normalize.ts
@@ -30,4 +30,4 @@ tags:
 - [[transliterateUzbek()]] - `contains` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization
+#graphify/code #graphify/EXTRACTED #community/Community_None

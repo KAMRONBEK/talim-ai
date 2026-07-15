@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_None
 ---
 
 # preprocessLatex()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[TutorMessageContent()]] - `calls` [EXTRACTED]
 - [[TutorMessageContent.tsx]] - `imports` [EXTRACTED]
+- [[normalizeSegment()]] - `calls` [EXTRACTED]
 - [[preprocess-latex.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

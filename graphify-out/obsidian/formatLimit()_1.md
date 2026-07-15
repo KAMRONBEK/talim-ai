@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Tenant Hooks"
+community: "Community None"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant_Hooks
+  - community/Community_None
 ---
 
 # formatLimit()
@@ -15,4 +15,4 @@ tags:
 - [[UserDetailPage()]] - `calls` [EXTRACTED]
 - [[page.tsx_9]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

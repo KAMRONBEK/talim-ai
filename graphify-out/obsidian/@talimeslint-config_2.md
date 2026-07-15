@@ -1,17 +1,18 @@
 ---
-source_file: "apps/web/package.json"
+source_file: "apps/api/package.json"
 type: "code"
-community: "Frontend Dependencies"
-location: "L34"
+community: "Community None"
+location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Frontend_Dependencies
+  - community/Community_None
 ---
 
 # @talim/eslint-config
 
 ## Connections
-- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[@talimeslint-config_3]] - `imports` [EXTRACTED]
+- [[devDependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

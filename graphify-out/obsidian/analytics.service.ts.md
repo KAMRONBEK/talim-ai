@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/admin/analytics.service.ts"
 type: "code"
-community: "Analytics & Usage Pricing"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics__Usage_Pricing
+  - community/Community_None
 ---
 
 # analytics.service.ts
@@ -38,8 +38,8 @@ tags:
 - [[getUsersByRole()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[planMonthlyPriceUsd()]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[usage-pricing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

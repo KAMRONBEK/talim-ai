@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L978"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # Content
@@ -26,4 +26,4 @@ tags:
 - [[useReparseContent.ts]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

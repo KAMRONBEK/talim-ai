@@ -11,7 +11,6 @@ tags:
 # GitHub Repo Clone
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[Cross-Repo Graph Merge]] - `conceptually_related_to` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Graphify_Tool_Features

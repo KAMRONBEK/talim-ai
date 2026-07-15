@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/learning/rich-text.tsx"
 type: "code"
-community: "Quiz Answer Input Components"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Answer_Input_Components
+  - community/Community_None
 ---
 
 # normalizeGeneratedText()
 
 ## Connections
+- [[RichText()]] - `calls` [EXTRACTED]
 - [[rich-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Input_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

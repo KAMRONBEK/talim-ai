@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/tsconfig.json"
 type: "code"
-community: "TypeScript Config (API)"
+community: "Community None"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TypeScript_Config_API
+  - community/Community_None
 ---
 
 # compilerOptions
@@ -18,4 +18,4 @@ tags:
 - [[plugins_1]] - `contains` [EXTRACTED]
 - [[tsconfig.json_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TypeScript_Config_API
+#graphify/code #graphify/EXTRACTED #community/Community_None

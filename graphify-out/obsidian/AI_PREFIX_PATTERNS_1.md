@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-summary.ts"
 type: "code"
-community: "Deck Player & Section Reader"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Player__Section_Reader
+  - community/Community_None
 ---
 
 # AI_PREFIX_PATTERNS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[format-summary.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader
+#graphify/code #graphify/EXTRACTED #community/Community_None

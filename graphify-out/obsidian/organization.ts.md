@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Tenant Service & Assignments"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Service__Assignments
+  - community/Community_None
 ---
 
 # organization.ts
@@ -24,7 +24,7 @@ tags:
 - [[joinTenantByCode()]] - `contains` [EXTRACTED]
 - [[patchTenantForOwner()]] - `contains` [EXTRACTED]
 - [[patchTenantSchema]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[regenerateJoinCode()_1]] - `contains` [EXTRACTED]
 - [[shared.ts_3]] - `imports_from` [EXTRACTED]
@@ -32,4 +32,4 @@ tags:
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[uniqueSlug()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Service__Assignments
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/package.json"
-type: "code"
-community: "Frontend Dependencies"
-location: "L31"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L23"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Frontend_Dependencies
+  - community/Community_None
 ---
 
 # zustand
 
 ## Connections
-- [[dependencies_2]] - `contains` [EXTRACTED]
+- [[zustand]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

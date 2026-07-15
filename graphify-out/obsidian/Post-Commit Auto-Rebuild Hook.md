@@ -11,7 +11,6 @@ tags:
 # Post-Commit Auto-Rebuild Hook
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[Code-Only Change (skip semantic extraction)]] - `conceptually_related_to` [INFERRED]
 - [[Work Memory  LESSONS]] - `references` [EXTRACTED]
 

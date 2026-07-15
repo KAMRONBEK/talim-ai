@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen-prompt.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Community None"
 location: "L72"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Community_None
 ---
 
 # normalizePracticeQuestionType()
@@ -14,5 +14,6 @@ tags:
 ## Connections
 - [[generateQuiz.job.ts]] - `imports` [EXTRACTED]
 - [[question-gen-prompt.ts]] - `contains` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `indirect_call` [INFERRED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Community_None

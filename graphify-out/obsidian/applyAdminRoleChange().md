@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/adminUserRole.service.ts"
 type: "code"
-community: "Admin Role Management"
+community: "Community None"
 location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Role_Management
+  - community/Community_None
 ---
 
 # applyAdminRoleChange()
@@ -22,4 +22,4 @@ tags:
 - [[tutorRequest.service.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Role_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

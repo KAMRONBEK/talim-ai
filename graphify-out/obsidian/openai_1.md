@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/src/services/ai.service.ts"
-type: "code"
-community: "AI Service (DeepSeek)"
-location: "L21"
+source_file: "apps/api/package.json"
+type: "concept"
+community: "Community None"
+location: "L36"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/AI_Service_DeepSeek
+  - community/Community_None
 ---
 
 # openai
 
 ## Connections
-- [[ai.service.ts]] - `contains` [EXTRACTED]
+- [[openai]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek
+#graphify/concept #graphify/EXTRACTED #community/Community_None

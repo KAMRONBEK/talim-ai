@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Security & Isolation Stories"
+community: "Community None"
 location: "L2709"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Security__Isolation_Stories
+  - community/Community_None
 ---
 
 # Area: Security, multi-tenant isolation matrix, resilience, jobs, quota, data-lifecycle
@@ -21,4 +21,4 @@ tags:
 - [[US-XCUT-12 Quota matrix — every feature × plan × role → correct 402413 contract + role-aware upgrade]] - `contains` [EXTRACTED]
 - [[US-XCUT-13 Data lifecycle & cascade — delete content  student  tenant; deactivate  reactivate]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Security__Isolation_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

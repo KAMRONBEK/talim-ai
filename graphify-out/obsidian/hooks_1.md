@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/hooks.md"
 type: "document"
-community: "Graphify Hooks Integration"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Hooks_Integration
+  - community/Community_None
 ---
 
 # hooks.md
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graphify reference commit hook and native CLAUDE.md integration]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Hooks_Integration
+#graphify/document #graphify/EXTRACTED #community/Community_None

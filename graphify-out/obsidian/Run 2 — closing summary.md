@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Run 2 Summary"
+community: "Community None"
 location: "L236"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Run_2_Summary
+  - community/Community_None
 ---
 
 # Run 2 — closing summary
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Run 2 (resumed) — progress]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Run_2_Summary
+#graphify/document #graphify/EXTRACTED #community/Community_None

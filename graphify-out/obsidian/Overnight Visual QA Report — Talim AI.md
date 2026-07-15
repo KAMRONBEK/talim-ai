@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Visual QA Reports"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Visual_QA_Reports
+  - community/Community_None
 ---
 
 # Overnight Visual QA Report — Talim AI
@@ -45,4 +45,4 @@ tags:
 - [[Test-data notes (local dev DB only — reversible)]] - `contains` [EXTRACTED]
 - [[visual-qa-report]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Visual_QA_Reports
+#graphify/document #graphify/EXTRACTED #community/Community_None

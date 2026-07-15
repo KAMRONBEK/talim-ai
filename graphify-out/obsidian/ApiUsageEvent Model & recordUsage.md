@@ -12,6 +12,6 @@ tags:
 
 ## Connections
 - [[Admin Cost Dashboard]] - `shares_data_with` [EXTRACTED]
-- [[Epic 5 — Usage Metering & Platform Cost_3]] - `references` [EXTRACTED]
+- [[Epic 5 — Usage Metering & Platform Cost_2]] - `references` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Architecture_Notes_for_Epics

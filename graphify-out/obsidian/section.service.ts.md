@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # section.service.ts
@@ -26,7 +26,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[ingest.service.ts]] - `imports_from` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[processContent.job.ts]] - `imports_from` [EXTRACTED]
 - [[resolveSectionTitle()]] - `contains` [EXTRACTED]
@@ -36,4 +36,4 @@ tags:
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[translateSectionTitles()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

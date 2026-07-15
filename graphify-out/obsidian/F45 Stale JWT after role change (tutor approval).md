@@ -4,7 +4,7 @@ type: "concept"
 community: "Bug Tracking & Accounts"
 tags:
   - graphify/concept
-  - graphify/EXTRACTED
+  - graphify/INFERRED
   - community/Bug_Tracking__Accounts
 ---
 
@@ -12,6 +12,5 @@ tags:
 
 ## Connections
 - [[F11 Stale session token after admin role change]] - `semantically_similar_to` [INFERRED]
-- [[Findings ledger]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Bug_Tracking__Accounts
+#graphify/concept #graphify/INFERRED #community/Bug_Tracking__Accounts

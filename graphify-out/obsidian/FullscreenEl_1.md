@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/NarratedVideoPlayer.tsx"
 type: "code"
-community: "Narrated Video Player"
+community: "Community None"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Narrated_Video_Player
+  - community/Community_None
 ---
 
 # FullscreenEl
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[NarratedVideoPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Narrated_Video_Player
+#graphify/code #graphify/EXTRACTED #community/Community_None

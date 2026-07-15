@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContentBase.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useContentBase()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[VideoInner()]] - `calls` [EXTRACTED]
 - [[page.tsx_34]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useContentBase.ts]] - `contains` [EXTRACTED]
 - [[useContentProgress()]] - `calls` [EXTRACTED]
@@ -40,4 +41,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

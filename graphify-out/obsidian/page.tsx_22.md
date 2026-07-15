@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # page.tsx
@@ -21,4 +21,4 @@ tags:
 - [[useTenantContent()]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

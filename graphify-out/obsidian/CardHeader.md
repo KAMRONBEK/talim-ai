@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Become Tutor & Auth Shell"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Become_Tutor__Auth_Shell
+  - community/Community_None
 ---
 
 # CardHeader
@@ -22,4 +22,4 @@ tags:
 - [[page.tsx_5]] - `imports` [EXTRACTED]
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_None

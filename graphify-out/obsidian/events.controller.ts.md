@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/events.controller.ts"
 type: "code"
-community: "Job Event Bus"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Bus
+  - community/Community_None
 ---
 
 # events.controller.ts
@@ -23,4 +23,4 @@ tags:
 - [[jobEvents.service.ts]] - `imports_from` [EXTRACTED]
 - [[streamEvents()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Bus
+#graphify/code #graphify/EXTRACTED #community/Community_None

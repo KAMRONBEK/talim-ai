@@ -1,16 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 1
+members: 0
 ---
 
 # Playwright Config
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 1 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[playwright.config.ts]] - code - apps/web/playwright.config.ts
 
 ## Live Query (requires Dataview plugin)
 

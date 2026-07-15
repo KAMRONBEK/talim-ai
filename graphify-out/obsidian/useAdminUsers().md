@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin User Management"
+community: "Community None"
 location: "L44"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_User_Management
+  - community/Community_None
 ---
 
 # useAdminUsers()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_10]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_User_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

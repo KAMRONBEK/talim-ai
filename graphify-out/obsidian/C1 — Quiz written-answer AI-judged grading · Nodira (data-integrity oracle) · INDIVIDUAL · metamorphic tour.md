@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Run 19 Charters"
+community: "Community None"
 location: "L1304"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Run_19_Charters
+  - community/Community_None
 ---
 
 # C1 — Quiz written-answer AI-judged grading · Nodira (data-integrity oracle) · INDIVIDUAL · metamorphic tour
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Run 19 — R2026-07-14a (deep, session-based, RCRCRC-driven; unattended overnight)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Run_19_Charters
+#graphify/document #graphify/EXTRACTED #community/Community_None

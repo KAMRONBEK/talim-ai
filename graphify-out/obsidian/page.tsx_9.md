@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/[id]/page.tsx"
 type: "code"
-community: "Admin Tenant Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Tenant_Hooks
+  - community/Community_None
 ---
 
 # page.tsx
@@ -31,6 +31,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[isTenantUsage()]] - `contains` [EXTRACTED]
+- [[plan.ts]] - `imports_from` [EXTRACTED]
 - [[planLabel()]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `imports_from` [EXTRACTED]
 - [[useAdminTenant()]] - `imports` [EXTRACTED]
@@ -41,4 +42,4 @@ tags:
 - [[useResetUserPassword()]] - `imports` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

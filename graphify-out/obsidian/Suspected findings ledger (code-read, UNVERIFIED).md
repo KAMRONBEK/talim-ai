@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "User Stories & Cross-Area Issues"
+community: "Community None"
 location: "L3238"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__Cross-Area_Issues
+  - community/Community_None
 ---
 
 # Suspected findings ledger (code-read, UNVERIFIED)
@@ -18,4 +18,4 @@ tags:
 - [[S4 — polish  (5)]] - `contains` [EXTRACTED]
 - [[Untagged (review)  (35)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__Cross-Area_Issues
+#graphify/document #graphify/EXTRACTED #community/Community_None

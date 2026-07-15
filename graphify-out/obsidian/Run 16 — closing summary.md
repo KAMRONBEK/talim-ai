@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Auth Rate Limit Run"
+community: "Community None"
 location: "L800"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Auth_Rate_Limit_Run
+  - community/Community_None
 ---
 
 # Run 16 — closing summary
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Run 16 — 2026-06-29 (overnight, unattended) · auth rate-limit UX + frontier]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Auth_Rate_Limit_Run
+#graphify/document #graphify/EXTRACTED #community/Community_None

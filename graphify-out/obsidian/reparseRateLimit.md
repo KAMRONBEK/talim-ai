@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/rate-limit.middleware.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Community None"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Community_None
 ---
 
 # reparseRateLimit
@@ -16,4 +16,4 @@ tags:
 - [[rate-limit.middleware.ts]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

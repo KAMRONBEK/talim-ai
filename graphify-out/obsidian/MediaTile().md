@@ -1,19 +1,18 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # MediaTile()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[cn()]] - `calls` [EXTRACTED]
 - [[material-media-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

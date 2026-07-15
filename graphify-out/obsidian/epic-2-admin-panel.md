@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/epic-2-admin-panel.md"
 type: "document"
-community: "Product Epics Documentation"
+community: "Product Plan Epics"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Epics_Documentation
+  - community/Product_Plan_Epics
 ---
 
 # epic-2-admin-panel.md
@@ -17,4 +17,4 @@ tags:
 - [[README_1]] - `references` [EXTRACTED]
 - [[epic-5-usage-metering]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Epics_Documentation
+#graphify/document #graphify/EXTRACTED #community/Product_Plan_Epics

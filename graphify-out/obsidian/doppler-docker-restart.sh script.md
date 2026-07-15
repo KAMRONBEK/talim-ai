@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/doppler-docker-restart.sh"
 type: "code"
-community: "Doppler Restart Script"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Doppler_Restart_Script
+  - community/Community_None
 ---
 
 # doppler-docker-restart.sh script
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[doppler-docker-restart.sh]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Doppler_Restart_Script
+#graphify/code #graphify/EXTRACTED #community/Community_None

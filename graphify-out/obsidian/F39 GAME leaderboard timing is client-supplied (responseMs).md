@@ -11,7 +11,6 @@ tags:
 # F39: GAME leaderboard timing is client-supplied (responseMs)
 
 ## Connections
-- [[Findings ledger]] - `references` [EXTRACTED]
 - [[GAME speed-points cheat clamp (computeGamePoints)]] - `references` [EXTRACTED]
 - [[QA-Deferred Structural Items (Run 18)]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]

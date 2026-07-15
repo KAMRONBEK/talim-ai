@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/README.md"
 type: "document"
-community: "Product Epics Documentation"
+community: "Community None"
 location: "L15"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Epics_Documentation
+  - community/Community_None
 ---
 
 # Prompt index
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Epic prompts]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Epics_Documentation
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateFlashcards.job.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # registerGenerateFlashcardsJob()
@@ -15,5 +15,7 @@ tags:
 - [[bootstrap()]] - `calls` [EXTRACTED]
 - [[generateFlashcards.job.ts]] - `contains` [EXTRACTED]
 - [[index.ts]] - `imports` [EXTRACTED]
+- [[parseAppLocale()]] - `calls` [EXTRACTED]
+- [[publishContentEvent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

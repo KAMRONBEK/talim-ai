@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ingest.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # ingest.service.ts
@@ -16,7 +16,7 @@ tags:
 - [[chunkText()]] - `imports` [EXTRACTED]
 - [[generateContentSections()]] - `imports` [EXTRACTED]
 - [[ingestText()]] - `contains` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[reparseContent.job.ts]] - `imports_from` [EXTRACTED]
@@ -24,4 +24,4 @@ tags:
 - [[storeChunksWithEmbeddings()]] - `imports` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

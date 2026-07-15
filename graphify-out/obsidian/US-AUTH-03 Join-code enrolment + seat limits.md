@@ -1,19 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Product Plan Epics"
+community: "Community None"
 location: "L169"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plan_Epics
+  - community/Community_None
 ---
 
 # US-AUTH-03: Join-code enrolment + seat limits
 
 ## Connections
-- [[Epic 1 — Subscriptions & billing]] - `conceptually_related_to` [INFERRED]
-- [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
 - [[Worked examples (the depth to aim for)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Plan_Epics
+#graphify/document #graphify/EXTRACTED #community/Community_None

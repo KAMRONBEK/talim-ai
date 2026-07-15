@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/exports.md"
 type: "document"
-community: "Graphify Export Options"
+community: "Community None"
 location: "L79"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Export_Options
+  - community/Community_None
 ---
 
 # Step 8 - Token reduction benchmark (only if total_words > 5000)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graphify reference extra exports and benchmark]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Export_Options
+#graphify/document #graphify/EXTRACTED #community/Community_None

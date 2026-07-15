@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # getYoutubeThumbnailUrl()
@@ -18,4 +18,4 @@ tags:
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[youtube.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

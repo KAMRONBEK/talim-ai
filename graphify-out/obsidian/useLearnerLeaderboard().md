@@ -1,21 +1,21 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Assessment Leaderboard"
+community: "Community None"
 location: "L276"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Leaderboard
+  - community/Community_None
 ---
 
 # useLearnerLeaderboard()
 
 ## Connections
-- [[Leaderboard()]] - `calls` [INFERRED]
+- [[Leaderboard()]] - `calls` [EXTRACTED]
 - [[inFlightRefetchInterval()]] - `calls` [EXTRACTED]
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Leaderboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

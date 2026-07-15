@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L236"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # generateSlideDeck()
@@ -21,4 +21,4 @@ tags:
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 - [[targetSlideCount()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

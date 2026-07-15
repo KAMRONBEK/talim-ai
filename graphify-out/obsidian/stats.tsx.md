@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/stats.tsx"
 type: "code"
-community: "Marketing Landing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Page
+  - community/Community_None
 ---
 
 # stats.tsx
@@ -16,4 +16,4 @@ tags:
 - [[Stats()]] - `contains` [EXTRACTED]
 - [[landing-page.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

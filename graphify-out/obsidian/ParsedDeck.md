@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/deck-schema.ts"
 type: "code"
-community: "Deck Slide Schema"
+community: "Community None"
 location: "L232"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Deck_Slide_Schema
+  - community/Community_None
 ---
 
 # ParsedDeck
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[deck-schema.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Deck_Slide_Schema
+#graphify/code #graphify/EXTRACTED #community/Community_None

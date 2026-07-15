@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Admin Dark Theme Run"
+community: "Community None"
 location: "L614"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin_Dark_Theme_Run
+  - community/Community_None
 ---
 
 # Run 11 — closing summary
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Run 11 — 2026-06-28 · admin dark-theme toggle (feature `809ac0c`) deep QA]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin_Dark_Theme_Run
+#graphify/document #graphify/EXTRACTED #community/Community_None

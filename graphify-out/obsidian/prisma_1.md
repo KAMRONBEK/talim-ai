@@ -1,19 +1,17 @@
 ---
 source_file: "apps/api/package.json"
-type: "code"
-community: "Prisma Package Config"
-location: "L56"
+type: "concept"
+community: "Community None"
+location: "L38"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Prisma_Package_Config
+  - community/Community_None
 ---
 
 # prisma
 
 ## Connections
-- [[package.json_1]] - `contains` [EXTRACTED]
-- [[schema]] - `contains` [EXTRACTED]
-- [[seed]] - `contains` [EXTRACTED]
+- [[prisma]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Package_Config
+#graphify/concept #graphify/EXTRACTED #community/Community_None

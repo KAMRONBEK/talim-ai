@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Admin & Learner User Stories"
+community: "Community None"
 location: "L4060"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin__Learner_User_Stories
+  - community/Community_None
 ---
 
 # US-ADMIN-11: Content moderation — approve/flag effects visible to end users + content detail
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Admin impersonation, analytics, content moderation]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin__Learner_User_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

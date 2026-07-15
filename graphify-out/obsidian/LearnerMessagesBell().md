@@ -1,23 +1,25 @@
 ---
 source_file: "apps/web/components/learner/learner-messages-bell.tsx"
 type: "code"
-community: "Tenant Messages & Progress"
+community: "Community None"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Messages__Progress
+  - community/Community_None
 ---
 
 # LearnerMessagesBell()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[dashboard-header.tsx]] - `imports` [EXTRACTED]
+- [[formatRelativeTime()]] - `calls` [EXTRACTED]
 - [[learner-messages-bell.tsx]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useLearnerMessages()]] - `calls` [EXTRACTED]
 - [[useLearnerUnreadCount()]] - `calls` [EXTRACTED]
 - [[useMarkMessageRead()]] - `calls` [EXTRACTED]
 - [[useReplyToLearnerMessage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress
+#graphify/code #graphify/EXTRACTED #community/Community_None

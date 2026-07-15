@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # useChatStore
@@ -14,9 +14,9 @@ tags:
 ## Connections
 - [[ChatWindow()]] - `calls` [EXTRACTED]
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
-- [[ContentWorkspaceInner()]] - `calls` [INFERRED]
+- [[ContentWorkspaceInner()]] - `calls` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[selection-ask.tsx]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

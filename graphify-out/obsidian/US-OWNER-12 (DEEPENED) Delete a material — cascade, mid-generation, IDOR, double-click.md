@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Tenant Owner Stories"
+community: "Community None"
 location: "L1335"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Tenant_Owner_Stories
+  - community/Community_None
 ---
 
 # US-OWNER-12 (DEEPENED): Delete a material — cascade, mid-generation, IDOR, double-click
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Tenant owner students, materials, assignment, settings]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Tenant_Owner_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -13,5 +13,8 @@ tags:
 
 ## Connections
 - [[appsapi]] - `contains` [EXTRACTED]
+- [[srcindex.ts]] - `extends` [EXTRACTED]
+- [[srcprismaseed.ts]] - `extends` [EXTRACTED]
+- [[srcscripts.ts]] - `extends` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Knip_Config_Dead_Code

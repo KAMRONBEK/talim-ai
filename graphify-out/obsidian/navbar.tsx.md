@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/navbar.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # navbar.tsx
@@ -19,6 +19,7 @@ tags:
 - [[SheetContent()]] - `imports` [EXTRACTED]
 - [[SheetHeader()]] - `imports` [EXTRACTED]
 - [[SheetTitle()]] - `imports` [EXTRACTED]
+- [[ThemeToggle()_1]] - `imports` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[landing-page.tsx]] - `imports_from` [EXTRACTED]
 - [[language-switcher.tsx]] - `imports_from` [EXTRACTED]
@@ -26,5 +27,6 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_39]] - `imports_from` [EXTRACTED]
 - [[page.tsx_41]] - `imports_from` [EXTRACTED]
+- [[theme-toggle.tsx_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

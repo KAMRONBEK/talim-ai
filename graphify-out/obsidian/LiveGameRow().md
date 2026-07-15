@@ -1,23 +1,22 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessments Page"
+community: "Community None"
 location: "L224"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Tenant_Assessments_Page
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # LiveGameRow()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
-- [[formatRelativeTime()]] - `calls` [INFERRED]
+- [[formatRelativeTime()]] - `calls` [EXTRACTED]
 - [[mutErr()]] - `calls` [EXTRACTED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
 - [[toDatetimeLocal()]] - `calls` [EXTRACTED]
-- [[useScheduleAssessment()]] - `calls` [INFERRED]
-- [[useSetAssessmentLive()]] - `calls` [INFERRED]
+- [[useScheduleAssessment()]] - `calls` [EXTRACTED]
+- [[useSetAssessmentLive()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessments_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

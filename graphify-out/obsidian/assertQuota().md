@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # assertQuota()
@@ -21,6 +21,7 @@ tags:
 - [[createSlides()]] - `calls` [EXTRACTED]
 - [[createVideo()]] - `calls` [EXTRACTED]
 - [[dayRange()]] - `calls` [EXTRACTED]
+- [[enforceQuota()]] - `calls` [EXTRACTED]
 - [[flashcards.controller.ts]] - `imports` [EXTRACTED]
 - [[generateSummary()]] - `calls` [EXTRACTED]
 - [[getGenerationCount()]] - `calls` [EXTRACTED]
@@ -35,6 +36,7 @@ tags:
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 - [[quota.middleware.ts]] - `imports` [EXTRACTED]
 - [[regenerateEpisode()]] - `calls` [EXTRACTED]
+- [[registerProcessContentJob()]] - `calls` [EXTRACTED]
 - [[reparseContent()]] - `calls` [EXTRACTED]
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[resolveUpgradePlanCode()]] - `calls` [EXTRACTED]
@@ -48,4 +50,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

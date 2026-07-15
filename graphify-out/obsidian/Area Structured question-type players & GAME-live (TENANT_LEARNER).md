@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Admin & Learner User Stories"
+community: "Community None"
 location: "L3646"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin__Learner_User_Stories
+  - community/Community_None
 ---
 
 # Area: Structured question-type players & GAME-live (TENANT_LEARNER)
@@ -19,4 +19,4 @@ tags:
 - [[US-LEARNER-17 Quiz review  strict result breakdown after finishing]] - `contains` [EXTRACTED]
 - [[US-LEARNER-18 Messaging (learner side) — receive, reply, mark-read, bell poll]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin__Learner_User_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

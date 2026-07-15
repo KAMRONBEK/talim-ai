@@ -11,7 +11,6 @@ tags:
 # Incremental Update (--update)
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[Cluster-Only Rerun (--cluster-only)]] - `conceptually_related_to` [EXTRACTED]
 - [[Code-Only Change (skip semantic extraction)]] - `references` [EXTRACTED]
 - [[URL Ingestion (auto-detected types)]] - `references` [EXTRACTED]

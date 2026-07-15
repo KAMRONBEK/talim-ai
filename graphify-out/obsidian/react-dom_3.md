@@ -1,17 +1,17 @@
 ---
-source_file: "packages/ui/package.json"
-type: "code"
-community: "Shared UI Dependencies"
-location: "L37"
+source_file: "apps/web/package.json"
+type: "concept"
+community: "Community None"
+location: "L25"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Shared_UI_Dependencies
+  - community/Community_None
 ---
 
 # react-dom
 
 ## Connections
-- [[devDependencies_7]] - `contains` [EXTRACTED]
+- [[react-dom_2]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

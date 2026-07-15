@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "Locale Prompts (Tutor/Podcast/Summary)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Prompts_Tutor/Podcast/Summary
+  - community/Community_None
 ---
 
 # locale-prompts.ts
@@ -17,7 +17,6 @@ tags:
 - [[PODCAST_PROMPTS]] - `contains` [EXTRACTED]
 - [[PODCAST_USER]] - `contains` [EXTRACTED]
 - [[ParsedTurn]] - `contains` [EXTRACTED]
-- [[QuestionStyle]] - `imports` [EXTRACTED]
 - [[RAG_CHUNK_LABEL]] - `contains` [EXTRACTED]
 - [[SUMMARY_PREFIX_PATTERNS_EN]] - `contains` [EXTRACTED]
 - [[SUMMARY_PREFIX_PATTERNS_RU]] - `contains` [EXTRACTED]
@@ -27,7 +26,6 @@ tags:
 - [[TUTOR_MATH_RULES]] - `contains` [EXTRACTED]
 - [[TUTOR_PROMPTS]] - `contains` [EXTRACTED]
 - [[TUTOR_VISUAL_RULES]] - `contains` [EXTRACTED]
-- [[assessment-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[buildPodcastUserPrompt()]] - `contains` [EXTRACTED]
 - [[buildSummaryUserPrompt()]] - `contains` [EXTRACTED]
 - [[buildTutorSystemMessage()]] - `contains` [EXTRACTED]
@@ -45,4 +43,4 @@ tags:
 - [[summary-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Prompts_Tutor/Podcast/Summary
+#graphify/code #graphify/EXTRACTED #community/Community_None

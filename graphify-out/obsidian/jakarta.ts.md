@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/jakarta.ts"
 type: "code"
-community: "Root Layout & Fonts"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Layout__Fonts
+  - community/Community_None
 ---
 
 # jakarta.ts
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_1]] - `imports_from` [EXTRACTED]
 - [[layout.tsx_6]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Layout__Fonts
+#graphify/code #graphify/EXTRACTED #community/Community_None

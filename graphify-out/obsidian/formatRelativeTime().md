@@ -1,23 +1,27 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Relative Time Utilities"
+community: "Community None"
 location: "L49"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Relative_Time_Utilities
+  - community/Community_None
 ---
 
 # formatRelativeTime()
 
 ## Connections
-- [[AssessmentCard()]] - `calls` [INFERRED]
-- [[LearnerDashboardPage()]] - `calls` [INFERRED]
-- [[LiveGameRow()]] - `calls` [INFERRED]
+- [[AssessmentCard()]] - `calls` [EXTRACTED]
+- [[LearnerDashboardPage()]] - `calls` [EXTRACTED]
+- [[LearnerMessagesBell()]] - `calls` [EXTRACTED]
+- [[LearningHistoryPanel()]] - `calls` [EXTRACTED]
+- [[LiveGameRow()]] - `calls` [EXTRACTED]
+- [[RecentContentGrid()]] - `calls` [EXTRACTED]
 - [[ResponseBubble()]] - `calls` [EXTRACTED]
 - [[StudentReplyRow()]] - `calls` [EXTRACTED]
-- [[TenantMaterialDetailPage()]] - `calls` [INFERRED]
+- [[TenantMaterialDetailPage()]] - `calls` [EXTRACTED]
+- [[TenantMessagesBell()]] - `calls` [EXTRACTED]
 - [[ThreadBubble()]] - `calls` [EXTRACTED]
 - [[format-relative-time.ts]] - `contains` [EXTRACTED]
 - [[formatUzbek()]] - `calls` [EXTRACTED]
@@ -30,4 +34,4 @@ tags:
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Relative_Time_Utilities
+#graphify/code #graphify/EXTRACTED #community/Community_None

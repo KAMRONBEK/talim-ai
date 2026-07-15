@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L36"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # useGenerateVideo()
@@ -18,5 +18,6 @@ tags:
 - [[page.tsx_34]] - `imports` [EXTRACTED]
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `contains` [EXTRACTED]
+- [[videoKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

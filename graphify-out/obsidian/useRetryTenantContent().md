@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # useRetryTenantContent()
@@ -15,4 +15,4 @@ tags:
 - [[invalidateContentLists()]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

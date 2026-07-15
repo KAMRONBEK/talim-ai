@@ -12,6 +12,6 @@ tags:
 
 ## Connections
 - [[ApiUsageEvent Model & recordUsage]] - `shares_data_with` [EXTRACTED]
-- [[Epic 2 — Platform Admin Panel_3]] - `references` [EXTRACTED]
+- [[Epic 2 — Platform Admin Panel_2]] - `references` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Architecture_Notes_for_Epics

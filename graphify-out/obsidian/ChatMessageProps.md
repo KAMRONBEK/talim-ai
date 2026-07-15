@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatMessage.tsx"
 type: "code"
-community: "Chat Store & Tutor Graph"
+community: "Community None"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Store__Tutor_Graph
+  - community/Community_None
 ---
 
 # ChatMessageProps
@@ -15,4 +15,4 @@ tags:
 - [[ChatMessage.tsx]] - `contains` [EXTRACTED]
 - [[MessageRole]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph
+#graphify/code #graphify/EXTRACTED #community/Community_None

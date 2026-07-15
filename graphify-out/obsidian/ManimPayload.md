@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Tutor Tools (Chart/Geogebra/Sandbox)"
+community: "Community None"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Tools_Chart/Geogebra/Sandbox
+  - community/Community_None
 ---
 
 # ManimPayload
@@ -18,4 +18,4 @@ tags:
 - [[tutor-manim.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Tools_Chart/Geogebra/Sandbox
+#graphify/code #graphify/EXTRACTED #community/Community_None

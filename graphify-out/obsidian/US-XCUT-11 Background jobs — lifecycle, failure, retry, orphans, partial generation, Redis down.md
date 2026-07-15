@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Security & Isolation Stories"
+community: "Community None"
 location: "L2900"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Security__Isolation_Stories
+  - community/Community_None
 ---
 
 # US-XCUT-11: Background jobs — lifecycle, failure, retry, orphans, partial generation, Redis down
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Area Security, multi-tenant isolation matrix, resilience, jobs, quota, data-lifecycle]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Security__Isolation_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

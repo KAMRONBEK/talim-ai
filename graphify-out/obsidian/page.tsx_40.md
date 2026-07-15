@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Page & Hooks"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Page__Hooks
+  - community/Community_None
 ---
 
 # page.tsx
 
 ## Connections
+- [[AuthGuard()_1]] - `imports` [EXTRACTED]
 - [[Badge()]] - `imports` [EXTRACTED]
 - [[Button]] - `imports` [EXTRACTED]
 - [[Card]] - `imports` [EXTRACTED]
@@ -30,6 +31,7 @@ tags:
 - [[QuizResult.tsx]] - `imports_from` [EXTRACTED]
 - [[QuizReviewList()]] - `contains` [EXTRACTED]
 - [[RichText()]] - `imports` [EXTRACTED]
+- [[auth-guard.tsx_1]] - `imports_from` [EXTRACTED]
 - [[formatAnswerDisplay()]] - `imports` [EXTRACTED]
 - [[getReviewOptionStyles()]] - `contains` [EXTRACTED]
 - [[gradableQuestion()]] - `imports` [EXTRACTED]
@@ -52,4 +54,4 @@ tags:
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 - [[useSubmitQuiz()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks
+#graphify/code #graphify/EXTRACTED #community/Community_None

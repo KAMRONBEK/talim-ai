@@ -11,7 +11,6 @@ tags:
 # F63: PDF region-select opened a duplicate Learn panel on desktop
 
 ## Connections
-- [[Findings ledger]] - `references` [EXTRACTED]
 - [[Observations Ledger (O-numbers)]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessments Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessments_Page
+  - community/Community_None
 ---
 
 # page.tsx
@@ -64,4 +64,4 @@ tags:
 - [[useTenantContents()]] - `imports` [EXTRACTED]
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

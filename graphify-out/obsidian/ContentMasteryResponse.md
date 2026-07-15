@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L1167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # ContentMasteryResponse
@@ -16,4 +16,4 @@ tags:
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 - [[useMastery.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

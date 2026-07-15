@@ -1,20 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/assessments/page.tsx"
 type: "code"
-community: "Assessment Leaderboard"
+community: "Community None"
 location: "L117"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Assessment_Leaderboard
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # ResultsSection()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_19]] - `contains` [EXTRACTED]
-- [[useAssessmentLeaderboard()]] - `calls` [INFERRED]
-- [[useAssessmentResults()]] - `calls` [INFERRED]
+- [[useAssessmentLeaderboard()]] - `calls` [EXTRACTED]
+- [[useAssessmentResults()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Assessment_Leaderboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

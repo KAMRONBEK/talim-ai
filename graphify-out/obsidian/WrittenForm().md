@@ -1,19 +1,23 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Game Quiz Player"
+community: "Community None"
 location: "L36"
 tags:
   - graphify/code
-  - graphify/INFERRED
-  - community/Game_Quiz_Player
+  - graphify/EXTRACTED
+  - community/Community_None
 ---
 
 # WrittenForm()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[clozeOptions()]] - `calls` [EXTRACTED]
+- [[dragItems()]] - `calls` [EXTRACTED]
+- [[dragTargets()]] - `calls` [EXTRACTED]
+- [[hotspotImageUrl()]] - `calls` [EXTRACTED]
+- [[matchingLeft()]] - `calls` [EXTRACTED]
 - [[page.tsx_15]] - `contains` [EXTRACTED]
-- [[useSubmitLearnerAssessment()]] - `calls` [INFERRED]
+- [[useSubmitLearnerAssessment()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/INFERRED #community/Game_Quiz_Player
+#graphify/code #graphify/EXTRACTED #community/Community_None

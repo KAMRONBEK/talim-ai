@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/package.json"
 type: "code"
-community: "Package Definition"
+community: "Community None"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Package_Definition
+  - community/Community_None
 ---
 
 # version
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_5]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Package_Definition
+#graphify/code #graphify/EXTRACTED #community/Community_None

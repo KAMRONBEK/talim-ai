@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Visual QA Reports"
+community: "Community None"
 location: "L161"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Visual_QA_Reports
+  - community/Community_None
 ---
 
 # Issues logged (not fixed — ambiguous/risky)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Overnight Visual QA Report — Talim AI]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Visual_QA_Reports
+#graphify/document #graphify/EXTRACTED #community/Community_None

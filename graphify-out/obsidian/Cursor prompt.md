@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/backlog/_template.md"
 type: "document"
-community: "Backlog Template"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Backlog_Template
+  - community/Community_None
 ---
 
 # Cursor prompt
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Backlog — Short title]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Backlog_Template
+#graphify/document #graphify/EXTRACTED #community/Community_None

@@ -10,7 +10,4 @@ tags:
 
 # Honest Audit Trail (EXTRACTED/INFERRED/AMBIGUOUS)
 
-## Connections
-- [[Honesty Rules]] - `rationale_for` [EXTRACTED]
-
 #graphify/rationale #graphify/EXTRACTED #community/Graphify_Tool_Features

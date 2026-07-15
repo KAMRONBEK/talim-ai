@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Cross-Cutting Quality"
+community: "Community None"
 location: "L2469"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Cross-Cutting_Quality
+  - community/Community_None
 ---
 
 # Area: Cross-cutting quality: i18n, a11y, mobile/tablet
@@ -19,4 +19,4 @@ tags:
 - [[US-XCUT-07 i18n — number, currency, date, relative-time, and plural formatting correctness]] - `contains` [EXTRACTED]
 - [[US-XCUT-08 Locale switch, persistence, and API-locale sync]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Cross-Cutting_Quality
+#graphify/document #graphify/EXTRACTED #community/Community_None

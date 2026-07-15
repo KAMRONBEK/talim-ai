@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/rasterize-pdf.ts"
 type: "code"
-community: "PDF Text Extraction"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Extraction
+  - community/Community_None
 ---
 
 # rasterize-pdf.ts
@@ -17,4 +17,4 @@ tags:
 - [[rasterizePdfToImages()]] - `contains` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller (YouTube/OCR)"
+community: "Community None"
 location: "L68"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_YouTube/OCR
+  - community/Community_None
 ---
 
 # enqueueReparse()
@@ -19,4 +19,4 @@ tags:
 - [[reparseContent()_1]] - `calls` [EXTRACTED]
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR
+#graphify/code #graphify/EXTRACTED #community/Community_None

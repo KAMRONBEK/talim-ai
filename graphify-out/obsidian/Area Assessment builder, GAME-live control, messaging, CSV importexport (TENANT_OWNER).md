@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Owner Assessment Tools"
+community: "Community None"
 location: "L3788"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Owner_Assessment_Tools
+  - community/Community_None
 ---
 
 # Area: Assessment builder, GAME-live control, messaging, CSV import/export (TENANT_OWNER)
@@ -22,4 +22,4 @@ tags:
 - [[US-OWNER-24 CSV export — escaping & formula-injection safety]] - `contains` [EXTRACTED]
 - [[US-OWNER-25 Material detail page + per-part media generateretryfail]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Owner_Assessment_Tools
+#graphify/document #graphify/EXTRACTED #community/Community_None

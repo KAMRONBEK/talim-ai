@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/question-editor.tsx"
 type: "code"
-community: "Question Editor Component"
+community: "Community None"
 location: "L58"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Editor_Component
+  - community/Community_None
 ---
 
 # QuestionBody
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[question-editor.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Editor_Component
+#graphify/code #graphify/EXTRACTED #community/Community_None

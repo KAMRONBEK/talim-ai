@@ -1,18 +1,15 @@
 ---
 type: community
 cohesion: 0.67
-members: 3
+members: 0
 ---
 
 # Backlog Template
 
 **Cohesion:** 0.67 - moderately connected
-**Members:** 3 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[Backlog — Short title]] - document - docs/plans/backlog/_template.md
-- [[Cursor prompt]] - document - docs/plans/backlog/_template.md
-- [[_template]] - document - docs/plans/backlog/_template.md
 
 ## Live Query (requires Dataview plugin)
 

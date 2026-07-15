@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/flashcards/page.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # page.tsx
@@ -21,6 +21,8 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useContent()]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useFlashcards()]] - `imports` [EXTRACTED]
@@ -30,4 +32,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 - [[useReviewFlashcard()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/student-welcome-banner.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # student-welcome-banner.tsx
@@ -20,5 +20,7 @@ tags:
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 - [[onboarding.ts]] - `imports_from` [EXTRACTED]
 - [[page.tsx_16]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

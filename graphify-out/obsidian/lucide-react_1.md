@@ -1,17 +1,17 @@
 ---
-source_file: "apps/web/package.json"
-type: "code"
-community: "Frontend Dependencies"
-location: "L19"
+source_file: "apps/admin/package.json"
+type: "concept"
+community: "Community None"
+location: "L17"
 tags:
-  - graphify/code
+  - graphify/concept
   - graphify/EXTRACTED
-  - community/Frontend_Dependencies
+  - community/Community_None
 ---
 
 # lucide-react
 
 ## Connections
-- [[dependencies_2]] - `contains` [EXTRACTED]
+- [[lucide-react]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies
+#graphify/concept #graphify/EXTRACTED #community/Community_None

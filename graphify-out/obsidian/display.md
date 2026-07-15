@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/display.ts"
 type: "code"
-community: "Root Layout & Fonts"
+community: "Community None"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Layout__Fonts
+  - community/Community_None
 ---
 
 # display
@@ -15,4 +15,4 @@ tags:
 - [[display.ts]] - `contains` [EXTRACTED]
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Layout__Fonts
+#graphify/code #graphify/EXTRACTED #community/Community_None

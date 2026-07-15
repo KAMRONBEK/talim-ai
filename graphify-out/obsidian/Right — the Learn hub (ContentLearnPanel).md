@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/youlearn-redesign.md"
 type: "document"
-community: "Workspace Redesign Document"
+community: "Community None"
 location: "L73"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Workspace_Redesign_Document
+  - community/Community_None
 ---
 
 # Right — the Learn hub (<ContentLearnPanel>)
@@ -16,4 +16,4 @@ tags:
 - [[My Sets (Mening to'plamlarim)]] - `contains` [EXTRACTED]
 - [[Talim AI — Learning Workspace Redesign (YouLearn-inspired)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Workspace_Redesign_Document
+#graphify/document #graphify/EXTRACTED #community/Community_None

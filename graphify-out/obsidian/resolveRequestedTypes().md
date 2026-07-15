@@ -1,18 +1,19 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Community None"
 location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Community_None
 ---
 
 # resolveRequestedTypes()
 
 ## Connections
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `calls` [EXTRACTED]
 - [[typesFromStyle()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Community_None

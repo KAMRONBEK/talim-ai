@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/query.md"
 type: "document"
-community: "Graphify Query Reference"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Query_Reference
+  - community/Community_None
 ---
 
 # graphify reference: query, path, explain
@@ -18,4 +18,4 @@ tags:
 - [[Step 1 — Traversal]] - `contains` [EXTRACTED]
 - [[query]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Query_Reference
+#graphify/document #graphify/EXTRACTED #community/Community_None

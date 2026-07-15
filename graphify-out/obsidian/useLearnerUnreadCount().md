@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Messages & Progress"
+community: "Community None"
 location: "L274"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Messages__Progress
+  - community/Community_None
 ---
 
 # useLearnerUnreadCount()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[LearnerMessagesBell()]] - `calls` [EXTRACTED]
 - [[learner-messages-bell.tsx]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress
+#graphify/code #graphify/EXTRACTED #community/Community_None

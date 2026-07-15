@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/how-it-works.tsx"
 type: "code"
-community: "Marketing Landing Page"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Page
+  - community/Community_None
 ---
 
 # STEPS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[how-it-works.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

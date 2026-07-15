@@ -11,6 +11,6 @@ tags:
 # Content Assignment & Learner Scoping
 
 ## Connections
-- [[Epic 3 — Tenant (Organization) Experience_3]] - `references` [EXTRACTED]
+- [[Epic 3 — Tenant (Organization) Experience_2]] - `references` [EXTRACTED]
 
 #graphify/concept #graphify/EXTRACTED #community/Architecture_Notes_for_Epics

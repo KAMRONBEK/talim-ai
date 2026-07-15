@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/SKILL.md"
 type: "document"
-community: "Graphify Extraction Pipeline"
+community: "Community None"
 location: "L49"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Extraction_Pipeline
+  - community/Community_None
 ---
 
 # What You Must Do When Invoked
@@ -25,4 +25,4 @@ tags:
 - [[Step 9 - Save manifest, update cost tracker, clean up, and report]] - `contains` [EXTRACTED]
 - [[Steps 6b-8 - Wiki, Neo4j, FalkorDB, SVG, GraphML, MCP, benchmark (only on their flags)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Extraction_Pipeline
+#graphify/document #graphify/EXTRACTED #community/Community_None

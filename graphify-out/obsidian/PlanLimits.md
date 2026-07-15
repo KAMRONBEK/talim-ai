@@ -1,18 +1,17 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "Billing & Quota Errors"
+community: "Community None"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Quota_Errors
+  - community/Community_None
 ---
 
 # PlanLimits
 
 ## Connections
 - [[shared.ts_2]] - `contains` [EXTRACTED]
-- [[subscription.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

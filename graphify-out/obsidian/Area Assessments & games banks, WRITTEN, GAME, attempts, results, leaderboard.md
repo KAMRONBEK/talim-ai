@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Assessment Owner Stories"
+community: "Community None"
 location: "L1466"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Assessment_Owner_Stories
+  - community/Community_None
 ---
 
 # Area: Assessments & games: banks, WRITTEN, GAME, attempts, results, leaderboard
@@ -20,4 +20,4 @@ tags:
 - [[US-OWNER-10 Assessment-driven progress — per-student & class, post-submit update]] - `contains` [EXTRACTED]
 - [[US-OWNER-16 Assessment lifecycle — assign scope, unassign, delete, draftpublish transitions]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Assessment_Owner_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

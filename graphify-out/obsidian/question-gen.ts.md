@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Community_None
 ---
 
 # question-gen.ts
@@ -35,4 +35,4 @@ tags:
 - [[question-postprocess.ts]] - `imports_from` [EXTRACTED]
 - [[shared.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Community_None

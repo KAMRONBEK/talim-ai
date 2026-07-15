@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/package.json"
 type: "code"
-community: "Package Def (Utilities)"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Package_Def_Utilities
+  - community/Community_None
 ---
 
 # package.json
@@ -17,4 +17,4 @@ tags:
 - [[private_7]] - `contains` [EXTRACTED]
 - [[version_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Package_Def_Utilities
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,18 +1,18 @@
 ---
 source_file: "apps/web/components/account/upgrade-dialog.tsx"
 type: "code"
-community: "Upgrade Dialog & Pricing"
+community: "Community None"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Dialog__Pricing
+  - community/Community_None
 ---
 
 # UpgradeDialog()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[cn()]] - `calls` [EXTRACTED]
 - [[effectiveMonthlyUzs()]] - `calls` [EXTRACTED]
 - [[formatUzs()]] - `calls` [EXTRACTED]
 - [[global-upgrade-modal.tsx]] - `imports` [EXTRACTED]
@@ -20,4 +20,4 @@ tags:
 - [[upgrade-dialog.tsx]] - `contains` [EXTRACTED]
 - [[useRequestUpgrade()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

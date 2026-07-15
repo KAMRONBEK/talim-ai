@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # useContent.ts
@@ -15,6 +15,8 @@ tags:
 - [[Content]] - `imports` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports_from` [EXTRACTED]
 - [[UserRole]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[content-cache.ts]] - `imports_from` [EXTRACTED]
 - [[content-status-gate.tsx]] - `imports_from` [EXTRACTED]
 - [[contentApiBase()]] - `contains` [EXTRACTED]
@@ -37,6 +39,8 @@ tags:
 - [[removeContentFromLists()]] - `imports` [EXTRACTED]
 - [[restoreContentLists()]] - `imports` [EXTRACTED]
 - [[snapshotContentLists()]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useContent()]] - `contains` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
 - [[useContents()]] - `contains` [EXTRACTED]
@@ -48,4 +52,4 @@ tags:
 - [[useRetryContent()_1]] - `contains` [EXTRACTED]
 - [[useUploadContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

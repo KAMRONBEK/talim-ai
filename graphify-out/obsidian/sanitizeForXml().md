@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "TTS Text Normalization"
+community: "Community None"
 location: "L57"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/TTS_Text_Normalization
+  - community/Community_None
 ---
 
 # sanitizeForXml()
@@ -16,4 +16,4 @@ tags:
 - [[synthesizeChunkAzure()]] - `calls` [EXTRACTED]
 - [[tts.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "User Stories & Cross-Area Issues"
+community: "Community None"
 location: "L3033"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__Cross-Area_Issues
+  - community/Community_None
 ---
 
 # Completeness-critic stories — cross-area SEAMS & missing whole flows
@@ -24,4 +24,4 @@ tags:
 - [[US-XCUT-20 Discovery of newly-assigned work (no notification system) + missing reverse flows]] - `contains` [EXTRACTED]
 - [[user-stories-expansion]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__Cross-Area_Issues
+#graphify/document #graphify/EXTRACTED #community/Community_None

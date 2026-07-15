@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # deckScopeKey()
@@ -18,6 +18,8 @@ tags:
 - [[getReadySlideDeckAnyLocale()]] - `calls` [EXTRACTED]
 - [[getSlideDeck()]] - `calls` [EXTRACTED]
 - [[mediaReconciler.service.ts]] - `imports` [EXTRACTED]
+- [[reconcileStuckMediaClaims()]] - `calls` [EXTRACTED]
+- [[registerGenerateSlidesJob()]] - `calls` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Learner Dashboard"
+community: "Community None"
 location: "L176"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Community_None
 ---
 
 # ContentLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

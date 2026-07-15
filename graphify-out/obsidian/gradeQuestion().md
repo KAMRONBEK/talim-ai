@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Answer Grading Logic"
+community: "Community None"
 location: "L431"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Answer_Grading_Logic
+  - community/Community_None
 ---
 
 # gradeQuestion()
@@ -14,6 +14,7 @@ tags:
 ## Connections
 - [[QuizCard()]] - `calls` [EXTRACTED]
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
+- [[QuizReviewList()]] - `calls` [EXTRACTED]
 - [[answerToString()]] - `calls` [EXTRACTED]
 - [[buildCoverageResults()]] - `calls` [EXTRACTED]
 - [[checkAnswer()]] - `calls` [EXTRACTED]
@@ -35,5 +36,6 @@ tags:
 - [[parseQuestionConfig()]] - `calls` [EXTRACTED]
 - [[pointInAnyRegion()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
+- [[submitLearnerAssessment()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Answer_Grading_Logic
+#graphify/code #graphify/EXTRACTED #community/Community_None

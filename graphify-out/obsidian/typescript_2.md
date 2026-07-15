@@ -1,17 +1,18 @@
 ---
-source_file: "apps/web/package.json"
+source_file: "apps/api/package.json"
 type: "code"
-community: "Frontend Dependencies"
-location: "L46"
+community: "Community None"
+location: "L54"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Frontend_Dependencies
+  - community/Community_None
 ---
 
 # typescript
 
 ## Connections
-- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[devDependencies_1]] - `contains` [EXTRACTED]
+- [[typescript_3]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Community_None

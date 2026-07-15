@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/content-cache.ts"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # restoreContentLists()
@@ -14,7 +14,8 @@ tags:
 ## Connections
 - [[content-cache.ts]] - `contains` [EXTRACTED]
 - [[useContent.ts]] - `imports` [EXTRACTED]
+- [[useDeleteContent()_1]] - `calls` [EXTRACTED]
 - [[useDeleteTenantContent()]] - `calls` [EXTRACTED]
 - [[useTenantContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

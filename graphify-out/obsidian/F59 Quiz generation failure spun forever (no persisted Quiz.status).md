@@ -11,7 +11,6 @@ tags:
 # F59: Quiz generation failure spun forever (no persisted Quiz.status)
 
 ## Connections
-- [[Findings ledger]] - `references` [EXTRACTED]
 - [[QA-Deferred Structural Items (Run 18)]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 

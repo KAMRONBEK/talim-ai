@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/tenant-messages-bell.tsx"
 type: "code"
-community: "Tenant Messages & Progress"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Messages__Progress
+  - community/Community_None
 ---
 
 # tenant-messages-bell.tsx
@@ -29,10 +29,12 @@ tags:
 - [[formatRelativeTime()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useMarkTenantMessageRead()]] - `imports` [EXTRACTED]
 - [[useRespondToReply()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 - [[useTenantMessages()]] - `imports` [EXTRACTED]
 - [[useTenantUnreadCount()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress
+#graphify/code #graphify/EXTRACTED #community/Community_None

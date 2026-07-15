@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/video/page.tsx"
 type: "code"
-community: "Flashcards Page"
+community: "Community None"
 location: "L177"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_Page
+  - community/Community_None
 ---
 
 # GeneratingState()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_34]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

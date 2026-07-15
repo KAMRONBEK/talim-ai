@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/processContent.job.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # processContent.job.ts
@@ -26,7 +26,7 @@ tags:
 - [[index.ts]] - `imports_from` [EXTRACTED]
 - [[jobEventAudience.ts]] - `imports_from` [EXTRACTED]
 - [[pdf.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[publishContentEvent()]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `imports_from` [EXTRACTED]
@@ -39,4 +39,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

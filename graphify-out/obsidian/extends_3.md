@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/.eslintrc.json"
 type: "code"
-community: "ESLint Config"
+community: "Community None"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/ESLint_Config
+  - community/Community_None
 ---
 
 # extends
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[.eslintrc.json_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/ESLint_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

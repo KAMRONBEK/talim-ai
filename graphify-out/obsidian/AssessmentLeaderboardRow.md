@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Leaderboard Table Component"
+community: "Community None"
 location: "L629"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Leaderboard_Table_Component
+  - community/Community_None
 ---
 
 # AssessmentLeaderboardRow
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[leaderboard-table.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Leaderboard_Table_Component
+#graphify/code #graphify/EXTRACTED #community/Community_None

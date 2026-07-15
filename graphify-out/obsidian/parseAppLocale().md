@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # parseAppLocale()
@@ -31,8 +31,13 @@ tags:
 - [[locale.ts_1]] - `contains` [EXTRACTED]
 - [[readLocale()]] - `calls` [EXTRACTED]
 - [[readLocale()_1]] - `calls` [EXTRACTED]
+- [[registerGenerateFlashcardsJob()]] - `calls` [EXTRACTED]
+- [[registerGeneratePodcastJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateQuizJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateSlidesJob()]] - `calls` [EXTRACTED]
+- [[registerGenerateVideoJob()]] - `calls` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[shared.ts]] - `imports` [EXTRACTED]
 - [[tenant.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

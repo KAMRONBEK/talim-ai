@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # LanguageSwitcher()
@@ -18,5 +18,7 @@ tags:
 - [[learning-topbar.tsx]] - `imports` [EXTRACTED]
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
+- [[setApiLocale()]] - `calls` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

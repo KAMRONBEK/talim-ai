@@ -1,18 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 3
+members: 0
 ---
 
 # Auth Guard Component
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 3 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[AuthGuard()]] - code - apps/admin/components/auth-guard.tsx
-- [[auth-guard.tsx]] - code - apps/admin/components/auth-guard.tsx
-- [[useAuthHydrated()]] - code - apps/admin/components/auth-guard.tsx
 
 ## Live Query (requires Dataview plugin)
 

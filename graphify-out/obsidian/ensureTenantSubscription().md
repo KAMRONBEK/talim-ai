@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/organization.ts"
 type: "code"
-community: "Admin Role Management"
+community: "Community None"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Role_Management
+  - community/Community_None
 ---
 
 # ensureTenantSubscription()
@@ -17,4 +17,4 @@ tags:
 - [[getDefaultTenantPlanId()]] - `calls` [EXTRACTED]
 - [[organization.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Role_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

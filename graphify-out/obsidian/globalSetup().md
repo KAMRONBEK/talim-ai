@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/e2e/global-setup.ts"
 type: "code"
-community: "Playwright Test Setup"
+community: "Community None"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Playwright_Test_Setup
+  - community/Community_None
 ---
 
 # globalSetup()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[global-setup.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Playwright_Test_Setup
+#graphify/code #graphify/EXTRACTED #community/Community_None

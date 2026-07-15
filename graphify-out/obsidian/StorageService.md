@@ -1,17 +1,20 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # StorageService
 
 ## Connections
+- [[.delete()]] - `method` [EXTRACTED]
+- [[.get()]] - `method` [EXTRACTED]
+- [[.save()]] - `method` [EXTRACTED]
 - [[LocalStorageService]] - `implements` [EXTRACTED]
 - [[chat.controller.ts]] - `imports` [EXTRACTED]
 - [[content-shared.ts]] - `imports` [EXTRACTED]
@@ -29,4 +32,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

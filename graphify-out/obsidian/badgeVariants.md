@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # badgeVariants
@@ -16,4 +16,4 @@ tags:
 - [[badge.tsx]] - `contains` [EXTRACTED]
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/progress.ts"
 type: "code"
-community: "Learning Coverage & Badges"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Coverage__Badges
+  - community/Community_None
 ---
 
 # progress.ts
@@ -32,10 +32,10 @@ tags:
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 - [[listStudents()_1]] - `imports` [EXTRACTED]
 - [[mastery.service.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[resolveTenantIdForUser()]] - `imports` [EXTRACTED]
 - [[students.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges
+#graphify/code #graphify/EXTRACTED #community/Community_None

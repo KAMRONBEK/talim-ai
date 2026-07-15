@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/account/profile-card.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # profile-card.tsx
@@ -23,6 +23,8 @@ tags:
 - [[page.tsx_26]] - `imports_from` [EXTRACTED]
 - [[page.tsx_36]] - `imports_from` [EXTRACTED]
 - [[useAccount.ts]] - `imports_from` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 - [[useUpdateProfile()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

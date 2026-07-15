@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "Content Status UI"
+community: "Community None"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Status_UI
+  - community/Community_None
 ---
 
 # ContentStatusGateProps
@@ -16,4 +16,4 @@ tags:
 - [[content-status-gate.tsx]] - `contains` [EXTRACTED]
 - [[useRetryContent()_1]] - `references` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Status_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

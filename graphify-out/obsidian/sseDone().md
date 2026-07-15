@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/sse.ts"
 type: "code"
-community: "Chat Controller (SSE)"
+community: "Community None"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Chat_Controller_SSE
+  - community/Community_None
 ---
 
 # sseDone()
@@ -19,4 +19,4 @@ tags:
 - [[streamSummary()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Chat_Controller_SSE
+#graphify/code #graphify/EXTRACTED #community/Community_None

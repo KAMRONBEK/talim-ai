@@ -1,18 +1,17 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # ContentPageLoading()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
 - [[page.tsx_31]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

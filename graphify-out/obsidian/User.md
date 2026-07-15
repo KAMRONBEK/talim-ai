@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Auth Store & Admin Users"
+community: "Community None"
 location: "L335"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Store__Admin_Users
+  - community/Community_None
 ---
 
 # User
@@ -15,6 +15,7 @@ tags:
 - [[AdminUserListItem]] - `inherits` [EXTRACTED]
 - [[AppLocale]] - `references` [EXTRACTED]
 - [[AuthState]] - `references` [EXTRACTED]
+- [[AuthState_1]] - `references` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[page.tsx_37]] - `imports` [EXTRACTED]
 - [[session-sync.tsx]] - `imports` [EXTRACTED]
@@ -23,4 +24,4 @@ tags:
 - [[useAuthStore.ts_1]] - `imports` [EXTRACTED]
 - [[user-display.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Store__Admin_Users
+#graphify/code #graphify/EXTRACTED #community/Community_None

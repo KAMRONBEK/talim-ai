@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Upgrade Dialog & Pricing"
+community: "Community None"
 location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Dialog__Pricing
+  - community/Community_None
 ---
 
 # PlanCode
@@ -26,4 +26,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

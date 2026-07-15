@@ -11,7 +11,6 @@ tags:
 # Semantic (LLM) Extraction
 
 ## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
 - [[Extraction Cache]] - `conceptually_related_to` [EXTRACTED]
 - [[Gemini Extraction Backend]] - `references` [EXTRACTED]
 - [[Parallel Subagent Dispatch]] - `conceptually_related_to` [EXTRACTED]

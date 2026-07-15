@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "B2C Workspace Media"
+community: "Community None"
 location: "L730"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/B2C_Workspace_Media
+  - community/Community_None
 ---
 
 # Area: B2C workspace media: summary/quiz/chat/podcast + VIDEO + SLIDES + extras
@@ -22,4 +22,4 @@ tags:
 - [[US-IND-24 Quiz — DEEPEN (0partial generation, count variance, FAILED-vs-generating, retry, grading)]] - `contains` [EXTRACTED]
 - [[US-IND-25 Podcast — DEEPEN (fine controls, multi-episode, per-episode regen, duration mismatch)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/B2C_Workspace_Media
+#graphify/document #graphify/EXTRACTED #community/Community_None

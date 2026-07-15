@@ -13,5 +13,6 @@ tags:
 
 ## Connections
 - [[devDependencies_3]] - `contains` [EXTRACTED]
+- [[prettier_1]] - `imports` [EXTRACTED]
 
 #graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config

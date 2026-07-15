@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-postprocess.ts"
 type: "code"
-community: "Quiz Generation Job"
+community: "Community None"
 location: "L167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Job
+  - community/Community_None
 ---
 
 # SkipReason
@@ -16,4 +16,4 @@ tags:
 - [[question-gen.ts]] - `imports` [EXTRACTED]
 - [[question-postprocess.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job
+#graphify/code #graphify/EXTRACTED #community/Community_None

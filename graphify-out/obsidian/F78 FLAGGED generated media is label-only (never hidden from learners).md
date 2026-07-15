@@ -11,7 +11,6 @@ tags:
 # F78: FLAGGED generated media is label-only (never hidden from learners)
 
 ## Connections
-- [[Findings ledger]] - `references` [EXTRACTED]
 - [[QA-Deferred Structural Items (Run 18)]] - `references` [EXTRACTED]
 - [[Run 18 — Session-based deep QA of the post-2026-06-28 surface]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]

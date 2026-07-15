@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "Env Config & Background Jobs"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Env_Config__Background_Jobs
+  - community/Community_None
 ---
 
 # auth.middleware.ts
@@ -39,7 +39,7 @@ tags:
 - [[learner.controller.ts]] - `imports_from` [EXTRACTED]
 - [[learner.routes.ts]] - `imports_from` [EXTRACTED]
 - [[podcast.controller.ts]] - `imports_from` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[progress.controller.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
@@ -63,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Community_None

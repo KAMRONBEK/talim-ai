@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/sectionMastery.service.ts"
 type: "code"
-community: "Section Mastery Service"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery_Service
+  - community/Community_None
 ---
 
 # sectionMastery.service.ts
@@ -27,7 +27,7 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[learner.ts]] - `imports_from` [EXTRACTED]
 - [[masteryScore()]] - `imports` [EXTRACTED]
-- [[prisma_2]] - `imports` [EXTRACTED]
+- [[prisma_3]] - `imports` [EXTRACTED]
 - [[prisma.ts]] - `imports_from` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports_from` [EXTRACTED]
 - [[recordAnswers()]] - `contains` [EXTRACTED]
@@ -35,4 +35,4 @@ tags:
 - [[resolveMasteryBand()]] - `imports` [EXTRACTED]
 - [[scopeKeyFor()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Service
+#graphify/code #graphify/EXTRACTED #community/Community_None

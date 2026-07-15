@@ -1,12 +1,12 @@
 ---
 source_file: ".claude/skills/graphify/references/add-watch.md"
 type: "document"
-community: "Graphify Add & Watch"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Graphify_Add__Watch
+  - community/Community_None
 ---
 
 # add-watch.md
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[graphify reference add a URL and watch a folder]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Graphify_Add__Watch
+#graphify/document #graphify/EXTRACTED #community/Community_None

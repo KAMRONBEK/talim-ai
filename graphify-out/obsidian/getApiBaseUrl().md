@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/api.ts"
 type: "code"
-community: "Manim Video & Job Stream"
+community: "Community None"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Manim_Video__Job_Stream
+  - community/Community_None
 ---
 
 # getApiBaseUrl()
@@ -23,4 +23,4 @@ tags:
 - [[summaryStream.ts]] - `imports` [EXTRACTED]
 - [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Manim_Video__Job_Stream
+#graphify/code #graphify/EXTRACTED #community/Community_None

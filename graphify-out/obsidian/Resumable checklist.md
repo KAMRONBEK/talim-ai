@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "QA Test Plan Overview"
+community: "Community None"
 location: "L21"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Test_Plan_Overview
+  - community/Community_None
 ---
 
 # Resumable checklist
@@ -23,4 +23,4 @@ tags:
 - [[TENANT_LEARNER_1]] - `contains` [EXTRACTED]
 - [[TENANT_OWNER_1]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Test_Plan_Overview
+#graphify/document #graphify/EXTRACTED #community/Community_None

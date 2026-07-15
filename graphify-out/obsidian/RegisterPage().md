@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/register/page.tsx"
 type: "code"
-community: "Become Tutor & Auth Shell"
+community: "Community None"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Become_Tutor__Auth_Shell
+  - community/Community_None
 ---
 
 # RegisterPage()
 
 ## Connections
-- [[T]] - `calls` [INFERRED]
+- [[getPostLoginPath()]] - `calls` [EXTRACTED]
 - [[page.tsx_14]] - `contains` [EXTRACTED]
+- [[useAuthStore_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell
+#graphify/code #graphify/EXTRACTED #community/Community_None

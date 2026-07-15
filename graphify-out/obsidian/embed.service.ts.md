@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # embed.service.ts
@@ -21,10 +21,10 @@ tags:
 - [[generateEmbedding()]] - `contains` [EXTRACTED]
 - [[generateEmbeddings()]] - `contains` [EXTRACTED]
 - [[inspect-chunks.ts]] - `imports_from` [EXTRACTED]
-- [[openai_2]] - `contains` [EXTRACTED]
+- [[openai_3]] - `contains` [EXTRACTED]
 - [[rag.service.ts]] - `imports_from` [EXTRACTED]
 - [[recordEmbedUsage()]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `imports` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

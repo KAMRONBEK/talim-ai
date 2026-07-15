@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/epic-5-usage-metering.md"
 type: "document"
-community: "Product Epics Documentation"
+community: "Community None"
 location: "L9"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Epics_Documentation
+  - community/Community_None
 ---
 
 # Cursor prompt
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Epic 5 — Usage metering & platform cost_1]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Epics_Documentation
+#graphify/document #graphify/EXTRACTED #community/Community_None

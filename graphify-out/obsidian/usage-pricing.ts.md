@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/config/usage-pricing.ts"
 type: "code"
-community: "Analytics & Usage Pricing"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Analytics__Usage_Pricing
+  - community/Community_None
 ---
 
 # usage-pricing.ts
@@ -19,4 +19,4 @@ tags:
 - [[planMonthlyPriceUsd()]] - `contains` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

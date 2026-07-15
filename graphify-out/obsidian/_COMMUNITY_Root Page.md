@@ -1,17 +1,15 @@
 ---
 type: community
 cohesion: 1.00
-members: 2
+members: 0
 ---
 
 # Root Page
 
 **Cohesion:** 1.00 - tightly connected
-**Members:** 2 nodes
+**Members:** 0 nodes
 
 ## Members
-- [[RootPage()]] - code - apps/admin/app/page.tsx
-- [[page.tsx_12]] - code - apps/admin/app/page.tsx
 
 ## Live Query (requires Dataview plugin)
 

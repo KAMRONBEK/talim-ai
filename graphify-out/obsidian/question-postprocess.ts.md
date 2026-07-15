@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-postprocess.ts"
 type: "code"
-community: "Question Postprocessing"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Postprocessing
+  - community/Community_None
 ---
 
 # question-postprocess.ts
@@ -43,4 +43,4 @@ tags:
 - [[shuffled()]] - `imports` [EXTRACTED]
 - [[verifySourceQuote()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Postprocessing
+#graphify/code #graphify/EXTRACTED #community/Community_None

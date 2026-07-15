@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/section-prompt.ts"
 type: "code"
-community: "Embedding & Chunk Inspection"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Embedding__Chunk_Inspection
+  - community/Community_None
 ---
 
 # section-prompt.ts
@@ -15,4 +15,4 @@ tags:
 - [[buildSectionUserPrompt()]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection
+#graphify/code #graphify/EXTRACTED #community/Community_None

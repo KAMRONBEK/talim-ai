@@ -1,18 +1,17 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # assertCanGenerate()
 
 ## Connections
-- [[content.controller.ts_1]] - `imports` [EXTRACTED]
 - [[contentAccess.service.ts]] - `contains` [EXTRACTED]
 - [[createFlashcards()]] - `calls` [EXTRACTED]
 - [[createPodcast()]] - `calls` [EXTRACTED]
@@ -29,4 +28,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

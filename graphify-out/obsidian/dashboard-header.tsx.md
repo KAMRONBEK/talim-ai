@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "Tenant Billing Page"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Billing_Page
+  - community/Community_None
 ---
 
 # dashboard-header.tsx
@@ -19,15 +19,18 @@ tags:
 - [[LanguageSwitcher()]] - `imports` [EXTRACTED]
 - [[LearnerMessagesBell()]] - `imports` [EXTRACTED]
 - [[TenantMessagesBell()]] - `imports` [EXTRACTED]
+- [[ThemeToggle()_1]] - `imports` [EXTRACTED]
 - [[dashboard-search.tsx]] - `imports_from` [EXTRACTED]
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[language-switcher.tsx]] - `imports_from` [EXTRACTED]
 - [[learner-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 - [[learner-shell.tsx]] - `imports_from` [EXTRACTED]
+- [[plan.ts_1]] - `imports_from` [EXTRACTED]
 - [[planMessageKey]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-shell.tsx]] - `imports_from` [EXTRACTED]
+- [[theme-toggle.tsx_1]] - `imports_from` [EXTRACTED]
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page
+#graphify/code #graphify/EXTRACTED #community/Community_None

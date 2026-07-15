@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Slide UI Components"
+community: "Community None"
 location: "L103"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_UI_Components
+  - community/Community_None
 ---
 
 # ICONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/impersonation.ts"
 type: "code"
-community: "Audit & Content Management"
+community: "Community None"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Audit__Content_Management
+  - community/Community_None
 ---
 
 # signImpersonationToken()
@@ -16,4 +16,4 @@ tags:
 - [[impersonation.ts]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Audit__Content_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

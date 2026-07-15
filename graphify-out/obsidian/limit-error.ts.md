@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/limit-error.ts"
 type: "code"
-community: "Quota Limit Errors"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quota_Limit_Errors
+  - community/Community_None
 ---
 
 # limit-error.ts
@@ -21,4 +21,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quota_Limit_Errors
+#graphify/code #graphify/EXTRACTED #community/Community_None

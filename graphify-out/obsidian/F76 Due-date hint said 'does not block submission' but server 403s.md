@@ -11,7 +11,6 @@ tags:
 # F76: Due-date hint said 'does not block submission' but server 403s
 
 ## Connections
-- [[Findings ledger]] - `references` [EXTRACTED]
 - [[Run 18 — Session-based deep QA of the post-2026-06-28 surface]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 

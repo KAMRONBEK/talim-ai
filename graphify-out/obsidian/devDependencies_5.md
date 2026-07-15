@@ -1,18 +1,18 @@
 ---
 source_file: "packages/config/tailwind/package.json"
 type: "code"
-community: "Tailwind CSS Config Package"
+community: "Community None"
 location: "L10"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tailwind_CSS_Config_Package
+  - community/Community_None
 ---
 
 # devDependencies
 
 ## Connections
 - [[package.json_6]] - `contains` [EXTRACTED]
-- [[tailwindcss_2]] - `contains` [EXTRACTED]
+- [[tailwindcss_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tailwind_CSS_Config_Package
+#graphify/code #graphify/EXTRACTED #community/Community_None

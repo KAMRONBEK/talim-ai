@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Cross-Cutting Quality"
+community: "Community None"
 location: "L18"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Cross-Cutting_Quality
+  - community/Community_None
 ---
 
 # Contents
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim AI — QA User-Story Expansion (backlog)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Cross-Cutting_Quality
+#graphify/document #graphify/EXTRACTED #community/Community_None

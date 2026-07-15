@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/epic-1-subscriptions-billing.md"
 type: "document"
-community: "Product Epics Documentation"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Epics_Documentation
+  - community/Community_None
 ---
 
 # Epic 1 — Subscriptions & billing
@@ -15,4 +15,4 @@ tags:
 - [[Cursor prompt_1]] - `contains` [EXTRACTED]
 - [[epic-1-subscriptions-billing]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Epics_Documentation
+#graphify/document #graphify/EXTRACTED #community/Community_None

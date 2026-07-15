@@ -10,7 +10,4 @@ tags:
 
 # Structural (AST) Extraction
 
-## Connections
-- [[graphify_1]] - `references` [EXTRACTED]
-
 #graphify/concept #graphify/EXTRACTED #community/Graphify_Tool_Features

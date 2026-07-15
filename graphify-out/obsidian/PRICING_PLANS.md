@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Upgrade Dialog & Pricing"
+community: "Community None"
 location: "L81"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Dialog__Pricing
+  - community/Community_None
 ---
 
 # PRICING_PLANS
 
 ## Connections
+- [[getPlan()]] - `references` [EXTRACTED]
 - [[pricing.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing
+#graphify/code #graphify/EXTRACTED #community/Community_None

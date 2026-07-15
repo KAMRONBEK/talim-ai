@@ -1,17 +1,18 @@
 ---
-source_file: "packages/types/package.json"
+source_file: "apps/web/package.json"
 type: "code"
-community: "Shared TypeScript Config"
-location: "L21"
+community: "Community None"
+location: "L46"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_TypeScript_Config
+  - community/Community_None
 ---
 
 # typescript
 
 ## Connections
-- [[devDependencies_6]] - `contains` [EXTRACTED]
+- [[devDependencies_2]] - `contains` [EXTRACTED]
+- [[typescript_5]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

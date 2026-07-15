@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/components/learning/TranscriptPanel.tsx"
 type: "code"
-community: "Transcript Panel & Video Viewer"
+community: "Community None"
 location: "L64"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel__Video_Viewer
+  - community/Community_None
 ---
 
 # getSentenceIndex()
 
 ## Connections
+- [[TranscriptPanel()]] - `calls` [EXTRACTED]
 - [[TranscriptPanel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel__Video_Viewer
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "B2C Ingest Stories"
+community: "Community None"
 location: "L376"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/B2C_Ingest_Stories
+  - community/Community_None
 ---
 
 # Area: B2C ingest: PDF/SLIDE upload, OCR, YouTube, processing job
@@ -23,4 +23,4 @@ tags:
 - [[US-IND-16 OCR a selected PDF region (marquee → text)]] - `contains` [EXTRACTED]
 - [[US-IND-17 Dashboard upload entry points, duplicate & concurrent uploads]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/B2C_Ingest_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None

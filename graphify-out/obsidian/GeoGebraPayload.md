@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community None"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_None
 ---
 
 # GeoGebraPayload
@@ -17,4 +17,4 @@ tags:
 - [[tutor-geogebra.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

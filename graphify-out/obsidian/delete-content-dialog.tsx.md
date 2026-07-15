@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/delete-content-dialog.tsx"
 type: "code"
-community: "Login & Assign Content"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Login__Assign_Content
+  - community/Community_None
 ---
 
 # delete-content-dialog.tsx
@@ -28,4 +28,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useDeleteContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content
+#graphify/code #graphify/EXTRACTED #community/Community_None

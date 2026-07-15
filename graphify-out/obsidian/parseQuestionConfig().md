@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Bank & Question Management"
+community: "Community None"
 location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Bank__Question_Management
+  - community/Community_None
 ---
 
 # parseQuestionConfig()
@@ -23,6 +23,7 @@ tags:
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
 - [[grading.ts]] - `contains` [EXTRACTED]
 - [[learner.ts]] - `imports` [EXTRACTED]
+- [[listLearnerAssessments()_1]] - `calls` [EXTRACTED]
 - [[matchingLeft()_1]] - `calls` [EXTRACTED]
 - [[patchQuestion()_1]] - `calls` [EXTRACTED]
 - [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
@@ -31,4 +32,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management
+#graphify/code #graphify/EXTRACTED #community/Community_None

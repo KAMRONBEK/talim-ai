@@ -13,6 +13,7 @@ tags:
 
 ## Connections
 - [[assemblePdf()]] - `calls` [EXTRACTED]
+- [[esc()]] - `calls` [EXTRACTED]
 - [[makePdf()]] - `calls` [EXTRACTED]
 - [[qa-fixtures.mjs]] - `contains` [EXTRACTED]
 

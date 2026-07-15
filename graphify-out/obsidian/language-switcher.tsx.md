@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/language-switcher.tsx"
 type: "code"
-community: "API Client & Locale Routing"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Client__Locale_Routing
+  - community/Community_None
 ---
 
 # language-switcher.tsx
@@ -14,6 +14,8 @@ tags:
 ## Connections
 - [[LanguageSwitcher()]] - `contains` [EXTRACTED]
 - [[Locale]] - `imports` [EXTRACTED]
+- [[api_1]] - `imports` [EXTRACTED]
+- [[api.ts_1]] - `imports_from` [EXTRACTED]
 - [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[dashboard-header.tsx]] - `imports_from` [EXTRACTED]
 - [[learning-topbar.tsx]] - `imports_from` [EXTRACTED]
@@ -24,5 +26,7 @@ tags:
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 - [[setApiLocale()]] - `imports` [EXTRACTED]
+- [[useAuthStore_1]] - `imports` [EXTRACTED]
+- [[useAuthStore.ts_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Client__Locale_Routing
+#graphify/code #graphify/EXTRACTED #community/Community_None

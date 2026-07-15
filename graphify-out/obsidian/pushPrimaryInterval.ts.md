@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pushPrimaryInterval.ts"
 type: "code"
-community: "Assessment Leaderboard"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Leaderboard
+  - community/Community_None
 ---
 
 # pushPrimaryInterval.ts
@@ -17,4 +17,4 @@ tags:
 - [[useSlides.ts]] - `imports_from` [EXTRACTED]
 - [[useTranscript.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Leaderboard
+#graphify/code #graphify/EXTRACTED #community/Community_None

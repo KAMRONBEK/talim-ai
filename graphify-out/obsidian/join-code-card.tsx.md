@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/join-code-card.tsx"
 type: "code"
-community: "Billing & Profile UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Profile_UI
+  - community/Community_None
 ---
 
 # join-code-card.tsx
@@ -24,4 +24,4 @@ tags:
 - [[useTenant()]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

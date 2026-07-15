@@ -24,10 +24,8 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Graphify Tool Features]]
 - 1 edge to [[_COMMUNITY_Knowledge Graph Extraction]]
 - 1 edge to [[_COMMUNITY_Graphify Development Tools]]
 
 ## Top bridge nodes
-- [[Incremental Update (--update)]] - degree 6, connects to 3 communities
-- [[graphify add URL]] - degree 2, connects to 1 community
+- [[Incremental Update (--update)]] - degree 5, connects to 2 communities

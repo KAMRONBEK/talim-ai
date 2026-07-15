@@ -1,21 +1,20 @@
 ---
 source_file: "apps/web/components/chat/TutorChart.tsx"
 type: "code"
-community: "Tutor Embed Components"
+community: "Community None"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Embed_Components
+  - community/Community_None
 ---
 
 # TutorChart()
 
 ## Connections
 - [[Slide.tsx]] - `imports` [EXTRACTED]
-- [[T]] - `calls` [INFERRED]
 - [[TutorChart.tsx]] - `contains` [EXTRACTED]
 - [[VisualBlockRenderer.tsx]] - `imports` [EXTRACTED]
 - [[buildRows()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "User Stories & Cross-Area Issues"
+community: "Community None"
 location: "L3352"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__Cross-Area_Issues
+  - community/Community_None
 ---
 
 # Area: SSE job-events (push completion, replaces polling)
@@ -15,4 +15,4 @@ tags:
 - [[Completeness-critic stories — cross-area SEAMS & missing whole flows]] - `contains` [EXTRACTED]
 - [[US-XCUT-21 SSE job-events stream replaces completion polling]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__Cross-Area_Issues
+#graphify/document #graphify/EXTRACTED #community/Community_None

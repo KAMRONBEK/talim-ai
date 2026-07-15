@@ -1,18 +1,19 @@
 ---
 source_file: "apps/web/next.config.ts"
 type: "code"
-community: "Next.js i18n Config"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Nextjs_i18n_Config
+  - community/Community_None
 ---
 
 # next.config.ts
 
 ## Connections
+- [[.next]] - `imports_from` [EXTRACTED]
 - [[nextConfig_1]] - `contains` [EXTRACTED]
 - [[withNextIntl]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Nextjs_i18n_Config
+#graphify/code #graphify/EXTRACTED #community/Community_None

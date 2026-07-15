@@ -12,6 +12,7 @@ tags:
 # PLANS.md
 
 ## Connections
+- [[Epic 1 — Subscriptions & billing]] - `references` [EXTRACTED]
 - [[README_1]] - `references` [EXTRACTED]
 - [[Talim AI — Product plans]] - `contains` [EXTRACTED]
 - [[epic-1-subscriptions-billing]] - `references` [EXTRACTED]

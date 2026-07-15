@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/coverage-map.md"
 type: "document"
-community: "QA Coverage Map"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Coverage_Map
+  - community/Community_None
 ---
 
 # coverage-map.md
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Talim QA Coverage Map — machine-readable frontier ledger]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Coverage_Map
+#graphify/document #graphify/EXTRACTED #community/Community_None

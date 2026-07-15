@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "User Stories & QA Traceability"
+community: "Community None"
 location: "L155"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/User_Stories__QA_Traceability
+  - community/Community_None
 ---
 
 # US-LEARNER-04: Cannot reach owner/admin tools (role guard)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[Worked examples (the depth to aim for)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/User_Stories__QA_Traceability
+#graphify/document #graphify/EXTRACTED #community/Community_None

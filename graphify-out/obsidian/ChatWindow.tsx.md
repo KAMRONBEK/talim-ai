@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatWindow.tsx"
 type: "code"
-community: "API Endpoints & Chat UI"
+community: "Community None"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Endpoints__Chat_UI
+  - community/Community_None
 ---
 
 # ChatWindow.tsx
@@ -26,4 +26,4 @@ tags:
 - [[useLimitErrorHandler()]] - `imports` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
+#graphify/code #graphify/EXTRACTED #community/Community_None

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/contentAccess.service.ts"
 type: "code"
-community: "Auth Controller"
+community: "Community None"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth_Controller
+  - community/Community_None
 ---
 
 # resolveTenantIdForUser()
@@ -28,4 +28,4 @@ tags:
 - [[tenant.middleware.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth_Controller
+#graphify/code #graphify/EXTRACTED #community/Community_None

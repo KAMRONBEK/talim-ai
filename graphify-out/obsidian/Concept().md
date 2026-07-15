@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Slide UI Components"
+community: "Community None"
 location: "L87"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_UI_Components
+  - community/Community_None
 ---
 
 # Concept()
@@ -16,4 +16,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[deckIcon()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components
+#graphify/code #graphify/EXTRACTED #community/Community_None

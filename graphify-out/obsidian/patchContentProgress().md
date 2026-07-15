@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/progress.controller.ts"
 type: "code"
-community: "Flashcards & Podcast Controllers"
+community: "Community None"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards__Podcast_Controllers
+  - community/Community_None
 ---
 
 # patchContentProgress()
@@ -18,4 +18,4 @@ tags:
 - [[markSectionViewed()]] - `calls` [EXTRACTED]
 - [[progress.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers
+#graphify/code #graphify/EXTRACTED #community/Community_None

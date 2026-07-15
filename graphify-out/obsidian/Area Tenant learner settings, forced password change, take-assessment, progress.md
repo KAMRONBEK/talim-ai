@@ -1,12 +1,12 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Tenant Learner Stories"
+community: "Community None"
 location: "L2073"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Tenant_Learner_Stories
+  - community/Community_None
 ---
 
 # Area: Tenant learner: settings, forced password change, take-assessment, progress
@@ -22,4 +22,4 @@ tags:
 - [[US-LEARNER-12 Assessment leaderboard (ranking, self-highlight, privacy)]] - `contains` [EXTRACTED]
 - [[US-LEARNER-13 Attempt limits, locking, and results re-view]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Tenant_Learner_Stories
+#graphify/document #graphify/EXTRACTED #community/Community_None
