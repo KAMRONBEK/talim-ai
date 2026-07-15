@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/auth.middleware.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Env Config & Background Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Env_Config__Background_Jobs
 ---
 
 # auth.middleware.ts
@@ -63,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

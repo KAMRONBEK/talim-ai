@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Assessment Leaderboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Assessment_Leaderboard
 ---
 
 # useAssessments.ts
@@ -55,4 +55,4 @@ tags:
 - [[useSubmitLearnerAssessment()]] - `contains` [EXTRACTED]
 - [[useTenantAssessments()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Assessment_Leaderboard

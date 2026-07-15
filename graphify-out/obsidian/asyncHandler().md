@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/asyncHandler.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # asyncHandler()
@@ -27,4 +27,4 @@ tags:
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 - [[usage.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Dashboard & Charts"
-location: "L706"
+community: "Auth Store & Admin Users"
+location: "L665"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Auth_Store__Admin_Users
 ---
 
 # AdminUserListItem
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Auth_Store__Admin_Users

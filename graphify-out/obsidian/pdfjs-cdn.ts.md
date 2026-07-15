@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "PDF Text Selection"
+community: "PDF Text Extraction"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Selection
+  - community/PDF_Text_Extraction
 ---
 
 # pdfjs-cdn.ts
@@ -20,4 +20,4 @@ tags:
 - [[loadPdfJs()]] - `contains` [EXTRACTED]
 - [[rasterize-pdf.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction

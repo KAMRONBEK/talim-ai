@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Question Editor Component"
 location: "L142"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Question_Editor_Component
 ---
 
 # useCreateBankQuestion()
@@ -16,4 +16,4 @@ tags:
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Question_Editor_Component

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/resizable-split.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "API Endpoints & Chat UI"
 location: "L45"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/API_Endpoints__Chat_UI
 ---
 
 # ResizableSplit()
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[resizable-split.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

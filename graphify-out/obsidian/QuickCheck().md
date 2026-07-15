@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/Slide.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Login & Assign Content"
 location: "L388"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # QuickCheck()
@@ -16,4 +16,4 @@ tags:
 - [[T]] - `calls` [EXTRACTED]
 - [[cn()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSections.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # useSections.ts
@@ -26,4 +26,4 @@ tags:
 - [[useSection()]] - `contains` [EXTRACTED]
 - [[useSections()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

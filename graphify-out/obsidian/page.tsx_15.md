@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Game Quiz Player"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Game_Quiz_Player
 ---
 
 # page.tsx
@@ -35,4 +35,4 @@ tags:
 - [[useLearnerLeaderboard()]] - `imports` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Game_Quiz_Player

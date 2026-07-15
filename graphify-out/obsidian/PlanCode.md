@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
-location: "L81"
+community: "Upgrade Dialog & Pricing"
+location: "L73"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Upgrade_Dialog__Pricing
 ---
 
 # PlanCode
@@ -26,4 +26,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Upgrade_Dialog__Pricing

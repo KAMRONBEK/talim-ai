@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # usePodcast.ts
@@ -27,4 +27,4 @@ tags:
 - [[usePodcast()]] - `contains` [EXTRACTED]
 - [[useRegenerateEpisode()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

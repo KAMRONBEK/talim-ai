@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Messaging Hooks"
+community: "Relative Time Utilities"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Messaging_Hooks
+  - community/Relative_Time_Utilities
 ---
 
 # format-relative-time.ts
@@ -28,4 +28,4 @@ tags:
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Relative_Time_Utilities

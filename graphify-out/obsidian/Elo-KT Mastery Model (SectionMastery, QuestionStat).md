@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Design Docs"
+community: "Question Engine Rework Design"
 location: "§4"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Design_Docs
+  - community/Question_Engine_Rework_Design
 ---
 
 # Elo-KT Mastery Model (SectionMastery, QuestionStat)
@@ -19,4 +19,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Unified Grading Module (packagestypesgrading.ts)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Rework_Design

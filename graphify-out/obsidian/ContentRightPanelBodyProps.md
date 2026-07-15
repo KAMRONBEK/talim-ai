@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-right-panel.tsx"
 type: "code"
-community: "Sheet & Layout Components"
+community: "API Endpoints & Chat UI"
 location: "L20"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/API_Endpoints__Chat_UI
 ---
 
 # ContentRightPanelBodyProps
@@ -17,4 +17,4 @@ tags:
 - [[content-learn-panel.tsx]] - `imports` [EXTRACTED]
 - [[content-right-panel.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

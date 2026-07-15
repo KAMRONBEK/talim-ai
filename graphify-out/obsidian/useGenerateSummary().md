@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L176"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # useGenerateSummary()
@@ -18,4 +18,4 @@ tags:
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

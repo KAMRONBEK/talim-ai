@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale-prompts.ts"
 type: "code"
-community: "AI Prompt Builders"
-location: "L185"
+community: "Locale Prompts (Tutor/Podcast/Summary)"
+location: "L113"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Prompt_Builders
+  - community/Locale_Prompts_Tutor/Podcast/Summary
 ---
 
 # TUTOR_VISUAL_RULES
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[locale-prompts.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders
+#graphify/code #graphify/EXTRACTED #community/Locale_Prompts_Tutor/Podcast/Summary

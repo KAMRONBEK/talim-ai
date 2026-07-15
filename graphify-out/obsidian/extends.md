@@ -1,17 +1,17 @@
 ---
-source_file: "apps/admin/tsconfig.json"
+source_file: "apps/admin/.eslintrc.json"
 type: "code"
-community: "Admin tsconfig"
+community: "ESLint Config"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_tsconfig
+  - community/ESLint_Config
 ---
 
 # extends
 
 ## Connections
-- [[tsconfig.json]] - `contains` [EXTRACTED]
+- [[.eslintrc.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_tsconfig
+#graphify/code #graphify/EXTRACTED #community/ESLint_Config

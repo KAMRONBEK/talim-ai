@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "concept"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # console-baseline.json (per-route allowlist)
@@ -14,4 +14,4 @@ tags:
 - [[Preflight & anti-stall (unattended, §0)]] - `references` [EXTRACTED]
 - [[overnight-visual-qa.md — overnight DEEP QA runbook]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/concept #graphify/EXTRACTED #community/QA_Testing_Methodology

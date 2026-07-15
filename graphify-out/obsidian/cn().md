@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/lib/utils.ts"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Login & Assign Content"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # cn()
@@ -51,7 +51,6 @@ tags:
 - [[Section()]] - `calls` [EXTRACTED]
 - [[SectionReader()]] - `calls` [EXTRACTED]
 - [[SelectionAsk()]] - `calls` [EXTRACTED]
-- [[Separator()]] - `calls` [EXTRACTED]
 - [[SheetContent()]] - `calls` [EXTRACTED]
 - [[SheetHeader()]] - `calls` [EXTRACTED]
 - [[SheetTitle()]] - `calls` [EXTRACTED]
@@ -104,7 +103,6 @@ tags:
 - [[rich-text.tsx]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 - [[selection-ask.tsx]] - `imports` [EXTRACTED]
-- [[separator.tsx]] - `imports` [EXTRACTED]
 - [[sheet.tsx]] - `imports` [EXTRACTED]
 - [[summary-text.tsx]] - `imports` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
@@ -113,4 +111,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports` [EXTRACTED]
 - [[utils.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

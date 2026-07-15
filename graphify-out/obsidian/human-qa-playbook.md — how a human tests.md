@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "document"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # human-qa-playbook.md — how a human tests
@@ -14,4 +14,4 @@ tags:
 - [[Four QA instruments (one source of truth each)]] - `references` [EXTRACTED]
 - [[overnight-visual-qa.md — overnight DEEP QA runbook]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/document #graphify/EXTRACTED #community/QA_Testing_Methodology

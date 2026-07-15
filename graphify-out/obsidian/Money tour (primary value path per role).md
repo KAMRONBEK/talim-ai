@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # Money tour (primary value path per role)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Night rotation (garbage-collector, money tour, one lens per session)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/concept #graphify/EXTRACTED #community/QA_Testing_Methodology

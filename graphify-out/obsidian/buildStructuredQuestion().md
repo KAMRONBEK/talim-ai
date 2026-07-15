@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Bank & Question Management"
 location: "L94"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Bank__Question_Management
 ---
 
 # buildStructuredQuestion()
@@ -21,4 +21,4 @@ tags:
 - [[question-builders.ts]] - `contains` [EXTRACTED]
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management

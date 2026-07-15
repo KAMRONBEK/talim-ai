@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/tenant.routes.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L94"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # tenantContent
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tenant.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

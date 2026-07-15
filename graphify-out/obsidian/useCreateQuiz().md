@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Dialog Components"
+community: "Quiz Page & Hooks"
 location: "L78"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Quiz_Page__Hooks
 ---
 
 # useCreateQuiz()
@@ -16,4 +16,4 @@ tags:
 - [[practice-generator.tsx]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

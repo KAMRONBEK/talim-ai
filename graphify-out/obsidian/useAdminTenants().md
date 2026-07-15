@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Subscription UI"
+community: "Admin Tenant Hooks"
 location: "L88"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Admin_Tenant_Hooks
 ---
 
 # useAdminTenants()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_9]] - `imports` [EXTRACTED]
 - [[useAdmin.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks

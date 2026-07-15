@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
-location: "L32"
+community: "AI Service (DeepSeek)"
+location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/AI_Service_DeepSeek
 ---
 
 # ChatMessageInput
@@ -15,4 +15,4 @@ tags:
 - [[ai.service.ts]] - `contains` [EXTRACTED]
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek

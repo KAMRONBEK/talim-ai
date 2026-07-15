@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/tenant-content.controller.ts"
 type: "code"
-community: "Content Controller (B2C)"
+community: "Content Controller (YouTube/OCR)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # tenant-content.controller.ts
@@ -56,4 +56,4 @@ tags:
 - [[youtube.service.ts]] - `imports_from` [EXTRACTED]
 - [[youtubeSchema]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

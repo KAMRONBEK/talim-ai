@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/package.json"
 type: "code"
-community: "Admin App Dependencies"
+community: "Frontend Dependencies (with UI)"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_App_Dependencies
+  - community/Frontend_Dependencies_with_UI
 ---
 
 # dependencies
@@ -25,4 +25,4 @@ tags:
 - [[recharts]] - `contains` [EXTRACTED]
 - [[zustand]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies_with_UI

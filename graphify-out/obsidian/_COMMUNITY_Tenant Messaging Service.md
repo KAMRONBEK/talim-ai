@@ -35,9 +35,9 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 2 edges to [[_COMMUNITY_Prisma Client & Seed]]
-- 2 edges to [[_COMMUNITY_SSE Endpoint & Error Middleware]]
-- 1 edge to [[_COMMUNITY_Tenant Org & Roles Service]]
+- 2 edges to [[_COMMUNITY_Env Config & Background Jobs]]
+- 2 edges to [[_COMMUNITY_Billing & Quota Errors]]
+- 1 edge to [[_COMMUNITY_Tenant Service & Assignments]]
 
 ## Top bridge nodes
 - [[messages.ts]] - degree 20, connects to 3 communities

@@ -1,18 +1,19 @@
 ---
-source_file: "packages/config/tailwind/package.json"
+source_file: "packages/config/eslint/package.json"
 type: "code"
-community: "Tailwind Config Package"
+community: "ESLint Config Package"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tailwind_Config_Package
+  - community/ESLint_Config_Package
 ---
 
 # dependencies
 
 ## Connections
-- [[package.json_6]] - `contains` [EXTRACTED]
-- [[tailwindcss-animate]] - `contains` [EXTRACTED]
+- [[@eslintjs]] - `contains` [EXTRACTED]
+- [[package.json_4]] - `contains` [EXTRACTED]
+- [[typescript-eslint]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tailwind_Config_Package
+#graphify/code #graphify/EXTRACTED #community/ESLint_Config_Package

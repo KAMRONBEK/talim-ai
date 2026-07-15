@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/material-media-panel.tsx"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # material-media-panel.tsx
@@ -34,4 +34,4 @@ tags:
 - [[useVideo()]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/learner-messages-bell.tsx"
 type: "code"
-community: "Messaging Hooks"
+community: "Relative Time Utilities"
 location: "L182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Messaging_Hooks
+  - community/Relative_Time_Utilities
 ---
 
 # ThreadBubble()
@@ -16,4 +16,4 @@ tags:
 - [[formatRelativeTime()]] - `calls` [EXTRACTED]
 - [[learner-messages-bell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Relative_Time_Utilities

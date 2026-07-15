@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
+community: "AI Service (DeepSeek)"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/AI_Service_DeepSeek
 ---
 
 # getTutorTools()
@@ -15,4 +15,4 @@ tags:
 - [[ai.service.ts]] - `imports` [EXTRACTED]
 - [[tutor-tools.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek

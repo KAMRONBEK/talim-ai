@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/layout.tsx"
 type: "code"
-community: "Admin Layout Shell"
+community: "Admin Layout Components"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Layout_Shell
+  - community/Admin_Layout_Components
 ---
 
 # AdminLayout()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[layout.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Shell
+#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Components

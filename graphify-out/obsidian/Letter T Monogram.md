@@ -1,11 +1,11 @@
 ---
 source_file: "apps/web/app/icon.svg"
 type: "concept"
-community: "Web App Brand Icons"
+community: "Brand Assets & Icons"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Web_App_Brand_Icons
+  - community/Brand_Assets__Icons
 ---
 
 # Letter T Monogram
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Talim AI App Icon]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Web_App_Brand_Icons
+#graphify/concept #graphify/EXTRACTED #community/Brand_Assets__Icons

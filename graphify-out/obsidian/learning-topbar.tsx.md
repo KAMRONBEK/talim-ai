@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Login & Assign Content"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Login__Assign_Content
 ---
 
 # learning-topbar.tsx
@@ -29,4 +29,4 @@ tags:
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

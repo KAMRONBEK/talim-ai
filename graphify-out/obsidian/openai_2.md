@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Embedding & Chunk Inspection"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Embedding__Chunk_Inspection
 ---
 
 # openai
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[embed.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

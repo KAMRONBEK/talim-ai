@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Tenant Service & Assignments"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Tenant_Service__Assignments
 ---
 
 # shared.ts
@@ -33,4 +33,4 @@ tags:
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 - [[uniqueSlug()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Tenant_Service__Assignments

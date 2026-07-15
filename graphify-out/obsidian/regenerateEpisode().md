@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L151"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # regenerateEpisode()
@@ -19,4 +19,4 @@ tags:
 - [[podcast.controller.ts]] - `contains` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/youtube.ts"
 type: "code"
-community: "Dashboard Search"
+community: "Content Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dashboard_Search
+  - community/Content_Status_UI
 ---
 
 # youtube.ts
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeVideoId()]] - `contains` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dashboard_Search
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

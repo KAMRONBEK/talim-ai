@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/mastery.ts"
 type: "code"
-community: "Section Mastery (Elo-KT)"
+community: "Quiz Page & Hooks"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery_Elo-KT
+  - community/Quiz_Page__Hooks
 ---
 
 # MASTERY_BAND_ORDER
@@ -15,4 +15,4 @@ tags:
 - [[mastery.ts]] - `contains` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

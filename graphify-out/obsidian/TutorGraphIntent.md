@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph-intent.ts"
 type: "code"
-community: "AI Provider Service"
+community: "AI Service (DeepSeek)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/AI_Service_DeepSeek
 ---
 
 # TutorGraphIntent
@@ -16,4 +16,4 @@ tags:
 - [[ai.service.ts]] - `imports` [EXTRACTED]
 - [[tutor-graph-intent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek

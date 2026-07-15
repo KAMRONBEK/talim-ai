@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
-location: "L276"
+community: "Tenant Messages & Progress"
+location: "L248"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/Tenant_Messages__Progress
 ---
 
 # TenantMessageReply
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[tenant-messages-bell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress

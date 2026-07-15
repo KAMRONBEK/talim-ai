@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/VisualBlockRenderer.tsx"
 type: "code"
-community: "Tutor Chat Visual Components"
+community: "Tutor Embed Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Chat_Visual_Components
+  - community/Tutor_Embed_Components
 ---
 
 # VisualBlockRenderer.tsx
@@ -29,4 +29,4 @@ tags:
 - [[VisualBlockRenderer()]] - `contains` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components
+#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components

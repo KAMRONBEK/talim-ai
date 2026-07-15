@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/package.json"
 type: "code"
-community: "Types Package Config"
+community: "Shared TypeScript Config"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Types_Package_Config
+  - community/Shared_TypeScript_Config
 ---
 
 # private
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_8]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Types_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Shared_TypeScript_Config

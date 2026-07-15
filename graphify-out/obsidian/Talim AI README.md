@@ -1,11 +1,11 @@
 ---
 source_file: "README.md"
 type: "document"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # Talim AI README
@@ -19,4 +19,4 @@ tags:
 - [[Environment variables (DATABASE_URLJWT_SECRETOPENAIDEEPSEEK...)]] - `references` [EXTRACTED]
 - [[Talim Tech Stack (Next.jsExpressPrismaBullPostgres+pgvector)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/document #graphify/EXTRACTED #community/Admin_Panel_Architecture

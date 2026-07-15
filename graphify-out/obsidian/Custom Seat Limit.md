@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog Docs"
+community: "Feature Catalog Overview"
 location: "§3.5"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Docs
+  - community/Feature_Catalog_Overview
 ---
 
 # Custom Seat Limit
@@ -16,4 +16,4 @@ tags:
 - [[Class Join-Code Self-Enroll]] - `conceptually_related_to` [INFERRED]
 - [[Talim AI Feature Catalog]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Docs
+#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Overview

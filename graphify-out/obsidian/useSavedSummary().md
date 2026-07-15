@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Flashcards Page"
 location: "L205"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Flashcards_Page
 ---
 
 # useSavedSummary()
@@ -20,4 +20,4 @@ tags:
 - [[useContentActions.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

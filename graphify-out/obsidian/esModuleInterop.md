@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/base.json"
 type: "code"
-community: "Shared tsconfig (base)"
+community: "TypeScript Base Config"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_tsconfig_base
+  - community/TypeScript_Base_Config
 ---
 
 # esModuleInterop
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[compilerOptions_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_tsconfig_base
+#graphify/code #graphify/EXTRACTED #community/TypeScript_Base_Config

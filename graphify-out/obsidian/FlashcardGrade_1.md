@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Flashcards UI"
-location: "L1316"
+community: "Flashcards Page"
+location: "L1244"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_UI
+  - community/Flashcards_Page
 ---
 
 # FlashcardGrade
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_30]] - `imports` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_UI
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/usage.service.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Embedding & Chunk Inspection"
 location: "L28"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Embedding__Chunk_Inspection
 ---
 
 # recordUsage()
@@ -29,4 +29,4 @@ tags:
 - [[usage.service.ts]] - `contains` [EXTRACTED]
 - [[youtube.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

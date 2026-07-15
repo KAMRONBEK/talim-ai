@@ -1,20 +1,18 @@
 ---
-source_file: "packages/ui/package.json"
+source_file: "packages/config/eslint/package.json"
 type: "code"
-community: "UI Package Config"
-location: "L19"
+community: "ESLint Config Package"
+location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/ESLint_Config_Package
 ---
 
 # peerDependencies
 
 ## Connections
-- [[next_2]] - `contains` [EXTRACTED]
-- [[package.json_9]] - `contains` [EXTRACTED]
-- [[react_2]] - `contains` [EXTRACTED]
-- [[react-dom_2]] - `contains` [EXTRACTED]
+- [[eslint_4]] - `contains` [EXTRACTED]
+- [[package.json_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/ESLint_Config_Package

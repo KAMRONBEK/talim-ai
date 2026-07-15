@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/section.controller.ts"
 type: "code"
-community: "Section Controller"
+community: "Flashcards & Podcast Controllers"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Controller
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # listSections()
@@ -18,4 +18,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[section.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Controller
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

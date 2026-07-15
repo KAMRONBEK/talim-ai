@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenant.ts"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Billing & Profile UI"
 location: "L216"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # useResetTenantStudentPassword()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_28]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

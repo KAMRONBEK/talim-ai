@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Subscription & Billing Service"
-location: "L182"
+community: "Admin Content & Subscriptions"
+location: "L154"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Admin_Content__Subscriptions
 ---
 
 # UserSubscription
@@ -15,4 +15,4 @@ tags:
 - [[billing.controller.ts]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

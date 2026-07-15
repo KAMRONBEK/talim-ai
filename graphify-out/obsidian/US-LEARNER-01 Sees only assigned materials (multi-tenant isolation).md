@@ -1,17 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Community 88"
+community: "User Stories & QA Traceability"
+location: "L127"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_88
+  - community/User_Stories__QA_Traceability
 ---
 
 # US-LEARNER-01: Sees only assigned materials (multi-tenant isolation)
 
 ## Connections
-- [[F8 Inaccessible content hung on 'Loading…' forever (no redirect)]] - `references` [EXTRACTED]
-- [[Multi-tenant isolation]] - `references` [EXTRACTED]
+- [[Worked examples (the depth to aim for)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Community_88
+#graphify/document #graphify/EXTRACTED #community/User_Stories__QA_Traceability

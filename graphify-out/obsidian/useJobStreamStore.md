@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useJobStreamStore.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Flashcards Page"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Flashcards_Page
 ---
 
 # useJobStreamStore
@@ -40,4 +40,4 @@ tags:
 - [[useVideo()]] - `calls` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

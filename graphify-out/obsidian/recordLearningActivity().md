@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage"
+community: "Learning Coverage & Badges"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage
+  - community/Learning_Coverage__Badges
 ---
 
 # recordLearningActivity()
@@ -20,4 +20,4 @@ tags:
 - [[todayUtcDate()]] - `calls` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

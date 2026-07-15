@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateSlides.job.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Env Config & Background Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # generateSlides.job.ts
@@ -28,4 +28,4 @@ tags:
 - [[slides.service.ts]] - `imports_from` [EXTRACTED]
 - [[slidesQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

@@ -28,12 +28,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_Slide Deck Player UI]]
-- 2 edges to [[_COMMUNITY_Locale Sync & Content Hooks]]
-- 2 edges to [[_COMMUNITY_Shared Types & Zustand Stores]]
-- 1 edge to [[_COMMUNITY_Content Media Controllers]]
+- 2 edges to [[_COMMUNITY_Flashcards Page]]
+- 2 edges to [[_COMMUNITY_Slide UI Components]]
+- 2 edges to [[_COMMUNITY_Admin Content & Subscriptions]]
+- 1 edge to [[_COMMUNITY_Flashcards & Podcast Controllers]]
+- 1 edge to [[_COMMUNITY_Env Config & Background Jobs]]
 
 ## Top bridge nodes
-- [[NarratedVideoPlayer.tsx]] - degree 13, connects to 3 communities
+- [[NarratedVideoPlayer.tsx]] - degree 13, connects to 4 communities
 - [[VideoSegment]] - degree 3, connects to 2 communities
 - [[NarratedVideoPlayer()]] - degree 3, connects to 1 community

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useSlides.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Flashcards_Page
 ---
 
 # useSlides.ts
@@ -30,4 +30,4 @@ tags:
 - [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 - [[useSlides()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

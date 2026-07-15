@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTenantContent.ts"
 type: "code"
-community: "Dialog Components"
-location: "L47"
+community: "Billing & Profile UI"
+location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Billing__Profile_UI
 ---
 
 # useUploadTenantContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_24]] - `imports` [EXTRACTED]
 - [[useTenantContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

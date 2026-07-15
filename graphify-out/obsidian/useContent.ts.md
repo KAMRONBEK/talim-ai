@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Content Query Hooks"
+community: "Content Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Query_Hooks
+  - community/Content_Status_UI
 ---
 
 # useContent.ts
@@ -48,4 +48,4 @@ tags:
 - [[useRetryContent()_1]] - `contains` [EXTRACTED]
 - [[useUploadContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

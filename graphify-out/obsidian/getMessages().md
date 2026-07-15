@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Fonts & Root Layout"
+community: "Root Layout & Fonts"
 location: "L124"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/Root_Layout__Fonts
 ---
 
 # getMessages()
@@ -16,4 +16,4 @@ tags:
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/Root_Layout__Fonts

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/user-sidebar-footer.tsx"
 type: "code"
-community: "Billing & Access Guards"
+community: "Tenant Billing Page"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Tenant_Billing_Page
 ---
 
 # UserSidebarFooter()
@@ -22,4 +22,4 @@ tags:
 - [[useBilling()]] - `calls` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

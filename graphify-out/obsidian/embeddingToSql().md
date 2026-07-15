@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Embedding & Chunk Inspection"
 location: "L70"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Embedding__Chunk_Inspection
 ---
 
 # embeddingToSql()
@@ -22,4 +22,4 @@ tags:
 - [[searchWithDistance()]] - `calls` [EXTRACTED]
 - [[storeChunksWithEmbeddings()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

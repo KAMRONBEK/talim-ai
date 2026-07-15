@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Slide Deck Player UI"
+community: "Slide UI Components"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Player_UI
+  - community/Slide_UI_Components
 ---
 
 # deck.ts
@@ -43,4 +43,4 @@ tags:
 - [[index.ts_2]] - `re_exports` [EXTRACTED]
 - [[tutor-visual.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components

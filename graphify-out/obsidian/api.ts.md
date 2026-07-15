@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/api.ts"
 type: "code"
-community: "Admin API Client"
+community: "API Module"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_API_Client
+  - community/API_Module
 ---
 
 # api.ts
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[api]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_API_Client
+#graphify/code #graphify/EXTRACTED #community/API_Module

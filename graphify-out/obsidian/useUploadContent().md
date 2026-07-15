@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # useUploadContent()
@@ -16,4 +16,4 @@ tags:
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

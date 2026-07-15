@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/video.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # video.controller.ts
@@ -45,4 +45,4 @@ tags:
 - [[videoBodySchema]] - `contains` [EXTRACTED]
 - [[videoQueue]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

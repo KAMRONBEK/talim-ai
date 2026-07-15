@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "concept"
-community: "QA Evidence Protocol"
+community: "QA Finding Verification"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Evidence_Protocol
+  - community/QA_Finding_Verification
 ---
 
 # Finding self-verification protocol (§E)
@@ -14,4 +14,4 @@ tags:
 - [[Evidence triple (console + network + screenshot)]] - `references` [EXTRACTED]
 - [[Skeptic pass (evidence-only innocent-explanation check)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Evidence_Protocol
+#graphify/concept #graphify/EXTRACTED #community/QA_Finding_Verification

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Admin Subscription UI"
+community: "Subscription Edit Drawer"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Subscription_Edit_Drawer
 ---
 
 # subscription-edit-drawer.tsx
@@ -37,4 +37,4 @@ tags:
 - [[useUpdateTenant()]] - `imports` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Subscription_Edit_Drawer

@@ -1,13 +1,13 @@
 ---
 type: community
 cohesion: 0.20
-members: 15
+members: 17
 ---
 
 # YouTube Transcription Service
 
 **Cohesion:** 0.20 - loosely connected
-**Members:** 15 nodes
+**Members:** 17 nodes
 
 ## Members
 - [[OpenAITranscriptionSegment]] - code - apps/api/src/services/youtube.service.ts
@@ -19,6 +19,8 @@ members: 15
 - [[buildTranscriptionPrompt()]] - code - apps/api/src/services/youtube.service.ts
 - [[cleanTranscriptText()]] - code - apps/api/src/services/youtube.service.ts
 - [[extractYoutubeAudio()]] - code - apps/api/src/services/youtube.service.ts
+- [[extractYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
+- [[extractYoutubeVideoId()]] - code - apps/api/src/services/youtube.service.ts
 - [[fallbackTextSegments()]] - code - apps/api/src/services/youtube.service.ts
 - [[generateYoutubeTranscript()]] - code - apps/api/src/services/youtube.service.ts
 - [[normalizeCaptionSegments()]] - code - apps/api/src/services/youtube.service.ts
@@ -34,14 +36,12 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 6 edges to [[_COMMUNITY_Tenant Content Controller]]
-- 3 edges to [[_COMMUNITY_Env Config & Background Job Registration]]
-- 3 edges to [[_COMMUNITY_Usage Pricing & PDF Extraction]]
-- 1 edge to [[_COMMUNITY_Content Controller (B2C)]]
-- 1 edge to [[_COMMUNITY_Embedding Inspection Script]]
+- 6 edges to [[_COMMUNITY_Env Config & Background Jobs]]
+- 6 edges to [[_COMMUNITY_Content Controller (YouTubeOCR)]]
+- 4 edges to [[_COMMUNITY_Embedding & Chunk Inspection]]
 
 ## Top bridge nodes
-- [[youtube.service.ts]] - degree 24, connects to 5 communities
-- [[generateYoutubeTranscript()]] - degree 8, connects to 2 communities
-- [[cleanTranscriptText()]] - degree 4, connects to 1 community
-- [[normalizeCaptionSegments()]] - degree 2, connects to 1 community
+- [[youtube.service.ts]] - degree 25, connects to 3 communities
+- [[generateYoutubeTranscript()]] - degree 8, connects to 1 community
+- [[extractYoutubeTranscript()]] - degree 7, connects to 1 community
+- [[extractYoutubeVideoId()]] - degree 6, connects to 1 community

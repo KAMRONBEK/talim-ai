@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/inspect-chunks.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Embedding & Chunk Inspection"
 location: "L29"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Embedding__Chunk_Inspection
 ---
 
 # getChunkStats()
@@ -15,4 +15,4 @@ tags:
 - [[inspect-chunks.ts]] - `contains` [EXTRACTED]
 - [[main()_3]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "API Endpoints & Chat UI"
 location: "L309"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/API_Endpoints__Chat_UI
 ---
 
 # ContentDetailPage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_31]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

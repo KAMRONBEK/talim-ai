@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/package.json"
 type: "code"
-community: "tsconfig Package Meta"
+community: "Package Def (Utilities)"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/tsconfig_Package_Meta
+  - community/Package_Def_Utilities
 ---
 
 # version
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/tsconfig_Package_Meta
+#graphify/code #graphify/EXTRACTED #community/Package_Def_Utilities

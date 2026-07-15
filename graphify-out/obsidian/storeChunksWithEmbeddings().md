@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/rag.service.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Embedding & Chunk Inspection"
 location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Embedding__Chunk_Inspection
 ---
 
 # storeChunksWithEmbeddings()
@@ -19,4 +19,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rag.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/users/page.tsx"
 type: "code"
-community: "Admin Dashboard & Charts"
+community: "Admin User Management"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Admin_User_Management
 ---
 
 # page.tsx
@@ -24,4 +24,4 @@ tags:
 - [[useDeleteUser()]] - `imports` [EXTRACTED]
 - [[useResetUserPassword()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Admin_User_Management

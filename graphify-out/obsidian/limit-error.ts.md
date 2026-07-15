@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/limit-error.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Quota Limit Errors"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Quota_Limit_Errors
 ---
 
 # limit-error.ts
@@ -21,4 +21,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Quota_Limit_Errors

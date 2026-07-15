@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Assessment Controller"
+community: "Content Controller (YouTube/OCR)"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Assessment_Controller
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # getParam()
@@ -114,4 +114,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Assessment_Controller
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

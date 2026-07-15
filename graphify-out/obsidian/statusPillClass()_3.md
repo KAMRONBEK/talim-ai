@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/page.tsx"
 type: "code"
-community: "Admin Subscription UI"
+community: "Admin Tenant Hooks"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Admin_Tenant_Hooks
 ---
 
 # statusPillClass()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks

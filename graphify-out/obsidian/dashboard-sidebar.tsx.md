@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-sidebar.tsx"
 type: "code"
-community: "Sheet & Layout Components"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/Tenant_Billing_Page
 ---
 
 # dashboard-sidebar.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useContents()]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "concept"
-community: "Product Plans & Epics"
+community: "QA Traceability Ledger"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Traceability_Ledger
 ---
 
 # Observations Ledger (O-numbers)
@@ -16,4 +16,4 @@ tags:
 - [[O81 Impersonation token not single-use (replayable stateless JWT)]] - `references` [EXTRACTED]
 - [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/concept #graphify/EXTRACTED #community/QA_Traceability_Ledger

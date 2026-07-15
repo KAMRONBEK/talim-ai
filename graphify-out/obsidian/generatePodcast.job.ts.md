@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "Env Config & Background Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Env_Config__Background_Jobs
 ---
 
 # generatePodcast.job.ts
@@ -42,4 +42,4 @@ tags:
 - [[synthesizeSpeech()]] - `imports` [EXTRACTED]
 - [[tts.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

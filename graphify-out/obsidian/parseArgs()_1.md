@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/create-tenant-owner.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Audit & Content Management"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Audit__Content_Management
 ---
 
 # parseArgs()
@@ -15,4 +15,4 @@ tags:
 - [[create-tenant-owner.ts]] - `contains` [EXTRACTED]
 - [[main()_2]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Audit__Content_Management

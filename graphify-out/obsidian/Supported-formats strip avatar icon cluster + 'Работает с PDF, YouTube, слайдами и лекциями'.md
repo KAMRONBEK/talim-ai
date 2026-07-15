@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero-fixed.jpeg"
 type: "image"
-community: "QA Screenshots (RU Landing)"
+community: "Russian Landing Page"
 tags:
   - graphify/image
   - graphify/EXTRACTED
-  - community/QA_Screenshots_RU_Landing
+  - community/Russian_Landing_Page
 ---
 
 # Supported-formats strip: avatar icon cluster + 'Работает с PDF, YouTube, слайдами и лекциями'
@@ -14,4 +14,4 @@ tags:
 - [[Hero section badge 'Учитесь с ИИ', stacked headline, value-prop copy, CTA pair]] - `references` [EXTRACTED]
 - [[Value-prop paragraph upload any material (PDF, video, slides, lecture) → get конспекты, подкасты, тесты, личный ИИ-репетитор]] - `semantically_similar_to` [INFERRED]
 
-#graphify/image #graphify/EXTRACTED #community/QA_Screenshots_RU_Landing
+#graphify/image #graphify/EXTRACTED #community/Russian_Landing_Page

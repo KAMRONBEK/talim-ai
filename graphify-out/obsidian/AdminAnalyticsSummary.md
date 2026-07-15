@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Analytics"
-location: "L882"
+community: "Analytics & Usage Pricing"
+location: "L823"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Analytics
+  - community/Analytics__Usage_Pricing
 ---
 
 # AdminAnalyticsSummary
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Analytics
+#graphify/code #graphify/EXTRACTED #community/Analytics__Usage_Pricing

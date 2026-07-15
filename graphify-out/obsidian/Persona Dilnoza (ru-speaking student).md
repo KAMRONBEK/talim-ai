@@ -1,13 +1,13 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Persona (Dilnoza)"
+community: "Dilnoza Persona"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Persona_Dilnoza
+  - community/Dilnoza_Persona
 ---
 
 # Persona: Dilnoza (ru-speaking student)
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Persona_Dilnoza
+#graphify/concept #graphify/EXTRACTED #community/Dilnoza_Persona

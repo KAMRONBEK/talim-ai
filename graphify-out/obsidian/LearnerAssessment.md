@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
-location: "L610"
+community: "Game Quiz Player"
+location: "L569"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Game_Quiz_Player
 ---
 
 # LearnerAssessment
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_15]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Game_Quiz_Player

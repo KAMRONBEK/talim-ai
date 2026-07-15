@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useVideo.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # useVideo.ts
@@ -25,4 +25,4 @@ tags:
 - [[useVideo()]] - `contains` [EXTRACTED]
 - [[videoKey()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

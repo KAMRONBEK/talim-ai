@@ -1,17 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "qa · US-IND-25: Podcast DEEPEN (fine controls,"
+community: "User Stories & QA Traceability"
+location: "L185"
 tags:
   - graphify/document
-  - graphify/INFERRED
-  - community/qa__US-IND-25_Podcast_DEEPEN_fine_controls
+  - graphify/EXTRACTED
+  - community/User_Stories__QA_Traceability
 ---
 
 # US-IND-05: Podcast — generate + player
 
 ## Connections
-- [[F21 (S2, fixed) podcast playback broken + blob-404 spam from audio-effect churn]] - `references` [EXTRACTED]
-- [[US-IND-25 Podcast DEEPEN (fine controls, multi-episode, per-episode regen)]] - `conceptually_related_to` [INFERRED]
+- [[Worked examples (the depth to aim for)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/INFERRED #community/qa__US-IND-25_Podcast_DEEPEN_fine_controls
+#graphify/document #graphify/EXTRACTED #community/User_Stories__QA_Traceability

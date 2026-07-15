@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pdfjs-cdn.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "PDF Text Extraction"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/PDF_Text_Extraction
 ---
 
 # loadPdfJs()
@@ -17,4 +17,4 @@ tags:
 - [[rasterize-pdf.ts]] - `imports` [EXTRACTED]
 - [[rasterizePdfToImages()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction

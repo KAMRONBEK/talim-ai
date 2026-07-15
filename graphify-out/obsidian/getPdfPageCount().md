@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L36"
+community: "Content Controller (YouTube/OCR)"
+location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # getPdfPageCount()
@@ -17,4 +17,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[uploadContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Billing & Access Guards"
+community: "Become Tutor & Auth Shell"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # getPostLoginPath()
@@ -20,4 +20,4 @@ tags:
 - [[page.tsx_38]] - `imports` [EXTRACTED]
 - [[role-guard.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

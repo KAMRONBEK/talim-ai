@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
-location: "L23"
+community: "Tenant Billing Page"
+location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Tenant_Billing_Page
 ---
 
 # TenantSidebarBody()
@@ -17,4 +17,4 @@ tags:
 - [[useTenant()]] - `calls` [EXTRACTED]
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

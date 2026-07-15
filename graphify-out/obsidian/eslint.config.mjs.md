@@ -1,17 +1,17 @@
 ---
 source_file: "apps/api/eslint.config.mjs"
 type: "code"
-community: "API ESLint Config"
+community: "ESLint Configuration"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_ESLint_Config
+  - community/ESLint_Configuration
 ---
 
 # eslint.config.mjs
 
 ## Connections
-- [[index.js]] - `imports_from` [EXTRACTED]
+- [[index.js]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_ESLint_Config
+#graphify/code #graphify/EXTRACTED #community/ESLint_Configuration

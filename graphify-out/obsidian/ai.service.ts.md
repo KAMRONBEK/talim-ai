@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
+community: "AI Service (DeepSeek)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/AI_Service_DeepSeek
 ---
 
 # ai.service.ts
@@ -15,6 +15,7 @@ tags:
 - [[AiUsageContext]] - `contains` [EXTRACTED]
 - [[ChatMessageContent]] - `contains` [EXTRACTED]
 - [[ChatMessageInput]] - `contains` [EXTRACTED]
+- [[DeepSeekThinking]] - `contains` [EXTRACTED]
 - [[Env]] - `imports` [EXTRACTED]
 - [[TutorGraphIntent]] - `imports` [EXTRACTED]
 - [[TutorStreamEvent]] - `contains` [EXTRACTED]
@@ -50,4 +51,4 @@ tags:
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 - [[withTutorToolInstructions()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek

@@ -1,17 +1,17 @@
 ---
-source_file: "packages/types/tsconfig.json"
+source_file: "packages/config/tsconfig/nextjs.json"
 type: "code"
-community: "Types tsconfig"
-location: "L2"
+community: "Next.js TypeScript Config"
+location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Types_tsconfig
+  - community/Nextjs_TypeScript_Config
 ---
 
 # extends
 
 ## Connections
-- [[tsconfig.json_3]] - `contains` [EXTRACTED]
+- [[nextjs.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Types_tsconfig
+#graphify/code #graphify/EXTRACTED #community/Nextjs_TypeScript_Config

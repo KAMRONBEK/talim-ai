@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/summary.controller.ts"
 type: "code"
-community: "AI Prompt Builders"
+community: "Summary Controller"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Prompt_Builders
+  - community/Summary_Controller
 ---
 
 # buildSummaryMessages()
@@ -22,4 +22,4 @@ tags:
 - [[streamSummary()]] - `calls` [EXTRACTED]
 - [[summary.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders
+#graphify/code #graphify/EXTRACTED #community/Summary_Controller

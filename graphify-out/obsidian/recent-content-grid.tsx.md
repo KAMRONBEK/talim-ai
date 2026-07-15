@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Dashboard Search"
+community: "Content Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dashboard_Search
+  - community/Content_Status_UI
 ---
 
 # recent-content-grid.tsx
@@ -37,4 +37,4 @@ tags:
 - [[typeStyles_1]] - `contains` [EXTRACTED]
 - [[youtube.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dashboard_Search
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Subscription & Billing Service"
+community: "Billing & Quota Errors"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Billing__Quota_Errors
 ---
 
 # getSubscriptionForTenant()
@@ -23,4 +23,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Design Docs"
+community: "Question Engine Rework Design"
 location: "§7"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Design_Docs
+  - community/Question_Engine_Rework_Design
 ---
 
 # Stratified Whole-Material Chunk Spread
@@ -15,4 +15,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Rework_Design

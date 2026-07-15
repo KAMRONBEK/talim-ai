@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
-location: "L1105"
+community: "Admin Content & Subscriptions"
+location: "L1046"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Admin_Content__Subscriptions
 ---
 
 # PodcastEpisode
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

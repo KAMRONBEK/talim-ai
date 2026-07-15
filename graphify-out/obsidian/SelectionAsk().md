@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/selection-ask.tsx"
 type: "code"
-community: "Section Reader UI"
+community: "Deck Player & Section Reader"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Reader_UI
+  - community/Deck_Player__Section_Reader
 ---
 
 # SelectionAsk()
@@ -19,4 +19,4 @@ tags:
 - [[selection-ask.tsx]] - `contains` [EXTRACTED]
 - [[summary-text.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI
+#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader

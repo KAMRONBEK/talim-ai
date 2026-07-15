@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
+community: "Admin Content & Subscriptions"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/Admin_Content__Subscriptions
 ---
 
 # ContentStatus
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

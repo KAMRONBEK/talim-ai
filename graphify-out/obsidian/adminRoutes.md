@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/admin.routes.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # adminRoutes
@@ -15,4 +15,4 @@ tags:
 - [[admin.routes.ts]] - `contains` [EXTRACTED]
 - [[index.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

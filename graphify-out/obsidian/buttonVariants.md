@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/button.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Login & Assign Content"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # buttonVariants
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_23]] - `imports` [EXTRACTED]
 - [[page.tsx_24]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

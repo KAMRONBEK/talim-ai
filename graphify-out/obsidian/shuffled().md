@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Bank & Question Management"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Bank__Question_Management
 ---
 
 # shuffled()
@@ -19,4 +19,4 @@ tags:
 - [[question-postprocess.ts]] - `imports` [EXTRACTED]
 - [[shuffleOptionsWithKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management

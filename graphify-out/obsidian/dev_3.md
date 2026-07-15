@@ -1,12 +1,12 @@
 ---
 source_file: "package.json"
 type: "code"
-community: "Monorepo Scripts"
+community: "Database Scripts & Commands"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Monorepo_Scripts
+  - community/Database_Scripts__Commands
 ---
 
 # dev
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[scripts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Monorepo_Scripts
+#graphify/code #graphify/EXTRACTED #community/Database_Scripts__Commands

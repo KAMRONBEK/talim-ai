@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learner/game-quiz-player.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Game Quiz Player"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Game_Quiz_Player
 ---
 
 # GameStage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[game-quiz-player.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Game_Quiz_Player

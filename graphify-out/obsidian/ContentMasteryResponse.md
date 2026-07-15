@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
-location: "L1239"
+community: "API Endpoints & Chat UI"
+location: "L1167"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/API_Endpoints__Chat_UI
 ---
 
 # ContentMasteryResponse
@@ -16,4 +16,4 @@ tags:
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 - [[useMastery.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

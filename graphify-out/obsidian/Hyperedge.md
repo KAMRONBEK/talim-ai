@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/extraction-spec.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Knowledge Graph Extraction"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Knowledge_Graph_Extraction
 ---
 
 # Hyperedge
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Extraction Subagent Prompt]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Knowledge_Graph_Extraction

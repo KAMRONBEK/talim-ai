@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Content Status UI"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Content_Status_UI
 ---
 
 # TypeBadge()
@@ -17,4 +17,4 @@ tags:
 - [[getYoutubeThumbnailUrl()]] - `calls` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

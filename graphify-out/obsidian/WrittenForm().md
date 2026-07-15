@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Game Quiz Player"
 location: "L36"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Game_Quiz_Player
 ---
 
 # WrittenForm()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 - [[useSubmitLearnerAssessment()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/INFERRED #community/Game_Quiz_Player

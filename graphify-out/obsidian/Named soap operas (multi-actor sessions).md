@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Personas (Admin)"
+community: "Admin Personas"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Personas_Admin
+  - community/Admin_Personas
 ---
 
 # Named soap operas (multi-actor sessions)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Persona Power admin]] - `conceptually_related_to` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Personas_Admin
+#graphify/concept #graphify/EXTRACTED #community/Admin_Personas

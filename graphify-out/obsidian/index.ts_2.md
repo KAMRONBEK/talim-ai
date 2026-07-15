@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
+community: "Admin Content & Subscriptions"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/Admin_Content__Subscriptions
 ---
 
 # index.ts
@@ -24,9 +24,7 @@ tags:
 - [[AdminContentItem]] - `contains` [EXTRACTED]
 - [[AdminFunnelResponse]] - `contains` [EXTRACTED]
 - [[AdminGeneratedItem]] - `contains` [EXTRACTED]
-- [[AdminGeneratedListResponse]] - `contains` [EXTRACTED]
 - [[AdminGeneratedReview]] - `contains` [EXTRACTED]
-- [[AdminGeneratedReviewResponse]] - `contains` [EXTRACTED]
 - [[AdminImpersonateResponse]] - `contains` [EXTRACTED]
 - [[AdminMrrPlanBreakdown]] - `contains` [EXTRACTED]
 - [[AdminMrrResponse]] - `contains` [EXTRACTED]
@@ -54,10 +52,8 @@ tags:
 - [[AdminUserSubscription]] - `contains` [EXTRACTED]
 - [[AdminUsersByRoleResponse]] - `contains` [EXTRACTED]
 - [[AdminUsersByRoleRow]] - `contains` [EXTRACTED]
-- [[ApiError]] - `contains` [EXTRACTED]
 - [[AppLocale]] - `re_exports` [EXTRACTED]
 - [[AssessmentAssignment]] - `contains` [EXTRACTED]
-- [[AssessmentAttemptStatus]] - `contains` [EXTRACTED]
 - [[AssessmentLeaderboard]] - `contains` [EXTRACTED]
 - [[AssessmentLeaderboardRow]] - `contains` [EXTRACTED]
 - [[AssessmentMode]] - `contains` [EXTRACTED]
@@ -79,7 +75,6 @@ tags:
 - [[ChartSlide]] - `re_exports` [EXTRACTED]
 - [[ChatMessage]] - `contains` [EXTRACTED]
 - [[ChatMessage.tsx]] - `imports_from` [EXTRACTED]
-- [[ChatSession]] - `contains` [EXTRACTED]
 - [[ChatSessionResponse]] - `contains` [EXTRACTED]
 - [[ClassMastery]] - `contains` [EXTRACTED]
 - [[ClassMasteryDistribution]] - `contains` [EXTRACTED]
@@ -87,7 +82,6 @@ tags:
 - [[ConceptSlide]] - `re_exports` [EXTRACTED]
 - [[Content]] - `contains` [EXTRACTED]
 - [[ContentAssignment]] - `contains` [EXTRACTED]
-- [[ContentList.tsx]] - `imports_from` [EXTRACTED]
 - [[ContentMasteryResponse]] - `contains` [EXTRACTED]
 - [[ContentProgress]] - `contains` [EXTRACTED]
 - [[ContentProgressResponse]] - `contains` [EXTRACTED]
@@ -101,7 +95,6 @@ tags:
 - [[CoverSlide]] - `re_exports` [EXTRACTED]
 - [[CreateLearnerReplyResponse]] - `contains` [EXTRACTED]
 - [[CreateTenantStudentResponse]] - `contains` [EXTRACTED]
-- [[DEFAULT_PRACTICE_TYPES]] - `contains` [EXTRACTED]
 - [[Deck]] - `re_exports` [EXTRACTED]
 - [[DeckAccent]] - `re_exports` [EXTRACTED]
 - [[DeckAudience]] - `re_exports` [EXTRACTED]
@@ -131,7 +124,6 @@ tags:
 - [[LearnerMaterial]] - `contains` [EXTRACTED]
 - [[LearnerMaterialStatus]] - `contains` [EXTRACTED]
 - [[LearnerMessage]] - `contains` [EXTRACTED]
-- [[LearnerMessagesResponse]] - `contains` [EXTRACTED]
 - [[LearnerProgress]] - `contains` [EXTRACTED]
 - [[LearnerSummary]] - `contains` [EXTRACTED]
 - [[LearnerThreadMessage]] - `contains` [EXTRACTED]
@@ -150,12 +142,10 @@ tags:
 - [[NarratedVideoPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[PaginatedResponse]] - `contains` [EXTRACTED]
 - [[PlanCode]] - `contains` [EXTRACTED]
-- [[PlanFileLimitResponse]] - `contains` [EXTRACTED]
 - [[PlanKind]] - `contains` [EXTRACTED]
 - [[PlanLimits_1]] - `contains` [EXTRACTED]
 - [[Podcast]] - `contains` [EXTRACTED]
 - [[PodcastEpisode]] - `contains` [EXTRACTED]
-- [[PodcastEpisodeProgress]] - `contains` [EXTRACTED]
 - [[PodcastPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[PodcastSegment]] - `contains` [EXTRACTED]
 - [[PodcastStatus]] - `contains` [EXTRACTED]
@@ -164,7 +154,7 @@ tags:
 - [[QuestionBankMaterial]] - `contains` [EXTRACTED]
 - [[QuestionDepth]] - `contains` [EXTRACTED]
 - [[QuestionDifficulty]] - `contains` [EXTRACTED]
-- [[QuestionStyle_2]] - `contains` [EXTRACTED]
+- [[QuestionStyle_1]] - `contains` [EXTRACTED]
 - [[QuestionType]] - `contains` [EXTRACTED]
 - [[QuickCheckSlide]] - `re_exports` [EXTRACTED]
 - [[Quiz]] - `contains` [EXTRACTED]
@@ -173,7 +163,6 @@ tags:
 - [[QuizKind]] - `contains` [EXTRACTED]
 - [[QuizQuestion]] - `contains` [EXTRACTED]
 - [[QuizWithLatestAttempt]] - `contains` [EXTRACTED]
-- [[QuotaExceededResponse]] - `contains` [EXTRACTED]
 - [[QuotaFeature]] - `contains` [EXTRACTED]
 - [[QuoteSlide]] - `re_exports` [EXTRACTED]
 - [[RecapSlide]] - `re_exports` [EXTRACTED]
@@ -203,7 +192,6 @@ tags:
 - [[TenantAssessmentStatus]] - `contains` [EXTRACTED]
 - [[TenantBillingUsageVsLimits]] - `contains` [EXTRACTED]
 - [[TenantMemberRole]] - `contains` [EXTRACTED]
-- [[TenantMembership]] - `contains` [EXTRACTED]
 - [[TenantMessageReply]] - `contains` [EXTRACTED]
 - [[TenantMessageThread]] - `contains` [EXTRACTED]
 - [[TenantProgressSummary]] - `contains` [EXTRACTED]
@@ -226,7 +214,6 @@ tags:
 - [[User]] - `contains` [EXTRACTED]
 - [[UserRole]] - `contains` [EXTRACTED]
 - [[UserSubscription]] - `contains` [EXTRACTED]
-- [[UserUsageSummary]] - `contains` [EXTRACTED]
 - [[VideoSegment]] - `contains` [EXTRACTED]
 - [[VideoTutorialViewer.tsx]] - `imports_from` [EXTRACTED]
 - [[VisualBlock]] - `re_exports` [EXTRACTED]
@@ -330,7 +317,7 @@ tags:
 - [[section.service.ts]] - `imports_from` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `imports_from` [EXTRACTED]
 - [[serializeDesmosAsVisual()]] - `re_exports` [EXTRACTED]
-- [[serializeGraphBlock()_1]] - `re_exports` [EXTRACTED]
+- [[serializeGraphBlock()]] - `re_exports` [EXTRACTED]
 - [[serializeVisualBlock()]] - `re_exports` [EXTRACTED]
 - [[session-sync.tsx]] - `imports_from` [EXTRACTED]
 - [[shared.ts]] - `imports_from` [EXTRACTED]
@@ -366,7 +353,6 @@ tags:
 - [[useChatStore.ts]] - `imports_from` [EXTRACTED]
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useContentActions.ts]] - `imports_from` [EXTRACTED]
-- [[useContentStore.ts]] - `imports_from` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports_from` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports_from` [EXTRACTED]
@@ -386,4 +372,4 @@ tags:
 - [[user.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/sse.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Chat Controller (SSE)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Chat_Controller_SSE
 ---
 
 # sse.ts
@@ -18,4 +18,4 @@ tags:
 - [[sseHeaders()]] - `contains` [EXTRACTED]
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Chat_Controller_SSE

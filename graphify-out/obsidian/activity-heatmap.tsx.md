@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/activity-heatmap.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Billing & Profile UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # activity-heatmap.tsx
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_17]] - `imports_from` [EXTRACTED]
 - [[page.tsx_27]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

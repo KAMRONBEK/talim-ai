@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useBilling.ts"
 type: "code"
-community: "Billing & Access Guards"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Tenant_Billing_Page
 ---
 
 # useBilling.ts
@@ -24,4 +24,4 @@ tags:
 - [[useRequestUpgrade()]] - `contains` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

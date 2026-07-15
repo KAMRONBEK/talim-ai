@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/content-status-gate.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Content Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Content_Status_UI
 ---
 
 # content-status-gate.tsx
@@ -27,4 +27,4 @@ tags:
 - [[useContent.ts]] - `imports_from` [EXTRACTED]
 - [[useRetryContent()_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

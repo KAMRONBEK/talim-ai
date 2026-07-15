@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/auth-routing.ts"
 type: "code"
-community: "Content Detail Page"
+community: "Become Tutor & Auth Shell"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # getHomePathForRole()
@@ -18,4 +18,4 @@ tags:
 - [[layout.tsx_4]] - `imports` [EXTRACTED]
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Subscription & Billing Service"
-location: "L155"
+community: "Billing & Quota Errors"
+location: "L161"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Billing__Quota_Errors
 ---
 
 # getTenantUsageVsLimits()
@@ -28,4 +28,4 @@ tags:
 - [[tenants.controller.ts]] - `imports` [EXTRACTED]
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

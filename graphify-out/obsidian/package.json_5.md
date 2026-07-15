@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/package.json"
 type: "code"
-community: "Config Package Meta"
+community: "Package Definition"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Config_Package_Meta
+  - community/Package_Definition
 ---
 
 # package.json
@@ -16,4 +16,4 @@ tags:
 - [[private_5]] - `contains` [EXTRACTED]
 - [[version_4]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Config_Package_Meta
+#graphify/code #graphify/EXTRACTED #community/Package_Definition

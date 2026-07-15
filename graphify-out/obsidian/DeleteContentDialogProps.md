@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/delete-content-dialog.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # DeleteContentDialogProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[delete-content-dialog.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

@@ -2,7 +2,7 @@
 source_file: "apps/api/src/services/answerJudge.service.ts"
 type: "code"
 community: "Assessment Service"
-location: "L256"
+location: "L259"
 tags:
   - graphify/code
   - graphify/EXTRACTED

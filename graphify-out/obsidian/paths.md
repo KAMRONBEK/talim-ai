@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/tsconfig.json"
 type: "code"
-community: "Admin tsconfig"
+community: "TypeScript Config (Web)"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_tsconfig
+  - community/TypeScript_Config_Web
 ---
 
 # paths
@@ -15,4 +15,4 @@ tags:
 - [[unnamed]] - `contains` [EXTRACTED]
 - [[compilerOptions]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_tsconfig
+#graphify/code #graphify/EXTRACTED #community/TypeScript_Config_Web

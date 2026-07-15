@@ -1,18 +1,17 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Marketing Landing Components"
+community: "Become Tutor & Auth Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # navigation.ts
 
 ## Connections
-- [[ContentList.tsx]] - `imports_from` [EXTRACTED]
 - [[auth-guard.tsx_1]] - `imports_from` [EXTRACTED]
 - [[auth-shell.tsx]] - `imports_from` [EXTRACTED]
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
@@ -65,4 +64,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[{ Link, redirect, usePathname, useRouter, getPathname }]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

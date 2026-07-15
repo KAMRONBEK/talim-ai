@@ -2,7 +2,7 @@
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
 community: "Upgrade Dialog & Pricing"
-location: "L199"
+location: "L202"
 tags:
   - graphify/code
   - graphify/EXTRACTED

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-mermaid.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
+community: "Tutor Tools (Chart/Geogebra/Sandbox)"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Tutor_Tools_Chart/Geogebra/Sandbox
 ---
 
 # validateMermaidPayload()
@@ -16,4 +16,4 @@ tags:
 - [[tutor-mermaid.ts]] - `contains` [EXTRACTED]
 - [[tutor-tools.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Tutor_Tools_Chart/Geogebra/Sandbox

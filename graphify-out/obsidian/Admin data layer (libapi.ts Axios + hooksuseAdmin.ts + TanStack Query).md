@@ -1,11 +1,11 @@
 ---
 source_file: "apps/admin/CLAUDE.md"
 type: "concept"
-community: "Admin & API Architecture Docs"
+community: "Admin Panel Architecture"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Admin__API_Architecture_Docs
+  - community/Admin_Panel_Architecture
 ---
 
 # Admin data layer (lib/api.ts Axios + hooks/useAdmin.ts + TanStack Query)
@@ -15,4 +15,4 @@ tags:
 - [[appsadmin — platform-admin panel (Talim Admin, port 3001)]] - `references` [EXTRACTED]
 - [[appsapi — Express+Prisma+Bull backend (port 4000)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Admin__API_Architecture_Docs
+#graphify/concept #graphify/EXTRACTED #community/Admin_Panel_Architecture

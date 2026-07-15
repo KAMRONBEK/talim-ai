@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "PDF Text Selection"
+community: "PDF Text Extraction"
 location: "L61"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Selection
+  - community/PDF_Text_Extraction
 ---
 
 # ensureEndOfContent()
@@ -16,4 +16,4 @@ tags:
 - [[renderManualTextLayer()]] - `calls` [EXTRACTED]
 - [[renderTextLayer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction

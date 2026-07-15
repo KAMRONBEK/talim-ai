@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFlashcards.ts"
 type: "code"
-community: "Flashcards UI"
+community: "Flashcards Page"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_UI
+  - community/Flashcards_Page
 ---
 
 # useFlashcards()
@@ -20,4 +20,4 @@ tags:
 - [[useFlashcards.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_UI
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

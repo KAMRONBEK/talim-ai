@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learning-topbar.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Login & Assign Content"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Login__Assign_Content
 ---
 
 # LearningTopbarProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learning-topbar.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

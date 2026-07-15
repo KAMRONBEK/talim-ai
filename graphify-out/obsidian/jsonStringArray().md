@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Bank & Question Management"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Bank__Question_Management
 ---
 
 # jsonStringArray()
@@ -17,6 +17,7 @@ tags:
 - [[buildDragDropQuestion()]] - `calls` [EXTRACTED]
 - [[buildDropdownClozeQuestion()]] - `calls` [EXTRACTED]
 - [[buildMatchingQuestion()]] - `calls` [EXTRACTED]
+- [[clozeOptions()_1]] - `calls` [EXTRACTED]
 - [[formatQuestion()]] - `calls` [EXTRACTED]
 - [[formatQuiz()]] - `calls` [EXTRACTED]
 - [[gradeQuestion()]] - `calls` [EXTRACTED]
@@ -35,4 +36,4 @@ tags:
 - [[resolveAcceptedAnswers()]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management

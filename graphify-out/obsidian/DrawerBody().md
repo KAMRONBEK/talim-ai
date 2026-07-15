@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/subscription-edit-drawer.tsx"
 type: "code"
-community: "Admin Subscription UI"
+community: "Subscription Edit Drawer"
 location: "L48"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Subscription_Edit_Drawer
 ---
 
 # DrawerBody()
@@ -18,4 +18,4 @@ tags:
 - [[useUpdateTenant()]] - `calls` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Subscription_Edit_Drawer

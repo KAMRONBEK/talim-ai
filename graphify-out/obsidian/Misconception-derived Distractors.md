@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Design Docs"
+community: "Question Engine Rework Design"
 location: "§2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Design_Docs
+  - community/Question_Engine_Rework_Design
 ---
 
 # Misconception-Derived Distractors
@@ -15,4 +15,4 @@ tags:
 - [[Question Engine Rework Design]] - `references` [EXTRACTED]
 - [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Rework_Design

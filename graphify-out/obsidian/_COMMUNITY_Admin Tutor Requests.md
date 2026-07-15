@@ -27,11 +27,13 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Admin Panel UI]]
-- 4 edges to [[_COMMUNITY_Admin Data Hooks]]
+- 4 edges to [[_COMMUNITY_Admin Content Page]]
+- 3 edges to [[_COMMUNITY_Become Tutor & Auth Shell]]
+- 1 edge to [[_COMMUNITY_Billing & Profile UI]]
+- 1 edge to [[_COMMUNITY_Login & Assign Content]]
 
 ## Top bridge nodes
-- [[page.tsx_7]] - degree 13, connects to 2 communities
+- [[page.tsx_7]] - degree 13, connects to 4 communities
 - [[useAdminTutorRequests()]] - degree 3, connects to 1 community
 - [[useApproveTutorRequest()]] - degree 3, connects to 1 community
 - [[useRejectTutorRequest()]] - degree 3, connects to 1 community

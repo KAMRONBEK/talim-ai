@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewerLazy.tsx"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Flashcards_Page
 ---
 
 # PdfViewerLazy.tsx
@@ -16,4 +16,4 @@ tags:
 - [[PdfViewerLoading()]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

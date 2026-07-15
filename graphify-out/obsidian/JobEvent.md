@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/jobEvents.ts"
 type: "code"
-community: "In-Process Job Event Bus"
+community: "Job Event Bus"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/In-Process_Job_Event_Bus
+  - community/Job_Event_Bus
 ---
 
 # JobEvent
@@ -20,4 +20,4 @@ tags:
 - [[jobStream.ts]] - `imports` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/In-Process_Job_Event_Bus
+#graphify/code #graphify/EXTRACTED #community/Job_Event_Bus

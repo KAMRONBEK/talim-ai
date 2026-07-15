@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/podcast.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L183"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # streamEpisodeAudio()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[podcast.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

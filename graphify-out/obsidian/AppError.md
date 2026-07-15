@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/error.middleware.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Billing & Quota Errors"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Billing__Quota_Errors
 ---
 
 # AppError
@@ -63,4 +63,4 @@ tags:
 - [[users.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

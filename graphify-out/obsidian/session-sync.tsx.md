@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/session-sync.tsx"
 type: "code"
-community: "Admin Auth Store"
+community: "Global Providers & Upgrade Modal"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Auth_Store
+  - community/Global_Providers__Upgrade_Modal
 ---
 
 # session-sync.tsx
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[providers.tsx_1]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Store
+#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal

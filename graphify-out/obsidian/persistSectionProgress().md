@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage"
-location: "L256"
+community: "Learning Coverage & Badges"
+location: "L250"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage
+  - community/Learning_Coverage__Badges
 ---
 
 # persistSectionProgress()
@@ -20,4 +20,4 @@ tags:
 - [[refineSectionProgressWithAi()]] - `calls` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

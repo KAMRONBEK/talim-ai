@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/generated/page.tsx"
 type: "code"
-community: "Admin Generated-Media Page"
+community: "Admin Generated Media Review"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Generated-Media_Page
+  - community/Admin_Generated_Media_Review
 ---
 
 # statusPillClass()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Generated-Media_Page
+#graphify/code #graphify/EXTRACTED #community/Admin_Generated_Media_Review

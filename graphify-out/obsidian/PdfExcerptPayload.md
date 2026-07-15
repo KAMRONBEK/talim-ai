@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/PdfViewer.tsx"
 type: "code"
-community: "PDF Text Selection"
+community: "PDF Text Extraction"
 location: "L30"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Selection
+  - community/PDF_Text_Extraction
 ---
 
 # PdfExcerptPayload
@@ -15,4 +15,4 @@ tags:
 - [[PdfViewer.tsx]] - `contains` [EXTRACTED]
 - [[content-stage.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/auth/auth-shell.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Become Tutor & Auth Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # auth-shell.tsx
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_13]] - `imports_from` [EXTRACTED]
 - [[page.tsx_14]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

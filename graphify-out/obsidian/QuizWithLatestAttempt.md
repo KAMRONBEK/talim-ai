@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Quiz Player UI"
-location: "L1254"
+community: "Quiz Page & Hooks"
+location: "L1182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Page__Hooks
 ---
 
 # QuizWithLatestAttempt
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

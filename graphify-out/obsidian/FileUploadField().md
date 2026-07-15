@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Auth & Assignment UI"
-location: "L14"
+community: "Login & Assign Content"
+location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # FileUploadField()
@@ -18,4 +18,4 @@ tags:
 - [[cn()]] - `calls` [EXTRACTED]
 - [[useFileUpload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

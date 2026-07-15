@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "API Endpoints & Chat UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/API_Endpoints__Chat_UI
 ---
 
 # page.tsx
@@ -58,4 +58,4 @@ tags:
 - [[useSections()]] - `imports` [EXTRACTED]
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

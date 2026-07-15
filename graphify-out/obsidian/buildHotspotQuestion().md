@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-builders.ts"
 type: "code"
-community: "Question Bank Service"
+community: "Bank & Question Management"
 location: "L115"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Bank__Question_Management
 ---
 
 # buildHotspotQuestion()
@@ -17,4 +17,4 @@ tags:
 - [[parseHotspotRegions()]] - `calls` [EXTRACTED]
 - [[question-builders.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management

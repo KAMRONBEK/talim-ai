@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Dashboard & Hooks"
-location: "L407"
+community: "Billing & Profile UI"
+location: "L366"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # TenantStudent
@@ -16,4 +16,4 @@ tags:
 - [[onboarding-checklist.tsx]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

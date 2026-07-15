@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Env Config & Background Jobs"
 location: "L108"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # Overrides
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

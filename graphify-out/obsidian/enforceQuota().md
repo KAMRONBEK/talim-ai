@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/quota.middleware.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # enforceQuota()
@@ -18,4 +18,4 @@ tags:
 - [[quota.middleware.ts]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

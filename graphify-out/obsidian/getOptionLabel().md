@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Quiz Answer Helpers"
+community: "Quiz Answer Utilities"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Answer_Helpers
+  - community/Quiz_Answer_Utilities
 ---
 
 # getOptionLabel()
@@ -15,4 +15,4 @@ tags:
 - [[quiz-answer.ts]] - `contains` [EXTRACTED]
 - [[resolveCorrectAnswer()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Helpers
+#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Utilities

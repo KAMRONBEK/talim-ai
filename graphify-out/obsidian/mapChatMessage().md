@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Chat Controller (SSE)"
 location: "L66"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Chat_Controller_SSE
 ---
 
 # mapChatMessage()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[chat.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Chat_Controller_SSE

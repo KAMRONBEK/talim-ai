@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useProgress.ts"
 type: "code"
-community: "Content Detail Page"
+community: "Flashcards Page"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Flashcards_Page
 ---
 
 # useMarkSectionViewed()
@@ -17,4 +17,4 @@ tags:
 - [[useContentBase()]] - `calls` [EXTRACTED]
 - [[useProgress.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

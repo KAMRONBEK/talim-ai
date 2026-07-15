@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/scripts/smoke-quota.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
-location: "L71"
+community: "Billing & Quota Errors"
+location: "L68"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Billing__Quota_Errors
 ---
 
 # main()
@@ -19,4 +19,4 @@ tags:
 - [[parseArgs()_3]] - `calls` [EXTRACTED]
 - [[smoke-quota.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

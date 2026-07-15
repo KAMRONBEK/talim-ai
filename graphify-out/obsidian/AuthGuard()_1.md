@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/auth-guard.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Learner Dashboard"
 location: "L8"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Learner_Dashboard
 ---
 
 # AuthGuard()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[auth-guard.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

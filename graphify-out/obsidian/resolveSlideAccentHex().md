@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/deck-theme.ts"
 type: "code"
-community: "Slide Deck Player UI"
+community: "Slide UI Components"
 location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Player_UI
+  - community/Slide_UI_Components
 ---
 
 # resolveSlideAccentHex()
@@ -17,4 +17,4 @@ tags:
 - [[deck-theme.ts]] - `contains` [EXTRACTED]
 - [[paletteFor()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components

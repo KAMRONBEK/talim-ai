@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/mediaReconciler.service.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Env Config & Background Jobs"
 location: "L62"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # reconcileStuckMediaClaims()
@@ -17,4 +17,4 @@ tags:
 - [[mediaReconciler.service.ts]] - `contains` [EXTRACTED]
 - [[reconcileRowStatus()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

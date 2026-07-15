@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContentActions.ts"
 type: "code"
-community: "Content Detail Page"
+community: "Flashcards Page"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Flashcards_Page
 ---
 
 # useContentActions()
@@ -21,4 +21,4 @@ tags:
 - [[useRetryContent()_1]] - `calls` [EXTRACTED]
 - [[useSavedSummary()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

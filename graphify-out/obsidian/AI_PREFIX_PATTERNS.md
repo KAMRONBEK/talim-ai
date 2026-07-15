@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/summary-prompt.ts"
 type: "code"
-community: "AI Prompt Builders"
-location: "L23"
+community: "Locale Prompts (Tutor/Podcast/Summary)"
+location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Prompt_Builders
+  - community/Locale_Prompts_Tutor/Podcast/Summary
 ---
 
 # AI_PREFIX_PATTERNS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[summary-prompt.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Prompt_Builders
+#graphify/code #graphify/EXTRACTED #community/Locale_Prompts_Tutor/Podcast/Summary

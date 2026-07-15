@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Flashcards UI"
+community: "Flashcards Page"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_UI
+  - community/Flashcards_Page
 ---
 
 # AppLocale
@@ -64,4 +64,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useVideo.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_UI
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

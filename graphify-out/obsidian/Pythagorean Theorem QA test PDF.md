@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/qa-pythagoras.pdf"
 type: "paper"
-community: "QA Pythagoras Fixture"
+community: "Pythagoras QA Fixtures"
 tags:
   - graphify/paper
   - graphify/INFERRED
-  - community/QA_Pythagoras_Fixture
+  - community/Pythagoras_QA_Fixtures
 ---
 
 # Pythagorean Theorem QA test PDF
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Pythagoras QA fixture text]] - `semantically_similar_to` [INFERRED]
 
-#graphify/paper #graphify/INFERRED #community/QA_Pythagoras_Fixture
+#graphify/paper #graphify/INFERRED #community/Pythagoras_QA_Fixtures

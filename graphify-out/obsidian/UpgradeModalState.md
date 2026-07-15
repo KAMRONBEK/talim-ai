@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useUpgradeModal.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "Global Providers & Upgrade Modal"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Global_Providers__Upgrade_Modal
 ---
 
 # UpgradeModalState
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useUpgradeModal.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal

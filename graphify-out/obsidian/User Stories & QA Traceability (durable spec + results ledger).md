@@ -1,17 +1,17 @@
 ---
 source_file: "docs/qa/user-stories.md"
 type: "document"
-community: "Product Plans & Epics"
+community: "QA Traceability Ledger"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Traceability_Ledger
 ---
 
 # User Stories & QA Traceability (durable spec + results ledger)
 
 ## Connections
-- [[Findings Ledger (F-numbers)]] - `references` [EXTRACTED]
+- [[Findings ledger]] - `references` [EXTRACTED]
 - [[Observations Ledger (O-numbers)]] - `references` [EXTRACTED]
 - [[Overnight Visual QA Report (session journal, Runs 1–18)]] - `references` [EXTRACTED]
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
@@ -24,4 +24,4 @@ tags:
 - [[US-OWNER-12 Delete a material]] - `references` [EXTRACTED]
 - [[US-XCUT-01 i18n — Uzbek-first localization]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/QA_Traceability_Ledger

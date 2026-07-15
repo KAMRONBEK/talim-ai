@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Flashcards UI"
-location: "L1319"
+community: "Admin Content & Subscriptions"
+location: "L1247"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Flashcards_UI
+  - community/Admin_Content__Subscriptions
 ---
 
 # FlashcardReviewState
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useFlashcards.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Flashcards_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

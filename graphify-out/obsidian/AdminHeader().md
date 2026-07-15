@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/components/admin-header.tsx"
 type: "code"
-community: "Admin Layout Shell"
+community: "Admin Layout Components"
 location: "L25"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Layout_Shell
+  - community/Admin_Layout_Components
 ---
 
 # AdminHeader()
@@ -15,4 +15,4 @@ tags:
 - [[admin-header.tsx]] - `contains` [EXTRACTED]
 - [[admin-shell.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Shell
+#graphify/code #graphify/EXTRACTED #community/Admin_Layout_Components

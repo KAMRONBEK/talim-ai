@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Player UI"
+community: "Quiz Page & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Page__Hooks
 ---
 
 # useQuiz.ts
@@ -40,4 +40,4 @@ tags:
 - [[useSavedSummary()]] - `contains` [EXTRACTED]
 - [[useSubmitQuiz()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

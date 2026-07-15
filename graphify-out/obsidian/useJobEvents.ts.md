@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useJobEvents.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Manim Video & Job Stream"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Manim_Video__Job_Stream
 ---
 
 # useJobEvents.ts
@@ -22,4 +22,4 @@ tags:
 - [[useJobStreamStore]] - `imports` [EXTRACTED]
 - [[useJobStreamStore.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Manim_Video__Job_Stream

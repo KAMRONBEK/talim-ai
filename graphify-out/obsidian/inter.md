@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/fonts/inter.ts"
 type: "code"
-community: "Fonts & Root Layout"
+community: "Root Layout & Fonts"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/Root_Layout__Fonts
 ---
 
 # inter
@@ -16,4 +16,4 @@ tags:
 - [[layout.tsx_1]] - `imports` [EXTRACTED]
 - [[layout.tsx_6]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/Root_Layout__Fonts

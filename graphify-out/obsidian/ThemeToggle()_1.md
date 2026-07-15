@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/theme-toggle.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Billing & Profile UI"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Billing__Profile_UI
 ---
 
 # ThemeToggle()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[theme-toggle.tsx_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

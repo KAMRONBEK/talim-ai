@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/routes/learner.routes.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # learnerRoutes
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_1]] - `imports` [EXTRACTED]
 - [[learner.routes.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

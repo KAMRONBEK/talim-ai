@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "Learner Dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Learner_Dashboard
 ---
 
 # layout.tsx
@@ -49,4 +49,4 @@ tags:
 - [[useSidebarSheet()]] - `imports` [EXTRACTED]
 - [[useSidebarSheet.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

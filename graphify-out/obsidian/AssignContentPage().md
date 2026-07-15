@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/[id]/assign/page.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Login & Assign Content"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # AssignContentPage()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_22]] - `contains` [EXTRACTED]
 - [[useTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

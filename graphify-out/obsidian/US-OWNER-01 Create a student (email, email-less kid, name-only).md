@@ -1,13 +1,17 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Community 184"
+community: "Tenant Owner Stories"
+location: "L1081"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Community_184
+  - community/Tenant_Owner_Stories
 ---
 
 # US-OWNER-01: Create a student (email, email-less kid, name-only)
 
-#graphify/document #graphify/EXTRACTED #community/Community_184
+## Connections
+- [[Area Tenant owner students, materials, assignment, settings]] - `contains` [EXTRACTED]
+
+#graphify/document #graphify/EXTRACTED #community/Tenant_Owner_Stories

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/page.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "Flashcards Page"
 location: "L40"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Content_Detail_Page
+  - community/Flashcards_Page
 ---
 
 # ContentWorkspaceInner()
@@ -25,4 +25,4 @@ tags:
 - [[useSection()]] - `calls` [INFERRED]
 - [[useSections()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Content_Detail_Page
+#graphify/code #graphify/INFERRED #community/Flashcards_Page

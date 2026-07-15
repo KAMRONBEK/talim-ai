@@ -1,21 +1,21 @@
 ---
 source_file: ".claude/skills/graphify/references/update.md"
 type: "concept"
-community: "Graphify Skill Docs"
+community: "Graphify URL Ingestion"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Graphify_URL_Ingestion
 ---
 
 # Incremental Update (--update)
 
 ## Connections
+- [[graphify_1]] - `references` [EXTRACTED]
 - [[Cluster-Only Rerun (--cluster-only)]] - `conceptually_related_to` [EXTRACTED]
 - [[Code-Only Change (skip semantic extraction)]] - `references` [EXTRACTED]
 - [[URL Ingestion (auto-detected types)]] - `references` [EXTRACTED]
 - [[build_merge (replace-on-re-extract)]] - `references` [EXTRACTED]
-- [[graphify skill]] - `references` [EXTRACTED]
 - [[prune_sources (deleted-file pruning)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/concept #graphify/EXTRACTED #community/Graphify_URL_Ingestion

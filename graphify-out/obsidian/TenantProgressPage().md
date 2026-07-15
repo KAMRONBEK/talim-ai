@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Tenant Messages & Progress"
 location: "L23"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Dashboard__Hooks
+  - community/Tenant_Messages__Progress
 ---
 
 # TenantProgressPage()
@@ -17,4 +17,4 @@ tags:
 - [[useTenantProgress()]] - `calls` [INFERRED]
 - [[useTenantProgressTopics()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/INFERRED #community/Tenant_Messages__Progress

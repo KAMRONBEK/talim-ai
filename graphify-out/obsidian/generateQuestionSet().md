@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-gen.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Quiz Generation Job"
 location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Quiz_Generation_Job
 ---
 
 # generateQuestionSet()
@@ -21,4 +21,4 @@ tags:
 - [[postprocessGeneratedQuestions()]] - `calls` [EXTRACTED]
 - [[question-gen.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

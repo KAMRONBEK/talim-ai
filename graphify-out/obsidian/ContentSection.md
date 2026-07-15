@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Sheet & Layout Components"
-location: "L1049"
+community: "Learner Dashboard"
+location: "L990"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/Learner_Dashboard
 ---
 
 # ContentSection
@@ -17,4 +17,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useSections.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

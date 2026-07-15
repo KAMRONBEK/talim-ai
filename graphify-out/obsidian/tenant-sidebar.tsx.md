@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/tenant-sidebar.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # tenant-sidebar.tsx
@@ -32,4 +32,4 @@ tags:
 - [[useTenantStudents()]] - `imports` [EXTRACTED]
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useFileUpload.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # UseFileUploadOptions
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[useFileUpload.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

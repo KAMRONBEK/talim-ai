@@ -2,7 +2,7 @@
 source_file: "packages/config/eslint/package.json"
 type: "code"
 community: "ESLint Config Package"
-location: "L5"
+location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED

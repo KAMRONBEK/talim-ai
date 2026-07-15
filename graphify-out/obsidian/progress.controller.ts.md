@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/progress.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # progress.controller.ts
@@ -38,4 +38,4 @@ tags:
 - [[resolveLocale()]] - `imports` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

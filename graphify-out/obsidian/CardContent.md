@@ -1,18 +1,17 @@
 ---
 source_file: "packages/ui/components/card.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Become Tutor & Auth Shell"
 location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # CardContent
 
 ## Connections
-- [[ContentList.tsx]] - `imports` [EXTRACTED]
 - [[QuizCard.tsx]] - `imports` [EXTRACTED]
 - [[UploadCard.tsx]] - `imports` [EXTRACTED]
 - [[become-tutor-card.tsx]] - `imports` [EXTRACTED]
@@ -30,4 +29,4 @@ tags:
 - [[page.tsx_14]] - `imports` [EXTRACTED]
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

@@ -1,17 +1,17 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Config"
-location: "L33"
+community: "Shared UI Dependencies"
+location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Shared_UI_Dependencies
 ---
 
 # next
 
 ## Connections
-- [[devDependencies_6]] - `contains` [EXTRACTED]
+- [[devDependencies_7]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies

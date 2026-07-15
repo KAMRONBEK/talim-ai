@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/login/page.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Login & Assign Content"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Login__Assign_Content
 ---
 
 # page.tsx
@@ -24,4 +24,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[logo.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

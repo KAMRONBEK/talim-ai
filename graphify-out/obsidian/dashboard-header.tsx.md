@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/dashboard-header.tsx"
 type: "code"
-community: "Billing & Access Guards"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Tenant_Billing_Page
 ---
 
 # dashboard-header.tsx
@@ -30,4 +30,4 @@ tags:
 - [[useBilling()]] - `imports` [EXTRACTED]
 - [[useBilling.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Slide Deck Player UI"
+community: "Deck Player & Section Reader"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Player_UI
+  - community/Deck_Player__Section_Reader
 ---
 
 # FullscreenDoc
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[DeckPlayer.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader

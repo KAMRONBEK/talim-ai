@@ -1,19 +1,18 @@
 ---
 type: community
-cohesion: 0.13
-members: 15
+cohesion: 0.15
+members: 13
 ---
 
 # API Dev Dependencies
 
-**Cohesion:** 0.13 - loosely connected
-**Members:** 15 nodes
+**Cohesion:** 0.15 - loosely connected
+**Members:** 13 nodes
 
 ## Members
 - [[@talimeslint-config_1]] - code - apps/api/package.json
 - [[@talimtsconfig_1]] - code - apps/api/package.json
 - [[@typesbcrypt]] - code - apps/api/package.json
-- [[@typesbull]] - code - apps/api/package.json
 - [[@typescors]] - code - apps/api/package.json
 - [[@typesexpress]] - code - apps/api/package.json
 - [[@typesjsonwebtoken]] - code - apps/api/package.json
@@ -22,7 +21,6 @@ members: 15
 - [[@typespdf-parse]] - code - apps/api/package.json
 - [[devDependencies_1]] - code - apps/api/package.json
 - [[eslint_1]] - code - apps/api/package.json
-- [[prisma]] - code - apps/api/package.json
 - [[tsx]] - code - apps/api/package.json
 - [[typescript_1]] - code - apps/api/package.json
 
@@ -34,7 +32,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 1 edge to [[_COMMUNITY_API Package Meta]]
+- 1 edge to [[_COMMUNITY_Prisma Package Config]]
 
 ## Top bridge nodes
-- [[devDependencies_1]] - degree 15, connects to 1 community
+- [[devDependencies_1]] - degree 13, connects to 1 community

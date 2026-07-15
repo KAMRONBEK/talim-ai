@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/practice/practice-generator.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Learner Dashboard"
 location: "L39"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Learner_Dashboard
 ---
 
 # PracticeGenerator()
@@ -18,4 +18,4 @@ tags:
 - [[useCreateQuiz()]] - `calls` [EXTRACTED]
 - [[useLimitErrorHandler()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/locale.ts"
 type: "code"
-community: "Learner Controller"
+community: "Flashcards & Podcast Controllers"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Controller
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # parseAppLocale()
@@ -35,4 +35,4 @@ tags:
 - [[shared.ts]] - `imports` [EXTRACTED]
 - [[tenant.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Controller
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

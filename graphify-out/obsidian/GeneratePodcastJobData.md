@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/queue.service.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "Env Config & Background Jobs"
 location: "L47"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Env_Config__Background_Jobs
 ---
 
 # GeneratePodcastJobData
@@ -15,4 +15,4 @@ tags:
 - [[generatePodcast.job.ts]] - `imports` [EXTRACTED]
 - [[queue.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

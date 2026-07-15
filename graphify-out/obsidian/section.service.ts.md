@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "Section Controller"
+community: "Embedding & Chunk Inspection"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Controller
+  - community/Embedding__Chunk_Inspection
 ---
 
 # section.service.ts
@@ -36,4 +36,4 @@ tags:
 - [[summary.controller.ts]] - `imports_from` [EXTRACTED]
 - [[translateSectionTitles()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Controller
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

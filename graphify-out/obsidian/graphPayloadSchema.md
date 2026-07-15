@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-graph.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
-location: "L40"
+community: "Tutor Graph Tool"
+location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Tutor_Graph_Tool
 ---
 
 # graphPayloadSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tutor-graph.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Tutor_Graph_Tool

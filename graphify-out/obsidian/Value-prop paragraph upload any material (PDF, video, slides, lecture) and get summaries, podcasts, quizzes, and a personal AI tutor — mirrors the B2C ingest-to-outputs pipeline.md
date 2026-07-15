@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/ru-landing-mobile-hero.jpeg"
 type: "image"
-community: "QA Screenshots (RU Mobile)"
+community: "Russian Landing Page QA"
 tags:
   - graphify/image
   - graphify/INFERRED
-  - community/QA_Screenshots_RU_Mobile
+  - community/Russian_Landing_Page_QA
 ---
 
 # Value-prop paragraph: upload any material (PDF, video, slides, lecture) and get summaries, podcasts, quizzes, and a personal AI tutor — mirrors the B2C ingest-to-outputs pipeline
@@ -16,4 +16,4 @@ tags:
 - [[QA screenshot Russian landing page mobile hero (pre-fix, dark theme) — full above-the-fold hero of Talim AI at ~390px width]] - `references` [EXTRACTED]
 - [[Social-proof style row of three circular source-type icons with caption 'Работает с PDF, YouTube, слайдами и лекциями' (Works with PDF, YouTube, slides and lectures)]] - `semantically_similar_to` [INFERRED]
 
-#graphify/image #graphify/INFERRED #community/QA_Screenshots_RU_Mobile
+#graphify/image #graphify/INFERRED #community/Russian_Landing_Page_QA

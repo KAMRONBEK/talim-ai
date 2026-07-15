@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/impersonation.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Env Config & Background Jobs"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # impersonation.ts
@@ -18,4 +18,4 @@ tags:
 - [[signImpersonationToken()]] - `contains` [EXTRACTED]
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

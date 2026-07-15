@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/content/UploadCard.tsx"
 type: "code"
-community: "Auth & Assignment UI"
-location: "L91"
+community: "Become Tutor & Auth Shell"
+location: "L100"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # UploadCard()
@@ -15,4 +15,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[UploadCard.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/learner-navigation.tsx"
 type: "code"
-community: "Billing & Access Guards"
+community: "Tenant Billing Page"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Tenant_Billing_Page
 ---
 
 # learnerNavKeys
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner-navigation.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

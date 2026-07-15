@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/params.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Content Controller (YouTube/OCR)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # params.ts
@@ -32,4 +32,4 @@ tags:
 - [[users.controller.ts]] - `imports_from` [EXTRACTED]
 - [[video.controller.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

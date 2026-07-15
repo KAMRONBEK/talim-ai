@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/tenant.ts"
 type: "code"
-community: "Subscription & Billing Service"
-location: "L80"
+community: "Billing & Quota Errors"
+location: "L86"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Billing__Quota_Errors
 ---
 
 # assertTenantQuota()
@@ -30,4 +30,4 @@ tags:
 - [[tenant.ts]] - `contains` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

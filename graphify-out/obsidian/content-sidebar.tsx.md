@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-sidebar.tsx"
 type: "code"
-community: "Sheet & Layout Components"
+community: "Learner Dashboard"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/Learner_Dashboard
 ---
 
 # content-sidebar.tsx
@@ -33,4 +33,4 @@ tags:
 - [[layout.tsx_4]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

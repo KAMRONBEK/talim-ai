@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/students/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Billing & Profile UI"
 location: "L52"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # TenantStudentsPage()
@@ -25,4 +25,4 @@ tags:
 - [[useTenantContents()]] - `calls` [EXTRACTED]
 - [[useTenantStudents()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Auth Store"
-location: "L367"
+community: "Auth Store & Admin Users"
+location: "L335"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Auth_Store
+  - community/Auth_Store__Admin_Users
 ---
 
 # User
@@ -23,4 +23,4 @@ tags:
 - [[useAuthStore.ts_1]] - `imports` [EXTRACTED]
 - [[user-display.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Auth_Store
+#graphify/code #graphify/EXTRACTED #community/Auth_Store__Admin_Users

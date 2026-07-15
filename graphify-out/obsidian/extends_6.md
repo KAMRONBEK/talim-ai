@@ -1,17 +1,17 @@
 ---
-source_file: "packages/ui/tsconfig.json"
+source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "UI tsconfig"
-location: "L2"
+community: "Node TypeScript Config"
+location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_tsconfig
+  - community/Node_TypeScript_Config
 ---
 
 # extends
 
 ## Connections
-- [[tsconfig.json_4]] - `contains` [EXTRACTED]
+- [[node.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_tsconfig
+#graphify/code #graphify/EXTRACTED #community/Node_TypeScript_Config

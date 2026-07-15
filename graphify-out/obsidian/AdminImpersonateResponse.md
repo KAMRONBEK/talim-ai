@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Admin Dashboard & Charts"
-location: "L832"
+community: "Admin Content Page"
+location: "L783"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Admin_Content_Page
 ---
 
 # AdminImpersonateResponse
@@ -15,4 +15,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[useAdmin.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Page

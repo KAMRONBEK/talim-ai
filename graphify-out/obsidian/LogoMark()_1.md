@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/brand/logo.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # LogoMark()
@@ -23,4 +23,4 @@ tags:
 - [[navbar.tsx]] - `imports` [EXTRACTED]
 - [[tenant-sidebar.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content-shared.ts"
 type: "code"
-community: "Content Controller (B2C)"
+community: "Content Controller (YouTube/OCR)"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # formatTranscriptSegment()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[content-shared.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

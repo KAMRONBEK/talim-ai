@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Quiz Player UI"
+community: "Question Editor Component"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Question_Editor_Component
 ---
 
 # QuestionType
@@ -21,4 +21,4 @@ tags:
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Question_Editor_Component

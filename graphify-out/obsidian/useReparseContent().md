@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useReparseContent.ts"
 type: "code"
-community: "Content Detail Page"
+community: "API Endpoints & Chat UI"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/API_Endpoints__Chat_UI
 ---
 
 # useReparseContent()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_31]] - `imports` [EXTRACTED]
 - [[useReparseContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

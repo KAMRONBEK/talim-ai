@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/slides.service.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Flashcards & Podcast Controllers"
 location: "L38"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # deckScopeKey()
@@ -20,4 +20,4 @@ tags:
 - [[mediaReconciler.service.ts]] - `imports` [EXTRACTED]
 - [[slides.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

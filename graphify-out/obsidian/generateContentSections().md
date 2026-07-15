@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/section.service.ts"
 type: "code"
-community: "AI Tutor Chat Controller"
+community: "Embedding & Chunk Inspection"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Chat_Controller
+  - community/Embedding__Chunk_Inspection
 ---
 
 # generateContentSections()
@@ -18,4 +18,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[section.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Chat_Controller
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Quiz Answer Helpers"
+community: "Quiz Answer Utilities"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Answer_Helpers
+  - community/Quiz_Answer_Utilities
 ---
 
 # isSelectedAnswerCorrect()
@@ -19,4 +19,4 @@ tags:
 - [[resolveCorrectAnswer()]] - `calls` [EXTRACTED]
 - [[stripOptionLabel()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Helpers
+#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Utilities

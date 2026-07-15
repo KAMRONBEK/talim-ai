@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/YoutubeVideoPlayer.tsx"
 type: "code"
-community: "Transcript Panel UI"
+community: "Transcript Panel & Video Viewer"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel_UI
+  - community/Transcript_Panel__Video_Viewer
 ---
 
 # YoutubeVideoPlayer.tsx
@@ -19,4 +19,4 @@ tags:
 - [[YoutubeVideoPlayerProps]] - `contains` [EXTRACTED]
 - [[loadYoutubeApi()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel__Video_Viewer

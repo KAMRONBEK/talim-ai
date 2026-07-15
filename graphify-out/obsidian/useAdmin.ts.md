@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/hooks/useAdmin.ts"
 type: "code"
-community: "Admin Dashboard & Charts"
+community: "Admin Content Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Dashboard__Charts
+  - community/Admin_Content_Page
 ---
 
 # useAdmin.ts
@@ -85,4 +85,4 @@ tags:
 - [[useUpdateTenant()]] - `contains` [EXTRACTED]
 - [[useUpdateUserSubscription()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Dashboard__Charts
+#graphify/code #graphify/EXTRACTED #community/Admin_Content_Page

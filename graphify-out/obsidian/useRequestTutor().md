@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useTutorRequest.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Become Tutor & Auth Shell"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # useRequestTutor()
@@ -16,4 +16,4 @@ tags:
 - [[become-tutor-card.tsx]] - `imports` [EXTRACTED]
 - [[useTutorRequest.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

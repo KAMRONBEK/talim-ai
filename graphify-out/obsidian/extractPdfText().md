@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L388"
+community: "Embedding & Chunk Inspection"
+location: "L391"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Embedding__Chunk_Inspection
 ---
 
 # extractPdfText()
@@ -19,4 +19,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[rasterizeAndOcrPdf()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

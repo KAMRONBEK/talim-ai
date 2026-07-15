@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L12"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # DialogContext
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[dialog.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

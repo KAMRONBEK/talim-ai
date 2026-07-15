@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/quiz/QuizCard.tsx"
 type: "code"
-community: "Quiz Player UI"
+community: "Quiz Answer Input Components"
 location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Answer_Input_Components
 ---
 
 # QuizCardProps
@@ -16,4 +16,4 @@ tags:
 - [[QuizAnswerValue]] - `references` [EXTRACTED]
 - [[QuizCard.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Input_Components

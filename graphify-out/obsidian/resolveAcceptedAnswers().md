@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/grading.ts"
 type: "code"
-community: "Quiz Controller & Grading"
+community: "Quiz Controller"
 location: "L43"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Quiz_Controller
 ---
 
 # resolveAcceptedAnswers()
@@ -22,4 +22,4 @@ tags:
 - [[question-inputs.tsx]] - `imports` [EXTRACTED]
 - [[quiz.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller

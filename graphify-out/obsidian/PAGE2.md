@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/qa-fixtures.mjs"
 type: "code"
-community: "QA Fixture Generator"
+community: "QA Fixture PDF Generation"
 location: "L102"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/QA_Fixture_Generator
+  - community/QA_Fixture_PDF_Generation
 ---
 
 # PAGE2
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[qa-fixtures.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/QA_Fixture_Generator
+#graphify/code #graphify/EXTRACTED #community/QA_Fixture_PDF_Generation

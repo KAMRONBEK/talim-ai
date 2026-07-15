@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/locale-api.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "API Client & Locale Routing"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/API_Client__Locale_Routing
 ---
 
 # setApiLocale()
@@ -16,4 +16,4 @@ tags:
 - [[locale-api.ts]] - `contains` [EXTRACTED]
 - [[useLocaleContent.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/API_Client__Locale_Routing

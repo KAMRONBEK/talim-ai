@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/ai.service.ts"
 type: "code"
-community: "AI Provider Service"
-location: "L293"
+community: "AI Service (DeepSeek)"
+location: "L281"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Provider_Service
+  - community/AI_Service_DeepSeek
 ---
 
 # generateJsonCompletion()
@@ -24,4 +24,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[tutor-scope.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Provider_Service
+#graphify/code #graphify/EXTRACTED #community/AI_Service_DeepSeek

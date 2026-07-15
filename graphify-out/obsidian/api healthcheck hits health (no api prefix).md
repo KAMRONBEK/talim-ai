@@ -1,12 +1,12 @@
 ---
 source_file: "docker-compose.yml"
 type: "concept"
-community: "Architecture Invariants (CLAUDE.md)"
+community: "Platform Architecture Guide"
 location: "services.api.healthcheck"
 tags:
   - graphify/concept
   - graphify/INFERRED
-  - community/Architecture_Invariants_CLAUDEmd
+  - community/Platform_Architecture_Guide
 ---
 
 # api healthcheck hits /health (no /api prefix)
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[API routes mounted at root; health is GET health]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/INFERRED #community/Architecture_Invariants_CLAUDEmd
+#graphify/concept #graphify/INFERRED #community/Platform_Architecture_Guide

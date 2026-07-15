@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/tenant-messages-bell.tsx"
 type: "code"
-community: "Messaging Hooks"
+community: "Tenant Messages & Progress"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Messaging_Hooks
+  - community/Tenant_Messages__Progress
 ---
 
 # TenantMessagesBell()
@@ -19,4 +19,4 @@ tags:
 - [[useTenantMessages()]] - `calls` [EXTRACTED]
 - [[useTenantUnreadCount()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L423"
+community: "Content Controller (YouTube/OCR)"
+location: "L426"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # ocrImageDataUrl()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

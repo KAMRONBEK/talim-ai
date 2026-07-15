@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/providers.tsx"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Global Providers & Upgrade Modal"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Global_Providers__Upgrade_Modal
 ---
 
 # providers.tsx
@@ -23,4 +23,4 @@ tags:
 - [[useJobEvents()]] - `imports` [EXTRACTED]
 - [[useJobEvents.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal

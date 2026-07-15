@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/format-relative-time.ts"
 type: "code"
-community: "Messaging Hooks"
+community: "Relative Time Utilities"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Messaging_Hooks
+  - community/Relative_Time_Utilities
 ---
 
 # LOCALE_MAP
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[format-relative-time.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Messaging_Hooks
+#graphify/code #graphify/EXTRACTED #community/Relative_Time_Utilities

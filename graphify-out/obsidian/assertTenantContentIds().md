@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
-community: "Question Bank Service"
-location: "L260"
+community: "Bank & Question Management"
+location: "L254"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Question_Bank_Service
+  - community/Bank__Question_Management
 ---
 
 # assertTenantContentIds()
@@ -16,4 +16,4 @@ tags:
 - [[createBank()_1]] - `calls` [EXTRACTED]
 - [[shared.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Question_Bank_Service
+#graphify/code #graphify/EXTRACTED #community/Bank__Question_Management

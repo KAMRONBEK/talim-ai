@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/human-qa-playbook.md"
 type: "concept"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # Uzbek apostrophe quadruple (U+02BB attack)
@@ -15,4 +15,4 @@ tags:
 - [[Persona Aziza (9-year-old email-less student)]] - `conceptually_related_to` [INFERRED]
 - [[Uzbek-language decomposed quality rubric]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/concept #graphify/EXTRACTED #community/QA_Testing_Methodology

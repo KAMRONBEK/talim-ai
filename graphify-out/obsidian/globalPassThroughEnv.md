@@ -1,12 +1,12 @@
 ---
 source_file: "turbo.json"
 type: "code"
-community: "Root Dev Tooling"
+community: "Monorepo Root Config"
 location: "L3"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Root_Dev_Tooling
+  - community/Monorepo_Root_Config
 ---
 
 # globalPassThroughEnv
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[turbo.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Root_Dev_Tooling
+#graphify/code #graphify/EXTRACTED #community/Monorepo_Root_Config

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
-location: "L80"
+community: "Admin Content & Subscriptions"
+location: "L72"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/Admin_Content__Subscriptions
 ---
 
 # SubscriptionSource
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/Admin_Content__Subscriptions

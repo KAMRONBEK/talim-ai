@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/package.json"
 type: "code"
-community: "API Dev Tooling Config"
-location: "L51"
+community: "API Dev Dependencies"
+location: "L50"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Dev_Tooling_Config
+  - community/API_Dev_Dependencies
 ---
 
 # @types/node
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[devDependencies_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Dev_Tooling_Config
+#graphify/code #graphify/EXTRACTED #community/API_Dev_Dependencies

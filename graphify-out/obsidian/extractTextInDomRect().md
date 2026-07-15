@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/pdf-area-selection.ts"
 type: "code"
-community: "PDF Text Selection"
+community: "PDF Text Extraction"
 location: "L122"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Text_Selection
+  - community/PDF_Text_Extraction
 ---
 
 # extractTextInDomRect()
@@ -18,4 +18,4 @@ tags:
 - [[pdf-area-selection.ts]] - `contains` [EXTRACTED]
 - [[rectsIntersect()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Text_Selection
+#graphify/code #graphify/EXTRACTED #community/PDF_Text_Extraction

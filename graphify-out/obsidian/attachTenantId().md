@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/middleware/tenant.middleware.ts"
 type: "code"
-community: "API Routes & Middleware"
+community: "Assessment Controller"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Routes__Middleware
+  - community/Assessment_Controller
 ---
 
 # attachTenantId()
@@ -23,4 +23,4 @@ tags:
 - [[tenant.middleware.ts]] - `contains` [EXTRACTED]
 - [[tenant.routes.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Routes__Middleware
+#graphify/code #graphify/EXTRACTED #community/Assessment_Controller

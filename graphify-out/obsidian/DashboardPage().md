@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Dashboard Search"
+community: "Tenant Billing Page"
 location: "L22"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Dashboard_Search
+  - community/Tenant_Billing_Page
 ---
 
 # DashboardPage()
@@ -18,4 +18,4 @@ tags:
 - [[useContents()]] - `calls` [INFERRED]
 - [[useDashboardSearch()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Dashboard_Search
+#graphify/code #graphify/INFERRED #community/Tenant_Billing_Page

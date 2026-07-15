@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/tenants/[id]/page.tsx"
 type: "code"
-community: "Admin Subscription UI"
+community: "Become Tutor & Auth Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # page.tsx
@@ -31,4 +31,4 @@ tags:
 - [[useAdminTenant()]] - `imports` [EXTRACTED]
 - [[useUpdateTenant()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

@@ -2,7 +2,7 @@
 source_file: "packages/types/index.ts"
 type: "code"
 community: "Narrated Video Player"
-location: "L1292"
+location: "L1220"
 tags:
   - graphify/code
   - graphify/EXTRACTED

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/materials/page.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Billing & Profile UI"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Billing__Profile_UI
 ---
 
 # TenantMaterialsPage()
@@ -21,4 +21,4 @@ tags:
 - [[useTenantSearch()]] - `calls` [EXTRACTED]
 - [[useUploadTenantContent()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L587"
+community: "Flashcards & Podcast Controllers"
+location: "L604"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # getContentMastery()
@@ -16,4 +16,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

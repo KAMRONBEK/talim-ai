@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/content.controller.ts"
 type: "code"
-community: "Content Controller (B2C)"
-location: "L41"
+community: "Content Controller (YouTube/OCR)"
+location: "L40"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # reparseContent()
@@ -20,4 +20,4 @@ tags:
 - [[formatContent()]] - `calls` [EXTRACTED]
 - [[getParam()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

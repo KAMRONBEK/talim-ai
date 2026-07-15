@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/tutor-visual.ts"
 type: "code"
-community: "Slide Deck Player UI"
+community: "Slide UI Components"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Slide_Deck_Player_UI
+  - community/Slide_UI_Components
 ---
 
 # ChartPayload
@@ -19,4 +19,4 @@ tags:
 - [[tutor-chart.ts]] - `imports` [EXTRACTED]
 - [[tutor-visual.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Slide_Deck_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components

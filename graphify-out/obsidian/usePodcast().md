@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/usePodcast.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Flashcards Page"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Flashcards_Page
 ---
 
 # usePodcast()
@@ -22,4 +22,4 @@ tags:
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 - [[usePodcast.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Learner Dashboard"
+community: "Tenant Billing Page"
 location: "L19"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learner_Dashboard
+  - community/Tenant_Billing_Page
 ---
 
 # useContents()
@@ -24,4 +24,4 @@ tags:
 - [[useContent.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

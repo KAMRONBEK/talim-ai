@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pushPrimaryInterval.ts"
 type: "code"
-community: "Web Providers & Job-Event Stream"
+community: "Assessment Leaderboard"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_Providers__Job-Event_Stream
+  - community/Assessment_Leaderboard
 ---
 
 # inFlightRefetchInterval()
@@ -19,4 +19,4 @@ tags:
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 - [[useTranscript.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_Providers__Job-Event_Stream
+#graphify/code #graphify/EXTRACTED #community/Assessment_Leaderboard

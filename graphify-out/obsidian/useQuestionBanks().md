@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAssessments.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Tenant Assessments Page"
 location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Tenant_Assessments_Page
 ---
 
 # useQuestionBanks()
@@ -17,4 +17,4 @@ tags:
 - [[useAssessments.ts]] - `contains` [EXTRACTED]
 - [[useJobStreamStore]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Tenant_Assessments_Page

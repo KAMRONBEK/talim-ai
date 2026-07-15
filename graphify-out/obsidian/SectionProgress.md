@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Sheet & Layout Components"
-location: "L1266"
+community: "Learner Dashboard"
+location: "L1194"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/Learner_Dashboard
 ---
 
 # SectionProgress
@@ -16,4 +16,4 @@ tags:
 - [[content-sidebar.tsx]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

@@ -1,13 +1,13 @@
 ---
 type: community
-cohesion: 0.13
-members: 27
+cohesion: 0.12
+members: 28
 ---
 
 # Auth Controller
 
-**Cohesion:** 0.13 - loosely connected
-**Members:** 27 nodes
+**Cohesion:** 0.12 - loosely connected
+**Members:** 28 nodes
 
 ## Members
 - [[approveSchema]] - code - apps/api/src/services/tutorRequest.service.ts
@@ -32,6 +32,7 @@ members: 27
 - [[registerSchema]] - code - apps/api/src/controllers/auth.controller.ts
 - [[registerTenant()]] - code - apps/api/src/controllers/auth.controller.ts
 - [[rejectTutorRequest()_1]] - code - apps/api/src/services/tutorRequest.service.ts
+- [[resolveTenantIdForUser()]] - code - apps/api/src/services/contentAccess.service.ts
 - [[signToken()]] - code - apps/api/src/controllers/auth.controller.ts
 - [[tutorRequest.service.ts]] - code - apps/api/src/services/tutorRequest.service.ts
 - [[updateMe()]] - code - apps/api/src/controllers/auth.controller.ts
@@ -46,19 +47,20 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 5 edges to [[_COMMUNITY_Prisma Client & Seed]]
-- 5 edges to [[_COMMUNITY_Tenant Org & Roles Service]]
-- 4 edges to [[_COMMUNITY_API Routes & Middleware]]
-- 4 edges to [[_COMMUNITY_SSE Endpoint & Error Middleware]]
-- 2 edges to [[_COMMUNITY_API Bootstrap & Background Jobs]]
-- 2 edges to [[_COMMUNITY_Admin Content & Audit Controllers]]
-- 2 edges to [[_COMMUNITY_Learner Controller]]
-- 1 edge to [[_COMMUNITY_Shared Types & Zustand Stores]]
-- 1 edge to [[_COMMUNITY_Subscription & Billing Service]]
+- 8 edges to [[_COMMUNITY_Env Config & Background Jobs]]
+- 6 edges to [[_COMMUNITY_Billing & Quota Errors]]
+- 5 edges to [[_COMMUNITY_Audit & Content Management]]
+- 4 edges to [[_COMMUNITY_Assessment Controller]]
+- 4 edges to [[_COMMUNITY_Learning Coverage & Badges]]
+- 3 edges to [[_COMMUNITY_Admin Role Management]]
+- 2 edges to [[_COMMUNITY_Content Controller (YouTubeOCR)]]
+- 2 edges to [[_COMMUNITY_Tenant Service & Assignments]]
+- 2 edges to [[_COMMUNITY_Flashcards & Podcast Controllers]]
+- 1 edge to [[_COMMUNITY_Admin Content & Subscriptions]]
 
 ## Top bridge nodes
 - [[auth.controller.ts]] - degree 34, connects to 8 communities
+- [[resolveTenantIdForUser()]] - degree 15, connects to 6 communities
 - [[tutorRequest.service.ts]] - degree 16, connects to 4 communities
-- [[formatUser()]] - degree 8, connects to 2 communities
 - [[joinTenantByCode()]] - degree 5, connects to 2 communities
-- [[approveTutorRequest()_1]] - degree 3, connects to 1 community
+- [[formatUser()]] - degree 8, connects to 1 community

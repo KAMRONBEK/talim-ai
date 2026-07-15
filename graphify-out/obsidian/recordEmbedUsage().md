@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/embed.service.ts"
 type: "code"
-community: "Usage Pricing & Metering"
+community: "Embedding & Chunk Inspection"
 location: "L22"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Usage_Pricing__Metering
+  - community/Embedding__Chunk_Inspection
 ---
 
 # recordEmbedUsage()
@@ -17,4 +17,4 @@ tags:
 - [[generateEmbeddings()]] - `calls` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Usage_Pricing__Metering
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/terms/page.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # SECTIONS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_41]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

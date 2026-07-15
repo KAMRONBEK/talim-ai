@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/learning-coverage-prompt.ts"
 type: "code"
-community: "Learning Progress & Coverage"
+community: "Learning Coverage & Badges"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage
+  - community/Learning_Coverage__Badges
 ---
 
 # learning-coverage-prompt.ts
@@ -16,4 +16,4 @@ tags:
 - [[buildLearningCoverageUserPrompt()]] - `contains` [EXTRACTED]
 - [[learningProgress.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

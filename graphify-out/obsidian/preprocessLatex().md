@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/preprocess-latex.ts"
 type: "code"
-community: "Tutor Chat Visual Components"
+community: "Tutor Embed Components"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tutor_Chat_Visual_Components
+  - community/Tutor_Embed_Components
 ---
 
 # preprocessLatex()
@@ -16,4 +16,4 @@ tags:
 - [[TutorMessageContent.tsx]] - `imports` [EXTRACTED]
 - [[preprocess-latex.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tutor_Chat_Visual_Components
+#graphify/code #graphify/EXTRACTED #community/Tutor_Embed_Components

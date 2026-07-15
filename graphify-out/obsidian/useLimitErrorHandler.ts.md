@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLimitErrorHandler.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Flashcards_Page
 ---
 
 # useLimitErrorHandler.ts
@@ -30,4 +30,4 @@ tags:
 - [[useUpgradeModal]] - `imports` [EXTRACTED]
 - [[useUpgradeModal.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

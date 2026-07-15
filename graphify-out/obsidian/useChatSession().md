@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useChat.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "API Endpoints & Chat UI"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/API_Endpoints__Chat_UI
 ---
 
 # useChatSession()
@@ -16,4 +16,4 @@ tags:
 - [[ChatWindow.tsx]] - `imports` [EXTRACTED]
 - [[useChat.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

@@ -1,17 +1,19 @@
 ---
-source_file: "apps/api/src/lib/tutor-graph.ts"
+source_file: "packages/types/tutor-graph.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
-location: "L65"
+community: "Chat Store & Tutor Graph"
+location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Chat_Store__Tutor_Graph
 ---
 
 # serializeGraphBlock()
 
 ## Connections
-- [[tutor-graph.ts]] - `contains` [EXTRACTED]
+- [[index.ts_2]] - `re_exports` [EXTRACTED]
+- [[tutor-graph.ts_1]] - `contains` [EXTRACTED]
+- [[useChatStore.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph

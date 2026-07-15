@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/locale.ts"
 type: "code"
-community: "Content Media Controllers"
-location: "L7"
+community: "Flashcards & Podcast Controllers"
+location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # resolveLocale()
@@ -45,4 +45,4 @@ tags:
 - [[summary.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

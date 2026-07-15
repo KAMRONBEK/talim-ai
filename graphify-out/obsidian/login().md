@@ -2,7 +2,7 @@
 source_file: "apps/api/src/controllers/auth.controller.ts"
 type: "code"
 community: "Auth Controller"
-location: "L168"
+location: "L166"
 tags:
   - graphify/code
   - graphify/EXTRACTED

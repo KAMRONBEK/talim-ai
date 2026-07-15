@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generateQuiz.job.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Quiz Generation Job"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Quiz_Generation_Job
 ---
 
 # getSectionChunks()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generateQuiz.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

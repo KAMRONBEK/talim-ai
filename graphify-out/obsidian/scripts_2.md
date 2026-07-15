@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
+community: "Frontend Dependencies"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Frontend_Dependencies
 ---
 
 # scripts
@@ -17,6 +17,7 @@ tags:
 - [[lint_2]] - `contains` [EXTRACTED]
 - [[package.json_2]] - `contains` [EXTRACTED]
 - [[start_2]] - `contains` [EXTRACTED]
+- [[teste2e]] - `contains` [EXTRACTED]
 - [[typecheck_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies

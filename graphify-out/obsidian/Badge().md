@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/badge.tsx"
 type: "code"
-community: "Auth & Assignment UI"
-location: "L28"
+community: "Login & Assign Content"
+location: "L27"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Login__Assign_Content
 ---
 
 # Badge()
@@ -26,4 +26,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

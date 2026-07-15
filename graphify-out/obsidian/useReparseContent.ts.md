@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useReparseContent.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Content Status UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Content_Status_UI
 ---
 
 # useReparseContent.ts
@@ -25,4 +25,4 @@ tags:
 - [[rasterizePdfToImages()]] - `imports` [EXTRACTED]
 - [[useReparseContent()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/authenticatedBlob.ts"
 type: "code"
-community: "Web API Client & Endpoints"
+community: "Flashcards Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_API_Client__Endpoints
+  - community/Flashcards_Page
 ---
 
 # authenticatedBlob.ts
@@ -21,4 +21,4 @@ tags:
 - [[page.tsx_34]] - `imports_from` [EXTRACTED]
 - [[useReparseContent.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_API_Client__Endpoints
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

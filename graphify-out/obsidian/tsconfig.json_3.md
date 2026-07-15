@@ -1,19 +1,19 @@
 ---
 source_file: "packages/types/tsconfig.json"
 type: "code"
-community: "Types tsconfig"
+community: "TypeScript Config (Package)"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Types_tsconfig
+  - community/TypeScript_Config_Package
 ---
 
 # tsconfig.json
 
 ## Connections
 - [[compilerOptions_6]] - `contains` [EXTRACTED]
-- [[extends_5]] - `contains` [EXTRACTED]
+- [[extends_7]] - `contains` [EXTRACTED]
 - [[include_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Types_tsconfig
+#graphify/code #graphify/EXTRACTED #community/TypeScript_Config_Package

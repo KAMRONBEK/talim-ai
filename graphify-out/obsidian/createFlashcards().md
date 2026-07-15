@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/flashcards.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L143"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # createFlashcards()
@@ -21,4 +21,4 @@ tags:
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 - [[scopeKey()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

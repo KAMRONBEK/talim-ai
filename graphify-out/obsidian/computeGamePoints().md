@@ -2,7 +2,7 @@
 source_file: "apps/api/src/services/assessment/shared.ts"
 type: "code"
 community: "Assessment Service"
-location: "L199"
+location: "L193"
 tags:
   - graphify/code
   - graphify/EXTRACTED

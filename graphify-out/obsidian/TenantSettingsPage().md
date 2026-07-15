@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/settings/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Billing & Profile UI"
 location: "L15"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # TenantSettingsPage()
@@ -20,4 +20,4 @@ tags:
 - [[useTenantContents()]] - `calls` [INFERRED]
 - [[useTenantStudents()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/INFERRED #community/Billing__Profile_UI

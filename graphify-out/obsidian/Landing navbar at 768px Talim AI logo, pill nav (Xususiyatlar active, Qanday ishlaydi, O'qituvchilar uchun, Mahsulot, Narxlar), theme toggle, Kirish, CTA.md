@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/screenshots/uz-landing-tablet768-navbar.jpeg"
 type: "concept"
-community: "QA Screenshots (UZ Navbar)"
+community: "Uzbek Landing Defects"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/QA_Screenshots_UZ_Navbar
+  - community/Uzbek_Landing_Defects
 ---
 
 # Landing navbar at 768px: Talim AI logo, pill nav (Xususiyatlar active, Qanday ishlaydi, O'qituvchilar uchun, Mahsulot, Narxlar), theme toggle, Kirish, CTA
@@ -16,4 +16,4 @@ tags:
 - [[Marketing navbar component in appsweb (componentsmarketing) responsible for this responsive layout]] - `conceptually_related_to` [INFERRED]
 - [[QA screenshot Uzbek landing page at tablet 768px showing navbar pre-fix state]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/QA_Screenshots_UZ_Navbar
+#graphify/concept #graphify/EXTRACTED #community/Uzbek_Landing_Defects

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/admin/tenants.controller.ts"
 type: "code"
-community: "Tenant Org & Roles Service"
+community: "Audit & Content Management"
 location: "L132"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Org__Roles_Service
+  - community/Audit__Content_Management
 ---
 
 # patchTenant()
@@ -19,4 +19,4 @@ tags:
 - [[tenants.controller.ts]] - `contains` [EXTRACTED]
 - [[writeAdminAuditLog()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Org__Roles_Service
+#graphify/code #graphify/EXTRACTED #community/Audit__Content_Management

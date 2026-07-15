@@ -1,12 +1,12 @@
 ---
 source_file: "docs/FEATURES.md"
 type: "concept"
-community: "Feature Catalog Docs"
+community: "Feature Catalog Overview"
 location: "§1.1"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Feature_Catalog_Docs
+  - community/Feature_Catalog_Overview
 ---
 
 # Content Ingestion Pipeline (Upload/Parse/Section/Chunk/Embed)
@@ -19,4 +19,4 @@ tags:
 - [[YouTube Import]] - `conceptually_related_to` [EXTRACTED]
 - [[processContent Ingestion Job]] - `conceptually_related_to` [INFERRED]
 
-#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Docs
+#graphify/concept #graphify/EXTRACTED #community/Feature_Catalog_Overview

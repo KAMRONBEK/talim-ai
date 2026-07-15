@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Student Management Service"
+community: "Student Import Service"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Student_Management_Service
+  - community/Student_Import_Service
 ---
 
 # students.ts
@@ -40,4 +40,4 @@ tags:
 - [[subscription.service.ts]] - `imports_from` [EXTRACTED]
 - [[tenant.service.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Student_Management_Service
+#graphify/code #graphify/EXTRACTED #community/Student_Import_Service

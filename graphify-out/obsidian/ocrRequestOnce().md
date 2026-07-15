@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/pdf.service.ts"
 type: "code"
-community: "PDF Extraction Service"
-location: "L273"
+community: "Embedding & Chunk Inspection"
+location: "L276"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/PDF_Extraction_Service
+  - community/Embedding__Chunk_Inspection
 ---
 
 # ocrRequestOnce()
@@ -16,4 +16,4 @@ tags:
 - [[pdf.service.ts]] - `contains` [EXTRACTED]
 - [[recordUsage()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/PDF_Extraction_Service
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

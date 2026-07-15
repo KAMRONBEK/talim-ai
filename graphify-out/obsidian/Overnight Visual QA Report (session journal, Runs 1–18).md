@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/visual-qa-report.md"
 type: "document"
-community: "Product Plans & Epics"
+community: "Bug Tracking & Accounts"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/Bug_Tracking__Accounts
 ---
 
 # Overnight Visual QA Report (session journal, Runs 1–18)
@@ -17,4 +17,4 @@ tags:
 - [[Talim QA Coverage Map (frontier ledger)]] - `references` [EXTRACTED]
 - [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/Bug_Tracking__Accounts

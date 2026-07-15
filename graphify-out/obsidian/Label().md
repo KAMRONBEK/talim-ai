@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/label.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Login & Assign Content"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Login__Assign_Content
 ---
 
 # Label()
@@ -27,4 +27,4 @@ tags:
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[question-editor.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

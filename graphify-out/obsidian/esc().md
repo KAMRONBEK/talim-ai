@@ -1,17 +1,17 @@
 ---
-source_file: "docs/qa/screenshots/_genpdf.js"
+source_file: "scripts/qa-fixtures.mjs"
 type: "code"
-community: "QA PDF Generator Script"
-location: "L29"
+community: "QA Fixture PDF Generation"
+location: "L35"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/QA_PDF_Generator_Script
+  - community/QA_Fixture_PDF_Generation
 ---
 
 # esc()
 
 ## Connections
-- [[_genpdf.js]] - `contains` [EXTRACTED]
+- [[qa-fixtures.mjs]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/QA_PDF_Generator_Script
+#graphify/code #graphify/EXTRACTED #community/QA_Fixture_PDF_Generation

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/lib/plan.ts"
 type: "code"
-community: "Admin Subscription UI"
+community: "Admin Tenant Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Admin_Tenant_Hooks
 ---
 
 # plan.ts
@@ -15,4 +15,4 @@ tags:
 - [[PLAN_LABELS]] - `contains` [EXTRACTED]
 - [[planLabel()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Admin_Tenant_Hooks

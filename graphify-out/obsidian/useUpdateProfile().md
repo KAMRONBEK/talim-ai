@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Billing & Profile UI"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Billing__Profile_UI
 ---
 
 # useUpdateProfile()
@@ -16,4 +16,4 @@ tags:
 - [[profile-card.tsx]] - `imports` [EXTRACTED]
 - [[useAccount.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

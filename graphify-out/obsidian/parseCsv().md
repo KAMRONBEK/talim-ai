@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/students.ts"
 type: "code"
-community: "Student Management Service"
-location: "L222"
+community: "Student Import Service"
+location: "L214"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Student_Management_Service
+  - community/Student_Import_Service
 ---
 
 # parseCsv()
@@ -15,4 +15,4 @@ tags:
 - [[normalizeImportInput()]] - `calls` [EXTRACTED]
 - [[students.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Student_Management_Service
+#graphify/code #graphify/EXTRACTED #community/Student_Import_Service

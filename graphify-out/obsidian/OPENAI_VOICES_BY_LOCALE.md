@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "TTS Text Normalization"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/TTS_Text_Normalization
 ---
 
 # OPENAI_VOICES_BY_LOCALE
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[tts.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization

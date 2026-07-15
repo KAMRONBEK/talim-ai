@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(tenant)/tenant/progress/page.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Tenant Messages & Progress"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Tenant_Messages__Progress
 ---
 
 # masteryTone()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_25]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress

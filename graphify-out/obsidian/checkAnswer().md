@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L540"
+community: "Quiz Controller"
+location: "L554"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Quiz_Controller
 ---
 
 # checkAnswer()
@@ -21,4 +21,4 @@ tags:
 - [[quizQuestionKey()]] - `calls` [EXTRACTED]
 - [[resolveAcceptedAnswers()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller

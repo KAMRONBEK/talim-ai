@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/middleware.ts"
 type: "code"
-community: "Fonts & Root Layout"
+community: "API Client & Locale Routing"
 location: "L6"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/API_Client__Locale_Routing
 ---
 
 # config
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[middleware.ts_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/API_Client__Locale_Routing

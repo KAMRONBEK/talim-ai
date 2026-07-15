@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/deck/DeckPlayer.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "Deck Player & Section Reader"
 location: "L21"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/Deck_Player__Section_Reader
 ---
 
 # DeckPlayer()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_33]] - `imports` [EXTRACTED]
 - [[section-reader.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader

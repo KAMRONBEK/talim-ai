@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useChatStore.ts"
 type: "code"
-community: "Shared Types & Zustand Stores"
+community: "Chat Store & Tutor Graph"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_Types__Zustand_Stores
+  - community/Chat_Store__Tutor_Graph
 ---
 
 # ChatState
@@ -15,4 +15,4 @@ tags:
 - [[ChatMessage]] - `references` [EXTRACTED]
 - [[useChatStore.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_Types__Zustand_Stores
+#graphify/code #graphify/EXTRACTED #community/Chat_Store__Tutor_Graph

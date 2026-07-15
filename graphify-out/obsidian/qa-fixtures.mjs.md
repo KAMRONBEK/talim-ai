@@ -1,12 +1,12 @@
 ---
 source_file: "scripts/qa-fixtures.mjs"
 type: "code"
-community: "QA Fixture Generator"
+community: "QA Fixture PDF Generation"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/QA_Fixture_Generator
+  - community/QA_Fixture_PDF_Generation
 ---
 
 # qa-fixtures.mjs
@@ -20,7 +20,7 @@ tags:
 - [[args]] - `contains` [EXTRACTED]
 - [[assemblePdf()]] - `contains` [EXTRACTED]
 - [[buildTextPdf()]] - `contains` [EXTRACTED]
-- [[esc()_1]] - `contains` [EXTRACTED]
+- [[esc()]] - `contains` [EXTRACTED]
 - [[jpegDimensions()]] - `contains` [EXTRACTED]
 - [[makePdf()]] - `contains` [EXTRACTED]
 - [[wrapJpeg()]] - `contains` [EXTRACTED]
@@ -28,4 +28,4 @@ tags:
 - [[writeOversize()]] - `contains` [EXTRACTED]
 - [[writeStandardSet()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/QA_Fixture_Generator
+#graphify/code #graphify/EXTRACTED #community/QA_Fixture_PDF_Generation

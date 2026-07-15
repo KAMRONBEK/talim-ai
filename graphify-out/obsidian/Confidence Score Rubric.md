@@ -1,11 +1,11 @@
 ---
 source_file: ".claude/skills/graphify/references/extraction-spec.md"
 type: "rationale"
-community: "Graphify Skill Docs"
+community: "Knowledge Graph Extraction"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Graphify_Skill_Docs
+  - community/Knowledge_Graph_Extraction
 ---
 
 # Confidence Score Rubric
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Extraction Subagent Prompt]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Graphify_Skill_Docs
+#graphify/rationale #graphify/EXTRACTED #community/Knowledge_Graph_Extraction

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Player UI"
+community: "Quiz Page & Hooks"
 location: "L37"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Page__Hooks
 ---
 
 # LETTERS
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_40]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Assessment Builder UI"
-location: "L569"
+community: "Leaderboard Table Component"
+location: "L528"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Leaderboard_Table_Component
 ---
 
 # AssessmentMode
@@ -16,4 +16,4 @@ tags:
 - [[leaderboard-table.tsx]] - `imports` [EXTRACTED]
 - [[useAssessments.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/EXTRACTED #community/Leaderboard_Table_Component

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useAccount.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Billing & Profile UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Billing__Profile_UI
 ---
 
 # useAccount.ts
@@ -18,4 +18,4 @@ tags:
 - [[useChangePassword()]] - `contains` [EXTRACTED]
 - [[useUpdateProfile()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

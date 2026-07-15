@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useContent.ts"
 type: "code"
-community: "Dialog Components"
+community: "Content Status UI"
 location: "L106"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Content_Status_UI
 ---
 
 # useDeleteContent()
@@ -17,4 +17,4 @@ tags:
 - [[delete-content-dialog.tsx]] - `imports` [EXTRACTED]
 - [[useContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

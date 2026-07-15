@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useLocaleContent.ts"
 type: "code"
-community: "Locale Sync & Content Hooks"
+community: "Global Providers & Upgrade Modal"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Locale_Sync__Content_Hooks
+  - community/Global_Providers__Upgrade_Modal
 ---
 
 # useLocaleSync()
@@ -17,4 +17,4 @@ tags:
 - [[useAutoGenerateOnLocaleChange()]] - `calls` [EXTRACTED]
 - [[useLocaleContent.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Locale_Sync__Content_Hooks
+#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/recent-content-grid.tsx"
 type: "code"
-community: "Content Query Hooks"
+community: "Content Status UI"
 location: "L15"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Query_Hooks
+  - community/Content_Status_UI
 ---
 
 # RecentContentGridProps
@@ -15,4 +15,4 @@ tags:
 - [[Content]] - `references` [EXTRACTED]
 - [[recent-content-grid.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Query_Hooks
+#graphify/code #graphify/EXTRACTED #community/Content_Status_UI

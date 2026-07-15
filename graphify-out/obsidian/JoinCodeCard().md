@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/tenant/join-code-card.tsx"
 type: "code"
-community: "Tenant Dashboard & Hooks"
+community: "Billing & Profile UI"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Billing__Profile_UI
 ---
 
 # JoinCodeCard()
@@ -19,4 +19,4 @@ tags:
 - [[useRegenerateJoinCode()]] - `calls` [EXTRACTED]
 - [[useTenant()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

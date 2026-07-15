@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Env Config & Background Jobs"
 location: "L207"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # DeckAudience
@@ -20,4 +20,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

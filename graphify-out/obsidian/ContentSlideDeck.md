@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/deck.ts"
 type: "code"
-community: "Job Event Fan-out & Media Jobs"
+community: "Slide UI Components"
 location: "L224"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Job_Event_Fan-out__Media_Jobs
+  - community/Slide_UI_Components
 ---
 
 # ContentSlideDeck
@@ -17,4 +17,4 @@ tags:
 - [[slides.service.ts]] - `imports` [EXTRACTED]
 - [[useSlides.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Job_Event_Fan-out__Media_Jobs
+#graphify/code #graphify/EXTRACTED #community/Slide_UI_Components

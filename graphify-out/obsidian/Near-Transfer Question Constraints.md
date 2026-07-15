@@ -1,12 +1,12 @@
 ---
 source_file: "docs/plans/question-engine.md"
 type: "concept"
-community: "Question Engine Design Docs"
+community: "Question Engine Rework Design"
 location: "§2"
 tags:
   - graphify/concept
   - graphify/EXTRACTED
-  - community/Question_Engine_Design_Docs
+  - community/Question_Engine_Rework_Design
 ---
 
 # Near-Transfer Question Constraints
@@ -16,4 +16,4 @@ tags:
 - [[Question Generation Pipeline (overgenerate, filter, shuffle)]] - `references` [EXTRACTED]
 - [[Unified Generation Parameters (counttypesdepthscope)]] - `references` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Design_Docs
+#graphify/concept #graphify/EXTRACTED #community/Question_Engine_Rework_Design

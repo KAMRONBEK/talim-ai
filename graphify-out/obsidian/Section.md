@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/learning/summary-text.tsx"
 type: "code"
-community: "Section Reader UI"
+community: "Deck Player & Section Reader"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Reader_UI
+  - community/Deck_Player__Section_Reader
 ---
 
 # Section
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[summary-text.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Reader_UI
+#graphify/code #graphify/EXTRACTED #community/Deck_Player__Section_Reader

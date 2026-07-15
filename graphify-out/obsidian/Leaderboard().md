@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(learner)/learner/assessments/page.tsx"
 type: "code"
-community: "Tenant Assessment Builder UI"
+community: "Assessment Leaderboard"
 location: "L18"
 tags:
   - graphify/code
   - graphify/INFERRED
-  - community/Tenant_Assessment_Builder_UI
+  - community/Assessment_Leaderboard
 ---
 
 # Leaderboard()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_15]] - `contains` [EXTRACTED]
 - [[useLearnerLeaderboard()]] - `calls` [INFERRED]
 
-#graphify/code #graphify/INFERRED #community/Tenant_Assessment_Builder_UI
+#graphify/code #graphify/INFERRED #community/Assessment_Leaderboard

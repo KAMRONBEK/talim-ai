@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/youtube.service.ts"
 type: "code"
-community: "YouTube Ingest Service"
-location: "L180"
+community: "YouTube Transcription Service"
+location: "L182"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/YouTube_Ingest_Service
+  - community/YouTube_Transcription_Service
 ---
 
 # extractYoutubeTranscript()
@@ -20,4 +20,4 @@ tags:
 - [[processContent.job.ts]] - `imports` [EXTRACTED]
 - [[youtube.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/YouTube_Ingest_Service
+#graphify/code #graphify/EXTRACTED #community/YouTube_Transcription_Service

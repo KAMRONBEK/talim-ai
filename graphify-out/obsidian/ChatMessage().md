@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/chat/ChatMessage.tsx"
 type: "code"
-community: "Auth & Assignment UI"
+community: "API Endpoints & Chat UI"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Auth__Assignment_UI
+  - community/API_Endpoints__Chat_UI
 ---
 
 # ChatMessage()
@@ -17,4 +17,4 @@ tags:
 - [[T]] - `calls` [INFERRED]
 - [[cn()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Auth__Assignment_UI
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI

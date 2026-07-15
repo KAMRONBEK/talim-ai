@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/index.ts"
 type: "code"
-community: "Shared UI Primitives"
+community: "Login & Assign Content"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Login__Assign_Content
 ---
 
 # index.ts
@@ -24,7 +24,6 @@ tags:
 - [[CardTitle]] - `re_exports` [EXTRACTED]
 - [[ChatMessage.tsx]] - `imports_from` [EXTRACTED]
 - [[ChatWindow.tsx]] - `imports_from` [EXTRACTED]
-- [[ContentList.tsx]] - `imports_from` [EXTRACTED]
 - [[DeckMarkdown.tsx]] - `imports_from` [EXTRACTED]
 - [[DeckPlayer.tsx]] - `imports_from` [EXTRACTED]
 - [[Dialog()]] - `re_exports` [EXTRACTED]
@@ -41,7 +40,6 @@ tags:
 - [[Progress()]] - `re_exports` [EXTRACTED]
 - [[QuizCard.tsx]] - `imports_from` [EXTRACTED]
 - [[QuizResult.tsx]] - `imports_from` [EXTRACTED]
-- [[Separator()]] - `re_exports` [EXTRACTED]
 - [[Sheet()]] - `re_exports` [EXTRACTED]
 - [[SheetContent()]] - `re_exports` [EXTRACTED]
 - [[SheetHeader()]] - `re_exports` [EXTRACTED]
@@ -122,7 +120,6 @@ tags:
 - [[rich-text.tsx]] - `imports_from` [EXTRACTED]
 - [[section-reader.tsx]] - `imports_from` [EXTRACTED]
 - [[selection-ask.tsx]] - `imports_from` [EXTRACTED]
-- [[separator.tsx]] - `re_exports` [EXTRACTED]
 - [[sheet.tsx]] - `re_exports` [EXTRACTED]
 - [[student-welcome-banner.tsx]] - `imports_from` [EXTRACTED]
 - [[subscription-edit-drawer.tsx]] - `imports_from` [EXTRACTED]
@@ -135,4 +132,4 @@ tags:
 - [[user-sidebar-footer.tsx]] - `imports_from` [EXTRACTED]
 - [[utils.ts]] - `re_exports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

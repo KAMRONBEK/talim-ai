@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/layout/content-generations.tsx"
 type: "code"
-community: "Sheet & Layout Components"
+community: "Learner Dashboard"
 location: "L9"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/Learner_Dashboard
 ---
 
 # ContentGenerationsBlockProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[content-generations.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/Learner_Dashboard

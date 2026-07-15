@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/badges.service.ts"
 type: "code"
-community: "Prisma Client & Seed"
+community: "Learning Coverage & Badges"
 location: "L14"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Prisma_Client__Seed
+  - community/Learning_Coverage__Badges
 ---
 
 # finalize()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[badges.service.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Prisma_Client__Seed
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

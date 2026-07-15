@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/quiz-answer.ts"
 type: "code"
-community: "Quiz Answer Helpers"
+community: "Quiz Answer Utilities"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Answer_Helpers
+  - community/Quiz_Answer_Utilities
 ---
 
 # resolveCorrectAnswer()
@@ -19,4 +19,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[quiz-answer.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Helpers
+#graphify/code #graphify/EXTRACTED #community/Quiz_Answer_Utilities

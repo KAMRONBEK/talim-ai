@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tts.service.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "TTS Text Normalization"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/TTS_Text_Normalization
 ---
 
 # tts.service.ts
@@ -40,10 +40,9 @@ tags:
 - [[synthesizeChunk()]] - `contains` [EXTRACTED]
 - [[synthesizeChunkAzure()]] - `contains` [EXTRACTED]
 - [[synthesizeChunkOpenai()]] - `contains` [EXTRACTED]
-- [[synthesizeDialogue()]] - `contains` [EXTRACTED]
 - [[synthesizeDialogueWithSegments()]] - `contains` [EXTRACTED]
 - [[synthesizeSpeech()]] - `contains` [EXTRACTED]
 - [[tts-normalize.ts]] - `imports_from` [EXTRACTED]
 - [[usage.service.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/TTS_Text_Normalization

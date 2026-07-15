@@ -1,17 +1,18 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
-location: "L32"
+community: "Frontend Dependencies"
+location: "L33"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Frontend_Dependencies
 ---
 
 # devDependencies
 
 ## Connections
+- [[@playwrighttest]] - `contains` [EXTRACTED]
 - [[@talimeslint-config_2]] - `contains` [EXTRACTED]
 - [[@talimtailwind-config_1]] - `contains` [EXTRACTED]
 - [[@talimtsconfig_2]] - `contains` [EXTRACTED]
@@ -26,4 +27,4 @@ tags:
 - [[tailwindcss_1]] - `contains` [EXTRACTED]
 - [[typescript_2]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/user.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Billing & Quota Errors"
 location: "L139"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Billing__Quota_Errors
 ---
 
 # assertQuota()
@@ -48,4 +48,4 @@ tags:
 - [[user.ts]] - `contains` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

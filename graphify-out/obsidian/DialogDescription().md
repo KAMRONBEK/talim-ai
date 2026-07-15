@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/components/dialog.tsx"
 type: "code"
-community: "Dialog Components"
-location: "L85"
+community: "Login & Assign Content"
+location: "L92"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # DialogDescription()
@@ -18,4 +18,4 @@ tags:
 - [[index.ts_3]] - `re_exports` [EXTRACTED]
 - [[practice-generator.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/layout.tsx"
 type: "code"
-community: "Content Detail Page"
+community: "Flashcards Page"
 location: "L26"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Detail_Page
+  - community/Flashcards_Page
 ---
 
 # ContentLayoutInner()
@@ -23,4 +23,4 @@ tags:
 - [[useSections()]] - `calls` [EXTRACTED]
 - [[useSidebarSheet()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Detail_Page
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

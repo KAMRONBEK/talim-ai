@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components.json"
 type: "code"
-community: "Web shadcn Config"
+community: "Component Library Config"
 location: "L17"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_shadcn_Config
+  - community/Component_Library_Config
 ---
 
 # lib
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[aliases]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_shadcn_Config
+#graphify/code #graphify/EXTRACTED #community/Component_Library_Config

@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "rationale"
-community: "QA Evidence Protocol"
+community: "QA Finding Verification"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/QA_Evidence_Protocol
+  - community/QA_Finding_Verification
 ---
 
 # Skeptic pass (evidence-only innocent-explanation check)
@@ -13,4 +13,4 @@ tags:
 ## Connections
 - [[Finding self-verification protocol (§E)]] - `references` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/QA_Evidence_Protocol
+#graphify/rationale #graphify/EXTRACTED #community/QA_Finding_Verification

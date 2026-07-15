@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/learningProgress.service.ts"
 type: "code"
-community: "Learning Progress & Coverage"
+community: "Learning Coverage & Badges"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Learning_Progress__Coverage
+  - community/Learning_Coverage__Badges
 ---
 
 # learningProgress.service.ts
@@ -31,7 +31,6 @@ tags:
 - [[gradeQuestion()]] - `imports` [EXTRACTED]
 - [[index.ts_2]] - `imports_from` [EXTRACTED]
 - [[isLatestSectionAttempt()]] - `contains` [EXTRACTED]
-- [[isSectionComplete()]] - `contains` [EXTRACTED]
 - [[jsonStringArray()]] - `imports` [EXTRACTED]
 - [[learning-coverage-prompt.ts]] - `imports_from` [EXTRACTED]
 - [[markSectionViewed()]] - `contains` [EXTRACTED]
@@ -52,4 +51,4 @@ tags:
 - [[todayUtcDate()]] - `contains` [EXTRACTED]
 - [[updateProgressAfterQuizSubmit()]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Learning_Progress__Coverage
+#graphify/code #graphify/EXTRACTED #community/Learning_Coverage__Badges

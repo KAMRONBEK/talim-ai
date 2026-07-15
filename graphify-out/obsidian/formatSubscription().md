@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/subscription/shared.ts"
 type: "code"
-community: "Subscription & Billing Service"
-location: "L87"
+community: "Billing & Quota Errors"
+location: "L74"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Subscription__Billing_Service
+  - community/Billing__Quota_Errors
 ---
 
 # formatSubscription()
@@ -23,4 +23,4 @@ tags:
 - [[tenant.ts]] - `imports` [EXTRACTED]
 - [[user.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Subscription__Billing_Service
+#graphify/code #graphify/EXTRACTED #community/Billing__Quota_Errors

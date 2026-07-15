@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/question-postprocess.ts"
 type: "code"
-community: "Quiz Generation Pipeline"
+community: "Quiz Generation Job"
 location: "L346"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Generation_Pipeline
+  - community/Quiz_Generation_Job
 ---
 
 # overgenerateCount()
@@ -16,4 +16,4 @@ tags:
 - [[question-gen.ts]] - `imports` [EXTRACTED]
 - [[question-postprocess.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Pipeline
+#graphify/code #graphify/EXTRACTED #community/Quiz_Generation_Job

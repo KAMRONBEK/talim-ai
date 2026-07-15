@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/section-prompt.ts"
 type: "code"
-community: "Section Controller"
+community: "Embedding & Chunk Inspection"
 location: "L11"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Controller
+  - community/Embedding__Chunk_Inspection
 ---
 
 # buildSectionUserPrompt()
@@ -16,4 +16,4 @@ tags:
 - [[section-prompt.ts]] - `contains` [EXTRACTED]
 - [[section.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Controller
+#graphify/code #graphify/EXTRACTED #community/Embedding__Chunk_Inspection

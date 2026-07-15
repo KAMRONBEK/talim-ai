@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/contexts/learner-shell.tsx"
 type: "code"
-community: "Billing & Access Guards"
+community: "Tenant Billing Page"
 location: "L18"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Billing__Access_Guards
+  - community/Tenant_Billing_Page
 ---
 
 # MustChangePasswordGate()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[learner-shell.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Billing__Access_Guards
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,17 +1,17 @@
 ---
-source_file: "packages/config/tsconfig/base.json"
+source_file: "knip.json"
 type: "code"
-community: "Shared tsconfig (base)"
+community: "Knip Config (Dead Code)"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_tsconfig_base
+  - community/Knip_Config_Dead_Code
 ---
 
 # $schema
 
 ## Connections
-- [[base.json]] - `contains` [EXTRACTED]
+- [[knip.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_tsconfig_base
+#graphify/code #graphify/EXTRACTED #community/Knip_Config_Dead_Code

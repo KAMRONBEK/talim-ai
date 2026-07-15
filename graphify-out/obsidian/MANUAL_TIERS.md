@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/lib/pricing.ts"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L42"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # MANUAL_TIERS
@@ -15,4 +15,4 @@ tags:
 - [[pricing.ts]] - `contains` [EXTRACTED]
 - [[pricing.tsx]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

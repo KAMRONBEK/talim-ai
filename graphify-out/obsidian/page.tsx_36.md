@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/settings/page.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Billing & Profile UI"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Billing__Profile_UI
 ---
 
 # page.tsx
@@ -20,4 +20,4 @@ tags:
 - [[billing-summary-card.tsx]] - `imports_from` [EXTRACTED]
 - [[profile-card.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Billing__Profile_UI

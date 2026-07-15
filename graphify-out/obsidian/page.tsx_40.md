@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/quiz/[id]/page.tsx"
 type: "code"
-community: "Quiz Player UI"
+community: "Quiz Page & Hooks"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Page__Hooks
 ---
 
 # page.tsx
@@ -52,4 +52,4 @@ tags:
 - [[useSections.ts]] - `imports_from` [EXTRACTED]
 - [[useSubmitQuiz()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

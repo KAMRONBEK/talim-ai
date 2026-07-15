@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/dashboard/quick-action-cards.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # quick-action-cards.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useFileUpload()]] - `imports` [EXTRACTED]
 - [[useFileUpload.tsx]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

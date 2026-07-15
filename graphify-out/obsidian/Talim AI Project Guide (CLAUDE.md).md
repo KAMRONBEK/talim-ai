@@ -1,11 +1,11 @@
 ---
 source_file: "CLAUDE.md"
 type: "document"
-community: "Architecture Invariants (CLAUDE.md)"
+community: "Platform Architecture Guide"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/Architecture_Invariants_CLAUDEmd
+  - community/Platform_Architecture_Guide
 ---
 
 # Talim AI project guide (CLAUDE.md)
@@ -18,4 +18,4 @@ tags:
 - [[Use dbmigratedeploy locally (checksum drift)]] - `references` [EXTRACTED]
 - [[i18n lives only in appsweb (next-intl + locale)]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/Architecture_Invariants_CLAUDEmd
+#graphify/document #graphify/EXTRACTED #community/Platform_Architecture_Guide

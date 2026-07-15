@@ -1,17 +1,17 @@
 ---
-source_file: "apps/api/tsconfig.json"
+source_file: "apps/admin/tsconfig.json"
 type: "code"
-community: "API tsconfig"
+community: "TypeScript Config (Web)"
 location: "L2"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_tsconfig
+  - community/TypeScript_Config_Web
 ---
 
 # extends
 
 ## Connections
-- [[tsconfig.json_1]] - `contains` [EXTRACTED]
+- [[tsconfig.json]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_tsconfig
+#graphify/code #graphify/EXTRACTED #community/TypeScript_Config_Web

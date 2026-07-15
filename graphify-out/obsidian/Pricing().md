@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/pricing.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # Pricing()
@@ -16,4 +16,4 @@ tags:
 - [[page.tsx_39]] - `imports` [EXTRACTED]
 - [[pricing.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

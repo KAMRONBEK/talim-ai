@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/layout.tsx"
 type: "code"
-community: "Fonts & Root Layout"
+community: "Root Layout & Fonts"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Fonts__Root_Layout
+  - community/Root_Layout__Fonts
 ---
 
 # layout.tsx
@@ -29,4 +29,4 @@ tags:
 - [[routing]] - `imports` [EXTRACTED]
 - [[routing.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Fonts__Root_Layout
+#graphify/code #graphify/EXTRACTED #community/Root_Layout__Fonts

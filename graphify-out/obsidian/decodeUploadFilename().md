@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/filename.ts"
 type: "code"
-community: "Content Controller (B2C)"
+community: "Content Controller (YouTube/OCR)"
 location: "L16"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Controller_B2C
+  - community/Content_Controller_YouTube/OCR
 ---
 
 # decodeUploadFilename()
@@ -18,4 +18,4 @@ tags:
 - [[uploadContent()]] - `calls` [EXTRACTED]
 - [[uploadContent()_1]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Controller_B2C
+#graphify/code #graphify/EXTRACTED #community/Content_Controller_YouTube/OCR

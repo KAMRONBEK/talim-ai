@@ -1,18 +1,19 @@
 ---
 type: community
 cohesion: 0.10
-members: 40
+members: 41
 ---
 
 # Learning Coverage & Badges
 
 **Cohesion:** 0.10 - loosely connected
-**Members:** 40 nodes
+**Members:** 41 nodes
 
 ## Members
 - [[Badge]] - code - packages/types/index.ts
 - [[CoverageQuestionResult]] - code - apps/api/src/lib/learning-coverage-prompt.ts
 - [[LearnerMastery]] - code - apps/api/src/services/mastery.service.ts
+- [[LearnerMaterial]] - code - packages/types/index.ts
 - [[LearnerProgress]] - code - packages/types/index.ts
 - [[MasteryTopic]] - code - packages/types/index.ts
 - [[QuizWithQuestions]] - code - apps/api/src/services/learningProgress.service.ts
@@ -35,7 +36,6 @@ members: 40
 - [[getStudentProgress()_1]] - code - apps/api/src/services/tenant/progress.ts
 - [[getTenantProgress()]] - code - apps/api/src/services/tenant/progress.ts
 - [[isLatestSectionAttempt()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[isSectionComplete()]] - code - apps/api/src/services/learningProgress.service.ts
 - [[learning-coverage-prompt.ts]] - code - apps/api/src/lib/learning-coverage-prompt.ts
 - [[learningProgress.service.ts]] - code - apps/api/src/services/learningProgress.service.ts
 - [[listStudents()_1]] - code - apps/api/src/services/tenant/students.ts
@@ -43,6 +43,7 @@ members: 40
 - [[mastery.service.ts]] - code - apps/api/src/services/mastery.service.ts
 - [[persistSectionProgress()]] - code - apps/api/src/services/learningProgress.service.ts
 - [[progress.ts]] - code - apps/api/src/services/tenant/progress.ts
+- [[quizQuestionKey()]] - code - apps/api/src/services/answerJudge.service.ts
 - [[recalculateContentProgress()]] - code - apps/api/src/services/learningProgress.service.ts
 - [[recordLearningActivity()]] - code - apps/api/src/services/learningProgress.service.ts
 - [[refineSectionProgressWithAi()]] - code - apps/api/src/services/learningProgress.service.ts
@@ -59,26 +60,29 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 11 edges to [[_COMMUNITY_Flashcards API & Prisma Seed]]
-- 8 edges to [[_COMMUNITY_Media & Progress Controllers]]
-- 7 edges to [[_COMMUNITY_Shared Types & Auth Stores]]
-- 4 edges to [[_COMMUNITY_Billing, Usage & Limits]]
-- 4 edges to [[_COMMUNITY_Admin Content & Audit]]
-- 3 edges to [[_COMMUNITY_Quiz API Controller]]
-- 3 edges to [[_COMMUNITY_Section Service]]
-- 3 edges to [[_COMMUNITY_Content Grid & Learner Dashboard]]
-- 2 edges to [[_COMMUNITY_AI Provider Service]]
-- 2 edges to [[_COMMUNITY_Grading Engine Types]]
-- 2 edges to [[_COMMUNITY_Question Banks & Builders]]
-- 2 edges to [[_COMMUNITY_Tenant Hooks & Messaging]]
-- 2 edges to [[_COMMUNITY_Student Provisioning & CSV]]
-- 1 edge to [[_COMMUNITY_Tenant Owner Controller]]
-- 1 edge to [[_COMMUNITY_Content API Controller]]
-- 1 edge to [[_COMMUNITY_Tenant Service]]
+- 10 edges to [[_COMMUNITY_Quiz Controller]]
+- 8 edges to [[_COMMUNITY_Env Config & Background Jobs]]
+- 8 edges to [[_COMMUNITY_Admin Content & Subscriptions]]
+- 5 edges to [[_COMMUNITY_Flashcards & Podcast Controllers]]
+- 5 edges to [[_COMMUNITY_Summary Controller]]
+- 4 edges to [[_COMMUNITY_Billing & Quota Errors]]
+- 4 edges to [[_COMMUNITY_Content Controller (YouTubeOCR)]]
+- 4 edges to [[_COMMUNITY_Auth Controller]]
+- 3 edges to [[_COMMUNITY_Tenant Messages & Progress]]
+- 2 edges to [[_COMMUNITY_AI Service (DeepSeek)]]
+- 2 edges to [[_COMMUNITY_Assessment Service]]
+- 2 edges to [[_COMMUNITY_Answer Grading Logic]]
+- 2 edges to [[_COMMUNITY_Flashcards Page]]
+- 2 edges to [[_COMMUNITY_Student Import Service]]
+- 1 edge to [[_COMMUNITY_Tenant Student Management]]
+- 1 edge to [[_COMMUNITY_Embedding & Chunk Inspection]]
+- 1 edge to [[_COMMUNITY_Bank & Question Management]]
+- 1 edge to [[_COMMUNITY_Tenant Service & Assignments]]
+- 1 edge to [[_COMMUNITY_Learner Dashboard]]
 
 ## Top bridge nodes
-- [[learningProgress.service.ts]] - degree 35, connects to 9 communities
-- [[progress.ts]] - degree 25, connects to 7 communities
-- [[mastery.service.ts]] - degree 17, connects to 6 communities
-- [[badges.service.ts]] - degree 10, connects to 2 communities
-- [[getAssignedContentIds()]] - degree 4, connects to 2 communities
+- [[learningProgress.service.ts]] - degree 38, connects to 11 communities
+- [[progress.ts]] - degree 25, connects to 8 communities
+- [[mastery.service.ts]] - degree 17, connects to 7 communities
+- [[buildCoverageResults()]] - degree 6, connects to 3 communities
+- [[LearnerMaterial]] - degree 4, connects to 3 communities

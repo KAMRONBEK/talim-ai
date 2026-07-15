@@ -1,12 +1,12 @@
 ---
 source_file: "packages/ui/package.json"
 type: "code"
-community: "UI Package Config"
+community: "Shared UI Dependencies"
 location: "L7"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/UI_Package_Config
+  - community/Shared_UI_Dependencies
 ---
 
 # exports
@@ -19,4 +19,4 @@ tags:
 - [[.fontsnewsreader]] - `contains` [EXTRACTED]
 - [[package.json_9]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/UI_Package_Config
+#graphify/code #graphify/EXTRACTED #community/Shared_UI_Dependencies

@@ -1,50 +1,54 @@
 ---
 type: community
-cohesion: 0.11
-members: 35
+cohesion: 0.08
+members: 39
 ---
 
 # Quiz Controller
 
-**Cohesion:** 0.11 - loosely connected
-**Members:** 35 nodes
+**Cohesion:** 0.08 - loosely connected
+**Members:** 39 nodes
 
 ## Members
-- [[CoverageQuestionResult]] - code - apps/api/src/lib/learning-coverage-prompt.ts
+- [[AiGradeEntry]] - code - apps/api/src/services/answerJudge.service.ts
+- [[GradeResult]] - code - packages/types/grading.ts
+- [[JudgeCandidate]] - code - apps/api/src/services/answerJudge.service.ts
+- [[JudgeOptions]] - code - apps/api/src/services/answerJudge.service.ts
+- [[JudgeVerdict]] - code - apps/api/src/services/answerJudge.service.ts
+- [[QuizEvaluation]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[QuizQuestionForEvaluation]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[QuizWithQuestions]] - code - apps/api/src/services/learningProgress.service.ts
+- [[answerJudge.service.ts]] - code - apps/api/src/services/answerJudge.service.ts
 - [[assertQuizAccess()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[blendCoverageScore()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[buildCoverageResults()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[buildLearningCoverageUserPrompt()]] - code - apps/api/src/lib/learning-coverage-prompt.ts
-- [[computeBestFullQuizScore()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[computeQuickCheckAccuracy()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[createQuiz()]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[bankQuestionKey()]] - code - apps/api/src/services/answerJudge.service.ts
+- [[checkAnswer()]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[checkAnswerSchema]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[consumeJudgeBudget()]] - code - apps/api/src/services/answerJudge.service.ts
 - [[createQuizSchema]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[estimateAiCoverage()]] - code - apps/api/src/services/learningProgress.service.ts
 - [[evaluateQuizAnswers()]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[evidenceWeightForQuestion()]] - code - packages/types/grading.ts
 - [[formatAttempt()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[formatQuiz()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[getLatestAttempt()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[getQuiz()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[getSubmittedOptionLabel()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[isLatestSectionAttempt()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[isOpenAnswerCorrect()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[isSectionComplete()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[learning-coverage-prompt.ts]] - code - apps/api/src/lib/learning-coverage-prompt.ts
-- [[learningProgress.service.ts]] - code - apps/api/src/services/learningProgress.service.ts
+- [[isJudgeable()]] - code - apps/api/src/services/answerJudge.service.ts
+- [[judgeBudgets]] - code - apps/api/src/services/answerJudge.service.ts
+- [[judgeWithModel()]] - code - apps/api/src/services/answerJudge.service.ts
+- [[judgeWrittenAnswers()]] - code - apps/api/src/services/answerJudge.service.ts
 - [[listAttempts()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[normalizeAnswer()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[persistSectionProgress()]] - code - apps/api/src/services/learningProgress.service.ts
+- [[normalizeForOptionMatch()]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[practiceTypeEnum]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[questionDepthEnum]] - code - apps/api/src/services/assessment/shared.ts
+- [[questionStyleEnum]] - code - apps/api/src/services/assessment/shared.ts
 - [[quiz.controller.ts]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[quizCreatorUserId()]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[recalculateContentProgress()]] - code - apps/api/src/services/learningProgress.service.ts
-- [[refineSectionProgressWithAi()]] - code - apps/api/src/services/learningProgress.service.ts
+- [[resolveAcceptedAnswers()]] - code - packages/types/grading.ts
 - [[resolveSubmittedAnswer()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[stripSubmittedOptionLabel()]] - code - apps/api/src/controllers/quiz.controller.ts
+- [[submitAnswerValueSchema]] - code - apps/api/src/services/assessment/shared.ts
 - [[submitQuiz()]] - code - apps/api/src/controllers/quiz.controller.ts
 - [[submitSchema]] - code - apps/api/src/controllers/quiz.controller.ts
-- [[updateProgressAfterQuizSubmit()]] - code - apps/api/src/services/learningProgress.service.ts
+- [[verdictHash()]] - code - apps/api/src/services/answerJudge.service.ts
 
 ## Live Query (requires Dataview plugin)
 
@@ -54,23 +58,26 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 19 edges to [[_COMMUNITY_Content & Podcast API]]
-- 9 edges to [[_COMMUNITY_Tenant Admin & Prisma]]
-- 6 edges to [[_COMMUNITY_Community 97]]
-- 6 edges to [[_COMMUNITY_Section & Summary API]]
-- 5 edges to [[_COMMUNITY_Community 51]]
-- 5 edges to [[_COMMUNITY_Billing & Usage API]]
-- 2 edges to [[_COMMUNITY_Admin Audit & Auth]]
-- 2 edges to [[_COMMUNITY_Slide Deck Types]]
-- 2 edges to [[_COMMUNITY_Community 57]]
-- 1 edge to [[_COMMUNITY_Admin Analytics & Subscriptions]]
-- 1 edge to [[_COMMUNITY_Content Controller]]
-- 1 edge to [[_COMMUNITY_Env Config & Jobs]]
-- 1 edge to [[_COMMUNITY_Community 67]]
+- 11 edges to [[_COMMUNITY_Assessment Service]]
+- 10 edges to [[_COMMUNITY_Flashcards & Podcast Controllers]]
+- 10 edges to [[_COMMUNITY_Learning Coverage & Badges]]
+- 9 edges to [[_COMMUNITY_Answer Grading Logic]]
+- 8 edges to [[_COMMUNITY_Env Config & Background Jobs]]
+- 8 edges to [[_COMMUNITY_Content Controller (YouTubeOCR)]]
+- 5 edges to [[_COMMUNITY_Quiz Answer Input Components]]
+- 4 edges to [[_COMMUNITY_Billing & Quota Errors]]
+- 4 edges to [[_COMMUNITY_Section Mastery Service]]
+- 3 edges to [[_COMMUNITY_Bank & Question Management]]
+- 2 edges to [[_COMMUNITY_Admin Content & Subscriptions]]
+- 2 edges to [[_COMMUNITY_AI Service (DeepSeek)]]
+- 1 edge to [[_COMMUNITY_Audit & Content Management]]
+- 1 edge to [[_COMMUNITY_Quiz Generation Job]]
+- 1 edge to [[_COMMUNITY_Quiz Page & Hooks]]
+- 1 edge to [[_COMMUNITY_Assessment Controller]]
 
 ## Top bridge nodes
-- [[quiz.controller.ts]] - degree 45, connects to 11 communities
-- [[learningProgress.service.ts]] - degree 33, connects to 7 communities
-- [[createQuiz()]] - degree 8, connects to 2 communities
-- [[evaluateQuizAnswers()]] - degree 8, connects to 2 communities
-- [[persistSectionProgress()]] - degree 8, connects to 1 community
+- [[quiz.controller.ts]] - degree 65, connects to 15 communities
+- [[answerJudge.service.ts]] - degree 25, connects to 7 communities
+- [[resolveAcceptedAnswers()]] - degree 9, connects to 4 communities
+- [[checkAnswer()]] - degree 8, connects to 4 communities
+- [[evaluateQuizAnswers()]] - degree 8, connects to 3 communities

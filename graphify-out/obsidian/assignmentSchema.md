@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/tenant/shared.ts"
 type: "code"
-community: "SSE Endpoint & Error Middleware"
+community: "Tenant Service & Assignments"
 location: "L32"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/SSE_Endpoint__Error_Middleware
+  - community/Tenant_Service__Assignments
 ---
 
 # assignmentSchema
@@ -15,4 +15,4 @@ tags:
 - [[assignments.ts]] - `imports` [EXTRACTED]
 - [[shared.ts_3]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/SSE_Endpoint__Error_Middleware
+#graphify/code #graphify/EXTRACTED #community/Tenant_Service__Assignments

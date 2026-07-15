@@ -1,11 +1,11 @@
 ---
 source_file: "docs/qa/overnight-visual-qa.md"
 type: "document"
-community: "QA Playbook & Oracles"
+community: "QA Testing Methodology"
 tags:
   - graphify/document
   - graphify/EXTRACTED
-  - community/QA_Playbook__Oracles
+  - community/QA_Testing_Methodology
 ---
 
 # overnight-visual-qa.md — overnight DEEP QA runbook
@@ -21,4 +21,4 @@ tags:
 - [[scriptsqa-preflight.sh]] - `references` [EXTRACTED]
 - [[visual-qa-report.md — session journal]] - `references` [EXTRACTED]
 
-#graphify/document #graphify/EXTRACTED #community/QA_Playbook__Oracles
+#graphify/document #graphify/EXTRACTED #community/QA_Testing_Methodology

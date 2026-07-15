@@ -26,7 +26,7 @@ SORT file.name ASC
 ```
 
 ## Connections to other communities
-- 3 edges to [[_COMMUNITY_API Bootstrap & Background Jobs]]
+- 3 edges to [[_COMMUNITY_Env Config & Background Jobs]]
 
 ## Top bridge nodes
 - [[LocalStorageService]] - degree 9, connects to 1 community

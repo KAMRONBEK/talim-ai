@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/store/useUpgradeModal.ts"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "Global Providers & Upgrade Modal"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Global_Providers__Upgrade_Modal
 ---
 
 # useUpgradeModal.ts
@@ -18,4 +18,4 @@ tags:
 - [[useLimitErrorHandler.ts]] - `imports_from` [EXTRACTED]
 - [[useUpgradeModal]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Global_Providers__Upgrade_Modal

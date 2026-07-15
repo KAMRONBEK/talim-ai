@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/content/[id]/slides/page.tsx"
 type: "code"
-community: "Upgrade Modal & Chat Window"
+community: "Flashcards Page"
 location: "L116"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Upgrade_Modal__Chat_Window
+  - community/Flashcards_Page
 ---
 
 # EmptyState()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[page.tsx_33]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Upgrade_Modal__Chat_Window
+#graphify/code #graphify/EXTRACTED #community/Flashcards_Page

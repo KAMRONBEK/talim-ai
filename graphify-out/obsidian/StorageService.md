@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/services/storage.service.ts"
 type: "code"
-community: "API Bootstrap & Background Jobs"
+community: "Env Config & Background Jobs"
 location: "L5"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/API_Bootstrap__Background_Jobs
+  - community/Env_Config__Background_Jobs
 ---
 
 # StorageService
@@ -29,4 +29,4 @@ tags:
 - [[tenant-content.controller.ts]] - `imports` [EXTRACTED]
 - [[video.controller.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/API_Bootstrap__Background_Jobs
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

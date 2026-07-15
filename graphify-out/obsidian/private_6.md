@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tailwind/package.json"
 type: "code"
-community: "Tailwind Config Package"
+community: "Tailwind CSS Config Package"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tailwind_Config_Package
+  - community/Tailwind_CSS_Config_Package
 ---
 
 # private
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[package.json_6]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tailwind_Config_Package
+#graphify/code #graphify/EXTRACTED #community/Tailwind_CSS_Config_Package

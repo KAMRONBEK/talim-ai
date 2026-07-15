@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/practice/practice-generator.tsx"
 type: "code"
-community: "Dialog Components"
+community: "Login & Assign Content"
 location: "L24"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dialog_Components
+  - community/Login__Assign_Content
 ---
 
 # PracticeGeneratorProps
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[practice-generator.tsx]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dialog_Components
+#graphify/code #graphify/EXTRACTED #community/Login__Assign_Content

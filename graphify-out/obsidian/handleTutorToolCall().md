@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/lib/tutor-tools.ts"
 type: "code"
-community: "AI Tutor Visual Tools"
+community: "Tutor Tools (Chart/Geogebra/Sandbox)"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/AI_Tutor_Visual_Tools
+  - community/Tutor_Tools_Chart/Geogebra/Sandbox
 ---
 
 # handleTutorToolCall()
@@ -22,4 +22,4 @@ tags:
 - [[validateManimScript()]] - `calls` [EXTRACTED]
 - [[validateMermaidPayload()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/AI_Tutor_Visual_Tools
+#graphify/code #graphify/EXTRACTED #community/Tutor_Tools_Chart/Geogebra/Sandbox

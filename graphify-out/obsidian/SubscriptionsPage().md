@@ -1,12 +1,12 @@
 ---
 source_file: "apps/admin/app/(admin)/subscriptions/page.tsx"
 type: "code"
-community: "Admin Subscription UI"
+community: "Subscription Edit Drawer"
 location: "L34"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Admin_Subscription_UI
+  - community/Subscription_Edit_Drawer
 ---
 
 # SubscriptionsPage()
@@ -15,4 +15,4 @@ tags:
 - [[page.tsx_4]] - `contains` [EXTRACTED]
 - [[useAdminSubscriptions()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Admin_Subscription_UI
+#graphify/code #graphify/EXTRACTED #community/Subscription_Edit_Drawer

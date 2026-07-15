@@ -1,12 +1,12 @@
 ---
 source_file: "packages/config/tsconfig/node.json"
 type: "code"
-community: "Node tsconfig"
+community: "Node TypeScript Config"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Node_tsconfig
+  - community/Node_TypeScript_Config
 ---
 
 # compilerOptions
@@ -19,4 +19,4 @@ tags:
 - [[outDir_1]] - `contains` [EXTRACTED]
 - [[rootDir_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Node_tsconfig
+#graphify/code #graphify/EXTRACTED #community/Node_TypeScript_Config

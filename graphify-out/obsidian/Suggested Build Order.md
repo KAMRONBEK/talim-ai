@@ -1,16 +1,18 @@
 ---
 source_file: "docs/PLANS.md"
-type: "rationale"
-community: "Plans & Epics Docs"
+type: "document"
+community: "Product Plan Epics"
+location: "L187"
 tags:
-  - graphify/rationale
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Plans__Epics_Docs
+  - community/Product_Plan_Epics
 ---
 
-# Suggested Build Order
+# Suggested build order
 
 ## Connections
-- [[Product Plans Roadmap]] - `references` [EXTRACTED]
+- [[Talim AI Product Plans]] - `rationale_for` [EXTRACTED]
+- [[Talim AI — Product plans]] - `contains` [EXTRACTED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Plans__Epics_Docs
+#graphify/document #graphify/EXTRACTED #community/Product_Plan_Epics

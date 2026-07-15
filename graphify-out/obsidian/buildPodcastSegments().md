@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/jobs/generatePodcast.job.ts"
 type: "code"
-community: "Podcast Generation & TTS"
+community: "Env Config & Background Jobs"
 location: "L31"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Podcast_Generation__TTS
+  - community/Env_Config__Background_Jobs
 ---
 
 # buildPodcastSegments()
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[generatePodcast.job.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Podcast_Generation__TTS
+#graphify/code #graphify/EXTRACTED #community/Env_Config__Background_Jobs

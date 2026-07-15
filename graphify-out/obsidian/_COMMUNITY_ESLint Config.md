@@ -10,8 +10,8 @@ members: 2
 **Members:** 2 nodes
 
 ## Members
-- [[eslint.config.mjs]] - code - apps/api/eslint.config.mjs
-- [[index.js]] - code - packages/config/eslint/index.js
+- [[.eslintrc.json]] - code - apps/admin/.eslintrc.json
+- [[extends]] - code - apps/admin/.eslintrc.json
 
 ## Live Query (requires Dataview plugin)
 

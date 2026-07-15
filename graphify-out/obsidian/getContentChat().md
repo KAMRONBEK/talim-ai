@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/chat.controller.ts"
 type: "code"
-community: "Content Media Controllers"
+community: "Flashcards & Podcast Controllers"
 location: "L101"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Content_Media_Controllers
+  - community/Flashcards__Podcast_Controllers
 ---
 
 # getContentChat()
@@ -17,4 +17,4 @@ tags:
 - [[getParam()]] - `calls` [EXTRACTED]
 - [[resolveLocale()]] - `calls` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Content_Media_Controllers
+#graphify/code #graphify/EXTRACTED #community/Flashcards__Podcast_Controllers

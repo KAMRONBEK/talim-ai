@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/package.json"
 type: "code"
-community: "Web App Dependencies"
-location: "L12"
+community: "Frontend Dependencies"
+location: "L13"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Web_App_Dependencies
+  - community/Frontend_Dependencies
 ---
 
 # dependencies
@@ -32,4 +32,4 @@ tags:
 - [[remark-math]] - `contains` [EXTRACTED]
 - [[zustand_1]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Web_App_Dependencies
+#graphify/code #graphify/EXTRACTED #community/Frontend_Dependencies

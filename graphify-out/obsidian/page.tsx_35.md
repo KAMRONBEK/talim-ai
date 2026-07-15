@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/dashboard/page.tsx"
 type: "code"
-community: "Dashboard Search"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Dashboard_Search
+  - community/Tenant_Billing_Page
 ---
 
 # page.tsx
@@ -25,4 +25,4 @@ tags:
 - [[useContents()]] - `imports` [EXTRACTED]
 - [[useDashboardSearch()]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Dashboard_Search
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

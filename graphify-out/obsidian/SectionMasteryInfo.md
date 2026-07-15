@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Section Mastery (Elo-KT)"
-location: "L1226"
+community: "Section Mastery Service"
+location: "L1154"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Section_Mastery_Elo-KT
+  - community/Section_Mastery_Service
 ---
 
 # SectionMasteryInfo
@@ -16,4 +16,4 @@ tags:
 - [[index.ts_2]] - `contains` [EXTRACTED]
 - [[sectionMastery.service.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Elo-KT
+#graphify/code #graphify/EXTRACTED #community/Section_Mastery_Service

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/marketing/navbar.tsx"
 type: "code"
-community: "Marketing Landing Components"
+community: "Tenant Billing Page"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Tenant_Billing_Page
 ---
 
 # navbar.tsx
@@ -27,4 +27,4 @@ tags:
 - [[page.tsx_39]] - `imports_from` [EXTRACTED]
 - [[page.tsx_41]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Tenant_Billing_Page

@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/components/podcast/PodcastPlayer.tsx"
 type: "code"
-community: "Transcript Panel UI"
+community: "Transcript Panel & Video Viewer"
 location: "L51"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Transcript_Panel_UI
+  - community/Transcript_Panel__Video_Viewer
 ---
 
 # PodcastPlayer()
@@ -17,4 +17,4 @@ tags:
 - [[formatTime()_1]] - `calls` [EXTRACTED]
 - [[page.tsx_32]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Transcript_Panel_UI
+#graphify/code #graphify/EXTRACTED #community/Transcript_Panel__Video_Viewer

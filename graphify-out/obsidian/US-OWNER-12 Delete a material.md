@@ -1,11 +1,12 @@
 ---
 source_file: "docs/qa/user-stories.md"
-type: "concept"
-community: "Product Plans & Epics"
+type: "document"
+community: "QA Traceability Ledger"
+location: "L106"
 tags:
-  - graphify/concept
+  - graphify/document
   - graphify/EXTRACTED
-  - community/Product_Plans__Epics
+  - community/QA_Traceability_Ledger
 ---
 
 # US-OWNER-12: Delete a material
@@ -13,5 +14,6 @@ tags:
 ## Connections
 - [[Multi-tenant isolation guard (contentAccess.service  assertCanAccessContent)]] - `references` [EXTRACTED]
 - [[User Stories & QA Traceability (durable spec + results ledger)]] - `references` [EXTRACTED]
+- [[Worked examples (the depth to aim for)]] - `contains` [EXTRACTED]
 
-#graphify/concept #graphify/EXTRACTED #community/Product_Plans__Epics
+#graphify/document #graphify/EXTRACTED #community/QA_Traceability_Ledger

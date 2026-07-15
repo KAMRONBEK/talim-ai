@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/app/[locale]/(auth)/login/page.tsx"
 type: "code"
-community: "Shared UI Primitives"
+community: "Become Tutor & Auth Shell"
 location: "L1"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Shared_UI_Primitives
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # page.tsx
@@ -27,4 +27,4 @@ tags:
 - [[index.ts_3]] - `imports_from` [EXTRACTED]
 - [[navigation.ts]] - `imports_from` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Shared_UI_Primitives
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

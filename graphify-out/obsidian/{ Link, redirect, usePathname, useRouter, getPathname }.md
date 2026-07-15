@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/i18n/navigation.ts"
 type: "code"
-community: "Marketing Landing Components"
+community: "Become Tutor & Auth Shell"
 location: "L4"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Marketing_Landing_Components
+  - community/Become_Tutor__Auth_Shell
 ---
 
 # { Link, redirect, usePathname, useRouter, getPathname }
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[navigation.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Marketing_Landing_Components
+#graphify/code #graphify/EXTRACTED #community/Become_Tutor__Auth_Shell

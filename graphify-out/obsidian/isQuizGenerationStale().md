@@ -1,12 +1,12 @@
 ---
 source_file: "apps/web/hooks/useQuiz.ts"
 type: "code"
-community: "Quiz Player UI"
+community: "Quiz Page & Hooks"
 location: "L23"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Player_UI
+  - community/Quiz_Page__Hooks
 ---
 
 # isQuizGenerationStale()
@@ -18,4 +18,4 @@ tags:
 - [[page.tsx_40]] - `imports` [EXTRACTED]
 - [[useQuiz.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Player_UI
+#graphify/code #graphify/EXTRACTED #community/Quiz_Page__Hooks

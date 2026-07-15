@@ -1,12 +1,12 @@
 ---
 source_file: "apps/api/src/controllers/quiz.controller.ts"
 type: "code"
-community: "Quiz Controller & Grading"
-location: "L67"
+community: "Quiz Controller"
+location: "L71"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Quiz_Controller__Grading
+  - community/Quiz_Controller
 ---
 
 # submitSchema
@@ -14,4 +14,4 @@ tags:
 ## Connections
 - [[quiz.controller.ts]] - `contains` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Quiz_Controller__Grading
+#graphify/code #graphify/EXTRACTED #community/Quiz_Controller

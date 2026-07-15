@@ -1,16 +1,17 @@
 ---
 source_file: "docs/qa/user-stories-expansion.md"
 type: "document"
-community: "Community 72"
+community: "User Stories & Cross-Area Issues"
+location: "L3354"
 tags:
   - graphify/document
-  - graphify/INFERRED
-  - community/Community_72
+  - graphify/EXTRACTED
+  - community/User_Stories__Cross-Area_Issues
 ---
 
 # US-XCUT-21: SSE job-events stream replaces completion polling
 
 ## Connections
-- [[SSE Job-Events Stream (Run 9, replaces completion polling)]] - `conceptually_related_to` [INFERRED]
+- [[Area SSE job-events (push completion, replaces polling)]] - `contains` [EXTRACTED]
 
-#graphify/document #graphify/INFERRED #community/Community_72
+#graphify/document #graphify/EXTRACTED #community/User_Stories__Cross-Area_Issues

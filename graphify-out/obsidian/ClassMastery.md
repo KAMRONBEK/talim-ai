@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Tenant Dashboard & Hooks"
-location: "L454"
+community: "Tenant Messages & Progress"
+location: "L413"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Tenant_Dashboard__Hooks
+  - community/Tenant_Messages__Progress
 ---
 
 # ClassMastery
@@ -17,4 +17,4 @@ tags:
 - [[page.tsx_25]] - `imports` [EXTRACTED]
 - [[useTenant.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Tenant_Dashboard__Hooks
+#graphify/code #graphify/EXTRACTED #community/Tenant_Messages__Progress

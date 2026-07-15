@@ -1,12 +1,12 @@
 ---
 source_file: "CLAUDE.md"
 type: "rationale"
-community: "Architecture Invariants (CLAUDE.md)"
+community: "Platform Architecture Guide"
 location: "Architecture conventions & invariants"
 tags:
   - graphify/rationale
   - graphify/EXTRACTED
-  - community/Architecture_Invariants_CLAUDEmd
+  - community/Platform_Architecture_Guide
 ---
 
 # API routes mounted at root; health is GET /health
@@ -15,4 +15,4 @@ tags:
 - [[Talim AI project guide (CLAUDE.md)]] - `references` [EXTRACTED]
 - [[api healthcheck hits health (no api prefix)]] - `conceptually_related_to` [INFERRED]
 
-#graphify/rationale #graphify/EXTRACTED #community/Architecture_Invariants_CLAUDEmd
+#graphify/rationale #graphify/EXTRACTED #community/Platform_Architecture_Guide

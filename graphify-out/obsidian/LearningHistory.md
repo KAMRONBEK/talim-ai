@@ -1,12 +1,12 @@
 ---
 source_file: "packages/types/index.ts"
 type: "code"
-community: "Sheet & Layout Components"
-location: "L1353"
+community: "API Endpoints & Chat UI"
+location: "L1281"
 tags:
   - graphify/code
   - graphify/EXTRACTED
-  - community/Sheet__Layout_Components
+  - community/API_Endpoints__Chat_UI
 ---
 
 # LearningHistory
@@ -19,4 +19,4 @@ tags:
 - [[learning-history-panel.tsx]] - `imports` [EXTRACTED]
 - [[useProgress.ts]] - `imports` [EXTRACTED]
 
-#graphify/code #graphify/EXTRACTED #community/Sheet__Layout_Components
+#graphify/code #graphify/EXTRACTED #community/API_Endpoints__Chat_UI
