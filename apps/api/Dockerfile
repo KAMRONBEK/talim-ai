@@ -63,4 +63,7 @@ COPY --from=builder /app/package.json ./root-package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN mkdir -p /uploads
 EXPOSE 4000
-CMD ["sh", "-c", "./apps/api/node_modules/.bin/prisma migrate deploy --schema=src/prisma/schema.prisma && node dist/index.js"]
+# The plan seed runs at every boot so Plan.limits can't drift from the code's
+# quota keys (it did once: the 2025-06 migration's key names survived a code
+# rename and silently disabled all quotas). It must stay idempotent.
+CMD ["sh", "-c", "./apps/api/node_modules/.bin/prisma migrate deploy --schema=src/prisma/schema.prisma && node dist/prisma/seed.js && node dist/index.js"]
