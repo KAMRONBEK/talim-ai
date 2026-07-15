@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "workspaces": {
+    "apps/api": {
+      "entry": ["src/index.ts", "src/scripts/*.ts", "src/prisma/seed.ts"]
+    },
+    "apps/web": {
+      "ignoreDependencies": ["eslint", "eslint-config-next", "@talim/eslint-config"]
+    },
+    "apps/admin": {
+      "ignoreDependencies": ["eslint", "eslint-config-next", "@talim/eslint-config"]
+    }
+  },
+  "ignoreBinaries": ["doppler", "pdftoppm", "cupsfilter"]
+}

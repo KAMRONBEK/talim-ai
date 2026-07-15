@@ -64,16 +64,8 @@ export const PRACTICE_GENERATOR_TYPES = [
   'FLASHCARD',
 ] as const satisfies readonly QuestionType[];
 
-/** Default type mix when the learner doesn't customize the Practice generator. */
-export const DEFAULT_PRACTICE_TYPES: QuestionType[] = [
-  'MULTIPLE_CHOICE',
-  'TRUE_FALSE',
-  'FILL_BLANK',
-  'SHORT_ANSWER',
-];
 export type BankQuestionStatus = 'DRAFT' | 'APPROVED' | 'REJECTED';
 export type TenantAssessmentStatus = 'DRAFT' | 'PUBLISHED';
-export type AssessmentAttemptStatus = 'SUBMITTED' | 'GRADED';
 
 export type PlanKind = 'INDIVIDUAL' | 'TENANT';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELED' | 'TRIALING';
@@ -151,26 +143,6 @@ export type QuotaFeature =
   | 'VIDEO'
   | 'PODCAST'
   | 'STUDENT';
-
-export interface QuotaExceededResponse {
-  message: string;
-  code: 'QUOTA_EXCEEDED';
-  feature: QuotaFeature;
-  used: number;
-  limit: number;
-  upgradePlanCode: PlanCode | null;
-}
-
-/** A file rejected at upload because it exceeds the plan's page/size caps. */
-export interface PlanFileLimitResponse {
-  message: string;
-  code: 'PLAN_FILE_LIMIT';
-  maxPages: number | null;
-  maxFileSizeMb: number | null;
-  pages: number | null;
-  fileSizeMb: number | null;
-  upgradePlanCode: PlanCode | null;
-}
 
 export interface AdminUpdateSubscriptionInput {
   planCode?: PlanCode;
@@ -319,10 +291,6 @@ export interface LearnerMessage {
   thread: LearnerThreadMessage[];
 }
 
-export interface LearnerMessagesResponse {
-  messages: LearnerMessage[];
-}
-
 export interface LearnerUnreadCountResponse {
   count: number;
 }
@@ -385,15 +353,6 @@ export interface Tenant {
   seatLimit: number | null;
   joinCode: string | null;
   createdAt: string;
-}
-
-export interface TenantMembership {
-  id: string;
-  tenantId: string;
-  userId: string;
-  role: TenantMemberRole;
-  active: boolean;
-  joinedAt: string;
 }
 
 export interface ContentAssignment {
@@ -811,10 +770,6 @@ export interface AdminGeneratedItem {
   reviewStatus: MediaReviewStatus;
 }
 
-export interface AdminGeneratedListResponse {
-  items: AdminGeneratedItem[];
-}
-
 /** One generated-media review row (approve/flag), keyed by (kind, mediaId). */
 export interface AdminGeneratedReview {
   kind: string;
@@ -823,10 +778,6 @@ export interface AdminGeneratedReview {
   note: string | null;
   reviewedById: string | null;
   updatedAt: string;
-}
-
-export interface AdminGeneratedReviewResponse {
-  review: AdminGeneratedReview;
 }
 
 export interface AdminImpersonateResponse {
@@ -839,16 +790,6 @@ export interface UsageFeatureStats {
   inputTokens: number;
   outputTokens: number;
   costUsd: number;
-}
-
-export interface UserUsageSummary {
-  periodStart: string;
-  periodEnd: string;
-  totalInputTokens: number;
-  totalOutputTokens: number;
-  totalCostUsd: number;
-  eventCount: number;
-  byFeature: Partial<Record<UsageFeature, UsageFeatureStats>>;
 }
 
 export interface AdminUsageSummaryRow {
@@ -1135,19 +1076,6 @@ export interface Podcast {
   episodes: PodcastEpisode[];
 }
 
-export interface PodcastEpisodeProgress {
-  episodeId: string;
-  listenedSec: number;
-  completed: boolean;
-}
-
-export interface ChatSession {
-  id: string;
-  userId: string;
-  contentId: string;
-  createdAt: string;
-}
-
 export interface ChatMessage {
   id: string;
   sessionId: string;
@@ -1355,11 +1283,6 @@ export interface LearningHistory {
   summaries: ContentSummary[];
   podcastStatus: PodcastStatus | null;
   streakDays: number;
-}
-
-export interface ApiError {
-  message: string;
-  errors?: Record<string, string[]>;
 }
 
 export { isSelectedAnswerCorrect, resolveCorrectAnswer } from './quiz-answer';
