@@ -17,8 +17,9 @@ apps, product/role model) see the root `CLAUDE.md`.
   after `tsc`.
 - **Key deps** (`apps/api/package.json`): `express`, `@prisma/client` / `prisma` 6, `bull` (Redis
   queues), `jsonwebtoken`, `bcrypt`, `helmet`, `cors`, `express-rate-limit`, `multer`, `openai`,
-  `zod`, `pdf-parse`, `@distube/ytdl-core` + `youtube-transcript`, `@langchain/textsplitters`,
-  and the shared `@talim/types` workspace package.
+  `zod`, `pdf-parse`, `@distube/ytdl-core` + `youtube-transcript`,
+  and the shared `@talim/types` workspace package. (Text chunking is a custom
+  `chunkText` in `services/rag.service.ts` — no langchain.)
 - **Entry point:** `src/index.ts` → `bootstrap()`:
   1. Ensures the local upload dir exists when `storageService` is the `LocalStorageService`.
   2. **Registers all four Bull job processors** before the server listens:
