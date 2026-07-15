@@ -6,8 +6,12 @@ name: Weekly product research
 # It only writes that one markdown file — it never touches code — so the PR is safe
 # to skim and the CI gate (ci.yml) still runs on it like any other PR.
 #
-# Setup (one-time): add an ANTHROPIC_API_KEY repo secret
-#   Settings → Secrets and variables → Actions → New repository secret.
+# Auth uses your Claude **Max subscription** (counts against the Max plan quota,
+# NOT billed as separate Anthropic API usage). Setup (one-time):
+#   1. Locally: `claude setup-token`  (requires an active Max/Pro subscription) →
+#      prints a long-lived OAuth token.
+#   2. GitHub → Settings → Secrets and variables → Actions → New repository secret
+#      named CLAUDE_CODE_OAUTH_TOKEN, paste the token.
 # Test without waiting a week: Actions tab → this workflow → "Run workflow".
 on:
   schedule:
@@ -32,7 +36,9 @@ jobs:
       - name: Research pass
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Max-subscription OAuth token (from `claude setup-token`) — uses plan
+          # quota, not pay-as-you-go API billing.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             You are researching how to make **Talim AI** better. It is a multi-tenant
             AI learning platform for the **Uzbek market**: B2C solo learners upload
