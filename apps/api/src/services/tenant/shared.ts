@@ -65,7 +65,7 @@ export async function uniqueSlug(base: string): Promise<string> {
   }
 }
 
-export const DEFAULT_TENANT_PLAN_CODE = 'TENANT_STARTER';
+const DEFAULT_TENANT_PLAN_CODE = 'TENANT_STARTER';
 
 export async function getDefaultTenantPlanId(): Promise<string> {
   const plan = await prisma.plan.findUnique({ where: { code: DEFAULT_TENANT_PLAN_CODE } });

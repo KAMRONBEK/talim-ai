@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 /** Solid accent hex per accent name (drives the `--slide-accent` CSS variable). */
-export const ACCENT_HEX: Record<DeckAccent, string> = {
+const ACCENT_HEX: Record<DeckAccent, string> = {
   teal: '#14B8A6',
   indigo: '#6366F1',
   violet: '#8B5CF6',
@@ -44,7 +44,7 @@ export interface DeckPalette {
   hero: string;
 }
 
-export const DECK_PALETTES = {
+const DECK_PALETTES = {
   aurora: {
     accents: ['teal', 'indigo', 'violet'],
     canvasLight: 'bg-[linear-gradient(135deg,#ECFEFF_0%,#EEF2FF_55%,#F5F3FF_100%)]',
@@ -71,9 +71,9 @@ export const DECK_PALETTES = {
   },
 } as const satisfies Record<string, DeckPalette>;
 
-export type PaletteName = keyof typeof DECK_PALETTES;
+type PaletteName = keyof typeof DECK_PALETTES;
 
-export const ACCENT_TO_PALETTE: Record<DeckAccent, PaletteName> = {
+const ACCENT_TO_PALETTE: Record<DeckAccent, PaletteName> = {
   teal: 'aurora',
   indigo: 'aurora',
   violet: 'aurora',
@@ -89,7 +89,11 @@ export function paletteFor(accent: DeckAccent): DeckPalette {
 }
 
 /** Per-slide accent: explicit override, else cycle the deck palette's accents. */
-export function resolveSlideAccentHex(deckAccent: DeckAccent, slide: DeckSlide, index: number): string {
+export function resolveSlideAccentHex(
+  deckAccent: DeckAccent,
+  slide: DeckSlide,
+  index: number,
+): string {
   if (slide.accent) return ACCENT_HEX[slide.accent];
   const palette = paletteFor(deckAccent);
   const cycled = palette.accents[index % palette.accents.length] ?? deckAccent;

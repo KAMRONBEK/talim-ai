@@ -6,9 +6,9 @@ import { recordUsage, type UsageContext } from './usage.service.js';
 
 const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) : null;
 
-export type TranscriptSegmentSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
+type TranscriptSegmentSource = 'YOUTUBE_CAPTIONS' | 'AI_TRANSCRIPTION';
 
-export interface TranscriptSegmentInput {
+interface TranscriptSegmentInput {
   order: number;
   startMs: number;
   endMs: number;
@@ -156,7 +156,9 @@ async function generateYoutubeTranscript(
   const segments = response.segments?.length
     ? normalizeTranscriptionSegments(response.segments)
     : fallbackTextSegments(response.text ?? '');
-  const text = cleanTranscriptText(response.text ?? segments.map((segment) => segment.text).join(' '));
+  const text = cleanTranscriptText(
+    response.text ?? segments.map((segment) => segment.text).join(' '),
+  );
   if (!text || segments.length === 0) {
     throw new Error('No transcript available for this video');
   }
@@ -187,7 +189,9 @@ export async function extractYoutubeTranscript(
   }
 
   try {
-    const transcript = (await YoutubeTranscript.fetchTranscript(videoId)) as YoutubeTranscriptItem[];
+    const transcript = (await YoutubeTranscript.fetchTranscript(
+      videoId,
+    )) as YoutubeTranscriptItem[];
     const segments = normalizeCaptionSegments(transcript);
     const text = cleanTranscriptText(segments.map((segment) => segment.text).join(' '));
     if (text && segments.length > 0) {

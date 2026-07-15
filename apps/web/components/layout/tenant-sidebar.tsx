@@ -2,7 +2,15 @@
 
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { BarChart3, BookOpen, CreditCard, FileQuestion, GraduationCap, LayoutDashboard, Settings } from 'lucide-react';
+import {
+  BarChart3,
+  BookOpen,
+  CreditCard,
+  FileQuestion,
+  GraduationCap,
+  LayoutDashboard,
+  Settings,
+} from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useTenant, useTenantStudents } from '@/hooks/useTenant';
@@ -20,7 +28,7 @@ const navItems = [
   { href: '/tenant/settings', key: 'settings' as const, icon: Settings },
 ];
 
-export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
+function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   const t = useTranslations('tenant');
   const pathname = usePathname();
   const user = useAuthStore((s) => s.user);
@@ -31,10 +39,16 @@ export function TenantSidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full min-h-0 flex-col bg-[#211b15] text-[#b8b0a4]">
       <div className="flex shrink-0 items-center gap-2 border-b border-white/10 px-4 py-4">
-        <Link href="/tenant/dashboard" onClick={onNavigate} className="flex min-w-0 items-center gap-2.5">
+        <Link
+          href="/tenant/dashboard"
+          onClick={onNavigate}
+          className="flex min-w-0 items-center gap-2.5"
+        >
           <LogoMark className="h-8 w-8 shadow-soft" />
           <span className="min-w-0">
-            <span className="block truncate font-display text-base font-bold text-[#f7f2e8]">Talim AI</span>
+            <span className="block truncate font-display text-base font-bold text-[#f7f2e8]">
+              Talim AI
+            </span>
             <span className="block truncate font-label text-[10px] uppercase tracking-wider text-[#8a8076]">
               {t('organization')}
             </span>

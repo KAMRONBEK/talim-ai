@@ -3,20 +3,12 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, Trash2 } from 'lucide-react';
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  Input,
-  Label,
-} from '@talim/ui';
+import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, Input, Label } from '@talim/ui';
 import type { BankQuestion, QuestionType } from '@talim/types';
 import { useCreateBankQuestion, usePatchBankQuestion } from '@/hooks/useAssessments';
 
 /** Every authorable question type, in the order shown in the editor's type select. */
-export const QUESTION_TYPES: QuestionType[] = [
+const QUESTION_TYPES: QuestionType[] = [
   'SHORT_ANSWER',
   'NUMERIC',
   'MULTIPLE_CHOICE',
@@ -57,7 +49,9 @@ function mutErr(e: unknown, fallback: string): string {
 }
 
 function asStringArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === 'string')
+    : [];
 }
 
 /** The shared create/patch body — the fields both mutations accept. */
@@ -164,7 +158,10 @@ export function QuestionEditor({
     return ['', ''];
   });
   const [correctIndex, setCorrectIndex] = useState<number>(() => {
-    if (question?.options && (question.type === 'MULTIPLE_CHOICE' || question.type === 'TRUE_FALSE')) {
+    if (
+      question?.options &&
+      (question.type === 'MULTIPLE_CHOICE' || question.type === 'TRUE_FALSE')
+    ) {
       const idx = question.options.findIndex((o) => question.acceptableAnswers.includes(o));
       return idx >= 0 ? idx : 0;
     }
@@ -184,7 +181,10 @@ export function QuestionEditor({
     if (question?.type === 'MATCHING') {
       const left = asStringArray((question.config as { left?: unknown } | null)?.left);
       if (left.length) {
-        return left.map((value, i) => ({ left: value, right: question.acceptableAnswers[i] ?? '' }));
+        return left.map((value, i) => ({
+          left: value,
+          right: question.acceptableAnswers[i] ?? '',
+        }));
       }
     }
     return [
@@ -225,11 +225,17 @@ export function QuestionEditor({
 
   // HOTSPOT: background image + normalized correct regions ({x,y,w,h}, all 0..1).
   const [hotspotImageUrl, setHotspotImageUrl] = useState<string>(() => {
-    const url = question?.type === 'HOTSPOT' ? (question.config as { imageUrl?: unknown } | null)?.imageUrl : undefined;
+    const url =
+      question?.type === 'HOTSPOT'
+        ? (question.config as { imageUrl?: unknown } | null)?.imageUrl
+        : undefined;
     return typeof url === 'string' ? url : '';
   });
   const [regions, setRegions] = useState<{ x: number; y: number; w: number; h: number }[]>(() => {
-    const raw = question?.type === 'HOTSPOT' ? (question.config as { regions?: unknown } | null)?.regions : undefined;
+    const raw =
+      question?.type === 'HOTSPOT'
+        ? (question.config as { regions?: unknown } | null)?.regions
+        : undefined;
     if (!Array.isArray(raw)) return [];
     return raw
       .filter(
@@ -499,7 +505,9 @@ export function QuestionEditor({
                       value={opt}
                       placeholder={t('editorOptionPlaceholder')}
                       onChange={(event) =>
-                        setOptions(options.map((o, idx) => (idx === index ? event.target.value : o)))
+                        setOptions(
+                          options.map((o, idx) => (idx === index ? event.target.value : o)),
+                        )
                       }
                     />
                     <Button
@@ -523,7 +531,12 @@ export function QuestionEditor({
                   </div>
                 ))}
               </div>
-              <Button type="button" size="sm" variant="outline" onClick={() => setOptions([...options, ''])}>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={() => setOptions([...options, ''])}
+              >
                 <Plus className="h-3.5 w-3.5" />
                 {t('editorAddOption')}
               </Button>
@@ -789,7 +802,9 @@ export function QuestionEditor({
                                 max={1}
                                 step={0.01}
                                 value={region[key]}
-                                onChange={(event) => updateRegion(index, key, Number(event.target.value))}
+                                onChange={(event) =>
+                                  updateRegion(index, key, Number(event.target.value))
+                                }
                                 className="w-16"
                               />
                             </label>

@@ -9,7 +9,6 @@ import type { QuotaFeature } from '@talim/types';
 import { prisma } from '../../lib/prisma.js';
 import { AppError, QuotaExceededError } from '../../middleware/error.middleware.js';
 
-export type { QuotaFeature };
 export { QuotaExceededError };
 
 export const FREE_PLAN_CODE = 'FREE';
@@ -23,7 +22,7 @@ export const GENERATION_FEATURES = [
   'SLIDESHOW_GEN',
 ] as const;
 
-export const VIDEO_FEATURE = 'VIDEO_GEN' as const;
+const VIDEO_FEATURE = 'VIDEO_GEN' as const;
 
 export interface PlanLimits {
   maxUploadsPerDay?: number | null;
@@ -57,7 +56,7 @@ export function parseLimits(raw: Prisma.JsonValue): PlanLimits {
   return raw as PlanLimits;
 }
 
-export function monthToDateRange(): { from: Date; to: Date } {
+function monthToDateRange(): { from: Date; to: Date } {
   const to = new Date();
   const from = new Date(to.getFullYear(), to.getMonth(), 1);
   return { from, to };
@@ -70,10 +69,7 @@ export function dayRange(): { from: Date; to: Date } {
   return { from, to };
 }
 
-export function resolveEffectivePlanCode(
-  planCode: string,
-  status: SubscriptionStatus,
-): string {
+function resolveEffectivePlanCode(planCode: string, status: SubscriptionStatus): string {
   if (status === 'CANCELED') return FREE_PLAN_CODE;
   return planCode;
 }

@@ -1,4 +1,4 @@
-export const SUMMARY_SYSTEM_PROMPT = `Siz o'quv materiallari uchun xulosa yozadigan o'qituvchisiz.
+const SUMMARY_SYSTEM_PROMPT = `Siz o'quv materiallari uchun xulosa yozadigan o'qituvchisiz.
 
 Qoidalar:
 - Javob faqat o'zbek tilida bo'lsin (matn boshqa tilda bo'lsa ham, xulosani o'zbekcha yozing).
@@ -11,7 +11,7 @@ Qoidalar:
 - Masala yechimlaridagi raqamli nomuvofiqliklarni "xato" deb baholamang — faqat qanday masalalar va formulalar o'rgatilganini yozing.
 - 2–4 paragraf yetarli. Umumiy hajm: taxminan 150–350 so'z.`;
 
-export function buildSummaryUserPrompt(title: string, context: string): string {
+function buildSummaryUserPrompt(title: string, context: string): string {
   return `Material: ${title}
 
 Manba matn (ichki foydalanish uchun — javobda ko'chirmang):

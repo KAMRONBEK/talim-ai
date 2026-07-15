@@ -18,7 +18,7 @@ export interface RecordUsageInput {
   metadata?: Record<string, unknown>;
 }
 
-export function estimateCost(model: string, inputTokens: number, outputTokens: number): number {
+function estimateCost(model: string, inputTokens: number, outputTokens: number): number {
   return estimateTokenCostUsd(model, inputTokens, outputTokens);
 }
 
@@ -62,8 +62,10 @@ export async function getUsageForPeriod(params: {
   };
 
   const events = await prisma.apiUsageEvent.findMany({ where });
-  const byFeature: Record<string, { inputTokens: number; outputTokens: number; costUsd: number; count: number }> =
-    {};
+  const byFeature: Record<
+    string,
+    { inputTokens: number; outputTokens: number; costUsd: number; count: number }
+  > = {};
 
   let totalInputTokens = 0;
   let totalOutputTokens = 0;

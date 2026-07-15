@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Button, Card, CardContent, CardHeader, CardTitle, Input, buttonVariants, cn } from '@talim/ui';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Input,
+  buttonVariants,
+  cn,
+} from '@talim/ui';
 import { useCreateYoutubeContent } from '@/hooks/useContent';
 import { useFileUpload } from '@/hooks/useFileUpload';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
@@ -11,7 +20,7 @@ interface UploadCallbacks {
   onSuccess?: () => void;
 }
 
-export function FileUploadField({ onSuccess }: UploadCallbacks) {
+function FileUploadField({ onSuccess }: UploadCallbacks) {
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
   // Plan/quota limits surface the global promotion modal from inside the hook;
@@ -88,7 +97,7 @@ interface UploadCardProps {
   compact?: boolean;
 }
 
-export function UploadCard({ onSuccess, compact }: UploadCardProps) {
+function UploadCard({ onSuccess, compact }: UploadCardProps) {
   const t = useTranslations('content');
   const inner = (
     <>

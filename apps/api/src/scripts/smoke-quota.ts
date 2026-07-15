@@ -25,11 +25,8 @@
  *   { "message": "...", "code": "QUOTA_EXCEEDED", "feature": "UPLOAD", "used": 3, "limit": 3, "upgradePlanCode": "INDIVIDUAL_PRO" }
  */
 import { prisma } from '../lib/prisma.js';
-import {
-  assertQuota,
-  getUsageVsLimits,
-  QuotaExceededError,
-} from '../services/subscription.service.js';
+import { assertQuota, getUsageVsLimits } from '../services/subscription.service.js';
+import { QuotaExceededError } from '../services/subscription/shared.js';
 
 function parseArgs(argv: string[]): Record<string, string> {
   const args: Record<string, string> = {};

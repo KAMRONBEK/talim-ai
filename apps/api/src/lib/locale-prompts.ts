@@ -137,7 +137,8 @@ const QUIZ_STYLE: Record<AppLocale, Record<QuestionStyle, string>> = {
     mixed:
       "Turli savol turlarini muvozanatli aralashtiring: ko'p tanlovli, to'g'ri/noto'g'ri, qisqa yozma va mos bo'lsa raqamli.",
     multipleChoice: "BARCHA savollar MULTIPLE_CHOICE bo'lsin (har biri 3-4 ta variant).",
-    trueFalse: "BARCHA savollar to'g'ri/noto'g'ri bo'lsin (options AYNAN [\"To'g'ri\", \"Noto'g'ri\"]).",
+    trueFalse:
+      "BARCHA savollar to'g'ri/noto'g'ri bo'lsin (options AYNAN [\"To'g'ri\", \"Noto'g'ri\"]).",
     written: "BARCHA savollar SHORT_ANSWER bo'lsin (qisqa yozma javob, options: null).",
     numeric: "BARCHA savollar NUMERIC bo'lsin (raqamli javob, options: null).",
   },
@@ -255,26 +256,27 @@ Rules:
 - Ответы краткие и понятные.`,
 };
 
-const TUTOR_CONTEXT: Record<AppLocale, { material: string; excerpt: string; imageRegion: string }> = {
-  uz: {
-    material: "O'quv materiali (bilim manbasi — iqtibos qilmasdan o'rgating):\n",
-    excerpt: 'O\'quvchi materialdan quyidagi qismni belgiladi:\n"""',
-    imageRegion:
-      "O'quvchi PDF dan hudud tanladi va rasmini yubordi. Xabardagi rasmni o'qing va ko'rganingiz asosida javob bering.",
-  },
-  en: {
-    material: 'Learning material (teach from this — do not quote verbatim):\n',
-    excerpt: 'The student highlighted this excerpt from the material:\n"""',
-    imageRegion:
-      'The student selected a region from the PDF and attached an image. Read the image in their message and answer based on what you see.',
-  },
-  ru: {
-    material: 'Учебный материал (обучайте на его основе — не цитируйте дословно):\n',
-    excerpt: 'Студент выделил следующий фрагмент материала:\n"""',
-    imageRegion:
-      'Студент выделил область PDF и прикрепил изображение. Прочитайте изображение в сообщении и ответьте на основе того, что видите.',
-  },
-};
+const TUTOR_CONTEXT: Record<AppLocale, { material: string; excerpt: string; imageRegion: string }> =
+  {
+    uz: {
+      material: "O'quv materiali (bilim manbasi — iqtibos qilmasdan o'rgating):\n",
+      excerpt: 'O\'quvchi materialdan quyidagi qismni belgiladi:\n"""',
+      imageRegion:
+        "O'quvchi PDF dan hudud tanladi va rasmini yubordi. Xabardagi rasmni o'qing va ko'rganingiz asosida javob bering.",
+    },
+    en: {
+      material: 'Learning material (teach from this — do not quote verbatim):\n',
+      excerpt: 'The student highlighted this excerpt from the material:\n"""',
+      imageRegion:
+        'The student selected a region from the PDF and attached an image. Read the image in their message and answer based on what you see.',
+    },
+    ru: {
+      material: 'Учебный материал (обучайте на его основе — не цитируйте дословно):\n',
+      excerpt: 'Студент выделил следующий фрагмент материала:\n"""',
+      imageRegion:
+        'Студент выделил область PDF и прикрепил изображение. Прочитайте изображение в сообщении и ответьте на основе того, что видите.',
+    },
+  };
 
 const SUMMARY_PREFIX_PATTERNS_EN = [
   /^here is (?:the )?(?:extracted )?text(?: from (?:the )?(?:document|handbook|material|pdf))?[\s:—-]*/i,
@@ -334,18 +336,23 @@ export function buildSummaryUserPrompt(locale: AppLocale, title: string, context
 
 export function sanitizeSummaryOutput(locale: AppLocale, text: string): string {
   let cleaned = text.trim();
-  const extraPatterns = locale === 'en' ? SUMMARY_PREFIX_PATTERNS_EN : locale === 'ru' ? SUMMARY_PREFIX_PATTERNS_RU : [];
+  const extraPatterns =
+    locale === 'en'
+      ? SUMMARY_PREFIX_PATTERNS_EN
+      : locale === 'ru'
+        ? SUMMARY_PREFIX_PATTERNS_RU
+        : [];
   for (const pattern of extraPatterns) {
     cleaned = cleaned.replace(pattern, '');
   }
   return sanitizeUz(cleaned);
 }
 
-export function getQuizSystemPrompt(locale: AppLocale): string {
+function getQuizSystemPrompt(locale: AppLocale): string {
   return QUIZ_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
-export function buildQuizUserPrompt(
+function buildQuizUserPrompt(
   locale: AppLocale,
   title: string,
   context: string,
@@ -368,7 +375,7 @@ Return JSON:
 }`;
 }
 
-export function getTutorSystemPrompt(locale: AppLocale): string {
+function getTutorSystemPrompt(locale: AppLocale): string {
   return TUTOR_PROMPTS[locale] + LANGUAGE_QUALITY[locale];
 }
 
@@ -397,7 +404,9 @@ export function buildTutorSystemMessage(
   ];
 
   if (scopeNote?.trim()) {
-    parts.push(`\n\nRouting note (higher priority than previous chat history): ${scopeNote.trim()}`);
+    parts.push(
+      `\n\nRouting note (higher priority than previous chat history): ${scopeNote.trim()}`,
+    );
   }
 
   if (context.trim()) {

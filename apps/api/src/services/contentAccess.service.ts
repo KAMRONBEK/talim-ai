@@ -58,7 +58,7 @@ export async function buildContentListWhere(user: AuthPayload): Promise<Prisma.C
   throw new AppError(403, 'Use /api/tenant/content for organization materials');
 }
 
-export function assertIndividualContentRoute(user: AuthPayload): void {
+function assertIndividualContentRoute(user: AuthPayload): void {
   if (user.role === 'TENANT_OWNER') {
     throw new AppError(403, 'Use /api/tenant/content for organization materials');
   }

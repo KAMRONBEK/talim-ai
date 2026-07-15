@@ -1,6 +1,6 @@
 const PREFIX = 'talim-onboarding-';
 
-export function getOnboardingKey(userId: string): string {
+function getOnboardingKey(userId: string): string {
   return `${PREFIX}${userId}`;
 }
 

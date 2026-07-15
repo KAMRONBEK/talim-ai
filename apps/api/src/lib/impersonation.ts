@@ -3,7 +3,7 @@ import type { UserRole } from '@prisma/client';
 import { env } from '../config/env.js';
 
 /** How long an impersonation token is valid. Short-lived by design. */
-export const IMPERSONATION_TTL = '30m';
+const IMPERSONATION_TTL = '30m';
 
 /**
  * Claims carried by an impersonation JWT. It reuses the normal auth token shape
@@ -11,7 +11,7 @@ export const IMPERSONATION_TTL = '30m';
  * PLUS `imp: true` and `impersonatorId` so downstream code / audit can tell an
  * impersonated session apart from a genuine login.
  */
-export interface ImpersonationClaims {
+interface ImpersonationClaims {
   userId: string;
   email: string;
   role: UserRole;

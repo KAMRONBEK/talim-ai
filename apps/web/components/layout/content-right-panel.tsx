@@ -73,7 +73,14 @@ export function ContentRightPanelBody({
         </h3>
         <div className="relative mx-auto my-4 h-[120px] w-[120px]">
           <svg width="120" height="120" viewBox="0 0 120 120" className="-rotate-90">
-            <circle cx="60" cy="60" r="52" fill="none" stroke="hsl(var(--border))" strokeWidth="8" />
+            <circle
+              cx="60"
+              cy="60"
+              r="52"
+              fill="none"
+              stroke="hsl(var(--border))"
+              strokeWidth="8"
+            />
             <circle
               cx="60"
               cy="60"
@@ -184,7 +191,7 @@ export function ContentRightPanelBody({
 
 type ContentRightPanelProps = Omit<ContentRightPanelBodyProps, 'onAction'>;
 
-export function ContentRightPanel(props: ContentRightPanelProps) {
+function ContentRightPanel(props: ContentRightPanelProps) {
   return (
     <aside className="hidden w-72 shrink-0 flex-col overflow-y-auto border-l bg-card md:flex">
       <ContentRightPanelBody {...props} />
@@ -197,11 +204,7 @@ interface ContentRightPanelSheetProps extends ContentRightPanelProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function ContentRightPanelSheet({
-  open,
-  onOpenChange,
-  ...props
-}: ContentRightPanelSheetProps) {
+function ContentRightPanelSheet({ open, onOpenChange, ...props }: ContentRightPanelSheetProps) {
   const t = useTranslations('content');
 
   return (

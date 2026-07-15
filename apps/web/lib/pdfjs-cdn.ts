@@ -11,7 +11,7 @@ export interface PdfDocumentProxy {
   getPage(pageNumber: number): Promise<PdfPageProxy>;
 }
 
-export interface PdfPageProxy {
+interface PdfPageProxy {
   getViewport(params: { scale: number }): PdfViewport;
   render(params: {
     canvasContext: CanvasRenderingContext2D;

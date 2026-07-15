@@ -22,12 +22,9 @@ const openai = new OpenAI({
   apiKey: env.OPENAI_API_KEY,
 });
 
-export type ChatMessageContent =
+type ChatMessageContent =
   | string
-  | Array<
-      | { type: 'text'; text: string }
-      | { type: 'image_url'; image_url: { url: string } }
-    >;
+  | Array<{ type: 'text'; text: string } | { type: 'image_url'; image_url: { url: string } }>;
 
 export interface ChatMessageInput {
   role: 'system' | 'user' | 'assistant';
@@ -124,8 +121,9 @@ export async function* streamChatCompletion(
   messages: ChatMessageInput[],
   usage?: AiUsageContext,
 ): AsyncGenerator<string> {
-  const stream =
-    (await createDeepSeekChatStream(messages)) as unknown as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
+  const stream = (await createDeepSeekChatStream(
+    messages,
+  )) as unknown as AsyncIterable<OpenAI.Chat.Completions.ChatCompletionChunk>;
 
   let finalUsage: { prompt_tokens?: number; completion_tokens?: number } | null = null;
   for await (const chunk of stream) {
@@ -138,7 +136,7 @@ export async function* streamChatCompletion(
   recordCompletionUsage(usage, env.DEEPSEEK_MODEL, { usage: finalUsage });
 }
 
-export async function* streamTutorCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
+async function* streamTutorCompletion(messages: ChatMessageInput[]): AsyncGenerator<string> {
   for await (const event of streamTutorWithTools(messages)) {
     if (event.type === 'text') yield event.text;
   }
@@ -195,10 +193,7 @@ export async function* streamTutorWithTools(
     let assistantText = '';
     let roundInputTokens = 0;
     let roundOutputTokens = 0;
-    const toolCallsAcc: Record<
-      number,
-      { id: string; name: string; arguments: string }
-    > = {};
+    const toolCallsAcc: Record<number, { id: string; name: string; arguments: string }> = {};
     let finishReason: string | null = null;
 
     for await (const chunk of stream) {

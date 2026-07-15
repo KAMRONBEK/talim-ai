@@ -39,7 +39,7 @@ const streamSchema = z.object({
   locale: z.enum(['uz', 'en', 'ru']).optional(),
 });
 
-export async function getOrCreateSession(
+async function getOrCreateSession(
   userId: string,
   contentId: string,
   locale: AppLocale,

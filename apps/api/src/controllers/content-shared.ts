@@ -39,7 +39,7 @@ export const reparseSchema = z.object({
   pages: z.array(z.string().min(1)).min(1).max(30),
 });
 
-export function formatTranscriptSegment(segment: {
+function formatTranscriptSegment(segment: {
   id: string;
   contentId: string;
   order: number;

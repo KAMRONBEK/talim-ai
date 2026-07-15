@@ -5,7 +5,7 @@ import { getApiBaseUrl } from '@/lib/api';
 import { getApiLocale } from '@/lib/locale-api';
 import { useAuthStore } from './useAuthStore';
 
-export interface LocalChatMessage {
+interface LocalChatMessage {
   id: string;
   role: MessageRole;
   text: string;
@@ -85,105 +85,111 @@ export const useChatStore = create<ChatState>((set, get) => ({
       isStreaming: true,
       messages: [
         ...state.messages,
-        { id: userMsgId, role: 'USER', text: message, excerpt: selectedExcerpt, excerptImage: selectedImage },
+        {
+          id: userMsgId,
+          role: 'USER',
+          text: message,
+          excerpt: selectedExcerpt,
+          excerptImage: selectedImage,
+        },
         { id: assistantMsgId, role: 'ASSISTANT', text: '', streaming: true },
       ],
     }));
 
     try {
-    const response = await fetch(`${getApiBaseUrl()}/chat/stream`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        'Accept-Language': getApiLocale(),
-      },
-      body: JSON.stringify({
-        contentId,
-        message,
-        sessionId: get().sessionId ?? undefined,
-        selectedExcerpt,
-        selectedImage,
-        locale: getApiLocale(),
-      }),
-    });
-
-    if (!response.ok || !response.body) {
-      // Surface limit errors (402 TUTOR_MESSAGE quota etc.) as an axios-shaped
-      // error so the caller can classify it and open the promotion modal. The
-      // catch below clears the optimistic bubbles + unlocks the composer.
-      let data: unknown;
-      try {
-        data = await response.json();
-      } catch {
-        /* non-JSON error body */
-      }
-      throw Object.assign(new Error('chat_stream_failed'), {
-        response: { status: response.status, data },
+      const response = await fetch(`${getApiBaseUrl()}/chat/stream`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          'Accept-Language': getApiLocale(),
+        },
+        body: JSON.stringify({
+          contentId,
+          message,
+          sessionId: get().sessionId ?? undefined,
+          selectedExcerpt,
+          selectedImage,
+          locale: getApiLocale(),
+        }),
       });
-    }
 
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    let fullText = '';
-    let streamFailed = false;
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      buffer += decoder.decode(value, { stream: true });
-      const lines = buffer.split('\n');
-      buffer = lines.pop() ?? '';
-
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const data = line.slice(6);
-        if (data === '[DONE]') continue;
-
+      if (!response.ok || !response.body) {
+        // Surface limit errors (402 TUTOR_MESSAGE quota etc.) as an axios-shaped
+        // error so the caller can classify it and open the promotion modal. The
+        // catch below clears the optimistic bubbles + unlocks the composer.
+        let data: unknown;
         try {
-          const parsed = JSON.parse(data) as {
-            text?: string;
-            visual?: VisualBlock;
-            graph?: DesmosGraphPayload;
-            sessionId?: string;
-            error?: string;
-          };
-          if (parsed.sessionId) {
-            set({ sessionId: parsed.sessionId });
-          }
-          if (parsed.error) {
-            // Mid-stream server error: flag it and let the outer catch remove the
-            // optimistic bubbles + surface a localized message via ChatWindow — don't
-            // render the raw English server string (it also wouldn't persist → ghost).
-            streamFailed = true;
-          }
-          if (parsed.visual) {
-            fullText = appendVisualToText(fullText, parsed.visual);
-            get().updateStreamingMessage(assistantMsgId, fullText);
-          } else if (parsed.graph) {
-            fullText += serializeGraphBlock(parsed.graph);
-            get().updateStreamingMessage(assistantMsgId, fullText);
-          }
-          if (parsed.text) {
-            fullText += parsed.text;
-            get().updateStreamingMessage(assistantMsgId, fullText);
-          }
+          data = await response.json();
         } catch {
-          // skip malformed chunks
+          /* non-JSON error body */
+        }
+        throw Object.assign(new Error('chat_stream_failed'), {
+          response: { status: response.status, data },
+        });
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let fullText = '';
+      let streamFailed = false;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() ?? '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6);
+          if (data === '[DONE]') continue;
+
+          try {
+            const parsed = JSON.parse(data) as {
+              text?: string;
+              visual?: VisualBlock;
+              graph?: DesmosGraphPayload;
+              sessionId?: string;
+              error?: string;
+            };
+            if (parsed.sessionId) {
+              set({ sessionId: parsed.sessionId });
+            }
+            if (parsed.error) {
+              // Mid-stream server error: flag it and let the outer catch remove the
+              // optimistic bubbles + surface a localized message via ChatWindow — don't
+              // render the raw English server string (it also wouldn't persist → ghost).
+              streamFailed = true;
+            }
+            if (parsed.visual) {
+              fullText = appendVisualToText(fullText, parsed.visual);
+              get().updateStreamingMessage(assistantMsgId, fullText);
+            } else if (parsed.graph) {
+              fullText += serializeGraphBlock(parsed.graph);
+              get().updateStreamingMessage(assistantMsgId, fullText);
+            }
+            if (parsed.text) {
+              fullText += parsed.text;
+              get().updateStreamingMessage(assistantMsgId, fullText);
+            }
+          } catch {
+            // skip malformed chunks
+          }
         }
       }
-    }
 
-    if (streamFailed) throw new Error('chat_stream_failed');
+      if (streamFailed) throw new Error('chat_stream_failed');
 
-    set((state) => ({
-      isStreaming: false,
-      messages: state.messages.map((m) =>
-        m.id === assistantMsgId ? { ...m, text: fullText, streaming: false } : m,
-      ),
-    }));
+      set((state) => ({
+        isStreaming: false,
+        messages: state.messages.map((m) =>
+          m.id === assistantMsgId ? { ...m, text: fullText, streaming: false } : m,
+        ),
+      }));
     } catch (err) {
       // Any failure — non-OK response, network reject, or a mid-stream read error —
       // unlocks the composer and removes the optimistic user + assistant bubbles so

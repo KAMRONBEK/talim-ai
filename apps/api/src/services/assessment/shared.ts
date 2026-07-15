@@ -9,20 +9,12 @@ import { buildRagContext } from '../rag.service.js';
 // The grading engine lives in @talim/types (shared with the web app for instant practice
 // feedback). Re-exported here so the assessment services keep their original import surface.
 export {
-  normalizeAnswer,
   jsonStringArray,
   parseQuestionConfig,
-  parseArrayAnswer,
   answerToString,
-  isCorrect,
   gradeQuestion,
   isAnswerableMultipleChoice,
   isAnswerableMultipleSelect,
-  parseHotspotRegions,
-  pointInAnyRegion,
-  guessFloorForQuestion,
-  type GradeResult,
-  type HotspotRegion,
 } from '@talim/types';
 
 export const createBankSchema = z.object({
@@ -45,7 +37,7 @@ export const questionStyleEnum = z.enum([
   'written',
   'numeric',
 ]);
-export type QuestionStyle = z.infer<typeof questionStyleEnum>;
+type QuestionStyle = z.infer<typeof questionStyleEnum>;
 
 export const questionDepthEnum = z.enum(['recall', 'understanding', 'application', 'mixed']);
 
@@ -80,7 +72,7 @@ export const generateSchema = z.object({
 // Every question type the storage + scoring engine supports. Shared by the patch
 // (edit/approve) and create (manual authoring) schemas so a tutor can hand-author or
 // edit any type the AI generator can produce.
-export const questionTypeEnum = z.enum([
+const questionTypeEnum = z.enum([
   'SHORT_ANSWER',
   'NUMERIC',
   'MULTIPLE_CHOICE',
@@ -106,10 +98,14 @@ export const patchQuestionSchema = z
     explanation: z.string().nullable().optional(),
     status: z.enum(['DRAFT', 'APPROVED', 'REJECTED']).optional(),
   })
-  .refine((v) => v.type === 'HOTSPOT' || v.acceptableAnswers === undefined || v.acceptableAnswers.length >= 1, {
-    message: 'At least one acceptable answer is required.',
-    path: ['acceptableAnswers'],
-  });
+  .refine(
+    (v) =>
+      v.type === 'HOTSPOT' || v.acceptableAnswers === undefined || v.acceptableAnswers.length >= 1,
+    {
+      message: 'At least one acceptable answer is required.',
+      path: ['acceptableAnswers'],
+    },
+  );
 
 /**
  * Manual authoring of a bank question from scratch (not AI-generated). `prompt` and `type`
@@ -184,7 +180,7 @@ export const submitAnswerValueSchema = z.union([
   z.array(z.string()),
   z.record(z.string(), z.string()),
 ]);
-export type SubmitAnswerValue = z.infer<typeof submitAnswerValueSchema>;
+type SubmitAnswerValue = z.infer<typeof submitAnswerValueSchema>;
 
 export const submitAssessmentSchema = z.object({
   answers: z.record(z.string(), submitAnswerValueSchema),
@@ -193,7 +189,7 @@ export const submitAssessmentSchema = z.object({
   durationMs: z.number().int().min(0).optional(),
 });
 
-export const GAME_BASE_POINTS = 1000;
+const GAME_BASE_POINTS = 1000;
 
 /** Speed-weighted, streak-multiplied points for a correct game-quiz answer. */
 export function computeGamePoints(
@@ -387,8 +383,11 @@ export async function getSectionContext(tenantId: string, contentId?: string, se
   return buildRagContext(chunks.map((c) => ({ text: c.text, chunkIndex: c.chunkIndex })));
 }
 
-
-export async function assertLearnerAssignment(tenantId: string, userId: string, assessmentId: string) {
+export async function assertLearnerAssignment(
+  tenantId: string,
+  userId: string,
+  assessmentId: string,
+) {
   const assignment = await prisma.assessmentAssignment.findFirst({
     where: { assessmentId, learnerId: userId, assessment: { tenantId } },
   });
@@ -404,6 +403,10 @@ export interface LeaderboardAttempt {
   user: { id: string; name: string | null; username: string | null; email: string };
 }
 
-export function learnerDisplayName(u: { name: string | null; username: string | null; email: string }): string {
+export function learnerDisplayName(u: {
+  name: string | null;
+  username: string | null;
+  email: string;
+}): string {
   return u.name ?? u.username ?? u.email;
 }

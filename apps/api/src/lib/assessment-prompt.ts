@@ -12,7 +12,7 @@ export type AssessmentQuestionStyle =
   | 'matching'
   | 'ordering';
 
-export const ASSESSMENT_SYSTEM_PROMPT = `Siz O'zbekistondagi maktab va o'quv markazlari uchun savol banki tuzadigan metodistsiz.
+const ASSESSMENT_SYSTEM_PROMPT = `Siz O'zbekistondagi maktab va o'quv markazlari uchun savol banki tuzadigan metodistsiz.
 
 Qoidalar:
 - Savollar tabiiy, savodli o'zbek tilida, lotin yozuvida bo'lsin (ona tilida so'zlashuvchi o'qituvchidek — tarjima qilingandek emas).
@@ -49,7 +49,7 @@ function styleInstruction(style: AssessmentQuestionStyle): string {
     case 'matching':
       return 'BARCHA savollar MATCHING bo\'lsin: config: {"left": [...], "right": [...]}, acceptableAnswers har bir chap element uchun to\'g\'ri o\'ng javob (tartib bilan, left ga parallel). Kamida 2 juft. options: null.';
     case 'ordering':
-      return 'BARCHA savollar ORDERING bo\'lsin: acceptableAnswers elementlar to\'g\'ri tartibda (birinchidan oxirigacha). Kamida 2 element. config va options: null.';
+      return "BARCHA savollar ORDERING bo'lsin: acceptableAnswers elementlar to'g'ri tartibda (birinchidan oxirigacha). Kamida 2 element. config va options: null.";
     case 'written':
       return "BARCHA savollar SHORT_ANSWER bo'lsin (qisqa yozma javob, options: null).";
     case 'numeric':
@@ -60,7 +60,7 @@ function styleInstruction(style: AssessmentQuestionStyle): string {
   }
 }
 
-export function buildAssessmentPrompt(input: {
+function buildAssessmentPrompt(input: {
   title: string;
   topic?: string | null;
   context?: string | null;
@@ -154,7 +154,7 @@ Return JSON:
  * Anything else collapses to SHORT_ANSWER. (Do NOT widen this: the B2C quiz path in
  * quiz.controller can't grade the B2B-only types.)
  */
-export function normalizeQuestionType(type: string | undefined): QuestionType {
+function normalizeQuestionType(type: string | undefined): QuestionType {
   if (type === 'NUMERIC' || type === 'MULTIPLE_CHOICE') return type;
   return 'SHORT_ANSWER';
 }

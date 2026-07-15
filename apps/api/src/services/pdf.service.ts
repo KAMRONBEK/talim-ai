@@ -17,7 +17,7 @@ const openai = env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) :
 const OPENROUTER_API = 'https://openrouter.ai/api/v1';
 
 /** True when a dedicated OCR provider is configured (primary scanned-PDF path). */
-export const hasPrimaryOcrProvider = (): boolean => env.OPENROUTER_API_KEY.length > 0;
+const hasPrimaryOcrProvider = (): boolean => env.OPENROUTER_API_KEY.length > 0;
 
 async function extractWithPdfParse(buffer: Buffer): Promise<string> {
   // pdf-parse bundles an old pdf.js that throws on some real-world PDFs (e.g.
@@ -459,7 +459,10 @@ export async function extractRegionTextFromImage(
   imageBuffer: Buffer,
   usage?: UsageContext,
 ): Promise<string> {
-  const text = await ocrImageDataUrl(`data:image/png;base64,${imageBuffer.toString('base64')}`, usage);
+  const text = await ocrImageDataUrl(
+    `data:image/png;base64,${imageBuffer.toString('base64')}`,
+    usage,
+  );
   if (!text) {
     throw new Error('No text could be extracted from the selected region');
   }

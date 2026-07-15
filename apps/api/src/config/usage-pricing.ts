@@ -1,5 +1,5 @@
 /** USD per 1M tokens — update when provider pricing changes */
-export const TOKEN_PRICING_PER_MILLION: Record<string, { input: number; output: number }> = {
+const TOKEN_PRICING_PER_MILLION: Record<string, { input: number; output: number }> = {
   'deepseek-v4-flash': { input: 0.14, output: 0.28 },
   'deepseek-chat': { input: 0.14, output: 0.28 },
   'gpt-4o': { input: 2.5, output: 10 },
@@ -20,7 +20,7 @@ export const TOKEN_PRICING_PER_MILLION: Record<string, { input: number; output: 
  * Kept here (not in a migration) so pricing can change without a schema change.
  * A plan's own `limits.priceMonthlyUsd` (when set) takes precedence over this.
  */
-export const PLAN_MONTHLY_PRICE_USD: Record<string, number> = {
+const PLAN_MONTHLY_PRICE_USD: Record<string, number> = {
   FREE: 0,
   INDIVIDUAL_PRO: 10,
   TENANT_STARTER: 49,

@@ -11,10 +11,7 @@ export function Testimonials() {
   const t = useTranslations('landing');
 
   return (
-    <section
-      id="testimonials"
-      className="border-t border-border/60 py-20 sm:py-24"
-    >
+    <section id="testimonials" className="border-t border-border/60 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
@@ -70,5 +67,3 @@ export function Testimonials() {
     </section>
   );
 }
-
-export default Testimonials;

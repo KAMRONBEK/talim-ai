@@ -45,11 +45,11 @@ export const MANUAL_TIERS: ManualTier[] = [
   { key: '2', bullets: 3 },
 ];
 
-export type PlanAudience = 'individual' | 'team';
+type PlanAudience = 'individual' | 'team';
 export type BillingPeriod = 'monthly' | 'annual';
 
 /** Per-plan limits, in display terms. `null` means unlimited. */
-export interface PlanLimitsView {
+interface PlanLimitsView {
   uploadsPerDay: number | null;
   generationsPerDay: number | null;
   tutorPerDay: number | null;
@@ -78,7 +78,7 @@ export interface PricingPlan {
   limits: PlanLimitsView;
 }
 
-export const PRICING_PLANS: PricingPlan[] = [
+const PRICING_PLANS: PricingPlan[] = [
   {
     code: 'FREE',
     nameKey: 'free',
@@ -169,7 +169,10 @@ export function planFeatureSpecs(plan: PricingPlan): FeatureSpec[] {
   const l = plan.limits;
   const daily = (n: number | null, unlimitedKey: string, countKey: string): FeatureSpec =>
     n === null ? { key: unlimitedKey } : { key: countKey, values: { n } };
-  const file: FeatureSpec = { key: 'features.file', values: { pages: l.maxPages, mb: l.maxFileMb } };
+  const file: FeatureSpec = {
+    key: 'features.file',
+    values: { pages: l.maxPages, mb: l.maxFileMb },
+  };
 
   if (plan.audience === 'individual') {
     return [
@@ -192,7 +195,7 @@ export function planFeatureSpecs(plan: PricingPlan): FeatureSpec[] {
   ];
 }
 
-export function plansForAudience(audience: PlanAudience): PricingPlan[] {
+function plansForAudience(audience: PlanAudience): PricingPlan[] {
   return PRICING_PLANS.filter((p) => p.audience === audience);
 }
 

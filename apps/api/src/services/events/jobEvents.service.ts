@@ -63,4 +63,4 @@ class InProcessJobEventBus {
 }
 
 export const jobEvents = new InProcessJobEventBus();
-export type JobEventBus = InProcessJobEventBus;
+type JobEventBus = InProcessJobEventBus;

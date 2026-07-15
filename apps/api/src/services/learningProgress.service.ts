@@ -117,10 +117,7 @@ async function estimateAiCoverage(
   }
 }
 
-async function computeBestFullQuizScore(
-  userId: string,
-  sectionId: string,
-): Promise<number | null> {
+async function computeBestFullQuizScore(userId: string, sectionId: string): Promise<number | null> {
   const attempts = await prisma.quizAttempt.findMany({
     where: {
       userId,
@@ -149,10 +146,7 @@ function blendCoverageScore(params: {
   return Math.round(Math.max(0, Math.min(100, blended)) * 10) / 10;
 }
 
-export async function recalculateContentProgress(
-  userId: string,
-  contentId: string,
-): Promise<void> {
+async function recalculateContentProgress(userId: string, contentId: string): Promise<void> {
   const sections = await prisma.contentSection.findMany({
     where: { contentId },
     select: { id: true },
@@ -363,7 +357,7 @@ export async function updateProgressAfterQuizSubmit(
   });
 }
 
-export function isSectionComplete(coverageScore: number): boolean {
+function isSectionComplete(coverageScore: number): boolean {
   return coverageScore >= SECTION_COMPLETE_THRESHOLD;
 }
 
