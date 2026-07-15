@@ -579,6 +579,26 @@
       "assessments": "Assessments",
       "readyMaterials": "Ready materials"
     },
+    "dashboard": {
+      "readyHint": "{count} ready",
+      "totalHint": "{count} total",
+      "avgMasteryHint": "across students with progress",
+      "atRiskHint": "low mastery or 14+ days inactive",
+      "activeWeekHint": "of {count} active students",
+      "liveCount": "{count} live",
+      "scheduledCount": "{count} scheduled",
+      "draftCount": "{count, plural, one {# draft} other {# drafts}}",
+      "classSnapshot": "Class snapshot",
+      "focusTopics": "Weakest topics",
+      "assessmentPulse": "Assessment activity",
+      "questionsShort": "{count, plural, one {# question} other {# questions}}",
+      "submittedShort": "{submitted}/{total} submitted",
+      "noAssessments": "No published assessments yet.",
+      "recentActivity": "Recent student activity",
+      "noRecentActivity": "No student activity yet.",
+      "atRiskStudents": "{count, plural, one {# student at risk} other {# students at risk}}",
+      "messagesHint": "Open the Messages bell above to read and reply."
+    },
     "register": {
       "title": "Create your organization",
       "desc": "For tutors, schools, and training teams",
@@ -1043,6 +1063,14 @@
       "materialsDone": "Materials done",
       "quizzes": "Quizzes",
       "avgAccuracy": "Avg accuracy"
+    },
+    "dashboard": {
+      "completedHint": "of {count} assigned",
+      "activityTitle": "Learning activity",
+      "activeDaysThisWeek": "{count, plural, one {# active day} other {# active days}} this week",
+      "focusTitle": "Topics to review",
+      "unreadFromTutor": "{count, plural, one {# new message} other {# new messages}} from your tutor",
+      "checkBell": "Open the Messages bell above to read and reply."
     },
     "nav": {
       "materials": "Materials",

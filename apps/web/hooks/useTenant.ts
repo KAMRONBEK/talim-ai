@@ -70,6 +70,8 @@ export function useCreateTenantStudent() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      // The tenant dashboard reads its roster/totals from the progress summary.
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'progress'] });
       // Refresh seat usage + the at-cap gate, which read from the billing query.
       queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
     },
@@ -92,6 +94,7 @@ export function useImportStudents() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'progress'] });
       // Imported students consume seats — refresh the seat usage + at-cap gate.
       queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
     },
@@ -110,7 +113,9 @@ export function useSendTenantMessage() {
 
 /**
  * The tutor's sent message threads (each root broadcast grouped with its student replies).
- * Newest root first. Fetched lazily (only while the inbox panel is open).
+ * Newest root first. The inbox bell defers fetching until its panel opens (pass `enabled`);
+ * the tenant dashboard fetches eagerly for its recent-threads card — same queryKey, so
+ * the bell reuses the cached list.
  */
 export function useTenantMessages(enabled = true) {
   return useQuery({
@@ -207,6 +212,7 @@ export function usePatchTenantStudent() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'progress'] });
       // Activating/deactivating a student changes seat usage (billing query).
       queryClient.invalidateQueries({ queryKey: ['billing', 'me'] });
     },
@@ -379,6 +385,7 @@ export function useAssignContent() {
     onSuccess: (_data, vars) => {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'assignments', vars.contentId] });
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'progress'] });
       queryClient.invalidateQueries({ queryKey: ['contents'] });
     },
   });
@@ -393,6 +400,7 @@ export function useUnassignContent() {
     onSuccess: (_data, vars) => {
       queryClient.invalidateQueries({ queryKey: ['tenant', 'assignments', vars.contentId] });
       queryClient.invalidateQueries({ queryKey: ['tenant', 'students'] });
+      queryClient.invalidateQueries({ queryKey: ['tenant', 'progress'] });
     },
   });
 }

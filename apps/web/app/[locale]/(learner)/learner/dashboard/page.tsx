@@ -4,26 +4,54 @@ import { useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   AlertCircle,
+  Award,
   BookOpen,
+  CalendarClock,
+  CheckCircle2,
   FileText,
   Flame,
   Gamepad2,
+  Layers,
   Loader2,
+  Mail,
   Play,
   Presentation,
   Target,
+  TrendingUp,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useContents } from '@/hooks/useContent';
-import { useLearnerMaterials, useLearnerSummary } from '@/hooks/useTenant';
+import {
+  useLearnerMaterials,
+  useLearnerMessages,
+  useLearnerProgress,
+  useLearnerSummary,
+  useLearnerUnreadCount,
+} from '@/hooks/useTenant';
 import { useLearnerAssessments } from '@/hooks/useAssessments';
 import { Link } from '@/i18n/navigation';
 import { Button, Progress, cn } from '@talim/ui';
-import type { AppLocale, Content, ContentType, LearnerMaterial } from '@talim/types';
+import type {
+  AppLocale,
+  Content,
+  ContentType,
+  LearnerAssessment,
+  LearnerMaterial,
+} from '@talim/types';
 import { formatRelativeTime } from '@/lib/format-relative-time';
+import { masteryTone } from '@/lib/mastery-tone';
+import { ActivityHeatmap } from '@/components/tenant/activity-heatmap';
+import { StatCard } from '@/components/dashboard/stat-card';
 import { StudentWelcomeBanner } from '@/components/learner/student-welcome-banner';
 
 type CardStatus = 'processing' | 'failed' | 'completed' | 'continue' | 'notStarted';
+
+/** Achievement codes → localized label keys under the `learner` namespace. */
+const BADGE_LABEL_KEYS: Record<string, string> = {
+  STREAK_5: 'badges.STREAK_5',
+  FIRST_PERFECT: 'badges.FIRST_PERFECT',
+  TEN_QUIZZES: 'badges.TEN_QUIZZES',
+};
 
 const typeStyles: Record<
   ContentType,
@@ -140,6 +168,63 @@ function AssignedMaterialCard({
   );
 }
 
+function TaskCard({ assessment }: { assessment: LearnerAssessment }) {
+  const t = useTranslations('learner');
+  const locale = useLocale() as AppLocale;
+  const pastDue = assessment.dueAt != null && new Date(assessment.dueAt).getTime() < Date.now();
+  // Mirrors /learner/assessments: a task submitted before the deadline is not "overdue".
+  const overdue = pastDue && assessment.attemptCount === 0;
+
+  const metaParts = [
+    t('assessments.questionCount', { count: assessment.questions.length }),
+    t('assessments.attempts', { used: assessment.attemptCount, max: assessment.maxAttempts }),
+  ];
+  if (assessment.latestScore != null) {
+    metaParts.push(t('assessments.latest', { score: Math.round(assessment.latestScore) }));
+  }
+  if (assessment.mode === 'GAME' && assessment.latestPoints != null) {
+    metaParts.push(t('assessments.points', { count: assessment.latestPoints }));
+  }
+
+  return (
+    <Link
+      href="/learner/assessments"
+      className={cn(
+        'hover-lift rounded-2xl border border-border/70 border-l-4 bg-card p-4 shadow-soft',
+        assessment.mode === 'GAME' ? 'border-l-accent-secondary' : 'border-l-primary',
+      )}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <p className="min-w-0 truncate font-display font-semibold">{assessment.title}</p>
+        <span
+          className={cn(
+            'shrink-0 rounded-full px-2 py-0.5 font-label text-[10px] font-bold uppercase tracking-wide',
+            assessment.mode === 'GAME'
+              ? 'bg-accent-secondary/15 text-accent-secondary'
+              : 'bg-primary/10 text-primary',
+          )}
+        >
+          {assessment.mode === 'GAME' ? t('assessments.gameBadge') : t('assessments.writtenBadge')}
+        </span>
+      </div>
+      {assessment.dueAt && (
+        <p
+          className={cn(
+            'mt-1.5 flex items-center gap-1.5 text-xs font-medium',
+            overdue ? 'text-destructive' : 'text-accent-secondary',
+          )}
+        >
+          <CalendarClock className="h-3.5 w-3.5 shrink-0" />
+          {overdue
+            ? t('assessments.overdue', { date: formatRelativeTime(assessment.dueAt, locale) })
+            : t('assessments.due', { date: formatRelativeTime(assessment.dueAt, locale) })}
+        </p>
+      )}
+      <p className="mt-1 text-sm text-muted-foreground">{metaParts.join(' · ')}</p>
+    </Link>
+  );
+}
+
 export default function LearnerDashboardPage() {
   const t = useTranslations('learner');
   const locale = useLocale() as AppLocale;
@@ -148,6 +233,10 @@ export default function LearnerDashboardPage() {
   const { data: summary } = useLearnerSummary();
   const { data: materials } = useLearnerMaterials();
   const { data: assessments } = useLearnerAssessments();
+  const { data: progress } = useLearnerProgress();
+  const { data: unreadMessages = 0 } = useLearnerUnreadCount();
+  // Only fetch the message bodies when there is something unread to preview.
+  const { data: messages } = useLearnerMessages(unreadMessages > 0);
 
   // Live/scheduled GAME quiz → prominent join banner. Prefer an open live session;
   // otherwise the soonest upcoming scheduled game. Nothing renders when neither exists.
@@ -200,9 +289,87 @@ export default function LearnerDashboardPage() {
     return 0;
   };
 
+  // Tasks sorted by urgency: live games first, then nearest upcoming deadline, then
+  // no-deadline tasks; closed (past-due) tasks sort last — a passed dueAt means
+  // submissions are closed, so they're no longer actionable.
+  const sortedTasks = useMemo(() => {
+    const now = Date.now();
+    const rank = (a: LearnerAssessment) => {
+      if (a.isLive) return 0;
+      if (a.dueAt == null) return 2;
+      return new Date(a.dueAt).getTime() >= now ? 1 : 3;
+    };
+    return [...(assessments ?? [])]
+      .sort((x, y) => {
+        const rx = rank(x);
+        const r = rx - rank(y);
+        if (r !== 0) return r;
+        if (x.dueAt != null && y.dueAt != null) {
+          const byDue = new Date(x.dueAt).getTime() - new Date(y.dueAt).getTime();
+          // Upcoming: soonest first; closed: most recently closed first.
+          return rx === 3 ? -byDue : byDue;
+        }
+        return 0;
+      })
+      .slice(0, 4);
+  }, [assessments]);
+
+  const activeDaysThisWeek = useMemo(() => {
+    const days = new Set(progress?.activityDays ?? []);
+    let count = 0;
+    const today = new Date();
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      if (days.has(date.toISOString().slice(0, 10))) count += 1;
+    }
+    return count;
+  }, [progress?.activityDays]);
+
+  // Weakest topics first — masteryByTopic arrives sorted by coverage desc.
+  const focusTopics = useMemo(
+    () =>
+      [...(progress?.masteryByTopic ?? [])]
+        .filter((topic) => topic.coverage < 70)
+        .slice(-4)
+        .reverse(),
+    [progress?.masteryByTopic],
+  );
+
+  const badges = progress?.badges ?? [];
+  // Preview the newest tutor message in the unread thread — an unread root's `readAt`
+  // is also nulled when a newer in-thread tutor response is what's actually unread.
+  const latestUnread = (messages ?? []).find((m) => m.readAt == null);
+  const unreadPreview = latestUnread
+    ? ([...latestUnread.thread].reverse().find((tm) => tm.fromTutor) ?? latestUnread)
+    : undefined;
+
+  const completedCount =
+    progress?.materialsDone ??
+    (materials ?? []).filter((m) => m.status === 'completed').length;
+
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
       <StudentWelcomeBanner />
+
+      {unreadMessages > 0 && (
+        <div className="flex flex-wrap items-center gap-4 rounded-3xl border border-info/40 bg-info/10 p-5 shadow-soft">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-info text-info-foreground">
+            <Mail className="h-6 w-6" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-display font-semibold text-foreground">
+              {t('dashboard.unreadFromTutor', { count: unreadMessages })}
+            </p>
+            {unreadPreview && (
+              <p className="mt-0.5 truncate text-sm text-muted-foreground">
+                {unreadPreview.senderName ?? t('messages.fromTutor')}: {unreadPreview.body}
+              </p>
+            )}
+            <p className="mt-0.5 text-xs text-muted-foreground">{t('dashboard.checkBell')}</p>
+          </div>
+        </div>
+      )}
 
       {liveGame && (
         <div className="relative flex flex-wrap items-center justify-between gap-4 overflow-hidden rounded-3xl border border-accent-secondary/40 bg-accent-secondary/10 p-5 shadow-soft">
@@ -303,34 +470,55 @@ export default function LearnerDashboardPage() {
         )}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <div className="flex items-start justify-between">
-            <p className="font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {t('statAssigned')}
-            </p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <BookOpen className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
-            {assignedCount}
-          </p>
-        </div>
-        <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <div className="flex items-start justify-between">
-            <p className="font-label text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {t('statAvgQuiz')}
-            </p>
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-success/10 text-success">
-              <Target className="h-5 w-5" />
-            </span>
-          </div>
-          <p className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight">
-            {summary?.avgQuizScore != null ? `${Math.round(summary.avgQuizScore)}%` : '—'}
-          </p>
-        </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          label={t('statAssigned')}
+          value={assignedCount}
+          icon={BookOpen}
+          tone="pine"
+        />
+        <StatCard
+          label={t('progress.materialsDone')}
+          value={completedCount}
+          icon={CheckCircle2}
+          tone="success"
+          hint={t('dashboard.completedHint', { count: assignedCount })}
+        />
+        <StatCard
+          label={t('statAvgQuiz')}
+          value={summary?.avgQuizScore != null ? `${Math.round(summary.avgQuizScore)}%` : '—'}
+          icon={Target}
+          tone="clay"
+        />
+        <StatCard
+          href="/learner/progress"
+          label={t('progress.overallMastery')}
+          value={progress?.overallMastery != null ? `${Math.round(progress.overallMastery)}%` : '—'}
+          icon={TrendingUp}
+          tone="pine"
+          valueClassName={
+            progress?.overallMastery != null && progress.overallMastery >= 70
+              ? 'text-primary'
+              : undefined
+          }
+        />
       </div>
+
+      {sortedTasks.length > 0 && (
+        <section>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="font-display text-lg font-semibold">{t('tasksTitle')}</h2>
+            <Link href="/learner/assessments" className="text-sm font-medium text-primary hover:underline">
+              {t('viewAll')}
+            </Link>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2">
+            {sortedTasks.map((assessment) => (
+              <TaskCard key={assessment.id} assessment={assessment} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <div className="w-full">
         <div className="mb-4 flex items-center justify-between gap-3">
@@ -365,33 +553,108 @@ export default function LearnerDashboardPage() {
         )}
       </div>
 
-      {(assessments?.length ?? 0) > 0 && (
-        <section>
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="font-display text-lg font-semibold">{t('tasksTitle')}</h2>
-            <Link href="/learner/assessments" className="text-sm font-medium text-primary hover:underline">
-              {t('viewAll')}
-            </Link>
+      {progress && (
+        <div className="grid gap-4 lg:grid-cols-3">
+          <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+            <div className="mb-4 flex items-center gap-2">
+              <Flame className="h-4 w-4 text-primary" aria-hidden />
+              <h3 className="font-display text-base font-semibold tracking-tight">
+                {t('dashboard.activityTitle')}
+              </h3>
+            </div>
+            <ActivityHeatmap days={progress.activityDays} />
+            <p className="mt-3 text-sm text-muted-foreground">
+              {t('dashboard.activeDaysThisWeek', { count: activeDaysThisWeek })}
+            </p>
           </div>
-          <div className="grid gap-3 md:grid-cols-2">
-            {assessments?.slice(0, 2).map((assessment) => (
-              <Link
-                key={assessment.id}
-                href="/learner/assessments"
-                className="hover-lift rounded-2xl border border-border/70 border-l-4 border-l-primary bg-card p-4 shadow-soft"
-              >
-                <p className="font-display font-semibold">{assessment.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {t('taskMeta', {
-                    count: assessment.questions.length,
-                    used: assessment.attemptCount,
-                    max: assessment.maxAttempts,
-                  })}
-                </p>
+
+          <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+            <div className="mb-4 flex items-center gap-2">
+              <Layers className="h-4 w-4 text-primary" aria-hidden />
+              <h3 className="font-display text-base font-semibold tracking-tight">
+                {t('dashboard.focusTitle')}
+              </h3>
+            </div>
+            {focusTopics.length === 0 ? (
+              <p className="rounded-xl bg-muted/50 px-4 py-6 text-center text-sm text-muted-foreground">
+                {t('progress.masteryEmpty')}
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {focusTopics.map((topic) => {
+                  const pct = Math.max(0, Math.min(100, Math.round(topic.coverage)));
+                  const tone = masteryTone(topic.coverage);
+                  return (
+                    <div key={topic.sectionId}>
+                      <div className="flex items-center justify-between gap-3 text-sm">
+                        <span className="truncate">{topic.title}</span>
+                        <span className={`font-display font-bold tabular-nums ${tone.text}`}>
+                          {pct}%
+                        </span>
+                      </div>
+                      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-muted">
+                        <div
+                          className={`h-full rounded-full ${tone.bar}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+            <div className="mb-4 flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <Award className="h-4 w-4 text-primary" aria-hidden />
+                <h3 className="font-display text-base font-semibold tracking-tight">
+                  {t('progress.achievements')}
+                </h3>
+              </div>
+              <Link href="/learner/progress" className="text-sm font-medium text-primary hover:underline">
+                {t('viewAll')}
               </Link>
-            ))}
+            </div>
+            {badges.length === 0 ? (
+              <p className="rounded-xl bg-muted/50 px-4 py-6 text-center text-sm text-muted-foreground">
+                {t('progress.badgesEmpty')}
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {badges.map((badge) => {
+                  const earned = badge.earned;
+                  const pct = Math.round(Math.max(0, Math.min(1, badge.progress ?? 0)) * 100);
+                  const labelKey = BADGE_LABEL_KEYS[badge.code];
+                  const label = labelKey ? t(labelKey) : badge.code;
+                  return (
+                    <div key={badge.code} className={`flex items-center gap-3 ${earned ? '' : 'opacity-60'}`}>
+                      <span
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg ${
+                          earned ? 'bg-accent-secondary/15' : 'bg-muted'
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {badge.emoji}
+                      </span>
+                      <div className="min-w-0">
+                        <p className={`truncate text-sm font-semibold ${earned ? '' : 'text-muted-foreground'}`}>
+                          {label}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {earned
+                            ? t('progress.badgeEarned')
+                            : t('progress.badgeProgress', { percent: pct })}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
-        </section>
+        </div>
       )}
     </div>
   );

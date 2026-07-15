@@ -579,6 +579,26 @@
       "assessments": "Задания",
       "readyMaterials": "Готовые материалы"
     },
+    "dashboard": {
+      "readyHint": "{count} готово",
+      "totalHint": "всего {count}",
+      "avgMasteryHint": "по ученикам с прогрессом",
+      "atRiskHint": "низкое освоение или неактивен 14+ дней",
+      "activeWeekHint": "из {count} активных учеников",
+      "liveCount": "{count} в эфире",
+      "scheduledCount": "{count} запланировано",
+      "draftCount": "{count, plural, one {# черновик} few {# черновика} many {# черновиков} other {# черновика}}",
+      "classSnapshot": "Обзор класса",
+      "focusTopics": "Самые слабые темы",
+      "assessmentPulse": "Активность по заданиям",
+      "questionsShort": "{count, plural, one {# вопрос} few {# вопроса} many {# вопросов} other {# вопроса}}",
+      "submittedShort": "{submitted}/{total} сдали",
+      "noAssessments": "Опубликованных заданий пока нет.",
+      "recentActivity": "Недавняя активность учеников",
+      "noRecentActivity": "Активности учеников пока нет.",
+      "atRiskStudents": "{count, plural, one {# ученик в зоне риска} few {# ученика в зоне риска} many {# учеников в зоне риска} other {# ученика в зоне риска}}",
+      "messagesHint": "Нажмите на колокольчик «Сообщения» вверху, чтобы прочитать и ответить."
+    },
     "register": {
       "title": "Создайте организацию",
       "desc": "Для репетиторов, школ и команд",
@@ -1043,6 +1063,14 @@
       "materialsDone": "Материалы пройдены",
       "quizzes": "Тесты",
       "avgAccuracy": "Средняя точность"
+    },
+    "dashboard": {
+      "completedHint": "из {count} назначенных",
+      "activityTitle": "Учебная активность",
+      "activeDaysThisWeek": "{count, plural, one {# активный день} few {# активных дня} many {# активных дней} other {# активных дней}} на этой неделе",
+      "focusTitle": "Темы для повторения",
+      "unreadFromTutor": "{count, plural, one {# новое сообщение} few {# новых сообщения} many {# новых сообщений} other {# новых сообщений}} от преподавателя",
+      "checkBell": "Нажмите на колокольчик «Сообщения» вверху, чтобы прочитать и ответить."
     },
     "nav": {
       "materials": "Материалы",

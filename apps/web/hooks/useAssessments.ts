@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import type {
   AssessmentAssignment,
   AssessmentLeaderboard,
@@ -247,6 +247,24 @@ export function useAssessmentResults(assessmentId: string | null) {
       return data;
     },
     enabled: Boolean(assessmentId),
+  });
+}
+
+/**
+ * Results for several assessments at once (dashboard "submitted x/y" rows). Shares the
+ * per-id query key with useAssessmentResults so the cache is common between the two.
+ */
+export function useAssessmentResultsMany(assessmentIds: string[]) {
+  return useQueries({
+    queries: assessmentIds.map((assessmentId) => ({
+      queryKey: ['tenant', 'assessments', assessmentId, 'results'],
+      queryFn: async () => {
+        const { data } = await api.get<AssessmentResults>(
+          `/tenant/assessments/${assessmentId}/results`,
+        );
+        return data;
+      },
+    })),
   });
 }
 

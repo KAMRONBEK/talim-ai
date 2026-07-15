@@ -579,6 +579,26 @@
       "assessments": "Topshiriqlar",
       "readyMaterials": "Tayyor materiallar"
     },
+    "dashboard": {
+      "readyHint": "{count} ta tayyor",
+      "totalHint": "jami {count} ta",
+      "avgMasteryHint": "o'rganishni boshlagan o'quvchilar bo'yicha",
+      "atRiskHint": "o'zlashtirish past yoki 14+ kun faol emas",
+      "activeWeekHint": "{count} ta faol o'quvchidan",
+      "liveCount": "{count} ta jonli",
+      "scheduledCount": "{count} ta rejalashtirilgan",
+      "draftCount": "{count} ta qoralama",
+      "classSnapshot": "Sinf holati",
+      "focusTopics": "Eng zaif mavzular",
+      "assessmentPulse": "Topshiriqlar faolligi",
+      "questionsShort": "{count} ta savol",
+      "submittedShort": "{submitted}/{total} topshirdi",
+      "noAssessments": "Hozircha e'lon qilingan topshiriqlar yo'q.",
+      "recentActivity": "O'quvchilarning so'nggi faolligi",
+      "noRecentActivity": "Hozircha o'quvchilar faolligi yo'q.",
+      "atRiskStudents": "{count} ta o'quvchi xavf ostida",
+      "messagesHint": "O'qish va javob yozish uchun yuqoridagi qo'ng'iroq (Xabarlar) belgisini bosing."
+    },
     "register": {
       "title": "Tashkilot yarating",
       "desc": "O'qituvchilar, maktablar va jamoalar uchun",
@@ -1043,6 +1063,14 @@
       "materialsDone": "Tugatilgan materiallar",
       "quizzes": "Testlar",
       "avgAccuracy": "O'rtacha aniqlik"
+    },
+    "dashboard": {
+      "completedHint": "{count} ta biriktirilgandan",
+      "activityTitle": "O'quv faolligi",
+      "activeDaysThisWeek": "Shu haftada {count} kun faol bo'ldingiz",
+      "focusTitle": "Takrorlash kerak bo'lgan mavzular",
+      "unreadFromTutor": "O'qituvchingizdan {count} ta yangi xabar",
+      "checkBell": "O'qish va javob yozish uchun yuqoridagi qo'ng'iroq (Xabarlar) belgisini bosing."
     },
     "nav": {
       "materials": "Materiallar",
