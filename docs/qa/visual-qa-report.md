@@ -1783,3 +1783,25 @@ chrome checked this run).
 4. **Moderation FLAGGED-hidden** (F78) — is a FLAGGED podcast/quiz actually withheld from the learner serving path, or label-only? (product-gap confirm).
 5. **CSV import robustness** — BOM/semicolon/Windows-1251 encodings, seat-boundary + concurrent-import race, 500-row perf (fresh angle on csv-import cells).
 6. **Re-examination bucket:** re-attack C3 GAME-live at **ru/en** (live player render) + C1 written-judge with a **Cyrillic/RTL answer key** (different content-locale than uz).
+
+---
+
+## Run 21 — 2026-07-16 (overnight, session-based deep QA · branch claude/visual-qa)
+
+**Boot:** preflight exit 0 (api/web/admin healthy, 4 accounts ok, fixtures ready); re-read rulebook + coverage-map + last 5 journal entries. RCRCRC top = `aaaa2b9c feat(web): real so'm prices on public pricing surfaces` + `7ae7893f feat(dashboards): information-dense tutor & student dashboards` (freshest product code, both on `viewed`/∞ cells). Invariants compiled (seat/deactivation-immediate/assigned-only/no-cross-tenant/server-timing). Charter queue: C1 pricing surfaces, C2 tutor dashboard, C3 student dashboard, C4 analytics fuzz, C5 moderation FLAGGED-hidden, C6 CSV encoding robustness (regression), C7 structured-player a11y (regression).
+
+### C1 — Public pricing surfaces, all 4 tiers/so'm · Nodira · Money tour · data-integrity + charisma (RCRCRC #1, aaaa2b9c)
+
+**Charter:** Explore `/pricing` (+ landing `#pricing`) as a skeptical buyer across logged-out/INDIVIDUAL roles + uz/ru, to discover **data-integrity** (advertised prices/limits ≠ the shared `PRICING_PLANS` source) + **charisma/i18n** defects. **Done when:** every tier's monthly+annual+effective-monthly price + feature list matches `lib/pricing.ts` exactly, the ~20% annual-save claim reconciles arithmetically, i18n scans (raw-key/eng-leak) are clean uz+ru, and CTA routing is characterized.
+
+**Oracle established first** (`apps/web/lib/pricing.ts`, the single source shared by /pricing, landing #pricing, and the in-app upgrade modal — so nothing drifts): FREE 0 · Pro 119 000/mo, 1 140 000/yr (eff 95 000, save 20.2%) · Team 349 000/mo, 3 348 000/yr (eff 279 000, 20.1%) · School 1 190 000/mo, 11 400 000/yr (eff 950 000, 20.2%). All three save-% + effective-monthly comments reconcile to the arithmetic.
+
+**🟢 Monthly uz — exact match to source.** All 4 tiers render with correct so'm prices (thin-space grouped) + correct feature lists: FREE (3 uploads/20 tutor/5 gen/1 podcast/1 video daily, 100pg/25MB); Pro (unlimited uploads/tutor/tests, 12 podcast, 4 video, 2000pg/120MB); Team (25 students, 100 materials, 50 gen, 20 podcast, 10 video, unlimited tutor, 2000pg/120MB); School (100 students, 500 materials, 200 gen, 50 podcast, 30 video, unlimited tutor). Manual-activation note present ("To'lov qo'lda amalga oshiriladi: tarifni tanlang…"). Highlighted cards = Pro + School ("Eng mashhur").
+
+**🟢 Annual toggle reconciles.** Yillik → Pro **95 000 so'm/oy · Yiliga 1 140 000**; Team **279 000/oy · 3 348 000**; School **950 000/oy · 11 400 000** — effective-monthly = annualUzs/12 to the som, totals match source. Toggle copy "Yillik · 20% tejang".
+
+**🟢 i18n oracle clean (uz + ru).** uz: 0 raw i18n keys, 0 English UI leakage, 0 console errors/warnings. ru: prices in **сум** (119 000/349 000/1 190 000/мес), Cyrillic present, 0 raw keys, only "Pro" hit = legit cross-locale plan name; annual copy "Ежегодно · Экономия 20%". Pricing cell now uz+ru → oracle-verified.
+
+**🟢 CTA routing characterized (Money tour).** Logged-out: every tier CTA `href=/register` → clicking "Pro olish" lands on `/uz/register` ✓ (correct — sign up then request activation, manual billing). Logged-in INDIVIDUAL: `/pricing` renders identically, CTAs still `/register`; clicking "Pro olish" → `/register` → RoleGuard **bounces to `/dashboard`** with no upgrade flow → **O90** (usability, low-confidence, by-design-adjacent: the manual-billing "all CTAs → register" decision makes the logged-in CTA a dead-end; real upgrade path is the quota-402 modal / settings).
+
+**Oracle:** data-integrity (product self-consistency — rendered = `PRICING_PLANS`) + World (arithmetic reconciles) + Standards (i18n). **No F.** ASCII-apostrophe on the pricing copy = **already O80** (product-wide U+0027-vs-U+02BB convention), not re-filed. **New: O90** (logged-in CTA dead-end). **Test-data:** none (read-only public surface; INDIVIDUAL login only). **Cells:** pricing/logged-out → oracle-verified(uz+ru); pricing/INDIVIDUAL → oracle-verified; pricing/OWNER → deferred to C2 (owner-session, render is provably role-independent — hardcoded hrefs, no role branch).

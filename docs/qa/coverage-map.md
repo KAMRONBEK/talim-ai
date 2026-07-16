@@ -79,9 +79,9 @@
 | admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | Saboteur | oracle-verified | R2026-07-12a | c73f9371 | — | 0 |
 | admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-12a | c73f9371 | F78 | 0 |
 | admin.content/ADMIN/content-detail | /content/[id] (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
-| pricing/logged-out/cta | /[locale]/pricing | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
-| pricing/INDIVIDUAL/cta | /[locale]/pricing | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
-| pricing/TENANT_OWNER/cta | /[locale]/pricing | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
+| pricing/logged-out/cta | /[locale]/pricing | logged-out | populated | uz+ru | Nodira | oracle-verified | R2026-07-16a | aaaa2b9c | O80,O90 | 0 |
+| pricing/INDIVIDUAL/cta | /[locale]/pricing | INDIVIDUAL | populated | uz | Nodira | oracle-verified | R2026-07-16a | aaaa2b9c | O90 | 0 |
+| pricing/TENANT_OWNER/cta | /[locale]/pricing | TENANT_OWNER | populated | uz | — | viewed | — | aaaa2b9c | O90 | ∞ |
 | terms/logged-out/render | /[locale]/terms | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/typebadge | /[locale]/dashboard | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/i18n-ru-en | /[locale]/dashboard | INDIVIDUAL | locale{ru,en} | ru | Dilnoza | oracle-verified | R2026-07-14a | 1ac3af69 | F80 | 0 |
