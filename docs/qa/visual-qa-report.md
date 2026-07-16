@@ -1879,3 +1879,15 @@ chrome checked this run).
 **Curio (not filed):** `DELETE /tenant/students/:id` is a **soft-delete** (`deleteStudent` sets `active:false`, preserves attempt history) — intentional per the deactivate/reactivate product model, not a REST bug. Minor: `parseCsv` is comma-only, so a semicolon-delimited CSV (European Excel) mis-parses the whole line as one column — known limitation, the UI paste expects comma; not exercised destructively.
 
 **Oracle:** security (World — no stored-XSS execution) + data-integrity (product self-consistency — CSV escaping) + reliability (BOM import). **No F, no new O** (F79 regression-confirmed). **Test-data:** 2 students created for the BOM test, both hard-deleted via throwaway prisma script (roster back to 5, tree clean). **Cells:** xss-longname-render to oracle-verified; csv-import-malformed to oracle-verified(Hostile); csv-export/F79 re-verified.
+
+### C7 — Quiz-player keyboard operability + ARIA audit · Rustam · usability/keyboard-a11y (regression bucket, fresh angle)
+
+**Charter:** Re-attack the quiz player from a NEW angle (pure keyboard-only operability + ARIA semantics, vs. the prior grading/i18n passes) as a keyboard-reliant user, to discover **usability/keyboard-a11y** defects. **Done when:** the full answer→check→grade flow is completable keyboard-only, focus order is logical, a visible focus indicator exists, and interactive controls have accessible names.
+
+**Setup:** existing SHORT_ANSWER practice quiz on qa-individual's uz-math.pdf (no generation needed).
+
+**🟢 Keyboard-only completion end-to-end.** Login: filled fields, **Enter from the password field submits** → /dashboard (keyboard-operable form). Quiz: answer textbox reachable + focused; typing "to'g'ri burchak" **enabled** the "Tekshirish" + "Keyingi" buttons (disabled-until-input); **Tab from input → "Tekshirish"** (logical order, no skip); **Enter on the button → graded "To'g'ri!"** with feedback. No mouse used at any step. 0 console errors.
+
+**🟢 ARIA + focus audit (deterministic).** 14 interactive elements, **1 unnamed** = the `sr-only` file input (standard visually-hidden upload pattern; the visible "+ Yuklash" is its labeled trigger — browser announces the default "Choose File", a trivial polish sub-nit, not filed). Answer textbox has an aria-label ("Javobingiz"). **Visible focus ring present**: `outline: 2px solid` + pine ring `hsl(168 50% 24% / 0.3)` box-shadow on focus — keyboard focus is never invisible.
+
+**Oracle:** usability/keyboard-a11y (Standards — WCAG operable + focus-visible + name-role-value). **No F, no numbered O** (the sr-only file-input default-name is a browser-standard polish item). **Test-data:** none (graded an existing quiz, no persistence mutated). **Cells:** quiz.[id]/keyboard-operability → oracle-verified. Note: structured-type (MATCHING/ORDERING) keyboard reorder a11y still owed — would need a ~130s structured-quiz generation; the DROPDOWN_CLOZE structured-player a11y remains oracle-verified from R2026-07-14a.

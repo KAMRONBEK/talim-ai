@@ -50,7 +50,8 @@
 | learner.assessments/TENANT_LEARNER-active/structured-players | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | FedEx | interacted | R2026-07-12a | a9b2c397 | — | 1 |
 | learner.assessments/TENANT_LEARNER-active/malformed-config | /[locale]/learner/assessments | TENANT_LEARNER-active | error/failed-job | uz | — | viewed | — | — | — | ∞ |
 | learner.assessments/TENANT_LEARNER-active/hotspot-dragdrop-a11y | /[locale]/learner/assessments | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | PLANS:QA-DEFER-HOTSPOT-A11Y | ∞ |
-| quiz.[id]/INDIVIDUAL/structured-player-a11y | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Rustam | oracle-verified | R2026-07-14a | a9b2c397 | O87 | 0 |
+| quiz.[id]/INDIVIDUAL/structured-player-a11y | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Rustam | oracle-verified | R2026-07-14a | a9b2c397 | O87 | 2 |
+| quiz.[id]/INDIVIDUAL/keyboard-operability | /[locale]/quiz/[id] | INDIVIDUAL | populated | uz | Rustam | oracle-verified | R2026-07-16a | a9b2c397 | — | 0 |
 | quiz.[id]/INDIVIDUAL/i18n-ru-en-chrome | /[locale]/quiz/[id] | INDIVIDUAL | locale{ru,en} | ru | Dilnoza | oracle-verified | R2026-07-14b | a783868a | — | 0 |
 | tenant.assessments/TENANT_OWNER/i18n-ru-chrome | /[locale]/tenant/assessments | TENANT_OWNER | locale{ru} | ru | Dilnoza | oracle-verified | R2026-07-14b | a783868a | O89 | 0 |
 | learner.dashboard/TENANT_LEARNER-active/game-banner | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | FedEx | oracle-verified | R2026-07-14b | 9714b45a | — | 0 |
