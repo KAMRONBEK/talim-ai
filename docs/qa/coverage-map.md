@@ -83,6 +83,7 @@
 | pricing/INDIVIDUAL/cta | /[locale]/pricing | INDIVIDUAL | populated | uz | Nodira | oracle-verified | R2026-07-16a | aaaa2b9c | O90 | 0 |
 | pricing/TENANT_OWNER/cta | /[locale]/pricing | TENANT_OWNER | populated | uz | Nodira | oracle-verified | R2026-07-16a | aaaa2b9c | O90 | 0 |
 | tenant.dashboard/TENANT_OWNER/info-dense-stats | /[locale]/tenant/dashboard | TENANT_OWNER | populated | uz | Nodira | oracle-verified | R2026-07-16a | 7ae7893f | — | 0 |
+| learner.dashboard/TENANT_LEARNER-active/info-dense-stats | /[locale]/learner/dashboard | TENANT_LEARNER-active | populated | uz | Aziza | oracle-verified | R2026-07-16a | 7ae7893f | O91 | 0 |
 | terms/logged-out/render | /[locale]/terms | logged-out | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/typebadge | /[locale]/dashboard | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/i18n-ru-en | /[locale]/dashboard | INDIVIDUAL | locale{ru,en} | ru | Dilnoza | oracle-verified | R2026-07-14a | 1ac3af69 | F80 | 0 |
