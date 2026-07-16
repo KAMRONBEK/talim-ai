@@ -75,8 +75,9 @@
 | impersonate/ADMIN/accept | /[locale]/impersonate | ADMIN | populated | uz | Hostile | oracle-verified | R2026-07-12a | c73f9371 | O81 | 0 |
 | impersonate/ADMIN/browser-ui-flow | /users/[id]→/impersonate | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-14a | c73f9371 | O85 | 0 |
 | impersonate/ADMIN/replay-tamper | /[locale]/impersonate | ADMIN | error/failed-job | uz | Saboteur | oracle-verified | R2026-07-14b | c73f9371 | O81 | 0 |
-| admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | Saboteur | interacted | R2026-07-12a | c73f9371 | — | 1 |
-| admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | Saboteur | oracle-verified | R2026-07-12a | c73f9371 | — | 0 |
+| admin.dashboard/ADMIN/analytics-empty | /dashboard (:3001) | ADMIN | empty | en | Saboteur | oracle-verified | R2026-07-16a | c73f9371 | — | 0 |
+| admin.dashboard/ADMIN/analytics-populated | /dashboard (:3001) | ADMIN | populated | en | Saboteur | oracle-verified | R2026-07-16a | c73f9371 | O92 | 0 |
+| admin.analytics.8ep/ADMIN/days-fuzz | /admin/analytics/* | ADMIN | error/failed-job | en | Saboteur | oracle-verified | R2026-07-16a | c73f9371 | O92 | 0 |
 | admin.content/ADMIN/flag-effect | /content (:3001) | ADMIN | populated | en | Hostile | oracle-verified | R2026-07-12a | c73f9371 | F78 | 0 |
 | admin.content/ADMIN/content-detail | /content/[id] (:3001) | ADMIN | populated | en | — | viewed | — | — | — | ∞ |
 | pricing/logged-out/cta | /[locale]/pricing | logged-out | populated | uz+ru | Nodira | oracle-verified | R2026-07-16a | aaaa2b9c | O80,O90 | 0 |

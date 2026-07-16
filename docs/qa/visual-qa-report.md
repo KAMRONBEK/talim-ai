@@ -1837,3 +1837,19 @@ chrome checked this run).
 **🟢 INVARIANT — assigned-only enforced (tenant-isolation).** Navigated to a **non-assigned** content id (`cmq1fprts…`, the PDF attached to qa-individual) → server returns **404 Not Found** on every content endpoint (content/sections/progress/learning-history/summary), UI **redirects back to /learner/dashboard**. 404 (not 403) is the stronger choice — doesn't confirm the resource exists. No cross-tenant/non-assigned data in any response body. The 9 console errors this navigation produced are all the intentional 404 probe (allowlisted negative test); the dashboard's own load was 0-error.
 
 **Oracle:** data-integrity (product self-consistency) + security/tenant-isolation (World — 404 on non-assigned). **No F; O91 logged.** **Test-data:** none (read-only). **Cells:** learner.dashboard/info-dense-stats → oracle-verified.
+
+### C4 — Analytics 8-endpoint admin fuzz · Saboteur · reliability/security (US-ADMIN-10, never oracle-counted)
+
+**Charter:** Fuzz the 8 admin analytics endpoints (summary/mrr/user-growth/by-role/funnel/content-by-type/top-orgs/spend-by-model) with hostile `days` params + probe the empty-DB divide-by-zero and 429 concerns, to discover **reliability** (crash/500/NaN) + **security** defects. **Done when:** no fuzz variant 500s, no NaN/Infinity leaks into any body, the UI renders analytics without ÷0, and the empty-DB ÷0 path is resolved (source or live).
+
+**🟢 Fuzz matrix clean — 8 endpoints × 11 hostile `days` = 88 requests, all 200.** Variants: none, 30, 0, -1, 99999999, abc, empty, 1.5, `days[]=1` (array), NaN, 0x10. **Zero 500s, zero crashes** — the `days` parser coerces/clamps every garbage input safely.
+
+**🟢 No NaN/Infinity leakage.** Inspected funnel/summary/mrr/user-growth bodies at days=0/-1/abc — all finite (funnel returns raw counts {registered:25,activated:6,tutors:5,paid:6}; summary {users:25,active30d:6,orgs:5,content:8,quizzesTaken:19,mrrUsd:255}). Regex NaN|Infinity = 0 hits.
+
+**🟢 Empty-DB ÷0 — structurally impossible (source-verified).** The analytics don't compute client-side conversion **rates**: the funnel renders **absolute bar values** (Registered→Activated→Tutors→Paid) with an empty-state guard (`funnelData.length===0 → ChartState empty`); MRR = `priceUsd × subs` (no division); user-growth = cumulative totals; spend = sums. No ratio anywhere ⇒ an empty DB yields zeros/empty-state, never NaN%. **Admin dashboard rendered live: 0 NaN/Infinity/undefined%**, MRR $255, funnel cards present, 0 console errors.
+
+**🟡 O92 (S3, data-consistency — LOGGED low-confidence).** Admin MRR prices plans from a hardcoded USD table (`PLAN_MONTHLY_PRICE_USD`: Team $49, Pro $10, School $149) that has drifted from the real so'm prices (`aaaa2b9c`: Team 349 000≈$28, Pro 119 000≈$9.5 ✓, School 1 190 000≈$95). Pro matches; **Team & School are ~1.5–1.7× overstated**, inflating MRR (Team $245 vs ~$140 real). User-visible in the revenue table. Deliberately-separate internal USD gauge (comment "pricing can change without a schema change"; no exchange rate; manual billing) → product decision, not filed as F.
+
+**Deferred (rate-limit LAST):** 429 rapid-refresh burst on the admin bucket (120/60s in-memory) → end-of-run bad-neighborhood, to avoid mid-run throttle.
+
+**Oracle:** reliability (World — no crash/NaN under fuzz) + data-consistency (product self-consistency — MRR vs so'm prices). **No F; O92 logged.** **Test-data:** none (read-only GETs). **Cells:** analytics-populated + analytics-empty + days-fuzz → oracle-verified.
