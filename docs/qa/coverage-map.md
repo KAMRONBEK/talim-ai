@@ -66,9 +66,10 @@
 | tenant.assessments/TENANT_OWNER/game-live-control | /[locale]/tenant/assessments | TENANT_OWNER | loading/generating | uz | Antisocial | oracle-verified | R2026-07-12a | 9714b45a | — | 0 |
 | tenant.messages-bell/TENANT_OWNER/populated | /[locale]/tenant/dashboard | TENANT_OWNER | populated | uz | — | viewed | — | — | — | ∞ |
 | tenant.students/TENANT_OWNER/csv-import-valid | /[locale]/tenant/students | TENANT_OWNER | populated | uz | FedEx | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
-| tenant.students/TENANT_OWNER/csv-import-malformed | /[locale]/tenant/students | TENANT_OWNER | error/failed-job | uz | Couch-potato | interacted | R2026-07-12a | 2d8ddab3 | — | 1 |
+| tenant.students/TENANT_OWNER/csv-import-malformed | /[locale]/tenant/students | TENANT_OWNER | error/failed-job | uz | Hostile | oracle-verified | R2026-07-16a | 2d8ddab3 | — | 0 |
+| tenant.students/TENANT_OWNER/xss-longname-render | /[locale]/tenant/students | TENANT_OWNER | populated | uz | Hostile | oracle-verified | R2026-07-16a | 7ae7893f | — | 0 |
 | tenant.students/TENANT_OWNER/csv-import-seat-boundary | /[locale]/tenant/students | TENANT_OWNER | quota-exceeded | uz | Nodira | oracle-verified | R2026-07-12a | 2d8ddab3 | — | 0 |
-| tenant.students/TENANT_OWNER/csv-export | /[locale]/tenant/students | TENANT_OWNER | populated | uz | Hostile | oracle-verified | R2026-07-12a | 8dc84401 | F79 | 0 |
+| tenant.students/TENANT_OWNER/csv-export | /[locale]/tenant/students | TENANT_OWNER | populated | uz | Hostile | oracle-verified | R2026-07-16a | 3a9a6d02 | F79 | 0 |
 | tenant.materials.[id]/TENANT_OWNER/per-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | populated | uz | Antisocial | oracle-verified | R2026-07-14b | a783868a | — | 0 |
 | tenant.materials.[id]/TENANT_OWNER/failed-part | /[locale]/tenant/materials/[id] | TENANT_OWNER | error/failed-job | uz | Antisocial | interacted | R2026-07-14b | a783868a | O88 | 1 |
 | tenant.materials.[id]/TENANT_LEARNER-active/role-guard | /[locale]/tenant/materials/[id] | TENANT_LEARNER-active | populated | uz | — | viewed | — | — | — | ∞ |
