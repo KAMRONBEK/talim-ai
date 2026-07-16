@@ -1853,3 +1853,15 @@ chrome checked this run).
 **Deferred (rate-limit LAST):** 429 rapid-refresh burst on the admin bucket (120/60s in-memory) → end-of-run bad-neighborhood, to avoid mid-run throttle.
 
 **Oracle:** reliability (World — no crash/NaN under fuzz) + data-consistency (product self-consistency — MRR vs so'm prices). **No F; O92 logged.** **Test-data:** none (read-only GETs). **Cells:** analytics-populated + analytics-empty + days-fuzz → oracle-verified.
+
+### C5 — Moderation FLAGGED-hidden re-attack · Hostile/Power-admin · security/data-integrity (F78 live-reconfirm)
+
+**Charter:** Re-attack F78 (FLAGGED generated media label-only) from a LIVE angle (R18 was grep-only): flag a real podcast as admin, then confirm a learner still receives it, to discover whether the moderation flag is enforced on any serving path. **Done when:** the serving-path consumer question is answered with a live evidence bundle, or F78 is shown fixed.
+
+**🟢 Source re-confirm.** grep `GeneratedMediaReview`/`FLAGGED` across `apps/api/src` hits only `schema.prisma` + its migration + `admin/content.controller.ts` (write + admin `/generated` left-join read). **Zero** references in any learner/tenant/content/podcast/quiz serving path or in `contentAccess.service` — the review status is never consulted when serving.
+
+**🐛 F78 CONFIRMED LIVE (still true — evidence bundle).** Podcast `cmqx0f75r…` (READY) on the YouTube content assigned to teststudent1. **BEFORE:** learner `GET /content/…/podcast` → 200, **6 episodes**. **FLAG:** admin `POST /admin/generated/podcast/:id/review {FLAGGED}` → 200; admin `/generated` list now shows `reviewStatus: FLAGGED`. **AFTER:** learner re-fetch → **200, still 6 episodes**, body contains **no** review/flag/hidden/withheld marker; episode audio stream still reachable. The FLAGGED flag has **zero** effect on what the learner receives. **RESTORED** to APPROVED.
+
+**Verdict:** F78 holds — flagging is label-only, no serving-path enforcement. Already logged + in `docs/PLANS.md` (product decision needed on hide semantics: "under review" placeholder vs full hide). Not re-filed; ledger updated with the live evidence. Severity stays S3 (moderation is an internal tool; no data loss/isolation break — a flagged item is served, not leaked cross-tenant).
+
+**Oracle:** security/data-integrity (product self-consistency — a moderation action with no enforcement is a product gap). **No new F** (F78 re-confirmed). **Test-data:** the podcast review row is now `APPROVED` (was PENDING/no-row; no un-review endpoint exists, APPROVED = benign not-flagged terminal state) — harmless morning note; it shows APPROVED in admin /generated. **Cells:** admin.content/flag-effect re-verified (Hostile, live).
