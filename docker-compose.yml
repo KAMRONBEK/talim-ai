@@ -60,7 +60,11 @@ services:
       AZURE_SPEECH_KEY: ${AZURE_SPEECH_KEY:-}
       AZURE_SPEECH_REGION: ${AZURE_SPEECH_REGION:-}
       UPLOAD_DIR: ${UPLOAD_DIR:-/uploads}
-      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:3001}
+      # No silent default: a wrong-but-present CORS value is worse than a missing one
+      # (dev localhost origins on prod silently block all browser logins — the 2026-07-18
+      # outage). Every real flow supplies this — Doppler dev & prd both set it, CI sets it
+      # inline — so `:?` only fails a bare Doppler-less `docker compose up`, which is the bug.
+      CORS_ORIGIN: ${CORS_ORIGIN:?CORS_ORIGIN must be set (Doppler dev/prd or .env) — refusing to start with a silent localhost default}
     volumes:
       - uploads_data:/uploads
     depends_on:
