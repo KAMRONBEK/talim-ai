@@ -41,3 +41,6 @@ apps/web/playwright-report/
 apps/web/test-results/
 apps/web/blob-report/
 apps/web/.playwright/
+
+# Award submission pack (contains personal data - PINFL/phones; repo is public)
+award-submission/
