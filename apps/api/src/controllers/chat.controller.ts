@@ -23,6 +23,7 @@ import {
   isTutorClarification,
   isTutorScopeRefusal,
 } from '../lib/tutor-scope.js';
+import { buildRetrievalQuery, applyKeepOrder } from '../lib/retrieval-context.js';
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { manimQueue } from '../services/queue.service.js';
@@ -215,7 +216,18 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     userId: req.user.userId,
     metadata: { contentId: body.contentId, sessionId },
   };
-  const messageChunks = await searchSimilarChunks(body.contentId, body.message, 7, embedUsage);
+  // Retrieval used to see only the bare message while the scope classifier got six
+  // turns of history — so a follow-up like "endi buni chizib ber" or "explain the
+  // second one" embedded to nothing useful and returned generic chunks. Short messages
+  // are the strong follow-up signal, so those (and only those) carry the previous user
+  // turn into the query; a self-contained question is left undiluted.
+  // Only the DENSE arms see the expanded query — the lexical arm keeps searching the
+  // learner's actual words, because websearch_to_tsquery ANDs terms and an expanded
+  // query would match no chunk at all.
+  const contextualQuery = buildRetrievalQuery(body.message, recentTurns);
+  const messageChunks = await searchSimilarChunks(body.contentId, body.message, 7, embedUsage, {
+    contextualQuery,
+  });
   const excerptChunks =
     !body.selectedImage && body.selectedExcerpt?.trim()
       ? await searchSimilarChunks(body.contentId, body.selectedExcerpt, 7, embedUsage)
@@ -246,6 +258,14 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     recentTurns,
   });
 
+  // Free reranking. The classifier just read every chunk to judge scope, so its `keep`
+  // list reorders them by what actually answers the question — a relevance signal RRF
+  // cannot produce, at zero extra calls and zero extra latency. Falls back to fusion
+  // order whenever `keep` is absent or unusable.
+  const rankedChunks = applyKeepOrder(chunks, scopeDecision.keep);
+  const rankedBase = buildRagContext(rankedChunks, locale);
+  const tutorContext = figureContext ? `${rankedBase}\n\n${figureContext}` : rankedBase;
+
   sseHeaders(res);
 
   if (scopeDecision.route === 'unrelated') {
@@ -272,7 +292,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
       role: 'system' as const,
       content: buildTutorSystemMessage(
         locale,
-        context,
+        tutorContext,
         body.selectedExcerpt,
         Boolean(body.selectedImage),
         scopeDecision.scopeNote,

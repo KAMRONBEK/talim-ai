@@ -9,6 +9,10 @@ export interface TutorScopeDecision {
   route: TutorScopeRoute;
   reason: string;
   scopeNote?: string;
+  /** 1-based indexes of the retrieved context excerpts worth keeping, most useful
+   *  first. Absent when the model omitted it or the heuristic fallback ran — callers
+   *  must treat that as "keep the original retrieval order". */
+  keep?: number[];
 }
 
 interface ClassifyTutorScopeInput {
@@ -32,6 +36,25 @@ const decisionSchema = z.object({
   route: z.enum(['direct', 'related_extension', 'unrelated', 'needs_clarification']),
   reason: z.string().min(1).max(300),
   scopeNote: z.string().max(300).optional(),
+  // Free reranking: this call already reads every retrieved chunk in order to judge
+  // scope, so it can also say which ones actually matter — at no extra request, token
+  // round trip, or latency.
+  //
+  // Decoded LENIENTLY and on purpose. The whole object goes through a single
+  // `decisionSchema.parse` whose catch discards the model's classification and falls
+  // back to a keyword heuristic that can answer "unrelated" — so a strict rule here
+  // would let a malformed *optional* field turn a correctly-classified question into a
+  // canned out-of-scope refusal. `keep: null` is an especially likely emission, since
+  // the prompt shows the key and then tells the model it may omit it. Anything that is
+  // not a usable list of positive integers degrades to "no rerank", never to "no
+  // classification".
+  keep: z.preprocess(
+    (value) =>
+      Array.isArray(value)
+        ? value.filter((n): n is number => typeof n === 'number' && Number.isInteger(n) && n > 0)
+        : undefined,
+    z.array(z.number().int().positive()).max(50).optional(),
+  ),
 });
 
 const STOP_WORDS = new Set([
@@ -213,7 +236,8 @@ Return JSON only:
 {
   "route": "direct" | "related_extension" | "unrelated" | "needs_clarification",
   "reason": "short reason",
-  "scopeNote": "optional short note for the tutor"
+  "scopeNote": "optional short note for the tutor",
+  "keep": [3, 1, 5]
 }
 
 Definitions:
@@ -238,7 +262,20 @@ Important:
 - Use the retrieved context, title, and recent conversation; ignore the tutor's own
   previous refusals.
 - Keep reason concise.
-- scopeNote should be present for direct or related_extension.`,
+- scopeNote should be present for direct or related_extension.
+
+"keep" — rerank the retrieved context:
+- The retrieved context below is a numbered list of excerpts from the material. They
+  were found by keyword and vector similarity, which ranks by resemblance, not by
+  whether an excerpt actually helps answer THIS question.
+- Return "keep" as the numbers of the excerpts that genuinely help, MOST USEFUL FIRST.
+  Judge usefulness against the student's message and the recent conversation.
+- Drop excerpts that merely share vocabulary with the question but carry no
+  information needed to answer it (headings, tables of contents, passing mentions).
+- Use ONLY numbers that appear in the list. Never invent a number.
+- Prefer 3-7 excerpts. If nearly all are useful, list them all; if you genuinely
+  cannot tell, omit "keep" entirely rather than guessing.
+- A figure line ("[Rasm N] ...") is not numbered — never reference it in "keep".`,
         },
         {
           role: 'user',

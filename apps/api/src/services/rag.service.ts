@@ -29,6 +29,16 @@ const HNSW_EF_SEARCH = 200;
 const DENSE_CANDIDATES = 60;
 const LEXICAL_CANDIDATES = 60;
 
+// Weighted RRF. The raw query the learner actually typed votes at full strength; its
+// transliterations vote lower because the transliterator is letter-wise and mangles
+// non-Uzbek tokens, so a variant arm is a cross-script bridge rather than an equal
+// opinion. At most three dense arms — scriptVariants returns [raw, cyrillic, latin]
+// for mixed-script input and [raw, other-script] otherwise.
+const PRIMARY_ARM_WEIGHT = 1.0;
+const VARIANT_ARM_WEIGHT = 0.6;
+const LEXICAL_ARM_WEIGHT = 1.0;
+const MAX_DENSE_ARMS = 3;
+
 // Retrieval breadth must scale with document size: a top-K that suits a 3-page handout
 // starves a 400-page textbook, since the answer is a smaller fraction of the material.
 const TOP_K_MAX = 14;
@@ -259,64 +269,113 @@ export async function searchSimilarChunks(
   query: string,
   limit: number = TOP_K,
   usage?: UsageContext,
+  options?: { contextualQuery?: string },
 ): Promise<{ text: string; chunkIndex: number }[]> {
   // Bridge the Latin↔Cyrillic Uzbek script gap: materials are often Cyrillic while
-  // learners type Latin (and vice versa). Embed both scripts together so dense recall
-  // reaches cross-script chunks, and OR both tsqueries so the lexical arm matches a
-  // Cyrillic chunk for a Latin query — otherwise "shin" never finds "шин".
-  const variants = scriptVariants(query);
-  const denseQuery = variants.join(' ') || query;
-  const lexAlt = variants[1] ?? variants[0] ?? query;
-  // The chunk count decides retrieval breadth; fetch it alongside the embedding so the
+  // learners type Latin (and vice versa), so the lexical arm ORs a tsquery per script
+  // variant and "shin" can still find "шин".
+  //
+  // Dense side: each script variant gets its OWN embedding and its OWN fusion arm.
+  // Concatenating them into one string (the previous behaviour) produced a single
+  // blended vector sitting between the Latin and Cyrillic clusters, matching neither
+  // cleanly — the biggest dense-recall defect for this corpus. Indexing variants
+  // positionally would be wrong too: variants[0] is the RAW query (still mixed-script
+  // for inputs like "DNK ва РНК farqi"), so we simply use them all.
+  //
+  // Dense and lexical deliberately search DIFFERENT strings. `contextualQuery` may
+  // carry prior conversation so a bare follow-up still embeds its subject — useful for
+  // vectors, fatal for keywords: websearch_to_tsquery ANDs plain terms, so a 44-term
+  // expanded query matches no chunk at all and silently zeroes the lexical arm. The
+  // lexical side therefore always searches the learner's actual message.
+  const denseSource = options?.contextualQuery?.trim() || query;
+  const denseVariants = scriptVariants(denseSource).slice(0, MAX_DENSE_ARMS);
+  const denseQueries = denseVariants.length ? denseVariants : [denseSource];
+  const lexicalVariants = scriptVariants(query).slice(0, MAX_DENSE_ARMS);
+  const lexicalQueries = lexicalVariants.length ? lexicalVariants : [query];
+  // The chunk count decides retrieval breadth; fetch it alongside the embeddings so the
   // extra (index-only) count costs no wall-clock on top of the embedding round trip.
-  const [queryEmbedding, chunkCount] = await Promise.all([
-    generateEmbedding(
-      denseQuery,
+  // All variants embed in ONE request — batching is already handled in embed.service.
+  const [queryEmbeddings, chunkCount] = await Promise.all([
+    generateEmbeddings(
+      denseQueries,
       usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
     ),
     prisma.chunk.count({ where: { contentId } }),
   ]);
-  const vectorSql = embeddingToSql(queryEmbedding);
   const topK = scaleTopK(limit, chunkCount);
 
-  // Hybrid retrieval: dense (cosine) + lexical (tsvector) fused with Reciprocal
-  // Rank Fusion (k=60). Lexical recall catches exact terms/names/numbers that dense
-  // search misses — important for low-resource Uzbek where dense recall is weaker.
-  const rows = await withVectorRecall((tx) =>
-    tx.$queryRawUnsafe<{ text: string; chunkIndex: number }[]>(
-      `WITH vec AS (
-       SELECT "id", "text", "chunkIndex",
-              ROW_NUMBER() OVER (ORDER BY "embedding" <=> $2::vector) AS rnk
+  // Hybrid retrieval: one dense (cosine) arm per script variant + one lexical
+  // (tsvector) arm, fused with weighted Reciprocal Rank Fusion (k=60). Lexical recall
+  // catches exact terms/names/numbers that dense search misses — important for
+  // low-resource Uzbek where dense recall is weaker.
+  //
+  // Arms are weighted, not equal. Plain RRF gives every arm's rank-1 the same 1/61
+  // regardless of how confident it is, and there is no similarity threshold — so a
+  // transliteration that is garbage for non-Uzbek tokens ("photosynthesis" becomes
+  // "пҳотосйнтҳесис") would still inject 60 candidates at full strength. Variant arms
+  // therefore vote at reduced weight: they are a cross-script bridge, not an equal
+  // opinion.
+  //
+  // Dense weights are then NORMALISED to sum to 1.0. Without this, adding arms would
+  // inflate total dense mass (up to 1.0 + 0.6 + 0.6 = 2.2) against a fixed lexical 1.0,
+  // and a chunk that only the lexical arm found — an exact name, year or figure that
+  // dense recall misses, precisely what the lexical arm exists for — could be outscored
+  // and evicted from topK. Normalising keeps dense-vs-lexical balance identical to the
+  // single-arm behaviour while still letting a chunk confirmed across scripts outrank
+  // one found by a single arm.
+  const rawWeights = queryEmbeddings.map((_, i) => (i === 0 ? PRIMARY_ARM_WEIGHT : VARIANT_ARM_WEIGHT));
+  const weightSum = rawWeights.reduce((a, b) => a + b, 0) || 1;
+
+  // Params: $1 contentId · $2 topK · $3 dense limit · $4 lexical limit ·
+  //         then one tsquery per lexical variant, then one vector per dense arm.
+  const LEX_PARAM_OFFSET = 5;
+  const vectorParamOffset = LEX_PARAM_OFFSET + lexicalQueries.length;
+  const denseArms = queryEmbeddings.map((_, i) => {
+    const p = vectorParamOffset + i;
+    const weight = (rawWeights[i]! / weightSum).toFixed(6);
+    return `vec${i} AS (
+       SELECT "id", "text", "chunkIndex", ${weight}::float8 AS w,
+              ROW_NUMBER() OVER (ORDER BY "embedding" <=> $${p}::vector) AS rnk
        FROM "Chunk"
        WHERE "contentId" = $1 AND "embedding" IS NOT NULL
-       ORDER BY "embedding" <=> $2::vector
-       LIMIT $6
-     ),
+       ORDER BY "embedding" <=> $${p}::vector
+       LIMIT $3
+     )`;
+  });
+  // OR a tsquery per script variant. Picking two positionally dropped the clean Latin
+  // form for mixed-script input, leaving exact-term recall to arms that cannot provide it.
+  const lexTsQuery = lexicalQueries
+    .map((_, i) => `websearch_to_tsquery('simple', $${LEX_PARAM_OFFSET + i})`)
+    .join(' || ');
+  const armUnion = [...queryEmbeddings.map((_, i) => `SELECT * FROM vec${i}`), 'SELECT * FROM lex'].join(
+    ' UNION ALL ',
+  );
+
+  const rows = await withVectorRecall((tx) =>
+    tx.$queryRawUnsafe<{ text: string; chunkIndex: number }[]>(
+      `WITH ${denseArms.join(',\n     ')},
      lex AS (
-       SELECT "id", "text", "chunkIndex",
+       SELECT "id", "text", "chunkIndex", ${LEXICAL_ARM_WEIGHT}::float8 AS w,
               ROW_NUMBER() OVER (ORDER BY ts_rank("tsv", qq.q) DESC) AS rnk
        FROM "Chunk"
-       CROSS JOIN (
-         SELECT websearch_to_tsquery('simple', $3) || websearch_to_tsquery('simple', $5) AS q
-       ) qq
+       CROSS JOIN (SELECT ${lexTsQuery} AS q) qq
        WHERE "contentId" = $1 AND "tsv" @@ qq.q
-       LIMIT $7
+       LIMIT $4
      )
      SELECT f."text", f."chunkIndex"
      FROM (
-       SELECT "id", "text", "chunkIndex", SUM(1.0 / (60 + rnk)) AS score
-       FROM (SELECT * FROM vec UNION ALL SELECT * FROM lex) u
+       SELECT "id", "text", "chunkIndex", SUM(w / (60 + rnk)) AS score
+       FROM (${armUnion}) u
        GROUP BY "id", "text", "chunkIndex"
      ) f
      ORDER BY f.score DESC
-     LIMIT $4`,
+     LIMIT $2`,
       contentId,
-      vectorSql,
-      query,
       topK,
-      lexAlt,
       DENSE_CANDIDATES,
       LEXICAL_CANDIDATES,
+      ...lexicalQueries,
+      ...queryEmbeddings.map(embeddingToSql),
     ),
   );
 
