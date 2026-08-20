@@ -220,8 +220,16 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     !body.selectedImage && body.selectedExcerpt?.trim()
       ? await searchSimilarChunks(body.contentId, body.selectedExcerpt, 7, embedUsage)
       : [];
+  // Merge up to the breadth retrieval actually chose for this document. The default
+  // limit here is a fixed 7, which clipped the length-scaled result straight back to
+  // the old width — and, because excerpt chunks are consumed first, dropped every
+  // message-derived chunk on long materials.
   const chunks = excerptChunks.length
-    ? mergeSimilarChunks(excerptChunks, messageChunks)
+    ? mergeSimilarChunks(
+        excerptChunks,
+        messageChunks,
+        Math.max(excerptChunks.length, messageChunks.length),
+      )
     : messageChunks;
   // Pull relevant captioned figures so the tutor can reason about diagrams/charts.
   const figures = await searchSimilarFigures(body.contentId, body.message, 3, embedUsage);

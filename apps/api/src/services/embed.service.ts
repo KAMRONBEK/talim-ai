@@ -53,18 +53,65 @@ export async function generateEmbedding(
   return embedding;
 }
 
+// The embeddings endpoint caps a single request at 2048 inputs and ~300k tokens. A
+// book-length PDF exceeds both, and the whole request 400s — long documents failed to
+// ingest outright. Batch well under each cap so document length stops being a limit.
+const EMBED_MAX_BATCH_INPUTS = 256;
+const EMBED_MAX_BATCH_TOKENS = 200_000;
+
+function batchByTokenBudget(texts: string[]): string[][] {
+  const batches: string[][] = [];
+  let batch: string[] = [];
+  let batchTokens = 0;
+
+  for (const text of texts) {
+    const tokens = Math.min(encode(text).length, EMBED_MAX_TOKENS);
+    const wouldExceed =
+      batch.length >= EMBED_MAX_BATCH_INPUTS || batchTokens + tokens > EMBED_MAX_BATCH_TOKENS;
+    if (batch.length > 0 && wouldExceed) {
+      batches.push(batch);
+      batch = [];
+      batchTokens = 0;
+    }
+    batch.push(text);
+    batchTokens += tokens;
+  }
+  if (batch.length > 0) batches.push(batch);
+  return batches;
+}
+
 export async function generateEmbeddings(
   texts: string[],
   usage?: UsageContext,
 ): Promise<number[][]> {
   if (texts.length === 0) return [];
-  const response = await openai.embeddings.create({
-    model: EMBEDDING_MODEL,
-    input: texts.map(clampToTokenLimit),
-    dimensions: EMBEDDING_DIMENSIONS,
-  });
-  recordEmbedUsage(usage, response, { chunkCount: texts.length });
-  return response.data.map((item) => item.embedding);
+
+  const embeddings: number[][] = [];
+  for (const batch of batchByTokenBudget(texts)) {
+    const response = await openai.embeddings.create({
+      model: EMBEDDING_MODEL,
+      input: batch.map(clampToTokenLimit),
+      dimensions: EMBEDDING_DIMENSIONS,
+    });
+    recordEmbedUsage(usage, response, { chunkCount: batch.length });
+
+    // Align by the response's own `index` rather than array position: the API does not
+    // guarantee ordering, and a positional map would silently mis-pair every embedding
+    // after a reordered element — invisible corruption of the whole vector index.
+    const ordered: number[][] = new Array(batch.length);
+    for (const item of response.data) {
+      ordered[item.index] = item.embedding;
+    }
+    const missing = ordered.findIndex((e) => !e);
+    if (missing !== -1) {
+      throw new Error(
+        `Embedding response incomplete: expected ${batch.length} vectors, missing index ${missing}`,
+      );
+    }
+    embeddings.push(...ordered);
+  }
+
+  return embeddings;
 }
 
 export function embeddingToSql(embedding: number[]): string {

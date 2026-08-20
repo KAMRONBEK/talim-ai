@@ -16,6 +16,96 @@ const OVERLAP_TOKENS = 80;
 const MAX_BLOCK_TOKENS = 900;
 const TOP_K = 7;
 
+// --- Vector recall tuning -------------------------------------------------
+// The HNSW indexes are global (one index over every tenant's chunks) while every
+// retrieval filters by "contentId". Postgres cannot push that filter into the HNSW
+// graph scan, so it is applied *after* the scan emits its candidates: the index walks
+// to the globally nearest `ef_search` rows, then most of them are discarded because
+// they belong to other documents. With the pgvector default (ef_search = 40) and a
+// dense arm that asked for 40 rows there was zero slack — the longer the corpus, the
+// fewer of those 40 survived the filter, which is exactly why recall collapsed on
+// long PDFs. Raising ef_search widens the pool; iterative scan (pgvector 0.8+) makes
+// the scan *refill* when the filter empties it, which is the real fix.
+const HNSW_EF_SEARCH = 200;
+const DENSE_CANDIDATES = 60;
+const LEXICAL_CANDIDATES = 60;
+
+// Retrieval breadth must scale with document size: a top-K that suits a 3-page handout
+// starves a 400-page textbook, since the answer is a smaller fraction of the material.
+const TOP_K_MAX = 14;
+const CHUNKS_PER_EXTRA_K = 120;
+
+function scaleTopK(base: number, chunkCount: number): number {
+  return Math.min(base + Math.floor(chunkCount / CHUNKS_PER_EXTRA_K), TOP_K_MAX);
+}
+
+/** pgvector 0.8.0 added iterative index scans; older servers reject the GUC outright
+ *  (and a failed SET aborts the surrounding transaction), so probe the version once.
+ *
+ *  Memoize only a SUCCESSFUL probe. Caching a failure would be indistinguishable from
+ *  "this server is pgvector < 0.8", and a single transient error at boot — when the
+ *  pool is busiest and the first tutor message triggers the lazy probe — would disable
+ *  iterative scan for the whole process lifetime with nothing in the logs. */
+let iterativeScanSupport: boolean | null = null;
+let iterativeScanProbe: Promise<boolean> | null = null;
+
+async function supportsIterativeScan(): Promise<boolean> {
+  if (iterativeScanSupport !== null) return iterativeScanSupport;
+  iterativeScanProbe ??= prisma
+    .$queryRaw<{ extversion: string }[]>`SELECT extversion FROM pg_extension WHERE extname = 'vector'`
+    .then((rows) => {
+      const [major = 0, minor = 0] = (rows[0]?.extversion ?? '0.0').split('.').map(Number);
+      iterativeScanSupport = major > 0 || minor >= 8;
+      return iterativeScanSupport;
+    })
+    .catch((error) => {
+      // Leave the result uncached so the next retrieval re-probes.
+      console.warn('[rag] pgvector capability probe failed; iterative scan off this call', error);
+      return false;
+    })
+    .finally(() => {
+      iterativeScanProbe = null;
+    });
+  return iterativeScanProbe;
+}
+
+// Prisma's interactive-transaction defaults (timeout 5s, maxWait 2s) are far too tight
+// for this workload: the settings above deliberately make the scan work harder, and the
+// single API process shares its pool with ten Bull processors. Left at the defaults a
+// slow scan would abort with P2028, and a busy pool would fail to even start the
+// transaction after 2s — turning a previously-queuing read into a hard tutor error.
+const VECTOR_TX_TIMEOUT_MS = 30_000;
+const VECTOR_TX_MAX_WAIT_MS = 15_000;
+// Re-indexing a book-length PDF inserts thousands of rows one statement at a time and
+// runs on a background job, not a request — it needs a far longer ceiling than a read.
+const CHUNK_WRITE_TIMEOUT_MS = 600_000;
+
+/** Apply the per-query vector-recall settings, then run `run` on the same connection.
+ *  `SET LOCAL` is transaction-scoped, so this must be an interactive transaction —
+ *  a bare $executeRaw would land on an arbitrary pooled connection and be lost.
+ *  Falls back to an unwrapped query if the transaction cannot be started or completed,
+ *  so degraded recall never becomes a failed answer. */
+async function withVectorRecall<T>(run: (client: typeof prisma) => Promise<T>): Promise<T> {
+  const iterative = await supportsIterativeScan();
+  try {
+    return await prisma.$transaction(
+      async (tx) => {
+        // Interpolated, not parameterised: SET LOCAL does not accept bind parameters.
+        // Both values are module constants — no user input reaches this string.
+        await tx.$executeRawUnsafe(`SET LOCAL hnsw.ef_search = ${HNSW_EF_SEARCH}`);
+        if (iterative) {
+          await tx.$executeRawUnsafe(`SET LOCAL hnsw.iterative_scan = 'relaxed_order'`);
+        }
+        return run(tx as unknown as typeof prisma);
+      },
+      { timeout: VECTOR_TX_TIMEOUT_MS, maxWait: VECTOR_TX_MAX_WAIT_MS },
+    );
+  } catch (error) {
+    console.warn('[rag] vector-recall transaction failed; retrying without tuning', error);
+    return run(prisma);
+  }
+}
+
 function countTokens(text: string): number {
   return encode(text).length;
 }
@@ -108,26 +198,43 @@ export async function storeChunksWithEmbeddings(
   chunks: string[],
   usage?: UsageContext,
 ): Promise<void> {
-  await prisma.$executeRaw`DELETE FROM "Chunk" WHERE "contentId" = ${contentId}`;
+  // Embed BEFORE deleting. The old order wiped a working index first and only then
+  // called the network, so any embedding failure (a 429 mid-way through a long PDF —
+  // now more likely, since long inputs are split across several requests) left the
+  // material with zero chunks and no retry: the tutor answered from empty context.
+  const embeddings = await generateEmbeddings(
+    chunks,
+    usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
+  );
 
-  const embeddings = await generateEmbeddings(chunks, usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined);
-
-  for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i];
-    const embedding = embeddings[i];
-    if (!chunk || !embedding) continue;
-
-    const vectorSql = embeddingToSql(embedding);
-    await prisma.$executeRawUnsafe(
-      `INSERT INTO "Chunk" ("id", "contentId", "text", "embedding", "chunkIndex")
-       VALUES ($1, $2, $3, $4::vector, $5)`,
-      randomUUID(),
-      contentId,
-      chunk,
-      vectorSql,
-      i,
-    );
+  const rows = chunks.map((chunk, i) => ({ chunk, embedding: embeddings[i], index: i }));
+  for (const row of rows) {
+    // generateEmbeddings now guarantees a 1:1 result, so a gap is a real bug. Fail
+    // before touching the existing index rather than leaving a silent hole in it.
+    if (row.chunk && !row.embedding) {
+      throw new Error(`Missing embedding for chunk ${row.index} of content ${contentId}`);
+    }
   }
+
+  // Swap atomically so a mid-write failure cannot leave the material partially indexed.
+  await prisma.$transaction(
+    async (tx) => {
+      await tx.$executeRaw`DELETE FROM "Chunk" WHERE "contentId" = ${contentId}`;
+      for (const row of rows) {
+        if (!row.chunk || !row.embedding) continue;
+        await tx.$executeRawUnsafe(
+          `INSERT INTO "Chunk" ("id", "contentId", "text", "embedding", "chunkIndex")
+           VALUES ($1, $2, $3, $4::vector, $5)`,
+          randomUUID(),
+          contentId,
+          row.chunk,
+          embeddingToSql(row.embedding),
+          row.index,
+        );
+      }
+    },
+    { timeout: CHUNK_WRITE_TIMEOUT_MS, maxWait: VECTOR_TX_MAX_WAIT_MS },
+  );
 }
 
 export function mergeSimilarChunks(
@@ -174,13 +281,23 @@ async function rerank(
         top_n: limit,
       }),
     });
-    if (!res.ok) return rows.slice(0, limit);
+    if (!res.ok) {
+      // Degrading to RRF order is correct, but doing it *silently* meant a revoked or
+      // rate-limited key looked identical to a healthy reranker for weeks. Log it.
+      console.warn(`[rag] Cohere rerank failed (${res.status}); falling back to RRF order`);
+      return rows.slice(0, limit);
+    }
     const data = (await res.json()) as { results?: { index: number }[] };
     const ordered = (data.results ?? [])
       .map((r) => rows[r.index])
       .filter((r): r is { text: string; chunkIndex: number } => Boolean(r));
-    return ordered.length ? ordered.slice(0, limit) : rows.slice(0, limit);
-  } catch {
+    if (!ordered.length) {
+      console.warn('[rag] Cohere rerank returned no usable results; falling back to RRF order');
+      return rows.slice(0, limit);
+    }
+    return ordered.slice(0, limit);
+  } catch (error) {
+    console.warn('[rag] Cohere rerank threw; falling back to RRF order', error);
     return rows.slice(0, limit);
   }
 }
@@ -198,24 +315,31 @@ export async function searchSimilarChunks(
   const variants = scriptVariants(query);
   const denseQuery = variants.join(' ') || query;
   const lexAlt = variants[1] ?? variants[0] ?? query;
-  const queryEmbedding = await generateEmbedding(
-    denseQuery,
-    usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
-  );
+  // The chunk count decides retrieval breadth; fetch it alongside the embedding so the
+  // extra (index-only) count costs no wall-clock on top of the embedding round trip.
+  const [queryEmbedding, chunkCount] = await Promise.all([
+    generateEmbedding(
+      denseQuery,
+      usage ? { ...usage, metadata: { ...usage.metadata, contentId } } : undefined,
+    ),
+    prisma.chunk.count({ where: { contentId } }),
+  ]);
   const vectorSql = embeddingToSql(queryEmbedding);
-  const candidateCount = Math.max(limit, RERANK_CANDIDATES);
+  const topK = scaleTopK(limit, chunkCount);
+  const candidateCount = Math.max(topK * 3, RERANK_CANDIDATES);
 
   // Hybrid retrieval: dense (cosine) + lexical (tsvector) fused with Reciprocal
   // Rank Fusion (k=60). Lexical recall catches exact terms/names/numbers that dense
   // search misses — important for low-resource Uzbek where dense recall is weaker.
-  const rows = await prisma.$queryRawUnsafe<{ text: string; chunkIndex: number }[]>(
-    `WITH vec AS (
+  const rows = await withVectorRecall((tx) =>
+    tx.$queryRawUnsafe<{ text: string; chunkIndex: number }[]>(
+      `WITH vec AS (
        SELECT "id", "text", "chunkIndex",
               ROW_NUMBER() OVER (ORDER BY "embedding" <=> $2::vector) AS rnk
        FROM "Chunk"
        WHERE "contentId" = $1 AND "embedding" IS NOT NULL
        ORDER BY "embedding" <=> $2::vector
-       LIMIT 40
+       LIMIT $6
      ),
      lex AS (
        SELECT "id", "text", "chunkIndex",
@@ -225,7 +349,7 @@ export async function searchSimilarChunks(
          SELECT websearch_to_tsquery('simple', $3) || websearch_to_tsquery('simple', $5) AS q
        ) qq
        WHERE "contentId" = $1 AND "tsv" @@ qq.q
-       LIMIT 40
+       LIMIT $7
      )
      SELECT f."text", f."chunkIndex"
      FROM (
@@ -235,14 +359,17 @@ export async function searchSimilarChunks(
      ) f
      ORDER BY f.score DESC
      LIMIT $4`,
-    contentId,
-    vectorSql,
-    query,
-    candidateCount,
-    lexAlt,
+      contentId,
+      vectorSql,
+      query,
+      candidateCount,
+      lexAlt,
+      DENSE_CANDIDATES,
+      LEXICAL_CANDIDATES,
+    ),
   );
 
-  return rerank(query, rows, limit);
+  return rerank(query, rows, topK);
 }
 
 /** Retrieve the most relevant captioned figures for a query (vector similarity). */
@@ -257,15 +384,19 @@ export async function searchSimilarFigures(
     usage ? { ...usage, metadata: { ...usage.metadata, contentId, figures: true } } : undefined,
   );
   const vectorSql = embeddingToSql(queryEmbedding);
-  return prisma.$queryRawUnsafe<{ caption: string; page: number | null }[]>(
-    `SELECT "caption", "page"
+  // Same global-HNSW + contentId post-filter shape as searchSimilarChunks — needs the
+  // same recall settings, or a figure-rich corpus starves this query too.
+  return withVectorRecall((tx) =>
+    tx.$queryRawUnsafe<{ caption: string; page: number | null }[]>(
+      `SELECT "caption", "page"
      FROM "ContentFigure"
      WHERE "contentId" = $1 AND "embedding" IS NOT NULL
      ORDER BY "embedding" <=> $2::vector
      LIMIT $3`,
-    contentId,
-    vectorSql,
-    limit,
+      contentId,
+      vectorSql,
+      limit,
+    ),
   );
 }
 
