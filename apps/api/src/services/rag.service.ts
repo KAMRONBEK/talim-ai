@@ -1,7 +1,6 @@
 import { randomUUID } from 'crypto';
 import { encode, decode } from 'gpt-tokenizer';
 import type { AppLocale } from '@talim/types';
-import { env } from '../config/env.js';
 import { prisma } from '../lib/prisma.js';
 import { getRagChunkLabel } from '../lib/locale-prompts.js';
 import { generateEmbedding, generateEmbeddings, embeddingToSql } from './embed.service.js';
@@ -255,53 +254,6 @@ export function mergeSimilarChunks(
   return merged;
 }
 
-const RERANK_CANDIDATES = 20;
-
-/**
- * Rerank candidates with Cohere Rerank when COHERE_API_KEY is set; otherwise keep
- * the RRF order. Never throws — degrades to the top-`limit` candidates on any error.
- */
-async function rerank(
-  query: string,
-  rows: { text: string; chunkIndex: number }[],
-  limit: number,
-): Promise<{ text: string; chunkIndex: number }[]> {
-  if (!env.COHERE_API_KEY || rows.length <= 1) return rows.slice(0, limit);
-  try {
-    const res = await fetch('https://api.cohere.com/v2/rerank', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.COHERE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'rerank-v3.5',
-        query,
-        documents: rows.map((r) => r.text),
-        top_n: limit,
-      }),
-    });
-    if (!res.ok) {
-      // Degrading to RRF order is correct, but doing it *silently* meant a revoked or
-      // rate-limited key looked identical to a healthy reranker for weeks. Log it.
-      console.warn(`[rag] Cohere rerank failed (${res.status}); falling back to RRF order`);
-      return rows.slice(0, limit);
-    }
-    const data = (await res.json()) as { results?: { index: number }[] };
-    const ordered = (data.results ?? [])
-      .map((r) => rows[r.index])
-      .filter((r): r is { text: string; chunkIndex: number } => Boolean(r));
-    if (!ordered.length) {
-      console.warn('[rag] Cohere rerank returned no usable results; falling back to RRF order');
-      return rows.slice(0, limit);
-    }
-    return ordered.slice(0, limit);
-  } catch (error) {
-    console.warn('[rag] Cohere rerank threw; falling back to RRF order', error);
-    return rows.slice(0, limit);
-  }
-}
-
 export async function searchSimilarChunks(
   contentId: string,
   query: string,
@@ -326,7 +278,6 @@ export async function searchSimilarChunks(
   ]);
   const vectorSql = embeddingToSql(queryEmbedding);
   const topK = scaleTopK(limit, chunkCount);
-  const candidateCount = Math.max(topK * 3, RERANK_CANDIDATES);
 
   // Hybrid retrieval: dense (cosine) + lexical (tsvector) fused with Reciprocal
   // Rank Fusion (k=60). Lexical recall catches exact terms/names/numbers that dense
@@ -362,14 +313,16 @@ export async function searchSimilarChunks(
       contentId,
       vectorSql,
       query,
-      candidateCount,
+      topK,
       lexAlt,
       DENSE_CANDIDATES,
       LEXICAL_CANDIDATES,
     ),
   );
 
-  return rerank(query, rows, topK);
+  // RRF order is final, so the fused SELECT already returns exactly the chunks we want
+  // — no second ranking pass to trim down to.
+  return rows;
 }
 
 /** Retrieve the most relevant captioned figures for a query (vector similarity). */

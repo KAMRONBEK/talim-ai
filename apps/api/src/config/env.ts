@@ -10,9 +10,6 @@ const envSchema = z.object({
   DEEPSEEK_MODEL: z.string().default('deepseek-v4-flash'),
   DEEPSEEK_THINKING: z.enum(['enabled', 'disabled']).default('enabled'),
   OPENAI_API_KEY: z.string().default(''),
-  // Optional Cohere Rerank API key. When set, hybrid retrieval results are reranked
-  // (rerank-v3.5) for a quality boost; when empty, retrieval falls back to RRF order.
-  COHERE_API_KEY: z.string().default(''),
   TRANSCRIPTION_MODEL: z.string().default('whisper-1'),
   // Scanned-PDF ingest: max pages to rasterize + OCR, and OCR concurrency. Default
   // concurrency is conservative (3) to stay within the 2GB VPS during fallback OCR.
