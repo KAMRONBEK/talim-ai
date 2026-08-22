@@ -1316,6 +1316,18 @@ export {
   type HtmlSandboxPayload,
 } from './tutor-visual';
 
+export { HEALTH_GROUP_LABELS, HEALTH_GROUP_ORDER } from './health';
+export type {
+  HealthStatus,
+  HealthGroup,
+  HealthDetail,
+  HealthCheckResult,
+  HealthGroupSummary,
+  HealthVerdict,
+  SystemHealthReport,
+  HealthReconcileResponse,
+} from './health';
+
 export type {
   DeckAccent,
   DeckIcon,

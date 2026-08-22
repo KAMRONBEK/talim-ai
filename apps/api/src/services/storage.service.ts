@@ -42,10 +42,18 @@ export class LocalStorageService implements StorageService {
   }
 
   async delete(filePath: string): Promise<void> {
+    const resolved = this.resolvePath(filePath);
     try {
-      await fs.unlink(this.resolvePath(filePath));
+      await fs.unlink(resolved);
     } catch {
       // ignore missing files
+    }
+    // `save` puts every file in its own `Date.now()` directory, so unlinking alone
+    // leaves an empty directory behind forever. Drop it once it is empty — rmdir
+    // fails harmlessly with ENOTEMPTY when siblings remain (same-millisecond saves).
+    const parent = path.dirname(resolved);
+    if (parent !== path.resolve(this.baseDir)) {
+      await fs.rmdir(parent).catch(() => undefined);
     }
   }
 }

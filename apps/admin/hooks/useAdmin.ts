@@ -27,6 +27,8 @@ import type {
   AdminUserGrowthResponse,
   AdminUserListItem,
   AdminUsersByRoleResponse,
+  HealthReconcileResponse,
+  SystemHealthReport,
   AdminUserSubscription,
   PaginatedResponse,
 } from '@talim/types';
@@ -446,5 +448,62 @@ export function useAdminContentDetail(id: string) {
       return data;
     },
     enabled: Boolean(id),
+  });
+}
+
+// --- System health (pre-demo self-diagnostics) -----------------------------
+
+/**
+ * Fast health pass. Polls on the same 60s cadence as the server-side cache, so a
+ * left-open dashboard costs one probe sweep per minute regardless of viewers.
+ */
+export function useSystemHealth() {
+  return useQuery({
+    queryKey: ['admin', 'health'],
+    queryFn: async () => {
+      const { data } = await api.get<SystemHealthReport>('/admin/health/system');
+      return data;
+    },
+    refetchInterval: 60_000,
+    // A report is a point-in-time reading — never serve a stale one silently.
+    staleTime: 0,
+  });
+}
+
+/** Force a fresh sweep, bypassing the server cache. */
+export function useRefreshHealth() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await api.get<SystemHealthReport>('/admin/health/system', {
+        params: { refresh: true },
+      });
+      return data;
+    },
+    onSuccess: (report) => queryClient.setQueryData(['admin', 'health'], report),
+  });
+}
+
+/** Deep pass — makes real, metered provider calls. Operator-triggered only. */
+export function useDeepHealthCheck() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await api.post<SystemHealthReport>('/admin/health/deep');
+      return data;
+    },
+    onSuccess: (report) => queryClient.setQueryData(['admin', 'health'], report),
+  });
+}
+
+/** Flip orphaned in-flight media claims to FAILED so they become retryable. */
+export function useReconcileStuckJobs() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      const { data } = await api.post<HealthReconcileResponse>('/admin/health/reconcile-stuck');
+      return data.report;
+    },
+    onSuccess: (report) => queryClient.setQueryData(['admin', 'health'], report),
   });
 }

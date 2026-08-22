@@ -9,6 +9,7 @@ import { LogoMark } from '@/components/logo';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard' },
+  { href: '/health', label: 'Health' },
   { href: '/tutor-requests', label: 'Requests' },
   { href: '/users', label: 'Users' },
   { href: '/tenants', label: 'Tenants' },

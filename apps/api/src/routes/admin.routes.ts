@@ -15,6 +15,12 @@ adminRoutes.get('/tutor-requests', asyncHandler(tutorRequestController.listTutor
 adminRoutes.post('/tutor-requests/:id/approve', asyncHandler(tutorRequestController.approveTutorRequest));
 adminRoutes.post('/tutor-requests/:id/reject', asyncHandler(tutorRequestController.rejectTutorRequest));
 
+// System health / self-diagnostics. The fast pass is free and pollable; the deep
+// pass makes real metered provider calls and is rate-limited in the service.
+adminRoutes.get('/health/system', asyncHandler(adminController.getSystemHealthReport));
+adminRoutes.post('/health/deep', asyncHandler(adminController.runDeepHealthCheck));
+adminRoutes.post('/health/reconcile-stuck', asyncHandler(adminController.reconcileStuckJobs));
+
 adminRoutes.get('/analytics/summary', asyncHandler(adminController.analyticsSummary));
 adminRoutes.get('/analytics/mrr', asyncHandler(adminController.analyticsMrr));
 adminRoutes.get('/analytics/user-growth', asyncHandler(adminController.analyticsUserGrowth));

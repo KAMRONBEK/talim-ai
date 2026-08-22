@@ -48,6 +48,38 @@ export interface SubscriptionView {
   effectivePlanCode: string;
 }
 
+/**
+ * The limit keys each plan kind MUST carry, by `PlanKind`.
+ *
+ * A missing key reads as `undefined`, which the quota code treats as "no limit" —
+ * so a renamed or half-seeded `Plan.limits` turns every quota silently OFF instead
+ * of failing loudly. This list lives beside the quota logic (not in the health
+ * probe) so a future rename touches the same file the drift check reads.
+ *
+ * `null` is a legitimate value meaning "unlimited"; only key ABSENCE is drift.
+ */
+export const EXPECTED_PLAN_LIMIT_KEYS: Record<PlanKind, readonly (keyof PlanLimits)[]> = {
+  INDIVIDUAL: [
+    'maxUploadsPerDay',
+    'maxGenerationsPerDay',
+    'maxPodcastsPerDay',
+    'maxVideosPerDay',
+    'maxTutorMessagesPerDay',
+    'maxPagesPerFile',
+    'maxFileSizeMb',
+  ],
+  TENANT: [
+    'maxStudents',
+    'maxContentItems',
+    'maxGenerationsPerDay',
+    'maxPodcastsPerDay',
+    'maxVideosPerDay',
+    'maxTutorMessagesPerDay',
+    'maxPagesPerFile',
+    'maxFileSizeMb',
+  ],
+};
+
 export function parseLimits(raw: Prisma.JsonValue): PlanLimits {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
   return raw as PlanLimits;
