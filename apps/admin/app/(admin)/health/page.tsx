@@ -116,6 +116,67 @@ function VerdictBanner({ report, now }: { report: SystemHealthReport; now: numbe
   );
 }
 
+/**
+ * Feature-level rollup. The 32 low-level checks answer "what is broken"; this
+ * answers the question actually being asked before a demo: "can I show this?"
+ */
+function ReadinessCard({ report }: { report: SystemHealthReport }) {
+  const readiness = report.readiness ?? [];
+  if (readiness.length === 0) return null;
+  const blocked = readiness.filter((f) => f.status === 'down').length;
+  const reduced = readiness.filter((f) => f.status === 'degraded').length;
+
+  return (
+    <Card className="rounded-2xl shadow-soft">
+      <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
+        <div>
+          <h2 className="font-display text-base font-semibold">Demo readiness</h2>
+          <p className="text-xs text-muted-foreground">
+            What a live audience would actually experience, feature by feature
+          </p>
+        </div>
+        <span className="shrink-0 text-xs text-muted-foreground">
+          {blocked > 0
+            ? `${blocked} would fail`
+            : reduced > 0
+              ? `${reduced} reduced`
+              : 'all features ready'}
+        </span>
+      </CardHeader>
+      <CardContent className="grid gap-x-6 gap-y-3 pt-1 sm:grid-cols-2">
+        {readiness.map((feature) => {
+          const tone =
+            feature.status === 'down'
+              ? 'bg-destructive/10 text-destructive'
+              : feature.status === 'degraded'
+                ? 'bg-warning-muted text-warning'
+                : 'bg-success-muted text-success';
+          const label =
+            feature.status === 'down' ? 'WILL FAIL' : feature.status === 'degraded' ? 'REDUCED' : 'READY';
+
+          return (
+            <div key={feature.id} className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span
+                  className={`inline-flex shrink-0 items-center rounded-full px-2 py-0.5 font-label text-[10px] font-semibold tracking-wide ${tone}`}
+                >
+                  {label}
+                </span>
+                <span className="truncate text-sm font-medium text-foreground">{feature.label}</span>
+              </div>
+              {feature.status !== 'ok' && (
+                <p className="mt-1 break-words text-xs leading-relaxed text-muted-foreground">
+                  {feature.summary}
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </CardContent>
+    </Card>
+  );
+}
+
 function GroupGrid({
   report,
   busy,
@@ -312,6 +373,7 @@ export default function AdminHealthPage() {
       ) : report ? (
         <>
           <VerdictBanner report={report} now={now} />
+          <ReadinessCard report={report} />
           <GroupGrid
             report={report}
             busy={busy}

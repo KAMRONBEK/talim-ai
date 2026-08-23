@@ -53,6 +53,25 @@ export interface HealthGroupSummary {
 /** `go` = nothing wrong; `issues` = degraded only; `critical` = at least one down. */
 export type HealthVerdict = 'go' | 'issues' | 'critical';
 
+/**
+ * Whether a user-facing FEATURE will work, derived from the low-level checks.
+ *
+ * This exists because "not configured" reads as harmless in a check list, but is
+ * not harmless if you are about to demo the feature that depends on it. Rolling
+ * the checks up to "Podcasts: degraded" is the signal an operator can act on in
+ * the ten minutes before a presentation.
+ */
+export interface FeatureReadiness {
+  id: string;
+  label: string;
+  /** `down` = will visibly fail; `degraded` = works but worse; `ok` = good to demo. */
+  status: Exclude<HealthStatus, 'skipped'>;
+  /** Plain-language consequence, e.g. "non-native Uzbek voice". */
+  summary: string;
+  /** Ids of the checks that decided this, so the operator knows where to look. */
+  blockedBy: string[];
+}
+
 export interface SystemHealthReport {
   verdict: HealthVerdict;
   /** degraded + down. */
@@ -69,6 +88,8 @@ export interface SystemHealthReport {
   includesDeep: boolean;
   checks: HealthCheckResult[];
   groups: HealthGroupSummary[];
+  /** Feature-level rollup for the pre-demo glance. */
+  readiness: FeatureReadiness[];
 }
 
 /** Response of POST /admin/health/reconcile-stuck. */

@@ -8,6 +8,7 @@ import type {
 import { HEALTH_GROUP_ORDER } from '@talim/types';
 import type { ProbeDefinition } from './runner.js';
 import { runProbes } from './runner.js';
+import { computeReadiness } from './readiness.js';
 import { infrastructureProbes } from './probes/infrastructure.probes.js';
 import { aiProviderProbes } from './probes/aiProviders.probes.js';
 import { ragProbes } from './probes/rag.probes.js';
@@ -110,6 +111,7 @@ function assemble(
     includesDeep: ordered.some((c) => c.deep),
     checks: ordered,
     groups: summarize(ordered),
+    readiness: computeReadiness(ordered),
   };
 }
 

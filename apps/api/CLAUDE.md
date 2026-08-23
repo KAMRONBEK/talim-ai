@@ -39,8 +39,13 @@ apps, product/role model) see the root `CLAUDE.md`.
 - **Config:** `src/config/env.ts` validates `process.env` with a zod schema and `process.exit(1)`
   on failure. Notable vars: `DATABASE_URL`, `REDIS_URL`, `JWT_SECRET` (min 32 chars),
   `OPENAI_API_KEY`, `DEEPSEEK_API_KEY` / `DEEPSEEK_MODEL`, `TUTOR_MODEL` (default `gpt-4o`),
-  `TTS_MODEL` / `TTS_PROVIDER` (`openai` | `elevenlabs` | `azure` — prod uses `azure`,
-  Microsoft native uz/ru neural voices), `TRANSCRIPTION_MODEL`, `MANIM_BIN`,
+  `TTS_MODEL` / `TTS_PROVIDER` (`openai` | `elevenlabs` | `azure` — **prod is on `openai`
+  as of 2026-08-23**: the Azure subscription's free credit expired and its Speech key
+  started returning 401, so `AZURE_SPEECH_KEY` was removed from every Doppler config.
+  Azure is still the *preferred* path — set `AZURE_SPEECH_KEY` + `AZURE_SPEECH_REGION`
+  again and `tts.service` auto-routes back to the native uz/ru neural voices; until
+  then Uzbek/Russian narration uses English-trained OpenAI voices and sounds
+  non-native), `TRANSCRIPTION_MODEL`, `MANIM_BIN`,
   `UPLOAD_DIR` (default `/uploads`), `DEFAULT_CONTENT_LOCALE` (`uz`|`en`|`ru`), `CORS_ORIGIN`.
   Secrets come from **Doppler** (root scripts wrap commands in `doppler run --`); never hardcode.
 - Pricing constants live in `src/config/usage-pricing.ts`.

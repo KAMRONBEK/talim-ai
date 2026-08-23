@@ -1324,6 +1324,7 @@ export type {
   HealthCheckResult,
   HealthGroupSummary,
   HealthVerdict,
+  FeatureReadiness,
   SystemHealthReport,
   HealthReconcileResponse,
 } from './health';

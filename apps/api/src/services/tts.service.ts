@@ -77,6 +77,30 @@ function recordTtsUsage(model: string, text: string, usage?: UsageContext): void
   });
 }
 
+/** Carries the HTTP status so the caller can tell "key is dead" from "try again later". */
+class AzureTtsError extends Error {
+  constructor(
+    message: string,
+    readonly status?: number,
+  ) {
+    super(message);
+    this.name = 'AzureTtsError';
+  }
+}
+
+/**
+ * Azure auth/config failures — revoked key, deleted resource, an expired
+ * subscription — are not transient. Retrying them per chunk would burn one dead
+ * round-trip for every ~700 characters of a script, so the first auth failure
+ * trips a breaker and the rest of the run is served by OpenAI.
+ */
+const AZURE_BREAKER_COOLDOWN_MS = 10 * 60_000;
+let azureBreakerUntil = 0;
+
+function isAzureAuthFailure(status: number | undefined): boolean {
+  return status === 401 || status === 403 || status === 404;
+}
+
 async function azurePostWithRetry(ssml: string, voice: string): Promise<Buffer> {
   const url = `https://${env.AZURE_SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/v1`;
   const maxAttempts = 4;
@@ -102,9 +126,12 @@ async function azurePostWithRetry(ssml: string, voice: string): Promise<Buffer> 
       continue;
     }
     const detail = await res.text().catch(() => '');
-    throw new Error(`Azure TTS failed (${res.status} ${voice}): ${detail.slice(0, 300)}`);
+    throw new AzureTtsError(
+      `Azure TTS failed (${res.status} ${voice}): ${detail.slice(0, 300)}`,
+      res.status,
+    );
   }
-  throw new Error(`Azure TTS failed after ${maxAttempts} attempts (${voice})`);
+  throw new AzureTtsError(`Azure TTS failed after ${maxAttempts} attempts (${voice})`);
 }
 
 async function synthesizeChunkAzure(
@@ -140,15 +167,45 @@ async function synthesizeChunkOpenai(
   return Buffer.from(await response.arrayBuffer());
 }
 
-function synthesizeChunk(
+/**
+ * Prefer Azure's native voices, but never let an Azure outage take podcasts down
+ * with it: on failure we degrade to OpenAI voices instead of failing the job.
+ *
+ * The degradation is audible — OpenAI has no native Uzbek voice — so it is logged
+ * loudly rather than swallowed. The health dashboard probes Azure independently,
+ * so a dead key still shows up as DOWN there even while podcasts keep working.
+ */
+async function synthesizeChunk(
   text: string,
   locale: AppLocale,
   usage: UsageContext | undefined,
   speaker: Speaker = 0,
 ): Promise<Buffer> {
-  return azureConfigured
-    ? synthesizeChunkAzure(text, locale, usage, speaker)
-    : synthesizeChunkOpenai(text, locale, usage, speaker);
+  const azureUsable = azureConfigured && Date.now() >= azureBreakerUntil;
+  if (!azureUsable) {
+    return synthesizeChunkOpenai(text, locale, usage, speaker);
+  }
+
+  try {
+    return await synthesizeChunkAzure(text, locale, usage, speaker);
+  } catch (error) {
+    const status = error instanceof AzureTtsError ? error.status : undefined;
+    const reason = error instanceof Error ? error.message : String(error);
+
+    if (isAzureAuthFailure(status)) {
+      azureBreakerUntil = Date.now() + AZURE_BREAKER_COOLDOWN_MS;
+      console.error(
+        `[tts] Azure Speech rejected the credentials (HTTP ${status}). Falling back to OpenAI voices for the next ${AZURE_BREAKER_COOLDOWN_MS / 60000} minutes — Uzbek and Russian will sound non-native until AZURE_SPEECH_KEY is restored. Reason: ${reason}`,
+      );
+    } else {
+      console.error(`[tts] Azure synthesis failed, using OpenAI for this chunk. Reason: ${reason}`);
+    }
+
+    // With no OpenAI key there is nothing to fall back TO — surface the real Azure
+    // error rather than a misleading "no provider configured".
+    if (!env.OPENAI_API_KEY) throw error;
+    return synthesizeChunkOpenai(text, locale, usage, speaker);
+  }
 }
 
 /** Run async tasks with a bounded concurrency, preserving input order. */
