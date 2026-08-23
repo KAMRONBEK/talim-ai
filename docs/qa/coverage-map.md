@@ -91,3 +91,8 @@
 | dashboard/INDIVIDUAL/typebadge | /[locale]/dashboard | INDIVIDUAL | populated | uz | — | viewed | — | — | — | ∞ |
 | dashboard/INDIVIDUAL/i18n-ru-en | /[locale]/dashboard | INDIVIDUAL | locale{ru,en} | ru | Dilnoza | oracle-verified | R2026-07-14a | 1ac3af69 | F80 | 0 |
 | learner.dashboard/TENANT_LEARNER-active/must-change-pw | /[locale]/learner/dashboard | TENANT_LEARNER-active | mustChangePassword | uz | Aziza | oracle-verified | R2026-07-14a | 13a93172 | O84 | 0 |
+| admin.health/ADMIN/populated | /health (:3001) | ADMIN | populated | en | FedEx | oracle-verified | R2026-08-23a | 4040534a | — | 0 |
+| admin.health/ADMIN/api-unreachable | /health (:3001) | ADMIN | error/failed-job | en | Hostile | oracle-verified | R2026-08-23a | 4040534a | O94 | 0 |
+| admin.health/ADMIN/a11y-live-region | /health (:3001) | ADMIN | populated | en | Rustam | oracle-verified | R2026-08-23a | e19ce5d7 | F83 | 0 |
+| admin.health/ADMIN/mobile390-dark | /health (:3001) | ADMIN | viewport{390} theme{dark} | en | OCD | oracle-verified | R2026-08-23a | 4040534a | O96 | 0 |
+| admin.health/ADMIN/deep-check | /health (:3001) | ADMIN | loading/generating | en | — | viewed | — | — | O97 | ∞ |

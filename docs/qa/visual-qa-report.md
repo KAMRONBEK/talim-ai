@@ -1917,3 +1917,69 @@ chrome checked this run).
 6. **O82/O88 podcast media-metadata** — the structural duration estimator (PLANS) + per-episode FAILED affordance.
 
 **Run 21 net:** RCRCRC-fresh code (pricing + both dashboards) is **data-integrity clean**; the 4 new observations are all low-confidence/structural (price-source drift ×2, dashboard cross-source metric ×1, 429 header ×1) for morning product review; F78 upgraded from grep-only to a live evidence bundle. Types/web/admin untouched (docs-only commits), nothing pushed.
+
+---
+
+## Run 22 — R2026-08-23a (session-based deep QA · branch `claude/visual-qa`)
+
+**Env:** local stack reused (web :3000, api :4000 healthy). **admin :3001 was down at boot** — a
+prior session in this same conversation had started and stopped it for UI verification, and it was
+never part of the user's `dev:all`. Preflight correctly **ABORTED** (`admin :3001 unreachable`).
+Restored admin in place (free port ⇒ no duplicate risk), re-ran preflight → **OK** (4/4 test accounts
+probe, fixtures generated, 32GB free, baseline typecheck clean).
+
+**Frontier note:** run-start route enumeration flagged **`/health` (:3001) as a staleness-∞ NEW
+route** — shipped earlier the same day (`807ac52d`→`4040534a`) and never QA'd. It is also the surface
+the founder is meant to trust before an investor demo, so the queue was built around it, plus the
+recently-changed `storage.service`/`tts.service` code (RCRCRC "Recent").
+
+| # | Charter | Persona · Tour | Result |
+| --- | --- | --- | --- |
+| C1 | Is the health verdict *trustworthy*? | Nodira · FedEx | **PASS** — oracle-verified |
+| C2 | Health page when the API dies | Saboteur · Hostile | **PASS** — O94 |
+| C3 | Health page a11y | Rustam · keyboard | **FAIL → fixed** — **F83** |
+| C4 | Health @390 + dark | Dilnoza · OCD | **PASS** — O96 |
+| C5 | `storage.delete` rmdir safety (recent code) | Saboteur | **PASS** |
+
+**C1 — trust oracle (the important one).** Rather than assert "it renders", every positive claim was
+cross-checked against the database directly: pgvector `0.8.2`≡0.8.2, indexes `Chunk_embedding_hnsw +
+Chunk_tsv_gin + ContentFigure_embedding_hnsw`≡"all four present" (see O95), migrations `38`≡38, READY
+w/ 0 chunks `0`≡0, null embeddings `0`≡0, failed ingests 24h `0`≡0, plans `4`≡4. **Every claim matched
+— the page does not lie.** Depth-3: survived a real `location.reload()`; sampled the banner every
+200ms through load and found **no false-green flash** (`sequence: ["ISSUES"]`). Vigilance scan: 0
+console errors/warnings, 3× `GET /admin/health/system` → 200.
+
+**C2 — reliability.** Killed the API at the client layer (XHR redirected to a dead port). Page showed
+**no green**, rendered `CAN'T REACH THE API` + *"stale snapshot from 1m ago and may no longer be
+true"*, and suppressed the issue count. Restored the API → recovered cleanly on "Re-check now"
+(back to `2 ISSUES`, stale warning gone, no stuck state). O94 logged for the still-green group pills
+below the banner.
+
+**C3 — a11y → F83 (fixed, `e19ce5d7`).** Text-not-colour status ✓, clean h1→h2 outline ✓, no unlabeled
+buttons ✓, both actions keyboard-operable (tabIndex 0) ✓ — but **zero live regions document-wide** on
+a page that re-polls every 60s and swaps the verdict **in place**. Reproduced twice incl. fresh state;
+skeptic pass ruled out a global toaster/portal. Fixed + verified live.
+
+**C4 — visual.** @390: `scrollWidth == clientWidth == 390`, **zero** over-wide elements, content
+legible (screenshot `docs/qa/screenshots/R2026-08-23a-health-390.png`). Dark mode: DEGRADED badge
+`rgb(219,148,67)` on `rgb(56,42,25)` = **5.50:1**, passes WCAG AA small-text. O96 = cosmetic only.
+
+**C5 — storage delete (re-scoped).** The `LocalStorageService.delete` rmdir change touches *every*
+delete in the app, so data-loss risk outranked re-testing podcast generation. 5/5 pass:
+empty-parent removed · **sibling file + its dir survive** (ENOTEMPTY handled) · **baseDir never
+removed** · missing file doesn't throw · **traversal `../../../etc/passwd` blocked**, `/etc/passwd`
+intact.
+
+**Cells advanced:** 4 new `admin.health/*` cells to **oracle-verified**; 1 (`deep-check`) left at
+`viewed`/∞ deliberately (O97).
+**Bugs fixed:** F83 (`e19ce5d7`).
+**Issues logged:** F83 (fixed) · O94, O95, O96, O97.
+**Flaky / blocked-on-job:** none.
+**Not covered (honest gap):** the **deep check** was not run — it makes real metered provider calls,
+and my probe identity would have failed the audit-log FK. It is the top of tomorrow's queue.
+
+**Tomorrow's charter queue:** (1) `admin.health/ADMIN/deep-check` as a real admin, incl. the 60s
+cooldown + audit row; (2) re-triage O94 (stale-green pills) — promote to F if a second reader is
+misled; (3) `tenant.materials.[id]/TENANT_LEARNER-active/role-guard` (∞, isolation invariant);
+(4) `content.[id].flashcards/TENANT_LEARNER-deactivated/populated` (∞, isolation invariant);
+(5) podcast end-to-end on the OpenAI TTS path (deferred from C5).
