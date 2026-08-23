@@ -6,8 +6,14 @@ import { contentQueue } from '../../queue.service.js';
 import { storageService } from '../../storage.service.js';
 import type { ProbeDefinition } from '../runner.js';
 
-const SLOW_DB_MS = 1000;
-const SLOW_REDIS_MS = 500;
+// These budgets are deliberately loose. Every probe runs concurrently, so ~25 of
+// them contend for the event loop while these two are being timed — the measured
+// figure includes queueing delay, not just server round-trip. On a cold container
+// straight after a deploy that inflates a healthy Redis PING to ~500ms, which a
+// tighter threshold would report as degraded on every single deploy.
+// A genuinely wedged dependency blows the probe's timeout instead of returning slow.
+const SLOW_DB_MS = 1500;
+const SLOW_REDIS_MS = 1000;
 const LOW_DISK_BYTES = 1024 * 1024 * 1024; // 1 GiB
 /** Warn once resident memory passes this share of the container's real limit. */
 const RSS_WARN_RATIO = 0.8;
