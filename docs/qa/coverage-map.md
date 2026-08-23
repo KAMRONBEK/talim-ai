@@ -95,4 +95,4 @@
 | admin.health/ADMIN/api-unreachable | /health (:3001) | ADMIN | error/failed-job | en | Hostile | oracle-verified | R2026-08-23a | 4040534a | O94 | 0 |
 | admin.health/ADMIN/a11y-live-region | /health (:3001) | ADMIN | populated | en | Rustam | oracle-verified | R2026-08-23a | e19ce5d7 | F83 | 0 |
 | admin.health/ADMIN/mobile390-dark | /health (:3001) | ADMIN | viewport{390} theme{dark} | en | OCD | oracle-verified | R2026-08-23a | 4040534a | O96 | 0 |
-| admin.health/ADMIN/deep-check | /health (:3001) | ADMIN | loading/generating | en | — | viewed | — | — | O97 | ∞ |
+| admin.health/ADMIN/deep-check | /health (:3001) | ADMIN | loading/generating | en | FedEx | oracle-verified | R2026-08-23b | 921b8fd8 | F84 | 0 |

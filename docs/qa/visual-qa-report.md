@@ -1983,3 +1983,48 @@ cooldown + audit row; (2) re-triage O94 (stale-green pills) — promote to F if 
 misled; (3) `tenant.materials.[id]/TENANT_LEARNER-active/role-guard` (∞, isolation invariant);
 (4) `content.[id].flashcards/TENANT_LEARNER-deactivated/populated` (∞, isolation invariant);
 (5) podcast end-to-end on the OpenAI TTS path (deferred from C5).
+
+## Run 22b — R2026-08-23b (targeted: close O97 · the deep check)
+
+**Charter:** drive `admin.health/ADMIN/deep-check` — the cell R2026-08-23a deliberately left at
+`viewed`/∞ — to depth ≥3 on **local and production**, since it is the only check that detects an
+account out of credit and the run before a demo depends on it.
+
+**Blocker from R22a confirmed, then solved.** `AdminAuditLog.adminUserId` is nullable **but carries a
+real FK to `User`**, so the synthetic probe id used previously would have failed the insert with
+P2003 *after* the metered probes had already run. Solved by minting against the **real** `qa-admin`
+row locally, and the single real ADMIN row on prod.
+
+**Local (real qa-admin, UI + API):** `POST /admin/health/deep` → **200**, 31 checks, mode=deep.
+DeepSeek + gpt-4o real completions **ok**; RAG e2e **ok** (source passage top-3); Azure/OpenRouter
+**skipped** (unconfigured — correct). Audit oracle: `health.deep_check` count **4→5**, row attributed
+to `qa-admin@talim.local` with verdict metadata. UI flow exercised end-to-end: "Run deep check" →
+confirm panel (cost + duration copy) → "Run it" → banner switched to **"Deep pass · 1417ms"**, the
+pre-demo hint correctly disappeared, and all 5 deep rows rendered.
+
+**Cost-control oracle:** 3 immediate re-POSTs all returned `cached=true` with identical
+`durationMs`, 5–10ms — the cooldown does prevent re-spend. That test surfaced **F84**.
+
+**Near-miss worth recording:** the deep chips read `DEEP · 2M AGO` and I nearly filed it as a
+stale-timestamp bug. Verification killed it: `checkedAt=22:16:10.456Z` matches the audit row's
+`22:16:10.578Z` exactly — the chip was honestly reporting elapsed wall-clock between the run and my
+inspection. The age-transparency feature working as designed.
+
+**PRODUCTION deep check — the headline result.** `POST https://talim-ai.uz/api/admin/health/deep`
+→ **200, cached=false, 1701ms**, attributed in the prod audit log to `admin@gmail.com`:
+
+| probe | result |
+| --- | --- |
+| DeepSeek completion | **ok** — real completion on `deepseek-v4-flash` |
+| OpenAI tutor (gpt-4o) | **ok** — real completion |
+| OpenRouter OCR path | **ok** — real completion on `google/gemini-2.5-flash-lite` |
+| RAG end-to-end | **ok** — 4 hits in 791ms, source passage top-3 |
+| Azure TTS | skipped (unconfigured — expected) |
+
+**No provider account is out of credit.** Prod verdict unchanged: **2 issues, 0 critical** (Manim,
+TTS) — neither blocking.
+
+**Cells advanced:** `admin.health/ADMIN/deep-check` viewed → **oracle-verified**.
+**Bugs fixed:** F84 (`921b8fd8`). **Resolved:** O97.
+**Note:** F84's fix is committed but **not yet deployed** — the prod audit row above predates it and
+therefore lacks the `servedFromCache` field.
