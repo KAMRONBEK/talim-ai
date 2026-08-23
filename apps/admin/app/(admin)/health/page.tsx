@@ -48,7 +48,8 @@ function relativeTime(iso: string, now: number): string {
 function UnreachableBanner({ report, now }: { report: SystemHealthReport | undefined; now: number }) {
   return (
     <Card className="rounded-2xl border-destructive/50 shadow-soft">
-      <CardContent className="flex items-start gap-4 p-5">
+      {/* role=alert: losing contact with the API is urgent enough to interrupt. */}
+      <CardContent className="flex items-start gap-4 p-5" role="alert">
         <PlugZap className="h-10 w-10 shrink-0 text-destructive" />
         <div>
           <p className="font-display text-3xl font-semibold leading-none text-destructive">
@@ -85,8 +86,15 @@ function VerdictBanner({ report, now }: { report: SystemHealthReport; now: numbe
     <Card className="rounded-2xl shadow-soft">
       <CardContent className="flex flex-wrap items-start justify-between gap-4 p-5">
         <div className="flex items-start gap-4">
-          <Icon className={`h-10 w-10 shrink-0 ${tone}`} />
-          <div>
+          <Icon className={`h-10 w-10 shrink-0 ${tone}`} aria-hidden="true" />
+          {/*
+            F83: the report re-polls every 60s and swaps this text in place. Without a
+            live region a screen-reader user is never told the verdict flipped to
+            broken — the one event this page exists to surface. `polite` (not alert)
+            so it queues behind whatever the user is currently reading; `atomic` so
+            the verdict and its counts are announced as one sentence.
+          */}
+          <div role="status" aria-live="polite" aria-atomic="true">
             <p className={`font-display text-3xl font-semibold leading-none ${tone}`}>
               {report.verdict === 'go'
                 ? title
