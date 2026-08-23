@@ -76,6 +76,10 @@ function UnreachableBanner({ report, now }: { report: SystemHealthReport | undef
 function VerdictBanner({ report, now }: { report: SystemHealthReport; now: number }) {
   const { icon: Icon, tone, title } = VERDICT[report.verdict];
   const pulse = report.checks.find((c) => c.id === 'ai-usage-pulse');
+  // Name the failures right here. "2 ISSUES" on its own sends the operator hunting
+  // through seven cards to find which two — worst-case reading a card below the fold
+  // while deciding whether it is safe to start a demo.
+  const failing = report.checks.filter((c) => c.status === 'down' || c.status === 'degraded');
 
   return (
     <Card className="rounded-2xl shadow-soft">
@@ -96,6 +100,28 @@ function VerdictBanner({ report, now }: { report: SystemHealthReport; now: numbe
               {relativeTime(report.generatedAt, now)}
             </p>
             {pulse && <p className="mt-1 text-xs text-muted-foreground">{pulse.message}</p>}
+
+            {failing.length > 0 && (
+              <ul className="mt-3 space-y-1.5">
+                {failing.map((check) => (
+                  <li key={check.id} className="flex flex-wrap items-baseline gap-x-2 text-sm">
+                    <span
+                      className={`inline-flex shrink-0 items-center rounded-full px-2 py-0.5 font-label text-[10px] font-semibold tracking-wide ${
+                        check.status === 'down'
+                          ? 'bg-destructive/10 text-destructive'
+                          : 'bg-warning-muted text-warning'
+                      }`}
+                    >
+                      {check.status === 'down' ? 'DOWN' : 'DEGRADED'}
+                    </span>
+                    <span className="font-medium text-foreground">{check.label}</span>
+                    <span className="text-xs text-muted-foreground">
+                      in {HEALTH_GROUP_LABELS[check.group]}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 

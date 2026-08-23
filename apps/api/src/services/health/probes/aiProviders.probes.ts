@@ -108,7 +108,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
     group: 'ai-providers',
     label: 'OpenAI key valid',
     deep: false,
-    timeoutMs: 6000,
+    timeoutMs: 12000,
     timeoutStatus: 'degraded',
     remediation: ROTATE_OPENAI,
     run: async () => {
@@ -119,7 +119,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
       // though NOT that the account has credit (that is the embedding probe below).
       const response = await fetch('https://api.openai.com/v1/models', {
         headers: { Authorization: `Bearer ${env.OPENAI_API_KEY}` },
-        signal: AbortSignal.timeout(5500),
+        signal: AbortSignal.timeout(11000),
       });
       const failure = await classifyResponse(response, 'OpenAI');
       if (failure) return failure;
@@ -135,7 +135,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
     group: 'ai-providers',
     label: 'OpenAI embeddings live',
     deep: false,
-    timeoutMs: 8000,
+    timeoutMs: 15000,
     timeoutStatus: 'degraded',
     remediation: ROTATE_OPENAI,
     run: async () => {
@@ -166,7 +166,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
     group: 'ai-providers',
     label: 'DeepSeek key + model',
     deep: false,
-    timeoutMs: 6000,
+    timeoutMs: 12000,
     timeoutStatus: 'degraded',
     remediation: ROTATE_DEEPSEEK,
     run: async () => {
@@ -175,7 +175,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
       }
       const response = await fetch('https://api.deepseek.com/models', {
         headers: { Authorization: `Bearer ${env.DEEPSEEK_API_KEY}` },
-        signal: AbortSignal.timeout(5500),
+        signal: AbortSignal.timeout(11000),
       });
       const failure = await classifyResponse(response, 'DeepSeek');
       if (failure) return failure;
@@ -204,7 +204,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
     group: 'ai-providers',
     label: 'OpenRouter key + credits',
     deep: false,
-    timeoutMs: 6000,
+    timeoutMs: 12000,
     timeoutStatus: 'degraded',
     remediation: ROTATE_OPENROUTER,
     run: async () => {
@@ -213,7 +213,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
       }
       const response = await fetch('https://openrouter.ai/api/v1/key', {
         headers: { Authorization: `Bearer ${env.OPENROUTER_API_KEY}` },
-        signal: AbortSignal.timeout(5500),
+        signal: AbortSignal.timeout(11000),
       });
       const failure = await classifyResponse(response, 'OpenRouter');
       if (failure) return failure;
@@ -257,7 +257,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
     group: 'ai-providers',
     label: 'Azure Speech key + voices',
     deep: false,
-    timeoutMs: 7000,
+    timeoutMs: 12000,
     timeoutStatus: 'degraded',
     remediation: ROTATE_AZURE,
     run: async () => {
@@ -268,7 +268,7 @@ export const aiProviderProbes: ProbeDefinition[] = [
         `https://${env.AZURE_SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/voices/list`,
         {
           headers: { 'Ocp-Apim-Subscription-Key': env.AZURE_SPEECH_KEY },
-          signal: AbortSignal.timeout(6500),
+          signal: AbortSignal.timeout(11000),
         },
       );
       const failure = await classifyResponse(response, 'Azure Speech');
