@@ -31,11 +31,21 @@ export async function getSystemHealthReport(req: AuthenticatedRequest, res: Resp
 export async function runDeepHealthCheck(req: AuthenticatedRequest, res: Response): Promise<void> {
   const report = await getSystemHealth('deep');
   if (req.user) {
+    // Log every request (who asked, when), but record whether this one actually
+    // ran the metered probes. Within the cooldown the report is replayed from
+    // cache and nothing is spent — without this flag the trail reads as N real
+    // deep checks (N× provider spend) when only the first one executed.
     await writeAdminAuditLog({
       adminUserId: req.user.userId,
       action: 'health.deep_check',
       targetType: 'system',
-      metadata: { verdict: report.verdict, issueCount: report.issueCount, durationMs: report.durationMs },
+      metadata: {
+        verdict: report.verdict,
+        issueCount: report.issueCount,
+        durationMs: report.durationMs,
+        servedFromCache: report.cached,
+        spentProviderCalls: !report.cached,
+      },
     });
   }
   res.json(report);
