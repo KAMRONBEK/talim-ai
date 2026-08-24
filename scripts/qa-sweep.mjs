@@ -1413,14 +1413,21 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
     );
     const rendered = new Set(findings.visibleLines ?? []);
     const lostLines = baselineLines.filter((line) => !rendered.has(line)).length;
-    const loadBearing = lostLines > 0;
+    // No baseline fingerprint (the normal pass's evaluate timed out, or a refactor stopped
+    // returning visibleLines) means the diff cannot answer the question — and `lostLines === 0`
+    // would then read as "nothing was lost" and waive the probe on EVERY cell. Unknown is not
+    // innocent: fall back to the original, stricter rule and say so in the verdict.
+    const canDiff = baselineLines.length > 0;
+    const loadBearing = !canDiff || lostLines > 0;
     const probes = [
       probe(
         'error-affordance',
         !loadBearing || findings.errorAffordance,
-        loadBearing
-          ? `aborted GET ${primaryApi}: ${lostLines}/${baselineLines.length} visible lines lost, no error affordance shown`
-          : `aborted GET ${primaryApi}: page rendered identically (${baselineLines.length} lines) — not load-bearing for this route, so there is nothing to tell the user`,
+        !canDiff
+          ? `aborted GET ${primaryApi}: no baseline fingerprint, so the load-bearing check could not run — judged strictly`
+          : loadBearing
+            ? `aborted GET ${primaryApi}: ${lostLines}/${baselineLines.length} visible lines lost, no error affordance shown`
+            : `aborted GET ${primaryApi}: page rendered identically (${baselineLines.length} lines) — not load-bearing for this route, so there is nothing to tell the user`,
         // Kept on PASS: a waived probe that explains nothing is indistinguishable from a
         // weakened one, and this is the exact waiver a future reader will want to audit.
         !loadBearing,
