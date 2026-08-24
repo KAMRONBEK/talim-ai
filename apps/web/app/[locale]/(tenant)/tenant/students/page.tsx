@@ -339,6 +339,9 @@ export default function TenantStudentsPage() {
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         placeholder={t('assignSearch')}
+        // Same unlabelled-search fix as assign-students-panel.tsx: a placeholder is not
+        // an accessible name.
+        aria-label={t('assignSearch')}
         className="max-w-sm"
       />
 
