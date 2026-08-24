@@ -3251,18 +3251,19 @@
         "layout-stability"
       ],
       "sweepCount": 6,
-      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "depthVerifiedAt": "2026-08-25T02:45:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25a",
-      "tour_last": "Hostile (deactivated mid-session)",
-      "persona_last": "Test Student One",
-      "criterion": "security/tenant-isolation",
+      "lastDepthRun": "R2026-08-25b",
+      "tour_last": "Multi-actor soap opera (receive, read, reply) — the other half of the tutor thread",
+      "persona_last": "Test Student One (student)",
+      "criterion": "security/xss-escaping",
       "findings": [
-        "F86"
+        "F86",
+        "F93"
       ],
       "issue": 41,
-      "notes": "Depth 3: verified under BOTH account states across real navigations. Invariant deactivated-learner-loses-access-immediately HOLDS on an already-issued token (content 200->404, /learner/materials 200->403, /learner/assessments 200->403; fresh login 403). Also CLS measured 0.19 here vs sweep 0.276 -> O98."
+      "notes": "Depth 3: verified under BOTH account states across real navigations. Invariant deactivated-learner-loses-access-immediately HOLDS on an already-issued token (content 200->404, /learner/materials 200->403, /learner/assessments 200->403; fresh login 403). Also CLS measured 0.19 here vs sweep 0.276 -> O98. | R2026-08-25b re-attack, messaging lens: the tutor message arrived without a reload and rendered escaped -- img onerror and script payloads shown as literal text, window.__xss never set, no raw markup in innerHTML. Bell label \"Xabarlar (2 o'qilmagan)\". Opening the message marked it read (unread-count 2->1 via the API) and revealed a reply box; the reply reached the tutor. Learner cannot reach any tutor messaging endpoint (403)."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440",
@@ -4254,17 +4255,19 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 6,
-      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "depthVerifiedAt": "2026-08-25T02:45:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25a",
-      "tour_last": "FedEx (follow one student end-to-end)",
-      "persona_last": "Nodira (tutor)",
-      "criterion": "security/tenant-isolation",
-      "notes": "Depth 3: opened -> clicked Faolsizlantirish on @teststudent1 -> PATCH /tenant/students/:id {active:false} -> row FAOLSIZ survived a real location.reload(). Reactivated; state restored. Surfaced F86 (#41). Seat-limit invariant also driven here (create + import + join-code paths, boundary and concurrent): sequential enforcement correct, concurrent enforcement violated -> F87, security-shaped, details in the advisory only. State restored (seatLimit -> null, probe accounts purged, over-purged fixture qa-joincode reactivated).",
+      "lastDepthRun": "R2026-08-25b",
+      "tour_last": "Multi-actor soap opera (tutor to student and back) + input attacks on the composer",
+      "persona_last": "Nodira (tutor) with Test Student One as the second actor",
+      "criterion": "reliability/data-integrity",
+      "notes": "Depth 3: opened -> clicked Faolsizlantirish on @teststudent1 -> PATCH /tenant/students/:id {active:false} -> row FAOLSIZ survived a real location.reload(). Reactivated; state restored. Surfaced F86 (#41). Seat-limit invariant also driven here (create + import + join-code paths, boundary and concurrent): sequential enforcement correct, concurrent enforcement violated -> F87, security-shaped, details in the advisory only. State restored (seatLimit -> null, probe accounts purged, over-purged fixture qa-joincode reactivated). | R2026-08-25b re-attack, messaging lens: bulk-select -> Xabar -> sent a hostile body (img onerror, script tag, RTL override, emoji, Cyrillic). Learner received it within 4.5s with no reload, rendered as TEXT (no XSS fired, no raw script/img in the DOM), bell 2 unread. Learner opened it (unread 2->1) and replied; owner bell showed 1 unread after a real reload; owner opened the thread (auto-marks student replies read), responded via the inline box with Enter, and the full 3-turn thread survived another real location.reload(). Composer input attacks: empty and whitespace-only both keep Send disabled; 5000 maxLength on both boxes. Messaging IDOR matrix 8/8 correct (cross-learner read/reply 404, learner posting to tutor endpoints 403, deactivated-only and non-member-only recipients 400). Deactivated recipients are silently dropped from a mixed selection, which is CORRECT and disclosed up front by the dialog copy (\"Nofaol o'quvchilar o'tkazib yuboriladi\"), so not a finding. Surfaced F93 (#45): the API accepts whitespace-only bodies on all three write paths while every composer blocks them. Also F92 (#44), the 0.289 CLS on this route. Residue: probe messages cannot be deleted (O100).",
       "findings": [
         "F86",
-        "F87"
+        "F87",
+        "F92",
+        "F93"
       ],
       "advisory": "GHSA-2r57-gmq8-w83r"
     },
