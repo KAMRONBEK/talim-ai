@@ -1,0 +1,34 @@
+{
+  "_doc": "Known-and-accepted i18n exceptions for scripts/qa-i18n-check.mjs (BLOCKING CI gate). globalLiterals: strings exempt in every file (brand names, third-party product names). fileLiterals: per-file exact strings — keyed by string, not line, so entries survive code moving. identicalToEn: message keys whose uz/ru value is legitimately the same as en; supports * as a path-segment wildcard. Every entry needs a reason. Prune entries that stop appearing. Seeded 2026-08-24 from the tree at that date; entries marked DEBT are real gaps someone accepted, not exemptions.",
+  "globalLiterals": {
+    "Talim AI": "brand wordmark — identical in uz/en/ru by design (matches messages landing.footer.brand)",
+    "Talim": "short brand wordmark used in the marketing navbar/footer lockup",
+    "Desmos": "third-party product name in the graphing-calculator attribution link; the surrounding sentence IS translated (content.desmosAttribution)"
+  },
+  "fileLiterals": {
+    "apps/web/app/[locale]/(learner)/learner/dashboard/page.tsx": {
+      "Video": "DEBT — material-type badge in the MATERIAL_STYLES lookup table; keys content.aiVideo / tenant.filterVideo already exist and this should move onto them",
+      "Slides": "DEBT — same MATERIAL_STYLES table; belongs on a content.typeSlide key"
+    }
+  },
+  "identicalToEn": {
+    "common.proPlan": "plan name — 'Pro' is the product's own label in every locale",
+    "pricing.plans.pro": "plan name — same as common.proPlan",
+    "auth.email": "'Email' is the borrowed form used in Uzbek and Russian UI",
+    "account.profile.email": "same as auth.email",
+    "tenant.students.email": "same as auth.email",
+    "content.typePdf": "file-format acronym",
+    "tenant.filterPdf": "file-format acronym",
+    "content.typeYoutube": "third-party product name",
+    "locales.uz": "language picker shows each language as its own endonym",
+    "locales.en": "language picker shows each language as its own endonym",
+    "tenant.settings.slug": "'URL slug' is the technical term; kept untranslated so tutors can match it to the address bar",
+    "tenant.students.importPlaceholder": "sample CSV — the header row must be the literal column names the parser accepts (name,email,username)",
+    "landing.tutors.cards.*.value": "short acronyms/figures on the marketing stat cards",
+    "landing.stats.items.*.value": "numeric marketing figures (12k+, 280k)",
+    "landing.testimonials.items.*.name": "person names",
+    "landing.testimonials.items.*.initials": "avatar initials derived from person names",
+    "landing.footer.brand": "brand wordmark",
+    "landing.footer.copyright": "brand wordmark inside the copyright line"
+  }
+}
