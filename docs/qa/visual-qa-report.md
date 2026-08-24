@@ -2453,3 +2453,31 @@ One more probe hole was closed on re-reading rather than by a failure (`7ea872c0
 fingerprint the new load-bearing check depends on were ever unavailable, the diff would find zero
 lost lines and waive `error-affordance` on **every** cell at once, which would read as a clean run
 rather than a broken one. Unknown now falls back to the strict rule and says so in the verdict.
+
+### Addendum — CSV export, and a false finding caught in time
+
+The last untouched §G item cheap enough for this cycle's remaining budget. The export code carries a
+comment claiming it neutralises spreadsheet formula injection (CWE-1236); the point of a QA pass is
+to check the claim, so a probe student was created whose name hits **all three escape paths at
+once** — a leading formula char, an embedded comma and embedded double quotes:
+
+    =cmd|' /C calc'!A0, Ali "quoted"
+
+Selecting it and clicking Eksport (capturing the Blob rather than downloading it) produces:
+
+    Ism,Email,Holat
+    "'=cmd|' /C calc'!A0, Ali ""quoted""",'@qacsvprobe,Faol
+
+Correct on every claim: the formula char is neutralised with a leading apostrophe, **so is the
+`@username` email column** (`@` is a formula char too, and that one is easy to forget), the field
+is wrapped with its inner quotes doubled per RFC 4180, and the MIME is `text/csv;charset=utf-8`.
+
+**The near-miss.** The first pass read the blob with `Blob.text()` and reported `hasBOM: false` —
+which would have been filed as "Excel will mangle Uzbek names", the exact thing the code says it
+prevents. `Blob.text()` performs a UTF-8 decode, and UTF-8 decode *strips a leading BOM by spec*.
+Read as bytes, the file starts `EF BB BF`. The BOM was always there; the measuring instrument ate
+it. Recorded in the cell notes so the next run does not repeat the mistake — this is the third time
+this pass that a plausible-looking finding dissolved under a second look (the others: the seat-limit
+"fiction" that was just a null override, and the a11y sweep that ignored `element.labels`).
+
+Probe soft-deleted; 5 active students and 5/25 seats before and after.
