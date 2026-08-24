@@ -895,12 +895,27 @@ function collectFindings(cfg) {
     document.querySelector('[role="alert"],.text-destructive,[data-error]') !== null ||
     nodes.some(({ text }) => errorWords.test(text));
 
+  // --- visible-line fingerprint (used by the error-state sub-pass) ----------
+  // Digits are stripped so a ticking counter, a relative timestamp or a changed score
+  // is not mistaken for content that DISAPPEARED — the only thing the comparison cares
+  // about is whether a failed request cost the user a line of text.
+  const visibleLines = Array.from(
+    new Set(
+      (document.body.innerText ?? '')
+        .split('\n')
+        .map((line) => line.replace(/\d+/g, '').replace(/\s+/g, ' ').trim().toLowerCase())
+        .filter(Boolean)
+        .map((line) => line.slice(0, 120)),
+    ),
+  ).slice(0, 600);
+
   const perf = window.__qaSweep ?? { rejections: [], cls: 0, longestTask: 0 };
   return {
     htmlLang: document.documentElement.getAttribute('lang'),
     title: document.title,
     mainTextLength: mainText.length,
     mainTextSample: mainText.slice(0, 200), // redacted + truncated again before it is written
+    visibleLines,
     garbage,
     garbageSoft,
     i18nKeys,
@@ -1341,6 +1356,9 @@ async function sweepCell(context, cell, baseline, namespaces) {
       screenshot,
       primaryApi: primary.pathname,
       primaryApiCandidates: primary.candidates,
+      // Consumed by the error pass and STRIPPED before the verdict is written — this is
+      // rendered page text and the verdicts/state files are committed.
+      visibleLines: findings.visibleLines ?? [],
     };
   } finally {
     await page.close().catch(() => null);
@@ -1352,8 +1370,16 @@ async function sweepCell(context, cell, baseline, namespaces) {
  * page degrades honestly — an error affordance appears and no spinner spins forever. The
  * primary GET is the one OBSERVED during the normal pass, so this needs no hand-maintained
  * route→endpoint table and cannot drift.
+ *
+ * A page only owes the user an error message if the failed request actually COST them
+ * something on screen. Observed most-stale-first: of 10 error-affordance failures, 6 were
+ * pages that rendered byte-identically with the request aborted — `/tenant` on the billing
+ * page, `/content` on the learner progress page and so on are fetched by a sidebar or a
+ * sibling widget, not by the page under test. Demanding an error banner for a fetch with no
+ * visible consequence is the probe crying wolf, so the normal pass's visible-line set is
+ * diffed against the error pass's and the probe only bites when a line was actually lost.
  */
-async function sweepErrorState(context, cell, primaryApi, namespaces, candidates = []) {
+async function sweepErrorState(context, cell, primaryApi, namespaces, candidates = [], baselineLines = []) {
   const page = await context.newPage();
   page.setDefaultTimeout(ERROR_PASS_BUDGET.evaluate);
   const rec = attachRecorders(page, CFG.api);
@@ -1378,8 +1404,20 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
       { locale: cell.variantSpec.locale, namespaces: cell.app === 'web' ? namespaces : [] },
       ERROR_PASS_BUDGET.evaluate,
     );
+    const rendered = new Set(findings.visibleLines ?? []);
+    const lostLines = baselineLines.filter((line) => !rendered.has(line)).length;
+    const loadBearing = lostLines > 0;
     const probes = [
-      probe('error-affordance', findings.errorAffordance, `aborted GET ${primaryApi}`),
+      probe(
+        'error-affordance',
+        !loadBearing || findings.errorAffordance,
+        loadBearing
+          ? `aborted GET ${primaryApi}: ${lostLines}/${baselineLines.length} visible lines lost, no error affordance shown`
+          : `aborted GET ${primaryApi}: page rendered identically (${baselineLines.length} lines) — not load-bearing for this route, so there is nothing to tell the user`,
+        // Kept on PASS: a waived probe that explains nothing is indistinguishable from a
+        // weakened one, and this is the exact waiver a future reader will want to audit.
+        !loadBearing,
+      ),
       probe(
         'no-immortal-spinner',
         !(findings.spinners > 0 || (findings.spinnerText && !findings.errorAffordance)),
@@ -1391,6 +1429,8 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
       // Kept on PASS as well: the verdict is only readable if you can see which GET was
       // chosen and what it was chosen over.
       abortedApiChosenFrom: candidates,
+      lostLines,
+      baselineLineCount: baselineLines.length,
       probes,
       failedProbes: probes.filter((p) => !p.ok).map((p) => p.id),
     };
@@ -2004,13 +2044,15 @@ async function main() {
           CFG.cellTimeout,
           `cell ${cell.cellId}`,
         );
-        verdict = { ...record, ...outcome };
+        // visibleLines is rendered page text, kept out of the committed verdicts file.
+        const { visibleLines: baselineLines = [], ...writableOutcome } = outcome;
+        verdict = { ...record, ...writableOutcome };
 
         if (CFG.errorPass && cell.expectation === 'ok' && cell.isPrimaryVariant) {
           if (outcome.primaryApi) {
             try {
               verdict.errorPass = await withTimeout(
-                sweepErrorState(context, active, outcome.primaryApi, namespaces, outcome.primaryApiCandidates),
+                sweepErrorState(context, active, outcome.primaryApi, namespaces, outcome.primaryApiCandidates, baselineLines),
                 CFG.cellTimeout,
                 `error-pass ${cell.cellId}`,
               );
