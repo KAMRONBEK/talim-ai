@@ -388,6 +388,15 @@ export interface GradeResult {
  * matches the key. Rewards "mostly right order, one item misplaced" instead of zeroing
  * every slot after a single early shift. Items that don't match any key entry (or resolve
  * ambiguously) contribute no correct pairs.
+ *
+ * The submitted list is deduplicated (first occurrence wins) before pairs are counted. An
+ * ordering places each item exactly once, so a repeat carries no ordering information — but
+ * the pair COUNT is quadratic in the submitted length while the denominator is fixed by the
+ * key, so without this an answer repeating each item twice scored 4.0 and one repeating a
+ * single item eight times scored 4.5, on a question worth 1. Under strict scoring that is
+ * multiplied straight into pointsEarned (services/assessment/learner.ts), so a submission the
+ * player cannot produce but an HTTP client can was worth 450% of the question. The final
+ * clamp restores the 0..1 contract GradeResult.creditFraction declares, whatever the input.
  */
 function orderingPairwiseCredit(correctOrder: string[], submitted: string[]): number {
   const n = correctOrder.length;
@@ -401,9 +410,14 @@ function orderingPairwiseCredit(correctOrder: string[], submitted: string[]): nu
   }
   const keyIndex = new Map<string, number>();
   correctOrder.forEach((item, i) => keyIndex.set(normalizeAnswer(item), i));
-  const positions = submitted
-    .map((item) => keyIndex.get(normalizeAnswer(item)))
-    .filter((v): v is number => v != null);
+  const seen = new Set<number>();
+  const positions: number[] = [];
+  for (const item of submitted) {
+    const at = keyIndex.get(normalizeAnswer(item));
+    if (at == null || seen.has(at)) continue;
+    seen.add(at);
+    positions.push(at);
+  }
   let correctPairs = 0;
   for (let i = 0; i < positions.length; i++) {
     for (let j = i + 1; j < positions.length; j++) {
@@ -412,7 +426,7 @@ function orderingPairwiseCredit(correctOrder: string[], submitted: string[]): nu
       if (a != null && b != null && a < b) correctPairs += 1;
     }
   }
-  return correctPairs / ((n * (n - 1)) / 2);
+  return Math.min(1, Math.max(0, correctPairs / ((n * (n - 1)) / 2)));
 }
 
 /** Canonical self-report answer values for FLASHCARD practice items. */
