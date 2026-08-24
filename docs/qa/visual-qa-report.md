@@ -2181,3 +2181,38 @@ extra GRADED attempts on `QA Written Quiz!` for `teststudent1`, and a `QA RacePr
 assessment assigned to that learner. Neither is removable through the API (O100), and the extra
 attempts also fed the Elo-KT mastery update. A future run reading `teststudent1`'s progress should
 treat it as contaminated by this run, not by the product.
+
+### Addendum 3 — GAME timing, and all five standing invariants now have a verdict
+
+**F89 — GAME timing is not server-authoritative.** The last member of the check-then-trust family,
+and the last of the five §A.2 standing invariants without a runtime verdict. Security-shaped →
+reproduction and figures in the advisory only
+([GHSA-mvr4-9xv9-6585](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-mvr4-9xv9-6585)).
+Safe to say here: two attempts with **byte-identical answers**, differing only in the timings the
+client reported about itself, produced a **2.00× point swing** — exactly the full width of the speed
+factor — and the forged attempt took **rank 1** on the class leaderboard when read back through the
+learner API. The attempt was submitted after a deliberate 35 s real idle against a 20 s-per-question
+limit; the server had the information to know it was slow and never consulted it. Severity left at
+`medium`: the confirmation makes it actionable, it does not make it more dangerous.
+
+One detail the static pass had not noted: the clamp's default is `responseMs ?? limitMs`, so a client
+that **omits** timings is scored at the *worst* speed factor. Honest clients are penalised and
+forging clients rewarded — the incentive points the wrong way, which matters for how urgent the fix is.
+
+### Standing invariants (§A.2) — the cycle's scoreboard
+
+| Invariant | Verdict |
+| --- | --- |
+| Seat limit is never exceeded | ✅ sequentially · ❌ **under concurrency** → F87 |
+| A deactivated learner loses content access immediately | ✅ **holds**, on an already-issued token |
+| A learner sees only assigned materials | ✅ **holds** — 55/55 checks, no cross-tenant id in any body |
+| No cross-tenant id appears in any response body | ✅ **holds** |
+| GAME/assessment timing is server-authoritative | ❌ **violated** → F89 (and attempts → F88) |
+
+Three of the five failures share one shape: **a correct check that is not atomic, or not checked
+against server state at all.** That is a single architectural fix (serializable transactions /
+advisory locks / server-derived timing), not three unrelated bugs — worth stating plainly so it is
+prioritised as one piece of work rather than three tickets.
+
+**Further test data left behind:** a `QA RaceProbe GameTiming` assessment plus 2 attempts, again
+unremovable (O100).
