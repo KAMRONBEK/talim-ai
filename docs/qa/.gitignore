@@ -1,1 +1,11 @@
 screenshots/
+
+# Sweep verdicts quote text rendered off live pages with real seeded data — an admin:users
+# cell failing `content-rendered` would publish student names and emails into a public repo.
+# The values are masked at the source too (scripts/qa-sweep.mjs), but the files stay local.
+# qa-coverage-state.json is deliberately NOT ignored: it is the durable queue, and it carries
+# only cell ids, timestamps and probe names.
+qa-sweep-verdicts.json
+qa-sweep-verdicts.filtered.json
+.qa-coverage-state.lock
+*.tmp

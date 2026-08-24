@@ -84,6 +84,16 @@ git checkout "$BRANCH" 2>/dev/null || git checkout -b "$BRANCH" || {
 CAFFEINATE=""
 command -v caffeinate >/dev/null 2>&1 && CAFFEINATE="caffeinate -is"
 
+# macOS has no GNU `timeout` by default; coreutils ships it as `gtimeout`. Degrade to
+# no cap rather than failing the run, but say so — a silent missing timeout is how a
+# hung sweep turns into a lost night.
+SWEEP_TIMEOUT_BIN=""
+if command -v timeout >/dev/null 2>&1; then
+  SWEEP_TIMEOUT_BIN="timeout ${QA_SWEEP_TIMEOUT:-90m}"
+elif command -v gtimeout >/dev/null 2>&1; then
+  SWEEP_TIMEOUT_BIN="gtimeout ${QA_SWEEP_TIMEOUT:-90m}"
+fi
+
 qa_http(){ curl -s -o /dev/null -w '%{http_code}' -m 5 "$1" 2>/dev/null || echo 000; }
 qa_stack_healthy(){
   [ "$(qa_http http://localhost:4000/health)" = 200 ] || return 1
@@ -221,9 +231,18 @@ while [ "$PASSES" = "0" ] || [ "$PASS" -lt "$PASSES" ]; do
     phase "pass${PASS}-cycle${CYCLE}-sweep"
 
     if [ "${QA_SKIP_SWEEP:-0}" != "1" ]; then
-      $CAFFEINATE node scripts/qa-sweep.mjs 2>&1 | tee -a "$LOG"
-      if [ "${PIPESTATUS[0]}" -ne 0 ]; then
-        say "❌ sweep could not run — aborting (never drive QA against a broken sweep)."
+      # Hard wall-clock cap. The sweep checkpoints its verdicts every 25 cells, and that
+      # mitigation only means anything if something can actually stop a hung run — an
+      # unattended loop with no timeout waits forever on a wedged browser.
+      $CAFFEINATE ${SWEEP_TIMEOUT_BIN} node scripts/qa-sweep.mjs 2>&1 | tee -a "$LOG"
+      SWEEP_RC="${PIPESTATUS[0]}"
+      if [ "$SWEEP_RC" = 124 ]; then
+        say "❌ sweep exceeded ${QA_SWEEP_TIMEOUT:-90m} — treating as a broken environment."
+        exit 1
+      elif [ "$SWEEP_RC" -ne 0 ]; then
+        # Exit 1 = identity/integrity gate or unreachable stack; exit 2 = bad invocation.
+        # Either way the sweep's verdict file cannot be trusted, so do not spend the agent.
+        say "❌ sweep could not run (exit $SWEEP_RC) — aborting (never drive QA against a broken sweep)."
         exit 1
       fi
     fi
