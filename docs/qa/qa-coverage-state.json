@@ -3329,16 +3329,15 @@
       "depthVerifiedAt": "2026-08-25T02:45:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25b",
+      "lastDepthRun": "R2026-08-25c",
       "tour_last": "Multi-actor soap opera (receive, read, reply) — the other half of the tutor thread",
       "persona_last": "Test Student One (student)",
       "criterion": "security/xss-escaping",
       "findings": [
-        "F86",
-        "F93"
+        "F97"
       ],
-      "issue": 41,
-      "notes": "Depth 3: verified under BOTH account states across real navigations. Invariant deactivated-learner-loses-access-immediately HOLDS on an already-issued token (content 200->404, /learner/materials 200->403, /learner/assessments 200->403; fresh login 403). Also CLS measured 0.19 here vs sweep 0.276 -> O98. | R2026-08-25b re-attack, messaging lens: the tutor message arrived without a reload and rendered escaped -- img onerror and script payloads shown as literal text, window.__xss never set, no raw markup in innerHTML. Bell label \"Xabarlar (2 o'qilmagan)\". Opening the message marked it read (unread-count 2->1 via the API) and revealed a reply box; the reply reached the tutor. Learner cannot reach any tutor messaging endpoint (403)."
+      "issue": 47,
+      "notes": "R2026-08-25c: re-attacked from the live-game angle as the receiving end of US-OWNER-21. The live join banner + ?play deep-link render correctly here once loaded, but do not appear on an already-open page (F97/#47). Still carries the O98 layout-stability family from earlier cycles."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440",
@@ -4196,15 +4195,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 8,
-      "depthVerifiedAt": "2026-08-25T01:05:00.000Z",
+      "depthVerifiedAt": "2026-08-25T05:45:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25a",
-      "criterion": "reliability/data-integrity",
+      "lastDepthRun": "R2026-08-25c",
+      "criterion": "reliability/multi-actor",
       "findings": [
-        "O100"
+        "F97"
       ],
-      "notes": "Depth 3: created a PUBLISHED assessment from an approved bank question set and assigned it to a learner; verified it persisted by re-reading it from the LEARNER side as an assignable, submittable assessment. Surfaced O100 (no delete, no unassign, empty learnerIds rejected)."
+      "notes": "R2026-08-25c depth 3 (US-OWNER-21, the last untouched multi-actor flow in reach-list G): go-live -> learner join banner + ?play deep-link -> end-live -> banner clears, with server state confirmed on BOTH sides at every step (owner /tenant/assessments and learner /learner/assessments agree on isLive). Invariants that HELD and need no re-test: go-live on a WRITTEN assessment is refused 400 'Only game assessments can go live'; a live session does NOT bypass maxAttempts (exhausted learner opening ?play gets 'Urinishlar chekloviga yetdingiz'); schedule field rejects not-a-date / <script>alert(1)</script> / '' with 400 'Invalid date', accepts null to clear, 404s an unknown id (past 2001 and year 9999 ARE accepted -- harmless, go-live is manual). F97/#47: the banner never reaches a learner who already has the dashboard open (no refetchInterval and no SSE on useLearnerAssessments, the only such query in that file); reload is the only way. Test data restored: both GAME assessments back to isLive=false, scheduledAt=null, exactly as found.",
+      "tour_last": "Soap opera: tutor starts a live game while a student is already watching (two-actor)",
+      "persona_last": "Tutor running a live class",
+      "issue": 47
     },
     "web:locale.tenant.billing/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.billing/TENANT_OWNER/uz-light-1440",
