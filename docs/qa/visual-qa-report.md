@@ -2145,3 +2145,39 @@ it. Caught by comparing the active count against the pre-test roster (4 vs 5) ra
 the cleanup; reactivated. Final state matches the original exactly — 5 active, same five names.
 23 inactive probe rows remain in the roster (student delete is a soft delete that frees the seat,
 which is by design for the reactivation path).
+
+### Addendum 2 — `maxAttempts`, and the check-then-act family
+
+The seat-limit result made its two sibling advisories worth re-reading. Both were **static analysis
+only**, and the `maxAttempts` one explicitly listed a runtime demonstration as the recommended
+confirmation. It is now attached.
+
+**F88 — `maxAttempts` is not enforced under concurrency.** Security-shaped (a student-side cheat
+vector on a graded exam), so the reproduction and figures are in the advisory
+([GHSA-9m6m-jwgc-r8wp](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-9m6m-jwgc-r8wp))
+and **not** here. What is safe to say: sequential enforcement is correct — a lone follow-up
+submission is refused with `409 "Attempt limit reached"` — so the check exists and only atomicity is
+missing. Reproduced **twice**, the second time on an assessment created and assigned from scratch so
+the result did not depend on fixture state. Raised from `low` to `medium`.
+
+The mechanism was read at the source before testing (`assessment/learner.ts:247-266` — a
+`$transaction` doing `count` then `create` with no `isolationLevel`, i.e. READ COMMITTED), which is
+why the test was designed around the boundary rather than fished for.
+
+**Pattern worth naming:** three standing invariants — seats, attempts, and (per GHSA-mvr4) GAME
+timing — are each guarded by a correct check that is not atomic. Two are now runtime-confirmed as
+*total* failures under parallelism rather than rare boundary double-books. The remaining one
+(client-supplied timings) is a different shape and still unconfirmed at runtime; it is the obvious
+next target.
+
+**O100 — an assessment can never be deleted or unassigned.** Found by trying to clean up after the
+test: there is no `DELETE /tenant/assessments/:id` (404, route absent) and `assign` rejects
+`learnerIds: []`. Content has both operations, so this is an asymmetry, not an append-only design
+decision. A tutor who publishes the wrong assessment has no remedy and the class sees it forever.
+Logged as O rather than F because "missing endpoint" is a product call, not self-evidently a defect.
+
+**Test data left behind (honest disclosure).** This run could not fully clean up after itself:
+extra GRADED attempts on `QA Written Quiz!` for `teststudent1`, and a `QA RaceProbe MaxAttempts`
+assessment assigned to that learner. Neither is removable through the API (O100), and the extra
+attempts also fed the Elo-KT mastery update. A future run reading `teststudent1`'s progress should
+treat it as contaminated by this run, not by the product.

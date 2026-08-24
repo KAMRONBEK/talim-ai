@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T00:45:00.000Z",
+  "updatedAt": "2026-08-25T01:05:00.000Z",
   "runs": [
     {
       "runId": "2026-08-24T19-18-10-074Z",
@@ -3185,18 +3185,20 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 2,
-      "depthVerifiedAt": null,
+      "depthVerifiedAt": "2026-08-25T01:05:00.000Z",
       "status": "active",
-      "depth": "interacted",
+      "depth": "verified",
       "lastDepthRun": "R2026-08-25a",
-      "tour_last": "Hostile (aborted primary GET)",
+      "tour_last": "Saboteur (concurrent submission race)",
       "persona_last": "Test Student One",
-      "criterion": "reliability/data-integrity",
+      "criterion": "security/cheat-vector",
       "findings": [
-        "F85"
+        "F85",
+        "F88"
       ],
       "issue": 40,
-      "notes": "Depth 2: oracle GET /learner/assessments = 2 (QA Written Quiz!, QA Game Quiz) while UI said nothing assigned. No submit yet -> NOT verified."
+      "notes": "Depth 3: real submissions POSTed and GRADED, verified by re-reading /learner/assessments (attemptCount persisted). maxAttempts invariant VIOLATED under concurrency -> F88, reproduced twice (2nd on a freshly created+assigned assessment). Sequential control returns 409, so the check is correct and only atomicity is missing. Also F85 error-path oracle. Test data left behind: extra GRADED attempts on QA Written Quiz! and a QA RaceProbe MaxAttempts assessment -- neither removable, see O100.",
+      "advisory": "GHSA-9m6m-jwgc-r8wp"
     },
     "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440",
@@ -4082,8 +4084,15 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 2,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T01:05:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25a",
+      "criterion": "reliability/data-integrity",
+      "findings": [
+        "O100"
+      ],
+      "notes": "Depth 3: created a PUBLISHED assessment from an approved bank question set and assigned it to a learner; verified it persisted by re-reading it from the LEARNER side as an assignable, submittable assessment. Surfaced O100 (no delete, no unassign, empty learnerIds rejected)."
     },
     "web:locale.tenant.billing/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.billing/TENANT_OWNER/uz-light-1440",
