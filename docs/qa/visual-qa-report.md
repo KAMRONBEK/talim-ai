@@ -2627,3 +2627,183 @@ labels, DROPDOWN_CLOZE, HOTSPOT/DRAG_DROP keyboard+touch) — the largest remain
 entirely at `swept`; (3) `content/[id]/{podcast,slides,video}` — the rest of the INDIVIDUAL AI
 surface, each needing an oracle rather than a render check; (4) F91 will now attribute itself on the
 next sighting, so the cheap move is to read the `serverErrors` block rather than re-derive it.
+
+## Cycle R2026-08-25d — pass 1, cycle 4
+
+Cycle 3 left a four-item "next up". Items (2) and (3) are the bulk of this cycle; item (4) paid off
+immediately and item (1) is still waiting on a production build. Three cells driven to depth 3 —
+**one newly verified**, two re-attacked — plus three findings, one of them fixed here.
+
+### Triage — 15 sweep failures: 3 probe bugs, 1 attribution, 11 already filed
+
+**Three `content-rendered` failures were new, and none of them was a product bug.** Two
+`content/[id]` cells and one `content/[id]/slides` cell failed the full sweep quoting nothing but
+their own loading placeholder — *Загрузка…*, *Yuklanmoqda…*. Opened by hand, every one renders: the
+slides page shows an honest empty state ("O'qituvchingiz hali bu material uchun slayd yaratmagan"),
+the PDF workspace shows its full 2 722-character reader in ~4 s.
+
+The probe reads main-text **once**, right after `gotoAndSettle`, and settle stops on 700 ms of
+network quiet. Those two collide on any page that finishes *fetching* well before it finishes
+*rendering* — React commit, PDF.js worker parse, nothing on the wire. A cell that looks blank now
+gets **one bounded second look** (`CELL_BUDGET.renderRetry`, 4 s) before it is called blank, and the
+wait is recorded as `renderWaitMs` so a page that only passes after 3.5 s of extra waiting stays
+visible instead of becoming invisible (`db9a4c83`).
+
+Verified in **both** directions, because a calibration that only makes a number go down is worth
+nothing: the slides cell now passes after a **1 078 ms** second look, and a negative control with the
+content API blocked sits at 11 characters for 6 s — past the retry cap — so a genuinely blank page
+still fails.
+
+**F91's fourth sighting arrived with its own attribution**, which is exactly what last cycle's
+instrumentation was built for:
+
+```
+inFlight: 2 · responsesBefore: 20 · replays: [200, 200, 200]
+verdict: MOMENTARY — 0/3 immediate replays reproduced; the condition was gone within ~1s
+```
+
+That kills both remaining explanations with evidence from *inside* the failing moment rather than
+minutes later. Not the target row — three immediate replays on the same id all 200. Not pool
+exhaustion — a pool that is out of connections stays out for its 10 s timeout, not 900 ms, and
+`inFlight: 2` is an idle server. What is left is a sub-second window in which one read throws a
+non-`AppError`, and the only record of the throw is `console.error(err)` on the operator's own
+terminal. Posted to [#43](https://github.com/KAMRONBEK/talim-ai/issues/43) with the cheapest next
+step named: **one log line** in the error middleware ends this; a fifth QA sighting will not.
+
+The other eleven were re-checked against the ledger and left alone, with one exception:
+**`/uz/learner/progress`** now loses 1 of 41 visible lines, and it was in cycle 2's *retraction* list
+at 0. The probe was tightened rather than loosened in between, so the page changed, not the
+measurement. It joins #40's route list as its narrowest instance.
+
+### Depth — a grading truth-table, and what it found
+
+**The 7 structured question types, graded through the real submit endpoint.** Built a bank carrying
+MULTIPLE_SELECT / ORDERING / MATCHING / DROPDOWN_CLOZE / DRAG_DROP / FILL_BLANK / NUMERIC (HOTSPOT is
+correctly refused without `config.imageUrl`), then submitted five answer-sets, each score derived by
+hand from `packages/types/grading.ts` **before** looking at the response:
+
+| batch | predicted | actual |
+| --- | --- | --- |
+| exact key everywhere | 100 | **100** |
+| garbage everywhere | 0 | **0** |
+| the interesting middles | 2 of 7 | **28.57** |
+| forged shapes | 5 of 7 | **71.43** |
+| blank everywhere | 0 | **0** |
+
+Five for five. The deterministic grader can be trusted on all seven types, and the metamorphic pair
+holds tightly.
+
+**F100 — a forged ORDERING answer was worth 450% of its own question.** `orderingPairwiseCredit()`
+counts ordered pairs over the *submitted* list but divides by the pair count of the *key*. Those
+disagree the moment a submission repeats an item — the numerator is quadratic in submitted length,
+the denominator is fixed. Measured on a `strictScoring` assessment, question worth 1:
+
+| submitted | creditFraction | pointsEarned | maxPoints |
+| --- | --- | --- | --- |
+| `["1","2","3","4"]` (the key) | 1 | 1 | 1 |
+| `["4","3","2","1"]` | 0 | −0.5 | 1 |
+| `["1","3","2","4"]` | 0.833 | 0.833 | 1 |
+| **`["1","1","2","2","3","3","4","4"]`** | **4** | **4** | 1 |
+| **`["1"×8, "2", "3", "4"]`** | **4.5** | **4.5** | 1 |
+
+Unbounded — and `GradeResult.creditFraction` documents itself as *"0..1 credit for this answer"*.
+Fixed by deduplicating submitted items before counting pairs, then clamping (`07475d9f`); the forged
+rows drop to 1.0 and every legitimate row is byte-identical. Abuse-shaped, so it went to a **draft
+advisory** ([GHSA-mmv8](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-mmv8-jv85-97jg)),
+never a public issue.
+
+Two things were scoped honestly rather than assumed. The sibling graders were each checked for the
+same shape and are all bounded — MULTIPLE_SELECT clamps explicitly, the rest count hits over a loop
+bounded by the key. And the Elo-KT mastery model **already clamped its own input**
+(`sectionMastery.service.ts:112`), so mastery was never affected; `pointsEarned` was the whole
+exposure. Both facts shrink the advisory instead of inflating it.
+
+**F101 — the ORDERING question nobody touched.** The ledger has carried "ORDERING untouched-initial-
+order as a free point" as an unpinned **S2 candidate** since R19. Pinned now, with the number.
+Submitting the learner form with **every field untouched** persists six empty answers and one full
+one:
+
+```
+MULTIPLE_SELECT []   ORDERING ["3","4","1","2"]   MATCHING ["","",""]   NUMERIC ""
+```
+
+That answer is worth **0.333 credit** against a genuinely blank answer's 0. The starting order is
+shuffled *server-side* and is stable across real reloads, so it is not a per-load lottery: every
+learner who skips that question gets the same free credit, sized by how far the shuffle landed from
+the key.
+
+Filed rather than fixed ([#49](https://github.com/KAMRONBEK/talim-ai/issues/49)) because it is
+deliberate — `question-inputs.tsx:120` says *"The starting order is a valid ORDERING answer"*. What is
+hard to defend either way is the combination: a skip and a real answer look identical, the untouched
+question earns partial marks, and the amount is set by the shuffle. The honest severity is **S3**,
+not the ledger's speculative S2 — scoring impact needs `strictScoring`, which defaults off.
+
+**The assessment builder, by hand.** Five-step wizard. Step 2 is AI draft generation and its type
+chips omit HOTSPOT and DRAG_DROP — which looked like a whole feature no tutor could author, until
+step 3's **manual editor turned out to offer all 11 types**, including *Rasmda belgilash* and *Surib
+joylashtirish*. Dissolved before filing. Input attacks: whitespace-only options keep submit
+**disabled** (correct); an XSS + RTL-override + mixed-script + emoji prompt saved and rendered as
+literal text — 0 script tags, 0 injected images, nothing fired — and survived a real reload.
+**O104**: two *identical* options are accepted (`options: ["alpha","alpha"]`, status APPROVED).
+Nonsense, but the learner cannot get it wrong, so it stays an observation.
+
+**The podcast, with an oracle.** The last INDIVIDUAL AI surface at `swept`. The generated uz script
+scores **11 of 11** atomic claims against `fixtures/uz-math-facts.md` with **zero** trap answers —
+3-4-5 → 5, 9+16=25, `D = b²−4ac` (not +4ac), `x²−5x+6=0` → D=1 with roots 2 and 3, A∩B={2,3} (not
+{1,4}), katetlar 6/8 → 10 — and it explicitly states the theorem predates Pythagoras. The Uzbek is
+clean and self-consistent. Playback position persists across a real reload (resumed at 79 s).
+
+**F102** ([#50](https://github.com/KAMRONBEK/talim-ai/issues/50)) is what the page gets wrong: the
+episode card says **1:17** while the player under it says **1:31**, for one 91.75 s episode. The card
+renders `durationSec`, which `generatePodcast.job.ts:135` computes as a **150-words-per-minute
+estimate** — an English-prose rate, applied to Uzbek narrated by English-trained voices — while the
+real audio buffer sits on the line above.
+
+**And the thing that looked much worse, which is fine.** The stored segment timeline says
+**305 840 ms** for that 91.75 s file — 3.3× too long, because `TTS_BYTES_PER_MS = 6` is Azure's
+48 kbit/s figure and the provider moved to OpenAI on 2026-08-23. That reads like broken click-to-seek
+on every podcast generated since the switch. It is not: the client normalizes the timeline against
+the real duration, so all **12** transcript lines seek monotonically from 0 to 87.19 s, none past the
+end. Measured before writing it up. The stale constant is recorded on #50 rather than filed as a seek
+bug.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F100** (S3) 🔒 ✅ `07475d9f` [GHSA-mmv8](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-mmv8-jv85-97jg) | A forged ORDERING answer earned unbounded weighted points — 450% of its own question. |
+| **F101** (S3) [#49](https://github.com/KAMRONBEK/talim-ai/issues/49) | An ORDERING question you never touched is submitted as a real answer, worth partial marks. |
+| **F102** (S3) [#50](https://github.com/KAMRONBEK/talim-ai/issues/50) | One podcast episode shows two different lengths on the same screen. |
+| **O104** | The question editor accepts two identical multiple-choice options. |
+
+### Cycle close — R2026-08-25d
+
+**Cells advanced:** 3 driven to depth 3, but only **1 newly `verified`** (podcast INDIVIDUAL),
+13 → **14**. The other two (`learner/assessments`, `tenant/assessments`) were already verified in
+cycles 1 and 3 and were re-attacked from a new persona × tour — that advances confidence, not the
+count. Checked against the file rather than from memory, for the reason cycle 3 gave.
+**Sweep failures triaged:** 15 — 3 probe bugs (fixed, and verified in both directions), 1 attributed
+(F91), 11 already filed, one of those with new evidence on #40. **Findings:** F100 · F101 · F102 ·
+O104. **Fixed and verified:** F100, plus the `renderRetry` calibration. **Issues filed:** #49, #50;
+comments on #43 and #40; draft advisory GHSA-mmv8. **Blocked-on-job:** none.
+
+**Three candidates dissolved on a second look**, which is now the most reliable pattern in this pass:
+HOTSPOT/DRAG_DROP looked unauthorable (the manual editor has them), whitespace-only options looked
+accepted (a mis-scoped DOM query — the single form's submit was in fact disabled), and click-to-seek
+looked broken by a 3.3× timeline (the client normalizes). Each was measured before it was written
+down.
+
+**Test data left behind (honest disclosure).** Two question banks (`QA Structured Truth-Table` ×2,
+7 questions each) and **9 assessments** created for the truth-table, all assigned to Test Student One
+and visible in that learner's Topshiriqlar list. **They cannot be removed through the product** —
+there is no delete route for assessments, banks or bank questions, and `assignAssessmentSchema` has
+no unassign path. This is O100's third instance, after messages. The one thing that *could* be
+cleaned up through the product was: the XSS probe question is left **REJECTED** via the review
+control. No students created, no seats consumed; the org is unchanged at 5 active / 5 of 25.
+
+**Next up:** (1) the assessment/bank/question **delete gap** now blocks QA cleanup as well as users —
+worth promoting to `docs/PLANS.md` rather than accumulating another O; (2) `content/[id]/video` and
+`content/[id]/slides` for INDIVIDUAL are the last AI surfaces at `swept` and both need oracles;
+(3) the 8 structured **players** still need their interaction depth — HOTSPOT and DRAG_DROP
+keyboard + touch specifically, which this cycle graded but never drove; (4) O98 against a production
+build, still the oldest open question in the pass.

@@ -2271,8 +2271,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 11,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:55:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25d",
+      "tour_last": "Oracle grading of the AI script + click-to-seek accuracy against the real audio timeline",
+      "persona_last": "B2C learner deciding whether they have time to listen",
+      "criterion": "reliability/AI-output-quality",
+      "findings": [
+        "F102"
+      ],
+      "issue": 50,
+      "notes": "R2026-08-25d depth 3: played the uz episode, exercised all 12 transcript click-to-seek lines, and confirmed playback position persists across a real reload (resumed at 79s). ORACLE: the generated script scores 11/11 atomic claims against fixtures/uz-math-facts.md with ZERO trap answers (3-4-5 -> 5; 9+16=25; D=b^2-4ac not +4ac; x^2-5x+6=0 -> D=1, roots 2 and 3; A intersect B = {2,3} not {1,4}; katetlar 6/8 -> 10) and it explicitly says the theorem predates Pythagoras. Uzbek is clean: consistent U+2018 for o/g, U+2019 tutuq belgisi, no ru/en leakage. F102 (#50): the episode card shows 1:17 (a 150-wpm word-count estimate, generatePodcast.job.ts:135) while the player shows the real 1:31 -- two lengths for one episode on one screen. Click-to-seek was suspected next and is FINE: the stored segment timeline is 305840ms for a 91.75s file (TTS_BYTES_PER_MS=6 is Azure 48kbit/s, the provider is now OpenAI) but the client normalizes against the real duration, so all 12 seeks land monotonically 0 -> 87.19s, none past the end. Stale constant recorded on #50, not filed as a seek bug."
     },
     "web:locale.content.id.slides/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.slides/INDIVIDUAL/uz-light-1440",
@@ -3309,24 +3319,20 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 9,
-      "depthVerifiedAt": "2026-08-25T01:05:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:30:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25a",
-      "tour_last": "Saboteur (concurrent submission race)",
-      "persona_last": "Test Student One",
-      "criterion": "security/cheat-vector",
+      "lastDepthRun": "R2026-08-25d",
+      "tour_last": "Grading truth-table + forged-submission oracle across all 7 structured types",
+      "persona_last": "Student in a hurry who submits without reading",
+      "criterion": "reliability/data-integrity",
       "findings": [
-        "F85",
-        "F88",
-        "F89"
+        "F100",
+        "F101"
       ],
-      "issue": 40,
-      "notes": "Depth 3: real submissions POSTed and GRADED, verified by re-reading /learner/assessments (attemptCount persisted). maxAttempts invariant VIOLATED under concurrency -> F88, reproduced twice (2nd on a freshly created+assigned assessment). Sequential control returns 409, so the check is correct and only atomicity is missing. Also F85 error-path oracle. Test data left behind: extra GRADED attempts on QA Written Quiz! and a QA RaceProbe MaxAttempts assessment -- neither removable, see O100. GAME timing invariant also driven here: identical answers with differing self-reported timings -> 2.00x point swing, forged attempt at leaderboard rank 1 -> F89.",
-      "advisory": [
-        "GHSA-9m6m-jwgc-r8wp",
-        "GHSA-mvr4-9xv9-6585"
-      ]
+      "issue": 49,
+      "notes": "Depth 3: real submissions POSTed and GRADED, verified by re-reading /learner/assessments (attemptCount persisted). maxAttempts invariant VIOLATED under concurrency -> F88, reproduced twice (2nd on a freshly created+assigned assessment). Sequential control returns 409, so the check is correct and only atomicity is missing. Also F85 error-path oracle. Test data left behind: extra GRADED attempts on QA Written Quiz! and a QA RaceProbe MaxAttempts assessment -- neither removable, see O100. GAME timing invariant also driven here: identical answers with differing self-reported timings -> 2.00x point swing, forged attempt at leaderboard rank 1 -> F89. | R2026-08-25d depth 3: built a 7-type structured bank (MULTIPLE_SELECT/ORDERING/MATCHING/DROPDOWN_CLOZE/DRAG_DROP/FILL_BLANK/NUMERIC) and drove the WRITTEN player to submit + real reload (Urinishlar 1/5, Oxirgi 0% both survive). Truth-table over 5 batched attempts: exact key 100, garbage 0, middles 28.57 (2/7), forged 71.43 (5/7), blank 0 -- every batch score matched a hand-derivation from packages/types/grading.ts, so the deterministic grader is trustworthy on all 7. HOTSPOT is correctly refused without config.imageUrl. Two findings: F100 (advisory GHSA-mmv8) a forged ORDERING answer with duplicated items scored creditFraction 4.0/4.5 on a question worth 1 -- fixed here and re-verified; F101 (#49) an untouched ORDERING submits the server-shuffled starting order as a real answer worth 0.333 credit while every other type submits empty.",
+      "advisory": "GHSA-mmv8-jv85-97jg"
     },
     "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440",
@@ -4212,17 +4218,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 9,
-      "depthVerifiedAt": "2026-08-25T05:45:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:30:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25c",
-      "criterion": "reliability/multi-actor",
+      "lastDepthRun": "R2026-08-25d",
+      "criterion": "usability/data-integrity",
       "findings": [
         "F97"
       ],
-      "notes": "R2026-08-25c depth 3 (US-OWNER-21, the last untouched multi-actor flow in reach-list G): go-live -> learner join banner + ?play deep-link -> end-live -> banner clears, with server state confirmed on BOTH sides at every step (owner /tenant/assessments and learner /learner/assessments agree on isLive). Invariants that HELD and need no re-test: go-live on a WRITTEN assessment is refused 400 'Only game assessments can go live'; a live session does NOT bypass maxAttempts (exhausted learner opening ?play gets 'Urinishlar chekloviga yetdingiz'); schedule field rejects not-a-date / <script>alert(1)</script> / '' with 400 'Invalid date', accepts null to clear, 404s an unknown id (past 2001 and year 9999 ARE accepted -- harmless, go-live is manual). F97/#47: the banner never reaches a learner who already has the dashboard open (no refetchInterval and no SSE on useLearnerAssessments, the only such query in that file); reload is the only way. Test data restored: both GAME assessments back to isLive=false, scheduledAt=null, exactly as found.",
-      "tour_last": "Soap opera: tutor starts a live game while a student is already watching (two-actor)",
-      "persona_last": "Tutor running a live class",
+      "notes": "R2026-08-25c depth 3 (US-OWNER-21, the last untouched multi-actor flow in reach-list G): go-live -> learner join banner + ?play deep-link -> end-live -> banner clears, with server state confirmed on BOTH sides at every step (owner /tenant/assessments and learner /learner/assessments agree on isLive). Invariants that HELD and need no re-test: go-live on a WRITTEN assessment is refused 400 'Only game assessments can go live'; a live session does NOT bypass maxAttempts (exhausted learner opening ?play gets 'Urinishlar chekloviga yetdingiz'); schedule field rejects not-a-date / <script>alert(1)</script> / '' with 400 'Invalid date', accepts null to clear, 404s an unknown id (past 2001 and year 9999 ARE accepted -- harmless, go-live is manual). F97/#47: the banner never reaches a learner who already has the dashboard open (no refetchInterval and no SSE on useLearnerAssessments, the only such query in that file); reload is the only way. Test data restored: both GAME assessments back to isLive=false, scheduledAt=null, exactly as found. | R2026-08-25d depth 3: 5-step wizard (Bank -> Yaratish -> Ko'rib chiqish -> Nashr -> Tayinlash). Step 2 is AI draft generation and its type chips omit HOTSPOT/DRAG_DROP, but the MANUAL editor in step 3 offers all 11 types including Rasmda belgilash and Surib joylashtirish -- so no type is unauthorable (a suspected gap that dissolved on a second look). Input attacks on the editor: whitespace-only options keep the submit button DISABLED (correct); an XSS + RTL-override + mixed-script + emoji prompt saved and rendered as literal text (0 script tags, 0 injected imgs, nothing fired) and survived a real reload; duplicate identical options are accepted (see O104). Wizard step is not in the URL, so a reload returns to step 1 -- the question is still persisted, verified via GET /tenant/question-banks/:id/questions. Probe question left REJECTED through the product's own review control.",
+      "tour_last": "Guidebook through the 5-step builder wizard + input-attack matrix on the manual editor",
+      "persona_last": "Tutor authoring a question by hand",
       "issue": 47
     },
     "web:locale.tenant.billing/TENANT_OWNER/uz-light-1440": {
