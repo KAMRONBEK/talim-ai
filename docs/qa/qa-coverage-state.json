@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-24T19:57:13.786Z",
+  "updatedAt": "2026-08-25T00:20:00.000Z",
   "runs": [
     {
       "runId": "2026-08-24T19-18-10-074Z",
@@ -2207,7 +2207,17 @@
       ],
       "sweepCount": 2,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "depth": "interacted",
+      "lastDepthRun": "R2026-08-25a",
+      "tour_last": "Hostile (aborted primary GET)",
+      "persona_last": "QA Individual",
+      "criterion": "reliability/data-integrity",
+      "findings": [
+        "F85"
+      ],
+      "issue": 40,
+      "notes": "Depth 2: error path driven with an API oracle (GET /content = 2 items) while the UI claimed zero. No submit yet -> NOT verified."
     },
     "web:locale.dashboard.settings/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.dashboard.settings/INDIVIDUAL/uz-light-1440",
@@ -3047,8 +3057,14 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 3,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25a",
+      "tour_last": "Saboteur (cross-tenant id fuzzing)",
+      "persona_last": "Test Student One",
+      "criterion": "security/tenant-isolation",
+      "notes": "Depth 3: 55-check isolation matrix over 11 content sub-resources x 5 actor/target pairs -- zero violations. Post-deactivation deep-link to the PREVIOUSLY assigned id bounces to /learner/dashboard. No cross-tenant id in any response body."
     },
     "web:locale.content.id.chat/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.content.id.chat/TENANT_LEARNER/uz-light-1440",
@@ -3170,7 +3186,17 @@
       ],
       "sweepCount": 2,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "depth": "interacted",
+      "lastDepthRun": "R2026-08-25a",
+      "tour_last": "Hostile (aborted primary GET)",
+      "persona_last": "Test Student One",
+      "criterion": "reliability/data-integrity",
+      "findings": [
+        "F85"
+      ],
+      "issue": 40,
+      "notes": "Depth 2: oracle GET /learner/assessments = 2 (QA Written Quiz!, QA Game Quiz) while UI said nothing assigned. No submit yet -> NOT verified."
     },
     "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.dashboard/TENANT_LEARNER/uz-light-1440",
@@ -3186,8 +3212,18 @@
         "layout-stability"
       ],
       "sweepCount": 2,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25a",
+      "tour_last": "Hostile (deactivated mid-session)",
+      "persona_last": "Test Student One",
+      "criterion": "security/tenant-isolation",
+      "findings": [
+        "F86"
+      ],
+      "issue": 41,
+      "notes": "Depth 3: verified under BOTH account states across real navigations. Invariant deactivated-learner-loses-access-immediately HOLDS on an already-issued token (content 200->404, /learner/materials 200->403, /learner/assessments 200->403; fresh login 403). Also CLS measured 0.19 here vs sweep 0.276 -> O98."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440",
@@ -4173,8 +4209,14 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 2,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25a",
+      "tour_last": "FedEx (follow one student end-to-end)",
+      "persona_last": "Nodira (tutor)",
+      "criterion": "security/tenant-isolation",
+      "notes": "Depth 3: opened -> clicked Faolsizlantirish on @teststudent1 -> PATCH /tenant/students/:id {active:false} -> row FAOLSIZ survived a real location.reload(). Reactivated; state restored. Surfaced F86 (#41)."
     },
     "web:locale.tenant.students.id/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.students.id/TENANT_OWNER/uz-light-1440",

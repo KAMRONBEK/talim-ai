@@ -2028,3 +2028,88 @@ TTS) — neither blocking.
 **Bugs fixed:** F84 (`921b8fd8`). **Resolved:** O97.
 **Note:** F84's fix is committed but **not yet deployed** — the prod audit row above predates it and
 therefore lacks the `servedFromCache` field.
+
+## Run 23 — R2026-08-25a (continuous QA · pass 1, cycle 1 · branch `claude/visual-qa`)
+
+**First cycle with the deterministic sweep in front of it.** The sweep had already visited all 282
+cells and returned **81 failures**; that queue, not a route list, was the starting point.
+
+### Triage — 60 of the 81 failures were the machine misreading correct behaviour
+
+Every one was reproduced in the real browser before being judged. §B0 says a false positive is a bug
+in the probe, so each was calibrated at the source rather than waved through (`bf9f4c07`).
+
+| Class | Cells | Verdict |
+| --- | --- | --- |
+| `GET /summary/:id` → 404 | 48 | **Not a defect.** A READY content with no summary returns 404 and the client treats it as the empty state (`useSavedSummary`, `retry:false`, returns null on 404). Oracle: `cmrkrfbcv…` is READY with 1 section, `/content/:id` 200 while `/summary/:id` 404. The **two** 404s per page are the full-material and per-section scopes — two honest questions, **not** a duplicated request (verified in the network log: distinct `sectionId` params). Waiver made global + extended to the console channel. |
+| `/content/[id]/chat` "redirected away" | 8 | **Not a defect.** The standalone chat route was folded into the unified workspace and kept as a redirect to `?panel=chat`. The matrix now asserts the fold. Redirect targets differing only by query string were previously inexpressible → `expected-outcome` now matches pathname *or* pathname+search. |
+| Guard cell 401 in console | 1 | **Probe inconsistency.** `http-ok` waives an expected 401 on a guard cell; `console-clean` did not — the same event judged two ways. Guard rule now applies to both. |
+| YouTube `www-widgetapi` postMessage warning | — | Third-party iframe script, not our code → global waiver. |
+| Next.js LCP `priority` hint | 4 | Dev-only `warn-once`; waived **and** logged as **O99** so the hint is judged, not silently obeyed. |
+
+Verified by re-sweeping the affected routes: content **48/48**, quiz **9/9**, materials **21/21** —
+all pass, no surviving probe weakened. **21 real failures remain** and are worked below.
+
+### Findings
+
+**F85 (S2) — a failed request is shown as "you have nothing".** [#40](https://github.com/KAMRONBEK/talim-ai/issues/40)
+The `errorPass:error-affordance` class (11 cells) is not "no error state"; it is worse. Three sites,
+each checked against the API as an oracle:
+
+| Page | API truth | What the user is told |
+| --- | --- | --- |
+| `/uz/dashboard` | `GET /content` 200, **2 materials** | "Hali material yo'q" |
+| `/uz/learner/assessments` | 200, **2** ("QA Written Quiz!", "QA Game Quiz") | "Hali hech narsa tayinlanmagan." |
+| `/uz/tenant/students` | `GET /tenant` 200, `joinCode:"DUTDWE"` | "Kod yo'q" |
+
+Zero error affordances, no spinner — a stable, confident lie with no retry control. Cause is one
+shape repeated: `isError` never consumed, `undefined` defaulted to `[]`, `[]` renders the empty
+state. Reproduced twice, second from fresh state. Structural → filed, not fixed.
+
+**F86 (S3) — a deactivated student is never told.** [#41](https://github.com/KAMRONBEK/talim-ai/issues/41)
+**Promoted from O86, which had sat in the observation ledger since R19 (2026-07-14) — ~6 weeks —
+purely because nobody had bundled it.** That is the O-ledger's failure mode, and worth naming.
+Cause pinned this time: `apps/web/lib/api.ts:37` globally handles **401 only**, so a deactivated
+learner's 403s are unclaimed and the session runs on.
+
+**O98** — the `layout-stability` class (11 cells) re-measured at CLS **0.19** live vs the sweep's
+**0.276**; it straddles the 0.25 limit rather than reproducing. The shift is real (a ~178px block
+mounts above the fold at t≈312ms and pushes three siblings down) but S3-shaped and non-reproducible
+above threshold → **O, not F**, per §E. Needs a production-build measurement before anyone acts.
+
+### Depth — the tenant-isolation invariant, which no sweep can reach
+
+**Isolation HOLDS. 55/55 checks clean.** An 11-sub-resource matrix (`/content/:id`, `sections`,
+`flashcards`, `podcast`, `slides`, `video`, `progress`, `learning-history`, `summary`, `chat`,
+`quiz`) across 5 actor→target pairs: student→two foreign INDIVIDUAL PDFs (404 on all 11, twice),
+owner→foreign PDF (403 on all 11), individual→tenant content (404 on all 11), student→assigned
+(200, correct). **No cross-tenant id in any response body.**
+
+**Deactivation invariant HOLDS, and immediately.** Driven as a real UI mutation to depth 3: clicked
+"Faolsizlantirish" on `@teststudent1` → `PATCH /tenant/students/:id` → row flipped to FAOLSIZ and
+**survived a real `location.reload()`**. On the learner's *already-issued* token, measured across the
+transition: `/content/:id` **200→404**, `/learner/materials` **200→403** (1 item→0),
+`/learner/assessments` **200→403**, while `/auth/me` correctly stayed 200 (the session is valid, the
+membership is not). Fresh login refused with 403 "Student account is deactivated". Deep-link to the
+previously-assigned material bounced to the dashboard. Reactivated; access restored; **world left as
+found**.
+
+**Near-miss worth recording.** The first learner-side check appeared to show a deactivated student
+reading tenant content. It was contamination, not a leak: a still-open owner tab re-persisted its
+Zustand auth into the shared `localStorage` after my `clear()`, so the "learner" page was the owner.
+Re-run in an isolated browser context, the result inverted. A same-origin second tab is not an
+isolated session — filing that as a leak would have been a false S1.
+
+**Cells advanced:** 3 → `verified` (`tenant.students/TENANT_OWNER`, `learner.dashboard/TENANT_LEARNER`,
+`content.id/TENANT_LEARNER` — all uz-light-1440), 2 → `interacted` (`dashboard/INDIVIDUAL`,
+`learner.assessments/TENANT_LEARNER`; error-path oracle but no submit, so **not** marked verified).
+**Sweep failures triaged:** 60 calibrated as probe bugs, 21 real (11 → #40, 10 → O98).
+**Findings:** F85 (#40), F86 (#41, promoted from O86) · O98, O99. **Fixed:** sweep calibration only.
+**Flaky / blocked-on-job:** none.
+
+**Next up:** (1) the remaining 8 F85 sites — `/dashboard/settings`, `/learner/progress`,
+`/learner/settings`, `/tenant/{assessments,billing,settings}`, `/tenant/materials/[id]/assign` —
+share the shape but were not oracle-checked individually; (2) O98 against a **production build**;
+(3) `admin:dashboard/ADMIN/light-1440` error-affordance, the one non-web cell in the class (#38);
+(4) depth on the 277 cells still at `swept`, starting with GAME live control and the seat-limit
+invariant, neither of which has ever been depth-verified.
