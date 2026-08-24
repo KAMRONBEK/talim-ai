@@ -2421,3 +2421,35 @@ that needs an oracle, not a render check; (2) O98 against a production build, st
 settle the learner-dashboard CLS; (3) GAME **live control** (schedule → go-live → end-live with a
 concurrent learner) is the last untouched multi-actor flow in §G; (4) CSV import/export, also
 untouched, and the one place a seat-boundary race meets file parsing.
+
+### Closing sweep — R2026-08-25b
+
+Full re-sweep after the cycle's work, to check the two probe calibrations hold across the whole
+surface rather than only on the routes they were tuned against.
+
+| | cycle 1 close | cycle 2 close |
+| --- | --- | --- |
+| cells | 276 | 276 |
+| pass | 256 | **266** |
+| **fail** | **20** | **10** |
+| depth-verified | 6 | **11** |
+
+The 10 survivors are all accounted for: **6** `error-affordance` (5 are the F85/#40 set, the sixth
+is the admin dashboard's analytics failure — already filed as **#38**), **3** `layout-stability`
+plus one cell holding both (F92/#44 on tenant students, O98 on the learner dashboard), and one cell
+that is **F91**. No probe was weakened to get there: `console-clean`, `http-ok` and
+`content-rendered` all still fire, and they are exactly what caught F91 again.
+
+**F91 recurred**, which by its own terms retires the "flaky" label. Both sightings hit a user id
+that the same run had created and soft-deleted minutes earlier, and both happened deep inside a
+full sweep. But a deleted target is not sufficient — 5 sequential and **120 concurrent** GETs on
+that id afterwards were all 200 (with 10 correct 429s from the admin limiter). It is now blocked on
+evidence a QA cycle cannot reach: the API prints its stack trace to the operator's terminal, so the
+sweep can record the 500 and never the throw. Recorded on [#43](https://github.com/KAMRONBEK/talim-ai/issues/43)
+with the comparison table, and the cheapest next step named — capture 5xx bodies during the sweep
+window instead of adding another tally mark next cycle.
+
+One more probe hole was closed on re-reading rather than by a failure (`7ea872c0`): if the baseline
+fingerprint the new load-bearing check depends on were ever unavailable, the diff would find zero
+lost lines and waive `error-affordance` on **every** cell at once, which would read as a clean run
+rather than a broken one. Unknown now falls back to the strict rule and says so in the verdict.
