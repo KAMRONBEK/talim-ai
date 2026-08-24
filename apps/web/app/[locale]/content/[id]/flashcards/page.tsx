@@ -99,7 +99,22 @@ function FlashcardsInner({ id }: { id: string }) {
     const cardId = queue[0];
     if (!cardId) return;
     setError(null);
-    review.mutate({ cardId, grade }, { onError: () => setError(t('reviewFailed')) });
+    review.mutate(
+      { cardId, grade },
+      {
+        onError: () => {
+          setError(t('reviewFailed'));
+          // The advance below is optimistic; a failed grade has to roll it back. Without
+          // this the session told the learner "Baho saqlanmadi. Qayta urinib ko'ring."
+          // about a card it had already dropped from the queue — an instruction the UI
+          // itself made impossible to follow, and a card silently skipped for the rest of
+          // the session even though the server still has it due. "again" already re-queues
+          // to the tail, so the guard leaves that case alone rather than duplicating it.
+          setQueue((prev) => (prev.includes(cardId) ? prev : [cardId, ...prev]));
+          if (grade !== 'again') setReviewed((n) => Math.max(0, n - 1));
+        },
+      },
+    );
     setQueue((prev) => {
       const [head, ...rest] = prev;
       // "Again" re-queues the card to the end of this session.
