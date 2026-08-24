@@ -388,6 +388,16 @@ function webRoleMatrix(pattern) {
       toLogin,
     ];
   }
+  if (p === '/content/[id]/chat') {
+    // Not a page: the standalone chat route was folded into the unified workspace and kept as
+    // a redirect for old links (apps/web/app/[locale]/content/[id]/chat/page.tsx). Asserting
+    // "it renders" would fail forever; assert the fold instead, including the panel it opens.
+    return [
+      { role: 'INDIVIDUAL', expectation: 'redirect', to: '?panel=chat' },
+      { role: 'TENANT_LEARNER', expectation: 'redirect', to: '?panel=chat' },
+      toLogin,
+    ];
+  }
   if (p.startsWith('/content') || p.startsWith('/quiz')) {
     return [
       { role: 'INDIVIDUAL', expectation: 'ok' },
@@ -1108,12 +1118,19 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
   // -- expected outcome ------------------------------------------------------
   const requestedPath = new URL(cell.url).pathname;
   const finalPath = new URL(finalUrl).pathname;
+  // Some redirects differ from their source only in the query string (the folded chat route
+  // lands on /content/[id]?panel=chat), so a pathname-only target cannot express them. Match
+  // either form: pathname+search === pathname when there is no query, so existing targets
+  // like '/login' are unaffected.
+  const finalPathQuery = finalPath + new URL(finalUrl).search;
   const stayed = finalPath === requestedPath;
   if (cell.expectation === 'ok') {
     probes.push(probe('expected-outcome', stayed, `redirected to ${finalPath}`));
   } else if (cell.expectation === 'redirect') {
     const target = cell.expectedTarget;
-    const hitTarget = target ? finalPath.endsWith(target) : !stayed;
+    const hitTarget = target
+      ? finalPath.endsWith(target) || finalPathQuery.endsWith(target)
+      : !stayed;
     probes.push(
       probe('expected-outcome', !stayed && hitTarget, `expected ${target ?? 'any redirect'}, landed on ${finalPath}`),
     );
@@ -1130,9 +1147,17 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
 
   // -- console ---------------------------------------------------------------
   const consoleEntries = baselineEntries(baseline, cell.route, 'console');
+  // A browser logs every 4xx as a console error too, so a guard cell's expected 401/403 was
+  // failing `console-clean` while `http-ok` (below) correctly waived it — the same event
+  // judged two ways. Mirror the http-ok rule here so the two probes cannot disagree.
+  const guardAuthNoise = (m) =>
+    guardCell &&
+    /Failed to load resource.*status of 40[13]/.test(m.text) &&
+    String(m.url ?? '').startsWith(CFG.api);
   const consoleFindings = rec.console.filter(
     (m) =>
       !BUILTIN_CONSOLE_NOISE.some((n) => m.text.includes(n)) &&
+      !guardAuthNoise(m) &&
       !isWaived(consoleEntries, { text: m.text, level: m.level, url: m.url }),
   );
   probes.push(
