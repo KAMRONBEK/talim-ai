@@ -1871,7 +1871,8 @@
       "lastFailedProbes": [],
       "sweepCount": 7,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified."
     },
     "web:locale.content.id.podcast/INDIVIDUAL/ru-light-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/ru-light-1440",
@@ -2041,7 +2042,8 @@
       "lastFailedProbes": [],
       "sweepCount": 7,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified."
     },
     "web:locale.content.id.podcast/INDIVIDUAL/uz-dark-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/uz-dark-1440",
@@ -2229,8 +2231,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 9,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T05:10:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25c",
+      "tour_last": "Guidebook + fault-injection (grade POST forced to 500)",
+      "persona_last": "B2C solo learner grinding a deck",
+      "criterion": "reliability/data-integrity + AI oracle",
+      "findings": [
+        "F96"
+      ],
+      "notes": "R2026-08-25c depth 3: generated a 12-card uz deck on uz-math.pdf -> flip -> grade -> REAL reload -> 11 due, card 0 reps=1 iv=1 ef=2.5 nextReviewAt +1d. SM-2 arithmetic checked on real rows: Good keeps EF 2.5, Easy raises it to 2.6, both give a 1-day first interval; 'Again' (Takrorlash) re-queues to the TAIL and does not increment the studied count (walked the whole queue to confirm the card came back last). ORACLE (fixtures/uz-math-facts.md): all 12 backs correct, ZERO trap answers -- no hypotenuse 7, no D=b^2+4ac, no intersection {1,4}, no 'Pifagor discovered it first'; cards 3 and 10 solved independently (3-4-5; D=25-24=1, roots 2 and 3). Uzbek: Latin throughout, no ru/en leakage, consistent ASCII apostrophes, consistent terminology. F96 found + FIXED here (54e18ccf): a failed grade advanced the queue anyway. NOTE for the next run: flashcards have NO sourceQuote column (only QuizQuestion/BankQuestion do), so the runbook's 'verify each flashcard back against its sourceQuote' is not checkable -- grade against the fixture instead. NOTE 2: a raw fetch from the browser without ?locale= returns {deck:null} because resolveLocale falls back to Accept-Language (en); that is the instrument, not a defect."
     },
     "web:locale.content.id.podcast/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/uz-light-1440",
