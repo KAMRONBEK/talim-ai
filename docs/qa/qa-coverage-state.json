@@ -2194,8 +2194,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 7,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:10:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25b",
+      "tour_last": "Keyboard tour + configuration tour (drag the divider, then try to do it without a mouse)",
+      "persona_last": "Rustam (keyboard-only) over Aziza (B2C self-learner)",
+      "criterion": "usability/keyboard-a11y",
+      "notes": "R2026-08-25b depth 3: opened the workspace, dragged the split 914 -> 654, and the position survived a real location.reload() (stored as content-workspace-split-v2 = 42.16). Section list, action rail (Xulosa/Podkast/Video/Mashq) and the O'qish/Xulosa/Podkast/Test tabs are all keyboard-reachable -- 35 focusables, all reached. The divider is not: surfaced F95 (#46), mouse-only, WCAG 2.1.1. Console carries two 404s from GET /summary/:id for a content with no generated summary yet; that is the absent-optional-resource shape the baseline already waives, not a defect.",
+      "findings": [
+        "F95"
+      ]
     },
     "web:locale.content.id.chat/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.chat/INDIVIDUAL/uz-light-1440",
