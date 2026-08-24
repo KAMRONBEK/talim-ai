@@ -2416,8 +2416,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 7,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:55:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25b",
+      "tour_last": "Oracle tour (solve every key against the fixture) + metamorphic pair",
+      "persona_last": "Aziza (B2C self-learner)",
+      "criterion": "reliability/ai-output-truth",
+      "notes": "R2026-08-25b depth 3 with a real oracle, not a rendering check. Pulled the source section body from the API and graded all 5 keys of the uz-math quiz against it and docs/qa/fixtures/uz-math-facts.md: 4 of 5 quote the source verbatim and are exact; none of the fixture's trap answers (hypotenuse 7, D = b^2+4ac, intersection {1,4}, \"Pythagoras discovered it first\") appears. Q1 is factually right but ungrounded and mis-cited -> O101. Metamorphic pair (tight): keyed answers -> score 100, garbage -> score 0. A defensible synonym for Q1 (\"90 daraja\") also scored 100, so the AI judge is doing its job rather than string-matching. In the browser: retook the quiz from scratch, answered all 5, submitted, and the 100% result survived a real location.reload(); mastery moved 62 -> 73 on the same screen. Input attacks on the answer field: empty keeps Tekshirish disabled; a `<script>` payload prefixed to a correct answer is escaped (no XSS, nothing raw in the DOM) and the judge accepted the answer while telling the student not to include the script part; a missing apostrophe (\"to'gri\") was tolerated. Residue: 4 extra attempts on this quiz for qa-individual.",
+      "findings": [
+        "O101"
+      ]
     },
     "web:locale.register/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.register/INDIVIDUAL/uz-light-1440",
