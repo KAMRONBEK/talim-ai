@@ -2295,3 +2295,129 @@ a design decision, so all were filed under the runbook's fix-discipline rule.
 (3) GAME **live control** (schedule → go-live → end-live with a concurrent learner) and **messaging**
 IDOR — both untouched and both multi-actor, which is where this cycle's real bugs came from;
 (4) admin impersonation (token single-use / expiry / tamper), never depth-verified.
+
+---
+
+## Cycle R2026-08-25b — pass 1, cycle 2
+
+Cycle 1 ended with a fair complaint against itself: *"270 of 276 cells are still at `swept` —
+breadth is proven, depth barely started."* This cycle was spent on depth, and on making the sweep
+stop wasting the next cycle's attention.
+
+### Triage — the sweep's 17 failures were 10 defects and 7 probe bugs
+
+The queue was 10 `error-affordance` + 8 `layout-stability` (one cell held both). Rather than
+re-derive the sweep's evidence, each was reproduced once with a **differential** method the sweep
+had not used: render the page **twice from fresh contexts** — once normally, once with its primary
+GET aborted — and diff the visible text. That answers the question the probe is actually asking:
+*did the failure cost the user anything, and were they told?*
+
+| Route | Lines lost | Verdict |
+| --- | --- | --- |
+| `/uz/dashboard` (INDIVIDUAL) | 5 of 27 | real — "Hali material yo'q" |
+| `/uz/learner/assessments` | 16 of 37 | real — "Hali hech narsa tayinlanmagan." |
+| `/uz/tenant/settings` | 3 of 48 | real — "Kod yo'q" **(new site)** |
+| `/uz/tenant/students` | 2 of 67 | real — "Kod yo'q" |
+| `/uz/tenant/materials/[id]/assign` | 1 of 47 | real — the material title vanishes from the back-link |
+| `/uz/dashboard/settings`, `/uz/learner/progress`, `/uz/learner/settings`, `/uz/tenant/billing`, `/uz/tenant/assessments`, `/uz/tenant/students` (its `/tenant` abort) | **0** | **probe bug** — page rendered identically |
+
+Six pages were being failed for not showing an error about a request they do not depend on: a
+sidebar's or a sibling widget's `GET /tenant`, `GET /content`, `GET /learner/summary`. The probe now
+fingerprints the normal pass's visible lines and only bites when a line is actually lost, with
+digits stripped so a ticking counter or a relative timestamp is not mistaken for vanished content
+(`160ddec9`). The two *narrowest* real defects — the join-code card losing 2 and 3 lines — still
+fail, which is the check that the calibration did not just make a number go down.
+
+`layout-stability` had the same disease in a different organ: **six of its seven failures were
+redirect cells**. A learner sent to `/learner/dashboard` from `/login`, `/register` or `/tenant/*`
+was reporting the *destination's* layout shift under the *source* route, six times over. CLS is now
+measured only on cells we expect to render (`8a37531c`). 7 → 2, and both survivors genuinely shift.
+
+Issue [#40](https://github.com/KAMRONBEK/talim-ai/issues/40) was updated with the complete
+five-route list and the six retractions, so its scope shrinks instead of growing.
+
+### Depth — six cells, and what each one actually proved
+
+**`tenant/students/[id]`** (never depth-verified). Assign round-trip on a student with no
+assignments, so it was fully reversible: MATERIALLAR 0 → 1, the material appeared in the progress
+list, survived a real reload, then unassigned — final state identical, including the other
+student's original `assignedAt`, which the upsert's empty `update` leaves alone. **IDOR matrix 8/8
+correct**, including assign-to-a-deactivated-member (404, the membership lookup requires
+`active: true`). Five input attacks on the `[id]` param all 404 with an honest `[role=alert]`
+"Yuklab bo'lmadi. Qayta urinib ko'ring." — worth noting for #40, since the error affordance those
+five routes lack already exists a few files away.
+
+**Messaging, both ends** — the largest untouched multi-actor surface. A hostile body (`img onerror`,
+`<script>`, RTL override, emoji, Cyrillic) sent from the students page reached the student's browser
+in 4.5 s with no reload and rendered as literal text; nothing fired, nothing raw in the DOM. Student
+opened it (unread 2 → 1), replied; tutor's bell showed 1 unread after a real reload; tutor responded
+from the inline box with Enter; the whole three-turn thread survived another reload. IDOR 8/8.
+Deactivated recipients *are* silently dropped from a mixed selection — but the compose dialog says
+so before you send ("Nofaol o'quvchilar o'tkazib yuboriladi"), so that is correct behaviour, not a
+silent failure. One finding: **F93/#45**, all three write paths accept a whitespace-only body
+because `z.string().min(1)` is a length check.
+
+**Impersonation** (never depth-verified, and in better shape than the reach-list assumed). Recorded
+in full so nobody re-tests it: imp token on `/admin/*` → 403, tampered signature → 401, payload
+rewritten to `role: ADMIN` → 401, self → 400, unknown → 404, other admin → 403, TTL exactly the
+30 min the panel promises, deactivated target mints but is 403 on `/learner/*`, `?token=` stripped
+from the URL on landing. The panel's claim *"This action is recorded in the audit log"* was checked
+against `GET /admin/audit-logs` rather than believed — every mint writes an `IMPERSONATE` row naming
+admin, target and role. **F94** (advisory, low) is what is missing: no banner, no exit control, and
+the session survives a reload like any other login, so an operator can forget which account they are
+in; the trail records that impersonation started, never what was done next.
+
+**Quiz, with a real oracle.** Nothing AI-generated had been graded this pass, which was the cycle's
+biggest hole. Pulled the source section body from the API and solved all five keys against it and
+`fixtures/uz-math-facts.md`: four quote the source verbatim and are exact, and **not one fixture
+trap answer appears** — no hypotenuse of 7, no `D = b² + 4ac`, no intersection `{1,4}`, no claim
+that Pythagoras discovered it first. Metamorphic pair holds tightly: keyed → **100**, garbage → **0**.
+A defensible synonym ("90 daraja") also scores 100, so the written-answer judge is judging rather
+than string-matching. **O101**: Q1 is factually right but ungrounded — neither it nor its
+explanation is in the source, and the `sourceQuote` cited for it does not support it. One question
+in one generated quiz is a sample, not evidence about the generator, so it stays an observation.
+
+**B2C workspace.** The split drags 914 → 654 and comes back identical after a real reload. Every one
+of the page's 35 focusables is keyboard-reachable — except the divider itself (**F95/#46**,
+WCAG 2.1.1).
+
+### Findings
+
+| | |
+| --- | --- |
+| **F92** (S3) [#44](https://github.com/KAMRONBEK/talim-ai/issues/44) | `/uz/tenant/students` drops 38 px, CLS **0.289 on 3/3 cold loads**, one shift event, one cause: the seat-count pill mounts after `useBilling()` with no reserved height. Split out of O98, which keeps the genuinely threshold-straddling learner-dashboard family. |
+| **F93** (S4) [#45](https://github.com/KAMRONBEK/talim-ai/issues/45) | A blank message can be sent on all three message write paths and can never be deleted. |
+| **F94** (S3) 🔒 [GHSA-v8gx](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-v8gx-9qfw-92f4) | An impersonated session is indistinguishable from a real one and cannot be exited. |
+| **F95** (S4) [#46](https://github.com/KAMRONBEK/talim-ai/issues/46) | The workspace divider is mouse-only. |
+| **O101** | One quiz question is not grounded in the material it cites. |
+
+### Two things I was wrong about, and checked before filing
+
+- The web `/impersonate` page's comment about *"one-shot token consumption"* looked like the server
+  promising single use. It is about React StrictMode double-invoking the effect — and the admin
+  panel plainly tells the operator the token lasts 30 minutes and can be pasted by hand. Not a
+  contradiction, so not a finding.
+- The assign panel offering "Biriktirish" for an already-assigned material looked like silent
+  failure. It is not: the click returns 201, the upsert creates no duplicate, and the progress list
+  above updates immediately. What is missing is only an assigned-state label in the panel — an
+  enhancement, which the runbook forbids as a finding.
+
+### Cycle close — R2026-08-25b
+
+**Cells advanced:** 5 newly `verified` + 2 re-attacked from a different lens (6 → 11 total). **Sweep failures triaged:** 17 — 10 real, 7
+calibrated as probe bugs and verified by re-sweep. **Findings:** F92 · F93 · F94 · F95 · O101.
+**Fixed:** two sweep probes (`160ddec9`, `8a37531c`); every product finding was structural or needed
+a design decision, so all were filed under the fix-discipline rule. **Issues filed:** #44, #45, #46,
+plus a comment on #40 and a draft advisory. **Blocked-on-job:** none.
+
+**Test data left behind (honest disclosure).** Probe messages in the QA tenant (root, reply,
+response and two whitespace-only ones) — messages have no delete route, which is O100's second
+instance. Four extra attempts on the uz-math quiz for `qa-individual`. One probe learner was created
+and soft-deleted; active students and seats are 5 and 5/25, before and after.
+
+**Next up:** (1) the tenant surface is now the best-covered and the **INDIVIDUAL** one the worst —
+`content/[id]/{flashcards,podcast,slides,video}` are all still at `swept`, and each is AI output
+that needs an oracle, not a render check; (2) O98 against a production build, still the only way to
+settle the learner-dashboard CLS; (3) GAME **live control** (schedule → go-live → end-live with a
+concurrent learner) is the last untouched multi-actor flow in §G; (4) CSV import/export, also
+untouched, and the one place a seat-boundary race meets file parsing.

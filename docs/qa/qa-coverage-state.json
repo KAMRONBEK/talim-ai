@@ -1109,18 +1109,9 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 4,
-      "depthVerifiedAt": "2026-08-25T03:25:00.000Z",
       "status": "active",
-      "depth": "verified",
-      "lastDepthRun": "R2026-08-25b",
-      "tour_last": "Guidebook (the consumer half of the impersonation handshake)",
-      "persona_last": "Platform operator",
-      "criterion": "security/session-handling",
-      "notes": "R2026-08-25b depth 3: driven with a real minted token (?token=<jwt>) twice from fresh contexts. Consumes the token, writes it to the talim-auth store, calls /auth/me, and replaces the URL so no token survives in the address bar or history; lands on the role home. Reload keeps the session. No token -> the page renders its own error and a back-to-login link (the sweep already covers that ANON case). Contributes to F94.",
-      "findings": [
-        "F94"
-      ],
-      "advisory": "GHSA-v8gx-9qfw-92f4"
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
+      "depthVerifiedAt": null
     },
     "web:locale.login/ANON/ru-light-1440": {
       "cellId": "web:locale.login/ANON/ru-light-1440",
@@ -1209,18 +1200,9 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 4,
-      "depthVerifiedAt": "2026-08-25T03:25:00.000Z",
       "status": "active",
-      "depth": "verified",
-      "lastDepthRun": "R2026-08-25b",
-      "tour_last": "Guidebook (the consumer half of the impersonation handshake)",
-      "persona_last": "Platform operator",
-      "criterion": "security/session-handling",
-      "notes": "R2026-08-25b depth 3: driven with a real minted token (?token=<jwt>) twice from fresh contexts. Consumes the token, writes it to the talim-auth store, calls /auth/me, and replaces the URL so no token survives in the address bar or history; lands on the role home. Reload keeps the session. No token -> the page renders its own error and a back-to-login link (the sweep already covers that ANON case). Contributes to F94.",
-      "findings": [
-        "F94"
-      ],
-      "advisory": "GHSA-v8gx-9qfw-92f4"
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
+      "depthVerifiedAt": null
     },
     "web:locale.login/ANON/uz-dark-1440": {
       "cellId": "web:locale.login/ANON/uz-dark-1440",
@@ -1754,18 +1736,9 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 4,
-      "depthVerifiedAt": "2026-08-25T03:25:00.000Z",
       "status": "active",
-      "depth": "verified",
-      "lastDepthRun": "R2026-08-25b",
-      "tour_last": "Guidebook (the consumer half of the impersonation handshake)",
-      "persona_last": "Platform operator",
-      "criterion": "security/session-handling",
-      "notes": "R2026-08-25b depth 3: driven with a real minted token (?token=<jwt>) twice from fresh contexts. Consumes the token, writes it to the talim-auth store, calls /auth/me, and replaces the URL so no token survives in the address bar or history; lands on the role home. Reload keeps the session. No token -> the page renders its own error and a back-to-login link (the sweep already covers that ANON case). Contributes to F94.",
-      "findings": [
-        "F94"
-      ],
-      "advisory": "GHSA-v8gx-9qfw-92f4"
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
+      "depthVerifiedAt": null
     },
     "web:locale.login/ANON/uz-light-390": {
       "cellId": "web:locale.login/ANON/uz-light-390",
