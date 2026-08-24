@@ -987,7 +987,8 @@
       "respondPlaceholder": "Reply to this student…",
       "respond": "Send",
       "respondError": "Couldn't send your reply."
-    }
+    },
+    "inactiveSubscriptionBanner": "Your organization subscription is not active. Uploads, students, and AI generation may be limited."
   },
   "learner": {
     "loading": "Loading...",
