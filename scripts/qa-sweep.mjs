@@ -228,6 +228,11 @@ const CELL_BUDGET = {
   goto: budget(0.4, 5000),
   settle: budget(0.14, 2000),
   evaluate: budget(0.18, 4000), // spent twice: first attempt + the lost-context retry
+  // Network quiet is not the same thing as rendered. A page whose data has arrived can still
+  // be mid-render (React commit, PDF.js worker parse) with nothing on the wire, so `settle`
+  // returns while the loading shell is still on screen. Rather than lengthen `settle` for
+  // every cell, a cell that looks blank is given ONE bounded second look — see renderRetry().
+  renderRetry: budget(0.1, 4000),
 };
 // The error pass additionally sits through a retry/backoff window before it judges a spinner.
 const ERROR_PASS_BUDGET = {
@@ -995,6 +1000,32 @@ async function evaluateFindings(page, cfg, budgetMs = CELL_BUDGET.evaluate) {
   }
 }
 
+/**
+ * A blank-looking page gets one bounded second look before it is called blank.
+ *
+ * `content-rendered` reads `main ?? body` once, right after `gotoAndSettle`, and settle stops on
+ * 700ms of network quiet. Those two facts collide on any page that finishes fetching well before
+ * it finishes rendering: three `content/[id]` cells failed a full sweep quoting nothing but their
+ * own loading placeholder ("Загрузка…", "Yuklanmoqda…"), and every one of them renders in ~4s when
+ * opened by hand. A page that is genuinely blank stays blank for the whole window and still fails,
+ * so this buys back the slow-but-healthy cells without weakening the probe. `renderWaitMs` is
+ * recorded in the verdict so "slow" stays visible instead of becoming invisible.
+ *
+ * Returns the ms waited, or null if no second look was needed.
+ */
+async function waitForRender(page, capMs) {
+  const deadline = Date.now() + capMs;
+  const started = Date.now();
+  while (Date.now() < deadline) {
+    await sleep(250);
+    const len = await page
+      .evaluate(() => ((document.querySelector('main') ?? document.body).innerText ?? '').trim().length)
+      .catch(() => 0);
+    if (len >= MIN_RENDERED_TEXT) return Date.now() - started;
+  }
+  return Date.now() - started;
+}
+
 // ---------------------------------------------------------------------------
 // 11. Per-cell instrumentation + verdict assembly
 // ---------------------------------------------------------------------------
@@ -1362,12 +1393,21 @@ async function sweepCell(context, cell, baseline, namespaces) {
     await gotoAndSettle(page, cell.url, rec);
     if (cell.expectation !== 'ok') await waitForRedirect(page, cell.url);
 
-    const findings = await evaluateFindings(page, {
+    const evalCfg = {
       locale: cell.variantSpec.locale,
       // Empty for apps/admin: it has no i18n, so there is nothing for the key probe to find
       // there but false positives off apps/web's namespaces.
       namespaces: cell.app === 'web' ? namespaces : [],
-    });
+    };
+    let findings = await evaluateFindings(page, evalCfg);
+
+    // Only cells we expect to RENDER get the second look; a redirect/denied cell is supposed to
+    // show a bare placeholder mid-bounce and `content-rendered` is not applied to it at all.
+    let renderWaitMs = null;
+    if (cell.expectation === 'ok' && findings.mainTextLength < MIN_RENDERED_TEXT) {
+      renderWaitMs = await waitForRender(page, CELL_BUDGET.renderRetry);
+      findings = await evaluateFindings(page, evalCfg);
+    }
     const finalUrl = page.url();
     const probes = assembleProbes(cell, rec, findings, finalUrl, baseline);
     const failed = probes.filter((p) => !p.ok);
@@ -1388,6 +1428,10 @@ async function sweepCell(context, cell, baseline, namespaces) {
       result: failed.length === 0 ? 'pass' : 'fail',
       finalUrl,
       durationMs: Date.now() - started,
+      // Non-null means this cell looked blank at settle time and needed a second look. Kept in
+      // the verdict on purpose: a cell that passes only after 3.5s of extra waiting is a real
+      // signal, and hiding it would turn the calibration into a way of not seeing slow pages.
+      ...(renderWaitMs === null ? {} : { renderWaitMs }),
       probes,
       failedProbes: failed.map((p) => p.id),
       screenshot,
