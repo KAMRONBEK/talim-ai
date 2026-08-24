@@ -1,7 +1,18 @@
 {
   "_doc": "Per-route allowlisted noise for scripts/qa-sweep.mjs. Anything not listed is a finding; prune entries that stop appearing. Three channels: 'console' (console/page errors), 'network' (4xx/5xx), 'text' (garbage-text / raw-i18n-key / raw-math probes). A waiver is a claim that the noise is understood — always give a reason.",
   "global": {
-    "console": [],
+    "console": [
+      {
+        "match": "favicon.ico",
+        "reason": "apps/admin ships no favicon, so every admin page logs one 404. Tracked as a polish issue; not worth failing all 66 admin cells. Console entries carry no HTTP status, so this matches on the URL.",
+        "sev": "waived"
+      },
+      {
+        "match": "width(-1) and height(-1) of chart",
+        "reason": "recharts ResponsiveContainer logs this on first paint before the container is measured. Verified against docs/qa/screenshots/sweep/admin_dashboard_ADMIN_light-1440.png: every chart renders correctly with real data. Dev-time transient, not a defect — do NOT re-file.",
+        "sev": "waived"
+      }
+    ],
     "network": [],
     "text": []
   },
@@ -9,7 +20,12 @@
     "/[locale]/content/[id]": {
       "console": [],
       "network": [
-        { "match": "GET /summary", "status": 404, "reason": "F3 — summary not yet generated on first load; benign", "sev": "waived" }
+        {
+          "match": "GET /summary",
+          "status": 404,
+          "reason": "F3 — summary not yet generated on first load; benign",
+          "sev": "waived"
+        }
       ],
       "text": []
     },

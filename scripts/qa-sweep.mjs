@@ -402,10 +402,13 @@ function webRoleMatrix(pattern) {
 
 function adminRoleMatrix(pattern) {
   if (pattern === '/') {
-    // Server redirect to /login for everyone, session or not.
+    // apps/admin/app/page.tsx server-redirects to /login, but /login itself then bounces an
+    // authenticated ADMIN on to /dashboard. So the landing place is role-dependent, and
+    // asserting /login for everyone made a correctly-behaving admin look like a defect on
+    // the very first sweep.
     return [
       { role: ANON, expectation: 'redirect', to: '/login' },
-      { role: 'ADMIN', expectation: 'redirect', to: '/login' },
+      { role: 'ADMIN', expectation: 'redirect', to: '/dashboard' },
     ];
   }
   if (pattern === '/login') {
@@ -650,14 +653,18 @@ function baselineEntries(baseline, route, kind) {
 }
 
 /** An entry may be a bare string or `{ match, status?, level?, reason, sev }`. */
-function isWaived(entries, { text, status, level }) {
+function isWaived(entries, { text, status, level, url }) {
   return entries.some((entry) => {
     const e = typeof entry === 'string' ? { match: entry } : entry;
     if (!e?.match) return false;
     if (e.sev && e.sev !== 'waived') return false;
     if (e.status != null && e.status !== status) return false;
     if (e.level && e.level !== level) return false;
-    return text.includes(e.match);
+    // Match the URL too. A failed-resource console error carries no useful text — every
+    // one of them reads "Failed to load resource: … 404" — so the only thing that
+    // identifies it is the URL. Keying a waiver on that text instead would waive every
+    // 404 on the page, which is precisely the noise this file exists to avoid.
+    return text.includes(e.match) || (url ? String(url).includes(e.match) : false);
   });
 }
 
@@ -1051,14 +1058,24 @@ function attachRecorders(page, apiOrigin) {
  * on REQUEST start order — the page's own fetch order — and tie-broken by path so two
  * requests fired in the same millisecond still resolve the same way every run.
  */
-function primaryApiFor(rec) {
+function primaryApiFor(rec, routeHint = null) {
   const byPath = new Map();
   for (const entry of rec.apiGets) {
     const prior = byPath.get(entry.pathname);
     if (!prior || entry.seq < prior.seq) byPath.set(entry.pathname, entry);
   }
+  // A page's own resource beats a sibling widget's. On /users/[id] the layout's
+  // /admin/tenants and the page's /admin/users/<id> both start at +0ms, and an
+  // alphabetical tie-break picked /admin/tenants — so the error pass aborted a sidebar
+  // fetch and then blamed the page for not showing an error. Prefer the candidate whose
+  // path carries an id that appears in the URL under test.
+  const ownResource = (p) => (routeHint && routeHint.some((id) => id && p.includes(id)) ? 0 : 1);
   const ranked = [...byPath.values()].sort(
-    (a, b) => a.at - b.at || a.pathname.localeCompare(b.pathname) || a.seq - b.seq,
+    (a, b) =>
+      ownResource(a.pathname) - ownResource(b.pathname) ||
+      a.at - b.at ||
+      a.pathname.localeCompare(b.pathname) ||
+      a.seq - b.seq,
   );
   if (!ranked.length) return { pathname: null, candidates: [] };
   return {
@@ -1116,7 +1133,7 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
   const consoleFindings = rec.console.filter(
     (m) =>
       !BUILTIN_CONSOLE_NOISE.some((n) => m.text.includes(n)) &&
-      !isWaived(consoleEntries, { text: m.text, level: m.level }),
+      !isWaived(consoleEntries, { text: m.text, level: m.level, url: m.url }),
   );
   probes.push(
     probe('console-clean', consoleFindings.length === 0, consoleFindings.slice(0, 5)),
@@ -1287,7 +1304,9 @@ async function sweepCell(context, cell, baseline, namespaces) {
       screenshot = path.relative(REPO, file);
     }
 
-    const primary = primaryApiFor(rec);
+    // The ids substituted into this cell's URL identify the page's own resource, which is
+    // how primaryApiFor breaks a same-millisecond tie against a layout-level fetch.
+    const primary = primaryApiFor(rec, (cell.url.match(/[A-Za-z0-9_-]{16,}/g) ?? []));
     return {
       result: failed.length === 0 ? 'pass' : 'fail',
       finalUrl,
@@ -1973,10 +1992,17 @@ async function main() {
             } catch (err) {
               verdict.errorPass = { result: 'error', error: plain(err?.message ?? err), failedProbes: ['error-pass-crashed'] };
             }
-            for (const id of verdict.errorPass.failedProbes ?? []) {
+            const epFailed = verdict.errorPass.failedProbes ?? [];
+            for (const id of epFailed) {
               byProbe[id] = (byProbe[id] ?? 0) + 1;
             }
-            if ((verdict.errorPass.failedProbes ?? []).length) verdict.result = 'fail';
+            if (epFailed.length) {
+              verdict.result = 'fail';
+              // Surface them on the cell too. Marking the cell failed while leaving
+              // failedProbes empty produced a verdict that said "this failed" and
+              // "nothing failed" at once — the reader has no thread to pull.
+              verdict.failedProbes = [...(verdict.failedProbes ?? []), ...epFailed.map((id) => `errorPass:${id}`)];
+            }
           } else {
             verdict.errorPass = { skipped: 'no-data-dependency-observed' };
           }
