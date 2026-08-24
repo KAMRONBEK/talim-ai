@@ -1006,6 +1006,11 @@ function attachRecorders(page, apiOrigin) {
     mutations: [],
     duplicates: [],
     apiGets: [],
+    // 5xx forensics. A 500 is never waivable, so the sweep records it — but for three runs
+    // running the record was one line ("500 GET /admin/users/:id") and every attempt to
+    // attribute it happened MINUTES later, by which time it no longer reproduced. The
+    // response body and the replay have to be captured inside the failing moment or not at all.
+    serverErrors: [],
     lastActivityAt: Date.now(),
   };
   const touch = () => {
@@ -1068,6 +1073,31 @@ function attachRecorders(page, apiOrigin) {
       /* data: / blob: URLs */
     }
     rec.responses.push({ status: res.status(), method: req.method(), url, pathname });
+    if (res.status() >= 500) {
+      const entry = {
+        status: res.status(),
+        method: req.method(),
+        pathname,
+        url,
+        at: new Date().toISOString(),
+        // How busy the page was when it broke. A 5xx alone cannot distinguish "this request
+        // is broken" from "the server was under pressure"; the in-flight count can.
+        inFlight: started.size,
+        responsesBefore: rec.responses.length - 1,
+        body: null,
+      };
+      rec.serverErrors.push(entry);
+      // Best-effort and deliberately un-awaited: the body may already be discarded, and a
+      // rejected promise here must not take the cell down.
+      res
+        .text()
+        .then((t) => {
+          entry.body = redact(String(t).slice(0, 600), 600);
+        })
+        .catch(() => {
+          entry.body = '<body unavailable>';
+        });
+    }
     const start = started.get(req);
     if (start && res.status() === 200) rec.apiGets.push(start);
   });
@@ -1363,6 +1393,7 @@ async function sweepCell(context, cell, baseline, namespaces) {
       screenshot,
       primaryApi: primary.pathname,
       primaryApiCandidates: primary.candidates,
+      serverErrors: rec.serverErrors,
       // Consumed by the error pass and STRIPPED before the verdict is written — this is
       // rendered page text and the verdicts/state files are committed.
       visibleLines: findings.visibleLines ?? [],
@@ -1451,6 +1482,60 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
   } finally {
     await page.close().catch(() => null);
   }
+}
+
+/**
+ * Replay a 5xx the instant it happens, from the same session, and record the answer.
+ *
+ * F91 is why this exists. `GET /admin/users/:id` 500'd on three consecutive full sweeps and
+ * every investigation was the same dead end: by the time anyone retried the id — minutes
+ * later, from a fresh process — it answered 200, so the only durable record was a tally mark
+ * and a guess. The guesses were checked and both were wrong: the target was NOT in a bad state
+ * (two other variants read the identical id seconds apart and passed), and the server was NOT
+ * saturated (1440 concurrent heavy reads produced zero 5xx).
+ *
+ * Replaying here answers the one question that separates the remaining explanations, and it
+ * answers it while the condition still exists: does it reproduce within a second of failing?
+ * Yes ⇒ a request-shaped defect, and the body is on the record. No ⇒ genuinely momentary,
+ * which is itself the finding rather than an absence of one.
+ */
+async function replayServerErrors(serverErrors, session) {
+  const REPLAYS = 3;
+  const out = [];
+  for (const err of serverErrors.slice(0, 4)) {
+    // Only reads are replayed. Re-firing a failed POST/DELETE to learn why it failed is how
+    // a QA pass creates the data it is supposed to be observing.
+    if (err.method !== 'GET') {
+      out.push({ ...err, verdict: `NOT REPLAYED — ${err.method} is a write` });
+      continue;
+    }
+    const replays = [];
+    for (let i = 0; i < REPLAYS; i++) {
+      try {
+        const res = await fetch(err.url, {
+          headers: session?.token ? { Authorization: `Bearer ${session.token}` } : {},
+        });
+        const body = res.status >= 400 ? redact((await res.text()).slice(0, 300), 300) : null;
+        replays.push({ status: res.status, body });
+      } catch (e) {
+        replays.push({ status: 'ERR', body: plain(e?.message ?? e) });
+      }
+    }
+    const reproduced = replays.filter((r) => typeof r.status === 'number' && r.status >= 500).length;
+    out.push({
+      ...err,
+      replays,
+      reproduced,
+      // The line a human should read first.
+      verdict:
+        reproduced === REPLAYS
+          ? 'DETERMINISTIC — reproduces on every immediate replay from the same session'
+          : reproduced > 0
+            ? `INTERMITTENT — ${reproduced}/${REPLAYS} immediate replays also 5xx`
+            : `MOMENTARY — 0/${REPLAYS} immediate replays reproduced; the condition was gone within ~1s`,
+    });
+  }
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -2061,6 +2146,10 @@ async function main() {
         // visibleLines is rendered page text, kept out of the committed verdicts file.
         const { visibleLines: baselineLines = [], ...writableOutcome } = outcome;
         verdict = { ...record, ...writableOutcome };
+
+        if (verdict.serverErrors?.length) {
+          verdict.serverErrors = await replayServerErrors(verdict.serverErrors, session);
+        }
 
         if (CFG.errorPass && cell.expectation === 'ok' && cell.isPrimaryVariant) {
           if (outcome.primaryApi) {
