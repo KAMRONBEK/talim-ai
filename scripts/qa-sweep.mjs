@@ -1304,7 +1304,14 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
     );
   }
 
-  probes.push(probe('layout-stability', findings.cls <= CLS_LIMIT, `CLS ${findings.cls} (limit ${CLS_LIMIT})`));
+  // CLS is accumulated for the whole page lifetime, so on a cell we EXPECT to bounce it
+  // measures the DESTINATION's layout shift and files it under the source route. Six of the
+  // seven layout-stability failures were exactly that: a learner sent to /learner/dashboard
+  // from /login, /register, /tenant/materials… each reporting the learner dashboard's own
+  // shift a second time. The destination has its own cell; judge it there.
+  if (cell.expectation === 'ok') {
+    probes.push(probe('layout-stability', findings.cls <= CLS_LIMIT, `CLS ${findings.cls} (limit ${CLS_LIMIT})`));
+  }
   probes.push(
     probe('no-long-task', findings.longestTask <= LONG_TASK_LIMIT_MS, `longest task ${findings.longestTask}ms`),
   );
