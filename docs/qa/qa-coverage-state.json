@@ -4283,8 +4283,18 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 9,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T06:50:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25c",
+      "tour_last": "Keyboard-only tour — no mouse used for any step of the round trip",
+      "persona_last": "Tutor who cannot use a mouse",
+      "criterion": "usability/keyboard-a11y",
+      "findings": [
+        "F99",
+        "O102"
+      ],
+      "notes": "R2026-08-25c depth 3, driven WITHOUT the mouse: Tab to a student checkbox -> Space -> Tab to Tayinlash -> Enter -> counter 1/5 -> 2/5 -> REAL reload -> still 2/5 with the new student checked+disabled -> unassigned again -> back to 1/5, the original state. A11y measured properly (using element.labels, the trap a previous cycle recorded): 28 focusables, ALL Tab-reachable, focus ring visible on every one, 0 tabindex=-1 traps, all 5 student checkboxes label-associated, the already-assigned row correctly checked+disabled rather than dropped from the tab order. F99 FIXED here (256a1d5c): the student-search input was the single unlabelled control, placeholder-only, at both this panel and /tenant/students. O102 (not filed): 0 live regions on the page, so the assign result is silent to a screen reader -- same class as F90/#42 on the GAME player, but announcing a discrete assign is a design call, so it stays an observation. Assignment state restored: 1 of 5, Test Student One only, exactly as found."
     },
     "web:locale.tenant.progress/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.progress/TENANT_OWNER/uz-light-1440",

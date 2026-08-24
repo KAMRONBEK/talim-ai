@@ -2481,3 +2481,142 @@ this pass that a plausible-looking finding dissolved under a second look (the ot
 "fiction" that was just a null override, and the a11y sweep that ignored `element.labels`).
 
 Probe soft-deleted; 5 active students and 5/25 seats before and after.
+
+## Cycle R2026-08-25c — pass 1, cycle 3
+
+Cycle 2 closed with a four-item "next up" list. Three of those four are now depth-verified and the
+fourth (O98 against a production build) is still the one thing a dev-server cycle cannot settle.
+Four cells advanced, four findings, two of them fixed and verified here.
+
+### Triage — 12 sweep failures, 11 already filed, 1 worth real work
+
+The sweep's queue was 6 `error-affordance` (the F85/#40 set plus admin #38), 6 `layout-stability`
+(the F92/#44 and O98 families, now visible on more variants), and **F91**. Eleven were re-checked
+against the ledger and left alone — re-deriving a filed finding is how a triage queue turns into
+theatre. F91 got the cycle's first real hour, because a **third** consecutive full sweep is not a
+coincidence and "flaky" had stopped being an answer.
+
+**Both standing explanations were wrong, and both were cheap to disprove.**
+
+*"The target was in a bad state (a soft-deleted account)."* All three ADMIN variants in that run
+resolved to the **identical** id — it is the `adminUserId` *and* the `TENANT_OWNER.studentId` entry
+in one id bag. `light-1440` and `light-390` read that row and passed; `dark-1440` read the same row
+seconds later and 500'd. A property of the target cannot explain a difference the target does not
+have. The note added to #43 after the second sighting is retired.
+
+*"Connection-pool exhaustion."* `prisma.ts` is a bare `new PrismaClient()`, so the default pool and
+its 10 s timeout were a plausible source of a transient non-`AppError` throw. Six rounds of 240
+concurrent heavy reads across four role sessions, interleaved with 90 concurrent GETs on the
+endpoint itself: **1530 requests, zero 5xx, slowest admin read 178 ms.** Not load.
+
+What actually blocks attribution is that the only record of the throw is `console.error(err)` on the
+operator's own terminal — the launcher's dev log holds Next.js output only — and the client sees a
+constant `{"message":"Internal server error"}`. Every investigation so far has happened *minutes*
+late, from a fresh process, when it no longer reproduces. So the sweep now collects the evidence
+**inside the failing moment**: on any 5xx it records the response body, the in-flight request count
+and the position in the cell, then replays that GET three times immediately from the same session
+and labels the result `DETERMINISTIC` / `INTERMITTENT` / `MOMENTARY`. Writes are never replayed —
+re-firing a failed POST to learn why it failed is how a QA pass manufactures the data it is meant to
+be observing. Verified against real Playwright with an always-500 and a 500-then-200 endpoint; they
+labelled `DETERMINISTIC` and `MOMENTARY` respectively. The next sighting arrives with an attribution
+instead of a tally mark.
+
+### Depth — four cells, and one hypothesis that died on contact
+
+**Flashcards (INDIVIDUAL), the worst-covered surface.** Generated a 12-card uz deck on `uz-math.pdf`
+and drove it: flip → grade → real reload → 11 due, card 0 at `reps 1 / iv 1 / ef 2.5` and due
+tomorrow. SM-2 checked on real rows rather than assumed — Good holds EF at 2.5, Easy raises it to
+2.6, both give a 1-day first interval, and *Again* re-queues to the **tail** without counting as
+studied (walked the whole queue to watch the card come back last). **Oracle:** all 12 backs correct
+against `fixtures/uz-math-facts.md`, **zero** trap answers — no hypotenuse of 7, no `D = b²+4ac`, no
+intersection `{1,4}`, no "Pifagor discovered it first" — with two cards solved independently (3-4-5;
+`D = 25−24 = 1`, roots 2 and 3).
+
+Then fault injection found **F96**: with the review POST forced to 500, the session showed *"Baho
+saqlanmadi. Qayta urinib ko'ring."* — grade not saved, try again — **about a card it had already
+dropped from the queue**. The advance was synchronous and the error path only set a message. An
+instruction the product itself made impossible to follow, plus a card silently skipped and still
+counted as studied, while the server correctly kept it due. Fixed by rolling the optimistic advance
+back (`54e18ccf`); the same injected 500 now leaves the card on screen, and the retry grades it.
+
+**GAME live control, the last untouched multi-actor flow.** Two actors, with server state read from
+*both* sides at every step rather than inferred from one screen. Go-live → join banner + `?play`
+deep-link → end-live → banner clears, all correct. Worth recording so nobody re-tests them: go-live
+on a WRITTEN assessment is refused `400 "Only game assessments can go live"`; a live session does
+**not** bypass `maxAttempts` (an exhausted learner following the deep-link gets *"Urinishlar
+chekloviga yetdingiz"*); the schedule field rejects `not-a-date`, `<script>alert(1)</script>` and
+`""` with `400 "Invalid date"` and 404s an unknown id.
+
+**F97/#47** is what the flow costs today: the banner never reaches a learner who already has the
+dashboard open. `useLearnerAssessments` is the only query in its file with neither a
+`refetchInterval` nor an event subscription — its siblings, including *both* leaderboard hooks, are
+explicitly SSE-primary with a safety-net poll and say so in comments. So a live game's leaderboard
+refreshes itself while the banner announcing the game does not. Absent at 5/15/30/50 s on an
+untouched page, present immediately after a reload, with `isLive: true` on both APIs throughout. A
+classroom waiting for "go" sees nothing until somebody presses F5.
+
+**CSV import.** Ten file shapes. **F98/#48**: a `;`-delimited file — Excel's default on ru/uz
+Windows, which is this product's market — parses line 1 as the single cell `name;email`, misses the
+header check, and **imports its own header row as a student**; every data row then becomes one
+whole-line name with the email never parsed. `HTTP 200`, every row `created`, no warning field. Same
+for comma files with Uzbek headers (`Ism,Familiya` → a student named `Ism`). A headerless-positional
+control shows why the code does this and why it cannot simply assume line 1 is a header.
+
+**A hypothesis that died on contact, recorded because it looked certain.** `parseCsv` never strips a
+BOM, and this app's own export *writes* one — so a BOM'd file had to break header detection. It does
+not: `String.trim()` treats `U+FEFF` as whitespace, and the BOM file imports perfectly. That is the
+second measuring-instrument error in two cycles (after `Blob.text()` eating the same BOM), and the
+third plausible-looking finding this pass to dissolve under a second look. The related **O103** —
+the app's own export cannot be re-imported, because its headers are localized (`Ism,Email,Holat`) —
+is real but stays an observation, since nothing claims an export is an import template.
+
+The concurrent-import seat race **re-confirms F87** rather than finding anything: two simultaneous
+13-row imports into 13 free seats produced 14 students, 26 active against a limit of 25. It went to
+the existing advisory, not a public issue. One new datum there — each import correctly refused 6
+rows, so the per-row assert *does* fire during a bulk import and the overshoot on this path is +1
+rather than the unbounded single-create case.
+
+**Assign page, keyboard-only.** No mouse touched any step: Tab → Space → Tab → Enter → 1/5 becomes
+2/5 → real reload → still 2/5 → unassigned back to the original state. The page is in good shape —
+28 focusables, all Tab-reachable, focus ring visible on every one, no `tabindex="-1"` traps, all
+five student checkboxes label-associated (measured through `element.labels`, the trap a previous
+cycle recorded), and the already-assigned row correctly checked-and-disabled rather than dropped
+from the tab order. One control failed: **F99**, the student-search box, placeholder-only at both
+this panel and `/tenant/students`. Fixed by naming it with the string it already displays, so no new
+i18n keys and all three locales covered by construction (`256a1d5c`). **O102** — the assign result
+is announced to nobody (0 live regions) — stays an observation, because deciding what to say is a
+design call.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F96** (S3) ✅ `54e18ccf` | A flashcard grade that failed to save took the card with it. |
+| **F97** (S3) [#47](https://github.com/KAMRONBEK/talim-ai/issues/47) | Starting a live game never reaches a student who already has the dashboard open. |
+| **F98** (S3) [#48](https://github.com/KAMRONBEK/talim-ai/issues/48) | A semicolon-delimited roster imports its own header row as a student. |
+| **F99** (S4) ✅ `256a1d5c` | The student-search box announced as an unlabelled edit field. |
+| **O102 · O103** | The assign result is silent to AT; the app's own export cannot be re-imported. |
+
+### Cycle close — R2026-08-25c
+
+**Cells advanced:** 4 newly `verified` (11 → 15). **Sweep failures triaged:** 12 — 11 already filed
+and left alone, 1 (F91) taken as far as a QA cycle can and then instrumented so the next sighting
+attributes itself. **Findings:** F96 · F97 · F98 · F99 · O102 · O103. **Fixed and verified:** F96,
+F99, plus the sweep's 5xx forensics. **Issues filed:** #47, #48; comment on #43; evidence appended
+to advisory GHSA-2r57-gmq8-w83r. **Blocked-on-job:** none. **Runbook corrected:** §D told the next
+run to grade flashcards against a `sourceQuote` the `Flashcard` model does not have (only
+`QuizQuestion`/`BankQuestion` do) — a rulebook that cries wolf costs the same as a sweep that does.
+
+**Test data left behind (honest disclosure).** A 12-card flashcard deck on `uz-math.pdf` for
+`qa-individual`, with 11 cards graded — the deck is regenerable and the SRS state is the point of
+the test. 27 probe students created across the CSV cell, **all deactivated**; the org is back to its
+original 5 active / 5 of 25 seats. Both GAME assessments restored to `isLive: false`,
+`scheduledAt: null`. Assignment state restored to 1 of 5 (Test Student One only).
+
+**Next up:** (1) O98 against a **production build** — still the only way to settle the learner
+dashboard CLS, and now the oldest open question in the pass; (2) the **assessment builder** and the
+8 structured player types (grading truth-tables, ORDERING untouched-order, MATCHING duplicate
+labels, DROPDOWN_CLOZE, HOTSPOT/DRAG_DROP keyboard+touch) — the largest remaining §G surface and
+entirely at `swept`; (3) `content/[id]/{podcast,slides,video}` — the rest of the INDIVIDUAL AI
+surface, each needing an oracle rather than a render check; (4) F91 will now attribute itself on the
+next sighting, so the cheap move is to read the `serverErrors` block rather than re-derive it.
