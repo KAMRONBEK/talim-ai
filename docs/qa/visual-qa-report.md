@@ -2216,3 +2216,82 @@ prioritised as one piece of work rather than three tickets.
 
 **Further test data left behind:** a `QA RaceProbe GameTiming` assessment plus 2 attempts, again
 unremovable (O100).
+
+### Addendum 4 — keyboard-only pass on the GAME player (usability criterion)
+
+Persona **Rustam (keyboard-only)**, tour **keyboard**, cell
+`web:locale.quiz.id/TENANT_LEARNER/uz-light-1440`. Driven to **depth 3 with `Tab` and `Enter` only** —
+no pointer at any point: reached "O'ynash" in 13 tabs from a cold page, "Boshlash" in 1, the first
+answer option in 1, played all three questions, submitted, then did a real `location.reload()` and
+confirmed the attempt persisted (`attemptCount 3/3`, `latestPoints 962`, card correctly switched to
+"Urinishlar chekloviga yetdingiz").
+
+**What passed** — worth recording so nobody re-tests it: keyboard-operable end to end, focus clearly
+visible (`outline: 3px solid` + ring), and **0 of 14 inputs truly unlabeled**.
+
+**A false a11y finding I nearly filed.** My first sweep of focusables reported **14 unlabeled
+inputs** — a damning-looking number. It was my heuristic that was wrong: it only checked
+`innerText`/`aria-label`/`title` and ignored wrapping `<label>` elements. Re-checked properly with
+`input.labels.length`, the real count is **0**. Any a11y check that does not use `element.labels`
+will manufacture this same false positive.
+
+**F90 (S3) — the timed game is silent to assistive tech.** [#42](https://github.com/KAMRONBEK/talim-ai/issues/42)
+Document-wide: `[aria-live],[role=status],[role=alert],output,[aria-atomic]` → **0**, no
+`role="timer"`, measured at three separate moments during play. Meanwhile the 20 s countdown ticks,
+the speed bonus visibly decays (962 → 938 ballgacha), the question counter advances and answer
+feedback appears — all swapped **in place**. Same class as **F83**, which was fixed on admin
+`/health` in `e19ce5d7`; the game player never got the same treatment.
+
+**Deliberately filed, not fixed.** Wrapping a per-second countdown in `aria-live` would announce
+every tick, which is worse than silence — the fix needs a design decision (announce transitions and
+feedback via `role="status"`, keep the ticking timer `aria-live="off"` but expose it as
+`role="timer"`, consider threshold announcements). That is a human's call, so it does not qualify as
+the "clear, low-risk" fix the runbook allows. WCAG SC 4.1.3 is failed outright; SC 2.2.1 (the
+unadjustable 20 s limit) is *raised as a question*, since the real-time/essential exception is
+genuinely arguable for a competitive game.
+
+**Incidental corroboration for F88:** the client-side UI enforces `maxAttempts` correctly — after
+the third attempt the card refuses to start a fourth. Which is exactly why F88 is an atomicity
+defect and not a missing check.
+
+### Cycle close — R2026-08-25a
+
+A full re-sweep was run at the end to check that the calibration held across the whole surface, not
+just the routes I re-swept while making it.
+
+| | before (cycle start) | after |
+| --- | --- | --- |
+| cells | 282 | **276** (6 retired — the chat route's redundant `ok` variants, correct) |
+| pass | 201 | **256** |
+| **fail** | **81** | **20** |
+| depth-verified | 0 | **6** |
+
+The 20 survivors are all accounted for: **11** `error-affordance` (F85 / #40), **9**
+`layout-stability` (O98 — note it moved 11 → 9 between runs, which independently corroborates the
+"straddles the threshold" call), and one three-probe cell that is **F91**. No probe was silently
+weakened: `console-clean`, `http-ok` and `content-rendered` all still fire, and they are what caught
+F91.
+
+**Cells advanced:** 6 → `verified`, 1 → `interacted`.
+**Sweep failures triaged:** 60 calibrated as probe bugs (verified by re-sweep), 21 real.
+**Findings:** F85 (#40) · F86 (#41, promoted from O86) · F87 (GHSA-2r57, low→medium) · F88
+(GHSA-9m6m, low→medium) · F89 (GHSA-mvr4, runtime-confirmed) · F90 (#42) · F91 (#43, flaky) ·
+O98, O99, O100.
+**Fixed:** sweep calibration only — every product finding this cycle was either structural or needed
+a design decision, so all were filed under the runbook's fix-discipline rule.
+**Blocked-on-job:** none.
+
+**Honest gaps in this cycle:**
+- 270 of 276 cells are still at `swept` — breadth is proven, depth barely started. At 6 cells/cycle
+  the queue does not empty; the next cycles should batch related cells per browser session rather
+  than driving them one at a time.
+- The 8 remaining F85 sites share the shape but were not individually oracle-checked.
+- O98 still needs a **production-build** measurement; dev-mode CLS is not trustworthy evidence.
+- Test data left behind that the API cannot remove (O100): 2 probe assessments, extra GRADED
+  attempts on `QA Written Quiz!` and on the probes, all for `teststudent1` — whose Elo-KT mastery is
+  therefore contaminated **by this run, not by the product**. 23 inactive probe student rows.
+
+**Next up:** (1) batch-verify the remaining F85 sites; (2) O98 against a production build;
+(3) GAME **live control** (schedule → go-live → end-live with a concurrent learner) and **messaging**
+IDOR — both untouched and both multi-actor, which is where this cycle's real bugs came from;
+(4) admin impersonation (token single-use / expiry / tamper), never depth-verified.
