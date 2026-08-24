@@ -9,3 +9,6 @@ qa-sweep-verdicts.json
 qa-sweep-verdicts.filtered.json
 .qa-coverage-state.lock
 *.tmp
+
+# Per-run black-box recorder — machine state, not source.
+.qa-run-manifest.json
