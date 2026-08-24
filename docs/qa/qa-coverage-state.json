@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T00:20:00.000Z",
+  "updatedAt": "2026-08-25T00:45:00.000Z",
   "runs": [
     {
       "runId": "2026-08-24T19-18-10-074Z",
@@ -4216,7 +4216,12 @@
       "tour_last": "FedEx (follow one student end-to-end)",
       "persona_last": "Nodira (tutor)",
       "criterion": "security/tenant-isolation",
-      "notes": "Depth 3: opened -> clicked Faolsizlantirish on @teststudent1 -> PATCH /tenant/students/:id {active:false} -> row FAOLSIZ survived a real location.reload(). Reactivated; state restored. Surfaced F86 (#41)."
+      "notes": "Depth 3: opened -> clicked Faolsizlantirish on @teststudent1 -> PATCH /tenant/students/:id {active:false} -> row FAOLSIZ survived a real location.reload(). Reactivated; state restored. Surfaced F86 (#41). Seat-limit invariant also driven here (create + import + join-code paths, boundary and concurrent): sequential enforcement correct, concurrent enforcement violated -> F87, security-shaped, details in the advisory only. State restored (seatLimit -> null, probe accounts purged, over-purged fixture qa-joincode reactivated).",
+      "findings": [
+        "F86",
+        "F87"
+      ],
+      "advisory": "GHSA-2r57-gmq8-w83r"
     },
     "web:locale.tenant.students.id/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.students.id/TENANT_OWNER/uz-light-1440",

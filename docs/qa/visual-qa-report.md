@@ -2113,3 +2113,35 @@ share the shape but were not oracle-checked individually; (2) O98 against a **pr
 (3) `admin:dashboard/ADMIN/light-1440` error-affordance, the one non-web cell in the class (#38);
 (4) depth on the 277 cells still at `swept`, starting with GAME live control and the seat-limit
 invariant, neither of which has ever been depth-verified.
+
+### Addendum — the seat-limit invariant (same cycle)
+
+`web:locale.tenant.students/TENANT_OWNER` was already verified above, so the remaining §A.2 invariant
+attached to it was driven too: **"seat limit is never exceeded (create + import + join paths)"**.
+
+**Sequential enforcement is correct.** Pinned to zero free seats via the admin override, all three
+seat-consuming paths refuse properly — single create and join-code register both `402
+QUOTA_EXCEEDED`, CSV import reports `{created:0, seatLimited:1}` (correct partial-import semantics).
+The active count did not move.
+
+**Concurrent enforcement is not.** → **F87**, security-shaped, so the reproduction, the affected
+paths and the overshoot figures are in the draft advisory **only** — this repo is public. An
+advisory already existed for this from a static-analysis pass on 2026-08-24 and explicitly asked for
+a runtime demonstration; that demonstration is now attached, it covers more paths than the original
+described, and the measured magnitude was enough to raise it from **low** to **medium**
+([GHSA-2r57-gmq8-w83r](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-2r57-gmq8-w83r)).
+
+**A false start worth recording.** The first attempt looked like a much bigger finding — all four
+seat-consuming calls succeeded and `GET /tenant` reported `seatLimit: null` while the tutor UI showed
+"25 TADAN 5 TA JOY BAND". That reads like "the displayed limit is fiction". It is not: reading
+`subscription/tenant.ts:101` shows the limit resolves as `tenant.seatLimit ?? limits.maxStudents`, so
+a null override correctly falls through to the plan's 25 — and 5 active against 25 was simply nowhere
+near the boundary. The test was invalid, not the product. Filing that would have been a false S1;
+the real bug only appeared once the boundary was actually reached.
+
+**Housekeeping.** Probe accounts purged, `seatLimit` restored to `null`. One cleanup slip: the junk
+filter `/QA Join/i` also matched the pre-existing fixture **"QA JoinCode Student"** and deactivated
+it. Caught by comparing the active count against the pre-test roster (4 vs 5) rather than trusting
+the cleanup; reactivated. Final state matches the original exactly — 5 active, same five names.
+23 inactive probe rows remain in the roster (student delete is a soft delete that frees the seat,
+which is by design for the reactivation path).
