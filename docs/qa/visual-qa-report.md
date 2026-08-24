@@ -2486,7 +2486,8 @@ Probe soft-deleted; 5 active students and 5/25 seats before and after.
 
 Cycle 2 closed with a four-item "next up" list. Three of those four are now depth-verified and the
 fourth (O98 against a production build) is still the one thing a dev-server cycle cannot settle.
-Four cells advanced, four findings, two of them fixed and verified here.
+Five cells driven to depth 3 — two of them newly verified, three re-attacked from a new lens — plus
+four findings, two of which are fixed and verified here.
 
 ### Triage — 12 sweep failures, 11 already filed, 1 worth real work
 
@@ -2599,7 +2600,13 @@ design call.
 
 ### Cycle close — R2026-08-25c
 
-**Cells advanced:** 4 newly `verified` (11 → 15). **Sweep failures triaged:** 12 — 11 already filed
+**Cells advanced:** 5 driven to depth 3 — but only **2 newly `verified`** (flashcards INDIVIDUAL,
+tenant assign), taking the total **11 → 13**. The other three (`tenant/students`,
+`tenant/assessments`, `learner/dashboard`) were *already* verified in earlier cycles and were
+re-attacked from a different persona × tour, which advances confidence but not the count. Counted
+this way on purpose: a first draft of this line said "4 newly verified (11 → 15)" from memory
+instead of from the file, and an inflated coverage number is the one failure this whole system
+exists to prevent. **Sweep failures triaged:** 12 — 11 already filed
 and left alone, 1 (F91) taken as far as a QA cycle can and then instrumented so the next sighting
 attributes itself. **Findings:** F96 · F97 · F98 · F99 · O102 · O103. **Fixed and verified:** F96,
 F99, plus the sweep's 5xx forensics. **Issues filed:** #47, #48; comment on #43; evidence appended
