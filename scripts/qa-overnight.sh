@@ -35,6 +35,9 @@
 #   QA_REPORT_ONLY=1     find + report only, never edit code
 #   QA_SKIP_SWEEP=1      skip the deterministic tier (agent only)
 #   QA_SWEEP_ONLY=1      run the deterministic tier and stop (no LLM spend)
+#   QA_RECYCLE_CYCLES=3  restart the web dev server every N cycles (it leaks under
+#                        sustained sweeping; 0 disables)
+#   QA_SWEEP_RETRIES=2   attempts per cycle before giving up, each after a web recycle
 #   QA_OPEN_PR=0         don't push the branch / open a PR
 #   QA_FOCUS=...         bias the agent toward areas/US-ids
 #   QA_TOUR= QA_PERSONA= QA_SOAP=1     pin a lens / persona / soap-opera-only
@@ -176,6 +179,31 @@ Bash(git add *),Bash(git commit *),Bash(git status*),Bash(git diff*),Bash(git lo
 Bash(git branch*),Bash(git rev-parse*),Bash(git stash*),Bash(git worktree*),\
 Bash(git checkout claude/*),Bash(git checkout -b claude/*)"
 
+# Kill the web dev server, drop its build cache, bring it back, and refuse to continue
+# until it is BOTH healthy and actually ours. Only :3000 is recycled: api holds the Bull
+# queues and admin is comparatively idle, so neither has shown this growth, and
+# restarting the api mid-run would orphan in-flight jobs.
+recycle_web(){
+  local rss
+  rss="$(ps -A -o rss=,command= 2>/dev/null | grep -i 'next-server' | grep -v grep | sort -rn | head -1 | awk '{printf "%.1f", $1/1048576}')"
+  say "recycling @talim/web (was ${rss:-?}GB RSS)"
+  lsof -ti tcp:3000 -sTCP:LISTEN 2>/dev/null | xargs kill -TERM 2>/dev/null || true
+  sleep 3
+  lsof -ti tcp:3000 -sTCP:LISTEN 2>/dev/null | xargs kill -KILL 2>/dev/null || true
+  # The stale .next cache is half the memory story and rebuilds in under a minute.
+  rm -rf "$(pwd)/apps/web/.next" 2>/dev/null || true
+  nohup $CAFFEINATE doppler run -- pnpm --filter @talim/web dev >>"$DEV_LOG" 2>&1 &
+  for _ in $(seq 1 100); do
+    if curl -s -L -m 8 http://localhost:3000/uz 2>/dev/null | grep -q '<title>Talim AI</title>'; then
+      say "web back and identified ✓"
+      return 0
+    fi
+    sleep 3
+  done
+  say "web did not return within ~5min (see $DEV_LOG)"
+  return 1
+}
+
 run_agent(){
   local prompt="$1"
   # --model opus is NOT optional. The global default model is Fable, and this session
@@ -230,21 +258,45 @@ while [ "$PASSES" = "0" ] || [ "$PASS" -lt "$PASSES" ]; do
     CYCLE=$((CYCLE + 1))
     phase "pass${PASS}-cycle${CYCLE}-sweep"
 
+    # The Next dev server leaks across sustained sweeping — ~3000 page loads over 11
+    # cycles took it to 8.2GB RSS, the machine into swap, and every cell to a goto
+    # timeout. The tell is wall-clock: 517s → 888s → 1306s → 2703s across four cycles
+    # while cells that ran in 1.3s crept to 29s. Recycle on a schedule rather than
+    # waiting for the collapse.
+    if [ "${QA_RECYCLE_CYCLES:-3}" -gt 0 ] 2>/dev/null && [ "$((CYCLE % ${QA_RECYCLE_CYCLES:-3}))" = 0 ]; then
+      say "scheduled web recycle (every ${QA_RECYCLE_CYCLES:-3} cycles)"
+      recycle_web || { say "❌ web did not come back after a scheduled recycle."; exit 1; }
+    fi
+
     if [ "${QA_SKIP_SWEEP:-0}" != "1" ]; then
-      # Hard wall-clock cap. The sweep checkpoints its verdicts every 25 cells, and that
-      # mitigation only means anything if something can actually stop a hung run — an
-      # unattended loop with no timeout waits forever on a wedged browser.
-      $CAFFEINATE ${SWEEP_TIMEOUT_BIN} node scripts/qa-sweep.mjs 2>&1 | tee -a "$LOG"
-      SWEEP_RC="${PIPESTATUS[0]}"
-      if [ "$SWEEP_RC" = 124 ]; then
-        say "❌ sweep exceeded ${QA_SWEEP_TIMEOUT:-90m} — treating as a broken environment."
-        exit 1
-      elif [ "$SWEEP_RC" -ne 0 ]; then
-        # Exit 1 = identity/integrity gate or unreachable stack; exit 2 = bad invocation.
-        # Either way the sweep's verdict file cannot be trusted, so do not spend the agent.
-        say "❌ sweep could not run (exit $SWEEP_RC) — aborting (never drive QA against a broken sweep)."
-        exit 1
-      fi
+      SWEEP_TRY=0
+      while :; do
+        SWEEP_TRY=$((SWEEP_TRY + 1))
+        # Hard wall-clock cap. The sweep checkpoints its verdicts every 25 cells, and that
+        # mitigation only means anything if something can actually stop a hung run — an
+        # unattended loop with no timeout waits forever on a wedged browser.
+        $CAFFEINATE ${SWEEP_TIMEOUT_BIN} node scripts/qa-sweep.mjs 2>&1 | tee -a "$LOG"
+        SWEEP_RC="${PIPESTATUS[0]}"
+        [ "$SWEEP_RC" = 0 ] && break
+
+        # Exit 2 is a bad invocation — a bug in the caller, not the environment. Never
+        # retry it; it will fail identically forever.
+        if [ "$SWEEP_RC" = 2 ]; then
+          say "❌ sweep rejected its own invocation (exit 2) — fix the command, not the stack."
+          exit 2
+        fi
+
+        # Everything else (integrity gate, identity gate, timeout) means the environment
+        # is degraded. For a run that is supposed to continue until the queue is empty,
+        # dying here is the wrong answer — recycle the web server and try again. Only
+        # give up when a fresh server cannot produce a clean sweep either.
+        if [ "$SWEEP_TRY" -ge "${QA_SWEEP_RETRIES:-2}" ]; then
+          say "❌ sweep still failing (exit $SWEEP_RC) after $SWEEP_TRY attempts with a recycled web server — stopping."
+          exit 1
+        fi
+        say "⚠ sweep failed (exit $SWEEP_RC) — recycling the web server and retrying (attempt $((SWEEP_TRY + 1))/${QA_SWEEP_RETRIES:-2})"
+        recycle_web || { say "❌ web did not come back after recycle."; exit 1; }
+      done
     fi
     say "coverage: $(pending_summary)"
 
