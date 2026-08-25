@@ -233,6 +233,14 @@ const CELL_BUDGET = {
   // returns while the loading shell is still on screen. Rather than lengthen `settle` for
   // every cell, a cell that looks blank is given ONE bounded second look — see renderRetry().
   renderRetry: budget(0.1, 4000),
+  // A guard cell's bounce is only as fast as the route it is bouncing OUT of. `/content/[id]`
+  // is the heaviest route in the app (PDF.js + katex + mermaid), and under `next dev` its first
+  // compile runs past the old fixed 5s cap — so `expected-outcome` reported "expected /login,
+  // landed on /uz/content/…" for a page whose AuthGuard (auth-guard.tsx:18-23) redirects
+  // synchronously the moment it mounts with no token. Verified by hand: it does reach /uz/login,
+  // just after the cap. Only cells that fail to redirect ever spend this budget, so a longer
+  // cap costs nothing on a healthy sweep and stops the slowest guard route flapping RED.
+  redirect: budget(0.28, 10_000),
 };
 // The error pass additionally sits through a retry/backoff window before it judges a spinner.
 const ERROR_PASS_BUDGET = {
@@ -1000,13 +1008,15 @@ async function gotoAndSettle(page, url, net, { quietMs = 700, capMs, gotoMs } = 
   return response;
 }
 
-async function waitForRedirect(page, fromUrl, capMs = 5000) {
-  const deadline = Date.now() + capMs;
+/** Resolves to the ms waited once the URL moves, or `null` if it never did. */
+async function waitForRedirect(page, fromUrl, capMs = CELL_BUDGET.redirect) {
+  const started = Date.now();
+  const deadline = started + capMs;
   while (Date.now() < deadline) {
-    if (page.url() !== fromUrl) return true;
+    if (page.url() !== fromUrl) return Date.now() - started;
     await sleep(150);
   }
-  return false;
+  return null;
 }
 
 /**
@@ -1415,7 +1425,8 @@ async function sweepCell(context, cell, baseline, namespaces) {
 
   try {
     await gotoAndSettle(page, cell.url, rec);
-    if (cell.expectation !== 'ok') await waitForRedirect(page, cell.url);
+    const redirectWaitMs =
+      cell.expectation === 'ok' ? null : await waitForRedirect(page, cell.url);
 
     const evalCfg = {
       locale: cell.variantSpec.locale,
@@ -1456,6 +1467,10 @@ async function sweepCell(context, cell, baseline, namespaces) {
       // the verdict on purpose: a cell that passes only after 3.5s of extra waiting is a real
       // signal, and hiding it would turn the calibration into a way of not seeing slow pages.
       ...(renderWaitMs === null ? {} : { renderWaitMs }),
+      // How long the guard cell took to bounce. Kept for the same reason as renderWaitMs: a
+      // cell that only redirects after 8s is passing on a technicality, and the number is the
+      // only way to notice that before it becomes a user-visible stall.
+      ...(redirectWaitMs === null ? {} : { redirectWaitMs }),
       probes,
       failedProbes: failed.map((p) => p.id),
       screenshot,
