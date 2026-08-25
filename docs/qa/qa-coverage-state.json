@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T03:10:35.995Z",
+  "updatedAt": "2026-08-25T03:30:00.000Z",
   "runs": [
     {
       "runId": "2026-08-24T20-51-45-693Z",
@@ -122,6 +122,13 @@
       "at": "2026-08-25T03:10:35.995Z",
       "cells": 38,
       "failures": 0
+    },
+    {
+      "runId": "R2026-08-25i",
+      "at": "2026-08-25T03:30:00.000Z",
+      "cells": 0,
+      "failures": 0,
+      "note": "agent depth cycle (no full sweep)"
     }
   ],
   "cells": {
@@ -3266,8 +3273,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.learner.progress/TENANT_LEARNER/ru-light-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/ru-light-1440",
@@ -3436,8 +3453,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-dark-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-dark-1440",
@@ -3675,18 +3702,20 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 15,
-      "depthVerifiedAt": "2026-08-25T02:45:00.000Z",
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25c",
-      "tour_last": "Multi-actor soap opera (receive, read, reply) — the other half of the tutor thread",
-      "persona_last": "Test Student One (student)",
-      "criterion": "security/xss-escaping",
+      "lastDepthRun": "R2026-08-25i",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "criterion": "security/tenant-isolation",
       "findings": [
-        "F97"
+        "F97",
+        "F117",
+        "F118"
       ],
       "issue": 47,
-      "notes": "R2026-08-25c: re-attacked from the live-game angle as the receiving end of US-OWNER-21. The live join banner + ?play deep-link render correctly here once loaded, but do not appear on an already-open page (F97/#47). Still carries the O98 layout-stability family from earlier cycles."
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-light-1440",
@@ -4054,8 +4083,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.learner.progress/TENANT_LEARNER/uz-light-390": {
       "cellId": "web:locale.learner.progress/TENANT_LEARNER/uz-light-390",
@@ -4151,8 +4190,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.tenant.materials/TENANT_OWNER/ru-light-1440": {
       "cellId": "web:locale.tenant.materials/TENANT_OWNER/ru-light-1440",
@@ -4315,8 +4364,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.tenant.materials/TENANT_OWNER/uz-dark-1440": {
       "cellId": "web:locale.tenant.materials/TENANT_OWNER/uz-dark-1440",
@@ -4618,8 +4677,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 15,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.tenant.materials/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.materials/TENANT_OWNER/uz-light-1440",
@@ -4730,18 +4799,20 @@
         "errorPass:error-affordance"
       ],
       "sweepCount": 15,
-      "depthVerifiedAt": "2026-08-25T06:20:00.000Z",
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25c",
-      "tour_last": "Input-attack matrix on the CSV import format + concurrent-import seat race",
-      "persona_last": "Tutor importing a class roster out of Excel",
-      "criterion": "reliability/data-integrity",
-      "notes": "R2026-08-25c depth 3 (US-OWNER-23, the last untouched reach-list item): drove POST /tenant/students/import across 10 file shapes. F98/#48 -- a semicolon-delimited file (Excel's default in ru/uz Windows locales) imports its own header row as a student named 'name;email' and every data row as one whole-line name, HTTP 200, every row 'created', no warning field; same for comma files with non-English headers ('Ism' becomes a student). Reproduced twice, second time from restored state, with a headerless-positional control proving the behaviour is a deliberate feature the parser cannot distinguish from an unrecognised header. WORKING, do not re-test: leading UTF-8 BOM (String.trim() strips U+FEFF, so my 'BOM breaks the header' hypothesis was WRONG -- tested, refuted), CRLF, Cyrillic names, duplicate-in-one-file -> skipped_duplicate, formula-injection name stored raw on import (correct; escaping belongs on export and is already right). Seat race re-confirmed F87 (advisory GHSA-2r57-gmq8-w83r, NOT a new finding): 2 concurrent 13-row imports into 13 free seats -> 14 created, 26 active vs limit 25; each import refused 6 rows, so the per-row assert does fire and the overshoot here is +1, not unbounded -- appended to the advisory. Note the effective seat cap is subscription.limits.maxStudents (25), NOT Tenant.seatLimit (null). Test data: 27 probe students created across the cell, all deactivated; org restored to its original 5 active / 5 of 25 seats. Cell still carries F92/#44 (CLS 0.289) from the sweep.",
+      "lastDepthRun": "R2026-08-25i",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "criterion": "security/tenant-isolation",
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed).",
       "findings": [
         "F98",
         "F87",
-        "F92"
+        "F92",
+        "F117",
+        "F118"
       ],
       "advisory": "GHSA-2r57-gmq8-w83r",
       "issue": 48
@@ -4815,8 +4886,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T03:30:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25i",
+      "criterion": "security/tenant-isolation",
+      "persona_last": "Tutor + student (two actors, one thread)",
+      "tour_last": "Soap-opera tour — a broadcast, a reply, a response, then every way to reach someone else’s thread",
+      "findings": [
+        "F117",
+        "F118"
+      ],
+      "notes": "Messaging driven to depth 3 (owner -> learner -> reply -> respond) through the real UI in both bells plus the /tenant/students compose dialog, verified after a real location.reload() on both sides. XSS charter HOLDS: <img src=x onerror=...> and <script> in a message body render as literal text in the learner bell, the tutor thread and the dashboard preview -- 0 injected nodes anywhere. Unread bookkeeping is correct: the learner badge read 6 against 5 root threads, which looked like a defect and is not -- the 6th is an unread in-thread tutor response, counted by getLearnerUnreadCount and cleared by the same markRecipientRead(threadId) sweep; expanding all 5 threads drove the badge to 0 and it stayed 0 through a reload. Cross-tenant isolation matrix run against the second org (img-src-x-onerror-alert-1) and CLEAN: owner B marking or responding to tenant A's reply -> 404; owner B sending to tenant A's learner -> 400 'No valid active students selected'; learner A marking/replying to tenant B's message -> 404; learner A calling the owner send/list endpoints -> 403; B's own /tenant/messages response contains no tenant A thread, learner or owner id. Same-tenant IDOR also blocked: a thread addressed only to QA Joiner Six is invisible to learner A and both /read and /reply on it return 404. Input attacks (12 on send, 5 on reply): empty/null/numeric/array/missing/100k-char/empty-or-scalar studentIds/unknown studentId all 400 correctly. Two real defects found -- whitespace-only body returned 201 and delivered a blank card with an unread badge (this is #45's cause; FIXED 3968322e by z.string().trim().min(1)), and a NUL byte in any text field returns 500 instead of a validation error, on register/students/messages alike (filed #64, structural so not fixed)."
     },
     "web:locale.tenant.materials/TENANT_OWNER/uz-light-390": {
       "cellId": "web:locale.tenant.materials/TENANT_OWNER/uz-light-390",
