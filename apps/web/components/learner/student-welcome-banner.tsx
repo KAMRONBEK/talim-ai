@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
@@ -10,21 +10,23 @@ import { dismissOnboarding, isOnboardingPending } from '@/lib/onboarding';
 export function StudentWelcomeBanner() {
   const t = useTranslations('learner.onboarding');
   const user = useAuthStore((s) => s.user);
-  const [visible, setVisible] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    if (user?.id) {
-      // Prefer the server-driven flag (works across devices); fall back to the
-      // legacy per-device localStorage flag.
-      setVisible(Boolean(user.mustChangePassword) || isOnboardingPending(user.id));
-    }
-  }, [user?.id, user?.mustChangePassword]);
+  // Derived during render, not in an effect. Initialising to false and flipping it on
+  // mount meant this banner was absent from the first paint and then appeared — pushing
+  // the entire dashboard down every single time it was due, which is most of #67's
+  // 517px. LearnerShell renders inside RoleGuard/AuthGuard, both of which already wait
+  // for the auth store to hydrate, so `user` is populated on the first render that
+  // reaches here and localStorage is safe to read.
+  // Prefer the server-driven flag (works across devices); fall back to the legacy
+  // per-device localStorage flag.
+  const due = Boolean(user?.id) && (Boolean(user?.mustChangePassword) || isOnboardingPending(user!.id));
 
-  if (!visible || !user) return null;
+  if (!due || dismissed || !user) return null;
 
   const handleDismiss = () => {
     dismissOnboarding(user.id);
-    setVisible(false);
+    setDismissed(true);
   };
 
   return (

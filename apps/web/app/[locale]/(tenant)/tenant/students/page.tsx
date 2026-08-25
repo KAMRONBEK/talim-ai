@@ -304,11 +304,18 @@ export default function TenantStudentsPage() {
           <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-primary">{t('nav.students')}</p>
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight">{t('students.title')}</h1>
           <p className="mt-1 text-muted-foreground">{t('students.desc')}</p>
-          {seats && (
-            <p className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-secondary px-3 py-1 font-label text-xs font-semibold uppercase tracking-wide tabular-nums text-primary">
-              {t('students.seatUsage', { used: seats.used, limit: seats.limit ?? '∞' })}
-            </p>
-          )}
+          {/* The pill arrives with the billing query, ~0.4s after first paint, and used to
+              push the join-code card, the action buttons and the whole roster down 38px in
+              one lurch — a tutor reaching for "copy code" or a student's "reset" hits
+              whatever slid into that spot. Reserve its line from the start so its arrival
+              changes text, not layout. */}
+          <p
+            className="mt-3 inline-flex items-center rounded-full border border-primary/20 bg-secondary px-3 py-1 font-label text-xs font-semibold uppercase tracking-wide tabular-nums text-primary"
+            aria-hidden={!seats}
+            style={seats ? undefined : { visibility: 'hidden' }}
+          >
+            {seats ? t('students.seatUsage', { used: seats.used, limit: seats.limit ?? '∞' }) : '\u00a0'}
+          </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Button
