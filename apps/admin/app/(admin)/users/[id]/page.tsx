@@ -605,7 +605,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
       <Card>
         <CardHeader>
-          <h2 className="font-display text-lg font-semibold">Usage vs limits (this month)</h2>
+          <h2 className="font-display text-lg font-semibold">Usage vs limits (today)</h2>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 text-sm">
@@ -644,7 +644,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               </p>
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">API cost (MTD)</p>
+              <p className="text-xs text-muted-foreground">API cost (today)</p>
               <p className="font-medium">${usageVsLimits.apiCostUsd.toFixed(4)}</p>
             </div>
           </div>

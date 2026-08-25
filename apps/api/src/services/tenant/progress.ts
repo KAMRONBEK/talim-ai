@@ -17,12 +17,23 @@ export async function getTenantProgress(tenantId: string, locale: AppLocale = DE
   const [students, materials, progressRows, quizAttempts, classMastery] = await Promise.all([
     listStudents(tenantId),
     prisma.content.count({ where: { tenantId } }),
+    // Both class figures must be computed over the CLASS — active learners — not over
+    // "anyone who touched tenant content". Without the membership filter the tutor's own
+    // attempts counted toward the class average, which is how the scorecard reported
+    // "Average quiz 65%" above a table where all 71 students showed a dash: not one
+    // member of the class had taken a quiz, and the 65% was the tutor's own.
     prisma.contentProgress.findMany({
-      where: { content: { tenantId } },
+      where: {
+        content: { tenantId },
+        user: { tenantMemberships: { some: { tenantId, role: 'LEARNER', active: true } } },
+      },
       select: { overallCoverage: true },
     }),
     prisma.quizAttempt.findMany({
-      where: { quiz: { content: { tenantId } } },
+      where: {
+        quiz: { content: { tenantId } },
+        user: { tenantMemberships: { some: { tenantId, role: 'LEARNER', active: true } } },
+      },
       select: { score: true },
     }),
     getClassMastery(tenantId, { locale }),

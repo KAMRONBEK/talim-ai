@@ -629,7 +629,7 @@
       "adminHint": "Ask your platform admin to assign a tenant subscription.",
       "students": "Students",
       "materials": "Materials",
-      "generations": "Generations this month",
+      "generations": "Generations today",
       "seatsUsed": "Seats used",
       "manualNote": "Payment is handled personally — reach out to your admin to adjust your seat limit."
     },
@@ -1190,7 +1190,7 @@
     "emptyBody": "Generate a clean, visual slide deck from this content — perfect for studying or teaching.",
     "notAvailableLearner": "Your tutor hasn't created slides for this material yet.",
     "error": "Couldn't generate slides. Please try again.",
-    "limitReached": "You've reached your AI generation limit ({used}/{limit} this month). Contact your admin to raise it.",
+    "limitReached": "You've reached your AI generation limit ({used}/{limit} today). Contact your admin to raise it.",
     "limitReachedGeneric": "AI generation isn't available on your current plan. Please contact your admin."
   },
   "video": {
