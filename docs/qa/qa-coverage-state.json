@@ -3418,8 +3418,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 10,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:45:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25e",
+      "tour_last": "Forced-password-change gate + deep-link bypass attempt, on a throwaway account",
+      "persona_last": "Email-less child logging in for the first time with a password read out loud",
+      "criterion": "security/session-handling",
+      "notes": "R2026-08-25e depth 3, driven on a NEW throwaway student (QA Kid Five / qakid5) so no shared credential was disturbed -- deactivated at the end, org back to 5 active. mustChangePassword is set by reset-password, and the gate is REAL, not advisory: login lands on /uz/learner/settings with 'O'qituvchingiz vaqtinchalik parol o'rnatdi', and deep-links to /uz/learner/assessments, /uz/learner/progress and /uz/content/[id] ALL redirect back to settings. No bypass -- the long-standing §G question is answered. Submitting the form with the correct current password shows 'Parol yangilandi.' and the gate lifts immediately (assessments reachable on the next navigation); submitting with a WRONG current password changes nothing and says nothing (0 [role=alert]/[role=status]/.text-destructive, no text) -- the F17/#17 silent-failure shape on a third surface, commented there. Dissolved before filing: mustChangePassword is false for a tutor-SUPPLIED password (students.ts:128,158 set it to !params.password), which contradicts CLAUDE.md's summary but is deliberate -- the nudge is for system-generated temp passwords only. Surfaced O108 (mutation responses return the raw row, so the post-reset credentials dialog should show no username for an email-less kid -- API side verified 3x, dialog not captured).",
+      "findings": [
+        "O108"
+      ]
     },
     "web:locale.login/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.login/TENANT_LEARNER/uz-light-1440",
