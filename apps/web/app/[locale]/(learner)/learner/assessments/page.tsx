@@ -862,7 +862,8 @@ function AssessmentCard({
 
 export default function LearnerAssessmentsPage() {
   const t = useTranslations('learner.assessments');
-  const { data: assessments = [], isLoading } = useLearnerAssessments();
+  const tc = useTranslations('common');
+  const { data: assessments = [], isLoading, isError } = useLearnerAssessments();
   // Read a `?play=<assessmentId>` deep-link (set by the dashboard live-game banner)
   // client-side to avoid a useSearchParams Suspense boundary on this client page.
   const [autoPlayId, setAutoPlayId] = useState<string | null>(null);
@@ -871,6 +872,10 @@ export default function LearnerAssessmentsPage() {
   }, []);
 
   if (isLoading) return <p className="text-muted-foreground">{t('loading')}</p>;
+  // `data: assessments = []` defaults an errored fetch to an empty list, which renders
+  // "nothing has been assigned yet" — a student is told they have no homework and skips
+  // it. The leaderboard panel in this same file already guards this way (line 30).
+  if (isError) return <p className="text-sm text-destructive">{tc('loadError')}</p>;
 
   return (
     <div className="mx-auto max-w-4xl space-y-6">

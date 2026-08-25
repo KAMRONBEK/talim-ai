@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const user = useAuthStore((s) => s.user);
-  const { data: contents, isLoading } = useContents();
+  const { data: contents, isLoading, isError } = useContents();
   const { search } = useDashboardSearch();
 
   const filtered = useMemo(() => {
@@ -65,6 +65,11 @@ export default function DashboardPage() {
         </div>
         {isLoading ? (
           <p className="text-center text-muted-foreground">{tCommon('loading')}</p>
+        ) : isError ? (
+          // Without this the failed request falls through to the grid, which reads an
+          // empty array as "you have no materials" and tells the user their uploads are
+          // gone. Telling someone their data does not exist is worse than saying nothing.
+          <p className="text-center text-sm text-destructive">{tCommon('loadError')}</p>
         ) : (
           <RecentContentGrid contents={filtered} />
         )}

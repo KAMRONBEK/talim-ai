@@ -8,7 +8,8 @@ import { useRegenerateJoinCode, useTenant } from '@/hooks/useTenant';
 
 export function JoinCodeCard() {
   const t = useTranslations('tenant');
-  const { data: tenant } = useTenant();
+  const tc = useTranslations('common');
+  const { data: tenant, isError } = useTenant();
   const regenerate = useRegenerateJoinCode();
   const [copied, setCopied] = useState(false);
   const code = tenant?.joinCode ?? null;
@@ -22,9 +23,17 @@ export function JoinCodeCard() {
         <p className="text-sm text-secondary-foreground/80">{t('joinCode.desc')}</p>
       </CardHeader>
       <CardContent className="flex flex-wrap items-center gap-3">
-        <span className="font-label text-3xl font-bold tracking-[0.14em] text-primary">
-          {code ?? t('joinCode.none')}
-        </span>
+        {/* A failed GET /tenant left `tenant` undefined, so the card affirmatively stated
+            the class had no code — and still offered Regenerate. A tutor acting on that
+            would invalidate the code already handed out to their class. Say the load
+            failed, and take the destructive control away until we know the truth. */}
+        {isError ? (
+          <span className="text-sm text-destructive">{tc('loadError')}</span>
+        ) : (
+          <span className="font-label text-3xl font-bold tracking-[0.14em] text-primary">
+            {code ?? t('joinCode.none')}
+          </span>
+        )}
         {code && (
           <Button
             variant="outline"
@@ -44,7 +53,7 @@ export function JoinCodeCard() {
           variant="ghost"
           size="sm"
           className="text-secondary-foreground hover:bg-primary/10 hover:text-primary"
-          disabled={regenerate.isPending}
+          disabled={regenerate.isPending || isError}
           onClick={() => {
             if (confirm(t('joinCode.regenerateConfirm'))) regenerate.mutate();
           }}
