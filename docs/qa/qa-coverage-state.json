@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:18:26.963Z",
+  "updatedAt": "2026-08-25T04:29:07.693Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -426,16 +426,19 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 17,
-      "depthVerifiedAt": null,
+      "depthVerifiedAt": "2026-08-25T04:29:07.693Z",
       "status": "active",
       "findings": [
-        "F112"
+        "F112",
+        "GHSA-v8gx-9qfw-92f4",
+        "O121"
       ],
-      "criterion": "usability/keyboard-a11y",
-      "persona_last": "Operator (platform admin)",
-      "tour_last": "Configuration tour — the same table at 1440 and at 390",
-      "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures.",
-      "lastDepthRun": "R2026-08-25h"
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) auditing their own morning",
+      "tour_last": "Landmark tour -- do the actions first, then go looking for them in the log",
+      "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures. | Depth 3 on the admin audit log. The section-G charter holds: the log shows the actions just performed -- all three IMPERSONATE mints from this cycle appear newest-first, attributed to qa-admin@talim.local, with targetRole and targetEmail in the metadata. It also shows the advisory gap in the operators own UI rather than only through the API: a real PATCH /tenant executed inside an impersonated session at ~04:16Z left no row at all, and the newest entry is still the 04:07:42Z mint. GHSA-v8gx-9qfw-92f4. Pagination driven to depth 3: 63 rows at pageSize 50, Next reaches page 2 with its 13 rows and correctly disables itself there, Previous correctly walks back and is correctly disabled on page 1. API fuzz clean -- page/pageSize honoured, and pageSize 0/-1/abc/100000 plus page -1/abc all rejected 400. After a real reload the operator is returned to page 1 because the position lives in useState and never reaches the URL: recorded as O121, an enhancement, not a finding. One candidate DIED IN SELF-VERIFICATION and is recorded so the next cycle does not re-chase it: Next was observed disabled on page 1, which given total 63 / pageSize 50 would have meant 13 audit rows unreachable. It does not reproduce -- Next is enabled on page 1, Previous disabled, and the source math (page * pageSize >= total) is demonstrably right. S3-shaped and non-reproducing, so under the flaky rule it is not an F. Most likely sampled during a refetch window against a smaller stale total.",
+      "lastDepthRun": "R2026-08-25j",
+      "depth": "verified"
     },
     "admin:content/ADMIN/light-1440": {
       "cellId": "admin:content/ADMIN/light-1440",
@@ -472,8 +475,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 19,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:29:07.693Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "reliability/data-integrity",
+      "persona_last": "Operator refreshing the dashboard to watch a number move",
+      "tour_last": "Variability tour -- fuzz the API, then trip the real rate limit and read what the page claims",
+      "findings": [
+        "F85"
+      ],
+      "notes": "Depth 3 on the admin analytics dashboard, driven with a REALISTIC failure trigger rather than a synthetic abort. API side first and it is CLEAN: 96 fuzz probes across all 8 analytics endpoints (days = empty, 30, 0, -1, 99999999, abc, 1.5, NaN, Infinity, array form, duplicated param, and a SQL-shaped value) returned 200 every time, with no non-finite number and no out-of-range percentage anywhere in any response body -- so the empty-DB divide-by-zero hypothesis is dead. The admin rate limit is precise too: 119 admin requests passed and the rest returned 429, matching the documented 120/60s per-user bucket in admin-rate-limit.middleware.ts. The UI is where it breaks. The dashboard fires 8 analytics requests per load, so an operator refreshing about 15 times in a minute trips that bucket. Healthy baseline captured on the same session moments before: all 8 cards render real data, zero No-data-yet, zero Couldnt-load, console 0 errors. Then 150 requests to /admin/analytics/summary (200 x 111, 429 x 39) and one reload: 4 cards say Couldnt load (summary, MRR, spend-by-model, top-orgs) and 4 say No data yet (user growth, users by role, activation funnel, content by type), console 0 -> 18 errors. The same failure, on the same page, in the same moment, reported two contradictory ways -- on a platform with 108 users, 6 orgs and 8 content items the page had just finished displaying. Cause is explicit rather than an oversight: dashboard/page.tsx:175, :210, :235 and :269 each pass X.isError INTO the empty prop, and ChartState at :112 renders empty as the positive claim No data yet. The four honest cards (:156, :306, :357, :399) branch on isError separately. ChartState has no third state, so those four also have no retry control -- and because the trigger is a rate limit, the operators instinct to refresh again is what keeps it tripped. This refines and partly corrects #38, whose title says there is no error state: there is one, on exactly half the cards. Evidence added to #38 rather than duplicated. Reproduced 2/2, the second time with the healthy baseline recorded immediately before."
     },
     "admin:generated/ADMIN/light-1440": {
       "cellId": "admin:generated/ADMIN/light-1440",
