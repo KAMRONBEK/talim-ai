@@ -128,7 +128,15 @@ jobs:
           # fast run reset the deep streak, and a deep-only provider outage would then
           # never be confirmed — a false green in the exact place this workflow exists.
           STATE=".health-state/$MODE"
-          state_get() { sed -n "s/^$1=//p" "$STATE" 2>/dev/null | tail -1; }
+          # Must succeed when the state file does not exist yet. GitHub runs this step as
+          # `bash -e`, the script adds `pipefail`, and on a cold cache `sed` fails on the
+          # missing file — which made the pipeline non-zero, made `BASELINE=$(state_get …)`
+          # non-zero, and killed the whole script before it executed a single check. The
+          # monitor could not survive its own first run: exit 2, no output, 17ms.
+          state_get() {
+            [ -f "$STATE" ] || return 0
+            sed -n "s/^$1=//p" "$STATE" 2>/dev/null | tail -1
+          }
           state_put() {
             printf 'baseline=%s\nanomaly=%s\nseen=%s\nalerted=%s\n' "$1" "$2" "$3" "$4" > "$STATE"
           }
