@@ -2234,8 +2234,19 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:20:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25e",
+      "tour_last": "Multi-turn conversation tour + input-attack catalog + reload-mid-flow side-quest",
+      "persona_last": "Uzbek 7th-grader revising for a maths test",
+      "criterion": "reliability/AI-output-quality + multi-turn state",
+      "notes": "R2026-08-25e depth 3: /content/[id]/chat redirects to ?panel=chat (expectation 'redirect' is correct). Held a real 4-turn conversation, each turn graded against fixtures/uz-math-facts.md before reading the next: (1) 'Pifagor teoremasi nima?' -> a^2+b^2=c^2 + the 3-4-5 example; (2) 'Katetlari 6 va 8 bo'lsa-chi?' -- no subject, no theorem named -- answered c=10 from history; (3) 'Shu sonni ikkiga bo'lsam?' -- pure anaphora on the PREVIOUS ANSWER -- 'Agar 10 sonini ikkiga bo'lsangiz, natija 5'; (4) the fixture's trap 'Pifagor birinchi bo'lib kashf etganmi?' -> correctly refused, citing Bobil/Hindiston. 4/4 correct, 0 traps, so F64 (tutor ignores history) does NOT reproduce. All 4 turns survived a real reload in order. KaTeX renders here -- same $...$ convention the deck fails to render (F104). Input attacks: empty submit rejected, whitespace-only rejected without clearing the composer, and an XSS + RTL-override + mixed-script + emoji payload stored and rendered as literal text (0 injected imgs, 0 script tags, 0 dialogs). Side-quest reload-mid-stream surfaced F106 (#54). Also F105 (#53).",
+      "findings": [
+        "F106",
+        "F105"
+      ],
+      "issue": 54
     },
     "web:locale.content.id.flashcards/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.flashcards/INDIVIDUAL/uz-light-1440",
