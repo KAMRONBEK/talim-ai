@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:38:56.143Z",
+  "updatedAt": "2026-08-25T04:43:34.959Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -4397,8 +4397,11 @@
       "criterion": "usability/keyboard-a11y",
       "persona_last": "Tutor on a phone",
       "tour_last": "Configuration tour — the tutor surface at 390",
-      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it.",
-      "lastDepthRun": "R2026-08-25h"
+      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it. | F122/#69 (class average computed over a different population than the table beneath it) is server-side and therefore locale- and viewport-independent. Numbers, keyboard sweep and depth-3 were driven on the uz-light-1440 cell; this variant was not itself driven.",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F122"
+      ]
     },
     "web:locale.tenant.settings/TENANT_OWNER/ru-light-1440": {
       "cellId": "web:locale.tenant.settings/TENANT_OWNER/ru-light-1440",
@@ -4583,8 +4586,11 @@
       "criterion": "usability/keyboard-a11y",
       "persona_last": "Tutor on a phone",
       "tour_last": "Configuration tour — the tutor surface at 390",
-      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it.",
-      "lastDepthRun": "R2026-08-25h"
+      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it. | F122/#69 (class average computed over a different population than the table beneath it) is server-side and therefore locale- and viewport-independent. Numbers, keyboard sweep and depth-3 were driven on the uz-light-1440 cell; this variant was not itself driven.",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F122"
+      ]
     },
     "web:locale.tenant.settings/TENANT_OWNER/uz-dark-1440": {
       "cellId": "web:locale.tenant.settings/TENANT_OWNER/uz-dark-1440",
@@ -4924,13 +4930,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 16,
-      "depthVerifiedAt": null,
+      "depthVerifiedAt": "2026-08-25T04:43:34.959Z",
       "status": "active",
       "criterion": "usability/keyboard-a11y",
-      "persona_last": "Tutor on a phone",
-      "tour_last": "Configuration tour — the tutor surface at 390",
-      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it.",
-      "lastDepthRun": "R2026-08-25h"
+      "persona_last": "Tutor checking how the class is doing before parents evening",
+      "tour_last": "Landmark tour by keyboard only -- Tab the whole page, then re-derive every tile from the API",
+      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it. | Depth 3 on tenant progress, previously untouched in all four variants. Two criteria this cycle owed were paid here: usability/keyboard-a11y and charisma/visual. F122/#69 found by re-deriving the scorecard instead of reading it: the page claims Ortacha test 65% directly above a table whose ORTACHA TEST column reads a dash for all 71 rows. The two numbers are computed over different populations -- the class figure at progress.ts:23-26 is prisma.quizAttempt.findMany({ where: { quiz: { content: { tenantId } } } }) with NO userId scope, so it counts the tutors own attempts on their own material and the attempts of anyone since removed from the org. avgCoverage on the same card (progress.ts:18-22) has the identical unscoped shape. The alternative hypothesis was checked and killed before filing: the per-student column is NOT the broken half. listStudents (students.ts:29-31) does a proper groupBy scoped to learnerIds, so all-null there correctly means no current member has ever taken a quiz on tenant material. That is what makes the class figure the wrong one rather than the table. Checked and HEALTHY on the same page, recorded so it is not re-tested: atRisk 6 is correct against its own definition (progress.ts:41-46, active students with mastery below threshold OR no recent activity -- all six qualify on both counts, so \"everyone is at risk\" is a fresh-class consequence, not a bug). Keyboard access is clean: 45 tab stops, all 45 distinct (no trap, no loop), 0 without a visible focus ring, 0 zero-size stops, 0 unlabelled inputs, 0 images missing alt, heading order H1 -> H2. No horizontal overflow. Two a11y gaps noted but deliberately NOT minted as new observations, because both are already recorded as classes elsewhere: the 6 table th cells carry no scope and there is no caption (AT infers column scope on a simple single-header table), and there are 0 live regions on a page whose stats load async -- the same shape as O102 and F90. The CSV defects from last cycle are visible here in production UI rather than in a test harness: a student row is literally named \"Valiev C9,qa.csvNl.C9@example.com\" -- F119/#66 rendering in the tutors own class list. Not re-filed.",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F122"
+      ],
+      "depth": "verified",
+      "issue": 69
     },
     "web:locale.tenant.settings/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.settings/TENANT_OWNER/uz-light-1440",
@@ -5136,8 +5147,11 @@
       "criterion": "usability/keyboard-a11y",
       "persona_last": "Tutor on a phone",
       "tour_last": "Configuration tour — the tutor surface at 390",
-      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it.",
-      "lastDepthRun": "R2026-08-25h"
+      "notes": "no-clipped-content triaged and FIXED (f9eae726). At 390 the class-progress table hid 751px of columns and the assessment-results table hid 112px, both inside overflow-hidden cards with no scrollbar. Both wrappers are now overflow-x-auto; verified at 390 as qa-owner (full scroll extent reached, no page-level horizontal overflow). The results table only renders once an assessment is selected, which is why the deterministic sweep had never seen it. | F122/#69 (class average computed over a different population than the table beneath it) is server-side and therefore locale- and viewport-independent. Numbers, keyboard sweep and depth-3 were driven on the uz-light-1440 cell; this variant was not itself driven.",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F122"
+      ]
     },
     "web:locale.tenant.settings/TENANT_OWNER/uz-light-390": {
       "cellId": "web:locale.tenant.settings/TENANT_OWNER/uz-light-390",
