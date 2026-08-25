@@ -101,6 +101,17 @@ export function errorMiddleware(
     return;
   }
 
+  // Prisma's "operation depends on a record that was not found" (P2025) is a 404, not a
+  // server fault: deleting an already-deleted item, or patching a row someone else
+  // removed, is the client asking about something that isn't there. Mapping it centrally
+  // fixes every bare delete/update at once — the alternative is an existence check in
+  // front of each one, which is what the codebase was already doing inconsistently
+  // (admin deleteGenerated checked for slideshow but not podcast/quiz/summary).
+  if ((err as { code?: string }).code === 'P2025') {
+    res.status(404).json({ message: 'Not found' });
+    return;
+  }
+
   // Multer rejects (oversized file, too many parts, unexpected field) arrive here
   // as a MulterError — map them to a clear 413/400 instead of a generic 500.
   if (err.name === 'MulterError') {

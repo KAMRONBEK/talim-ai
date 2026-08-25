@@ -14,7 +14,10 @@ export const createStudentSchema = z
       .max(40)
       .regex(/^[a-zA-Z0-9._-]+$/, 'Username may use letters, numbers, dot, underscore, hyphen')
       .optional(),
-    password: z.string().min(6).max(100).optional(),
+    // 8 to match register and self-service change (auth.controller.ts). The weakest
+    // password rule in the product should not be the one that applies to children's
+    // accounts created in bulk by a tutor.
+    password: z.string().min(8).max(100).optional(),
   })
   .refine((b) => Boolean(b.email || b.username), {
     message: 'Provide an email or a username for the student',

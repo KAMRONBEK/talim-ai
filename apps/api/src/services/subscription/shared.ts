@@ -19,6 +19,11 @@ export const GENERATION_FEATURES = [
   'SECTION_GEN',
   'SUMMARY_GEN',
   'SLIDESHOW_GEN',
+  // AI question-bank drafting is gated by enforceQuota('GENERATION') on the route but
+  // records itself as QUESTION_DRAFT, so leaving it out meant the pre-check passed
+  // forever and the usage never accrued — an uncapped AI spend per org behind a cap
+  // that looked enforced.
+  'QUESTION_DRAFT',
 ] as const;
 
 export interface PlanLimits {

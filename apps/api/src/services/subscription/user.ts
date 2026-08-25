@@ -50,7 +50,11 @@ export async function getSubscriptionForUser(userId: string): Promise<Subscripti
       });
   }
 
-  if (sub.status === 'CANCELED') {
+  // PAST_DUE is a lapsed-payment state, not an access-granting one — the tenant path
+  // already refuses it (requireActiveTenantSubscription accepts only ACTIVE/TRIALING).
+  // Downgrading only on CANCELED meant the same status blocked an organization while
+  // an individual kept their full paid allowances indefinitely.
+  if (sub.status === 'CANCELED' || sub.status === 'PAST_DUE') {
     const freePlan = await getFreePlan();
     return formatSubscription(sub, parseLimits(freePlan.limits));
   }
