@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:34:34.904Z",
+  "updatedAt": "2026-08-25T04:38:56.143Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -4302,7 +4302,12 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F121"
+      ],
+      "notes": "F121/#68 (the \"this month\" label on a daily quota) is locale- and viewport-independent: the string is wrong in uz, en and ru alike. Numbers and depth-3 reload were driven on the uz-light-1440 cell; this variant was not itself driven."
     },
     "web:locale.tenant.dashboard/TENANT_OWNER/ru-light-1440": {
       "cellId": "web:locale.tenant.dashboard/TENANT_OWNER/ru-light-1440",
@@ -4485,7 +4490,12 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F121"
+      ],
+      "notes": "F121/#68 (the \"this month\" label on a daily quota) is locale- and viewport-independent: the string is wrong in uz, en and ru alike. Numbers and depth-3 reload were driven on the uz-light-1440 cell; this variant was not itself driven."
     },
     "web:locale.tenant.dashboard/TENANT_OWNER/uz-dark-1440": {
       "cellId": "web:locale.tenant.dashboard/TENANT_OWNER/uz-dark-1440",
@@ -4807,8 +4817,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 16,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:38:56.143Z",
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F121"
+      ],
+      "depth": "verified",
+      "issue": 68,
+      "criterion": "reliability/data-integrity",
+      "persona_last": "Tutor rationing their generation quota for the month",
+      "tour_last": "Money tour -- re-derive every number on the card from the API instead of reading it",
+      "notes": "Depth 3 on tenant billing, previously untouched in all four variants -- the section-C money-and-time category. Arithmetic checked against the API rather than read off the screen: Band orinlar 6 / 25 matches getActiveStudentCount = 6 active of 71 total rows against seatLimit = tenant.seatLimit ?? limits.maxStudents, and tenant.seatLimit is null here so the plan value 25 is the one in force (correct fallback, tenant.ts:174). Materiallar 1 / 100 is getTenantContentCount against maxContentItems, an untimed total against an untimed limit -- correct. The third counter is F121/#68: Oy generatsiyalari / Generations this month / Генерации за месяц is a DAILY allowance (maxGenerationsPerDay: 50) counted over a single day (dayRange(), periodStart = local midnight). The API is internally consistent; only the label lies, and it lies in all three locales. Same family as #60 but the repair differs -- here the quota really is daily, so the fix is to relabel rather than widen the window. Filed not fixed: user-facing copy in three locales is a product-wording call. Isolation checked and CLEAN: /billing/me returns the callers OWN subscription in every role. A TENANT_LEARNER of this paid org gets a personal FREE row -- different subscription id, no tenantId, no students count, none of the orgs numbers. Individual likewise. Unauthenticated 401. That same result re-confirms #8 live rather than contradicting it: the learner in a TENANT_STARTER org (maxTutorMessagesPerDay null = unlimited) is served FREE limits with maxTutorMessagesPerDay 20. Not re-filed. Depth 3 by real reload -- all three counters byte-identical before and after. No horizontal overflow at 1440 or 390. One overflow-hidden card hides 40px at 390, but that is the decorative girih overlay and the sweeps tuned no-clipped-content probe passes this cell, so per section-B0 it was not re-triaged. Still unproven here: currentPeriodStart and currentPeriodEnd are both null on this subscription, so the period-boundary behaviour behind #14 could not be exercised from this org."
     },
     "web:locale.tenant.dashboard/TENANT_OWNER/uz-light-1440": {
       "cellId": "web:locale.tenant.dashboard/TENANT_OWNER/uz-light-1440",
@@ -5023,7 +5043,12 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "findings": [
+        "F121"
+      ],
+      "notes": "F121/#68 (the \"this month\" label on a daily quota) is locale- and viewport-independent: the string is wrong in uz, en and ru alike. Numbers and depth-3 reload were driven on the uz-light-1440 cell; this variant was not itself driven."
     },
     "web:locale.tenant.dashboard/TENANT_OWNER/uz-light-390": {
       "cellId": "web:locale.tenant.dashboard/TENANT_OWNER/uz-light-390",
