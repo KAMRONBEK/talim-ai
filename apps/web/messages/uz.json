@@ -81,7 +81,8 @@
     "showPassword": "Parolni ko‘rsatish",
     "hidePassword": "Parolni yashirish",
     "termsNotice": "Davom etish orqali siz Shartlarimizga rozilik bildirasiz.",
-    "acceptTerms": "Men <terms>Foydalanish shartlari</terms>ga roziman."
+    "acceptTerms": "Men <terms>Foydalanish shartlari</terms>ga roziman.",
+    "forgotPassword": "Parolni unutdingizmi? O'quvchilar o'qituvchisidan tiklashni so'rashlari mumkin. Aks holda murojaat qiling:"
   },
   "dashboard": {
     "readyToLearn": "O'rganishga tayyormisiz, {name}?",
