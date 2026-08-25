@@ -326,7 +326,9 @@ function headerFieldFor(cell: string): 'name' | 'email' | 'username' | 'ignored'
 export function parseCsv(csv: string): ImportRowInput[] {
   // Excel writes a UTF-8 BOM and this app's own export prepends one; left in place it
   // would corrupt the very first header cell and make the header unrecognisable.
-  const text = csv.replace(/^﻿/, '');
+  // \uFEFF rather than the literal character: an inline BOM is invisible in review and
+  // trips eslint's no-irregular-whitespace.
+  const text = csv.replace(/^\uFEFF/, '');
   if (text.trim() === '') return [];
 
   const rows = tokenize(text, detectDelimiter(text));
