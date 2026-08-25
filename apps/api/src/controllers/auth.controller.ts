@@ -207,7 +207,18 @@ export async function me(req: AuthenticatedRequest, res: Response): Promise<void
   const body: { user: Awaited<ReturnType<typeof formatUser>>; token?: string } = {
     user: formatted,
   };
-  if (req.legacyToken) {
+  // A role change — tutor approval, an admin role edit — writes the database but cannot
+  // reach a JWT already sitting in someone's browser. The token kept the old role for up
+  // to seven days, so /auth/me reported TENANT_OWNER, the web app routed to /tenant/*,
+  // and every one of those calls 403'd against a token that still said INDIVIDUAL. It
+  // self-healed on re-login, which is exactly why it never reproduced on demand.
+  //
+  // The client already stores whatever token this returns (session-sync.tsx), so
+  // reissuing when the token has drifted from the database closes the window on the
+  // next /auth/me instead of at expiry.
+  const roleDrifted = req.user.role !== user.role;
+  const tenantDrifted = (req.user.tenantId ?? null) !== (formatted.tenantId ?? null);
+  if (req.legacyToken || roleDrifted || tenantDrifted) {
     body.token = signToken(user.id, user.email, user.role, formatted.tenantId);
   }
   res.json(body);
