@@ -158,6 +158,39 @@ export async function assertTenantQuota(
   }
 }
 
+/**
+ * A learner's AI-tutor usage belongs to their organization's plan, never to a personal one.
+ *
+ * TUTOR_MESSAGE used to fall through to `getSubscriptionForUser()` for learners, which
+ * auto-creates a personal FREE subscription — so a student in a school on a paid plan was
+ * cut off at the FREE cap of 20 messages/day their school never bought, and every student
+ * who used the tutor silently grew a stray `Subscription` row.
+ *
+ * Deliberately does NOT call `requireActiveTenantSubscription`. Whether a lapsed
+ * organization should cut its students off mid-term is an open product question (#13);
+ * deciding it here would change learner access as a side effect of a quota fix.
+ */
+export async function assertTenantTutorMessageQuota(tenantId: string): Promise<void> {
+  const sub = await getSubscriptionForTenant(tenantId);
+  if (!sub) return;
+
+  const limit = sub.limits.maxTutorMessagesPerDay;
+  if (limit == null) return;
+
+  const { from, to } = dayRange();
+  const used = await prisma.apiUsageEvent.count({
+    where: { tenantId, feature: 'TUTOR_CHAT', createdAt: { gte: from, lte: to } },
+  });
+  if (used >= limit) {
+    throw new QuotaExceededError(
+      'TUTOR_MESSAGE',
+      used,
+      limit,
+      resolveTenantUpgradePlanCode(sub.effectivePlanCode),
+    );
+  }
+}
+
 export async function getTenantUsageVsLimits(tenantId: string) {
   const sub = await getSubscriptionForTenant(tenantId);
   const limits = sub?.limits ?? {};
