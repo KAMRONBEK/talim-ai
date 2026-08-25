@@ -17,7 +17,7 @@ interface DashboardSidebarBodyProps {
 function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
   const t = useTranslations('sidebar');
   const tCommon = useTranslations('common');
-  const { data: contents } = useContents();
+  const { data: contents, isError } = useContents();
 
   const recents = useMemo(() => (contents ?? []).slice(0, 5), [contents]);
 
@@ -47,7 +47,11 @@ function DashboardSidebarBody({ onNavigate }: DashboardSidebarBodyProps) {
         <p className="mb-2 mt-6 px-2 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
           {t('recents')}
         </p>
-        {recents.length === 0 ? (
+        {isError ? (
+          // The sidebar renders on every B2C page, so a failed /content left this
+          // asserting "no materials yet" alongside a correctly-errored main pane.
+          <p className="px-2 text-sm text-destructive">{tCommon('loadError')}</p>
+        ) : recents.length === 0 ? (
           <p className="px-2 text-sm text-muted-foreground">{t('noMaterials')}</p>
         ) : (
           <ul className="space-y-0.5">
