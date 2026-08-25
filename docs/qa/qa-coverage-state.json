@@ -2359,8 +2359,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 13,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:40:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25f",
+      "tour_last": "Oracle grading + a keyboard-only pass over the transport",
+      "persona_last": "A 7th-grader who would rather watch than read",
+      "criterion": "usability/keyboard-a11y + AI-output correctness",
+      "findings": [
+        "F109"
+      ],
+      "issue": 57,
+      "notes": "R2026-08-25f depth 3: empty state -> \"Video yaratish\" -> POST 202 -> READY in well under the 3-min cap -> 5 segments with audio -> survives a real reload. ORACLE: the narration is trustworthy. 9 of 9 atomic claims are supported by fixtures/uz-math-facts.md and every trap is avoided -- 3-4-5 gives 5 (not 7), D = b^2 - 4ac (not +4ac), x^2-5x+6=0 gives D=1 with roots 2 and 3, katetlar 6/8 gives 10, and intersection is described as the common elements (not the symmetric difference). The embedded quick-check answer key was solved independently: 6^2+8^2=100 so c=10, and its distractors 8/9/12 are none of them also correct. Unlike the slide deck (F104), the video script writes superscripts as Unicode, so no raw LaTeX reaches the screen. KEYBOARD: the transport is genuinely operable -- the scrubber is role=slider, tabIndex 0, ArrowRight seeks +5s, aria-valuenow/valuemax/label all present and in Uzbek. Home/End are not bound (polish only, arrows work). F109 (#57): totalDur is seeded from the servers per-segment ESTIMATES and each entry is corrected to the real audio length only when the viewer reaches that segment, so the total grows 1:23 -> 1:32 -> 1:41 across one sitting while the stored durationSec stays 79; the same value drives the seek fraction, the chapter ticks and aria-valuemax. THREE things checked and dissolved rather than filed: (a) GET /content/:id/video returning {\"video\":null} for 180s was MY oracle being wrong -- video is per-section and needs ?sectionId, confirming the media-parts-per-section model, not a product bug; (b) segment 3s stored title is the junk string \"uz-math.pdf 4\" but that segment renders as a quick-check card and the title is never displayed -> O112; (c) the \"Choose File\" control sitting first in the AT order is a 1x1 sr-only file input, not a layout break -- though its accessible name is the browsers English default on an Uzbek page -> O114. O106 is NARROWED, not confirmed: the video quick-check DOES grade -- clicking the right option turns it emerald and reveals a correct worked explanation -- so \"a quick-check never says whether you were right\" is specific to the slide deck, which now has a working reference implementation to copy. The grading is conveyed by border colour alone (aria-pressed null, no \"correct\" text) -> O113."
     },
     "web:locale.dashboard/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.dashboard/INDIVIDUAL/uz-light-1440",
