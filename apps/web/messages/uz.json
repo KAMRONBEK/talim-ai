@@ -630,7 +630,7 @@
       "adminHint": "Admin tenant obunasini tayinlashi kerak.",
       "students": "O'quvchilar",
       "materials": "Materiallar",
-      "generations": "Oy generatsiyalari",
+      "generations": "Bugungi generatsiyalar",
       "seatsUsed": "Band o'rinlar",
       "manualNote": "To'lov shaxsan amalga oshiriladi — o'rinlar sonini o'zgartirish uchun adminingizga murojaat qiling."
     },
@@ -1193,7 +1193,7 @@
     "emptyBody": "Ushbu materialdan ko‘rgazmali slaydlar to‘plamini yarating — o‘qish va dars berish uchun qulay.",
     "notAvailableLearner": "O‘qituvchingiz hali bu material uchun slayd yaratmagan.",
     "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring.",
-    "limitReached": "AI yaratish limitiga yetdingiz (bu oy {used}/{limit}). Limitni oshirish uchun administratoringizga murojaat qiling.",
+    "limitReached": "AI yaratish chegarasiga yetdingiz ({used}/{limit} bugun). Chegarani oshirish uchun administratorga murojaat qiling.",
     "limitReachedGeneric": "AI yaratish hozircha tarifingizda mavjud emas. Iltimos, administratoringizga murojaat qiling."
   },
   "video": {
