@@ -110,7 +110,7 @@ export default function SubscriptionsPage() {
           </select>
         </div>
       </div>
-      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
+      <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-soft">
         <table className="w-full text-sm">
           <thead className="bg-muted/40">
             <tr>

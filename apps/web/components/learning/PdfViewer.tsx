@@ -282,6 +282,11 @@ export function PdfViewer({
         const scaledViewport = page.getViewport({ scale });
         viewportByPageRef.current.set(pageNumber, scaledViewport);
 
+        // pdf.js lays the text layer out in CSS via `--scale-factor`; without it the
+        // spans stay at scale 1 while the canvas is fitted to the container, so the
+        // invisible text sits somewhere other than the glyphs it belongs to.
+        pageEl.style.setProperty('--scale-factor', String(scale));
+
         if (canvas.width !== scaledViewport.width) canvas.width = scaledViewport.width;
         if (canvas.height !== scaledViewport.height) canvas.height = scaledViewport.height;
         const ctx = canvas.getContext('2d');

@@ -213,9 +213,23 @@ function coerceDeck(raw: unknown, overrides: Overrides): Deck {
 
   // Salvage: keep individually valid slides, recompute deck minutes.
   const slides: DeckSlide[] = [];
+  const dropped: string[] = [];
   for (const s of rawSlides) {
     const parsed = slideSchema.safeParse(s);
-    if (parsed.success) slides.push(parsed.data as DeckSlide);
+    if (parsed.success) {
+      slides.push(parsed.data as DeckSlide);
+      continue;
+    }
+    // A dropped slide is content the learner silently never sees, and the deck's
+    // own title/recap may still refer to it. Say which one and why.
+    const id = isRecord(s) && typeof s.id === 'string' ? s.id : '?';
+    const layout = isRecord(s) && typeof s.layout === 'string' ? s.layout : '?';
+    dropped.push(`${id}(${layout}): ${parsed.error.issues.map((i) => `${i.path.join('.')} ${i.message}`).join('; ')}`);
+  }
+  if (dropped.length > 0) {
+    console.warn(
+      `[slides] deck salvage dropped ${dropped.length} of ${rawSlides.length} slides for content ${overrides.sourceContentId}: ${dropped.join(' | ')}`,
+    );
   }
   if (slides.length < MIN_SLIDES) {
     throw new AppError(502, 'The model returned an invalid slide deck. Please try again.');

@@ -134,7 +134,7 @@ function ResultsSection({ assessmentId }: { assessmentId: string }) {
           mode: results.mode === 'GAME' ? t('modeGame') : t('modeWritten'),
         })}
       </p>
-      <div className="overflow-hidden rounded-xl border border-border/70 bg-card">
+      <div className="overflow-x-auto rounded-xl border border-border/70 bg-card">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border/70 bg-secondary/40">
             <tr className="font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">

@@ -18,7 +18,13 @@ function ImpersonateInner() {
   const logout = useAuthStore((s) => s.logout);
   const [error, setError] = useState('');
   // Guard against React 18 StrictMode double-invoking the effect (and against
-  // re-runs) so the one-shot token consumption only happens once.
+  // re-runs) so we only exchange the token for a session once.
+  //
+  // This ref is the ONLY thing that is once-only. The token itself is not: it is
+  // a stateless 30-minute JWT that `authMiddleware` accepts like any other, so it
+  // stays a working credential for the rest of its window no matter how many times
+  // it is used (measured: `GET /auth/me` 200 on 5/5 replays). Do not read this
+  // guard as "the token is spent" — see GHSA-v8gx-9qfw-92f4.
   const started = useRef(false);
 
   useEffect(() => {

@@ -6,6 +6,8 @@ node_modules
 .turbo
 dist
 .next
+# side-by-side production build used by QA (NEXT_DIST_DIR) while `next dev` owns .next
+.next-prod-qa
 .env
 .env.*
 !.env.example

@@ -158,7 +158,9 @@ Every finding **names its oracle** (FEW HICCUPPS: **C**laims / **H**istory / pro
 - **Factual grounding:** `curl :4000` for the source section text; extract 5–10 atomic claims from a
   generated summary/quiz/flashcard; each needs a **quotable supporting source sentence**. Independently
   **solve every quiz answer key**; verify distractors aren't also correct; verify each cloze blank has
-  **exactly one** defensible answer; verify each flashcard back against its `sourceQuote`.
+  **exactly one** defensible answer. **Flashcards have no `sourceQuote`** — only `QuizQuestion` and
+  `BankQuestion` carry that column, so grade a flashcard back against the fixture and the section text
+  the deck was built from, not against a citation it never stores.
 - **Metamorphic (tight only):** the keyed answer must grade **100%**, garbage **0%**. Loose
   paraphrase-stability is a smell → re-reproduce, don't file.
 - **Uzbek quality = decomposed rubric, never "is this good Uzbek?":** wrong-language leakage,

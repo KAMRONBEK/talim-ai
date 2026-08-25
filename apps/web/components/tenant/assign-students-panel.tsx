@@ -70,6 +70,10 @@ export function AssignStudentsPanel({ contentId }: { contentId: string }) {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder={t('assignSearch')}
+          // A placeholder is not an accessible name: it is not exposed as one, and it
+          // disappears as soon as there is a value. Without this the field announced as
+          // an unlabelled edit box — the only unlabelled control on the assign page.
+          aria-label={t('assignSearch')}
         />
         <Button
           type="button"

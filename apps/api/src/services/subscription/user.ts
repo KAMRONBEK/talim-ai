@@ -24,15 +24,30 @@ export async function getSubscriptionForUser(userId: string): Promise<Subscripti
 
   if (!sub) {
     const freePlan = await getFreePlan();
-    sub = await prisma.subscription.create({
-      data: {
-        userId,
-        planId: freePlan.id,
-        status: 'ACTIVE',
-        source: 'ADMIN',
-      },
-      include: { plan: true },
-    });
+    // `Subscription.userId` is unique, so two concurrent callers that both saw no row
+    // would race here and the loser would throw P2002 (a 500). That is not theoretical:
+    // GET /admin/users/:id calls this and getUsageVsLimits() — which calls it again — in
+    // the same Promise.all, so a single request races itself on any user without a row.
+    // Treat "someone else just created it" as success and re-read.
+    sub = await prisma.subscription
+      .create({
+        data: {
+          userId,
+          planId: freePlan.id,
+          status: 'ACTIVE',
+          source: 'ADMIN',
+        },
+        include: { plan: true },
+      })
+      .catch(async (err: unknown) => {
+        if ((err as { code?: string })?.code !== 'P2002') throw err;
+        const existing = await prisma.subscription.findUnique({
+          where: { userId },
+          include: { plan: true },
+        });
+        if (!existing) throw err;
+        return existing;
+      });
   }
 
   if (sub.status === 'CANCELED') {

@@ -27,7 +27,7 @@ export default function AuditLogPage() {
           <CardContent className="p-8 text-center text-muted-foreground">No entries yet.</CardContent>
         </Card>
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
+        <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-soft">
           <table className="w-full text-left text-sm">
             <thead className="bg-muted/40">
               <tr>

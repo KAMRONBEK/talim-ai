@@ -228,6 +228,19 @@ const CELL_BUDGET = {
   goto: budget(0.4, 5000),
   settle: budget(0.14, 2000),
   evaluate: budget(0.18, 4000), // spent twice: first attempt + the lost-context retry
+  // Network quiet is not the same thing as rendered. A page whose data has arrived can still
+  // be mid-render (React commit, PDF.js worker parse) with nothing on the wire, so `settle`
+  // returns while the loading shell is still on screen. Rather than lengthen `settle` for
+  // every cell, a cell that looks blank is given ONE bounded second look — see renderRetry().
+  renderRetry: budget(0.1, 4000),
+  // A guard cell's bounce is only as fast as the route it is bouncing OUT of. `/content/[id]`
+  // is the heaviest route in the app (PDF.js + katex + mermaid), and under `next dev` its first
+  // compile runs past the old fixed 5s cap — so `expected-outcome` reported "expected /login,
+  // landed on /uz/content/…" for a page whose AuthGuard (auth-guard.tsx:18-23) redirects
+  // synchronously the moment it mounts with no token. Verified by hand: it does reach /uz/login,
+  // just after the cap. Only cells that fail to redirect ever spend this budget, so a longer
+  // cap costs nothing on a healthy sweep and stops the slowest guard route flapping RED.
+  redirect: budget(0.28, 10_000),
 };
 // The error pass additionally sits through a retry/backoff window before it judges a spinner.
 const ERROR_PASS_BUDGET = {
@@ -388,6 +401,16 @@ function webRoleMatrix(pattern) {
       toLogin,
     ];
   }
+  if (p === '/content/[id]/chat') {
+    // Not a page: the standalone chat route was folded into the unified workspace and kept as
+    // a redirect for old links (apps/web/app/[locale]/content/[id]/chat/page.tsx). Asserting
+    // "it renders" would fail forever; assert the fold instead, including the panel it opens.
+    return [
+      { role: 'INDIVIDUAL', expectation: 'redirect', to: '?panel=chat' },
+      { role: 'TENANT_LEARNER', expectation: 'redirect', to: '?panel=chat' },
+      toLogin,
+    ];
+  }
   if (p.startsWith('/content') || p.startsWith('/quiz')) {
     return [
       { role: 'INDIVIDUAL', expectation: 'ok' },
@@ -402,10 +425,13 @@ function webRoleMatrix(pattern) {
 
 function adminRoleMatrix(pattern) {
   if (pattern === '/') {
-    // Server redirect to /login for everyone, session or not.
+    // apps/admin/app/page.tsx server-redirects to /login, but /login itself then bounces an
+    // authenticated ADMIN on to /dashboard. So the landing place is role-dependent, and
+    // asserting /login for everyone made a correctly-behaving admin look like a defect on
+    // the very first sweep.
     return [
       { role: ANON, expectation: 'redirect', to: '/login' },
-      { role: 'ADMIN', expectation: 'redirect', to: '/login' },
+      { role: 'ADMIN', expectation: 'redirect', to: '/dashboard' },
     ];
   }
   if (pattern === '/login') {
@@ -650,14 +676,18 @@ function baselineEntries(baseline, route, kind) {
 }
 
 /** An entry may be a bare string or `{ match, status?, level?, reason, sev }`. */
-function isWaived(entries, { text, status, level }) {
+function isWaived(entries, { text, status, level, url }) {
   return entries.some((entry) => {
     const e = typeof entry === 'string' ? { match: entry } : entry;
     if (!e?.match) return false;
     if (e.sev && e.sev !== 'waived') return false;
     if (e.status != null && e.status !== status) return false;
     if (e.level && e.level !== level) return false;
-    return text.includes(e.match);
+    // Match the URL too. A failed-resource console error carries no useful text — every
+    // one of them reads "Failed to load resource: … 404" — so the only thing that
+    // identifies it is the URL. Keying a waiver on that text instead would waive every
+    // 404 on the page, which is precisely the noise this file exists to avoid.
+    return text.includes(e.match) || (url ? String(url).includes(e.match) : false);
   });
 }
 
@@ -852,6 +882,28 @@ function collectFindings(cfg) {
     }
   }
 
+  // --- clipped-and-unreachable content ---------------------------------------
+  // The overflow scan above answers "does the PAGE scroll sideways", and deliberately
+  // skips anything an ancestor clips. That leaves a blind spot with the opposite sign:
+  // a container with overflow-x:hidden whose content is far wider is not merely ugly —
+  // the overflow is unreachable, because clipping is exactly what suppresses the
+  // scrollbar that would let you get to it. One 600-char user name pushed six columns
+  // (including the admin Actions buttons) out of an overflow-hidden table wrapper while
+  // no-horizontal-overflow stayed green. Thresholds are deliberately blunt so that
+  // truncation, marquees and 1px rounding stay quiet.
+  const clipped = [];
+  for (const el of Array.from(document.body.querySelectorAll('*')).slice(0, 2500)) {
+    if (clipped.length >= 5) break;
+    const cs = getComputedStyle(el);
+    if (cs.overflowX !== 'hidden' && cs.overflowX !== 'clip') continue;
+    if (cs.textOverflow === 'ellipsis') continue; // deliberate truncation
+    if (el.clientWidth < 80) continue;
+    const excess = el.scrollWidth - el.clientWidth;
+    if (excess <= 100) continue;
+    if (el.scrollWidth < el.clientWidth * 1.25) continue;
+    clipped.push({ at: describe(el), clientWidth: el.clientWidth, scrollWidth: el.scrollWidth, excess });
+  }
+
   // --- rendered content -----------------------------------------------------
   const main = document.querySelector('main') ?? document.body;
   const mainText = (main.innerText ?? '').trim();
@@ -878,18 +930,34 @@ function collectFindings(cfg) {
     document.querySelector('[role="alert"],.text-destructive,[data-error]') !== null ||
     nodes.some(({ text }) => errorWords.test(text));
 
+  // --- visible-line fingerprint (used by the error-state sub-pass) ----------
+  // Digits are stripped so a ticking counter, a relative timestamp or a changed score
+  // is not mistaken for content that DISAPPEARED — the only thing the comparison cares
+  // about is whether a failed request cost the user a line of text.
+  const visibleLines = Array.from(
+    new Set(
+      (document.body.innerText ?? '')
+        .split('\n')
+        .map((line) => line.replace(/\d+/g, '').replace(/\s+/g, ' ').trim().toLowerCase())
+        .filter(Boolean)
+        .map((line) => line.slice(0, 120)),
+    ),
+  ).slice(0, 600);
+
   const perf = window.__qaSweep ?? { rejections: [], cls: 0, longestTask: 0 };
   return {
     htmlLang: document.documentElement.getAttribute('lang'),
     title: document.title,
     mainTextLength: mainText.length,
     mainTextSample: mainText.slice(0, 200), // redacted + truncated again before it is written
+    visibleLines,
     garbage,
     garbageSoft,
     i18nKeys,
     apostrophe,
     brokenImages,
     overflow,
+    clipped,
     katexErrors,
     rawMath,
     mermaidTotal: mermaidNodes.length,
@@ -940,13 +1008,15 @@ async function gotoAndSettle(page, url, net, { quietMs = 700, capMs, gotoMs } = 
   return response;
 }
 
-async function waitForRedirect(page, fromUrl, capMs = 5000) {
-  const deadline = Date.now() + capMs;
+/** Resolves to the ms waited once the URL moves, or `null` if it never did. */
+async function waitForRedirect(page, fromUrl, capMs = CELL_BUDGET.redirect) {
+  const started = Date.now();
+  const deadline = started + capMs;
   while (Date.now() < deadline) {
-    if (page.url() !== fromUrl) return true;
+    if (page.url() !== fromUrl) return Date.now() - started;
     await sleep(150);
   }
-  return false;
+  return null;
 }
 
 /**
@@ -963,6 +1033,32 @@ async function evaluateFindings(page, cfg, budgetMs = CELL_BUDGET.evaluate) {
   }
 }
 
+/**
+ * A blank-looking page gets one bounded second look before it is called blank.
+ *
+ * `content-rendered` reads `main ?? body` once, right after `gotoAndSettle`, and settle stops on
+ * 700ms of network quiet. Those two facts collide on any page that finishes fetching well before
+ * it finishes rendering: three `content/[id]` cells failed a full sweep quoting nothing but their
+ * own loading placeholder ("Загрузка…", "Yuklanmoqda…"), and every one of them renders in ~4s when
+ * opened by hand. A page that is genuinely blank stays blank for the whole window and still fails,
+ * so this buys back the slow-but-healthy cells without weakening the probe. `renderWaitMs` is
+ * recorded in the verdict so "slow" stays visible instead of becoming invisible.
+ *
+ * Returns the ms waited, or null if no second look was needed.
+ */
+async function waitForRender(page, capMs) {
+  const deadline = Date.now() + capMs;
+  const started = Date.now();
+  while (Date.now() < deadline) {
+    await sleep(250);
+    const len = await page
+      .evaluate(() => ((document.querySelector('main') ?? document.body).innerText ?? '').trim().length)
+      .catch(() => 0);
+    if (len >= MIN_RENDERED_TEXT) return Date.now() - started;
+  }
+  return Date.now() - started;
+}
+
 // ---------------------------------------------------------------------------
 // 11. Per-cell instrumentation + verdict assembly
 // ---------------------------------------------------------------------------
@@ -974,6 +1070,11 @@ function attachRecorders(page, apiOrigin) {
     mutations: [],
     duplicates: [],
     apiGets: [],
+    // 5xx forensics. A 500 is never waivable, so the sweep records it — but for three runs
+    // running the record was one line ("500 GET /admin/users/:id") and every attempt to
+    // attribute it happened MINUTES later, by which time it no longer reproduced. The
+    // response body and the replay have to be captured inside the failing moment or not at all.
+    serverErrors: [],
     lastActivityAt: Date.now(),
   };
   const touch = () => {
@@ -1036,6 +1137,31 @@ function attachRecorders(page, apiOrigin) {
       /* data: / blob: URLs */
     }
     rec.responses.push({ status: res.status(), method: req.method(), url, pathname });
+    if (res.status() >= 500) {
+      const entry = {
+        status: res.status(),
+        method: req.method(),
+        pathname,
+        url,
+        at: new Date().toISOString(),
+        // How busy the page was when it broke. A 5xx alone cannot distinguish "this request
+        // is broken" from "the server was under pressure"; the in-flight count can.
+        inFlight: started.size,
+        responsesBefore: rec.responses.length - 1,
+        body: null,
+      };
+      rec.serverErrors.push(entry);
+      // Best-effort and deliberately un-awaited: the body may already be discarded, and a
+      // rejected promise here must not take the cell down.
+      res
+        .text()
+        .then((t) => {
+          entry.body = redact(String(t).slice(0, 600), 600);
+        })
+        .catch(() => {
+          entry.body = '<body unavailable>';
+        });
+    }
     const start = started.get(req);
     if (start && res.status() === 200) rec.apiGets.push(start);
   });
@@ -1051,14 +1177,24 @@ function attachRecorders(page, apiOrigin) {
  * on REQUEST start order — the page's own fetch order — and tie-broken by path so two
  * requests fired in the same millisecond still resolve the same way every run.
  */
-function primaryApiFor(rec) {
+function primaryApiFor(rec, routeHint = null) {
   const byPath = new Map();
   for (const entry of rec.apiGets) {
     const prior = byPath.get(entry.pathname);
     if (!prior || entry.seq < prior.seq) byPath.set(entry.pathname, entry);
   }
+  // A page's own resource beats a sibling widget's. On /users/[id] the layout's
+  // /admin/tenants and the page's /admin/users/<id> both start at +0ms, and an
+  // alphabetical tie-break picked /admin/tenants — so the error pass aborted a sidebar
+  // fetch and then blamed the page for not showing an error. Prefer the candidate whose
+  // path carries an id that appears in the URL under test.
+  const ownResource = (p) => (routeHint && routeHint.some((id) => id && p.includes(id)) ? 0 : 1);
   const ranked = [...byPath.values()].sort(
-    (a, b) => a.at - b.at || a.pathname.localeCompare(b.pathname) || a.seq - b.seq,
+    (a, b) =>
+      ownResource(a.pathname) - ownResource(b.pathname) ||
+      a.at - b.at ||
+      a.pathname.localeCompare(b.pathname) ||
+      a.seq - b.seq,
   );
   if (!ranked.length) return { pathname: null, candidates: [] };
   return {
@@ -1091,12 +1227,19 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
   // -- expected outcome ------------------------------------------------------
   const requestedPath = new URL(cell.url).pathname;
   const finalPath = new URL(finalUrl).pathname;
+  // Some redirects differ from their source only in the query string (the folded chat route
+  // lands on /content/[id]?panel=chat), so a pathname-only target cannot express them. Match
+  // either form: pathname+search === pathname when there is no query, so existing targets
+  // like '/login' are unaffected.
+  const finalPathQuery = finalPath + new URL(finalUrl).search;
   const stayed = finalPath === requestedPath;
   if (cell.expectation === 'ok') {
     probes.push(probe('expected-outcome', stayed, `redirected to ${finalPath}`));
   } else if (cell.expectation === 'redirect') {
     const target = cell.expectedTarget;
-    const hitTarget = target ? finalPath.endsWith(target) : !stayed;
+    const hitTarget = target
+      ? finalPath.endsWith(target) || finalPathQuery.endsWith(target)
+      : !stayed;
     probes.push(
       probe('expected-outcome', !stayed && hitTarget, `expected ${target ?? 'any redirect'}, landed on ${finalPath}`),
     );
@@ -1113,10 +1256,18 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
 
   // -- console ---------------------------------------------------------------
   const consoleEntries = baselineEntries(baseline, cell.route, 'console');
+  // A browser logs every 4xx as a console error too, so a guard cell's expected 401/403 was
+  // failing `console-clean` while `http-ok` (below) correctly waived it — the same event
+  // judged two ways. Mirror the http-ok rule here so the two probes cannot disagree.
+  const guardAuthNoise = (m) =>
+    guardCell &&
+    /Failed to load resource.*status of 40[13]/.test(m.text) &&
+    String(m.url ?? '').startsWith(CFG.api);
   const consoleFindings = rec.console.filter(
     (m) =>
       !BUILTIN_CONSOLE_NOISE.some((n) => m.text.includes(n)) &&
-      !isWaived(consoleEntries, { text: m.text, level: m.level }),
+      !guardAuthNoise(m) &&
+      !isWaived(consoleEntries, { text: m.text, level: m.level, url: m.url }),
   );
   probes.push(
     probe('console-clean', consoleFindings.length === 0, consoleFindings.slice(0, 5)),
@@ -1212,6 +1363,7 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
       clientWidth: findings.overflow.clientWidth,
       offenders: findings.overflow.offenders,
     }),
+    probe('no-clipped-content', (findings.clipped ?? []).length === 0, findings.clipped ?? []),
   );
 
   // A guard cell legitimately renders only a "Loading…" placeholder mid-bounce.
@@ -1247,7 +1399,14 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
     );
   }
 
-  probes.push(probe('layout-stability', findings.cls <= CLS_LIMIT, `CLS ${findings.cls} (limit ${CLS_LIMIT})`));
+  // CLS is accumulated for the whole page lifetime, so on a cell we EXPECT to bounce it
+  // measures the DESTINATION's layout shift and files it under the source route. Six of the
+  // seven layout-stability failures were exactly that: a learner sent to /learner/dashboard
+  // from /login, /register, /tenant/materials… each reporting the learner dashboard's own
+  // shift a second time. The destination has its own cell; judge it there.
+  if (cell.expectation === 'ok') {
+    probes.push(probe('layout-stability', findings.cls <= CLS_LIMIT, `CLS ${findings.cls} (limit ${CLS_LIMIT})`));
+  }
   probes.push(
     probe('no-long-task', findings.longestTask <= LONG_TASK_LIMIT_MS, `longest task ${findings.longestTask}ms`),
   );
@@ -1266,14 +1425,24 @@ async function sweepCell(context, cell, baseline, namespaces) {
 
   try {
     await gotoAndSettle(page, cell.url, rec);
-    if (cell.expectation !== 'ok') await waitForRedirect(page, cell.url);
+    const redirectWaitMs =
+      cell.expectation === 'ok' ? null : await waitForRedirect(page, cell.url);
 
-    const findings = await evaluateFindings(page, {
+    const evalCfg = {
       locale: cell.variantSpec.locale,
       // Empty for apps/admin: it has no i18n, so there is nothing for the key probe to find
       // there but false positives off apps/web's namespaces.
       namespaces: cell.app === 'web' ? namespaces : [],
-    });
+    };
+    let findings = await evaluateFindings(page, evalCfg);
+
+    // Only cells we expect to RENDER get the second look; a redirect/denied cell is supposed to
+    // show a bare placeholder mid-bounce and `content-rendered` is not applied to it at all.
+    let renderWaitMs = null;
+    if (cell.expectation === 'ok' && findings.mainTextLength < MIN_RENDERED_TEXT) {
+      renderWaitMs = await waitForRender(page, CELL_BUDGET.renderRetry);
+      findings = await evaluateFindings(page, evalCfg);
+    }
     const finalUrl = page.url();
     const probes = assembleProbes(cell, rec, findings, finalUrl, baseline);
     const failed = probes.filter((p) => !p.ok);
@@ -1287,16 +1456,30 @@ async function sweepCell(context, cell, baseline, namespaces) {
       screenshot = path.relative(REPO, file);
     }
 
-    const primary = primaryApiFor(rec);
+    // The ids substituted into this cell's URL identify the page's own resource, which is
+    // how primaryApiFor breaks a same-millisecond tie against a layout-level fetch.
+    const primary = primaryApiFor(rec, (cell.url.match(/[A-Za-z0-9_-]{16,}/g) ?? []));
     return {
       result: failed.length === 0 ? 'pass' : 'fail',
       finalUrl,
       durationMs: Date.now() - started,
+      // Non-null means this cell looked blank at settle time and needed a second look. Kept in
+      // the verdict on purpose: a cell that passes only after 3.5s of extra waiting is a real
+      // signal, and hiding it would turn the calibration into a way of not seeing slow pages.
+      ...(renderWaitMs === null ? {} : { renderWaitMs }),
+      // How long the guard cell took to bounce. Kept for the same reason as renderWaitMs: a
+      // cell that only redirects after 8s is passing on a technicality, and the number is the
+      // only way to notice that before it becomes a user-visible stall.
+      ...(redirectWaitMs === null ? {} : { redirectWaitMs }),
       probes,
       failedProbes: failed.map((p) => p.id),
       screenshot,
       primaryApi: primary.pathname,
       primaryApiCandidates: primary.candidates,
+      serverErrors: rec.serverErrors,
+      // Consumed by the error pass and STRIPPED before the verdict is written — this is
+      // rendered page text and the verdicts/state files are committed.
+      visibleLines: findings.visibleLines ?? [],
     };
   } finally {
     await page.close().catch(() => null);
@@ -1308,8 +1491,16 @@ async function sweepCell(context, cell, baseline, namespaces) {
  * page degrades honestly — an error affordance appears and no spinner spins forever. The
  * primary GET is the one OBSERVED during the normal pass, so this needs no hand-maintained
  * route→endpoint table and cannot drift.
+ *
+ * A page only owes the user an error message if the failed request actually COST them
+ * something on screen. Observed most-stale-first: of 10 error-affordance failures, 6 were
+ * pages that rendered byte-identically with the request aborted — `/tenant` on the billing
+ * page, `/content` on the learner progress page and so on are fetched by a sidebar or a
+ * sibling widget, not by the page under test. Demanding an error banner for a fetch with no
+ * visible consequence is the probe crying wolf, so the normal pass's visible-line set is
+ * diffed against the error pass's and the probe only bites when a line was actually lost.
  */
-async function sweepErrorState(context, cell, primaryApi, namespaces, candidates = []) {
+async function sweepErrorState(context, cell, primaryApi, namespaces, candidates = [], baselineLines = []) {
   const page = await context.newPage();
   page.setDefaultTimeout(ERROR_PASS_BUDGET.evaluate);
   const rec = attachRecorders(page, CFG.api);
@@ -1334,8 +1525,27 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
       { locale: cell.variantSpec.locale, namespaces: cell.app === 'web' ? namespaces : [] },
       ERROR_PASS_BUDGET.evaluate,
     );
+    const rendered = new Set(findings.visibleLines ?? []);
+    const lostLines = baselineLines.filter((line) => !rendered.has(line)).length;
+    // No baseline fingerprint (the normal pass's evaluate timed out, or a refactor stopped
+    // returning visibleLines) means the diff cannot answer the question — and `lostLines === 0`
+    // would then read as "nothing was lost" and waive the probe on EVERY cell. Unknown is not
+    // innocent: fall back to the original, stricter rule and say so in the verdict.
+    const canDiff = baselineLines.length > 0;
+    const loadBearing = !canDiff || lostLines > 0;
     const probes = [
-      probe('error-affordance', findings.errorAffordance, `aborted GET ${primaryApi}`),
+      probe(
+        'error-affordance',
+        !loadBearing || findings.errorAffordance,
+        !canDiff
+          ? `aborted GET ${primaryApi}: no baseline fingerprint, so the load-bearing check could not run — judged strictly`
+          : loadBearing
+            ? `aborted GET ${primaryApi}: ${lostLines}/${baselineLines.length} visible lines lost, no error affordance shown`
+            : `aborted GET ${primaryApi}: page rendered identically (${baselineLines.length} lines) — not load-bearing for this route, so there is nothing to tell the user`,
+        // Kept on PASS: a waived probe that explains nothing is indistinguishable from a
+        // weakened one, and this is the exact waiver a future reader will want to audit.
+        !loadBearing,
+      ),
       probe(
         'no-immortal-spinner',
         !(findings.spinners > 0 || (findings.spinnerText && !findings.errorAffordance)),
@@ -1347,12 +1557,68 @@ async function sweepErrorState(context, cell, primaryApi, namespaces, candidates
       // Kept on PASS as well: the verdict is only readable if you can see which GET was
       // chosen and what it was chosen over.
       abortedApiChosenFrom: candidates,
+      lostLines,
+      baselineLineCount: baselineLines.length,
       probes,
       failedProbes: probes.filter((p) => !p.ok).map((p) => p.id),
     };
   } finally {
     await page.close().catch(() => null);
   }
+}
+
+/**
+ * Replay a 5xx the instant it happens, from the same session, and record the answer.
+ *
+ * F91 is why this exists. `GET /admin/users/:id` 500'd on three consecutive full sweeps and
+ * every investigation was the same dead end: by the time anyone retried the id — minutes
+ * later, from a fresh process — it answered 200, so the only durable record was a tally mark
+ * and a guess. The guesses were checked and both were wrong: the target was NOT in a bad state
+ * (two other variants read the identical id seconds apart and passed), and the server was NOT
+ * saturated (1440 concurrent heavy reads produced zero 5xx).
+ *
+ * Replaying here answers the one question that separates the remaining explanations, and it
+ * answers it while the condition still exists: does it reproduce within a second of failing?
+ * Yes ⇒ a request-shaped defect, and the body is on the record. No ⇒ genuinely momentary,
+ * which is itself the finding rather than an absence of one.
+ */
+async function replayServerErrors(serverErrors, session) {
+  const REPLAYS = 3;
+  const out = [];
+  for (const err of serverErrors.slice(0, 4)) {
+    // Only reads are replayed. Re-firing a failed POST/DELETE to learn why it failed is how
+    // a QA pass creates the data it is supposed to be observing.
+    if (err.method !== 'GET') {
+      out.push({ ...err, verdict: `NOT REPLAYED — ${err.method} is a write` });
+      continue;
+    }
+    const replays = [];
+    for (let i = 0; i < REPLAYS; i++) {
+      try {
+        const res = await fetch(err.url, {
+          headers: session?.token ? { Authorization: `Bearer ${session.token}` } : {},
+        });
+        const body = res.status >= 400 ? redact((await res.text()).slice(0, 300), 300) : null;
+        replays.push({ status: res.status, body });
+      } catch (e) {
+        replays.push({ status: 'ERR', body: plain(e?.message ?? e) });
+      }
+    }
+    const reproduced = replays.filter((r) => typeof r.status === 'number' && r.status >= 500).length;
+    out.push({
+      ...err,
+      replays,
+      reproduced,
+      // The line a human should read first.
+      verdict:
+        reproduced === REPLAYS
+          ? 'DETERMINISTIC — reproduces on every immediate replay from the same session'
+          : reproduced > 0
+            ? `INTERMITTENT — ${reproduced}/${REPLAYS} immediate replays also 5xx`
+            : `MOMENTARY — 0/${REPLAYS} immediate replays reproduced; the condition was gone within ~1s`,
+    });
+  }
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -1960,23 +2226,36 @@ async function main() {
           CFG.cellTimeout,
           `cell ${cell.cellId}`,
         );
-        verdict = { ...record, ...outcome };
+        // visibleLines is rendered page text, kept out of the committed verdicts file.
+        const { visibleLines: baselineLines = [], ...writableOutcome } = outcome;
+        verdict = { ...record, ...writableOutcome };
+
+        if (verdict.serverErrors?.length) {
+          verdict.serverErrors = await replayServerErrors(verdict.serverErrors, session);
+        }
 
         if (CFG.errorPass && cell.expectation === 'ok' && cell.isPrimaryVariant) {
           if (outcome.primaryApi) {
             try {
               verdict.errorPass = await withTimeout(
-                sweepErrorState(context, active, outcome.primaryApi, namespaces, outcome.primaryApiCandidates),
+                sweepErrorState(context, active, outcome.primaryApi, namespaces, outcome.primaryApiCandidates, baselineLines),
                 CFG.cellTimeout,
                 `error-pass ${cell.cellId}`,
               );
             } catch (err) {
               verdict.errorPass = { result: 'error', error: plain(err?.message ?? err), failedProbes: ['error-pass-crashed'] };
             }
-            for (const id of verdict.errorPass.failedProbes ?? []) {
+            const epFailed = verdict.errorPass.failedProbes ?? [];
+            for (const id of epFailed) {
               byProbe[id] = (byProbe[id] ?? 0) + 1;
             }
-            if ((verdict.errorPass.failedProbes ?? []).length) verdict.result = 'fail';
+            if (epFailed.length) {
+              verdict.result = 'fail';
+              // Surface them on the cell too. Marking the cell failed while leaving
+              // failedProbes empty produced a verdict that said "this failed" and
+              // "nothing failed" at once — the reader has no thread to pull.
+              verdict.failedProbes = [...(verdict.failedProbes ?? []), ...epFailed.map((id) => `errorPass:${id}`)];
+            }
           } else {
             verdict.errorPass = { skipped: 'no-data-dependency-observed' };
           }

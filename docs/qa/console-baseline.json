@@ -1,18 +1,44 @@
 {
   "_doc": "Per-route allowlisted noise for scripts/qa-sweep.mjs. Anything not listed is a finding; prune entries that stop appearing. Three channels: 'console' (console/page errors), 'network' (4xx/5xx), 'text' (garbage-text / raw-i18n-key / raw-math probes). A waiver is a claim that the noise is understood — always give a reason.",
   "global": {
-    "console": [],
-    "network": [],
+    "console": [
+      {
+        "match": "favicon.ico",
+        "reason": "apps/admin ships no favicon, so every admin page logs one 404. Tracked as a polish issue; not worth failing all 66 admin cells. Console entries carry no HTTP status, so this matches on the URL.",
+        "sev": "waived"
+      },
+      {
+        "match": "width(-1) and height(-1) of chart",
+        "reason": "recharts ResponsiveContainer logs this on first paint before the container is measured. Verified against docs/qa/screenshots/sweep/admin_dashboard_ADMIN_light-1440.png: every chart renders correctly with real data. Dev-time transient, not a defect — do NOT re-file.",
+        "sev": "waived"
+      },
+      {
+        "match": "/summary/",
+        "reason": "Companion to the global network waiver below — the browser logs every 4xx as a console error too, and a failed-resource entry carries no status, so it must be matched on the URL. Scoped to the /summary/ path: a 404 from any OTHER endpoint still fails.",
+        "sev": "waived"
+      },
+      {
+        "match": "www-widgetapi",
+        "reason": "The YouTube embed's own widget API logs a postMessage target-origin warning from inside the third-party iframe script. Not our code, not actionable from this repo, and it fired on every content route that can host a YouTube source.",
+        "sev": "waived"
+      },
+      {
+        "match": "was detected as the Largest Contentful Paint",
+        "reason": "Next.js dev-only warn-once perf HINT (add `priority` to the LCP <Image>), not an error — it never appears in a production build. Logged as O99 so the hint is judged deliberately rather than silently obeyed; whether a list thumbnail is really the LCP element depends on the row, so blanket-adding `priority` could be wrong.",
+        "sev": "waived"
+      }
+    ],
+    "network": [
+      {
+        "match": "GET /summary",
+        "status": 404,
+        "reason": "Documented empty state, not a failure: a READY content with no summary yet returns 404 {\"message\":\"Summary not found\"}, and the client treats it as such — useSavedSummary (apps/web/hooks/useQuiz.ts:218-223) returns null on 404 with retry:false. Oracle-verified R23: content cmrkrfbcv… is status READY with 1 section and GET /summary/<id> → 404 while GET /content/<id> → 200. Fires on every route that mounts the workspace (the page asks for both the full-material and the per-section scope, which is 2 honest 404s, not a duplicate request). Global rather than per-route because the contract is the endpoint's, not the page's.",
+        "sev": "waived"
+      }
+    ],
     "text": []
   },
   "routes": {
-    "/[locale]/content/[id]": {
-      "console": [],
-      "network": [
-        { "match": "GET /summary", "status": 404, "reason": "F3 — summary not yet generated on first load; benign", "sev": "waived" }
-      ],
-      "text": []
-    },
     "/[locale]/content/[id]/chat": {
       "console": [],
       "network": [],
