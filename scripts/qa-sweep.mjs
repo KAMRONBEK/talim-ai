@@ -874,6 +874,28 @@ function collectFindings(cfg) {
     }
   }
 
+  // --- clipped-and-unreachable content ---------------------------------------
+  // The overflow scan above answers "does the PAGE scroll sideways", and deliberately
+  // skips anything an ancestor clips. That leaves a blind spot with the opposite sign:
+  // a container with overflow-x:hidden whose content is far wider is not merely ugly —
+  // the overflow is unreachable, because clipping is exactly what suppresses the
+  // scrollbar that would let you get to it. One 600-char user name pushed six columns
+  // (including the admin Actions buttons) out of an overflow-hidden table wrapper while
+  // no-horizontal-overflow stayed green. Thresholds are deliberately blunt so that
+  // truncation, marquees and 1px rounding stay quiet.
+  const clipped = [];
+  for (const el of Array.from(document.body.querySelectorAll('*')).slice(0, 2500)) {
+    if (clipped.length >= 5) break;
+    const cs = getComputedStyle(el);
+    if (cs.overflowX !== 'hidden' && cs.overflowX !== 'clip') continue;
+    if (cs.textOverflow === 'ellipsis') continue; // deliberate truncation
+    if (el.clientWidth < 80) continue;
+    const excess = el.scrollWidth - el.clientWidth;
+    if (excess <= 100) continue;
+    if (el.scrollWidth < el.clientWidth * 1.25) continue;
+    clipped.push({ at: describe(el), clientWidth: el.clientWidth, scrollWidth: el.scrollWidth, excess });
+  }
+
   // --- rendered content -----------------------------------------------------
   const main = document.querySelector('main') ?? document.body;
   const mainText = (main.innerText ?? '').trim();
@@ -927,6 +949,7 @@ function collectFindings(cfg) {
     apostrophe,
     brokenImages,
     overflow,
+    clipped,
     katexErrors,
     rawMath,
     mermaidTotal: mermaidNodes.length,
@@ -1330,6 +1353,7 @@ function assembleProbes(cell, rec, findings, finalUrl, baseline) {
       clientWidth: findings.overflow.clientWidth,
       offenders: findings.overflow.offenders,
     }),
+    probe('no-clipped-content', (findings.clipped ?? []).length === 0, findings.clipped ?? []),
   );
 
   // A guard cell legitimately renders only a "Loading…" placeholder mid-bounce.
