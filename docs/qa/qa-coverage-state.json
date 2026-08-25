@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:43:34.959Z",
+  "updatedAt": "2026-08-25T04:46:50.414Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -130,6 +130,13 @@
       "cells": 0,
       "failures": 0,
       "note": "agent depth cycle (no full sweep)"
+    },
+    {
+      "runId": "R2026-08-25j",
+      "at": "2026-08-25T04:46:50.414Z",
+      "cells": 0,
+      "failures": 0,
+      "note": "agent depth cycle (no full sweep) — close"
     }
   ],
   "cells": {
@@ -209,13 +216,14 @@
       "depthVerifiedAt": null,
       "status": "active",
       "findings": [
-        "F112"
+        "F112",
+        "O122"
       ],
       "criterion": "usability/keyboard-a11y",
       "persona_last": "Operator (platform admin)",
       "tour_last": "Configuration tour — the same table at 1440 and at 390",
       "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures.",
-      "lastDepthRun": "R2026-08-25h"
+      "lastDepthRun": "R2026-08-25j"
     },
     "admin:health/ADMIN/dark-1440": {
       "cellId": "admin:health/ADMIN/dark-1440",
@@ -499,16 +507,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 17,
-      "depthVerifiedAt": null,
+      "depthVerifiedAt": "2026-08-25T04:46:50.414Z",
       "status": "active",
       "findings": [
-        "F112"
+        "F112",
+        "O122"
       ],
-      "criterion": "usability/keyboard-a11y",
-      "persona_last": "Operator (platform admin)",
-      "tour_last": "Configuration tour — the same table at 1440 and at 390",
-      "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures.",
-      "lastDepthRun": "R2026-08-25h"
+      "criterion": "reliability/data-integrity",
+      "persona_last": "Operator moderating AI output before a school sees it",
+      "tour_last": "Claims tour -- press the button, then go and check whether it did the thing",
+      "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures. | Depth 3 on the generated-media review queue, and the section-G open question resolved. 28 rows, all PENDING at the start. Drove the first row (Slideshow on uz-math.pdf) PENDING -> Flag -> FLAGGED and confirmed it survives a real reload, so the review decision itself persists correctly. Then the question section G actually asks: its owner fetched it, GET /content/:id/slides returned 200 with the full deck, and NO review or moderation field appears anywhere in the payload. Grep confirms the shape -- FLAGGED occurs only in the schema, the admin controller that writes it, and the admin table that renders it, with zero occurrences anywhere in apps/web. Label-only, definitively. Resolved as O122, an observation rather than a finding: no admin copy promises flagging hides anything, the buttons are a bare Approve/Flag pair, and a separate Delete sits beside them as the removal action. Flag is triage, Delete is enforcement -- coherent, so filing it would be filing an enhancement. Minor: content.controller.ts:197 accepts z.enum(APPROVED, FLAGGED) only, so a review decision can never be returned to PENDING. TEST DATA LEFT BEHIND ON PURPOSE: that slideshow row is still FLAGGED. It is the standing reproducer for O122 and cannot be set back to PENDING anyway.",
+      "lastDepthRun": "R2026-08-25j",
+      "depth": "verified"
     },
     "admin:health/ADMIN/light-1440": {
       "cellId": "admin:health/ADMIN/light-1440",
@@ -786,13 +796,14 @@
       "depthVerifiedAt": null,
       "status": "active",
       "findings": [
-        "F112"
+        "F112",
+        "O122"
       ],
       "criterion": "usability/keyboard-a11y",
       "persona_last": "Operator (platform admin)",
       "tour_last": "Configuration tour — the same table at 1440 and at 390",
       "notes": "no-clipped-content triaged and FIXED (1173bfb6). Every admin list table sat in an overflow-hidden card, so anything wider than the card -- /users at 7270px and /subscriptions at 5820px at 1440 (F112's long-name row), and all eight tables at 390 -- was clipped with no scrollbar to reach it, because the clipping is what suppresses the page scrollbar. All eight wrappers are now overflow-x-auto. Verified in-browser (each scrolls its full extent; /users' first-row Reset button hit-tests to itself at 1440) and by a targeted re-sweep of ADMIN x light-390 + light-1440: 26 cells, 0 no-clipped-content failures.",
-      "lastDepthRun": "R2026-08-25h"
+      "lastDepthRun": "R2026-08-25j"
     },
     "admin:health/ADMIN/light-390": {
       "cellId": "admin:health/ADMIN/light-390",
