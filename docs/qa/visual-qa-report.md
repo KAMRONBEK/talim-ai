@@ -3317,3 +3317,152 @@ depth-verified, and approving one would give the isolation matrix a second tenan
 students; (4) F112's client half is the general fix — every admin list table has the same
 `overflow-hidden` + auto-layout construction and is spared only by luck of data, so the new
 `no-clipped-content` probe should be watched on the next full sweep for cells nobody expects.
+
+---
+
+## Cycle R2026-08-25h — pass 1, cycle 8
+
+Last cycle ended with a prediction: the brand-new `no-clipped-content` probe "should be
+watched on the next full sweep for cells nobody expects." It fired on **14 cells**, and
+every single one was a real defect. Two of them were not the cosmetic clipping the probe
+was written to catch.
+
+### Triage — 26 sweep failures
+
+Nine `layout-stability` and six `error-affordance` were already owned (#44, #51, #40, #38,
+O98). The fourteen `no-clipped-content` were all new, and they split three ways.
+
+**Eight admin tables at 390, two at 1440 — F112's general case.** Every admin list table
+sits in an `overflow-hidden` card. Measured in the browser: all seven list routes at 390
+report `overflow-x: hidden` on the wrapper, content wider than it, and
+`document.documentElement.scrollWidth === window.innerWidth` — no scrollbar anywhere,
+because *the clipping is what suppresses it*. Control: forcing `overflow-x: auto` on
+`/users` at 1440 scrolls 6000px and brings Reset/Delete back. **Fixed** on all eight
+wrappers (`1173bfb6`) and verified by a targeted re-sweep — ADMIN × light-390 + light-1440,
+26 cells, **zero** clip failures. This is the client half of
+[GHSA-jvw8-v32q-m53h](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-jvw8-v32q-m53h);
+the unbounded `name` on public register is still open there.
+
+**Two tutor tables.** `/tenant/progress` hid 751px of columns at 390 and the
+assessment-results table hid 112px. **Fixed** (`f9eae726`). The results table only exists
+once an assessment is selected — the sweep could never have reached it.
+
+### F115 (#62) — the marquee was sending the tutor a different part of the page
+
+The `/content/[id]` failure named `div.pdf-page-inner` clipping 230px at 390. The canvas
+was fine; the thing overflowing was pdf.js's invisible **text layer**, and it measured
+**612px — the PDF's intrinsic page width — at every viewport**:
+
+| viewport | canvas | text layer | ratio |
+| --- | --- | --- | --- |
+| 1440 | 844 | 612 | 0.725 |
+| 390 | 382 | 612 | 1.602 |
+
+pdf.js positions text spans as `calc(var(--total-scale-factor) * Npx)`.
+`pdf-text-layer.css:15` declares `--scale-factor: 1` on `.pdf-page` as a placeholder, and
+`PdfViewer.tsx` computes the real scale, renders the canvas *and* the `TextLayer` at it —
+and never writes it back to the property the CSS reads. So the selectable text sits
+somewhere other than the glyphs at every window size except one.
+
+That matters because it is what the marquee reads: `extractTextFromTextLayerMarquee`
+intersects the drawn rectangle against those span rects. **A/B on the identical drag**
+(top-left 400×300 of an 844px page):
+
+- **before** — the whole first paragraph, including `tomonlari orasidagi`, `deydi:
+  gipotenuzaning kvadrati` and `ya'ni a^2 + b^2 = c^2`, all drawn to the *right* of x=400,
+  plus lines below y=300;
+- **after** — each line clipped at the box edge, exactly the words inside it.
+
+There is a fallback with the correct viewport transform, but it only fires when the DOM
+path returns *too little* text — so the over-inclusive desktop case never reaches it and
+fails silently with plausible-looking output. **Fixed** (`1e7b7dff`): text layer width now
+equals canvas width at 390 (scale 0.624) and 1440 (scale 1.379).
+
+### F116 (#63) — the flashcards tab is off the screen on an Android phone
+
+The same cell's remaining clip was the workspace tab row. At 390 "Kartalar" is truncated by
+32px. At **360** — the common Android width — it spans x 349–422 on a 360px screen: an
+**11px sliver**, centre off the edge, `elementFromPoint` at that centre not returning the
+button. The row is `shrink-0`, so it never becomes a scroll container (`scrollWidth -
+clientWidth === 0`); the ancestor is `overflow-hidden`; there is no page scrollbar. A scan
+of every `<a>` on the page found **no other link to flashcards**. **Fixed** (`1ead136f`):
+the group is now `min-w-0 overflow-x-auto` with `shrink-0` tabs — at 360 clicking Kartalar
+actually lands on `/flashcards`, and at 1440 the row's max scroll is 0, so the desktop is
+untouched.
+
+(`ru` and `en` show only two tabs on the same material. That is #9 — generated artifacts
+are locale-scoped — not a new finding.)
+
+### `admin:/tutor-requests` driven to depth 3 — and the invariant it breaks
+
+A never-verified core §G flow. A fresh learner requested tutor status through the real UI;
+the operator approved with a seat limit of **3**; the decision survived a real reload. The
+whole downstream contract holds: tenant with `seatLimit 3` + join code, owner membership
+`OWNER`/active, role `TENANT_OWNER`, `TENANT_STARTER` subscription **ACTIVE**, and an audit
+row `tutor_request.approve` with correct attribution.
+
+Server-side validation on the seat limit is solid — `-5` and `0` → *"greater than or equal
+to 1"*, `1.5` → *"Expected integer, received float"*, `999999999999` → *"less than or equal
+to 100000"*. XSS in the org name (`<img src=x onerror=alert(1)>`) round-trips as literal
+text in the admin panel and the slug is sanitised to `img-src-x-onerror-alert-1`.
+
+Then the limit itself was raced. **1 active student, limit 3, four concurrent
+`POST /tenant/students` → all four `201`, ending at 5 active.** A sequential create one
+moment later returns `402 QUOTA_EXCEEDED · used 5 · limit 3` — the check works; only
+concurrency defeats it. `assertTenantQuota` (`subscription/tenant.ts:95-107`) reads the
+limit, counts, compares, and the write happens later with no transaction or lock.
+Reproduced twice, the second time on a fresh token from a clean state.
+
+This is **already filed** as
+[GHSA-2r57-gmq8-w83r](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-2r57-gmq8-w83r)
+("Seat-limit enforcement collapses under concurrency — all three seat-consuming paths"), so
+this is a **re-confirmation on a brand-new org created through the admin approval path this
+cycle**, not a new finding. The single-request paths all behave: the 4th sequential create
+is 402, and a join-code register against a full class is 402 with the active count
+unchanged at 3.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F115** (S2) [#62](https://github.com/KAMRONBEK/talim-ai/issues/62) → **fixed** | Selecting a region of a PDF sent the AI tutor text from outside the selection, at every viewport width. |
+| **F116** (S3) [#63](https://github.com/KAMRONBEK/talim-ai/issues/63) → **fixed** | On a 360px phone the Flashcards tab is off the screen edge with nothing to scroll it into view. |
+| **F112** (S2) client half → **fixed** | Eight admin tables and two tutor tables clipped their right-hand columns with no scrollbar. |
+| **GHSA-2r57-gmq8-w83r** re-confirmed | 4 concurrent creates against 2 free seats → 5 students in a 3-seat class. |
+| **O118 – O119** | Admin approve shows server validation as a native `alert('Validation error')`, dropping the per-field detail the API returns; the seat-limit input is `min=0` while the server requires ≥ 1. |
+| evidence added | F114/#61's lossy-audit shape repeats here — the seat limit the operator typed is not in `tutor_request.approve`'s metadata. |
+
+### Cycle close — R2026-08-25h
+
+**Cells advanced:** 6 newly `verified` (`admin:/tutor-requests` ×3 variants,
+`web:/[locale]/content/[id]` ×3 roles/variants), taking the total **23 → 29**; 32 more
+advanced with fix notes attached. **Sweep failures triaged:** 26 — 15 already owned, 11 new
+and **all 14 `no-clipped-content` cells now fixed and re-swept clean**. **Fixed and
+verified:** 4 commits, each re-tested in the browser and confirmed by a targeted sweep.
+**Issues filed:** #62, #63. **Blocked-on-job:** none.
+
+**The method note worth keeping.** Last cycle's lesson was that a *correct* probe can be
+*blind*. This cycle is the sequel: a probe written to catch a **layout** problem found a
+**data** problem. The text layer was flagged because it was 230px too wide — the
+interesting fact was never the clipping, it was *why* something inside a rendered page had
+the wrong width. The failure a probe reports and the defect it has found are not always the
+same thing, and the cheap move — call it cosmetic and add `overflow-x-auto` — would have
+silenced the only signal that the AI tutor was being fed the wrong half of the page.
+
+**Test data left behind (honest disclosure).** A new org exists: **`<img
+src=x onerror=alert(1)>`** (slug `img-src-x-onerror-alert-1`, join code `KQBDVP`), owned by
+`qa-tutor-c8@talim.local` / `TutorReq-12345`, seat limit 3, `TENANT_STARTER` ACTIVE. It is
+deliberately **left in place** — it is a second tenant for the isolation matrix (which
+cycle 6 wanted and could not have) and a standing XSS canary for every tenant-name surface.
+It holds 3 active students (`Race2 C8 1-3`) plus soft-deleted probe rows; the over-limit
+state produced by the race was normalised back to 3 active. `qa-joinfull-c8@talim.local`
+was rejected at register (seat limit) and no account was created.
+
+**Next up:** (1) the §G **CSV import** matrix (BOM, semicolon beyond #48, formula-injection
+escaping, the seat-boundary race — which now has a known-broken lock to test against) is
+still the largest untouched owner flow; (2) **messaging** — broadcast → reply → mark-read,
+IDOR matrix, XSS-in-body — remains untouched and security-shaped; (3) the new
+`<img src=x…>` tenant makes a real **cross-tenant isolation matrix** possible for the first
+time: two orgs, each with students, and the "no cross-tenant id in any response body"
+charter has never been run with a second populated tenant; (4) `admin:subscriptions`
+CLS 0.666 survives the table fix and is still unexplained.
