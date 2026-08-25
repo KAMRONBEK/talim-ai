@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:04:28.574Z",
+  "updatedAt": "2026-08-25T04:11:21.826Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -383,19 +383,21 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 15,
-      "depthVerifiedAt": "2026-08-25T01:45:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
       "status": "active",
       "findings": [
-        "F91"
+        "F91",
+        "GHSA-v8gx-9qfw-92f4"
       ],
       "issue": 43,
       "flaky": false,
-      "notes": "F91/#43 SOLVED and FIXED. It was never flaky: GET /admin/users/:id 500s the FIRST time it is ever called for a user with no personal Subscription row, and 200s forever after -- which is why 37+ retries across three cycles were always clean. Cause: admin/users.controller.ts:182-185 awaits getSubscriptionForUser(id) and getUsageVsLimits(id) in the same Promise.all, and getUsageVsLimits calls getSubscriptionForUser again (subscription/user.ts:203); that function was findUnique-then-create on a unique userId, so one request raced ITSELF and the loser threw P2002 -> unhandled -> 500. Tenant students are the population with no row, which is why every sighting was a freshly created student. Reproduced 3/3 deterministically via owner-creates-student -> first admin GET = 500, second = 200; confirmed in the real browser (console 500 on first load, masked afterwards by react-query's retry). Fixed by making the create idempotent (catch P2002 -> re-read). Verified: fresh student now 200 on first GET (API) and zero console errors on first browser load. getSubscriptionForTenant does not auto-create, so the tenant path never had this race.",
+      "notes": "F91/#43 SOLVED and FIXED. It was never flaky: GET /admin/users/:id 500s the FIRST time it is ever called for a user with no personal Subscription row, and 200s forever after -- which is why 37+ retries across three cycles were always clean. Cause: admin/users.controller.ts:182-185 awaits getSubscriptionForUser(id) and getUsageVsLimits(id) in the same Promise.all, and getUsageVsLimits calls getSubscriptionForUser again (subscription/user.ts:203); that function was findUnique-then-create on a unique userId, so one request raced ITSELF and the loser threw P2002 -> unhandled -> 500. Tenant students are the population with no row, which is why every sighting was a freshly created student. Reproduced 3/3 deterministically via owner-creates-student -> first admin GET = 500, second = 200; confirmed in the real browser (console 500 on first load, masked afterwards by react-query's retry). Fixed by making the create idempotent (catch P2002 -> re-read). Verified: fresh student now 200 on first GET (API) and zero console errors on first browser load. getSubscriptionForTenant does not auto-create, so the tenant path never had this race. | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25g",
-      "tour_last": "Landmark tour — chase the one probe that had never been explained (F91's ghost 500)",
-      "persona_last": "Operator (platform admin)",
-      "criterion": "reliability/data-integrity"
+      "lastDepthRun": "R2026-08-25j",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "criterion": "security/session-handling",
+      "advisory": "GHSA-v8gx-9qfw-92f4"
     },
     "admin:root/ADMIN/light-1440": {
       "cellId": "admin:root/ADMIN/light-1440",
@@ -679,17 +681,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 17,
-      "depthVerifiedAt": "2026-08-25T03:25:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25g",
-      "tour_last": "Guidebook + token-abuse matrix (mint, reuse, tamper, wrong target)",
-      "persona_last": "Platform operator",
+      "lastDepthRun": "R2026-08-25j",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
       "criterion": "security/session-handling",
-      "notes": "See dark-1440: F91/#43 root-caused and fixed this cycle (P2002 self-race in getSubscriptionForUser).",
+      "notes": "See dark-1440: F91/#43 root-caused and fixed this cycle (P2002 self-race in getSubscriptionForUser). | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
       "findings": [
         "F94",
-        "F91"
+        "F91",
+        "GHSA-v8gx-9qfw-92f4"
       ],
       "advisory": "GHSA-v8gx-9qfw-92f4",
       "flaky": true,
@@ -945,8 +948,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 16,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ],
+      "notes": "Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out)."
     },
     "admin:login/ANON/dark-1440": {
       "cellId": "admin:login/ANON/dark-1440",
@@ -1170,8 +1183,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 14,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ],
+      "notes": "Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out)."
     },
     "admin:login/ANON/light-390": {
       "cellId": "admin:login/ANON/light-390",
@@ -1365,8 +1388,18 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 14,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ],
+      "notes": "Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out)."
     },
     "web:locale/ANON/ru-light-1440": {
       "cellId": "web:locale/ANON/ru-light-1440",
@@ -1396,8 +1429,17 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "status": "active",
-      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
-      "depthVerifiedAt": null
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified. | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ]
     },
     "web:locale.login/ANON/ru-light-1440": {
       "cellId": "web:locale.login/ANON/ru-light-1440",
@@ -1487,8 +1529,17 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "status": "active",
-      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
-      "depthVerifiedAt": null
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified. | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ]
     },
     "web:locale.login/ANON/uz-dark-1440": {
       "cellId": "web:locale.login/ANON/uz-dark-1440",
@@ -1715,16 +1766,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 13,
-      "depthVerifiedAt": "2026-08-25T03:25:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25b",
-      "tour_last": "Guidebook (the consumer half of the impersonation handshake)",
-      "persona_last": "Platform operator",
+      "lastDepthRun": "R2026-08-25j",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
       "criterion": "security/session-handling",
-      "notes": "R2026-08-25b depth 3: driven with a real minted token (?token=<jwt>) twice from fresh contexts. Consumes the token, writes it to the talim-auth store, calls /auth/me, and replaces the URL so no token survives in the address bar or history; lands on the role home. Reload keeps the session. No token -> the page renders its own error and a back-to-login link (the sweep already covers that ANON case). Contributes to F94.",
+      "notes": "R2026-08-25b depth 3: driven with a real minted token (?token=<jwt>) twice from fresh contexts. Consumes the token, writes it to the talim-auth store, calls /auth/me, and replaces the URL so no token survives in the address bar or history; lands on the role home. Reload keeps the session. No token -> the page renders its own error and a back-to-login link (the sweep already covers that ANON case). Contributes to F94. | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
       "findings": [
-        "F94"
+        "F94",
+        "GHSA-v8gx-9qfw-92f4"
       ],
       "advisory": "GHSA-v8gx-9qfw-92f4"
     },
@@ -2058,8 +2110,17 @@
       "lastFailedProbes": [],
       "sweepCount": 13,
       "status": "active",
-      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified.",
-      "depthVerifiedAt": null
+      "notes": "Not depth-driven. The uz-light-1440 sibling was (R2026-08-25b); these variants were briefly marked verified by the same update and corrected in the same cycle -- a variant nobody opened is not verified. | Depth 3 on impersonation, the largest untouched section-G flow. Drove the real chain: admin panel mints via POST /admin/users/:id/impersonate -> the browser opens /uz/impersonate?token=<JWT> from a cleared context -> the target session is stored (talim-auth = qa-owner@talim.local / TENANT_OWNER) -> a real mutation as the impersonated tutor (PATCH /tenant, 200) -> a real location.reload(), after which the session survives and the tutor dashboard still renders as QA Owner. Abuse matrix mostly CLEAN and re-confirmed: /admin/* from an imp session 403 (incl. chaining another impersonation), tampered signature 401, payload rewritten to role=ADMIN with the original signature 401, self 400, unknown id 404, TTL exactly 30 min. Three things do NOT hold, all folded into GHSA-v8gx-9qfw-92f4 (raised low -> medium this cycle rather than duplicated): (1) TRANSPORT -- the credential is a URL query parameter (admin users/[id]/page.tsx:170-176) and nginx.conf sets no access_log, so nginx default combined logs $request with the query string; a 30-minute unrevocable bearer token for another account is written to a production log on every use (CWE-598). (2) The impersonate page comment claiming one-shot consumption is false -- replay measured 200 on 5/5 and 3/3 across two independent mints; comment corrected in source this cycle. (3) Zero-audit confirmed empirically rather than by code reading: PATCH /tenant inside the imp session returned 200 and /admin/audit-logs held 50 rows before and 50 after. Re-confirmed the original advisory findings too: 0 banners, no impersonation marker anywhere in the rendered text, and the only exit-shaped control is the ordinary Chiqish (log out).",
+      "depthVerifiedAt": "2026-08-25T04:11:21.826Z",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25j",
+      "criterion": "security/session-handling",
+      "persona_last": "Operator (platform admin) stepping into a paying tutor account",
+      "tour_last": "Money-and-time tour -- follow the credential itself: where it travels, how long it lives, what it leaves behind",
+      "advisory": "GHSA-v8gx-9qfw-92f4",
+      "findings": [
+        "GHSA-v8gx-9qfw-92f4"
+      ]
     },
     "web:locale.login/ANON/uz-light-390": {
       "cellId": "web:locale.login/ANON/uz-light-390",
