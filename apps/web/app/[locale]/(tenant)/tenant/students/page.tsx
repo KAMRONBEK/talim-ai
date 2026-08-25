@@ -70,6 +70,9 @@ export default function TenantStudentsPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [createError, setCreateError] = useState<string | null>(null);
+  // Row-level action failures (reset password) need somewhere to surface; the roster has
+  // no per-row error slot and a silent no-op is what made them dangerous.
+  const [actionError, setActionError] = useState<string | null>(null);
   const [credentials, setCredentials] = useState<{ username: string | null; password: string } | null>(
     null,
   );
@@ -414,6 +417,12 @@ export default function TenantStudentsPage() {
         </div>
       )}
 
+      {actionError && (
+        <p role="alert" className="text-sm text-destructive">
+          {actionError}
+        </p>
+      )}
+
       <div className="hidden overflow-x-auto rounded-2xl border border-border/70 bg-card shadow-soft md:block">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-border/70 bg-muted/40">
@@ -541,10 +550,16 @@ export default function TenantStudentsPage() {
                       onClick={() =>
                         resetPassword.mutate(s.id, {
                           onSuccess: (data) => {
+                            setActionError(null);
                             setDialogMode('reset');
                             setCredentials({ username: data.student.username, password: data.temporaryPassword });
                             setOpen(true);
                           },
+                          // With onSuccess only, a failed reset did nothing visible: the
+                          // dialog never opened and the tutor reasonably assumed it had
+                          // worked. They then tell the student a password that was never
+                          // set, and the kid cannot log in the next day.
+                          onError: () => setActionError(t('students.resetFailed')),
                         })
                       }
                     >
@@ -554,7 +569,20 @@ export default function TenantStudentsPage() {
                       type="button"
                       size="sm"
                       variant="ghost"
-                      onClick={() => patchStudent.mutate({ id: s.id, active: !s.active })}
+                      onClick={() => {
+                        // Deactivating revokes a child's access to every material the
+                        // instant it lands, and this fired on a single click — a stray
+                        // double-click on the row above cut a student off. Every other
+                        // destructive action here confirms; this one didn't.
+                        // Reactivating is harmless, so it stays one click.
+                        if (
+                          s.active &&
+                          !confirm(t('students.deactivateConfirm', { name: s.name || s.username || s.email || '' }))
+                        ) {
+                          return;
+                        }
+                        patchStudent.mutate({ id: s.id, active: !s.active });
+                      }}
                     >
                       {s.active ? t('students.deactivate') : t('students.reactivate')}
                     </Button>

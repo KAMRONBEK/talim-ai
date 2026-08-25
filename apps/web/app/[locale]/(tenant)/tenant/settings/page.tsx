@@ -20,6 +20,7 @@ export default function TenantSettingsPage() {
   const { data: students } = useTenantStudents();
   const { data: assessments } = useTenantAssessments();
   const [name, setName] = useState('');
+  const [renameError, setRenameError] = useState<string | null>(null);
 
   useEffect(() => {
     if (tenant?.name) setName(tenant.name);
@@ -27,7 +28,15 @@ export default function TenantSettingsPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await patch.mutateAsync({ name });
+    // An uncaught mutateAsync rejection left the old name on screen with no explanation,
+    // so a failed rename was indistinguishable from a successful one that simply hadn't
+    // re-rendered yet.
+    setRenameError(null);
+    try {
+      await patch.mutateAsync({ name });
+    } catch {
+      setRenameError(t('settings.renameFailed'));
+    }
   };
 
   return (
@@ -54,6 +63,11 @@ export default function TenantSettingsPage() {
           {tenant?.slug && (
             <p className="text-sm text-muted-foreground">
               {t('settings.slug')}: {tenant.slug}
+            </p>
+          )}
+          {renameError && (
+            <p role="alert" className="text-sm text-destructive">
+              {renameError}
             </p>
           )}
           <Button type="submit" disabled={patch.isPending}>
