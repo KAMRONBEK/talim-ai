@@ -2,13 +2,16 @@ import { z } from 'zod';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 
+// `.trim()` runs before `.min(1)`, so a body of only spaces/tabs/newlines is rejected rather
+// than delivered as a blank card with a "new message" badge the student cannot clear by reading.
+// The compose UI already sends `body.trim()`; this makes the API agree with it.
 const sendMessageSchema = z.object({
   studentIds: z.array(z.string().min(1)).min(1),
-  body: z.string().min(1).max(5000),
+  body: z.string().trim().min(1).max(5000),
 });
 
 const replyMessageSchema = z.object({
-  body: z.string().min(1).max(5000),
+  body: z.string().trim().min(1).max(5000),
 });
 
 interface SentMessageShape {
