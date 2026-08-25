@@ -612,7 +612,8 @@
       "orgTitle": "Tashkilot",
       "orgName": "Tashkilot nomi",
       "slug": "URL slug",
-      "save": "Saqlash"
+      "save": "Saqlash",
+      "renameFailed": "Nomni saqlab bo'lmadi. Qayta urinib ko'ring."
     },
     "onboarding": {
       "title": "O'qituvchi sozlash ro'yxati",
@@ -712,7 +713,9 @@
       "messageSending": "Yuborilmoqda…",
       "messageEmpty": "Avval xabar yozing.",
       "messageError": "Xabarni yuborib bo'lmadi.",
-      "messageSent": "Xabar yuborildi."
+      "messageSent": "Xabar yuborildi.",
+      "deactivateConfirm": "{name} o'quvchini o'chirasizmi? U barcha materiallarga kirish huquqini darhol yo'qotadi. Keyinroq qayta tiklashingiz mumkin.",
+      "resetFailed": "Parolni tiklab bo'lmadi. Qayta urinib ko'ring."
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",

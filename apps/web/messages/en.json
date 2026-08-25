@@ -612,7 +612,8 @@
       "orgTitle": "Organization",
       "orgName": "Organization name",
       "slug": "URL slug",
-      "save": "Save changes"
+      "save": "Save changes",
+      "renameFailed": "Couldn't save the name. Please try again."
     },
     "onboarding": {
       "title": "Tutor setup checklist",
@@ -712,7 +713,9 @@
       "messageSending": "Sending…",
       "messageEmpty": "Write a message first.",
       "messageError": "Couldn't send the message.",
-      "messageSent": "Message sent."
+      "messageSent": "Message sent.",
+      "deactivateConfirm": "Deactivate {name}? They lose access to all materials immediately. You can reactivate them later.",
+      "resetFailed": "Couldn't reset the password. Please try again."
     },
     "assign": {
       "title": "Assign to students",
