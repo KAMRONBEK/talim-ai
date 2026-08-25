@@ -84,6 +84,27 @@
   h3 {
     @apply font-display tracking-tight;
   }
+
+  /* Operator data is user-supplied and unbounded (a `name` from public register has no
+     maximum). Auto table layout sizes a column to its longest unbreakable run, so one
+     account with a 600-character name widened /subscriptions to 5845px and /users to
+     6967px inside a 1270px card -- pushing Status, Source and every action button past
+     the right edge and shifting the whole page on load (CLS 0.67). `anywhere` lets those
+     runs break, so a row can no longer size the table beyond its container. Body cells
+     only: `th` labels are ours and short, and letting them break mid-word tripled the
+     header height once the columns narrowed. Their min-content width is also what keeps
+     each column readable after the body stops dictating the layout. */
+  table td {
+    overflow-wrap: anywhere;
+  }
+
+  /* Column widths are decided by the body, so a header label can start on one line while
+     the table is empty and wrap to two once data arrives -- growing the header row and
+     shoving the whole body down after first paint. The labels are short and ours; pin
+     them to one line so the header height never depends on the rows below it. */
+  table th {
+    white-space: nowrap;
+  }
 }
 
 @layer utilities {
