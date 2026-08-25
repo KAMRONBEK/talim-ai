@@ -2807,3 +2807,169 @@ worth promoting to `docs/PLANS.md` rather than accumulating another O; (2) `cont
 (3) the 8 structured **players** still need their interaction depth — HOTSPOT and DRAG_DROP
 keyboard + touch specifically, which this cycle graded but never drove; (4) O98 against a production
 build, still the oldest open question in the pass.
+
+## Cycle R2026-08-25e — pass 1, cycle 5
+
+Cycle 4 left four items. All four are closed or answered here, and the two that had been carried
+longest — the production-build CLS question and the structured players' keyboard depth — turned out
+to be worth the wait: one refuted its own hedge, the other found a graded question no keyboard user
+can answer.
+
+### Triage — 12 sweep failures, 11 already filed, 1 that nobody owned
+
+Six `error-affordance` failures and six `layout-stability` failures. The six error-affordance cells
+are exactly #40's standing list plus admin's #38 — checked against the issue, left alone. Of the
+layout-stability six, four are `/tenant/students` and `/learner/dashboard` (F92/#44 and O98).
+
+The other two were `/uz/tenant/assessments`, and **no issue owned them**. They were sitting between
+two entries: #44 is specifically the students page's seat pill, and O98 had been narrowed to "the
+learner-dashboard family". So the sweep had been failing a page for four full runs with nowhere to
+put the result.
+
+### The production build, at last — and it makes the jump worse
+
+O98's hedge has been in the ledger since R2026-08-25a: every CLS number on this repo came from the
+dev server, so the 0.25 breaches "may not exist in the artifact users get". That was the oldest
+open question in the pass. Measured it: `next build` + `next start` under `NODE_ENV=production`,
+served on :3100, real login through the form, three cold loads per route.
+
+| Route | dev server (sweep) | **production build** |
+| --- | --- | --- |
+| `/uz/tenant/students` | 0.289 · 0.312 · 0.339 | **0.386 · 0.387 · 0.386** |
+| `/uz/tenant/assessments` | 0.269 · 0.275 · 0.276 | **0.302 · 0.312 · 0.235** |
+| `/uz/learner/dashboard` | 0.19 – 0.32 | **0.159 · 0.315 · 0.107** |
+
+Production is **worse**, not better, on the two tenant pages. `/tenant/students`' dominant shift
+attributes to `DIV.hidden.overflow-x-auto` moving **y 429 → 467** — the same 38 px box F92 named —
+so #44 loses its caveat and its real number is 0.386, near 4× Google's threshold. The learner
+dashboard still straddles (1 of 3 loads over the sweep limit, all three over 0.1) from a *cascade*
+of small shifts rather than one box, so it stays an O — but "measure a production build first" is
+discharged, and no future cycle should reopen on that ground.
+
+`/uz/tenant/assessments` got a name and a cause. The live-game section
+(`assessments/page.tsx:548`, `{assessments.some((a) => a.mode === 'GAME') && …}`) does not exist
+until the assessments request resolves, and it mounts **above** everything. The arithmetic closes on
+the settled page: the section is **442 px** tall at y 330, the question bank sits at y 804, and the
+observed shift moves the bank from **y 319 → 793**. That is **F103**
+([#51](https://github.com/KAMRONBEK/talim-ai/issues/51)) — #44's shape in a box twelve times larger.
+
+**Two false readings on the way**, both recorded on #44 because they will bite the next person:
+SSE (`GET /events`) can never be proxied through `route.fetch` — it never terminates — so it needs
+its own stub registered *after* the catch-all, since Playwright runs the newest handler first. And
+injecting a token into `localStorage` **loses a race with zustand-persist rehydration**: the store
+writes its old value back, so an early "the learner dashboard is 0.003 on production!" reading was
+really the *tenant* dashboard, redirected. Log in through the real form.
+
+### Depth — four cells newly verified, one re-attacked
+
+**Slides, INDIVIDUAL.** Generated a deck, graded every claim, reloaded, regenerated, graded again.
+The content is trustworthy: **10 of 10** atomic claims match `fixtures/uz-math-facts.md` with zero
+trap answers — 3-4-5 → 5, `D = b² − 4ac` (not `+4ac`), `x² − 5x + 6 = 0` → D = 1 with roots 2 and 3,
+and a quick-check whose distractors (6, 8, 14) are none of them also correct.
+
+The presentation is not. **F104** ([#52](https://github.com/KAMRONBEK/talim-ai/issues/52)): a student
+reads `$c^2 = a^2 + b^2$`, `$a \neq 0$` and `$D = b^2 - 4ac$` as literal characters — **25 raw math
+spans across 3 of 5 slides, 0 `.katex` nodes**. Not the model going off-script: `deck-prompt.ts:64`
+*instructs* it to write `$...$`, and `DeckMarkdown` is already wired with `remarkMath` +
+`rehypeKatex`. It just has **two call sites**, both fields literally named `markdown`, while
+`definition`, `bullets` and `recap` interpolate plain text. It is a coin flip per generation — the
+first deck used Unicode superscripts and looked fine.
+
+**The AI tutor, INDIVIDUAL.** Held an actual conversation rather than asking four unrelated
+questions, grading each turn before reading the next. Turn 2 named no subject
+("Katetlari 6 va 8 bo'lsa-chi?") and answered c = 10; turn 3 was pure anaphora on the *previous
+answer* ("shu sonni ikkiga bo'lsam") and answered 5; turn 4 was the fixture's trap and was refused
+correctly, citing Bobil and Hindiston. **4/4, zero traps — F64 does not reproduce.** All four turns
+survived a real reload, and the composer refuses empty and whitespace-only input while rendering an
+XSS + RTL-override + mixed-script payload as literal text.
+
+Reloading mid-answer, though, loses it. **F106** ([#54](https://github.com/KAMRONBEK/talim-ai/issues/54)):
+the question sits alone with no answer, no spinner, no error and no retry, while the server finishes
+normally and stores the row (verified in the database both times). `useChat.ts` fetches the list once
+on mount and nothing revalidates it. Recovery is not "reload twice" — repro 2's second reload landed
+a second before the row was written and also showed nothing. Quota is charged before the stream
+starts. Also **F105** ([#53](https://github.com/KAMRONBEK/talim-ai/issues/53)): every message reads
+"Hozir" forever, because the component is never given a timestamp — though the API returns
+`createdAt` and `lib/format-relative-time.ts` sits there unused.
+
+**Slides, TENANT_LEARNER** — the isolation axis, driven as a real two-actor round-trip. The owner
+generated a deck; the assigned learner sees it, walks it 1/6 → 6/6, and still has it after a reload.
+The role difference is on the *identical URL*: the owner's page offers Slayd yaratish / Qayta
+yaratish / Xulosa PDF / Mashq, and the learner's only button is Chiqish. The denial matrix holds
+before and after reload — the deep-link bounces with no title or deck-text leak, slides and chat both
+404 with the same "Content not found" a nonexistent id gets, and POST answers 403 identically
+whether the material is assigned or not, so the role gate fires first and leaks nothing either.
+
+**The structured players, by keyboard alone** — cycle 4 graded all seven types but never drove them.
+Six are keyboard-complete and better than expected: ORDERING exposes real Yuqoriga/Pastga buttons
+instead of demanding a drag, DROPDOWN_CLOZE and MATCHING use native selects, MULTIPLE_SELECT
+checkboxes are `<label>`-wrapped, and all 24 focusables have a visible ring.
+
+**DRAG_DROP cannot be answered at all** — **F107**
+([#55](https://github.com/KAMRONBEK/talim-ai/issues/55)). The chips are buttons with `aria-pressed`,
+so an item picks up fine; the buckets are `<div>`s carrying only `onClick` — no `tabIndex`, no
+`role`, no key handler — so Tab walks straight past them into the next question. Proven three ways:
+a mouse click moves the counter **0/3 → 1/3**, `Enter`-then-`Tab`×6 never focuses a bucket, and a
+full keyboard pass submitted **0/3 placed** for 2 of 7 (29%) with the attempt spent and persisted.
+The hint text already promises "click the item, then the group" — the bucket simply never got the
+treatment the chip has. Touch is unaffected.
+
+**The forced-password-change gate.** Driven on a *throwaway* student so no shared credential was
+touched. The §G question — "and the deep-link bypass" — is answered: **there is none.**
+`/learner/assessments`, `/learner/progress` and `/content/[id]` all redirect back to settings until
+the password changes, and the gate lifts on the next navigation once it does. Submitting with the
+*wrong* current password, however, does nothing and says nothing — 0 alert elements, no text. That
+is #17's silent-failure shape on a third surface, and on the one most likely to be used by the least
+experienced user in the product; commented there rather than filed again.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F103** (S3) [#51](https://github.com/KAMRONBEK/talim-ai/issues/51) | The question-bank card jumps 474 px down when the live-game section mounts above it. |
+| **F104** (S3) [#52](https://github.com/KAMRONBEK/talim-ai/issues/52) | AI slide decks show raw LaTeX — students read `$c^2 = a^2 + b^2$`. |
+| **F105** (S4) [#53](https://github.com/KAMRONBEK/talim-ai/issues/53) | Every AI-tutor message is stamped "Hozir" forever. |
+| **F106** (S3) [#54](https://github.com/KAMRONBEK/talim-ai/issues/54) | Reloading while the tutor is answering loses the answer on screen. |
+| **F107** (S3) [#55](https://github.com/KAMRONBEK/talim-ai/issues/55) | A drag-and-drop question can't be answered with a keyboard. |
+| **O105 · O106 · O107 · O108** | A deck names a topic no slide teaches; a quick-check never says whether you were right; answer fields are named by their placeholder; mutation responses return the raw student row. |
+
+### Cycle close — R2026-08-25e
+
+**Cells advanced:** 5 driven to depth 3, **4 newly `verified`** — slides INDIVIDUAL, chat
+INDIVIDUAL, slides TENANT_LEARNER, learner settings — taking the total **14 → 18** (counted from
+the file, per cycle 3's lesson). The fifth, `learner/assessments`, was already verified in cycle 1
+and was re-attacked from a keyboard-only persona, which advances confidence rather than the count.
+**Sweep failures triaged:** 12 — 11 already filed, 1 unowned and now **F103**; no probe bugs this
+cycle. **Findings:** F103 · F104 · F105 · F106 · F107 · O105 · O106 · O107 · O108. **Fixed and
+verified:** no product fix earned its way in — all five findings are structural or visual-design
+calls, which is exactly what the fix-discipline rule is for. One piece of instrumentation shipped:
+the slide-deck salvage path now names the slide it dropped and the zod rule it broke, instead of
+discarding model output in silence. **Issues filed:** #51, #52, #53, #54, #55; comments on #44 and
+#17. **Blocked-on-job:** none.
+
+**Three candidates dissolved before filing**, continuing the pattern: `mustChangePassword` is
+deliberately false for a tutor-typed password (`students.ts:128` — CLAUDE.md's summary is the thing
+that is wrong, not the code); the MULTIPLE_SELECT checkboxes that looked unlabelled are
+`<label>`-wrapped; and "Qayta yaratish does nothing" was `createdAt` being preserved on upsert —
+the deck really did regenerate, with a new title, new wording and different layouts.
+
+**A method trap worth more than any single finding:** two roles cannot share one Playwright context.
+Same origin, one `localStorage` — logging the owner in silently logs the learner out, and a first
+pass of the learner isolation checks ran as the owner without announcing it. Every multi-actor cell
+from here needs `browser().newContext()` per role. Together with the zustand-persist race above,
+that is two ways this cycle nearly recorded a false pass.
+
+**Test data left behind (honest disclosure).** One slide deck on `uz-math.pdf` (regenerated once)
+and one on the tenant's YouTube material — both regenerable, and the second is genuinely useful as
+the only tenant-owned deck. Six new tutor messages in the `qa-individual` chat session, including
+the XSS probe, which renders as inert text. One extra attempt on "QA Structured Player Walk"
+(2 of 5). One probe student, **QA Kid Five / qakid5**, created for the password-gate cell and left
+**deactivated** — the org is back to 5 active of 25 seats.
+
+**Next up:** (1) `content/[id]/video` for INDIVIDUAL is now the last AI surface at `swept`, and it
+needs an oracle plus a bounded wait, since Manim rendering is the one job that can genuinely block;
+(2) **O108 is a two-minute check** — open the reset dialog for an email-less kid, screenshot it,
+then pin or dissolve; (3) O105 becomes decidable on the next slide generation now that the salvage
+path logs, so read the API terminal before re-deriving anything; (4) the AUTH surface (§G) —
+register with join code, duplicate, weak password, rate-limit — is still entirely at `swept` and is
+the largest untouched block left.
