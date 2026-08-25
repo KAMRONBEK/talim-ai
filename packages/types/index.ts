@@ -464,6 +464,12 @@ export interface LearnerProgress {
 
 export interface LearnerSummary {
   tenantName: string | null;
+  /**
+   * Whether the learner's organization has an ACTIVE (or TRIALING) subscription.
+   * Learners keep full access when it lapses — see #13 — so this is purely to warn
+   * them that their class is in an unpaid state, never to gate anything.
+   */
+  orgSubscriptionActive: boolean;
   assignedCount: number;
   streakDays: number;
   avgQuizScore: number | null;

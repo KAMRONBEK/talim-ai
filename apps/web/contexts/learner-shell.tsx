@@ -1,7 +1,9 @@
 'use client';
 
 import { type ReactNode, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import { useLearnerSummary } from '@/hooks/useTenant';
 import { RoleGuard } from '@/components/role-guard';
 import { AuthGuard } from '@/components/auth-guard';
 import { useAuthStore } from '@/store/useAuthStore';
@@ -29,6 +31,24 @@ function MustChangePasswordGate({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
+/**
+ * Learners keep full access when their organization's subscription lapses (#13) — a
+ * child should not lose their homework because an adult's paperwork is late, and
+ * activation is manual here, so a lapse is usually administrative. But silence left
+ * them with no idea their class was in an unpaid state, so state it and point at the
+ * person who can act. This never gates anything.
+ */
+function InactiveSubscriptionNotice() {
+  const t = useTranslations('learner');
+  const { data: summary } = useLearnerSummary();
+  if (!summary || summary.orgSubscriptionActive) return null;
+  return (
+    <div className="border-b border-accent-secondary/40 bg-accent-secondary/10 px-4 py-3 text-sm text-foreground md:px-6">
+      {t('inactiveSubscriptionBanner')}
+    </div>
+  );
+}
+
 export function LearnerShell({ children }: { children: ReactNode }) {
   return (
     <RoleGuard allowedRoles={['TENANT_LEARNER']}>
@@ -38,6 +58,7 @@ export function LearnerShell({ children }: { children: ReactNode }) {
             <LearnerSidebar />
             <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
               <DashboardHeader />
+              <InactiveSubscriptionNotice />
               <main className="min-h-0 flex-1 overflow-y-auto bg-background px-4 py-8 md:px-6">{children}</main>
               <LearnerBottomNav />
             </div>

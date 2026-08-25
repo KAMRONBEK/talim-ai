@@ -1176,7 +1176,8 @@
       "sending": "Yuborilmoqda…",
       "replyError": "Javobingizni yuborib bo'lmadi.",
       "you": "Siz"
-    }
+    },
+    "inactiveSubscriptionBanner": "Sinfingiz obunasi faol emas. Siz o'qishda davom etishingiz mumkin — o'qituvchingizga xabar bering."
   },
   "slides": {
     "subtitle": "Ushbu material asosida AI yaratgan slaydlar",
