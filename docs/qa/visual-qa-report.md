@@ -2973,3 +2973,191 @@ then pin or dissolve; (3) O105 becomes decidable on the next slide generation no
 path logs, so read the API terminal before re-deriving anything; (4) the AUTH surface (§G) —
 register with join code, duplicate, weak password, rate-limit — is still entirely at `swept` and is
 the largest untouched block left.
+
+## Cycle R2026-08-25f — pass 1, cycle 6
+
+Cycle 5 left four items. All four are closed here, and two of them were carried
+observations that had each been called undecidable from a QA cycle. Both turned out to be
+decidable — one needed a screenshot nobody had managed to take, the other needed arithmetic
+rather than a log file. The AUTH surface, named last cycle as "the largest untouched block
+left", is now the cycle's two newest verified cells.
+
+### Triage — 12 sweep failures, 12 already owned
+
+Six `error-affordance` (#40's standing list plus admin's #38) and six `layout-stability`
+(#44's students page, O98's learner dashboard, and the two `/tenant/assessments` cells that
+became **F103/#51** last cycle). The failure set is identical to cycle 5's, every member has
+an owner, and no probe cried wolf. Triage took minutes, which is what it should take once
+the queue is properly owned — the cost of a sweep failure is paid the cycle it is first
+filed, not every cycle after.
+
+### The AUTH surface, driven end to end
+
+**Register with a class join code.** Typed the code in **lowercase** (`dutdwe`) on purpose —
+accepted. Landed as `TENANT_LEARNER` in QA Academy, and the role, the org membership and the
+session all survived a real reload *and* a second login from fully cleared storage. The
+boundary is well defended on both sides: submit stays disabled until the terms box is
+ticked, native `minlength=8` and `type=email` catch short passwords and malformed addresses
+in the browser, and the server re-enforces independently (400 on a 6-character password, 409
+on a duplicate email, 404 on a bad join code). **An invalid join code leaves no orphaned
+account** — a login on that email is 401 — so only the seat-full path (#28) orphans, and
+that half of the §G item is clean.
+
+What it accepts without complaint is names: `"   "` → **201**, and a 600-character name →
+**201**. That is #34's shape on the user's own name field (**O110**).
+
+**F108 ([#56](https://github.com/KAMRONBEK/talim-ai/issues/56)):** the first thing that
+student reads is false. The learner welcome banner tells them *"O'qituvchingiz bu hisobni
+yaratdi… vaqtinchalik parolni o'zgartiring"* — your teacher made this account, go change the
+temporary password — when they chose their own password seconds earlier and the register
+response said `mustChangePassword: false`. `student-welcome-banner.tsx:19` ORs the server
+flag with a **per-device localStorage default** that is `true` whenever the key is absent, so
+the flag built for exactly this decision never gates anything, and dismissing it does not
+travel: clear storage, log in again, the banner is back.
+
+**Login.** Wrong password and a wholly unknown email return the *identical* message, so there
+is no user enumeration. The locale switch persists **server-side** — flipping to Russian
+wrote `preferredLocale: ru`, confirmed on `/auth/me`, and logout landed on `/ru/login` rather
+than snapping back to uz. Logout nulls the token in storage rather than leaving it behind.
+A deep link followed while logged out bounces correctly but **never returns** —
+`role-guard.tsx:38` replaces to `/login` with no capture of the intended path, so `?play=<id>`
+is simply gone (**O109**, kept an O because a return path is a missing feature and
+enhancements are not findings).
+
+**The rate limit, deliberately run last** — it is IP-keyed, so filling the bucket locks this
+machine out of every subsequent login for 15 minutes. Tokens for all five actors were minted
+first, so the cooldown cost nothing. First 429 at attempt **31**, with `Retry-After: 577` and
+the full standard header set; a known-good credential is then refused too. Two candidates
+dissolved on inspection and both are worth not re-deriving: the server's 429 text *is* a
+hardcoded English string, but the login page maps the **status code** to its own translated
+copy, so no user ever sees it; and `trust proxy` + nginx's `X-Forwarded-For` are wired
+correctly, so the key is the real client IP and not one shared nginx address. What is left —
+a class behind one NAT sharing a bucket — is **O115**, recorded rather than filed, because
+IP-keyed login limiting is standard and everything around it is done right.
+
+### The last AI surface — the video tells the truth, then miscounts itself
+
+`content/[id]/video` was the final AI surface at `swept`. Generated one, and the **narration
+graded clean**: 9 of 9 atomic claims supported by `fixtures/uz-math-facts.md`, every trap
+avoided — 3-4-5 → 5, `D = b² − 4ac`, `x²−5x+6=0` → D=1 with roots 2 and 3, katetlar 6/8 → 10,
+intersection described as the common elements. The embedded quick-check's key was solved
+independently and its distractors (8, 9, 12) are none of them also correct. Unlike the slide
+deck (F104), the script writes superscripts as Unicode, so no raw LaTeX reaches a student.
+The transport is genuinely keyboard-operable — `role=slider`, `tabIndex 0`, ArrowRight seeks
++5 s, Uzbek `aria-label`, live `aria-valuenow`.
+
+**F109 ([#57](https://github.com/KAMRONBEK/talim-ai/issues/57)):** the video gets longer while
+you watch it. **1:23** on slide 1, **1:32** by slide 4, **1:41** by slide 5, against a stored
+`durationSec` of **79**. `NarratedVideoPlayer.tsx:74` seeds the duration array from the
+server's *estimates* and corrects each entry to the real audio length only when the viewer
+reaches that segment (`:362-372`); the estimates run short (16 s stored vs 19.42 and 24.60
+real), so the sum only climbs. It is not just a label — the same value drives the seek
+fraction, the chapter-tick positions and `aria-valuemax`, so the ticks slide and a
+drag-to-seek maps differently before and after.
+
+**My own oracle was the first thing that broke**, and it is worth writing down: `GET
+/content/:id/video` returned `{"video":null}` for 180 straight seconds while the browser
+showed a finished player. Video is **per-section** and needs `?sectionId=`. Three minutes
+spent proving the product was fine. Two smaller candidates also dissolved: segment 3's stored
+title is the junk string `"uz-math.pdf 4"` but that segment renders as a quick-check card and
+the title is never displayed (**O112**), and the "Choose File" control sitting first in the
+accessibility tree is a 1×1 `sr-only` file input, not a layout break (**O114**).
+
+**O106 is narrowed rather than repeated.** The video's quick-check *does* grade — clicking the
+right option turns it emerald and reveals a correct worked explanation — so "a quick-check
+never tells you whether you were right" belongs to the slide deck alone, which now has a
+working reference implementation to copy. What both share is conveying correctness through
+colour with no `aria-pressed` and no text (**O113**).
+
+### Two carried observations, both closed
+
+**O108 → F110 ([#58](https://github.com/KAMRONBEK/talim-ai/issues/58)).** Last cycle called it
+a two-minute check and failed it twice. The reason is the finding's most reusable part: the
+credentials panel is **not** a `[role=dialog]` node, so waiting on that selector never
+resolves. Opened by clicking through the row instead, and it shows exactly what the source
+predicted — for an email-less kid, `Parol: f1b0b86e-280` and **no username**, on a panel that
+says "give this information to the student (shown once)". **Nusxalash** copies the password
+alone. Re-verified the cause independently in one session: the list returns
+`username: "qakid5"`, reset returns `username: null` for the same row seconds later, and
+*create* returns the list's form — so the **same panel** shows the username on create and
+drops it on reset.
+
+**O105 → F111 ([#59](https://github.com/KAMRONBEK/talim-ai/issues/59)).** This one was
+recorded as having "two candidate causes and no way to separate them from a QA cycle", with a
+`console.warn` added last cycle so the next generation could be diagnosed from the API log.
+That plan cannot work — **the API logs to the dev server's stdout and there is no log file in
+the repo**, so a QA cycle cannot read it. It did not need to. The prompt tells the model to
+name its own slides and shows `s1` as the example (`deck-prompt.ts:131,145`), so a deck that
+comes back **`s1,s2,s5,s6`** was drafted with six slides and had two removed with the
+survivors keeping their numbers — which is precisely what `coerceDeck`'s salvage path does
+(`slides.service.ts:214-228`), and its own comment predicts the symptom: *"A dropped slide is
+content the learner silently never sees, and the deck's own title/recap may still refer to
+it."* Two fresh regenerations 90 seconds apart both returned `s1,s2,s5,s6` with entirely
+different wording, against a control on a different source that came back `s1..s6` complete.
+The resulting deck's cover promises Pythagoras, quadratics **and** sets, its recap summarises
+all three, and it teaches one.
+
+### The Never/Ever charters, checked
+
+Two of the standing invariants were driven as a denial matrix — four actors × three target
+ids × seven endpoints, with every response body scanned for foreign ids. **Both hold, and
+hold well.** The newly-registered joiner is inside QA Academy with nothing assigned, and gets
+**404 on the tenant's own material** — the same status a nonexistent id returns, so there is
+no existence oracle either. The assigned learner gets 200 on that material and 404 on an
+individual's private content; the individual gets the mirror image. No cross-tenant id
+appeared in any body. One apparent anomaly — the owner getting **200** on
+`/chat/content/:id/messages` for a tenant material — was chased and dissolved: the session
+lookup is scoped by `userId` (`chat.controller.ts:110,129`), so the owner sees their own
+empty session, never the learner's private tutor conversation.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F108** (S3) [#56](https://github.com/KAMRONBEK/talim-ai/issues/56) | A student who signs themselves up is told their teacher made the account and to change a temporary password that doesn't exist. |
+| **F109** (S3) [#57](https://github.com/KAMRONBEK/talim-ai/issues/57) | An AI video gets longer while you watch it — 1:23 on slide 1, 1:41 on slide 5. |
+| **F110** (S3) [#58](https://github.com/KAMRONBEK/talim-ai/issues/58) | Resetting an email-less kid's password shows the password but not the username they sign in with. |
+| **F111** (S3) [#59](https://github.com/KAMRONBEK/talim-ai/issues/59) | AI slide decks silently drop slides — a deck promising three topics teaches one. |
+| **O109 – O115** | Deep links never return after login; register accepts blank and unbounded names; the login error is never announced; a video segment titled with the filename; correctness shown by colour alone; an English "Choose File" first in the AT order; login's rate-limit bucket shared across a NAT. |
+
+### Cycle close — R2026-08-25f
+
+**Cells advanced:** 3 driven to depth 3 and **newly `verified`** — register/ANON, login/ANON
+and video/INDIVIDUAL — taking the total **18 → 21** (counted from the file). A fourth,
+`tenant/students`, was already verified and was re-attacked to pin O108, which advances
+confidence rather than the count. **Sweep failures triaged:** 12, all already owned; no probe
+bugs. **Findings:** F108 · F109 · F110 · F111 · O109–O115. **Carried items closed:** O105 and
+O108, both promoted to findings after previous cycles had recorded them as undecidable.
+**Fixed and verified:** none — all four findings are structural or product-design calls,
+which is what the fix-discipline rule exists for. **Issues filed:** #56, #57, #58, #59.
+**Blocked-on-job:** none.
+
+**Five candidates dissolved before filing** — the running theme of this pass. The 429's
+English text never reaches a user; `trust proxy` is wired correctly so the rate limiter keys
+on real client IPs; the owner's 200 on a learner's chat endpoint is their own empty session;
+the "Choose File" control is `sr-only`; and the video endpoint returning null for three
+minutes was my own missing `?sectionId`.
+
+**A structural gap worth a human's attention:** instrumentation added by a QA cycle to help
+the *next* QA cycle must not be a `console.warn`. Last cycle's plan for O105 was unreadable
+by design, and only an unrelated line of evidence saved it. If the salvage path's drops
+matter, they belong on the deck row.
+
+**Test data left behind (honest disclosure).** `qa-joiner6@talim.local` — a real
+`TENANT_LEARNER` self-enrolled into QA Academy. Three junk `INDIVIDUAL` accounts from the
+register input attacks: `qa-ws-name-c6`, `qa-longname-c6`, `qa-xssname-c6`. One probe student
+**QA Kid Six / qakid6**, created and immediately deactivated. **QA Kid Five's password was
+reset** to a value nobody recorded — it was already a deactivated probe account, but its old
+credential is gone. One AI video generated on `uz-math.pdf`. And most consequentially: the
+`uz-math.pdf` slide deck was **regenerated twice** and is now the degraded **4-slide** version
+(`s1,s2,s5,s6`) rather than the 5-slide one earlier cycles graded — F111 is the reason, and
+the next cycle should not read that deck as a regression it caused.
+
+**Next up:** (1) the §G **CSV import** matrix (BOM, semicolon beyond #48, formula-injection
+escaping, the seat-boundary race) is the largest untouched owner flow; (2) **messaging** —
+broadcast → reply → mark-read, the IDOR matrix and XSS-in-body — is untouched and
+security-shaped, and today's denial matrix is the pattern to reuse; (3) **admin
+tutor-requests** approve/reject is a core §G flow never depth-verified, and approving one
+would finally give the isolation matrix a *second tenant with students* to run against, which
+is the one thing today's run could not test; (4) O110 and #34 look like one shared validation
+gap on name fields and could be confirmed together.
