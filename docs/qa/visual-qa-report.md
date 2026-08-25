@@ -3466,3 +3466,172 @@ IDOR matrix, XSS-in-body — remains untouched and security-shaped; (3) the new
 time: two orgs, each with students, and the "no cross-tenant id in any response body"
 charter has never been run with a second populated tenant; (4) `admin:subscriptions`
 CLS 0.666 survives the table fix and is still unexplained.
+
+---
+
+## Cycle R2026-08-25i — pass 1, cycle 9
+
+Three of this cycle's four candidates dissolved under checking, and the two that survived were
+both found the same way: by feeding the product its own output.
+
+### Triage — 11 sweep failures
+
+Nine were already owned (#40's and #38's `error-affordance` list, #44's students page, F103/#51's
+two `/tenant/assessments` cells). The two remaining were `admin:subscriptions` **CLS 0.666** —
+last cycle's closing line was that it "survives the table fix and is still unexplained."
+
+It was not a new defect. It was **F112 wearing a different probe's uniform**. Attributing the shift
+rather than scoring it named the cause on the first look: the `Subject` header went from 207px to
+**1270px** while `Type`/`Plan`/`Status`/`Source` collapsed to `0,0,0,0` — pushed out of the viewport.
+`qa-longname-c6`'s 600-character name sizes that column to **5331px** and the table to **5845px**
+inside a 1270px card. `/users` is the same table one search away: **6967px**, with Reset and Delete
+ending at x=7052 on a 1440px screen.
+
+Last cycle made those columns *reachable* (`overflow-x-auto`); it could not stop one row from
+sizing the table. **Fixed** (`1b0351a5`) with `overflow-wrap: anywhere` on `td`.
+
+The instructive part was the first attempt. Applying it to `th` as well *increased* the residual
+shift: header labels began breaking mid-word and the header row grew 44px → **125px**. Header text
+is ours and short, and its min-content width is precisely what keeps each column legible once the
+body stops dictating the layout — so `td` only, plus `white-space: nowrap` on `th` so the header
+height stops depending on the rows below it.
+
+`/subscriptions` **CLS 0.666 → 0.015**, table 5845px → 1270px. `/users` filtered to the long-name
+row: 6967px → 1270px, all eight columns present, Reset and Delete inside the viewport and
+hit-testing to themselves. Full ADMIN re-sweep: **38 cells, 0 failures**. The server half — an
+unbounded `name` on public register — stays open in
+[GHSA-jvw8-v32q-m53h](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-jvw8-v32q-m53h).
+
+### Messaging — depth 3, and an isolation matrix that holds
+
+Untouched by every previous cycle because it lives behind a header bell that route enumeration
+never opens. Owner → learner → reply → respond, driven through both bells and the
+`/tenant/students` compose dialog, each side re-checked after a real reload.
+
+**Two candidates dissolved, which is the point of §E.** The learner's badge read **6** against
+**5** threads, all unread — a badge you can never clear is exactly the shape of a real bug. It is
+not one: the sixth is an unread *in-thread tutor response*, counted by `getLearnerUnreadCount` and
+cleared by the same `markRecipientRead(threadId)` sweep. Expanding all five drove it to 0 and it
+stayed 0 through a reload. Separately, `/learner/messages` appeared to drop a reply that the UI
+was showing — the field is `thread`, not `replies`, and my probe asked for the wrong key.
+
+**The isolation charter holds, tested rather than assumed** — the first cycle able to run it with
+two populated tenants:
+
+| attempt | result |
+| --- | --- |
+| owner B marks / responds to tenant A's reply | 404 · 404 |
+| owner B sends to tenant A's learner | 400 *No valid active students selected* |
+| learner A marks / replies to tenant B's message | 404 · 404 |
+| learner A replies to a same-tenant thread addressed to someone else | **404** (invisible to them too) |
+| learner A calls the owner send / list endpoints | 403 · 403 |
+
+No tenant A thread, learner or owner id appears anywhere in B's response body. XSS holds too:
+`<img src=x onerror=…>` and `<script>` render as literal text in the learner bell, the tutor
+thread and the dashboard preview — **0 injected nodes**.
+
+**F45's cause found, at the boundary rather than in the dialog.** `z.string().min(1)` counts
+whitespace, so `POST /tenant/messages` with `'   '` returned **201** and delivered a real message:
+bell incremented, thread rendered as an empty card with a "Yangi" badge, and reading it the only
+way to clear a notification that says nothing. The reply endpoint had the same hole. The compose UI
+sends `body.trim()` and blocks empty — which is why clicking never reproduced it — but the UI is
+not the boundary, and QA Academy already held three such threads, one a month old. **Fixed**
+(`3968322e`): `.trim()` before `.min(1)`, so whitespace-only is 400 on both endpoints and an
+ordinary body with stray spaces is stored trimmed. Evidence added to #45 rather than a duplicate.
+
+### F118 (#65) — you cannot import the file Talim just exported you
+
+The CSV matrix was the largest untouched owner flow. The export side turned out already hardened
+and re-verified — formula-injection escaping (CWE-1236) and a UTF-8 BOM for Excel. So the round
+trip: select a student, click **Eksport**, capture exactly what the app writes, paste it into the
+real import dialog, click **Import qilish**.
+
+> **Yaratildi 0 · Qayta faollashtirildi 0 · O'tkazib yuborildi 0 · O'rin cheklovi 0 · Xatolar 2**
+> `1-qator · — XATO  Name is required`
+
+Nothing imported, on rows whose names are sitting in column 1.
+
+The export writes a **localized** header; `parseCsv` matches a hardcoded English list. `Ism,Email,Holat`
+trips the worst of both branches — `'email'` **is** in the list, so `hasHeader` becomes true and the
+header is correctly skipped, but `first.indexOf('name')` is **-1** because the column is called
+`Ism`, so every row fails the name guard.
+
+| export locale | header | re-import |
+| --- | --- | --- |
+| uz | `Ism,Email,Holat` | every row **error — Name is required** |
+| ru | `Имя,Email,Статус` | every row **error — Name is required** |
+| en | `Name,Email,Status` | **created** |
+
+It needs a header containing *one* recognised column but not `name`. That is exactly what our own
+export produces in both locales the product is actually for — and English works, which is why it
+survived. Filed, not fixed: the repair is a contract decision (canonical export headers vs
+localized aliases vs a positional fallback), not a patch.
+
+### F119 (#66) — a line break turns one student into two
+
+`csv.split(/\r?\n/)` runs *before* any quote handling, so `parseLine` — which tracks quotes
+correctly — can never see a quoted field continue onto the next line. `"Ali\nValiev C9",email`
+(legal RFC 4180, and what Excel writes whenever a cell holds a newline) yields two `created` rows:
+`Ali`, provisioned email-less with a generated username, and **`Valiev C9,qa.csvNl.C9@example.com`**
+— the trailing `"` opens a new quoted run that swallows the comma, gluing the email into the name.
+Both consume a seat, the real student is never created, and the report says `created` twice.
+
+Controls isolate it to the line split: quoted comma, CRLF and UTF-8 BOM all parse correctly
+(`String.trim` strips `U+FEFF`, so the BOM never reaches header detection).
+
+### F117 (#64) — a NUL byte is a 500, everywhere
+
+Found while running input attacks on the message body. `U+0000` is legal in JSON and passes every
+zod check; PostgreSQL rejects it in a `text` column, Prisma throws, nothing catches it. Confirmed on
+`POST /auth/register` (**unauthenticated**), `/tenant/students`, `/tenant/messages` and the learner
+reply. Reproduced 2/2 on fresh logins; the identical payload without the byte is 201 every time.
+Nothing is written and `/health` is 200 immediately after, so this is a wrong status code, not data
+loss. Filed not fixed — patching the two message schemas would leave register and students behind.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F118** (S2) [#65](https://github.com/KAMRONBEK/talim-ai/issues/65) | Exporting your class in Uzbek and importing it back creates nobody — every row says "Name is required". |
+| **F119** (S3) [#66](https://github.com/KAMRONBEK/talim-ai/issues/66) | A name with a line break imports as two students, one named after their own email. |
+| **F117** (S3) [#64](https://github.com/KAMRONBEK/talim-ai/issues/64) | A NUL byte in any text field returns 500 instead of a validation error — register included. |
+| **F112** CLS half → **fixed** | One 600-character name reflowed every admin table on load; CLS 0.666 → 0.015. |
+| **#45 cause → fixed** | A whitespace-only message body was accepted at the API and delivered as a blank card. |
+| **O120** | The CSV import error `Name is required` is untranslated English on an Uzbek page. |
+| charters re-run | Cross-tenant + same-tenant messaging isolation: 8 attempts, all denied, no id leakage. |
+
+### Cycle close — R2026-08-25i
+
+**Cells advanced:** 13 newly `verified` — 9 messaging (`tenant/dashboard` ×4, `learner/dashboard`
+×4, `tenant/students` uz-light-1440) and 4 CSV (`tenant/students` ×4 variants) — taking the total
+**29 → 39**. **Sweep failures triaged:** 11 — 9 already owned, 2 explained and fixed. **Fixed and
+verified:** 2 commits, each re-tested in the browser and confirmed by a targeted 38-cell sweep.
+**Issues filed:** #64, #65, #66 · **evidence added:** #45. **Blocked-on-job:** none.
+
+**The method note worth keeping.** Cycle 7's lesson was that a correct probe can be blind; cycle 8's
+was that the failure a probe reports and the defect it found are not always the same thing. This
+cycle is the third variation: **a probe that has been failing for four runs can be an old finding in
+a new costume.** `admin:subscriptions` CLS was carried as "unexplained" for four sweeps and was
+never a separate bug — the cheap move (chase the shift) would have missed that, and attributing it
+instead of scoring it named F112 in one look.
+
+The other one is cheaper to state: **three of four candidates this cycle died in §E**, two of them
+mine (a badge that looked stuck, an API that looked like it was dropping data — I had queried the
+wrong key). The rule that an S1/S2-shaped non-repro becomes `F<n> flaky` is what makes it safe to
+kill the rest quickly, and killing them is most of what kept this cycle honest.
+
+**Test data left behind (honest disclosure).** The CSV matrix created 7 students; all 7 were
+deactivated afterwards and QA Academy is back to its **6-active** baseline (soft delete, so the
+rows persist as inactive). Tenant A gained four messaging threads (`MARKER-C9-A` with its
+reply/response, `TRIMCHECK-C9`, a private thread to QA Joiner Six) plus two whitespace-only threads
+created *before* the trim fix landed — those two are deliberately left in place as #45's remaining
+half (there is still no way to delete a sent message). Tenant B gained one `TENANT-B-PRIVATE-C9`
+thread. `qa-longname-c6` is still deliberately in place as the advisory's reproducer.
+
+**Next up:** (1) **messaging bell polling + the deactivated-learner exclusion** — the round trip is
+proven but the "deactivated students are excluded" charter and the bell's poll interval are
+untested; (2) `parseCsv` now has three open defects (#48, #65, #66) that one rewrite would close
+together — worth promoting to `docs/PLANS.md` rather than fixing piecemeal in a QA cycle;
+(3) **admin impersonation** remains the largest untouched §G flow and carries a standing **S1
+hypothesis** in the candidate list; (4) F117's shared-zod-string-helper is the same shape as
+`parseCsv` — both are "validation thinner than the column", and #34 is a third.
