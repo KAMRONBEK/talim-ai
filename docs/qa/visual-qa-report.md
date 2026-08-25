@@ -3161,3 +3161,159 @@ tutor-requests** approve/reject is a core §G flow never depth-verified, and app
 would finally give the isolation matrix a *second tenant with students* to run against, which
 is the one thing today's run could not test; (4) O110 and #34 look like one shared validation
 gap on name fields and could be confirmed together.
+
+---
+
+## Cycle R2026-08-25g — pass 1, cycle 7
+
+Two things that had been sitting in the ledger as *unexplainable* were explained this cycle,
+and both turned out to have been mislabelled rather than hard. F91 was not flaky. And the probe
+that should have caught the cycle's worst defect could not see it by construction.
+
+### Triage — 16 sweep failures, and one of them was the whole cycle
+
+Fourteen were already owned: six `error-affordance` (#40's standing list plus admin's #38) and
+eight `layout-stability` (#44's students page, O98's learner dashboard, F103/#51's two
+`/tenant/assessments` cells). No probe cried wolf. The two new ones each opened a thread.
+
+**`admin:users.id` — `console-clean` + `http-ok`, a 500 on `GET /admin/users/:id`.** This is
+**F91/#43**, recorded across three cycles as *"intermittent, 37 retries clean"* and last cycle
+declared *"blocked on the API stack trace, which is not reachable from a QA cycle"*. It needed
+neither the stack trace nor another retry — **the retries were the reason it looked flaky.**
+
+`getSubscriptionForUser` was `findUnique`-then-`create` on `Subscription.userId`, which is
+unique (`subscription/user.ts:19-36`). The admin user-detail handler awaits it *and*
+`getUsageVsLimits(id)` in one `Promise.all` (`admin/users.controller.ts:182-185`) — and
+`getUsageVsLimits` calls it again (`user.ts:203`). **A single request races itself.** Both
+branches see no row, both INSERT, the loser throws `P2002`, and an unhandled Prisma error is a
+500. The winner's row now exists, so **every retry afterwards is 200 — forever.** That is the
+entire ghost, and it explains the one detail every sighting shared: the target was always a
+tenant student, the only population created without a personal `Subscription` row.
+
+Reproduced 3/3 deterministically — owner creates a student, first admin `GET` **500**, second
+**200** — and in the browser, where react-query's retry usually wins and hides it. **Fixed**
+(catch `P2002`, re-read) and verified: a fresh student is 200 on the first call and the first
+browser load is console-clean. `getSubscriptionForTenant` does not auto-create, so the tenant
+path never had this race.
+
+**`admin:subscriptions` — `layout-stability`, CLS 0.666 on both variants.** Chasing where the
+shift came from was worth more than the shift: the `Subject` column measured **5331px**.
+
+### F112 — one user's name disables the admin panel, and every probe was green
+
+`/users` renders a table **7270px wide inside a 1152px `overflow-hidden` wrapper**. Password,
+Role, Plan, Status, Content and **Actions** — impersonate, edit, reset password — are clipped
+away, and `document.documentElement.scrollWidth === window.innerWidth`, so **there is no
+scrollbar to reach them**. The operator cannot administer any user. `/subscriptions` is the
+same, hiding the Edit column.
+
+The cause is a single account whose `name` is 600 unbroken characters, created by *last cycle's
+own register input attack* (O110). `POST /auth/register` is public and puts no maximum on the
+field (`auth.controller.ts:19`). **Control:** filtering that one row out collapses the table to
+**1150px**, it fits, and the Actions buttons come back. One row, whole page.
+
+Because the trigger is an unauthenticated self-service action that degrades the operator
+surface, this is filed as a **draft advisory
+([GHSA-jvw8-v32q-m53h](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-jvw8-v32q-m53h))**,
+not a public issue.
+
+**The probe lesson is the durable part.** `no-horizontal-overflow` passed. It was *right* to
+pass: it asks "does the page scroll sideways", and it deliberately skips anything an ancestor
+clips (`qa-sweep.mjs:871`). But that leaves a blind spot with the opposite sign — when a
+container clips content far wider than itself, the overflow is **unreachable**, because the
+clipping is precisely what suppresses the scrollbar. §B0 says a false positive is a bug in the
+probe; a false negative is the same bug with worse consequences, so a **`no-clipped-content`**
+probe was added and validated on **59 cells**: it fires on exactly `/users` and
+`/subscriptions`, and is silent on the other 12 admin cells (every other list table included)
+and on all 45 owner + learner web cells.
+
+### `/subscriptions` driven to depth 3 — the money-and-time tour
+
+Opened the Edit drawer on `qa-individual` (FREE / ACTIVE / no period end) → set **Pro** with a
+period end of 2026-09-30 → Save → the row showed it → survived a real `location.reload()` →
+and the *user's own* `/billing/me` returned `INDIVIDUAL_PRO` with the Pro limit set, no
+re-login needed. Restored to FREE / ACTIVE / null and re-verified.
+
+**#14 confirmed behaviourally rather than by code reading.** Set the period end to
+**2020-01-01** — six and a half years expired, status still ACTIVE — and probed the quota gate
+with `POST /content/youtube` on a deliberately invalid URL. `enforceQuota` runs before the
+handler, so the status code names which plan's cap applied at zero AI spend:
+
+| Subscription state | Probe |
+| --- | --- |
+| Pro, ACTIVE, period end **2020-01-01** | **400** — passed the gate, unlimited generations |
+| Free, ACTIVE, period end null | **402** `QUOTA_EXCEEDED · GENERATION · used 5 · limit 5` |
+
+Same user, same minute. A subscription that expired in 2020 grants the full paid allowance.
+Evidence added to #14 rather than opening a duplicate.
+
+Server-side validation on that endpoint is otherwise solid — `'not-a-date'`, a number, an
+unknown `planCode` and an unknown `status` all 400 with clear zod errors. Only the semantic
+range is unbounded (**O116**: year 0001 and year 9999 both accepted).
+
+**F113 ([#60](https://github.com/KAMRONBEK/talim-ai/issues/60)):** the same page shows **API
+cost (30d) $0.167118** beside **API cost (MTD) $0.082394** for an account whose activity is
+entirely inside this month. `getUsageVsLimits` runs on `dayRange()` (`shared.ts:89-93`) —
+midnight local to now — while the panel is headed *"Usage vs limits (this month)"* and the tile
+says *MTD*. The window starts `2026-08-24T19:00Z`, which is local midnight today, not local
+month start. The per-day limits printed beside the counters are the giveaway: "Uploads 0 / 3"
+reads as three a month.
+
+**F114 ([#61](https://github.com/KAMRONBEK/talim-ai/issues/61)):** the backdate above logged as
+`{"toPlan":"INDIVIDUAL_PRO","fromPlan":"INDIVIDUAL_PRO","toStatus":"ACTIVE","fromStatus":"ACTIVE"}`
+— every recorded field unchanged. `currentPeriodEnd` is accepted and written
+(`subscription/user.ts:97-99`) but never audited (`admin/users.controller.ts:380-391`). Billing
+here is **manual**, so the audit log *is* the billing record. The organization equivalent logs
+`metadata: body` and does capture it, so the two admin paths disagree and the individual one is
+the lossy side.
+
+### Candidates dissolved
+
+The drawer's **Cancel is `type="submit"`** and looks like a save-in-disguise; changing the plan
+and clicking it left the subscription untouched (**O117**). And the audit log *does* record all
+six subscription edits with correct attribution and timestamps — it is only the date field that
+is missing.
+
+### Findings
+
+| | |
+| --- | --- |
+| **F112** (S2) [GHSA-jvw8-v32q-m53h](https://github.com/KAMRONBEK/talim-ai/security/advisories/GHSA-jvw8-v32q-m53h) | One user's 600-character name clips six columns — including every admin action button — out of an `overflow-hidden` table with no scrollbar to reach them. |
+| **F113** (S3) [#60](https://github.com/KAMRONBEK/talim-ai/issues/60) | "Usage vs limits (this month)" and "API cost (MTD)" both show today only, on a page that also shows a correct 30-day figure. |
+| **F114** (S3) [#61](https://github.com/KAMRONBEK/talim-ai/issues/61) | Backdating a subscription's period end six years is audited as a no-op. |
+| **F91 → fixed** [#43](https://github.com/KAMRONBEK/talim-ai/issues/43) | The admin user page 500s once per user, and only once — a request racing itself, not flakiness. |
+| **O116 – O117** | Period end accepts year 0001 and year 9999; the drawer's Cancel button is a submit. |
+
+### Cycle close — R2026-08-25g
+
+**Cells advanced:** 2 newly `verified` — `admin:users.id` and `admin:subscriptions` — taking
+the total **21 → 23**; `admin:users` advanced to `interacted` with F112 attached. **Sweep
+failures triaged:** 16 — 14 already owned, 2 new and both productive. **Findings:** F112 · F113
+· F114 · O116 · O117. **Fixed and verified:** F91/#43, the only one of the three long-standing
+"undecidable" items that was ever a code bug rather than a product-design call. **Issues
+filed:** #60, #61 · **advisory:** GHSA-jvw8-v32q-m53h · **evidence added:** #14, #43.
+**Blocked-on-job:** none.
+
+**Two method notes worth keeping.** First: *"intermittent" is a hypothesis, not a property.*
+F91 survived three cycles because each one re-ran the failing request and got a 200 — which was
+the bug's signature, not its absence. The question that cracked it was not "why is this flaky"
+but "what is true of the first call that is not true of the second". Second: a probe that is
+*correct* can still be *blind*, and its greenness then reads as evidence of health.
+`no-horizontal-overflow` was doing its job perfectly while the admin panel was unusable.
+
+**Test data left behind (honest disclosure).** Six probe students `qaf91g7*` in QA Academy,
+created to reproduce F91 and then deleted — but `DELETE /tenant/students/:id` is a soft delete,
+so they remain in the list as deactivated rows and still appear in admin tables.
+`qa-individual@talim.local`'s subscription was moved FREE → Pro → FREE and its period end set
+and cleared; final state verified identical to the baseline (FREE / ACTIVE / `currentPeriodEnd:
+null`). The `qa-longname-c6` account from last cycle is deliberately **left in place** — it is
+F112's reproducer, and deleting it would hide the defect from the next sweep.
+
+**Next up:** (1) the §G **CSV import** matrix (BOM, semicolon beyond #48, formula-injection
+escaping, the seat-boundary race) is still the largest untouched owner flow; (2) **messaging** —
+broadcast → reply → mark-read, IDOR matrix, XSS-in-body — remains untouched and
+security-shaped; (3) **admin tutor-requests** approve/reject is a core §G flow never
+depth-verified, and approving one would give the isolation matrix a second tenant with
+students; (4) F112's client half is the general fix — every admin list table has the same
+`overflow-hidden` + auto-layout construction and is spared only by luck of data, so the new
+`no-clipped-content` probe should be watched on the next full sweep for cells nobody expects.

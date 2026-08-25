@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T01:54:02.571Z",
+  "updatedAt": "2026-08-25T02:02:08.141Z",
   "runs": [
     {
       "runId": "2026-08-24T19-26-48-954Z",
@@ -214,7 +214,12 @@
       ],
       "sweepCount": 10,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25g",
+      "findings": [
+        "F112"
+      ],
+      "notes": "Sweep's layout-stability failure (CLS 0.666, both variants) triaged this cycle and explained: it is the visible edge of F112 -- one 600-char user name widens the table to ~5820px inside a 1152px overflow-hidden wrapper. Not a probe bug. The light-1440 twin was driven to depth 3; see its notes."
     },
     "admin:tenants/ADMIN/dark-1440": {
       "cellId": "admin:tenants/ADMIN/dark-1440",
@@ -440,8 +445,18 @@
         "layout-stability"
       ],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T02:02:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25g",
+      "tour_last": "Money-and-time tour — follow the plan, the period and the money all the way to what the user's own quota gate does",
+      "persona_last": "Operator (platform admin)",
+      "criterion": "reliability/data-integrity",
+      "findings": [
+        "F112",
+        "F114"
+      ],
+      "notes": "Depth 3: opened the Edit drawer on qa-individual (FREE/ACTIVE/no period end) -> set plan Pro + period end 2026-09-30 -> Save -> row showed Pro/ACTIVE/9/30/2026 -> survived a real location.reload() -> the user's OWN /billing/me returned INDIVIDUAL_PRO with the Pro limit set and no re-login needed. Restored to FREE/ACTIVE/null and re-verified. Input attacks on Period end (5): future date ok, 2020-01-01 (6y past) accepted silently, cleared to empty ok, and at the API 'not-a-date' -> 400 'Invalid datetime', numeric 0 -> 400 type error; unknown planCode and unknown status also 400 with clear zod enum errors, so server-side validation is solid and only the semantic RANGE is unbounded (year 0001 and year 9999 both 200 -- O116, harmless only because period end is not enforced at all). Money oracle, A/B on the same user one minute apart using POST /content/youtube with an invalid URL (enforceQuota runs before the handler, so 402 vs 400 reveals which plan's cap applied, at zero AI spend): expired-Pro -> 400 (passed the gate, unlimited), FREE -> 402 QUOTA_EXCEEDED used 5 limit 5. That is issue #14 confirmed behaviourally rather than by code reading; evidence added to #14. Candidate dissolved: the drawer's Cancel button is type=submit, but clicking it after changing the plan left the subscription untouched -- it is handled, not a save-in-disguise. Two findings from this cell: F112 (GHSA-jvw8-v32q-m53h, the table clipped past its overflow-hidden wrapper) and F114 (#61, the period-end edit audits as a no-op)."
     },
     "admin:tenants/ADMIN/light-1440": {
       "cellId": "admin:tenants/ADMIN/light-1440",
@@ -518,7 +533,16 @@
       ],
       "sweepCount": 12,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "depth": "interacted",
+      "lastDepthRun": "R2026-08-25g",
+      "tour_last": "Landmark tour — measure the table against its own container instead of against the viewport",
+      "persona_last": "Operator (platform admin)",
+      "criterion": "security/tenant-isolation",
+      "findings": [
+        "F112"
+      ],
+      "notes": "F112 (GHSA-jvw8-v32q-m53h): table is 7270px inside a 1152px overflow-hidden wrapper, so Password/Role/Plan/Status/Content/Actions are clipped away with document.scrollWidth == viewport, i.e. no scrollbar to reach them. Cause is one account with a 600-char unbroken name (public POST /auth/register has no max on `name`, auth.controller.ts:19). Control: filtering that one row out collapses the table to 1150px and the Actions buttons return -- so one row disables the whole page. Reproduced twice, the second time from a fully fresh browser and login. Every existing probe stayed green, which is why a new no-clipped-content probe was added to qa-sweep.mjs this cycle; it now fails this cell deterministically. Not yet depth 3 -- no mutate-and-persist round trip was driven here."
     },
     "admin:users.id/ADMIN/light-1440": {
       "cellId": "admin:users.id/ADMIN/light-1440",
