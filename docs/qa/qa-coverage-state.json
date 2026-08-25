@@ -3280,8 +3280,15 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:35:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25e",
+      "tour_last": "Two-actor round-trip (owner generates, learner reads) + deep-link denial matrix",
+      "persona_last": "Student who pastes a classmate's URL into the address bar",
+      "criterion": "security/tenant-isolation",
+      "notes": "R2026-08-25e depth 3, driven as a real owner->learner round-trip in TWO Playwright contexts (one context cannot hold two roles -- same origin, one localStorage; a first attempt silently ran the 'learner' checks as the owner and was discarded). Owner pressed 'Slayd yaratish' on the assigned YouTube material -> deck READY -> the assigned learner sees the same deck (6 slides, 'Kilometr va metr'), walks it with ArrowRight 1/6 -> 6/6, and it survives a real reload with 0 .katex-error and 0 raw $..$ spans. Role-differentiated controls on the IDENTICAL url: the owner's page offers 'Slayd yaratish' / 'Qayta yaratish' / 'Xulosa PDF' / 'Mashq'; the learner's only button is 'Chiqish'. Before generation the learner saw an honest empty state (\"O'qituvchingiz hali bu material uchun slayd yaratmagan\"), never a generate prompt. Denial matrix on a non-assigned id (the INDIVIDUAL's uz-math.pdf): UI deep-link bounces to /uz/learner/dashboard with no title or deck-text leak, before AND after reload; GET /content/:id/slides 404 'Content not found' (same text as a nonexistent id, so existence is not disclosed); GET /chat/content/:id/messages 404; POST /content/:id/slides 403 'Learners cannot upload, generate, or modify content' -- identical for assigned and non-assigned, so the role gate fires first and leaks nothing either. Never/Ever invariants checked: learner sees only assigned, no cross-tenant id in any body.",
+      "findings": []
     },
     "web:locale.content.id.video/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.content.id.video/TENANT_LEARNER/uz-light-1440",
