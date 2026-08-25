@@ -2298,8 +2298,20 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 12,
-      "depthVerifiedAt": null,
-      "status": "active"
+      "depthVerifiedAt": "2026-08-25T00:15:00.000Z",
+      "status": "active",
+      "depth": "verified",
+      "lastDepthRun": "R2026-08-25e",
+      "tour_last": "Intellectual + oracle tour (generate, grade every claim, regenerate, re-grade)",
+      "persona_last": "Uzbek 7th-grader revising for a maths test",
+      "criterion": "reliability/AI-output-quality",
+      "notes": "R2026-08-25e depth 3: empty state -> 'Slayd yaratish' -> deck READY in ~35s -> deck survives a real reload (browser_evaluate location.reload) -> 'Qayta yaratish' produces a genuinely different deck (new title, new question wording, different layouts; createdAt is preserved on upsert, which briefly looked like a no-op regenerate and was not). Keyboard walk works (ArrowRight/Left, stops at 5/5, no wraparound); the quickCheck MCQ reveals on any click. Oracle: 10/10 atomic claims match fixtures/uz-math-facts.md with zero trap answers -- 3-4-5 -> 5, D = b^2-4ac (not +4ac), x^2-5x+6=0 -> D=1 roots 2 and 3, 6/8 -> 10 with distractors 6/8/14 none of which is also correct, sets defined correctly. Surfaced F104 (#52, raw LaTeX on 3 of 5 slides), O105 (both decks name a topic no slide teaches; s4 missing 2/2 -- now instrumented) and O106 (quick-check never says whether you were right).",
+      "findings": [
+        "F104",
+        "O105",
+        "O106"
+      ],
+      "issue": 52
     },
     "web:locale.content.id.video/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.video/INDIVIDUAL/uz-light-1440",
