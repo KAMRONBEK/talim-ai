@@ -1,6 +1,6 @@
 {
   "_doc": "Durable continuous-QA queue. One entry per route×role×variant cell, merged across runs. lastSweptAt/lastResult/sweepCount/status are owned by scripts/qa-sweep.mjs; every OTHER field (depthVerifiedAt, issue, notes, owner, …) belongs to the LLM QA agent and is preserved untouched. Only a FULL sweep retires cells. This file IS committed, so keep rendered page text out of it — probe IDs and timestamps only.",
-  "updatedAt": "2026-08-25T04:11:21.826Z",
+  "updatedAt": "2026-08-25T04:18:26.963Z",
   "runs": [
     {
       "runId": "2026-08-24T22-04-31-506Z",
@@ -1668,7 +1668,7 @@
       "status": "active",
       "lastDepthRun": "R2026-08-25j",
       "criterion": "security/session-handling",
-      "notes": "expected-outcome triaged this cycle -> PROBE BUG, not a product defect. The page does bounce: components/auth-guard.tsx:18-23 redirects synchronously on mount with no token, and by hand the URL reaches /uz/login every time. What it does not do is beat the old fixed 5s waitForRedirect cap on a COLD `next dev` compile of the heaviest route in the app (PDF.js + katex + mermaid). Fixed in scripts/qa-sweep.mjs: the cap is now CELL_BUDGET.redirect (>=10s, scaled off --cell-timeout) and the measured wait is recorded as redirectWaitMs so a slow-but-correct bounce stays visible instead of silently passing. Verified by a targeted re-sweep of /[locale]/content/** x ANON+INDIVIDUAL x uz-light-1440: 12/12 pass, all six ANON cells land on /uz/login with redirectWaitMs 0."
+      "notes": "expected-outcome triaged this cycle -> PROBE BUG, not a product defect. The page does bounce: components/auth-guard.tsx:18-23 redirects synchronously on mount with no token, and by hand the URL reaches /uz/login every time. What it does not do is beat the old fixed 5s waitForRedirect cap on a COLD `next dev` compile of the heaviest route in the app (PDF.js + katex + mermaid). Fixed in scripts/qa-sweep.mjs: the cap is now CELL_BUDGET.redirect (>=10s, scaled off --cell-timeout) and the measured wait is recorded as redirectWaitMs so a slow-but-correct bounce stays visible instead of silently passing. Verified by a targeted re-sweep of /[locale]/content/** x ANON+INDIVIDUAL x uz-light-1440: 12/12 pass, all six ANON cells land on /uz/login with redirectWaitMs 0. | Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/ANON/uz-light-1440": {
       "cellId": "web:locale.content.id.podcast/ANON/uz-light-1440",
@@ -2242,7 +2242,8 @@
       "sweepCount": 15,
       "depthVerifiedAt": null,
       "status": "active",
-      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified."
+      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified. | Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose.",
+      "lastDepthRun": "R2026-08-25j"
     },
     "web:locale.content.id.podcast/INDIVIDUAL/ru-light-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/ru-light-1440",
@@ -2424,7 +2425,8 @@
       "sweepCount": 15,
       "depthVerifiedAt": null,
       "status": "active",
-      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified."
+      "notes": "Not depth-driven this cycle; the uz-light-1440 sibling was (R2026-08-25c). A variant nobody opened is not verified. | Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose.",
+      "lastDepthRun": "R2026-08-25j"
     },
     "web:locale.content.id.podcast/INDIVIDUAL/uz-dark-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/uz-dark-1440",
@@ -2625,17 +2627,17 @@
       "lastResult": "pass",
       "lastFailedProbes": [],
       "sweepCount": 18,
-      "depthVerifiedAt": "2026-08-25T05:10:00.000Z",
+      "depthVerifiedAt": "2026-08-25T04:18:26.963Z",
       "status": "active",
       "depth": "verified",
-      "lastDepthRun": "R2026-08-25c",
-      "tour_last": "Guidebook + fault-injection (grade POST forced to 500)",
-      "persona_last": "B2C solo learner grinding a deck",
-      "criterion": "reliability/data-integrity + AI oracle",
+      "lastDepthRun": "R2026-08-25j",
+      "tour_last": "Variability tour -- every grade, then the failure path, then a real reload",
+      "persona_last": "Solo B2C learner revising the night before",
+      "criterion": "reliability/data-integrity",
       "findings": [
         "F96"
       ],
-      "notes": "R2026-08-25c depth 3: generated a 12-card uz deck on uz-math.pdf -> flip -> grade -> REAL reload -> 11 due, card 0 reps=1 iv=1 ef=2.5 nextReviewAt +1d. SM-2 arithmetic checked on real rows: Good keeps EF 2.5, Easy raises it to 2.6, both give a 1-day first interval; 'Again' (Takrorlash) re-queues to the TAIL and does not increment the studied count (walked the whole queue to confirm the card came back last). ORACLE (fixtures/uz-math-facts.md): all 12 backs correct, ZERO trap answers -- no hypotenuse 7, no D=b^2+4ac, no intersection {1,4}, no 'Pifagor discovered it first'; cards 3 and 10 solved independently (3-4-5; D=25-24=1, roots 2 and 3). Uzbek: Latin throughout, no ru/en leakage, consistent ASCII apostrophes, consistent terminology. F96 found + FIXED here (54e18ccf): a failed grade advanced the queue anyway. NOTE for the next run: flashcards have NO sourceQuote column (only QuizQuestion/BankQuestion do), so the runbook's 'verify each flashcard back against its sourceQuote' is not checkable -- grade against the fixture instead. NOTE 2: a raw fetch from the browser without ?locale= returns {deck:null} because resolveLocale falls back to Accept-Language (en); that is the instrument, not a defect."
+      "notes": "R2026-08-25c depth 3: generated a 12-card uz deck on uz-math.pdf -> flip -> grade -> REAL reload -> 11 due, card 0 reps=1 iv=1 ef=2.5 nextReviewAt +1d. SM-2 arithmetic checked on real rows: Good keeps EF 2.5, Easy raises it to 2.6, both give a 1-day first interval; 'Again' (Takrorlash) re-queues to the TAIL and does not increment the studied count (walked the whole queue to confirm the card came back last). ORACLE (fixtures/uz-math-facts.md): all 12 backs correct, ZERO trap answers -- no hypotenuse 7, no D=b^2+4ac, no intersection {1,4}, no 'Pifagor discovered it first'; cards 3 and 10 solved independently (3-4-5; D=25-24=1, roots 2 and 3). Uzbek: Latin throughout, no ru/en leakage, consistent ASCII apostrophes, consistent terminology. F96 found + FIXED here (54e18ccf): a failed grade advanced the queue anyway. NOTE for the next run: flashcards have NO sourceQuote column (only QuizQuestion/BankQuestion do), so the runbook's 'verify each flashcard back against its sourceQuote' is not checkable -- grade against the fixture instead. NOTE 2: a raw fetch from the browser without ?locale= returns {deck:null} because resolveLocale falls back to Accept-Language (en); that is the instrument, not a defect. | Depth 3 on SRS flashcards, first time this flow has been driven. Oracle (section D) FIRST: all 12 uz-math.pdf cards graded against docs/qa/fixtures/uz-math-facts.md -- 12/12 factually correct, 0 trap answers (no gipotenuza 7, no D=b^2+4ac, no kesishma 1/4, and card 4 correctly says the relation predates Pythagoras). Independently re-solved card 10: x^2-5x+6=0 gives D=25-24=1 and roots (5+-1)/2 = 3 and 2, matching the key. Math is Unicode superscripts, not LaTeX, so there is no KaTeX surface here at all. Apostrophes are ASCII throughout this deck (the house convention) but the Venn deck uses curly U+2018/U+2019 -- the AI is inconsistent BETWEEN decks; that is O80, a product-wide decision, not a new finding. SM-2 arithmetic verified against the algorithm rather than eyeballed: card 1 at rep 1 / iv 1 / ef 2.5 graded Oson (q=5) became rep 2, iv 6, ef 2.6, nextReviewAt exactly +6 days. Card 2 graded Takrorlash (q=1) became rep 0, iv 0, due true -- it re-queues, and after a real reload it is the ONE due card the session resumes on. Depth 3 confirmed by that reload: card 1 still 2/6/2.6 and not due, card 2 still 0/0 and due. THE CHARTER HOLDS -- a grade failure must not advance the queue. With POST review aborted, the counter stayed 1/12 (11 left), the same card stayed on screen, the server state for it was untouched (rep 1, iv 1, nextReviewAt unchanged), and the page showed a real error affordance: 1 role=alert reading \"Baho saqlanmadi. Qayta urinib koring.\" That is the exact opposite of F85/#40 and is worth keeping as the positive control for what that fix should look like. Isolation matrix CLEAN: learner reviewing the individual card 404, owner 403, unauthenticated 401, unknown card id 404, invalid / trailing-space / uppercase grade all 400 with a proper zod enum error (no NUL-style 500), control 200 with the exact SM-2 result. The review route ignores its own contentId param and resolves the content from the card instead -- safer than trusting the URL, recorded here as deliberately correct. The owner 403 body points at /api/tenant/content, a path that does not exist: that is issue #33 and this is a second call site for it (evidence added there). NOT yet proven, left for the next cycle: the TENANT_LEARNER read path. The learner one assigned material has no deck, learners cannot generate one (assertCanGenerate blocks them), and the tutor route that can (tenant.routes.ts:126-130) would cost a real AI generation on a YouTube source with no fixture to grade against. Deliberately not spent."
     },
     "web:locale.content.id.podcast/INDIVIDUAL/uz-light-1440": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/uz-light-1440",
@@ -3109,7 +3111,9 @@
       "lastFailedProbes": [],
       "sweepCount": 15,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "notes": "Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/INDIVIDUAL/uz-light-390": {
       "cellId": "web:locale.content.id.podcast/INDIVIDUAL/uz-light-390",
@@ -3279,7 +3283,9 @@
       "lastFailedProbes": [],
       "sweepCount": 15,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "notes": "Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/TENANT_LEARNER/ru-light-1440": {
       "cellId": "web:locale.content.id.podcast/TENANT_LEARNER/ru-light-1440",
@@ -3462,7 +3468,9 @@
       "lastFailedProbes": [],
       "sweepCount": 15,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "notes": "Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/TENANT_LEARNER/uz-dark-1440": {
       "cellId": "web:locale.content.id.podcast/TENANT_LEARNER/uz-dark-1440",
@@ -3661,7 +3669,9 @@
       "lastFailedProbes": [],
       "sweepCount": 18,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "notes": "Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/TENANT_LEARNER/uz-light-1440": {
       "cellId": "web:locale.content.id.podcast/TENANT_LEARNER/uz-light-1440",
@@ -4098,7 +4108,9 @@
       "lastFailedProbes": [],
       "sweepCount": 15,
       "depthVerifiedAt": null,
-      "status": "active"
+      "status": "active",
+      "lastDepthRun": "R2026-08-25j",
+      "notes": "Flow driven to depth 3 on the INDIVIDUAL/uz-light-1440 cell this cycle (SM-2 arithmetic, again-requeues, grade-failure-does-not-advance, isolation matrix -- all hold). This variant/role was NOT itself driven, so it stays below verified on purpose."
     },
     "web:locale.content.id.podcast/TENANT_LEARNER/uz-light-390": {
       "cellId": "web:locale.content.id.podcast/TENANT_LEARNER/uz-light-390",
