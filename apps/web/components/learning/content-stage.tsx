@@ -317,7 +317,7 @@ export function ContentStage({
         <div
           role="group"
           aria-label={t('modeToggleLabel')}
-          className="flex shrink-0 items-center gap-1 rounded-xl bg-muted p-1"
+          className="flex min-w-0 items-center gap-1 overflow-x-auto rounded-xl bg-muted p-1"
         >
           {modes.map((mode) => (
             <button
@@ -326,7 +326,7 @@ export function ContentStage({
               aria-pressed={mode.active}
               onClick={mode.onSelect}
               className={cn(
-                'rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors',
+                'shrink-0 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors',
                 mode.active
                   ? 'bg-primary text-primary-foreground shadow-soft'
                   : 'text-muted-foreground hover:text-foreground',
