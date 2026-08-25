@@ -1176,7 +1176,8 @@
       "sending": "Sending…",
       "replyError": "Couldn't send your reply.",
       "you": "You"
-    }
+    },
+    "inactiveSubscriptionBanner": "Your class subscription is not active. You can keep studying — let your teacher know."
   },
   "slides": {
     "subtitle": "AI-generated slides from this material",

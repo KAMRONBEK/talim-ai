@@ -67,7 +67,16 @@ export async function getLearnerSummary(userId: string) {
   });
   if (!membership) throw new AppError(404, 'Organization not found');
 
-  const [assignedCount, progressRows, quizAttempts, streakDays] = await Promise.all([
+  const [orgSubscription, assignedCount, progressRows, quizAttempts, streakDays] = await Promise.all([
+    // Learners deliberately keep full access when the org's subscription lapses — a
+    // child should not lose their homework because an adult's paperwork is late, and
+    // activation here is manual, so a lapse is often administrative rather than a
+    // decision. But they should not be left guessing either, so the state is surfaced
+    // and the learner shell warns. See #13.
+    prisma.subscription.findUnique({
+      where: { tenantId: membership.tenantId },
+      select: { status: true },
+    }),
     prisma.contentAssignment.count({
       where: { learnerId: userId, content: { tenantId: membership.tenantId } },
     }),
@@ -91,6 +100,10 @@ export async function getLearnerSummary(userId: string) {
 
   return {
     tenantName: membership.tenant.name,
+    // TRIALING is an access-granting state, same as in requireActiveTenantSubscription;
+    // a missing row is not active either.
+    orgSubscriptionActive:
+      orgSubscription?.status === 'ACTIVE' || orgSubscription?.status === 'TRIALING',
     assignedCount,
     streakDays,
     avgQuizScore,
