@@ -14,7 +14,7 @@ import {
   getFreePlan,
   parseLimits,
 } from './shared.js';
-import { assertTenantQuota } from './tenant.js';
+import { assertTenantQuota, assertTenantTutorMessageQuota } from './tenant.js';
 
 export async function getSubscriptionForUser(userId: string): Promise<SubscriptionView> {
   let sub = await prisma.subscription.findUnique({
@@ -161,6 +161,13 @@ export async function assertQuota(
   if (options?.role === 'TENANT_LEARNER') {
     if (feature === 'UPLOAD' || feature === 'GENERATION' || feature === 'VIDEO' || feature === 'PODCAST') {
       throw new AppError(403, 'Learners cannot upload or generate content');
+    }
+    // Everything a learner IS allowed to spend belongs to their org's plan. Falling
+    // through to the personal path below would meter them against a FREE subscription
+    // auto-created in their name — see assertTenantTutorMessageQuota.
+    if (feature === 'TUTOR_MESSAGE' && options.tenantId) {
+      await assertTenantTutorMessageQuota(options.tenantId);
+      return;
     }
   }
 

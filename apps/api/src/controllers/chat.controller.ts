@@ -323,6 +323,10 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
       graphIntent,
       usage: {
         userId: req.user.userId,
+        // Without this every TUTOR_CHAT event was written with a null tenantId, so the
+        // org-scoped count in assertTenantQuota was permanently 0 and the tenant
+        // tutor-message cap could never fire for anyone.
+        tenantId: req.user.tenantId ?? null,
         feature: 'TUTOR_CHAT',
         metadata: { contentId: body.contentId, sessionId },
       },
