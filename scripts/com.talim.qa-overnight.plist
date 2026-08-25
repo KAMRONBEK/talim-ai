@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  launchd agent that runs the deep overnight QA on this Mac every night at 02:30.
+  launchd agent for CONTINUOUS QA (scripts/qa-overnight.sh).
 
-  It runs the login shell (`zsh -l`) so pnpm / docker / doppler / claude are on PATH
-  exactly as in your terminal. The qa-overnight.sh harness itself brings up the stack
-  (docker db/redis → migrate → 3 dev servers) and is resumable, so a missed night just
-  continues the next run. Requires at run time: Mac awake, Docker Desktop running,
-  Doppler logged in.
+  It is scheduled at 02:30 only because that is when the machine is free — the run is
+  NOT time-boxed. It sweeps the whole surface and keeps cycling until the coverage
+  queue in docs/qa/qa-coverage-state.json reports a complete pass, however long that
+  takes, then exits.
+
+  WHY ProgramArguments calls bash directly instead of `zsh -lc 'pnpm ...'`:
+  launchd starts a NON-INTERACTIVE shell, so ~/.zshrc is never sourced. When nvm was
+  only loaded from .zshrc this produced `command not found: pnpm` on 22 consecutive
+  scheduled runs, and because launchd discards the exit status nothing ever surfaced
+  it. We now set PATH explicitly below rather than depending on shell startup files.
+  Keep the nvm bin path in sync with the version in .nvmrc / your active nvm install.
 
   Install:
     cp scripts/com.talim.qa-overnight.plist ~/Library/LaunchAgents/
-    launchctl load ~/Library/LaunchAgents/com.talim.qa-overnight.plist
+    launchctl unload ~/Library/LaunchAgents/com.talim.qa-overnight.plist 2>/dev/null
+    launchctl load   ~/Library/LaunchAgents/com.talim.qa-overnight.plist
+  Let it run with the lid closed / machine asleep:
+    sudo pmset repeat wakeorpoweron MTWRFSU 02:25:00
+  Check what the last run did (the manifest is the black box recorder):
+    cat docs/qa/.qa-run-manifest.json
+  Run once now:
+    launchctl start com.talim.qa-overnight
   Disable:
     launchctl unload ~/Library/LaunchAgents/com.talim.qa-overnight.plist
-  Run once now (test):
-    launchctl start com.talim.qa-overnight
 -->
 <plist version="1.0">
 <dict>
@@ -23,20 +34,38 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/zsh</string>
-        <string>-lc</string>
-        <string>cd "$HOME/Documents/apps/talim-ai" &amp;&amp; pnpm qa:overnight</string>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>cd "$HOME/Documents/apps/talim-ai" &amp;&amp; exec bash scripts/qa-overnight.sh</string>
     </array>
 
-    <!-- 02:30 every day -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <!-- launchd gives a bare PATH. Everything the run shells out to must be here. -->
+        <key>PATH</key>
+        <string>/Users/kamuran/.nvm/versions/node/v22.23.2/bin:/Users/kamuran/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/kamuran</string>
+    </dict>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/kamuran/Documents/apps/talim-ai</string>
+
+    <!-- 02:30 daily. If the Mac was asleep, launchd fires on wake instead. -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key><integer>2</integer>
         <key>Minute</key><integer>30</integer>
     </dict>
 
-    <!-- Don't fire a burst of catch-up runs after the Mac wakes from a long sleep. -->
+    <!-- Don't fire a burst of catch-up runs after a long sleep. -->
     <key>RunAtLoad</key>
+    <false/>
+
+    <!-- A pass can run for hours; never let launchd restart it on top of itself. -->
+    <key>KeepAlive</key>
+    <false/>
+    <key>AbandonProcessGroup</key>
     <false/>
 
     <key>StandardOutPath</key>

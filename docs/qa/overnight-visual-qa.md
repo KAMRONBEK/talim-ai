@@ -1,196 +1,159 @@
-# Overnight DEEP QA Runbook — Talim AI
+# Continuous QA Runbook — Talim AI
 
-You are **Claude Code running UNATTENDED overnight**, driving a **real browser** (Playwright MCP)
-on branch `claude/visual-qa`. There is **no human to approve a prompt, unblock a wedge, or confirm
-a finding**. Everything you do must be **non-interactive, bounded, and reversible**.
+You are **Claude Code running UNATTENDED** on branch `claude/visual-qa`, driving a **real browser**
+(Playwright MCP). There is **no human to approve a prompt, unblock a wedge, or confirm a finding**.
+Everything you do must be **non-interactive, bounded, and reversible**.
 
-Your job is NOT a breadth-first "does it render" sweep. It is a **session-based, persona-driven,
-minute-detail exploration** that: **deprioritizes** saturated areas (but never permanently excludes
-them — a "green" cell is a hypothesis to re-attack from a fresh angle, not a settled fact, because
-this QA suite is fallible and misses things), hunts the post-2026-06-28 feature surface (question
-engine v2, SRS flashcards, GAME live, messaging, CSV import, impersonation), and files
-**evidence-backed findings** — never hallucinations, never enhancements.
+**This is not a nightly session with a time box.** It is a run-to-completion effort: the launcher
+(`scripts/qa-overnight.sh`) cycles sweep → agent → sweep until the coverage queue is empty, however
+many cycles that takes. Your job in each cycle is to move the queue toward empty. "I ran out of time"
+is not a thing here; "this cell is now verified" is.
 
-Three companion docs are your instruments; read them, do not duplicate them:
-- **`docs/qa/coverage-map.md`** — machine-readable frontier ledger (route×role×state cells + staleness).
-  **This is the planner's source of truth for what to test next.**
-- **`docs/qa/user-stories.md`** — durable equivalence-class spec + **findings ledger** (F-numbers,
-  `O<n>` observations, severities). Source of truth for EC results.
-- **`docs/qa/human-qa-playbook.md`** — how a human tests: personas, tour definitions, the
-  minute-detail catalog, the input-attack catalog, and the behavior-simulation recipes (R1–R15).
-- **`docs/qa/visual-qa-report.md`** — append-only **session journal**.
+## The two tiers — know which one you are
+
+| Tier | What | Who |
+| --- | --- | --- |
+| **Deterministic sweep** | `scripts/qa-sweep.mjs` visits **every** route × role × variant and runs a binary probe pack (console, 4xx/5xx, garbage text, raw i18n keys, overflow, broken images, KaTeX, CLS…). Zero LLM cost. | The machine. Already ran before you started. |
+| **Judgement** | Everything the sweep cannot decide: is this failure real, does this flow actually work end to end, is this Uzbek correct, does this quiz answer key hold, can two actors race this. | **You.** |
+
+**Do not spend turns doing the sweep's job.** If you find yourself eyeballing a page for overflow or
+counting console errors, stop — that already happened, deterministically, on every page. Read the
+verdicts and go where judgement is required.
+
+Your instruments — read them, don't duplicate them:
+- **`docs/qa/qa-sweep-verdicts.json`** — this cycle's machine findings. **Your first work queue.**
+- **`docs/qa/qa-coverage-state.json`** — the durable coverage queue (every cell, its status, staleness).
+  **This is the definition of "done".**
+- **`docs/qa/human-qa-playbook.md`** — personas, tour lenses, input-attack catalog, soap operas.
+- **`docs/qa/user-stories.md`** — durable EC spec + the F/O findings ledger.
+- **`docs/qa/visual-qa-report.md`** — append-only session journal.
 
 ---
 
 ## HARD RULES (never break)
-- **Branch only.** You are on `claude/visual-qa`. Commit only here. NEVER `git checkout main`,
-  NEVER `git push`, NEVER deploy. (Pushing `main` auto-deploys to prod.)
-- **Local only.** Test `localhost:3000` (web) + `localhost:3001` (admin). NEVER prod (`talim-ai.uz`).
+- **Branch only.** You are on `claude/visual-qa`. Commit only here. NEVER `git checkout main`, NEVER
+  push `main`, NEVER deploy. (The launcher may push *this* branch and open a PR; you do not.)
+- **Local only.** Test `localhost:3000` (web), `localhost:3001` (admin), `localhost:4000` (api).
+  NEVER prod (`talim-ai.uz`). Production is verified by `.github/workflows/health-monitor.yml`, not by you.
 - **Fix discipline.** Fix only **clear, low-risk** bugs and **verify** the fix. Anything ambiguous,
-  subjective, or structural → **LOG it, don't fix.** Enhancements are **forbidden as findings**.
-- **Verify before each commit:** `pnpm --filter @talim/types build && pnpm --filter @talim/web typecheck && pnpm --filter @talim/admin typecheck` pass; re-test the fixed thing in the browser. One logical fix per commit.
-- **Allowlist-only tools.** pnpm / node / npx / curl / doppler / bash / git-on-claude-branch +
+  subjective, or structural → **file it, don't fix it.** Enhancements are **forbidden as findings**.
+- **Verify before each commit:** `pnpm --filter @talim/types build && pnpm --filter @talim/web typecheck
+  && pnpm --filter @talim/admin typecheck` pass; re-test the fixed thing in the browser. One logical fix
+  per commit.
+- **Allowlist-only tools.** pnpm / node / npx / curl / doppler / gh / bash / git-on-claude-branch +
   `mcp__playwright__*`. `page.clock` fakes **only** the page clock — **never** use it against
   server-authoritative GAME/assessment timers.
-- **Resumable + checkpointed.** Assume context was compacted between sessions. Update
-  `coverage-map.md` and append a session report **before** the next charter; `git commit` per charter
-  so a crash loses ≤1 charter's work. Never restart from zero.
+- **Checkpoint constantly.** Assume context was compacted between cycles. Update
+  `qa-coverage-state.json` and commit **per unit of work**, so a crash loses one cell, not one cycle.
 
 ---
 
-## 0. Preflight & anti-stall (UNATTENDED — run FIRST, every session)
+## §0. Anti-stall (UNATTENDED)
 
-Everything here must be **non-interactive** — overnight there is no human to approve a prompt or
-recover a wedge. The launcher (`scripts/qa-overnight.sh`) already **brought up the stack** if it was
-down (infra → migrate → all 3 dev servers, no seed) and ran `scripts/qa-preflight.sh` before you
-start, so the stack is up and healthy when you begin; re-run the preflight yourself if anything
-wedges mid-run. Permissions are pre-granted in `.claude/settings.local.json` + the launcher's
-`--allowedTools`, so recovery commands never prompt.
+The launcher already brought the stack up and ran `scripts/qa-preflight.sh` before you started, so the
+stack is healthy when you begin. Re-run the preflight yourself if anything wedges mid-cycle.
 
-- **0.1 Preflight (one approved Bash call):** `bash scripts/qa-preflight.sh`. It verifies Doppler,
-  clears stale Playwright Chrome profile locks, health-gates web/admin/api (`:4000/health`==200,
-  `:3000/uz` & `:3001/login` in 200/307/308), recovers a **wedged web server in place** (free :3000
-  → `rm -rf apps/web/.next` → relaunch **only** `@talim/web`), and cleans `.playwright-mcp/` + repo-root
-  `*.png`. Preflight now **also** gates test-accounts (login health + auto-repair) and fixtures
-  (§4). **Exit 0 → proceed. Exit 1 → STOP**, write a `stack-down`/`web-wedge` note in
-  `visual-qa-report.md`; never keep navigating against a 500/unreachable stack. The user runs
-  `pnpm dev:all`; preflight **reuses** a healthy stack and never spawns a duplicate or relaunches
-  api/admin (those are the user's — if they're down, abort).
-
-- **0.2 Browser-lock fallback at navigate time.** `.mcp.json` runs Playwright `--isolated` so the
-  "Browser is already in use for …/mcp-chrome-<id>" lock should not recur. If it still does on the
-  FIRST `browser_navigate`, don't retry blindly — free it and re-navigate:
-  `node -e "require('child_process').execSync('ps ax -o pid=,command=').toString().split('\n').filter(l=>/mcp-chrome/.test(l)).map(l=>parseInt(l,10)).filter(Boolean).forEach(p=>{try{process.kill(p,'SIGTERM')}catch(e){}})"`
-  (`node -e process.kill` and the preflight script are pre-approved even where bare `kill` might not be.)
-
-- **0.3 Bounded waits only — never wait forever.** Cap every wait (navigation, element, generation).
-  **Login stall:** after submitting the login form, wait for the URL to leave `/login` with a **10s
-  cap**; if still on `/{locale}/login` but the auth token is in `localStorage` and `GET /auth/me` is
+- **0.1 Bounded waits only.** Cap every wait. **Login stall:** after submitting a login form, wait for
+  the URL to leave `/login` with a **10s cap**; if the token is in `localStorage` and `GET /auth/me` is
   200, navigate **directly** to the role home (INDIVIDUAL→`/dashboard`, LEARNER→`/learner/dashboard`,
-  OWNER→`/tenant/dashboard`, ADMIN→`:3001/dashboard`) and log `post-login redirect stalled — direct-nav
-  fallback`. **Infinite spinners** (a quiz/deck/content that never resolves): cap the wait (~30s),
-  screenshot, log a finding, and move on — never block the run. Never wait unbounded on a generation
-  job: cap the wall-clock, mark the cell `blocked-on-job`, continue, revisit at run end.
-  (F8/F59/F60 already mitigate the known ones; treat any new one the same way.)
-
-- **0.4 Health gate between roles.** Before each role switch (INDIVIDUAL→OWNER→LEARNER→ADMIN), re-poll
-  `GET :4000/health` (3 retries ×5s). On failure: re-run `bash scripts/qa-preflight.sh`; if it aborts,
-  STOP with `API health failure between <old> and <new>` rather than logging false 403/500 findings.
-
-- **0.5 Mid-run hygiene + browser recycle.** Every ~3 charters (or on any `Browser closed` /
-  connection error), `mcp__playwright__browser_close` then reopen to free memory / reconnect (log as an
-  observation, not a finding), and `rm -rf .playwright-mcp` + delete repo-root `*.png`. Before EVERY
-  commit, confirm `git status` shows no `.png` / `.playwright-mcp/` staged. Screenshots go under
-  **`docs/qa/screenshots/`** (gitignored) — never `/tmp`, never repo-root.
-
-- **0.6 Console-error triage (don't mask crashes, don't over-report).** Triage every console/network
-  event against **`docs/qa/console-baseline.json`** (per-route allowlist). ABORT-worthy: HTTP 500s,
-  React/hydration `Cannot read properties of undefined`, lost network/connection. Log-and-continue:
-  allowlisted noise (the known F3 summary-404 is a formal baseline entry) and intentional
-  401/403/404/409 from negative tests. Anything **not** allowlisted is a finding candidate; prune
-  baseline entries that stop appearing. After any admin role-change / password-change test, force
-  logout+login before testing `/tenant/*` — post-change 403s are expected (F11/F45/F46), not findings.
-
-- **0.7 Emulation hygiene + liveness.** Pre-arm `browser_handle_dialog` policy and
-  `grantPermissions(['clipboard-read','clipboard-write'])` at session start. Every emulation change
-  (throttle / offline / CPU / timezone / touch / `page.route` / `page.clock`) must be restored in a
-  `finally`. **Never repeat the same tool+args a 3rd time.** An unchanged snapshot after k actions =
-  "stuck → switch strategy or open a new tab." **Clear-before-type** (`browser_fill_form` or
-  select-all) — appended text is the #1 real infinite loop.
+  OWNER→`/tenant/dashboard`, ADMIN→`:3001/dashboard`). **Infinite spinners:** cap at ~30s, screenshot,
+  file, move on. Never wait unbounded on a generation job — cap it, mark the cell `blocked-on-job`,
+  continue, revisit at cycle end.
+- **0.2 Health gate between roles.** Before each role switch, re-poll `GET :4000/health` (3 × 5s). On
+  failure re-run `bash scripts/qa-preflight.sh`; if it aborts, STOP rather than logging false 403/500s.
+- **0.3 Hygiene + browser recycle.** Every ~3 cells (or on any `Browser closed` error),
+  `mcp__playwright__browser_close` then reopen. `rm -rf .playwright-mcp` and delete repo-root `*.png`.
+  Before EVERY commit confirm `git status` has no `.png` / `.playwright-mcp/` staged. Screenshots live
+  under **`docs/qa/screenshots/`** (gitignored).
+- **0.4 Emulation hygiene.** Pre-arm `browser_handle_dialog` and clipboard permissions at start. Every
+  emulation change (throttle / offline / CPU / timezone / touch / `page.route` / `page.clock`) is
+  restored in a `finally`. **Never repeat the same tool+args a 3rd time** — an unchanged snapshot after
+  k actions means "stuck → change strategy or open a new tab". **Clear-before-type** always; appended
+  text is the #1 real infinite loop.
+- **0.5 Console triage.** `docs/qa/console-baseline.json` is the per-route allowlist and the sweep
+  already applies it. Anything the sweep flagged is a candidate; don't re-triage what it cleared.
+  After any admin role-change / password-change test, force logout+login before testing `/tenant/*` —
+  post-change 403s are expected (F11/F45/F46), not findings.
 
 ---
 
-## 1. Test accounts (create if missing; record creds in the report)
-Preflight now health-checks and auto-repairs these; if it logged `WARN account-drift`, treat the
-affected role as report-only until repaired. Assert **INDIVIDUAL is still INDIVIDUAL** (never promoted).
-- ADMIN: `pnpm create-admin --email qa-admin@talim.local --password QaAdmin-12345`
-- OWNER: `pnpm create-tenant-owner` (note the org **join code**).
-- LEARNER: register at `/uz/register` with the join code (also test an email-less kid the owner creates).
-- INDIVIDUAL: register fresh at `/uz/register`.
-As INDIVIDUAL and OWNER, upload one small **PDF** (use `docs/qa/fixtures/uz-math.pdf`) and add one
-**YouTube** link so the **workspace** has both content types. **Do not attach content directly to the
-DB when the upload flow itself is under test** — drive the real UI.
-
----
-
-## §A. Boot ritual (every session start; assume context was compacted)
-1. Re-read this **rulebook** (HARD RULES + §0), `coverage-map.md`, and the **last 5 journal entries**
-   in `visual-qa-report.md`.
-2. `bash scripts/qa-preflight.sh` → exit 1 aborts the session.
-3. Compile the **Never/Ever invariant list** once per run from CLAUDE.md + docs — each is a standing
-   violation-charter you check opportunistically all night:
+## §A. Boot ritual (every cycle; assume context was compacted)
+1. Re-read this rulebook, `qa-coverage-state.json`, and the **last 3 journal entries**.
+2. Compile the **Never/Ever invariant list** — standing violation-charters you check opportunistically:
    - seat limit is **never** exceeded (create + import + join paths);
    - a **deactivated** learner loses content access **immediately**;
    - a learner sees **only assigned** materials;
    - **no cross-tenant id** appears in any response body;
-   - GAME/assessment timing is **server-authoritative** (client clock cannot cheat it).
-4. Derive **RCRCRC priorities**: `git log` since the last run's commit (**R**ecent / **R**epaired),
-   the F-ledger's repeat-offender modules (**C**hronic), and never-oracle-verified cells (**C**ore
-   that's never been counted). Feed these into charter risk.
+   - GAME/assessment timing is **server-authoritative**.
+3. Derive **RCRCRC priorities** from `git log` since the last cycle (**R**ecent / **R**epaired /
+   **C**hronic repeat-offender modules / **C**ore that has never been oracle-verified).
 
 ---
 
-## §B. Charter selection — the coverage frontier
-This **replaces** "test EVERY page exhaustively." Pick **6–10 charters** by sorting `coverage-map.md`
-cells by `staleness × risk − recentness`. Risk is boosted for: recently-changed code (RCRCRC), cells
-with prior findings, never-oracle-verified cells, and **all P0 gap areas** (the US-IND-26→34 /
-US-LEARNER-14→18 / US-OWNER-18→25 / US-ADMIN-08b/10/11 rows in `user-stories.md`).
+## §B0. TRIAGE FIRST — the sweep's failures are pre-evidenced work
 
-**Recently-tested cells are deprioritized, NOT excluded.** The `− recentness` term pushes just-tested
-cells down the queue so genuinely stale/high-risk work goes first — but a "green" (oracle-verified,
-low-staleness) cell is never off-limits, because this QA suite is fallible and a passing cell is only
-proven bug-free *under the angles tried so far*. So **every run reserves ≥2 charters as a
-"regression re-examination" bucket**: pick oracle-verified / low-staleness cells (prefer ones whose
-`findings` were fixes, and the highest-traffic happy paths) and **re-attack them from a NEW angle** —
-a different **persona × tour lens × state-variant × input-attack set** than `tour_last` records. The
-ONLY forbidden thing is a **literal replay** of the same persona+tour+steps (that adds no signal); a
-fresh lens on a green cell is exactly what surfaces what the last pass missed. When you re-examine a
-cell, update its `tour_last` so the next run rotates to yet another lens.
-Honor `QA_FOCUS` (comma list of areas/US-ids), `QA_TOUR` (pinned lens), `QA_PERSONA` (pinned persona),
-`QA_SOAP=1` (run only the soap-opera block).
+Open `docs/qa/qa-sweep-verdicts.json`. Every `fail` names a route, role, variant, and probe, and it
+already reproduced deterministically. This is the highest-value work in the cycle because the discovery
+cost is already paid.
 
-Write each charter in **Hendrickson form**, with **pre-committed, testable done-conditions you may
-NOT redefine mid-run**:
+For each failure: reproduce it once in the real browser → apply **§E** → then either fix it (clear +
+low-risk) or file it (§H). **Do not re-derive the evidence.** Your judgement call is *"is this a real
+defect, and what should happen about it"* — nothing more.
 
-> **Explore** `<route/feature>` **as** `<persona/role>` **with** `<tour lens + attack section + tool>`
-> **to discover** `<HTSM quality criterion>`. **Done when:** `<explicit checks>`.
+A failure you decide is a false positive is **a bug in the probe**, not a non-event: tighten the probe
+in `scripts/qa-sweep.mjs` (or add the route to `console-baseline.json`) and say so in the journal. A
+sweep that cries wolf gets ignored within a week, which costs more than the bug did.
 
-Guarantee **≥1 charter per run** for each criterion that matters: reliability/data-integrity,
+---
+
+## §B. THEN DEEPEN — drive cells to depth
+
+The sweep proves a page *renders correctly*. It cannot prove a *flow works*. That is the entire reason
+you exist. Take cells from `qa-coverage-state.json` whose status is not `verified`, sorted by
+`staleness × risk`, and drive each to **depth ≥3**:
+
+> **open → interact → submit → verify persisted after a real reload**
+> (`browser_evaluate(() => location.reload())`, *not* client-side nav)
+
+Depth enum: `swept < interacted < verified`. **"It rendered" is depth 1 and does not count.** Only mark
+a cell `verified` when it genuinely reached depth 3 — the coverage number is worthless the moment it
+starts lying, and the whole point of this system is that the number can be trusted.
+
+Guarantee **≥1 cell per cycle** for each criterion that matters: reliability/data-integrity,
 security/tenant-isolation, usability/keyboard-a11y, performance, charisma/visual.
 
+Per cell, tag **one persona + one tour lens** from the playbook, apply **≥3 input attacks** (playbook §4)
+on every field, and fire **one or two side-quests**: cancel a slow op, reload mid-flow,
+`browser_navigate_back` mid-wizard — then return to the main quest and observe recovery.
+
+Honour `QA_FOCUS` (areas/US-ids), `QA_TOUR` (pinned lens), `QA_PERSONA`, `QA_SOAP=1` (soap operas only).
+
+**A verified cell is not sealed forever.** When a pass completes, every cell's staleness resets and the
+next pass re-attacks it from a **different persona × tour × state × input-attack** than its `tour_last`.
+The only forbidden move is a literal replay of the same steps.
+
 ---
 
-## §C. Session loop (one charter; hard budget ≤35 browser actions or ~15 min)
-Tag every session with **one persona + one tour lens** from `human-qa-playbook.md`. For each
-interactive target inside the charter, run the **per-page ritual**:
+## §C. What only judgement can do
 
-1. `browser_navigate` (a **real route**, not soft-nav) → `browser_wait_for` → `browser_snapshot`
-   (structure oracle) → `browser_take_screenshot` (visual rubric).
-2. **Depth ≥3 before a cell counts as covered:** open → interact → submit → **verify persisted after
-   a real reload** (`browser_evaluate(() => location.reload())`, *not* client-side nav). "Viewed" is
-   depth 1, not coverage. The depth enum is `viewed < interacted < oracle-verified`.
-3. Apply the charter's **tour lens** (playbook §2.2) and **≥3 input attacks** (playbook §4) on
-   **every field** you encounter.
-4. **Vigilance scan after every `browser_click`/`browser_type`** (FSE-2025 discipline):
-   `browser_console_messages` (new errors vs baseline), `browser_network_requests` (4xx/5xx, duplicate
-   POSTs, non-localhost hosts), and a **snapshot-diff for change *outside* the acted region**.
-5. Fire **one or two side-quests** per flow: cancel a slow op, reload mid-flow, `browser_navigate_back`
-   mid-wizard, switch views — then return to the main quest and observe recovery.
-6. **Console/network dragnet** vs `console-baseline.json`: anything not allowlisted is a finding
-   candidate; prune baseline entries that no longer appear.
-7. Run the applicable **oracles (§D)** and the **self-verification protocol (§E)** before logging.
-8. Update the cell in `coverage-map.md` (depth, run-id, tour), append the **session report**, and
-   `git commit`.
-
-**Session report fields** (append to the journal before the next session starts):
-`charter · tour · persona · env(role/locale/theme/viewport) · action-log(terse) · TBS%(on-charter /
-bug-investigation / setup) · F<n> · O<n> curios · cells-touched · spawned-charters · blocked%`.
+These never appear in the sweep. Reserve real budget for them:
+- **Multi-turn and stateful flows.** Hold an actual conversation with the AI tutor — ask a follow-up
+  that only makes sense given the previous answer. The tutor ignoring chat history (F64) was invisible
+  to every single-shot check for months.
+- **Multi-actor races.** Two learners, owner + learner, admin + owner, concurrently. Seat limits,
+  `maxAttempts`, join-code races, GAME live control.
+- **Long sessions.** Do something for 20 minutes and see what rots — stale caches after mutation, lost
+  form state, tokens expiring mid-flow.
+- **Soap operas** (playbook §6) — run as dedicated cells, one each.
+- **Money and time.** Quota arithmetic, plan limits, period boundaries, anything with a currency or a
+  date on it.
 
 ---
 
 ## §D. Human-oracle rules (AI output + Uzbek quality)
+
 Every finding **names its oracle** (FEW HICCUPPS: **C**laims / **H**istory / product **s**elf-consistency
-/ **W**orld / **S**tandards). Rendering checks alone no longer pass §4:
+/ **W**orld / **S**tandards). Rendering checks alone do not pass:
 
 - **Factual grounding:** `curl :4000` for the source section text; extract 5–10 atomic claims from a
   generated summary/quiz/flashcard; each needs a **quotable supporting source sentence**. Independently
@@ -198,92 +161,107 @@ Every finding **names its oracle** (FEW HICCUPPS: **C**laims / **H**istory / pro
   **exactly one** defensible answer; verify each flashcard back against its `sourceQuote`.
 - **Metamorphic (tight only):** the keyed answer must grade **100%**, garbage **0%**. Loose
   paraphrase-stability is a smell → re-reproduce, don't file.
-- **Uzbek quality = decomposed rubric, not "is this good Uzbek?":** check wrong-language leakage,
-  Latin/Cyrillic script consistency, agglutinative-suffix correctness, calques, terminology
-  consistency. **Deterministic pre-checks** via `browser_evaluate`: regex for raw i18n keys
-  (`\b[a-z]+(\.[a-zA-Z]+){2,}\b`), English UI words on uz/ru pages, and **ASCII apostrophe in
-  `o'`/`g'`** where U+02BB is required. Log fluency doubts as **low-confidence `O<n>`** for morning
-  human review — never a confirmed F.
-- **Math/diagram = deterministic:** `document.querySelectorAll('.katex-error').length === 0`, console
-  scan for `KaTeX`, an `svg` present in every `.mermaid` container, and **no raw `$$` / `\frac` /
-  ```` ```mermaid ```` surviving** in snapshot text.
+- **Uzbek quality = decomposed rubric, never "is this good Uzbek?":** wrong-language leakage,
+  Latin/Cyrillic script consistency, agglutinative-suffix correctness, calques, terminology consistency.
+  Log fluency doubts as **low-confidence `O<n>`** for human review — never a confirmed F.
+- **Math/diagram = deterministic:** `.katex-error` count is 0, an `svg` in every `.mermaid` container,
+  no raw `$$` / `\frac` / ```` ```mermaid ```` surviving in snapshot text. (The sweep covers these on
+  every page — only investigate what it flagged.)
 
 ---
 
-## §E. Finding self-verification protocol (kills the 48–85% false-positive rate)
-Before you write any `F<n>`, ALL of the following:
-1. **Reproduce twice, once from fresh state** (new tab / re-login / fresh navigate). Non-repro →
-   `O<n>` flaky-suspect, not a finding.
-2. **Minimal repro** — strip to the shortest deterministic steps.
-3. **Environment-attribution check** — could this be Playwright / headless / unloaded-font / HMR /
-   dev-overlay / stale-login? Retry after `browser_wait_for` first.
-4. **Evidence bundle:** minimal steps + failure-moment screenshot + console excerpt + the **full
-   failing request** (`browser_network_request`) + expected-vs-actual + **severity**:
-   **S1** data-loss/isolation/security · **S2** key flow broken · **S3** visual/non-blocking ·
-   **S4** polish.
-5. **Dedup** against the ledger by route + symptom (no F31/F32/F33-style collisions).
-6. **Skeptic pass** — a fresh reading of *only the evidence bundle* must propose an innocent
-   explanation before the finding is accepted. **The same chain that found it may not confirm it.**
+## §E. Finding self-verification
 
-Reproducible + oracle-named + evidence-bundled → `F<n>`. Everything else (preferences, enhancements,
-one-off oddities, fluency doubts) → **`O<n>` Observations ledger**, which is **re-triaged every run**
-(fixes the "dismissed as artifact → real bug" failure). One-off curios are not discarded.
+Before you record any `F<n>`:
+1. **Reproduce twice, once from fresh state** (new tab / re-login / fresh navigate).
+2. **Minimal repro** — the shortest deterministic steps.
+3. **Environment-attribution check** — Playwright / headless / unloaded font / HMR / dev-overlay /
+   stale-login? Retry after `browser_wait_for` first.
+4. **Evidence bundle:** minimal steps + failure-moment screenshot + console excerpt + the **full failing
+   request** + expected-vs-actual + **severity**: **S1** data-loss/isolation/security · **S2** key flow
+   broken · **S3** visual/non-blocking · **S4** polish.
+5. **Dedup** against the ledger and against `gh issue list` by route + symptom.
+6. **Skeptic pass** — a fresh reading of *only the evidence bundle* must propose an innocent explanation
+   before the finding is accepted.
+
+> **The flaky rule.** If a candidate is **S1/S2-shaped** and fails "reproduce twice", it becomes
+> **`F<n>` marked flaky** — NOT a demoted observation. Intermittent bugs are still bugs, and the
+> old "non-repro → O" rule is exactly how the duplicate-PDF-panel defect sat unfixed from Run 2 until
+> a human hit it in Run 15. Only S3/S4-shaped non-repros go to the `O<n>` ledger.
+
+Everything else (preferences, enhancements, one-off oddities, fluency doubts) → **`O<n>` ledger**,
+re-triaged each pass.
 
 ---
 
-## §F. New-feature flow-lists (navigate these — the pre-v2 map missed them)
-Charters must actually reach the post-2026-06-28 surface. Minimum targets per area (full EC matrices
-live in `user-stories.md`):
+## §F. Filing — findings must leave this repo's markdown
 
-- **AUTH:** register valid/join-code/duplicate/weak-pw/mismatch; login valid/wrong/unknown/rate-limit;
-  role redirect; logout; locale-switch persistence; deep-link-while-logged-out bounce+return;
-  **orphaned-account on seat-full/invalid-code register** (F27/F43 charter).
-- **INDIVIDUAL (B2C):** upload PDF + YouTube → workspace (Material/Summary toggle, resizable divider
-  **persists after reload**, section nav, reading-progress ring). **Practice generator v2** — count
-  presets fill-to-count on thin content, each type chip alone + combined, Mixed default at 0 chips,
-  depth picker, quota-402→upgrade modal, double-submit dedupe, cancel mid-generation. **SRS flashcards**
-  — flip→Again/Hard/Good/Easy, Again re-queues, SM-2 persists after reload, **grade-failure must NOT
-  advance the queue** (12374e85), empty/complete states. **Chat/tutor** — streamed markdown + KaTeX +
-  mermaid/Manim/Desmos; select transcript + marquee PDF region → seeded chat. **Podcast** transcript
-  click-to-seek sync.
+A finding that only ever lands in a ledger is a finding nobody works on.
+
+- **Non-security findings → a GitHub issue.** `gh issue create --label bug --label S2|S3|S4 --label qa-found`.
+  Title = the symptom in the user's words, not the code cause. Body = **Symptom / Evidence (file:line) /
+  Reproduction / Notes**. Check `gh issue list --label qa-found` first so you don't duplicate; if it
+  exists, `gh issue comment` with the new evidence instead.
+- **Security- or abuse-shaped findings → NEVER a public issue.** This repository is **public**. Auth
+  bypasses, token/session handling, tenant-isolation holes, PII exposure, cheat vectors, and
+  spend-abuse vectors go to a **draft advisory**:
+  `gh api --method POST /repos/KAMRONBEK/talim-ai/security-advisories --input <file>` (needs
+  `summary`, `description`, `severity`, and a `vulnerabilities` array). Then reference the GHSA id in
+  the ledger. When in doubt, treat it as security.
+- Either way, mirror it into `user-stories.md` with its `F<n>` so the EC spec stays whole.
+
+---
+
+## §G. The surface you must reach
+
+The sweep enumerates routes from the filesystem, so new pages appear automatically. But these flows are
+**not** reachable by route enumeration and are yours to reach deliberately:
+
+- **AUTH:** register valid/join-code/duplicate/weak-pw; login valid/wrong/unknown/rate-limit; role
+  redirect; logout; locale-switch persistence; deep-link-while-logged-out bounce+return; orphaned
+  account on seat-full/invalid-code register.
+- **INDIVIDUAL:** upload PDF + YouTube → workspace (Material/Summary toggle, resizable divider persists
+  after reload, section nav, reading-progress ring). **Practice generator v2** — count presets on thin
+  content, each type chip alone + combined, Mixed at 0 chips, depth picker, quota-402 → upgrade modal,
+  double-submit dedupe, cancel mid-generation. **SRS flashcards** — flip → Again/Hard/Good/Easy, Again
+  re-queues, SM-2 persists after reload, grade-failure must NOT advance the queue. **Chat/tutor** —
+  streamed markdown + KaTeX + mermaid/Manim/Desmos, **multi-turn follow-ups**, select transcript +
+  marquee PDF region → seeded chat. Podcast transcript click-to-seek.
 - **TENANT_OWNER:** students (email + email-less kid → synthetic email + mustChangePassword; reset;
-  **deactivate→content-access-lost**; reactivate); join-code copy/regenerate; **assessment builder**
-  (all 8 structured types round-trip owner→learner, per-type editor + invalid-config validation, due
-  set/clear/past-reject, **submission-after-due blocked server-side**, **DRAFT-assign blocked** F56);
-  **GAME live** lifecycle (schedule→go-live→end-live with a concurrent learner via curl, live banner +
-  `?play` deep-link, forged `responseMs` clamp, leaderboard self-highlight + null-`durationMs`
-  tie-break); **messaging** (broadcast→reply→respond→mark-read, 60s bell poll, deactivated excluded,
-  **IDOR matrix** on `/messages/:id/{read,reply,respond}`, XSS-in-body escaped); **CSV import/export**
-  (valid paste + per-row errors, seat-boundary + concurrent-import race, BOM/semicolon/Windows-1251,
-  **formula-injection escaping** on export, 500-row perf); Elo-KT mastery up **and** down; material
-  detail per-part generate/retry/fail.
-- **TENANT_LEARNER:** mustChangePassword banner→change; dashboard shows ONLY assigned; assigned
-  workspace has **NO generate/upload/delete**; **structured question players** (grading truth-tables
-  incl. partial credit, ORDERING untouched-order-as-answer, MATCHING duplicate right-labels,
-  **DROPDOWN_CLOZE one chip-row per blank** a9b2c397, HOTSPOT/DRAG_DROP keyboard+touch a11y); GAME
-  live (`?play`, per-question timer, auto-lock, quiz-review strict breakdown); non-assigned id →
-  access denied; deactivation → access lost on next action.
+  deactivate→content-access-lost; reactivate); join-code copy/regenerate; **assessment builder** (all 8
+  structured types round-trip owner→learner, per-type editor + invalid-config validation, due
+  set/clear/past-reject, submission-after-due blocked server-side, DRAFT-assign blocked); **GAME live**
+  (schedule→go-live→end-live with a concurrent learner, live banner + `?play` deep-link, forged
+  `responseMs` clamp, leaderboard self-highlight + null-`durationMs` tie-break); **messaging**
+  (broadcast→reply→respond→mark-read, bell poll, deactivated excluded, IDOR matrix, XSS-in-body escaped);
+  **CSV import/export** (valid + per-row errors, seat-boundary + concurrent-import race, BOM/semicolon/
+  Windows-1251, formula-injection escaping, 500-row perf); Elo-KT mastery up **and** down; material
+  per-part generate/retry/fail.
+- **TENANT_LEARNER:** mustChangePassword banner→change **and the deep-link bypass**; dashboard shows ONLY
+  assigned; assigned workspace has **NO** generate/upload/delete; **structured players** (grading
+  truth-tables incl. partial credit, ORDERING untouched-order-as-answer, MATCHING duplicate right-labels,
+  DROPDOWN_CLOZE one chip-row per blank, HOTSPOT/DRAG_DROP keyboard+touch); GAME live; non-assigned id →
+  denied; deactivation → access lost on next action.
 - **ADMIN (:3001, no i18n):** dashboard; tutor-requests approve(seat limit→org+ACTIVE sub)/reject;
   **impersonation** (token single-use/expiry/tamper/deactivated-target, imp-session can't reach admin
   routes, audit attribution, exit restores admin); analytics 8 endpoints (empty-DB divide-by-zero,
-  `days` fuzz, 429 under rapid refresh); moderation (**FLAGGED media actually hidden** from learner or
-  label-only = product gap); users/tenants/content; **audit log** shows the actions you just performed.
+  `days` fuzz, 429 under rapid refresh); moderation (FLAGGED media actually hidden or label-only =
+  product gap); users/tenants/content; **audit log** shows the actions you just performed;
+  **`/health`** fast + deep pass.
 
 ---
 
-## §G. Rhythm & closeout
-- **Every 5th session: PROOF self-debrief** (Past / Results / Obstacles / Outlook / Feelings →
-  "which area do I trust least?") + re-read the mission; compute **on-charter %** (target **70–80%**).
-- **Budget checkpoints at 25 / 50 / 75 %:** write coverage-vs-spend, re-plan the charter queue.
-- **Soap operas (playbook §6) run as dedicated sessions** (one each). Under `QA_SOAP=1`, run only these.
-- **Last hour = bad-neighborhood pass** around **every bug found tonight** (bugs cluster).
-- **Schedule rate-limiter / auth-abuse tests LAST** (lockout risk); honor `QA_SKIP_RATELIMIT` on reruns
-  inside the 15-min window.
-- **Run end — ledger reconciliation gate (the run may not close while it fails):**
-  - reconcile `user-stories.md` — every touched EC statused, index ticked, **no journal↔ledger drift**;
-  - roll closed runs in the journal into a summary table (journal never exceeds one read window);
-  - emit a **staleness report** + **flaky-suspect list** + **blocked-on-job list** + **tomorrow's
-    charter queue**;
-  - promote any structural deferral into `docs/PLANS.md` with **owner + date**.
-- End with a plain summary: coverage (cells advanced, by depth), bugs fixed (commits), issues logged
-  (F + O), and the next-night charter queue. **Do not push.**
+## §H. Cycle close
+
+Short and mechanical — bookkeeping is not testing:
+1. Update every touched cell in `qa-coverage-state.json` (status, run-id, tour, findings).
+2. Append a session report to `visual-qa-report.md`:
+   `cells-advanced · sweep-failures-triaged · F<n> · O<n> · issues-filed · blocked-on-job · next-up`.
+3. Commit. Then stop — the launcher decides whether to run another cycle.
+
+At **pass** close (the launcher will tell you the queue is empty): roll the journal's closed cycles into
+a summary table so it never exceeds one read window, promote any structural deferral into `docs/PLANS.md`
+with an owner + date, and reset staleness for the next pass.
+
+**Do not** write TBS percentages, PROOF debriefs, budget checkpoints, EC-index tick-throughs, or
+staleness reports. `qa-coverage-state.json` is generated truth; narrating it is wasted budget.

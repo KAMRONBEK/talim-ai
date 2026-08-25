@@ -1,0 +1,437 @@
+name: Health monitor
+
+# Schedules the 31 self-diagnostic probes that already ship inside the API
+# (apps/api/src/services/health/probes/) but until now only ever ran when a human
+# happened to open the admin /health page. Two of them exist specifically because
+# production broke silently for days:
+#
+#   * plan-limits-drift  — prod Plan.limits carrying pre-rename keys, which the quota
+#                          code reads as "unlimited", silently switching every quota off
+#   * azure-speech-auth  — the TTS key 401ing, so every podcast failed in prod
+#
+# Both are FAST probes, so the every-30-minute pass covers them.
+#
+# What a scheduled pass actually costs (counted from the probe definitions, because
+# the header here previously claimed "free, read-only" and that was false):
+#
+#   fast — 26 probes, 48 runs/day
+#     · 1 POST /auth/login, 1 GET /admin/health/system
+#     · 4 outbound provider calls, of which ONE IS METERED: `openai-embedding`
+#       (aiProviders.probes.ts, deep:false) really embeds the string "salom" through
+#       text-embedding-3-small. The other three — OpenAI /v1/models, DeepSeek /models,
+#       OpenRouter /api/v1/key — are free liveness endpoints. Azure adds a fifth free
+#       voices/list call whenever AZURE_SPEECH_KEY is set; it is unset in prd since
+#       2026-08-23, so that probe returns `skipped` and calls nothing.
+#     · everything else (Postgres, Redis, storage, queues, manim/poppler, plan-limits)
+#       is internal to the box. rag-retrieval-selftest reuses a vector already in the
+#       DB, so it costs nothing either.
+#
+#   deep — all 31 probes, 1 run/day
+#     · everything above, plus 5 genuinely metered calls: DeepSeek, OpenAI TUTOR_MODEL
+#       and OpenRouter completions (max_tokens=1 each), one Azure TTS synthesis of
+#       "Salom", and rag-e2e-deep embedding a ~200-char query.
+#
+# The dollars are a rounding error either way (~$0.00000006 per fast pass). The reason
+# the fast pass moved from */15 to */30 is provider-side rate-limit exposure: ~200
+# outbound calls/day instead of ~480, bought with detection latency that is irrelevant
+# against incidents which historically ran for days.
+#
+# No notifications on purpose: the owner does not want to be pinged. A failed run plus
+# the job summary IS the record — which is why this file works so hard not to cry wolf.
+
+on:
+  schedule:
+    # Fast pass. Public repo, so Actions minutes are not billed.
+    - cron: '*/30 * * * *'
+    # Deep pass — spends provider credit. 03:17 UTC = 08:17 Tashkent, off the */30 grid.
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'fast = free probes plus one ~3-token embedding; deep = also the metered provider calls'
+        type: choice
+        options: [fast, deep]
+        default: fast
+
+# Never let a hung run stack up behind the schedule.
+concurrency:
+  group: health-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: System health
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      API_BASE: https://talim-ai.uz/api
+      DEEP_CRON: '17 3 * * *'
+      SCHEDULE: ${{ github.event.schedule }}
+      DISPATCH_MODE: ${{ inputs.mode }}
+      # A platform ADMIN account: /admin/health/* is behind authMiddleware +
+      # requireRole('ADMIN'), so there is no unauthenticated way to reach the probes.
+      ADMIN_EMAIL: ${{ secrets.HEALTH_ADMIN_EMAIL }}
+      ADMIN_PASSWORD: ${{ secrets.HEALTH_ADMIN_PASSWORD }}
+    steps:
+      # The previous verdict, so this run can tell "still broken" from "just broke".
+      # A cache entry (not an artifact) because it is a handful of words and needs no
+      # auth. v2: the state grew from one word to per-mode bookkeeping, and a v1 entry
+      # would be misparsed rather than ignored.
+      #
+      # continue-on-error on BOTH cache steps: a cache-service hiccup must never be
+      # the thing that turns a healthy production run red. A miss simply means this
+      # run has no baseline, which the judging below already handles.
+      - name: Restore health state
+        continue-on-error: true
+        uses: actions/cache/restore@v4
+        with:
+          path: .health-state
+          key: health-state-v2-${{ github.run_id }}
+          restore-keys: health-state-v2-
+
+      - name: Probe production health
+        id: probe
+        run: |
+          set -uo pipefail
+          mkdir -p .health-state
+
+          MODE=fast
+          if [ -n "${DISPATCH_MODE:-}" ]; then
+            MODE="$DISPATCH_MODE"
+          elif [ "${SCHEDULE:-}" = "$DEEP_CRON" ]; then
+            MODE=deep
+          fi
+
+          # How many consecutive runs must agree before this workflow goes red, and how
+          # long a standing, already-reported problem may stay quiet. Both are per-mode
+          # because the two passes run three orders of magnitude apart:
+          #
+          #   fast runs every 30 min, so a single blip is cheap to wait out (1 extra
+          #   run = 30 min) and re-asserting daily costs 1 red run per day.
+          #   deep runs once a day, so "wait for a second consecutive run" would mean
+          #   waiting 24h — and a once-a-day alert cannot be noisy by definition, so it
+          #   fires on first sighting instead.
+          if [ "$MODE" = "deep" ]; then
+            CONFIRM_RUNS=1
+            REASSERT_RUNS=7
+          else
+            CONFIRM_RUNS=2
+            REASSERT_RUNS=48
+          fi
+
+          # Per-mode state file. Writing one mode's file must never clobber the other's:
+          # a fast pass sees 26 probes and a deep pass 31, so a deep-only failure is
+          # legitimately invisible to fast runs. Sharing one baseline would let every
+          # fast run reset the deep streak, and a deep-only provider outage would then
+          # never be confirmed — a false green in the exact place this workflow exists.
+          STATE=".health-state/$MODE"
+          state_get() { sed -n "s/^$1=//p" "$STATE" 2>/dev/null | tail -1; }
+          state_put() {
+            printf 'baseline=%s\nanomaly=%s\nseen=%s\nalerted=%s\n' "$1" "$2" "$3" "$4" > "$STATE"
+          }
+
+          BASELINE=$(state_get baseline)
+          PREV_ANOMALY=$(state_get anomaly)
+          PREV_SEEN=$(state_get seen)
+          PREV_ALERTED=$(state_get alerted)
+          case "$PREV_SEEN" in ''|*[!0-9]*) PREV_SEEN=0 ;; esac
+          case "$PREV_ALERTED" in ''|*[!0-9]*) PREV_ALERTED=0 ;; esac
+          echo "mode=$MODE · baseline=${BASELINE:-none} · anomaly=${PREV_ANOMALY:-none} (seen ${PREV_SEEN}x, alerted at ${PREV_ALERTED})"
+
+          summary() { printf '%s\n' "$*" >> "$GITHUB_STEP_SUMMARY"; }
+          rank() {
+            case "$1" in
+              go) echo 0 ;;
+              issues) echo 1 ;;
+              critical) echo 2 ;;
+              *) echo 9 ;;
+            esac
+          }
+
+          # Judge one observation against the baseline and decide whether to go red.
+          #
+          # This replaces a one-word `verdict` file that every non-verdict path
+          # overwrote with `unreachable`. Because `unreachable` also meant "no
+          # baseline", and "no baseline" meant "must be `go`", a single DNS blip on
+          # login reset the baseline and the very next run failed a week-old, entirely
+          # unchanged `issues` as a fresh regression. At 96 runs/day that fired roughly
+          # daily, and a monitor that cries wolf daily is a monitor that gets disabled.
+          #
+          # Two invariants fix it:
+          #   1. A run that could not reach production learns NOTHING about the verdict,
+          #      so it must not write the baseline. Only a real verdict may.
+          #   2. Nothing goes red on a single sighting (on the fast pass): an anomaly has
+          #      to repeat on consecutive runs before it is believed.
+          #
+          # Still edge-triggered: red on the transition, not for as long as the problem
+          # lasts — re-failing every half hour is how the owner learns to ignore this.
+          # The one exception is the REASSERT window, because an unreachable production
+          # cannot promote a baseline, and "prod has been down for three days and every
+          # run since the first is green" is exactly the false green worth one red a day.
+          judge() {
+            local observed=$1
+            local bar=$BASELINE
+            case "$bar" in go|issues|critical) ;; *) bar=go ;; esac
+
+            # Anomalies are classed, not spelled out per verdict: a prod flapping
+            # issues -> critical -> issues would otherwise reset the streak on every
+            # run and never confirm anything.
+            local anomaly=''
+            if [ "$observed" = "unreachable" ]; then
+              anomaly='unreachable'
+            elif [ "$(rank "$observed")" -gt "$(rank "$bar")" ]; then
+              anomaly='regressed'
+            fi
+
+            if [ -z "$anomaly" ]; then
+              # At or better than the bar. The only healthy path that moves the
+              # baseline — this is how a recovery (critical -> issues) is recorded
+              # without being mistaken for a regression against a stale `go`.
+              state_put "$observed" '' 0 0
+              if [ "$observed" != "go" ]; then
+                summary ""
+                summary "_Unchanged from the recorded baseline \`$bar\` — already reported, not failing again._"
+                echo "::warning title=Production is still not clean::verdict is $observed and has not got worse; see the job summary. This run is green because the regression was already reported."
+              fi
+              return 0
+            fi
+
+            local seen=1 alerted=0
+            if [ "$anomaly" = "$PREV_ANOMALY" ]; then
+              seen=$((PREV_SEEN + 1))
+              alerted=$PREV_ALERTED
+            fi
+
+            if [ "$seen" -lt "$CONFIRM_RUNS" ]; then
+              # Deliberately keeps the OLD baseline: this observation is not trusted yet.
+              state_put "$BASELINE" "$anomaly" "$seen" "$alerted"
+              summary ""
+              summary "**Unconfirmed \`$anomaly\` ($observed), seen ${seen}/${CONFIRM_RUNS} run(s).** Not failing until the next run agrees."
+              echo "::warning title=Unconfirmed health anomaly::$observed against baseline $bar — waiting for a second consecutive run before calling it."
+              return 0
+            fi
+
+            if [ "$alerted" -gt 0 ] && [ $((seen - alerted)) -lt "$REASSERT_RUNS" ]; then
+              state_put "$BASELINE" "$anomaly" "$seen" "$alerted"
+              summary ""
+              summary "_Still \`$anomaly\` after ${seen} consecutive run(s) — already reported, re-asserting in $((REASSERT_RUNS - (seen - alerted))) run(s)._"
+              echo "::warning title=Production is still unreachable::$seen consecutive runs could not get a verdict; the first one already failed."
+              return 0
+            fi
+
+            if [ "$observed" = "unreachable" ]; then
+              # Baseline untouched on purpose — see invariant 1.
+              state_put "$BASELINE" "$anomaly" "$seen" "$seen"
+            else
+              # A confirmed regression is adopted as the new baseline so the next run
+              # compares against reality instead of reporting the same edge forever.
+              state_put "$observed" '' 0 0
+            fi
+            return 1
+          }
+
+          # Configuration faults are NOT routed through judge(). They are deterministic,
+          # they will not clear on their own, and while one is live nothing whatsoever is
+          # being monitored — a green run would be the worst false green available. So
+          # they fail every run until a human fixes them, and they leave the baseline
+          # exactly as they found it (this run learned nothing about production).
+          config_error() {
+            summary "## Health monitor — $1"
+            summary ""
+            summary "$2"
+            echo "::error title=$1::$3"
+          }
+
+          # Running this often, a single transient blip would otherwise read as an
+          # outage. Retry only 000 (DNS/TLS/connect) and 5xx; a 4xx is a real answer.
+          # FETCH_BODY is re-fed on every attempt: piping a body into this function
+          # instead would leave attempts 2 and 3 POSTing nothing at all.
+          FETCH_BODY=''
+          fetch() {
+            local out=$1 timeout=$2; shift 2
+            local code attempt
+            for attempt in 1 2 3; do
+              if [ -n "$FETCH_BODY" ]; then
+                code=$(printf '%s' "$FETCH_BODY" \
+                  | curl -sS --max-time "$timeout" -o "$out" -w '%{http_code}' "$@" --data @- 2>"${out}.err")
+              else
+                code=$(curl -sS --max-time "$timeout" -o "$out" -w '%{http_code}' "$@" 2>"${out}.err")
+              fi
+              code=${code:-000}
+              case "$code" in
+                000|5??) if [ "$attempt" -lt 3 ]; then sleep $(( attempt * 10 )); fi ;;
+                *) break ;;
+              esac
+            done
+            printf '%s' "$code"
+          }
+
+          if [ -z "${ADMIN_EMAIL:-}" ] || [ -z "${ADMIN_PASSWORD:-}" ]; then
+            config_error "not configured" \
+              "Set the \`HEALTH_ADMIN_EMAIL\` and \`HEALTH_ADMIN_PASSWORD\` repo secrets to a platform ADMIN account. Until then nothing is being monitored." \
+              "HEALTH_ADMIN_EMAIL / HEALTH_ADMIN_PASSWORD repo secrets are missing."
+            # Unconfigured is a real problem and must stay visible — but failing all 48
+            # fast passes a day turns the Actions tab into noise, and a monitor whose
+            # red runs are routine is a monitor nobody reads. So the once-daily deep
+            # pass (and any manual run) fails loudly; the fast passes annotate and stop.
+            if [ "$MODE" = "deep" ] || [ -n "${DISPATCH_MODE:-}" ]; then
+              exit 1
+            fi
+            echo "::warning::unconfigured — skipping this fast pass; the daily deep pass will fail loudly"
+            exit 0
+          fi
+
+          # --- authenticate ---------------------------------------------------
+          # The credential never touches the disk and never appears in any argv:
+          # jq reads it from the environment (--arg would have put it on jq's own
+          # command line) and curl reads the body from stdin. The previous version
+          # wrote login.json and deleted it two lines later, which left a plaintext
+          # production admin password on the runner for the rest of its life if the
+          # job was cancelled in between.
+          FETCH_BODY=$(jq -nc '{email: $ENV.ADMIN_EMAIL, password: $ENV.ADMIN_PASSWORD}')
+          login_code=$(fetch login.body 30 -X POST "$API_BASE/auth/login" \
+            -H 'Content-Type: application/json')
+          FETCH_BODY=''
+          TOKEN=$(jq -r '.token // empty' login.body 2>/dev/null || true)
+          ROLE=$(jq -r '.user.role // empty' login.body 2>/dev/null || true)
+          # Repo-secret masking does not cover a value minted at runtime, and this is a
+          # public repo with public logs — register the JWT so an accidental echo is
+          # redacted rather than published.
+          if [ -n "$TOKEN" ]; then echo "::add-mask::$TOKEN"; fi
+
+          if [ "$login_code" = "401" ] || [ "$login_code" = "403" ]; then
+            # The API answered and rejected these credentials, so this is a stale
+            # secret, not an outage: a transient failure cannot produce a 401 (a down
+            # API gives 000/502, a down database gives 500). Config fault, not judged.
+            config_error "stale credentials" \
+              "\`POST /auth/login\` returned **$login_code**. \`HEALTH_ADMIN_EMAIL\`/\`HEALTH_ADMIN_PASSWORD\` no longer match a production account — rotate them, or nothing is being monitored." \
+              "POST /auth/login returned $login_code — the HEALTH_ADMIN_* credentials are stale."
+            exit 1
+          fi
+          if [ "$login_code" != "200" ] || [ -z "$TOKEN" ]; then
+            summary "## Health monitor ($MODE) — could not sign in"
+            summary ""
+            summary "\`POST /auth/login\` returned **$login_code**: $(jq -r '.message // "(no message)"' login.body 2>/dev/null | head -c 200)"
+            summary ""
+            summary "Recorded baseline \`${BASELINE:-none}\` is left untouched — this run learned nothing about production."
+            tr -d '\r' < login.body.err || true
+            if judge unreachable; then
+              exit 0
+            fi
+            echo "::error title=Production auth is unreachable::POST /auth/login returned $login_code on consecutive runs."
+            exit 1
+          fi
+          rm -f login.body login.body.err
+
+          if [ "$ROLE" != "ADMIN" ]; then
+            config_error "wrong account role" \
+              "\`HEALTH_ADMIN_EMAIL\` resolves to role **$ROLE**; \`/admin/health/*\` requires \`ADMIN\`." \
+              "the account signed in as $ROLE; /admin/health/* requires ADMIN."
+            exit 1
+          fi
+
+          # --- probe ----------------------------------------------------------
+          # No `refresh=1` on the fast pass. It forced a full re-probe — including the
+          # metered embedding — on every single poll, and bought nothing: the API's
+          # report cache is 60s and this workflow runs every 30 minutes, so the cache is
+          # always cold by the time we ask. Without it, the one case where the cache DOES
+          # apply (an operator has the admin /health page open right now) hands us their
+          # report instead of stampeding a second sweep. A report up to 60s old is the
+          # same report for a 30-minute monitor.
+          # deep: POST, and the API rate-limits it server-side.
+          if [ "$MODE" = "deep" ]; then
+            code=$(fetch report.json 180 -X POST "$API_BASE/admin/health/deep" \
+              -H "Authorization: Bearer $TOKEN")
+          else
+            code=$(fetch report.json 90 "$API_BASE/admin/health/system" \
+              -H "Authorization: Bearer $TOKEN")
+          fi
+          VERDICT=$(jq -r '.verdict // empty' report.json 2>/dev/null || true)
+          case "$VERDICT" in
+            go|issues|critical) ;;
+            *) VERDICT='' ;;
+          esac
+          if [ "$code" != "200" ] || [ -z "$VERDICT" ]; then
+            summary "## Health monitor ($MODE) — no verdict"
+            summary ""
+            summary "The health endpoint returned **$code**. Recorded baseline \`${BASELINE:-none}\` is left untouched — this run learned nothing about production."
+            echo "--- body (first 500 bytes) ---"; head -c 500 report.json 2>/dev/null || true; echo
+            tr -d '\r' < report.json.err || true
+            if judge unreachable; then
+              exit 0
+            fi
+            echo "::error title=Health endpoint unreachable::$MODE health check returned HTTP $code with no verdict on consecutive runs."
+            exit 1
+          fi
+
+          # --- report ---------------------------------------------------------
+          # Every field defaulted: a report that is missing a counter must produce a
+          # readable summary, not a jq error where the table should be.
+          ISSUES=$(jq -r '.issueCount // 0' report.json 2>/dev/null || echo 0)
+          DOWN=$(jq -r '.downCount // 0' report.json 2>/dev/null || echo 0)
+          OK=$(jq -r '.okCount // 0' report.json 2>/dev/null || echo 0)
+          SKIPPED=$(jq -r '.skippedCount // 0' report.json 2>/dev/null || echo 0)
+          DURATION=$(jq -r '.durationMs // 0' report.json 2>/dev/null || echo 0)
+          CACHED=$(jq -r '.cached // false' report.json 2>/dev/null || echo false)
+
+          case "$VERDICT" in
+            go) ICON='✅' ;;
+            issues) ICON='⚠️' ;;
+            *) ICON='🔴' ;;
+          esac
+
+          summary "## $ICON Production health: \`$VERDICT\` ($MODE pass)"
+          summary ""
+          summary "$OK ok · $ISSUES issue(s) of which $DOWN down · $SKIPPED not configured · ${DURATION}ms · baseline \`${BASELINE:-none}\`"
+          if [ "$CACHED" = "true" ]; then
+            summary ""
+            summary "_Served from the API's report cache — no probe re-ran and no provider credit was spent on this run._"
+          fi
+
+          # Only the sanitized `message` is published, never `detail` (which carries key
+          # fingerprints and regions) — this repo is public and job summaries are too.
+          if [ "$ISSUES" != "0" ]; then
+            summary ""
+            summary "| status | check | what is wrong |"
+            summary "|---|---|---|"
+            jq -r '(.checks // [])[] | select(.status=="down" or .status=="degraded")
+              | "| \(.status) | \(.label) (`\(.id)`) | \((.message // "") | gsub("\\|"; "/")) |"' \
+              report.json >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          fi
+
+          # `(.readiness // [])[]` rather than `.readiness[]`: on a report without the
+          # field the bare form aborts with "Cannot iterate over null", which left
+          # NOT_READY empty, made the guard below true, and printed a jq error into the
+          # summary where the feature table belongs.
+          NOT_READY=$(jq -r '[(.readiness // [])[] | select(.status != "ok")] | length' report.json 2>/dev/null || echo 0)
+          case "$NOT_READY" in ''|*[!0-9]*) NOT_READY=0 ;; esac
+          if [ "$NOT_READY" != "0" ]; then
+            summary ""
+            summary "**Features that will not demo cleanly**"
+            summary ""
+            jq -r '(.readiness // [])[] | select(.status != "ok")
+              | "- **\(.label)** — \(.status): \((.summary // "") | gsub("\\|"; "/"))"' \
+              report.json >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          fi
+
+          if judge "$VERDICT"; then
+            echo "verdict $VERDICT (baseline ${BASELINE:-none}) — no confirmed regression"
+            exit 0
+          fi
+          summary ""
+          summary "**Regression: \`${BASELINE:-none}\` → \`$VERDICT\`, confirmed over $CONFIRM_RUNS consecutive run(s).**"
+          echo "::error title=Production health regressed::verdict went ${BASELINE:-none} -> $VERDICT ($ISSUES issue(s), $DOWN down)."
+          exit 1
+
+      # Always save, including after a failure: the next run must compare against what
+      # this one actually learned, otherwise one regression would fail every run forever.
+      - name: Save health state
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .health-state
+          key: health-state-v2-${{ github.run_id }}

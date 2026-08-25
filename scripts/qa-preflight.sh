@@ -56,6 +56,23 @@ healthy(){
   case "$(http http://localhost:${ADMIN}/login)" in 200|307|308) ;; *) return 1;; esac
   return 0
 }
+
+# Liveness is not identity. A 200/307 on :3000 only proves SOMETHING is listening —
+# during this harness's own build, :3000 was serving an entirely different Next.js
+# project and every health gate happily passed, which would have produced a full run
+# of confident nonsense. `<title>` comes from server-rendered metadata
+# (apps/web/app/[locale]/layout.tsx:14, apps/admin/app/layout.tsx:10) so it is present
+# even though the pages are client components.
+identity_ok(){ # $1 = url, $2 = expected <title>, $3 = label
+  local body
+  body="$(curl -s -L -m 10 "$1" 2>/dev/null)"
+  case "$body" in
+    *"<title>$2</title>"*) return 0 ;;
+    *) log "  IDENTITY MISMATCH on $3 ($1): expected <title>$2</title>"
+       log "  got: $(printf '%s' "$body" | grep -oE '<title>[^<]*</title>' | head -1)"
+       return 1 ;;
+  esac
+}
 poll(){ local n=0; until "$1"; do n=$((n+1)); [ "$n" -ge "$2" ] && return 1; sleep "$3"; done; return 0; }
 
 if poll healthy 5 3; then
@@ -82,6 +99,13 @@ else
     fail "web :$WEB unhealthy (code=$WCODE) but not a 5xx/wedge — needs a human"
   fi
 fi
+
+# --- 3a. Identity gate: is the thing on that port actually OUR app? --------------
+identity_ok "http://localhost:${WEB}/uz"      "Talim AI"    "web :$WEB" \
+  || fail "port $WEB is serving a different application — free it (bash scripts/free-dev-ports.sh) and start @talim/web"
+identity_ok "http://localhost:${ADMIN}/login" "Talim Admin" "admin :$ADMIN" \
+  || fail "port $ADMIN is serving a different application — free it and start @talim/admin"
+log "identity ok (web=Talim AI, admin=Talim Admin)"
 
 # --- 3b. Deterministic test fixtures (uz-math.pdf + answer key, CSV imports, ---
 # reject-path files). The overnight agent uploads KNOWN content so AI output can

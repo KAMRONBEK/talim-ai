@@ -1,14 +1,27 @@
 {
-  "_doc": "Per-route allowlisted console/network noise. Anything not listed is a finding; prune entries that stop appearing. Extend as the run confirms benign noise.",
+  "_doc": "Per-route allowlisted noise for scripts/qa-sweep.mjs. Anything not listed is a finding; prune entries that stop appearing. Three channels: 'console' (console/page errors), 'network' (4xx/5xx), 'text' (garbage-text / raw-i18n-key / raw-math probes). A waiver is a claim that the noise is understood — always give a reason.",
   "global": {
     "console": [],
-    "network": []
+    "network": [],
+    "text": []
   },
   "routes": {
     "/[locale]/content/[id]": {
       "console": [],
       "network": [
         { "match": "GET /summary", "status": 404, "reason": "F3 — summary not yet generated on first load; benign", "sev": "waived" }
+      ],
+      "text": []
+    },
+    "/[locale]/content/[id]/chat": {
+      "console": [],
+      "network": [],
+      "text": [
+        {
+          "match": "NaN",
+          "reason": "The AI tutor teaches programming and maths, so it renders 'NaN' as correct prose (e.g. 'NaN (Not a Number) tushunchasi'). Everywhere else NaN in the DOM is a real formatting bug, so this waiver is scoped to the tutor route only. Bare 'undefined' is already report-only globally for the same reason.",
+          "sev": "waived"
+        }
       ]
     }
   }

@@ -10,7 +10,7 @@ on:
 
 jobs:
   verify:
-    name: typecheck · lint
+    name: typecheck · lint · i18n
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -45,6 +45,18 @@ jobs:
       # @talim/eslint-config; web/admin use next/core-web-vitals via .eslintrc.json).
       - name: Lint
         run: pnpm lint
+
+      # i18n is a HARD gate too. Message-key parity across uz/en/ru is already
+      # perfect, so the bugs that reach users are display strings hardcoded in TSX
+      # that never went through next-intl (issue #27: the inactive-subscription
+      # banner renders English to Uzbek tutors). Neither typecheck nor lint can see
+      # those, and the browser QA loop only finds one if it happens to log in as
+      # the right role in the right locale. This parses apps/web instead.
+      # Also compiles every message as ICU so a broken plural can't ship.
+      # Exceptions live in docs/qa/i18n-allowlist.json; run the script locally
+      # (`node scripts/qa-i18n-check.mjs`) — it prints the fix for each finding.
+      - name: i18n gate
+        run: node scripts/qa-i18n-check.mjs
 
       # Warn-only: surface knowledge-graph drift so someone runs
       # scripts/graphify-refresh.sh. Never fails the build.

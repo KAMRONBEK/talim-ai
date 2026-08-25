@@ -987,7 +987,8 @@
       "respondPlaceholder": "Ushbu o'quvchiga javob yozing…",
       "respond": "Yuborish",
       "respondError": "Javobingizni yuborib bo'lmadi."
-    }
+    },
+    "inactiveSubscriptionBanner": "Tashkilotingiz obunasi faol emas. Material yuklash, o'quvchi qo'shish va AI yaratish cheklangan bo'lishi mumkin."
   },
   "learner": {
     "loading": "Yuklanmoqda...",
