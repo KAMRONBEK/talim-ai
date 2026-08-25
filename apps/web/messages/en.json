@@ -81,7 +81,8 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "termsNotice": "By continuing you agree to our Terms.",
-    "acceptTerms": "I agree to the <terms>Terms of Service</terms>."
+    "acceptTerms": "I agree to the <terms>Terms of Service</terms>.",
+    "forgotPassword": "Forgot your password? Students can ask their teacher to reset it. Otherwise contact"
   },
   "dashboard": {
     "readyToLearn": "Ready to learn, {name}?",

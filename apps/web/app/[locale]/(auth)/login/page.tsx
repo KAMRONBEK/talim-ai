@@ -134,6 +134,16 @@ export default function LoginPage() {
               </div>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
+            {/* There is no self-serve reset — no email transport exists — so a forgotten
+                password was a permanent lockout with nothing on screen to suggest a way
+                out (#10). Both audiences on this page need different answers: a student's
+                tutor can reset them today, a solo learner needs an admin. Say both. */}
+            <p className="text-xs text-muted-foreground">
+              {t('forgotPassword')}{' '}
+              <a href="mailto:support@talim.ai" className="font-medium text-primary hover:underline">
+                support@talim.ai
+              </a>
+            </p>
             <Button type="submit" className="h-12 w-full text-base" disabled={loading}>
               {loading ? t('signingIn') : t('signIn')}
             </Button>
