@@ -203,7 +203,7 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
           <p className="text-sm text-muted-foreground">Tenant owner and learners in this organization</p>
         </CardHeader>
         <CardContent>
-          <div className="overflow-hidden rounded-xl border border-border">
+          <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead className="bg-muted/40">
                 <tr>
