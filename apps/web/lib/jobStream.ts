@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from '@/lib/api';
+import { getApiBaseUrl, handleAuthFailure } from '@/lib/api';
 import type { JobEvent } from '@talim/types';
 
 type Listener = (e: JobEvent) => void;
@@ -52,6 +52,14 @@ class JobStream {
           },
           signal: this.abort.signal,
         });
+        // Without this, an expired token turned the reconnect loop into a permanent
+        // retry of a credential that will never work again — quietly, every second or
+        // so, for as long as the tab stayed open. stop() first so the loop cannot race
+        // the navigation and fire more 401s on the way out.
+        if (handleAuthFailure(res.status)) {
+          this.stop();
+          return;
+        }
         if (!res.ok || !res.body) throw new Error(`events ${res.status}`);
         this.backoff = 1000;
         this.setConnected(true); // fires the catch-up invalidation in the hook
