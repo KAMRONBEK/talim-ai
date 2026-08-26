@@ -107,7 +107,36 @@ function ChartCard({
   );
 }
 
-function ChartState({ loading, empty }: { loading: boolean; empty: boolean }) {
+/**
+ * A chart's non-data state.
+ *
+ * `failed` is deliberately separate from `empty`: these panels used to pass `isError` as
+ * `empty`, so a failed analytics request rendered "No data yet" — visually identical to a
+ * platform that genuinely has no data. On a dashboard whose whole job is to be a truthful
+ * summary, silently reporting absence as zero is the worst available answer.
+ */
+function ChartState({
+  loading,
+  empty,
+  failed,
+  what,
+  onRetry,
+  isRetrying,
+}: {
+  loading: boolean;
+  empty: boolean;
+  failed?: boolean;
+  what?: string;
+  onRetry?: () => void;
+  isRetrying?: boolean;
+}) {
+  if (failed) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <LoadFailed what={what ?? 'this panel'} onRetry={onRetry} isRetrying={isRetrying} />
+      </div>
+    );
+  }
   return (
     <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
       {loading ? 'Loading…' : empty ? 'No data yet' : null}
@@ -177,7 +206,14 @@ export default function AdminDashboardPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <ChartCard title="User growth" hint="Cumulative total (area) and new signups per month (line)">
           {growth.isLoading || growth.isError || growthData.length === 0 ? (
-            <ChartState loading={growth.isLoading} empty={growthData.length === 0 || growth.isError} />
+            <ChartState
+              loading={growth.isLoading}
+              empty={growthData.length === 0}
+              failed={growth.isError}
+              what="user growth"
+              onRetry={() => void growth.refetch()}
+              isRetrying={growth.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -212,7 +248,14 @@ export default function AdminDashboardPage() {
 
         <ChartCard title="Users by role">
           {byRole.isLoading || byRole.isError || roleData.length === 0 ? (
-            <ChartState loading={byRole.isLoading} empty={roleData.length === 0 || byRole.isError} />
+            <ChartState
+              loading={byRole.isLoading}
+              empty={roleData.length === 0}
+              failed={byRole.isError}
+              what="users by role"
+              onRetry={() => void byRole.refetch()}
+              isRetrying={byRole.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -237,7 +280,14 @@ export default function AdminDashboardPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <ChartCard title="Activation funnel" hint="Registered → activated → tutors → paid">
           {funnel.isLoading || funnel.isError || funnelData.length === 0 ? (
-            <ChartState loading={funnel.isLoading} empty={funnelData.length === 0 || funnel.isError} />
+            <ChartState
+              loading={funnel.isLoading}
+              empty={funnelData.length === 0}
+              failed={funnel.isError}
+              what="the activation funnel"
+              onRetry={() => void funnel.refetch()}
+              isRetrying={funnel.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -271,7 +321,11 @@ export default function AdminDashboardPage() {
           {contentByType.isLoading || contentByType.isError || typeData.length === 0 ? (
             <ChartState
               loading={contentByType.isLoading}
-              empty={typeData.length === 0 || contentByType.isError}
+              empty={typeData.length === 0}
+              failed={contentByType.isError}
+              what="content by type"
+              onRetry={() => void contentByType.refetch()}
+              isRetrying={contentByType.isFetching}
             />
           ) : (
             <div className="h-64">
