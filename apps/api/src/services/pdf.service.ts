@@ -29,10 +29,65 @@ async function extractWithPdfParse(buffer: Buffer): Promise<string> {
   return data?.text?.trim() ?? '';
 }
 
-/** Page count for plan gating. Returns null when the PDF can't be parsed. */
+/**
+ * What we know about a PDF's length, and — when we don't know — why not.
+ *
+ * The old probe returned `number | null` and swallowed the error, so the page cap treated "I
+ * couldn't read this" as "no opinion" and let the file through. Three different files bypassed a
+ * 100-page plan cap that way, all measured: a password-protected PDF (pdf-parse throws
+ * PasswordException), a truncated one (InvalidPDFException), and — worst — one whose catalog
+ * simply lies, declaring `/Count 0`. That last one parses "successfully" with numpages 0, so the
+ * cap compared 0 > 100 and passed, then the empty text sent it down the paid OCR ladder.
+ */
+export type PdfPageProbe = { pages: number } | { pages: null; reason: 'encrypted' | 'unreadable' };
+
+/** Ask poppler how many pages a PDF has. Independent of pdf.js, which is where the lies land. */
+async function pdfInfoPageCount(
+  buffer: Buffer,
+): Promise<{ pages: number } | { pages: null; encrypted: boolean }> {
+  const dir = await mkdtemp(join(tmpdir(), 'talim-pdfinfo-'));
+  try {
+    const inPath = join(dir, 'in.pdf');
+    await writeFile(inPath, buffer);
+    const { stdout, stderr } = await runCliCapture('pdfinfo', [inPath], 20_000);
+    const match = /^Pages:\s+(\d+)/m.exec(stdout);
+    const n = match ? Number(match[1]) : 0;
+    if (Number.isFinite(n) && n > 0) return { pages: n };
+    return { pages: null, encrypted: /incorrect password/i.test(stderr) };
+  } catch (err) {
+    // A non-zero exit still carries the reason on stderr — an encrypted file reports
+    // "Command Line Error: Incorrect password" and exits 1.
+    const message = err instanceof Error ? err.message : String(err);
+    return { pages: null, encrypted: /incorrect password/i.test(message) };
+  } finally {
+    await rm(dir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
+export async function probePdfPages(buffer: Buffer): Promise<PdfPageProbe> {
+  let passwordProtected = false;
+  try {
+    const info = await pdfParse(buffer);
+    const n = info?.numpages;
+    if (typeof n === 'number' && Number.isInteger(n) && n > 0) return { pages: n };
+    // Parsed, but claims zero pages — the catalog is lying. Fall through to poppler.
+  } catch (err) {
+    passwordProtected = (err as { name?: string })?.name === 'PasswordException';
+  }
+
+  const second = await pdfInfoPageCount(buffer);
+  if (second.pages !== null) return { pages: second.pages };
+  if (passwordProtected || second.encrypted) return { pages: null, reason: 'encrypted' };
+  return { pages: null, reason: 'unreadable' };
+}
+
+/**
+ * Plain page count for callers that only need a number (OCR batch splitting).
+ * Prefer `probePdfPages` anywhere a decision depends on NOT knowing.
+ */
 export async function getPdfPageCount(buffer: Buffer): Promise<number | null> {
-  const info = await pdfParse(buffer).catch(() => null);
-  return info?.numpages ?? null;
+  const probe = await probePdfPages(buffer);
+  return probe.pages;
 }
 
 /** OCR fallback for scanned/image PDFs via OpenAI vision. */
@@ -205,6 +260,35 @@ type OpenRouterFileAnnotation = {
   type?: string;
   file?: { content?: { type?: string; text?: string }[] };
 };
+
+/** Like runCli, but returns stdout/stderr — pdfinfo reports the page count on stdout. */
+function runCliCapture(
+  cmd: string,
+  args: string[],
+  timeoutMs = 60_000,
+): Promise<{ stdout: string; stderr: string }> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(cmd, args);
+    let stdout = '';
+    let stderr = '';
+    proc.stdout.on('data', (d) => {
+      stdout += d.toString();
+    });
+    proc.stderr.on('data', (d) => {
+      stderr += d.toString();
+    });
+    const timer = setTimeout(() => proc.kill('SIGKILL'), timeoutMs);
+    proc.on('error', (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
+    proc.on('close', (code) => {
+      clearTimeout(timer);
+      if (code === 0) resolve({ stdout, stderr });
+      else reject(new Error(`${cmd} exited ${code}: ${stderr.slice(0, 200)}`));
+    });
+  });
+}
 
 /** Run a CLI tool to completion, rejecting on non-zero exit. */
 function runCli(cmd: string, args: string[], timeoutMs = 120_000): Promise<void> {

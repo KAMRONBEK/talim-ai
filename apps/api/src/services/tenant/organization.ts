@@ -77,6 +77,31 @@ export async function regenerateJoinCode(ownerId: string) {
  * makes the user a TENANT_LEARNER, and (since a student belongs to one tutor)
  * deactivates any prior learner memberships in other tenants.
  */
+/**
+ * Signup pre-flight: resolve a join code and confirm the class can actually take someone,
+ * WITHOUT touching any user.
+ *
+ * Registration creates the account first and joins second, so every rule that only
+ * `joinTenantByCode` enforced fired *after* the insert — and nothing rolled it back. Signing up
+ * for a class that was already full left a stranded INDIVIDUAL account holding the email
+ * hostage: retrying returned "Email already registered", and the app has no join-class screen
+ * to recover through.
+ *
+ * Lives here rather than in the auth controller so join rules stay in the tenant service.
+ * `joinTenantByCode` keeps its own checks — it is the authoritative join for
+ * `POST /auth/join-class`, which calls the service directly. Checking twice is the existing
+ * pattern; see createStudent's unconditional up-front seat assert.
+ */
+export async function assertJoinableByCode(joinCode: string): Promise<{ tenantId: string }> {
+  const code = joinCode.trim().toUpperCase();
+  if (!code) throw new AppError(400, 'Join code required');
+  const tenant = await prisma.tenant.findUnique({ where: { joinCode: code } });
+  if (!tenant) throw new AppError(404, 'Invalid join code');
+  // Also runs requireActiveTenantSubscription, so a lapsed org is refused before the insert too.
+  await assertTenantQuota(tenant.id, 'STUDENT');
+  return { tenantId: tenant.id };
+}
+
 export async function joinTenantByCode(
   userId: string,
   joinCode: string,

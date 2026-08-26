@@ -12,8 +12,10 @@ import { decodeUploadFilename } from '../lib/filename.js';
 import { extractRegionTextFromImage } from '../services/pdf.service.js';
 import { assertQuota } from '../services/subscription.service.js';
 import { assertTenantOwnsContent } from '../services/contentAccess.service.js';
+import { getFileLimitsForTenant } from '../services/subscription.service.js';
 import {
   enqueueContentIngest,
+  assertFileWithinPlan,
   enqueueReparse,
   loadOrBackfillTranscript,
   ocrRegionSchema,
@@ -78,6 +80,12 @@ export async function uploadContent(req: AuthenticatedRequest, res: Response): P
   const originalName = decodeUploadFilename(req.file.originalname);
   const isPdf = req.file.mimetype === 'application/pdf' || originalName.endsWith('.pdf');
   const type = isPdf ? ContentType.PDF : ContentType.SLIDE;
+
+  // This path had NO file gate at all — page and size caps were enforced only on the INDIVIDUAL
+  // upload, so a tutor's plan limits meant nothing here.
+  const fileLimits = await getFileLimitsForTenant(tenantId);
+  await assertFileWithinPlan(fileLimits, req.file.size, req.file.buffer, isPdf);
+
   const storagePath = await storageService.save(req.file.buffer, originalName);
 
   const content = await prisma.content.create({

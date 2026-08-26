@@ -9,13 +9,12 @@ import { cancelContentJobs } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { decodeUploadFilename } from '../lib/filename.js';
-import { extractRegionTextFromImage, getPdfPageCount } from '../services/pdf.service.js';
+import { extractRegionTextFromImage } from '../services/pdf.service.js';
 import {
   assertQuota,
   getFileLimitsForUser,
   getFileLimitsForTenant,
 } from '../services/subscription.service.js';
-import { PlanFileLimitError } from '../middleware/error.middleware.js';
 import {
   assertCanAccessContent,
   assertCanMutateContent,
@@ -23,6 +22,7 @@ import {
 } from '../services/contentAccess.service.js';
 import {
   enqueueContentIngest,
+  assertFileWithinPlan,
   enqueueReparse,
   loadOrBackfillTranscript,
   ocrRegionSchema,
@@ -111,22 +111,7 @@ export async function uploadContent(req: AuthenticatedRequest, res: Response): P
     req.user.role === 'TENANT_OWNER' && req.user.tenantId
       ? await getFileLimitsForTenant(req.user.tenantId)
       : await getFileLimitsForUser(req.user.userId);
-  const fileSizeMb = req.file.size / (1024 * 1024);
-  let pages: number | null = null;
-  if (isPdf) pages = await getPdfPageCount(req.file.buffer);
-
-  const overSize = fileLimits.maxFileSizeMb != null && fileSizeMb > fileLimits.maxFileSizeMb;
-  const overPages =
-    fileLimits.maxPagesPerFile != null && pages != null && pages > fileLimits.maxPagesPerFile;
-  if (overSize || overPages) {
-    throw new PlanFileLimitError(
-      fileLimits.maxPagesPerFile,
-      fileLimits.maxFileSizeMb,
-      pages,
-      Math.round(fileSizeMb * 10) / 10,
-      fileLimits.upgradePlanCode,
-    );
-  }
+  await assertFileWithinPlan(fileLimits, req.file.size, req.file.buffer, isPdf);
 
   const storagePath = await storageService.save(req.file.buffer, originalName);
 

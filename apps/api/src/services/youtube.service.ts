@@ -106,20 +106,68 @@ function fallbackTextSegments(text: string): TranscriptSegmentInput[] {
   ];
 }
 
+/**
+ * Longest video we will download and transcribe.
+ *
+ * Not an arbitrary product limit — it is the point past which the request cannot succeed. OpenAI
+ * caps audio/transcriptions at 26,214,400 bytes, and even at the low-bitrate format selected
+ * below a longer video exceeds it. Without this the job downloaded for minutes, spiked the RAM of
+ * a process that is simultaneously the API and all ten Bull workers, and then always 413'd.
+ */
+const MAX_TRANSCRIBE_DURATION_SEC = 30 * 60;
+
+/** Hard byte ceiling, under OpenAI's 26,214,400. contentLength can be absent or simply wrong. */
+const MAX_TRANSCRIBE_AUDIO_BYTES = 24 * 1024 * 1024;
+
+/** Thrown before (or during) download when a video cannot be transcribed at any cost. */
+export class VideoTooLongError extends Error {
+  readonly code = 'VIDEO_TOO_LONG' as const;
+
+  constructor(
+    readonly durationSec: number | null,
+    readonly limitSec: number = MAX_TRANSCRIBE_DURATION_SEC,
+  ) {
+    super('This video is too long to transcribe');
+    this.name = 'VideoTooLongError';
+  }
+}
+
 async function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
   const chunks: Buffer[] = [];
+  let total = 0;
   for await (const chunk of stream) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+    const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    total += buf.length;
+    // Bound worst-case RSS per job regardless of what the metadata claimed. Destroying the
+    // stream stops the download rather than letting it run to completion just to be rejected.
+    if (total > MAX_TRANSCRIBE_AUDIO_BYTES) {
+      (stream as NodeJS.ReadableStream & { destroy?: () => void }).destroy?.();
+      throw new VideoTooLongError(null);
+    }
+    chunks.push(buf);
   }
   return Buffer.concat(chunks);
 }
 
-async function extractYoutubeAudio(url: string): Promise<Buffer> {
-  const stream = ytdl(url, {
-    quality: 'highestaudio',
-    filter: 'audioonly',
-  });
-  return streamToBuffer(stream);
+async function extractYoutubeAudio(url: string): Promise<{ audio: Buffer; container: string }> {
+  // getInfo BEFORE downloading: the duration and the format's byte length are both available up
+  // front, and nothing was reading either of them.
+  const info = await ytdl.getInfo(url);
+  const durationSec = Number(info.videoDetails?.lengthSeconds ?? 0);
+  if (Number.isFinite(durationSec) && durationSec > MAX_TRANSCRIBE_DURATION_SEC) {
+    throw new VideoTooLongError(durationSec);
+  }
+
+  // lowestaudio, not highestaudio: Whisper gains nothing from bitrate, and the smaller stream
+  // both quarters the memory and lifts how many minutes fit under the 25 MB request cap.
+  const format = ytdl.chooseFormat(info.formats, { quality: 'lowestaudio', filter: 'audioonly' });
+  const declared = Number(format.contentLength ?? 0);
+  if (Number.isFinite(declared) && declared > MAX_TRANSCRIBE_AUDIO_BYTES) {
+    throw new VideoTooLongError(Number.isFinite(durationSec) ? durationSec : null);
+  }
+
+  const stream = ytdl.downloadFromInfo(info, { format });
+  return { audio: await streamToBuffer(stream), container: format.container || 'mp4' };
 }
 
 function buildTranscriptionPrompt(options?: { title?: string; locale?: string }): string {
@@ -144,9 +192,11 @@ async function generateYoutubeTranscript(
     throw new Error('No transcript available for this video');
   }
 
-  const audio = await extractYoutubeAudio(url);
+  const { audio, container } = await extractYoutubeAudio(url);
   const response = (await openai.audio.transcriptions.create({
-    file: await toFile(audio, 'youtube-audio.mp3', { type: AUDIO_MIME_TYPE }),
+    // Name it by its real container. It was always labelled .mp3 / audio/mpeg regardless of what
+    // was actually downloaded, which is a lie the transcription API has to work around.
+    file: await toFile(audio, `youtube-audio.${container}`, { type: AUDIO_MIME_TYPE }),
     model: env.TRANSCRIPTION_MODEL,
     prompt: buildTranscriptionPrompt(options),
     response_format: 'verbose_json',

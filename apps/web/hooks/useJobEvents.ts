@@ -6,6 +6,7 @@ import type { JobEvent } from '@talim/types';
 import { jobStream } from '@/lib/jobStream';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useJobStreamStore } from '@/store/useJobStreamStore';
+import { useTranscriptFailureStore } from '@/store/useTranscriptFailureStore';
 
 /**
  * Opens the single per-tab SSE job-events stream and turns each event into a precise
@@ -95,6 +96,13 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
       if (ev.contentId) qc.invalidateQueries({ queryKey: ['quiz-history', ev.contentId] });
       break;
     case 'transcript.status':
+      // Remember WHY, when the job said. The transcript endpoint reports only "failed", so
+      // without this a video that is simply too long reads as a malfunction worth retrying.
+      if (ev.status === 'FAILED' && ev.reason) {
+        useTranscriptFailureStore.getState().setReason(ev.contentId, ev.reason);
+      } else if (ev.status === 'READY') {
+        useTranscriptFailureStore.getState().clearReason(ev.contentId);
+      }
       qc.invalidateQueries({ queryKey: ['content-transcript', ev.contentId] });
       break;
     case 'bank.status':

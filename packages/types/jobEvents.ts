@@ -18,7 +18,17 @@ export type JobEvent =
       status: 'READY' | 'FAILED' | 'GENERATING';
     }
   | { type: 'quiz.status'; quizId: string; contentId?: string; status: 'READY' | 'FAILED' }
-  | { type: 'transcript.status'; contentId: string; status: 'READY' | 'FAILED' }
+  | {
+      type: 'transcript.status';
+      contentId: string;
+      status: 'READY' | 'FAILED';
+      /**
+       * Why it failed, when we know. Without this the UI could only ever show one generic
+       * "transcript failed" line — so a video that is simply too long to transcribe read as a
+       * malfunction the learner should retry, which it is not.
+       */
+      reason?: 'TOO_LONG';
+    }
   | { type: 'manim.status'; jobId: string; status: 'READY' | 'FAILED' }
   | { type: 'bank.status'; bankId: string; status: 'READY' | 'FAILED' }
   /**
