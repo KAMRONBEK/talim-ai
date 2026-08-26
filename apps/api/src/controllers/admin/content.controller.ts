@@ -6,9 +6,19 @@ import { AppError } from '../../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../../middleware/auth.middleware.js';
 import { getParam } from '../../lib/params.js';
 import { writeAdminAuditLog } from '../../services/admin/audit.service.js';
-import { contentQueue } from '../../services/queue.service.js';
+import {
+  cancelQueuedMediaJob,
+  contentQueue,
+  podcastQueue,
+  videoQueue,
+} from '../../services/queue.service.js';
 import { cancelContentJobs } from '../../services/queue.service.js';
 import { storageService } from '../../services/storage.service.js';
+import {
+  deleteContentMediaBlobs,
+  deleteContentVideoBlobs,
+  deletePodcastBlobs,
+} from '../../services/mediaCleanup.service.js';
 import { getChunkSample } from '../../services/admin/analytics.service.js';
 import { paginationSchema } from './shared.js';
 
@@ -54,6 +64,9 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
   if (!content) throw new AppError(404, 'Content not found');
 
   await cancelContentJobs(id);
+  // The admin path never had this: podcast episode audio and video narration audio were left on
+  // the volume while their rows cascaded away, so the paths became unrecoverable (#35).
+  await deleteContentMediaBlobs(id);
   if (content.storagePath) {
     await storageService.delete(content.storagePath).catch(() => {});
   }
@@ -324,14 +337,20 @@ export async function deleteGenerated(req: AuthenticatedRequest, res: Response):
   const id = getParam(req, 'id');
   const kind = typeof req.query.kind === 'string' ? req.query.kind : '';
 
+  // Cancel first, then delete blobs (which needs the paths), then the row. Deleting a
+  // still-GENERATING item without cancelling guaranteed an orphan every time: the job went on to
+  // save its mp3 and only then failed updating the row that no longer existed.
   if (kind === 'podcast') {
+    await cancelQueuedMediaJob(podcastQueue, 'podcastId', id);
+    await deletePodcastBlobs(id);
     await prisma.podcast.delete({ where: { id } });
   } else if (kind === 'quiz') {
     await prisma.quiz.delete({ where: { id } });
   } else if (kind === 'slideshow') {
     const video = await prisma.contentVideo.findUnique({ where: { id } });
     if (!video) throw new AppError(404, 'Generated item not found');
-    if (video.storagePath) await storageService.delete(video.storagePath).catch(() => {});
+    await cancelQueuedMediaJob(videoQueue, 'videoId', id);
+    await deleteContentVideoBlobs(id);
     await prisma.contentVideo.delete({ where: { id } });
   } else if (kind === 'summary') {
     await prisma.contentSummary.delete({ where: { id } });
