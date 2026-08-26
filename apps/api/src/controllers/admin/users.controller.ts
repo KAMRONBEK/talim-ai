@@ -1,6 +1,7 @@
 import type { Response } from 'express';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';
+import { NAME_MAX, ORG_NAME_MAX, userText } from '../../lib/user-text.js';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../../middleware/auth.middleware.js';
@@ -27,17 +28,17 @@ import {
 const createUserSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  name: z.string().min(1).optional(),
+  name: userText({ max: NAME_MAX }).optional(),
   role: z.enum(['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN']).default('INDIVIDUAL'),
 });
 
 const patchUserSchema = z
   .object({
-    name: z.string().min(1).optional(),
+    name: userText({ max: NAME_MAX }).optional(),
     role: z.enum(['INDIVIDUAL', 'TENANT_OWNER', 'TENANT_LEARNER', 'ADMIN']).optional(),
     preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
     tenantId: z.string().min(1).optional(),
-    orgName: z.string().min(1).optional(),
+    orgName: userText({ max: ORG_NAME_MAX }).optional(),
     newOwnerId: z.string().min(1).optional(),
     adminPasswordNote: z.string().nullable().optional(),
   })

@@ -1,17 +1,19 @@
 import { z } from 'zod';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
+import { MESSAGE_MAX, userText } from '../../lib/user-text.js';
 
-// `.trim()` runs before `.min(1)`, so a body of only spaces/tabs/newlines is rejected rather
-// than delivered as a blank card with a "new message" badge the student cannot clear by reading.
-// The compose UI already sends `body.trim()`; this makes the API agree with it.
+// A body of only spaces/tabs/newlines is rejected rather than delivered as a blank card with a
+// "new message" badge the student cannot clear by reading. The compose UI already sends
+// `body.trim()`; this makes the API agree with it — and `userText` additionally strips the
+// control characters that used to reach Postgres and come back as a bare 500.
 const sendMessageSchema = z.object({
   studentIds: z.array(z.string().min(1)).min(1),
-  body: z.string().trim().min(1).max(5000),
+  body: userText({ max: MESSAGE_MAX, multiline: true }),
 });
 
 const replyMessageSchema = z.object({
-  body: z.string().trim().min(1).max(5000),
+  body: userText({ max: MESSAGE_MAX, multiline: true }),
 });
 
 interface SentMessageShape {

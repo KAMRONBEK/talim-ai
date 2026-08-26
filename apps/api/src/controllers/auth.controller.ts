@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 import type { UserRole } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
+import { NAME_MAX, userText } from '../lib/user-text.js';
 import { env } from '../config/env.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
@@ -16,7 +17,7 @@ const registerSchema = z
   .object({
     email: z.string().email(),
     password: z.string().min(8),
-    name: z.string().min(1).optional(),
+    name: userText({ max: NAME_MAX }).optional(),
     joinCode: z.string().min(4).max(12).optional(),
     role: z.never().optional(),
   })
@@ -34,7 +35,7 @@ const joinSchema = z.object({
 
 const updateMeSchema = z.object({
   preferredLocale: z.enum(['uz', 'en', 'ru']).optional(),
-  name: z.string().min(1).optional(),
+  name: userText({ max: NAME_MAX }).optional(),
 });
 
 const changePasswordSchema = z.object({

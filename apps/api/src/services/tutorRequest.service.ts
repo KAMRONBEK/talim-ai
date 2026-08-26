@@ -2,11 +2,13 @@ import { z } from 'zod';
 import type { TutorRequestStatus } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
+import { ORG_NAME_MAX, userText } from '../lib/user-text.js';
 import { applyAdminRoleChange } from './adminUserRole.service.js';
 
 const createSchema = z.object({
-  orgName: z.string().min(2).max(120),
-  note: z.string().max(1000).optional(),
+  orgName: userText({ min: 2, max: ORG_NAME_MAX }),
+  // Optional, so min 0 — but still stripped and trimmed, since a NUL here 500s just the same.
+  note: userText({ min: 0, max: 1000, multiline: true }).optional(),
 });
 
 const approveSchema = z.object({
