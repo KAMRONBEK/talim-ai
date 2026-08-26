@@ -4,6 +4,7 @@ import { prisma } from '../lib/prisma.js';
 import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
+import { deleteContentMediaBlobs } from '../services/mediaCleanup.service.js';
 import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
@@ -166,22 +167,8 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
 
   await cancelContentJobs(content.id);
 
-  const podcasts = await prisma.podcast.findMany({
-    where: { contentId: content.id },
-    include: { episodes: true },
-  });
-  for (const podcast of podcasts) {
-    await Promise.all(
-      podcast.episodes
-        .filter((episode) => episode.audioPath)
-        .map((episode) => storageService.delete(episode.audioPath!)),
-    );
-  }
-
-  const videos = await prisma.contentVideo.findMany({ where: { contentId: content.id } });
-  await Promise.all(
-    videos.filter((v) => v.storagePath).map((v) => storageService.delete(v.storagePath!)),
-  );
+  // Second verbatim copy of the same cleanup, now shared — see mediaCleanup.service.
+  await deleteContentMediaBlobs(content.id);
 
   if (content.storagePath) {
     await storageService.delete(content.storagePath);

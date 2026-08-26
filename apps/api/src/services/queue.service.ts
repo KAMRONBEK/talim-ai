@@ -124,6 +124,27 @@ const CONTENT_QUEUES = [
   transcriptQueue,
 ] as const;
 
+/**
+ * Remove queued/running jobs for ONE generated media row.
+ *
+ * Deliberately not `cancelContentJobs`, which is contentId-scoped: deleting a single podcast must
+ * not also kill an unrelated quiz or slides job running for the same content. Same tolerance as
+ * that function — an ACTIVE job is locked by its worker and cannot be removed, so it is skipped
+ * rather than failing the caller.
+ */
+export async function cancelQueuedMediaJob(
+  queue: Bull.Queue,
+  key: 'podcastId' | 'videoId',
+  id: string,
+): Promise<void> {
+  const jobs = await queue.getJobs(['waiting', 'active', 'delayed']);
+  await Promise.all(
+    jobs
+      .filter((job) => (job.data as Record<string, unknown>)[key] === id)
+      .map((job) => job.remove().catch(() => false)),
+  );
+}
+
 export async function cancelContentJobs(contentId: string): Promise<void> {
   const states: Bull.JobStatus[] = ['waiting', 'active', 'delayed'];
   for (const queue of CONTENT_QUEUES) {
