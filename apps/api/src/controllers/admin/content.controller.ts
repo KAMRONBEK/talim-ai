@@ -1,4 +1,5 @@
 import type { Response } from 'express';
+import { enqueueContentIngest } from '../content-shared.js';
 import { z } from 'zod';
 import type { Prisma } from '@prisma/client';
 import { prisma } from '../../lib/prisma.js';
@@ -6,12 +7,7 @@ import { AppError } from '../../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../../middleware/auth.middleware.js';
 import { getParam } from '../../lib/params.js';
 import { writeAdminAuditLog } from '../../services/admin/audit.service.js';
-import {
-  cancelQueuedMediaJob,
-  contentQueue,
-  podcastQueue,
-  videoQueue,
-} from '../../services/queue.service.js';
+import { cancelQueuedMediaJob, podcastQueue, videoQueue } from '../../services/queue.service.js';
 import { cancelContentJobs } from '../../services/queue.service.js';
 import { storageService } from '../../services/storage.service.js';
 import {
@@ -96,7 +92,7 @@ export async function retryContentJob(req: AuthenticatedRequest, res: Response):
     where: { id },
     data: { status: 'PENDING' },
   });
-  await contentQueue.add({ contentId: id });
+  await enqueueContentIngest(id);
   await writeAdminAuditLog({
     adminUserId: req.user.userId,
     action: 'content.retry_job',
