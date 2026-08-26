@@ -7,6 +7,7 @@ import {
   useApproveTutorRequest,
   useRejectTutorRequest,
 } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 
 const STATUS_FILTERS = ['PENDING', 'APPROVED', 'REJECTED', ''] as const;
 
@@ -25,7 +26,10 @@ function errorMessage(err: unknown, fallback: string): string {
 export default function TutorRequestsPage() {
   const [status, setStatus] = useState<string>('PENDING');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = useAdminTutorRequests({ status: status || undefined, page });
+  const { data, isLoading, isError, refetch, isFetching } = useAdminTutorRequests({
+    status: status || undefined,
+    page,
+  });
   const approve = useApproveTutorRequest();
   const reject = useRejectTutorRequest();
   const [seatById, setSeatById] = useState<Record<string, string>>({});
@@ -60,7 +64,7 @@ export default function TutorRequestsPage() {
       </div>
 
       {isError ? (
-        <p className="text-sm text-destructive">Couldn&apos;t load tutor requests. Please try again.</p>
+        <LoadFailed what="tutor requests" onRetry={() => void refetch()} isRetrying={isFetching} />
       ) : isLoading || !data ? (
         <p className="text-muted-foreground">Loading…</p>
       ) : data.items.length === 0 ? (

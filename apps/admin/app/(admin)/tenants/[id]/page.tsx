@@ -5,6 +5,7 @@ import { use, useState } from 'react';
 import { Button, Card, CardContent, CardHeader, Input, Label } from '@talim/ui';
 import type { PlanCode, SubscriptionStatus } from '@talim/types';
 import { useAdminTenant, useUpdateTenant } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { planLabel } from '@/lib/plan';
 
 const TENANT_PLANS: PlanCode[] = ['TENANT_STARTER', 'TENANT_GROWTH'];
@@ -17,7 +18,7 @@ function formatLimit(used: number, limit: number | null): string {
 
 export default function TenantDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { data, isLoading, isError } = useAdminTenant(id);
+  const { data, isLoading, isError, refetch, isFetching } = useAdminTenant(id);
   const updateTenant = useUpdateTenant();
 
   const [name, setName] = useState('');
@@ -28,7 +29,9 @@ export default function TenantDetailPage({ params }: { params: Promise<{ id: str
   const [seatLimit, setSeatLimit] = useState<string | null>(null);
 
   if (isError) {
-    return <p className="text-sm text-destructive">Couldn&apos;t load this organization. Please try again.</p>;
+    return (
+      <LoadFailed what="this organization" onRetry={() => void refetch()} isRetrying={isFetching} />
+    );
   }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading organization…</p>;

@@ -12,6 +12,7 @@ import {
   useAdminAnalyticsTopOrgs,
   useAdminAnalyticsSpendByModel,
 } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { Activity, Building2, FileText, ListChecks, Users, Wallet } from 'lucide-react';
 import {
   Area,
@@ -154,7 +155,11 @@ export default function AdminDashboardPage() {
 
       {/* KPI cards — analytics summary */}
       {summary.isError ? (
-        <p className="text-sm text-destructive">Couldn&apos;t load the analytics summary. Please try again.</p>
+        <LoadFailed
+          what="the analytics summary"
+          onRetry={() => void summary.refetch()}
+          isRetrying={summary.isFetching}
+        />
       ) : summary.isLoading || !s ? (
         <p className="text-muted-foreground">Loading summary…</p>
       ) : (
@@ -304,7 +309,11 @@ export default function AdminDashboardPage() {
           {mrr.isLoading ? (
             <ChartState loading empty={false} />
           ) : mrr.isError ? (
-            <p className="text-sm text-destructive">Couldn&apos;t load MRR.</p>
+            <LoadFailed
+              what="MRR"
+              onRetry={() => void mrr.refetch()}
+              isRetrying={mrr.isFetching}
+            />
           ) : !mrr.data || mrr.data.byPlan.length === 0 ? (
             <ChartState loading={false} empty />
           ) : (
@@ -355,7 +364,11 @@ export default function AdminDashboardPage() {
           {spendByModel.isLoading ? (
             <ChartState loading empty={false} />
           ) : spendByModel.isError ? (
-            <p className="text-sm text-destructive">Couldn&apos;t load spend by model.</p>
+            <LoadFailed
+              what="spend by model"
+              onRetry={() => void spendByModel.refetch()}
+              isRetrying={spendByModel.isFetching}
+            />
           ) : spendRows.length === 0 ? (
             <ChartState loading={false} empty />
           ) : (
@@ -397,7 +410,11 @@ export default function AdminDashboardPage() {
         {topOrgs.isLoading ? (
           <ChartState loading empty={false} />
         ) : topOrgs.isError ? (
-          <p className="text-sm text-destructive">Couldn&apos;t load top organizations.</p>
+          <LoadFailed
+            what="top organizations"
+            onRetry={() => void topOrgs.refetch()}
+            isRetrying={topOrgs.isFetching}
+          />
         ) : orgs.length === 0 ? (
           <ChartState loading={false} empty />
         ) : (

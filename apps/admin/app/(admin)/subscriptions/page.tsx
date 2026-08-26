@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import type { AdminSubscriptionListItem } from '@talim/types';
 import { useAdminSubscriptions } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { SubscriptionEditDrawer } from '@/components/subscription-edit-drawer';
 import { planLabel } from '@/lib/plan';
 
@@ -38,7 +39,7 @@ export default function SubscriptionsPage() {
   const [kind, setKind] = useState<(typeof KIND_OPTIONS)[number]>('all');
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<AdminSubscriptionListItem | null>(null);
-  const { data, isLoading, isError } = useAdminSubscriptions({
+  const { data, isLoading, isError, refetch, isFetching } = useAdminSubscriptions({
     page,
     search: search || undefined,
     status: status || undefined,
@@ -133,8 +134,13 @@ export default function SubscriptionsPage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load subscriptions. Please try again.
+                <td colSpan={7} className="px-4 py-8">
+                  <LoadFailed
+                    what="subscriptions"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { Button, Card, CardContent } from '@talim/ui';
 import { useAdminAuditLogs } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 
 export default function AuditLogPage() {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = useAdminAuditLogs({ page });
+  const { data, isLoading, isError, refetch, isFetching } = useAdminAuditLogs({ page });
 
   return (
     <div className="space-y-6">
@@ -19,7 +20,7 @@ export default function AuditLogPage() {
       </div>
 
       {isError ? (
-        <p className="text-sm text-destructive">Couldn&apos;t load the audit log. Please try again.</p>
+        <LoadFailed what="the audit log" onRetry={() => void refetch()} isRetrying={isFetching} />
       ) : isLoading || !data ? (
         <p className="text-muted-foreground">Loading…</p>
       ) : data.items.length === 0 ? (
