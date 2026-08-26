@@ -5,7 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Button } from '@talim/ui';
 import { useAuthStore } from '@/store/useAuthStore';
-import { dismissOnboarding, isOnboardingPending } from '@/lib/onboarding';
+import { dismissOnboarding } from '@/lib/onboarding';
 
 export function StudentWelcomeBanner() {
   const t = useTranslations('learner.onboarding');
@@ -18,9 +18,15 @@ export function StudentWelcomeBanner() {
   // 517px. LearnerShell renders inside RoleGuard/AuthGuard, both of which already wait
   // for the auth store to hydrate, so `user` is populated on the first render that
   // reaches here and localStorage is safe to read.
-  // Prefer the server-driven flag (works across devices); fall back to the legacy
-  // per-device localStorage flag.
-  const due = Boolean(user?.id) && (Boolean(user?.mustChangePassword) || isOnboardingPending(user!.id));
+  // Gated on mustChangePassword ALONE. This banner says "your teacher created this
+  // account, change the temporary password" — which is only true when a tutor or admin
+  // issued one, and mustChangePassword is exactly that signal.
+  //
+  // The old `|| isOnboardingPending(user.id)` fallback returns true whenever no
+  // localStorage key exists, i.e. by default for everyone, so a student who signed
+  // themselves up with a class code was told somebody else made their account and sent
+  // to Settings to change a temporary password that never existed (#56).
+  const due = Boolean(user?.mustChangePassword);
 
   if (!due || dismissed || !user) return null;
 
