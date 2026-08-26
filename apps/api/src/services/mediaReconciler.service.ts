@@ -15,6 +15,9 @@ import { deckScopeKey } from './slides.service.js';
  *  eventually resolve the DB claim itself, so the row is NOT orphaned. */
 const LIVE_STATES: Bull.JobStatus[] = ['active', 'waiting', 'delayed', 'paused'];
 
+/** How long a Content row may sit unclaimed before the reconciler treats it as orphaned. */
+const CONTENT_CLAIM_GRACE_MS = 60_000;
+
 async function collectLiveJobData<T>(queues: Bull.Queue[]): Promise<T[]> {
   const out: T[] = [];
   for (const queue of queues) {
@@ -61,7 +64,11 @@ async function reconcileRowStatus(opts: {
  */
 export async function reconcileStuckMediaClaims(): Promise<void> {
   try {
-    // --- Content (ingest + reparse) stuck in PROCESSING ---
+    // --- Content (ingest + reparse) stuck in PENDING or PROCESSING ---
+    // PENDING was invisible to every recovery path: uploads create the row PENDING and only the
+    // worker flips it to PROCESSING, so an enqueue that never landed could not be seen by this
+    // reconciler, by the admin "reconcile stuck jobs" button, or by the orphaned-jobs health
+    // probe. All three reported zero while the card sat "processing" forever.
     const contentJobs = await collectLiveJobData<{ contentId?: string }>([
       contentQueue,
       reparseQueue,
@@ -69,14 +76,23 @@ export async function reconcileStuckMediaClaims(): Promise<void> {
     const liveContentIds = new Set(
       contentJobs.map((d) => d.contentId).filter((id): id is string => !!id),
     );
+    // The grace window is load-bearing, not cosmetic: content.create and contentQueue.add are
+    // not atomic, so a row created microseconds ago is legitimately PENDING with no live job yet.
+    // Without it this would flip healthy in-flight uploads to FAILED — and it is reachable at
+    // runtime under live traffic via POST /admin/health/reconcile-stuck.
+    const claimCutoff = new Date(Date.now() - CONTENT_CLAIM_GRACE_MS);
     const stuckContent = await prisma.content.findMany({
-      where: { status: 'PROCESSING' },
+      where: { status: { in: ['PENDING', 'PROCESSING'] }, updatedAt: { lt: claimCutoff } },
       select: { id: true },
     });
     const orphanContentIds = stuckContent.map((c) => c.id).filter((id) => !liveContentIds.has(id));
     if (orphanContentIds.length) {
       await prisma.content.updateMany({
-        where: { id: { in: orphanContentIds }, status: 'PROCESSING' },
+        where: {
+          id: { in: orphanContentIds },
+          status: { in: ['PENDING', 'PROCESSING'] },
+          updatedAt: { lt: claimCutoff },
+        },
         data: { status: 'FAILED' },
       });
     }

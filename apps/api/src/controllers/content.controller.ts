@@ -5,7 +5,7 @@ import { AppError } from '../middleware/error.middleware.js';
 import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { storageService } from '../services/storage.service.js';
 import { deleteContentMediaBlobs } from '../services/mediaCleanup.service.js';
-import { cancelContentJobs, contentQueue } from '../services/queue.service.js';
+import { cancelContentJobs } from '../services/queue.service.js';
 import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { decodeUploadFilename } from '../lib/filename.js';
@@ -21,6 +21,7 @@ import {
   buildContentListWhere,
 } from '../services/contentAccess.service.js';
 import {
+  enqueueContentIngest,
   assertFileWithinPlan,
   enqueueReparse,
   loadOrBackfillTranscript,
@@ -124,7 +125,7 @@ export async function uploadContent(req: AuthenticatedRequest, res: Response): P
     },
   });
 
-  await contentQueue.add({ contentId: content.id });
+  await enqueueContentIngest(content.id);
   res.status(201).json({ content: formatContent(content) });
 }
 
@@ -148,7 +149,7 @@ export async function createYoutubeContent(
     },
   });
 
-  await contentQueue.add({ contentId: content.id });
+  await enqueueContentIngest(content.id);
   res.status(201).json({ content: formatContent(content) });
 }
 
@@ -175,7 +176,7 @@ export async function retryContent(req: AuthenticatedRequest, res: Response): Pr
     data: { status: 'PENDING' },
   });
 
-  await contentQueue.add({ contentId: content.id });
+  await enqueueContentIngest(content.id);
   res.json({ content: formatContent(updated) });
 }
 

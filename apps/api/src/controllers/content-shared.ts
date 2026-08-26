@@ -7,12 +7,8 @@ import { AppError, PlanFileLimitError } from '../middleware/error.middleware.js'
 import { probePdfPages } from '../services/pdf.service.js';
 import type { PlanCode } from '@talim/types';
 import { storageService } from '../services/storage.service.js';
-import {
-  reparseQueue,
-  transcriptQueue,
-  type BackfillTranscriptJobData,
-} from '../services/queue.service.js';
-import { publishContentEventTo } from '../services/events/jobEventAudience.js';
+import { contentQueue, reparseQueue, transcriptQueue, type BackfillTranscriptJobData } from '../services/queue.service.js';
+import { publishContentEvent, publishContentEventTo } from '../services/events/jobEventAudience.js';
 import type { UsageContext } from '../services/usage.service.js';
 
 /** A failed transcript backfill is reported as-is for this long before a fresh GET
@@ -122,7 +118,6 @@ export async function enqueueReparse(
   return updated;
 }
 
-/** Stream a stored content file with the right Content-Type/Disposition headers. */
 /** File limits for one account, as resolved from its plan. */
 export interface PlanFileLimits {
   maxPagesPerFile: number | null;
@@ -176,6 +171,39 @@ export async function assertFileWithinPlan(
   }
   return pages;
 }
+
+/**
+ * Enqueue an ingest, and never leave the row stranded if the queue refuses it.
+ *
+ * `contentQueue.add` was called unguarded from seven places. A rejection — Redis rejecting
+ * writes, or down long enough for Bull's client to give up (measured at ~4 minutes, not the
+ * "brief blip" this was filed as) — left the Content row PENDING forever and 500'd the request.
+ *
+ * PENDING is the crux. Uploads create the row PENDING and only the worker flips it to
+ * PROCESSING, while both recovery mechanisms — the boot reconciler and the admin "reconcile
+ * stuck jobs" button — only look for PROCESSING. So nothing on the platform could see the
+ * orphan, and the card sat "processing" with no retry.
+ *
+ * Marking it FAILED rather than deleting it is deliberate: FAILED is the state the product
+ * already understands. It unlocks the Retry button, which re-enqueues from the storagePath the
+ * server already saved — so the user does not re-upload a file that was accepted. The guard on
+ * `status: 'PENDING'` means a worker that already claimed the job (reply lost, command landed)
+ * is never clobbered.
+ */
+export async function enqueueContentIngest(contentId: string): Promise<void> {
+  try {
+    await contentQueue.add({ contentId });
+  } catch (error) {
+    await prisma.content
+      .updateMany({ where: { id: contentId, status: 'PENDING' }, data: { status: 'FAILED' } })
+      .catch(() => undefined);
+    // The SSE bus is in-process, so this still reaches the browser with Redis down.
+    void publishContentEvent(contentId, { type: 'content.status', contentId, status: 'FAILED' });
+    throw error;
+  }
+}
+
+/** Stream a stored content file with the right Content-Type/Disposition headers. */
 
 export async function sendContentFile(res: Response, storagePath: string): Promise<void> {
   const buffer = await storageService.get(storagePath);
