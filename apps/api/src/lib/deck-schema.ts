@@ -227,6 +227,15 @@ export const deckSchema = z.object({
   estimatedMinutes: z.number().int().min(1).max(90),
   sourceContentId: z.string(),
   slides: z.array(slideSchema).min(4).max(30),
+  // Present only on a salvaged deck. Optional so a clean model response still validates
+  // through the direct path without the generator having to invent the field.
+  salvage: z
+    .object({
+      drafted: z.number().int().min(0),
+      dropped: z.number().int().min(0),
+      reasons: z.array(z.string()),
+    })
+    .optional(),
 });
 
 type ParsedDeck = z.infer<typeof deckSchema>;

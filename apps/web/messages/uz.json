@@ -1194,7 +1194,8 @@
     "notAvailableLearner": "O‘qituvchingiz hali bu material uchun slayd yaratmagan.",
     "error": "Slaydlarni yaratib bo‘lmadi. Yana urinib ko‘ring.",
     "limitReached": "AI yaratish chegarasiga yetdingiz ({used}/{limit} bugun). Chegarani oshirish uchun administratorga murojaat qiling.",
-    "limitReachedGeneric": "AI yaratish hozircha tarifingizda mavjud emas. Iltimos, administratoringizga murojaat qiling."
+    "limitReachedGeneric": "AI yaratish hozircha tarifingizda mavjud emas. Iltimos, administratoringizga murojaat qiling.",
+    "salvageNotice": "Bu taqdimotning {dropped} ta slaydi yaratishda yo'qoldi, shuning uchun u sarlavhasida va'da qilingan mavzularning bir qismini o'z ichiga olmaydi. Qayta yaratib ko'ring."
   },
   "video": {
     "subtitle": "Ushbu material asosida AI ovozli slayd-video",

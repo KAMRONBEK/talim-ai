@@ -53,6 +53,14 @@ function SlidesInner({ id }: { id: string }) {
           </div>
         </div>
         <div className="flex items-center gap-3">
+          {/* A salvaged deck is missing slides its own title and recap still promise, so
+              it must not present itself as complete. Says how many were lost and points
+              at the one action that can recover them. */}
+          {deck?.salvage && deck.salvage.dropped > 0 && (
+            <span role="alert" className="max-w-[46ch] text-xs text-destructive">
+              {t('salvageNotice', { dropped: deck.salvage.dropped })}
+            </span>
+          )}
           {/* When a deck already exists the EmptyState (which renders genError)
               isn't shown, so surface enqueue errors AND job-level failures (status
               FAILED from the background run) here too. */}

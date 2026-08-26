@@ -244,6 +244,12 @@ function coerceDeck(raw: unknown, overrides: Overrides): Deck {
     estimatedMinutes: estimatedMinutesFor(slides.length),
     sourceContentId: overrides.sourceContentId,
     slides,
+    // Carried on the deck so the loss survives the request. The console.warn above goes
+    // to the API's stdout, which nothing reads after the fact, so a deck that quietly
+    // lost a third of its lesson was indistinguishable from a complete one.
+    ...(dropped.length > 0
+      ? { salvage: { drafted: rawSlides.length, dropped: dropped.length, reasons: dropped } }
+      : {}),
   };
 }
 
