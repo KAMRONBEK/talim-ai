@@ -55,12 +55,12 @@ export async function buildContentListWhere(user: AuthPayload): Promise<Prisma.C
     const ids = await getAssignedContentIds(user.userId, activeMembership.tenantId);
     return { id: { in: ids } };
   }
-  throw new AppError(403, 'Use /api/tenant/content for organization materials');
+  throw new AppError(403, 'Use /tenant/content for organization materials');
 }
 
 function assertIndividualContentRoute(user: AuthPayload): void {
   if (user.role === 'TENANT_OWNER') {
-    throw new AppError(403, 'Use /api/tenant/content for organization materials');
+    throw new AppError(403, 'Use /tenant/content for organization materials');
   }
 }
 
@@ -134,7 +134,7 @@ export async function assertCanAccessContent(
       if (activeMembership) content = assignment.content;
     }
   } else {
-    throw new AppError(403, 'Use /api/tenant/content for organization materials');
+    throw new AppError(403, 'Use /tenant/content for organization materials');
   }
 
   if (!content) throw new AppError(404, 'Content not found');

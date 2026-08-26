@@ -7,17 +7,17 @@
  * Manual API checks (replace TOKEN and API base):
  *
  *   # Upload limit (FREE: 3 materials)
- *   curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:4000/api/content/upload \
+ *   curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:4000/content/upload \
  *     -H "Authorization: Bearer TOKEN" -F "file=@sample.pdf"
  *   # Expect 402 when at limit
  *
  *   # Generation limit (FREE: 20/month) — new quiz after cache miss
- *   curl -s -X POST http://localhost:4000/api/quiz/content/CONTENT_ID \
+ *   curl -s -X POST http://localhost:4000/quiz/content/CONTENT_ID \
  *     -H "Authorization: Bearer TOKEN" -H "Content-Type: application/json" \
  *     -d '{"sectionId":"SECTION_ID","kind":"FULL"}'
  *
  *   # Tutor message limit (FREE: 50/month)
- *   curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:4000/api/chat/stream \
+ *   curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:4000/chat/stream \
  *     -H "Authorization: Bearer TOKEN" -H "Content-Type: application/json" \
  *     -d '{"contentId":"CONTENT_ID","message":"Hello"}'
  *

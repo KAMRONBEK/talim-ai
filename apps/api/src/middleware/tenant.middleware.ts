@@ -121,7 +121,7 @@ export function blockIndividualContentForOwner(
     return;
   }
   if (req.user.role === 'TENANT_OWNER') {
-    res.status(403).json({ message: 'Use /api/tenant/content for organization materials' });
+    res.status(403).json({ message: 'Use /tenant/content for organization materials' });
     return;
   }
   next();
