@@ -378,7 +378,8 @@
     "askSelection": "Ask AI",
     "explainSelection": "Explain",
     "selectionAskPrompt": "About this part:\n\"{snippet}\"\n\n",
-    "suggestionsLabel": "Suggested prompts"
+    "suggestionsLabel": "Suggested prompts",
+    "noAnswer": "No answer arrived for this question. Please ask it again."
   },
   "quiz": {
     "loading": "Loading quiz...",

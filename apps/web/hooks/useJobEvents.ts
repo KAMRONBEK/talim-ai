@@ -106,6 +106,13 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
     // manim.status is intentionally NOT handled here: the pending visual lives in the
     // Zustand chat store (not react-query), so ManimVideo subscribes to jobStream
     // directly and reacts to its own jobId.
+    case 'chat.message':
+      // The answer to a question this user asked has landed in the database. The page that
+      // started the stream already rendered it live; this is for a page that lost the stream
+      // (reloaded mid-answer) and would otherwise sit on a question with nothing under it.
+      // Partial key: locale is the last segment of ['chat-session', contentId, locale].
+      qc.invalidateQueries({ queryKey: ['chat-session', ev.contentId] });
+      break;
     case 'leaderboard.update':
       // Refresh both the tenant-owner board and the learner board for this assessment
       // (keys mirror useAssessmentLeaderboard / useLearnerLeaderboard in useAssessments).
