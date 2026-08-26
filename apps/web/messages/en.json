@@ -1148,7 +1148,8 @@
       "dropHere": "Drop here",
       "placedCount": "Placed {count} of {total}",
       "submissionsClosed": "Submissions closed",
-      "dueEnforcedHint": "The due date has passed, so late submissions are no longer accepted."
+      "dueEnforcedHint": "The due date has passed, so late submissions are no longer accepted.",
+      "dragPlaceInto": "Place into \"{group}\""
     },
     "materialsAssignedSubtitle": "{count, plural, one {# material assigned} other {# materials assigned}}",
     "assignedToYou": "Assigned to you",

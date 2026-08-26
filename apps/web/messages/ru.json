@@ -1148,7 +1148,8 @@
       "dropHere": "Перетащите сюда",
       "placedCount": "Размещено {count} из {total}",
       "submissionsClosed": "Приём ответов закрыт",
-      "dueEnforcedHint": "Срок сдачи истёк, поэтому поздние ответы больше не принимаются."
+      "dueEnforcedHint": "Срок сдачи истёк, поэтому поздние ответы больше не принимаются.",
+      "dragPlaceInto": "Поместить в «{group}»"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# материал назначен} few {# материала назначено} many {# материалов назначено} other {# материалов назначено}}",
     "assignedToYou": "Назначено вам",

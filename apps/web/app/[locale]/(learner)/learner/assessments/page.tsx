@@ -683,7 +683,28 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
                           }}
                           className="min-h-[4.5rem] rounded-lg border border-border/70 bg-card p-3"
                         >
-                          <p className="mb-2 text-xs font-medium text-muted-foreground">{target}</p>
+                          {/*
+                            The bucket itself is a div, so a keyboard user could pick a chip up
+                            and then had nowhere to put it: Tab went straight past every bucket to
+                            the next question, and the answer scored 0 on submit. The group's own
+                            label is the control now — disabled (and so out of the tab order) until
+                            something is picked, which makes the flow exactly what the hint above
+                            already promises: choose the item, then choose the group.
+                          */}
+                          <button
+                            type="button"
+                            disabled={locked || picked === null}
+                            aria-label={t('dragPlaceInto', { group: target })}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              if (locked || picked === null) return;
+                              placeDrag(question.id, items.length, picked, target);
+                              setDragPick((prev) => ({ ...prev, [question.id]: null }));
+                            }}
+                            className="mb-2 rounded text-xs font-medium text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default enabled:text-primary enabled:underline enabled:underline-offset-2"
+                          >
+                            {target}
+                          </button>
                           <div className="flex flex-wrap gap-2">
                             {items.map((item, i) =>
                               (values[i] ?? '') === target ? (

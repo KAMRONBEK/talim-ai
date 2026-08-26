@@ -1148,7 +1148,8 @@
       "dropHere": "Shu yerga tashlang",
       "placedCount": "{count}/{total} joylashtirildi",
       "submissionsClosed": "Topshirish yopilgan",
-      "dueEnforcedHint": "Muddat tugagani uchun kechiktirilgan javoblar qabul qilinmaydi."
+      "dueEnforcedHint": "Muddat tugagani uchun kechiktirilgan javoblar qabul qilinmaydi.",
+      "dragPlaceInto": "{group} guruhiga joylashtirish"
     },
     "materialsAssignedSubtitle": "{count, plural, one {# ta material biriktirildi} other {# ta material biriktirildi}}",
     "assignedToYou": "Sizga biriktirilgan",
