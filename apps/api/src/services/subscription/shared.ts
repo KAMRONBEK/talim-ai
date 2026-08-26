@@ -51,6 +51,19 @@ export interface SubscriptionView {
   currentPeriodEnd: string | null;
   limits: PlanLimits;
   effectivePlanCode: string;
+  /**
+   * True when `currentPeriodEnd` is in the past.
+   *
+   * Derived rather than stored: nothing in this product moves a subscription out of ACTIVE when
+   * its period lapses (activation is manual, and there is no billing cron), so the stored status
+   * cannot answer this. Without it the date shown in the UI was decoration — an ACTIVE
+   * subscription whose period ended last year looked identical to one ending next year.
+   *
+   * This does NOT gate access. That is the decision already taken on #13: a lapsed org keeps
+   * working and gets warned, rather than a school losing its lessons mid-term because nobody
+   * clicked a button.
+   */
+  periodExpired: boolean;
 }
 
 /**
@@ -135,6 +148,8 @@ export function formatSubscription(
     currentPeriodEnd: sub.currentPeriodEnd?.toISOString() ?? null,
     limits,
     effectivePlanCode,
+    // Computed on every read rather than persisted, so it can never go stale against the clock.
+    periodExpired: sub.currentPeriodEnd !== null && sub.currentPeriodEnd.getTime() < Date.now(),
   };
 }
 
