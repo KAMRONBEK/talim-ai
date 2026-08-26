@@ -112,5 +112,12 @@ function applyEvent(qc: QueryClient, ev: JobEvent): void {
       qc.invalidateQueries({ queryKey: ['tenant', 'assessments', ev.assessmentId, 'leaderboard'] });
       qc.invalidateQueries({ queryKey: ['learner', 'assessments', ev.assessmentId, 'leaderboard'] });
       break;
+    case 'assessment.live':
+      // The tutor started or ended a live game. Refresh the learner's assessment list —
+      // which is what renders the join banner on the dashboard they are already sitting
+      // on — and the tutor's own list so its live state stays honest too.
+      qc.invalidateQueries({ queryKey: ['learner', 'assessments'] });
+      qc.invalidateQueries({ queryKey: ['tenant', 'assessments'] });
+      break;
   }
 }
