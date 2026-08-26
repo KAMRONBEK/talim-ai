@@ -2,6 +2,7 @@ import { parseAppLocale, type AppLocale, type Deck } from '@talim/types';
 import { prisma } from '../lib/prisma.js';
 import { generateJsonCompletion } from '../services/ai.service.js';
 import { synthesizeSpeech } from '../services/tts.service.js';
+import { mp3DurationSec } from '../lib/mp3-duration.js';
 import { storageService } from '../services/storage.service.js';
 import { getSlideDeck, generateAndStoreSlideDeck } from '../services/slides.service.js';
 import { videoQueue, type GenerateVideoJobData } from '../services/queue.service.js';
@@ -176,6 +177,12 @@ export function registerGenerateVideoJob(): void {
           metadata: { contentId, videoId, segment: i },
         });
         seg.audioPath = await storageService.save(audio, `video-${videoId}-${i}.mp3`);
+        // Replace the word-count estimate with the real length now that the audio exists.
+        // Keeping the estimate is what made the player's total grow as it lazily learned
+        // each segment's true duration, and left the stored durationSec disagreeing with
+        // every number on screen. null means unmeasurable — keep the estimate then.
+        const measured = mp3DurationSec(audio);
+        if (measured != null) seg.durationSec = Math.max(1, Math.round(measured));
         audioCount++;
       } catch (err) {
         console.error(`Video TTS failed for ${videoId} segment ${i}:`, err);
