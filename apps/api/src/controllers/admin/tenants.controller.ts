@@ -1,5 +1,6 @@
 import type { Response } from 'express';
 import { z } from 'zod';
+import { ORG_NAME_MAX, userText } from '../../lib/user-text.js';
 import type { Prisma } from '@prisma/client';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
@@ -19,7 +20,7 @@ const patchTenantSubscriptionSchema = z
     planCode: z.enum(['TENANT_STARTER', 'TENANT_GROWTH']).optional(),
     status: z.enum(['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING']).optional(),
     currentPeriodEnd: z.string().datetime().nullable().optional(),
-    name: z.string().min(1).optional(),
+    name: userText({ max: ORG_NAME_MAX }).optional(),
     // Custom per-tenant seat (student) limit; null clears the override and
     // falls back to the plan's maxStudents. An explicit limit must allow at least
     // one seat — 0 would silently lock the tenant out of adding any students.

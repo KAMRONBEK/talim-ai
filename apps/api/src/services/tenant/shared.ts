@@ -1,12 +1,13 @@
 import crypto from 'node:crypto';
 import { z } from 'zod';
+import { NAME_MAX, ORG_NAME_MAX, userText } from '../../lib/user-text.js';
 import { prisma } from '../../lib/prisma.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import { slugifyOrgName } from '../../lib/tenant-slug.js';
 
 export const createStudentSchema = z
   .object({
-    name: z.string().min(1).optional(),
+    name: userText({ max: NAME_MAX }).optional(),
     email: z.string().email().optional(),
     username: z
       .string()
@@ -24,12 +25,14 @@ export const createStudentSchema = z
   });
 
 export const patchStudentSchema = z.object({
-  name: z.string().min(1).optional(),
+  name: userText({ max: NAME_MAX }).optional(),
   active: z.boolean().optional(),
 });
 
+// Without a trim an org could be renamed to "   " (blank header), and without a max to an
+// arbitrarily long string that breaks the header and the sidebar.
 export const patchTenantSchema = z.object({
-  name: z.string().min(1).optional(),
+  name: userText({ max: ORG_NAME_MAX }).optional(),
 });
 
 export const assignmentSchema = z.object({
