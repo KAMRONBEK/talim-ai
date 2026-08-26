@@ -208,63 +208,171 @@ interface ImportRowInput {
   username?: string;
 }
 
-/** Minimal, dependency-free CSV parse. Supports quoted fields ("a,b", "" escapes) and an
- *  optional header row (columns name/email/username in any order). Without a header, columns
- *  are positional: col0=name, col1=email (if it contains '@') else username. */
-function parseCsv(csv: string): ImportRowInput[] {
-  const lines = csv.split(/\r?\n/).filter((l) => l.trim() !== '');
-  if (lines.length === 0) return [];
+/**
+ * Dependency-free CSV parse for the student importer.
+ *
+ * Rewritten because three separate defects all came from the same two shortcuts —
+ * splitting on newlines before understanding quotes, and assuming a comma and an
+ * English header:
+ *
+ *   #66  a name containing a line break became two students, the second named after
+ *        their own email, because the text was split into lines first.
+ *   #48  a semicolon file (Excel's default in most of Europe and in ru/uz locales)
+ *        parsed as ONE column, so the header row was imported as a student.
+ *   #65  exporting a class in Uzbek and importing it back created nobody: the export
+ *        writes localized headers, `email` matched so the file looked headered, but
+ *        indexOf('name') was -1 and every row failed "Name is required".
+ *
+ * The export (students page) is the file users most often re-import, so the round trip
+ * is treated as the contract: localized headers, a UTF-8 BOM, `@username` in the email
+ * column for email-less children, and a status column this importer has no use for.
+ */
 
-  const parseLine = (line: string): string[] => {
-    const out: string[] = [];
-    let cur = '';
-    let inQuotes = false;
-    for (let i = 0; i < line.length; i += 1) {
-      const ch = line[i];
-      if (inQuotes) {
-        if (ch === '"') {
-          if (line[i + 1] === '"') {
-            cur += '"';
-            i += 1;
-          } else {
-            inQuotes = false;
-          }
+/** Header labels the export actually writes, per locale, plus the raw field names. */
+const HEADER_ALIASES: Record<'name' | 'email' | 'username', readonly string[]> = {
+  name: ['name', 'ism', 'имя', 'ф.и.о', 'фио', 'full name'],
+  email: ['email', 'e-mail', 'pochta', 'почта', 'эл. почта', 'электронная почта'],
+  username: ['username', 'foydalanuvchi nomi', 'foydalanuvchi', 'имя пользователя', 'логин', 'login'],
+};
+
+/** Columns the export emits that carry nothing importable. Recognised so their presence
+ *  still counts as "this row is a header", rather than being mistaken for data. */
+const IGNORED_HEADERS: readonly string[] = ['status', 'holat', 'статус'];
+
+/**
+ * Split the whole document into records and fields in one pass.
+ *
+ * Quotes are honoured across newlines, which is the entire point: a quoted field may
+ * legally contain the delimiter, CR, LF, or an escaped quote, and none of that survives
+ * a `split('\n')` done first.
+ */
+function tokenize(text: string, delimiter: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+
+    if (inQuotes) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 1;
         } else {
-          cur += ch;
+          inQuotes = false;
         }
-      } else if (ch === '"') {
-        inQuotes = true;
-      } else if (ch === ',') {
-        out.push(cur);
-        cur = '';
       } else {
-        cur += ch;
+        field += ch;
       }
+      continue;
     }
-    out.push(cur);
-    return out.map((s) => s.trim());
-  };
 
-  const first = parseLine(lines[0] ?? '').map((c) => c.toLowerCase());
-  const headerCols = ['name', 'email', 'username'];
-  const hasHeader = first.some((c) => headerCols.includes(c));
-  const idx = hasHeader
-    ? {
-        name: first.indexOf('name'),
-        email: first.indexOf('email'),
-        username: first.indexOf('username'),
+    if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === delimiter) {
+      row.push(field);
+      field = '';
+    } else if (ch === '\n' || ch === '\r') {
+      // Swallow the LF of a CRLF pair so it does not open an empty record.
+      if (ch === '\r' && text[i + 1] === '\n') i += 1;
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = '';
+    } else {
+      field += ch;
+    }
+  }
+  row.push(field);
+  rows.push(row);
+
+  return rows
+    .map((r) => r.map((c) => c.trim()))
+    .filter((r) => r.some((c) => c !== ''));
+}
+
+/**
+ * Pick the delimiter by counting candidates OUTSIDE quotes, so a comma inside a quoted
+ * name cannot outvote the real separator. Comma wins ties: it is the format this app
+ * exports, and a single-column file has no separator to find.
+ */
+function detectDelimiter(text: string): string {
+  const counts: Record<string, number> = { ',': 0, ';': 0, '\t': 0 };
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    if (ch === '"') {
+      if (inQuotes && text[i + 1] === '"') i += 1;
+      else inQuotes = !inQuotes;
+    } else if (!inQuotes && ch !== undefined && ch in counts) {
+      counts[ch] = (counts[ch] ?? 0) + 1;
+    }
+  }
+  const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+  return best && best[1] > 0 ? best[0] : ',';
+}
+
+function headerFieldFor(cell: string): 'name' | 'email' | 'username' | 'ignored' | null {
+  const c = cell.trim().toLowerCase();
+  if (!c) return null;
+  for (const [field, aliases] of Object.entries(HEADER_ALIASES)) {
+    if (aliases.includes(c)) return field as 'name' | 'email' | 'username';
+  }
+  return IGNORED_HEADERS.includes(c) ? 'ignored' : null;
+}
+
+export function parseCsv(csv: string): ImportRowInput[] {
+  // Excel writes a UTF-8 BOM and this app's own export prepends one; left in place it
+  // would corrupt the very first header cell and make the header unrecognisable.
+  // \uFEFF rather than the literal character: an inline BOM is invisible in review and
+  // trips eslint's no-irregular-whitespace.
+  const text = csv.replace(/^\uFEFF/, '');
+  if (text.trim() === '') return [];
+
+  const rows = tokenize(text, detectDelimiter(text));
+  if (rows.length === 0) return [];
+
+  const headerRow = rows[0] ?? [];
+  const mapped = headerRow.map(headerFieldFor);
+  // A header must be recognisable as a whole: every non-empty cell is either a field we
+  // import or one we knowingly ignore. Requiring only ONE match is what let a localized
+  // header pass as English and then yield -1 for every column.
+  const isHeader =
+    headerRow.length > 0 &&
+    mapped.some((m) => m === 'name' || m === 'email' || m === 'username') &&
+    mapped.every((m, i) => m !== null || headerRow[i] === '');
+
+  const idx = { name: -1, email: -1, username: -1 };
+  if (isHeader) {
+    mapped.forEach((m, i) => {
+      if (m === 'name' || m === 'email' || m === 'username') {
+        if (idx[m] === -1) idx[m] = i;
       }
-    : { name: 0, email: -1, username: -1 };
-  const dataLines = hasHeader ? lines.slice(1) : lines;
+    });
+  }
 
-  return dataLines.map((line) => {
-    const cols = parseLine(line);
-    const pick = (i: number) => (i >= 0 && cols[i] ? cols[i] : undefined);
-    if (hasHeader) {
-      return { name: pick(idx.name), email: pick(idx.email), username: pick(idx.username) };
+  const dataRows = isHeader ? rows.slice(1) : rows;
+
+  return dataRows.map((cols) => {
+    const at = (i: number) => (i >= 0 && cols[i] ? cols[i] : undefined);
+
+    if (isHeader) {
+      const emailCell = at(idx.email);
+      // The export writes `@username` in the email column for email-less children, so a
+      // re-import must read it back as a username rather than as a malformed address.
+      const handle = emailCell?.startsWith('@') ? emailCell.slice(1) : null;
+      return {
+        name: at(idx.name),
+        email: handle === null ? emailCell : undefined,
+        username: handle ?? at(idx.username),
+      };
     }
-    const name = pick(0);
-    const second = pick(1);
+
+    const name = at(0);
+    const second = at(1);
+    if (second?.startsWith('@')) return { name, username: second.slice(1) };
     if (second && second.includes('@')) return { name, email: second };
     return { name, username: second };
   });
