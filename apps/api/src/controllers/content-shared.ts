@@ -3,7 +3,9 @@ import path from 'path';
 import { z } from 'zod';
 import type { Content, ContentStatus } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
-import { AppError } from '../middleware/error.middleware.js';
+import { AppError, PlanFileLimitError } from '../middleware/error.middleware.js';
+import { probePdfPages } from '../services/pdf.service.js';
+import type { PlanCode } from '@talim/types';
 import { storageService } from '../services/storage.service.js';
 import {
   reparseQueue,
@@ -121,6 +123,60 @@ export async function enqueueReparse(
 }
 
 /** Stream a stored content file with the right Content-Type/Disposition headers. */
+/** File limits for one account, as resolved from its plan. */
+export interface PlanFileLimits {
+  maxPagesPerFile: number | null;
+  maxFileSizeMb: number | null;
+  upgradePlanCode: PlanCode | null;
+}
+
+/**
+ * The single gate every upload passes through.
+ *
+ * It used to live inline in the INDIVIDUAL controller only — the tenant upload handler went
+ * straight from `req.file` to `storageService.save`, so a tutor's page and size caps were not
+ * enforced at all. And the page term only fired on a known, positive count, so any PDF the parser
+ * could not read skipped the cap entirely.
+ *
+ * @returns the page count when known, so the caller can report it.
+ */
+export async function assertFileWithinPlan(
+  limits: PlanFileLimits,
+  fileSizeBytes: number,
+  buffer: Buffer,
+  isPdf: boolean,
+): Promise<number | null> {
+  const fileSizeMb = fileSizeBytes / (1024 * 1024);
+  const overSize = limits.maxFileSizeMb != null && fileSizeMb > limits.maxFileSizeMb;
+
+  let pages: number | null = null;
+  if (isPdf) {
+    const probe = await probePdfPages(buffer);
+    pages = probe.pages;
+    if (probe.pages === null) {
+      // Deliberately NOT PlanFileLimitError: that opens the upgrade modal, and no plan makes an
+      // unreadable file readable. Every local reader refuses these — pdf-parse, pdfinfo and
+      // pdftoppm all fail — so today's alternative is a confusing FAILED item minutes later,
+      // after a paid OCR attempt that could never have worked.
+      throw probe.reason === 'encrypted'
+        ? new AppError(400, 'This PDF is password-protected. Remove the password and upload it again.')
+        : new AppError(400, 'This PDF could not be read — it may be damaged or incomplete.');
+    }
+  }
+
+  const overPages = limits.maxPagesPerFile != null && pages != null && pages > limits.maxPagesPerFile;
+  if (overSize || overPages) {
+    throw new PlanFileLimitError(
+      limits.maxPagesPerFile,
+      limits.maxFileSizeMb,
+      pages,
+      Math.round(fileSizeMb * 10) / 10,
+      limits.upgradePlanCode,
+    );
+  }
+  return pages;
+}
+
 export async function sendContentFile(res: Response, storagePath: string): Promise<void> {
   const buffer = await storageService.get(storagePath);
   const ext = path.extname(storagePath).toLowerCase();
