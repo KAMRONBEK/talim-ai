@@ -14,18 +14,39 @@ Baseline at start: **34 open** (1×S2, 22×S3, 11×S4).
 
 ### Progress
 
-**34 → 13 open.** 21 closed across 15 PRs (#86–#101), all merged. Two were closed as
-*already fixed* after verification rather than re-fixed (#45 messages, #63 flashcards tab);
-one had its premise corrected (#43 was never actually stuck).
+**34 → 9 open.** 25 closed across 20 PRs (#86–#105), all merged. Two were closed as
+*already fixed* after verification rather than re-fixed (#45 messages, #63 flashcards tab).
 
-Remaining 13, and why each is still open:
+Three issues turned out to be **wrong or narrower than filed**, and were corrected on the
+issue rather than fixed as written:
+
+- **#43** — the page was never stuck; it errors after a ~1s react-query retry. The real
+  defect was the dead-end that state settles into.
+- **#67** — names the change-password banner as a cause, but `learner-shell` redirects a
+  student with `mustChangePassword` away from the dashboard entirely.
+- **#42** — asks for per-answer correctness feedback that cannot exist: the client has no
+  answer key mid-game.
+
+Two grew **larger** than filed once diagnosed:
+
+- **#35** — `ContentVideo.storagePath` is written by no code, so *every* delete path was
+  orphaning video audio, not just the admin ones.
+- **#32** — the axios interceptor is the only thing that ends a session, so every raw-fetch
+  transport (blob, summary, chat, SSE) bypassed it.
+
+Remaining 9:
 
 | | Why it's still here |
 | --- | --- |
-| #9 #14 #29 #30 | Need a product decision, not a fix. #30 has the options written up on the issue. |
-| #11 #12 #16 #25 #26 #28 | Ingest/queue failure paths — each needs a way to *induce* the failure before it can be verified. |
-| #32 #35 | Tractable; not yet started. |
-| #42 | GAME-quiz screen-reader support — the last of the a11y set. |
+| #9 #29 #30 | Need a product decision, not a fix. All three have the options written up on the issue. |
+| #11 #12 #16 #25 #26 #28 | Ingest/queue failure paths — each needs a way to *induce* the failure before it can be honestly verified. Diagnosis in progress. |
+
+### Method note
+
+Two rounds of parallel diagnosis agents (read-only, no edits) produced the fix and
+verification plans; implementation and verification stayed in the main loop. That split
+worked well — the agents found the two scope expansions above, which a straight read of the
+issues would have missed.
 
 It also stops early on any of: the quality gates going red and not being fixable
 within the iteration, `qa-preflight.sh` aborting (never drive QA against a stack that
