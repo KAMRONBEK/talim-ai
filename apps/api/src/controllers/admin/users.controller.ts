@@ -382,11 +382,17 @@ export async function patchUserSubscription(req: AuthenticatedRequest, res: Resp
     action: 'subscription.update',
     targetType: 'subscription',
     targetId: subscription.id,
+    // Period end is the field that says how long a plan lasts, and billing here is entirely
+    // manual — the audit log IS the billing record. Without these two, extending or backdating
+    // a subscription was written down as `FREE -> FREE, ACTIVE -> ACTIVE`: a no-op. The tenant
+    // equivalent logs the whole body and has always captured it.
     metadata: {
       fromPlan: existing.plan.code,
       toPlan: subscription.planCode,
       fromStatus: existing.status,
       toStatus: subscription.status,
+      fromPeriodEnd: existing.currentPeriodEnd?.toISOString() ?? null,
+      toPeriodEnd: subscription.currentPeriodEnd ?? null,
     },
   });
 
