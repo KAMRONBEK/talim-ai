@@ -29,6 +29,8 @@
     "landing.testimonials.items.*.name": "person names",
     "landing.testimonials.items.*.initials": "avatar initials derived from person names",
     "landing.footer.brand": "brand wordmark",
-    "landing.footer.copyright": "brand wordmark inside the copyright line"
+    "landing.footer.copyright": "brand wordmark inside the copyright line",
+    "content.materialTab": "'material' is a standard Uzbek noun, not an English word left untranslated — it sits beside contentTab 'Mazmun' and reads correctly in Uzbek",
+    "tenant.filterVideo": "'video' is a standard Uzbek noun; the sibling filters are Uzbekised where the word differs (Slaydlar) and left alone where it does not"
   }
 }
