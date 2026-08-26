@@ -213,7 +213,12 @@ model Tenant {
   questionBanks    QuestionBank[]
   assessments      TenantAssessment[]
 
-  @@index([ownerId])
+  // Unique, not just indexed: one owner owns exactly one org. Every consumer already assumed
+  // it — resolveTenantIdForUser, getTenantForOwner, regenerateJoinCode, patchTenantForOwner and
+  // adminUserRole all use findFirst with no ordering — but nothing enforced it, so a race could
+  // create a second org and the tutor's students, materials and join code silently split
+  // between the two depending on which row came back first.
+  @@unique([ownerId])
 }
 
 model TenantMembership {

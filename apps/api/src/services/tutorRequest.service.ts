@@ -100,28 +100,68 @@ export async function listTutorRequests(params: {
  */
 export async function approveTutorRequest(requestId: string, adminId: string, input: unknown) {
   const body = approveSchema.parse(input ?? {});
+
+  // Claim the request atomically instead of check-then-act. The read-then-write it replaced let
+  // two concurrent approvals both pass the PENDING check, both find no tenant for the owner, and
+  // both create one — colliding on Tenant.slug (a raw P2002, which the error middleware had no
+  // branch for, so it surfaced as a bare 500), or, when the timing let the second slug attempt
+  // see the first insert, quietly producing a SECOND org for the same owner. Nothing enforced
+  // one-org-per-owner, and resolveTenantIdForUser/getTenantForOwner both use findFirst with no
+  // ordering — so which org that tutor landed in, and where their students and join code went,
+  // was arbitrary.
+  //
+  // A single UPDATE ... WHERE status='PENDING' row-locks in Postgres: the second statement blocks,
+  // re-evaluates against the new row version, and matches zero rows.
+  const claimedAt = new Date();
+  const claim = await prisma.tutorRequest.updateMany({
+    where: { id: requestId, status: 'PENDING' },
+    data: { status: 'APPROVED', decidedById: adminId, decidedAt: claimedAt },
+  });
+  if (claim.count === 0) {
+    const exists = await prisma.tutorRequest.findUnique({ where: { id: requestId } });
+    throw exists ? new AppError(400, 'Request already decided') : new AppError(404, 'Request not found');
+  }
+
   const request = await prisma.tutorRequest.findUnique({
     where: { id: requestId },
     include: { user: true },
   });
   if (!request) throw new AppError(404, 'Request not found');
-  if (request.status !== 'PENDING') throw new AppError(400, 'Request already decided');
 
-  const { tenantId } = await applyAdminRoleChange(
-    request.userId,
-    request.user.role,
-    'TENANT_OWNER',
-    { orgName: request.orgName },
-  );
-  await prisma.user.update({ where: { id: request.userId }, data: { role: 'TENANT_OWNER' } });
-  if (tenantId && body.seatLimit != null) {
-    await prisma.tenant.update({ where: { id: tenantId }, data: { seatLimit: body.seatLimit } });
+  let tenantId: string | null;
+  try {
+    ({ tenantId } = await applyAdminRoleChange(request.userId, request.user.role, 'TENANT_OWNER', {
+      orgName: request.orgName,
+    }));
+
+    // applyAdminRoleChange returns a null tenantId whenever the role did not actually change —
+    // correct for its other caller, wrong here. If the user was ALREADY a TENANT_OWNER (an admin
+    // promoted them first, or a previous approve died between the role update and the status
+    // update), the null silently skipped the seat limit and recorded `tenantId: null` in the
+    // audit log, while the response still said 200. Recover the org they own.
+    if (!tenantId) {
+      tenantId =
+        (await prisma.tenant.findFirst({ where: { ownerId: request.userId }, select: { id: true } }))
+          ?.id ?? null;
+    }
+
+    await prisma.user.update({ where: { id: request.userId }, data: { role: 'TENANT_OWNER' } });
+    if (tenantId && body.seatLimit != null) {
+      await prisma.tenant.update({ where: { id: tenantId }, data: { seatLimit: body.seatLimit } });
+    }
+  } catch (err) {
+    // Release our own claim so a retry can succeed. Scoped on decidedById + decidedAt so this can
+    // only ever un-claim the claim this call made. Without it, a failure here (getDefaultTenantPlanId
+    // throws when the TENANT_STARTER plan is missing — a live risk given the prod plan drift) would
+    // leave the request permanently APPROVED with no org behind it.
+    await prisma.tutorRequest.updateMany({
+      where: { id: requestId, status: 'APPROVED', decidedById: adminId, decidedAt: claimedAt },
+      data: { status: 'PENDING', decidedById: null, decidedAt: null },
+    });
+    throw err;
   }
 
-  const updated = await prisma.tutorRequest.update({
-    where: { id: requestId },
-    data: { status: 'APPROVED', decidedById: adminId, decidedAt: new Date() },
-  });
+  const updated = await prisma.tutorRequest.findUniqueOrThrow({ where: { id: requestId } });
   return { request: formatRequest(updated), tenantId };
 }
 

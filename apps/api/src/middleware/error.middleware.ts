@@ -112,6 +112,24 @@ export function errorMiddleware(
     return;
   }
 
+  // A unique-constraint violation (P2002) is a conflict, not a server fault. Without this branch
+  // a racing insert fell through to the generic handler and the caller got a bare 500 — the
+  // approval race surfaced exactly that way, with no hint that reading the current state was the
+  // right response.
+  if ((err as { code?: string }).code === 'P2002') {
+    const target = (err as { meta?: { target?: unknown } }).meta?.target;
+    const field = Array.isArray(target)
+      ? target.join(', ')
+      : typeof target === 'string'
+        ? target
+        : undefined;
+    res.status(409).json({
+      message: field ? `Already exists (${field})` : 'Already exists',
+      code: 'CONFLICT',
+    });
+    return;
+  }
+
   // Multer rejects (oversized file, too many parts, unexpected field) arrive here
   // as a MulterError — map them to a clear 413/400 instead of a generic 500.
   if (err.name === 'MulterError') {
