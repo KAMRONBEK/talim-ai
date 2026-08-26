@@ -49,6 +49,20 @@ export function requireTenantMember(
     (req.user.role !== 'TENANT_OWNER' && req.user.role !== 'TENANT_LEARNER') ||
     !req.user.tenantId
   ) {
+    // A LEARNER reaching here without a tenantId has no ACTIVE membership —
+    // resolveTenantIdForUser only resolves one from an active row — so this is the
+    // deactivation case arriving one gate earlier than requireActiveLearner, and it must
+    // carry the same code or the client cannot tell it from an ordinary role refusal.
+    //
+    // It only started landing here once /auth/me began reissuing a token when tenantId
+    // drifts: a deactivated learner now gets a token with no tenantId, so they fail this
+    // gate instead of the next one.
+    if (req.user.role === 'TENANT_LEARNER') {
+      res
+        .status(403)
+        .json({ message: 'Student account is deactivated', code: 'ACCOUNT_DEACTIVATED' });
+      return;
+    }
     res.status(403).json({ message: 'Forbidden' });
     return;
   }
@@ -87,7 +101,11 @@ export async function requireActiveLearner(
     },
   });
   if (!membership) {
-    res.status(403).json({ message: 'Student account is deactivated' });
+    // The code is what the web client keys on. Matching the prose would break the moment
+    // this string is translated or reworded, and this particular 403 has to be told apart
+    // from every other 403 — it is the one that must end the session rather than render
+    // an empty list.
+    res.status(403).json({ message: 'Student account is deactivated', code: 'ACCOUNT_DEACTIVATED' });
     return;
   }
   next();

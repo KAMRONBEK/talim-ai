@@ -41,6 +41,18 @@ api.interceptors.response.use(
         window.location.href = `/${locale}/login`;
       }
     }
+
+    // A deactivated student kept a live session and simply saw zeros — "0 materials
+    // assigned", streak reset — for an account that had been removed from the class a
+    // second earlier. Every request 403s, but nothing acted on it, so the app looked
+    // like it was working and merely empty. End the session and say why.
+    if (error.response?.status === 403 && error.response?.data?.code === 'ACCOUNT_DEACTIVATED') {
+      useAuthStore.getState().logout();
+      if (typeof window !== 'undefined') {
+        const locale = getApiLocale();
+        window.location.href = `/${locale}/login?reason=deactivated`;
+      }
+    }
     return Promise.reject(error);
   },
 );

@@ -27,7 +27,15 @@ export default function LoginPage() {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    // Explain an involuntary landing here. The axios interceptor ends the session when a
+    // student's membership is deactivated mid-use; without this they are simply dumped on
+    // the sign-in screen with no idea why, and their own password no longer works.
+    // Read client-side (like the dashboard's ?play= handling) to avoid a useSearchParams
+    // Suspense boundary on this page.
+    if (new URLSearchParams(window.location.search).get('reason') === 'deactivated') {
+      setError(t('accountDeactivated'));
+    }
+  }, [t]);
 
   const user = useAuthStore((s) => s.user);
 

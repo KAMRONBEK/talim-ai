@@ -203,6 +203,24 @@ export async function me(req: AuthenticatedRequest, res: Response): Promise<void
   if (!user) {
     throw new AppError(404, 'User not found');
   }
+
+  // A learner removed from their class is not a valid session, and this endpoint is what
+  // decides that. Returning 200 here let SessionSync call setAuth() and re-populate the
+  // store immediately after the API client had logged them out over a 403 elsewhere — so
+  // the session healed itself and the student stayed in an app showing zeros.
+  if (user.role === 'TENANT_LEARNER') {
+    const active = await prisma.tenantMembership.findFirst({
+      where: { userId: user.id, role: 'LEARNER', active: true },
+      select: { id: true },
+    });
+    if (!active) {
+      res
+        .status(403)
+        .json({ message: 'Student account is deactivated', code: 'ACCOUNT_DEACTIVATED' });
+      return;
+    }
+  }
+
   const formatted = await formatUser(user);
   const body: { user: Awaited<ReturnType<typeof formatUser>>; token?: string } = {
     user: formatted,

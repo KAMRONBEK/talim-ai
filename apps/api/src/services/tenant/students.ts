@@ -553,7 +553,12 @@ export async function deleteStudent(tenantId: string, learnerId: string) {
 export async function resetStudentPassword(tenantId: string, learnerId: string) {
   const membership = await prisma.tenantMembership.findFirst({
     where: { tenantId, userId: learnerId, role: 'LEARNER' },
-    include: { user: { select: { id: true, email: true, name: true } } },
+    // `username` is load-bearing here, not decoration: for an email-less child it is the
+    // only thing they can type into the sign-in box. Omitting it from the select made
+    // formatStudentRow read undefined and emit `username: null`, so the one-time
+    // credentials panel showed a password and no way to use it. The row type marks
+    // username optional, so nothing failed to compile.
+    include: { user: { select: { id: true, email: true, name: true, username: true } } },
   });
   if (!membership) throw new AppError(404, 'Student not found');
 
