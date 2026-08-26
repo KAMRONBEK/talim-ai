@@ -70,6 +70,10 @@ export default function TenantStudentsPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [createError, setCreateError] = useState<string | null>(null);
+  // Free alternatives the API offers when a username is taken. Usernames are global, so a tutor
+  // will increasingly hit a common name another school already used — a bare "already taken"
+  // leaves them guessing in front of a class.
+  const [usernameSuggestions, setUsernameSuggestions] = useState<string[]>([]);
   // Row-level action failures (reset password) need somewhere to surface; the roster has
   // no per-row error slot and a silent no-op is what made them dangerous.
   const [actionError, setActionError] = useState<string | null>(null);
@@ -219,6 +223,11 @@ export default function TenantStudentsPage() {
       resetForm();
     } catch (err) {
       setCreateError(apiError(err, t('students.createError')));
+      const data = (err as { response?: { data?: { code?: string; suggestions?: string[] } } })
+        ?.response?.data;
+      setUsernameSuggestions(
+        data?.code === 'USERNAME_TAKEN' && Array.isArray(data.suggestions) ? data.suggestions : [],
+      );
     }
   };
 
@@ -795,6 +804,27 @@ export default function TenantStudentsPage() {
                 <Input id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
               {createError && <p className="text-sm text-destructive">{createError}</p>}
+              {usernameSuggestions.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm text-muted-foreground">
+                    {t('students.usernameSuggestions')}
+                  </span>
+                  {usernameSuggestions.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => {
+                        setUsername(suggestion);
+                        setCreateError(null);
+                        setUsernameSuggestions([]);
+                      }}
+                      className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              )}
               <Button type="submit" disabled={createStudent.isPending}>
                 {t('students.create')}
               </Button>

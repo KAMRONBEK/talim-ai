@@ -10,6 +10,7 @@ import {
   requireTenantId,
 } from '../middleware/tenant.middleware.js';
 import * as tenantController from '../controllers/tenant.controller.js';
+import * as contentController from '../controllers/content.controller.js';
 import * as tenantContentController from '../controllers/tenant-content.controller.js';
 import * as assessmentController from '../controllers/assessment.controller.js';
 import * as sectionController from '../controllers/section.controller.js';
@@ -113,6 +114,7 @@ tenantContent.delete('/:id', asyncHandler(tenantContentController.deleteContent)
 tenantContent.get('/:id/file', asyncHandler(tenantContentController.getContentFile));
 tenantContent.post('/:id/ocr-region', asyncHandler(tenantContentController.ocrPdfRegion));
 tenantContent.get('/:id/transcript', asyncHandler(tenantContentController.getContentTranscript));
+tenantContent.get('/:id/other-locales', asyncHandler(contentController.getOtherLocales));
 tenantContent.get('/:id/sections', asyncHandler(sectionController.listSections));
 tenantContent.get('/:id/sections/:sectionId', asyncHandler(sectionController.getSection));
 tenantContent.get('/:id/podcast', asyncHandler(podcastController.getPodcast));

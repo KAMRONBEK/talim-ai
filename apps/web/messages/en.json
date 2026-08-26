@@ -334,7 +334,8 @@
       "needsReview": "Time to review",
       "helper": "Mastery tracks your recent answers — it can go down after mistakes or time away."
     },
-    "transcriptTooLong": "This video is too long to transcribe (about 30 minutes maximum). Use a shorter video, or one that has captions."
+    "transcriptTooLong": "This video is too long to transcribe (about 30 minutes maximum). Use a shorter video, or one that has captions.",
+    "otherLocaleMaterials": "You already have {count} generated item(s) for this material in {locale}. Switch language instead of regenerating."
   },
   "chat": {
     "title": "AI Tutor",
@@ -720,7 +721,8 @@
       "messageError": "Couldn't send the message.",
       "messageSent": "Message sent.",
       "deactivateConfirm": "Deactivate {name}? They lose access to all materials immediately. You can reactivate them later.",
-      "resetFailed": "Couldn't reset the password. Please try again."
+      "resetFailed": "Couldn't reset the password. Please try again.",
+      "usernameSuggestions": "Available instead:"
     },
     "assign": {
       "title": "Assign to students",

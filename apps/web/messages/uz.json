@@ -334,7 +334,8 @@
       "needsReview": "Takrorlash vaqti keldi",
       "helper": "O'zlashtirish so'nggi javoblaringizni aks ettiradi — xatolar yoki uzoq tanaffusdan keyin pasayishi mumkin."
     },
-    "transcriptTooLong": "Bu video transkripsiya uchun juda uzun (taxminan 30 daqiqagacha). Qisqaroq video yoki subtitrlari bor videodan foydalaning."
+    "transcriptTooLong": "Bu video transkripsiya uchun juda uzun (taxminan 30 daqiqagacha). Qisqaroq video yoki subtitrlari bor videodan foydalaning.",
+    "otherLocaleMaterials": "Bu material uchun {locale} tilida ham tayyor materiallar bor ({count} ta). Qaytadan yaratishdan oldin tilni almashtiring."
   },
   "chat": {
     "title": "AI O'qituvchi",
@@ -720,7 +721,8 @@
       "messageError": "Xabarni yuborib bo'lmadi.",
       "messageSent": "Xabar yuborildi.",
       "deactivateConfirm": "{name} o'quvchini o'chirasizmi? U barcha materiallarga kirish huquqini darhol yo'qotadi. Keyinroq qayta tiklashingiz mumkin.",
-      "resetFailed": "Parolni tiklab bo'lmadi. Qayta urinib ko'ring."
+      "resetFailed": "Parolni tiklab bo'lmadi. Qayta urinib ko'ring.",
+      "usernameSuggestions": "Bo‘sh variantlar:"
     },
     "assign": {
       "title": "O'quvchilarga tayinlash",

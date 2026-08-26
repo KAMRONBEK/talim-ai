@@ -10,6 +10,8 @@ import { extractYoutubeVideoId } from '../services/youtube.service.js';
 import { getParam } from '../lib/params.js';
 import { decodeUploadFilename } from '../lib/filename.js';
 import { extractRegionTextFromImage } from '../services/pdf.service.js';
+import { getOtherLocaleGenerations } from '../services/contentLocales.service.js';
+import { resolveLocale } from '../lib/locale.js';
 import {
   assertQuota,
   getFileLimitsForUser,
@@ -214,6 +216,20 @@ export async function deleteContent(req: AuthenticatedRequest, res: Response): P
 
   await prisma.content.delete({ where: { id: content.id } });
   res.status(204).send();
+}
+
+/**
+ * Which other languages already have generated material for this content.
+ *
+ * Read-only and cheap (six grouped counts). Goes through assertCanAccessContent like every other
+ * content read, so it cannot become a way to probe for content you cannot see.
+ */
+export async function getOtherLocales(req: AuthenticatedRequest, res: Response): Promise<void> {
+  if (!req.user) throw new AppError(401, 'Unauthorized');
+  const contentId = getParam(req, 'id');
+  await assertCanAccessContent(req.user, contentId);
+  const locale = resolveLocale(req);
+  res.json({ locales: await getOtherLocaleGenerations(contentId, locale) });
 }
 
 export async function ocrPdfRegion(req: AuthenticatedRequest, res: Response): Promise<void> {

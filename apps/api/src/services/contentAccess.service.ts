@@ -42,6 +42,21 @@ export async function buildContentListWhere(user: AuthPayload): Promise<Prisma.C
     return { userId: user.userId, tenantId: null };
   }
   if (user.role === 'TENANT_LEARNER') {
+    // A learner's own B2C uploads, from before they joined a class. This clause can only ever
+    // match content they personally uploaded: `userId` pins it to them and `tenantId: null`
+    // excludes every organization's material, so it widens nothing across tenants.
+    //
+    // Joining a class used to hide these outright — the role flips to TENANT_LEARNER and the
+    // list became assignments-only, so a student watched their own files disappear with no
+    // warning, no explanation, and no self-serve way back. Nothing was deleted; there was simply
+    // no longer any path that returned it to them. For a child on a school account that reads as
+    // the app having eaten their work.
+    //
+    // Deliberately OUTSIDE the membership check below: a deactivated student rightly loses the
+    // class, but their own files are still theirs. They remain read-only either way —
+    // assertCanMutateContent and assertCanGenerate both refuse a TENANT_LEARNER.
+    const ownLibrary: Prisma.ContentWhereInput = { userId: user.userId, tenantId: null };
+
     // Only expose assigned content while the learner's membership is active, and
     // only content owned by their CURRENT tenant. ContentAssignment rows are not
     // deleted when a learner is deactivated or switches tutors via a join code,
@@ -51,9 +66,9 @@ export async function buildContentListWhere(user: AuthPayload): Promise<Prisma.C
       where: { userId: user.userId, role: 'LEARNER', active: true },
       select: { tenantId: true },
     });
-    if (!activeMembership) return { id: { in: [] } };
+    if (!activeMembership) return ownLibrary;
     const ids = await getAssignedContentIds(user.userId, activeMembership.tenantId);
-    return { id: { in: ids } };
+    return { OR: [{ id: { in: ids } }, ownLibrary] };
   }
   throw new AppError(403, 'Use /tenant/content for organization materials');
 }
@@ -132,6 +147,13 @@ export async function assertCanAccessContent(
         select: { id: true },
       });
       if (activeMembership) content = assignment.content;
+    }
+    if (!content) {
+      // Same rule as the list: their own untenanted upload. Scoped to this user with no tenant,
+      // so it cannot reach another learner's file or any organization's material.
+      content = await prisma.content.findFirst({
+        where: { id: contentId, userId: user.userId, tenantId: null },
+      });
     }
   } else {
     throw new AppError(403, 'Use /tenant/content for organization materials');
