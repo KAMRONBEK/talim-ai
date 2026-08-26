@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { prisma } from '../../lib/prisma.js';
-import { AppError, QuotaExceededError } from '../../middleware/error.middleware.js';
+import { AppError, QuotaExceededError, UsernameTakenError } from '../../middleware/error.middleware.js';
 import { assertTenantQuota } from '../subscription.service.js';
 import { createStudentSchema, formatStudentRow, patchStudentSchema } from './shared.js';
 
@@ -90,6 +90,37 @@ export interface ProvisionStudentResult {
  * re-queries the live active-student count) only on the seat-consuming create/reactivate
  * paths — giving natural partial-import behaviour at the seat limit.
  */
+/**
+ * Free alternatives to a taken username.
+ *
+ * Usernames are global, so a tutor typing a common first name will hit a name some other school
+ * already used. Answering with a bare "already taken" leaves them guessing in front of a class;
+ * these give them something to click. Availability is checked the same case-insensitive way login
+ * resolves a username, so a suggestion is never one that would collide on submit.
+ */
+async function suggestUsernames(taken: string, name?: string | null): Promise<string[]> {
+  const base = taken.replace(/\d+$/, '') || taken;
+  const candidates: string[] = [];
+
+  // A surname initial reads more like a real username than a counter, so offer it first.
+  const parts = (name ?? '').trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const initial = parts.length > 1 ? parts[parts.length - 1]![0] : undefined;
+  if (initial && /^[a-z]$/.test(initial)) candidates.push(`${base}.${initial}`);
+
+  for (let n = 2; n <= 9; n += 1) candidates.push(`${base}${n}`);
+
+  const free: string[] = [];
+  for (const candidate of candidates) {
+    if (free.length >= 3) break;
+    const exists = await prisma.user.findFirst({
+      where: { username: { equals: candidate, mode: 'insensitive' } },
+      select: { id: true },
+    });
+    if (!exists) free.push(candidate);
+  }
+  return free;
+}
+
 async function provisionStudent(
   tenantId: string,
   params: ProvisionStudentParams,
@@ -113,7 +144,7 @@ async function provisionStudent(
     // Checked BEFORE the email lookup below so a case variant reports the conflict the tutor
     // can actually see. It used to slip past this check and collide on the lowercased synthetic
     // email instead, answering "Email already registered" on a form with no email field.
-    if (taken) throw new AppError(409, 'Username already taken');
+    if (taken) throw new UsernameTakenError(username, await suggestUsernames(username, params.name));
     // Synthesize a stable internal email for username-only (email-less) students.
     if (!email) email = `${username}@students.talim.local`;
   }

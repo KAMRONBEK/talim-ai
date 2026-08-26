@@ -52,6 +52,26 @@ export class PlanFileLimitError extends AppError {
   }
 }
 
+/**
+ * Thrown when a student username is already in use (HTTP 409), carrying free alternatives.
+ *
+ * Usernames are globally unique, so as the platform grows a tutor will increasingly be told a
+ * common Uzbek first name is "already taken" because a completely different school used it. A
+ * bare 409 is a dead end — the tutor is standing in front of a class with no idea what to type
+ * next. The suggestions turn it into a choice.
+ */
+export class UsernameTakenError extends AppError {
+  readonly code = 'USERNAME_TAKEN' as const;
+
+  constructor(
+    public username: string,
+    public suggestions: string[],
+  ) {
+    super(409, 'Username already taken');
+    this.name = 'UsernameTakenError';
+  }
+}
+
 export function errorMiddleware(
   err: Error,
   _req: Request,
@@ -74,6 +94,16 @@ export function errorMiddleware(
       used: err.used,
       limit: err.limit,
       upgradePlanCode: err.upgradePlanCode,
+    });
+    return;
+  }
+
+  if (err instanceof UsernameTakenError) {
+    res.status(err.statusCode).json({
+      message: err.message,
+      code: err.code,
+      username: err.username,
+      suggestions: err.suggestions,
     });
     return;
   }

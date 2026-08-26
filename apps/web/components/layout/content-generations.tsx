@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { FileText, Headphones, Clapperboard, ListChecks } from 'lucide-react';
 import { PracticeGenerator } from '@/components/practice/practice-generator';
+import { useOtherLocales } from '@/hooks/useOtherLocales';
 
 export interface ContentGenerationsBlockProps {
   contentId: string;
@@ -32,7 +33,13 @@ export function ContentGenerationsBlock({
   onAction,
 }: ContentGenerationsBlockProps) {
   const t = useTranslations('content');
+  const tLocales = useTranslations('locales');
   const [practiceOpen, setPracticeOpen] = useState(false);
+  // Generated artifacts are locale-scoped by design, so switching the app language empties this
+  // block. Without saying why, that reads as "my materials were deleted" — and the natural
+  // response is to regenerate, paying again for something that already exists in the other
+  // language. Tell the user it is there.
+  const { data: otherLocales } = useOtherLocales(contentId);
 
   const wrapAction = (fn: () => void) => () => {
     fn();
@@ -44,6 +51,18 @@ export function ContentGenerationsBlock({
       <h3 className="mb-3 font-label text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
         {t('resources')}
       </h3>
+      {(otherLocales ?? []).length > 0 && (
+        <div className="mb-3 space-y-1.5 rounded-xl border border-info/40 bg-info/10 p-2.5">
+          {(otherLocales ?? []).map((entry) => (
+            <p key={entry.locale} className="text-[11px] leading-snug text-foreground">
+              {t('otherLocaleMaterials', {
+                count: entry.total,
+                locale: tLocales.has(entry.locale) ? tLocales(entry.locale) : entry.locale,
+              })}
+            </p>
+          ))}
+        </div>
+      )}
       <div className="space-y-2">
         {!hideGenerateActions && (
           <button
