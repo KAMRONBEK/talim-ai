@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import type { TranscriptSegment } from '@talim/types';
 import { cn } from '@talim/ui';
 import { getYoutubeVideoId } from '@/lib/youtube';
+import { useTranscriptFailureStore } from '@/store/useTranscriptFailureStore';
 import { useTranscript } from '@/hooks/useTranscript';
 import { YoutubeVideoPlayer } from './YoutubeVideoPlayer';
 import {
@@ -74,6 +75,9 @@ export function VideoTutorialViewer({
   const t = useTranslations('content');
   const videoId = getYoutubeVideoId(url);
   const { data: transcript, isLoading, isError } = useTranscript(contentId, Boolean(videoId));
+  // Set by the transcript.status job event when the job could say why (see
+  // useTranscriptFailureStore); undefined after a reload, which falls back to the generic line.
+  const failureReason = useTranscriptFailureStore((state) => state.byContentId[contentId]);
   const [currentMs, setCurrentMs] = useState(0);
   const [seekTarget, setSeekTarget] = useState<{ key: number; ms: number } | null>(null);
 
@@ -171,7 +175,7 @@ export function VideoTutorialViewer({
         </div>
       ) : transcript?.status === 'failed' ? (
         <div className="flex min-h-0 flex-1 items-center justify-center rounded-lg border bg-card p-4 text-center text-sm text-muted-foreground">
-          {t('transcriptFailed')}
+          {failureReason === 'TOO_LONG' ? t('transcriptTooLong') : t('transcriptFailed')}
         </div>
       ) : (
         <TranscriptPanel

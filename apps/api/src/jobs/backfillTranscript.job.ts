@@ -55,15 +55,21 @@ export function registerBackfillTranscriptJob(): void {
 
   transcriptQueue.on('failed', async (job, err) => {
     console.error(`Transcript backfill job ${job?.id} failed:`, err.message);
+    // "Too long" is deterministic — retrying re-downloads the whole audio to fail identically,
+    // doubling the memory spike for nothing. Discard so Bull stops, and report it immediately
+    // rather than after a pointless second attempt.
+    const tooLong = (err as { code?: string }).code === 'VIDEO_TOO_LONG';
+    if (tooLong) await job?.discard().catch(() => undefined);
     // Bull emits 'failed' on every attempt; only the final one (no retries left)
     // should tell clients the transcript failed.
-    if (job && job.attemptsMade < (job.opts.attempts ?? 1)) return;
+    if (!tooLong && job && job.attemptsMade < (job.opts.attempts ?? 1)) return;
     const data = job?.data as BackfillTranscriptJobData | undefined;
     if (!data?.contentId) return;
     await publishContentEvent(data.contentId, {
       type: 'transcript.status',
       contentId: data.contentId,
       status: 'FAILED',
+      ...(tooLong ? { reason: 'TOO_LONG' as const } : {}),
     });
   });
 }

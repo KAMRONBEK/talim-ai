@@ -333,7 +333,8 @@
       "band_mastered": "Mastered",
       "needsReview": "Time to review",
       "helper": "Mastery tracks your recent answers — it can go down after mistakes or time away."
-    }
+    },
+    "transcriptTooLong": "This video is too long to transcribe (about 30 minutes maximum). Use a shorter video, or one that has captions."
   },
   "chat": {
     "title": "AI Tutor",
