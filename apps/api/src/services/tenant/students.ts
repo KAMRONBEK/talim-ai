@@ -96,14 +96,26 @@ async function provisionStudent(
   opts: { assertSeatBeforeConsume?: boolean; formatRow?: boolean } = {},
 ): Promise<ProvisionStudentResult> {
   const formatRow = opts.formatRow ?? true;
-  const username = params.username?.trim();
+  // Usernames are stored lowercase because login resolves them case-INSENSITIVELY. Storing
+  // what was typed let `ali` and `Ali` both exist while a login for either matched both, so a
+  // child's password looked like it simply "didn't work".
+  const username = params.username?.trim().toLowerCase();
   let email = params.email?.trim();
 
   if (username) {
-    const taken = await prisma.user.findUnique({ where: { username }, select: { id: true } });
+    // Match the way login looks a username up, not the way the column is indexed: any row login
+    // could resolve to must block the name here. A case-sensitive findUnique would miss rows
+    // created before usernames were normalised.
+    const taken = await prisma.user.findFirst({
+      where: { username: { equals: username, mode: 'insensitive' } },
+      select: { id: true },
+    });
+    // Checked BEFORE the email lookup below so a case variant reports the conflict the tutor
+    // can actually see. It used to slip past this check and collide on the lowercased synthetic
+    // email instead, answering "Email already registered" on a form with no email field.
     if (taken) throw new AppError(409, 'Username already taken');
     // Synthesize a stable internal email for username-only (email-less) students.
-    if (!email) email = `${username.toLowerCase()}@students.talim.local`;
+    if (!email) email = `${username}@students.talim.local`;
   }
   if (!email) throw new AppError(400, 'Provide an email or a username for the student');
 
