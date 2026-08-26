@@ -545,27 +545,6 @@ export default function TenantAssessmentsPage() {
         })}
       </nav>
 
-      {assessments.some((a) => a.mode === 'GAME') && (
-        <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-          <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
-              <Radio className="h-5 w-5" />
-            </span>
-            <div>
-              <h2 className="font-display text-lg font-semibold">{t('live.title')}</h2>
-              <p className="text-sm text-muted-foreground">{t('live.desc')}</p>
-            </div>
-          </div>
-          <div className="grid gap-3">
-            {assessments
-              .filter((a) => a.mode === 'GAME')
-              .map((a) => (
-                <LiveGameRow key={a.id} assessment={a} />
-              ))}
-          </div>
-        </section>
-      )}
-
       {step === 'bank' && (
         <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
           <div className="flex items-center gap-3">
@@ -1360,6 +1339,39 @@ export default function TenantAssessmentsPage() {
         bankId={selectedBankId}
         question={editing && editing !== 'new' ? editing : undefined}
       />
+
+      {/*
+        Rendered here, below the wizard's working area, rather than directly under the nav.
+        This section does not exist in the DOM until GET /tenant/assessments resolves, so
+        mounting it above the question-bank card pushed that card — and everything under it —
+        down 474px about 0.15s after first paint, measured at CLS 0.21-0.28. A tutor reaching
+        for the bank title field as the page settled typed into whatever slid into that spot.
+
+        Reserving its height instead would trade that for an equally large upward shift for
+        every tutor with no GAME assessment, since the section is conditional on data. Below
+        the working area, the only thing it can push is the results section, which sits far
+        past the fold and so moves nothing the tutor can see.
+      */}
+      {assessments.some((a) => a.mode === 'GAME') && (
+        <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
+              <Radio className="h-5 w-5" />
+            </span>
+            <div>
+              <h2 className="font-display text-lg font-semibold">{t('live.title')}</h2>
+              <p className="text-sm text-muted-foreground">{t('live.desc')}</p>
+            </div>
+          </div>
+          <div className="grid gap-3">
+            {assessments
+              .filter((a) => a.mode === 'GAME')
+              .map((a) => (
+                <LiveGameRow key={a.id} assessment={a} />
+              ))}
+          </div>
+        </section>
+      )}
 
       <section className="space-y-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
         <div className="flex items-center gap-3">
