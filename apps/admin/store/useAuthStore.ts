@@ -9,6 +9,9 @@ interface AuthState {
   logout: () => void;
 }
 
+/** localStorage key for the persisted session. Exported so cross-tab sync matches it exactly. */
+export const AUTH_STORAGE_KEY = 'talim-admin-auth';
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
@@ -18,7 +21,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => set({ user: null, token: null }),
     }),
     {
-      name: 'talim-admin-auth',
+      name: AUTH_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
     },
   ),
