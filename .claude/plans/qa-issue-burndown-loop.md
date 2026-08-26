@@ -12,45 +12,53 @@ gh issue list --label qa-found --state open --limit 100 --json number --jq lengt
 
 Baseline at start: **34 open** (1×S2, 22×S3, 11×S4).
 
-### Progress
+### Progress — loop complete
 
-**34 → 9 open.** 25 closed across 20 PRs (#86–#105), all merged. Two were closed as
+**34 → 3 open.** 31 closed across 26 PRs (#86–#111), all merged. Two were closed as
 *already fixed* after verification rather than re-fixed (#45 messages, #63 flashcards tab).
 
-Three issues turned out to be **wrong or narrower than filed**, and were corrected on the
-issue rather than fixed as written:
+The remaining 3 are **not** work items — they are questions:
 
-- **#43** — the page was never stuck; it errors after a ~1s react-query retry. The real
-  defect was the dead-end that state settles into.
-- **#67** — names the change-password banner as a cause, but `learner-shell` redirects a
-  student with `mustChangePassword` away from the dashboard entirely.
-- **#42** — asks for per-answer correctness feedback that cannot exist: the client has no
-  answer key mid-game.
-
-Two grew **larger** than filed once diagnosed:
-
-- **#35** — `ContentVideo.storagePath` is written by no code, so *every* delete path was
-  orphaning video audio, not just the admin ones.
-- **#32** — the axios interceptor is the only thing that ends a session, so every raw-fetch
-  transport (blob, summary, chat, SSE) bypassed it.
-
-Remaining 9:
-
-| | Why it's still here |
+| | The decision |
 | --- | --- |
-| #9 #29 #30 | Need a product decision, not a fix. All three have the options written up on the issue. |
-| #11 #12 #16 #25 #26 #28 | Ingest/queue failure paths — each needs a way to *induce* the failure before it can be honestly verified. Diagnosis in progress. |
+| #9 | Cross-locale artifact discoverability. Also needs its S2 → S3 relabel. |
+| #29 | Does a student who joins a class keep their personal library? |
+| #30 | Per-tenant usernames means changing what a child types to log in. |
+
+Each has the options and a recommendation written up on the issue. None can be
+closed without an answer, so the loop's stop condition is met as far as it can be.
+
+### What the diagnoses changed
+
+Three issues were **wrong or narrower than filed**, and were corrected on the issue
+rather than fixed as written:
+
+- **#43** — the page was never stuck; it errors after a ~1s react-query retry.
+- **#67** — blames a banner that `learner-shell` redirects away from the dashboard entirely.
+- **#42** — asks for per-answer correctness that cannot exist; the client has no answer key mid-game.
+
+Five grew **larger** than filed once diagnosed — and these were the highest-value finds:
+
+- **#11** — the reported race is the smaller half. The mid-job quota assert dropped
+  `tenantId`, so every tutor was metered against a phantom personal FREE plan (5/day)
+  instead of their org's (50/day), *and* the job wrote that phantom subscription. Two of
+  six tenant owners in the dev DB already had one.
+- **#35** — `ContentVideo.storagePath` is written by no code, so *every* delete path
+  orphaned video audio, not just the admin ones.
+- **#32** — the axios interceptor is the only thing that ends a session, so every
+  raw-`fetch` transport bypassed it.
+- **#25** — a PDF whose catalog *lies* (`/Count 0`) parsed "fine" as 0 pages and skipped
+  the cap; and the tenant upload path had no file gate at all.
+- **#16** — three defects, not one: a slug-collision 500, a silent duplicate org, and a
+  seat limit discarded at HTTP 200.
 
 ### Method note
 
-Two rounds of parallel diagnosis agents (read-only, no edits) produced the fix and
-verification plans; implementation and verification stayed in the main loop. That split
-worked well — the agents found the two scope expansions above, which a straight read of the
-issues would have missed.
-
-It also stops early on any of: the quality gates going red and not being fixable
-within the iteration, `qa-preflight.sh` aborting (never drive QA against a stack that
-isn't ours), or the user saying stop.
+Two rounds of parallel read-only diagnosis agents produced the fix and verification
+plans; implementation and verification stayed in the main loop. That split found every
+scope expansion above. The agents' most valuable output was not the fix plans but the
+**induce recipes** — the six ingest/queue issues were open precisely because none of
+those failures happens on its own.
 
 ## Iteration
 
