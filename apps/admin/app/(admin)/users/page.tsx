@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import { useAdminUsers, useDeleteUser, useResetUserPassword } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { planLabel } from '@/lib/plan';
 
 function roleBadge(role: string): string {
@@ -23,7 +24,10 @@ function subStatusBadge(status: string): string {
 export default function UsersPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = useAdminUsers({ page, search: search || undefined });
+  const { data, isLoading, isError, refetch, isFetching } = useAdminUsers({
+    page,
+    search: search || undefined,
+  });
   const deleteUser = useDeleteUser();
   const resetPassword = useResetUserPassword();
 
@@ -71,8 +75,13 @@ export default function UsersPage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={8} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load users. Please try again.
+                <td colSpan={8} className="px-4 py-8">
+                  <LoadFailed
+                    what="users"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

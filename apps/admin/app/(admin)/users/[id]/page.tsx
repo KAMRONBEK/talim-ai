@@ -20,6 +20,7 @@ import {
   useUpdateUserSubscription,
 } from '@/hooks/useAdmin';
 import { planLabel } from '@/lib/plan';
+import { LoadFailed } from '@/components/load-failed';
 
 const INDIVIDUAL_PLANS: PlanCode[] = ['FREE', 'INDIVIDUAL_PRO'];
 const STATUS_OPTIONS: SubscriptionStatus[] = ['ACTIVE', 'PAST_DUE', 'CANCELED', 'TRIALING'];
@@ -42,7 +43,7 @@ function isTenantUsage(
 
 export default function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { data, isLoading, isError } = useAdminUser(id);
+  const { data, isLoading, isError, refetch, isFetching } = useAdminUser(id);
   const updateSubscription = useUpdateUserSubscription();
   const patchUser = usePatchUser();
   const resetPassword = useResetUserPassword();
@@ -72,7 +73,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
   }, [data?.user.id, data?.user.adminPasswordNote]);
 
   if (isError) {
-    return <p className="text-sm text-destructive">Couldn&apos;t load this user. Please try again.</p>;
+    return <LoadFailed what="this user" onRetry={() => void refetch()} isRetrying={isFetching} />;
   }
   if (isLoading || !data) {
     return <p className="text-muted-foreground">Loading user…</p>;

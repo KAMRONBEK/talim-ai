@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from '@talim/ui';
 import type { MediaReviewStatus } from '@talim/types';
 import { useAdminGenerated, useReviewGenerated } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { api } from '@/lib/api';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -32,7 +33,7 @@ function statusPillClass(status: string): string {
 
 export default function GeneratedPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]['id']>('all');
-  const { data, isLoading, isError } = useAdminGenerated(tab);
+  const { data, isLoading, isError, refetch, isFetching } = useAdminGenerated(tab);
   const reviewGenerated = useReviewGenerated();
   const qc = useQueryClient();
 
@@ -115,8 +116,13 @@ export default function GeneratedPage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load generated media. Please try again.
+                <td colSpan={6} className="px-4 py-8">
+                  <LoadFailed
+                    what="generated media"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

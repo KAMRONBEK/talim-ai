@@ -8,6 +8,7 @@ import {
   useDeleteContent,
   useRetryContent,
 } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 
 function errorMessage(err: unknown, fallback: string): string {
   return (err as { response?: { data?: { message?: string } } })?.response?.data?.message ?? fallback;
@@ -35,7 +36,7 @@ function DetailStat({ label, value }: { label: string; value: string | number })
 }
 
 function ContentDetailModal({ id, onClose }: { id: string; onClose: () => void }) {
-  const { data, isLoading, isError } = useAdminContentDetail(id);
+  const { data, isLoading, isError, refetch, isFetching } = useAdminContentDetail(id);
 
   return (
     <div
@@ -65,7 +66,11 @@ function ContentDetailModal({ id, onClose }: { id: string; onClose: () => void }
         <CardContent className="space-y-6">
           {isLoading && <p className="text-sm text-muted-foreground">Loading detail…</p>}
           {isError && (
-            <p className="text-sm text-destructive">Couldn&apos;t load this content&apos;s detail.</p>
+            <LoadFailed
+              what="this content's detail"
+              onRetry={() => void refetch()}
+              isRetrying={isFetching}
+            />
           )}
           {data && (
             <>
@@ -183,7 +188,13 @@ export default function ContentPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [detailId, setDetailId] = useState<string | null>(null);
-  const { data, isLoading, isError } = useAdminContents({ page, search: search || undefined });
+  const {
+    data,
+    isLoading,
+    isError,
+    refetch,
+    isFetching,
+  } = useAdminContents({ page, search: search || undefined });
   const deleteContent = useDeleteContent();
   const retryContent = useRetryContent();
 
@@ -238,8 +249,13 @@ export default function ContentPage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load content. Please try again.
+                <td colSpan={5} className="px-4 py-8">
+                  <LoadFailed
+                    what="content"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

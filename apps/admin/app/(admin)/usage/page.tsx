@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { Button } from '@talim/ui';
 import { useAdminUsage } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 
 export default function UsagePage() {
   const [days, setDays] = useState(30);
-  const { data, isLoading, isError } = useAdminUsage(days);
+  const { data, isLoading, isError, refetch, isFetching } = useAdminUsage(days);
 
   return (
     <div className="space-y-6">
@@ -47,8 +48,13 @@ export default function UsagePage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load usage. Please try again.
+                <td colSpan={5} className="px-4 py-8">
+                  <LoadFailed
+                    what="usage"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

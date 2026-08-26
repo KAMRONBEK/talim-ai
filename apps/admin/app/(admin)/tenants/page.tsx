@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button, Input } from '@talim/ui';
 import { useAdminTenants } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { planLabel } from '@/lib/plan';
 
 function statusPillClass(status: string): string {
@@ -18,7 +19,10 @@ function statusPillClass(status: string): string {
 export default function TenantsPage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = useAdminTenants({ page, search: search || undefined });
+  const { data, isLoading, isError, refetch, isFetching } = useAdminTenants({
+    page,
+    search: search || undefined,
+  });
 
   return (
     <div className="space-y-6">
@@ -74,8 +78,13 @@ export default function TenantsPage() {
             )}
             {isError && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-destructive">
-                  Couldn&apos;t load organizations. Please try again.
+                <td colSpan={6} className="px-4 py-8">
+                  <LoadFailed
+                    what="organizations"
+                    onRetry={() => void refetch()}
+                    isRetrying={isFetching}
+                    className="justify-center"
+                  />
                 </td>
               </tr>
             )}

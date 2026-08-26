@@ -12,6 +12,7 @@ import {
   useAdminAnalyticsTopOrgs,
   useAdminAnalyticsSpendByModel,
 } from '@/hooks/useAdmin';
+import { LoadFailed } from '@/components/load-failed';
 import { Activity, Building2, FileText, ListChecks, Users, Wallet } from 'lucide-react';
 import {
   Area,
@@ -106,7 +107,36 @@ function ChartCard({
   );
 }
 
-function ChartState({ loading, empty }: { loading: boolean; empty: boolean }) {
+/**
+ * A chart's non-data state.
+ *
+ * `failed` is deliberately separate from `empty`: these panels used to pass `isError` as
+ * `empty`, so a failed analytics request rendered "No data yet" — visually identical to a
+ * platform that genuinely has no data. On a dashboard whose whole job is to be a truthful
+ * summary, silently reporting absence as zero is the worst available answer.
+ */
+function ChartState({
+  loading,
+  empty,
+  failed,
+  what,
+  onRetry,
+  isRetrying,
+}: {
+  loading: boolean;
+  empty: boolean;
+  failed?: boolean;
+  what?: string;
+  onRetry?: () => void;
+  isRetrying?: boolean;
+}) {
+  if (failed) {
+    return (
+      <div className="flex h-64 items-center justify-center">
+        <LoadFailed what={what ?? 'this panel'} onRetry={onRetry} isRetrying={isRetrying} />
+      </div>
+    );
+  }
   return (
     <div className="flex h-64 items-center justify-center text-sm text-muted-foreground">
       {loading ? 'Loading…' : empty ? 'No data yet' : null}
@@ -154,7 +184,11 @@ export default function AdminDashboardPage() {
 
       {/* KPI cards — analytics summary */}
       {summary.isError ? (
-        <p className="text-sm text-destructive">Couldn&apos;t load the analytics summary. Please try again.</p>
+        <LoadFailed
+          what="the analytics summary"
+          onRetry={() => void summary.refetch()}
+          isRetrying={summary.isFetching}
+        />
       ) : summary.isLoading || !s ? (
         <p className="text-muted-foreground">Loading summary…</p>
       ) : (
@@ -172,7 +206,14 @@ export default function AdminDashboardPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <ChartCard title="User growth" hint="Cumulative total (area) and new signups per month (line)">
           {growth.isLoading || growth.isError || growthData.length === 0 ? (
-            <ChartState loading={growth.isLoading} empty={growthData.length === 0 || growth.isError} />
+            <ChartState
+              loading={growth.isLoading}
+              empty={growthData.length === 0}
+              failed={growth.isError}
+              what="user growth"
+              onRetry={() => void growth.refetch()}
+              isRetrying={growth.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -207,7 +248,14 @@ export default function AdminDashboardPage() {
 
         <ChartCard title="Users by role">
           {byRole.isLoading || byRole.isError || roleData.length === 0 ? (
-            <ChartState loading={byRole.isLoading} empty={roleData.length === 0 || byRole.isError} />
+            <ChartState
+              loading={byRole.isLoading}
+              empty={roleData.length === 0}
+              failed={byRole.isError}
+              what="users by role"
+              onRetry={() => void byRole.refetch()}
+              isRetrying={byRole.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -232,7 +280,14 @@ export default function AdminDashboardPage() {
       <div className="grid gap-4 lg:grid-cols-2">
         <ChartCard title="Activation funnel" hint="Registered → activated → tutors → paid">
           {funnel.isLoading || funnel.isError || funnelData.length === 0 ? (
-            <ChartState loading={funnel.isLoading} empty={funnelData.length === 0 || funnel.isError} />
+            <ChartState
+              loading={funnel.isLoading}
+              empty={funnelData.length === 0}
+              failed={funnel.isError}
+              what="the activation funnel"
+              onRetry={() => void funnel.refetch()}
+              isRetrying={funnel.isFetching}
+            />
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -266,7 +321,11 @@ export default function AdminDashboardPage() {
           {contentByType.isLoading || contentByType.isError || typeData.length === 0 ? (
             <ChartState
               loading={contentByType.isLoading}
-              empty={typeData.length === 0 || contentByType.isError}
+              empty={typeData.length === 0}
+              failed={contentByType.isError}
+              what="content by type"
+              onRetry={() => void contentByType.refetch()}
+              isRetrying={contentByType.isFetching}
             />
           ) : (
             <div className="h-64">
@@ -304,7 +363,11 @@ export default function AdminDashboardPage() {
           {mrr.isLoading ? (
             <ChartState loading empty={false} />
           ) : mrr.isError ? (
-            <p className="text-sm text-destructive">Couldn&apos;t load MRR.</p>
+            <LoadFailed
+              what="MRR"
+              onRetry={() => void mrr.refetch()}
+              isRetrying={mrr.isFetching}
+            />
           ) : !mrr.data || mrr.data.byPlan.length === 0 ? (
             <ChartState loading={false} empty />
           ) : (
@@ -355,7 +418,11 @@ export default function AdminDashboardPage() {
           {spendByModel.isLoading ? (
             <ChartState loading empty={false} />
           ) : spendByModel.isError ? (
-            <p className="text-sm text-destructive">Couldn&apos;t load spend by model.</p>
+            <LoadFailed
+              what="spend by model"
+              onRetry={() => void spendByModel.refetch()}
+              isRetrying={spendByModel.isFetching}
+            />
           ) : spendRows.length === 0 ? (
             <ChartState loading={false} empty />
           ) : (
@@ -397,7 +464,11 @@ export default function AdminDashboardPage() {
         {topOrgs.isLoading ? (
           <ChartState loading empty={false} />
         ) : topOrgs.isError ? (
-          <p className="text-sm text-destructive">Couldn&apos;t load top organizations.</p>
+          <LoadFailed
+            what="top organizations"
+            onRetry={() => void topOrgs.refetch()}
+            isRetrying={topOrgs.isFetching}
+          />
         ) : orgs.length === 0 ? (
           <ChartState loading={false} empty />
         ) : (
