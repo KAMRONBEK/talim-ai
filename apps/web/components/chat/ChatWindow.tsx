@@ -151,6 +151,15 @@ export function ChatWindow({
   const answerStillExpected =
     awaitingAnswer && isAnswerStillExpected(sessionData?.messages, Date.now());
 
+  // Message times are relative, so they rot on a tab left open — "now" has to become
+  // "5 daqiqa oldin" without the user touching anything. One slow tick for the whole list.
+  const [, setClockTick] = useState(0);
+  useEffect(() => {
+    if (messages.length === 0) return;
+    const id = setInterval(() => setClockTick((n) => n + 1), 60_000);
+    return () => clearInterval(id);
+  }, [messages.length]);
+
   return (
     <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
       <div className="flex items-center gap-3 border-b border-border/70 px-4 py-3">
@@ -186,6 +195,7 @@ export function ChatWindow({
               streaming={msg.streaming}
               excerpt={msg.excerpt}
               excerptImage={msg.excerptImage}
+              createdAt={msg.createdAt}
             />
           ))}
         {answerStillExpected && <ChatMessage role="ASSISTANT" text="" streaming />}

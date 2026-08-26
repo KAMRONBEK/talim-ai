@@ -12,6 +12,9 @@ interface LocalChatMessage {
   streaming?: boolean;
   excerpt?: string;
   excerptImage?: string;
+  /** When the server recorded this message. Absent on a bubble we have only just created
+   *  locally, which is the one case where "now" is actually true. */
+  createdAt?: string;
 }
 
 interface ChatState {
@@ -71,6 +74,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
         text: m.text,
         excerpt: m.excerpt ?? undefined,
         excerptImage: m.excerptImage ?? undefined,
+        createdAt: m.createdAt,
       })),
       isStreaming: false,
     }),
@@ -91,8 +95,15 @@ export const useChatStore = create<ChatState>((set, get) => ({
           text: message,
           excerpt: selectedExcerpt,
           excerptImage: selectedImage,
+          createdAt: new Date().toISOString(),
         },
-        { id: assistantMsgId, role: 'ASSISTANT', text: '', streaming: true },
+        {
+          id: assistantMsgId,
+          role: 'ASSISTANT',
+          text: '',
+          streaming: true,
+          createdAt: new Date().toISOString(),
+        },
       ],
     }));
 
