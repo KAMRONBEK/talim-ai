@@ -996,7 +996,8 @@
       "respond": "Send",
       "respondError": "Couldn't send your reply."
     },
-    "inactiveSubscriptionBanner": "Your organization subscription is not active. Uploads, students, and AI generation may be limited."
+    "inactiveSubscriptionBanner": "Your organization subscription is not active. Uploads, students, and AI generation may be limited.",
+    "expiredPeriodBanner": "Your subscription period has ended. Your account still works for now — contact an administrator to continue."
   },
   "learner": {
     "loading": "Loading...",
