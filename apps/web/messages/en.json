@@ -141,7 +141,7 @@
     "processingStepAnalyzing": "Understanding the content",
     "processingStepStructuring": "Building sections",
     "failed": "Could not process material",
-    "failedDesc": "Could not extract text from the PDF. It may be scanned or image-only — try OCR reprocessing.",
+    "failedDesc": "We couldn't finish processing this material. If it's a scanned or image-only PDF, try OCR reprocessing; otherwise retry, or delete it and upload again.",
     "retry": "Retry processing",
     "retrying": "Processing...",
     "backToLibrary": "Back to library",

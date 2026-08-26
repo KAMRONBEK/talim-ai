@@ -8,6 +8,7 @@ import { Button, cn } from '@talim/ui';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useRetryContent } from '@/hooks/useContent';
 import { DeleteContentDialog } from '@/components/content/delete-content-dialog';
+import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
 interface ContentStatusGateProps {
   content: Content;
@@ -34,6 +35,10 @@ export function ContentStatusGate({
   const t = useTranslations('content');
   const tCommon = useTranslations('common');
   const router = useRouter();
+  // Declared above the early return — this component bails out for READY content, and hooks
+  // cannot live below that.
+  const [retryNotice, setRetryNotice] = useState<string | null>(null);
+  const handleLimitError = useLimitErrorHandler();
 
   if (content.status === 'READY') return null;
 
@@ -54,12 +59,25 @@ export function ContentStatusGate({
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-2xl">⚠️</div>
             <h2 className="mt-4 font-display text-lg font-semibold">{t('failed')}</h2>
             <p className="mt-2 text-sm text-muted-foreground">{t('failedDesc')}</p>
+            {/* Retry re-checks the quota and can legitimately answer 402. With no onError the
+                button spun, returned to idle, and said nothing — so the one failure the user
+                could actually act on was the one they were never told about. */}
+            {retryNotice && (
+              <p role="alert" className="mt-3 text-sm text-destructive">
+                {retryNotice}
+              </p>
+            )}
             <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
               {!isLearner && (
                 <>
                   <Button
                     disabled={retryContent.isPending}
-                    onClick={() => retryContent.mutate(content.id)}
+                    onClick={() => {
+                      setRetryNotice(null);
+                      retryContent.mutate(content.id, {
+                        onError: (err) => setRetryNotice(handleLimitError(err, t('failedDesc'))),
+                      });
+                    }}
                   >
                     {retryContent.isPending ? t('retrying') : t('retry')}
                   </Button>

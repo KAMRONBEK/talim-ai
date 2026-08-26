@@ -141,7 +141,7 @@
     "processingStepAnalyzing": "Mazmun tahlil qilinyapti",
     "processingStepStructuring": "Bo'limlar tuzilyapti",
     "failed": "Material qayta ishlanmadi",
-    "failedDesc": "PDF dan matn ajratib bo'lmadi. Skanerlangan yoki faqat rasmlardan iborat PDF bo'lishi mumkin — OCR orqali qayta urinib ko'ring.",
+    "failedDesc": "Bu materialni oxirigacha qayta ishlay olmadik. Agar u skanerlangan yoki faqat rasmlardan iborat PDF bo'lsa, OCR orqali qayta urinib ko'ring; aks holda qaytadan urining yoki o'chirib, qayta yuklang.",
     "retry": "Qayta ishlash",
     "retrying": "Ishlanmoqda...",
     "backToLibrary": "Kutubxonaga qaytish",

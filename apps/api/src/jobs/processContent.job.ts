@@ -1,5 +1,6 @@
 import { ContentStatus } from '@prisma/client';
 import { prisma } from '../lib/prisma.js';
+import { AppError } from '../middleware/error.middleware.js';
 import { env } from '../config/env.js';
 import { contentQueue, type ProcessContentJobData } from '../services/queue.service.js';
 import { storageService } from '../services/storage.service.js';
@@ -63,15 +64,37 @@ export function registerProcessContentJob(): void {
       const chunks = await chunkText(text);
       await storeChunksWithEmbeddings(contentId, chunks, usage);
 
+      // The AI outline is the only thing left that the generation quota can still refuse — the
+      // chunks and embeddings above are already computed, already paid for, and already stored.
+      let allowAiOutline = true;
       if (chunks.length > 3) {
         const user = await prisma.user.findUnique({
           where: { id: content.userId },
           select: { role: true },
         });
-        await assertQuota(content.userId, 'GENERATION', { role: user?.role });
+        try {
+          await assertQuota(content.userId, 'GENERATION', {
+            role: user?.role,
+            // Without this a TENANT_OWNER fell through to the personal path, where they have no
+            // subscription row — so one was CREATED for them on the spot at FREE's 5/day, while
+            // the upload that was just accepted had been checked against the org's 50/day. Every
+            // tutor hit a hard cliff on their 6th ingest of the day, and the job quietly wrote a
+            // phantom FREE subscription in their name. reparseContent has always passed it.
+            tenantId: content.tenantId ?? undefined,
+          });
+        } catch (err: unknown) {
+          // Match on the 402 status, not the QuotaExceededError class: an inactive org
+          // subscription throws a plain AppError(402) from requireActiveTenantSubscription, and
+          // that must not turn a paid-for ingest into a dead material either.
+          if (!(err instanceof AppError) || err.statusCode !== 402) throw err;
+          allowAiOutline = false;
+        }
       }
 
-      await generateContentSections(contentId, chunks.length);
+      // Degrading rather than failing: the material reaches READY and the tutor, RAG, search and
+      // quizzes all work — only the chapter titles are generic. Failing here threw away work the
+      // user had already been charged for, and reported it as a scanned-PDF problem.
+      await generateContentSections(contentId, chunks.length, { skipAiOutline: !allowAiOutline });
       // Sections were regenerated with fresh ids — drop stale slide decks (incl. any
       // placeholder from a prior failed read) so they regenerate from the new text.
       await prisma.contentSlideDeck.deleteMany({ where: { contentId } });
