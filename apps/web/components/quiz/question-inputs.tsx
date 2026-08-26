@@ -117,8 +117,13 @@ export function isAnswerProvided(
   question: QuizQuestion,
   value: QuizAnswerValue | undefined,
 ): boolean {
-  // The starting order is a valid ORDERING answer — matches the assessments WrittenForm.
-  if (questionRenderKind(question) === 'ordering') return true;
+  // ORDERING no longer counts as answered just because the list renders in some order.
+  // Returning true unconditionally meant the learner got no "you haven't answered this"
+  // prompt and could not tell a skipped question from a completed one. It is answered
+  // when they have actually stored an arrangement.
+  if (questionRenderKind(question) === 'ordering') {
+    return Array.isArray(value) && value.some((v) => v.trim() !== '');
+  }
   if (value == null) return false;
   if (typeof value === 'string') return value.trim() !== '';
   if (Array.isArray(value)) return value.some((v) => v.trim() !== '');
