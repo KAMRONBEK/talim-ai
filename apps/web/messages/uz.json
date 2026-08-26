@@ -161,7 +161,7 @@
     "savedSummary": "Saqlangan xulosa",
     "aiPodcast": "AI Podkast",
     "listenAction": "Tinglash",
-    "aiVideo": "AI Video",
+    "aiVideo": "AI video",
     "watchAction": "Ko'rish",
     "practiceQuiz": "Mashq testi",
     "quizCount": "{count} ta test",
@@ -571,7 +571,7 @@
       "dashboard": "Bosh sahifa",
       "materials": "Materiallar",
       "students": "O'quvchilar",
-      "progress": "Progress",
+      "progress": "Taraqqiyot",
       "assessments": "Topshiriqlar",
       "billing": "To'lov",
       "settings": "Sozlamalar"
@@ -823,7 +823,7 @@
         "clearSchedule": "Jadvalni tozalash"
       },
       "wizardNav": "Baholash qurish bosqichlari",
-      "stepBankLabel": "Bank",
+      "stepBankLabel": "Savollar banki",
       "stepGenerateLabel": "Yaratish",
       "stepReviewLabel": "Ko‘rib chiqish",
       "stepPublishLabel": "Nashr",
@@ -1083,7 +1083,7 @@
     },
     "nav": {
       "materials": "Materiallar",
-      "progress": "Progress",
+      "progress": "Taraqqiyot",
       "tasks": "Topshiriqlar",
       "settings": "Sozlamalar"
     },
