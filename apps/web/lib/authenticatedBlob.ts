@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from '@/lib/api';
+import { getApiBaseUrl, handleAuthFailure, terminateSession } from '@/lib/api';
 import { useAuthStore } from '@/store/useAuthStore';
 
 /** Carries the HTTP status so callers can distinguish permanent (4xx) from transient failures. */
@@ -29,7 +29,13 @@ export async function fetchAuthenticatedBlob(
   options?: FetchBlobOptions,
 ): Promise<string> {
   const token = useAuthStore.getState().token;
-  if (!token) throw new BlobFetchError('Not authenticated');
+  if (!token) {
+    // Second stranding path, and the quieter one: with no token this threw with an undefined
+    // status, which the reader reads as "transient" — so it burned both retries and landed on the
+    // same dead-end error screen. End the session and report 401 so it is classified permanent.
+    terminateSession();
+    throw new BlobFetchError('Not authenticated', 401);
+  }
 
   // Internal controller drives the actual fetch; an external signal (unmount) and the
   // stall timer both abort through it.
@@ -52,7 +58,14 @@ export async function fetchAuthenticatedBlob(
       headers: { Authorization: `Bearer ${token}` },
       signal: controller.signal,
     });
-    if (!response.ok) throw new BlobFetchError('Failed to fetch resource', response.status);
+    if (!response.ok) {
+      // Read the body only on the error path — consuming it on success would drain the stream
+      // before response.blob()/getReader() and break every PDF, podcast and video-audio load.
+      const body = (await response.json().catch(() => null)) as { code?: string } | null;
+      handleAuthFailure(response.status, body?.code ?? undefined);
+      // Still throw: the redirect is a navigation, and the caller's cleanup must run meanwhile.
+      throw new BlobFetchError('Failed to fetch resource', response.status);
+    }
 
     // Default path (no stall window, or no streaming support): single read.
     if (stallMs == null || !response.body) {

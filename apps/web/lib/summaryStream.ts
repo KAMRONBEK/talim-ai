@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from '@/lib/api';
+import { getApiBaseUrl, handleAuthFailure } from '@/lib/api';
 import { getApiLocale } from '@/lib/locale-api';
 import { useAuthStore } from '@/store/useAuthStore';
 
@@ -57,6 +57,9 @@ export async function streamSummaryGeneration(
     } catch {
       /* non-JSON error body */
     }
+    // An expired session here used to render "summary failed" with a Retry that could
+    // never succeed, because this stream never passed through the axios interceptor.
+    handleAuthFailure(response.status, (data as { code?: string } | null)?.code);
     throw Object.assign(new Error('summary_stream_failed'), {
       response: { status: response.status, data },
     });
