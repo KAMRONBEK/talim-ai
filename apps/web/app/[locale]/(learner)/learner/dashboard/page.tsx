@@ -227,14 +227,15 @@ function TaskCard({ assessment }: { assessment: LearnerAssessment }) {
 
 export default function LearnerDashboardPage() {
   const t = useTranslations('learner');
+  const tCommon = useTranslations('common');
   const locale = useLocale() as AppLocale;
   const user = useAuthStore((s) => s.user);
   const { data: contents, isLoading } = useContents();
-  const { data: summary } = useLearnerSummary();
+  const { data: summary, isPending: summaryPending } = useLearnerSummary();
   const { data: materials } = useLearnerMaterials();
-  const { data: assessments } = useLearnerAssessments();
+  const { data: assessments, isPending: assessmentsPending } = useLearnerAssessments();
   const { data: progress } = useLearnerProgress();
-  const { data: unreadMessages = 0 } = useLearnerUnreadCount();
+  const { data: unreadMessages = 0, isPending: unreadPending } = useLearnerUnreadCount();
   // Only fetch the message bodies when there is something unread to preview.
   const { data: messages } = useLearnerMessages(unreadMessages > 0);
 
@@ -347,6 +348,30 @@ export default function LearnerDashboardPage() {
   const completedCount =
     progress?.materialsDone ??
     (materials ?? []).filter((m) => m.status === 'completed').length;
+
+  // Three banners sit above everything else on this page — change-password, unread messages,
+  // and live game — and each one is conditional on data that arrives after first paint. Painting
+  // the dashboard before they settle is what made it fall ~517px in four lurches, moving the
+  // hero CTA and stat tiles out from under a student's pointer mid-click.
+  //
+  // Reserving space for them is not available here: all three are conditional, so a placeholder
+  // would leave a hole (and an equal upward shift) for every student who has none of them. So
+  // hold the first paint instead. Nothing is painted at a position it is about to leave, and the
+  // skeleton has nothing below it to push.
+  const bootstrapping = isLoading || summaryPending || assessmentsPending || unreadPending;
+  if (bootstrapping) {
+    return (
+      <div className="mx-auto flex max-w-6xl flex-col gap-8" aria-busy="true">
+        <span className="sr-only">{tCommon('loading')}</span>
+        <div className="h-[354px] animate-pulse rounded-3xl bg-muted" />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="h-[158px] animate-pulse rounded-3xl bg-muted" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-8">
