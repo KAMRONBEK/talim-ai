@@ -164,7 +164,12 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
 
   const handleSubmit = () => {
     const currentAnswers = questions.reduce<Record<string, QuizAnswerValue>>((acc, question) => {
-      const value = valueFor(question);
+      // Submit what the learner actually stored, not valueFor(). valueFor synthesizes the
+      // options' starting order for ORDERING so the list has something to render — but
+      // submitting that synthesized value meant an untouched ORDERING question went in as
+      // if the learner had arranged it that way, and pairwise partial credit paid out for
+      // an arrangement nobody made. Every other type submits nothing when untouched.
+      const value = answers[question.id];
       if (value != null && isAnswerProvided(question, value)) acc[question.id] = value;
       return acc;
     }, {});
@@ -175,7 +180,10 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
 
   const kind = questionRenderKind(q);
   const answer = valueFor(q);
-  const hasAnswer = isAnswerProvided(q, answer);
+  // `answer` is the DISPLAY value (ORDERING falls back to the starting order so the list
+  // renders); answeredness must read the raw store, or an untouched ORDERING question
+  // reports itself as answered again.
+  const hasAnswer = isAnswerProvided(q, answers[q.id]);
   const isRevealed = revealed[q.id] ?? false;
   // Single grading engine — identical to the server's submit grading. A written answer
   // the local engine rejects may still be accepted by the server's AI judge; the same
@@ -189,7 +197,7 @@ export function QuizCard({ quiz, onSubmit, isSubmitting }: QuizCardProps) {
   const isAiChecking = checkAnswerMutation.isPending;
   const typeLabel = t(questionTypeLabelKey(q.type));
   const allQuestionsAnswered = questions.every((question) =>
-    isAnswerProvided(question, valueFor(question)),
+    isAnswerProvided(question, answers[question.id]),
   );
 
   const partialLabel = (() => {

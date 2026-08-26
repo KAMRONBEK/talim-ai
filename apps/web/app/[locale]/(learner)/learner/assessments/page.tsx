@@ -301,8 +301,11 @@ function WrittenForm({ assessment }: { assessment: LearnerAssessment }) {
               return [q.id, lefts.map((_, i) => values[i] ?? '')];
             }
             if (q.type === 'ORDERING' && q.options?.length) {
-              // The items in the learner's chosen order (defaults to the shuffled options).
-              return [q.id, ordering[q.id] ?? q.options];
+              // ONLY the learner's chosen order. Falling back to q.options submitted the
+              // shuffled starting arrangement as though they had made it, and pairwise
+              // partial credit paid out for work nobody did (#49). Untouched submits empty,
+              // like every other question type.
+              return [q.id, ordering[q.id] ?? []];
             }
             if (q.type === 'DRAG_DROP' && dragItems(q.config).length) {
               // A chosen target per item, parallel to config.items, JSON-encoded — the

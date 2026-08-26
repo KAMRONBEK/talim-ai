@@ -27,7 +27,7 @@ import type {
 import { MermaidDiagram } from '@/components/chat/MermaidDiagram';
 import { TutorChart } from '@/components/chat/TutorChart';
 import { T, deckIcon, paletteFor, resolveSlideAccentHex } from '@/lib/deck-theme';
-import { DeckMarkdown } from './DeckMarkdown';
+import { DeckMarkdown, DeckText } from './DeckMarkdown';
 
 const fadeUp = 'motion-safe:animate-deck-fade-in-up';
 
@@ -60,7 +60,7 @@ function Cover({ slide }: { slide: CoverSlide }) {
         <h1 className={cn(T.title, 'mt-5 max-w-[20ch] text-[3.5rem] font-extrabold drop-shadow-sm')}>
           {slide.title}
         </h1>
-        {slide.subtitle && <p className="mt-5 max-w-[42ch] text-2xl text-white/90">{slide.subtitle}</p>}
+        {slide.subtitle && <p className="mt-5 max-w-[42ch] text-2xl text-white/90"><DeckText>{slide.subtitle}</DeckText></p>}
         {slide.estimatedMinutes != null && (
           <span className="mt-8 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur">
             ⏱ {slide.estimatedMinutes} min
@@ -78,7 +78,7 @@ function Section({ slide }: { slide: SectionSlide }) {
       <div className="relative">
         {slide.index && <span className="text-7xl font-extrabold text-white/40 tabular-nums">{slide.index}</span>}
         <h2 className={cn(T.title, 'mt-2 max-w-[24ch] text-[3rem] font-extrabold')}>{slide.title}</h2>
-        {slide.subtitle && <p className="mt-4 max-w-[44ch] text-xl text-white/85">{slide.subtitle}</p>}
+        {slide.subtitle && <p className="mt-4 max-w-[44ch] text-xl text-white/85"><DeckText>{slide.subtitle}</DeckText></p>}
       </div>
     </div>
   );
@@ -95,7 +95,7 @@ function Concept({ slide }: { slide: ConceptSlide }) {
       <div className={T.accentRule} />
       {slide.body && (
         <p className={cn('mt-6 max-w-[52ch] text-2xl leading-relaxed text-zinc-600 dark:text-zinc-300', fadeUp)}>
-          {slide.body}
+          <DeckText>{slide.body}</DeckText>
         </p>
       )}
     </div>
@@ -121,7 +121,7 @@ function Bullets({ slide }: { slide: BulletsSlide }) {
                 <Icon className={T.iconInChip} strokeWidth={1.75} />
               </span>
               <div>
-                <p className="text-xl font-semibold leading-snug">{b.text}</p>
+                <p className="text-xl font-semibold leading-snug"><DeckText>{b.text}</DeckText></p>
                 {b.sub && <p className="mt-0.5 text-base text-zinc-500 dark:text-zinc-400">{b.sub}</p>}
               </div>
             </li>
@@ -164,13 +164,13 @@ function BigStat({ slide }: { slide: BigStatSlide }) {
     <div className="flex h-full w-full flex-col items-center justify-center text-center">
       <div className={cn('flex items-center gap-4', fadeUp)}>
         <span className="bg-gradient-to-br from-[var(--slide-accent)] to-fuchsia-500 bg-clip-text text-[9rem] font-extrabold leading-none tabular-nums text-transparent">
-          {slide.value}
+          <DeckText>{slide.value}</DeckText>
         </span>
         {slide.trend && (
           <TrendIcon className="h-12 w-12 text-[color:var(--slide-accent)]" strokeWidth={2.25} />
         )}
       </div>
-      <p className={cn('mt-4 max-w-[40ch] text-2xl font-semibold', fadeUp)}>{slide.label}</p>
+      <p className={cn('mt-4 max-w-[40ch] text-2xl font-semibold', fadeUp)}><DeckText>{slide.label}</DeckText></p>
       {slide.context && (
         <p className={cn('mt-3 max-w-[48ch] text-lg text-zinc-500 dark:text-zinc-400', fadeUp)}>{slide.context}</p>
       )}
@@ -190,9 +190,9 @@ function StatTrio({ slide }: { slide: StatTrioSlide }) {
             className={cn('flex flex-col items-center p-8 text-center', T.surface, fadeUp, 'deck-stagger')}
           >
             <span className="bg-gradient-to-br from-[var(--slide-accent)] to-fuchsia-500 bg-clip-text text-6xl font-extrabold tabular-nums text-transparent">
-              {s.value}
+              <DeckText>{s.value}</DeckText>
             </span>
-            <span className="mt-3 text-lg font-medium text-zinc-600 dark:text-zinc-300">{s.label}</span>
+            <span className="mt-3 text-lg font-medium text-zinc-600 dark:text-zinc-300"><DeckText>{s.label}</DeckText></span>
           </div>
         ))}
       </div>
@@ -222,13 +222,13 @@ function Definition({ slide }: { slide: DefinitionSlide }) {
   return (
     <div className="flex h-full w-full flex-col justify-center">
       <Kicker>{t('definition')}</Kicker>
-      <h2 className={cn(T.title, 'mt-4 text-[3rem]', fadeUp)}>{slide.term}</h2>
+      <h2 className={cn(T.title, 'mt-4 text-[3rem]', fadeUp)}><DeckText>{slide.term}</DeckText></h2>
       {slide.pronunciation && (
         <p className="mt-1 text-xl italic text-zinc-400">/{slide.pronunciation}/</p>
       )}
       <div className={T.accentRule} />
       <p className={cn('mt-6 max-w-[52ch] text-2xl leading-relaxed text-zinc-600 dark:text-zinc-300', fadeUp)}>
-        {slide.definition}
+        <DeckText>{slide.definition}</DeckText>
       </p>
       {slide.example && (
         <div className={cn('mt-6 max-w-[52ch] border-l-4 border-[var(--slide-accent)] bg-[color:var(--slide-accent)]/5 p-4 text-lg italic', fadeUp)}>
@@ -414,7 +414,7 @@ function QuickCheck({ slide }: { slide: QuickCheckSlide }) {
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[color:var(--slide-accent)]/15 text-sm font-bold text-[color:var(--slide-accent)]">
                     {String.fromCharCode(65 + i)}
                   </span>
-                  <span className="flex-1">{opt.text}</span>
+                  <span className="flex-1"><DeckText>{opt.text}</DeckText></span>
                   {correct && <Check className="h-5 w-5 text-emerald-500" />}
                 </button>
               </li>
