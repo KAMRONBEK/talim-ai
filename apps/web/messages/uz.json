@@ -1037,7 +1037,15 @@
       "answeredCount": "{count} / {total} javob berildi",
       "speedBonus": "Tezlik bonusi",
       "potentialPoints": "{points} ballgacha",
-      "speedBonusHint": "Hozir to'g'ri javob bersangiz oladigan ball — vaqt tugab borgani sari kamayadi. Yakuniy ball natijalar sahifasida ko'rsatiladi."
+      "speedBonusHint": "Hozir to'g'ri javob bersangiz oladigan ball — vaqt tugab borgani sari kamayadi. Yakuniy ball natijalar sahifasida ko'rsatiladi.",
+      "a11yQuestionStart": "{current} / {total}-savol. {seconds} soniya vaqtingiz bor.",
+      "a11yAnswerRecorded": "Javob qabul qilindi.",
+      "a11yTimeUp": "Vaqt tugadi.",
+      "a11yTimeWarning": "{seconds} soniya qoldi.",
+      "a11yTimerLabel": "Savol uchun qolgan vaqt",
+      "a11yGameOver": "O'yin tugadi. {points} ball. {total} tadan {correct} ta to'g'ri.",
+      "a11yCorrect": "To'g'ri",
+      "a11yIncorrect": "Noto'g'ri"
     },
     "welcome": "Xush kelibsiz, {name}",
     "dashboardDesc": "Sizga tayinlangan materiallar.",

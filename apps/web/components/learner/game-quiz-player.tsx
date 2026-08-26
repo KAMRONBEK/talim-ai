@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowDown, ArrowUp, Zap } from 'lucide-react';
 import { Button, Input } from '@talim/ui';
@@ -28,7 +28,16 @@ const GAME_BASE_POINTS = 1000;
 const GAME_SELECT_CLASS =
   'rounded-lg border border-white/15 bg-white/[0.08] px-3 py-2 text-sm text-[#f7f2e8] focus:border-[#3e9c86] focus:outline-none focus:ring-1 focus:ring-[#3e9c86]';
 
-function GameStage({ children }: { children: ReactNode }) {
+/**
+ * The stage every phase renders into — and the host of the game's single live region.
+ *
+ * The announcer lives HERE, not inside a phase's children, and that placement is load-bearing:
+ * a live region only announces mutations to a node that already existed, so one rendered per
+ * phase would remount on every transition and drop the very message it was added to deliver.
+ * GameStage is the root of all four phase returns at the same position in the tree, so React
+ * keeps this node alive across intro -> playing -> submitting -> results.
+ */
+function GameStage({ children, announcement }: { children: ReactNode; announcement?: string }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-[#14332c] bg-[#16322b] text-[#f7f2e8] shadow-[0_24px_60px_-34px_rgba(20,40,30,0.6)]">
       <div
@@ -37,6 +46,12 @@ function GameStage({ children }: { children: ReactNode }) {
         style={{ backgroundImage: GIRIH_OVERLAY }}
       />
       <div className="relative">{children}</div>
+      {/* Polite, never assertive: assertive would cut across the option the learner is being
+          read, which is their actual task under time pressure. Every message is a few words,
+          so the queue costs about a second. */}
+      <div role="status" aria-atomic="true" className="sr-only">
+        {announcement}
+      </div>
     </div>
   );
 }
@@ -112,6 +127,21 @@ export function GameQuizPlayer({
   const startRef = useRef(0);
   const startTotalRef = useRef(0);
   const lockedRef = useRef(false);
+  // The live-region text, with a nonce so the SAME sentence twice in a row still announces:
+  // an unchanged string is not a DOM mutation, so "10 soniya qoldi" on two consecutive
+  // questions would be silent the second time. The nonce is spent as a zero-width space,
+  // which screen readers do not speak.
+  const [liveMsg, setLiveMsg] = useState({ text: '', nonce: 0 });
+  const announce = useCallback((text: string) => {
+    setLiveMsg((prev) => ({ text, nonce: prev.nonce + 1 }));
+  }, []);
+  const announcement = liveMsg.text ? liveMsg.text + (liveMsg.nonce % 2 ? '\u200b' : '') : '';
+  // Which thresholds this question has already warned about, so each fires once.
+  const timeWarnedRef = useRef({ t10: false, t5: false });
+  // Why the previous question ended, so the next one can open by saying so.
+  const advanceReasonRef = useRef<'answered' | 'timeout' | null>(null);
+  const promptRef = useRef<HTMLDivElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const question = assessment.questions[index];
 
@@ -129,22 +159,60 @@ export function GameQuizPlayer({
     setHotspotPoint(null);
     // ORDERING starts from the (already shuffled) options; the learner reorders from there.
     setOrderValues(question.options ?? []);
+
+    timeWarnedRef.current = { t10: false, t5: false };
+    // Open with what just happened, then where we are. Silent on the first question, which has
+    // no predecessor to report.
+    const reason = advanceReasonRef.current;
+    const prefix =
+      reason === 'timeout' ? `${t('a11yTimeUp')} ` : reason === 'answered' ? `${t('a11yAnswerRecorded')} ` : '';
+    advanceReasonRef.current = null;
+    announce(
+      prefix +
+        t('a11yQuestionStart', {
+          current: index + 1,
+          total: assessment.questions.length,
+          seconds: limitSec,
+        }),
+    );
+    // Also fixes a focus-order defect: answering unmounts the focused control, dropping focus to
+    // <body> and dumping a keyboard user at the top of the document every single question.
+    // Skipped for the types that autoFocus an input — autoFocus lands during commit and this
+    // effect runs after, so moving focus here would steal it back.
+    const autoFocuses =
+      question.type === 'FILL_BLANK' ||
+      question.type === 'SHORT_ANSWER' ||
+      question.type === 'NUMERIC';
+    if (!autoFocuses) promptRef.current?.focus();
+
     const id = setInterval(() => {
       const elapsed = (Date.now() - startRef.current) / 1000;
       const left = Math.max(0, limitSec - elapsed);
       setTimeLeft(left);
+      // Threshold warnings only — at most two per question. A polite region fed every tick would
+      // queue ~20 announcements per question and make the game less usable, not more.
+      if (left <= 10 && limitSec > 10 && !timeWarnedRef.current.t10) {
+        timeWarnedRef.current.t10 = true;
+        announce(t('a11yTimeWarning', { seconds: 10 }));
+      } else if (left <= 5 && limitSec > 5 && !timeWarnedRef.current.t5) {
+        timeWarnedRef.current.t5 = true;
+        announce(t('a11yTimeWarning', { seconds: 5 }));
+      }
       if (left <= 0) {
         clearInterval(id);
-        lockAnswer('');
+        lockAnswer('', 'timeout');
       }
     }, 100);
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, index]);
 
-  function lockAnswer(answer: string) {
+  // `reason` is passed explicitly rather than inferred from an empty answer — an empty
+  // FILL_BLANK submission is also '', and calling that a timeout would be a lie.
+  function lockAnswer(answer: string, reason: 'answered' | 'timeout' = 'answered') {
     if (!question || lockedRef.current) return;
     lockedRef.current = true;
+    advanceReasonRef.current = reason;
     const elapsedMs = Math.min(Date.now() - startRef.current, limitSec * 1000);
     const nextAnswers = { ...answers, [question.id]: answer };
     const nextTimings = { ...timings, [question.id]: Math.round(elapsedMs) };
@@ -191,6 +259,11 @@ export function GameQuizPlayer({
   }
 
   async function finish(finalAnswers: Record<string, string>, finalTimings: Record<string, number>) {
+    const reason = advanceReasonRef.current;
+    advanceReasonRef.current = null;
+    const prefix =
+      reason === 'timeout' ? `${t('a11yTimeUp')} ` : reason === 'answered' ? `${t('a11yAnswerRecorded')} ` : '';
+    announce(prefix + t('scoring'));
     setPhase('submitting');
     try {
       const data = await submit.mutateAsync({
@@ -210,9 +283,22 @@ export function GameQuizPlayer({
     }
   }
 
+  // Results are a status message: they appear without focus moving, so nothing would read them.
+  useEffect(() => {
+    if (phase !== 'results' || !result) return;
+    announce(
+      t('a11yGameOver', {
+        points: result.attempt.pointsTotal,
+        correct: result.correct,
+        total: result.total,
+      }),
+    );
+    resultsRef.current?.focus();
+  }, [phase, result, announce, t]);
+
   if (phase === 'intro') {
     return (
-      <GameStage>
+      <GameStage announcement={announcement}>
         <div className="flex flex-col items-center px-6 py-14 text-center sm:px-10">
           <LogoMark className="h-12 w-12 shadow-soft" />
           <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-[#f7f2e8] sm:text-3xl">
@@ -246,7 +332,7 @@ export function GameQuizPlayer({
 
   if (phase === 'submitting') {
     return (
-      <GameStage>
+      <GameStage announcement={announcement}>
         <div className="flex flex-col items-center gap-4 px-6 py-16 text-center">
           <div className="h-11 w-11 animate-spin rounded-full border-2 border-white/15 border-t-[#D9663D]" />
           <p className="text-sm text-[#9dc4b8]">{t('scoring')}</p>
@@ -258,12 +344,16 @@ export function GameQuizPlayer({
   if (phase === 'results' && result) {
     const promptById = new Map(assessment.questions.map((q) => [q.id, q.prompt]));
     return (
-      <GameStage>
+      <GameStage announcement={announcement}>
         <div className="space-y-5 px-5 py-7 sm:px-8">
           <div className="flex items-center gap-2.5">
             <LogoMark className="h-7 w-7" />
           </div>
-          <div className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center">
+          <div
+            ref={resultsRef}
+            tabIndex={-1}
+            className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 px-6 py-8 text-center outline-none"
+          >
             <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-[#9dc4b8]">
               {t('yourScore')}
             </p>
@@ -292,7 +382,13 @@ export function GameQuizPlayer({
                   {i + 1}. {promptById.get(r.questionId)}
                 </p>
                 <p className="mt-1 text-sm text-[#cfe0d9]">
-                  {r.correct ? `✓ +${r.pointsAwarded}` : '✗'} ·{' '}
+                  {/* The glyphs are decoration to a screen reader — a bare ✗ is usually silent,
+                      so a wrong answer read as though it had no verdict at all. */}
+                  <span aria-hidden>{r.correct ? `✓ +${r.pointsAwarded}` : '✗'}</span>
+                  <span className="sr-only">
+                    {r.correct ? `${t('a11yCorrect')}, +${r.pointsAwarded}` : t('a11yIncorrect')}
+                  </span>{' '}
+                  ·{' '}
                   <span className="text-[#9dc4b8]">
                     {t('yourAnswer', { answer: r.submittedAnswer || '—' })}
                   </span>
@@ -336,7 +432,7 @@ export function GameQuizPlayer({
       ? fillBlankCount(question.config)
       : 1;
   return (
-    <GameStage>
+    <GameStage announcement={announcement}>
       <div className="flex flex-col px-5 py-6 sm:px-8 sm:py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
@@ -351,8 +447,16 @@ export function GameQuizPlayer({
         </div>
 
         <div className="flex flex-col items-center py-8 text-center sm:py-12">
-          <div className="relative mb-7 h-20 w-20">
-            <svg width="80" height="80" viewBox="0 0 84 84" className="-rotate-90">
+          {/* role="timer" carries an implicit aria-live="off": it names itself as a timer and
+              exposes the current value when the user navigates to it on demand, without
+              announcing a single tick. The number below stays exposed (not aria-hidden) so that
+              on-demand read returns the seconds actually left. */}
+          <div
+            role="timer"
+            aria-label={t('a11yTimerLabel')}
+            className="relative mb-7 h-20 w-20"
+          >
+            <svg width="80" height="80" viewBox="0 0 84 84" className="-rotate-90" aria-hidden>
               <circle cx="42" cy="42" r="37" fill="none" stroke="rgba(247,242,232,0.12)" strokeWidth="7" />
               <circle
                 cx="42"
@@ -388,7 +492,11 @@ export function GameQuizPlayer({
             </span>
           </div>
 
-          <div className="mx-auto max-w-2xl font-display text-2xl font-semibold leading-snug text-[#f7f2e8] sm:text-3xl">
+          <div
+            ref={promptRef}
+            tabIndex={-1}
+            className="mx-auto max-w-2xl font-display text-2xl font-semibold leading-snug text-[#f7f2e8] outline-none sm:text-3xl"
+          >
             <RichText className="prose-invert prose-p:text-[#f7f2e8]">{question.prompt}</RichText>
           </div>
 

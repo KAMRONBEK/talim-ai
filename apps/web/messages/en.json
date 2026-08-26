@@ -1037,7 +1037,15 @@
       "answeredCount": "{count} / {total} answered",
       "speedBonus": "Speed bonus",
       "potentialPoints": "up to {points} pts",
-      "speedBonusHint": "Points you'd earn by answering correctly now — it drops as time runs out. Your final score is shown on the results screen."
+      "speedBonusHint": "Points you'd earn by answering correctly now — it drops as time runs out. Your final score is shown on the results screen.",
+      "a11yQuestionStart": "Question {current} of {total}. You have {seconds} seconds.",
+      "a11yAnswerRecorded": "Answer recorded.",
+      "a11yTimeUp": "Time is up.",
+      "a11yTimeWarning": "{seconds} seconds left.",
+      "a11yTimerLabel": "Time left on this question",
+      "a11yGameOver": "Game over. {points} points. {correct} of {total} correct.",
+      "a11yCorrect": "Correct",
+      "a11yIncorrect": "Incorrect"
     },
     "welcome": "Welcome, {name}",
     "dashboardDesc": "Your assigned learning materials.",
