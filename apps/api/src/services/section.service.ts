@@ -31,7 +31,38 @@ interface GeneratedSection {
   subsections?: GeneratedSubsection[];
 }
 
-export async function generateContentSections(contentId: string, chunkCount: number): Promise<void> {
+/** The outline this produces when the AI call is unavailable: generic but complete. */
+async function createMechanicalSections(contentId: string, chunkCount: number): Promise<void> {
+  const perSection = Math.max(2, Math.ceil(chunkCount / 6));
+  let order = 0;
+  for (let start = 0; start < chunkCount; start += perSection) {
+    const end = Math.min(chunkCount - 1, start + perSection - 1);
+    await prisma.contentSection.create({
+      data: {
+        contentId,
+        title: `Bo'lim ${order + 1}`,
+        order,
+        startChunk: start,
+        endChunk: end,
+        readMinutes: Math.max(3, end - start + 2),
+      },
+    });
+    order++;
+  }
+}
+
+export async function generateContentSections(
+  contentId: string,
+  chunkCount: number,
+  options?: {
+    /**
+     * Skip the AI outline and go straight to the mechanical one. Set when the caller knows the
+     * generation quota will refuse the call — so the material still gets a usable outline
+     * instead of the whole ingest being thrown away over chapter titles.
+     */
+    skipAiOutline?: boolean;
+  },
+): Promise<void> {
   const content = await prisma.content.findUnique({
     where: { id: contentId },
     select: { userId: true },
@@ -41,6 +72,11 @@ export async function generateContentSections(contentId: string, chunkCount: num
   await prisma.contentSection.deleteMany({ where: { contentId } });
 
   if (chunkCount === 0) return;
+
+  if (options?.skipAiOutline) {
+    await createMechanicalSections(contentId, chunkCount);
+    return;
+  }
 
   if (chunkCount <= 3) {
     await prisma.contentSection.create({
@@ -130,22 +166,7 @@ export async function generateContentSections(contentId: string, chunkCount: num
       }
     }
   } catch {
-    const perSection = Math.max(2, Math.ceil(chunkCount / 6));
-    let order = 0;
-    for (let start = 0; start < chunkCount; start += perSection) {
-      const end = Math.min(chunkCount - 1, start + perSection - 1);
-      await prisma.contentSection.create({
-        data: {
-          contentId,
-          title: `Bo'lim ${order + 1}`,
-          order,
-          startChunk: start,
-          endChunk: end,
-          readMinutes: Math.max(3, end - start + 2),
-        },
-      });
-      order++;
-    }
+    await createMechanicalSections(contentId, chunkCount);
   }
 }
 
