@@ -216,6 +216,23 @@ export interface Deck {
   estimatedMinutes: number;
   sourceContentId: string;
   slides: DeckSlide[];
+  /**
+   * Set only when generation had to salvage: some drafted slides failed validation and
+   * were dropped, so this deck teaches less than its own title and recap promise.
+   *
+   * Recorded on the deck rather than logged, because a console.warn on the API's stdout
+   * is not readable after the fact — there is no log file — and the loss is otherwise
+   * completely silent. A deck missing a third of its lesson looked identical to a
+   * complete one.
+   */
+  salvage?: {
+    /** Slides the model drafted, before validation. */
+    drafted: number;
+    /** Slides dropped for failing the schema. */
+    dropped: number;
+    /** `id(layout): first failing field` per dropped slide, for diagnosis. */
+    reasons: string[];
+  };
 }
 
 export type SlideDeckStatus = 'PENDING' | 'GENERATING' | 'READY' | 'FAILED';

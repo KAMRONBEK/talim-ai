@@ -1194,7 +1194,8 @@
     "notAvailableLearner": "Your tutor hasn't created slides for this material yet.",
     "error": "Couldn't generate slides. Please try again.",
     "limitReached": "You've reached your AI generation limit ({used}/{limit} today). Contact your admin to raise it.",
-    "limitReachedGeneric": "AI generation isn't available on your current plan. Please contact your admin."
+    "limitReachedGeneric": "AI generation isn't available on your current plan. Please contact your admin.",
+    "salvageNotice": "This deck lost {dropped} slide(s) during generation, so it does not cover everything its title promises. Try regenerating it."
   },
   "video": {
     "subtitle": "An AI narrated-slideshow video from this material",
