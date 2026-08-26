@@ -378,7 +378,8 @@
     "askSelection": "AI dan so'rash",
     "explainSelection": "Tushuntirish",
     "selectionAskPrompt": "Ushbu qism haqida:\n\"{snippet}\"\n\n",
-    "suggestionsLabel": "Tavsiya etilgan savollar"
+    "suggestionsLabel": "Tavsiya etilgan savollar",
+    "noAnswer": "Bu savolga javob kelmadi. Iltimos, savolni qaytadan bering."
   },
   "quiz": {
     "loading": "Test yuklanmoqda...",

@@ -378,7 +378,8 @@
     "askSelection": "Спросить ИИ",
     "explainSelection": "Объяснить",
     "selectionAskPrompt": "Об этой части:\n\"{snippet}\"\n\n",
-    "suggestionsLabel": "Предлагаемые вопросы"
+    "suggestionsLabel": "Предлагаемые вопросы",
+    "noAnswer": "Ответ на этот вопрос не пришёл. Пожалуйста, задайте его ещё раз."
   },
   "quiz": {
     "loading": "Загрузка теста...",

@@ -27,6 +27,7 @@ import { buildRetrievalQuery, applyKeepOrder } from '../lib/retrieval-context.js
 import { getParam } from '../lib/params.js';
 import { resolveLocale } from '../lib/locale.js';
 import { manimQueue } from '../services/queue.service.js';
+import { jobEvents } from '../services/events/jobEvents.service.js';
 import { resolveManimAsset } from '../jobs/renderManim.job.js';
 import { storageService } from '../services/storage.service.js';
 import { assertCanAccessContent } from '../services/contentAccess.service.js';
@@ -84,14 +85,37 @@ function mapChatMessage(m: {
   };
 }
 
+/**
+ * Tell the asker's other open tabs that an answer now exists in the database.
+ *
+ * The tutor stream is delivered over the request that started it, so a page reload mid-answer
+ * leaves nobody listening: generation continues and the row is written, but the reloaded page
+ * fetched the conversation once on mount and never learns about it. It renders the question
+ * alone — no answer, no spinner, no error — even though the quota was already charged.
+ *
+ * A chat session is private to one user (userId + contentId + locale), so this goes to the
+ * asker only, not the content audience. Publishing must never break the answer that just
+ * succeeded, so failures are swallowed.
+ */
+function publishChatMessage(userId: string, contentId: string, sessionId: string): void {
+  try {
+    jobEvents.publish(userId, { type: 'chat.message', contentId, sessionId });
+  } catch (err) {
+    console.error('chat: message event publish failed', err);
+  }
+}
+
 async function streamStaticAssistantResponse(
   res: Response,
+  userId: string,
+  contentId: string,
   sessionId: string,
   text: string,
 ): Promise<void> {
   await prisma.chatMessage.create({
     data: { sessionId, role: 'ASSISTANT', text },
   });
+  publishChatMessage(userId, contentId, sessionId);
 
   sseData(res, { text });
   sseData(res, { sessionId });
@@ -269,12 +293,24 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
   sseHeaders(res);
 
   if (scopeDecision.route === 'unrelated') {
-    await streamStaticAssistantResponse(res, sessionId, getOutOfScopeResponse(locale));
+    await streamStaticAssistantResponse(
+      res,
+      req.user.userId,
+      body.contentId,
+      sessionId,
+      getOutOfScopeResponse(locale),
+    );
     return;
   }
 
   if (scopeDecision.route === 'needs_clarification') {
-    await streamStaticAssistantResponse(res, sessionId, getClarificationResponse(locale));
+    await streamStaticAssistantResponse(
+      res,
+      req.user.userId,
+      body.contentId,
+      sessionId,
+      getClarificationResponse(locale),
+    );
     return;
   }
 
@@ -349,6 +385,7 @@ export async function streamChat(req: AuthenticatedRequest, res: Response): Prom
     const assistantMessage = await prisma.chatMessage.create({
       data: { sessionId, role: 'ASSISTANT', text: fullResponse },
     });
+    publishChatMessage(req.user.userId, body.contentId, sessionId);
 
     for (const job of manimJobs) {
       await manimQueue.add({

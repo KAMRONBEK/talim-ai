@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { ArrowRight, Bot } from 'lucide-react';
 import { Button } from '@talim/ui';
 import { ChatMessage } from './ChatMessage';
-import { useChatSession } from '@/hooks/useChat';
+import { isAnswerStillExpected, useChatSession } from '@/hooks/useChat';
 import { useChatStore } from '@/store/useChatStore';
 import { useLimitErrorHandler } from '@/hooks/useLimitErrorHandler';
 
@@ -36,7 +36,7 @@ export function ChatWindow({
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const hydratedKeyRef = useRef<string | null>(null);
+  const hydratedSigRef = useRef<string | null>(null);
   const { data: sessionData, isLoading } = useChatSession(contentId);
   const { messages, isStreaming, streamMessage, hydrate, reset, seededPrompt, clearSeededPrompt } =
     useChatStore();
@@ -49,17 +49,34 @@ export function ChatWindow({
   }, [contentId, locale, quickActions, t]);
 
   useEffect(() => {
-    hydratedKeyRef.current = null;
+    hydratedSigRef.current = null;
     reset();
   }, [contentId, locale, reset]);
 
+  // Re-hydrate whenever the server's copy of the conversation actually changes, not just once
+  // on mount. Hydrating once was why a reload mid-answer stayed broken forever: the refetch
+  // landed, the query cache updated, and this component ignored it. It is also why the manim
+  // recovery in useJobEvents (which invalidates ['chat-session']) never reached the screen.
+  //
+  // The signature includes the last message's text length because the manim render job patches
+  // a message in place — same id, same count, new content.
   useEffect(() => {
     if (!sessionData || isLoading) return;
-    const key = `${contentId}:${locale}`;
-    if (hydratedKeyRef.current === key) return;
-    hydratedKeyRef.current = key;
-    hydrate(sessionData.sessionId, sessionData.messages);
-  }, [sessionData, isLoading, contentId, locale, hydrate]);
+    // A stream in flight exists only in the store; hydrating over it would wipe the partial
+    // answer the user is watching arrive.
+    if (isStreaming) return;
+    const next = sessionData.messages;
+    // Never accept a response that is BEHIND what we already show. The poll below runs while a
+    // question is unanswered, so a response issued mid-stream (user row written, assistant row
+    // not yet) can land just after our own stream finished — hydrating that would delete the
+    // answer the user just watched being written.
+    if (next.length < messages.length) return;
+    const last = next[next.length - 1];
+    const sig = `${contentId}:${locale}:${next.length}:${last?.id ?? ''}:${last?.text.length ?? 0}`;
+    if (hydratedSigRef.current === sig) return;
+    hydratedSigRef.current = sig;
+    hydrate(sessionData.sessionId, next);
+  }, [sessionData, isLoading, isStreaming, messages.length, contentId, locale, hydrate]);
 
   useEffect(() => {
     if (inputSeed) {
@@ -116,6 +133,24 @@ export function ChatWindow({
   const showGreeting = !isLoading && messages.length === 0;
   const hasExcerptSelection = Boolean(selectedExcerpt || selectedExcerptImage);
 
+  // The conversation ends on the learner's own question with no stream running: the answer is
+  // being written by a request this page no longer owns (it reloaded), or generation died.
+  const awaitingAnswer =
+    !isLoading && !isStreaming && messages[messages.length - 1]?.role === 'USER';
+
+  // While awaiting, re-render on a slow tick so the "writing…" indicator can give way to a
+  // failure notice once the answer window closes. Without it, a generation that died leaves a
+  // typing indicator running forever — the same silent lie as showing nothing, just prettier.
+  const [, setAwaitTick] = useState(0);
+  useEffect(() => {
+    if (!awaitingAnswer) return;
+    const id = setInterval(() => setAwaitTick((n) => n + 1), 5000);
+    return () => clearInterval(id);
+  }, [awaitingAnswer]);
+
+  const answerStillExpected =
+    awaitingAnswer && isAnswerStillExpected(sessionData?.messages, Date.now());
+
   return (
     <div className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border/70 bg-card shadow-soft">
       <div className="flex items-center gap-3 border-b border-border/70 px-4 py-3">
@@ -153,6 +188,12 @@ export function ChatWindow({
               excerptImage={msg.excerptImage}
             />
           ))}
+        {answerStillExpected && <ChatMessage role="ASSISTANT" text="" streaming />}
+        {awaitingAnswer && !answerStillExpected && (
+          <p role="status" className="text-sm text-muted-foreground">
+            {t('noAnswer')}
+          </p>
+        )}
         <div ref={bottomRef} />
       </div>
 

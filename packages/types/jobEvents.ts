@@ -21,6 +21,12 @@ export type JobEvent =
   | { type: 'transcript.status'; contentId: string; status: 'READY' | 'FAILED' }
   | { type: 'manim.status'; jobId: string; status: 'READY' | 'FAILED' }
   | { type: 'bank.status'; bankId: string; status: 'READY' | 'FAILED' }
+  /**
+   * An assistant reply was persisted for one of this user's tutor conversations. Emitted for
+   * the asker only — chat sessions are private — so a page that lost the stream (a reload
+   * mid-answer) can pick the answer up without waiting for the user to reload again.
+   */
+  | { type: 'chat.message'; contentId: string; sessionId: string }
   | { type: 'leaderboard.update'; assessmentId: string; tenantId: string }
   // A tutor starting or ending a live game. Students wait on their dashboard for exactly
   // this moment, and without a push the join banner only appeared on a manual reload —
