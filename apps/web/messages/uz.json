@@ -333,7 +333,8 @@
       "band_mastered": "O'zlashtirilgan",
       "needsReview": "Takrorlash vaqti keldi",
       "helper": "O'zlashtirish so'nggi javoblaringizni aks ettiradi — xatolar yoki uzoq tanaffusdan keyin pasayishi mumkin."
-    }
+    },
+    "transcriptTooLong": "Bu video transkripsiya uchun juda uzun (taxminan 30 daqiqagacha). Qisqaroq video yoki subtitrlari bor videodan foydalaning."
   },
   "chat": {
     "title": "AI O'qituvchi",
