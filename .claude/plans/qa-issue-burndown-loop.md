@@ -12,53 +12,74 @@ gh issue list --label qa-found --state open --limit 100 --json number --jq lengt
 
 Baseline at start: **34 open** (1×S2, 22×S3, 11×S4).
 
-### Progress — loop complete
+### Loop complete — stop condition met
 
-**34 → 3 open.** 31 closed across 26 PRs (#86–#111), all merged. Two were closed as
-*already fixed* after verification rather than re-fixed (#45 messages, #63 flashcards tab).
+```
+gh issue list --label qa-found --state open  ->  0
+```
 
-The remaining 3 are **not** work items — they are questions:
+**34 → 0.** 34 closed across 27 PRs (#86–#112), all merged. Two were closed as
+*already fixed* after verification rather than re-fixed (#45, #63), and #9 was
+relabelled S2 → S3 because the analysis showed it was never data loss.
 
-| | The decision |
-| --- | --- |
-| #9 | Cross-locale artifact discoverability. Also needs its S2 → S3 relabel. |
-| #29 | Does a student who joins a class keep their personal library? |
-| #30 | Per-tenant usernames means changing what a child types to log in. |
+### The last three were decisions, and were decided
 
-Each has the options and a recommendation written up on the issue. None can be
-closed without an answer, so the loop's stop condition is met as far as it can be.
+| | Call taken | Why not the bigger option |
+| --- | --- | --- |
+| #29 | Learner keeps their own pre-join uploads, read-only | — |
+| #30 | Keep usernames global; make a collision actionable | Per-tenant usernames changes what every existing child types to log in, for a problem that is predictive rather than current |
+| #9 | Report what exists in other languages | Un-scoping artifacts would show Uzbek quizzes inside a Russian UI — that contradicts the model rather than fixing it |
+
+#29 was the risky one: it touches `contentAccess.service`, which 17 modules run
+through, so it shipped behind six isolation controls (another learner's files,
+unassigned org material, another tenant's material, mutate, generate, deactivated
+learner) rather than on the strength of the feature working.
 
 ### What the diagnoses changed
 
-Three issues were **wrong or narrower than filed**, and were corrected on the issue
-rather than fixed as written:
+Three issues were **wrong or narrower than filed** and were corrected on the issue
+rather than fixed as written: **#43** (never stuck — it errors after a ~1s retry),
+**#67** (blames a banner the learner shell redirects away from), **#42** (asks for
+per-answer correctness that cannot exist client-side).
 
-- **#43** — the page was never stuck; it errors after a ~1s react-query retry.
-- **#67** — blames a banner that `learner-shell` redirects away from the dashboard entirely.
-- **#42** — asks for per-answer correctness that cannot exist; the client has no answer key mid-game.
-
-Five grew **larger** than filed once diagnosed — and these were the highest-value finds:
+Six grew **larger** once diagnosed — these were the highest-value finds:
 
 - **#11** — the reported race is the smaller half. The mid-job quota assert dropped
   `tenantId`, so every tutor was metered against a phantom personal FREE plan (5/day)
-  instead of their org's (50/day), *and* the job wrote that phantom subscription. Two of
-  six tenant owners in the dev DB already had one.
+  instead of their org's (50/day), *and* the job wrote that phantom subscription. Two
+  of six tenant owners in the dev DB already had one.
 - **#35** — `ContentVideo.storagePath` is written by no code, so *every* delete path
   orphaned video audio, not just the admin ones.
 - **#32** — the axios interceptor is the only thing that ends a session, so every
   raw-`fetch` transport bypassed it.
-- **#25** — a PDF whose catalog *lies* (`/Count 0`) parsed "fine" as 0 pages and skipped
+- **#25** — a PDF whose catalog lies (`/Count 0`) parsed "fine" as 0 pages and skipped
   the cap; and the tenant upload path had no file gate at all.
-- **#16** — three defects, not one: a slug-collision 500, a silent duplicate org, and a
-  seat limit discarded at HTTP 200.
+- **#16** — three defects: a slug-collision 500, a silent duplicate org, and a seat
+  limit discarded at HTTP 200.
+- **#26** — the row is `PENDING`, not `PROCESSING`, so all three recovery mechanisms
+  were blind to it; and a brief Redis blip does not reproduce it (Bull buffers ~4 min).
 
-### Method note
+### Method
 
 Two rounds of parallel read-only diagnosis agents produced the fix and verification
 plans; implementation and verification stayed in the main loop. That split found every
-scope expansion above. The agents' most valuable output was not the fix plans but the
+scope expansion above. Their most valuable output was not the fix plans but the
 **induce recipes** — the six ingest/queue issues were open precisely because none of
 those failures happens on its own.
+
+Every non-trivial fix was run **with the fix stashed first**, to prove the check could
+actually fail. That caught more bad tests than bad fixes.
+
+### Known follow-ups, deliberately not done
+
+- **#12's duration ceiling is unverifiable end-to-end** until `@distube/ytdl-core` is
+  upgraded — it currently fails "Failed to find any playable formats" on every video.
+- **A periodic `UPLOAD_DIR` sweeper** for manim assets (path lives only in the Redis job
+  record) and the ACTIVE-job race.
+- **`DELETE /admin/users/:id`** cascades every content of a user and still orphans blobs;
+  cheap now that `deleteContentMediaBlobs` exists, but it needs its own negative control.
+- **Prod is not backfilled** for podcast durations, and prod `Tenant.ownerId` uniqueness
+  was only precondition-checked on dev.
 
 ## Iteration
 
