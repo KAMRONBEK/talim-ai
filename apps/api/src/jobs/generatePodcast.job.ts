@@ -12,6 +12,7 @@ import {
   type DialogueSegmentBytes,
 } from '../services/tts.service.js';
 import { storageService } from '../services/storage.service.js';
+import { mp3DurationSec } from '../lib/mp3-duration.js';
 import {
   getPodcastSystemPrompt,
   buildPodcastUserPrompt,
@@ -43,6 +44,29 @@ function buildPodcastSegments(
     cursorMs = endMs;
   }
   return segments;
+}
+
+
+/**
+ * The episode's real length, measured from the encoded audio.
+ *
+ * This used to be `(wordCount / 150) * 60` — an English-prose reading rate applied to Uzbek
+ * narration, which since 2026-08-23 is spoken by OpenAI's English-trained voices. Measured
+ * against the real audio, 13 of 15 stored episodes were wrong by 5-28s, in both directions.
+ * The card is exactly the number a learner reads when deciding whether they have time to listen.
+ *
+ * The audio buffer is already in hand, and the player derives an accurate figure from the same
+ * bytes, so measure rather than re-tune the constant — a wrong constant is also what produced
+ * the 3.3x-too-long stored segment timeline (TTS_BYTES_PER_MS above).
+ *
+ * Falls back to the old estimate only when no frame header can be read, so a Buffer we cannot
+ * parse degrades to today's behaviour instead of storing a confident zero.
+ */
+function measureEpisodeDuration(audio: Buffer, script: string): number {
+  const measured = mp3DurationSec(audio);
+  if (measured !== null && measured > 0) return Math.round(measured);
+  const wordCount = script.split(/\s+/).length;
+  return Math.max(60, Math.round((wordCount / 150) * 60));
 }
 
 export function registerGeneratePodcastJob(): void {
@@ -127,12 +151,11 @@ export function registerGeneratePodcastJob(): void {
           audio = await synthesizeSpeech(script, locale, ttsUsage);
         }
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
-        const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({
           where: { id: episode.id },
           data: {
             audioPath,
-            durationSec: Math.max(60, Math.round((wordCount / 150) * 60)),
+            durationSec: measureEpisodeDuration(audio, script),
             segments: segments ? (segments as unknown as object) : Prisma.DbNull,
           },
         });
@@ -254,12 +277,11 @@ export function registerGeneratePodcastJob(): void {
           audio = await synthesizeSpeech(script, locale, ttsUsage);
         }
         const audioPath = await storageService.save(audio, `${locale}/${episode.id}.mp3`);
-        const wordCount = script.split(/\s+/).length;
         await prisma.podcastEpisode.update({
           where: { id: episode.id },
           data: {
             audioPath,
-            durationSec: Math.max(60, Math.round((wordCount / 150) * 60)),
+            durationSec: measureEpisodeDuration(audio, script),
             segments: segments ? (segments as unknown as object) : Prisma.DbNull,
           },
         });
