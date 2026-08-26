@@ -1,4 +1,5 @@
 import { prisma } from '../../lib/prisma.js';
+import { jobEvents } from '../events/jobEvents.service.js';
 import { AppError } from '../../middleware/error.middleware.js';
 import {
   assignAssessmentSchema,
@@ -90,6 +91,41 @@ export async function setAssessmentLive(tenantId: string, assessmentId: string, 
       : { isLive: false },
     include: { questions: true, assignments: true },
   });
+
+  // Push the state change to the students it concerns. The tutor's own screen promises
+  // "students will see the join banner on their dashboard" — but a learner already
+  // sitting on that dashboard, which is exactly where a class waits when the tutor says
+  // "we're starting now", saw nothing until they reloaded by hand.
+  //
+  // Fan-out mirrors the leaderboard.update path: assigned learners plus the owner, so
+  // the tutor's own list stays correct too. Delivery must never break go-live, so every
+  // failure is swallowed — a missed push costs a manual refresh, a thrown one costs the
+  // lesson.
+  try {
+    const assignees = await prisma.assessmentAssignment.findMany({
+      where: { assessmentId, learnerId: { not: null } },
+      select: { learnerId: true },
+      distinct: ['learnerId'],
+    });
+    const tenant = await prisma.tenant.findUnique({
+      where: { id: tenantId },
+      select: { ownerId: true },
+    });
+    const recipients = new Set<string>();
+    if (tenant) recipients.add(tenant.ownerId);
+    for (const a of assignees) if (a.learnerId) recipients.add(a.learnerId);
+    for (const recipient of recipients) {
+      jobEvents.publish(recipient, {
+        type: 'assessment.live',
+        assessmentId,
+        tenantId,
+        isLive: goingLive,
+      });
+    }
+  } catch (err) {
+    console.error('setAssessmentLive: live event publish failed', err);
+  }
+
   return formatAssessment(updated);
 }
 

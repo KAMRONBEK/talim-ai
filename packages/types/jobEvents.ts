@@ -21,7 +21,12 @@ export type JobEvent =
   | { type: 'transcript.status'; contentId: string; status: 'READY' | 'FAILED' }
   | { type: 'manim.status'; jobId: string; status: 'READY' | 'FAILED' }
   | { type: 'bank.status'; bankId: string; status: 'READY' | 'FAILED' }
-  | { type: 'leaderboard.update'; assessmentId: string; tenantId: string };
+  | { type: 'leaderboard.update'; assessmentId: string; tenantId: string }
+  // A tutor starting or ending a live game. Students wait on their dashboard for exactly
+  // this moment, and without a push the join banner only appeared on a manual reload —
+  // in a classroom, the difference between "everyone joins" and "everyone stares at an
+  // unchanged screen".
+  | { type: 'assessment.live'; assessmentId: string; tenantId: string; isLive: boolean };
 
 /** Wire frame: carries a monotonic per-user sequence id for Last-Event-ID replay. */
 export interface SeqJobEvent {
