@@ -11,7 +11,7 @@ import type { AuthenticatedRequest } from '../middleware/auth.middleware.js';
 import { parseAppLocale } from '@talim/types';
 import { resolveTenantIdForUser } from '../services/contentAccess.service.js';
 import { createTutorRequest, getMyLatestTutorRequest } from '../services/tutorRequest.service.js';
-import { joinTenantByCode } from '../services/tenant.service.js';
+import { assertJoinableByCode, joinTenantByCode } from '../services/tenant.service.js';
 
 const registerSchema = z
   .object({
@@ -96,13 +96,15 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
   }
 
   // Validate a supplied join code BEFORE creating the user: joinTenantByCode runs AFTER
-  // user.create, so an invalid code would otherwise leave an orphaned INDIVIDUAL account
-  // (with a FREE sub) that blocks the email on retry. joinTenantByCode still does the
-  // authoritative join (seat quota, membership) once the account exists.
+  // user.create, so anything it rejects would otherwise leave an orphaned INDIVIDUAL account
+  // (with a FREE sub) that blocks the email on retry — and there is no join-class screen in the
+  // app to recover through.
+  //
+  // This used to check only that the code RESOLVED. The seat limit and the org's subscription
+  // status were still checked after the insert, so signing up for a class that was already full
+  // returned 402 and left the account behind anyway. assertJoinableByCode covers all three.
   if (body.joinCode) {
-    const code = body.joinCode.trim().toUpperCase();
-    const tenant = await prisma.tenant.findUnique({ where: { joinCode: code } });
-    if (!tenant) throw new AppError(404, 'Invalid join code');
+    await assertJoinableByCode(body.joinCode);
   }
 
   const passwordHash = await bcrypt.hash(body.password, 12);
