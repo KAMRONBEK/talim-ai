@@ -379,7 +379,10 @@
     "explainSelection": "Tushuntirish",
     "selectionAskPrompt": "Ushbu qism haqida:\n\"{snippet}\"\n\n",
     "suggestionsLabel": "Tavsiya etilgan savollar",
-    "noAnswer": "Bu savolga javob kelmadi. Iltimos, savolni qaytadan bering."
+    "noAnswer": "Bu savolga javob kelmadi. Iltimos, savolni qaytadan bering.",
+    "timeMinutes": "{count} daqiqa oldin",
+    "timeHours": "{count} soat oldin",
+    "timeDays": "{count} kun oldin"
   },
   "quiz": {
     "loading": "Test yuklanmoqda...",

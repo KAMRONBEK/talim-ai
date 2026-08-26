@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import type { MessageRole } from '@talim/types';
 import { cn } from '@talim/ui';
 import { TutorMessageContent } from './TutorMessageContent';
+import { describeMessageAge, formatExactTime } from '@/lib/relative-time';
 
 interface ChatMessageProps {
   role: MessageRole;
@@ -11,10 +12,30 @@ interface ChatMessageProps {
   streaming?: boolean;
   excerpt?: string;
   excerptImage?: string;
+  /** Omitted for a bubble created locally moments ago, where "now" is the truthful label. */
+  createdAt?: string;
 }
 
-export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: ChatMessageProps) {
+export function ChatMessage({
+  role,
+  text,
+  streaming,
+  excerpt,
+  excerptImage,
+  createdAt,
+}: ChatMessageProps) {
   const t = useTranslations('chat');
+  // Every message used to be stamped "now" — a constant string, not a rounded-down
+  // computation — so a conversation from last week claimed to have just happened.
+  const age = describeMessageAge(createdAt);
+  const when =
+    !age || age.unit === 'now'
+      ? t('now')
+      : age.unit === 'date'
+        ? age.text
+        : t(`time${age.unit === 'minutes' ? 'Minutes' : age.unit === 'hours' ? 'Hours' : 'Days'}`, {
+            count: age.value,
+          });
   const isUser = role === 'USER';
   const hasExcerpt = Boolean(excerpt || excerptImage);
   return (
@@ -62,7 +83,18 @@ export function ChatMessage({ role, text, streaming, excerpt, excerptImage }: Ch
           )}
         </div>
         <p className="mt-1 text-[11px] text-muted-foreground">
-          {isUser ? t('you') : t('tutor')} · {t('now')}
+          {isUser ? t('you') : t('tutor')}
+          {/* No timestamp for things that were never sent — the canned greeting and the
+              placeholder shown while an answer is still on its way. Stamping those "now"
+              on every render is the same untruth this fixed for real messages. */}
+          {createdAt && (
+            <>
+              {' · '}
+              <time dateTime={createdAt} title={formatExactTime(createdAt)}>
+                {when}
+              </time>
+            </>
+          )}
         </p>
       </div>
     </div>

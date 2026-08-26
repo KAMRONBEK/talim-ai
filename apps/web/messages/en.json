@@ -379,7 +379,10 @@
     "explainSelection": "Explain",
     "selectionAskPrompt": "About this part:\n\"{snippet}\"\n\n",
     "suggestionsLabel": "Suggested prompts",
-    "noAnswer": "No answer arrived for this question. Please ask it again."
+    "noAnswer": "No answer arrived for this question. Please ask it again.",
+    "timeMinutes": "{count, plural, one {# minute ago} other {# minutes ago}}",
+    "timeHours": "{count, plural, one {# hour ago} other {# hours ago}}",
+    "timeDays": "{count, plural, one {# day ago} other {# days ago}}"
   },
   "quiz": {
     "loading": "Loading quiz...",
