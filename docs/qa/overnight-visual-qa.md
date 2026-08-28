@@ -34,7 +34,8 @@ Your instruments — read them, don't duplicate them:
 - **Branch only.** You are on `claude/visual-qa`. Commit only here. NEVER `git checkout main`, NEVER
   push `main`, NEVER deploy. (The launcher may push *this* branch and open a PR; you do not.)
 - **Local only.** Test `localhost:3000` (web), `localhost:3001` (admin), `localhost:4000` (api).
-  NEVER prod (`talim-ai.uz`). Production is verified by `.github/workflows/health-monitor.yml`, not by you.
+  NEVER prod (`talim-ai.uz`). Production is out of scope for QA — check the admin `/health` page by
+  hand if you need a verdict; there is no scheduled monitor.
 - **Fix discipline.** Fix only **clear, low-risk** bugs and **verify** the fix. Anything ambiguous,
   subjective, or structural → **file it, don't fix it.** Enhancements are **forbidden as findings**.
 - **Verify before each commit:** `pnpm --filter @talim/types build && pnpm --filter @talim/web typecheck

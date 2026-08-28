@@ -232,10 +232,11 @@ jobs:
       - name: Smoke the deployed application
         env:
           # Any real production account. Used only to prove the login path still
-          # returns a token; falls back to the health-monitor admin so a single
-          # credential pair is enough to arm both workflows.
-          CANARY_EMAIL: ${{ secrets.SMOKE_LOGIN_EMAIL || secrets.HEALTH_ADMIN_EMAIL }}
-          CANARY_PASSWORD: ${{ secrets.SMOKE_LOGIN_PASSWORD || secrets.HEALTH_ADMIN_PASSWORD }}
+          # returns a token. Unset today, so the login check self-skips — every other
+          # check below runs without it. (The HEALTH_ADMIN_* fallback that used to sit
+          # here pointed at the scheduled health monitor, which has been removed.)
+          CANARY_EMAIL: ${{ secrets.SMOKE_LOGIN_EMAIL }}
+          CANARY_PASSWORD: ${{ secrets.SMOKE_LOGIN_PASSWORD }}
         run: |
           # No `set -e`: every check runs so one failure does not hide the others,
           # and the job fails once at the end with the full picture.
@@ -395,8 +396,8 @@ jobs:
 
           # ---- 5. Canary login ----------------------------------------------
           if [ -z "${CANARY_EMAIL:-}" ] || [ -z "${CANARY_PASSWORD:-}" ]; then
-            echo "::warning title=Canary login skipped::add the SMOKE_LOGIN_EMAIL / SMOKE_LOGIN_PASSWORD repo secrets (or HEALTH_ADMIN_EMAIL / HEALTH_ADMIN_PASSWORD) to arm the login canary."
-            summary "| ⚠️ | canary login | skipped — no SMOKE_LOGIN_* / HEALTH_ADMIN_* secret set |"
+            echo "::warning title=Canary login skipped::add the SMOKE_LOGIN_EMAIL / SMOKE_LOGIN_PASSWORD repo secrets to arm the login canary."
+            summary "| ⚠️ | canary login | skipped — no SMOKE_LOGIN_* secret set |"
           else
             # The credential never touches the disk and never appears in any argv: jq
             # reads it from the environment (--arg would have put it on jq's own command

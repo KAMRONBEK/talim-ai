@@ -27,8 +27,9 @@ errors, stop — that already ran on every page, deterministically.
 
 ## Hard rules
 - **Branch:** work only on `claude/visual-qa`. Never push `main`, never deploy.
-- **Local only:** `:3000` web, `:3001` admin, `:4000` api. Never prod — production is covered by
-  `.github/workflows/health-monitor.yml`.
+- **Local only:** `:3000` web, `:3001` admin, `:4000` api. Never prod — production is out of scope
+  for QA. (Nothing polls it on a schedule: the health monitor was removed rather than carry a
+  credential nobody wanted to maintain. The admin `/health` page still runs the same probes on demand.)
 - **Tooling:** drive the UI with the **`playwright`** MCP. Use **`talim-vps`** MCP only for server ops.
 - **Screenshots** → `docs/qa/screenshots/` (gitignored). No repo-root `*.png`, no `.playwright-mcp/` staged.
 - **Secrets** stay in Doppler — never write real credentials into git.
